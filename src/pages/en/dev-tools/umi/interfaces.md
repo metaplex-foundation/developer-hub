@@ -6,6 +6,7 @@ description: Overview over Umi's Interfaces
 ## The core interfaces
 
 Umi defines a set of core interfaces that makes it easy to interact with the Solana blockchain. Namely, they are:
+
 - [`Signer`](https://umi.typedoc.metaplex.com/interfaces/umi.Signer.html): An interface representing a wallet that can sign transactions and messages.
 - [`EddsaInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html): An interface to create keypairs, find PDAs and sign/verify messages using the EdDSA algorithm.
 - [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html): An interface representing a Solana RPC client.
@@ -34,6 +35,7 @@ interface Context {
 ```
 
 As you can see the `Signer` interface is used twice in the context:
+
 - Once for the `identity` which is the signer using your app.
 - Once for the `payer` which is the signer paying for things like transaction fees and storage fees. Usually this will be the same signer as the `identity` but separating them offers more flexibility for apps – e.g. in case they wish to abstract some costs from their users to improve the user experience.
 
@@ -60,5 +62,3 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(awsUploader(...))
   .use(myProgramRepository());
 ```
-
-

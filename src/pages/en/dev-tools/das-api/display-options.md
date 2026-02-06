@@ -92,4 +92,4 @@ The following DAS API methods support the `options` parameter with display optio
 
 ## Performance Considerations
 
-Enabling display options may increase response size and processing time. Only enable the options you need for your specific use case to optimize performance. 
+Enabling display options may increase response size and processing time. Only enable the options you need for your specific use case to optimize performance.

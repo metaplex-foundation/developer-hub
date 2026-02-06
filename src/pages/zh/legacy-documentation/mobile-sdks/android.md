@@ -25,6 +25,7 @@ Metaplex Android SDK 是一个允许您执行以下操作的库:
 ## 入门
 
 ### 安装
+
 #### 要求 {#requirements}
 
 - Android 21+
@@ -35,15 +36,15 @@ Metaplex Android SDK 是一个允许您执行以下操作的库:
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +53,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // 设置版本
+ ...
+ implementation 'com.metaplex:metaplex:+' // 设置版本
 }
 ```
 
@@ -64,19 +65,22 @@ dependencies {
 该库现在可通过 JitPack.io 获得
 
 首先,将 JitPack 仓库添加到您的构建中:
+
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
+
 然后将依赖项添加到您的应用程序/模块的 'build.gradle' 文件中:
+
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -97,9 +101,11 @@ val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
 # 使用
+
 正确配置后,该 `Metaplex` 实例可用于访问提供不同功能集的模块。目前,只有一个 NFT 模块可以通过 `nft` 属性访问。从该模块中,您将能够查找、创建和更新 NFT,未来还会有更多功能。
 
 ## NFT
+
 NFT 模块可以通过 `Metaplex.nft` 访问并提供以下方法。目前,我们只支持读取方法。未来将支持写入和创建 NFT。
 
 - findByMint(mint, callback)
@@ -116,11 +122,11 @@ NFT 模块可以通过 `Metaplex.nft` 访问并提供以下方法。目前,我�
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +156,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,20 +166,21 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
 ## 拍卖
+
 Metaplex 拍卖行协议允许任何人实施去中心化的销售合约并接受他们想要的任何 SPL 代币。
 
 拍卖模块可以通过 `Metaplex.auctions` 访问并提供以下方法。目前我们只支持读取方法。未来将支持拍卖行创建以及与出价和列表交互和创建的能力。
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
 - 更多即将推出!
 
@@ -181,7 +188,7 @@ Metaplex 拍卖行协议允许任何人实施去中心化的销售合约并接�
 
 **注意:** 拍卖 API 提供的这些挂起函数是库的架构更改。我们以前只提供异步回调方法。我们强烈建议每个人都迁移到新的挂起函数,但我们也提供了可用方法的异步回调实现。请注意,这些方法作为临时方案提供,将来可能会被弃用:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address, callback)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
 
 ### findAuctionHouseByAddress
@@ -203,6 +210,7 @@ val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByCreator
 返回的 `AuctionHouse` 模型将包含有关链上拍卖行账户的详细信息。将来,此模型将用于构造 `AuctionHouseClient` 实例以与拍卖交互并执行交易。
 
 ## 身份
+
 `Metaplex` 实例的当前身份可以通过 `metaplex.identity()` 访问,并提供有关在与 SDK 交互时我们代表哪个钱包行事的信息。
 
 此方法返回具有以下接口的身份对象。所有方法都需要 solana api 实例
@@ -224,11 +232,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver` 驱动程序是最简单的身份驱动程序。它本质上是一个 `null` 驱动程序,当我们不需要发送任何签名交易时很有用。如果您使用 `signTransaction` 方法,它将返回失败。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 驱动程序接受 `Account` 对象作为参数。
-
 
 ### ReadOnlyIdentityDriver
 
@@ -259,4 +265,3 @@ interface StorageDriver {
 SDK 附带了一个[示例应用](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample)。请克隆它,在您的手机上运行它,并获取它可以帮助您的内容。
 
 [github]: https://github.com/metaplex-foundation/metaplex-android
-[sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample

@@ -11,24 +11,28 @@ The Metaplex CLI is a powerful command-line tool that provides a comprehensive s
 ## Key Features
 
 ### Core Functionality
+
 - Create and manage MPL Core Assets and Collections
 - Upload and update asset metadata
 - Fetch asset and collection information
 - Manage asset properties and attributes
 
 ### Candy Machine Support
+
 - Create MPL Core Candy Machines with step-by-step guidance
 - Upload, validate, and insert assets with intelligent caching
 - Set up complex minting rules and guard groups
 - Real-time indicators for uploads, creation, and deployment
 
 ### Toolbox Utilities
+
 - Create and manage fungible tokens
 - Transfer SOL between addresses
 - Check SOL balances
 - Airdrop SOL for testing purposes
 
 ### Configuration Management
+
 - Manage multiple wallets
 - Configure RPC endpoints
 - Set preferred blockchain explorer
@@ -62,6 +66,7 @@ mplx <category> <command> [options]
 ```
 
 Categories include:
+
 - `core`: MPL Core asset management
 - `cm`: Candy Machine operations
 - `toolbox`: Utility commands
@@ -86,6 +91,7 @@ Categories include:
 ### Create Your First Candy Machine
 
 Get started with the interactive wizard:
+
 ```bash
 # Install and configure the CLI
 mplx config set keypair /path/to/my-wallet.json
@@ -98,6 +104,7 @@ mplx cm create --wizard
 ### Create Individual Assets
 
 For single assets or custom collections:
+
 ```bash
 # Create a collection
 mplx core create-collection

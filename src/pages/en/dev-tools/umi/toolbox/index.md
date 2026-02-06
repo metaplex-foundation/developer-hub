@@ -8,7 +8,7 @@ The **mpl-toolbox** package is designed to complement Umi by providing a set of 
 
 {% quick-links %}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" target="_blank" href="<https://mpl-toolbox.typedoc.metaplex.com/>" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
@@ -26,7 +26,7 @@ npm i @metaplex-foundation/mpl-toolbox
 
 While Umi, and the other Metaplex products, already offer comprehensive packages that includes all the essential functions to get you started, they don't include the necessary helpers and functions for lower-level yet critical tasks, especially when dealing with Solana's native programs. For example, with just Umi, creating an account using the SPL System Program or extending a Lookup Table from the SPL Address Lookup Table program it's not possible.
 
-That's why we created **mpl-toolbox**, a package that provides a set of essential helpers for Solana's Native that simplifies these low-level tasks. 
+That's why we created **mpl-toolbox**, a package that provides a set of essential helpers for Solana's Native that simplifies these low-level tasks.
 
 **The mpl-toolbox package includes helpers from the following programs:**
 

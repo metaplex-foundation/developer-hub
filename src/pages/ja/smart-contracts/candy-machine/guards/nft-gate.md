@@ -40,11 +40,10 @@ Owner: Token Metadata Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="requiredCollection" to="collectionNftMint" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the payer
 
-has 1 NFT 
+has 1 NFT
 
 from this collection
 {% /edge %}
@@ -61,8 +60,8 @@ from this collection
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}

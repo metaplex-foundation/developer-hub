@@ -95,6 +95,7 @@ const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
 假设一个附加了 `startDate`、`SolPayment` 和 `mintLimit` 守卫且未使用组的 Candy Machine，在允许用户调用铸造功能之前应进行以下验证：
 
 1. 验证 `startDate` 在过去：
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -115,7 +116,8 @@ if (startDate) {
 }
 ```
 
-2. 检查钱包是否有足够的 SOL 支付铸造费用：
+1. 检查钱包是否有足够的 SOL 支付铸造费用：
+
 ```ts
 const solPayment = unwrapOption(candyGuard.guards.solPayment);
 if (solPayment){
@@ -126,7 +128,8 @@ if (solPayment){
 }
 ```
 
-3. 确保 `mintLimit` 尚未达到：
+1. 确保 `mintLimit` 尚未达到：
+
 ```ts
 const mintLimit = unwrapOption(candyGuard.guards.mintLimit);
 if (mintLimit){

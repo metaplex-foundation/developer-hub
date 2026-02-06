@@ -14,12 +14,12 @@ To fund the escrow, you need to add NFTs, fungibles, or some mix of both. Practi
 
 In order to take advantage of the metadata randomization feature of MPL-404, off-chain metadata URIs need to be consistently defined and increment. Consistent base URIs is not available from all the off-chain metadata solutions. Shadow Drive is one possible off-chain metadata solution with incrementing URIs. URIs should look like this:
 
-- https://shdw-drive.genesysgo.net/.../0.json
-- https://shdw-drive.genesysgo.net/.../1.json
+- <https://shdw-drive.genesysgo.net/.../0.json>
+- <https://shdw-drive.genesysgo.net/.../1.json>
 
 ...
 
-- https://shdw-drive.genesysgo.net/.../999999.json
+- <https://shdw-drive.genesysgo.net/.../999999.json>
 
 ## Swap Randomization
 

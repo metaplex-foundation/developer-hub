@@ -9,6 +9,7 @@ description: Frequently asked questions about Bubblegum.
 Bubblegum V2 is a new iteration of the Bubblegum program that introduces several improvements and new features.
 It is part of the known Bubblegum program, but the instructions and data structures are different.
 With Bubblegum V2 cNFTs are grouped into collections using MPL-Core Collections instead of Metaplex Token Metadata Collections. It also introduces new features like freezing, thawing, and soulbound NFTs and additional features like:
+
 - **Freeze and Thaw Functionality**: Project creators can now freeze and thaw cNFTs, providing greater control over their assets for various use cases such as preventing transfers during specific events or implementing vesting mechanics.
 - **MPL-Core Collections Integration**: Bubblegum V2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
 - **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](/smart-contracts/core) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.

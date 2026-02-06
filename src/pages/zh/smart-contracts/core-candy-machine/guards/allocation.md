@@ -75,7 +75,6 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## 守卫设置
@@ -258,6 +257,7 @@ _Sugar 目前不支持 route 指令。_
 {% /dialect-switcher %}
 
 ## 配额账户
+
 当使用 `Allocation` 守卫时，在运行 route 指令后会创建一个 `allocationTracker` 账户。出于验证目的，可以这样获取它：
 
 ```js

@@ -57,12 +57,12 @@ async fn upload(
 
 where:
 
-* `sugar_config` - The current sugar configuration
-* `cache` - Asset cache object (mutable)
-* `data_type` - Type of the asset being uploaded
-* `assets` - Vector of assets to upload (mutable)
-* `progress` - Reference to the progress bar to provide feedback to the console
-* `interrupted` - Reference to the shared interruption handler flag to receive notifications
+- `sugar_config` - The current sugar configuration
+- `cache` - Asset cache object (mutable)
+- `data_type` - Type of the asset being uploaded
+- `assets` - Vector of assets to upload (mutable)
+- `progress` - Reference to the progress bar to provide feedback to the console
+- `interrupted` - Reference to the shared interruption handler flag to receive notifications
 
 This function will be called to upload each type of asset separately&mdash;e.g., once for your images, once for your metadata and, if present, once for your animation assets. After uploading an asset, its information needs to be updated in the `cache` object and the cache saved to the file system using the `sync_file` function. Syncing the cache to the file system might be slow for large collections, therefore it should be done as frequent as practical to avoid slowing down the upload process and, at the same time, minimizing the chances of information loss in case the user aborts the upload.
 
@@ -86,6 +86,7 @@ The `upload_asset` function must return a `JoinHandle` object. In most cases, th
 ### Prepare
 
 All upload methods need to implement an additional trait `Prepare`. The rationale is to prepare the method for the upload of the specified media/metadata files, e.g.:
+
 - check if any file exceeds a size limit;
 - check if there is storage space for the upload;
 - check/add funds for the upload.
@@ -100,10 +101,11 @@ async fn prepare(
     asset_indices: Vec<(DataType, &[isize])>,
 ) -> Result<()>;
 ```
+
 where:
-* `sugar_config` - The current sugar configuration
-* `asset_pairs` - Mapping of `index` to an `AssetPair`
-* `asset_indices` - Vector with the information of which asset pair indices will be uploaded, grouped by type.
+- `sugar_config` - The current sugar configuration
+- `asset_pairs` - Mapping of `index` to an `AssetPair`
+- `asset_indices` - Vector with the information of which asset pair indices will be uploaded, grouped by type.
 
 The `asset_pairs` contain the complete information of the assets, but only the assets specified in the `asset_indices` will be uploaded&mdash;e.g., if index `1` is only present in the `DataType::Image` indices' array, only the image of asset `1` will the uploaded.
 

@@ -13,12 +13,11 @@ Metaplex 协议的 **Candy Machine** 是 Solana 上用于公平 NFT 集合发布
 
 {% quick-link title="CLI 命令" icon="CommandLine" href="/zh/dev-tools/cli/cm" description="使用 Metaplex CLI 通过交互式向导创建和管理 Candy Machine。" /%}
 
-{% quick-link title="API 参考" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="查看 Javascript API 文档。" /%}
+{% quick-link title="API 参考" icon="JavaScript" href="<https://mpl-core-candy-machine.typedoc.metaplex.com/>" target="_blank" description="查看 Javascript API 文档。" /%}
 
-{% quick-link title="API 参考" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="查看 Rust API 文档。" /%}
+{% quick-link title="API 参考" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" target="_blank" description="查看 Rust API 文档。" /%}
 {% /quick-links %}
 
 {% callout %}
 本文档指的是 Candy Machine 的最新版本,称为 Core Candy Machine。它允许铸造 [Core](/zh/smart-contracts/core) 资产。如果您想铸造 Metaplex Token Metadata NFT,[请参考 Candy Machine V3](https://developers.metaplex.com/candy-machine/)。
 {% /callout %}
-

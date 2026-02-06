@@ -57,6 +57,7 @@ Solana에서의 스테이킹은 두 가지 주요 방식으로 수행할 수 있
 ### 검증자 선택하기
 
 검증자를 선택할 때 다음 요소들을 고려하세요:
+
 - **성능**: 가동시간과 블록 생산 이력
 - **수수료**: 검증자가 보유하는 보상의 비율 (일반적으로 5-10%)
 - **총 스테이크**: 더 높은 스테이크는 신뢰를 나타낼 수 있지만 중앙화에도 기여합니다
@@ -65,11 +66,13 @@ Solana에서의 스테이킹은 두 가지 주요 방식으로 수행할 수 있
 ## 도구 및 리소스
 
 ### 스테이킹 도구
+
 - [Solana Beach](https://solanabeach.io/validators) - 익스플로러 및 검증자 통계
 - [Validators.app](https://www.validators.app/) - 상세한 검증자 성능 지표
 - [Stakeview.app](https://stakeview.app/) - 검증자 순위 및 비교
 
 ### 스테이킹을 지원하는 지갑
+
 - Phantom
 - Solflare
 - Ledger

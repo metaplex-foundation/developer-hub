@@ -4,7 +4,7 @@ metaTitle: 기술 설명 | Fixed Price Sale
 description: Fixed Price Sale 프로그램의 기술 설명
 ---
 
-## 크리에이터가 무언가를 판매하려면:
+## 크리에이터가 무언가를 판매하려면
 
 1. 스토어 생성
 
@@ -20,7 +20,7 @@ description: Fixed Price Sale 프로그램의 기술 설명
 
     - 판매 리소스에서 정의한 최대 공급량을 제외한 판매 항목에 대한 정보가 있는 객체 생성
 
-## 사용자가 토큰을 구매하려면:
+## 사용자가 토큰을 구매하려면
 
 1. 스토어로 이동.
 
@@ -78,7 +78,6 @@ description: Fixed Price Sale 프로그램의 기술 설명
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
-
 
 ## TradeHistory
 

@@ -75,6 +75,7 @@ npm i @metaplex-foundation/umi-bundle-tests
 ## Umiの基本
 
 このセクションでは、Umiを使い始めるための基本的な手順を説明します：
+
 - [Umiの作成とRPCへの接続](/ja/dev-tools/umi/getting-started#connecting-to-an-rpc)
 - [ウォレットの接続](/ja/dev-tools/umi/getting-started#connecting-a-wallet)
 - [プログラムとクライアントの登録](/ja/dev-tools/umi/getting-started#registering-programs-and-clients)

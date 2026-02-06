@@ -90,7 +90,7 @@ pnpm cli compress images -q <QUALITY> -s <SIZE> -e <EXTENSION>
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Inscribe!
+## Inscribe
 
 {% dialect-switcher title="NFT 자산을 다운로드하세요." %}
 {% dialect title="Bash (Hashlist)" id="bash" %}

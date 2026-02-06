@@ -26,9 +26,10 @@ Try both modes and paste the result to see the difference!
 
 {% code-tabs-imported from="core/create-asset" /%}
 
-### What you get when copying:
+### What you get when copying
 
 **Snippet mode** (just the main code):
+
 ```
 // Create a new NFT asset
 const asset = await create(umi, {
@@ -38,6 +39,7 @@ const asset = await create(umi, {
 ```
 
 **With imports mode** (full runnable code):
+
 ```
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { create } from '@metaplex-foundation/mpl-core'

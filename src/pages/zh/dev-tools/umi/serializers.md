@@ -6,6 +6,7 @@ description: Metaplex Umi 中的序列化器和反序列化器
 无论我们是向区块链发送数据还是从中读取数据，序列化都是过程中的重要组成部分。序列化逻辑可能因程序而异，虽然 Borsh 序列化是 Solana 程序最流行的选择，但它并不是唯一的选择。
 
 Umi 通过提供灵活且可扩展的序列化框架来帮助解决这个问题，该框架允许您构建自己的序列化器。具体来说，它包括：
+
 - 一个泛型 `Serializer<From, To = From>` 类型，表示可以将 `From` 序列化为 `Uint8Array` 并将 `Uint8Array` 反序列化为 `To`（默认为 `From`）的对象。
 - 一组序列化器辅助函数，用于映射和转换序列化器为新的序列化器。
 - 最后但同样重要的是，一组内置序列化器，可用于序列化常见类型，包括字符串编码器、数字序列化器、数据结构等。这些基元可用于构建更复杂的序列化器。
@@ -39,6 +40,7 @@ type Serializer<From, To extends From = From> = {
 ```
 
 除了不令人意外的 `serialize` 和 `deserialize` 函数外，`Serializer` 类型还包括 `description`、`fixedSize` 和 `maxSize`。
+
 - `description` 是一个快速的人类可读字符串，描述序列化器。
 - `fixedSize` 属性在且仅在我们处理固定大小序列化器时给出序列化值的字节大小。例如，`u32` 序列化器的 `fixedSize` 始终为 `4` 字节。
 - `maxSize` 属性在处理具有最大大小边界的可变大小序列化器时很有帮助。例如，borsh `Option<PublicKey>` 序列化器的大小可以是 `1` 或 `33`，因此其 `maxSize` 为 `33` 字节。
@@ -241,6 +243,7 @@ const base58: Serializer<string> = baseX(
 ### 字符串
 
 `string` 序列化器返回一个 `Serializer<string>`，可用于使用各种编码和大小策略序列化字符串。它包含以下选项：
+
 - `encoding`：一个 `Serializer<string>`，表示序列化和反序列化字符串时使用的编码。它默认为内置的 `utf8` 序列化器。您可能想知道，为什么我们需要传递一个 `Serializer<string>` 来创建一个 `Serializer<string>`？这是因为 `encoding` 序列化器的目的只是将一些文本转换为字节数组或从字节数组转换，而不用担心其他任何事情，如存储字符串的大小。这允许我们插入任何我们想要的编码，同时能够利用此 `string` 函数提供的所有其他选项。
 - `size`：为了知道字符串在给定缓冲区中延伸多长，我们需要知道其字节大小。为此，可以使用以下大小策略之一：
   - `NumberSerializer`：当传递数字序列化器时，它将用作前缀来存储和恢复字符串的大小。默认情况下，大小使用小端的 `u32` 前缀存储——这是 borsh 序列化的默认行为。
@@ -273,6 +276,7 @@ string({ size: 'variable' }).serialize('Hi'); // -> 0x4869
 `bytes` 序列化器返回一个 `Serializer<Uint8Array>`，它将 `Uint8Array` 反序列化为... `Uint8Array`。虽然这看起来有点无用，但在组合到其他序列化器中时可能很有用。例如，您可以在 `struct` 序列化器中使用它来表示特定字段应保持未序列化状态。
 
 与 `string` 函数非常相似，`bytes` 函数包含一个 `size` 选项，用于配置如何存储和恢复字节数组的大小。支持与 `string` 函数相同的大小策略，只是这里的默认大小是 `"variable"` 策略。总结：
+
 - `NumberSerializer`：使用前缀数字序列化器来存储和恢复字节数组的大小。
 - `number`：使用固定大小来存储字节数组。
 - `"variable"`：序列化时按原样传递缓冲区，反序列化时返回缓冲区的剩余部分。默认行为。
@@ -314,11 +318,13 @@ unit().deserialize(new Uint8Array([42])); // -> [undefined, 0]
 ### 数组、集合和映射
 
 Umi 提供三个函数来序列化列表和映射：
+
 - `array`：序列化项目数组。它接受一个 `Serializer<T>` 作为参数并返回一个 `Serializer<T[]>`。
 - `set`：序列化唯一项目的集合。它接受一个 `Serializer<T>` 作为参数并返回一个 `Serializer<Set<T>>`。
 - `map`：序列化键值对的映射。它接受一个 `Serializer<K>` 用于键和一个 `Serializer<V>` 用于值作为参数，并返回一个 `Serializer<Map<K, V>>`。
 
 所有三个函数都接受相同的 `size` 选项，用于配置如何存储和恢复数组、集合或映射的长度。这与 `string` 和 `bytes` 序列化器的工作方式非常相似。以下是支持的策略：
+
 - `NumberSerializer`：使用数字序列化器在内容前加上其大小的前缀。默认情况下，大小使用小端的 `u32` 前缀存储。
 - `number`：返回具有固定项目数的数组、集合或映射序列化器。
 - `"remainder"`：返回通过将缓冲区的其余部分除以其项的固定大小来推断项目数的数组、集合或映射序列化器。例如，如果缓冲区剩余 64 字节，数组的每个项目是 16 字节长，则数组将被反序列化为 4 个项目。请注意，此选项仅适用于固定大小的项目。对于映射，键序列化器和值序列化器都必须具有固定大小。
@@ -343,12 +349,14 @@ map(u8(), u8(), { size: 'remainder' }) // 可变大小的 (u8, u8) 条目映射�
 ### 选项和可空值
 
 Umi 提供两个函数来序列化可选值：
+
 - `nullable`：序列化可以为 null 的值。它接受一个 `Serializer<T>` 作为参数并返回一个 `Serializer<Nullable<T>>`，其中 `Nullable<T>` 是 `T | null` 的类型别名。
 - `option`：序列化 `Option` 实例（[参见文档](helpers#选项)）。它接受一个 `Serializer<T>` 作为参数并返回一个 `Serializer<OptionOrNullable<T>, Option<T>>`。这意味着反序列化的值将始终包装在 `Option` 类型中，但序列化的值可以是 `Option<T>` 或 `Nullable<T>`。
 
 两个函数都通过在可选值前加上一个布尔值来序列化它们，该布尔值指示值是否存在。如果前缀布尔值为 `false`，则值为 `null`（对于可空值）或 `None`（对于选项），我们可以跳过反序列化实际值。否则，使用提供的序列化器反序列化值并返回。
 
 它们都提供相同的选项来配置创建的序列化器的行为：
+
 - `prefix`：用于序列化和反序列化布尔前缀的 `NumberSerializer`。默认情况下，它使用小端的 `u8` 前缀。
 - `fixed`：当此值为 `true` 时，它通过在值为空时更改序列化逻辑来返回固定大小的序列化器。在这种情况下，序列化的值将用零填充，以便空值和填充值使用相同的字节数进行序列化。请注意，这仅在项序列化器是固定大小时有效。
 
@@ -456,6 +464,7 @@ directionSerializer.serialize('LEFT'); // -> 0x00
 ### 数据枚举
 
 在 Rust 中，枚举是强大的数据类型，其变体可以是以下之一：
+
 - 空变体——例如 `enum Message { Quit }`。
 - 元组变体——例如 `enum Message { Write(String) }`。
 - 结构体变体——例如 `enum Message { Move { x: i32, y: i32 } }`。

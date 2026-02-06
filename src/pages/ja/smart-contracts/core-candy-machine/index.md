@@ -11,14 +11,11 @@ Metaplexプロトコルの**Candy Machine**は、Solanaにおける公平なNFT�
 {% quick-links %}
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/core-candy-machine/sdk" description="お好みの言語やライブラリを選択して、Candy Machinesを始めましょう。" /%}
 
+{% quick-link title="APIリファレンス" icon="JavaScript" href="<https://mpl-core-candy-machine.typedoc.metaplex.com/>" target="_blank" description="JavaScript API ドキュメントを確認してください。" /%}
 
-{% quick-link title="APIリファレンス" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="JavaScript API ドキュメントを確認してください。" /%}
-
-
-{% quick-link title="APIリファレンス" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="Rust API ドキュメントを確認してください。" /%}
+{% quick-link title="APIリファレンス" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" target="_blank" description="Rust API ドキュメントを確認してください。" /%}
 {% /quick-links %}
 
 {% callout %}
 このドキュメントは、Core Candy Machineとして知られるCandy Machineの最新バージョンについて説明しています。これは[Core](/ja/smart-contracts/core)アセットのミントを可能にします。Metaplex Token MetadataのNFTをミントしたい場合は、[代わりにCandy Machine V3を参照してください](https://developers.metaplex.com/candy-machine/)。
 {% /callout %}
-

@@ -9,6 +9,7 @@ Protecting your Core Candy Machine launch from bots and malicious actors is cruc
 ## Why Anti-Bot Protection Matters
 
 Without proper protection, bots can:
+
 - Mint large quantities before real users can participate
 - Use predictable patterns to snipe rare items
 - Overwhelm your infrastructure with automated requests
@@ -33,6 +34,7 @@ https://yourproject.com/metadata/2.json
 ```
 
 This pattern allows bots to:
+
 - Pre-fetch all metadata before the mint
 - Identify rare traits and target specific indexes
 - Plan attacks based on known metadata distribution
@@ -45,6 +47,7 @@ You can use various upload services and SDKs that automatically generate transac
 UMI's built-in uploader is a wrapper around services like **Irys** and **ArDrive Turbo**. It automatically generates transaction ID-based URIs while abstracting away the complexity of working directly with these services.
 
 **Example using UMI Uploader:**
+
 ```typescript
 import fs from "fs";
 import mime from "mime";
@@ -88,6 +91,7 @@ await securelyStoreUris(uploadedUris);
 ```
 
 **Other Upload Services to Explore:**
+
 - **Irys**: Direct SDK for Arweave uploads with transaction IDs
 - **ArDrive**: Arweave-based storage with built-in transaction ID generation
 - **IPFS**: Services like Pinata, Infura, or Web3.Storage
@@ -121,11 +125,13 @@ Create a single placeholder metadata file that will be used for all mints initia
 ```
 
 Upload this to a single, predictable URI (you can use any upload service):
+
 ```
 https://yourproject.com/metadata/placeholder.json
 ```
 
 **Key Requirements for Any Upload Solution:**
+
 - **Transaction ID-based URIs**: Ensure unpredictable, non-sequential identifiers
 - **Permanent storage**: Use services that provide immutable storage (Arweave, IPFS, etc.)
 - **URI storage**: Always store returned URIs in order for reveal mapping
@@ -252,6 +258,7 @@ const { masterHash, metadataHashes } = await generateVerificationHashes(
 ```
 
 Publish this on:
+
 - Your website
 - IPFS for permanent storage
 - Social media for transparency
@@ -266,6 +273,7 @@ Publish this on:
 {% /callout %}
 
 When you load items into a Candy Machine:
+
 - **All metadata URIs are immediately visible** to anyone who queries the on-chain data
 - **Bots can instantly scrape** all your real metadata if you load it directly
 - **Trait analysis becomes trivial** for malicious actors
@@ -278,11 +286,13 @@ This public visibility is exactly why the placeholder strategy is crucial for pr
 There are two ways to load items into a Candy Machine, and choosing the right one affects your security:
 
 **Hidden Settings:**
+
 - Mints sequentially: index 0, then 1, then 2, etc.
 - Users get predictable placeholder mint order
 - While mapping can still randomize the final reveal, mint order itself is predictable
 
 **Config Lines (Recommended):**
+
 - Better user experience with unpredictable placeholder mint index results
 
 #### Using Config Lines with Placeholder Metadata
@@ -323,6 +333,7 @@ await addConfigLines(umi, {
 ```
 
 **Placeholder metadata structure:**
+
 ```json
 {
   "name": "Mystery Asset",
@@ -379,6 +390,7 @@ Next.js is the most popular platform for creating NFT mint sites because it prov
 - **Cloudflare Workers**: Edge computing for global low-latency minting
 
 **Why Next.js is Ideal for Mint Sites:**
+
 - **Integrated Backend**: API routes built-in, no separate server needed
 - **Easy Deployment**: One-click deployment to Vercel, Netlify, etc.
 - **React Frontend**: Perfect for wallet connection and mint UI
@@ -390,6 +402,7 @@ Next.js is the most popular platform for creating NFT mint sites because it prov
 Always include these guards in your backend-generated transactions:
 
 **1. Third Party Signer Guard**: Ensures only your backend can authorize mints
+
 ```typescript
 const guards = {
   thirdPartySigner: {
@@ -411,6 +424,7 @@ const guards = {
 ##### Backend Mint Endpoint Implementation
 
 **Next.js API Route Example:**
+
 ```typescript
 // pages/api/mint.ts (Pages Router) or app/api/mint/route.ts (App Router)
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -453,6 +467,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 ```
 
 **Alternative: Express.js/AWS Lambda Example:**
+
 ```typescript
 // Traditional Express or serverless function
 app.post('/api/mint', async (req, res) => {
@@ -490,16 +505,19 @@ app.post('/api/mint', async (req, res) => {
 #### Deployment Considerations by Platform
 
 **Next.js Deployment:**
+
 - **Vercel**: Zero-config deployment, perfect for Next.js
 - **Netlify**: Great alternative with similar ease of use
 - **Railway**: Full-stack hosting with databases included
 
 **Serverless Deployment:**
+
 - **AWS Lambda**: Use Serverless Framework or AWS CDK
 - **Cloudflare Workers**: Global edge deployment
 - **Vercel Functions**: Automatic with Next.js deployment
 
 **Traditional Server:**
+
 - **Railway/Render**: Easy container deployment
 - **DigitalOcean/Linode**: VPS with Docker
 - **AWS EC2**: Full control but more setup required
@@ -519,17 +537,20 @@ After minting completes, implement a reveal mechanism that updates each asset's 
 With instant reveal, each NFT is updated to its final metadata immediately after the mint transaction completes. This provides immediate gratification for users but requires more complex backend infrastructure.
 
 **Process:**
+
 1. User mints an asset (gets placeholder metadata)
 2. Backend immediately looks up the mint index in your secure mapping
 3. Backend updates the asset with the final metadata URI from your stored upload list
 4. User receives the revealed asset instantly
 
 **Pros:**
+
 - Immediate user satisfaction
 - No waiting period for reveal
 - Simpler user experience
 
 **Cons:**
+
 - More complex backend implementation
 - Requires robust error handling for failed reveals
 
@@ -538,18 +559,21 @@ With instant reveal, each NFT is updated to its final metadata immediately after
 With event reveal, all assets remain as placeholders after minting, and the project reveals all NFTs at once at a predetermined time. This creates a community-wide reveal event with no user interaction required.
 
 **Process:**
+
 1. User mints an asset (gets placeholder metadata)
 2. Asset remains as placeholder until project reveal event
 3. Project backend processes all assets using your secure mapping at the scheduled time
 4. All assets are updated to their final metadata simultaneously
 
 **Pros:**
+
 - Simpler mint process
 - Creates community-wide reveal excitement
 - Can be scheduled for optimal timing (e.g., during community events)
 - No user interaction required
 
 **Cons:**
+
 - Users must wait for reveal
 - Requires separate reveal infrastructure
 - Need to manage reveal expectations
@@ -559,6 +583,7 @@ With event reveal, all assets remain as placeholders after minting, and the proj
 With user-triggered reveal, users can reveal their own NFTs through an interactive UI. Each user controls when their asset is revealed, but the reveal still uses the secure mapping.
 
 **Process:**
+
 1. User mints an asset (gets placeholder metadata)
 2. Asset remains as placeholder until user chooses to reveal
 3. User visits reveal website and triggers reveal for their specific asset
@@ -566,12 +591,14 @@ With user-triggered reveal, users can reveal their own NFTs through an interacti
 5. Asset is updated to its final metadata
 
 **Pros:**
+
 - Users control their own reveal timing
 - Creates interactive community engagement
 - Can build anticipation while giving users choice
 - Lower immediate transaction costs
 
 **Cons:**
+
 - More complex UI/UX implementation
 - Requires user action to complete reveal
 - May have incomplete reveals if users don't participate
@@ -579,17 +606,20 @@ With user-triggered reveal, users can reveal their own NFTs through an interacti
 ##### Choosing Your Strategy
 
 **Choose Instant Reveal if:**
+
 - You want immediate user satisfaction
 - Your backend can handle the complexity
 - You want to avoid reveal-related support issues
 
 **Choose Event Reveal if:**
+
 - You want to create community-wide reveal excitement
 - You prefer simpler mint infrastructure
 - You want to control reveal timing
 - You want to schedule reveals during community events
 
 **Choose User-Triggered Reveal if:**
+
 - You want to give users control over their reveal timing
 - You want to create interactive community engagement
 - You have the resources for a reveal UI/UX
@@ -628,6 +658,7 @@ await publishMapping(fullMappingData);
 ```
 
 **Verification function for community:**
+
 ```typescript
 // Verification function users can run to verify their assets
 function verifyAssetMapping(
@@ -695,6 +726,7 @@ function detectSuspiciousActivity(requests: MintRequest[]): boolean {
 #### Platform-Specific Security Tips
 
 **Next.js Security:**
+
 ```typescript
 // Implement rate limiting with express-rate-limit
 import rateLimit from 'express-rate-limit';
@@ -709,6 +741,7 @@ export default limiter(handler);
 ```
 
 **Serverless Security:**
+
 - **AWS Lambda**: Use IAM roles, not hardcoded credentials
 - **Vercel**: Use environment variables and edge config
 - **Cloudflare Workers**: Leverage KV storage for rate limiting
@@ -734,6 +767,7 @@ Here's the complete anti-bot protection workflow in order:
 Implementing comprehensive anti-bot protection requires careful planning and execution across multiple layers of your minting infrastructure. The chronological approach outlined in this guide ensures that each step builds upon the previous one, creating a robust defense system.
 
 **Key Success Factors:**
+
 - **Preparation is everything**: Generate mapping and verification hashes before launch
 - **Backend control is critical**: Never let clients generate their own mint transactions
 - **Transparency builds trust**: Publish verification data before mint and full mapping after reveal
@@ -741,4 +775,4 @@ Implementing comprehensive anti-bot protection requires careful planning and exe
 
 By following this structured approach, you create multiple layers of protection that make it extremely difficult for automated systems to game your mint while maintaining complete transparency and fairness for your legitimate community members.
 
-Remember that determined attackers will always look for weaknesses, so staying informed about new attack vectors and continuously improving your defenses is essential for long-term success. 
+Remember that determined attackers will always look for weaknesses, so staying informed about new attack vectors and continuously improving your defenses is essential for long-term success.

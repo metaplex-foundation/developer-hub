@@ -34,6 +34,7 @@ faqs:
 **Genesis** 是 Metaplex 为 Solana 上的**代币生成事件 (TGE)** 开发的智能合约。构建 Presale、Launch Pool 和拍卖，通过链上协调实现代币创建、分发和资金收集。{% .lead %}
 
 {% callout title="选择您的路径" %}
+
 - **刚接触 Genesis？** 从[快速入门](/zh/smart-contracts/genesis/getting-started)开始了解流程
 - **准备好构建了？** 直接跳转到 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)
 - **需要 SDK 参考？** 查看 [JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)
@@ -123,21 +124,27 @@ Genesis 支持三种可以组合使用的机制：
 ## 常见问题
 
 ### 什么是 Genesis？
+
 Genesis 是 Metaplex 为 Solana 上的代币生成事件 (TGE) 开发的智能合约。它为 Presale、Launch Pool 和拍卖提供链上基础设施，实现协调的代币创建和分发。
 
 ### Genesis 支持哪些发行机制？
+
 Genesis 支持三种机制：**Launch Pool**（按比例分配与价格发现）、**Presale**（固定价格）和**统一价格拍卖**（基于出价的清算价格）。
 
 ### 使用 Genesis 需要多少费用？
+
 Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 的协议费用。没有前期成本——您只需支付 Solana 交易费用以及募集资金的协议费用。
 
 ### 发行后可以撤销代币权限吗？
+
 可以。Genesis 提供 `revokeMintAuthorityV2` 和 `revokeFreezeAuthorityV2` 指令来永久撤销权限。
 
 ### Launch Pool 和 Presale 有什么区别？
+
 **Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。
 
 ### 我可以组合多种发行机制吗？
+
 可以。Genesis 使用 Bucket 系统，您可以添加多个流入 Bucket 并配置用于金库或归属的流出 Bucket。
 
 ## 术语表

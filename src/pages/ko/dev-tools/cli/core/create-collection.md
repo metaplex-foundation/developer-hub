@@ -9,6 +9,7 @@ description: 다양한 방법을 사용하여 MPL Core 컬렉션 생성
 ## 방법
 
 ### 1. 간단한 생성
+
 명령줄 인수를 통해 메타데이터의 이름과 URI를 직접 제공하여 단일 컬렉션을 생성합니다.
 
 ```bash
@@ -16,6 +17,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 ```
 
 ### 2. 파일 기반 생성
+
 이미지 파일과 JSON 메타데이터 파일을 제공하여 단일 컬렉션을 생성합니다. 명령어가 두 파일 업로드 및 컬렉션 생성을 처리합니다.
 
 ```bash
@@ -23,6 +25,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ```
 
 ### 3. 대화형 마법사
+
 파일 업로드 및 메타데이터 생성을 포함한 전체 프로세스를 안내하는 대화형 마법사를 사용하여 컬렉션을 생성합니다.
 
 ```bash
@@ -32,31 +35,37 @@ mplx core collection create --wizard
 ## 옵션
 
 ### 기본 옵션
+
 - `--name <string>`: 컬렉션 이름 (간단한 생성에 필수)
 - `--uri <string>`: 컬렉션 메타데이터의 URI (간단한 생성에 필수)
 
 ### 파일 기반 옵션
+
 - `--files`: 파일 기반 생성을 나타내는 플래그
 - `--image <path>`: 업로드하고 컬렉션에 할당할 이미지 파일 경로
 - `--json <path>`: JSON 메타데이터 파일 경로
 
 ### 플러그인 옵션
+
 - `--plugins`: 대화형 플러그인 선택 사용
 - `--pluginsFile <path>`: 플러그인 데이터가 포함된 JSON 파일 경로
 
 ## 예시
 
 1. 대화형 마법사를 사용하여 컬렉션 생성:
+
 ```bash
 mplx core collection create --wizard
 ```
 
-2. 이름과 URI로 컬렉션 생성:
+1. 이름과 URI로 컬렉션 생성:
+
 ```bash
 mplx core collection create --name "My Collection" --uri "https://example.com/metadata.json"
 ```
 
-3. 파일에서 컬렉션 생성:
+1. 파일에서 컬렉션 생성:
+
 ```bash
 mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
 ```
@@ -64,6 +73,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ## 출력
 
 명령어는 성공적으로 생성되면 다음 정보를 출력합니다:
+
 ```
 --------------------------------
   Collection: <collection_address>

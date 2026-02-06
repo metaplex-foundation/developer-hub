@@ -10,35 +10,36 @@ Metaplex Token Metadata는 [온체인 컬렉션](/ko/smart-contracts/token-metad
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// 불변, 한 번 전환되면 이 메타데이터의 모든 판매는 2차 판매로 간주됩니다.
-	pub primary_sale_happened: bool,
-	// 데이터 구조체가 변경 가능한지 여부, 기본값은 아니오
-	pub is_mutable: bool,
-	/// 에디션의 쉬운 계산을 위한 nonce, 있는 경우
-	pub edition_nonce: Option<u8>,
-	/// 토큰 표준은 결정론적이며 create master edition 호출을 성공적으로 호출하면
-	/// SemiFungible에서 NonFungible로 변경됩니다.
-	pub token_standard: Option<TokenStandard>,
-	/// Metadata를 쉽게 변경할 수 없으므로 여기 끝에 새로운 DataV2 필드를 추가합니다.
-	/// 컬렉션
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // 불변, 한 번 전환되면 이 메타데이터의 모든 판매는 2차 판매로 간주됩니다.
+ pub primary_sale_happened: bool,
+ // 데이터 구조체가 변경 가능한지 여부, 기본값은 아니오
+ pub is_mutable: bool,
+ /// 에디션의 쉬운 계산을 위한 nonce, 있는 경우
+ pub edition_nonce: Option<u8>,
+ /// 토큰 표준은 결정론적이며 create master edition 호출을 성공적으로 호출하면
+ /// SemiFungible에서 NonFungible로 변경됩니다.
+ pub token_standard: Option<TokenStandard>,
+ /// Metadata를 쉽게 변경할 수 없으므로 여기 끝에 새로운 DataV2 필드를 추가합니다.
+ /// 컬렉션
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // 컬렉션이 검증되었는지 여부
-	pub key: Pubkey,    // 컬렉션 NFT의 SPL 토큰 민트 계정
+ pub verified: bool, // 컬렉션이 검증되었는지 여부
+ pub key: Pubkey,    // 컬렉션 NFT의 SPL 토큰 민트 계정
 }
 ```
 
 그러나 컬렉션 민트 주소가 주어졌을 때, 해당 특정 컬렉션에 속하는 모든 NFT를 찾는 것은 체인에서 직접 읽을 때 상당히 더 어렵습니다. [DAS](/ko/dev-tools/das-api)를 사용하는 하나의 우수한 방법과 체인에서 직접 데이터를 가져오는 두 가지 기본 접근법이 있습니다.
 
 ## DAS API
+
 DAS를 사용하여 민트를 가져오는 것은 [이를 지원하는 RPC 공급자](/rpc-providers#metaplex-das-api)를 사용할 때 우수한 방법입니다.
 
 {% dialect-switcher title="getAssetByGroup 예제" %}
@@ -121,7 +122,7 @@ Rust `Option`은 [Borsh](https://borsh.io/) 인코딩에서 `None` 변형에 대
 - 중복을 방지하기 위해 `metadata` 주소를 `Set`에 추가합니다.
 
 - 모든 `metadata` 주소가 발견되면, 이들을 반복하며 `getAccountInfo`를 호출하여 계정 데이터를 찾습니다.
-    - 계정 데이터를 Metadata 구조체/객체로 역직렬화하고, `mint` 필드에서 민트 주소를 찾습니다. `mint` 주소를 Set에 추가합니다.
-    - 이 최종 Set이 컬렉션의 모든 항목에 대한 민트 주소 목록입니다.
+  - 계정 데이터를 Metadata 구조체/객체로 역직렬화하고, `mint` 필드에서 민트 주소를 찾습니다. `mint` 주소를 Set에 추가합니다.
+  - 이 최종 Set이 컬렉션의 모든 항목에 대한 민트 주소 목록입니다.
 
 컬렉션 멤버를 가져오기 위한 트랜잭션 크롤링의 예제 Rust 및 TypeScript 코드는 [여기](https://github.com/metaplex-foundation/get-collection)에서 찾을 수 있습니다.

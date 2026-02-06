@@ -14,6 +14,7 @@ The MPL-Core Collection has to contain the [`BubblegumV2` plugin](/smart-contrac
 The following sections show how to set and remove a collection from a cNFT in single-step transactions. It is also possible to do both operations in a single instruction when adding the `coreCollection` and `newCoreCollection` parameters. If both collection authorities are not the same wallet, both have to sign.
 
 ## Set the Collection of a Compressed NFT
+
 The **setCollectionV2** instruction can be used to set the collection of a cNFT. It can also be used to remove the collection from a cNFT or change the collection of a cNFT.
 
 {% dialect-switcher title="Set the Collection of a Compressed NFT" %}
@@ -53,6 +54,7 @@ const signature = await setCollectionV2(umi, {
 {% /dialect-switcher %}
 
 ## Remove the Collection of a Compressed NFT
+
 The **setCollectionV2** instruction can also be used to remove the collection from a cNFT.
 
 {% dialect-switcher title="Remove the Collection of a Compressed NFT" %}

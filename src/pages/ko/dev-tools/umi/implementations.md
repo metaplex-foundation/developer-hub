@@ -48,6 +48,7 @@ description: 공개 인터페이스 구현 개요
 | 업로드 및 다운로드를 모의하기 위한 로컬 캐시 사용 | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-storage-mock) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-storage-mock) |
 | 4EVERLAND 사용 | 4EVERLAND | [GitHub](https://github.com/4everland/umi-uploader-4everland) / [NPM](https://www.npmjs.com/package/@4everland/umi-uploader-4everland) |
 | Bundlr.network 사용 (Deprecated - `umi-uploader-irys` 사용) | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-uploader-bundlr) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-uploader-bundlr) |
+
 ## Downloader Interface
 
 | 설명 | 관리자 | 링크 |

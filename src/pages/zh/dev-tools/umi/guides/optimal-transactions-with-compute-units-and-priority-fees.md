@@ -13,6 +13,7 @@ updated: '12-02-2024'
 优先费让您可以在本地费用市场中出价，以更快地将交易包含在区块中。当网络拥堵且多个交易竞争修改相同账户时，验证者会优先处理具有更高优先费的交易。
 
 关于优先费的要点：
+
 - 它们的计算方式为：`compute_unit_limit * compute_unit_price`
 - 更高的费用增加更快包含的可能性
 - 根据当前网络竞争情况只支付必要的费用
@@ -25,6 +26,7 @@ updated: '12-02-2024'
 2. 区块具有有限的 CU 容量 - 请求过多的 CU 会减少每个区块的总交易数
 
 优化 CU 限制的好处：
+
 - 通过只支付所需的 CU 来降低交易成本
 - 通过允许每个区块更多交易来提高网络效率
 - 仍然确保有足够的资源用于执行
@@ -40,11 +42,13 @@ updated: '12-02-2024'
 {% /callout %}
 
 ### 计算优先费
+
 使用优先费时，重要的是要记住，当考虑竞争时，这些费用效果最好。手动添加一个巨大的数字可能导致支付超过所需的费用，而使用太低的数字可能导致在竞争激烈时交易不被包含在区块中。
 
 要获取为我们交易中的账户支付的最后优先费，可以使用 `getRecentPrioritizationFees` RPC 调用。我们使用结果基于前 100 个支付的费用计算平均值。这个数字可以根据您的经验进行调整。
 
 需要以下步骤：
+
 1. 从您的交易中提取可写账户
 2. 查询这些账户最近支付的费用
 3. 根据市场条件计算最优费用
@@ -53,6 +57,7 @@ updated: '12-02-2024'
 
 {% totem %}
 {% totem-accordion title="代码片段" %}
+
 ```js
 import {
   TransactionBuilder,
@@ -105,13 +110,16 @@ export const getPriorityFee = async (
 };
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### 计算计算单元
+
 为了优化交易成本并确保可靠执行，我们可以通过首先模拟交易来计算理想的计算单元限制。这种方法比使用固定值更精确，有助于避免资源的过度分配。
 
 模拟过程的工作原理：
+
 1. 使用最大计算单元（1,400,000）构建交易
 2. 模拟它以测量实际消耗的计算单元
 3. 添加 10% 的安全缓冲区以应对变化
@@ -119,6 +127,7 @@ export const getPriorityFee = async (
 
 {% totem %}
 {% totem-accordion title="代码片段" %}
+
 ```js
 export const getRequiredCU = async (
   umi: Umi,
@@ -175,14 +184,17 @@ export const getRequiredCU = async (
   console.log("Estimating required compute units...");
   const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### Sol 转账完整示例
+
 按照上面的代码并引入一些样板代码来创建 Umi 实例，可以生成这样的脚本来创建 Sol 转账交易：
 
 {% totem %}
 {% totem-accordion title="完整代码示例" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
@@ -367,5 +379,6 @@ const example = async () => {
 example().catch(console.error);
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}

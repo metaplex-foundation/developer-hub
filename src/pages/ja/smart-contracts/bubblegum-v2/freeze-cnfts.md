@@ -13,6 +13,7 @@ Bubblegum V2では、圧縮NFTを凍結・解凍できます。これはステ�
 {% dialect-switcher title="リーフデリゲートとして圧縮NFTを凍結" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -29,8 +30,10 @@ await freezeV2(umi, {
   //coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% totem-accordion title="永続凍結デリゲートとして" %}
+
 ```js
 import {
   getAssetWithProof,
@@ -46,5 +49,6 @@ await freezeV2(umi, {
   coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem-accordion %}
 {% /dialect %}

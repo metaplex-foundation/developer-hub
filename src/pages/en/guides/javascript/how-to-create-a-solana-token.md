@@ -249,7 +249,7 @@ const createMintIx = await createFungible(umi, {
 
 If we are minting the tokens straight away then we need a place to store the tokens in someones wallet. To do this we mathematically generate an address based on both the wallet and mint address which is called a Associated Token Account (ATA) or sometimes just referred to as just a Token Account. This Token Account (ATA) belongs to the wallet and stores our tokens for us.
 
-#### Generating a Token Account.
+#### Generating a Token Account
 
 The first thing we need to do is figure out what the Token Account address should be. MPL-Toolbox has a helper function we can import that does just that while also creating the Token Account for if it doesn't exist.
 

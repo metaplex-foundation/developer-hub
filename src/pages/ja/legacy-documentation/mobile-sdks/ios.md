@@ -26,6 +26,7 @@ iOSおよびSwiftをサポートする他のAppleプラットフォームで動�
 ## はじめに
 
 ### インストール
+
 #### 要件 {#requirements}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
@@ -41,6 +42,7 @@ Xcode 11から、[Swift Package Manager](https://swift.org/package-manager/)を�
 問題が発生した場合、またはXcodeプロジェクトへのパッケージの追加に関する質問がある場合は、Appleの[Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)ガイド記事を読むことをお勧めします。
 
 ### セットアップ
+
 Swift SDKへのエントリーポイントは、APIにアクセスできる`Metaplex`インスタンスです。
 
 `SolanaConnectionDriver`を設定し、環境を設定します。`StorageDriver`と`IdentityDriver`を提供します。URLShared用のURLSharedStorageDriverとゲストIdentity Driver用のGuestIdentityDriverの具体的な実装も使用できます。
@@ -55,9 +57,11 @@ let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storag
 ```
 
 # 使用方法
+
 適切に設定されると、その`Metaplex`インスタンスを使用して、さまざまな機能セットを提供するモジュールにアクセスできます。現在、`nfts()`メソッドを介してアクセスできるNFTモジュールが1つだけあります。そのモジュールから、NFTの検索、作成、更新ができ、さらに多くの機能が追加される予定です。
 
 ## NFT
+
 NFTモジュールは`Metaplex.nfts()`を介してアクセスでき、以下のメソッドを提供します。現在、読み取りメソッドのみをサポートしています。NFTの作成と更新は将来サポートされる予定です。
 
 - findNftByMint(mint, callback)
@@ -75,12 +79,12 @@ NFTモジュールは`Metaplex.nfts()`を介してアクセスでき、以下の
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -127,6 +131,7 @@ nft.metadata(metaplex: self.metaplex) { result in
 ```
 
 ## アイデンティティ
+
 `Metaplex`インスタンスの現在のアイデンティティは`metaplex.identity()`を介してアクセスでき、SDKと対話するときに誰の代わりに行動しているかについての情報を提供します。
 
 このメソッドは、以下のインターフェースを持つアイデンティティオブジェクトを返します。すべてのメソッドにはsolana apiインスタンスが必要です
@@ -148,11 +153,9 @@ public protocol IdentityDriver {
 
 `GuestIdentityDriver`ドライバーは最もシンプルなアイデンティティドライバーです。これは本質的に`null`ドライバーであり、署名されたトランザクションを送信する必要がない場合に便利です。`signTransaction`メソッドを使用すると失敗を返します。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver`ドライバーは、パラメーターとして`Account`オブジェクトを受け入れます。
-
 
 ### ReadOnlyIdentityDriver
 

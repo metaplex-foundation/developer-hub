@@ -26,6 +26,7 @@ This project is in active development. **All** interfaces are _very likely_ to c
 ## Getting started
 
 ### Installation
+
 #### Requirements {#requirements}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
@@ -41,9 +42,10 @@ From Xcode 11, you can use [Swift Package Manager](https://swift.org/package-man
 If you encounter any problems or have a question on adding the package to an Xcode project, I suggest reading the [Adding Package Dependencies to Your App](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app) guide article from Apple.
 
 ### Setup
+
 The entry point to the Swift SDK is a `Metaplex` instance that will give you access to its API.
 
-Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations URLSharedStorageDriver for URLShared and GuestIdentityDriver for a guest Identity Driver. 
+Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations URLSharedStorageDriver for URLShared and GuestIdentityDriver for a guest Identity Driver.
 
 You can customise who the SDK should interact on behalf of and which storage provider to use when uploading assets. We might provide a default and simple implementation in the future.
 
@@ -55,9 +57,11 @@ let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storag
 ```
 
 # Usage
+
 Once properly configured, that `Metaplex` instance can be used to access modules providing different sets of features. Currently, there is only one NFT module that can be accessed via the `nfts()` method. From that module, you will be able to find, create and update NFTs with more features to come.
 
 ## NFTs
+
 The NFT module can be accessed via `Metaplex.nfts()` and provide the following methods. Currently, we only support reading methods. Writing and creating NFTs will be supported in the future.
 
 - findNftByMint(mint, callback)
@@ -66,7 +70,7 @@ The NFT module can be accessed via `Metaplex.nfts()` and provide the following m
 - findNftsByCreator(creator, position = 1, callback)
 - findNftsByCandyMachine(candyMachine, version = 2, callback)
 
-All the methods return a callback. It's also possible to wrap them inside either RX, and async Result or Combine. We only provide this interface since is the most compatible without forcing any specific framework. 
+All the methods return a callback. It's also possible to wrap them inside either RX, and async Result or Combine. We only provide this interface since is the most compatible without forcing any specific framework.
 
 ### Your first request
 
@@ -75,12 +79,12 @@ The following code snippet is a basic one you can use to get NFTs from a publicK
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -127,6 +131,7 @@ nft.metadata(metaplex: self.metaplex) { result in
 ```
 
 ## Identity
+
 The current identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and provide information on the wallet we are acting on behalf of when interacting with the SDK.
 
 This method returns an identity object with the following interface. All the methods required a solana api instance
@@ -148,11 +153,9 @@ Let’s have a quick look at the concrete identity drivers available to us.
 
 The `GuestIdentityDriver` driver is the simplest identity driver. It is essentially a `null` driver that can be useful when we don’t need to send any signed transactions. It will return failure if you use `signTransaction` methods.
 
-
 ### KeypairIdentityDriver
 
 The `KeypairIdentityDriver` driver accepts a `Account` object as a parameter.
-
 
 ### ReadOnlyIdentityDriver
 
@@ -168,7 +171,7 @@ public protocol StorageDriver {
 }
 ```
 
-Currently, it's only used to retrieve json data off-chain. 
+Currently, it's only used to retrieve json data off-chain.
 
 ### URLSharedStorageDriver
 
@@ -176,14 +179,12 @@ This will use URLShared networking. Which is the default iOS networking implemen
 
 ### MemoryStorageDriver
 
-This will use return Empty Data object with 0 size. 
+This will use return Empty Data object with 0 size.
 
 ## Sample app
 
-The SDK comes with a [sample app][sample]. Please clone it run it on your phone and take what is can help you. 
+The SDK comes with a [sample app][sample]. Please clone it run it on your phone and take what is can help you.
 
 [github]: https://github.com/metaplex-foundation/metaplex-ios
 [docs]: https://github.com/metaplex-foundation/metaplex-ios#metaplex-ios-sdk
 [sample]: https://github.com/metaplex-foundation/metaplex-ios/tree/main/Sample
-
-

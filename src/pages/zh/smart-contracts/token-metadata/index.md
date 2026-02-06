@@ -14,7 +14,7 @@ Token Metadata 程序是在 Solana 区块链上处理 NFT 和同质化资产时�
 
 {% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/token-metadata/getting-started" description="选择您喜欢的语言或库,开始在 Solana 上使用数字资产。" /%}
 
-{% quick-link title="API 参考" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容?查看我们的 API 参考文档并找到您的答案。" /%}
+{% quick-link title="API 参考" icon="CodeBracketSquare" href="<https://mpl-token-metadata.typedoc.metaplex.com/>" target="_blank" description="正在寻找特定内容?查看我们的 API 参考文档并找到您的答案。" /%}
 
 {% /quick-links %}
 

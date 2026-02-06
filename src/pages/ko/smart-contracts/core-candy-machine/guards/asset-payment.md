@@ -53,7 +53,6 @@ Owner: System Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
 
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
@@ -131,6 +130,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## 민팅 설정
 
 Asset Payment 가드에는 다음 민팅 설정이 포함됩니다:
+
 - **Asset Address**: 지불할 Asset의 주소입니다. 이는 필수 컬렉션의 일부여야 하며 민팅하는 사람에게 속해야 합니다.
 - **Collection Address**: 지불에 사용되는 컬렉션의 주소입니다.
 - **Destination**: 모든 Asset을 받을 지갑의 주소입니다.

@@ -26,17 +26,20 @@ description: Candy Machineから別のウォレットアドレスにNFTをミン
 別のウォレットへNFTをミントすることは、エアドロップ、景品配布、または複数の受信者にNFTを配布する際に特に有用です。このガイドでは、Candy Machineから異なるウォレットアドレスにNFTをミントするプロセスを案内します。ミントプロセスを開始する人がミントコストを負担することに注意することが重要です。したがって、受信者が自分でNFTを請求する方がしばしばコスト効率的です。
 
 {% callout type="note" title="重要な考慮事項" %}
+
 - 別のウォレットへのミントは高額になる可能性があります。代わりに[allowlist](/ja/smart-contracts/candy-machine/guards/allow-list)や[NFT Gate](/ja/smart-contracts/candy-machine/guards/nft-gate) Guardを使用した請求メカニズムを検討することをお勧めします。
 - ガードありとガードなしのCandy Machineで利用可能な異なるツールがあります。ガードなしでのミントは通常より簡単です。
 {% /callout %}
 
 このガイドでは2つのアプローチを説明します：
+
 1. [Sugar CLI](#using-sugar-cli)を使用したミント。コーディング不要！
 2. [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)を使用したミント
 
 ## Sugar CLIの使用
 
 Sugar CLIは、他のウォレットにNFTをミントするための2つの主要なコマンドを提供します：
+
 1. `sugar mint`：*1つ*の特定のウォレットにミント
 2. `sugar airdrop`：*複数*のウォレットにミント
 
@@ -87,7 +90,6 @@ Typescriptを使用して別のウォレットにミントする場合、Candy M
 
 ガードなしのCandy Machineの場合、`mintFromCandyMachineV2`を使用します。この関数では、受信者を`nftOwner`として直接指定できます。
 
-
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
 
@@ -113,6 +115,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="完全なコード例" %}
+
 ```js
 import {
   addConfigLines,
@@ -268,6 +271,7 @@ const RPC_ENDPOINT = "https://api.devnet.solana.com";
 })();
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
@@ -308,6 +312,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="完全なコード例" %}
+
 ```js
 import {
   addConfigLines,
@@ -477,5 +482,6 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}

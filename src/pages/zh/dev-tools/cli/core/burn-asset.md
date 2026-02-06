@@ -9,16 +9,19 @@ description: 使用 Metaplex CLI 销毁 MPL Core 资产
 ## 基本用法
 
 ### 销毁单个资产
+
 ```bash
 mplx core asset burn <assetId>
 ```
 
 ### 从集合中销毁资产
+
 ```bash
 mplx core asset burn <assetId> --collection <collectionId>
 ```
 
 ### 销毁多个资产
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```
@@ -51,17 +54,21 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 示例
 
 ### 销毁单个资产
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
 
 ### 从集合中销毁资产
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe
 ```
 
 ### 从列表批量销毁资产
+
 创建 JSON 文件 `assets-to-burn.json`：
+
 ```json
 [
   "5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa",
@@ -70,6 +77,7 @@ mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --collection H
 ```
 
 然后运行：
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```

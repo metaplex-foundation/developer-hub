@@ -15,11 +15,14 @@ about:
 proficiencyLevel: Beginner
 ---
 Metaplex Core资产的链下JSON元数据与Metaplex Token Metadata标准类似。但是，由于可以使用插件在资产本身中存储更多数据，因此属性等一些数据也可以额外存储在链上。
+
 ## Schema示例
+
 以下是不同已知NFT类型的示例。需要注意的是，所有这些不同类型也可以使用`image`、`animation_url`和`properties`字段成为单个Asset的一部分。所有不同的字段在[JSON Schema字段](#json-schema字段)部分进一步描述。
 {% totem title="示例" id="schema-examples" %}
 {% totem-accordion title="图像" %}
 Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attribute)存储在链上。
+
 ```json
 {
   "name": "Number #0001",
@@ -47,8 +50,10 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
   }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="动画GIF" %}
+
 ```json
 {
   "name": "Number #0001",
@@ -66,8 +71,10 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
   }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="视频" %}
+
 ```json
 {
     "name": "Video Asset",
@@ -90,8 +97,10 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="音频" %}
+
 ```json
 {
     "name": "Audio Asset",
@@ -114,9 +123,11 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="VR" %}
 虽然大多数浏览器和钱包支持`.glb`文件，但建议在schema中包含一个备用图像。
+
 ```json
 {
     "name": "VR Asset",
@@ -139,9 +150,11 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="HTML" %}
 以下HTML Asset示例目前不受钱包支持，因为它们可能被视为安全风险。但是，一些浏览器会正确渲染它们，因此建议为所有不支持HTML Asset的工具提供备用图像。
+
 ```json
 {
     "name": "HTML Asset",
@@ -164,12 +177,17 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ## JSON Schema字段
+
 以下是不同字段的说明。
 如果您缺少Metaplex Token Metadata中已知的某些字段，这些字段可能已被弃用。例如，`creators`现在是[Royalties插件](/smart-contracts/core/plugins/royalties)的一部分。
+
 ### 必填字段
+
 - **name**：NFT资产的名称
   - 示例："Solana Monkey #123"，"Degen Ape #45"
 
@@ -179,7 +197,8 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
   - 示例：`https://arweave.net/123abc...?ext=png`
   - 支持：PNG、GIF、JPG/JPEG
 - **category**：NFT内容类型
-    - 示例：`image`、`video`、`audio`、`vr`、`html`
+  - 示例：`image`、`video`、`audio`、`vr`、`html`
+
 ### 可选字段
 
 - **animation_url**：多媒体附件的URI
@@ -189,14 +208,17 @@ Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attrib
   - 示例：`https://www.myproject.io/nft/123`
 - **attributes**：特征及其值的数组。也可以使用[Attributes插件](/smart-contracts/core/plugins/attribute)存储在链上。
   - 示例：
+
     ```json
     {
       "trait_type": "Background",
       "value": "Galaxy"
     }
     ```
+
 - **properties**：包括文件和类别的额外元数据
   - **files**：与NFT关联的所有资产的数组。`type`是文件的[MIME类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)。
+
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",

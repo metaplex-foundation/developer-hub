@@ -37,33 +37,49 @@ howToTools:
 {% callout title="什么是Asset？" %}
 与现有的Asset程序（如Solana的Token程序）不同，Metaplex Core和Core NFT Asset（有时称为Core NFT资产）不依赖于多个账户，如关联Token账户。相反，Core NFT Asset将钱包和"mint"账户之间的关系存储在资产本身中。
 {% /callout %}
+
 ## 前提条件
+
 - 您选择的代码编辑器（推荐**Visual Studio Code**）
 - Node **18.x.x**或更高版本。
+
 ## 初始设置
+
 本指南将教您如何基于单文件脚本用Javascript创建NFT Core Asset。您可能需要根据需要修改和移动函数。
+
 ### 初始化
+
 使用您喜欢的包管理器（npm、yarn、pnpm、bun）初始化新项目（可选），并在提示时输入所需的详细信息。
+
 ```js
 npm init
 ```
+
 ### 必需的包
+
 安装本指南所需的包。
 {% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
+
 ```js
 npm i @metaplex-foundation/umi
 ```
+
 ```js
 npm i @metaplex-foundation/umi-bundle-defaults
 ```
+
 ```js
 npm i @metaplex-foundation/mpl-core
 ```
+
 ```js
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
+
 ### 导入和包装函数
+
 这里我们定义本指南所需的所有导入，并创建一个包装函数来执行所有代码。
+
 ```ts
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
@@ -88,11 +104,14 @@ const createNft = async () => {
 // 运行包装函数
 createNft()
 ```
+
 ## 设置Umi
+
 设置Umi时，您可以从各种来源使用或生成密钥对/钱包。您可以创建新钱包进行测试，从文件系统导入现有钱包，或者如果您正在构建网站/dApp，可以使用`walletAdapter`。
 **注意**：在此示例中，我们将使用`generatedSigner()`设置Umi，但您可以在下面找到所有可能的设置！
 {% totem %}
 {% totem-accordion title="使用新钱包" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -109,8 +128,10 @@ umi.use(signerIdentity(signer))
 console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="使用现有钱包" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -131,8 +152,10 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 // 将密钥对加载到umi中。
 umi.use(keypairIdentity(umiSigner));
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="使用钱包适配器" %}
+
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -142,14 +165,20 @@ const umi = createUmi('https://api.devnet.solana.com')
 // 将钱包适配器注册到Umi
 .use(walletAdapterIdentity(wallet))
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 **注意**：`walletAdapter`部分仅提供连接到Umi所需的代码，假设您已经安装并设置了`walletAdapter`。有关完整指南，请参阅[此处](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+
 ## 创建Asset的元数据
+
 要在钱包或Explorer中显示Asset的可识别图像，我们需要创建存储元数据的URI！
+
 ### 上传图像
+
 Umi附带可下载的存储插件，允许您上传到`Arweave`、`NftStorage`、`AWS`和`ShdwDrive`等存储解决方案。在本指南中，我们将使用`irysUploader()`插件将内容存储在Arweave上。
 在此示例中，我们将使用本地方法通过Irys上传到Arweave；如果您希望将文件上传到其他存储提供商或从浏览器上传，您需要采取不同的方法。在浏览器场景中导入和使用`fs`将不起作用。
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -178,10 +207,13 @@ const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
 })
 console.log(imageUri[0])
 ```
+
 ### 上传元数据
+
 一旦我们有了有效且可用的图像URI，我们就可以开始处理资产的元数据。
 可替代代币离链元数据的标准如下。这应该填写并写入Javascript中的对象`{}`或保存到`metadata.json`文件中。
 我们将看看JavaScript对象方法。
+
 ```ts
 const metadata = {
   name: 'My NFT',
@@ -209,7 +241,9 @@ const metadata = {
   },
 }
 ```
+
 这里的字段包括：
+
 | 字段          | 描述                                                                                                                                                                                      |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name          | 您的NFT的名称。                                                                                                                                                                           |
@@ -220,16 +254,21 @@ const metadata = {
 | attributes    | 使用`{trait_type: value, "value": "value1"}`的对象                                                                                                                                        |
 | properties    | 包含`files`字段，接受`{uri: string, type: mimeType}`的`[]数组`。还包含category字段，可以设置为`image`、`audio`、`video`、`vfx`和`html`                                                    |
 创建元数据后，我们需要将其作为JSON文件上传，以便获得附加到我们Collection的URI。为此，我们将使用Umi的`uploadJson()`函数：
+
 ```js
 // 调用Umi的`uploadJson()`函数通过Irys将我们的元数据上传到Arweave。
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
+
 此函数在上传之前自动将我们的JavaScript对象转换为JSON。
 现在我们应该最终在`metadataUri`中存储了JSON文件的URI，前提是它没有抛出任何错误。
+
 ### 铸造NFT Core Asset
+
 从这里我们可以使用`@metaplex-foundation/mpl-core`包中的`create`函数来创建我们的Core NFT Asset。
+
 ```ts
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -239,7 +278,9 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
+
 然后记录详细信息如下：
+
 ```ts
   // 记录签名和交易以及NFT的链接。
   console.log('\nNFT Created')
@@ -249,10 +290,13 @@ const signature = base58.deserialize(tx.signature)[0]
   console.log('View NFT on Metaplex Explorer')
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
+
 ### 附加操作
+
 在继续之前，如果我们想创建已经包含插件和/或外部插件（如`FreezeDelegate`插件或`AppData`外部插件）的资产怎么办？以下是方法。
 `create()`指令通过`plugins`字段支持添加常规插件和外部插件。因此，我们可以轻松地添加特定插件所需的所有字段，一切都将由指令处理。
 以下是如何操作的示例：
+
 ```typescript
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -274,8 +318,11 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
+
 **注意**：如果您不确定使用哪些字段和插件，请参阅[文档](/smart-contracts/core/plugins)！
+
 ## 完整代码示例
+
 ```ts
 import { create } from '@metaplex-foundation/mpl-core'
 import {

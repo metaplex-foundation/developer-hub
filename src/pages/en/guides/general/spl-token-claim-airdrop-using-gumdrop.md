@@ -54,25 +54,31 @@ Ensure you mint enough tokens to cover your entire distribution list plus some b
 ## Distribution Methods
 
 To distribute the proofs to the users, Gumdrop supports multiple distribution methods. Wallet-based distribution is recommended for:
+
 - Better reliability
 - Simpler implementation
 - No dependency on external services
 - Direct wallet verification
 
 For wallet distribution, you'll need to either
-- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots. 
+
+- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots.
 or:
+
 1. Store the claim data in your database indexed by wallet address
 2. Create a frontend that fetches claim data when users connect their wallet
 3. Use the claim data to execute the on-chain claim transaction
 
 Other distribution methods are:
+
 - Email through AWS SES
 - SMS through AWS SNS
 - Discord through Discord API
 
 ## Distribution List Setup
+
 After creating the SPL token, you need to create a distribution list. This list defines who can claim tokens and the amount. This data is used to:
+
 1. Generate unique claim proofs for each recipient
 2. Create a merkle tree where the root is stored on-chain for verification
 3. Ensure only listed recipients can claim their exact allocation
@@ -97,6 +103,7 @@ The amount should be specified without decimals. For example, if you want to dro
 {% /callout %}
 
 The `handle` can be:
+
 - Wallet address for direct distribution **recommended**
 - Email address for AWS SES distribution
 - Phone number for AWS SNS distribution  
@@ -157,6 +164,7 @@ Gumdrop provides a powerful and flexible way to distribute SPL tokens through a 
 - **Flexibility**: Multiple distribution methods to reach users through their preferred channels
 
 When implementing your Gumdrop:
+
 1. Choose wallet-based distribution for the most reliable experience
 2. Test thoroughly on devnet before mainnet deployment
 3. Consider building a custom frontend for better user experience

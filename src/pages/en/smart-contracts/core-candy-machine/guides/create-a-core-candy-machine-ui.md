@@ -40,6 +40,7 @@ After setting up your environment, we can start focusing on the Candy Machine. M
 It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/smart-contracts/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
 
 ### Fetch Candy Machine Data
+
 In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  
 
 To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
@@ -69,6 +70,7 @@ This would return the Candy Machine Data like this:
 {% dialect title="JSON" id="json-cm" %}
 
 {% totem-accordion title="Candy Machine Data" %}
+
 ```json
 {
     "publicKey": "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9",
@@ -127,6 +129,7 @@ This would return the Candy Machine Data like this:
     "itemsLoaded": 16
 }
 ```
+
 {% /totem-accordion  %}
 
 {% /dialect %}
@@ -135,6 +138,7 @@ This would return the Candy Machine Data like this:
 From a UI perspective the most important field in here are `itemsRedeemed`, `itemsAvailable` and `mintAuthority`. In some cases it might also be interesting to show some of the `items` on your website as teaser pictures.
 
 #### Show remaining Asset Amount
+
 To display a section like `13 / 16 Assets minted` one would use something like:
 
 ```ts
@@ -148,9 +152,10 @@ const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedee
 ```
 
 ### Fetch Candy Guard Data
+
 The Candy Guard contains the conditions that have to be met to allow minting. This can for example be a Sol or Token Payment happening, limiting the amount of Assets one Wallet is allowed to mint and way more. You can find more information about Candy Guards on the [Candy Guard Page](/smart-contracts/core-candy-machine/guards).
 
-Similar to the Candy Machine Data it is not a necessity to fetch the guard account. Doing so can allow more flexibility like just updating the SOL price in the Candy Guard and automatically updating the numbers on the website, too. 
+Similar to the Candy Machine Data it is not a necessity to fetch the guard account. Doing so can allow more flexibility like just updating the SOL price in the Candy Guard and automatically updating the numbers on the website, too.
 
 If you want to build a more flexible UI that can be used for multiple Candy Machines fetching the Candy Guard then allows you to both build your mint function and check eligibility dynamically.
 
@@ -420,15 +425,18 @@ In this Object the most important field for the UI is the `guards` object. It co
     ]
 }
 ```
+
 {% /totem-accordion  %}
 
 {% /dialect %}
 {% /dialect-switcher %}
 
 ### Fetch additional Candy Machine related Accounts
+
 The choice of Guards you implement may necessitate fetching additional accounts. For instance, if you plan to verify a wallet's minting eligibility and are utilizing the `mintLimit` Guard, you would need to retrieve the `mintCounter` account. This account maintains a record of how many NFTs a particular wallet has already minted under that specific guard.
 
 #### `MintLimit` Accounts
+
 When the [`MintLimit`](/smart-contracts/core-candy-machine/guards/mint-limit) guard is active, it's advisable to retrieve the `MintCounter` account for the user's wallet. This allows you to check whether the user has reached their minting limit or if they're still eligible to mint additional items.
 
 The following code snippet demonstrates how to fetch the `MintCounter`. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
@@ -445,6 +453,7 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 ```
 
 #### `NftMintLimit` Accounts
+
 Similar to the `MintLimit` guard it can make sense to fetch the `NftMintCounter` account of the [`NftMintLimit`](/smart-contracts/core-candy-machine/guards/nft-mint-limit) guard to verify eligibility.
 
 The following code snippet demonstrates how to fetch the `NftMintCounter` account. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
@@ -466,6 +475,7 @@ const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
 
 #### `AssetMintLimit` Accounts
+
 Similar to the `NftMintCounter` guard it can make sense to fetch the `AssetMintCounter` account of the [`AssetMintLimit`](/smart-contracts/core-candy-machine/guards/asset-mint-limit) guard to verify eligibility.
 
 The following code snippet demonstrates how to fetch the `AssetMintCounter` account. Note that this example assumes you've already obtained the Candy Machine data:
@@ -487,6 +497,7 @@ const assetMintCounter = fetchAssetMintCounter(umi, pda);
 ```
 
 #### `Allocation` Accounts
+
 For the `Allocation` guard it can make sense to fetch the `AllocationTracker` account to verify that additional NFTs can be minted from a given group.
 
 The following code snippet demonstrates how to fetch the `AllocationTracker` account. Note that this example assumes you've already obtained the Candy Machine data:
@@ -504,6 +515,7 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
 ```
 
 #### `Allowlist` Accounts
+
 When implementing the Allowlist guard, it's crucial to execute a `route` instruction beforehand. This instruction generates a unique account for each wallet and Candy Machine combination, effectively marking the wallet as authorized to mint.
 
 From a UI perspective, it's beneficial to query this account. This allows you to determine whether the `route` instruction needs to be executed or if the user can proceed directly to the mint instruction.
@@ -531,9 +543,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
 ```
 
 ### Fetch Wallet Data
+
 To validate the legibility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs the wallet owns.
 
 To fetch the SOL balance the built in `getAccount` umi function can be used to fetch the wallet account:
+
 ```ts
 const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
@@ -556,6 +570,7 @@ const assets = await umi.rpc.getAssetsByOwner({
 ```
 
 ## Verify legibility
+
 After fetching all the required data you can then verify if the connected wallet is allowed to mint or not.
 
 It's important to note that when groups are attached to a Candy Machine, the `default` guards apply universally across all created groups.  Also, when groups are enabled the ability to mint from the `default` group becomes disabled and you must use the created groups for minting.
@@ -564,7 +579,8 @@ Therefore, if there are no groups defined you need to check if all the mint cond
 
 Given a Candy Machine with the `startDate`, `SolPayment` and `mintLimit` guards attached that is not leveraging groups the following validations should be done before allowing the user to call the mint function. It is assumed that the `candyGuard` was fetched before and one Core NFT Asset should be minted.
 
-1. Validate the `startDate` is in the past. Note that we are not using the users device time here but instead fetching the current internal Solana Blocktime since this is the time the Candy Machine will use for the validation on mint: 
+1. Validate the `startDate` is in the past. Note that we are not using the users device time here but instead fetching the current internal Solana Blocktime since this is the time the Candy Machine will use for the validation on mint:
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -585,7 +601,8 @@ if (startDate) {
 }
 ```
 
-2. Check if the Wallet has enough SOL to pay for the mint. Note that we are not including transaction fees here and assume that the `SolBalance` was fetched as described above.
+1. Check if the Wallet has enough SOL to pay for the mint. Note that we are not including transaction fees here and assume that the `SolBalance` was fetched as described above.
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -598,7 +615,8 @@ if (solPayment){
 }
 ```
 
-3. Make sure the `mintLimit` was not reached yet:
+1. Make sure the `mintLimit` was not reached yet:
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 import { 
@@ -625,18 +643,21 @@ if (mintLimit){
 When a wallet is not eligible to mint it is helpful to disable the mint button and show the user the reason for not being eligible to mint. E.g. a `Not enough SOL!` message.
 
 ## Guard Routes
-Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type. 
+
+Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type.
 
 {% callout type="note" title="Target Audience of this section" %}
 In case you are not using the `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` or `Allowlist` guard it is safe to skip this section.
 {% /callout %}
 
 Some Guards need their routes executed only once for the entire Candy Machine. For these, it's not necessary to include a function in the UI but can be run upfront once through a script:
+
 - [Allocation](/smart-contracts/core-candy-machine/guards/allocation)
 - [FreezeSolPayment](/smart-contracts/core-candy-machine/guards/freeze-sol-payment)
 - [FreezeTokenPayment](/smart-contracts/core-candy-machine/guards/freeze-token-payment)
 
 Other Guards require their routes to be executed for each individual wallet. In these cases, the route instruction should be run prior to the mint transaction:
+
 - [Allowlist](/smart-contracts/core-candy-machine/guards/allow-list)
 
 For an example of how to implement Guard routes, consider the case of the **Allowlist** guard. This assumes that the `allowListProof` has been fetched as described earlier, and that `allowlist` represents an array of eligible wallet addresses. The following code demonstrates how to handle this scenario in your implementation.
@@ -668,6 +689,7 @@ if (allowListProof === null) {
 ```
 
 ## Create a Mint Function
+
 It is recommended to implement legibility checks for all the guards that are attached. Keep in mind that if there are any groups attached the `default` guards will apply to all additional groups, while simultaneously disabling the `default` group.
 
 After those checks are done and, if required, the route instructions were run the mint transaction can be built. Depending on the guards, `mintArgs` may have to be passed in. These are arguments that help build the mint transaction by passing in the correct accounts and data. For example the `mintLimit` guard requires the `mintCounter` account. The Umi SDK abstracts these details away but still requires some information to build the transaction correctly.
@@ -716,7 +738,6 @@ await mintV1(umi, {
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
-
 ## Advanced Minting Techniques
 
 While the basic minting function we've discussed works well for most cases, there are some advanced techniques you can use to enhance your minting process. Let's explore a couple of these:
@@ -733,7 +754,7 @@ let builder = transactionBuilder()
   .add(mintV1(...))
 ```
 
-If you add to many `mintV1` instructions into a transaction you will receive a `Transaction too large` error. The function [`builder.fitsInOneTransaction(umi)`](/dev-tools/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before being sent. In case splitting is needed using [`signAllTransactions`](/dev-tools/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.    
+If you add to many `mintV1` instructions into a transaction you will receive a `Transaction too large` error. The function [`builder.fitsInOneTransaction(umi)`](/dev-tools/umi/transactions#transaction-builders) allows to check for this before sending the transaction so that the transaction can be split before being sent. In case splitting is needed using [`signAllTransactions`](/dev-tools/umi/transactions#building-and-signing-transactions) is recommended so that only one popup has to be approved in the Wallet Adapter.
 
 ### Guard Groups
 
@@ -770,7 +791,6 @@ await mintV1(umi, {
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
-
 ## Next Steps
 
 Now that you've mastered the essentials of interacting with the Candy Machine in your frontend, you might want to consider the following steps to further enhance and distribute your project:
@@ -785,6 +805,6 @@ Now that you've mastered the essentials of interacting with the Candy Machine in
 
 3. Optimization: Fine-tune your frontend for performance, especially if you're expecting high traffic during minting events.
 
-8. Monitoring: Set up monitoring tools to keep track of your Candy Machine UIs status and quickly address any issues that may arise.
+4. Monitoring: Set up monitoring tools to keep track of your Candy Machine UIs status and quickly address any issues that may arise.
 
 By focusing on these areas, you'll be well-prepared to launch and maintain a successful NFT minting project using Core Candy Machine.

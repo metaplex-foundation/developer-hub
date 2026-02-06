@@ -34,6 +34,7 @@ The Genesis API allows aggregators and applications to query launch data from Ge
 
 {% callout title="What You'll Learn" %}
 This reference covers:
+
 - Available endpoints and their use cases
 - Request/response formats with examples
 - TypeScript and Rust type definitions
@@ -309,26 +310,32 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 Add these dependencies to your `Cargo.toml`:
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## FAQ
 
 ### Is authentication required?
+
 No. The Genesis API is public with rate limits. No API key or authentication is needed.
 
 ### Which endpoint should I use if I only have a token mint?
+
 Use `/tokens/{mint}` to get all launches for a token. Use `/launches/{genesis_pubkey}` if you have the genesis address.
 
 ### What are the rate limits?
+
 Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
 
 ### Can a token have multiple launches?
+
 Yes. The `/tokens` endpoint returns an array of launches because tokens can have multiple campaigns (using different `genesisIndex` values).
 
 ## Glossary

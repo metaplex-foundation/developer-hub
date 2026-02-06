@@ -16,9 +16,9 @@ cargo add mpl-bubblegum
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-bubblegum" description="MPL-Bubblegum Rustクレートを開始しましょう。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-bubblegum>" description="MPL-Bubblegum Rustクレートを開始しましょう。" /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/MPL-Bubblegum/latest/mpl_bubblegum/" description="MPL-BubblegumのRust SDK typedocプラットフォーム。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/MPL-Bubblegum/latest/mpl_bubblegum/>" description="MPL-BubblegumのRust SDK typedocプラットフォーム。" /%}
 
 {% /quick-links %}
 

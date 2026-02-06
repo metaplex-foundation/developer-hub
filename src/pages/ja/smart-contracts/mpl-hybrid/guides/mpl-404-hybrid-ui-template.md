@@ -32,7 +32,6 @@ git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-next
 
 Githubリポジトリ - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
-
 ## セットアップ
 
 ### .envファイル
@@ -51,8 +50,8 @@ NEXT_PUBLIC_TOKEN="11111111111111111111111111111111"
 NEXT_PUBLIC_RPC="https://myrpc.com/?api-key="
 ```
 
-
 ### 画像の置換
+
 src/assets/images/には置換する2つの画像があります：
 
 - collectionImage.jpg
@@ -81,6 +80,7 @@ const useUmiStore = create<UmiState>()((set) => ({
   ...
 }))
 ```
+
 ## 追加ドキュメント
 
 このテンプレートが構築されているヘルパーと機能を理解するために、ベーステンプレートのドキュメントをさらに読むことをお勧めします

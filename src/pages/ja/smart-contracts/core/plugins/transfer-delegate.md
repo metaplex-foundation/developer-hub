@@ -30,27 +30,39 @@ faqs:
 ---
 **Transfer Delegateプラグイン**は、指定されたauthorityがオーナーに代わってCore Assetsを転送できるようにします。エスクローレスマーケットプレイス販売、ゲームメカニクス、サブスクリプションサービスに不可欠です。 {% .lead %}
 {% callout title="学べること" %}
+
 - AssetにTransfer Delegateプラグインを追加
 - マーケットプレイスやプログラムに転送権限をデリゲート
 - デリゲートとして転送を実行
 - 転送時のauthority動作
 {% /callout %}
+
 ## 概要
+
 **Transfer Delegate**は、デリゲートがAssetを転送できるようにするOwner Managedプラグインです。デリゲートされると、authorityはオーナーの承認なしにAssetを任意のアドレスに転送できます。
+
 - エスクローレスマーケットプレイスリスティングを有効化
 - authorityは**転送後に取り消される**（一回限りの使用）
 - 永続的な権限には[Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate)を使用
 - 追加の引数は不要
+
 ## 対象外
+
 永続的な転送権限（Permanent Transfer Delegateを参照）、コレクションレベルの転送、Token Metadata転送権限（別のシステム）。
+
 ## クイックスタート
+
 **ジャンプ先:** [プラグインを追加](#assetへのtransfer-delegateプラグインの追加) · [権限をデリゲート](#転送権限のデリゲート) · [デリゲートとして転送](#デリゲートとしてのasset転送)
+
 1. デリゲートアドレスでTransfer Delegateプラグインを追加
 2. デリゲートがAssetを一度転送可能に
 3. 転送後、authorityは自動的に取り消される
+
 ## 概要
+
 `Transfer Delegate`プラグインは、Transfer DelegateプラグインのauthorityがいつでもAssetを転送できるようにする`Owner Managed`プラグインです。
 Transfer Pluginは以下のような分野で機能します：
+
 - Assetのエスクローレス販売：エスクローアカウントを必要とせずにNFTを買い手に直接転送
 - ユーザーがイベントに基づいてアセットを交換/失うゲームシナリオ：ゲームイベント発生時にアセットを自動転送
 - サブスクリプションサービス：サブスクリプションサービスの一部としてNFTを転送
@@ -68,18 +80,26 @@ Transfer Pluginは以下のような分野で機能します：
 {% callout title="警告！" %}
 Transfer delegate authorityは一時的で、アセット転送時にリセットされます。
 {% /callout %}
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
 ## 引数
+
 Transfer Pluginには渡す引数がありません。
+
 ## 関数
+
 ### AssetへのTransfer Delegateプラグインの追加
+
 `addPlugin`コマンドは、AssetにTransfer Delegateプラグインを追加します。このプラグインにより、デリゲートがいつでもAssetを転送できます。
 {% dialect-switcher title="MPL Core AssetへのTransferプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -93,8 +113,10 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -104,8 +126,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::TransferDelegate(TransferDelegate {}))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -138,12 +162,16 @@ pub async fn add_transfer_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 転送権限のデリゲート
+
 `approvePluginAuthority`コマンドは、転送権限を別のアドレスにデリゲートします。これにより、所有権を維持しながら別のアドレスがAssetを転送できます。
 {% dialect-switcher title="転送権限のデリゲート" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -157,8 +185,10 @@ await approvePluginAuthority(umi, {
   newAuthority: { type: "Address", address: delegateAddress },
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -169,8 +199,10 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .new_authority(PluginAuthority::Address { address: ctx.accounts.new_authority.key() })
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -209,12 +241,16 @@ pub async fn approve_plugin_authority() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### デリゲートとしてのAsset転送
+
 `transfer`命令は、transfer delegate authorityを使用してAssetを別のアドレスに転送します。
 {% dialect-switcher title="MPL Core Assetの転送" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   fetchAsset,
@@ -240,8 +276,10 @@ const { signature } = await transfer(umi, {
   })
   .sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -251,14 +289,20 @@ TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .system_program(&ctx.accounts.system_program.to_account_info())
     .invoke()?;
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Transfer Delegate Authorityの更新
+
 Transfer Delegateプラグインは更新するプラグインデータを含まないため（空のオブジェクト`{}`）、主な「更新」操作はプラグインauthorityの変更です。これにより、異なるアドレスに転送権限をデリゲートできます。
+
 ### Transfer Delegate Authorityの変更
+
 `approvePluginAuthority`関数を使用して、転送権限を持つ人を変更できます：
 {% dialect-switcher title="Transfer Delegate Authorityの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -273,12 +317,16 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Transfer Delegate Authorityの取り消し
+
 転送権限は`revokePluginAuthority`関数を使用して取り消すことができ、アセットオーナーに転送制御が戻ります。
 {% dialect-switcher title="Transfer Delegate Authorityの取り消し" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -288,53 +336,83 @@ await revokePluginAuthority(umi, {
   plugin: { type: 'TransferDelegate' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 一般的なエラー
+
 ### `Authority mismatch`
+
 Transfer delegate authorityのみがAssetを転送できます。正しいキーペアで署名していることを確認してください。
+
 ### `Asset is frozen`
+
 フリーズされたAssetは転送できません。Freeze authorityがまずAssetを解凍する必要があります。
+
 ### `Transfer delegate not found`
+
 AssetにTransfer Delegateプラグインがないか、以前の転送後にauthorityがすでに取り消されています。
+
 ## 注意事項
+
 - Owner Managed: 追加にはオーナーの署名が必要
 - authorityは**転送後に自動的に取り消される**
 - 各転送には新しいオーナーによる再デリゲートが必要
 - フリーズされたAssetはデリゲートによって転送できない
 - 永続的な権限にはPermanent Transfer Delegateを使用
+
 ## クイックリファレンス
+
 ### Authorityライフサイクル
+
 | イベント | Authorityステータス |
 |-------|------------------|
 | プラグイン追加 | アクティブ |
 | Asset転送 | **取り消し** |
 | 新しいオーナーがプラグインを追加 | アクティブ（新しいデリゲート） |
+
 ### 誰が転送できる？
+
 | Authority | 転送可能？ |
 |-----------|---------------|
 | Assetオーナー | はい（常に） |
 | Transfer Delegate | はい（一度） |
 | Permanent Transfer Delegate | はい（常に） |
 | Update Authority | いいえ |
+
 ## FAQ
+
 ### なぜ転送権限が取り消されたのですか？
+
 Transfer Delegate authorityは転送後に自動的に取り消されます。これはマーケットプレイスの安全性のための設計です—デリゲートは一度しか転送できません。
+
 ### エスクローレスリスティングを実装するにはどうすればよいですか？
+
 1. 売り手がマーケットプレイスをauthorityとしてTransfer Delegateを追加
 2. 買い手が支払うと、マーケットプレイスがAssetを買い手に転送
 3. authorityが取り消されるため、売り手は二重リスティングができない
+
 ### Transfer DelegateとPermanent Transfer Delegateの違いは何ですか？
+
 Transfer Delegateは1回の転送後に取り消されます。Permanent Transfer Delegateは永続し、Asset作成時にのみ追加できます。
+
 ### デリゲートとしてフリーズされたAssetを転送できますか？
+
 いいえ。フリーズされたAssetはデリゲート転送を含むすべての転送をブロックします。複雑なエスクローシナリオにはPermanent Transfer DelegateとPermanent Freeze Delegateを使用してください。
+
 ### オーナーは各転送を承認する必要がありますか？
+
 いいえ。Transfer Delegateが設定されると、デリゲートはオーナーの承認なしに転送できます。ただし、authorityが取り消される前に一度しかできません。
+
 ## 関連プラグイン
+
 - [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) - 取り消し不可能な転送権限
 - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - 転送を一時的にブロック
 - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - デリゲートがAssetsをバーンできるようにする
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Transfer Delegate** | 一回限りの転送権限を許可するOwner Managedプラグイン |

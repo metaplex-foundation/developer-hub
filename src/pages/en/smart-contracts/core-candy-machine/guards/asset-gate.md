@@ -40,7 +40,6 @@ Owner: Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="requiredCollection" to="collectionNftMint" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the payer
 
@@ -61,8 +60,8 @@ from this collection
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -111,6 +110,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Mint Settings
 
 The Asset Gate guard contains the following Mint Settings:
+
 - **Asset Address**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used to prove ownership.
 

@@ -10,7 +10,7 @@ Metaplex Inscription 프로그램을 사용하면 블록체인을 데이터 저�
 
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/inscription/getting-started" description="원하는 언어나 라이브러리를 선택하고 Solana에서 디지털 자산을 시작하세요." /%}
 
-{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="특정한 내용을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾아보세요." /%}
+{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="<https://mpl-inscription.typedoc.metaplex.com/>" target="_blank" description="특정한 내용을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾아보세요." /%}
 
 {% /quick-links %}
 

@@ -17,25 +17,32 @@ mplx core plugins add <assetId> [options]
 ```
 
 ### Options
+
 - `--wizard`: Interactive wizard mode to select and configure plugins
 - `--collection`: Flag to indicate if the target is a collection (default: false)
 
 ### Methods
 
 #### 1. Using Wizard Mode
+
 ```bash
 mplx core plugins add <assetId> --wizard
 ```
+
 This will:
+
 1. Launch an interactive wizard to select the plugin type
 2. Guide you through plugin configuration
 3. Add the configured plugin to the asset/collection
 
 #### 2. Using JSON File
+
 ```bash
 mplx core plugins add <assetId> ./plugin.json
 ```
+
 The JSON file should contain the plugin configuration in the following format:
+
 ```json
 [
   {
@@ -50,16 +57,19 @@ The JSON file should contain the plugin configuration in the following format:
 ### Examples
 
 #### Add Plugin to Asset
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### Add Plugin to Collection
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### Add Plugin Using JSON
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.json
 ```
@@ -67,6 +77,7 @@ mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.j
 ## Output
 
 After a successful plugin addition, the command will display:
+
 ```
 --------------------------------
   Asset: <assetId>
@@ -99,25 +110,32 @@ mplx core plugins update <assetId> [options]
 ```
 
 ### Options
+
 - `--wizard`: Interactive wizard mode to select and configure plugins to update
 - `--collection`: Flag to indicate if the target is a collection (default: false)
 
 ### Methods
 
 #### 1. Using Wizard Mode
+
 ```bash
 mplx core plugins update <assetId> --wizard
 ```
+
 This will:
+
 1. Launch an interactive wizard to select which plugin(s) to update
 2. Guide you through the updated plugin configuration
 3. Apply the changes to the asset/collection
 
 #### 2. Using JSON File
+
 ```bash
 mplx core plugins update <assetId> ./plugin.json
 ```
+
 The JSON file should contain the updated plugin configuration in the same format as the JSON file used for adding plugins.
+
 ```
 
 ### Examples
@@ -128,11 +146,13 @@ mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### Update Plugin on Collection
+
 ```bash
 mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### Update Plugin Using JSON
+
 ```bash
 mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./updated-plugin.json
 ```
@@ -144,6 +164,7 @@ mplx core plugins update collectionPublicKey ./royalties.json --collection
 ```
 
 Where `royalties.json` contains:
+
 ```json
 [
   {

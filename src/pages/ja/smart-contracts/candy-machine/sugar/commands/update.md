@@ -9,7 +9,6 @@ description: updateコマンド。
 - Candy Machine内のアイテム数は、`hiddenSettings`が使用されている場合にのみ更新できます；
 - `hiddenSettings`の使用への切り替えは、アイテム数が0の場合にのみ可能です。切り替え後、アイテム数を更新できるようになります。
 
-
 設定を更新するには、config.json（または同等）ファイルを変更して実行します：
 
 ```

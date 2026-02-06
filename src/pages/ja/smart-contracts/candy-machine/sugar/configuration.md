@@ -119,6 +119,7 @@ Candy MachineはNFTがミントされる時に最終的なメタデータを持�
 {% totem %}
 {% totem-accordion title="hiddenSettings 例" %}
 設定ファイルの`hiddenSettings`セクションは次のようになります：
+
 ```json
 "hiddenSettings": {
     "name": "Name $ID+1$",
@@ -126,6 +127,7 @@ Candy MachineはNFTがミントされる時に最終的なメタデータを持�
     "hash": "49Bj8ZVSvSvAQwziKEts3iAeUhi27ATH"
 }
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

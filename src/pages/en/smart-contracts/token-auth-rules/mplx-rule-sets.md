@@ -6,14 +6,17 @@ description: The pNFT Rule Sets that Metaplex Foundation manages.
 The Metaplex Foundation manages two Rule Sets for pNFTs.
 
 ## Metaplex Foundation Rule Set
+
 This rule set represents the best efforts of finding and blocking programs that do not enforce marketplace royalties. This status is periodically checked and any updates are performed to continue comprehensive creator royalty enforcement.
 
-### Address:
+### Address
+
 **Devnet:** eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9
 
 **Mainnet:** eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9
 
 ### Contents
+
 Note that at the moment there are no programs bypassing creator royalties, therefore the rule set does not currently block any programs.
 
 ```json
@@ -41,14 +44,17 @@ Note that at the moment there are no programs bypassing creator royalties, there
 ```
 
 ## Compatibility Rule Set
+
 This rule set doesn't block any programs and serves to allow the same level of transfer restrictions (i.e. None) as standard NFTs.
 
-### Address:
+### Address
+
 **Devnet:** AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5
 
 **Mainnet:** AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5
 
 ### Contents
+
 ```json
 {
   "libVersion": 1,

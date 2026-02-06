@@ -33,37 +33,53 @@ This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Java
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 {% /callout %}
-But before starting, let's talk about Assets: 
+But before starting, let's talk about Assets:
 {% callout title="What is an Asset?" %}
 Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
 {% /callout %}
+
 ## Prerequisite
+
 - Code Editor of your choice (recommended **Visual Studio Code**)
 - Node **18.x.x** or above.
+
 ## Initial Setup
+
 This guide will teach you how to create an NFT Core Asset with Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+
 ### Initializing
+
 Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
+
 ```js
 npm init
 ```
+
 ### Required Packages
+
 Install the required packages for this guide.
 {% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
+
 ```js
 npm i @metaplex-foundation/umi
 ```
+
 ```js
 npm i @metaplex-foundation/umi-bundle-defaults
 ```
+
 ```js
 npm i @metaplex-foundation/mpl-core
 ```
+
 ```js
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
+
 ### Imports and Wrapper Function
+
 Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
+
 ```ts
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
@@ -88,11 +104,14 @@ const createNft = async () => {
 // run the wrapper function
 createNft()
 ```
+
 ## Setting up Umi
+
 While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
 **Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
 {% totem %}
 {% totem-accordion title="With a New Wallet" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -109,8 +128,10 @@ umi.use(signerIdentity(signer))
 console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="With an Existing Wallet" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -131,8 +152,10 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 // Load the keypair into umi.
 umi.use(keypairIdentity(umiSigner));
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="With the Wallet Adapter" %}
+
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -142,14 +165,20 @@ const umi = createUmi('https://api.devnet.solana.com')
 // Register Wallet Adapter to Umi
 .use(walletAdapterIdentity(wallet))
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 **Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+
 ## Creating the Metadata for the Asset
+
 To display a recognisable image for your Asset in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
+
 ### Uploading the Image
+
 Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
 In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -178,10 +207,13 @@ const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
 })
 console.log(imageUri[0])
 ```
+
 ### Uploading the Metadata
+
 Once we have a valid and working image URI we can start working on the metadata for our asset.
 The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
 We are going to look at the JavaScript object approach.
+
 ```ts
 const metadata = {
   name: 'My NFT',
@@ -209,7 +241,9 @@ const metadata = {
   },
 }
 ```
+
 The fields here include:
+
 | field         | description                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name          | The name of your NFT.                                                                                                                                                                     |
@@ -221,16 +255,21 @@ The fields here include:
 | image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
 | properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
 After creating the metadata, we need to upload it as a JSON file, so we can get a URI to attach to our Collection. To do this, we'll use Umi's `uploadJson()` function:
+
 ```js
 // Call upon Umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
+
 This function automatically converts our JavaScript object to JSON before uploading.
 Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
+
 ### Minting the NFT Core Asset
+
 From here we can use the `create` function from the `@metaplex-foundation/mpl-core` package to create our Core NFT Asset.
+
 ```ts
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -240,7 +279,9 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-And log out the detail as follow: 
+
+And log out the detail as follow:
+
 ```ts
   // Log out the signature and the links to the transaction and the NFT.
   console.log('\nNFT Created')
@@ -250,10 +291,13 @@ And log out the detail as follow:
   console.log('View NFT on Metaplex Explorer')
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
+
 ### Additional Actions
+
 Before moving on, what if we want to create an asset with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
 The `create()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
 Here's an example on how to do it:
+
 ```typescript
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -275,8 +319,11 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
+
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use!
+
 ## Full Code Example
+
 ```ts
 import { create } from '@metaplex-foundation/mpl-core'
 import {

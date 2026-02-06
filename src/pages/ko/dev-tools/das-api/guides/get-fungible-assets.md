@@ -42,6 +42,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 
@@ -71,8 +72,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`${data.result.items.length}개의 대체 가능 자산 발견`)
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 예제" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -90,6 +93,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -99,6 +103,7 @@ curl -X POST <ENDPOINT> \
 
 {% totem %}
 {% totem-accordion title="UMI 예제" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -126,8 +131,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   )
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -159,6 +166,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`전체 ${allAssets.items.length}개의 자산 중 ${FungibleTokens.length}개의 대체 가능 자산 발견`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -168,6 +176,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% totem %}
 {% totem-accordion title="UMI 예제" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -200,8 +209,10 @@ const creatorTokens = await umi.rpc.searchAssets({
 console.log(`공급량별 토큰: ${tokensBySupply.items.length}`)
 console.log(`크리에이터 토큰: ${creatorTokens.items.length}`)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
+
 ```javascript
 (async () => {
   // 특정 공급량 범위의 토큰 가져오기
@@ -258,6 +269,7 @@ console.log(`크리에이터 토큰: ${creatorTokens.items.length}`)
   console.log(`크리에이터 토큰: ${creatorTokens.items.length}`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

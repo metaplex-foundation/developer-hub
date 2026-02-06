@@ -18,7 +18,7 @@ Bubblegum은 Solana에서 압축 NFT(cNFT)를 생성하고 상호작용하기 �
 
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/bubblegum/sdk" description="원하는 언어나 라이브러리를 찾아 압축 NFT를 시작하세요." /%}
 
-{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾으세요." /%}
+{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾으세요." /%}
 
 {% /quick-links %}
 

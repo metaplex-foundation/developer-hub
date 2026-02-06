@@ -7,6 +7,7 @@ description: 用于 MPL Core 的数字资产标准 API 扩展
 除了通用 DAS SDK 之外，还为 [MPL Core](/zh/smart-contracts/core) 创建了一个扩展，可以直接返回正确的类型以便进一步与 MPL Core SDK 一起使用。它还自动派生资产中从集合继承的插件，并提供 [DAS 到 Core 类型转换](/zh/dev-tools/das-api/core-extension/convert-das-asset-to-core)的功能。
 
 ## 获取数据
+
 Core DAS API 扩展支持以下方法：
 
 - [`getAsset`](/zh/dev-tools/das-api/core-extension/methods/get-asset): 返回压缩/标准资产的信息，包括元数据和所有者。
@@ -18,7 +19,9 @@ Core DAS API 扩展支持以下方法：
 - [`searchCollections`](/zh/dev-tools/das-api/core-extension/methods/search-collections): 根据搜索条件返回集合列表。
 
 ## 类型转换
+
 此外，它还提供将常规 DAS Asset 类型转换为 Core Assets 和 Core Collections 的函数：
+
 - [`dasAssetsToCoreAssets`](/zh/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): 将 DAS Asset 转换为 Core Asset 类型
 - [`dasAssetsToCoreCollection`](/zh/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): 将 DAS Asset 转换为 Core Collection 类型
 

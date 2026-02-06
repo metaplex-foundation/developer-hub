@@ -41,26 +41,37 @@ faqs:
 ---
 このガイドでは、Metaplex Core SDKを使用してSolanaで**Core Assetメタデータを更新**する方法を説明します。管理するAssetの名前、URI、またはコレクションメンバーシップを変更できます。 {% .lead %}
 {% callout title="学習内容" %}
+
 - Asset名とメタデータURIの更新
 - Assetを別のCollectionに移動
 - Assetを不変（永続的）にする
 - Update Authority要件の理解
 {% /callout %}
+
 ## 概要
+
 `update`命令を使用してCore Assetのメタデータを更新します。Update Authority（または承認されたデリゲート）のみがAssetを変更できます。
+
 - `name`と`uri`を変更してメタデータを更新
 - `newCollection`を使用してCollection間でAssetを移動
 - `updateAuthority`を`None`に設定して不変にする
 - アカウントサイズを変更しない限り、更新は無料（レントコストなし）
+
 ## スコープ外
+
 Token Metadata NFTの更新（mpl-token-metadataを使用）、プラグインの変更（[プラグイン](/ja/smart-contracts/core/plugins)を参照）、所有権の転送（[Assetの転送](/ja/smart-contracts/core/transfer)を参照）。
+
 ## クイックスタート
+
 **ジャンプ先:** [Asset更新](#core-assetの更新) · [Collection変更](#core-assetのcollection変更) · [不変化](#core-assetデータの不変化)
+
 1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. 現在の状態を取得するためにAssetをフェッチ
 3. 新しい値で`update(umi, { asset, name, uri })`を呼び出す
 4. `fetchAsset()`で変更を確認
+
 ## 前提条件
+
 - AssetのUpdate Authorityである署名者が設定された**Umi**
 - 更新する**Assetアドレス**
 - Arweave/IPFSにアップロードされた**新しいメタデータ**（URIを変更する場合）
@@ -86,13 +97,18 @@ Core AssetのUpdate Authorityまたはデリゲートは、Assetのデータの�
 オンチェーン命令の詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
+
 ## Core Assetの更新
+
 SDKを使用してMPL Core Assetを更新する方法は以下の通りです。
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+
 ## Core AssetのCollection変更
+
 SDKを使用してCore AssetのCollectionを変更する方法は以下の通りです。
 {% dialect-switcher title="Core AssetのCollection変更" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from "@metaplex-foundation/umi";
 import {
@@ -118,9 +134,12 @@ const updateTx = await update(umi, {
   newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Core Assetデータの不変化
+
 SDKを使用してCore Assetを完全に不変にする方法は以下の通りです。[不変性ガイド](/ja/smart-contracts/core/guides/immutability)で説明されている異なるレベルの不変性があることに注意してください。
 {% callout type="warning" title="重要" %}
 これは破壊的なアクションであり、Assetを更新する機能が削除されます。
@@ -128,6 +147,7 @@ SDKを使用してCore Assetを完全に不変にする方法は以下の通り�
 {% /callout %}
 {% dialect-switcher title="Core Assetを不変にする" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { update, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -138,8 +158,10 @@ await update(umi, {
   newUpdateAuthority: updateAuthority('None'),
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::UpdateV1Builder, types::UpdateAuthority};
 use solana_client::nonblocking::rpc_client;
@@ -169,27 +191,41 @@ pub async fn update_asset_data_to_immutable() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## よくあるエラー
+
 ### `Authority mismatch`
+
 あなたはAssetのUpdate Authorityではありません。確認してください：
+
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 console.log(asset.updateAuthority) // 署名者と一致する必要があります
 ```
+
 ### `Collection authority required`
+
 Collectionを変更する場合、AssetとターゲットのCollection両方で権限が必要です。
+
 ### `Asset is immutable`
+
 AssetのUpdate Authorityが`None`に設定されています。これは元に戻せません。
+
 ## 注意事項
+
 - 更新前にAssetをフェッチして現在の状態を確認する
 - Update Authority（またはデリゲート）のみがAssetを更新できる
 - Assetを不変にすることは**永続的で元に戻せない**
 - Collectionを変更すると継承されたプラグイン（ロイヤリティなど）に影響する可能性がある
 - 更新によってAssetの所有者は変わらない
+
 ## クイックリファレンス
+
 ### 更新パラメータ
+
 | パラメータ | 説明 |
 |-----------|-------------|
 | `asset` | 更新するAsset（アドレスまたはフェッチされたオブジェクト） |
@@ -197,27 +233,43 @@ AssetのUpdate Authorityが`None`に設定されています。これは元に�
 | `uri` | 新しいメタデータURI |
 | `newCollection` | ターゲットCollectionアドレス |
 | `newUpdateAuthority` | 新しいAuthority（または不変の場合は`None`） |
+
 ### Authorityタイプ
+
 | タイプ | 説明 |
 |------|-------------|
 | `Address` | 特定の公開鍵 |
 | `Collection` | CollectionのUpdate Authority |
 | `None` | 不変 - 更新不可 |
+
 ## FAQ
+
 ### Assetを不変にした後、元に戻せますか？
+
 いいえ。Update Authorityを`None`に設定することは永続的です。Assetの名前、URI、コレクションメンバーシップは永久に固定されます。確実な場合のみ行ってください。
+
 ### URIを変更せずに名前だけを更新するにはどうすればよいですか？
+
 変更したいフィールドのみを渡します。現在の値を維持するには`uri`を省略してください：
+
 ```ts
 await update(umi, { asset, name: 'New Name' }).sendAndConfirm(umi)
 ```
+
 ### 更新と転送の違いは何ですか？
+
 更新はAssetのメタデータ（名前、URI）を変更します。転送は所有権を変更します。それぞれ異なる権限要件を持つ別々の操作です。
+
 ### デリゲートはAssetを更新できますか？
+
 はい、[Update Delegateプラグイン](/ja/smart-contracts/core/plugins/update-delegate)を通じてUpdate Delegateとして割り当てられている場合は可能です。
+
 ### 更新にSOLはかかりますか？
+
 新しいデータが現在のアカウントサイズより大きい場合（まれ）を除き、更新は無料です。トランザクション手数料（約0.000005 SOL）は引き続き適用されます。
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Update Authority** | Assetのメタデータを変更する権限を持つアカウント |

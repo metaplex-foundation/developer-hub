@@ -30,6 +30,7 @@ Shank 通过自动化生成 IDL 文件来简化 Solana 程序的开发工作流�
 ## 集成
 
 Shank 与其他 Metaplex 工具无缝集成：
+
 - **[Kinobi](/zh/dev-tools/umi/kinobi)** - 现代 IDL 生成和客户端创建
 - **[Solita](/zh/legacy-documentation/developer-tools/solita)** - TypeScript SDK 生成
 

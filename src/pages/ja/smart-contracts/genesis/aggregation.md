@@ -34,6 +34,7 @@ Genesis API を使用すると、アグリゲーターやアプリケーショ�
 
 {% callout title="学習内容" %}
 このリファレンスでは以下を解説します：
+
 - ローンチメタデータ用の HTTP API エンドポイント
 - JavaScript SDK によるオンチェーン状態の取得
 - TypeScript および Rust の型定義
@@ -332,12 +333,14 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 `Cargo.toml` に以下の依存関係を追加してください：
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## オンチェーン状態の取得（JavaScript SDK）
@@ -401,15 +404,19 @@ if (deposit) {
 ## FAQ
 
 ### API とオンチェーン取得の違いは何ですか？
+
 API は集約されたメタデータ（ソーシャル、画像）を返します。SDK によるオンチェーン取得は、デポジット合計や時間条件などのリアルタイム状態を返します。
 
 ### リアルタイムのデポジット合計を取得するにはどうすればよいですか？
+
 Genesis SDK の `fetchLaunchPoolBucketV2` または `fetchPresaleBucketV2` を使用して、現在のオンチェーン状態を読み取ります。
 
 ### Bucket の時間条件をクエリできますか？
+
 はい。bucket アカウントを取得し、`depositStartCondition`、`depositEndCondition`、`claimStartCondition`、`claimEndCondition` にアクセスしてください。
 
 ### ユーザーがデポジットしたかどうかを確認するにはどうすればよいですか？
+
 deposit PDA を指定して `safeFetchLaunchPoolDepositV2` または `safeFetchPresaleDepositV2` を使用します。デポジットが存在しない場合は null を返します。
 
 ## 用語集

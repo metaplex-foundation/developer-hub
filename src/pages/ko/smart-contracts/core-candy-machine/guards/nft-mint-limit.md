@@ -139,6 +139,7 @@ mintV1(umi, {
 _NFT Mint Limit 가드는 route instruction을 지원하지 않습니다._
 
 ## NftMintLimit Accounts
+
 `NftMintLimit` Guard가 사용될 때 각 NFT, CandyMachine 및 `id` 조합에 대해 `NftMintCounter` Account가 생성됩니다. 검증 목적으로 다음과 같이 가져올 수 있습니다:
 
 ```js

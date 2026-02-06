@@ -28,6 +28,7 @@ await close(umi, {
   inscriptionMetadataAccount,
 })
 ```
+
 {% /totem %}
 {% /dialect %}
 

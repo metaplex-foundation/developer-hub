@@ -17,25 +17,32 @@ mplx core plugins add <assetId> [options]
 ```
 
 ### 옵션
+
 - `--wizard`: 플러그인 선택 및 구성을 위한 대화형 마법사 모드
 - `--collection`: 대상이 컬렉션임을 나타내는 플래그 (기본값: false)
 
 ### 방법
 
 #### 1. 마법사 모드 사용
+
 ```bash
 mplx core plugins add <assetId> --wizard
 ```
+
 다음과 같은 작업을 수행합니다:
+
 1. 플러그인 유형을 선택하는 대화형 마법사 실행
 2. 플러그인 구성 안내
 3. 구성된 플러그인을 자산/컬렉션에 추가
 
 #### 2. JSON 파일 사용
+
 ```bash
 mplx core plugins add <assetId> ./plugin.json
 ```
+
 JSON 파일은 다음 형식의 플러그인 구성을 포함해야 합니다:
+
 ```json
 {
   "pluginType": {
@@ -48,16 +55,19 @@ JSON 파일은 다음 형식의 플러그인 구성을 포함해야 합니다:
 ### 예시
 
 #### 자산에 플러그인 추가
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### 컬렉션에 플러그인 추가
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### JSON을 사용하여 플러그인 추가
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.json
 ```
@@ -65,6 +75,7 @@ mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.j
 ## 출력
 
 플러그인 추가가 성공하면 명령어가 다음을 표시합니다:
+
 ```
 --------------------------------
   Asset: <assetId>

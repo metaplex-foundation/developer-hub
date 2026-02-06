@@ -139,6 +139,7 @@ mintV1(umi, {
 _NFT Mint Limit 守卫不支持 route 指令。_
 
 ## NftMintLimit 账户
+
 当使用 `NftMintLimit` 守卫时，会为每个 NFT、CandyMachine 和 `id` 组合创建一个 `NftMintCounter` 账户。出于验证目的，可以这样获取它：
 
 ```js

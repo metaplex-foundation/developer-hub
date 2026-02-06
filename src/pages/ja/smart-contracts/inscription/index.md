@@ -10,7 +10,7 @@ Metaplex Inscription Programを使用すると、ブロックチェーンをデ�
 
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/inscription/getting-started" description="お好みの言語やライブラリを選択して、SolanaでデジタルアセットのOSセットを開始しましょう。" /%}
 
-{% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="何か特定のものを探していますか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
+{% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="<https://mpl-inscription.typedoc.metaplex.com/>" target="_blank" description="何か特定のものを探していますか？APIリファレンスをご覧いただき、答えを見つけてください。" /%}
 
 {% /quick-links %}
 

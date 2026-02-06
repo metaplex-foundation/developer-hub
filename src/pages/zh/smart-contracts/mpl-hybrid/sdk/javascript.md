@@ -18,9 +18,7 @@ npm install @metaplex-foundation/mpl-hybrid
 
 ## Umi设置
 
-
 需要一个`umi`实例来与Metaplex Javascript SDK交互。如果您尚未设置和配置`umi`实例，可以查看[Umi入门指南](/zh/dev-tools/umi/getting-started)页面。
-
 
 在初始化`umi`实例期间，您可以使用以下方式将mpl-hybrid包添加到`umi`
 
@@ -29,6 +27,7 @@ npm install @metaplex-foundation/mpl-hybrid
 ```
 
 您可以在umi实例创建的任何位置添加`mplHybrid()`包。
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplHybrid } from '@metaplex-foundation/mpl-hybrid'

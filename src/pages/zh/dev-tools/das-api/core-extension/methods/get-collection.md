@@ -23,7 +23,6 @@ const collection = await das.getCollection(umi, collectionId);
 console.log(collection);
 ```
 
-
 ## 示例响应
 
 ```json

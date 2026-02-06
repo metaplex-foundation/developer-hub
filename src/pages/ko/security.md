@@ -8,7 +8,7 @@ description: 감사 및 취약점 보고 방법.
 
 **취약점을 보고하기 위해 공개 GitHub Issue를 열지 마십시오**.
 
-대신 security@metaplex.foundation으로 이메일을 보내주십시오.
+대신 <security@metaplex.foundation>으로 이메일을 보내주십시오.
 
 24-48시간 내에 응답을 받아야 합니다. 어떤 이유로든 응답을 받지 못한 경우, 원래 메시지를 받았는지 확인하기 위해 이메일로 후속 조치를 취하십시오.
 

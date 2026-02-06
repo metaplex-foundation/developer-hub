@@ -21,6 +21,7 @@ MPL Core Asset 和 Collection 上的许多插件在添加后可以更新。`upda
 {% totem %}
 {% totem-accordion title="技术指令详情" %}
 **指令账户列表**
+
 | 账户          | 描述                                            |
 | ------------- | ----------------------------------------------- |
 | asset         | MPL Core Asset 的地址。                         |
@@ -35,16 +36,21 @@ MPL Core Asset 和 Collection 上的许多插件在添加后可以更新。`upda
 | plugin | 要更新的插件类型和数据。               |
 某些账户/参数可能在我们的 SDK 中被抽象化或为可选，以便于使用。
 详细的 TypeDoc 文档，请参阅：
+
 - [updatePlugin](https://mpl-core.typedoc.metaplex.com/functions/updatePlugin.html)
 - [updateCollectionPlugin](https://mpl-core.typedoc.metaplex.com/functions/updateCollectionPlugin.html)
 注意：在 JavaScript SDK 中，updatePlugin 期望插件数据不带 data 包装器（例如 `{ type: 'FreezeDelegate', frozen: true }`）。相比之下，addPlugin 将数据包装在 `data` 下（例如 `{ type: 'FreezeDelegate', data: { frozen: true } }`）。这反映了 createAsset/createCollection 插件列表中使用的形式。
 {% /totem-accordion %}
 {% /totem %}
+
 ## 更新 Asset 上的插件
+
 ### 基本插件更新示例
+
 以下是使用 Attributes 插件作为示例更新 MPL Core Asset 上插件的方法：
 {% dialect-switcher title="更新 Asset 上的插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -68,11 +74,15 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 更新 Royalties 插件
+
 {% dialect-switcher title="更新 Royalties 插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -99,12 +109,16 @@ import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 更新基于状态的插件
+
 某些插件存储可以切换的简单状态，如 Freeze Delegate 插件：
 {% dialect-switcher title="更新冻结状态" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -128,12 +142,16 @@ import { updatePlugin } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 更新 Collection 上的插件
+
 Collection 插件的工作方式与 Asset 插件类似，但使用 `updateCollectionPlugin` 函数：
 {% dialect-switcher title="更新 Collection 上的插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -156,13 +174,18 @@ import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 处理复杂的插件数据
+
 ### 管理插件中的列表
+
 某些插件如 Autograph 和 Verified Creators 维护数据列表。更新这些插件时，您需要传递要维护的完整列表：
 {% dialect-switcher title="更新基于列表的插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -189,11 +212,15 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 从列表中删除项目
+
 {% dialect-switcher title="从插件列表中删除项目" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -218,26 +245,37 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 权限要求
+
 不同的插件需要不同的权限来更新：
+
 - **权限管理插件**（Royalties、Attributes、Update Delegate）：需要 Asset 或 Collection 的**权限**
 - **所有者管理插件**（Autograph、Freeze Delegate）：需要 Asset 的**所有者**或插件的特定权限
 - **Verified Creators 插件**：添加/删除创作者需要**更新权限**，但个别**创作者可以验证自己**
+
 ## 错误处理
+
 更新插件时的常见错误：
+
 - **Authority mismatch**：确保您使用正确的权限为插件类型签名
 - **Plugin not found**：在更新之前，插件必须存在于 Asset/Collection 上
 - **Invalid data**：插件数据必须符合预期的结构和约束
 - **Collection mismatch**：如果 Asset 是 Collection 的一部分，您可能需要在更新中包含 Collection
+
 ## 最佳实践
+
 1. **更新前获取**：始终获取当前 Asset/Collection 状态以查看现有插件数据
 2. **保留现有数据**：更新基于列表的插件时，包括您想要保留的现有数据
 3. **使用正确的权限**：确保您为每种插件类型使用正确的签名权限
 4. **批量更新**：如果更新多个插件，考虑批量操作以提高效率
 5. **验证数据**：确保您的更新数据满足插件的要求（例如，创作者百分比总和为 100%）
+
 ## 下一步
+
 - 在各个插件文档中了解特定插件更新
 - 在[插件概述](/smart-contracts/core/plugins)中探索所有可用插件
 - 查看[添加插件](/smart-contracts/core/plugins/adding-plugins)和[删除插件](/smart-contracts/core/plugins/removing-plugins)

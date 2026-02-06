@@ -34,6 +34,7 @@ Genesis APIは、アグリゲーターやアプリケーションがGenesisト�
 
 {% callout title="学べること" %}
 このリファレンスでは以下を解説します：
+
 - 利用可能なエンドポイントとそのユースケース
 - リクエスト/レスポンスの形式と例
 - TypeScriptおよびRustの型定義
@@ -309,26 +310,32 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 `Cargo.toml`に以下の依存関係を追加してください：
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## FAQ
 
 ### 認証は必要ですか？
+
 いいえ。Genesis APIはレート制限付きのパブリックAPIです。APIキーや認証は不要です。
 
 ### トークンミントしか持っていない場合、どのエンドポイントを使用すべきですか？
+
 `/tokens/{mint}`を使用してトークンの全ローンチを取得してください。Genesisアドレスがある場合は`/launches/{genesis_pubkey}`を使用してください。
 
 ### レート制限はどのようになっていますか？
+
 不正利用防止のためレート制限が適用されています。429レスポンスを受け取った場合は、リクエスト頻度を下げてください。
 
 ### 1つのトークンに複数のローンチを設定できますか？
+
 はい。`/tokens`エンドポイントはローンチの配列を返します。トークンは複数のキャンペーンを持つことができるためです（異なる`genesisIndex`値を使用）。
 
 ## 用語集

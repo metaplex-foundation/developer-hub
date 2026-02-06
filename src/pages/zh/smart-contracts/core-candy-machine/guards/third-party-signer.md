@@ -78,6 +78,7 @@ description: "Core Candy Machine '第三方签名者' 守卫要求预定义的�
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
+
 ## 守卫设置
 
 第三方签名者守卫包含以下设置：

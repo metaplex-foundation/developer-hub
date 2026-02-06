@@ -60,7 +60,6 @@ _OR at the end of the freeze period._
 {% node #thawed-Asset-bg1 label="Thawed Asset" theme="slate" parent="thawed-Asset" x="-5" y="-5" /%}
 {% node #thawed-Asset label="Thawed Asset" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -76,6 +75,7 @@ _When all Assets have been thawed._
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
+
 ## Guard Settings
 
 The Freeze Token Payment guard contains the following settings:
@@ -201,7 +201,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" x="415" %}
   {% node #candy-guard-route theme="pink" %}
     Route with Path {% .whitespace-nowrap %}
-    
+
     = *Initialize*
   {% /node %}
   {% node parent="candy-guard-route" theme="pink" %}
@@ -216,7 +216,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% edge from="freeze-period" to="candy-guard-route" theme="pink" path="straight" /%}
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
-
 
 {% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
@@ -262,7 +261,7 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" x="600" %}
   {% node #mint-candy-guard theme="pink" %}
     Route with
-    
+
     Path = *Initialize*
   {% /node %}
     {% node parent="candy-guard-route" theme="pink" %}
@@ -292,7 +291,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="mint-candy-machine" y="-20" x="120" theme="transparent" %}
   Mint Logic
 {% /node %}
-
 
 {% edge from="mint-candy-machine" to="frozen-Asset" path="straight" /%}
 {% node #frozen-Asset parent="mint-candy-machine" y="120" x="31" theme="slate" %}
@@ -376,7 +374,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" x="427" y="-14" %}
   {% node #candy-guard-route theme="pink" %}
     Route with
-    
+
     Path = *thaw*
   {% /node %}
   {% node parent="mint-candy-guard" theme="pink" %}
@@ -393,7 +391,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
 {% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
-
 
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 
@@ -474,7 +471,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% node parent="candy-machine" x="600" %}
   {% node #candy-guard-route theme="pink" %}
     Route with
-    
+
     Path = *unlockFunds*
   {% /node %}
   {% node parent="mint-candy-guard" theme="pink" %}
@@ -483,7 +480,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% /node %}
 
 {% node parent="candy-guard-route" y="-32" x="95" theme="transparent" %}
-  Unlock funds 
+  Unlock funds
   
   from the escrow
 {% /node %}
@@ -632,8 +629,8 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% node parent="freezeEscrow-PDA-A" y="-125" x="-4" %}
   {% node #route-init-a theme="pink" %}
-    Route with 
-    
+    Route with
+
     Path = *Initialize*
   {% /node %}
   {% node theme="pink" %}
@@ -659,8 +656,8 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% node parent="freezeEscrow-PDA-B" y="-125" x="-4" %}
   {% node #route-init-b theme="pink" %}
-    Route with 
-    
+    Route with
+
     Path = *Initialize*
   {% /node %}
   {% node theme="pink" %}

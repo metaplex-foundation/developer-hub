@@ -144,6 +144,7 @@ const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 此指令仅在 Token 账户不存在时才创建新的 Token 账户。当后续指令需要 Token 账户但您不确定它是否已存在时，这特别有用。此指令确保 Token 账户的存在，而无需在客户端获取它。
 
 工作原理如下：
+
 - 如果账户存在，指令成功且不执行任何操作。
 - 如果账户不存在，指令成功并创建 associated token 账户。
 

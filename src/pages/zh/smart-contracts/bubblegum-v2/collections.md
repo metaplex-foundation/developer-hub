@@ -14,6 +14,7 @@ MPL-Core集合必须包含[`BubblegumV2`插件](/zh/smart-contracts/core/plugins
 以下部分展示如何在单步交易中为cNFT设置和移除集合。在添加`coreCollection`和`newCoreCollection`参数时，也可以在单个指令中执行两个操作。如果两个集合权限不是同一个钱包，则两者都必须签名。
 
 ## 设置压缩NFT的集合
+
 **setCollectionV2**指令可用于设置cNFT的集合。它也可用于从cNFT移除集合或更改cNFT的集合。
 
 {% dialect-switcher title="设置压缩NFT的集合" %}
@@ -53,6 +54,7 @@ const signature = await setCollectionV2(umi, {
 {% /dialect-switcher %}
 
 ## 移除压缩NFT的集合
+
 **setCollectionV2**指令也可用于从cNFT移除集合。
 
 {% dialect-switcher title="移除压缩NFT的集合" %}

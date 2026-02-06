@@ -8,7 +8,7 @@ description: 一个旨在通过为 Solana 原生程序提供一组基本函数�
 
 {% quick-links %}
 
-{% quick-link title="API 参考" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="正在寻找特定内容？查看我们的 API 参考并找到您的答案。" /%}
+{% quick-link title="API 参考" icon="CodeBracketSquare" target="_blank" href="<https://mpl-toolbox.typedoc.metaplex.com/>" description="正在寻找特定内容？查看我们的 API 参考并找到您的答案。" /%}
 
 {% /quick-links %}
 

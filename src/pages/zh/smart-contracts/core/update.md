@@ -41,26 +41,37 @@ faqs:
 ---
 本指南展示如何使用 Metaplex Core SDK 在 Solana 上**更新 Core Asset 元数据**。修改您控制的 Asset 的名称、URI 或集合成员资格。{% .lead %}
 {% callout title="您将学到" %}
+
 - 更新 Asset 名称和元数据 URI
 - 将 Asset 移动到不同的 Collection
 - 使 Asset 不可变（永久）
 - 了解更新权限要求
 {% /callout %}
+
 ## 概要
+
 使用 `update` 指令更新 Core Asset 的元数据。只有更新权限（或授权的代理）可以修改 Asset。
+
 - 更改 `name` 和 `uri` 以更新元数据
 - 使用 `newCollection` 在 Collection 之间移动 Asset
 - 将 `updateAuthority` 设置为 `None` 以使其不可变
 - 更新是免费的（无租金成本），除非更改账户大小
+
 ## 超出范围
+
 更新 Token Metadata NFT（使用 mpl-token-metadata）、插件修改（参见[插件](/smart-contracts/core/plugins)）和所有权转移（参见[转移 Asset](/smart-contracts/core/transfer)）。
+
 ## 快速开始
+
 **跳转至：** [更新 Asset](#updating-a-core-asset) · [更改 Collection](#change-the-collection-of-a-core-asset) · [使其不可变](#making-a-core-asset-data-immutable)
+
 1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. 获取 Asset 以获取当前状态
 3. 使用新值调用 `update(umi, { asset, name, uri })`
 4. 使用 `fetchAsset()` 验证更改
+
 ## 前置条件
+
 - 配置了作为 Asset 更新权限的签名者的 **Umi**
 - 要更新的 Asset 的 **Asset 地址**
 - 上传到 Arweave/IPFS 的**新元数据**（如果更改 URI）
@@ -86,13 +97,18 @@ Core Asset 的更新权限或代理有能力更改 Asset 的某些数据。
 有关链上指令的完整详细信息，可以在此处查看。[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)
 {% /totem-accordion %}
 {% /totem %}
+
 ## 更新 Core Asset
+
 以下是如何使用我们的 SDK 更新 MPL Core Asset。
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+
 ## 更改 Core Asset 的 Collection
+
 以下是如何使用我们的 SDK 更改 Core Asset 的集合。
 {% dialect-switcher title="更改 Core Asset 的集合" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from "@metaplex-foundation/umi";
 import {
@@ -118,9 +134,12 @@ const updateTx = await update(umi, {
   newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 使 Core Asset 数据不可变
+
 以下是如何使用我们的 SDK 使 Core Asset 完全不可变。请注意，[不可变性指南](/smart-contracts/core/guides/immutability)中描述了不同级别的不可变性。
 {% callout type="warning" title="重要" %}
 这是一个破坏性操作，将移除更新资产的能力。
@@ -128,6 +147,7 @@ const updateTx = await update(umi, {
 {% /callout %}
 {% dialect-switcher title="使 Core Asset 不可变" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { update, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -138,8 +158,10 @@ await update(umi, {
   newUpdateAuthority: updateAuthority('None'),
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::UpdateV1Builder, types::UpdateAuthority};
 use solana_client::nonblocking::rpc_client;
@@ -169,27 +191,41 @@ pub async fn update_asset_data_to_immutable() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 常见错误
+
 ### `Authority mismatch`
+
 您不是 Asset 的更新权限。检查：
+
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 console.log(asset.updateAuthority) // 必须与您的签名者匹配
 ```
+
 ### `Collection authority required`
+
 更改 Collection 时，您需要同时拥有 Asset 和目标 Collection 的权限。
+
 ### `Asset is immutable`
+
 Asset 的更新权限设置为 `None`。这无法撤销。
+
 ## 注意事项
+
 - 更新前获取 Asset 以确保您拥有当前状态
 - 只有更新权限（或代理）可以更新 Asset
 - 使 Asset 不可变是**永久且不可逆的**
 - 更改 Collection 可能会影响继承的插件（版税等）
 - 更新不会更改 Asset 的所有者
+
 ## 快速参考
+
 ### 更新参数
+
 | 参数 | 描述 |
 |------|------|
 | `asset` | 要更新的 Asset（地址或获取的对象） |
@@ -197,27 +233,43 @@ Asset 的更新权限设置为 `None`。这无法撤销。
 | `uri` | 新的元数据 URI |
 | `newCollection` | 目标 Collection 地址 |
 | `newUpdateAuthority` | 新权限（或 `None` 表示不可变） |
+
 ### 权限类型
+
 | 类型 | 描述 |
 |------|------|
 | `Address` | 特定的公钥 |
 | `Collection` | Collection 的更新权限 |
 | `None` | 不可变 - 不允许更新 |
+
 ## 常见问题
+
 ### 我可以撤销使 Asset 不可变吗？
+
 不可以。将更新权限设置为 `None` 是永久性的。Asset 的名称、URI 和集合成员资格将永久冻结。只有在您确定时才这样做。
+
 ### 如何只更新名称而不更改 URI？
+
 只传递您想要更改的字段。省略 `uri` 以保持当前值：
+
 ```ts
 await update(umi, { asset, name: 'New Name' }).sendAndConfirm(umi)
 ```
+
 ### 更新和转移有什么区别？
+
 更新更改 Asset 的元数据（名称、URI）。转移更改所有权。它们是具有不同权限要求的独立操作。
+
 ### 代理可以更新 Asset 吗？
+
 可以，如果他们已通过 [Update Delegate 插件](/smart-contracts/core/plugins/update-delegate)被指定为 Update Delegate。
+
 ### 更新需要花费 SOL 吗？
+
 更新是免费的，除非新数据大于当前账户大小（罕见）。交易费用（约 0.000005 SOL）仍然适用。
+
 ## 术语表
+
 | 术语 | 定义 |
 |------|------|
 | **Update Authority** | 被授权修改 Asset 元数据的账户 |

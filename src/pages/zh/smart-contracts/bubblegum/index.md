@@ -20,7 +20,7 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 {% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum/sdk" description="选择您偏好的语言或库，开始使用压缩NFT。" /%}
 
-{% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容？查看我们的API参考找到您的答案。" /%}
+{% quick-link title="API参考" icon="CodeBracketSquare" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" target="_blank" description="正在寻找特定内容？查看我们的API参考找到您的答案。" /%}
 
 {% /quick-links %}
 

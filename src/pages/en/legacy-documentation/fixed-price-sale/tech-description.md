@@ -4,7 +4,7 @@ metaTitle: Technical Description | Fixed Price Sale
 description: Technical Description of the Fixed Price Sale Program
 ---
 
-## Creators to sell something have to:
+## Creators to sell something have to
 
 1. Create store
 
@@ -20,9 +20,9 @@ description: Technical Description of the Fixed Price Sale Program
 
     - Create object with info about items selling, all apart from max supply such as we defined it in Selling resource
 
-## Users to buy tokens have to:
+## Users to buy tokens have to
 
-1. Go to store. 
+1. Go to store.
 
 2. Choose token and click "Buy"
 
@@ -78,7 +78,6 @@ description: Technical Description of the Fixed Price Sale Program
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
-
 
 ## TradeHistory
 

@@ -66,8 +66,10 @@ const response = await fetch('<ENDPOINT>', {
   console.log(`在集合中找到 ${data.result.items.length} 个资产`)
 })()
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 示例" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -195,6 +197,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -262,6 +265,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

@@ -17,25 +17,32 @@ mplx core plugins add <assetId> [options]
 ```
 
 ### 选项
+
 - `--wizard`: 交互式向导模式，用于选择和配置插件
 - `--collection`: 指示目标是集合的标志（默认：false）
 
 ### 方法
 
 #### 1. 使用向导模式
+
 ```bash
 mplx core plugins add <assetId> --wizard
 ```
+
 这将：
+
 1. 启动交互式向导以选择插件类型
 2. 引导您完成插件配置
 3. 将配置好的插件添加到资产/集合
 
 #### 2. 使用 JSON 文件
+
 ```bash
 mplx core plugins add <assetId> ./plugin.json
 ```
+
 JSON 文件应包含以下格式的插件配置：
+
 ```json
 [
   {
@@ -50,16 +57,19 @@ JSON 文件应包含以下格式的插件配置：
 ### 示例
 
 #### 为资产添加插件
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### 为集合添加插件
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### 使用 JSON 添加插件
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.json
 ```
@@ -67,6 +77,7 @@ mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.j
 ## 输出
 
 成功添加插件后，命令将显示：
+
 ```
 --------------------------------
   Asset: <assetId>
@@ -99,25 +110,32 @@ mplx core plugins update <assetId> [options]
 ```
 
 ### 选项
+
 - `--wizard`: 交互式向导模式，用于选择和配置要更新的插件
 - `--collection`: 指示目标是集合的标志（默认：false）
 
 ### 方法
 
 #### 1. 使用向导模式
+
 ```bash
 mplx core plugins update <assetId> --wizard
 ```
+
 这将：
+
 1. 启动交互式向导以选择要更新的插件
 2. 引导您完成更新后的插件配置
 3. 将更改应用于资产/集合
 
 #### 2. 使用 JSON 文件
+
 ```bash
 mplx core plugins update <assetId> ./plugin.json
 ```
+
 JSON 文件应包含与添加插件时相同格式的更新插件配置。
+
 ```
 
 ### 示例
@@ -128,11 +146,13 @@ mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### 更新集合上的插件
+
 ```bash
 mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### 使用 JSON 更新插件
+
 ```bash
 mplx core plugins update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./updated-plugin.json
 ```
@@ -144,6 +164,7 @@ mplx core plugins update collectionPublicKey ./royalties.json --collection
 ```
 
 其中 `royalties.json` 包含：
+
 ```json
 [
   {

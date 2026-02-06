@@ -28,21 +28,30 @@ faqs:
 ---
 **Burn Delegateプラグイン**は、指定されたauthorityがオーナーに代わってCore Assetsをバーンできるようにします。ゲームメカニクス、サブスクリプションサービス、自動アセットライフサイクル管理に便利です。 {% .lead %}
 {% callout title="学べること" %}
+
 - AssetにBurn Delegateプラグインを追加
 - バーン権限を別のアドレスにデリゲート
 - バーン権限を取り消し
 - ユースケース：ゲーム、サブスクリプション、自動バーン
 {% /callout %}
+
 ## 概要
+
 **Burn Delegate**は、デリゲートがAssetをバーンできるようにするOwner Managedプラグインです。追加されると、デリゲートはオーナーの承認なしにいつでもAssetをバーンできます。
+
 - プログラムまたはウォレットにバーン権限をデリゲート
 - 権限はAsset転送時に取り消し
 - 取り消し不可能なバーン権限には[Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)を使用
 - 追加の引数は不要
+
 ## 対象外
+
 コレクションのバーン（別のプロセス）、永続的バーン権限（Permanent Burn Delegateを参照）、Token Metadataバーン権限（別のシステム）。
+
 ## クイックスタート
+
 **ジャンプ先:** [プラグインを追加](#assetへのburnプラグインの追加) · [権限をデリゲート](#バーン権限のデリゲート) · [取り消し](#バーン権限の取り消し)
+
 1. Burn Delegateプラグインを追加：`addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
 2. オプションで別のアドレスにデリゲート
 3. デリゲートはいつでもAssetをバーン可能
@@ -57,23 +66,32 @@ faqs:
 **Burn Delegateを選択**するのは、バーン権限が所有権変更時にリセットされるべき場合です。
 **[Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)を選択**するのは、権限が永続する必要がある場合です。
 {% /callout %}
+
 ## 一般的なユースケース
+
 - **ゲームメカニクス**: アイテムがゲーム内で消費、破壊、紛失されたときにNFTをバーン
 - **サブスクリプションサービス**: 期限切れのサブスクリプショントークンを自動バーン
 - **クラフトシステム**: 新しいアイテムをクラフトするときに材料NFTをバーン
 - **実績引き換え**: 報酬と引き換えに実績トークンをバーン
 - **イベントチケット**: イベントチェックイン後にチケットをバーン
 - **期間限定アセット**: 有効期限後にアセットをバーン
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
 ## 引数
+
 Burnプラグインには渡す引数がありません。
+
 ## AssetへのBurnプラグインの追加
+
 {% dialect-switcher title="MPL Core AssetへのBurnプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -85,8 +103,10 @@ import { addPlugin } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -119,12 +139,16 @@ pub async fn add_burn_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## バーン権限のデリゲート
+
 Burn Delegateプラグインの権限は、`approvePluginAuthority`関数を使用して別のアドレスにデリゲートできます。これにより、誰がAssetをバーンできるかを変更できます。
 {% dialect-switcher title="バーン権限のデリゲート" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -138,12 +162,16 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## バーン権限の取り消し
+
 バーン権限は`revokePluginAuthority`関数を使用して取り消すことができ、アセットオーナーに制御が戻ります。
 {% dialect-switcher title="バーン権限の取り消し" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -155,41 +183,65 @@ import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 一般的なエラー
+
 ### `Authority mismatch`
+
 burn delegateのauthorityのみがAssetをバーンできます。正しいキーペアで署名していることを確認してください。
+
 ### `Asset is frozen`
+
 フリーズされたアセットはバーンできません。フリーズauthorityがまずAssetを解凍する必要があります。
+
 ## 注意事項
+
 - Owner Managed: 追加にはオーナーの署名が必要
 - Assetが転送されると権限は自動的に取り消し
 - フリーズされたアセットはバーンできない
 - 転送後も権限が持続する必要がある場合はPermanent Burn Delegateを使用
 - バーンは即時かつ不可逆
+
 ## クイックリファレンス
+
 ### 誰がバーンできる？
+
 | Authority | バーン可能？ |
 |-----------|-----------|
 | Assetオーナー | はい（常に） |
 | Burn Delegate | はい |
 | Permanent Burn Delegate | はい（強制承認） |
 | Update Authority | いいえ |
+
 ## FAQ
+
 ### Burn DelegateとPermanent Burn Delegateの違いは何ですか？
+
 Burn Delegateの権限は転送時に取り消されます。Permanent Burn Delegateの権限は永続し、`forceApprove`を使用するため、Assetがフリーズされていてもバーンできます。
+
 ### Burn Delegateがいてもオーナーはバーンできますか？
+
 はい。オーナーはデリゲートに関係なく、常に自分のAssetをバーンできます。
+
 ### Burn Delegateはフリーズされたアセットで機能しますか？
+
 いいえ。通常のBurn Delegateはフリーズされたアセットをバーンできません。フリーズされたアセットをバーンする必要がある場合はPermanent Burn Delegateを使用します。
+
 ### Burn Delegateはいつ取り消されますか？
+
 Assetが新しいオーナーに転送されたとき。新しいオーナーは新しいBurn Delegateを追加する必要があります。
+
 ## 関連プラグイン
+
 - [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - forceApprove付きの取り消し不可能なバーン権限
 - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - 転送とバーンを一時的にブロック
 - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - デリゲートがAssetを転送できるようにする
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Burn Delegate** | デリゲートがAssetをバーンできるようにするOwner Managedプラグイン |

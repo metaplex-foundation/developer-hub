@@ -78,6 +78,7 @@ minting will fail
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
+
 ## 가드 설정
 
 Third Party Signer 가드에는 다음 설정이 포함됩니다:

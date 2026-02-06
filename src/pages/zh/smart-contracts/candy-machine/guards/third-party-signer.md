@@ -78,6 +78,7 @@ Owner: Any Program {% .whitespace-nowrap %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
 {% /diagram %}
+
 ## 守卫设置
 
 Third Party Signer 守卫包含以下设置：

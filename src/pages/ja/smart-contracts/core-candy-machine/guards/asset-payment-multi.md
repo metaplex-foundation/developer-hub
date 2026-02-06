@@ -54,7 +54,6 @@ Owner: System Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
 
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
@@ -132,6 +131,7 @@ APIリファレンス: [create](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ミント設定
 
 Asset Paymentガードには以下のミント設定が含まれます:
+
 - **[Asset Address]**: 支払いに使用するアセットの配列。これらは、必要なコレクションの一部であり、ミンターに属している必要があります。
 - **Collection Address**: 支払いに使用されるコレクションのアドレス。
 - **Destination**: すべてのアセットを受け取るウォレットのアドレス。

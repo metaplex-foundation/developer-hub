@@ -18,9 +18,11 @@ Auction House CLIを使い始めるには、以下の手順に従ってくださ
 git clone https://github.com/metaplex-foundation/metaplex-program-library.git
 cd auction-house/cli
 ```
+
 注意: デフォルトでは、`main`ブランチの先端にある最新のコードを使用します。
 
 次に：
+
 ```sh
 cd js && yarn install && yarn bootstrap
 cd src
@@ -28,8 +30,8 @@ cd src
 
 リポジトリをクローンし、パッケージをインストールしたら、ローカルの`Keypair`が設定されていることを確認してください。これについてサポートが必要な場合は、これらのガイドを参照してください。
 
-- https://docs.solana.com/cli/install-solana-cli-tools
-- https://docs.solana.com/wallet-guide/file-system-wallet
+- <https://docs.solana.com/cli/install-solana-cli-tools>
+- <https://docs.solana.com/wallet-guide/file-system-wallet>
 
 ## コマンドの実行
 
@@ -152,7 +154,7 @@ Signature: 4qYFoD8GN6TZLDjLsqyyt6mhjYEjwKF36LJCDLtL88nTD3y3bFzXmVFHP6Nczf5Dn4Gnm
 
 {% callout type="warning" %}
 
-`solana airdrop`コマンドは時々信頼性がありません。コマンドが機能しない場合は、https://solfaucet.comのエアドロップツールを使用できます。
+`solana airdrop`コマンドは時々信頼性がありません。コマンドが機能しない場合は、<https://solfaucet.comのエアドロップツールを使用できます。>
 
 {% /callout %}
 

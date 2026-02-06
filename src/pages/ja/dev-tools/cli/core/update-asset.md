@@ -9,11 +9,13 @@ description: MPLコアアセットのメタデータとプロパティの更新
 ## 基本的な使用法
 
 ### 単一アセットの更新
+
 ```bash
 mplx core asset update <assetId> [options]
 ```
 
 ### 更新オプション
+
 - `--name <string>`: アセットの新しい名前
 - `--uri <string>`: アセットメタデータの新しいURI
 - `--image <path>`: 新しい画像ファイルへのパス
@@ -22,21 +24,25 @@ mplx core asset update <assetId> [options]
 ## 更新方法
 
 ### 1. 名前とURIの更新
+
 ```bash
 mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.com/metadata.json"
 ```
 
 ### 2. JSONファイルで更新
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json
 ```
 
 ### 3. 画像で更新
+
 ```bash
 mplx core asset update <assetId> --image ./asset/image.jpg
 ```
 
 ### 4. JSONと画像で更新
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
 ```
@@ -44,16 +50,19 @@ mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/im
 ## 例
 
 ### アセット名の更新
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --name "New Asset Name"
 ```
 
 ### 新しい画像でアセットを更新
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./images/new-image.png
 ```
 
 ### 新しいメタデータでアセットを更新
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
 ```
@@ -61,6 +70,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 ## 出力
 
 更新が成功した後、コマンドは以下を表示します：
+
 ```
 --------------------------------
   Asset: <assetId>

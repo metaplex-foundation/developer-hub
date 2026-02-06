@@ -75,7 +75,6 @@ Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## 가드 설정
@@ -258,6 +257,7 @@ _Sugar는 현재 라우트 지시사항을 지원하지 않습니다._
 {% /dialect-switcher %}
 
 ## 할당 계정
+
 `Allocation` 가드를 사용할 때 라우트 지시사항이 실행된 후 `allocationTracker` 계정이 생성됩니다. 검증 목적으로 다음과 같이 가져올 수 있습니다:
 
 ```js

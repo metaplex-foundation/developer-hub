@@ -20,6 +20,7 @@ mplx toolbox sol transfer <amount> <address>
 ## 示例
 
 ### 向地址转账 1 SOL
+
 ```bash
 mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -27,6 +28,7 @@ mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## 输出
 
 成功转账后，命令将显示：
+
 ```
 --------------------------------
     Transferred <amount> SOL to <address>

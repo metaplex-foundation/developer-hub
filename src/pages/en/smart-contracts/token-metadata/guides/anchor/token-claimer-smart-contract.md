@@ -20,17 +20,20 @@ A Merkle tree is a binary tree used to efficiently represent a set of data. Each
 **Example**: Suppose we have four data entries: A, B, C, and D. The Merkle tree structure is built as follows:
 
 - **Leaf Nodes**: Each entry is hashed:
+
 ```
 Hash(A), Hash(B), Hash(C), Hash(D)
 ```
 
 - **Parent Nodes**: Pairs of leaf nodes are combined and hashed:
+
 ```
 Parent1 = Hash(Hash(A) + Hash(B))
 Parent2 = Hash(Hash(C) + Hash(D))
 ```
 
 - **Root Node**: The final hash is computed from the parent nodes:
+
 ```
 Root = Hash(Parent1 + Parent2)
 ```
@@ -98,12 +101,13 @@ This specialized tree, called a concurrent Merkle tree, maintains an on-chain ch
 
 This functionality is essential on Solana where only one writer per block is allowed per account. This limites updates to a single change per block, so the runtime can ensure the account's security and prevents corruption. Since every action requires writing, concurrent Merkle tree offers an efficient solution for managing multiple updates within the same block seamlessly.
 
-## Setup 
+## Setup
 
 - Code Editor of your choice (recommended **Visual Studio Code** with the **Rust Analyzer Plugin**)
 - Anchor **0.30.1** or above.
 
 Additionally, in this guide we’re going to leverage a mono-file approach to **Anchor** where all the necessary macros can be found in the `lib.rs` file:
+
 - `declare_id`: Specifies the program's on-chain address.
 - `#[program]`: Specifies the module containing the program’s instruction logic.
 - `#[derive(Accounts)]`: Applied to structs to indicate a list of accounts required for an instruction.
@@ -153,7 +157,7 @@ This example is not a full-fledged implementation suitable for production. To ma
 
 ### Imports and Templates
 
-Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file. 
+Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file.
 
 ```rust
 use anchor_lang::prelude::*;
@@ -362,7 +366,7 @@ pub struct Initialize<'info> {
 
 ### Update the Merkle Root onchain if needed
 
-We're going to create the `update_tree` instruction that will let the `authority` of the `AirdropState` change the root onchain. This can be used to add a new user or to revoke allocation. 
+We're going to create the `update_tree` instruction that will let the `authority` of the `AirdropState` change the root onchain. This can be used to add a new user or to revoke allocation.
 
 For this example we're going to create a new random allocation for a random address and push this entry in the Merkle Tree we created in the last instruction, like this:
 
@@ -414,13 +418,13 @@ pub struct Update<'info> {
 }
 ```
 
-We verify that this change is "safe" because we check the authority provided against the authority saved in the `AirdropState` using the `has_one` constrain. 
+We verify that this change is "safe" because we check the authority provided against the authority saved in the `AirdropState` using the `has_one` constrain.
 
 ### Claiming instruction for the User
 
 When a user claims tokens, their eligibility is verified using the Merkle Tree Root stored on-chain.
 
-**Step 1: Generate Merkle Proof**: 
+**Step 1: Generate Merkle Proof**:
 
 The system locates the user’s data in the external Merkle Tree database, generated from the previous examples, and generates the Merkle Proof. This proof includes the hashes of sibling nodes along the path to the user’s leaf and the index, enabling the verification process, like this:
 
@@ -533,7 +537,7 @@ To ensure accuracy, the root is reconstructed from the input provided in the acc
 
 For simplicity in this example, we won’t implement concurrency. Instead, we present two possible approaches to handle claims:
 
-- Set the isClaimed flag to true and recompute the Merkle Root on-chain. The main drawback of this approach is that the account will be locked during the update, as explained in the[ Concurrent Merkle Tree section](#concurrent-merkle-tree). This limits claims to one user per block and can be implemented in the same instruction like this after the transfer:
+- Set the isClaimed flag to true and recompute the Merkle Root on-chain. The main drawback of this approach is that the account will be locked during the update, as explained in the[Concurrent Merkle Tree section](#concurrent-merkle-tree). This limits claims to one user per block and can be implemented in the same instruction like this after the transfer:
 
 {% totem %}
 

@@ -30,28 +30,40 @@ faqs:
 ---
 This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Remove plugins from Assets
 - Remove plugins from Collections
 - Understand authority requirements for removal
 - Recover rent from removed plugins
 {% /callout %}
+
 ## Summary
+
 Remove plugins using `removePlugin()` for Assets or `removeCollectionPlugin()` for Collections. Only the plugin authority can remove a plugin.
+
 - Specify the plugin type to remove
 - Plugin data is deleted
 - Rent is recovered
 - Permanent plugins cannot be removed
+
 ## Out of Scope
+
 Permanent plugin removal (not possible), plugin updates (see [Updating Plugins](/smart-contracts/core/plugins/update-plugins)), and authority changes (see [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins)).
+
 ## Quick Start
+
 **Jump to:** [Remove from Asset](#removing-a-plugin-from-a-mpl-core-asset) · [Remove from Collection](#removing-a-plugin-from-a-collection)
+
 1. Identify the plugin type to remove
 2. Call `removePlugin()` with the Asset and plugin type
 3. Plugin is removed immediately
 Plugins can also be removed from MPL Core Assets and MPL Core Collections.
+
 ## Removing a Plugin from a MPL Core Asset
+
 {% dialect-switcher title="Removing a Plugin from a MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { removePlugin } from '@metaplex-foundation/mpl-core'
@@ -61,8 +73,10 @@ await removePlugin(umi, {
   plugin: { type: 'Attributes' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::RemovePluginV1Builder, types::PluginType};
 use solana_client::nonblocking::rpc_client;
@@ -92,11 +106,15 @@ pub async fn remove_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Removing a Plugin from a Collection
+
 {% dialect-switcher title="Removing a Plugin from a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
@@ -109,8 +127,10 @@ await removeCollectionPlugin(umi, {
   pluginType: { type: 'Royalties' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::RemoveCollectionPluginV1Builder, types::PluginType};
 use solana_client::nonblocking::rpc_client;
@@ -140,44 +160,72 @@ pub async fn remove_collection_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 You don't have permission to remove this plugin. Check who has authority over the plugin.
+
 ### `Plugin not found`
+
 The Asset/Collection doesn't have this plugin type attached.
+
 ### `Cannot remove permanent plugin`
+
 Permanent plugins cannot be removed after creation. They are permanently attached.
+
 ## Notes
+
 - Removing a plugin deletes all its data
 - Rent from the removed plugin is recovered
 - Only the plugin authority can remove a plugin
 - Permanent plugins can never be removed
+
 ## Quick Reference
+
 ### Removal Authority Requirements
+
 | Plugin Type | Who Can Remove |
 |-------------|----------------|
 | Owner Managed | Owner or delegate |
 | Authority Managed | Update authority or delegate |
 | Permanent | Cannot be removed |
+
 ## FAQ
+
 ### Can I recover the data after removing a plugin?
+
 No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.
+
 ### What happens to the rent when I remove a plugin?
+
 The rent that was used to store the plugin data is recovered and returned to the payer.
+
 ### Can I remove a plugin someone else delegated to me?
+
 Yes, if you're the delegated authority for that plugin, you can remove it.
+
 ### Why can't I remove a Permanent plugin?
+
 Permanent plugins cannot be removed after creation, though their settings can still be adjusted. This is by design for use cases that require guaranteed plugin presence.
+
 ### Can I remove a plugin from a Collection and its Assets at once?
+
 No. Collection plugins and Asset plugins are managed separately. However, removing a Collection plugin can affect Assets that inherit from it (e.g., Assets without their own Royalties plugin will no longer have royalties enforced).
+
 ## Related Operations
+
 - [Adding Plugins](/smart-contracts/core/plugins/adding-plugins) - Add plugins to Assets/Collections
 - [Delegating Plugins](/smart-contracts/core/plugins/delegating-and-revoking-plugins) - Change plugin authorities
 - [Updating Plugins](/smart-contracts/core/plugins/update-plugins) - Modify plugin data
 - [Plugins Overview](/smart-contracts/core/plugins) - Full list of available plugins
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Plugin Authority** | Address with permission to manage the plugin |

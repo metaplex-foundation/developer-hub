@@ -14,12 +14,12 @@ description: 在创建MPL-404混合资产之前如何准备
 
 为了利用MPL-404的元数据随机化功能，链下元数据URI需要一致定义并递增。并非所有链下元数据解决方案都支持一致的基础URI。Shadow Drive是一种可能的具有递增URI的链下元数据解决方案。URI应该如下所示：
 
-- https://shdw-drive.genesysgo.net/.../0.json
-- https://shdw-drive.genesysgo.net/.../1.json
+- <https://shdw-drive.genesysgo.net/.../0.json>
+- <https://shdw-drive.genesysgo.net/.../1.json>
 
 ...
 
-- https://shdw-drive.genesysgo.net/.../999999.json
+- <https://shdw-drive.genesysgo.net/.../999999.json>
 
 ## 交换随机化
 

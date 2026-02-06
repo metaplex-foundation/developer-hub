@@ -60,7 +60,6 @@ _または凍結期間の終了時。_
 {% node #thawed-Asset-bg1 label="解凍された Asset" theme="slate" parent="thawed-Asset" x="-5" y="-5" /%}
 {% node #thawed-Asset label="解凍された Asset" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -76,6 +75,7 @@ _すべての Asset が解凍された場合。_
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
+
 ## ガード設定
 
 Freeze Token Payment ガードには以下の設定が含まれます:
@@ -217,7 +217,6 @@ Freeze Escrow PDA アカウントは、以下のような複数のパラメー�
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
 {% node #freezeEscrow-PDA3 parent="destination-ata" x="397" y="-10" %}
@@ -292,7 +291,6 @@ Freeze Escrow PDA アカウントは、以下のような複数のパラメー�
 {% node parent="mint-candy-machine" y="-20" x="120" theme="transparent" %}
   ミントロジック
 {% /node %}
-
 
 {% edge from="mint-candy-machine" to="frozen-Asset" path="straight" /%}
 {% node #frozen-Asset parent="mint-candy-machine" y="120" x="31" theme="slate" %}
@@ -393,7 +391,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
 {% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
-
 
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 

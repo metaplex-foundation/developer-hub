@@ -9,6 +9,7 @@ description: 关于为 Core Candy Machine 铸造实施防机器人保护和安�
 ## 为什么防机器人保护很重要
 
 没有适当的保护，机器人可以：
+
 - 在真实用户参与之前铸造大量资产
 - 使用可预测的模式狙击稀有物品
 - 通过自动请求压垮您的基础设施
@@ -33,6 +34,7 @@ https://yourproject.com/metadata/2.json
 ```
 
 这种模式允许机器人：
+
 - 在铸造前预取所有元数据
 - 识别稀有特征并针对特定索引
 - 根据已知的元数据分布计划攻击
@@ -45,6 +47,7 @@ https://yourproject.com/metadata/2.json
 UMI 的内置上传器是 **Irys** 和 **ArDrive Turbo** 等服务的包装器。它自动生成基于交易 ID 的 URI，同时抽象化直接使用这些服务的复杂性。
 
 **使用 UMI Uploader 的示例：**
+
 ```typescript
 import fs from "fs";
 import mime from "mime";
@@ -88,6 +91,7 @@ await securelyStoreUris(uploadedUris);
 ```
 
 **其他可探索的上传服务：**
+
 - **Irys**：用于 Arweave 上传的直接 SDK，带有交易 ID
 - **ArDrive**：基于 Arweave 的存储，内置交易 ID 生成
 - **IPFS**：Pinata、Infura 或 Web3.Storage 等服务
@@ -121,11 +125,13 @@ await securelyStoreUris(uploadedUris);
 ```
 
 将其上传到单个可预测的 URI（您可以使用任何上传服务）：
+
 ```
 https://yourproject.com/metadata/placeholder.json
 ```
 
 **任何上传解决方案的关键要求：**
+
 - **基于交易 ID 的 URI**：确保不可预测的、非顺序的标识符
 - **永久存储**：使用提供不可变存储的服务（Arweave、IPFS 等）
 - **URI 存储**：始终按顺序存储返回的 URI 以进行揭示映射
@@ -193,6 +199,7 @@ await storeMapping(secureMapping);
 始终在后端生成的交易中包含这些守卫：
 
 **1. 第三方签名者守卫**：确保只有您的后端可以授权铸造
+
 ```typescript
 const guards = {
   thirdPartySigner: {
@@ -214,6 +221,7 @@ const guards = {
 ##### 后端铸造端点实现
 
 **Next.js API 路由示例：**
+
 ```typescript
 // pages/api/mint.ts（Pages Router）或 app/api/mint/route.ts（App Router）
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -294,6 +302,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 实施全面的防机器人保护需要在铸造基础设施的多个层面进行仔细的规划和执行。本指南中概述的时间顺序方法确保每个步骤都建立在前一个步骤之上，创建一个强大的防御系统。
 
 **关键成功因素：**
+
 - **准备就是一切**：在发布前生成映射和验证哈希
 - **后端控制至关重要**：永远不要让客户端生成自己的铸造交易
 - **透明度建立信任**：在铸造前发布验证数据，在揭示后发布完整映射

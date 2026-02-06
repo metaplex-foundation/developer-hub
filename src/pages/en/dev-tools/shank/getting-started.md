@@ -200,15 +200,18 @@ Now that you have Shank set up and generating IDL files, you can:
 ### Common Issues
 
 **IDL generation fails with parsing errors:**
+
 - Ensure your Rust code compiles successfully
 - Check that all derive macros are properly imported
 - Verify account annotations are correctly formatted
 
 **Missing accounts in generated IDL:**
+
 - Make sure structs are annotated with `#[derive(ShankAccount)]`
 - Check that the struct is public and accessible
 
 **Build script errors:**
+
 - Ensure `shank-cli` is installed and available in PATH
 - Verify build script permissions and execution rights
 

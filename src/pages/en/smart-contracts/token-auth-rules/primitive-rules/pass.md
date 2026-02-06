@@ -5,6 +5,7 @@ description: The Pass primitive rule
 ---
 
 ## Pass
+
 This Rule always evaluates as true during validation.
 
 ```js

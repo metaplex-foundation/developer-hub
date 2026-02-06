@@ -117,4 +117,5 @@ Token Metadata 程序的一些指令已经经历了几次迭代,并已弃用以�
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) TokenStandard 现在会自动设置。
 
 ## 在哪里可以了解更多关于 Token Metadata 账户大小缩减的信息?
+
 请查看[特殊常见问题](/zh/smart-contracts/token-metadata/guides/account-size-reduction)以获取更多信息,或在有其他问题的情况下加入我们的 [Discord](https://discord.gg/metaplex)。

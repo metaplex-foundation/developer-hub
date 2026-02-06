@@ -5,9 +5,11 @@ description: How to run validation using a Rule Set
 ---
 
 ## Introduction
+
 The Validate instruction on Token Authorization Rules takes an operation, token, and payload and uses that data to evaluate the rule set to determine if the operation is allowed. The most common use of this is royalty enforcement on Metaplex programmable NFTs. On pNFTs, the Delegate and Transfer instructions are **Operations**, the NFT that is being delegated or transferred is the **Token**, and the **Payload** is constructed using the different attributes of the Operation.
 
 ## Constructing the Payload
+
 Most **Primitive Rules** include a **field**. This is meant to indicate a field in the Payload passed in to the validate call. The values stored in these fields are fetched from the Payload HashMap and used for evaluation of the various rules. Below is an example of how Token Metadata constructs a payload for transferring an NFT.
 
 ```rust
@@ -36,6 +38,7 @@ auth_data.payload.insert(
 ```
 
 ## Calling Validate
+
 - **rule_set_pda** - The PDA that contains the Rule Set that will be evaluated.
 - **mint** - The mint of the token that is being operated on.
 - **system_program** - The System Program

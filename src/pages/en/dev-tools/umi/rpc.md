@@ -72,6 +72,7 @@ const simulationResult = await umi.rpc.simulateTransaction(myTransaction, {
 ```
 
 When using `replaceRecentBlockhash: true`, the simulator replaces the transaction’s recent blockhash with the latest one from the RPC for the simulation request only. It does not modify your original transaction or extend its on-chain validity. To actually extend validity, fetch a fresh blockhash and rebuild/re‑sign the transaction, or set the latest blockhash before sending. Using `replaceRecentBlockhash: true` during simulation is more convenient and can save an extra RPC call.
+
 ## Fetching accounts
 
 The following methods can be used to fetch accounts or check for their existence:

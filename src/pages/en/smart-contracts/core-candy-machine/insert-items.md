@@ -14,9 +14,11 @@ Additionally, because transactions are limited to a certain size, we cannot inse
 
 {% callout title="CLI Alternative" type="note" %}
 You can also insert items using the MPLX CLI, which handles batch processing automatically:
+
 ```bash
 mplx cm insert
 ```
+
 The CLI provides smart loading detection, progress tracking, and optimal batch sizing. See the [CLI insert command documentation](/dev-tools/cli/cm/insert) for more details.
 {% /callout %}
 

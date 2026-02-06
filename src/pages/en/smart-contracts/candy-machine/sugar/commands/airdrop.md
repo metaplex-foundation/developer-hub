@@ -43,13 +43,14 @@ By default sugar will use the default cache file `cache.json`. You can also over
 sugar mint --cache <CACHE>
 ```
 
-You can also tell sugar to use a specific candy machine with `--candy-machine`: 
+You can also tell sugar to use a specific candy machine with `--candy-machine`:
 
 ```
 sugar mint --candy-machine <CANDY_MACHINE>
 ```
 
 ## Rerunning the command
+
 In some cases mints will fail, e.g. because a blockhash was not found or similar RPC / Network related reasons. The results of your airdrop will be saved in `airdrop_results.json`. When rerunning the command the airdrop list and airdrop results will be compared.
 
 Be careful: In some cases you will see that a transaction could not be confirmed before a timeout happened. In those cases you should confirm e.g. on an explorer if the NFT was minted.

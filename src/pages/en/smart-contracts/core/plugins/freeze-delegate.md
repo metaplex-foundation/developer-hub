@@ -34,21 +34,30 @@ faqs:
 ---
 The **Freeze Delegate Plugin** allows you to freeze Core Assets, blocking transfers and burns while the asset remains in the owner's wallet. Perfect for escrowless staking, marketplace listings, and game mechanics. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Add the Freeze Delegate plugin to an Asset
 - Freeze and thaw Assets
 - Delegate freeze authority to another address
 - Use cases: staking, listings, game locking
 {% /callout %}
+
 ## Summary
+
 The **Freeze Delegate** is an Owner Managed plugin that freezes Assets in place. When frozen, the Asset cannot be transferred or burned until thawed by the freeze authority.
+
 - Freeze Assets without transferring to escrow
 - Delegate freeze authority to a program or other wallet
 - Authority is revoked on transfer (for non-permanent version)
 - Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) for irrevocable freezing
+
 ## Out of Scope
+
 Collection-level freezing (use Asset-level only), permanent freezing (see Permanent Freeze Delegate), and Token Metadata freeze authority (different system).
+
 ## Quick Start
+
 **Jump to:** [Add Plugin](#add-freeze-delegate-plugin-to-an-asset) · [Delegate Authority](#delegate-the-freeze-authority) · [Freeze](#freezing-an-asset) · [Thaw](#thawing-a-frozen-asset)
+
 1. Add the Freeze Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'FreezeDelegate', data: { frozen: true } } })`
 2. The Asset is now frozen and cannot be transferred
 3. Thaw when ready: update the plugin with `frozen: false`
@@ -64,7 +73,9 @@ Collection-level freezing (use Asset-level only), permanent freezing (see Perman
 **Choose Freeze Delegate** when authority should reset on ownership change.
 **Choose [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)** when authority must persist forever.
 {% /callout %}
+
 ## Common Use Cases
+
 - **Escrowless staking**: Freeze NFTs while staked without transferring to escrow
 - **Marketplace listings**: Lock NFTs for sale without escrow accounts
 - **Game item locking**: Temporarily lock items during gameplay
@@ -72,21 +83,29 @@ Collection-level freezing (use Asset-level only), permanent freezing (see Perman
 - **Governance**: Lock tokens during voting periods
 - **Collateral**: Lock NFTs used as lending collateral
 - **Tournaments**: Lock NFTs during competition participation
+
 ## Works With
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
 For collection-level freezing, use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) instead.
+
 ## Arguments
+
 | Arg    | Value |
 | ------ | ----- |
 | frozen | bool  |
+
 ## Functions
+
 ### Add Freeze Delegate Plugin to an Asset
+
 The `addPlugin` command adds the Freeze Delegate Plugin to an Asset. This plugin allows the Asset to be frozen, preventing transfers and burns.
 {% dialect-switcher title="Adding a Freeze Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -96,8 +115,10 @@ await addPlugin(umi, {
   plugin: { type: 'FreezeDelegate', data: { frozen: true } },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -107,8 +128,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -141,12 +164,16 @@ pub async fn add_freeze_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Delegate the Freeze Authority
+
 The `approvePluginAuthority` command delegates the freeze authority to a different address. This allows another address to freeze and thaw the Asset while maintaining ownership.
 {% dialect-switcher title="Delegate the Freeze Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -158,8 +185,10 @@ await approvePluginAuthority(umi, {
   newAuthority: { type: 'Address', address: delegateAddress },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -170,8 +199,10 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .new_authority(PluginAuthority::Address { address: ctx.accounts.new_authority.key() })
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -210,14 +241,20 @@ pub async fn approve_plugin_authority() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Updating the Freeze Delegate Plugin
+
 The Freeze Delegate Plugin can be updated to change the frozen state of the asset. This is the same as using the [Freezing an Asset](#freezing-an-asset) and [Thawing a Frozen Asset](#thawing-a-frozen-asset) functions shown below.
+
 ### Freezing an Asset
+
 The `freezeAsset` command freezes an Asset, preventing it from being transferred or burned. This is useful for escrowless staking or marketplace listings.
 {% dialect-switcher title="Freeze an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { freezeAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -230,8 +267,10 @@ await freezeAsset(umi, {
     authority: delegateSigner,
   }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -243,8 +282,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: true }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -281,12 +322,16 @@ pub async fn update_freeze_delegate_plugin() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Thawing a Frozen Asset
+
 The `thawAsset` command unfreezes a frozen Asset, restoring its ability to be transferred and burned.
 {% dialect-switcher title="Thaw an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { thawAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -298,8 +343,10 @@ await thawAsset(umi, {
   delegate: delegateSigner,
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -311,8 +358,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -349,54 +398,86 @@ pub async fn thaw_freeze_delegate_plugin() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Asset is frozen`
+
 You tried to transfer or burn a frozen Asset. The freeze authority must thaw it first.
+
 ### `Authority mismatch`
+
 Only the freeze delegate authority can freeze/thaw the Asset. Check who has the plugin authority.
+
 ### `Plugin not found`
+
 The Asset doesn't have a Freeze Delegate plugin. Add it first with `addPlugin`.
+
 ## Notes
+
 - Owner Managed: requires owner signature to add
 - Authority is automatically revoked when the Asset transfers
 - Frozen Assets can still be updated (metadata changes allowed)
 - Use Permanent Freeze Delegate if you need the authority to persist after transfer
 - Freezing is immediate - no confirmation period
+
 ## Quick Reference
+
 ### Freeze States
+
 | State | Can Transfer | Can Burn | Can Update |
 |-------|--------------|----------|------------|
 | Unfrozen | Yes | Yes | Yes |
 | Frozen | No | No | Yes |
+
 ### Authority Behavior
+
 | Event | Authority Result |
 |-------|------------------|
 | Asset transfers | Authority revoked |
 | Plugin removed | Authority gone |
 | Thaw | Authority retained |
+
 ## FAQ
+
 ### Can I freeze an Asset I don't own?
+
 No. The Freeze Delegate is Owner Managed, so only the owner can add it. After adding, you can delegate authority to another address.
+
 ### What's the difference between Freeze Delegate and Permanent Freeze Delegate?
+
 Freeze Delegate authority is revoked on transfer. Permanent Freeze Delegate authority persists forever and can only be added at creation time.
+
 ### Can a frozen Asset be burned?
+
 No. Frozen Assets block both transfers and burns. Thaw the Asset first if you want to burn it.
+
 ### Can I freeze an entire Collection at once?
+
 Not with the regular Freeze Delegate (Assets only). Use [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) on the Collection instead - it supports collection-level freezing and will freeze all Assets in that Collection at once. Note that Permanent Freeze Delegate can only be added at Collection creation time.
+
 ### Does freezing affect metadata updates?
+
 No. The Asset owner or update authority can still update metadata (name, URI) while frozen. Only transfers and burns are blocked.
+
 ### How do I implement escrowless staking?
+
 1. Add Freeze Delegate plugin with your staking program as authority
 2. When user stakes: freeze the Asset
 3. When user unstakes: thaw the Asset
 4. The NFT never leaves the user's wallet
+
 ## Related Plugins
+
 - [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - Irrevocable freeze authority, supports Collections
 - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
 - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow delegate to burn Assets
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Freeze Delegate** | Owner Managed plugin that blocks transfers and burns |

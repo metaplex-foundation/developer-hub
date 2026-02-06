@@ -19,23 +19,32 @@ programmingLanguage:
 ---
 MPL Core Execute命令は、MPL Core Assetsに**Asset Signers**の概念を導入します。
 これらの**Asset Signers**は、Asset自体に代わって署名者として機能し、MPL Core Assetsに以下の機能を提供します：
+
 - SolanaとSPLトークンを転送する
 - 他のアカウントの権限になる
 - `assetSignerPda`に割り当てられたトランザクション/命令/CPI署名を必要とする他のアクションと検証を実行する
 MPL Core Assetsは、ブロックチェーンにトランザクション/CPIを署名して送信する機能を持っています。これにより、Core Assetは`assetSigner`という形で独自のウォレットを持つことができます。
+
 ## Asset Signer PDA
+
 Assetsは`assetSignerPda`アカウント/アドレスにアクセスできるようになり、MPL Coreプログラムの`execute`命令が、送信された追加の命令を`assetSignerPda`でCPI命令に署名して通過させることができます。
 これにより、`assetSignerPda`アカウントは、現在のアセット所有者に代わってアカウント命令を効果的に所有および実行できます。
 `assetSignerPda`は、Core Assetに接続されたウォレットと考えることができます。
+
 ### findAssetSignerPda()
+
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 ```
+
 ## Execute命令
+
 ### 概要
+
 `execute`命令を使用すると、ユーザーはCore Assetと、オンチェーンでMPL Coreプログラムの`execute`命令に到達したときにAssetSignerによって署名されるパススルー命令を渡すことができます。
 `execute`命令とその引数の概要：
+
 ```ts
 const executeIx = await execute(umi, {
     {
@@ -50,20 +59,29 @@ const executeIx = await execute(umi, {
     }
 })
 ```
+
 ### 検証
+
 {% callout title="assetSignerPda検証" %}
 MPL Core Execute命令は、**現在のAsset所有者**もトランザクションに署名していることを検証します。これにより、現在のAsset所有者のみが`execute`命令で`assetSignerPda`を使用してトランザクションを実行できることが保証されます。
 {% /callout %}
+
 ### Execute操作の制御
+
 execute機能は[Freeze Executeプラグイン](/smart-contracts/core/plugins/freeze-execute)を使用して制御できます。このプラグインにより、アセットのexecute操作をフリーズし、フリーズ解除されるまでexecute命令の処理を防ぐことができます。
 Freeze Executeプラグインは以下の場合に特に役立ちます：
+
 - **バックドNFT**: 必要に応じて基礎となるアセットの引き出しを防止
 - **エスクローレスプロトコル**: プロトコル操作中にexecute機能を一時的にロック
 - **セキュリティ対策**: 複雑な操作を実行できるアセットに追加の保護レイヤーを追加
 Freeze Executeプラグインがアクティブで`frozen: true`に設定されている場合、プラグインが`frozen: false`に更新されるまで、execute命令の使用はブロックされます。
+
 ## 例
+
 ### Asset SignerからSOLを転送する
+
 以下の例では、`assetSignerPda`に送信されたSOLを任意の宛先に転送します。
+
 ```js
 import {
   execute,
@@ -104,9 +122,12 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+
 ### Asset SignerからSPLトークンを転送する
+
 以下の例では、`assetSignerPda`アカウントからSPLトークン残高の一部を宛先に転送します。
 この例は、ベースウォレットアドレスの派生トークンアカウントに関するベストプラクティスに基づいています。トークンが`assetSignerPda`アドレスに基づいて正しく派生されたトークンアカウントにない場合、この例を調整する必要があります。
+
 ```js
 import {
   execute,
@@ -157,8 +178,11 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+
 ### アセットの所有権を別のアセットに転送する
+
 以下の例では、別のCore Assetが所有するCore Assetを、さらに別のAssetに転送します。
+
 ```js
 import {
   execute,

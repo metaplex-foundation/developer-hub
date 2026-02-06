@@ -50,6 +50,7 @@ mplx --version
 ### 1. 创建配置目录
 
 CLI 将在首次设置配置时自动在 `~/.config/mplx` 创建配置文件。此配置存储:
+
 - 钱包配置
 - RPC 端点设置
 - 浏览器首选项
@@ -58,6 +59,7 @@ CLI 将在首次设置配置时自动在 `~/.config/mplx` 创建配置文件。�
 ### 2. 配置您的环境
 
 #### 设置钱包
+
 ```bash
 # 创建一个新钱包
 mplx config wallets new --name dev1
@@ -73,11 +75,13 @@ mplx config wallets set
 进一步阅读请参见
 
 #### 配置 RPC 端点
+
 ```bash
 mplx config set rpcUrl  https://api.mainnet-beta.solana.com
 ```
 
 #### 设置首选浏览器
+
 ```bash
 mplx config explorer set
 ```
@@ -87,22 +91,26 @@ mplx config explorer set
 如果您想为 CLI 做贡献或从源代码运行它:
 
 1. 克隆仓库:
+
 ```bash
 git clone https://github.com/metaplex-foundation/cli.git
 cd cli
 ```
 
-2. 安装依赖:
+1. 安装依赖:
+
 ```bash
 npm install
 ```
 
-3. 构建项目:
+1. 构建项目:
+
 ```bash
 npm run build
 ```
 
-4. 链接 CLI:
+1. 链接 CLI:
+
 ```bash
 npm link
 ```

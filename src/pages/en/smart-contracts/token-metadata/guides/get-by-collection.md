@@ -4,48 +4,49 @@ metaTitle: Get Mints in a Collection | Token Metadata Guides
 description: How-to guide to get all mints in a collection.
 ---
 
-Metaplex Token Metadata has [onchain collections](/smart-contracts/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard. 
+Metaplex Token Metadata has [onchain collections](/smart-contracts/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard.
 
 The specification design makes it very easy to look up any given NFT and determine if it is in a collection and if so, which collection, by simply reading the Collection fields from the metadata account. The onchain `Metadata` struct contains an option `Collection` struct which has a `key` field which is the Pubkey of the SPL token mint of the collection it belongs to.
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// Immutable, once flipped, all sales of this metadata are considered secondary.
-	pub primary_sale_happened: bool,
-	// Whether or not the data struct is mutable, default is not
-	pub is_mutable: bool,
-	/// nonce for easy calculation of editions, if present
-	pub edition_nonce: Option<u8>,
-	/// Token Standard is deterministic and will change from SemiFungible to NonFungible if
-	/// you call the create master edition call and it succeeds.
-	pub token_standard: Option<TokenStandard>,
-	/// Since we cannot easily change Metadata, we add the new DataV2 fields here at the end.
-	/// Collection
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // Immutable, once flipped, all sales of this metadata are considered secondary.
+ pub primary_sale_happened: bool,
+ // Whether or not the data struct is mutable, default is not
+ pub is_mutable: bool,
+ /// nonce for easy calculation of editions, if present
+ pub edition_nonce: Option<u8>,
+ /// Token Standard is deterministic and will change from SemiFungible to NonFungible if
+ /// you call the create master edition call and it succeeds.
+ pub token_standard: Option<TokenStandard>,
+ /// Since we cannot easily change Metadata, we add the new DataV2 fields here at the end.
+ /// Collection
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // Whether or not the collection is verified
-	pub key: Pubkey,    // The SPL token mint account of the collection NFT
+ pub verified: bool, // Whether or not the collection is verified
+ pub key: Pubkey,    // The SPL token mint account of the collection NFT
 }
 ```
 
 However, given a collection mint address, finding all NFTs that belong to that particular collection is significantly more difficult when reading directly from chain. There is one superior method using [DAS](/dev-tools/das-api) and two basic approaches to get the data from chain directly.
 
 ## DAS API
+
 Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/rpc-providers#metaplex-das-api).
 
 {% dialect-switcher title="getAssetByGroup Example" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Replace the `endpoint` with your RPC URL and `collection` with the collection address you are looking for. 
+Replace the `endpoint` with your RPC URL and `collection` with the collection address you are looking for.
 
 ```js
 import { publicKey } from '@metaplex-foundation/umi';
@@ -92,22 +93,22 @@ You can find more methods on DAS and additional Methods that allows fetching and
 
 ## GetProgramAccounts with PreCalculated Offsets
 
-It’s tempting to think we can simply use a [getProgramAccounts](https://docs.solana.com/developing/clients/jsonrpc-api#getprogramaccounts) call with an offset into the `Collection` struct to match the collection id against the `key` field. This is the same way that most client programs find, e.g. a snapshot of NFT mint accounts belonging to a specific candy machine or creator ID. However, due to the fact that `edition_nonce`, `token_standard`, and `collection` are all Rust `Option`s, this gets significantly more complicated. 
+It’s tempting to think we can simply use a [getProgramAccounts](https://docs.solana.com/developing/clients/jsonrpc-api#getprogramaccounts) call with an offset into the `Collection` struct to match the collection id against the `key` field. This is the same way that most client programs find, e.g. a snapshot of NFT mint accounts belonging to a specific candy machine or creator ID. However, due to the fact that `edition_nonce`, `token_standard`, and `collection` are all Rust `Option`s, this gets significantly more complicated.
 
-Rust `Option`s are represented in [Borsh](https://borsh.io/) encoding with a 0 for the `None` variant and a 1 for the `Some` variant along with the normal encoding for whatever the contained value of the `Some` variant is. (One byte for a `u8`, for example.) This means that we can’t calculate an offset into the `Collection` struct without knowing what variant type is in each two of the two `Option`s prior to the `Collection` field. 
+Rust `Option`s are represented in [Borsh](https://borsh.io/) encoding with a 0 for the `None` variant and a 1 for the `Some` variant along with the normal encoding for whatever the contained value of the `Some` variant is. (One byte for a `u8`, for example.) This means that we can’t calculate an offset into the `Collection` struct without knowing what variant type is in each two of the two `Option`s prior to the `Collection` field.
 
-There are two ways to do this: brute force and gathering a priori knowledge of the variants. 
+There are two ways to do this: brute force and gathering a priori knowledge of the variants.
 
-Brute force requires computing all the possible variants and running multiple `getProgramAccount` calls in parallel. Given up to five creators in the creators array and two possible options for each of the two `Option` fields prior to `Collection`, that leads to a total number of 20 possible combinations, meaning that you would have to make 20 `getProgramAccount` calls with various offsets to take this approach. This is obviously not a feasible nor scalable approach. 
-If some a priori information is known about a collection though, this can be reduced to a smaller number of calls. Knowing how many creators there are is the biggest gain, reducing the number of `getProgramAccount` calls down to only four which can be reasonably run in parallel. 
+Brute force requires computing all the possible variants and running multiple `getProgramAccount` calls in parallel. Given up to five creators in the creators array and two possible options for each of the two `Option` fields prior to `Collection`, that leads to a total number of 20 possible combinations, meaning that you would have to make 20 `getProgramAccount` calls with various offsets to take this approach. This is obviously not a feasible nor scalable approach.
+If some a priori information is known about a collection though, this can be reduced to a smaller number of calls. Knowing how many creators there are is the biggest gain, reducing the number of `getProgramAccount` calls down to only four which can be reasonably run in parallel.
 
-This approach is not the recommended one due to the high number of edge cases it involves and the fact that it can only be pragmatically used on collections where there is only one creator or the number of variations of how many creators there are is known ahead of time. 
+This approach is not the recommended one due to the high number of edge cases it involves and the fact that it can only be pragmatically used on collections where there is only one creator or the number of variations of how many creators there are is known ahead of time.
 
 Instead, we recommend using the transaction crawling approach.
 
 ## Transaction Crawling
 
-Transaction crawling involves getting all the transactions associated with the collection mint address and then parsing them to find the specific instructions that create collections. From there we can determine which mint accounts are part of the collection. 
+Transaction crawling involves getting all the transactions associated with the collection mint address and then parsing them to find the specific instructions that create collections. From there we can determine which mint accounts are part of the collection.
 
 The algorithm for doing this is shown below:
 
@@ -120,7 +121,7 @@ The algorithm for doing this is shown below:
 - Add the `metadata` address to a `Set` to ensure no duplicates.
 
 - Once all `metadata` address are found, loop over them and call `getAccountInfo` to find the account data.
-    - Deserialize the account data into a Metadata struct/object, and find the mint address from the `mint` field. Add the `mint` address to a Set.
-    - This final Set is your list of mint addresses for all items in the collection.
+  - Deserialize the account data into a Metadata struct/object, and find the mint address from the `mint` field. Add the `mint` address to a Set.
+  - This final Set is your list of mint addresses for all items in the collection.
 
 Example Rust and TypeScript code for transaction crawling to get collection members can be found [here](https://github.com/metaplex-foundation/get-collection).

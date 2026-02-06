@@ -42,6 +42,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -71,8 +72,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`找到 ${data.result.items.length} 个同质化资产`)
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 示例" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -90,6 +93,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -99,6 +103,7 @@ curl -X POST <ENDPOINT> \
 
 {% totem %}
 {% totem-accordion title="UMI 示例" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -126,8 +131,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   )
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -159,6 +166,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`在 ${allAssets.items.length} 个总资产中找到 ${FungibleTokens.length} 个同质化资产`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -168,6 +176,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% totem %}
 {% totem-accordion title="UMI 示例" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -200,8 +209,10 @@ const creatorTokens = await umi.rpc.searchAssets({
 console.log(`按供应量筛选的代币: ${tokensBySupply.items.length}`)
 console.log(`创建者代币: ${creatorTokens.items.length}`)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
+
 ```javascript
 (async () => {
   // 获取具有特定供应量范围的代币
@@ -258,6 +269,7 @@ console.log(`创建者代币: ${creatorTokens.items.length}`)
   console.log(`创建者代币: ${creatorTokens.items.length}`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

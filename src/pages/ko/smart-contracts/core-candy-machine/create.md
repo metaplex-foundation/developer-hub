@@ -252,6 +252,7 @@ ConfigLineSettings = {
 접두사를 제외한 삽입된 각 아이템의 이름 최대 길이입니다.
 
 예를 들어...
+
 - `1000`개의 아이템을 포함하는 candy machine
 - 각 아이템의 이름은 `Example Asset #X`이며 X는 1부터 시작하는 아이템의 인덱스
 
@@ -268,7 +269,8 @@ ConfigLineSettings = {
 `prefixUri`를 제외한 URI의 최대 길이입니다.
 
 예를 들어...
-- 20개 문자의 기본 URI ` https://arweave.net/`
+
+- 20개 문자의 기본 URI `https://arweave.net/`
 - 최대 43개 문자 길이의 고유 통합자
 
 ... 접두사 없이는 저장하는 데 63개의 필수 문자가 필요합니다. `prefixUri`를 사용할 때 `uriLength`는 `https://arweave.net/`의 20개 문자만큼 줄여서 고유 식별자의 43개 문자로 줄일 수 있습니다.

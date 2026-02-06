@@ -139,6 +139,7 @@ mintV1(umi, {
 _Asset Mint Limitガードはルート命令をサポートしていません。_
 
 ## AssetMintLimitアカウント
+
 `AssetMintLimit`ガードを使用すると、各Core NFT Asset、CandyMachine、および`id`の組み合わせに対して`AssetMintCounter`アカウントが作成されます。検証目的で次のようにフェッチできます:
 
 ```js

@@ -4,7 +4,7 @@ metaTitle: 技术描述 | 固定价格销售
 description: 固定价格销售程序的技术描述
 ---
 
-## 创作者出售物品需要:
+## 创作者出售物品需要
 
 1. 创建商店
 
@@ -20,7 +20,7 @@ description: 固定价格销售程序的技术描述
 
     - 创建包含有关销售物品信息的对象,除了最大供应量之外的所有内容,因为我们在销售资源中定义了它
 
-## 用户购买代币需要:
+## 用户购买代币需要
 
 1. 进入商店。
 
@@ -78,7 +78,6 @@ description: 固定价格销售程序的技术描述
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
-
 
 ## TradeHistory
 

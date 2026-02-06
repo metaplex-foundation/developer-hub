@@ -119,6 +119,7 @@ Candy Machine 可以配置为在铸造 NFT 时没有最终元数据。当您计�
 {% totem %}
 {% totem-accordion title="hiddenSettings 示例" %}
 配置文件中的 `hiddenSettings` 部分可能如下所示：
+
 ```json
 "hiddenSettings": {
     "name": "Name $ID+1$",
@@ -126,6 +127,7 @@ Candy Machine 可以配置为在铸造 NFT 时没有最终元数据。当您计�
     "hash": "49Bj8ZVSvSvAQwziKEts3iAeUhi27ATH"
 }
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

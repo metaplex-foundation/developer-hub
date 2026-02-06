@@ -27,28 +27,41 @@ faqs:
 ---
 This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Add external plugins during Asset/Collection creation
 - Add external plugins to existing Assets/Collections
 - Configure Oracle lifecycle checks
 - Set up AppData with data authorities
 {% /callout %}
+
 ## Summary
+
 Add external plugins using `create()` with the `plugins` array, or `addPlugin()` for existing Assets. Collections use `createCollection()` and `addCollectionPlugin()`.
+
 - Add at creation: include in `plugins` array
 - Add to existing: use `addPlugin()` / `addCollectionPlugin()`
 - Requires update authority signature
 - Configure lifecycle checks for Oracle plugins
+
 ## Out of Scope
+
 Removing external plugins (see [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins)), updating plugin data, and built-in plugins (see [Adding Plugins](/smart-contracts/core/plugins/adding-plugins)).
+
 ## Quick Start
+
 **Jump to:** [Create Asset with Plugin](#creating-a-core-asset-with-an-external-plugin) · [Add to Existing Asset](#adding-a-external-plugin-to-a-core-asset) · [Create Collection with Plugin](#creating-a-core-collection-with-an-external-plugin)
+
 1. Prepare your Oracle account or AppData configuration
 2. Add plugin at creation or via `addPlugin()`
 3. Configure lifecycle checks (Oracle) or data authority (AppData)
+
 ## Assets
+
 ### Creating a Core Asset with an External Plugin
+
 {% dialect-switcher title="Creating a Core Asset with an External Plugin" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -72,8 +85,10 @@ await create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateV2Builder,
@@ -121,11 +136,15 @@ pub async fn create_asset_with_oracle_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Adding a External Plugin to a Core Asset
+
 {% dialect-switcher title="Adding a Plugin with an assigned authority" %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddExternalPluginAdapterV1Builder,
@@ -171,8 +190,10 @@ pub async fn add_oracle_plugin_to_asset() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -192,12 +213,17 @@ addPlugin(umi, {
   },
 })
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collections
+
 ### Creating a Core Collection with an External Plugin
+
 {% dialect-switcher title="Adding a External Plugin to a Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -222,8 +248,10 @@ await createCollection(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV2Builder,
@@ -271,11 +299,15 @@ pub async fn create_collection_with_oracle_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Adding a External Plugin to a Collection
+
 {% dialect-switcher title="Burning an Assets" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addCollectionPlugin, CheckResult } from '@metaplex-foundation/mpl-core'
@@ -295,8 +327,10 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddCollectionExternalPluginV1Builder,
@@ -342,28 +376,47 @@ pub async fn add_oracle_plugin_to_collection() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 Only the update authority can add external plugins. Verify you're signing with the correct keypair.
+
 ### `Plugin already exists`
+
 An external plugin with the same key already exists. Remove it first or update it instead.
+
 ### `Invalid Oracle account`
+
 The Oracle base address is invalid or the account doesn't exist.
+
 ## Notes
+
 - External plugins are Authority Managed (update authority controls)
 - Oracle plugins require an existing Oracle account
 - AppData plugins need a Data Authority for write permissions
 - Collection plugins don't automatically apply to existing Assets
+
 ## FAQ
+
 ### Can I add multiple external plugins to one Asset?
+
 Yes. You can add multiple Oracle and/or AppData plugins to a single Asset.
+
 ### Do I need to create the Oracle account first?
+
 Yes. The Oracle account must exist before adding an Oracle plugin adapter.
+
 ### What's the difference between adding at creation vs adding later?
+
 No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
+
 ## Related Operations
+
 - [Removing External Plugins](/smart-contracts/core/external-plugins/removing-external-plugins) - Remove external plugins
 - [External Plugins Overview](/smart-contracts/core/external-plugins/overview) - Understanding external plugins
 - [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) - Oracle configuration details

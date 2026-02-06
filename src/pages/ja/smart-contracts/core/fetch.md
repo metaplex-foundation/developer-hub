@@ -42,34 +42,48 @@ faqs:
 ---
 このガイドでは、Metaplex Core SDKを使用してSolanaブロックチェーンから**Core AssetとCollectionを取得**する方法を説明します。個々のAssetを取得したり、所有者やCollectionでクエリしたり、インデックスクエリにDASを使用できます。 {% .lead %}
 {% callout title="学習内容" %}
+
 - アドレスで単一のAssetまたはCollectionを取得
 - 所有者、Collection、またはUpdate AuthorityでAssetをクエリ
 - DAS（Digital Asset Standard）APIで高速なインデックスクエリを使用
 - GPAとDASのパフォーマンスのトレードオフを理解
 {% /callout %}
+
 ## 概要
+
 SDKヘルパー関数またはDAS APIを使用してCore AssetとCollectionを取得します。ユースケースに基づいて適切な方法を選択してください：
+
 - **単一のAsset/Collection**: 公開鍵で`fetchAsset()`または`fetchCollection()`を使用
 - **複数のAsset**: `fetchAssetsByOwner()`、`fetchAssetsByCollection()`、または`fetchAssetsByUpdateAuthority()`を使用
 - **DAS API**: より高速なパフォーマンスのためにインデックスクエリを使用（DAS対応RPCが必要）
+
 ## スコープ外
+
 Token Metadataの取得（mpl-token-metadataを使用）、圧縮NFTの取得（Bubblegum DAS拡張を使用）、オフチェーンメタデータの取得（URIを直接フェッチ）。
+
 ## クイックスタート
+
 **ジャンプ先:** [単一Asset](#単一のassetまたはcollectionの取得) · [所有者別](#所有者別assetの取得) · [Collection別](#collection別assetの取得) · [DAS API](#das---digital-asset-standard-api)
+
 1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. RPCエンドポイントでUmiを設定
 3. Assetアドレスで`fetchAsset(umi, publicKey)`を呼び出す
 4. Assetプロパティにアクセス: `name`、`uri`、`owner`、`plugins`
+
 ## 前提条件
+
 - RPC接続が設定された**Umi**
 - 取得する**Asset/Collectionアドレス**（公開鍵）
 - インデックスクエリ用の**DAS対応RPC**（オプションだが推奨）
+
 ## 単一のAssetまたはCollectionの取得
+
 単一のAssetを取得するには、以下の関数を使用できます：
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi" /%}
 {% seperator h="6" /%}
 {% dialect-switcher title="Core Collectionの取得" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { fetchCollection } from '@metaplex-foundation/mpl-core'
 const asset = await fetchCollection(umi, collection.publicKey, {
@@ -77,8 +91,10 @@ const asset = await fetchCollection(umi, collection.publicKey, {
 })
 console.log(asset)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use std::str::FromStr;
 use mpl_core::Collection;
@@ -92,13 +108,19 @@ pub async fn fetch_asset() {
     print!("{:?}", collection)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 複数のAssetの取得
+
 複数のAssetは、`getProgramAccounts`（GPA）呼び出しを使用して取得できます。これはRPC的にかなり高コストで遅くなる可能性がありますが、`Digital Asset Standard` APIを使用する方法もあります。こちらはより高速ですが、[特定のRPCプロバイダー](/rpc-providers)が必要です。
+
 ### 所有者別Assetの取得
+
 {% dialect-switcher title="所有者別Assetの取得" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByOwner } from '@metaplex-foundation/mpl-core'
@@ -108,8 +130,10 @@ const assetsByOwner = await fetchAssetsByOwner(umi, owner, {
 })
 console.log(assetsByOwner)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
@@ -156,11 +180,15 @@ pub async fn fetch_assets_by_owner() {
     print!("{:?}", assets)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Collection別Assetの取得
+
 {% dialect-switcher title="Collection別Assetの取得" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByCollection } from '@metaplex-foundation/mpl-core'
@@ -170,8 +198,10 @@ const assetsByCollection = await fetchAssetsByCollection(umi, collection, {
 })
 console.log(assetsByCollection)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use mpl_core::{accounts::BaseAssetV1, types::Key, ID as MPL_CORE_ID};
 use solana_client::{
@@ -222,12 +252,16 @@ pub async fn fetch_assets_by_collection() {
     print!("{:?}", assets)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Update Authority別Assetの取得
+
 単一のAssetを取得するには、以下の関数を使用できます：
 {% dialect-switcher title="単一のAssetを取得" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { fetchAssetsByUpdateAuthority } from '@metaplex-foundation/mpl-core'
@@ -239,8 +273,10 @@ const assetsByUpdateAuthority = await fetchAssetsByUpdateAuthority(
 )
 console.log(assetsByUpdateAuthority)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 pub async fn fetch_assets_by_update_authority() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
@@ -283,13 +319,18 @@ pub async fn fetch_assets_by_update_authority() {
     print!("{:?}", assets)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## DAS - Digital Asset Standard API
+
 DAS対応RPCを使用すると、インデックス化されたAssetを活用して超高速のフェッチとデータ取得が可能になります。
 DASはメタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（Attributesを含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しくは[こちら](/dev-tools/das-api)をご覧ください。一般的なDAS SDKに加えて、[MPL Core用の拡張機能](/dev-tools/das-api/core-extension)が作成されており、MPL Core SDKでさらに使用できる正しい型を直接返します。また、Collectionから継承されたAssetのプラグインを自動的に継承し、DASからCoreへの型変換関数も提供します。
 以下は、DASでMPL Core Assetを取得した際に返されるデータの例です。
+
 ### FetchAssetの例
+
 ```json
 {
   "id": 0,
@@ -378,23 +419,35 @@ DASはメタデータ、オフチェーンメタデータ、コレクション�
   }
 }
 ```
+
 ## よくあるエラー
+
 ### `Asset not found`
+
 公開鍵が有効なCore Assetを指していません。確認してください：
+
 - アドレスが正しく、期待されるネットワーク（devnet対mainnet）にあること
 - アカウントが存在し、Core Asset（Token Metadataではない）であること
+
 ### `RPC rate limit exceeded`
+
 GPAクエリはコストがかかる場合があります。解決策：
+
 - インデックスクエリにDAS対応RPCを使用する
 - ページネーションを追加して結果を制限する
 - 適切な場所で結果をキャッシュする
+
 ## 注意事項
+
 - `fetchAsset`はCollectionから継承されたプラグインを含む完全なAssetを返します
 - Assetレベルのプラグインのみを取得するには`skipDerivePlugins: true`を設定（より高速）
 - GPAクエリ（`fetchAssetsByOwner`など）はメインネットでは遅くなる可能性あり - DASを推奨
 - DASはオフチェーンメタデータを返し、SDKフェッチ関数はオンチェーンデータのみを返します
+
 ## クイックリファレンス
+
 ### フェッチ関数
+
 | 関数 | ユースケース |
 |----------|----------|
 | `fetchAsset(umi, publicKey)` | アドレスで単一Asset |
@@ -402,29 +455,45 @@ GPAクエリはコストがかかる場合があります。解決策：
 | `fetchAssetsByOwner(umi, owner)` | ウォレットが所有するすべてのAsset |
 | `fetchAssetsByCollection(umi, collection)` | Collection内のすべてのAsset |
 | `fetchAssetsByUpdateAuthority(umi, authority)` | Update Authority別のすべてのAsset |
+
 ### DAS vs GPA比較
+
 | 機能 | GPA (getProgramAccounts) | DAS API |
 |---------|--------------------------|---------|
 | 速度 | 遅い（全アカウントをスキャン） | 高速（インデックス化） |
 | RPC負荷 | 高い | 低い |
 | オフチェーンメタデータ | なし | あり |
 | 特別なRPCが必要 | いいえ | はい |
+
 ## FAQ
+
 ### 複数のAssetを取得する場合、GPAとDASのどちらを使うべきですか？
+
 可能な限りDASを使用してください。GPAクエリはすべてのプログラムアカウントをスキャンするため、メインネットでは遅くコストがかかる可能性があります。DASはより高速でオフチェーンメタデータも含むインデックスクエリを提供します。互換性のあるエンドポイントについては[DAS RPCプロバイダー](/rpc-providers)を参照してください。
+
 ### Assetのオフチェーンメタデータはどうやって取得しますか？
+
 `uri`フィールドにメタデータURLが含まれています。別途取得してください：
+
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 const metadata = await fetch(asset.uri).then(res => res.json())
 ```
+
 ### 複数のCollectionにまたがってAssetを取得できますか？
+
 単一のクエリでは不可能です。各CollectionのAssetを別々に取得して結果を組み合わせるか、DASでカスタムフィルターを使用してください。
+
 ### `skipDerivePlugins`はなぜ便利ですか？
+
 デフォルトでは、`fetchAsset`はCollectionレベルのプラグインをAssetに継承します。`skipDerivePlugins: true`に設定するとこのステップをスキップし、Assetレベルのプラグインのみを返します。Asset自身のプラグインのみが必要な場合や、より高速なフェッチが必要な場合に使用してください。
+
 ### 大きな結果セットをページネーションするにはどうすればよいですか？
+
 GPA関数は組み込みのページネーションをサポートしていません。大規模なコレクションの場合は、`page`と`limit`パラメータをサポートするDASを使用するか、クライアントサイドのページネーションを実装してください。
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **GPA** | getProgramAccounts - プログラムが所有するすべてのアカウントをクエリするSolana RPCメソッド |

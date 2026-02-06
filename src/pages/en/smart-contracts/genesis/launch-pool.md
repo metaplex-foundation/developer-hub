@@ -45,6 +45,7 @@ faqs:
 
 {% callout title="What You'll Learn" %}
 This guide covers:
+
 - How Launch Pool pricing and distribution works
 - Setting up deposit and claim windows
 - Configuring end behaviors for fund collection
@@ -686,18 +687,23 @@ if (deposit) {
 ## FAQ
 
 ### How is the token price determined in a Launch Pool?
+
 The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
 
 ### Can users withdraw their deposits?
+
 Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system.
 
 ### What happens if I deposit multiple times?
+
 Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
 
 ### When can users claim their tokens?
+
 After the deposit period ends and the claim window opens (defined by `claimStartCondition`). The transition must be executed first to process end behaviors.
 
 ### What's the difference between Launch Pool and Presale?
+
 Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 
 ## Glossary

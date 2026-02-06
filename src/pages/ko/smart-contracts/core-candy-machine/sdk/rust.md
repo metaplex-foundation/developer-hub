@@ -18,9 +18,9 @@ cargo add mpl-core-candy-machine-core
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-machine-core" description="MPL Core Candy Machine용 Rust SDK를 시작하세요." /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-machine-core>" description="MPL Core Candy Machine용 Rust SDK를 시작하세요." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" description="Core Candy Machine crate를 위한 Rust SDK typedoc 플랫폼." /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" description="Core Candy Machine crate를 위한 Rust SDK typedoc 플랫폼." /%}
 
 {% /quick-links %}
 
@@ -38,8 +38,8 @@ cargo add mpl-core-candy-guard
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-guard" description="Core Candy Guards용 Rust SDK를 시작하세요." /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-guard>" description="Core Candy Guards용 Rust SDK를 시작하세요." /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-guard" description="Core Candy Guards crate를 위한 Rust SDK typedoc 플랫폼." /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-guard>" description="Core Candy Guards crate를 위한 Rust SDK typedoc 플랫폼." /%}
 
 {% /quick-links %}

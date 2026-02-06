@@ -9,6 +9,7 @@ updated: '11-25-2025'
 Create a fungible token with metadata on Solana using the Token Metadata program. {% .lead %}
 
 ## What You'll Learn
+
 This guide shows you how to create and mint a fungible token with:
 
 - Custom name, symbol, and metadata

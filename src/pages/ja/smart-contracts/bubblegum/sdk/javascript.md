@@ -18,9 +18,9 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum JavaScript SDK生成パッケージAPIドキュメント。" /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" description="MPL-Bubblegum JavaScript SDK生成パッケージAPIドキュメント。" /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/MPL-Bubblegum" description="NPM上のMPL-Bubblegum JavaScript SDK。" /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/MPL-Bubblegum>" description="NPM上のMPL-Bubblegum JavaScript SDK。" /%}
 
 {% /quick-links %}
 

@@ -10,7 +10,7 @@ Metaplex Inscription程序允许您将数据直接写入Solana，使用区块链
 
 {% quick-link title="快速开始" icon="InboxArrowDown" href="/zh/smart-contracts/inscription/getting-started" description="找到您选择的语言或库，开始在Solana上使用数字资产。" /%}
 
-{% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="寻找特定内容？查看我们的API参考并找到您的答案。" /%}
+{% quick-link title="API参考" icon="CodeBracketSquare" href="<https://mpl-inscription.typedoc.metaplex.com/>" target="_blank" description="寻找特定内容？查看我们的API参考并找到您的答案。" /%}
 
 {% /quick-links %}
 

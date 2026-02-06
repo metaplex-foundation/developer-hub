@@ -52,8 +52,8 @@ Owner: Any Program {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -78,6 +78,7 @@ minting will fail
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
 {% /diagram %}
+
 ## ガード設定
 
 Third Party Signerガードには以下の設定が含まれます：

@@ -50,9 +50,7 @@ NFT旨在永久存在，永久买卖、持有和欣赏。因此，记录资产�
 
 [Arweave]: https://arweave.org
 [arweave price service]: https://node1.bundlr.network/price/0
-[repo]: https://github.com/metaplex-foundation/metaplex
 [IPFS]: https://ipfs.io/
 [winstons]: https://docs.arweave.org/developers/server/http-api#ar-and-winston
 [S3]: https://aws.amazon.com/s3/
 [arweave path manifest]: https://github.com/ArweaveTeam/arweave/wiki/Path-Manifests
-[nft.storage metaplex doc]: https://nft.storage/docs/how-to/mint-solana

@@ -34,6 +34,7 @@ faqs:
 
 {% callout title="学べること" %}
 この概要では以下を説明します：
+
 - Uniform Price Auction の仕組み
 - オークションと他のローンチメカニズムの使い分け
 - 主要概念：入札、clearing price、割り当て
@@ -109,15 +110,19 @@ Uniform Price Auction の詳細なセットアップドキュメントは近日�
 ## FAQ
 
 ### Uniform Price Auction とは何ですか？
+
 すべての落札者が個々の入札額に関係なく同じ clearing price を支払うオークションです。clearing price は最低落札価格となります。
 
 ### clearing price はどのように決定されますか？
+
 入札は価格の高い順にランク付けされます。clearing price は、入札総数量が利用可能なトークン数に等しくなるポイントで設定され、すべての落札者がこの均一価格を支払います。
 
 ### 入札を非公開にできますか？
+
 はい。Uniform Price Auction は設定に応じて公開入札と非公開（sealed）入札の両方をサポートしています。
 
 ### Uniform Price Auction はいつ使うべきですか？
+
 入金ベースのローンチよりも構造化されたオークション形式を好む大口参加者（ホエール、ファンド）との価格発見に使用してください。
 
 ## 用語集

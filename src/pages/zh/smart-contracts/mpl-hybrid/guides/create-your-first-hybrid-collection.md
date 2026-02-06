@@ -71,10 +71,11 @@ npm i @metaplex-foundation/mpl-token-metadata
 要使用MPL-Hybrid程序中的元数据随机化功能，链下元数据URI需要遵循一致的递增结构。为此，我们使用Arweave的[路径清单](https://cookbook.arweave.dev/concepts/manifests.html)功能与Turbo SDK结合。
 
 清单允许多个交易链接在单个基础交易ID下，并分配人类可读的文件名，如下所示：
-- https://arweave.net/manifestID/0.json
-- https://arweave.net/manifestID/1.json
+
+- <https://arweave.net/manifestID/0.json>
+- <https://arweave.net/manifestID/1.json>
 - ...
-- https://arweave.net/manifestID/9999.json
+- <https://arweave.net/manifestID/9999.json>
 
 如果您不熟悉创建确定性URI，可以按照[本指南](/zh/guides/general/create-deterministic-metadata-with-turbo)获取详细步骤。此外，您可以在此处找到有关创建[集合](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)和Hybrid程序所需[资产](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)的说明。
 
@@ -366,6 +367,7 @@ import {
 })();
 
 ```
+
 {% /totem-accordion %}
 
 {% /totem %}
@@ -471,6 +473,7 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 ### 选择要捕获/释放的资产
 
 如何选择要捕获和释放的资产取决于您在创建托管时选择的路径：
+
 - **路径0**：如果路径设置为`0`，NFT元数据将在交换期间更新，因此您可以从托管中随机抓取一个资产，因为这无关紧要。
 - **路径1**：如果路径设置为`1`，NFT元数据在交换后保持不变，因此您可以让用户选择他们想要交换的特定NFT。
 

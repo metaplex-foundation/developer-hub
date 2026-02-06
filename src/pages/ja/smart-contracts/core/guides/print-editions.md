@@ -27,9 +27,13 @@ howToTools:
   - mpl-core SDK
 ---
 ## はじめに
+
 ### エディションとは？
+
 エディションは同じ「マスターエディション」のコピーです。概念を理解するために、物理的な絵画を思い浮かべると役立ちます：マスターエディションは最初の絵画で、エディション（プリントとも呼ばれる）はその絵画のコピーです。
+
 ### CoreでのEditions
+
 MPL Core Editionサポートはメインネットリリース後すぐに追加されました。Token Metadata Editionsとは異なり、エディション番号と供給量は強制されず、情報提供のみです。
 Coreでエディション概念を実現するために、2つの[プラグイン](/smart-contracts/core/plugins)が使用されます：Collectionの[Master Edition](/smart-contracts/core/plugins/master-edition)とAsset（プリント）の[Edition](/smart-contracts/core/plugins/edition)。階層は次のようになります：
 {% diagram %}
@@ -57,12 +61,15 @@ Assets
 {% edge from="master" to="asset2" /%}
 {% edge from="master" to="asset3" /%}
 {% /diagram %}
+
 ## Candy Machineを使用したEditionの作成
+
 Editionを作成・販売する最も簡単な方法は、Core Candy Machineを活用することです。
 以下のコードは、Master Edition CollectionとEditionをプリントするCandy Machineを作成します。
 {% dialect-switcher title="Edition GuardとMaster Edition Collectionを持つCandy Machineの作成" %}
 {% dialect title="JavaScript" id="js" %}
 まず、必要なすべての関数をインポートし、RPCとWalletでUmiをセットアップします：
+
 ```ts
 import {
   create,
@@ -84,8 +91,10 @@ const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
 const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
+
 このセットアップ後、[Master Editionプラグイン](/smart-contracts/core/plugins/master-edition)を持つCollectionを作成できます。`maxSupply`フィールドはプリントするEditionの数を決定します。プラグインの`name`と`uri`フィールドは、Collection名とuriに加えて使用できます。
 使いやすさのために、[Royaltyプラグイン](/smart-contracts/core/plugins/royalties)も追加します。
+
 ```ts
 const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
@@ -109,9 +118,12 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
+
 Collectionの作成後、`hiddenSettings`と`edition`ガードを使用してCandy Machineを作成できます。
+
 - `hiddenSettings`は、ミントされたすべてのAssetsに同じ、または類似の名前とメタデータを割り当てるために使用されます。`$ID$`変数を使用すると、ミント時にミントされたAssetのインデックスに置き換えられます。
 - `edition`ガードは、Assetsに[Editionプラグイン](/smart-contracts/core/plugins/edition)を追加するために使用されます。Edition番号はミントされたAssetごとに増加し、`editionStartOffset`の番号から始まります。
+
 ```ts
 // EditionsのNameとオフチェーンメタデータ
 const editionData = {
@@ -140,18 +152,23 @@ const createIx = await create(umi, {
 })
 await createIx.sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
 これで完了です！
 ユーザーはあなたのCandy MachineからEditionをミントできます。
+
 ## Core Candy MachineなしでEditionを作成
+
 {% callout type="note" %}
 MPL Core EditionsにはCore Candy Machineの使用を強く推奨します。Candy MachineはEditionsの作成と正しい番号付けを処理します。
 {% /callout %}
 Core Candy MachineなしでEditionを作成するには：
+
 1. [Master Edition](/smart-contracts/core/plugins/master-edition)プラグインを使用してCollectionを作成
 {% dialect-switcher title="Master EditionプラグインでMPL Core Collectionを作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
@@ -185,8 +202,10 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -229,11 +248,13 @@ pub async fn create_collection_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
 2. [Edition](/smart-contracts/core/plugins/edition)プラグインを持つAssetsを作成。プラグイン内の番号を増加させることを忘れないでください。
 {% dialect-switcher title="EditionプラグインでMPL Core Assetを作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
@@ -253,8 +274,10 @@ const result = create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -295,9 +318,12 @@ pub async fn create_asset_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 関連情報
+
 - [Candy Machineからミント](/core-candy-machine/mint)
 - [Master Editionプラグイン](/smart-contracts/core/plugins/master-edition)
 - [Editionプラグイン](/smart-contracts/core/plugins/edition)

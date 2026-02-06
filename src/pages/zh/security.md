@@ -8,7 +8,7 @@ description: 审计和漏洞报告方法。
 
 **请勿通过公开的GitHub Issue报告漏洞**。
 
-请发送电子邮件至security@metaplex.foundation。
+请发送电子邮件至<security@metaplex.foundation>。
 
 您应该在24-48小时内收到回复。如果因某些原因未收到回复，请通过电子邮件跟进以确认我们收到了您的原始消息。
 

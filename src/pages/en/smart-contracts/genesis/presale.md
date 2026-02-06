@@ -45,6 +45,7 @@ faqs:
 
 {% callout title="What You'll Learn" %}
 This guide covers:
+
 - How Presale pricing works (allocation + cap = price)
 - Setting up deposit windows and claim periods
 - Configuring deposit limits and cooldowns
@@ -81,6 +82,7 @@ tokens = deposit / price
 ```
 
 For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
+
 - Price = 100 SOL / 1,000,000 tokens = 0.0001 SOL per token
 - A 10 SOL deposit receives 100,000 tokens
 
@@ -650,18 +652,23 @@ if (deposit) {
 ## FAQ
 
 ### How is the token price calculated in a Presale?
+
 Price equals SOL cap divided by token allocation. For 1,000,000 tokens with a 100 SOL cap, the price is 0.0001 SOL per token.
 
 ### What happens if the SOL cap isn't reached?
+
 Users still receive tokens proportional to their deposits. If only 50 SOL is deposited against a 100 SOL cap, depositors receive 50% of allocated tokens.
 
 ### Can I set deposit limits per user?
+
 Yes. Use `minimumDepositAmount` for minimum per-transaction limits and `depositLimit` for maximum total deposit per user.
 
 ### What's the difference between Presale and Launch Pool?
+
 Presale has a fixed price determined by token allocation and SOL cap. Launch Pool discovers price organically based on total deposits.
 
 ### When should I use Presale vs Launch Pool?
+
 Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
 
 ## Glossary

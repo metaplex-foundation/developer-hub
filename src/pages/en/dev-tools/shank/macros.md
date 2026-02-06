@@ -30,6 +30,7 @@ This attribute allows overriding how Shank interprets a field's type when genera
 3. Fields with complex types needing simpler representations
 
 Supports two formats:
+
 - String literal: `#[idl_type("TypeName")]`
 - Direct type: `#[idl_type(TypeName)]`
 
@@ -99,6 +100,7 @@ Configures accounts for each instruction variant. The attribute follows this for
 ```
 
 Where:
+
 - `index`: The position of the account in the accounts array (0-based)
 - `mutability?`: Optional. Use `writable` if the account will be modified
 - `signer?`: Optional. Use `signer` if the account must sign the transaction

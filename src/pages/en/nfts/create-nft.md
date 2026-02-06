@@ -9,6 +9,7 @@ updated: '03-12-2025'
 Create an NFT using Metaplex Core on Solana. {% .lead %}
 
 ## What You'll Learn
+
 This guide shows you how to create an NFT with:
 
 - Custom name and metadata
@@ -44,4 +45,5 @@ Below you can find the minimum metadata that you need to upload. Additional fiel
 ```
 
 ## Plugins
+
 MPL Core Assets support the use of plugins at both the Collection and Asset levels. To create a Core Asset with a plugin you pass in the plugin type and its parameters into the `plugins` array arg during creation. You can find more information about plugins in the [Plugins Overview](/smart-contracts/core/plugins) page. In the context of NFTs like Profile Pictures the [Royalties plugin](/smart-contracts/core/plugins/royalties) is a common use case.

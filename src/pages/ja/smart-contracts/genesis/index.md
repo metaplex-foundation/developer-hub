@@ -34,6 +34,7 @@ faqs:
 **Genesis** は、Solana 上の**トークン生成イベント（TGE）**のための Metaplex スマートコントラクトです。トークンの作成、配布、資金収集のためのオンチェーン調整機能を備えた Presale、Launch Pool、オークションを構築できます。 {% .lead %}
 
 {% callout title="あなたに合ったパスを選択" %}
+
 - **Genesis が初めての方は？** [はじめに](/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
 - **構築する準備ができた方は？** [Launch Pool](/smart-contracts/genesis/launch-pool) または [Presale](/smart-contracts/genesis/presale) へ進みましょう
 - **SDK リファレンスが必要な方は？** [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) をご覧ください
@@ -123,21 +124,27 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 ## FAQ
 
 ### Genesis とは何ですか？
+
 Genesis は Solana 上のトークン生成イベント（TGE）のための Metaplex スマートコントラクトです。トークンの作成と配布を調整する Presale、Launch Pool、オークションのためのオンチェーンインフラを提供します。
 
 ### Genesis はどのようなローンチメカニズムに対応していますか？
+
 Genesis は3つのメカニズムに対応しています：**Launch Pool**（価格発見を伴う比例配分）、**Presale**（固定価格）、**Uniform Price Auction**（入札ベースのクリアリング価格）。
 
 ### Genesis の利用にかかる費用はいくらですか？
+
 Genesis は入金に対して {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料を徴収します。初期費用はかかりません。Solana のトランザクション手数料と調達資金に対するプロトコル手数料のみです。
 
 ### ローンチ後にトークン権限を取り消すことはできますか？
+
 はい。Genesis は `revokeMintAuthorityV2` および `revokeFreezeAuthorityV2` 命令を提供しており、権限を恒久的に取り消すことができます。
 
 ### Launch Pool と Presale の違いは何ですか？
+
 **Presale** は事前に固定価格が設定されます。**Launch Pool** は価格が自然に決定されます。預入額が多いほどトークンあたりの暗示価格が高くなり、全参加者への比例配分が行われます。
 
 ### 複数のローンチメカニズムを組み合わせることはできますか？
+
 はい。Genesis は bucket システムを採用しており、複数の Inflow bucket を追加し、トレジャリーやベスティング用の Outflow bucket を設定できます。
 
 ## 用語集

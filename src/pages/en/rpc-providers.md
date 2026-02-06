@@ -30,7 +30,7 @@ We will proceed to define some capabilities of RPC nodes and then present you wi
 
 Another distinguishing feature of RPCs is if they support the [Metaplex DAS API](/dev-tools/das-api). The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets. The API defines a set of methods that RPCs implement in order to provide asset data.
 
-For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible. 
+For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible.
 
 You can find out more about the DAS API in a [dedicated section](/dev-tools/das-api).
 
@@ -49,6 +49,7 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 {% /callout %}
 
 ### RPCs with DAS Support
+
 - [Extrnode](https://docs.extrnode.com/das_api/)
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
@@ -57,6 +58,7 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
 
 ### RPCs without DAS Support
+
 - [Alchemy](https://alchemy.com/?a=metaplex)
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
@@ -67,4 +69,5 @@ These lists are in alphabetical order. Please choose the RPC provider that best 
 - [Syndica](https://syndica.io/)
 
 ### Further Information
+
 If you have any questions or would like to further understand this topic, you are welcome to ask join the [Metaplex Discord](https://discord.gg/metaplex) Server.

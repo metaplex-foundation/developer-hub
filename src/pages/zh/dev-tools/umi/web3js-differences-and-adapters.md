@@ -44,6 +44,7 @@ import {
 生成公钥乍一看可能很相似，但包之间存在一些细微差异。**Web3Js** 使用大写 `P` 并需要 `new`，而 **Umi** 版本使用小写 `p`。
 
 ### Umi
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
 
@@ -52,6 +53,7 @@ const umiPublicKey = publicKey("11111111111111111111111111111111");
 ```
 
 ### Web3Js
+
 ```ts
 import { PublicKey } from '@solana/web3.js';
 
@@ -62,6 +64,7 @@ const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111"
 接下来，让我们看看如何使用适配器。
 
 ### 从 Web3Js 到 Umi
+
 ```ts
 import { PublicKey } from '@solana/web3.js';
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
@@ -74,6 +77,7 @@ const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
 ```
 
 ### 从 Umi 到 Web3Js
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
 import { toWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
@@ -90,6 +94,7 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 生成密钥对是 Web3Js 和 Umi 差异增加的地方。使用 **Web3Js**，您可以简单地使用 `Keypair.generate()`，但是在 **Umi** 中，您首先需要创建一个 Umi 实例，您将在大多数 Umi 和 Metaplex 相关操作中使用它。
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
@@ -105,6 +110,7 @@ const umiKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFil
 ```
 
 ### Web3Js
+
 ```ts
 import { Keypair } from '@solana/web3.js';
 
@@ -118,6 +124,7 @@ const web3jsKeypair = Keypair.fromSecretKey(new Uint8Array(walletFile));
 接下来，让我们看看如何使用适配器。
 
 ### 从 Umi 到 Web3Js
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -134,6 +141,7 @@ const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
 ```
 
 ### 从 Web3Js 到 Umi
+
 ```ts
 import { Keypair } from '@solana/web3.js';
 import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
@@ -152,6 +160,7 @@ const umiKeypair = fromWeb3JsKeypair(web3jsKeypair);
 对于大多数用例，处理单个指令无论如何都不是必需的，因为这可以使用其他辅助函数和交易构建器简化。
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -165,6 +174,7 @@ const umiInstructions = transferSol(umi, {...TransferParams}).getInstructions();
 ```
 
 ### Web3Js
+
 ```ts
 import { SystemProgram } from '@solana/web3.js';
 
@@ -175,6 +185,7 @@ const web3jsInstruction = SystemProgram.transfer({...TransferParams})
 接下来，让我们看看如何使用适配器。
 
 ### 从 Umi 到 Web3Js
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -191,6 +202,7 @@ const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
 ```
 
 ### 从 Web3Js 到 Umi
+
 ```ts
 import { SystemProgram } from '@solana/web3.js';
 import { fromWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
@@ -208,6 +220,7 @@ const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 ## 交易
 
 Solana 运行时支持两种交易版本：
+
 - 旧版交易：较旧的交易格式，没有额外优势
 - 0 / 版本化交易：添加了对地址查找表的支持
 
@@ -216,6 +229,7 @@ Solana 运行时支持两种交易版本：
 对于 `umi` 和 `umi-web3js-adapters`，我们添加了对两种交易类型的支持！
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -230,6 +244,7 @@ const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().bu
 ```
 
 ### Web3Js
+
 ```ts
 import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
@@ -254,6 +269,7 @@ const web3jsVersionedTransaction = new VersionedTransaction(messageV0);
 接下来，让我们看看如何使用适配器。
 
 ### 从 Umi 到 Web3Js
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -278,6 +294,7 @@ const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
 ```
 
 ### 从 Web3Js 到 Umi
+
 ```ts
 import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 import { fromWeb3JsLegacyTransaction, fromWeb3JsTransaction } from '@metaplex-foundation/umi-web3js-adapters';
@@ -297,12 +314,12 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
 ## 消息
 
 我们已经在版本化交易创建期间涵盖了创建消息。让我们再次回顾一下。
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
@@ -326,6 +343,7 @@ const umiMessage = umiVersionedTransaction.message
 ```
 
 ### Web3Js
+
 ```ts
 import { TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
@@ -346,6 +364,7 @@ const Web3JsMessage = new TransactionMessage({
 接下来，让我们看看如何使用适配器。
 
 ### 从 Umi 到 Web3Js
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { toWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';
@@ -361,6 +380,7 @@ const web3jsMessage = toWeb3JMessage(umiMessage);
 ```
 
 ### 从 Web3Js 到 Umi
+
 ```ts
 import { TransactionMessage } from '@solana/web3.js';
 import { fromWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';

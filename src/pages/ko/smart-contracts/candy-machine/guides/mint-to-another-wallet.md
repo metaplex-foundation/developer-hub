@@ -5,10 +5,13 @@ description: Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 방
 ---
 
 ## 개요
+
 이 가이드는 Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 방법을 설명합니다 - 에어드롭, 경품 또는 여러 수신자에게 NFT를 배포하는 일반적인 요구사항입니다.
 
 ## 사전 준비사항
+
 둘 중 하나
+
 - Solana와 NFT에 대한 기본적인 이해
 - 거래 수수료를 위한 자금이 있는 지갑
 
@@ -23,20 +26,25 @@ description: Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 방
 다른 지갑으로 NFT를 민팅하는 것은 에어드롭, 경품 또는 여러 수신자에게 NFT를 배포하는 데 특히 유용할 수 있습니다. 이 가이드는 Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 과정을 안내합니다. 민팅 프로세스를 시작하는 사람이 민팅 비용을 부담한다는 점에 유의해야 합니다. 따라서 수신자가 직접 NFT를 클레임하도록 하는 것이 종종 더 비용 효율적입니다.
 
 {% callout type="note" title="중요한 고려사항" %}
+
 - 다른 지갑으로 민팅하는 것은 비용이 많이 들 수 있습니다. 대신 클레임 메커니즘을 사용하는 것을 고려할 수 있습니다.
 - 가드가 있는 Candy Machine과 가드가 없는 Candy Machine에는 다른 도구를 사용할 수 있습니다. 가드 없이 민팅하는 것이 일반적으로 더 쉽습니다.
 {% /callout %}
 
 이 가이드에는 두 가지 접근 방식이 설명되어 있습니다:
+
 1. [sugar CLI](#using-sugar-cli)를 사용한 민팅
 2. [Javascript](#using-typescript-and-mpl-candy-machine)를 사용한 민팅
 
 ## Sugar CLI 사용
+
 Sugar CLI는 다른 지갑으로 NFT를 민팅하기 위한 두 가지 주요 명령을 제공합니다:
+
 1. `sugar mint` - *하나*의 특정 지갑으로 민팅
 2. `sugar airdrop` - *여러* 지갑으로 민팅
 
 ### `sugar mint`로 단일 수신자 민팅
+
 단일 수신자 지갑으로 NFT를 민팅하려면 다음 매개변수와 함께 `sugar mint` 명령을 사용하세요:
 
 - `--receiver <WALLET>`: 수신자의 지갑 주소를 지정
@@ -65,6 +73,7 @@ sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-m
 
 **예제**:
 이 에어드롭을 실행하려면 다음 명령을 사용할 수 있습니다
+
 ```sh
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
@@ -76,8 +85,8 @@ sugar airdrop --candy-machine 11111111111111111111111111111111
 Typescript를 사용하여 다른 지갑으로 민팅할 때 Candy Machine이 가드를 사용하는지 여부에 따라 두 가지 주요 접근 방식이 있습니다:
 
 ### 가드 없이 민팅
-가드가 없는 Candy Machine의 경우 `mintFromCandyMachineV2`를 사용하세요. 이 함수를 사용하면 수신자를 `nftOwner`로 직접 지정할 수 있습니다.
 
+가드가 없는 Candy Machine의 경우 `mintFromCandyMachineV2`를 사용하세요. 이 함수를 사용하면 수신자를 `nftOwner`로 직접 지정할 수 있습니다.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -112,6 +121,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="전체 코드 예제" %}
+
 ```js
 import {
   addConfigLines,
@@ -267,10 +277,12 @@ const RPC_ENDPOINT = "https://api.devnet.solana.com";
 })();
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### 가드와 함께 민팅
+
 가드가 있는 Candy Machine의 경우 `mintV2`를 사용하세요. 이 경우 먼저 `createMintWithAssociatedToken`을 사용하여 수신자를 위한 토큰 계정과 연결 토큰 계정을 생성해야 합니다. 이를 통해 수신자는 트랜잭션에 서명할 필요 없이 NFT를 받을 수 있습니다.
 
 ```js
@@ -298,6 +310,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="전체 코드 예제" %}
+
 ```js
 import {
   addConfigLines,
@@ -467,5 +480,6 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}

@@ -10,35 +10,36 @@ Metaplex Token Metadata 具有[链上集合](/zh/smart-contracts/token-metadata/
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// 不可变，一旦翻转，此元数据的所有销售都被视为二次销售。
-	pub primary_sale_happened: bool,
-	// 数据结构是否可变，默认不可变
-	pub is_mutable: bool,
-	/// 用于轻松计算版本的 nonce（如果存在）
-	pub edition_nonce: Option<u8>,
-	/// Token Standard 是确定性的，如果您调用 create master edition 调用并成功，
-	/// 它将从 SemiFungible 更改为 NonFungible。
-	pub token_standard: Option<TokenStandard>,
-	/// 由于我们无法轻松更改 Metadata，我们在末尾添加新的 DataV2 字段。
-	/// Collection
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // 不可变，一旦翻转，此元数据的所有销售都被视为二次销售。
+ pub primary_sale_happened: bool,
+ // 数据结构是否可变，默认不可变
+ pub is_mutable: bool,
+ /// 用于轻松计算版本的 nonce（如果存在）
+ pub edition_nonce: Option<u8>,
+ /// Token Standard 是确定性的，如果您调用 create master edition 调用并成功，
+ /// 它将从 SemiFungible 更改为 NonFungible。
+ pub token_standard: Option<TokenStandard>,
+ /// 由于我们无法轻松更改 Metadata，我们在末尾添加新的 DataV2 字段。
+ /// Collection
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // 集合是否已验证
-	pub key: Pubkey,    // 集合 NFT 的 SPL token mint 账户
+ pub verified: bool, // 集合是否已验证
+ pub key: Pubkey,    // 集合 NFT 的 SPL token mint 账户
 }
 ```
 
 然而，给定一个集合 mint 地址，在直接从链上读取时，找到属于该特定集合的所有 NFT 要困难得多。使用 [DAS](/zh/dev-tools/das-api) 有一种更优越的方法，还有两种直接从链上获取数据的基本方法。
 
 ## DAS API
+
 当使用[支持它的 RPC 提供商](/zh/rpc-providers#metaplex-das-api)时，使用 DAS 获取 mint 是更优越的方法。
 
 {% dialect-switcher title="getAssetByGroup 示例" %}
@@ -120,7 +121,7 @@ Rust `Option` 在 [Borsh](https://borsh.io/) 编码中用 0 表示 `None` 变体
 - 将 `metadata` 地址添加到 `Set` 以确保没有重复。
 
 - 一旦找到所有 `metadata` 地址，遍历它们并调用 `getAccountInfo` 以查找账户数据。
-    - 将账户数据反序列化为 Metadata 结构/对象，并从 `mint` 字段中找到 mint 地址。将 `mint` 地址添加到 Set。
-    - 这个最终的 Set 就是集合中所有项目的 mint 地址列表。
+  - 将账户数据反序列化为 Metadata 结构/对象，并从 `mint` 字段中找到 mint 地址。将 `mint` 地址添加到 Set。
+  - 这个最终的 Set 就是集合中所有项目的 mint 地址列表。
 
 交易爬取以获取集合成员的 Rust 和 TypeScript 示例代码可以在[这里](https://github.com/metaplex-foundation/get-collection)找到。

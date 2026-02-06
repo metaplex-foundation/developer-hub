@@ -30,6 +30,7 @@ pub struct Metadata {
 3. 需要更简单表示的复杂类型字段
 
 支持两种格式：
+
 - 字符串字面量：`#[idl_type("TypeName")]`
 - 直接类型：`#[idl_type(TypeName)]`
 
@@ -99,6 +100,7 @@ pub enum MyProgramInstruction {
 ```
 
 其中：
+
 - `index`: 账户在账户数组中的位置（从 0 开始）
 - `mutability?`: 可选。如果账户将被修改，使用 `writable`
 - `signer?`: 可选。如果账户必须签署交易，使用 `signer`

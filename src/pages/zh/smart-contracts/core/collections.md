@@ -41,32 +41,46 @@ faqs:
 ---
 本指南展示如何使用 Metaplex Core SDK 在 Solana 上**创建和管理 Core Collection**。Collection 将相关的 Asset 以共享身份和集合级别的元数据和插件组合在一起。 {% .lead %}
 {% callout title="学习内容" %}
+
 - 创建带有名称、URI 和可选插件的 Collection
 - 在创建时将 Asset 添加到 Collection
 - 获取和更新 Collection 元数据
 - 管理集合级别的插件（版税等）
 {% /callout %}
+
 ## 概要
+
 **Collection** 是将相关 Asset 分组的 Core 账户。它存储集合元数据（名称、图片、描述），并可以持有适用于集合中所有 Asset 的插件。
+
 - Collection 作为 Asset 组的"封面"
 - Asset 通过 `collection` 字段引用其 Collection
 - Collection 插件（如 Royalties）可以应用于所有成员 Asset
 - 创建 Collection 大约需要 0.0015 SOL
+
 ## 范围外
+
 Token Metadata Collection（使用 mpl-token-metadata）、压缩 NFT 集合（使用 Bubblegum）以及将现有集合迁移到 Core。
+
 ## 快速开始
+
 **跳转到：** [创建 Collection](#创建简单的-collection) · [带插件](#创建带插件的-collection) · [获取](#获取-collection) · [更新](#更新-collection)
+
 1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. 上传集合元数据 JSON 以获取 URI
 3. 调用 `createCollection(umi, { collection, name, uri })`
 4. 在创建 Asset 时传递 Collection 地址
+
 ## 前提条件
+
 - 配置了签名者和 RPC 连接的 **Umi**
 - 用于交易费用的 **SOL**（每个集合约 0.002 SOL）
 - 上传到 Arweave/IPFS 的包含集合图片的**元数据 JSON**
+
 ## 什么是 Collection？
+
 Collection 是属于同一系列或组的 Asset 组。为了将 Asset 分组，我们必须首先创建一个 Collection Asset，其目的是存储与该集合相关的任何元数据，如集合名称和集合图片。Collection Asset 作为您集合的封面，也可以存储集合范围的插件。
 可以从 Collection Asset 存储和访问的数据如下：
+
 | 账户            | 描述                                       |
 | --------------- | ------------------------------------------ |
 | key             | 账户密钥标识符                              |
@@ -75,11 +89,14 @@ Collection 是属于同一系列或组的 Asset 组。为了将 Asset 分组，�
 | uri             | 集合链下元数据的 URI                        |
 | num minted      | 集合中铸造的 Asset 数量                     |
 | current size    | 当前集合中的 Asset 数量                     |
+
 ## 创建 Collection
+
 要创建 Core Collection，您可以像这样使用 `CreateCollection` 指令：
 {% totem %}
 {% totem-accordion title="技术指令详情 - CreateCollectionV1" %}
 **指令账户列表**
+
 | 账户            | 描述                                        |
 | --------------- | ------------------------------------------ |
 | collection      | Core Asset 所属的 Collection               |
@@ -96,13 +113,18 @@ Collection 是属于同一系列或组的 Asset 组。为了将 Asset 分组，�
 链上指令的完整详细信息可以在 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30) 查看。
 {% /totem-accordion %}
 {% /totem %}
+
 ### 创建简单的 Collection
+
 以下代码片段创建一个没有插件或任何特殊功能的简单 Collection。
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
+
 ### 创建带插件的 Collection
+
 以下代码片段创建一个附加了 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties) 的 Collection。您可以按照[此处](/zh/smart-contracts/core/plugins)的说明附加其他插件。
 {% dialect-switcher title="创建带插件的 MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -132,8 +154,10 @@ await createCollection(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -179,12 +203,16 @@ pub async fn create_collection_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 获取 Collection
+
 要获取 Collection，可以使用以下函数：
 {% dialect-switcher title="获取 Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
 import { publicKey } from '@metaplex-foundation/umi'
@@ -192,8 +220,10 @@ const collectionId = publicKey('11111111111111111111111111111111')
 const collection = await fetchCollection(umi, collectionId)
 console.log(collection)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::Collection;
@@ -207,13 +237,17 @@ pub async fn fetch_collection() {
     print!("{:?}", collection)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 更新 Collection
+
 要更新 Core Collection 的数据，使用 `UpdateCollection` 指令。例如，您可以使用此指令更改集合的名称。
 {% totem %}
 {% totem-accordion title="技术指令详情 - UpdateCollectionV1" %}
 **指令账户列表**
+
 | 账户               | 描述                                        |
 | ------------------ | ------------------------------------------ |
 | collection         | Core Asset 所属的 Collection               |
@@ -234,6 +268,7 @@ pub async fn fetch_collection() {
 {% seperator h="6" /%}
 {% dialect-switcher title="更新 Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollection } from '@metaplex-foundation/mpl-core'
@@ -244,8 +279,10 @@ await updateCollection(umi, {
   uri: 'https://exmaple.com/new-uri',
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::instructions::UpdateCollectionV1Builder;
@@ -276,13 +313,17 @@ pub async fn update_collection() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 更新 Collection 插件
+
 如果您想更改附加到 Core Collection 的插件的行为，可以使用 `updateCollectionPlugin` 指令。
 {% totem %}
 {% totem-accordion title="技术指令详情 - UpdateCollectionPluginV1" %}
 **指令账户列表**
+
 | 账户          | 描述                                        |
 | ------------- | ------------------------------------------ |
 | collection    | Core Asset 所属的 Collection               |
@@ -301,6 +342,7 @@ pub async fn update_collection() {
 {% seperator h="6" /%}
 {% dialect-switcher title="更新 Collection 插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -316,8 +358,10 @@ await updateCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -358,57 +402,89 @@ pub async fn update_collection_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 常见错误
+
 ### `Collection account already exists`
+
 Collection 密钥对已被使用。生成一个新的签名者：
+
 ```ts
 const collectionSigner = generateSigner(umi) // 必须是唯一的
 ```
+
 ### `Authority mismatch`
+
 您不是 Collection 的 Update Authority。检查 Collection 的 `updateAuthority` 字段是否与您的签名者匹配。
+
 ### `Insufficient funds`
+
 您的支付钱包需要约 0.002 SOL。使用以下方式添加资金：
+
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
+
 ## 注意事项
+
 - 创建时 `collection` 参数必须是**新的密钥对**
 - Collection 插件会被 Asset 继承，除非在 Asset 级别被覆盖
 - 使用 `fetchCollection` 在创建后验证 Collection 状态
 - `numMinted` 计数器跟踪曾经创建的 Asset 总数（不是当前大小）
+
 ## 快速参考
+
 ### 程序 ID
+
 | 网络 | 地址 |
 |---------|---------|
 | Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 | Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+
 ### 最小代码
+
 ```ts {% title="minimal-collection.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/mpl-core'
 const collection = generateSigner(umi)
 await createCollection(umi, { collection, name: 'My Collection', uri: 'https://...' }).sendAndConfirm(umi)
 ```
+
 ### 成本明细
+
 | 项目 | 成本 |
 |------|------|
 | Collection 账户租金 | 约 0.0015 SOL |
 | 交易费用 | 约 0.000005 SOL |
 | **总计** | **约 0.002 SOL** |
+
 ## 常见问题
+
 ### Collection 和 Asset 有什么区别？
+
 Collection 是将 Asset 分组的容器。它有自己的元数据（名称、图片），但不能像 Asset 那样被拥有或转移。Asset 是用户实际拥有的 NFT。
+
 ### 我可以将现有的 Asset 添加到 Collection 吗？
+
 可以，使用带有 `newCollection` 参数的 `update` 指令。Asset 的 Update Authority 必须有权限将其添加到目标 Collection。
+
 ### 我的 NFT 需要 Collection 吗？
+
 不需要。Asset 可以独立存在而不需要 Collection。但是，Collection 可以实现集合级别的版税、更容易的发现性和批量操作。
+
 ### 我可以从 Collection 中移除 Asset 吗？
+
 可以，使用 `update` 指令来更改 Asset 的 Collection。您需要在 Asset 和 Collection 上都有适当的权限。
+
 ### 如果删除 Collection 会发生什么？
+
 Collection 在包含 Asset 时不能被删除。首先移除所有 Asset，然后才能关闭 Collection 账户。
+
 ## 术语表
+
 | 术语 | 定义 |
 |------|------------|
 | **Collection** | 在共享元数据下分组相关 Asset 的 Core 账户 |

@@ -9,6 +9,7 @@ description: Bubblegum에서 NFT 데이터가 저장되는 방식에 대해 자�
 Metaplex는 DAS API의 [참조 구현](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)을 만들었으며, 일부 RPC 제공업체는 특정 구현을 위해 이 코드의 일부 또는 전부를 사용하는 반면 다른 RPC 제공업체는 자체적으로 작성했습니다. Metaplex DAS API를 지원하는 다른 RPC 제공업체 목록은 ["Metaplex DAS API RPC"](/ko/rpc-providers) 페이지를 참조하세요.
 
 DAS API의 Metaplex 참조 구현에는 다음 주요 항목이 포함됩니다:
+
 * Solana 무투표 검증자 - 이 검증자는 합의하에 검증자 원장과 계정 데이터에만 안전하게 액세스하도록 구성됩니다.
 * Geyser 플러그인 - 플러그인을 "Plerkle"라고 하며 검증자에서 실행됩니다. 플러그인은 계정 업데이트, 슬롯 상태 업데이트, 트랜잭션 또는 블록 메타데이터 업데이트가 있을 때마다 알림을 받습니다. cNFT 인덱싱의 목적을 위해 플러그인의 `notify_transaction` 메서드는 Bubblegum이나 spl-account-compression 트랜잭션이 검증자에서 보일 때마다 트랜잭션 데이터를 제공하는 데 사용됩니다. 실제로 이러한 트랜잭션은 이벤트를 spl-noop 명령어 데이터로 전환하여 로그 잘림을 방지하기 위해 spl-account-compression과 Bubblegum에서 사용되는 spl-noop("작업 없음") 프로그램에서 오는 것입니다.
 * Redis 클러스터 - Redis 스트림은 각 업데이트 유형(계정, 트랜잭션 등)에 대한 큐로 사용됩니다. Geyser 플러그인은 이러한 스트림에 들어가는 데이터의 생산자입니다. Geyser 플러그인은 Flatbuffers 프로토콜을 사용하는 Plerkle 직렬화 형식으로 데이터를 변환한 다음 직렬화된 레코드를 적절한 Redis 데이터 스트림에 넣습니다.

@@ -7,9 +7,11 @@ description: Token Metadata Rust SDKを使用してNFTの開発を始めまし�
 Rust開発者の場合、Token Metadataプログラムとやり取りするためにRustクライアントSDKも使用できます。MetaplexはRust専用のクライアントクレートを提供しており、これは依存関係が最小限の軽量なクレートです。
 
 はじめるために、プロジェクトに`mpl-token-metadata`依存関係を追加する必要があります。プロジェクトのルートフォルダのターミナルから：
+
 ```
 cargo add mpl-token-metadata
 ```
+
 これにより、プロジェクトの依存関係リストにクレートの最新バージョンが追加されます。
 
 {% callout %}
@@ -358,6 +360,7 @@ impl Metadata {
 ```rust
 let (metadata_pubkey, _) = Metadata::find_pda(mint);
 ```
+
 {% /totem-prose %}
 {% totem-prose %}
 

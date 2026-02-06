@@ -5,10 +5,13 @@ description: A developer guide on how to mint NFTs from a Candy Machine to a dif
 ---
 
 ## Overview
+
 This guide explains how to mint NFTs from a Candy Machine to different wallet addresses - a common requirement for airdrops, giveaways, or distributing NFTs to multiple recipients.
 
 ## Prerequisites
+
 Either
+
 - Basic understanding of Solana and NFTs
 - A funded wallet for transaction fees
 
@@ -23,20 +26,25 @@ Or
 Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
 
 {% callout type="note" title="Important Consideration" %}
+
 - Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead.
 - There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
 {% /callout %}
 
 There are two approaches described in this guide:
+
 1. Mint using [sugar CLI](#using-sugar-cli)
 2. Mint using [Javascript](#using-typescript-and-mpl-candy-machine)
 
 ## Using Sugar CLI
+
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
+
 1. `sugar mint` to mint to *one* specific wallet
-2. `sugar airdrop` to mint to *multiple* wallets 
+2. `sugar airdrop` to mint to *multiple* wallets
 
 ### Single Recipient Minting with `sugar mint`
+
 To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
 
 - `--receiver <WALLET>`: Specify the recipient's wallet address
@@ -61,11 +69,12 @@ To mint NFTs to multiple wallets in a single command `sugar airdrop` can be used
 }
 ```
 
-By default sugar expects this file to be called `airdrop_list.json`. This default name can be changed with 
+By default sugar expects this file to be called `airdrop_list.json`. This default name can be changed with
 `--airdrop-list`.
 
 **Example**:
 To execute this airdrop the following command can be used
+
 ```sh
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
@@ -77,8 +86,8 @@ In this section the code Snippets for mint functions in Javascript are shown. Bo
 When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
 
 ### Mint without guards
-For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
+For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -113,6 +122,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="Full Code Example" %}
+
 ```js
 import {
   addConfigLines,
@@ -268,10 +278,12 @@ const RPC_ENDPOINT = "https://api.devnet.solana.com";
 })();
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### Mint with Guards
+
 For Candy Machines with guards, use `mintV2`. In this case, you'll need to first create the Token Account and Associated Token Account for the recipient using `createMintWithAssociatedToken`. This allows the recipient to receive the NFT without having to sign the transaction.
 
 ```js
@@ -299,6 +311,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="Full Code Example" %}
+
 ```js
 import {
   addConfigLines,
@@ -468,5 +481,6 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %

@@ -185,7 +185,9 @@ Also note that you may send a transaction without waiting for it to be confirmed
 ```ts
 const signature = await builder.send(umi)
 ```
+
 Or use `sendAndConfirm()` to wait for the transaction finalization for you. To do that, add `{confirm: {commitment: 'finalized'}}` as an "options" arg.
+
 ```ts
 const confirmResult = await builder.sendAndConfirm(umi, {confirm: {commitment: 'finalized'}})
 ```
@@ -243,7 +245,7 @@ console.log(
 
 ### Convert human readable (base58) transaction signature to Uint8Array
 
-In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script. 
+In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script.
 
 This can be done using the `base58.deserialize` method.
 

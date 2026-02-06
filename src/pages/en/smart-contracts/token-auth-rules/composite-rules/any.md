@@ -5,9 +5,11 @@ description: The Any composite rule
 ---
 
 ## Any
+
 This Rule operates as a logical OR on all Rules contained by an **Any** Rule. Only one contained Rule must evaluate to true in order for the **Any** Rule to evaluate to true.
 
 ### Fields
+
 * **rules** - A list of contained Rules
 
 ```js

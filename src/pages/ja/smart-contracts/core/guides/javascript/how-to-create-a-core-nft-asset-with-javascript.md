@@ -37,33 +37,49 @@ howToTools:
 {% callout title="Assetとは？" %}
 SolanaのTokenプログラムなどの既存のAssetプログラムとは異なり、Metaplex CoreとCore NFT Assets（Core NFT Assetsとも呼ばれる）は、Associated Token Accountsのような複数のアカウントに依存しません。代わりに、Core NFT Assetsはウォレットと「ミント」アカウント間の関係をアセット自体の中に保存します。
 {% /callout %}
+
 ## 前提条件
+
 - お好みのコードエディタ（**Visual Studio Code**を推奨）
 - Node **18.x.x**以上。
+
 ## 初期設定
+
 このガイドでは、単一ファイルスクリプトに基づいてJavascriptでNFT Core Assetを作成する方法を教えます。ニーズに合わせて関数を変更・移動する必要があるかもしれません。
+
 ### 初期化
+
 お好みのパッケージマネージャー（npm、yarn、pnpm、bun）で新しいプロジェクトを初期化し（オプション）、プロンプトが表示されたら必要な詳細を入力します。
+
 ```js
 npm init
 ```
+
 ### 必要なパッケージ
+
 このガイドに必要なパッケージをインストールします。
 {% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
+
 ```js
 npm i @metaplex-foundation/umi
 ```
+
 ```js
 npm i @metaplex-foundation/umi-bundle-defaults
 ```
+
 ```js
 npm i @metaplex-foundation/mpl-core
 ```
+
 ```js
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
+
 ### インポートとラッパー関数
+
 ここでは、このガイドに必要なすべてのインポートを定義し、すべてのコードを実行するラッパー関数を作成します。
+
 ```ts
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
 import {
@@ -88,11 +104,14 @@ const createNft = async () => {
 // ラッパー関数を実行
 createNft()
 ```
+
 ## Umiの設定
+
 Umiを設定する際、さまざまなソースからキーペア/ウォレットを使用または生成できます。テスト用に新しいウォレットを作成したり、ファイルシステムから既存のウォレットをインポートしたり、ウェブサイト/dAppを作成する場合は`walletAdapter`を使用できます。
 **注意**: この例では`generatedSigner()`でUmiを設定しますが、以下のすべての設定方法を見つけることができます！
 {% totem %}
 {% totem-accordion title="新しいウォレットで" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -109,8 +128,10 @@ umi.use(signerIdentity(signer))
 console.log('identityに1 SOLをエアドロップ中')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="既存のウォレットで" %}
+
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -131,8 +152,10 @@ let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 // キーペアをumiに読み込み
 umi.use(keypairIdentity(umiSigner));
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="Wallet Adapterで" %}
+
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -142,14 +165,20 @@ const umi = createUmi('https://api.devnet.solana.com')
 // Wallet AdapterをUmiに登録
 .use(walletAdapterIdentity(wallet))
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 **注意**: `walletAdapter`セクションは、`walletAdapter`がすでにインストールされセットアップされていることを前提として、Umiに接続するために必要なコードのみを提供します。包括的なガイドについては、[こちら](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください。
+
 ## Assetのメタデータの作成
+
 ウォレットやExplorerでAssetの認識可能な画像を表示するには、メタデータを保存するURIを作成する必要があります！
+
 ### 画像のアップロード
+
 Umiには、`Arweave`、`NftStorage`、`AWS`、`ShdwDrive`などのストレージソリューションにアップロードできるダウンロード可能なストレージプラグインが付属しています。このガイドでは、Arweaveにコンテンツを保存する`irysUploader()`プラグインを使用します。
 この例では、Irysを使用してArweaveにアップロードするローカルアプローチを使用します。ブラウザから別のストレージプロバイダーにファイルをアップロードしたい場合は、別のアプローチが必要です。ブラウザシナリオでは`fs`のインポートと使用は機能しません。
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -178,10 +207,13 @@ const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
 })
 console.log(imageUri[0])
 ```
+
 ### メタデータのアップロード
+
 有効で動作する画像URIができたら、アセットのメタデータの作成を開始できます。
 ファンジブルトークンのオフチェーンメタデータの標準は以下の通りです。これはJavascript内のオブジェクト`{}`に記述するか、`metadata.json`ファイルに保存する必要があります。
 JavaScriptオブジェクトアプローチを見ていきます。
+
 ```ts
 const metadata = {
   name: 'My NFT',
@@ -209,7 +241,9 @@ const metadata = {
   },
 }
 ```
+
 ここのフィールドには以下が含まれます：
+
 | フィールド    | 説明                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name          | NFTの名前。                                                                                                                                                                     |
@@ -220,16 +254,21 @@ const metadata = {
 | attributes    | `{trait_type: value, "value": "value1"}`のオブジェクトを使用                                                                                                                                |
 | properties    | `{uri: string, type: mimeType}`の`[] array`を取る`files`フィールドを含みます。また、`image`、`audio`、`video`、`vfx`、`html`に設定できるカテゴリフィールドも含みます |
 メタデータを作成したら、Collectionにアタッチするためのuriを取得するためにJSONファイルとしてアップロードする必要があります。これを行うには、Umiの`uploadJson()`関数を使用します：
+
 ```js
 // Umiの`uploadJson()`関数を呼び出してIrys経由でArweaveにメタデータをアップロード
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
+
 この関数は、アップロード前にJavaScriptオブジェクトを自動的にJSONに変換します。
 これで、エラーがスローされなければ、`metadataUri`にJSONファイルのURIが最終的に保存されているはずです。
+
 ### NFT Core Assetのミント
+
 ここから、`@metaplex-foundation/mpl-core`パッケージの`create`関数を使用してCore NFT Assetを作成できます。
+
 ```ts
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -239,7 +278,9 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
+
 そして、以下のように詳細をログ出力します：
+
 ```ts
   // 署名とトランザクションとNFTへのリンクをログ出力
   console.log('\nNFT Created')
@@ -249,10 +290,13 @@ const signature = base58.deserialize(tx.signature)[0]
   console.log('View NFT on Metaplex Explorer')
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 ```
+
 ### 追加アクション
+
 続ける前に、`FreezeDelegate`プラグインや`AppData`外部プラグインなど、プラグインや外部プラグインがすでに含まれたアセットを作成したい場合はどうすればよいでしょうか？以下にその方法を示します。
 `create()`命令は、`plugins`フィールドを通じて通常のプラグインと外部プラグインの両方の追加をサポートしています。特定のプラグインに必要なすべてのフィールドを簡単に追加するだけで、すべてが命令によって処理されます。
 以下はその方法の例です：
+
 ```typescript
 const asset = generateSigner(umi)
 const tx = await create(umi, {
@@ -274,4 +318,5 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
+
 **注意**: 使用するフィールドとプラグインがわからない場合は、[ドキュメント](/smart-contracts/core/plugins)を参照してください！

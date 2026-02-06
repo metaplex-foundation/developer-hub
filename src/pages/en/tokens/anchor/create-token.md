@@ -11,6 +11,7 @@ This guide demonstrates how to create a fungible token with metadata on Solana u
 {% callout title="What You'll Build" %}
 
 A single Anchor instruction that:
+
 - Creates a new SPL token mint
 - Creates the associated token account for the payer
 - Creates a metadata account with name, symbol, and URI
@@ -270,6 +271,7 @@ pub struct CreateToken<'info> {
 ```
 
 **Account Types:**
+
 - The `#[instruction(...)]` attribute allows using instruction arguments (like `decimals`) in account constraints
 - `mint` uses Anchor's `init` constraint with `mint::decimals = decimals` to create the token mint with the specified decimal places
 - `token_account` is initialized as an associated token account using `associated_token::` helpers
@@ -342,6 +344,7 @@ pub fn create_token(
 ```
 
 The function performs two Cross-Program Invocations:
+
 1. `create_metadata_accounts_v3` (lines 14-40) - Creates and initializes the metadata account with name, symbol, and URI
 2. `mint_to` (lines 43-54) - Mints the specified amount to the payer's token account
 
@@ -442,6 +445,7 @@ describe("anchor-spl-token", () => {
 ```
 
 **Key Points:**
+
 - The metadata account PDA is derived using seeds: `["metadata", TOKEN_METADATA_PROGRAM_ID, mint_pubkey]` (lines 29-36)
 - The associated token account is derived using `getAssociatedTokenAddressSync` (lines 39-42)
 - The mint keypair must be passed as a signer since it's being initialized
@@ -564,6 +568,7 @@ anchor-spl = { version = "0.32.1", features = ["token", "metadata", "associated_
 ## FAQ
 
 {% callout title="Terminology" %}
+
 - **Fungible token:** `decimals >= 0`, unlimited supply potential
 - **NFT:** `decimals = 0`, `supply = 1`, plus Master Edition account
 - **Token Metadata:** Metaplex program used for both fungible tokens and NFTs
@@ -594,6 +599,7 @@ The local Solana test validator starts with a clean state and doesn't include an
 ### Can I use this code to create an NFT?
 
 Yes, with modifications:
+
 - Set `mint::decimals = 0` (NFTs are indivisible)
 - Mint exactly 1 token
 - Remove mint authority after minting (so no more can be created)
@@ -602,6 +608,7 @@ Yes, with modifications:
 ### How much does it cost to create a token on Solana?
 
 Creating a token requires rent for three accounts:
+
 - Mint account: ~0.00145 SOL
 - Token account: ~0.00203 SOL
 - Metadata account: ~0.01 SOL
@@ -611,6 +618,7 @@ Total: approximately 0.015-0.02 SOL (varies with rent prices).
 ### What's the difference between Anchor and native Solana Rust?
 
 Anchor is a framework that simplifies Solana development by:
+
 - Auto-generating account serialization/deserialization
 - Providing declarative account validation with macros
 - Generating TypeScript clients automatically

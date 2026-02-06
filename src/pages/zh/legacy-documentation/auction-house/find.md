@@ -110,6 +110,7 @@ const nft = await metaplex
 {% /dialect-switcher %}
 
 ### 按交易状态查找
+
 以下是按相应交易状态 PDA 账户查找出价、列表和销售的代码片段。
 
 {% dialect-switcher title="JS SDK" %}

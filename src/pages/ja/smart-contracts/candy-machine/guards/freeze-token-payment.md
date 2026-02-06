@@ -60,7 +60,6 @@ _OR at the end of the freeze period._
 {% node #thawed-NFT-bg1 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
 {% node #thawed-NFT label="Thawed NFT" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -76,6 +75,7 @@ _When all NFTs have been thawed._
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
+
 ## ガード設定
 
 Freeze Token Paymentガードには以下の設定が含まれます：

@@ -54,11 +54,10 @@ Owner: System Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
 
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
-Transfers 
+Transfers
 
 n Asset(s) from
 
@@ -80,8 +79,8 @@ this collection
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -134,6 +133,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Mint Settings
 
 The Asset Payment guard contains the following Mint Settings:
+
 - **[Asset Address]**: An array of the Assets to pay with. These must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used for payment.
 - **Destination**: The address of the wallet that will receive all Assets.

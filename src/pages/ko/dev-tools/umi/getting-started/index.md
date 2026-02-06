@@ -75,6 +75,7 @@ npm i @metaplex-foundation/umi-bundle-tests
 ## Umi 기본사항
 
 이 섹션에서는 Umi를 시작하는 데 필요한 기본 단계를 다룹니다:
+
 - [Umi 생성 및 RPC 연결](/ko/dev-tools/umi/getting-started#connecting-to-an-rpc)
 - [지갑 연결](/ko/dev-tools/umi/getting-started#connecting-a-wallet)
 - [프로그램 및 클라이언트 등록](/ko/dev-tools/umi/getting-started#registering-programs-and-clients)

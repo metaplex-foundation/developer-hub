@@ -36,7 +36,6 @@ The minting process involves three steps, that you may or may not have to execut
 
 To mint additional tokens, you must **be the mint authority** - Only the wallet designated as the mint authority can mint new tokens
 
-
 ## Important Notes
 
 - Depending on the tool you are using, you may or may not have to account for decimals. The `amount` should account for decimals (e.g., for 9 decimals, minting 1 token requires `amount: 1_000_000_000`)

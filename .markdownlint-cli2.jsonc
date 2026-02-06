@@ -1,0 +1,48 @@
+{
+  // Markdownlint configuration for Metaplex Developer Hub
+  // Docs: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+  "config": {
+    // Disable line length — docs have long URLs, tables, and code
+    "MD013": false,
+
+    // Disable first-line heading — files start with frontmatter (---)
+    "MD041": false,
+
+    // Disable inline HTML — Markdoc tags ({% %}) trigger this
+    "MD033": false,
+
+    // Disable link fragment validation — doesn't understand Markdoc links
+    "MD051": false,
+
+    // Disable table column style — too strict for translated docs
+    "MD060": false,
+
+    // Disable duplicate heading check — docs reuse headings (e.g. NFT/pNFT sections)
+    "MD024": false,
+
+    // Disable emphasis-as-heading — docs use bold text as sub-headings intentionally
+    "MD036": false,
+
+    // Disable blanks-around-lists — conflicts with Markdoc tag patterns
+    "MD032": false,
+
+    // Disable table pipe style — translated docs have inconsistent pipe formatting
+    "MD055": false,
+
+    // Disable table column count — false positives from Markdoc table syntax
+    "MD056": false,
+
+    // Disable code block style — mixed fenced/indented is intentional with Markdoc
+    "MD046": false,
+
+    // Disable blanks around fences — Markdoc tags break this rule
+    "MD031": false
+  },
+
+  // Ignore auto-generated files
+  "ignores": [
+    "node_modules",
+    ".next",
+    "public"
+  ]
+}

@@ -19,11 +19,13 @@ programmingLanguage:
   - Rust
 ---
 ## 概要
+
 Freeze Executeプラグインは、Assetの Executeライフサイクルイベントをフリーズできる`Owner Managed`プラグインです。フリーズされると、AssetはそのAsset Signer PDAを通じて任意の命令を実行できなくなり、フリーズが解除されるまですべてのexecute操作を効果的にブロックします。
 {% callout type="warning" %}
 **重要**: これはOwner Managedプラグインであるため、Assetが新しいオーナーに転送された後、authorityは保持されません。新しいオーナーが以前のauthorityにプラグインの`freeze`ステータスを変更できるようにしたい場合は、authorityを再追加する必要があります。
 {% /callout %}
 Freeze Executeプラグインは、以下のようなシナリオで特に有用です：
+
 - **Backed NFT**: 基礎資産（SOL、トークン）の所有権を表すNFTをロックし、不正な引き出しを防止
 - **エスクローレスアセット管理**: 所有権を移転せずに金融操作に関与している間アセットをフリーズ
 - **ステーキングプロトコル**: 所有権を維持しながらステーキング期間中のアセット実行を防止
@@ -31,20 +33,28 @@ Freeze Executeプラグインは、以下のようなシナリオで特に有用
 - **ガバナンス制御**: ガバナンスや投票に関与するアセットにフリーズメカニズムを実装
 - **アセットレンタル**: レンタル中のアセットの実行を防止
 - **担保管理**: DeFiプロトコルで担保として使用されるアセットをロック
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ## 引数
+
 | 引数    | 値 |
 | ------ | ----- |
 | frozen | bool  |
+
 ## 関数
+
 ### AssetへのFreeze Executeプラグインの追加
+
 `addPlugin`コマンドは、AssetにFreeze Executeプラグインを追加します。このプラグインにより、AssetのExecute機能をフリーズし、任意の命令の実行を防ぐことができます。
 {% dialect-switcher title="MPL Core AssetへのFreeze Executeプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -58,8 +68,10 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -69,8 +81,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -103,12 +117,16 @@ pub async fn add_freeze_execute_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Freeze Executeプラグインを持つAssetの作成
+
 Asset作成時にFreeze Executeプラグインを追加することもできます：
 {% dialect-switcher title="Freeze Executeプラグインを持つAssetの作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
@@ -131,12 +149,16 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Freeze Executeプラグインを持つCollectionの作成
+
 Freeze ExecuteプラグインはCollectionにも適用できます：
 {% dialect-switcher title="Freeze Executeプラグインを持つCollectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection, mplCore } from '@metaplex-foundation/mpl-core'
@@ -152,12 +174,16 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Execute操作のフリーズ
+
 `updatePlugin`コマンドを使用して、AssetのExecute機能をフリーズし、フリーズ解除されるまで任意の命令の実行を防ぐことができます。
 {% dialect-switcher title="MPL Core AssetのExecute操作のフリーズ" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -170,8 +196,10 @@ import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -183,8 +211,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: true }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -221,12 +251,16 @@ pub async fn freeze_execute_operations() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Execute操作のフリーズ解除
+
 `updatePlugin`コマンドを使用して、AssetのExecute機能のフリーズを解除し、任意の命令を実行する能力を復元することもできます。
 {% dialect-switcher title="MPL Core AssetのExecute操作のフリーズ解除" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -239,8 +273,10 @@ import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -252,8 +288,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -290,15 +328,20 @@ pub async fn unfreeze_execute_operations() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## プラグインAuthority
+
 Freeze Executeプラグインは、execute操作のフリーズ/フリーズ解除を制御できる人を決定するために、さまざまなauthorityタイプをサポートしています：
+
 - **Owner Authority**（デフォルト）: アセットオーナーのみがフリーズ/フリーズ解除可能
 - **Delegate Authority**: 特定のアドレスにフリーズを制御する権限をデリゲート可能
 - **Update Authority**: アセットのupdate authorityがフリーズを制御可能（ただし明示的にデリゲートされた場合のみ）
 {% dialect-switcher title="プラグインAuthorityの設定" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from "@metaplex-foundation/umi";
 import { create, mplCore } from "@metaplex-foundation/mpl-core";
@@ -321,9 +364,12 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
   }).sendAndConfirm(umi);
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 重要な注意事項
+
 - `frozen`フィールドが`true`に設定されると、すべてのexecute操作がブロックされます
 - **デフォルトauthority**: アセットオーナーがデフォルトでプラグインを制御します
 - **Authorityデリゲーション**: 現在のauthorityのみがexecute機能をフリーズ/フリーズ解除できます
@@ -331,10 +377,13 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - フリーズ中はプラグインを削除できません
 - フリーズ中はauthorityを再割り当てできません
 - プラグインは[Execute命令](/smart-contracts/core/execute-asset-signing)システムと連携します
+
 ## ユースケース例: Backed NFT
+
 Freeze Executeプラグインの一般的なユースケースは、NFTが基礎資産（SOLやトークンなど）の所有権を表し、execute命令を通じて引き出し可能な「backed NFT」を作成することです。プラグインにより、これらのexecute操作を一時的にフリーズできます。
 {% dialect-switcher title="Backed NFTの例" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   generateSigner,
@@ -407,5 +456,6 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
   }).sendAndConfirm(umi);
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

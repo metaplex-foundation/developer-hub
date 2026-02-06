@@ -136,6 +136,7 @@ mintV1(umi, {
 _Mint Limit 守卫不支持 route 指令。_
 
 ## MintLimit 账户
+
 当使用 `MintLimit` 守卫时，会为每个钱包、CandyMachine 和 `id` 组合创建一个 `MintCounter` 账户。出于验证目的，可以这样获取它：
 
 ```js

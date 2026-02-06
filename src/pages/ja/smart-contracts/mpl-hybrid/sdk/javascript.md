@@ -18,9 +18,7 @@ npm install @metaplex-foundation/mpl-hybrid
 
 ## Umiセットアップ
 
-
 Metaplex Javascript SDKとやり取りするには`umi`インスタンスが必要です。まだ`umi`インスタンスを設定・構成していない場合は、[Umiスタートガイド](/ja/dev-tools/umi/getting-started)ページをご覧ください。
-
 
 `umi`インスタンスの初期化中に、以下を使用してmpl-hybridパッケージを`umi`に追加できます
 
@@ -29,6 +27,7 @@ Metaplex Javascript SDKとやり取りするには`umi`インスタンスが必�
 ```
 
 `mplHybrid()`パッケージはumiインスタンス作成のどこにでも追加できます。
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplHybrid } from '@metaplex-foundation/mpl-hybrid'

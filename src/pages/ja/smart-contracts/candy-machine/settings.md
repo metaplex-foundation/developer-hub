@@ -173,18 +173,18 @@ const candyMachineSettings = {
 
 - `1000`アイテムを含む。
 - 各アイテムの名前は「My NFT Project #X」で、XはアイテムのインデックスでIから開始。
-- 各アイテムのJSONメタデータはArweaveにアップロードされているため、URIは「https://arweave.net/」で始まり、最大43文字の一意の識別子で終わる。
+- 各アイテムのJSONメタデータはArweaveにアップロードされているため、URIは「<https://arweave.net/」で始まり、最大43文字の一意の識別子で終わる。>
 
 この例では、プレフィックスなしでは以下のようになります：
 
 - 名前長 = 20。「My NFT Project #」で16文字、最高の数字「1000」で4文字。
-- URI長 = 63。「https://arweave.net/」で20文字、一意の識別子で43文字。
+- URI長 = 63。「<https://arweave.net/」で20文字、一意の識別子で43文字。>
 
 1000アイテムを挿入する際、アイテム保存だけで合計83,000文字が必要になります。しかし、プレフィックスを使用すれば、キャンディマシンの作成に必要なスペース、そしてブロックチェーンでの作成コストを大幅に削減できます。
 
 - 名前プレフィックス = 「My NFT Project #」
 - 名前長 = 4
-- URIプレフィックス = 「https://arweave.net/」
+- URIプレフィックス = 「<https://arweave.net/」>
 - URI長 = 43
 
 1000アイテムで、アイテム保存に必要な文字数は47,000文字のみになります。
@@ -198,7 +198,7 @@ const candyMachineSettings = {
 
 - 名前プレフィックス = 「My NFT Project #$ID+1$」
 - 名前長 = 0
-- URIプレフィックス = 「https://arweave.net/」
+- URIプレフィックス = 「<https://arweave.net/」>
 - URI長 = 43
 
 そうです、**名前長が0になり**、必要な文字数を43,000文字まで削減しました。
@@ -253,7 +253,6 @@ const candyMachineSettings = {
 
 {% dialect-switcher title="隠し設定の設定" %}
 {% dialect title="JavaScript" id="js" %}
-
 
 ハッシュを計算するために、以下の関数を使用できます：
 

@@ -30,21 +30,30 @@ faqs:
 ---
 **Update Delegateプラグイン**は、追加のアドレスに更新権限を付与できます。サードパーティがプライマリupdate authorityでなくてもAssetメタデータを変更する必要がある場合に便利です。 {% .lead %}
 {% callout title="学べること" %}
+
 - AssetsとCollectionsにUpdate Delegateプラグインを追加
 - 追加のアドレスに更新権限を付与
 - 追加デリゲートができることとできないことを理解
 - デリゲートリストの更新と管理
 {% /callout %}
+
 ## 概要
+
 **Update Delegate**は、update authorityが他のアドレスに更新権限を付与できるAuthority Managedプラグインです。追加デリゲートはほとんどのAssetデータを変更できますが、コアauthority設定は変更できません。
+
 - サードパーティに更新権限を付与
 - 複数の追加デリゲートを追加
 - AssetsとCollectionsの両方で動作
 - デリゲートはルートupdate authorityを変更不可
+
 ## 対象外
+
 永続的な更新デリゲーション、オーナーレベルの権限（これはauthority managed）、Token Metadata update authority（別のシステム）。
+
 ## クイックスタート
+
 **ジャンプ先:** [Assetに追加](#assetへのupdate-delegateプラグインの追加) · [デリゲートを更新](#update-delegateプラグインの更新) · [Collection](#collectionのupdate-delegateプラグインの更新)
+
 1. デリゲートアドレスでUpdate Delegateプラグインを追加
 2. オプションで追加デリゲートを追加
 3. デリゲートがAssetメタデータを更新可能に
@@ -58,30 +67,42 @@ faqs:
 | オーナーが更新を制御すべき | ❌ デフォルトauthorityを使用 |
 **Update Delegateを使用**するのは、ルートauthorityを移転せずにプログラムやサードパーティに更新権限を付与する必要がある場合です。
 {% /callout %}
+
 ## 一般的なユースケース
+
 - **サードパーティサービス**: プラットフォームがあなたに代わってメタデータを更新できるようにする
 - **ゲームプログラム**: ゲームプログラムにAsset属性を変更する権限を付与
 - **チームコラボレーション**: 複数のチームメンバーがキーを共有せずに更新可能
 - **マーケットプレイス**: マーケットプレイスがリスティング関連のメタデータを更新できるようにする
 - **動的コンテンツ**: Assetデータを自動更新するサービス
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ## 引数
+
 |                     |             |
 | ------------------- | ----------- |
 | additionalDelegates | publickey[] |
+
 ### additionalDelegates
+
 追加デリゲートにより、updateDelegateプラグインに複数のデリゲートを追加できます。
 追加デリゲートは、update authorityができることをすべてできますが、以下を除きます：
+
 - 追加デリゲート配列の追加または変更（自分を削除する以外）
 - updateAuthorityプラグインのプラグインauthorityの変更
 - Collectionのルートupdate authorityの変更
+
 ## AssetへのUpdate Delegateプラグインの追加
+
 {% dialect-switcher title="MPL Core AssetへのUpdate Delegateプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -96,8 +117,10 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -130,12 +153,16 @@ pub async fn add_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Update Delegateプラグインの更新
+
 Update Delegateプラグインは、追加デリゲートのリストを変更したり、プラグインauthorityを変更したりするために更新できます。
 {% dialect-switcher title="AssetのUpdate Delegateプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -150,8 +177,10 @@ await updatePlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -189,11 +218,15 @@ pub async fn update_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## CollectionのUpdate Delegateプラグインの更新
+
 {% dialect-switcher title="CollectionのUpdate Delegateプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -208,8 +241,10 @@ await updateCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdateCollectionPluginV1Builder,
@@ -247,21 +282,32 @@ pub async fn update_collection_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 一般的なエラー
+
 ### `Authority mismatch`
+
 Update authority（または既存のプラグインauthority）のみがUpdate Delegateプラグインを追加/変更できます。
+
 ### `Cannot modify root authority`
+
 追加デリゲートはルートupdate authorityの変更や追加デリゲートリストの変更（自分を削除する以外）はできません。
+
 ## 注意事項
+
 - Authority Managed: update authorityはオーナーの署名なしで追加可能
 - 追加デリゲートはほぼ完全な更新権限を持つ
 - デリゲートはルートupdate authorityを変更不可
 - デリゲートは追加デリゲートリストを変更不可（自分を削除する以外）
 - AssetsとCollectionsの両方で動作
+
 ## クイックリファレンス
+
 ### 追加デリゲートの権限
+
 | アクション | 許可？ |
 |--------|----------|
 | 名前/URIの更新 | ✅ |
@@ -271,22 +317,37 @@ Update authority（または既存のプラグインauthority）のみがUpdate 
 | ルートupdate authorityの変更 | ❌ |
 | 追加デリゲートの変更 | ❌（自己削除を除く） |
 | プラグインauthorityの変更 | ❌ |
+
 ## FAQ
+
 ### 追加デリゲートは何ができますか？
+
 Update authorityができることのほとんど（メタデータの更新、プラグインの追加/削除など）ができます。ルートupdate authorityの変更、追加デリゲートリストの変更、Update Delegateプラグインauthorityの変更はできません。
+
 ### 追加デリゲートはより多くのデリゲートを追加できますか？
+
 いいえ。ルートupdate authority（またはプラグインauthority）のみが追加デリゲートを追加または削除できます。
+
 ### 追加デリゲートとして自分を削除するにはどうすればよいですか？
+
 追加デリゲートは、`additionalDelegates`配列に自分のアドレスを含めずにプラグインを更新することで、リストから自分を削除できます。
+
 ### 追加デリゲートに制限はありますか？
+
 ハードリミットはありませんが、デリゲートが増えるとアカウントサイズとレントが増加します。リストを適切な数に保ってください。
+
 ### Update DelegateはCollectionsで機能しますか？
+
 はい。CollectionにUpdate Delegateを追加すると、デリゲートがCollectionメタデータとCollectionレベルのプラグインを更新できます。
+
 ## 関連プラグイン
+
 - [Attributes](/smart-contracts/core/plugins/attribute) - デリゲートが更新できるオンチェーンデータを保存
 - [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - メタデータを変更不可にする（デリゲートを上書き）
 - [AddBlocker](/smart-contracts/core/plugins/addBlocker) - デリゲートが新しいプラグインを追加するのを防止
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Update Delegate** | 更新権限を付与するAuthority Managedプラグイン |

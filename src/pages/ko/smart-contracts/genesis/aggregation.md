@@ -34,6 +34,7 @@ Genesis API를 사용하면 애그리게이터와 애플리케이션이 Genesis 
 
 {% callout title="배우게 될 내용" %}
 이 레퍼런스에서 다루는 내용:
+
 - 런칭 메타데이터용 HTTP API 엔드포인트
 - JavaScript SDK를 사용한 온체인 상태 조회
 - TypeScript 및 Rust 타입 정의
@@ -332,12 +333,14 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 `Cargo.toml`에 다음 의존성을 추가하세요:
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## 온체인 상태 조회 (JavaScript SDK)
@@ -401,15 +404,19 @@ if (deposit) {
 ## FAQ
 
 ### API와 온체인 조회의 차이점은 무엇인가요?
+
 API는 집계된 메타데이터(소셜, 이미지)를 반환합니다. SDK를 통한 온체인 조회는 예치 총액 및 시간 조건과 같은 실시간 상태를 반환합니다.
 
 ### 실시간 예치 총액을 어떻게 가져오나요?
+
 Genesis SDK의 `fetchLaunchPoolBucketV2` 또는 `fetchPresaleBucketV2`를 사용하여 현재 온체인 상태를 읽으세요.
 
 ### 버킷의 시간 조건을 조회할 수 있나요?
+
 예. 버킷 계정을 조회하여 `depositStartCondition`, `depositEndCondition`, `claimStartCondition`, `claimEndCondition`에 접근하세요.
 
 ### 사용자가 예치했는지 어떻게 확인하나요?
+
 예치 PDA와 함께 `safeFetchLaunchPoolDepositV2` 또는 `safeFetchPresaleDepositV2`를 사용하세요. 예치가 없으면 null을 반환합니다.
 
 ## 용어집

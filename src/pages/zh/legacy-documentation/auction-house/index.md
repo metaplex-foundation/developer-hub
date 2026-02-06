@@ -34,7 +34,6 @@ description: 提供拍卖行程序的概述
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 该账户可以按用户想要的任何方式配置。我们将[在专门的页面中详细讨论这些配置](/zh/legacy-documentation/auction-house/settings),但这里有一些有趣的可配置参数:
 
 - `requireSignOff`: 这允许市场控制哪些资产可以被列出以及哪些出价可以被放置。在每个相关指令上,拍卖行[权限](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities)需要签署交易。
@@ -53,7 +52,7 @@ description: 提供拍卖行程序的概述
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. 拍卖行还分配另一个 PDA: `programAsSigner` PDA 作为**委托**。委托是 Solana SPL-token 程序的一个功能,[这里](https://spl.solana.com/token#authority-delegation)有详细讨论。委托允许拍卖行在稍后销售完成时从代币账户中提取资产。这样,资产无需托管,可以留在用户的钱包中,直到销售完成。
+1. 拍卖行还分配另一个 PDA: `programAsSigner` PDA 作为**委托**。委托是 Solana SPL-token 程序的一个功能,[这里](https://spl.solana.com/token#authority-delegation)有详细讨论。委托允许拍卖行在稍后销售完成时从代币账户中提取资产。这样,资产无需托管,可以留在用户的钱包中,直到销售完成。
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 
@@ -86,7 +85,7 @@ description: 提供拍卖行程序的概述
 > - Bob 注意到列表并对资产 A 出价 5 SOL。这为资产 A 创建了一个**买单**。
 > - 这使市场能够在同一交易中对资产出价并执行销售,实际上允许 Bob "购买"资产 A。
 
-2. _以出价价格"出售"_: 这是用户对未列出的资产感兴趣并对其出价的情况。如果资产所有者现在以出价金额列出资产,`list` 和 `executeSale` 指令将在同一指令中执行,因此列表者实际上以请求的价格"出售"了资产。
+1. _以出价价格"出售"_: 这是用户对未列出的资产感兴趣并对其出价的情况。如果资产所有者现在以出价金额列出资产,`list` 和 `executeSale` 指令将在同一指令中执行,因此列表者实际上以请求的价格"出售"了资产。
 
 > 示例:
 >
@@ -94,7 +93,7 @@ description: 提供拍卖行程序的概述
 > - Alice 注意到出价并将资产 A 列为 5 SOL。这为资产 A 创建了一个**卖单**。
 > - 这使市场能够在同一交易中列出资产并执行销售,实际上允许 Alice "出售"资产 A。
 
-3. _列表者同意出价_: 这是在给定资产存在**买单**和**卖单**后独立执行 `executeSale` 指令的情况。
+1. _列表者同意出价_: 这是在给定资产存在**买单**和**卖单**后独立执行 `executeSale` 指令的情况。
 
 > 示例:
 >

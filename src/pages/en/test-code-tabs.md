@@ -12,6 +12,7 @@ This page tests the new multi-language code tabs component.
 {% code-tabs defaultLanguage="javascript" %}
 
 {% code-tab language="javascript" label="JavaScript" %}
+
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -25,9 +26,11 @@ const asset = await create(umi, {
 
 console.log('Asset created:', asset.publicKey)
 ```
+
 {% /code-tab %}
 
 {% code-tab language="rust" label="Rust" %}
+
 ```rust
 use mpl_core::instructions::CreateV1;
 use solana_sdk::signer::Signer;
@@ -42,9 +45,11 @@ let instruction = asset.instruction();
 
 println!("Asset created: {:?}", asset);
 ```
+
 {% /code-tab %}
 
 {% code-tab language="kotlin" label="Kotlin" %}
+
 ```kotlin
 import com.metaplex.lib.Metaplex
 import com.metaplex.lib.modules.nfts.models.NFT
@@ -58,6 +63,7 @@ val nft = metaplex.nft().create(
 
 println("Asset created: ${nft.address}")
 ```
+
 {% /code-tab %}
 
 {% /code-tabs %}
@@ -67,6 +73,7 @@ println("Asset created: ${nft.address}")
 {% code-tabs defaultLanguage="typescript" %}
 
 {% code-tab language="typescript" label="TypeScript" %}
+
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { create, CreateArgs } from '@metaplex-foundation/mpl-core'
@@ -83,9 +90,11 @@ const asset = await create(umi, args).sendAndConfirm(umi)
 
 console.log('Asset created:', asset.publicKey.toString())
 ```
+
 {% /code-tab %}
 
 {% code-tab language="javascript" label="JavaScript" %}
+
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -99,6 +108,7 @@ const asset = await create(umi, {
 
 console.log('Asset created:', asset.publicKey)
 ```
+
 {% /code-tab %}
 
 {% /code-tabs %}
@@ -193,6 +203,7 @@ Code loaded from `src/examples/core/transfer-asset/` (native .js and .rs files)
 ## Next Steps
 
 If this test page works correctly:
+
 1. Migrate high-traffic pages to use CodeTabs
 2. Add more language examples
 3. Create documentation for content editors

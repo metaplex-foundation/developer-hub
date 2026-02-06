@@ -7,9 +7,11 @@ description: Token Metadata Rust SDK를 사용하여 NFT를 시작하세요
 Rust 개발자라면 Token Metadata 프로그램과 상호작용하기 위해 Rust 클라이언트 SDK를 사용할 수도 있습니다. Metaplex는 최소한의 종속성을 가진 경량 크레이트인 전용 Rust 클라이언트 크레이트를 제공합니다.
 
 시작하려면 프로젝트에 `mpl-token-metadata` 종속성을 추가해야 합니다. 프로젝트의 루트 폴더에서 터미널에서:
+
 ```
 cargo add mpl-token-metadata
 ```
+
 이렇게 하면 프로젝트의 종속성 목록에 크레이트의 최신 버전이 추가됩니다.
 
 {% callout %}
@@ -78,7 +80,6 @@ pub struct CreateV1 {
 ```
 
 {% /totem %}
-
 
 명령어 계정 필드를 채운 후, `instruction(...)` 메서드를 사용하여 해당 Solana `Instruction`을 생성할 수 있습니다:
 
@@ -359,6 +360,7 @@ impl Metadata {
 ```rust
 let (metadata_pubkey, _) = Metadata::find_pda(mint);
 ```
+
 {% /totem-prose %}
 {% totem-prose %}
 
@@ -370,7 +372,6 @@ let metadata_pubkey = Metadata::create_pda(mint, bump)?;
 
 {% /totem-prose %}
 {% /totem %}
-
 
 ## 🔗 유용한 링크
 

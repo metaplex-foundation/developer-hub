@@ -42,26 +42,37 @@ faqs:
 ---
 This guide shows how to **burn Core Assets** on Solana using the Metaplex Core SDK. Permanently destroy Assets and recover most of the rent deposit. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Burn an Asset and recover rent
 - Handle burning for Assets in Collections
 - Understand Burn Delegate permissions
 - Know what happens to the account after burning
 {% /callout %}
+
 ## Summary
+
 Burn a Core Asset to permanently destroy it and recover rent. Only the owner (or Burn Delegate) can burn an Asset.
+
 - Call `burn(umi, { asset })` to destroy the Asset
 - Most rent (~0.0028 SOL) is returned to the payer
 - A small amount (~0.0009 SOL) remains to prevent account reuse
 - Burning is **permanent and irreversible**
+
 ## Out of Scope
+
 Token Metadata burning (use mpl-token-metadata), compressed NFT burning (use Bubblegum), and Collection burning (Collections have their own burn process).
+
 ## Quick Start
+
 **Jump to:** [Burn Asset](#code-example) · [Burn in Collection](#burning-an-asset-that-is-part-of-a-collection)
+
 1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Fetch the Asset to verify ownership
 3. Call `burn(umi, { asset })` as the owner
 4. Rent is automatically returned to your wallet
+
 ## Prerequisites
+
 - **Umi** configured with a signer that owns the Asset (or is its Burn Delegate)
 - **Asset address** of the Asset to burn
 - **Collection address** (if the Asset is in a Collection)
@@ -81,13 +92,18 @@ Some of the accounts may be abstracted out and/or optional in our sdks for ease 
 A full detailed look at the on chain instruction it can be viewed on [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123).
 {% /totem-accordion %}
 {% /totem %}
+
 ## Code Example
+
 Here is how you can use our SDKs to burn a Core asset. The snippet assumes that you are the owner of the asset.
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+
 ## Burning an Asset that is part of a Collection
+
 Here is how you can use our SDKs to burn a Core asset that is part of a collection. The snippet assumes that you are the owner of the asset.
 {% dialect-switcher title="Burning an Asset that is part of a collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
@@ -111,8 +127,10 @@ await burn(umi, {
   collection,
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::instructions::BurnV1Builder;
 use solana_client::nonblocking::rpc_client;
@@ -143,60 +161,92 @@ pub async fn burn_asset_in_collection() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 You're not the owner or Burn Delegate of the Asset. Check ownership:
+
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 console.log(asset.owner) // Must match your signer
 ```
+
 ### `Asset is frozen`
+
 The Asset has a Freeze Delegate plugin and is currently frozen. The freeze authority must unfreeze it before burning.
+
 ### `Missing collection parameter`
+
 For Assets in a Collection, you must pass the `collection` address. Fetch the Asset first to get the collection:
+
 ```ts
 const asset = await fetchAsset(umi, assetAddress)
 const collectionId = collectionAddress(asset)
 ```
+
 ## Notes
+
 - Burning is **permanent and irreversible** - the Asset cannot be recovered
 - Rent is returned to the owner (amount varies based on asset size and plugins)
 - The remaining SOL prevents the account address from being reused
 - Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
 - Frozen Assets must be unfrozen before burning
+
 ## Quick Reference
+
 ### Burn Parameters
+
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | `asset` | Yes | Asset address or fetched object |
 | `collection` | If in collection | Collection address |
 | `authority` | No | Defaults to signer (use for delegates) |
+
 ### Who Can Burn?
+
 | Authority | Can Burn? |
 |-----------|-----------|
 | Asset Owner | Yes |
 | Burn Delegate | Yes |
 | Transfer Delegate | No |
 | Update Authority | No |
+
 ### Rent Recovery
+
 | Item | Amount |
 |------|--------|
 | Returned to payer | Base + plugin storage rent |
 | Remaining in account | ~0.0009 SOL |
+
 ## FAQ
+
 ### Can I recover the ~0.0009 SOL left in the account?
+
 No. This small amount is intentionally left to mark the account as "burned" and prevent its address from being reused for a new Asset.
+
 ### What happens to the Asset's metadata after burning?
+
 The on-chain account is cleared (zeroed out). The off-chain metadata remains accessible via the original URI, but there's no on-chain record linking to it.
+
 ### Can a Burn Delegate burn without the owner's approval?
+
 Yes. Once an owner assigns a Burn Delegate via the plugin, the delegate can burn the Asset at any time. Owners should only assign trusted addresses as Burn Delegates.
+
 ### Does burning affect the Collection's count?
+
 Yes. The Collection's `currentSize` is decremented when an Asset is burned. The `numMinted` counter remains unchanged (it tracks total ever minted).
+
 ### Can I burn multiple Assets at once?
+
 Not in a single instruction. You can batch multiple burn instructions in one transaction (up to transaction size limits).
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Burn** | Permanently destroy an Asset and recover rent |

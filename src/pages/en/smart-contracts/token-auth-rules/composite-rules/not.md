@@ -5,9 +5,11 @@ description: The Not composite rule
 ---
 
 ## Not
+
 A **Not** Rule operates as a negation on the contained Rule. If the contained Rule evaluates to true then the **Not** will evaluate to false, and vice versa.
 
 ### Fields
+
 * **rule** - The Rule to negate
 
 ```js

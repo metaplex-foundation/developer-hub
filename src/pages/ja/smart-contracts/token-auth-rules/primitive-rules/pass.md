@@ -5,6 +5,7 @@ description: Passプリミティブルール
 ---
 
 ## Pass
+
 このルールは検証中に常にtrueと評価されます。
 
 ```js

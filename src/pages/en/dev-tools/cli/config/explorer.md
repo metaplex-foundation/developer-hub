@@ -9,6 +9,7 @@ The `mplx config explorer` command allows you to set your preferred blockchain e
 ## Basic Usage
 
 ### Set Explorer
+
 ```bash
 mplx config explorer set
 ```
@@ -16,21 +17,24 @@ mplx config explorer set
 ## Commands
 
 ### Set Explorer
+
 Sets your preferred blockchain explorer from a list of available options.
 
 #### Examples
+
 ```bash
 mplx config explorer set
 ```
 
 #### Notes
+
 - Opens an interactive prompt to select from available explorers
 - Updates the active explorer in your configuration
 - The selected explorer will be used for viewing transactions and accounts
 - Available explorers include:
-  - Solana Explorer (https://explorer.solana.com)
-  - Solscan (https://solscan.io)
-  - Solana FM (https://solana.fm)
+  - Solana Explorer (<https://explorer.solana.com>)
+  - Solscan (<https://solscan.io>)
+  - Solana FM (<https://solana.fm>)
 
 ## Configuration File
 

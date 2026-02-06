@@ -58,6 +58,7 @@ name: "My Test Escrow"
 ### uri
 
 这是元数据池的基础uri。这需要是一个静态uri，其中还包含顺序目标的元数据json文件。即：
+
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -106,6 +107,7 @@ min和max表示元数据池中可用的最小和最大索引。
 ```
 
 这将转换为min和max参数。
+
 ```ts
 min: 0,
 max: 4999

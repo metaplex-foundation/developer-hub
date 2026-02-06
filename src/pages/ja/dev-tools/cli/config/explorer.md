@@ -9,6 +9,7 @@ description: 推奨ブロックチェーンエクスプローラーを設定
 ## 基本的な使用法
 
 ### エクスプローラーを設定
+
 ```bash
 mplx config explorer set
 ```
@@ -16,21 +17,24 @@ mplx config explorer set
 ## コマンド
 
 ### エクスプローラーを設定
+
 利用可能なオプションのリストから推奨ブロックチェーンエクスプローラーを設定します。
 
 #### 例
+
 ```bash
 mplx config explorer set
 ```
 
 #### 注意事項
+
 - 利用可能なエクスプローラーから選択するためのインタラクティブプロンプトを開きます
 - 設定内のアクティブなエクスプローラーを更新します
 - 選択されたエクスプローラーは、トランザクションとアカウントの表示に使用されます
 - 利用可能なエクスプローラーには以下が含まれます：
-  - Solana Explorer (https://explorer.solana.com)
-  - Solscan (https://solscan.io)
-  - Solana FM (https://solana.fm)
+  - Solana Explorer (<https://explorer.solana.com>)
+  - Solscan (<https://solscan.io>)
+  - Solana FM (<https://solana.fm>)
 
 ## 設定ファイル
 

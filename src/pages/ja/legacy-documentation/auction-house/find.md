@@ -110,6 +110,7 @@ const nft = await metaplex
 {% /dialect-switcher %}
 
 ### トレードステートで検索
+
 以下は、対応するトレードステートPDAアカウントでビッド、リスティング、販売を検索するためのスニペットです。
 
 {% dialect-switcher title="JS SDK" %}

@@ -26,22 +26,27 @@ description: 开发者指南，介绍如何将 NFT 从 Candy Machine 铸造到�
 将 NFT 铸造到其他钱包对于空投、赠品或向多个接收者分发 NFT 特别有用。本指南将引导您完成将 NFT 从 Candy Machine 铸造到不同钱包地址的过程。需要注意的是，发起铸造过程的人将承担铸造成本。因此，让接收者自己领取 NFT 通常更具成本效益。
 
 {% callout type="note" title="重要考虑" %}
+
 - 铸造到其他钱包可能会很昂贵。您可能需要考虑使用领取机制，例如使用[允许列表](/zh/smart-contracts/candy-machine/guards/allow-list)或 [NFT Gate](/zh/smart-contracts/candy-machine/guards/nft-gate) 守卫。
 - 对于有守卫和没有守卫的 Candy Machine 有不同的工具可用。没有守卫的铸造通常更简单。
 {% /callout %}
 
 本指南描述了两种方法：
+
 1. 使用 [Sugar CLI](#使用-sugar-cli) 铸造。无需编码！
 2. 使用 [Javascript](#使用-typescript-和-metaplex-foundationmpl-candy-machine) 铸造
 
 ## 使用 Sugar CLI
+
 Sugar CLI 提供了两个主要命令用于将 NFT 铸造到其他钱包：
+
 1. `sugar mint` 铸造到*一个*特定钱包
 2. `sugar airdrop` 铸造到*多个*钱包
 
 通过 sugar 允许铸造的前提是您的 Candy Machine 创建时**没有附加守卫**。要使用 sugar 创建 Candy Machine，您可以按照[此](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)指南的第一步进行操作。如果您的 Candy Machine 已附加守卫，可以使用 `sugar guard remove` 移除它们。
 
 ### 使用 `sugar mint` 铸造到单个接收者
+
 要将 NFT 铸造到单个接收者钱包，使用带有以下参数的 `sugar mint` 命令：
 
 - `--receiver <WALLET>`：指定接收者的钱包地址
@@ -70,6 +75,7 @@ sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-m
 
 **示例**：
 要执行此空投，可以使用以下命令
+
 ```sh
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
@@ -81,6 +87,7 @@ sugar airdrop --candy-machine 11111111111111111111111111111111
 使用 Typescript 铸造到其他钱包时，根据您的 Candy Machine 是否使用守卫，有两种主要方法：
 
 ### 无守卫铸造
+
 对于没有守卫的 Candy Machine，使用 `mintFromCandyMachineV2`。此函数允许您直接将接收者指定为 `nftOwner`。
 
 ```js
@@ -108,6 +115,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="完整代码示例" %}
+
 ```js
 import {
   addConfigLines,
@@ -263,10 +271,12 @@ const RPC_ENDPOINT = "https://api.devnet.solana.com";
 })();
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### 有守卫铸造
+
 对于有守卫的 Candy Machine，可以使用 `mintV2`。在这种情况下，您需要首先使用 `createMintWithAssociatedToken` 为接收者创建代币账户和关联代币账户。这允许接收者在不必签署交易的情况下接收 NFT。
 
 ```js
@@ -302,6 +312,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="完整代码示例" %}
+
 ```js
 import {
   addConfigLines,
@@ -471,5 +482,6 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}

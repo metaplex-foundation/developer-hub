@@ -313,6 +313,7 @@ As we learned in the previous section, in a Merkle tree only the leaf nodes repr
 ## Leaf Validation
 
 The process for using the leaf node and its Proof to calculate the Merkle root is as follows:
+
 1. Start with our raw leaf schema, hash it.
 2. Hash the value from step 1 with the sibling leaf node's hash to create the next value up of the leaf's Path.
 3. Hash the path value from step 2 with the next sibling inner node, which is the next value of the Proof.

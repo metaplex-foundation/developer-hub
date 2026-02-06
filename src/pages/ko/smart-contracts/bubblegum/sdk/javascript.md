@@ -18,9 +18,9 @@ npm install @metaplex-foundation/mpl-bubblegum
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum Javascript SDK에서 생성된 패키지 API 문서입니다." /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" description="MPL-Bubblegum Javascript SDK에서 생성된 패키지 API 문서입니다." /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/MPL-Bubblegum" description="NPM의 MPL-Bubblegum Javascript SDK입니다." /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/MPL-Bubblegum>" description="NPM의 MPL-Bubblegum Javascript SDK입니다." /%}
 
 {% /quick-links %}
 

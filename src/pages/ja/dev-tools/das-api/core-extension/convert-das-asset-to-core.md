@@ -9,6 +9,7 @@ Core アセットだけでなく、Token Metadataなどの他のアセットも�
 ## Assetへの変換例
 
 次の例では以下を示します：
+
 1. 標準DAS APIパッケージでDAS Assetsを取得する方法
 2. AssetsをフィルターしてCore Assetsのみにする方法
 3. すべての標準AssetsをCore Assetsにキャストする方法
@@ -28,6 +29,7 @@ const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
 ## Collectionへの変換例
 
 次の例では以下を示します：
+
 1. 標準DAS APIパッケージでDAS Collectionsを取得する方法
 2. AssetsをフィルターしてCore Assetsのみにする方法
 3. すべての標準AssetsをCore Assetsにキャストする方法

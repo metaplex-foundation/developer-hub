@@ -19,11 +19,13 @@ programmingLanguage:
   - Rust
 ---
 ## 概述
+
 Freeze Execute 插件是一个`所有者管理`的插件，允许冻结 Asset 上的 Execute 生命周期事件。当冻结时，资产无法通过其 Asset Signer PDA 执行任意指令，有效阻止任何执行操作直到解冻。
 {% callout type="warning" %}
 **重要**：由于这是一个所有者管理的插件，资产转移到新所有者后权限不会保留。如果新所有者希望之前的权限方能够更改插件的 `freeze` 状态，需要重新添加权限。
 {% /callout %}
 Freeze Execute 插件特别适用于以下场景：
+
 - **担保 NFT**：锁定代表基础资产（SOL、代币）所有权的 NFT，防止未经授权的提取
 - **无托管资产管理**：在不转移所有权的情况下冻结参与金融操作的资产
 - **质押协议**：在保持所有权的同时防止质押期间的资产执行
@@ -31,20 +33,28 @@ Freeze Execute 插件特别适用于以下场景：
 - **治理控制**：为参与治理或投票的资产实施冻结机制
 - **资产租赁**：在资产被租出期间防止执行
 - **抵押品管理**：锁定在 DeFi 协议中用作抵押品的资产
+
 ## 兼容性
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ## 参数
+
 | 参数   | 值    |
 | ------ | ----- |
 | frozen | bool  |
+
 ## 函数
+
 ### 向 Asset 添加 Freeze Execute 插件
+
 `addPlugin` 命令将 Freeze Execute 插件添加到 Asset。此插件允许冻结 Asset 的 Execute 功能，防止执行任意指令。
 {% dialect-switcher title="向 MPL Core Asset 添加 Freeze Execute 插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -58,8 +68,10 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -69,8 +81,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -103,12 +117,16 @@ pub async fn add_freeze_execute_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 创建带有 Freeze Execute 插件的 Asset
+
 您也可以在资产创建时添加 Freeze Execute 插件：
 {% dialect-switcher title="创建带有 Freeze Execute 插件的 Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { create, mplCore } from '@metaplex-foundation/mpl-core'
@@ -131,12 +149,16 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 创建带有 Freeze Execute 插件的 Collection
+
 Freeze Execute 插件也可以应用于 Collection：
 {% dialect-switcher title="创建带有 Freeze Execute 插件的 Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection, mplCore } from '@metaplex-foundation/mpl-core'
@@ -152,12 +174,16 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 冻结 Execute 操作
+
 `updatePlugin` 命令可用于冻结 Asset 的 Execute 功能，防止其执行任意指令直到解冻。
 {% dialect-switcher title="冻结 MPL Core Asset 的 Execute 操作" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -170,8 +196,10 @@ import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -183,8 +211,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: true }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -221,12 +251,16 @@ pub async fn freeze_execute_operations() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 解冻 Execute 操作
+
 `updatePlugin` 命令也可用于解冻 Asset 的 Execute 功能，恢复其执行任意指令的能力。
 {% dialect-switcher title="解冻 MPL Core Asset 的 Execute 操作" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { createUmi, publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
@@ -239,8 +273,10 @@ import { updatePlugin, mplCore } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })()
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -252,8 +288,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeExecute(FreezeExecute { frozen: false }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -290,15 +328,20 @@ pub async fn unfreeze_execute_operations() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 插件权限
+
 Freeze Execute 插件支持不同的权限类型来控制谁可以冻结/解冻执行操作：
+
 - **所有者权限**（默认）：只有资产所有者可以冻结/解冻
 - **委托权限**：可以将特定地址委托来控制冻结
 - **更新权限**：资产的更新权限可以控制冻结，但仅在明确委托的情况下
 {% dialect-switcher title="设置插件权限" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner } from "@metaplex-foundation/umi";
 import { create, mplCore } from "@metaplex-foundation/mpl-core";
@@ -321,9 +364,12 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
   }).sendAndConfirm(umi);
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 重要说明
+
 - 当 `frozen` 字段设置为 `true` 时，任何执行操作都将被阻止
 - **默认权限**：资产所有者默认控制插件
 - **权限委托**：只有当前权限方可以冻结/解冻执行功能
@@ -331,10 +377,13 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - 冻结状态下无法移除插件
 - 冻结状态下无法重新分配权限
 - 此插件与 [Execute 指令](/smart-contracts/core/execute-asset-signing) 系统配合使用
+
 ## 使用案例示例：担保 NFT
+
 Freeze Execute 插件的一个常见用例是创建"担保 NFT"，其中 NFT 代表可通过执行指令提取的基础资产（如 SOL 或代币）的所有权。该插件允许您临时冻结这些执行操作。
 {% dialect-switcher title="担保 NFT 示例" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   generateSigner,
@@ -407,5 +456,6 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
   }).sendAndConfirm(umi);
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

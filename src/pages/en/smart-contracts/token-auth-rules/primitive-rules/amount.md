@@ -5,9 +5,11 @@ description: The Amount primitive rule
 ---
 
 ## Amount
+
 The amount of tokens being transferred is compared (greater than, less than, or equal to) against an amount.
 
 ### Fields
+
 * **amount** - The amount to be compared against
 * **operator** - The comparison operation to use: greater than, less than, equal to
 * **field** - The payload field to compare against

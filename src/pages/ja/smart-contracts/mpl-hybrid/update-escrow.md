@@ -58,6 +58,7 @@ name: "My Test Escrow"
 ### uri
 
 これはメタデータプールのベースuriです。これは、メタデータjsonファイルを連続する宛先に含む静的uriである必要があります。例：
+
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -106,6 +107,7 @@ minとmaxは、メタデータプールで利用可能な最小および最大�
 ```
 
 これは次のminとmax引数に変換されます。
+
 ```ts
 min: 0,
 max: 4999

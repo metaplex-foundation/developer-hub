@@ -32,6 +32,7 @@ Understand the Genesis token launch flow before building. This guide explains ea
 
 {% callout title="Ready to Build?" %}
 Once you understand the flow:
+
 - **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and function reference
 - **[Launch Pool](/smart-contracts/genesis/launch-pool)** - Complete tutorial for proportional distribution
 - **[Presale](/smart-contracts/genesis/presale)** - Complete tutorial for fixed-price sales
@@ -83,6 +84,7 @@ Every Genesis launch follows this lifecycle:
 **What happens:** You create a Genesis Account which mints your token and holds the entire supply in escrow.
 
 **You provide:**
+
 - Token metadata (name, symbol, URI)
 - Total supply (with decimals)
 - Quote token (usually wSOL)
@@ -175,12 +177,14 @@ A {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee ap
 Common end behavior: Send 100% of collected SOL to the Unlocked bucket (treasury).
 
 You can split funds across multiple destinations:
+
 - 80% to treasury
 - 20% to liquidity pool bucket
 
 ## Step 6: Claim Period
 
 **What happens:**
+
 - Users claim tokens based on their deposit
 - Team claims raised SOL from the Unlocked bucket
 
@@ -226,21 +230,27 @@ Before you start building:
 ## FAQ
 
 ### What does initializing a Genesis Account create?
+
 It creates a new SPL token with metadata, a master coordination account (the Genesis Account PDA), and mints the total supply to be held in escrow for distribution.
 
 ### Can I add more buckets after finalizing?
+
 No. Finalization is permanent. You cannot add more buckets or change configurations. Plan your complete bucket structure before finalizing.
 
 ### What's the difference between inflow and outflow buckets?
+
 **Inflow buckets** collect SOL from users (Launch Pool, Presale). **Outflow buckets** receive tokens or SOL via end behaviors—typically an Unlocked Bucket for team/treasury claims.
 
 ### When does the launch become active?
+
 After finalization, the launch activates based on your bucket time conditions. Users can participate when the current time is within a bucket's deposit window.
 
 ### How do I calculate token supply with decimals?
+
 Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals: 1,000,000 × 1,000,000,000 = 1,000,000,000,000,000.
 
 ### Can I use a token other than SOL for deposits?
+
 Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denominated launches.
 
 ## Glossary

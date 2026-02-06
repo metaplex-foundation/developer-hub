@@ -11,14 +11,11 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 {% quick-links %}
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/core-candy-machine/sdk" description="원하는 언어나 라이브러리를 선택하고 Candy Machine을 시작하세요." /%}
 
+{% quick-link title="API 레퍼런스" icon="JavaScript" href="<https://mpl-core-candy-machine.typedoc.metaplex.com/>" target="_blank" description="Javascript API 문서를 확인하세요." /%}
 
-{% quick-link title="API 레퍼런스" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="Javascript API 문서를 확인하세요." /%}
-
-
-{% quick-link title="API 레퍼런스" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="Rust API 문서를 확인하세요." /%}
+{% quick-link title="API 레퍼런스" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" target="_blank" description="Rust API 문서를 확인하세요." /%}
 {% /quick-links %}
 
 {% callout %}
 이 문서는 Core Candy Machine으로 알려진 Candy Machine의 최신 버전을 다룹니다. 이는 [Core](/core) 자산 민팅을 지원합니다. Metaplex Token Metadata NFT를 민팅하려면 [대신 Candy Machine V3를 참조하십시오](https://developers.metaplex.com/candy-machine/).
 {% /callout %}
-

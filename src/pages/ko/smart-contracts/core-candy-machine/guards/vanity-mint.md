@@ -37,7 +37,6 @@ Mint {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the mint Address
 
@@ -83,6 +82,7 @@ Vanity Mint guard는 다음 설정을 포함합니다:
 - **Regular Expression**: 민트 주소가 일치해야 하는 정규식. 예를 들어, 모든 민트가 `mplx` 문자열로 시작하길 원한다면 이를 `regex` 매개변수로 사용할 수 있습니다.
 
 사용할 수 있는 정규식 아이디어 예시:
+
 - 특정 패턴으로 시작: `^mplx`
 - 특정 패턴으로 끝남: `mplx$`
 - 특정 패턴으로 시작하고 끝남: `^mplx*mplx$`

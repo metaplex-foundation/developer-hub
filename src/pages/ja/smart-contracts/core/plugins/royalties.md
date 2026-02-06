@@ -35,38 +35,54 @@ faqs:
 **Royalties Plugin**は、Core Assetの二次販売においてクリエイターロイヤリティを強制します。ロイヤリティの割合、クリエイター分配、およびどのプログラム（マーケットプレイス）がAssetの転送を許可または拒否されるかを指定します。 {% .lead %}
 {% callout title="学習内容" %}
 以下の方法を学びます：
+
 - AssetとCollectionにロイヤリティを追加する
 - Basis Pointとクリエイター分配を設定する
 - マーケットプレイス制御のためのAllowlistとDenylistを設定する
 - 作成後にロイヤリティを更新する
 {% /callout %}
+
 ## 概要
+
 **Royalties Plugin**は、Core Assetにロイヤリティを強制するAuthority管理のPluginです。割合（Basis Point）を設定し、複数のクリエイターに分配し、オプションでどのプログラムがAssetを転送できるかを制限できます。
+
 - Basis Pointでロイヤリティを設定（500 = 5%）
 - 最大5人のクリエイター間でロイヤリティを分配
 - Allowlist/Denylistを使用してマーケットプレイスアクセスを制御
 - Assetレベル（個別）またはCollectionレベル（全Asset）に適用
+
 ## 範囲外
+
 Token Metadataロイヤリティ（異なるシステム）、ロイヤリティの収集/分配（マーケットプレイスが処理）、およびロイヤリティの法的強制。
+
 ## クイックスタート
+
 **ジャンプ先:** [Assetに追加](#assetへのroyalties-pluginの追加コード例) · [Collectionに追加](#collectionへのroyalties-pluginの追加コード例) · [RuleSets](#rulesets) · [更新](#assetのroyalties-pluginの更新)
+
 1. `@metaplex-foundation/mpl-core`から`addPlugin`をインポート
 2. `type: 'Royalties'`、`basisPoints`、`creators`、`ruleSet`を指定して呼び出し
 3. マーケットプレイスがPluginを読み取り、販売時にロイヤリティを強制
+
 ## 対応アカウントタイプ
+
 | アカウントタイプ | サポート |
 |--------------|-----------|
 | MPL Core Asset | はい |
 | MPL Core Collection | はい |
 AssetとそのCollectionの両方に適用された場合、**Assetレベルのpluginが優先**されます。
+
 ## 引数
+
 | 引数 | 型 | 説明 |
 |----------|------|-------------|
 | basisPoints | number | ロイヤリティの割合（500 = 5%、1000 = 10%） |
 | creators | Creator[] | クリエイターのアドレスと割合のシェアの配列 |
 | ruleSet | RuleSet | プログラムのAllowlist、Denylist、またはなし |
+
 ## Basis Points
+
 ロイヤリティの割合を100分の1パーセントで表します。
+
 | Basis Points | パーセンテージ |
 |--------------|------------|
 | 100 | 1% |
@@ -74,10 +90,13 @@ AssetとそのCollectionの両方に適用された場合、**Assetレベルのp
 | 500 | 5% |
 | 1000 | 10% |
 例：`basisPoints`が500で、Assetが1 SOLで売却された場合、クリエイターは合計0.05 SOLを受け取ります。
+
 ## Creators
+
 Creators配列は、誰がロイヤリティを受け取り、どのように分配されるかを定義します。最大5人のクリエイターがサポートされています。パーセンテージの合計は100である必要があります。
 {% dialect-switcher title="Creators Array" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="creators-array.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 const creators = [
@@ -85,8 +104,10 @@ const creators = [
   { address: publicKey('22222222222222222222222222222222'), percentage: 20 },
 ]
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="creators_array.rs" %}
 use mpl_core::types::Creator;
 use solana_sdk::pubkey::Pubkey;
@@ -102,30 +123,42 @@ let creators = vec![
     },
 ];
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## RuleSets
+
 RuleSetsは、ロイヤリティ付きのAssetをどのプログラムが転送できるかを制御します。準拠したマーケットプレイスへの転送を制限することで、ロイヤリティを強制するために使用します。
+
 ### None（制限なし）
+
 任意のプログラムがAssetを転送できます。ロイヤリティは推奨事項のみです。
 {% dialect-switcher title="RuleSet None" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="ruleset-none.ts" %}
 import { ruleSet } from '@metaplex-foundation/mpl-core'
 const rules = ruleSet('None')
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="ruleset_none.rs" %}
 use mpl_core::types::RuleSet;
 let rule_set = RuleSet::None;
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Allowlist（強制に推奨）
+
 リストにあるプログラムのみが転送できます。ロイヤリティ準拠のマーケットプレイスに制限するために使用します。
 {% dialect-switcher title="RuleSet Allowlist" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="ruleset-allowlist.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { ruleSet } from '@metaplex-foundation/mpl-core'
@@ -136,8 +169,10 @@ const rules = ruleSet('ProgramAllowList', [
   ],
 ])
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="ruleset_allowlist.rs" %}
 use mpl_core::types::RuleSet;
 use solana_sdk::pubkey::Pubkey;
@@ -147,12 +182,16 @@ let rule_set = RuleSet::ProgramAllowList(vec![
     Pubkey::from_str("TSWAPaqyCSx2KABk68Shruf4rp7CxcNi8hAsbdwmHbN").unwrap(),
 ]);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Denylist
+
 リストにあるプログラム以外のすべてのプログラムが転送できます。既知の非準拠マーケットプレイスをブロックするために使用します。
 {% dialect-switcher title="RuleSet DenyList" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="ruleset-denylist.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { ruleSet } from '@metaplex-foundation/mpl-core'
@@ -162,8 +201,10 @@ const rules = ruleSet('ProgramDenyList', [
   ],
 ])
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="ruleset_denylist.rs" %}
 use mpl_core::types::RuleSet;
 use solana_sdk::pubkey::Pubkey;
@@ -172,11 +213,15 @@ let rule_set = RuleSet::ProgramDenyList(vec![
     Pubkey::from_str("BadMarketplace111111111111111111111111111").unwrap(),
 ]);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## AssetへのRoyalties Pluginの追加（コード例）
+
 {% dialect-switcher title="Add Royalties Plugin to Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="add-royalties-to-asset.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -195,8 +240,10 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="add_royalties_to_asset.rs" %}
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -234,12 +281,16 @@ pub async fn add_royalties_to_asset() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## CollectionへのRoyalties Pluginの追加（コード例）
+
 CollectionレベルのロイヤリティはCollection内のすべてのAssetに適用されますが、Assetレベルで上書きされない限りです。
 {% dialect-switcher title="Add Royalties Plugin to Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="add-royalties-to-collection.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { addCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -258,8 +309,10 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="add_royalties_to_collection.rs" %}
 use mpl_core::{
     instructions::AddCollectionPluginV1Builder,
@@ -298,12 +351,16 @@ pub async fn add_royalties_to_collection() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## AssetのRoyalties Pluginの更新
+
 既存のAssetのロイヤリティ割合、クリエイター、またはRuleSetを変更します。
 {% dialect-switcher title="Update Royalties Plugin on Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="update-royalties-asset.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -320,8 +377,10 @@ await updatePlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust {% title="update_royalties_asset.rs" %}
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -340,11 +399,15 @@ let update_ix = UpdatePluginV1Builder::new()
     }))
     .instruction();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## CollectionのRoyalties Pluginの更新
+
 {% dialect-switcher title="Update Royalties Plugin on Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts {% title="update-royalties-collection.ts" %}
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -361,22 +424,35 @@ await updateCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## よくあるエラー
+
 ### `Creator percentages must sum to 100`
+
 クリエイターのパーセンテージ値が合計100になっていません。分配を調整してください。
+
 ### `Authority mismatch`
+
 PluginのAuthorityのみがロイヤリティを更新できます。正しいキーペアで署名していることを確認してください。
+
 ### `Program not in allowlist`
+
 呼び出しプログラムがAllowlistにないため、転送がブロックされました。プログラムを追加するか、Denylist/None RuleSetに切り替えてください。
+
 ## 注意事項
+
 - AssetレベルのロイヤリティはCollectionレベルのロイヤリティを上書きします
 - クリエイターのパーセンテージは正確に合計100である必要があります
 - 厳格な強制にはAllowlistを、柔軟性にはDenylistを使用
 - ロイヤリティの収集/分配はCoreプログラムではなく、マーケットプレイスが処理します
+
 ## クイックリファレンス
+
 ### 最小コード
+
 ```ts {% title="minimal-royalties.ts" %}
 import { addPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
 await addPlugin(umi, {
@@ -389,27 +465,44 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 ### Basis Pointsリファレンス
+
 | 希望% | Basis Points |
 |-----------|--------------|
 | 2.5% | 250 |
 | 5% | 500 |
 | 7.5% | 750 |
 | 10% | 1000 |
+
 ## FAQ
+
 ### Coreのロイヤリティは強制されますか？
+
 はい、Allowlist RuleSetを使用する場合に強制されます。Allowlistに含まれるプログラムのみがAssetを転送でき、ロイヤリティの支払いが保証されます。
+
 ### CoreのロイヤリティとToken Metadataのロイヤリティの違いは何ですか？
+
 CoreのロイヤリティはAssetまたはCollectionレベルでRoyalties Pluginが必要で、RuleSetによるオプションの強制があります。標準のToken Metadata NFTロイヤリティは推奨事項であり、マーケットプレイスの協力に依存します。pNFT（プログラマブルNFT）もCoreと同様のRuleSetベースの強制をサポートしています。
+
 ### Collection内のAssetごとに異なるロイヤリティを設定できますか？
+
 はい。個別のAssetにRoyalties Pluginを追加することで、Collectionレベルの設定を上書きできます。
+
 ### マーケットプレイスはどのようにロイヤリティを読み取りますか？
+
 マーケットプレイスはDASまたはオンチェーンデータを通じてAssetのPluginを照会します。Royalties Pluginのデータには、Basis Point、クリエイター、RuleSetが含まれます。
+
 ### RuleSetを設定しない場合はどうなりますか？
+
 `ruleSet('None')`を使用してください。任意のプログラムがAssetを転送でき、ロイヤリティは推奨事項のみとなります。
+
 ### ミント後にロイヤリティを変更できますか？
+
 はい。Authorityがあれば、`updatePlugin`（Asset用）または`updateCollectionPlugin`（Collection用）を使用できます。
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Basis Points** | ロイヤリティの割合を100分の1で表したもの（500 = 5%） |

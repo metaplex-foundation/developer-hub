@@ -17,25 +17,32 @@ mplx core plugins add <assetId> [options]
 ```
 
 ### オプション
+
 - `--wizard`: プラグインを選択および設定するためのインタラクティブウィザードモード
 - `--collection`: ターゲットがコレクションであることを示すフラグ（デフォルト：false）
 
 ### 方法
 
 #### 1. ウィザードモードの使用
+
 ```bash
 mplx core plugins add <assetId> --wizard
 ```
+
 これにより以下が行われます：
+
 1. プラグインタイプを選択するためのインタラクティブウィザードを起動
 2. プラグイン設定をガイド
 3. 設定されたプラグインをアセット/コレクションに追加
 
 #### 2. JSONファイルの使用
+
 ```bash
 mplx core plugins add <assetId> ./plugin.json
 ```
+
 JSONファイルは、以下の形式でプラグイン設定を含む必要があります：
+
 ```json
 {
   "pluginType": {
@@ -48,16 +55,19 @@ JSONファイルは、以下の形式でプラグイン設定を含む必要が�
 ### 例
 
 #### アセットにプラグインを追加
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard
 ```
 
 #### コレクションにプラグインを追加
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --wizard --collection
 ```
 
 #### JSONを使用してプラグインを追加
+
 ```bash
 mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.json
 ```
@@ -65,6 +75,7 @@ mplx core plugins add 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa ./my-plugin.j
 ## 出力
 
 プラグインの追加が成功した後、コマンドは以下を表示します：
+
 ```
 --------------------------------
   Asset: <assetId>

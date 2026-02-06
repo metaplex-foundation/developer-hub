@@ -34,6 +34,7 @@ faqs:
 
 {% callout title="What You'll Learn" %}
 This overview covers:
+
 - How uniform price auctions work
 - When to use auctions vs other launch mechanisms
 - Key concepts: bids, clearing price, allocation
@@ -109,15 +110,19 @@ Detailed setup documentation for Uniform Price Auctions is coming soon. For now,
 ## FAQ
 
 ### What is a uniform price auction?
+
 An auction where all winning bidders pay the same clearing price, regardless of their individual bid amounts. The clearing price is the lowest winning bid.
 
 ### How is the clearing price determined?
+
 Bids are ranked by price from highest to lowest. The clearing price is set at the point where total bid quantity equals available tokens, with all winners paying this uniform price.
 
 ### Can bids be private?
+
 Yes. Uniform Price Auctions support both public and private (sealed) bids depending on your configuration.
 
 ### When should I use a Uniform Price Auction?
+
 Use it for price discovery with larger participants (whales, funds) who prefer structured auction formats over deposit-based launches.
 
 ## Glossary

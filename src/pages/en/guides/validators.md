@@ -57,6 +57,7 @@ To delegate SOL to a validator:
 ### Choosing a Validator
 
 Consider these factors when selecting a validator:
+
 - **Performance**: Uptime and block production history
 - **Commission**: The percentage of rewards the validator keeps (typically 5-10%)
 - **Total Stake**: Higher stake may indicate trust but also contributes to centralization
@@ -65,11 +66,13 @@ Consider these factors when selecting a validator:
 ## Tools and Resources
 
 ### Staking Tools
+
 - [Solana Beach](https://solanabeach.io/validators) - Explorer and validator statistics
 - [Validators.app](https://www.validators.app/) - Detailed validator performance metrics
 - [Stakeview.app](https://stakeview.app/) - Validator ranking and comparison
 
 ### Wallets Supporting Staking
+
 - Phantom
 - Solflare
 - Ledger

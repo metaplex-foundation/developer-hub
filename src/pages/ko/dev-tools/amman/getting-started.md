@@ -33,5 +33,6 @@ npm i @metaplex-foundation/amman
     "amman:start": "npx amman start"
   },
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

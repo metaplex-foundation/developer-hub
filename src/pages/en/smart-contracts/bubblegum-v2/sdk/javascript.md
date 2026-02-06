@@ -11,15 +11,16 @@ To get started, you'll need to [install the Umi framework](/dev-tools/umi/gettin
 ## Installation
 
 Installation can be executed with any JavaScript package manager (npm, yarn, bun, etc.).
+
 ```sh
 npm install @metaplex-foundation/mpl-bubblegum
 ```
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum JavaScript SDK generated package API documentation." /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" description="MPL-Bubblegum JavaScript SDK generated package API documentation." /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="MPL-Bubblegum Javascript SDK on NPM." /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum>" description="MPL-Bubblegum Javascript SDK on NPM." /%}
 
 {% /quick-links %}
 

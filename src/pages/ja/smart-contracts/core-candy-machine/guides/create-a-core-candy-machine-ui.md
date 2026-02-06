@@ -40,6 +40,7 @@ npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaple
 ユーザーには表示されないが、バックグラウンドの計算で使用される追加データを取得することも理にかなっています。たとえば、[Redeemed Amount](/ja/smart-contracts/core-candy-machine/guards/redeemed-amount) Guardを使用する場合、すでに償還された数量を取得して、ユーザーがさらにミントできるかどうかを確認する必要があります。
 
 ### Candy Machineデータの取得
+
 Candy Machineアカウントには、利用可能および償還されたアセットの数などのデータが保存されています。また、`mintAuthority`も保存されており、これは通常、Candy Guardのアドレスです。
 
 Candy Machineを取得するには、以下のように`fetchCandyMachine`関数を使用できます:
@@ -69,6 +70,7 @@ console.log(candyMachine)
 {% dialect title="JSON" id="json-cm" %}
 
 {% totem-accordion title="Candy Machine Data" %}
+
 ```json
 {
     "publicKey": "Ct5CWicvmjETYXarcUVJenfz3CCh2hcrCM3CMiB8x3k9",
@@ -127,6 +129,7 @@ console.log(candyMachine)
     "itemsLoaded": 16
 }
 ```
+
 {% /totem-accordion  %}
 
 {% /dialect %}
@@ -135,6 +138,7 @@ console.log(candyMachine)
 UI観点から最も重要なフィールドは、`itemsRedeemed`、`itemsAvailable`、および`mintAuthority`です。場合によっては、Webサイトにティーザー画像として`items`のいくつかを表示することも興味深いかもしれません。
 
 #### 残りのアセット数を表示する
+
 `13 / 16 Assets minted`のようなセクションを表示するには、以下のようなものを使用します:
 
 ```ts
@@ -148,6 +152,7 @@ const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedee
 ```
 
 ### Candy Guardデータの取得
+
 Candy Guardには、ミントを許可するために満たさなければならない条件が含まれています。これには、例えばSolまたはTokenの支払い、1つのウォレットがミントできるアセットの数の制限などが含まれます。Candy Guardの詳細については、[Candy Guardページ](/ja/smart-contracts/core-candy-machine/guards)をご覧ください。
 
 Candy Machineデータと同様に、guardアカウントを取得することは必須ではありません。そうすることで、Candy GuardのSOL価格を更新するだけで、Webサイトの数値も自動的に更新されるような柔軟性が得られます。
@@ -420,15 +425,18 @@ const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority);
     ]
 }
 ```
+
 {% /totem-accordion  %}
 
 {% /dialect %}
 {% /dialect-switcher %}
 
 ### 追加のCandy Machine関連アカウントの取得
+
 実装するGuardの選択により、追加のアカウントを取得する必要がある場合があります。たとえば、ウォレットのミント適格性を確認する予定があり、`mintLimit` Guardを使用している場合は、`mintCounter`アカウントを取得する必要があります。このアカウントは、特定のウォレットがその特定のguard下でミントしたNFTの数を記録しています。
 
 #### `MintLimit`アカウント
+
 [`MintLimit`](/ja/smart-contracts/core-candy-machine/guards/mint-limit) guardがアクティブな場合、ユーザーのウォレットの`MintCounter`アカウントを取得することをお勧めします。これにより、ユーザーがミント制限に達しているか、まだ追加のアイテムをミントできるかどうかを確認できます。
 
 以下のコードスニペットは、`MintCounter`を取得する方法を示しています。この例は、すでにCandy MachineとCandy Guardデータを取得していることを前提としています:
@@ -445,6 +453,7 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 ```
 
 #### `NftMintLimit`アカウント
+
 `MintLimit` guardと同様に、[`NftMintLimit`](/ja/smart-contracts/core-candy-machine/guards/nft-mint-limit) guardの`NftMintCounter`アカウントを取得して適格性を確認することが理にかなっています。
 
 以下のコードスニペットは、`NftMintCounter`アカウントを取得する方法を示しています。この例は、すでにCandy MachineとCandy Guardデータを取得していることを前提としています:
@@ -466,6 +475,7 @@ const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
 
 #### `AssetMintLimit`アカウント
+
 `NftMintCounter` guardと同様に、[`AssetMintLimit`](/ja/smart-contracts/core-candy-machine/guards/asset-mint-limit) guardの`AssetMintCounter`アカウントを取得して適格性を確認することが理にかなっています。
 
 以下のコードスニペットは、`AssetMintCounter`アカウントを取得する方法を示しています。この例は、すでにCandy Machineデータを取得していることを前提としています:
@@ -487,6 +497,7 @@ const assetMintCounter = fetchAssetMintCounter(umi, pda);
 ```
 
 #### `Allocation`アカウント
+
 `Allocation` guardの場合、`AllocationTracker`アカウントを取得して、特定のグループから追加のNFTをミントできることを確認することが理にかなっています。
 
 以下のコードスニペットは、`AllocationTracker`アカウントを取得する方法を示しています。この例は、すでにCandy Machineデータを取得していることを前提としています:
@@ -504,6 +515,7 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
 ```
 
 #### `Allowlist`アカウント
+
 Allowlist guardを実装する場合、事前に`route`命令を実行することが重要です。この命令は、各ウォレットとCandy Machineの組み合わせに対して一意のアカウントを生成し、ウォレットがミントを承認されていることを効果的にマークします。
 
 UI観点から、このアカウントを照会することは有益です。これにより、`route`命令を実行する必要があるか、ユーザーがミント命令に直接進めるかを判断できます。
@@ -531,9 +543,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
 ```
 
 ### ウォレットデータの取得
+
 適格性を検証するために、接続されたウォレットに関する情報を取得することもできます。使用しているGuardに応じて、ウォレット内のSOLの量、ウォレットが所有しているTokenとNFTを知りたい場合があります。
 
 SOL残高を取得するには、組み込みの`getAccount` umi関数を使用してウォレットアカウントを取得できます:
+
 ```ts
 const account = await umi.rpc.getAccount(umi.identity.publicKey);
 const solBalance = account.lamports;
@@ -556,6 +570,7 @@ const assets = await umi.rpc.getAssetsByOwner({
 ```
 
 ## 適格性の検証
+
 すべての必要なデータを取得した後、接続されたウォレットがミントを許可されているかどうかを確認できます。
 
 Candy Machineにグループが添付されている場合、`default` guardsは作成されたすべてのグループに普遍的に適用されることに注意することが重要です。また、グループが有効になっている場合、`default`グループからミントする機能は無効になり、作成されたグループをミントに使用する必要があります。
@@ -565,6 +580,7 @@ Candy Machineにグループが添付されている場合、`default` guardsは
 グループを活用していない`startDate`、`SolPayment`、および`mintLimit` guardsが添付されたCandy Machineが与えられた場合、ユーザーがミント関数を呼び出すことを許可する前に、次の検証を行う必要があります。`candyGuard`が以前に取得されており、1つのCore NFTアセットをミントすることを前提としています。
 
 1. `startDate`が過去であることを検証します。ここではユーザーのデバイス時間を使用せず、代わりに現在の内部Solanaブロックタイムをフェッチしています。これは、Candy Machineがミント時の検証に使用する時間だからです:
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -585,7 +601,8 @@ if (startDate) {
 }
 ```
 
-2. ウォレットがミントの支払いに十分なSOLを持っているかを確認します。ここでは取引手数料を含めておらず、`SolBalance`が上記のように取得されていると仮定しています。
+1. ウォレットがミントの支払いに十分なSOLを持っているかを確認します。ここでは取引手数料を含めておらず、`SolBalance`が上記のように取得されていると仮定しています。
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 
@@ -598,7 +615,8 @@ if (solPayment){
 }
 ```
 
-3. `mintLimit`にまだ達していないことを確認します:
+1. `mintLimit`にまだ達していないことを確認します:
+
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
 import {
@@ -625,6 +643,7 @@ if (mintLimit){
 ウォレットがミント不適格な場合、ミントボタンを無効にして、ミント不適格の理由をユーザーに表示すると役立ちます。例えば、`Not enough SOL!`メッセージなど。
 
 ## Guard Routes
+
 特定のGuardは、ミントが発生する前に実行する必要がある特定の命令を必要とします。これらの命令は、データを保存するアカウントを作成するか、ウォレットのミント適格性の証明を提供します。これらの命令の実行頻度は、Guardのタイプによって異なります。
 
 {% callout type="note" title="このセクションの対象者" %}
@@ -632,11 +651,13 @@ if (mintLimit){
 {% /callout %}
 
 一部のGuardは、Candy Machine全体に対して一度だけルートを実行する必要があります。これらについては、UIに関数を含める必要はありませんが、スクリプトを介して一度事前に実行できます:
+
 - [Allocation](/ja/smart-contracts/core-candy-machine/guards/allocation)
 - [FreezeSolPayment](/ja/smart-contracts/core-candy-machine/guards/freeze-sol-payment)
 - [FreezeTokenPayment](/ja/smart-contracts/core-candy-machine/guards/freeze-token-payment)
 
 他のGuardは、個々のウォレットごとにルートを実行する必要があります。これらの場合、ルート命令はミントトランザクションの前に実行する必要があります:
+
 - [Allowlist](/ja/smart-contracts/core-candy-machine/guards/allow-list)
 
 Guardルートの実装方法の例として、**Allowlist** guardのケースを考えてみましょう。これは、`allowListProof`が前述のように取得されており、`allowlist`が適格なウォレットアドレスの配列を表していることを前提としています。以下のコードは、実装でこのシナリオを処理する方法を示しています。
@@ -668,6 +689,7 @@ if (allowListProof === null) {
 ```
 
 ## ミント関数の作成
+
 添付されているすべてのguardの適格性チェックを実装することをお勧めします。グループが添付されている場合、`default` guardsがすべての追加グループに適用される一方で、同時に`default`グループが無効になることに注意してください。
 
 これらのチェックが完了し、必要に応じてルート命令が実行された後、ミントトランザクションを構築できます。Guardに応じて、`mintArgs`を渡す必要がある場合があります。これらは、正しいアカウントとデータを渡すことでミントトランザクションを構築するのに役立つ引数です。たとえば、`mintLimit` guardは`mintCounter`アカウントを必要とします。Umi SDKはこれらの詳細を抽象化しますが、トランザクションを正しく構築するためには、いくつかの情報が必要です。
@@ -715,7 +737,6 @@ await mintV1(umi, {
 
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
-
 
 ## 高度なミントテクニック
 
@@ -770,7 +791,6 @@ await mintV1(umi, {
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
-
 ## 次のステップ
 
 フロントエンドでCandy Machineと対話する基本をマスターしたので、プロジェクトをさらに強化および配布するために、次のステップを検討することをお勧めします:
@@ -785,6 +805,6 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 
 3. 最適化:特にミントイベント中に高トラフィックが予想される場合は、パフォーマンスのためにフロントエンドを微調整します。
 
-8. モニタリング:Candy Machine UIのステータスを追跡し、発生する可能性のある問題に迅速に対処するために、監視ツールを設定します。
+4. モニタリング:Candy Machine UIのステータスを追跡し、発生する可能性のある問題に迅速に対処するために、監視ツールを設定します。
 
 これらの領域に焦点を当てることで、Core Candy Machineを使用して成功したNFTミントプロジェクトを立ち上げ、維持する準備が整います。

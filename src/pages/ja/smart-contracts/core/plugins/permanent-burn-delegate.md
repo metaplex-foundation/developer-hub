@@ -30,21 +30,30 @@ faqs:
 ---
 **Permanent Burn Delegate Plugin**は、永続的に有効な取り消し不可能なburn権限を提供します。delegateはフリーズ中でもAssetをburnでき、ゲームやサブスクリプションサービスに最適です。 {% .lead %}
 {% callout title="学習内容" %}
+
 - 永続的なburn機能を持つAssetの作成
 - Collection全体のburn権限の有効化
 - フリーズ中のAssetのburn（`forceApprove`動作）
 - ユースケース：ゲーム、サブスクリプション、自動クリーンアップ
 {% /callout %}
+
 ## 概要
+
 **Permanent Burn Delegate**は、作成時にのみ追加できるpermanent pluginです。delegateはAssetがフリーズ中でも、いつでもAssetをburnできます。
+
 - Asset/Collection作成時にのみ追加可能
 - 権限は永続的（取り消されない）
 - `forceApprove`を使用 - フリーズ中でもburn可能
 - Collectionレベル：Collection内の任意のAssetをburn可能
+
 ## 対象外
+
 通常のburn delegate（[Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)を参照）、条件付きburn、Token Metadata burn権限。
+
 ## クイックスタート
+
 **移動先:** [Assetの作成](#creating-an-asset-with-a-permanent-burn-plugin)
+
 1. Asset/Collection作成時に`PermanentBurnDelegate` pluginを追加
 2. authorityをプログラムまたはdelegateアドレスに設定
 3. delegateはフリーズ中でもいつでもAssetをburn可能
@@ -59,26 +68,37 @@ faqs:
 **[Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)を選択**：ユーザーが取り消し可能なburn権限の場合。
 **Permanent Burn Delegateを選択**：ゲーム、緊急破棄、自動クリーンアップの場合。
 {% /callout %}
+
 ## 一般的なユースケース
+
 - **ゲームメカニクス**：ゲーム内でアイテムが消費、紛失、破壊された時にAssetを破棄
 - **サブスクリプション期限切れ**：フリーズ中でも期限切れのサブスクリプショントークンを自動burn
 - **緊急破棄**：状態に関係なく、侵害されたまたは不要なAssetを削除
 - **クラフトシステム**：クラフト時に素材NFTをburn（ロック中でも可能）
 - **期間限定アセット**：期限切れのコンテンツを自動的に破棄
 - **コンプライアンス**：オーナーがフリーズしようとしても、規約に違反するAssetを削除
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ### 動作
+
 - **Asset**：delegatedアドレスを使用してAssetのburnを許可します。
 - **Collection**：collection authorityを使用してCollection内の任意のAssetのburnを許可します。一度に全てをburnするわけではありません。
+
 ## 引数
+
 Permanent Burn Pluginには渡す引数はありません。
+
 ## Permanent Burn Pluginを持つAssetの作成
+
 {% dialect-switcher title="Permanent Freeze pluginを持つAssetの作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -96,8 +116,10 @@ await create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateV1Builder,
@@ -134,35 +156,58 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 一般的なエラー
+
 ### `Cannot add permanent plugin after creation`
+
 Permanent pluginはAsset/Collection作成時にのみ追加できます。既存のAssetにPermanent Burn Delegateを追加することはできません。
+
 ### `Authority mismatch`
+
 plugin authorityのみがburnできます。正しいキーペアで署名しているか確認してください。
+
 ## 注意事項
+
 - **作成時のみ**：Asset/Collection存在後は追加不可
 - **Force approve**：フリーズ中でもburn可能
 - **Collection動作**：Collection内の任意のAssetを個別にburn可能
 - **永続的**：権限は取り消されない
 - **不可逆**：burnされたAssetは復元不可
+
 ## FAQ
+
 ### Burn DelegateとPermanent Burn Delegateの違いは何ですか？
+
 通常のBurn Delegateはフリーズ中のAssetをburnできず、転送時に取り消されます。Permanent Burn Delegateはフリーズ中のAssetもburn可能（forceApprove）で、永続的に有効です。
+
 ### Permanent Burn Delegateはフリーズ中のAssetをburnできますか？
+
 はい。Permanent pluginは`forceApprove`を使用し、フリーズの拒否を上書きします。これはアイテムを破壊可能にする必要があるゲームメカニクスに便利です。
+
 ### 既存のAssetにこれを追加できますか？
+
 いいえ。Permanent pluginはAsset作成時にのみ追加できます。既存のAssetには通常のBurn Delegateを使用してください。
+
 ### CollectionレベルのPermanent Burn Delegateはどのように機能しますか？
+
 delegateはCollection内の任意の個別Assetをburnできますが、一度に全てをburnすることはできません。各burnは別々のトランザクションです。
+
 ### これは安全に使用できますか？
+
 注意して使用してください。delegateはオーナーの承認なしにいつでもAssetをburnできます。信頼できるプログラムまたはアドレスにのみ割り当ててください。
+
 ## 関連Plugin
+
 - [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate) - 取り消し可能なburn権限
 - [Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate) - 永続的なfreeze権限
 - [Permanent Transfer Delegate](/ja/smart-contracts/core/plugins/permanent-transfer-delegate) - 永続的なtransfer権限
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Permanent Plugin** | 作成時にのみ追加でき、永続的に有効なPlugin |

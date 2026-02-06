@@ -71,10 +71,11 @@ npm i @metaplex-foundation/mpl-token-metadata
 MPL-Hybridプログラムでメタデータランダム化機能を利用するには、オフチェーンメタデータURIが一貫した増分構造に従う必要があります。このため、TurboSDKと組み合わせてArweaveの[パスマニフェスト](https://cookbook.arweave.dev/concepts/manifests.html)機能を使用します。
 
 マニフェストにより、複数のトランザクションを単一のベーストランザクションID下でリンクし、人間が読める形式のファイル名を割り当てることができます：
-- https://arweave.net/manifestID/0.json
-- https://arweave.net/manifestID/1.json
+
+- <https://arweave.net/manifestID/0.json>
+- <https://arweave.net/manifestID/1.json>
 - ...
-- https://arweave.net/manifestID/9999.json
+- <https://arweave.net/manifestID/9999.json>
 
 決定論的URIの作成に慣れていない場合は、詳細な手順について[このガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。さらに、Hybridプログラムが機能するために必要な[コレクション](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)と[アセット](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)の作成手順を見つけることができます。
 
@@ -366,6 +367,7 @@ import {
 })();
 
 ```
+
 {% /totem-accordion %}
 
 {% /totem %}
@@ -471,6 +473,7 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 ### キャプチャ/リリースするアセットの選択
 
 キャプチャおよびリリースするアセットの選択方法は、エスクロー作成時に選択したパスによります：
+
 - **パス0**: パスが`0`に設定されている場合、NFTメタデータはスワップ中に更新されるため、これは関係ないのでエスクローからランダムなアセットを取得できます。
 - **パス1**: パスが`1`に設定されている場合、NFTメタデータはスワップ後も同じままなので、ユーザーにスワップしたい特定のNFTを選択させることができます。
 

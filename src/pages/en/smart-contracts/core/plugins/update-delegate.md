@@ -30,21 +30,30 @@ faqs:
 ---
 The **Update Delegate Plugin** allows you to grant update permissions to additional addresses. Useful when third parties need to modify Asset metadata without being the primary update authority. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Add the Update Delegate plugin to Assets and Collections
 - Grant update permissions to additional addresses
 - Understand what additional delegates can and cannot do
 - Update and manage the delegates list
 {% /callout %}
+
 ## Summary
+
 The **Update Delegate** is an Authority Managed plugin that allows the update authority to grant update permissions to other addresses. Additional delegates can modify most Asset data but cannot change core authority settings.
+
 - Grant update permissions to third parties
 - Add multiple additional delegates
 - Works with both Assets and Collections
 - Delegates cannot modify the root update authority
+
 ## Out of Scope
+
 Permanent update delegation, owner-level permissions (this is authority managed), and Token Metadata update authority (different system).
+
 ## Quick Start
+
 **Jump to:** [Add to Asset](#adding-the-update-delegate-plugin-to-an-asset) · [Update Delegates](#updating-the-update-delegate-plugin) · [Collection](#updating-update-delegate-plugin-on-collection)
+
 1. Add the Update Delegate plugin with the delegate address
 2. Optionally add additional delegates
 3. Delegates can now update Asset metadata
@@ -58,30 +67,42 @@ Permanent update delegation, owner-level permissions (this is authority managed)
 | Owner should control updates | ❌ Use default authority |
 **Use Update Delegate** when you need to grant update permissions to programs or third parties without transferring the root authority.
 {% /callout %}
+
 ## Common Use Cases
+
 - **Third-party services**: Allow platforms to update metadata on your behalf
 - **Game programs**: Grant your game program authority to modify Asset attributes
 - **Team collaboration**: Multiple team members can update without sharing keys
 - **Marketplaces**: Allow marketplaces to update listing-related metadata
 - **Dynamic content**: Services that automatically update Asset data
+
 ## Works With
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ## Arguments
+
 |                     |             |
 | ------------------- | ----------- |
 | additionalDelegates | publickey[] |
+
 ### additionalDelegates
+
 Additional delegates allow you to add more than one delegate to the updateDelegate plugin.
 Additional delegates can do everything that the update authority can do except:
+
 - add or change the additional delegates array (apart from remove themselves).
 - change the plugin authority of the updateAuthority plugin.
 - change the root update authority of the collection.
+
 ## Adding the Update Delegate Plugin to an Asset
+
 {% dialect-switcher title="Adding a Update Delegate Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -96,8 +117,10 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -130,12 +153,16 @@ pub async fn add_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Updating the Update Delegate Plugin
+
 The Update Delegate Plugin can be updated to modify the list of additional delegates or change the plugin authority.
 {% dialect-switcher title="Updating Update Delegate Plugin on Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -150,8 +177,10 @@ await updatePlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -189,11 +218,15 @@ pub async fn update_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Updating Update Delegate Plugin on Collection
+
 {% dialect-switcher title="Updating Update Delegate Plugin on Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin } from '@metaplex-foundation/mpl-core'
@@ -208,8 +241,10 @@ await updateCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdateCollectionPluginV1Builder,
@@ -247,21 +282,32 @@ pub async fn update_collection_update_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 Only the update authority (or existing plugin authority) can add/modify the Update Delegate plugin.
+
 ### `Cannot modify root authority`
+
 Additional delegates cannot change the root update authority or modify the additional delegates list (except removing themselves).
+
 ## Notes
+
 - Authority Managed: update authority can add without owner signature
 - Additional delegates have almost full update permissions
 - Delegates cannot change the root update authority
 - Delegates cannot modify the additional delegates list (except remove themselves)
 - Works on both Assets and Collections
+
 ## Quick Reference
+
 ### Additional Delegate Permissions
+
 | Action | Allowed? |
 |--------|----------|
 | Update name/URI | ✅ |
@@ -271,22 +317,37 @@ Additional delegates cannot change the root update authority or modify the addit
 | Change root update authority | ❌ |
 | Modify additional delegates | ❌ (except self-removal) |
 | Change plugin authority | ❌ |
+
 ## FAQ
+
 ### What can additional delegates do?
+
 Almost everything the update authority can do: update metadata, add/remove plugins, etc. They cannot change the root update authority, modify the additional delegates list, or change the Update Delegate plugin authority.
+
 ### Can additional delegates add more delegates?
+
 No. Only the root update authority (or plugin authority) can add or remove additional delegates.
+
 ### How do I remove myself as an additional delegate?
+
 Additional delegates can remove themselves from the list by updating the plugin without their address in the `additionalDelegates` array.
+
 ### Is there a limit to additional delegates?
+
 There's no hard limit, but more delegates increase account size and rent. Keep the list reasonable.
+
 ### Does Update Delegate work on Collections?
+
 Yes. Adding Update Delegate to a Collection allows delegates to update collection metadata and collection-level plugins.
+
 ## Related Plugins
+
 - [Attributes](/smart-contracts/core/plugins/attribute) - Store on-chain data that delegates can update
 - [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Make metadata unchangeable (overrides delegates)
 - [AddBlocker](/smart-contracts/core/plugins/addBlocker) - Prevent delegates from adding new plugins
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Update Delegate** | Authority Managed plugin for granting update permissions |

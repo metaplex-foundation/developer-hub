@@ -136,6 +136,7 @@ mintV1(umi, {
 _Mint Limitガードはルート命令をサポートしていません。_
 
 ## MintLimitアカウント
+
 `MintLimit`ガードを使用すると、各ウォレット、CandyMachine、および`id`の組み合わせに対して`MintCounter`アカウントが作成されます。検証目的で次のようにフェッチできます:
 
 ```js

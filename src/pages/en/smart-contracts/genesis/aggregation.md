@@ -34,6 +34,7 @@ The Genesis API allows aggregators and applications to query launch data from Ge
 
 {% callout title="What You'll Learn" %}
 This reference covers:
+
 - HTTP API endpoints for launch metadata
 - On-chain state fetching with the JavaScript SDK
 - TypeScript and Rust type definitions
@@ -332,12 +333,14 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 Add these dependencies to your `Cargo.toml`:
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## Fetching On-Chain State (JavaScript SDK)
@@ -401,15 +404,19 @@ if (deposit) {
 ## FAQ
 
 ### What's the difference between the API and on-chain fetching?
+
 The API returns aggregated metadata (socials, images). On-chain fetching via the SDK returns real-time state like deposit totals and time conditions.
 
 ### How do I get real-time deposit totals?
+
 Use `fetchLaunchPoolBucketV2` or `fetchPresaleBucketV2` from the Genesis SDK to read current on-chain state.
 
 ### Can I query time conditions for a bucket?
+
 Yes. Fetch the bucket account and access `depositStartCondition`, `depositEndCondition`, `claimStartCondition`, and `claimEndCondition`.
 
 ### How do I check if a user has deposited?
+
 Use `safeFetchLaunchPoolDepositV2` or `safeFetchPresaleDepositV2` with the deposit PDA. It returns null if no deposit exists.
 
 ## Glossary

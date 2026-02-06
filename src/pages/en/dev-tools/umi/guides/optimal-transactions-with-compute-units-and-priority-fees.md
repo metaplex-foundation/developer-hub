@@ -13,6 +13,7 @@ When sending transactions on Solana, optimizing two key parameters can significa
 Priority fees let you bid in local fee markets to get your transactions included faster. When the network is congested and multiple transactions compete to modify the same accounts, validators prioritize transactions with higher priority fees.
 
 Key points about priority fees:
+
 - They are calculated as: `compute_unit_limit * compute_unit_price`
 - Higher fees increase likelihood of faster inclusion
 - Only pay what's necessary based on current network competition
@@ -25,6 +26,7 @@ Compute Units (CUs) represent the computational resources your transaction needs
 2. Blocks have limited CU capacity - requesting excess CUs reduces total transactions per block
 
 Benefits of optimizing your CU limit:
+
 - Lower transaction costs by only paying for needed CUs
 - Improved network efficiency by allowing more transactions per block
 - Still ensures sufficient resources for execution
@@ -33,18 +35,20 @@ For example, a simple token transfer might only need 20,000 CUs, while an NFT mi
 
 ## Implementation Guide
 
-This guide demonstrates how to programmatically calculate optimal values rather than guessing. 
+This guide demonstrates how to programmatically calculate optimal values rather than guessing.
 
 {% callout type="warning" %}
 The code examples use `fetch` for RPC calls since Umi hasn't implemented these methods yet. When official support is added, prefer using Umi's built-in methods.
 {% /callout %}
 
 ### Calculate Priority Fees
+
 When using priority fees it is important to remember that those have the best effect when the competition is taken into account. Adding a huge number manually may result in overpaying more fees than required, while using a too low number might result in the transaction not being included into the block in case there is too much competition.
 
-To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 100 fees paid. This number can be aligned according to your experience. 
+To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 100 fees paid. This number can be aligned according to your experience.
 
 The following steps are necessary:
+
 1. Extract writable accounts from your transaction
 2. Query recent fees paid for those accounts
 3. Calculate optimal fee based on market conditions
@@ -53,6 +57,7 @@ At the bottom of the page you can find a full example where a Sol Transfer is do
 
 {% totem %}
 {% totem-accordion title="Code Snippet" %}
+
 ```js
 import {
   TransactionBuilder,
@@ -105,13 +110,16 @@ export const getPriorityFee = async (
 };
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### Calculate Compute Units
+
 To optimize transaction costs and ensure reliable execution, we can calculate the ideal compute unit limit by simulating the transaction first. This approach is more precise than using fixed values and helps avoid over-allocation of resources.
 
 The simulation process works by:
+
 1. Building the transaction with maximum compute units (1,400,000)
 2. Simulating it to measure actual compute units consumed
 3. Adding a 10% safety buffer to account for variations
@@ -119,6 +127,7 @@ The simulation process works by:
 
 {% totem %}
 {% totem-accordion title="Code Snippet" %}
+
 ```js
 export const getRequiredCU = async (
   umi: Umi,
@@ -175,14 +184,17 @@ export const getRequiredCU = async (
   console.log("Estimating required compute units...");
   const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### Full example for Sol Transfer
+
 Following the code above and introducing some boilerplate to create the Umi instance could result in a script like this to create a Sol Transfer transaction:
 
 {% totem %}
 {% totem-accordion title="Full Code Example" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
@@ -367,5 +379,6 @@ const example = async () => {
 example().catch(console.error);
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}

@@ -9,6 +9,7 @@ description: 了解更多关于Bubblegum上NFT数据如何存储的信息。
 Metaplex创建了DAS API的[参考实现](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)，一些RPC提供商使用部分或全部此代码用于其特定实现，而其他RPC提供商则编写了自己的实现。请参阅["Metaplex DAS API RPC"](/zh/rpc-providers)页面获取支持Metaplex DAS API的其他RPC提供商列表。
 
 Metaplex DAS API参考实现包括以下关键项：
+
 * Solana无投票验证节点 - 此验证节点配置为仅对共识下的验证节点分类账和账户数据有安全访问权限。
 * Geyser插件 - 该插件称为"Plerkle"，在验证节点上运行。每当有账户更新、slot状态更新、交易或区块元数据更新时，该插件都会收到通知。对于cNFT索引的目的，当在验证节点上看到Bubblegum或spl-account-compression交易时，插件的`notify_transaction`方法用于提供交易数据。实际上，这些交易来自spl-noop（"无操作"）程序，spl-account-compression和Bubblegum使用它来避免日志截断，将事件转换为spl-noop指令数据。
 * Redis集群 - Redis流用作每种更新类型（账户、交易等）的队列。Geyser插件是这些流数据的生产者。Geyser插件将数据转换为Plerkle序列化格式（使用Flatbuffers协议），然后将序列化记录放入适当的Redis数据流。

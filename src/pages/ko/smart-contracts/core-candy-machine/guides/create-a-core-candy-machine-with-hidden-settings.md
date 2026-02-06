@@ -63,6 +63,7 @@ umi.use(signerIdentity(signer));
 UMI 설정에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
 
 ## 공개 데이터 준비
+
 이제 최종 공개된 NFT의 메타데이터가 포함될 공개 데이터를 준비해보겠습니다. 이 데이터는 컬렉션의 각 NFT에 대한 이름과 URI를 포함하며 민팅 후 플레이스홀더 메타데이터를 업데이트하는 데 사용됩니다.
 이 메타데이터는 각 asset에 대해 업로드되며, 결과 URI를 사용할 것입니다.
 
@@ -306,9 +307,11 @@ for(let i = 0; i < nftMint.length; i++) {
 ```
 
 ## 결론
+
 축하합니다! 가이드의 1부를 완료하고 hidden settings로 Core Candy Machine을 성공적으로 설정했습니다.
 
 우리가 한 모든 일을 다시 살펴보겠습니다:
+
 - UMI 설정부터 시작했습니다.
 - UMI를 설정한 후, 초기 민팅 후 asset을 업데이트하는 데 사용될 메타데이터(이름과 URI)가 포함된 배열을 생성했습니다. 여기에는 검증 목적으로 해시 계산이 포함되었습니다.
 - 민팅된 asset이 속할 Collection asset을 생성했습니다.
@@ -316,5 +319,6 @@ for(let i = 0; i < nftMint.length; i++) {
 - Core Candy Machine의 hidden setting에 저장된 플레이스홀더 값으로 Core Candy Machine에서 모든 asset을 민팅했습니다.
 
 2부에서는 asset을 공개하고 메타데이터를 검증하는 단계를 다룰 것입니다. 여기에는 다음이 포함됩니다:
+
 - 컬렉션 asset을 가져와서 준비된 공개 데이터로 메타데이터를 업데이트합니다.
 - 공개된 asset의 메타데이터(이름과 URI)를 해시하고 예상 해시와 비교하여 공개 과정이 성공했는지 확인합니다.

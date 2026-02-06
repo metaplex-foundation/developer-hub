@@ -326,4 +326,5 @@ You can either generate your own UI and use the `umi` client wrapper and `mpl-ca
 - Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
 
 ### Further Reading
+
 - [Sugar CLI Docs](/smart-contracts/candy-machine/sugar)

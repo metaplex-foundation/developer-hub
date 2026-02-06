@@ -37,6 +37,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 
 umi.use(dasApi());
 ```
+
 {% /totem-prose %}
 {% /totem %}
 {% /dialect %}

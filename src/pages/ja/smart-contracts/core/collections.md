@@ -41,32 +41,46 @@ faqs:
 ---
 このガイドでは、Metaplex Core SDKを使用してSolanaで**Core Collectionを作成・管理**する方法を説明します。Collectionは関連するAssetを共有のアイデンティティとコレクションレベルのメタデータとプラグインでグループ化します。 {% .lead %}
 {% callout title="学習内容" %}
+
 - 名前、URI、オプションのプラグインを持つCollectionの作成
 - 作成時にAssetをCollectionに追加
 - Collectionメタデータの取得と更新
 - コレクションレベルのプラグイン（ロイヤリティなど）の管理
 {% /callout %}
+
 ## 概要
+
 **Collection**は関連するAssetをグループ化するCoreアカウントです。コレクションメタデータ（名前、画像、説明）を保存し、コレクション内のすべてのAssetに適用されるプラグインを保持できます。
+
 - CollectionはAssetグループの「表紙」として機能します
 - Assetは`collection`フィールドを通じてCollectionを参照します
 - Collectionプラグイン（ロイヤリティなど）はすべてのメンバーAssetに適用できます
 - Collectionの作成には約0.0015 SOLかかります
+
 ## スコープ外
+
 Token Metadata Collection（mpl-token-metadataを使用）、圧縮NFTコレクション（Bubblegumを使用）、既存のコレクションのCoreへの移行。
+
 ## クイックスタート
+
 **ジャンプ先:** [Collection作成](#シンプルなcollectionの作成) · [プラグイン付き](#プラグイン付きcollectionの作成) · [取得](#collectionの取得) · [更新](#collectionの更新)
+
 1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. コレクションメタデータJSONをアップロードしてURIを取得
 3. `createCollection(umi, { collection, name, uri })`を呼び出す
 4. Asset作成時にCollectionアドレスを渡す
+
 ## 前提条件
+
 - 署名者とRPC接続が設定された**Umi**
 - トランザクション手数料用の**SOL**（Collectionあたり約0.002 SOL）
 - Arweave/IPFSにアップロードされたコレクション画像付きの**メタデータJSON**
+
 ## Collectionとは？
+
 Collectionは、同じシリーズやグループに属するAssetのグループです。Assetをグループ化するには、まずコレクション名やコレクション画像などのコレクション関連のメタデータを保存するためのCollection Assetを作成する必要があります。Collection Assetはコレクションの表紙として機能し、コレクション全体のプラグインも保存できます。
 Collection Assetから保存およびアクセスできるデータは以下の通りです：
+
 | アカウント        | 説明                                       |
 | --------------- | ------------------------------------------ |
 | key             | アカウントキーの識別子                      |
@@ -75,11 +89,14 @@ Collection Assetから保存およびアクセスできるデータは以下の�
 | uri             | コレクションのオフチェーンメタデータへのURI  |
 | num minted      | コレクション内でミントされたAssetの数        |
 | current size    | 現在コレクション内にあるAssetの数            |
+
 ## Collectionの作成
+
 Core Collectionを作成するには、`CreateCollection`命令を次のように使用できます：
 {% totem %}
 {% totem-accordion title="技術的な命令の詳細 - CreateCollectionV1" %}
 **命令アカウントリスト**
+
 | アカウント        | 説明                                        |
 | --------------- | ------------------------------------------ |
 | collection      | Core Assetが属するCollection                |
@@ -96,13 +113,18 @@ Core Collectionを作成するには、`CreateCollection`命令を次のよう�
 オンチェーン命令の詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L30)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
+
 ### シンプルなCollectionの作成
+
 以下のスニペットは、プラグインや特別なものなしでシンプルなCollectionを作成します。
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
+
 ### プラグイン付きCollectionの作成
+
 以下のスニペットは、[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)を添付してCollectionを作成します。[こちら](/ja/smart-contracts/core/plugins)で説明されているように、追加のプラグインを添付できます。
 {% dialect-switcher title="プラグイン付きMPL Core Collectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -132,8 +154,10 @@ await createCollection(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -179,12 +203,16 @@ pub async fn create_collection_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collectionの取得
+
 Collectionを取得するには、以下の関数を使用できます：
 {% dialect-switcher title="Collectionの取得" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { fetchCollectionV1 } from '@metaplex-foundation/mpl-core'
 import { publicKey } from '@metaplex-foundation/umi'
@@ -192,8 +220,10 @@ const collectionId = publicKey('11111111111111111111111111111111')
 const collection = await fetchCollection(umi, collectionId)
 console.log(collection)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::Collection;
@@ -207,13 +237,17 @@ pub async fn fetch_collection() {
     print!("{:?}", collection)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collectionの更新
+
 Core Collectionのデータを更新するには、`UpdateCollection`命令を使用します。例えば、この命令を使用してCollectionの名前を変更できます。
 {% totem %}
 {% totem-accordion title="技術的な命令の詳細 - UpdateCollectionV1" %}
 **命令アカウントリスト**
+
 | アカウント           | 説明                                        |
 | ------------------ | ------------------------------------------ |
 | collection         | Core Assetが属するCollection                |
@@ -234,6 +268,7 @@ Core Collectionのデータを更新するには、`UpdateCollection`命令を�
 {% seperator h="6" /%}
 {% dialect-switcher title="Collectionの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollection } from '@metaplex-foundation/mpl-core'
@@ -244,8 +279,10 @@ await updateCollection(umi, {
   uri: 'https://exmaple.com/new-uri',
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::instructions::UpdateCollectionV1Builder;
@@ -276,13 +313,17 @@ pub async fn update_collection() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collectionプラグインの更新
+
 Core Collectionに添付されているプラグインの動作を変更したい場合は、`updateCollectionPlugin`命令を使用できます。
 {% totem %}
 {% totem-accordion title="技術的な命令の詳細 - UpdateCollectionPluginV1" %}
 **命令アカウントリスト**
+
 | アカウント      | 説明                                        |
 | ------------- | ------------------------------------------ |
 | collection    | Core Assetが属するCollection                |
@@ -301,6 +342,7 @@ Core Collectionに添付されているプラグインの動作を変更した�
 {% seperator h="6" /%}
 {% dialect-switcher title="Collectionプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -316,8 +358,10 @@ await updateCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -358,57 +402,89 @@ pub async fn update_collection_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## よくあるエラー
+
 ### `Collection account already exists`
+
 Collectionキーペアはすでに使用されています。新しい署名者を生成してください：
+
 ```ts
 const collectionSigner = generateSigner(umi) // 一意である必要があります
 ```
+
 ### `Authority mismatch`
+
 あなたはCollectionのUpdate Authorityではありません。Collectionの`updateAuthority`フィールドが署名者と一致しているか確認してください。
+
 ### `Insufficient funds`
+
 支払いウォレットには約0.002 SOLが必要です。以下でファンドを追加してください：
+
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
+
 ## 注意事項
+
 - `collection`パラメータは作成時に**新しいキーペア**である必要があります
 - Collectionプラグインは、Assetレベルでオーバーライドしない限り、Assetに継承されます
 - 作成後にCollectionの状態を確認するには`fetchCollection`を使用してください
 - `numMinted`カウンターは現在のサイズではなく、これまでに作成されたAssetの総数を追跡します
+
 ## クイックリファレンス
+
 ### プログラムID
+
 | ネットワーク | アドレス |
 |---------|---------|
 | Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 | Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+
 ### 最小コード
+
 ```ts {% title="minimal-collection.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/mpl-core'
 const collection = generateSigner(umi)
 await createCollection(umi, { collection, name: 'My Collection', uri: 'https://...' }).sendAndConfirm(umi)
 ```
+
 ### コスト内訳
+
 | 項目 | コスト |
 |------|------|
 | Collectionアカウントのレント | 約0.0015 SOL |
 | トランザクション手数料 | 約0.000005 SOL |
 | **合計** | **約0.002 SOL** |
+
 ## FAQ
+
 ### CollectionとAssetの違いは何ですか？
+
 CollectionはAssetをグループ化するコンテナです。独自のメタデータ（名前、画像）を持ちますが、Assetのように所有したり転送したりすることはできません。Assetはユーザーが所有する実際のNFTです。
+
 ### 既存のAssetをCollectionに追加できますか？
+
 はい、`newCollection`パラメータを指定して`update`命令を使用します。AssetのUpdate AuthorityがターゲットのCollectionに追加する権限を持っている必要があります。
+
 ### NFTにCollectionは必要ですか？
+
 いいえ。AssetはCollectionなしでスタンドアロンで存在できます。ただし、Collectionを使用するとコレクションレベルのロイヤリティ、発見しやすさ、一括操作が可能になります。
+
 ### CollectionからAssetを削除できますか？
+
 はい、`update`命令を使用してAssetのCollectionを変更できます。AssetとCollection両方で適切な権限が必要です。
+
 ### Collectionを削除するとどうなりますか？
+
 CollectionはAssetを含んでいる間は削除できません。まずすべてのAssetを削除してから、Collectionアカウントをクローズできます。
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Collection** | 共有メタデータの下で関連するAssetをグループ化するCoreアカウント |

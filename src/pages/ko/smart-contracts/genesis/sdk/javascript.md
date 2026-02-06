@@ -34,9 +34,9 @@ Genesis JavaScript SDK의 API 레퍼런스. 전체 튜토리얼은 [Launch Pool]
 
 {% quick-links %}
 
-{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
+{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/genesis>" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="자동 생성된 API 문서" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="<https://mpl-genesis.typedoc.metaplex.com/>" description="자동 생성된 API 문서" /%}
 
 {% /quick-links %}
 
@@ -358,15 +358,19 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 �
 ## FAQ
 
 ### Umi란 무엇이며 왜 필요한가요?
+
 Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
 
 ### 브라우저에서 Genesis SDK를 사용할 수 있나요?
+
 네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
 
 ### fetch와 safeFetch의 차이점은 무엇인가요?
+
 `fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
 
 ### 트랜잭션 오류를 어떻게 처리하나요?
+
 `sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.
 
 ---

@@ -65,7 +65,6 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## ヘルパーアカウント
 
 Auction Houseが適切に機能するために必要ないくつかのアカウントがあります。Auction Houseによって設定されると、権限はこれらのアカウントをリセットして、好みに応じて設定できます。
@@ -105,7 +104,6 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## サインオフを要求
 
 この設定により、マーケットプレイスはアセットリストと販売をゲートできます。権限セクションで説明したように、Auction House権限はアセットのゲートに役割を果たします。この検閲または集中制御は、`requireSignOff = true`の場合にのみ発生します。
@@ -131,7 +129,6 @@ const auctionHouseSettings = {
 ## 販売価格の変更可能性
 
 `canChangeSalePrice`により、マーケットプレイスは、ユーザーが意図的にアセットを無料で、または0 SOL（または他のSPL-token）でリストしたときに、アセットの販売価格を変更できます。アセットを0 SOLでリストすることにより、ユーザーはマーケットプレイスがカスタムマッチングアルゴリズムを適用して、「無料で」リストされたアセットに最適な価格マッチを見つけることを許可します。
-
 
 ここで注意すべき重要な点は、`canChangeSalePrice`は、`requireSignOff`も`true`に設定されている場合にのみ`true`に設定できることです。これは、パーミッションレスのリストと入札の場合、カスタムマッチングは不可能だからです。Auction Houseは、一致するビッドに「サインオフ」してアセットの販売を実行できる必要があります。
 
@@ -187,4 +184,5 @@ const auctionHouseSettings = {
 {% /dialect-switcher %}
 
 ## まとめ
+
 Auction House設定について理解したので、[次のページ](/legacy-documentation/auction-house/manage)では、それらを使用して独自のAuction Houseを作成および更新する方法を見ていきます。

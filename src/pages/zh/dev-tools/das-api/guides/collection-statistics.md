@@ -68,6 +68,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -129,6 +130,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

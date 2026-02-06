@@ -34,6 +34,7 @@ Genesis API를 사용하면 애그리게이터와 애플리케이션이 Genesis 
 
 {% callout title="배우게 될 내용" %}
 이 레퍼런스에서 다루는 내용:
+
 - 사용 가능한 엔드포인트와 사용 사례
 - 예제가 포함된 요청/응답 형식
 - TypeScript 및 Rust 타입 정의
@@ -309,26 +310,32 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 {% callout type="note" %}
 `Cargo.toml`에 다음 의존성을 추가하세요:
+
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
+
 {% /callout %}
 
 ## FAQ
 
 ### 인증이 필요한가요?
+
 아니요. Genesis API는 요청 제한이 있는 공개 API입니다. API 키나 인증이 필요하지 않습니다.
 
 ### 토큰 민트만 있으면 어떤 엔드포인트를 사용해야 하나요?
+
 `/tokens/{mint}`를 사용하여 토큰의 모든 런칭을 가져오세요. genesis 주소가 있으면 `/launches/{genesis_pubkey}`를 사용하세요.
 
 ### 요청 제한은 어떻게 되나요?
+
 남용 방지를 위해 요청 제한이 적용됩니다. 429 응답을 받으면 요청 빈도를 줄이세요.
 
 ### 토큰이 여러 런칭을 가질 수 있나요?
+
 예. `/tokens` 엔드포인트는 토큰이 여러 캠페인을 가질 수 있으므로 (다른 `genesisIndex` 값을 사용하여) 런칭 배열을 반환합니다.
 
 ## 용어집

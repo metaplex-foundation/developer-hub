@@ -9,6 +9,7 @@ description: 设置您首选的区块链浏览器
 ## 基本用法
 
 ### 设置浏览器
+
 ```bash
 mplx config explorer set
 ```
@@ -16,21 +17,24 @@ mplx config explorer set
 ## 命令
 
 ### 设置浏览器
+
 从可用选项列表中设置您首选的区块链浏览器。
 
 #### 示例
+
 ```bash
 mplx config explorer set
 ```
 
 #### 注意事项
+
 - 打开交互式提示以从可用浏览器中选择
 - 更新配置中的活动浏览器
 - 所选浏览器将用于查看交易和帐户
 - 可用浏览器包括:
-  - Solana Explorer (https://explorer.solana.com)
-  - Solscan (https://solscan.io)
-  - Solana FM (https://solana.fm)
+  - Solana Explorer (<https://explorer.solana.com>)
+  - Solscan (<https://solscan.io>)
+  - Solana FM (<https://solana.fm>)
 
 ## 配置文件
 

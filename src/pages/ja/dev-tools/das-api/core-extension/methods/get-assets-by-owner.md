@@ -23,8 +23,8 @@ const assets = await das.getAssetsByCollection(umi, { owner });
 console.log(assets);
 ```
 
-
 ## レスポンス例
+
 この例には配列内に1つのオブジェクトのみが含まれています。複数のCore アセットを所有する公開鍵の場合、配列にはより多くのエントリが含まれます。
 
 ```json

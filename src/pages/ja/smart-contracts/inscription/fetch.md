@@ -71,6 +71,7 @@ NFTに添付されていないInscriptionデータを読み取るには、異な
 {% dialect-switcher title="Inscriptionの取得" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import { fetchInscription } from '@metaplex-foundation/mpl-inscription'
 
@@ -82,8 +83,9 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 {% /dialect-switcher %}
 
 ## 現在のInscription数の取得
+
 現在の総inscription数は以下のように取得できます：
- 
+
 {% dialect-switcher title="現在のInscription数の取得" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}

@@ -144,6 +144,7 @@ const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 この命令は、まだ存在しない場合にのみ新しいTokenアカウントを作成します。これは、後続の命令でTokenアカウントが必要だが、それがすでに存在するかどうかわからない場合に特に便利です。この命令は、クライアント側で取得する必要なく、Tokenアカウントの存在を保証します。
 
 動作方法：
+
 - アカウントが存在する場合、命令は成功し何もしません。
 - アカウントが存在しない場合、命令は成功してAssociated Tokenアカウントを作成します。
 

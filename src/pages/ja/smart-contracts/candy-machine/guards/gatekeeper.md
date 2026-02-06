@@ -62,8 +62,8 @@ Network e.g. Captcha
 
 {% node parent="mint-candy-guard" y="150" x="-9" %}
   {% node #mint-candy-machine theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -84,14 +84,14 @@ Network e.g. Captcha
 {% node theme="transparent" parent="mint-candy-guard" x="-210" %}
 if a valid token for the given
 
-Network and payer does not exist 
+Network and payer does not exist
 
 Minting will fail
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
+
 ## ガード設定
 
 Gatekeeperガードには以下の設定が含まれます：
@@ -164,6 +164,7 @@ mintV2(umi, {
   },
 });
 ```
+
 {% /totem %}
 {% /dialect %}
 {% dialect title="Sugar" id="sugar" %}

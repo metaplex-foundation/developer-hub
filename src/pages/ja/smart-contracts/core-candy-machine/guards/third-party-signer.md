@@ -78,6 +78,7 @@ minting will fail
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
 {% /diagram %}
+
 ## ガード設定
 
 Third Party Signer ガードには以下の設定が含まれます：

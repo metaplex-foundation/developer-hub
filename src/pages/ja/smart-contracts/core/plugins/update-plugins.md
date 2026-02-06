@@ -21,6 +21,7 @@ MPL Core AssetsとCollectionsの多くのプラグインは、追加後に更新
 {% totem %}
 {% totem-accordion title="技術的な命令の詳細" %}
 **命令アカウントリスト**
+
 | アカウント       | 説明                                     |
 | ------------- | ----------------------------------------------- |
 | asset         | MPL Core Assetのアドレス。              |
@@ -35,16 +36,21 @@ MPL Core AssetsとCollectionsの多くのプラグインは、追加後に更新
 | plugin | 更新するプラグインタイプとデータ。 |
 一部のアカウント/引数は、使いやすさのためにSDKで抽象化されるか、オプションになる場合があります。
 詳細なTypeDocドキュメントについては、以下を参照してください：
+
 - [updatePlugin](https://mpl-core.typedoc.metaplex.com/functions/updatePlugin.html)
 - [updateCollectionPlugin](https://mpl-core.typedoc.metaplex.com/functions/updateCollectionPlugin.html)
 注意：JavaScript SDKでは、updatePluginはdataラッパーなしでプラグインデータを期待します（例：`{ type: 'FreezeDelegate', frozen: true }`）。対照的に、addPluginはデータを`data`の下にラップします（例：`{ type: 'FreezeDelegate', data: { frozen: true } }`）。これはcreateAsset/createCollectionプラグインリストで使用される形状を反映しています。
 {% /totem-accordion %}
 {% /totem %}
+
 ## Assetsのプラグインの更新
+
 ### 基本的なプラグイン更新例
+
 AttributesプラグインをMPL Core Assetでのプラグイン更新の例として、プラグインを更新する方法を示します：
 {% dialect-switcher title="Assetのプラグイン更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -68,11 +74,15 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Royaltiesプラグインの更新
+
 {% dialect-switcher title="Royaltiesプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -99,12 +109,16 @@ import { updatePlugin, ruleSet } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 状態ベースのプラグインの更新
+
 Freeze Delegateプラグインのように、トグルできる単純な状態を保存するプラグインもあります：
 {% dialect-switcher title="フリーズ状態の更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -128,12 +142,16 @@ import { updatePlugin } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collectionsのプラグインの更新
+
 Collectionプラグインはアセットプラグインと同様に動作しますが、`updateCollectionPlugin`関数を使用します：
 {% dialect-switcher title="Collectionのプラグイン更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
@@ -156,13 +174,18 @@ import { updateCollectionPlugin, ruleSet } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 複雑なプラグインデータの操作
+
 ### プラグイン内のリストの管理
+
 AutographorVerified Creatorsのようなプラグインは、データのリストを維持します。これらのプラグインを更新する場合、維持したい完全なリストを渡す必要があります：
 {% dialect-switcher title="リストベースのプラグインの更新" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -189,11 +212,15 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### リストからアイテムを削除
+
 {% dialect-switcher title="プラグインリストからアイテムを削除" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -218,26 +245,37 @@ import { updatePlugin, fetchAsset } from '@metaplex-foundation/mpl-core'
   }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Authority要件
+
 プラグインによって更新に必要なauthorityが異なります：
+
 - **Authority Managedプラグイン**（Royalties、Attributes、Update Delegate）: アセットまたはコレクションの**authority**が必要
 - **Owner Managedプラグイン**（Autograph、Freeze Delegate）: アセットの**オーナー**またはプラグインの特定のauthorityが必要
 - **Verified Creatorsプラグイン**: クリエイターの追加/削除には**update authority**が必要だが、個々の**クリエイターは自分自身を検証可能**
+
 ## エラー処理
+
 プラグイン更新時の一般的なエラー：
+
 - **Authority mismatch**: プラグインタイプに対して正しいauthorityで署名していることを確認
 - **Plugin not found**: プラグインは更新前にアセット/コレクションに存在している必要がある
 - **Invalid data**: プラグインデータは期待される構造と制約に準拠する必要がある
 - **Collection mismatch**: アセットがコレクションの一部である場合、更新にコレクションを含める必要がある場合がある
+
 ## ベストプラクティス
+
 1. **更新前に取得**: 常に現在のアセット/コレクション状態を取得して既存のプラグインデータを確認
 2. **既存データを保持**: リストベースのプラグインを更新する場合、保持したい既存データを含める
 3. **適切なauthorityを使用**: 各プラグインタイプに対して正しい署名authorityを使用していることを確認
 4. **更新をバッチ処理**: 複数のプラグインを更新する場合、効率のために操作をバッチ処理することを検討
 5. **データを検証**: 更新データがプラグインの要件を満たしていることを確認（例：クリエイターのパーセンテージが100%になる）
+
 ## 次のステップ
+
 - 個別のプラグインドキュメントで特定のプラグイン更新について学ぶ
 - [プラグイン概要](/smart-contracts/core/plugins)ですべての利用可能なプラグインを探索
 - [プラグインの追加](/smart-contracts/core/plugins/adding-plugins)と[プラグインの削除](/smart-contracts/core/plugins/removing-plugins)をチェック

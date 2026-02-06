@@ -23,8 +23,8 @@ const assets = await das.getAssetsByCollection(umi, { collection });
 console.log(assets);
 ```
 
-
 ## Example Response
+
 This example has only one object in the array. For Collections with more than one Core asset the Array will include more entries.
 
 ```json

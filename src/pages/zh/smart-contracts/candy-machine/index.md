@@ -12,9 +12,8 @@ Metaplex协议的**Candy Machine**是Solana上用于公平NFT集合发布的领�
 
 {% quick-links %}
 
-
 {% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/candy-machine/getting-started" description="找到您选择的语言或库,开始使用Candy Machine。" /%}
-{% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容?我们为您提供。" /%}
+{% quick-link title="API参考" icon="CodeBracketSquare" href="<https://mpl-candy-machine.typedoc.metaplex.com/>" target="_blank" description="正在寻找特定内容?我们为您提供。" /%}
 {% /quick-links %}
 
 {% callout %}
@@ -75,7 +74,7 @@ Metaplex协议的**Candy Machine**是Solana上用于公平NFT集合发布的领�
 每个项目由两个参数组成:
 
 - `name`:NFT的名称。
-- `uri`:指向NFT的[JSON元数据](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)的URI。这意味着JSON元数据已经通过链上(例如Arweave、IPFS)或链下(例如AWS、您自己的服务器)存储提供商上传。
+- `uri`:指向NFT的[JSON元数据](<https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)的URI。这意味着JSON元数据已经通过链上(例如Arweave、IPFS)或链下(例如AWS、您自己的服务器)存储提供商上传。>
 
 所有其他参数在所有NFT之间共享,因此直接保存在Candy Machine的设置中以避免重复。有关更多详细信息,请参阅[插入项目](/zh/smart-contracts/candy-machine/insert-items)。
 

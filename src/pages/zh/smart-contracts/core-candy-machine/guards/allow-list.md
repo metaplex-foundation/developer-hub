@@ -58,7 +58,6 @@ description: "Core Candy Machine 的 'Allowlist' 守卫允许您设置预定义�
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
 {% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
-
 {% node #leaves label="叶子" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
@@ -132,7 +131,6 @@ Merkle Proof {% .whitespace-nowrap %}
 {% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 {% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 
-
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="Payer" theme="indigo" /%}
 {% node theme="dimmed"%}
@@ -197,7 +195,6 @@ Merkle Root 不匹配，验证将失败
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -384,6 +381,7 @@ _Sugar 不能用于调用 "Proof" Route。_
 {% /dialect-switcher %}
 
 ## 允许列表账户
+
 当使用 `Allowlist` 守卫时，在运行 route 指令后会创建一个 `AllowListProof` 账户。当可以获取它时，用户在允许列表上且 route 已运行。出于验证目的，可以这样获取它：
 
 ```js

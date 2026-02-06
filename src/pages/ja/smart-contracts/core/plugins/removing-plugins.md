@@ -30,28 +30,40 @@ faqs:
 ---
 このガイドでは、Core Asset と Collection から**プラグインを削除**する方法を説明します。プラグインを削除すると、そのデータと機能が削除されます。 {% .lead %}
 {% callout title="学習内容" %}
+
 - Asset からプラグインを削除
 - Collection からプラグインを削除
 - 削除に必要な権限要件を理解
 - 削除したプラグインからレントを回収
 {% /callout %}
+
 ## 概要
+
 Asset には `removePlugin()`、Collection には `removeCollectionPlugin()` を使用してプラグインを削除します。プラグインを削除できるのはプラグイン権限者のみです。
+
 - 削除するプラグインタイプを指定
 - プラグインデータは削除される
 - レントは回収される
 - Permanent プラグインは削除不可
+
 ## 対象外
+
 Permanent プラグインの削除（不可能）、プラグインの更新（[プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins)を参照）、権限の変更（[プラグインの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins)を参照）。
+
 ## クイックスタート
+
 **ジャンプ先:** [Asset から削除](#mpl-core-asset-からプラグインを削除) · [Collection から削除](#collection-からプラグインを削除)
+
 1. 削除するプラグインタイプを特定
 2. Asset とプラグインタイプを指定して `removePlugin()` を呼び出す
 3. プラグインは即座に削除される
 プラグインは MPL Core Asset と MPL Core Collection からも削除できます。
+
 ## MPL Core Asset からプラグインを削除
+
 {% dialect-switcher title="MPL Core Asset からプラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { removePlugin } from '@metaplex-foundation/mpl-core'
@@ -61,8 +73,10 @@ await removePlugin(umi, {
   plugin: { type: 'Attributes' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::RemovePluginV1Builder, types::PluginType};
 use solana_client::nonblocking::rpc_client;
@@ -92,11 +106,15 @@ pub async fn remove_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collection からプラグインを削除
+
 {% dialect-switcher title="MPL Core Collection からプラグインを削除" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import {
@@ -109,8 +127,10 @@ await removeCollectionPlugin(umi, {
   pluginType: { type: 'Royalties' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{instructions::RemoveCollectionPluginV1Builder, types::PluginType};
 use solana_client::nonblocking::rpc_client;
@@ -140,44 +160,72 @@ pub async fn remove_collection_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## よくあるエラー
+
 ### `Authority mismatch`
+
 このプラグインを削除する権限がありません。誰がプラグインの権限を持っているか確認してください。
+
 ### `Plugin not found`
+
 Asset/Collection にこのプラグインタイプがアタッチされていません。
+
 ### `Cannot remove permanent plugin`
+
 Permanent プラグインは作成後に削除できません。永続的にアタッチされています。
+
 ## 注意事項
+
 - プラグインを削除するとすべてのデータが削除される
 - 削除されたプラグインのレントは回収される
 - プラグイン権限者のみがプラグインを削除できる
 - Permanent プラグインは削除不可
+
 ## クイックリファレンス
+
 ### 削除権限の要件
+
 | プラグインタイプ | 削除できる人 |
 |-------------|----------------|
 | Owner Managed | 所有者または委任者 |
 | Authority Managed | Update authority または委任者 |
 | Permanent | 削除不可 |
+
 ## FAQ
+
 ### プラグインを削除した後、データを復元できますか？
+
 いいえ。プラグインを削除するとすべてのデータが完全に削除されます。削除前に重要なデータをバックアップしてください。
+
 ### プラグインを削除するとレントはどうなりますか？
+
 プラグインデータの保存に使用されていたレントは回収され、支払者に返還されます。
+
 ### 他の人が委任したプラグインを削除できますか？
+
 はい。そのプラグインの委任された権限者であれば削除できます。
+
 ### Permanent プラグインを削除できないのはなぜですか？
+
 Permanent プラグインは作成後に削除できません。ただし、設定は引き続き調整できます。これは、プラグインの存在を保証する必要があるユースケースのための設計です。
+
 ### Collection とその Asset のプラグインを一度に削除できますか？
+
 いいえ。Collection プラグインと Asset プラグインは個別に管理されます。ただし、Collection プラグインを削除すると、そこから継承している Asset に影響を与える可能性があります（例：独自の Royalties プラグインを持たない Asset はロイヤリティが適用されなくなります）。
+
 ## 関連操作
+
 - [プラグインの追加](/ja/smart-contracts/core/plugins/adding-plugins) - Asset/Collection にプラグインを追加
 - [プラグインの委任](/ja/smart-contracts/core/plugins/delegating-and-revoking-plugins) - プラグイン権限の変更
 - [プラグインの更新](/ja/smart-contracts/core/plugins/update-plugins) - プラグインデータの変更
 - [プラグイン概要](/ja/smart-contracts/core/plugins) - 利用可能なプラグインの完全なリスト
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Plugin Authority** | プラグインを管理する権限を持つアドレス |

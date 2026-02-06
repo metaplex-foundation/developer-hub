@@ -8,7 +8,7 @@ description: SolanaのNative Programに必要な機能のセットを提供す�
 
 {% quick-links %}
 
-{% quick-link title="APIリファレンス" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="特定の何かをお探しですか？APIリファレンスをご覧になり、答えを見つけてください。" /%}
+{% quick-link title="APIリファレンス" icon="CodeBracketSquare" target="_blank" href="<https://mpl-toolbox.typedoc.metaplex.com/>" description="特定の何かをお探しですか？APIリファレンスをご覧になり、答えを見つけてください。" /%}
 
 {% /quick-links %}
 

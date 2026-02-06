@@ -22,8 +22,8 @@ const assets = await das.getAssetsByAuthority(umi, {authority:  publicKey('<Publ
 console.log(assets);
 ```
 
-
 ## 예제 응답
+
 이 예제에는 배열에 하나의 객체만 있습니다. 하나 이상의 Core 자산에 대한 권한을 가진 공개 키의 경우 배열에 더 많은 항목이 포함됩니다.
 
 ```json

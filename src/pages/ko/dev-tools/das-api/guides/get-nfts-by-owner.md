@@ -81,8 +81,10 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   console.log(`${data.result.items.length}개의 NFT 발견`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 예제" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -99,6 +101,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -108,6 +111,7 @@ curl -X POST <ENDPOINT> \
 
 {% totem %}
 {% totem-accordion title="UMI 예제" %}
+
 ```typescript
 import { publicKey } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -133,8 +137,10 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
 
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
+
 ```javascript
 (async () => {
   const response = await fetch("<ENDPOINT>", {
@@ -161,6 +167,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   console.log(`${data.result.items.length}개의 Core 자산 발견`);
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -170,6 +177,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
 {% totem %}
 {% totem-accordion title="UMI 예제" %}
+
 ```typescript
 import { publicKey } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -194,8 +202,10 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
   console.log(`이 컬렉션에서 ${collectionNfts.items.length}개의 NFT 발견`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
+
 ```javascript
 (async () => {
   const response = await fetch(
@@ -228,6 +238,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 })();
 
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

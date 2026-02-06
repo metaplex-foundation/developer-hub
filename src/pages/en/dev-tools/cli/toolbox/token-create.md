@@ -9,11 +9,13 @@ The `mplx toolbox token create` command allows you to create a new fungible toke
 ## Basic Usage
 
 ### Interactive Wizard
+
 ```bash
 mplx toolbox token create --wizard
 ```
 
 ### Direct Creation
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
@@ -21,11 +23,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## Options
 
 ### Required Options (when not using wizard)
+
 - `--name <string>`: Name of the token (e.g., "My Awesome Token")
 - `--symbol <string>`: Token symbol (2-6 characters, e.g., "MAT")
 - `--mint-amount <number>`: Initial amount of tokens to mint (must be greater than 0)
 
 ### Optional Options
+
 - `--decimals <number>`: Number of decimal places (0-9, default: 0)
 - `--description <string>`: Description of the token and its purpose
 - `--image <path>`: Path to the token image file (PNG, JPG, or GIF)
@@ -34,11 +38,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## Examples
 
 ### Create Token with Basic Information
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
 
 ### Create Token with All Options
+
 ```bash
 mplx toolbox token create \
   --name "My Awesome Token" \
@@ -50,6 +56,7 @@ mplx toolbox token create \
 ```
 
 ### Create Token Using Wizard
+
 ```bash
 mplx toolbox token create --wizard
 ```
@@ -57,6 +64,7 @@ mplx toolbox token create --wizard
 ## Output
 
 After successful token creation, the command will display:
+
 ```
 --------------------------------
 Token created successfully!
@@ -89,4 +97,4 @@ Execution Time: <time> seconds
   - Create the token on the blockchain
   - Mint the initial supply
 - The transaction signature and mint address are provided for verification
-- Speed run mode can be used to measure execution time 
+- Speed run mode can be used to measure execution time

@@ -5,9 +5,11 @@ description: The Public Key primitive rule
 ---
 
 ## Pubkey Match
+
 지정된 Pubkey가 특정 Pubkey와 일치하는지 확인합니다. 예를 들어, 이 규칙은 특정 사람만 NFT에 대한 작업을 수행할 수 있는 액세스 권한을 부여받아야 할 때 사용할 수 있습니다.
 
 ### 필드
+
 * **pubkey** - 비교할 공개 키
 * **field** - 페이로드에서 확인할 Pubkey를 지정하는 필드
 
@@ -28,9 +30,11 @@ const revision: RuleSetRevisionV2 = {
 ```
 
 ## Pubkey List Match
+
 Pubkey가 가능한 Pubkey 목록에 포함되어 있는지 확인하는 [PubkeyMatch](#pubkey-match)의 버전입니다. 예를 들어, 이 규칙은 토큰과 상호 작용할 수 있는 사용자의 허용 목록을 구축하는 데 사용할 수 있습니다.
 
 ### 필드
+
 * **pubkeys** - 비교할 공개 키 목록
 * **field** - 페이로드에서 확인할 Pubkey를 지정하는 필드
 
@@ -51,9 +55,11 @@ const revision: RuleSetRevisionV2 = {
 ```
 
 ## Pubkey Tree Match
+
 Pubkey가 가능한 Pubkey의 머클 트리에 포함되어 있는지 확인하는 [PubkeyMatch](#pubkey-match)의 버전입니다. 예를 들어, 이 규칙은 토큰과 상호 작용할 수 있는 사용자의 매우 큰 허용 목록을 구축하는 데 사용할 수 있습니다.
 
 ### 필드
+
 * **pubkey_field** - 확인할 pubkey가 포함된 페이로드의 필드
 * **proof_field** - 해시될 전체 머클 증명이 포함된 페이로드의 필드
 * **root** - 머클 트리의 루트

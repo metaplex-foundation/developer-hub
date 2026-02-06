@@ -110,6 +110,7 @@ const nft = await metaplex
 {% /dialect-switcher %}
 
 ### 거래 상태로 찾기
+
 다음은 해당 거래 상태 PDA 계정으로 입찰, 목록 및 판매를 찾는 스니펫입니다.
 
 {% dialect-switcher title="JS SDK" %}

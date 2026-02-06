@@ -30,6 +30,7 @@ pub struct Metadata {
 3. 더 간단한 표현이 필요한 복잡한 타입을 가진 필드
 
 두 가지 형식을 지원합니다:
+
 - 문자열 리터럴: `#[idl_type("TypeName")]`
 - 직접 타입: `#[idl_type(TypeName)]`
 
@@ -99,6 +100,7 @@ pub enum MyProgramInstruction {
 ```
 
 여기서:
+
 - `index`: 계정 배열에서 계정의 위치 (0부터 시작)
 - `mutability?`: 선택사항. 계정이 수정될 경우 `writable` 사용
 - `signer?`: 선택사항. 계정이 거래에 서명해야 하는 경우 `signer` 사용

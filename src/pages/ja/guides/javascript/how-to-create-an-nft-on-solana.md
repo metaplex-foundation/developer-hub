@@ -13,7 +13,7 @@ Metaplexは、**Core**、**Token Metadata**、**Bubblegum**を含む、Solanaブ
 
 CoreはMetaplexによって作成された最新で最も先進的なデジタル資産標準です。この標準は、強力なプラグインシステムを通じて最適化されたアカウント構造と拡張機能を提供します。
 
-#### Coreを使用する理由：
+#### Coreを使用する理由
 
 - 最新標準：CoreはMetaplexが現在まで作成した最新で最も強力なデジタル資産標準です。
 - シンプルさ：Coreは**シンプルさ第一のアプローチ**で一から設計されました。
@@ -26,7 +26,7 @@ CoreはMetaplexによって作成された最新で最も先進的なデジタ�
 
 Token Metadataは、すべてを始めたSolana NFT標準です。2021年に作成されたToken Metadataは、最初の発足以来5億1200万のNFTがミントされた驚異的な数で、SolanaブロックチェーンでのNFTの道を開拓しました。
 
-#### Token Metadataを使用する理由：
+#### Token Metadataを使用する理由
 
 - 試され信頼されている：Token Metadataは、Solana Monkey Business、DeGods、Claynosaurusなどのプロジェクトから過去4年間Solanaの主要なNFTトークン標準として使用されています。
 - エコシステムサポート：NFTとpNFTは、MagicEden、Tensor、Phantom、SolflareなどのマーケットプレイスとウォレットによってSolana全体でサポートされています。
@@ -38,7 +38,7 @@ Token Metadataは、すべてを始めたSolana NFT標準です。2021年に作�
 
 大量に安価なNFTを作成する場合、Bubblegumが選択すべきプロトコルです。Bubblegumは、各個別のNFTにアカウントを作成する代わりにマークル木アプローチを適用することで、**圧縮NFT（cNFT）**の技術を使用しています。
 
-#### Bubblegumを使用する理由：
+#### Bubblegumを使用する理由
 
 - デプロイが安価：マークル木ベースの製品であるため、木のデプロイが安価で、必要に応じて数百万のNFTを保存できます。
 - 大量エアドロップ：木が作成されると、木のストレージの代金は既に支払われているため、cNFTのエアドロップコストはほぼゼロに近くなります。

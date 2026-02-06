@@ -12,6 +12,6 @@ Umi 是一个用于构建和使用 Solana 程序 JavaScript 客户端的模块�
 
 {% quick-link title="快速入门" icon="InboxArrowDown" href="/zh/dev-tools/umi/getting-started" description="选择您喜欢的语言或库，开始使用基础程序。" /%}
 
-{% quick-link title="API 参考" icon="CodeBracketSquare" href="https://umi.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容？查看我们的 API 参考找到您的答案。" /%}
+{% quick-link title="API 参考" icon="CodeBracketSquare" href="<https://umi.typedoc.metaplex.com/>" target="_blank" description="正在寻找特定内容？查看我们的 API 参考找到您的答案。" /%}
 
 {% /quick-links %}

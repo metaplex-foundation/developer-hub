@@ -58,6 +58,7 @@ name: "My Test Escrow"
 ### uri
 
 This is the base uri for your metadata pool. This needs to be a static uri which also contains your metadata json files at sequential destination. ie:
+
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -70,7 +71,7 @@ uri: "https://shdw-drive.genesysgo.net/<bucket-id>/"
 
 ### token
 
-The Token mint address that is being used in your MPL Hybrid 404 project. 
+The Token mint address that is being used in your MPL Hybrid 404 project.
 
 ```ts
 token: publicKey("11111111111111111111111111111111")
@@ -106,6 +107,7 @@ Highest index: 4999.json
 ```
 
 This would then translate into the min and max args.
+
 ```ts
 min: 0,
 max: 4999
@@ -150,4 +152,3 @@ The `path` arg either enables of disables the metadata rerolling function on the
 // Reroll metadata on swap 0 = true, 1 = false
 path: 0,
 ```
-

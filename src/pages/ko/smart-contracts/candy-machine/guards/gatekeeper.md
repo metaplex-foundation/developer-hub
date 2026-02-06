@@ -90,8 +90,8 @@ Minting will fail
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
+
 ## 가드 설정
 
 게이트키퍼 가드는 다음 설정을 포함합니다:
@@ -164,6 +164,7 @@ mintV2(umi, {
   },
 });
 ```
+
 {% /totem %}
 {% /dialect %}
 {% dialect title="Sugar" id="sugar" %}

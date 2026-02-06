@@ -7,6 +7,7 @@ description: Sugarインストールガイド。
 Sugarをインストールする最も迅速で簡単な方法は、macOS、Linux、WSL（Windows Subsystem for Linux）用のインストールスクリプトを実行してプリビルドバイナリをダウンロードすることです。Windowsシステムについては、下記の📌をご覧ください。
 
 ターミナルで以下を実行してください：
+
 ```bash
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 ```
@@ -47,7 +48,7 @@ Windowsを使用している場合は、以下の手順に従ってください�
 8. ターミナルで`sugar`を実行して、使用できるコマンドのリストが印刷されるかどうかを確認してください。表示される場合は、準備完了です！
 
 9. エラーがあれば、[Metaplex Discord](https://discord.gg/metaplex)の`#candy-machine`フォーラムに報告してください。
-   
+
 {% callout %}
 
 このインストーラーバイナリは最新のSugarバイナリバージョンをダウンロードし、解凍して`PATH`環境のフォルダにコピーします。Rustがある場合、バイナリは`~/.cargo/bin`にコピーされ、そうでなければ`%LOCALAPPDATA%`ディレクトリに`SugarCLI`フォルダを作成します。バイナリがその場所にあれば、Windowsが自動的に見つけ、通常のコマンドラインアプリケーションとしてファイルシステムの任意のディレクトリからsugarバイナリを実行できるようになります。
@@ -68,9 +69,10 @@ Windowsを使用している場合は、以下の手順に従ってください�
 {% callout %}
 
 crates.ioからまたはソースからUbuntuやWSL（Windows Subsystem for Linux）にインストールする場合、追加の依存関係をインストールする必要がある場合があります：
+
 ```bash
 sudo apt install libudev-dev pkg-config unzip
-``` 
+```
 
 {% /callout %}
 
@@ -95,8 +97,8 @@ Rustコンパイラのバージョンが印刷されるはずです。コマン�
 ```bash
 cargo install sugar-cli
 ```
-これにより、Crates.ioからSugarコードがダウンロードされ、自動的にインストールされます。
 
+これにより、Crates.ioからSugarコードがダウンロードされ、自動的にインストールされます。
 
 ### ソースからビルド
 

@@ -91,7 +91,7 @@ Candy Machine settings determine the type of the asset, number of assets availab
 | isSequential |    | Boolean         | A boolean indicating whether a sequential index generation should be used during mint or not |
 | ruleSet  |        | Public Key | *(optional)* The rule set used by minted `pNFT`s |
 
-The `creators` setting allows you to specify up to 4 addresses and their percentage share. 
+The `creators` setting allows you to specify up to 4 addresses and their percentage share.
 
 | Setting | Options | Value/Type | Description               |
 | ------- | ------- | --------------- | ------------------------- |
@@ -119,6 +119,7 @@ The Candy Machine can be configured to not have the final metadata when an NFT i
 {% totem %}
 {% totem-accordion title="hiddenSettings example" %}
 The `hiddenSettings` section in the config file could look like this:
+
 ```json
 "hiddenSettings": {
     "name": "Name $ID+1$",
@@ -126,6 +127,7 @@ The `hiddenSettings` section in the config file could look like this:
     "hash": "49Bj8ZVSvSvAQwziKEts3iAeUhi27ATH"
 }
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

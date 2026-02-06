@@ -15,9 +15,11 @@ If you wish to create your Core Candy Machine Assets into a collection (new or e
 
 {% callout title="CLI Alternative" type="note" %}
 You can also create Core Candy Machines using the MPLX CLI with an interactive wizard:
+
 ```bash
 mplx cm create --wizard
 ```
+
 This provides step-by-step guidance, asset validation, and automatic deployment. See the [CLI Candy Machine documentation](/dev-tools/cli/cm) for detailed instructions.
 {% /callout %}
 
@@ -260,6 +262,7 @@ If your Asset's have a naming structure of `Example Asset #1` then your prefix w
 The maximum length for the name of each inserted item excluding the name prefix
 
 For Example given...
+
 - a candy machine containing `1000` items.
 - The name of each item is `Example Asset #X` where X is the item’s index starting from 1.
 
@@ -276,7 +279,8 @@ If your Asset's will have a metadata URI of `https://example.com/metadata/0.json
 The maximum lengths of your URIs excluding the `prefixUri`.
 
 For Example given...
-- a base URI ` https://arweave.net/` with 20 characters.
+
+- a base URI `https://arweave.net/` with 20 characters.
 - and a unique unifier with a maximum length of 43 characters
 
 ... without prefix would result in 63 required characters to store. When using the `prefixUri` the `uriLength` can be reduced by 20 characters for `https://arweave.net/` to the 43 characters for the unique identifier.

@@ -13,7 +13,7 @@ Metaplex는 **Core**, **Token Metadata**, **Bubblegum**을 포함하여 Solana �
 
 Core는 Metaplex가 개발한 가장 새롭고 진보된 디지털 자산 표준입니다. 이 표준은 최적화된 계정 구조와 강력한 플러그인 시스템을 통한 향상된 기능을 제공합니다.
 
-#### Core를 사용하는 이유:
+#### Core를 사용하는 이유
 
 - 최신 표준: Core는 현재까지 Metaplex가 개발한 가장 새롭고 강력한 디지털 자산 표준입니다.
 - 단순성: Core는 **단순성 우선 접근법**으로 처음부터 설계되었습니다.
@@ -26,7 +26,7 @@ Core는 Metaplex가 개발한 가장 새롭고 진보된 디지털 자산 표준
 
 Token Metadata는 모든 것을 시작한 Solana NFT 표준입니다. 2021년에 생성된 Token Metadata는 첫 시작 이후 무려 5억 1,200만 개의 NFT가 민팅되면서 Solana 블록체인에서 NFT의 길을 열었습니다.
 
-#### Token Metadata를 사용하는 이유:
+#### Token Metadata를 사용하는 이유
 
 - 검증되고 신뢰할 수 있음: Token Metadata는 Solana Monkey Business, DeGods, Claynosaurus 등의 프로젝트에서 지난 4년간 Solana의 주요 NFT 토큰 표준으로 사용되었습니다.
 - 생태계 지원: NFT와 pNFT는 MagicEden, Tensor, Phantom, Solflare 등과 같은 마켓플레이스와 지갑에서 Solana 전체적으로 지원됩니다.
@@ -38,7 +38,7 @@ Token Metadata는 모든 것을 시작한 Solana NFT 표준입니다. 2021년에
 
 대량으로 저렴하게 NFT를 생성하는 경우 Bubblegum이 선택할 프로토콜입니다. Bubblegum은 개별 NFT마다 계정을 생성하는 대신 머클 트리 접근법을 적용하여 **압축된 NFT(cNFT)**의 기술을 사용합니다.
 
-#### Bubblegum을 사용하는 이유:
+#### Bubblegum을 사용하는 이유
 
 - 저렴한 배포: 머클 트리 기반 제품인 트리는 필요시 수백만 개의 NFT를 저장할 수 있으면서도 배포가 저렴합니다.
 - 대량 에어드롭: 트리가 생성되면 트리의 저장소에 대한 비용이 이미 지불되었으므로 cNFT 에어드롭 비용은 거의 존재하지 않습니다.

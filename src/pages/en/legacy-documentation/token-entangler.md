@@ -36,7 +36,7 @@ The user facing process is easy. They pay the Token Entangler with NFT A and (if
 
 This is a very reduced picture that just shows the user facing process. There are additional Accounts etc. that are not shown in this image.
 
-## Create your own!
+## Create your own
 
 The start to end from a general point of view looks like this:
 

@@ -18,9 +18,9 @@ cargo add mpl-core-candy-machine-core
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-machine-core" description="MPL Core Candy Machine用Rust SDKを始めましょう。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-machine-core>" description="MPL Core Candy Machine用Rust SDKを始めましょう。" /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" description="Core Candy Machineクレート用のRust SDK typedocプラットフォーム。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" description="Core Candy Machineクレート用のRust SDK typedocプラットフォーム。" /%}
 
 {% /quick-links %}
 
@@ -38,8 +38,8 @@ cargo add mpl-core-candy-guard
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-guard" description="Core Candy Guards用Rust SDKを始めましょう。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-guard>" description="Core Candy Guards用Rust SDKを始めましょう。" /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-guard" description="Core Candy Guardsクレート用のRust SDK typedocプラットフォーム。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-guard>" description="Core Candy Guardsクレート用のRust SDK typedocプラットフォーム。" /%}
 
 {% /quick-links %}

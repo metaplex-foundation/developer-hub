@@ -26,6 +26,7 @@ description: Metaplex iOS SDK
 ## 入门
 
 ### 安装
+
 #### 要求 {#requirements}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
@@ -41,6 +42,7 @@ description: Metaplex iOS SDK
 如果您在将包添加到 Xcode 项目时遇到任何问题或有疑问,我建议阅读 Apple 的[将包依赖项添加到您的应用程序](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)指南文章。
 
 ### 设置
+
 Swift SDK 的入口点是一个 `Metaplex` 实例,它将为您提供对其 API 的访问。
 
 设置 `SolanaConnectionDriver` 并设置您的环境。提供 `StorageDriver` 和 `IdentityDriver`。您还可以使用 URLShared 的具体实现 URLSharedStorageDriver 和访客身份驱动程序的 GuestIdentityDriver。
@@ -55,9 +57,11 @@ let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storag
 ```
 
 # 使用
+
 正确配置后,该 `Metaplex` 实例可用于访问提供不同功能集的模块。目前,只有一个 NFT 模块可以通过 `nfts()` 方法访问。从该模块中,您将能够查找、创建和更新 NFT,未来还会有更多功能。
 
 ## NFT
+
 NFT 模块可以通过 `Metaplex.nfts()` 访问并提供以下方法。目前,我们只支持读取方法。未来将支持写入和创建 NFT。
 
 - findNftByMint(mint, callback)
@@ -75,12 +79,12 @@ NFT 模块可以通过 `Metaplex.nfts()` 访问并提供以下方法。目前,�
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -127,6 +131,7 @@ nft.metadata(metaplex: self.metaplex) { result in
 ```
 
 ## 身份
+
 `Metaplex` 实例的当前身份可以通过 `metaplex.identity()` 访问,并提供有关在与 SDK 交互时我们代表哪个钱包行事的信息。
 
 此方法返回具有以下接口的身份对象。所有方法都需要 solana api 实例
@@ -148,11 +153,9 @@ public protocol IdentityDriver {
 
 `GuestIdentityDriver` 驱动程序是最简单的身份驱动程序。它本质上是一个 `null` 驱动程序,当我们不需要发送任何签名交易时很有用。如果您使用 `signTransaction` 方法,它将返回失败。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 驱动程序接受 `Account` 对象作为参数。
-
 
 ### ReadOnlyIdentityDriver
 

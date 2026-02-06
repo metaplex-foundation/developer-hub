@@ -27,27 +27,37 @@ howToTools:
   - mpl-core SDK
 ---
 Soulbound NFTは、特定のウォレットアドレスに永続的にバインドされ、別のオーナーに転送できない非代替性トークンです。特定のアイデンティティに紐づけるべき実績、資格、メンバーシップを表すのに便利です。 {% .lead %}
+
 ## 概要
+
 このガイドでは、MPL CoreとUmiフレームワークを使用してSoulbound Assetsを作成する方法を探ります。TypeScriptでSoulbound NFTを実装したい開発者でも、単にその仕組みを理解したい方でも、基本的な概念から実践的な実装まですべてをカバーします。アセットをsoulboundにするさまざまなアプローチを検討し、コレクション内で最初のsoulbound NFTを作成する方法を説明します。
 MPL Coreでは、soulbound NFTを作成する主に2つのアプローチがあります：
+
 ### 1. Permanent Freeze Delegateプラグイン
+
 - アセットを完全に転送不可・バーン不可にする
 - 以下のいずれかに適用可能：
   - 個別のアセットレベル
   - コレクションレベル（レント効率が良い）
 - コレクションレベルの実装により、単一のトランザクションですべてのアセットを解凍可能
+
 ### 2. Oracleプラグイン
+
 - アセットを転送不可にするが、バーンは可能
 - 以下のいずれかに適用可能：
   - 個別のアセットレベル
   - コレクションレベル（レント効率が良い）
 - コレクションレベルの実装により、単一のトランザクションですべてのアセットを解凍可能
+
 ## Permanent Freeze DelegateプラグインでSoulbound NFTを作成
+
 Permanent Freeze Delegateプラグインは、アセットをフリーズして転送不可にする機能を提供します。soulboundアセットを作成する場合：
+
 1. アセット作成時にPermanent Freezeプラグインを含める
 2. 初期状態をfrozenに設定
 3. authorityをNoneに設定し、frozen状態を永続的で不変にする
 これにより、転送も解凍もできない永続的なsoulboundアセットが効果的に作成されます。以下のコードスニペットは、これら3つのオプションを追加する場所を示しています：
+
 ```js
   await create(umi, {
     asset: assetSigner,
@@ -63,10 +73,13 @@ Permanent Freeze Delegateプラグインは、アセットをフリーズして�
     ],
   })
 ```
+
 ### アセットレベルの実装
+
 Permanent Freeze Delegateプラグインは、個々のアセットにアタッチしてsoulboundにできます。これはより細かい制御を提供しますが、より多くのレントと、将来soulboundでなくなる必要がある場合にアセットごとに個別の解凍トランザクションが必要です。
 {% totem %}
 {% totem-accordion title="コード例" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -153,12 +166,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ### コレクションレベルの実装
+
 すべてのアセットがsoulboundであるべきコレクションの場合、コレクションレベルでプラグインを適用する方が効率的です。レントが少なく、1つのトランザクションでコレクション全体を解凍できます。
 {% totem %}
 {% totem-accordion title="コード例" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -244,12 +261,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ## OracleプラグインでSoulbound NFTを作成
+
 Oracleプラグインは、アセットのさまざまなライフサイクルイベントを承認または拒否する方法を提供します。soulbound NFTを作成するために、バーンなどの他の操作を許可しながら転送イベントを常に拒否する特別なOracleを使用できます。これはPermanent Freeze Delegateプラグインアプローチとは異なり、アセットは転送できなくてもバーン可能です。
 Oracleプラグインを使用してsoulboundアセットを作成する場合、プラグインをアセットにアタッチします。これは作成時または後から行えます。この例では、Metaplexによってデプロイされた常に拒否する[デフォルトOracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex)を使用しています。
 これにより、転送できないがバーン可能な永続的なsoulboundアセットが効果的に作成されます。以下のコードスニペットはその方法を示しています：
+
 ```js
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
@@ -276,10 +297,13 @@ await create(umi, {
   ],
 })
 ```
+
 ### アセットレベルの実装
+
 Oracleプラグインは、個々のアセットを転送不可にしながらバーン機能を保持できます。これは、アセットを破棄する必要があるケースに柔軟性を提供します。
 {% totem %}
 {% totem-accordion title="コード例" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -379,12 +403,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ### コレクションレベルの実装
+
 コレクションレベルでOracleプラグインを適用すると、コレクション内のすべてのアセットが転送不可だがバーン可能になります。これはよりレント効率が良く、コレクション全体の権限を一度に管理できます。
 {% totem %}
 {% totem-accordion title="コード例" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -483,5 +511,6 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}

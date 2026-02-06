@@ -13,6 +13,7 @@ description: 了解如何在Bubblegum上冻结和解冻压缩NFT。
 {% dialect-switcher title="作为叶子委托人冻结压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -29,8 +30,10 @@ await freezeV2(umi, {
   //coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% totem-accordion title="作为永久冻结委托人" %}
+
 ```js
 import {
   getAssetWithProof,
@@ -46,6 +49,7 @@ await freezeV2(umi, {
   coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem-accordion %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -57,6 +61,7 @@ await freezeV2(umi, {
 {% dialect-switcher title="委托并冻结压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -73,6 +78,7 @@ await delegateAndFreezeV2(umi, {
 }).sendAndConfirm(umi);
 
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -84,6 +90,7 @@ await delegateAndFreezeV2(umi, {
 {% dialect-switcher title="作为叶子委托人解冻压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -97,6 +104,7 @@ await thawV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -106,6 +114,7 @@ await thawV2(umi, {
 {% dialect-switcher title="作为永久冻结委托人解冻压缩NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -118,10 +127,10 @@ await thawV2(umi, {
   authority: permanentFreezeDelegate,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## 解冻并撤销委托权限
 
@@ -130,6 +139,7 @@ await thawV2(umi, {
 {% dialect-switcher title="解冻并撤销委托权限" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -143,16 +153,19 @@ await thawAndRevokeV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## 使cNFT成为灵魂绑定
+
 要使cNFT成为灵魂绑定，cNFT必须是带有[`permanentFreezeDelegate`](/zh/smart-contracts/core/plugins/permanent-freeze-delegate)插件的[mpl-core集合](/zh/smart-contracts/core/collections)的一部分。使用`setNonTransferableV2`指令，我们可以使cNFT不可转让。
 
 {% dialect-switcher title="使cNFT成为灵魂绑定" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -167,6 +180,7 @@ await setNonTransferableV2(umi, {
     coreCollection: collection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

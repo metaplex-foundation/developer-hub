@@ -68,6 +68,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -129,6 +130,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   const stats = await getCollectionStatistics('COLLECTION_ADDRESS')
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -150,4 +152,4 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 - [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
 - [Find Compressed NFTs](/dev-tools/das-api/guides/find-compressed-nfts) - Discover and work with compressed NFTs
-- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries

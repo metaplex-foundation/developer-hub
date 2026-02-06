@@ -50,6 +50,7 @@ You should see the current version of the CLI displayed.
 ### 1. Create Configuration Directory
 
 The CLI will automatically create a configuration file at `~/.config/mplx` when first setting config settings. This config stores:
+
 - Wallet configurations
 - RPC endpoint settings
 - Explorer preferences
@@ -58,6 +59,7 @@ The CLI will automatically create a configuration file at `~/.config/mplx` when 
 ### 2. Configure Your Environment
 
 #### Set up a Wallet
+
 ```bash
 # Create a new wallet
 mplx config wallets new --name dev1
@@ -70,14 +72,16 @@ mplx config wallets add dev1 /path/to/keypair.json
 mplx config wallets set
 ```
 
-Further reading see 
+Further reading see
 
 #### Configure RPC Endpoint
+
 ```bash
 mplx config set rpcUrl  https://api.mainnet-beta.solana.com
 ```
 
 #### Set Preferred Explorer
+
 ```bash
 mplx config explorer set
 ```
@@ -87,22 +91,26 @@ mplx config explorer set
 If you want to contribute to the CLI or run it from source:
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/metaplex-foundation/cli.git
 cd cli
 ```
 
-2. Install dependencies:
+1. Install dependencies:
+
 ```bash
 npm install
 ```
 
-3. Build the project:
+1. Build the project:
+
 ```bash
 npm run build
 ```
 
-4. Link the CLI:
+1. Link the CLI:
+
 ```bash
 npm link
 ```
@@ -165,4 +173,4 @@ Or if you installed via yarn:
 
 ```bash
 yarn global remove @metaplex-foundation/cli
-``` 
+```

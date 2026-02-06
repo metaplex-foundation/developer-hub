@@ -65,7 +65,6 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## 도우미 계정
 
 Auction House가 제대로 작동하는 데 필요한 여러 계정이 있습니다. Auction House에서 설정하면 권한은 원하는 대로 이러한 계정을 재설정하고 구성할 수 있습니다.
@@ -105,8 +104,8 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Require Sign Off
+
 이 설정을 통해 마켓플레이스는 자산 목록 및 판매를 게이트할 수 있습니다. 권한 섹션에서 논의한 것처럼 Auction House 권한은 자산 게이팅에서 역할을 합니다. 이러한 검열 또는 중앙 집중식 제어는 `requireSignOff = true`일 때만 발생할 수 있습니다.
 
 이런 일이 발생하면 마켓플레이스의 모든 트랜잭션: 목록 게시, 입찰 및 판매 실행은 Auction House 권한에 의해 서명되어야 합니다. 완전히 분산된 마켓플레이스는 해당 마켓플레이스에서 작업의 검열 또는 중앙 집중식 제어를 피하기 위해 `requireSignOff` 설정을 `false`로 유지하도록 선택할 수 있습니다.
@@ -130,7 +129,6 @@ const auctionHouseSettings = {
 ## Can Change Sale Price
 
 `canChangeSalePrice`를 사용하면 사용자가 의도적으로 자산을 무료로 또는 0 SOL(또는 다른 SPL-token)에 목록에 올릴 때 마켓플레이스가 자산의 판매 가격을 변경할 수 있습니다. 자산을 0 SOL에 목록에 올림으로써 사용자는 마켓플레이스가 "자유롭게" 목록에 올린 자산에 대한 최상의 가격 일치를 찾기 위해 사용자 정의 매칭 알고리즘을 적용할 수 있도록 합니다.
-
 
 여기서 주목해야 할 중요한 점은 `canChangeSalePrice`는 `requireSignOff`도 `true`로 설정된 경우에만 `true`로 설정할 수 있다는 것입니다. 이는 권한이 없는 목록 게시 및 입찰의 경우 사용자 정의 매칭이 불가능하기 때문입니다. Auction House는 일치하는 입찰에 "승인"하고 자산의 판매를 실행할 수 있어야 합니다.
 
@@ -186,4 +184,5 @@ const auctionHouseSettings = {
 {% /dialect-switcher %}
 
 ## 결론
+
 이제 Auction House 설정에 대해 알았으므로 [다음 페이지](/legacy-documentation/auction-house/manage)에서 이를 사용하여 자신만의 Auction House를 만들고 업데이트하는 방법을 살펴보겠습니다.

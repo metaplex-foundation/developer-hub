@@ -66,8 +66,10 @@ const response = await fetch('<ENDPOINT>', {
   console.log(`컬렉션에서 ${data.result.items.length}개의 자산 발견`)
 })()
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 예제" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -195,6 +197,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 
@@ -262,6 +265,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

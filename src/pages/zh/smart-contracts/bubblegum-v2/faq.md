@@ -9,6 +9,7 @@ description: 关于Bubblegum的常见问题。
 Bubblegum V2是Bubblegum程序的新迭代，引入了多项改进和新功能。
 它是已知Bubblegum程序的一部分，但指令和数据结构有所不同。
 在Bubblegum V2中，cNFT使用MPL-Core集合而不是Metaplex Token Metadata集合进行分组。它还引入了冻结、解冻和灵魂绑定NFT等新功能，以及其他功能，如：
+
 - **冻结和解冻功能**：项目创建者现在可以冻结和解冻cNFT，为各种用例提供对资产的更大控制，例如在特定事件期间阻止转账或实现锁定机制。
 - **MPL-Core集合集成**：Bubblegum V2 NFT现在可以添加到MPL-Core集合，而不仅限于代币元数据集合，允许更大的灵活性和与更广泛的Metaplex生态系统的集成。
 - **版税强制执行**：由于Bubblegum V2使用[MPL-Core](https://docs.metaplex.com/core/overview)集合，可以使用`ProgramDenyList`等方式对cNFT强制执行版税。

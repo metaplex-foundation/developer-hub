@@ -34,7 +34,6 @@ The Auction House program can be used to create a new marketplace by instantiati
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 The account can be configured in whichever way the user wants. We'll talk [more about these configurations in a dedicated page](auction-house/settings) but here are some interesting configurable parameters:
 
 - `requireSignOff`: this allows marketplaces to gate which assets can be listed and which bids can be placed. On every relevant instruction, the Auction House [authority](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities) needs to sign the transaction.
@@ -53,7 +52,7 @@ When a user lists an asset, the Auction House does two things:
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [here](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
+1. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [here](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 
@@ -86,7 +85,7 @@ Now that we know how the `executeSale` instruction works, let's discuss the thre
 > - Bob notices the listing and places a bid of 5 SOL for the asset A. This creates a **Buy Order** for asset A.
 > - This enables the marketplace to place a bid on the asset and execute the sale in the same transaction, in practice allowing Bob to "buy" asset A.
 
-2. _"Selling" at bid price_: This is the case when a user, interested in an unlisted asset, places a bid on it. If the asset owner now lists the asset for the bid amount, the `list` and the `executeSale` instructions are executed in the same instruction, and thus the lister effectively "sells" the asset at the requested price.
+1. _"Selling" at bid price_: This is the case when a user, interested in an unlisted asset, places a bid on it. If the asset owner now lists the asset for the bid amount, the `list` and the `executeSale` instructions are executed in the same instruction, and thus the lister effectively "sells" the asset at the requested price.
 
 > Example:
 >
@@ -94,7 +93,7 @@ Now that we know how the `executeSale` instruction works, let's discuss the thre
 > - Alice notices the bid and lists the asset A for 5 SOL. This creates a **Sell Order** for asset A.
 > - This enables the marketplace to list the asset and execute the sale in the same transaction, in practice allowing Alice to "sell" asset A.
 
-3. _Lister agreeing to a bid_: This is the case when the `executeSale` instruction is executed independently, after a **Buy Order** and a **Sell Order** exist for a given asset.
+1. _Lister agreeing to a bid_: This is the case when the `executeSale` instruction is executed independently, after a **Buy Order** and a **Sell Order** exist for a given asset.
 
 > Example:
 >

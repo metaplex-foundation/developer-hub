@@ -116,7 +116,7 @@ pub struct CreateV1Builder {
 }
 ```
 
-These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts may not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction. 
+These are your arguments of publickeys and data that will need to be passed into the builder. Some accounts may also be optional. These optional accounts may not be required at all by the program or could possibly default to another address if left out. This behaviour can vary from instruction to instruction.
 
 If you click through to the `new()` function again and scroll down this time you'll see the individual functions with additional comments. In the below case you can see that the owner will default to payer, so we don't need to pass in owner if in this case if the payer is also going to be the owner of the Asset.
 

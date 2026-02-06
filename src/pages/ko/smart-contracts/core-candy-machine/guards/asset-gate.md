@@ -40,7 +40,6 @@ Owner: Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="requiredCollection" to="collectionNftMint" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the payer
 
@@ -111,6 +110,7 @@ API 참조: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 ## 민트 설정
 
 자산 게이트 가드에는 다음 민트 설정이 포함됩니다:
+
 - **Asset Address**: 소유권을 증명하는 데 사용할 자산의 주소입니다. 이는 필수 컬렉션에 포함되어야 하며 민터의 소유여야 합니다.
 - **Collection Address**: 소유권을 증명하는 데 사용되는 컬렉션의 주소입니다.
 

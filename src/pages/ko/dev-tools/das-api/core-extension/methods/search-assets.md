@@ -9,6 +9,7 @@ description: 검색 기준이 주어진 MPL Core 자산 목록을 반환합니�
 ## 코드 예제
 
 이 예제에서는 두 가지 필터가 적용됩니다:
+
 1. 소유자의 공개 키
 2. 메타데이터 uri `jsonUri`
 
@@ -32,6 +33,7 @@ console.log(asset);
 ```
 
 ## 예제 응답
+
 ```json
 [
   {

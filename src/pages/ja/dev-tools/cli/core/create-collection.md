@@ -9,6 +9,7 @@ description: 異なる方法を使用してMPLコアコレクションを作成
 ## 方法
 
 ### 1. シンプルな作成
+
 コマンドライン引数を通じて、メタデータの名前とURIを直接提供して単一のコレクションを作成します。
 
 ```bash
@@ -16,6 +17,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 ```
 
 ### 2. ファイルベースの作成
+
 画像ファイルとJSONメタデータファイルを提供して単一のコレクションを作成します。コマンドは両方のファイルのアップロードとコレクションの作成を処理します。
 
 ```bash
@@ -23,6 +25,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ```
 
 ### 3. インタラクティブウィザード
+
 ファイルのアップロードとメタデータの作成を含む全プロセスをガイドするインタラクティブウィザードを使用してコレクションを作成します。
 
 ```bash
@@ -32,31 +35,37 @@ mplx core collection create --wizard
 ## オプション
 
 ### 基本オプション
+
 - `--name <string>`: コレクション名（シンプルな作成に必須）
 - `--uri <string>`: コレクションメタデータのURI（シンプルな作成に必須）
 
 ### ファイルベースオプション
+
 - `--files`: ファイルベースの作成を示すフラグ
 - `--image <path>`: アップロードしてコレクションに割り当てる画像ファイルへのパス
 - `--json <path>`: JSONメタデータファイルへのパス
 
 ### プラグインオプション
+
 - `--plugins`: インタラクティブなプラグイン選択を使用
 - `--pluginsFile <path>`: プラグインデータを含むJSONファイルへのパス
 
 ## 例
 
 1. インタラクティブウィザードを使用してコレクションを作成：
+
 ```bash
 mplx core collection create --wizard
 ```
 
-2. 名前とURIを使用してコレクションを作成：
+1. 名前とURIを使用してコレクションを作成：
+
 ```bash
 mplx core collection create --name "My Collection" --uri "https://example.com/metadata.json"
 ```
 
-3. ファイルからコレクションを作成：
+1. ファイルからコレクションを作成：
+
 ```bash
 mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
 ```
@@ -64,6 +73,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ## 出力
 
 コマンドは作成が成功すると以下の情報を出力します：
+
 ```
 --------------------------------
   Collection: <collection_address>

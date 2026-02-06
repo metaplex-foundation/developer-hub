@@ -5,9 +5,11 @@ description: The Amount primitive rule
 ---
 
 ## Amount
+
 전송되는 토큰 양이 특정 금액과 비교됩니다 (보다 큼, 보다 작음, 또는 같음).
 
 ### 필드
+
 * **amount** - 비교할 금액
 * **operator** - 사용할 비교 연산: 보다 큼, 보다 작음, 같음
 * **field** - 비교할 페이로드 필드

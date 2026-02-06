@@ -25,6 +25,7 @@ This project is in development. **All** interfaces are _very likely_ to change v
 ## Getting started
 
 ### Installation
+
 #### Requirements {#requirements}
 
 - Android 21+
@@ -35,15 +36,15 @@ Inside settings.gradle add a maven repository:
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
  
 ```
@@ -52,8 +53,8 @@ Then at your build.gradle:
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // Set version
+ ...
+ implementation 'com.metaplex:metaplex:+' // Set version
 }
 ```
 
@@ -64,19 +65,22 @@ After that gradle sync.
 The library is now is available through JitPack.io
 
 First, add the JitPack repository to your build:
+
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
+
 Then add the dependency to the 'build.gradle' file for your app/module:
+
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -84,7 +88,7 @@ dependencies {
 
 The entry point to the Android SDK is a `Metaplex` instance that will give you access to its API.
 
-Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations OkHttpSharedStorageDriver for OKHttp and ReadOnlyIdentityDriver for a read only Identity Driver. 
+Set the `SolanaConnectionDriver` and set up your environment. Provide a `StorageDriver` and `IdentityDriver`. You can also use the concrete implementations OkHttpSharedStorageDriver for OKHttp and ReadOnlyIdentityDriver for a read only Identity Driver.
 
 You can customize who the SDK should interact on behalf of and which storage provider to use when uploading assets. We might provide a default and simple implementation in the future.
 
@@ -97,9 +101,11 @@ val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
 # Usage
+
 Once properly configured, that `Metaplex` instance can be used to access modules providing different sets of features. Currently, there is only one NFT module that can be accessed via the `nft` property. From that module, you will be able to find, create and update NFTs with more features to come.
 
 ## NFTs
+
 The NFT module can be accessed via `Metaplex.nft` and provide the following methods. Currently, we only support reading methods. Writing and creating NFTs will be supported on the future.
 
 - findByMint(mint, callback)
@@ -108,7 +114,7 @@ The NFT module can be accessed via `Metaplex.nft` and provide the following meth
 - findAllByCreator(creator, position = 1, callback)
 - findAllByCandyMachine(candyMachine, version = 2, callback)
 
-All the methods return a callback. It's also possible to wrap them inside either RX or Async Result. We only provide this interface since is the most compatible without forcing any specific framework. 
+All the methods return a callback. It's also possible to wrap them inside either RX or Async Result. We only provide this interface since is the most compatible without forcing any specific framework.
 
 ### Your first request
 
@@ -116,11 +122,11 @@ The following code snippet is a basic one you can use to get NFTs from a publicK
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess { 
-		...
-	}.onFailure { 
-		...
-	}
+ it.onSuccess { 
+  ...
+ }.onFailure { 
+  ...
+ }
 }
 ```
 
@@ -150,7 +156,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,28 +166,29 @@ In order to load these properties, you may run the `metadata` properties of the 
 
 ```kotlin
 nft..metadata(metaplex) { result -> 
-	it.onSuccess { 
-		...
-	}.onFailure { 
-		...
-	}
+ it.onSuccess { 
+  ...
+ }.onFailure { 
+  ...
+ }
 }
 ```
 
 ## Auctions
-The Metaplex Auction House protocol allows anyone to implement a decentralized sales contract and accept ay SPL token they desire. 
+
+The Metaplex Auction House protocol allows anyone to implement a decentralized sales contract and accept ay SPL token they desire.
 
 The Auctions module can be accessed via `Metaplex.auctions` and provide the following methods. Currently we only support read methods. Auction House creation, and the ability to interact with and create bids and listings will be supported in the future.
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
 - more coming soon!
 
-All methods are provided as composable [suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html) to provide more flexibility and compatibility in your application.   
+All methods are provided as composable [suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html) to provide more flexibility and compatibility in your application.
 
 **Note:** These suspend functions provided by the Auctions API are an architectural change for the library. We have previously only provided async-callback methods. We highly recommend that everyone migrate to the new suspending functions, however we have also provided async-callback implementations of the available methods. Note that these methods are provided as a interim and may be deprecated in the future:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address, callback)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
 
 ### findAuctionHouseByAddress
@@ -200,9 +207,10 @@ The `findAuctionHouseByCreatorAndMint` method accepts a public key and returns a
 val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByCreatorAndMint(creatorPublicKey, mintPublicKey).getOrNull()
 ```
 
-The returned `AuctionHouse` model will contain details about the Auction House account on chain. In the future, this model will be used to construct an `AuctionHouseClient` instance to interact with the auction and perform trades. 
+The returned `AuctionHouse` model will contain details about the Auction House account on chain. In the future, this model will be used to construct an `AuctionHouseClient` instance to interact with the auction and perform trades.
 
 ## Identity
+
 The current identity of a `Metaplex` instance can be accessed via `metaplex.identity()` and provide information on the wallet we are acting on behalf of when interacting with the SDK.
 
 This method returns an identity object with the following interface. All the methods required a solana api instance
@@ -224,11 +232,9 @@ Let’s have a quick look at the concrete identity drivers available to us.
 
 The `GuestIdentityDriver` driver is the simplest identity driver. It is essentially a `null` driver that can be useful when we don’t need to send any signed transactions. It will return failure if you use `signTransaction` methods.
 
-
 ### KeypairIdentityDriver
 
 The `KeypairIdentityDriver` driver accepts a `Account` object as a parameter.
-
 
 ### ReadOnlyIdentityDriver
 
@@ -244,7 +250,7 @@ interface StorageDriver {
 }
 ```
 
-Currently its only used to retrieve json data off-chain. 
+Currently its only used to retrieve json data off-chain.
 
 ### OkHttpSharedStorageDriver
 
@@ -252,13 +258,10 @@ This will use OkHttp networking. Which is the most popular Android networking im
 
 ### MemoryStorageDriver
 
-This will use return Empty Data object with 0 size. 
+This will use return Empty Data object with 0 size.
 
 ## Sample app
 
-The SDK comes with a [sample app](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample). Please clone it run it on your phone and take what is can help you. 
+The SDK comes with a [sample app](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample). Please clone it run it on your phone and take what is can help you.
 
 [github]: https://github.com/metaplex-foundation/metaplex-android
-[sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample
-
-

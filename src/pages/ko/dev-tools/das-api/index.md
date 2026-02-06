@@ -5,6 +5,7 @@ description: Metaplex Digital Asset Standard에 액세스하는 데 사용되는
 ---
 
 Metaplex Digital Asset Standard (DAS) API는 Solana의 디지털 자산과 상호작용하기 위한 통합 인터페이스로, 세 가지 Metaplex 표준인 Core, Token Metadata, 압축된(Bubblegum) 자산을 모두 지원합니다. 이를 통해 자산 데이터에 쉽게 액세스하고 필터링할 수 있습니다. 특히 다음과 같은 경우에 유용합니다:
+
 - Core Assets의 경우, 플러그인을 자동으로 파생하고 컬렉션의 플러그인 데이터를 포함할 수 있습니다.
 - Compressed NFT의 경우, 상세한 계정 데이터가 온체인에 저장되지 않고 RPC 제공자가 관리하는 데이터 저장소에 저장됩니다.
 - 오프체인 메타데이터도 표준을 통해 인덱싱되므로 더 적은 호출로 데이터를 가져올 수 있습니다.

@@ -26,22 +26,27 @@ This guide explains how to mint NFTs from a Candy Machine to different wallet ad
 Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
 
 {% callout type="note" title="Important Consideration" %}
-- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/smart-contracts/candy-machine/guards/allow-list) or the [NFT Gate](/smart-contracts/candy-machine/guards/nft-gate) Guard. 
+
+- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/smart-contracts/candy-machine/guards/allow-list) or the [NFT Gate](/smart-contracts/candy-machine/guards/nft-gate) Guard.
 - There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
 {% /callout %}
 
 There are two approaches described in this guide:
+
 1. Mint using [Sugar CLI](#using-sugar-cli). No Coding required!
 2. Mint using [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)
 
 ## Using Sugar CLI
+
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
+
 1. `sugar mint` to mint to *one* specific wallet
-2. `sugar airdrop` to mint to *multiple* wallets 
+2. `sugar airdrop` to mint to *multiple* wallets
 
 Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [this](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine) Guide. If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
 
 ### Single Recipient Minting with `sugar mint`
+
 To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
 
 - `--receiver <WALLET>`: Specify the recipient's wallet address
@@ -71,6 +76,7 @@ By default sugar expects this file to be called `airdrop_list.json` but if if yo
 
 **Example**:
 To execute this airdrop the following command can be used
+
 ```sh
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
@@ -82,8 +88,8 @@ In this section the code Snippets for the mint functions in Javascript are shown
 When minting to another wallet using Typescript, there are two main approaches depending on whether your Candy Machine uses guards:
 
 ### Mint without Guards
-For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
+For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
@@ -110,6 +116,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="Full Code Example" %}
+
 ```js
 import {
   addConfigLines,
@@ -265,10 +272,12 @@ const RPC_ENDPOINT = "https://api.devnet.solana.com";
 })();
 
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
 
 ### Mint with Guards
+
 For Candy Machines with guards `mintV2` can be used. In this case, you'll need to first create the Token Account and Associated Token Account for the recipient using `createMintWithAssociatedToken`. This allows the recipient to receive the NFT without having to sign the transaction.
 
 ```js
@@ -304,6 +313,7 @@ const mintTx = await transactionBuilder()
 
 {% totem %}
 {% totem-accordion title="Full Code Example" %}
+
 ```js
 import {
   addConfigLines,
@@ -473,5 +483,6 @@ const RPC_ENDPOINT = "ENDPOINT";
   }
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}

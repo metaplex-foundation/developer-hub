@@ -14,12 +14,12 @@ MPL-404エスクローおよびスワッププログラムをデプロイする�
 
 MPL-404のメタデータランダム化機能を活用するには、オフチェーンメタデータURIを一貫して定義し、増分する必要があります。一貫したベースURIは、すべてのオフチェーンメタデータソリューションから利用できるわけではありません。Shadow Driveは、増分URIを持つ可能なオフチェーンメタデータソリューションの一つです。URIは次のようになる必要があります：
 
-- https://shdw-drive.genesysgo.net/.../0.json
-- https://shdw-drive.genesysgo.net/.../1.json
+- <https://shdw-drive.genesysgo.net/.../0.json>
+- <https://shdw-drive.genesysgo.net/.../1.json>
 
 ...
 
-- https://shdw-drive.genesysgo.net/.../999999.json
+- <https://shdw-drive.genesysgo.net/.../999999.json>
 
 ## スワップランダム化
 

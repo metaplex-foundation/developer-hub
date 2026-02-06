@@ -23,7 +23,7 @@ There are multiple criteria to find all bids, listings and sales (or *purchases*
 {% dialect title="JavaScript" id="js" %}
 
 Below is the snippet for finding bids by multiple criteria. You can use any combination of keys.
-     
+
 ```tsx
 // Find all bids in an Auction House.
 const bids = await metaplex
@@ -88,7 +88,7 @@ Below is the snippet for finding bids, listings and sales by corresponding recei
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
-     
+
 ```tsx
 // Find a bid by receipt
 const nft = await metaplex
@@ -110,11 +110,12 @@ const nft = await metaplex
 {% /dialect-switcher %}
 
 ### Find by Trade State
+
 Below is the snippet for finding bids, listings and sales by corresponding trade state PDA accounts.
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
-     
+
 ```tsx
 // Find a bid by trade state
 const nft = await metaplex

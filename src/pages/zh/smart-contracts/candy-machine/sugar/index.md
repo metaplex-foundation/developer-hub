@@ -25,6 +25,7 @@ sugar
 ```
 
 这将显示命令列表及其简短描述：
+
 ```
 sugar-cli 2.7.1
 用于创建和管理 Metaplex Candy Machine 的命令行工具。

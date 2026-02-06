@@ -9,11 +9,13 @@ description: 在 Solana 上创建新的同质化代币
 ## 基本用法
 
 ### 交互式向导
+
 ```bash
 mplx toolbox token create --wizard
 ```
 
 ### 直接创建
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
@@ -21,11 +23,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## 选项
 
 ### 必需选项（不使用向导时）
+
 - `--name <string>`: 代币名称（例如 "My Awesome Token"）
 - `--symbol <string>`: 代币符号（2-6 个字符，例如 "MAT"）
 - `--mint-amount <number>`: 要铸造的初始代币数量（必须大于 0）
 
 ### 可选选项
+
 - `--decimals <number>`: 小数位数（0-9，默认：0）
 - `--description <string>`: 代币及其用途的描述
 - `--image <path>`: 代币图片文件路径（PNG、JPG 或 GIF）
@@ -34,11 +38,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## 示例
 
 ### 使用基本信息创建代币
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
 
 ### 使用所有选项创建代币
+
 ```bash
 mplx toolbox token create \
   --name "My Awesome Token" \
@@ -50,6 +56,7 @@ mplx toolbox token create \
 ```
 
 ### 使用向导创建代币
+
 ```bash
 mplx toolbox token create --wizard
 ```
@@ -57,6 +64,7 @@ mplx toolbox token create --wizard
 ## 输出
 
 成功创建代币后，命令将显示：
+
 ```
 --------------------------------
 Token created successfully!

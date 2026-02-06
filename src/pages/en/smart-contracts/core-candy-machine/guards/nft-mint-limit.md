@@ -6,7 +6,7 @@ description: "The Core Candy Machine 'NFT Mint Limit' guard restricts minting to
 
 ## Overview
 
-The NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the amount of mints that can be done for a provided Token Metadata NFT. It can be considered as a combination of the [NFT Gate](/smart-contracts/core-candy-machine/guards/nft-gate) and [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) Guard, based on NFT Addresses instead of wallets. 
+The NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the amount of mints that can be done for a provided Token Metadata NFT. It can be considered as a combination of the [NFT Gate](/smart-contracts/core-candy-machine/guards/nft-gate) and [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) Guard, based on NFT Addresses instead of wallets.
 
 The limit is set per NFT Collection, per candy machine and per identifier — provided in the settings — to allow multiple nft mint limits within the same Core Candy Machine.
 
@@ -55,8 +55,8 @@ NFT Mint Counter PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
   {% node  theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -139,6 +139,7 @@ mintV1(umi, {
 _The NFT Mint Limit guard does not support the route instruction._
 
 ## NftMintLimit Accounts
+
 When the `NftMintLimit` Guard is used a `NftMintCounter` Account is created for each NFT, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
 
 ```js

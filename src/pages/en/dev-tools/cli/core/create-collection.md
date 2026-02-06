@@ -9,6 +9,7 @@ The `mplx core collection create` command allows you to create MPL Core Collecti
 ## Methods
 
 ### 1. Simple Creation
+
 Create a single Collection by providing the name and URI of the metadata directly through command line arguments.
 
 ```bash
@@ -16,6 +17,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 ```
 
 ### 2. File-based Creation
+
 Create a single Collection by providing an image file and a JSON metadata file. The command will handle uploading both files and creating the collection.
 
 ```bash
@@ -23,6 +25,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ```
 
 ### 3. Interactive Wizard
+
 Create a Collection using the interactive wizard which guides you through the entire process, including file uploads and metadata creation.
 
 ```bash
@@ -32,31 +35,37 @@ mplx core collection create --wizard
 ## Options
 
 ### Basic Options
+
 - `--name <string>`: Collection name (required for simple creation)
 - `--uri <string>`: URI of the Collection metadata (required for simple creation)
 
 ### File-based Options
+
 - `--files`: Flag to indicate file-based creation
 - `--image <path>`: Path to image file to upload and assign to Collection
 - `--json <path>`: Path to JSON metadata file
 
 ### Plugin Options
+
 - `--plugins`: Use interactive plugin selection
 - `--pluginsFile <path>`: Path to a JSON file with plugin data
 
 ## Examples
 
 1. Create a collection using the interactive wizard:
+
 ```bash
 mplx core collection create --wizard
 ```
 
-2. Create a collection with name and URI:
+1. Create a collection with name and URI:
+
 ```bash
 mplx core collection create --name "My Collection" --uri "https://example.com/metadata.json"
 ```
 
-3. Create a collection from files:
+1. Create a collection from files:
+
 ```bash
 mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
 ```
@@ -64,6 +73,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 ## Output
 
 The command will output the following information upon successful creation:
+
 ```
 --------------------------------
   Collection: <collection_address>
@@ -80,4 +90,4 @@ The command will output the following information upon successful creation:
 - Plugin configuration can be done either interactively or through a JSON file
 - The JSON metadata file must include a `name` field for the collection
 - The command will automatically handle file uploads and metadata creation when using the file-based or wizard methods
-- Collection metadata follows the standard NFT metadata format with additional collection-specific fields 
+- Collection metadata follows the standard NFT metadata format with additional collection-specific fields

@@ -9,6 +9,7 @@ description: Bubblegum에 대한 자주 묻는 질문.
 Bubblegum V2는 여러 개선 사항과 새로운 기능을 도입하는 Bubblegum 프로그램의 새로운 반복입니다.
 이는 알려진 Bubblegum 프로그램의 일부이지만 명령어와 데이터 구조가 다릅니다.
 Bubblegum V2를 사용하면 cNFT가 Metaplex Token Metadata 컬렉션 대신 MPL-Core 컬렉션을 사용하여 그룹화됩니다. 또한 동결, 해동, 소울바운드 NFT와 같은 새로운 기능과 다음과 같은 추가 기능을 도입합니다:
+
 - **동결 및 해동 기능**: 프로젝트 제작자는 이제 cNFT를 동결하고 해동할 수 있어 특정 이벤트 중 전송을 방지하거나 베스팅 메커니즘을 구현하는 등 다양한 사용 사례를 위해 자산을 더 잘 제어할 수 있습니다.
 - **MPL-Core 컬렉션 통합**: Bubblegum V2 NFT는 이제 토큰 메타데이터 컬렉션에 제한되지 않고 MPL-Core 컬렉션에 추가될 수 있어 더 넓은 Metaplex 생태계와의 유연성과 통합을 제공합니다.
 - **로열티 강제**: Bubblegum V2는 [MPL-Core](/smart-contracts/core) 컬렉션을 사용하므로 `ProgramDenyList`를 사용하여 cNFT에 로열티를 강제할 수 있습니다.

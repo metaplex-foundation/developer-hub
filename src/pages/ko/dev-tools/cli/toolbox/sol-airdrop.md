@@ -9,11 +9,13 @@ description: 지정된 주소로 SOL 에어드롭
 ## 기본 사용법
 
 ### 현재 지갑으로 에어드롭
+
 ```bash
 mplx toolbox sol airdrop <amount>
 ```
 
 ### 특정 주소로 에어드롭
+
 ```bash
 mplx toolbox sol airdrop <amount> <address>
 ```
@@ -26,11 +28,13 @@ mplx toolbox sol airdrop <amount> <address>
 ## 예시
 
 ### 현재 지갑으로 1 SOL 에어드롭
+
 ```bash
 mplx toolbox sol airdrop 1
 ```
 
 ### 특정 주소로 2 SOL 에어드롭
+
 ```bash
 mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -38,6 +42,7 @@ mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## 출력
 
 에어드롭이 성공하면 명령어가 다음을 표시합니다:
+
 ```
 --------------------------------
     Airdropped <amount> SOL to <address>

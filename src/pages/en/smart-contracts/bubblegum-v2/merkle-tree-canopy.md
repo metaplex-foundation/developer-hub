@@ -21,7 +21,9 @@ The canopy will be updated everytime the concurrent merkle tree is modified.  No
 The table below was generated with help from [compressed.app](https://compressed.app/), and shows how the total cost of minting 1,000,000 cNFTs can vary widely depending on canopy size.
 
 ### Cost for 1,000,000 cNFTs with various Canopy depth
+
 *A Merkle tree of depth 20 can store 1,048,576 cNFTs.*
+
 | Canopy Depth     | Proof Bytes   | Storage Cost | Mint cost (3 mint/tx w/ LUT) | Total cost |
 | ---------------- | ------------- | ------------ | -----------------------------| ---------- |
 | 0                | 640           | 0.3091       | 1.6667                       | 1.9758     |

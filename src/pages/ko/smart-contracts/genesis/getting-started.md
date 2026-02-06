@@ -32,6 +32,7 @@ faqs:
 
 {% callout title="빌드할 준비가 되셨나요?" %}
 흐름을 이해했다면:
+
 - **[JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript)** - 설치 및 함수 참조
 - **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 비례 배분을 위한 전체 튜토리얼
 - **[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 판매를 위한 전체 튜토리얼
@@ -83,6 +84,7 @@ faqs:
 **진행 사항:** 토큰을 발행하고 전체 공급량을 에스크로에 보관하는 Genesis Account를 생성합니다.
 
 **제공해야 할 것:**
+
 - 토큰 메타데이터 (이름, 심볼, URI)
 - 총 공급량 (소수점 포함)
 - Quote 토큰 (일반적으로 wSOL)
@@ -175,12 +177,14 @@ Unix 타임스탬프를 사용합니다 (밀리초가 아닌 초 단위).
 일반적인 종료 동작: 수집된 SOL의 100%를 Unlocked Bucket (재무)으로 전송합니다.
 
 여러 목적지로 자금을 분할할 수 있습니다:
+
 - 80%는 재무로
 - 20%는 유동성 풀 Bucket으로
 
 ## 6단계: 청구 기간
 
 **진행 사항:**
+
 - 사용자가 예치금에 따라 토큰을 청구합니다
 - 팀이 Unlocked Bucket에서 모금된 SOL을 청구합니다
 
@@ -226,21 +230,27 @@ Unix 타임스탬프를 사용합니다 (밀리초가 아닌 초 단위).
 ## FAQ
 
 ### Genesis Account 초기화 시 무엇이 생성되나요?
+
 메타데이터가 포함된 새로운 SPL 토큰, 마스터 조정 계정 (Genesis Account PDA), 그리고 배포를 위해 에스크로에 보관되는 총 공급량이 발행됩니다.
 
 ### Finalize 후에 Bucket을 더 추가할 수 있나요?
+
 아니요. Finalize는 영구적입니다. Bucket을 더 추가하거나 구성을 변경할 수 없습니다. Finalize 전에 완전한 Bucket 구조를 계획하세요.
 
 ### Inflow와 Outflow Bucket의 차이점은 무엇인가요?
+
 **Inflow Bucket**은 사용자로부터 SOL을 수집합니다 (Launch Pool, Presale). **Outflow Bucket**은 종료 동작을 통해 토큰 또는 SOL을 받습니다—일반적으로 팀/재무 청구를 위한 Unlocked Bucket입니다.
 
 ### 출시는 언제 활성화되나요?
+
 Finalize 후, Bucket 시간 조건에 따라 출시가 활성화됩니다. 현재 시간이 Bucket의 예치 창 내에 있을 때 사용자가 참여할 수 있습니다.
 
 ### 소수점이 있는 토큰 공급량은 어떻게 계산하나요?
+
 원하는 공급량에 10^소수점을 곱합니다. 소수점 9자리의 100만 토큰의 경우: 1,000,000 × 1,000,000,000 = 1,000,000,000,000,000.
 
 ### SOL 이외의 토큰을 예치에 사용할 수 있나요?
+
 예. `quoteMint`를 아무 SPL 토큰으로 설정할 수 있습니다. 그러나 SOL 단위 출시에는 wSOL이 표준입니다.
 
 ## 용어집

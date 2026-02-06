@@ -42,6 +42,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -71,8 +72,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} fungible assets`)
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -90,6 +93,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -99,6 +103,7 @@ You can also use `getAssetsByOwner` and filter the results client-side:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -126,8 +131,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   )
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   const response = await fetch('<ENDPOINT>', {
@@ -159,6 +166,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${FungibleTokens.length} fungible assets out of ${allAssets.items.length} total assets`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -168,6 +176,7 @@ You can filter fungible tokens by various properties:
 
 {% totem %}
 {% totem-accordion title="UMI Example" %}
+
 ```typescript
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -200,8 +209,10 @@ const creatorTokens = await umi.rpc.searchAssets({
 console.log(`Tokens by supply: ${tokensBySupply.items.length}`)
 console.log(`Creator tokens: ${creatorTokens.items.length}`)
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
+
 ```javascript
 (async () => {
   // Get tokens with specific supply range
@@ -258,6 +269,7 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
   console.log(`Creator tokens: ${creatorTokens.items.length}`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -273,4 +285,4 @@ console.log(`Creator tokens: ${creatorTokens.items.length}`)
 - [Get All Tokens in a Wallet](/dev-tools/das-api/guides/get-wallet-tokens)
 - [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner)
 - [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria)
-- [Analyze Collection Statistics](/dev-tools/das-api/guides/collection-statistics) 
+- [Analyze Collection Statistics](/dev-tools/das-api/guides/collection-statistics)

@@ -34,9 +34,9 @@ API reference for the Genesis JavaScript SDK. For complete tutorials, see [Launc
 
 {% quick-links %}
 
-{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
+{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/genesis>" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Auto-generated API docs" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="<https://mpl-genesis.typedoc.metaplex.com/>" description="Auto-generated API docs" /%}
 
 {% /quick-links %}
 
@@ -358,15 +358,19 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if 
 ## FAQ
 
 ### What is Umi and why is it required?
+
 Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
 
 ### Can I use the Genesis SDK in a browser?
+
 Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
 
 ### What's the difference between fetch and safeFetch?
+
 `fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
 
 ### How do I handle transaction errors?
+
 Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
 
 ---

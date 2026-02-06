@@ -9,6 +9,7 @@ description: 根据搜索条件返回 MPL Core 资产列表
 ## 代码示例
 
 在此示例中应用了两个过滤器：
+
 1. 所有者的公钥
 2. 元数据 uri `jsonUri`
 
@@ -32,6 +33,7 @@ console.log(asset);
 ```
 
 ## 示例响应
+
 ```json
 [
   {

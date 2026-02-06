@@ -58,6 +58,7 @@ name: "My Test Escrow"
 ### uri
 
 메타데이터 풀의 기본 uri입니다. 이는 순차적인 목적지에서 메타데이터 json 파일들도 포함하는 정적 uri여야 합니다. 예:
+
 ```
 https://shdw-drive.genesysgo.net/.../0.json
 https://shdw-drive.genesysgo.net/.../1.json
@@ -106,6 +107,7 @@ min과 max는 메타데이터 풀에서 사용 가능한 최소 및 최대 인�
 ```
 
 이는 min과 max args로 변환됩니다.
+
 ```ts
 min: 0,
 max: 4999

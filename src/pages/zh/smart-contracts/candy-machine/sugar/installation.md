@@ -7,6 +7,7 @@ description: Sugar 安装指南。
 安装 Sugar 最快捷、最简单的方法是通过运行安装脚本下载预构建的二进制文件，适用于 macOS、Linux 和 WSL（Windows 子系统 Linux）。对于 Windows 系统，请参见下面的 📌。
 
 在终端中运行以下命令：
+
 ```bash
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 ```
@@ -68,6 +69,7 @@ bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 {% callout %}
 
 从 crates.io 安装或在 Ubuntu 或 WSL（Windows 子系统 Linux）上从源代码安装时，您可能需要安装一些额外的依赖项：
+
 ```bash
 sudo apt install libudev-dev pkg-config unzip
 ```
@@ -95,8 +97,8 @@ rustc --version
 ```bash
 cargo install sugar-cli
 ```
-这将从 Crates.io 下载 Sugar 代码并自动为您安装。
 
+这将从 Crates.io 下载 Sugar 代码并自动为您安装。
 
 ### 从源代码构建
 

@@ -5,9 +5,11 @@ description: Rule Set을 사용하여 검증을 실행하는 방법
 ---
 
 ## 소개
+
 Token Authorization Rules의 Validate 명령은 operation, token, payload를 받아서 해당 데이터를 사용하여 rule set을 평가하여 operation이 허용되는지 결정합니다. 이것의 가장 일반적인 사용은 Metaplex 프로그래머블 NFT에서의 로열티 강제입니다. pNFT에서 Delegate와 Transfer 명령은 **Operations**이고, 위임되거나 전송되는 NFT가 **Token**이며, **Payload**는 Operation의 다양한 속성을 사용하여 구성됩니다.
 
 ## Payload 구성
+
 대부분의 **Primitive Rules**는 **field**를 포함합니다. 이는 validate 호출에 전달되는 Payload의 필드를 나타내기 위한 것입니다. 이러한 필드에 저장된 값은 Payload HashMap에서 가져와서 다양한 규칙의 평가에 사용됩니다. 다음은 Token Metadata가 NFT 전송을 위한 payload를 구성하는 방법의 예입니다.
 
 ```rust
@@ -36,6 +38,7 @@ auth_data.payload.insert(
 ```
 
 ## Validate 호출
+
 - **rule_set_pda** - 평가될 Rule Set을 포함하는 PDA입니다.
 - **mint** - 작업이 수행되는 토큰의 mint입니다.
 - **system_program** - System Program입니다.

@@ -6,8 +6,6 @@ description: Learn to write a swap function so users can swap their NFT into Tok
 
 The action of swapping Tokens in your possession to an NFT held in the escrow in the MPL-Hybrid program is called a `capture`.
 
-
-
 ## Swapping an NFT
 
 ```ts

@@ -9,16 +9,19 @@ description: Metaplex CLI를 사용하여 MPL Core 에셋 소각하기
 ## 기본 사용법
 
 ### 단일 에셋 소각
+
 ```bash
 mplx core asset burn <assetId>
 ```
 
 ### 컬렉션에서 에셋 소각
+
 ```bash
 mplx core asset burn <assetId> --collection <collectionId>
 ```
 
 ### 여러 에셋 소각
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```
@@ -51,17 +54,21 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 예제
 
 ### 단일 에셋 소각
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
 
 ### 컬렉션에서 에셋 소각
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe
 ```
 
 ### 리스트에서 여러 에셋 소각
+
 JSON 파일 `assets-to-burn.json` 생성:
+
 ```json
 [
   "5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa",
@@ -70,6 +77,7 @@ JSON 파일 `assets-to-burn.json` 생성:
 ```
 
 그런 다음 실행:
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```

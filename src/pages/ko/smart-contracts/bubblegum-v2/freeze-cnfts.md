@@ -13,6 +13,7 @@ Bubblegum V2를 사용하면 압축된 NFT를 동결하고 해동할 수 있습�
 {% dialect-switcher title="리프 위임자로 압축된 NFT 동결" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -29,8 +30,10 @@ await freezeV2(umi, {
   //coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% totem-accordion title="영구 동결 위임자로" %}
+
 ```js
 import {
   getAssetWithProof,
@@ -46,6 +49,7 @@ await freezeV2(umi, {
   coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem-accordion %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -57,6 +61,7 @@ await freezeV2(umi, {
 {% dialect-switcher title="압축된 NFT 위임 및 동결" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -73,6 +78,7 @@ await delegateAndFreezeV2(umi, {
 }).sendAndConfirm(umi);
 
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -84,6 +90,7 @@ await delegateAndFreezeV2(umi, {
 {% dialect-switcher title="리프 위임자로 압축된 NFT 해동" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -97,7 +104,8 @@ await thawV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -106,6 +114,7 @@ cNFT가 영구 동결 위임자에게 위임된 경우 다음과 같이 해동�
 {% dialect-switcher title="영구 동결 위임자로 압축된 NFT 해동" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -118,7 +127,8 @@ await thawV2(umi, {
   authority: permanentFreezeDelegate,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -129,6 +139,7 @@ await thawV2(umi, {
 {% dialect-switcher title="해동 및 위임 권한 취소" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -142,16 +153,19 @@ await thawAndRevokeV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## cNFT를 소울바운드로 만들기
+
 cNFT를 소울바운드로 만들려면 cNFT가 [`permanentFreezeDelegate`](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) 플러그인이 있는 [mpl-core 컬렉션](/ko/smart-contracts/core/collections)의 일부여야 합니다. `setNonTransferableV2` 명령어를 사용하여 cNFT를 양도 불가능하게 만들 수 있습니다.
 
 {% dialect-switcher title="cNFT를 소울바운드로 만들기" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -166,6 +180,7 @@ await setNonTransferableV2(umi, {
     coreCollection: collection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

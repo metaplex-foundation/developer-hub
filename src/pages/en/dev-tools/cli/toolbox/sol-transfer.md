@@ -20,6 +20,7 @@ mplx toolbox sol transfer <amount> <address>
 ## Examples
 
 ### Transfer 1 SOL to an Address
+
 ```bash
 mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -27,6 +28,7 @@ mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## Output
 
 After a successful transfer, the command will display:
+
 ```
 --------------------------------
     Transferred <amount> SOL to <address>
@@ -41,4 +43,4 @@ After a successful transfer, the command will display:
 - The command requires a connection to a Solana network (mainnet/devnet/testnet)
 - Make sure you have sufficient SOL in your wallet for the transfer
 - The transaction signature is provided for verification purposes
-- The transfer is irreversible once confirmed on the blockchain 
+- The transfer is irreversible once confirmed on the blockchain

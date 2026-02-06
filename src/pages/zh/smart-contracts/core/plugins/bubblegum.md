@@ -19,16 +19,23 @@ programmingLanguage:
 ---
 `Bubblegum` 插件是一个 `Authority Managed` 插件，允许您创建可用于压缩 NFT 的 Collection。 {% .lead %}
 此插件只能在 `MPL Core Collection` 上使用。
+
 ## 兼容性
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
+
 ## 参数
+
 `Bubblegum` 插件不需要任何参数。
+
 ## 使用 Bubblegum 插件创建 Collection 代码示例
+
 {% dialect-switcher title="使用 Bubblegum 插件创建 Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   createCollection,
@@ -48,11 +55,15 @@ await createCollection(umi, {
     ],
   })
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 向 Collection 添加 Bubblegum 插件代码示例
+
 {% dialect-switcher title="向 Collection 添加 Bubblegum 插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   addCollectionPlugin,
@@ -64,5 +75,6 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

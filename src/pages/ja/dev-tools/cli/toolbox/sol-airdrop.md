@@ -9,11 +9,13 @@ description: 指定されたアドレスにSOLをエアドロップ
 ## 基本的な使用法
 
 ### 現在のウォレットにエアドロップ
+
 ```bash
 mplx toolbox sol airdrop <amount>
 ```
 
 ### 特定のアドレスにエアドロップ
+
 ```bash
 mplx toolbox sol airdrop <amount> <address>
 ```
@@ -26,11 +28,13 @@ mplx toolbox sol airdrop <amount> <address>
 ## 例
 
 ### 現在のウォレットに1 SOLをエアドロップ
+
 ```bash
 mplx toolbox sol airdrop 1
 ```
 
 ### 特定のアドレスに2 SOLをエアドロップ
+
 ```bash
 mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -38,6 +42,7 @@ mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## 出力
 
 エアドロップが成功した後、コマンドは以下を表示します：
+
 ```
 --------------------------------
     Airdropped <amount> SOL to <address>

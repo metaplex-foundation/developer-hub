@@ -7,6 +7,7 @@ description: Digital Asset Standard API Extension for MPL Core
 In addition to the general DAS SDK an extension for [MPL Core](/smart-contracts/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/dev-tools/das-api/core-extension/convert-das-asset-to-core).  
 
 ## Fetching
+
 The Core DAS API Extension supports the following methods:
 
 - [`getAsset`](/dev-tools/das-api/core-extension/methods/get-asset): Returns the information of a compressed/standard asset including metadata and owner.
@@ -18,7 +19,9 @@ The Core DAS API Extension supports the following methods:
 - [`searchCollections`](/dev-tools/das-api/core-extension/methods/search-collections): Return the list of collections given a search criteria.
 
 ## Type Conversion
+
 In addition to that it also provides functions to convert the usual DAS Asset type to Core Assets and Core Collections:
+
 - [`dasAssetsToCoreAssets`](/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convert a DAS Asset to Core Asset Type
 - [`dasAssetsToCoreCollection`](/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): Convert a DAS Asset to Core Collection Type
 

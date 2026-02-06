@@ -14,7 +14,7 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/bubblegum-v2/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 
@@ -144,7 +144,6 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Verify and unverify the creators of a cNFT](/smart-contracts/bubblegum-v2/verify-creators).
 - [Freeze and thaw a cNFT](/smart-contracts/bubblegum-v2/freeze-cnfts).
 - [Make a cNFT soulbound](/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
-
 
 ## Next steps
 

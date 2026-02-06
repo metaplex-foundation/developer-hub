@@ -72,6 +72,7 @@ const imageData = await fetchInscription(umi, associatedInscriptionAccount[0])
 {% dialect-switcher title="获取Inscription" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import { fetchInscription } from '@metaplex-foundation/mpl-inscription'
 
@@ -83,6 +84,7 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 {% /dialect-switcher %}
 
 ## 获取当前Inscription计数
+
 可以这样获取当前的总inscription计数：
 
 {% dialect-switcher title="获取当前Inscription计数" %}

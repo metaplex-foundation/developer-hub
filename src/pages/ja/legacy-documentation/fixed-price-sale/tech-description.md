@@ -4,7 +4,7 @@ metaTitle: 技術的説明 | Fixed Price Sale
 description: Fixed Price Saleプログラムの技術的説明
 ---
 
-## クリエーターが何かを販売するには：
+## クリエーターが何かを販売するには
 
 1. ストアを作成
 
@@ -20,7 +20,7 @@ description: Fixed Price Saleプログラムの技術的説明
 
     - 販売するアイテムに関する情報を含むオブジェクトを作成します。販売リソースで定義した最大供給量以外のすべて
 
-## ユーザーがトークンを購入するには：
+## ユーザーがトークンを購入するには
 
 1. ストアに移動します。
 
@@ -78,7 +78,6 @@ description: Fixed Price Saleプログラムの技術的説明
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
-
 
 ## TradeHistory
 

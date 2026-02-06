@@ -32,6 +32,7 @@ faqs:
 
 {% callout title="准备好开始构建了吗？" %}
 一旦您了解了流程：
+
 - **[JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)** - 安装和函数参考
 - **[Launch Pool](/zh/smart-contracts/genesis/launch-pool)** - 按比例分发的完整教程
 - **[Presale](/zh/smart-contracts/genesis/presale)** - 固定价格销售的完整教程
@@ -83,6 +84,7 @@ faqs:
 **发生的事情：** 您创建一个 Genesis Account，它会铸造您的代币并将全部供应量托管。
 
 **您需要提供：**
+
 - 代币元数据（名称、符号、URI）
 - 总供应量（含小数位）
 - 报价代币（通常是 wSOL）
@@ -175,12 +177,14 @@ Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team 
 常见的结束行为：将 100% 收集的 SOL 发送到 Unlocked Bucket（国库）。
 
 您可以将资金分配到多个目的地：
+
 - 80% 到国库
 - 20% 到流动性池 Bucket
 
 ## 第 6 步：领取期
 
 **发生的事情：**
+
 - 用户根据其存款领取代币
 - 团队从 Unlocked Bucket 领取募集的 SOL
 
@@ -226,21 +230,27 @@ Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team 
 ## 常见问题
 
 ### 初始化 Genesis Account 会创建什么？
+
 它会创建一个带有元数据的新 SPL 代币、一个主协调账户（Genesis Account PDA），并铸造总供应量托管以便分发。
 
 ### Finalize 后还能添加更多 Bucket 吗？
+
 不能。Finalize 是永久性的。您无法添加更多 Bucket 或更改配置。在 Finalize 之前规划好您完整的 Bucket 结构。
 
 ### inflow 和 outflow Bucket 有什么区别？
+
 **Inflow Bucket** 从用户处收集 SOL（Launch Pool、Presale）。**Outflow Bucket** 通过结束行为接收代币或 SOL——通常是用于团队/国库领取的 Unlocked Bucket。
 
 ### 发行活动何时激活？
+
 Finalize 后，发行活动根据您的 Bucket 时间条件激活。当前时间在 Bucket 的存款窗口内时，用户可以参与。
 
 ### 如何计算带小数位的代币供应量？
+
 将您想要的供应量乘以 10^decimals。对于 100 万个带 9 位小数的代币：1,000,000 × 1,000,000,000 = 1,000,000,000,000,000。
 
 ### 我可以使用 SOL 以外的代币进行存款吗？
+
 可以。将 `quoteMint` 设置为任何 SPL 代币。但是，wSOL 是以 SOL 计价的发行活动的标准选择。
 
 ## 术语表

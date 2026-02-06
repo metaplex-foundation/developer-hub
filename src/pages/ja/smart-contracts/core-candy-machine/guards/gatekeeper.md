@@ -90,8 +90,8 @@ Gatekeeperネットワーク
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
+
 ## ガード設定
 
 Gatekeeperガードには以下の設定が含まれます:
@@ -164,6 +164,7 @@ mintV1(umi, {
   },
 });
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

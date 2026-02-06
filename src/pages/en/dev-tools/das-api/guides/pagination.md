@@ -281,23 +281,27 @@ const collectionAssets = await getAllAssetsByCursor('COLLECTION_ADDRESS')
 ## Best Practices
 
 ### Choose the Right Method
+
 - **Use page-based pagination** for simple use cases and beginners
 - **Use cursor-based pagination** for production applications and large collections
 - **Use range-based pagination** for advanced querying patterns
 
 ### Error Handling
+
 - Always check for empty result sets
 - Implement retry logic for failed requests
 - Handle rate limits appropriately
 - Add safety checks to prevent infinite loops
 
 ### Performance Optimization
+
 - Keep track of the last processed item
 - Implement proper caching strategies, but keep in mind that data, especially proofs can change quickly
 - Use appropriate sorting methods
 - Consider implementing checkpoints for long-running operations
 
 ### Data Consistency
+
 - Always use sorting when paginating
 - Maintain consistent sort parameters between requests
 

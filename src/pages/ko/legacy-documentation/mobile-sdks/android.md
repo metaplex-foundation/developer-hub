@@ -25,6 +25,7 @@ Android 및 kotlin을 지원하는 다른 플랫폼에서 모두 작동합니다
 ## 시작하기
 
 ### 설치
+
 #### 요구 사항 {#requirements}
 
 - Android 21+
@@ -35,15 +36,15 @@ settings.gradle 내부에 maven 저장소를 추가합니다:
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +53,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // 버전 설정
+ ...
+ implementation 'com.metaplex:metaplex:+' // 버전 설정
 }
 ```
 
@@ -64,19 +65,22 @@ dependencies {
 이제 라이브러리는 JitPack.io를 통해 사용할 수 있습니다.
 
 먼저 빌드에 JitPack 저장소를 추가합니다:
+
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
+
 그런 다음 앱/모듈의 'build.gradle' 파일에 종속성을 추가합니다:
+
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -97,9 +101,11 @@ val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
 # 사용법
+
 올바르게 구성되면 해당 `Metaplex` 인스턴스를 사용하여 다양한 기능 세트를 제공하는 모듈에 액세스할 수 있습니다. 현재 `nft` 속성을 통해 액세스할 수 있는 NFT 모듈이 하나만 있습니다. 해당 모듈에서 NFT를 찾고, 생성하고, 업데이트할 수 있으며 더 많은 기능이 추가될 예정입니다.
 
 ## NFT
+
 NFT 모듈은 `Metaplex.nft`를 통해 액세스할 수 있으며 다음 메서드를 제공합니다. 현재는 읽기 메서드만 지원합니다. NFT 작성 및 생성은 향후 지원될 예정입니다.
 
 - findByMint(mint, callback)
@@ -116,11 +122,11 @@ NFT 모듈은 `Metaplex.nft`를 통해 액세스할 수 있으며 다음 메서�
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +156,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,20 +166,21 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
 ## 경매
+
 Metaplex Auction House 프로토콜을 사용하면 누구나 분산된 판매 계약을 구현하고 원하는 SPL 토큰을 수락할 수 있습니다.
 
 경매 모듈은 `Metaplex.auctions`를 통해 액세스할 수 있으며 다음 메서드를 제공합니다. 현재는 읽기 메서드만 지원합니다. Auction House 생성 및 입찰 및 목록 생성 및 상호 작용 기능은 향후 지원될 예정입니다.
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
 - 곧 더 많이!
 
@@ -181,7 +188,7 @@ Metaplex Auction House 프로토콜을 사용하면 누구나 분산된 판매 �
 
 **참고:** Auctions API에서 제공하는 이러한 일시 중단 함수는 라이브러리의 아키텍처 변경 사항입니다. 이전에는 비동기 콜백 메서드만 제공했습니다. 모든 사람이 새로운 일시 중단 함수로 마이그레이션할 것을 강력히 권장하지만 사용 가능한 메서드의 비동기 콜백 구현도 제공했습니다. 이러한 메서드는 임시로 제공되며 향후 더 이상 사용되지 않을 수 있습니다:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address, callback)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
 
 ### findAuctionHouseByAddress
@@ -203,6 +210,7 @@ val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByCreator
 반환된 `AuctionHouse` 모델에는 체인의 Auction House 계정에 대한 세부 정보가 포함됩니다. 향후 이 모델은 경매와 상호 작용하고 거래를 수행하기 위해 `AuctionHouseClient` 인스턴스를 구성하는 데 사용됩니다.
 
 ## Identity
+
 `Metaplex` 인스턴스의 현재 ID는 `metaplex.identity()`를 통해 액세스할 수 있으며 SDK와 상호 작용할 때 우리가 대신하여 행동하는 지갑에 대한 정보를 제공합니다.
 
 이 메서드는 다음 인터페이스를 가진 ID 객체를 반환합니다. 모든 메서드에는 solana api 인스턴스가 필요합니다
@@ -224,11 +232,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver` 드라이버는 가장 간단한 ID 드라이버입니다. 본질적으로 서명된 트랜잭션을 보낼 필요가 없을 때 유용할 수 있는 `null` 드라이버입니다. `signTransaction` 메서드를 사용하면 실패를 반환합니다.
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 드라이버는 `Account` 객체를 매개변수로 받아들입니다.
-
 
 ### ReadOnlyIdentityDriver
 
@@ -259,6 +265,3 @@ OkHttp 네트워킹을 사용합니다. 가장 인기 있는 Android 네트워�
 SDK에는 [샘플 앱](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample)이 함께 제공됩니다. 휴대폰에서 복제하여 실행하고 도움이 될 수 있는 것을 가져가세요.
 
 [github]: https://github.com/metaplex-foundation/metaplex-android
-[sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample
-
-

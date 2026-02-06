@@ -30,27 +30,39 @@ faqs:
 ---
 The **Transfer Delegate Plugin** allows a designated authority to transfer Core Assets on behalf of the owner. Essential for escrowless marketplace sales, game mechanics, and subscription services. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Add the Transfer Delegate plugin to an Asset
 - Delegate transfer authority to a marketplace or program
 - Execute transfers as a delegate
 - Authority behavior on transfer
 {% /callout %}
+
 ## Summary
+
 The **Transfer Delegate** is an Owner Managed plugin that allows a delegate to transfer an Asset. Once delegated, the authority can transfer the Asset to any address without owner approval.
+
 - Enable escrowless marketplace listings
 - Authority is **revoked after transfer** (one-time use)
 - Use [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) for persistent authority
 - No additional arguments required
+
 ## Out of Scope
+
 Permanent transfer authority (see Permanent Transfer Delegate), collection-level transfers, and Token Metadata transfer authority (different system).
+
 ## Quick Start
+
 **Jump to:** [Add Plugin](#add-transfer-delegate-plugin-to-an-asset) · [Delegate Authority](#delegate-the-transfer-authority) · [Transfer as Delegate](#transferring-an-asset-as-delegate)
+
 1. Add the Transfer Delegate plugin with the delegate address
 2. The delegate can now transfer the Asset once
 3. After transfer, the authority is automatically revoked
+
 ## Overview
+
 The `Transfer Delegate` Plugin is a `Owner Managed` plugin that allows the authority of the Transfer Delegate Plugin to transfer the Asset at any time.
 The Transfer Plugin will work in areas such as:
+
 - Escrowless sale of the Asset: Transfer NFTs directly to buyers without needing an escrow account
 - Gaming scenario where the user swaps/loses their asset based on an event: Automatically transfer assets when game events occur
 - Subscription services: Transfer NFTs as part of a subscription service
@@ -68,18 +80,26 @@ The Transfer Plugin will work in areas such as:
 {% callout title="Warning!" %}
 The transfer delegate authority is temporary and will be reset upon asset transfer.
 {% /callout %}
+
 ## Works With
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
 ## Arguments
+
 The Transfer Plugin doesn't contain any arguments to pass in.
+
 ## Functions
+
 ### Add Transfer Delegate Plugin to an Asset
+
 The `addPlugin` command adds the Transfer Delegate Plugin to an Asset. This plugin allows a delegate to transfer the Asset at any time.
 {% dialect-switcher title="Adding a Transfer Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -93,8 +113,10 @@ await addPlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -104,8 +126,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::TransferDelegate(TransferDelegate {}))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -138,12 +162,16 @@ pub async fn add_transfer_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Delegate the Transfer Authority
+
 The `approvePluginAuthority` command delegates the transfer authority to a different address. This allows another address to transfer the Asset while maintaining ownership.
 {% dialect-switcher title="Delegate the Transfer Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -157,8 +185,10 @@ await approvePluginAuthority(umi, {
   newAuthority: { type: "Address", address: delegateAddress },
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -169,8 +199,10 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .new_authority(PluginAuthority::Address { address: ctx.accounts.new_authority.key() })
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -209,12 +241,16 @@ pub async fn approve_plugin_authority() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Transferring an Asset As Delegate
+
 The `transfer` instruction transfers an Asset to another address using the transfer delegate authority.
 {% dialect-switcher title="Transfer an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   fetchAsset,
@@ -240,8 +276,10 @@ const { signature } = await transfer(umi, {
   })
   .sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -251,14 +289,20 @@ TransferV1CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info())
     .system_program(&ctx.accounts.system_program.to_account_info())
     .invoke()?;
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Updating Transfer Delegate Authority
+
 Since the Transfer Delegate plugin doesn't contain plugin data to update (it's an empty object `{}`), the main "update" operation is changing the plugin authority. This allows you to delegate transfer permissions to different addresses.
+
 ### Changing the Transfer Delegate Authority
+
 You can change who has transfer authority using the `approvePluginAuthority` function:
 {% dialect-switcher title="Update Transfer Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -273,12 +317,16 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### Revoking Transfer Delegate Authority
+
 The transfer authority can be revoked using the `revokePluginAuthority` function, returning transfer control to the asset owner.
 {% dialect-switcher title="Revoke Transfer Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -288,57 +336,86 @@ await revokePluginAuthority(umi, {
   plugin: { type: 'TransferDelegate' },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 Only the transfer delegate authority can transfer the Asset. Verify you're signing with the correct keypair.
+
 ### `Asset is frozen`
+
 Frozen Assets cannot be transferred. The freeze authority must thaw the Asset first.
+
 ### `Transfer delegate not found`
+
 The Asset doesn't have a Transfer Delegate plugin or authority was already revoked after a previous transfer.
+
 ## Notes
+
 - Owner Managed: requires owner signature to add
 - Authority is **automatically revoked after transfer**
 - Each transfer requires re-delegation by the new owner
 - Frozen Assets cannot be transferred by delegates
 - Use Permanent Transfer Delegate for persistent authority
+
 ## Quick Reference
+
 ### Authority Lifecycle
+
 | Event | Authority Status |
 |-------|------------------|
 | Plugin added | Active |
 | Asset transferred | **Revoked** |
 | New owner adds plugin | Active (new delegate) |
+
 ### Who Can Transfer?
+
 | Authority | Can Transfer? |
 |-----------|---------------|
 | Asset Owner | Yes (always) |
 | Transfer Delegate | Yes (once) |
 | Permanent Transfer Delegate | Yes (always) |
 | Update Authority | No |
+
 ## FAQ
+
 ### Why was my transfer authority revoked?
+
 Transfer Delegate authority is automatically revoked after any transfer. This is by design for marketplace safety - the delegate can only transfer once.
+
 ### How do I implement escrowless listings?
+
 1. Seller adds Transfer Delegate with marketplace as authority
 2. When buyer pays, marketplace transfers Asset to buyer
 3. Authority is revoked; seller can't double-list
+
 ### What's the difference between Transfer Delegate and Permanent Transfer Delegate?
+
 Transfer Delegate is revoked after one transfer. Permanent Transfer Delegate persists forever and can only be added at Asset creation.
+
 ### Can I transfer a frozen Asset as a delegate?
+
 No. Frozen Assets block all transfers including delegate transfers. Use Permanent Transfer Delegate with a Permanent Freeze Delegate for complex escrow scenarios.
+
 ### Does the owner need to approve each transfer?
+
 No. Once the Transfer Delegate is set, the delegate can transfer without owner approval. However, they can only do it once before authority is revoked.
+
 ## Related Plugins
+
 - [Permanent Transfer Delegate](/smart-contracts/core/plugins/permanent-transfer-delegate) - Irrevocable transfer authority
 - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Block transfers temporarily
 - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - Allow delegate to burn Assets
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Transfer Delegate** | Owner Managed plugin allowing one-time transfer authority |
 | **Owner Managed** | Plugin type requiring owner signature to add |
 | **Escrowless** | Selling without transferring to a holding account |
 | **Permanent Transfer Delegate** | Irrevocable version added at creation |
-

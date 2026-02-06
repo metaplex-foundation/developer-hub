@@ -6,8 +6,6 @@ description: MPL-Hybrid 프로그램에서 사용자가 자신의 NFT를 토큰�
 
 MPL-Hybrid 프로그램에서 소유한 토큰을 에스크로에 보관된 NFT로 스왑하는 작업을 `capture`라고 합니다.
 
-
-
 ## NFT 스왑하기
 
 ```ts

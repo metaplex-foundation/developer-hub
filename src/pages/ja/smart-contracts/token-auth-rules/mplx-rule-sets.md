@@ -6,14 +6,17 @@ description: Metaplex Foundationが管理するpNFTルールセット。
 Metaplex Foundationは、pNFT用の2つのルールセットを管理しています。
 
 ## Metaplex Foundation ルールセット
+
 このルールセットは、マーケットプレイスロイヤリティを強制しないプログラムを見つけてブロックするためのベストエフォートを表しています。この状況は定期的にチェックされ、包括的なクリエイターロイヤリティの強制を継続するためにアップデートが実行されます。
 
-### アドレス:
+### アドレス
+
 **Devnet:** eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9
 
 **Mainnet:** eBJLFYPxJmMGKuFwpDWkzxZeUrad92kZRC5BJLpzyT9
 
 ### 内容
+
 現時点では、クリエイターロイヤリティを回避するプログラムは存在しないため、ルールセットは現在いかなるプログラムもブロックしていないことに注意してください。
 
 ```json
@@ -41,14 +44,17 @@ Metaplex Foundationは、pNFT用の2つのルールセットを管理してい�
 ```
 
 ## 互換性ルールセット
+
 このルールセットはいかなるプログラムもブロックせず、標準NFTと同じレベルの転送制限（つまり、なし）を許可するために機能します。
 
-### アドレス:
+### アドレス
+
 **Devnet:** AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5
 
 **Mainnet:** AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5
 
 ### 内容
+
 ```json
 {
   "libVersion": 1,

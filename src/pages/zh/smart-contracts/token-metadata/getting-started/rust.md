@@ -7,9 +7,11 @@ description: 使用 Token Metadata Rust SDK 开始使用 NFT
 如果您是 Rust 开发人员,您也可以使用 Rust 客户端 SDK 与 Token Metadata 程序交互。Metaplex 提供了一个专用的 Rust 客户端 crate,这是一个依赖项最少的轻量级 crate。
 
 首先,您需要将 `mpl-token-metadata` 依赖项添加到您的项目中。在项目根文件夹的终端中:
+
 ```
 cargo add mpl-token-metadata
 ```
+
 这将在您项目的依赖项列表中添加该 crate 的最新版本。
 
 {% callout %}
@@ -78,7 +80,6 @@ pub struct CreateV1 {
 ```
 
 {% /totem %}
-
 
 填写指令账户字段后,您可以使用 `instruction(...)` 方法生成相应的 Solana `Instruction`:
 
@@ -359,6 +360,7 @@ impl Metadata {
 ```rust
 let (metadata_pubkey, _) = Metadata::find_pda(mint);
 ```
+
 {% /totem-prose %}
 {% totem-prose %}
 
@@ -370,7 +372,6 @@ let metadata_pubkey = Metadata::create_pda(mint, bump)?;
 
 {% /totem-prose %}
 {% /totem %}
-
 
 ## 🔗 有用的链接
 

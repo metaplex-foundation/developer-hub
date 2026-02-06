@@ -30,6 +30,7 @@ pub struct Metadata {
 3. より単純な表現が必要な複雑な型を持つフィールド
 
 2つのフォーマットをサポートします：
+
 - 文字列リテラル：`#[idl_type("TypeName")]`
 - 直接型：`#[idl_type(TypeName)]`
 
@@ -99,6 +100,7 @@ pub enum MyProgramInstruction {
 ```
 
 ここで：
+
 - `index`: アカウント配列内のアカウントの位置（0ベース）
 - `mutability?`: オプション。アカウントが変更される場合は`writable`を使用
 - `signer?`: オプション。アカウントがトランザクションに署名する必要がある場合は`signer`を使用

@@ -56,12 +56,12 @@ async fn upload(
 
 其中：
 
-* `sugar_config` - 当前 sugar 配置
-* `cache` - 资产缓存对象（可变）
-* `data_type` - 正在上传的资产类型
-* `assets` - 要上传的资产向量（可变）
-* `progress` - 进度条的引用，用于向控制台提供反馈
-* `interrupted` - 共享中断处理程序标志的引用，用于接收通知
+- `sugar_config` - 当前 sugar 配置
+- `cache` - 资产缓存对象（可变）
+- `data_type` - 正在上传的资产类型
+- `assets` - 要上传的资产向量（可变）
+- `progress` - 进度条的引用，用于向控制台提供反馈
+- `interrupted` - 共享中断处理程序标志的引用，用于接收通知
 
 此函数将被调用以分别上传每种类型的资产——例如，一次用于您的图像，一次用于您的元数据，如果存在的话，一次用于您的动画资产。上传资产后，需要在 `cache` 对象中更新其信息，并使用 `sync_file` 函数将缓存保存到文件系统。将缓存同步到文件系统对于大型集合可能很慢，因此应该尽可能频繁地进行，以避免减慢上传过程，同时最大限度地减少用户中止上传时信息丢失的可能性。
 
@@ -85,6 +85,7 @@ fn upload_asset(
 ### Prepare
 
 所有上传方法都需要实现额外的 `Prepare` trait。其基本原理是为上传指定的媒体/元数据文件准备方法，例如：
+
 - 检查是否有文件超过大小限制；
 - 检查是否有足够的存储空间进行上传；
 - 检查/添加上传资金。
@@ -99,10 +100,11 @@ async fn prepare(
     asset_indices: Vec<(DataType, &[isize])>,
 ) -> Result<()>;
 ```
+
 其中：
-* `sugar_config` - 当前 sugar 配置
-* `asset_pairs` - `index` 到 `AssetPair` 的映射
-* `asset_indices` - 包含将要上传的资产对索引信息的向量，按类型分组。
+- `sugar_config` - 当前 sugar 配置
+- `asset_pairs` - `index` 到 `AssetPair` 的映射
+- `asset_indices` - 包含将要上传的资产对索引信息的向量，按类型分组。
 
 `asset_pairs` 包含资产的完整信息，但只有 `asset_indices` 中指定的资产才会被上传——例如，如果索引 `1` 仅出现在 `DataType::Image` 索引数组中，则只会上传资产 `1` 的图像。
 

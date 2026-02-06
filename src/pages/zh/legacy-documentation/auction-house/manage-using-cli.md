@@ -18,9 +18,11 @@ description: "如何使用 CLI 管理拍卖行"
 git clone https://github.com/metaplex-foundation/metaplex-program-library.git
 cd auction-house/cli
 ```
+
 注意: 默认情况下,您将使用 `main` 分支顶部的最新代码。
 
 然后:
+
 ```sh
 cd js && yarn install && yarn bootstrap
 cd src
@@ -28,8 +30,8 @@ cd src
 
 克隆仓库并安装包后,确保您已设置本地 `Keypair`。如果您需要帮助,请参阅这些指南。
 
-- https://docs.solana.com/cli/install-solana-cli-tools
-- https://docs.solana.com/wallet-guide/file-system-wallet
+- <https://docs.solana.com/cli/install-solana-cli-tools>
+- <https://docs.solana.com/wallet-guide/file-system-wallet>
 
 ## 运行命令
 
@@ -152,7 +154,7 @@ Signature: 4qYFoD8GN6TZLDjLsqyyt6mhjYEjwKF36LJCDLtL88nTD3y3bFzXmVFHP6Nczf5Dn4Gnm
 
 {% callout type="warning" %}
 
-`solana airdrop` 命令有时不可靠。如果命令不起作用,您可以使用 https://solfaucet.com 上的空投工具。
+`solana airdrop` 命令有时不可靠。如果命令不起作用,您可以使用 <https://solfaucet.com> 上的空投工具。
 
 {% /callout %}
 

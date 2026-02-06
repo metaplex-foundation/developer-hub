@@ -9,11 +9,13 @@ description: Solana에서 새 대체 가능 토큰 생성
 ## 기본 사용법
 
 ### 대화형 마법사
+
 ```bash
 mplx toolbox token create --wizard
 ```
 
 ### 직접 생성
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
@@ -21,11 +23,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## 옵션
 
 ### 필수 옵션 (마법사를 사용하지 않을 때)
+
 - `--name <string>`: 토큰 이름 (예: "My Awesome Token")
 - `--symbol <string>`: 토큰 심볼 (2-6자, 예: "MAT")
 - `--mint-amount <number>`: 발행할 토큰의 초기 양 (0보다 커야 함)
 
 ### 선택적 옵션
+
 - `--decimals <number>`: 소수점 자릿수 (0-9, 기본값: 0)
 - `--description <string>`: 토큰과 그 목적에 대한 설명
 - `--image <path>`: 토큰 이미지 파일 경로 (PNG, JPG 또는 GIF)
@@ -34,11 +38,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## 예시
 
 ### 기본 정보로 토큰 생성
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
 
 ### 모든 옵션으로 토큰 생성
+
 ```bash
 mplx toolbox token create \
   --name "My Awesome Token" \
@@ -50,6 +56,7 @@ mplx toolbox token create \
 ```
 
 ### 마법사를 사용하여 토큰 생성
+
 ```bash
 mplx toolbox token create --wizard
 ```
@@ -57,6 +64,7 @@ mplx toolbox token create --wizard
 ## 출력
 
 토큰 생성이 성공하면 명령어가 다음을 표시합니다:
+
 ```
 --------------------------------
 Token created successfully!

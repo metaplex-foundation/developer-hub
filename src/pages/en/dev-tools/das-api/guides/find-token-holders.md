@@ -72,6 +72,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -162,6 +163,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem %}
 
 ## Method 3: For Individual Tokens
+
 If you want to find holders of a specific individual NFT (not part of a collection), you'll need to use the NFT's specific Address in `getAsset`.
 
 {% totem %}
@@ -185,6 +187,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Token ${token.id} is owned by: ${token.ownership.owner}`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 

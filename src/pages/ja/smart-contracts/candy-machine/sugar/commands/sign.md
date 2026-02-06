@@ -19,10 +19,13 @@ sugar sign -k creator-keypair.json
 ```
 
 開発者は以下のコマンドでカスタムRPC URLを提供できます：
+
 ```
 sugar sign -r <RPC_URL>
 ```
+
 注意：`sugar sign`の使用は、Metaplex Token Metadataプログラム（つまり、`metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`）の非効率な`getProgramAccounts`呼び出しに依存します。推奨される解決策は、以下のコマンドを使用してNFTを個別に署名することです：
+
 ```
 sugar sign -m <MINT_ADDRESS>
 ```

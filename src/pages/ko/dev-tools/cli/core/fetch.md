@@ -9,11 +9,13 @@ description: 민트 주소로 MPL Core 자산 또는 컬렉션 가져오기
 ## 자산 가져오기
 
 ### 기본 사용법
+
 ```bash
 mplx core fetch asset <assetId>
 ```
 
 ### 다운로드 옵션
+
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
 mplx core fetch asset <assetId> --download --image
@@ -21,6 +23,7 @@ mplx core fetch asset <assetId> --download --metadata
 ```
 
 ### 자산 가져오기 옵션
+
 - `--download`: 자산 파일을 디스크에 다운로드 (추가 플래그로 개별 파일 선택 가능)
 - `--output <path>`: 다운로드한 자산을 저장할 디렉토리 경로 (--download 필요)
 - `--image`: 이미지 파일 다운로드 (--download 필요)
@@ -30,43 +33,53 @@ mplx core fetch asset <assetId> --download --metadata
 ## 컬렉션 가져오기
 
 ### 기본 사용법
+
 ```bash
 mplx core fetch collection <collectionId>
 ```
 
 ### 다운로드 옵션
+
 ```bash
 mplx core fetch collection <collectionId> --output ./collections
 ```
 
 ### 컬렉션 가져오기 옵션
+
 - `-o, --output <path>`: 다운로드한 컬렉션 파일의 출력 디렉토리. 지정하지 않으면 현재 폴더가 사용됩니다.
 
 ## 예시
 
 ### 자산 가져오기 예시
+
 1. 단일 자산 가져오기:
+
 ```bash
 mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
 
-2. 자산 파일을 특정 디렉토리에 다운로드:
+1. 자산 파일을 특정 디렉토리에 다운로드:
+
 ```bash
 mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --download --output ./assets
 ```
 
-3. 이미지만 다운로드:
+1. 이미지만 다운로드:
+
 ```bash
 mplx core fetch asset 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --download --image
 ```
 
 ### 컬렉션 가져오기 예시
+
 1. 컬렉션 가져오기:
+
 ```bash
 mplx core fetch collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe
 ```
 
-2. 컬렉션 파일을 특정 디렉토리에 다운로드:
+1. 컬렉션 파일을 특정 디렉토리에 다운로드:
+
 ```bash
 mplx core fetch collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe --output ./collections
 ```
@@ -74,7 +87,9 @@ mplx core fetch collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe --output
 ## 출력
 
 ### 자산 가져오기 출력
+
 파일을 다운로드할 때 다음 구조가 생성됩니다:
+
 ```
 <output_directory>/
   <assetId>/
@@ -84,7 +99,9 @@ mplx core fetch collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe --output
 ```
 
 ### 컬렉션 가져오기 출력
+
 파일을 다운로드할 때 다음 구조가 생성됩니다:
+
 ```
 <output_directory>/
   <collectionId>/

@@ -34,6 +34,7 @@ faqs:
 **Genesis** is a Metaplex smart contract for **Token Generation Events (TGE)** on Solana. Build presales, launch pools, and auctions with on-chain coordination for token creation, distribution, and fund collection. {% .lead %}
 
 {% callout title="Choose Your Path" %}
+
 - **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
 - **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
 - **Need SDK reference?** See [JavaScript SDK](/smart-contracts/genesis/sdk/javascript)
@@ -123,21 +124,27 @@ See [Getting Started](/smart-contracts/genesis/getting-started) for details on a
 ## FAQ
 
 ### What is Genesis?
+
 Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions with coordinated token creation and distribution.
 
 ### What launch mechanisms does Genesis support?
+
 Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
 
 ### How much does it cost to use Genesis?
+
 Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
 
 ### Can I revoke token authorities after launch?
+
 Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` instructions to permanently revoke authorities.
 
 ### What's the difference between Launch Pool and Presale?
+
 **Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
 
 ### Can I combine multiple launch mechanisms?
+
 Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.
 
 ## Glossary

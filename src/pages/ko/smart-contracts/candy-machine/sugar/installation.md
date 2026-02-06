@@ -7,6 +7,7 @@ description: Sugar 설치 가이드.
 Sugar를 설치하는 가장 빠르고 쉬운 방법은 macOS, Linux 및 WSL(Windows Subsystem for Linux)에서 사용할 수 있는 설치 스크립트를 실행하여 사전 빌드된 바이너리를 다운로드하는 것입니다. Windows 시스템의 경우 아래 📌를 참조하세요.
 
 터미널에서 다음을 실행하세요:
+
 ```bash
 bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 ```
@@ -68,6 +69,7 @@ Windows를 사용하는 경우 아래 단계를 따르세요:
 {% callout %}
 
 Ubuntu 또는 WSL(Windows Subsystem for Linux)에서 crates.io 또는 소스로부터 설치할 때 일부 추가 종속성을 설치해야 할 수 있습니다:
+
 ```bash
 sudo apt install libudev-dev pkg-config unzip
 ```
@@ -95,8 +97,8 @@ rustc --version
 ```bash
 cargo install sugar-cli
 ```
-이렇게 하면 Crates.io에서 Sugar 코드를 다운로드하고 자동으로 설치합니다.
 
+이렇게 하면 Crates.io에서 Sugar 코드를 다운로드하고 자동으로 설치합니다.
 
 ### 소스에서 빌드
 

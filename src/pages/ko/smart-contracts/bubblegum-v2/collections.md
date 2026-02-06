@@ -15,6 +15,7 @@ MPL-Core 컬렉션은 [`BubblegumV2` 플러그인](/ko/smart-contracts/core/plug
 다음 섹션은 단일 단계 트랜잭션에서 cNFT에서 컬렉션을 설정하고 제거하는 방법을 보여줍니다. `coreCollection`과 `newCoreCollection` 매개변수를 추가할 때 단일 명령어에서 두 작업을 모두 수행하는 것도 가능합니다. 두 컬렉션 권한이 동일한 지갑이 아닌 경우 둘 다 서명해야 합니다.
 
 ## 압축된 NFT의 컬렉션 설정
+
 **setCollectionV2** 명령어는 cNFT의 컬렉션을 설정하는 데 사용할 수 있습니다. cNFT에서 컬렉션을 제거하거나 cNFT의 컬렉션을 변경하는 데도 사용할 수 있습니다.
 
 {% dialect-switcher title="압축된 NFT의 컬렉션 설정" %}
@@ -54,6 +55,7 @@ const signature = await setCollectionV2(umi, {
 {% /dialect-switcher %}
 
 ## 압축된 NFT의 컬렉션 제거
+
 **setCollectionV2** 명령어는 cNFT에서 컬렉션을 제거하는 데도 사용할 수 있습니다.
 
 {% dialect-switcher title="압축된 NFT의 컬렉션 제거" %}

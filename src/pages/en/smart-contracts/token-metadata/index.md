@@ -14,7 +14,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 {% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="<https://mpl-token-metadata.typedoc.metaplex.com/>" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
 {% /quick-links %}
 

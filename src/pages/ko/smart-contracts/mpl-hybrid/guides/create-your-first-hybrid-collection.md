@@ -71,10 +71,11 @@ npm i @metaplex-foundation/mpl-token-metadata
 MPL-Hybrid 프로그램에서 메타데이터 무작위화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관되고 증분적인 구조를 따라야 합니다. 이를 위해 Turbo SDK와 함께 Arweave의 [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) 기능을 사용합니다.
 
 Manifest는 여러 트랜잭션을 단일 기본 트랜잭션 ID 하에 연결하고 사람이 읽을 수 있는 파일 이름을 할당할 수 있게 해줍니다:
-- https://arweave.net/manifestID/0.json
-- https://arweave.net/manifestID/1.json
+
+- <https://arweave.net/manifestID/0.json>
+- <https://arweave.net/manifestID/1.json>
 - ...
-- https://arweave.net/manifestID/9999.json
+- <https://arweave.net/manifestID/9999.json>
 
 결정론적 URI 생성에 익숙하지 않다면, 자세한 안내를 위해 [이 가이드](/ko/guides/general/create-deterministic-metadata-with-turbo)를 따를 수 있습니다. 또한 Hybrid 프로그램이 작동하는 데 필요한 [컬렉션](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)과 [자산](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) 생성에 대한 지침도 찾을 수 있습니다.
 
@@ -366,6 +367,7 @@ import {
 })();
 
 ```
+
 {% /totem-accordion %}
 
 {% /totem %}
@@ -471,6 +473,7 @@ const escrow = umi.eddsa.findPda(MPL_HYBRID_PROGRAM_ID, [
 ### 캡처/릴리스할 자산 선택
 
 캡처하고 릴리스할 자산을 선택하는 방법은 에스크로를 만들 때 선택한 경로에 따라 다릅니다:
+
 - **Path 0**: 경로가 `0`으로 설정되면, 스왑 중에 NFT 메타데이터가 업데이트되므로, 이것은 중요하지 않기 때문에 에스크로에서 무작위 자산을 가져올 수 있습니다.
 - **Path 1**: 경로가 `1`로 설정되면, 스왑 후에도 NFT 메타데이터가 동일하게 유지되므로, 사용자가 스왑하고 싶은 특정 NFT를 선택하게 할 수 있습니다.
 

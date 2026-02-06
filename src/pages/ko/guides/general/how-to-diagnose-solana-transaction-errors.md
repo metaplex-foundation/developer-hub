@@ -28,6 +28,7 @@ updated: '06-21-2024'
 Metaplex Umi의 `skipPreflight`는 `sendAndConfirm()` 및 `send()` 함수 인수에서 찾을 수 있으며 다음과 같이 활성화할 수 있습니다:
 
 #### sendAndConfirm()
+
 ```ts
 const tx = createV1(umi, {
     ...args
@@ -41,6 +42,7 @@ console.log(signature)
 ```
 
 #### send()
+
 ```ts
 const tx = createV1(umi, {
     ...args

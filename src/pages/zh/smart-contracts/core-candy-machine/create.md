@@ -15,9 +15,11 @@ description: 学习如何在 Javascript 和 Rust 中创建 Core Candy Machine �
 
 {% callout title="CLI 替代方案" type="note" %}
 您也可以使用带有交互式向导的 MPLX CLI 创建 Core Candy Machine：
+
 ```bash
 mplx cm create --wizard
 ```
+
 这提供了逐步指导、资产验证和自动部署。有关详细说明，请参阅 [CLI Candy Machine 文档](/zh/dev-tools/cli/cm)。
 {% /callout %}
 
@@ -231,6 +233,7 @@ ConfigLineSettings = {
 每个插入项目名称的最大长度，不包括名称前缀
 
 例如给定...
+
 - 一个包含 `1000` 个项目的 candy machine。
 - 每个项目的名称是 `Example Asset #X`，其中 X 是从 1 开始的项目索引。
 
@@ -247,6 +250,7 @@ ConfigLineSettings = {
 您的 URI 的最大长度，不包括 `prefixUri`。
 
 例如给定...
+
 - 一个基础 URI `https://arweave.net/`，有 20 个字符。
 - 和一个最大长度为 43 个字符的唯一标识符
 

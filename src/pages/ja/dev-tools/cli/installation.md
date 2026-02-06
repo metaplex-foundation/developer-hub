@@ -52,6 +52,7 @@ CLIの現在のバージョンが表示されるはずです。
 ### 1. 設定ディレクトリの作成
 
 CLIは、最初に設定を行う際に`~/.config/mplx`に設定ファイルを自動的に作成します。この設定には以下が保存されます：
+
 - ウォレット設定
 - RPCエンドポイント設定
 - エクスプローラー設定
@@ -60,6 +61,7 @@ CLIは、最初に設定を行う際に`~/.config/mplx`に設定ファイルを�
 ### 2. 環境の設定
 
 #### ウォレットの設定
+
 ```bash
 # 新しいウォレットを作成
 mplx config wallets new --name dev1
@@ -75,11 +77,13 @@ mplx config wallets set
 詳細については以下を参照してください
 
 #### RPCエンドポイントの設定
+
 ```bash
 mplx config set rpcUrl  https://api.mainnet-beta.solana.com
 ```
 
 #### 推奨エクスプローラーの設定
+
 ```bash
 mplx config explorer set
 ```
@@ -89,22 +93,26 @@ mplx config explorer set
 CLIに貢献したい、またはソースから実行したい場合：
 
 1. リポジトリをクローン：
+
 ```bash
 git clone https://github.com/metaplex-foundation/cli.git
 cd cli
 ```
 
-2. 依存関係をインストール：
+1. 依存関係をインストール：
+
 ```bash
 npm install
 ```
 
-3. プロジェクトをビルド：
+1. プロジェクトをビルド：
+
 ```bash
 npm run build
 ```
 
-4. CLIをリンク：
+1. CLIをリンク：
+
 ```bash
 npm link
 ```

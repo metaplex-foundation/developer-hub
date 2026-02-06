@@ -15,7 +15,7 @@ The answer is no. That is the very reason why we need to talk about managing the
 
 ## Getting Balance
 
-Adding to the discussion in the previous section, it is the responsibility of the Auction House to make sure that there are enough funds in the buyer escrow account, for the sale to go through. 
+Adding to the discussion in the previous section, it is the responsibility of the Auction House to make sure that there are enough funds in the buyer escrow account, for the sale to go through.
 
 To do so, firstly the Auction House should know how much funds are currently there in the buyer escrow account.
 

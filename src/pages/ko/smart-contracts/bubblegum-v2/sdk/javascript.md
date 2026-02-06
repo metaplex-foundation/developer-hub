@@ -11,15 +11,16 @@ Metaplex는 MPL-Bubblegum 프로그램과 상호 작용하는 데 사용할 수 
 ## 설치
 
 JavaScript 패키지 매니저(npm, yarn, bun 등)로 설치할 수 있습니다.
+
 ```sh
 npm install @metaplex-foundation/mpl-bubblegum
 ```
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum JavaScript SDK 생성된 패키지 API 문서." /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" description="MPL-Bubblegum JavaScript SDK 생성된 패키지 API 문서." /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="NPM의 MPL-Bubblegum Javascript SDK." /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum>" description="NPM의 MPL-Bubblegum Javascript SDK." /%}
 
 {% /quick-links %}
 

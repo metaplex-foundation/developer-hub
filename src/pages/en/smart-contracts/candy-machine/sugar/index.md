@@ -11,7 +11,7 @@ Sugar is a command-line tool to interact with Candy Machines. It allows you to m
 - robust error handling and validation of inputs with informative error messages;
 - state is maintain even if a command is stopped – e.g., if your upload fails, you can re-run the upload and only the failed ones are retried.
 
-Setting up Sugar is as simple as opening your favourite terminal application and downloading a binary file. 
+Setting up Sugar is as simple as opening your favourite terminal application and downloading a binary file.
 
 {% callout %}
 Find a full guide on how to create a Candy Machine using sugar [here](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine).
@@ -25,6 +25,7 @@ sugar
 ```
 
 This will display a list of commands and their short description:
+
 ```
 sugar-cli 2.7.1
 Command line tool for creating and managing Metaplex Candy Machines.

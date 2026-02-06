@@ -119,6 +119,7 @@ Candy Machine은 NFT가 민팅될 때 최종 메타데이터를 갖지 않도록
 {% totem %}
 {% totem-accordion title="hiddenSettings 예시" %}
 구성 파일의 `hiddenSettings` 섹션은 다음과 같을 수 있습니다:
+
 ```json
 "hiddenSettings": {
     "name": "Name $ID+1$",
@@ -126,6 +127,7 @@ Candy Machine은 NFT가 민팅될 때 최종 메타데이터를 갖지 않도록
     "hash": "49Bj8ZVSvSvAQwziKEts3iAeUhi27ATH"
 }
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

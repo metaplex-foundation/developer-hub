@@ -30,44 +30,63 @@ faqs:
 ---
 **Edition 插件**在单个 Asset 上存储版本号。用于为收藏系列和限量版创建编号的印刷品，如"1 of 100"。{% .lead %}
 {% callout title="学习内容" %}
+
 - 向 Asset 添加版本号
 - 创建可变和不可变版本
 - 更新版本号
 - 了解 Edition 工作流程
 {% /callout %}
+
 ## 摘要
+
 **Edition** 插件是一个权限管理插件，在 Asset 上存储唯一的版本号。最好与 Collection 上的 [Master Edition 插件](/smart-contracts/core/plugins/master-edition) 一起使用，将编号的版本组合在一起。
+
 - 权限管理（更新权限者控制）
 - 必须在 Asset 创建时添加
 - 如果权限可变，可以更新编号
 - 使用 Candy Machine Edition Guard 进行自动编号
+
 ## 范围外
+
 供应量强制（仅供参考）、自动编号（使用 Candy Machine）和 Collection 级别版本（对 Collection 使用 Master Edition 插件）。
+
 ## 快速开始
+
 **跳转至：** [创建可变版本](#使用可变插件创建) · [创建不可变版本](#使用不可变插件创建) · [更新版本](#更新-editions-插件)
+
 1. 在 Asset 创建时添加带有唯一编号的 Edition 插件
 2. 可选地将权限设为 `None` 以实现不可变性
 3. 如果可变，稍后更新编号
 {% callout type="note" title="推荐用法" %}
 我们建议
+
 - 使用 Master Edition Plugin 对版本进行分组
 - 使用带有 Edition Guard 的 Candy Machine 自动处理编号。
 {% /callout %}
+
 ## 适用于
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
 ## 参数
+
 | 参数    | 值  |
 | ------ | ------ |
 | number | number |
 编号是分配给资产的特定值。通常这个编号是唯一的，因此创作者应确保编号不会使用两次。
+
 ## 使用 editions 插件创建 Asset
+
 Editions Plugin 必须在资产创建时添加。只要它是可变的，编号就可以更改。
+
 ### 使用可变插件创建
+
 {% dialect-switcher title="使用 Edition Plugin 创建 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -84,8 +103,10 @@ const result = create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -126,13 +147,17 @@ pub async fn create_asset_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 使用不可变插件创建
+
 要创建带有不可变 Edition Plugin 的 Asset，可以使用以下代码：
 {% dialect-switcher title="向 MPL Core Asset 添加 Editions Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 要使 editions Plugin 不可变，authority 必须设置为 `nonePluginAuthority()`，如下所示：
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -150,8 +175,10 @@ const result = create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -193,12 +220,16 @@ pub async fn create_asset_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 更新 Editions 插件
+
 如果 Editions Plugin 是可变的，可以像其他插件一样更新：
 {% dialect-switcher title="更新 Asset 上的 Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePlugin } from '@metaplex-foundation/mpl-core'
@@ -208,47 +239,75 @@ const asset = publicKey('11111111111111111111111111111111')
     plugin: { type: 'Edition', number: 2 },
   }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 _即将推出_
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 常见错误
+
 ### `Cannot add Edition plugin after creation`
+
 Edition 插件必须在 Asset 创建时添加。不能添加到现有 Asset。
+
 ### `Authority mismatch`
+
 只有更新权限者可以更新版本号（如果可变）。
+
 ### `Plugin is immutable`
+
 Edition 插件的权限设置为 `None`。编号无法更改。
+
 ## 注意事项
+
 - 版本号不强制唯一——创作者必须跟踪
 - 插件必须在 `create()` 期间添加，而不是之后
 - 将权限设置为 `None` 使版本号永久
 - 与 Collection 上的 Master Edition 插件一起使用以正确分组
+
 ## 快速参考
+
 ### 权限选项
+
 | 权限 | 可更新 | 用例 |
 |-----------|------------|----------|
 | `UpdateAuthority` | ✅ | 可变版本号 |
 | `None` | ❌ | 永久、不可变版本 |
+
 ### 推荐设置
+
 | 组件 | 位置 | 目的 |
 |-----------|----------|---------|
 | Master Edition | Collection | 分组版本，存储最大供应量 |
 | Edition | Asset | 存储单个版本号 |
 | Candy Machine | 铸造 | 自动顺序编号 |
+
 ## 常见问题
+
 ### 版本号是否强制唯一？
+
 不是。版本号仅供参考。创作者负责确保唯一的编号。使用带有 Edition Guard 的 Candy Machine 进行自动顺序编号。
+
 ### 可以向现有 Asset 添加 Edition 插件吗？
+
 不可以。Edition 插件必须在 Asset 创建时添加。如果需要版本号，请提前规划。
+
 ### 如何创建"1 of 100"风格的版本？
+
 向 Asset 添加 Edition 插件（编号 1-100），并向 Collection 添加 `maxSupply: 100` 的 Master Edition 插件。Master Edition 分组版本并指示总供应量。
+
 ### 创建后可以更改版本号吗？
+
 可以，如果插件权限未设置为 `None`。更新权限者可以使用 `updatePlugin` 修改编号。
+
 ### Edition 和 Master Edition 有什么区别？
+
 Edition 在 Asset 上存储单个编号（例如 #5）。Master Edition 在 Collection 上存储集合级别的数据（最大供应量、版本名称/URI）并将版本组合在一起。
+
 ## 术语表
+
 | 术语 | 定义 |
 |------|------------|
 | **版本号** | 特定印刷品的唯一标识符（例如 1、2、3） |

@@ -13,7 +13,7 @@ Metaplex 提供 3 种不同的标准在 Solana 区块链上创建 NFT，包括 *
 
 Core 是 Metaplex 创建的最新最先进的数字资产标准。该标准通过强大的插件系统提供优化的账户结构和增强的功能。
 
-#### 为什么使用 Core：
+#### 为什么使用 Core
 
 - 最新标准：Core 是 Metaplex 迄今为止创建的最新最强大的数字资产标准。
 - 简单性：Core 从一开始就采用**简单优先的方法**进行设计。
@@ -26,7 +26,7 @@ Core 是 Metaplex 创建的最新最先进的数字资产标准。该标准通�
 
 Token Metadata 是开启一切的 Solana NFT 标准。Token Metadata 于 2021 年创建，为 Solana 区块链上的 NFT 铺平了道路，自首次推出以来已铸造了惊人的 5.12 亿个 NFT。
 
-#### 为什么使用 Token Metadata：
+#### 为什么使用 Token Metadata
 
 - 久经考验值得信赖：Token Metadata 在过去 4 年中一直被用作 Solana 的主要 NFT 代币标准，来自 Solana Monkey Business、DeGods、Claynosaurus 等项目。
 - 生态系统支持：NFT 和 pNFT 受到 Solana 范围内的市场和钱包的支持，例如 MagicEden、Tensor、Phantom、Solflare 等等。
@@ -38,7 +38,7 @@ Token Metadata 是开启一切的 Solana NFT 标准。Token Metadata 于 2021 �
 
 当涉及大量创建便宜的 NFT 时，Bubblegum 是要选择的协议。Bubblegum 使用**压缩 NFT（cNFT）** 的技术，通过应用 Merkle 树方法而不是为每个单独的 NFT 创建账户。
 
-#### 为什么使用 Bubblegum：
+#### 为什么使用 Bubblegum
 
 - 部署便宜：作为基于 Merkle 树的产品，树的部署成本很低，如果需要可以存储数百万个 NFT。
 - 大规模空投：一旦创建了树，空投 cNFT 的成本接近不存在，因为树的存储已经支付。

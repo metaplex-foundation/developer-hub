@@ -36,6 +36,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${searchResults.items.length} assets matching criteria`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -66,8 +67,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL Example" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -85,6 +88,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -127,6 +131,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -156,6 +161,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets from collection owned by wallet`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -199,6 +205,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   );
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript Example" %}
 
@@ -230,8 +237,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`Found ${data.result.items.length} assets matching complex criteria`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
+
 ## Tips and Best Practices
 
 1. **Start simple**: Begin with basic criteria and add complexity gradually

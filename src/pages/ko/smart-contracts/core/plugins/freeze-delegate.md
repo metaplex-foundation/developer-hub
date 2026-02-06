@@ -34,21 +34,30 @@ faqs:
 ---
 **Freeze Delegate 플러그인**을 사용하면 Core Asset을 동결하여 자산이 소유자 지갑에 남아 있는 동안 전송과 소각을 차단할 수 있습니다. 에스크로 없는 스테이킹, 마켓플레이스 등록 및 게임 메커니즘에 완벽합니다. {% .lead %}
 {% callout title="학습 내용" %}
+
 - Asset에 Freeze Delegate 플러그인 추가
 - Asset 동결 및 해동
 - 다른 주소에 동결 권한 위임
 - 사용 사례: 스테이킹, 등록, 게임 잠금
 {% /callout %}
+
 ## 요약
+
 **Freeze Delegate**는 Asset을 제자리에서 동결하는 소유자 관리 플러그인입니다. 동결되면 Asset은 동결 권한자가 해동할 때까지 전송하거나 소각할 수 없습니다.
+
 - 에스크로에 전송하지 않고 Asset 동결
 - 프로그램이나 다른 지갑에 동결 권한 위임
 - 비영구 버전의 경우 전송 시 권한 취소됨
 - 취소 불가능한 동결은 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 사용
+
 ## 범위 외
+
 Collection-level 동결 (Asset 수준만 사용), 영구 동결 (Permanent Freeze Delegate 참조), Token Metadata 동결 권한 (다른 시스템).
+
 ## 빠른 시작
+
 **바로 가기:** [플러그인 추가](#asset에-freeze-delegate-플러그인-추가) · [권한 위임](#동결-권한-위임) · [동결](#asset-동결) · [해동](#동결된-asset-해동)
+
 1. Freeze Delegate 플러그인 추가: `addPlugin(umi, { asset, plugin: { type: 'FreezeDelegate', data: { frozen: true } } })`
 2. Asset이 이제 동결되어 전송 불가
 3. 준비되면 해동: `frozen: false`로 플러그인 업데이트
@@ -64,7 +73,9 @@ Collection-level 동결 (Asset 수준만 사용), 영구 동결 (Permanent Freez
 **Freeze Delegate 선택** 소유권 변경 시 권한이 재설정되어야 할 때.
 **[Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 선택** 권한이 영원히 유지되어야 할 때.
 {% /callout %}
+
 ## 일반적인 사용 사례
+
 - **에스크로 없는 스테이킹**: 에스크로에 전송하지 않고 스테이킹 중인 NFT 동결
 - **마켓플레이스 등록**: 에스크로 계정 없이 판매용 NFT 잠금
 - **게임 아이템 잠금**: 게임 플레이 중 아이템 일시적 잠금
@@ -72,21 +83,29 @@ Collection-level 동결 (Asset 수준만 사용), 영구 동결 (Permanent Freez
 - **거버넌스**: 투표 기간 중 토큰 잠금
 - **담보**: 대출 담보로 사용되는 NFT 잠금
 - **토너먼트**: 대회 참가 중 NFT 잠금
+
 ## 호환 대상
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
 Collection-level 동결은 대신 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)를 사용하세요.
+
 ## 인자
+
 | 인자    | 값 |
 | ------ | ----- |
 | frozen | bool  |
+
 ## 함수
+
 ### Asset에 Freeze Delegate 플러그인 추가
+
 `addPlugin` 명령은 Asset에 Freeze Delegate 플러그인을 추가합니다. 이 플러그인은 Asset을 동결하여 전송과 소각을 방지할 수 있게 합니다.
 {% dialect-switcher title="MPL Core Asset에 Freeze 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -96,8 +115,10 @@ await addPlugin(umi, {
   plugin: { type: 'FreezeDelegate', data: { frozen: true } },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -107,8 +128,10 @@ AddPluginV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
     .invoke();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -141,12 +164,16 @@ pub async fn add_freeze_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 동결 권한 위임
+
 `approvePluginAuthority` 명령은 동결 권한을 다른 주소에 위임합니다. 이를 통해 소유권을 유지하면서 다른 주소가 Asset을 동결하고 해동할 수 있습니다.
 {% dialect-switcher title="동결 권한 위임" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -158,8 +185,10 @@ await approvePluginAuthority(umi, {
   newAuthority: { type: 'Address', address: delegateAddress },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .asset(ctx.accounts.asset)
@@ -170,8 +199,10 @@ ApprovePluginAuthorityV1CpiBuilder::new(ctx.accounts.mpl_core_program)
     .new_authority(PluginAuthority::Address { address: ctx.accounts.new_authority.key() })
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::ApprovePluginAuthorityV1Builder,
@@ -210,14 +241,20 @@ pub async fn approve_plugin_authority() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Freeze Delegate 플러그인 업데이트
+
 Freeze Delegate 플러그인은 자산의 동결 상태를 변경하기 위해 업데이트할 수 있습니다. 이는 아래 표시된 [Asset 동결](#asset-동결) 및 [동결된 Asset 해동](#동결된-asset-해동) 함수를 사용하는 것과 동일합니다.
+
 ### Asset 동결
+
 `freezeAsset` 명령은 Asset을 동결하여 전송하거나 소각할 수 없게 합니다. 에스크로 없는 스테이킹이나 마켓플레이스 등록에 유용합니다.
 {% dialect-switcher title="MPL Core Asset 동결" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { freezeAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -230,8 +267,10 @@ await freezeAsset(umi, {
     authority: delegateSigner,
   }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -243,8 +282,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: true }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -281,12 +322,16 @@ pub async fn update_freeze_delegate_plugin() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ### 동결된 Asset 해동
+
 `thawAsset` 명령은 동결된 Asset을 해동하여 전송하고 소각할 수 있는 기능을 복원합니다.
 {% dialect-switcher title="MPL Core Asset 해동" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { thawAsset, fetchAsset } from '@metaplex-foundation/mpl-core'
@@ -298,8 +343,10 @@ await thawAsset(umi, {
   delegate: delegateSigner,
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust CPI" id="rust-cpi" %}
+
 ```rust
 UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .asset(&ctx.accounts.asset.to_account_info())
@@ -311,8 +358,10 @@ UpdatePluginV1CpiBuilder::new(&ctx.accounts.core_program.to_account_info())
     .plugin(Plugin::FreezeDelegate(FreezeDelegate { frozen: false }))
     .invoke()?;
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::UpdatePluginV1Builder,
@@ -349,54 +398,86 @@ pub async fn thaw_freeze_delegate_plugin() {
     println!("Signature: {:?}", res);
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 일반적인 오류
+
 ### `Asset is frozen`
+
 동결된 Asset을 전송하거나 소각하려고 했습니다. 동결 권한자가 먼저 해동해야 합니다.
+
 ### `Authority mismatch`
+
 동결 위임 권한자만 Asset을 동결/해동할 수 있습니다. 플러그인 권한이 누구인지 확인하세요.
+
 ### `Plugin not found`
+
 Asset에 Freeze Delegate 플러그인이 없습니다. 먼저 `addPlugin`으로 추가하세요.
+
 ## 참고 사항
+
 - 소유자 관리: 추가하려면 소유자 서명 필요
 - Asset 전송 시 권한이 자동으로 취소됨
 - 동결된 Asset은 여전히 업데이트 가능 (메타데이터 변경 허용)
 - 전송 후에도 권한이 유지되어야 하면 Permanent Freeze Delegate 사용
 - 동결은 즉시 적용 - 확인 기간 없음
+
 ## 빠른 참조
+
 ### 동결 상태
+
 | 상태 | 전송 가능 | 소각 가능 | 업데이트 가능 |
 |-------|--------------|----------|------------|
 | 해동됨 | 예 | 예 | 예 |
 | 동결됨 | 아니요 | 아니요 | 예 |
+
 ### 권한 동작
+
 | 이벤트 | 권한 결과 |
 |-------|------------------|
 | Asset 전송 | 권한 취소됨 |
 | 플러그인 제거됨 | 권한 사라짐 |
 | 해동 | 권한 유지됨 |
+
 ## FAQ
+
 ### 소유하지 않은 Asset을 동결할 수 있나요?
+
 아니요. Freeze Delegate는 소유자 관리이므로 소유자만 추가할 수 있습니다. 추가 후 다른 주소에 권한을 위임할 수 있습니다.
+
 ### Freeze Delegate와 Permanent Freeze Delegate의 차이점은 무엇인가요?
+
 Freeze Delegate 권한은 전송 시 취소됩니다. Permanent Freeze Delegate 권한은 영구적으로 유지되며 생성 시에만 추가할 수 있습니다.
+
 ### 동결된 Asset을 소각할 수 있나요?
+
 아니요. 동결된 Asset은 전송과 소각 모두 차단합니다. 소각하려면 먼저 Asset을 해동하세요.
+
 ### 전체 Collection을 한 번에 동결할 수 있나요?
+
 일반 Freeze Delegate로는 안 됩니다 (Asset만). 대신 Collection에 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate)를 사용하세요 - Collection-level 동결을 지원하며 해당 Collection의 모든 Asset을 한 번에 동결합니다. Permanent Freeze Delegate는 Collection 생성 시에만 추가할 수 있습니다.
+
 ### 동결이 메타데이터 업데이트에 영향을 미치나요?
+
 아니요. 동결된 동안에도 Asset 소유자나 업데이트 권한자가 메타데이터 (이름, URI)를 업데이트할 수 있습니다. 전송과 소각만 차단됩니다.
+
 ### 에스크로 없는 스테이킹을 어떻게 구현하나요?
+
 1. 스테이킹 프로그램을 권한으로 하여 Freeze Delegate 플러그인 추가
 2. 사용자가 스테이킹할 때: Asset 동결
 3. 사용자가 언스테이킹할 때: Asset 해동
 4. NFT는 사용자 지갑을 떠나지 않음
+
 ## 관련 플러그인
+
 - [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) - 취소 불가능한 동결 권한, Collection 지원
 - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - 위임자가 Asset을 전송할 수 있도록 허용
 - [Burn Delegate](/smart-contracts/core/plugins/burn-delegate) - 위임자가 Asset을 소각할 수 있도록 허용
+
 ## 용어집
+
 | 용어 | 정의 |
 |------|------------|
 | **Freeze Delegate** | 전송과 소각을 차단하는 소유자 관리 플러그인 |

@@ -9,6 +9,7 @@ updated: '03-12-2025'
 使用Metaplex Core在Solana上创建NFT。 {% .lead %}
 
 ## 学习内容
+
 本指南将向您展示如何创建具有以下要素的NFT：
 
 - 自定义名称和元数据
@@ -44,4 +45,5 @@ updated: '03-12-2025'
 ```
 
 ## 插件
+
 MPL Core资产支持在收藏集级别和资产级别使用插件。要创建带有插件的Core资产，请在创建时将插件类型及其参数传递给`plugins`数组参数。有关插件的更多信息，请参阅[插件概述](/zh/smart-contracts/core/plugins)页面。在NFT的上下文中，例如头像图片，[版税插件](/zh/smart-contracts/core/plugins/royalties)是一个常见的用例。

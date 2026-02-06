@@ -52,6 +52,7 @@ mplx --version
 ### 1. 구성 디렉토리 생성
 
 CLI는 처음 구성 설정을 할 때 `~/.config/mplx`에 구성 파일을 자동으로 생성합니다. 이 구성은 다음을 저장합니다:
+
 - 지갑 구성
 - RPC 엔드포인트 설정
 - 탐색기 기본 설정
@@ -60,6 +61,7 @@ CLI는 처음 구성 설정을 할 때 `~/.config/mplx`에 구성 파일을 자�
 ### 2. 환경 구성
 
 #### 지갑 설정
+
 ```bash
 # 새 지갑 생성
 mplx config wallets new --name dev1
@@ -75,11 +77,13 @@ mplx config wallets set
 추가 정보는 참조
 
 #### RPC 엔드포인트 구성
+
 ```bash
 mplx config set rpcUrl  https://api.mainnet-beta.solana.com
 ```
 
 #### 선호하는 탐색기 설정
+
 ```bash
 mplx config explorer set
 ```
@@ -89,22 +93,26 @@ mplx config explorer set
 CLI에 기여하거나 소스에서 실행하려면:
 
 1. 저장소 복제:
+
 ```bash
 git clone https://github.com/metaplex-foundation/cli.git
 cd cli
 ```
 
-2. 종속성 설치:
+1. 종속성 설치:
+
 ```bash
 npm install
 ```
 
-3. 프로젝트 빌드:
+1. 프로젝트 빌드:
+
 ```bash
 npm run build
 ```
 
-4. CLI 연결:
+1. CLI 연결:
+
 ```bash
 npm link
 ```

@@ -27,9 +27,13 @@ howToTools:
   - mpl-core SDK
 ---
 ## Introduction
+
 ### What is an Edition?
-An Edition is a copy of the same "Master Edition". To understand the concept it can be helpful to think of physical Paintings: The Master Edition is the initial Painting, the Editions, also known as prints, are copies of that painting. 
+
+An Edition is a copy of the same "Master Edition". To understand the concept it can be helpful to think of physical Paintings: The Master Edition is the initial Painting, the Editions, also known as prints, are copies of that painting.
+
 ### Editions with Core
+
 MPL Core Edition support was added close after to the mainnet release. Different to Token Metadata Editions the Edition Numbers and Supply are not enforced, but informational.
 To achieve the Edition concept in Core two [Plugins](/smart-contracts/core/plugins) are used: [Master Edition](/smart-contracts/core/plugins/master-edition) in the Collection and [Edition](/smart-contracts/core/plugins/edition) in the Asset, which are the prints. The hierarchy looks like this:
 {% diagram %}
@@ -37,7 +41,7 @@ To achieve the Edition concept in Core two [Plugins](/smart-contracts/core/plugi
 {% node #master label="Master Edition" theme="indigo" /%}
 {% /node %}
 {% node y="50" parent="master" theme="transparent" %}
-Collection with 
+Collection with
 Master Edition Plugin
 {% /node %}
 {% node x="200" y="-70" parent="master" %}
@@ -50,19 +54,22 @@ Master Edition Plugin
 {% node #asset3 label="Edition" theme="blue" /%}
 {% /node %}
 {% node y="50" parent="asset3" theme="transparent" %}
-Assets with 
+Assets with
 Edition Plugin
 {% /node %}
 {% edge from="master" to="asset1" /%}
 {% edge from="master" to="asset2" /%}
 {% edge from="master" to="asset3" /%}
 {% /diagram %}
+
 ## Create Editions using Candy Machine
-The easiest method to create and sell Edition is by leveraging Core Candy Machine. 
+
+The easiest method to create and sell Edition is by leveraging Core Candy Machine.
 The following Code creates a Master Edition Collection and the Candy Machine that prints the Editions for you.
-{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %} 
+{% dialect-switcher title="Create a Candy Machine with Edition Guard and Master Edition Collection" %}
 {% dialect title="JavaScript" id="js" %}
 First all the required functions are imported and Umi set up with your RPC and Wallet:
+
 ```ts
 import {
   create,
@@ -84,8 +91,10 @@ const umi = createUmi("http://127.0.0.1:8899").use(mplCandyMachine());
 const keypair = generateSigner(umi);
 umi.use(keypairIdentity(keypair));
 ```
+
 After this setup we can create the Collection with [Master Edition Plugin](/smart-contracts/core/plugins/master-edition). The `maxSupply` field determines how many Editions you want to print. The `name` and `uri` fields in the Plugin can be used in addition to the Collection Name and uri.
 For ease of use we also add the [Royalty Plugin](/smart-contracts/core/plugins/royalties).
+
 ```ts
 const collectionSigner = generateSigner(umi);
 await createCollection(umi, {
@@ -109,9 +118,12 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
+
 After the creation of the Collection we can create the candy machine using `hiddenSettings` and the `edition` guard.
+
 - `hiddenSettings` are used to assign the same, or similar, Name and Metadata to all Assets minted. You can use a `$ID$` variable that will be replaced by the index of the minted Asset on mint.
 - The `edition` Guard is used to add the [Edition Plugin](/smart-contracts/core/plugins/edition) to the Assets. The Edition number is increasing for each minted Asset, starting with the number in `editionStartOffset`.
+
 ```ts
 // The Name and off chain Metadata of your Editions
 const editionData = {
@@ -140,18 +152,23 @@ const createIx = await create(umi, {
 })
 await createIx.sendAndConfirm(umi);
 ```
-{% /dialect %} 
+
+{% /dialect %}
 {% /dialect-switcher %}
-That's it! 
+That's it!
 Now users can mint editions from your candy machine.
+
 ## Create Editions without Core Candy Machine
+
 {% callout type="note" %}
 We strongly recommend to use Core Candy Machine for MPL Core Editions. Candy Machine handles the creation and also the correct numbering of the editions for you.
 {% /callout %}
 To create an Edition without Core Candy Machine you would:
+
 1. Create a Collection using the [Master Edition](/smart-contracts/core/plugins/master-edition) Plugin
 {% dialect-switcher title="Create a MPL Core Collection with Master Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import {
@@ -185,8 +202,10 @@ await createCollection(umi, {
     ]
   }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -229,11 +248,13 @@ pub async fn create_collection_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
 2. Create Assets with the [Edition](/smart-contracts/core/plugins/edition) Plugin. Remember to increase the number in the plugin.
 {% dialect-switcher title="Creating an MPL Core Asset with the Edition Plugin" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { 
@@ -253,8 +274,10 @@ const result = create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use std::str::FromStr;
 use mpl_core::{
@@ -295,9 +318,12 @@ pub async fn create_asset_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Further Reading
+
 - [Mint from Candy Machine](/core-candy-machine/mint)
 - [Master Edition Plugin](/smart-contracts/core/plugins/master-edition)
 - [Edition Plugin](/smart-contracts/core/plugins/edition)

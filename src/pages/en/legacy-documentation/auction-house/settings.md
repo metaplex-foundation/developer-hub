@@ -10,7 +10,7 @@ On this page, we will discuss settings that are available on an Auction House. T
 
 ## The Authority
 
-The authority is the wallet which controls the usage of an account, and in this case, the Auction House instance. The authority address can be be mentioned when creating an Auction House. If not mentioned, the wallet which is being used to create the Auction House defaults as the authority. 
+The authority is the wallet which controls the usage of an account, and in this case, the Auction House instance. The authority address can be be mentioned when creating an Auction House. If not mentioned, the wallet which is being used to create the Auction House defaults as the authority.
 
 The authority can also be transferred to another wallet after the creation of the Auction House, which transfers control of the Auction House. This action should be performed carefully.
 
@@ -65,20 +65,19 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Helper Accounts
 
 There are several accounts that are necessary for the Auction House to function properly. Once set by the Auction House, the authority can reset and configure these accounts as per their liking.
 
 There are some accounts that are created and controlled by the Auction House program. These accounts are Program Derived Addresses (PDAs) which you can read more about [here](https://solanacookbook.com/core-concepts/pdas.html). These are the two settings that can be used to set these accounts:
 
-1. `auctionHouseFeeAccount`: The public key of the fee account which stores funds for paying for Auction House related transactions on behalf of the users. 
+1. `auctionHouseFeeAccount`: The public key of the fee account which stores funds for paying for Auction House related transactions on behalf of the users.
 
 2. `auctionHouseTreasury`: The public key of the treasury account which stores the funds received on every sale, as marketplace royalty.
 
 There are other accounts that are not created by the Auction House program, but are essential for withdrawing different types of funds from the Auction House, back to the authority:
 
-1. `feeWithdrawalDestination`: The public key of the account to which the funds can be withdrawn from the fee account. 
+1. `feeWithdrawalDestination`: The public key of the account to which the funds can be withdrawn from the fee account.
 
 2. `treasuryWithdrawalDestination`: The public key of the account to which the funds can be withdrawn from the treasury account.
 
@@ -105,11 +104,11 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Require Sign Off
+
 This setting allows marketplaces to gate asset listing and sales. As discussed in the authority section, the Auction House authority plays a role in the gating of assets. This censorship or centralised control can only take place when `requireSignOff = true`.
 
-When this happens, every transaction on the marketplace: listing, bidding and execution of sales needs to be signed by the Auction House authority. Fully decentralised marketplaces can choose to keep the `requireSignOff` setting as `false` to avoid censorship or centralised control of actions on that marketplace. 
+When this happens, every transaction on the marketplace: listing, bidding and execution of sales needs to be signed by the Auction House authority. Fully decentralised marketplaces can choose to keep the `requireSignOff` setting as `false` to avoid censorship or centralised control of actions on that marketplace.
 
 Setting `requireSignOff = true` has other powers as well: it allows marketplaces to implement their own custom order matching algorithms. We will talk more about this in the next section.
 
@@ -130,7 +129,6 @@ const auctionHouseSettings = {
 ## Can Change Sale Price
 
 `canChangeSalePrice` allows marketplaces to change the sale price of an asset, when a user intentionally lists an asset for free, or for 0 SOL (or any other SPL-token). By listing the asset for 0 SOL, the user allows marketplaces to apply custom matching algorithms in order to find the best price match for the "freely" listed asset.
-
 
 An important point to note here is that `canChangeSalePrice` can be set to `true` only if `requireSignOff` is also set to `true`. This is because custom matching is not possible in the case of permissionless listing and bidding. The Auction House should be able to "sign off" on a matching bid and execute the sale of the asset.
 
@@ -186,4 +184,5 @@ const auctionHouseSettings = {
 {% /dialect-switcher %}
 
 ## Conclusion
+
 Now that we know about Auction House settings, on the [next page](/legacy-documentation/auction-house/manage), we’ll see how we can use them to create and update our own Auction House.

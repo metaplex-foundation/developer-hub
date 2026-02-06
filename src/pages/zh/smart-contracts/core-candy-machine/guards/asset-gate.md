@@ -40,7 +40,6 @@ Owner: Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="requiredCollection" to="collectionNftMint" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 检查付款人是否
 
@@ -111,6 +110,7 @@ API 参考：[create](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## 铸造设置
 
 Asset Gate 守卫包含以下铸造设置：
+
 - **Asset Address**：用于证明所有权的资产地址。此资产必须属于必需的 collection 且必须属于铸造者。
 - **Collection Address**：用于证明所有权的 Collection 地址。
 

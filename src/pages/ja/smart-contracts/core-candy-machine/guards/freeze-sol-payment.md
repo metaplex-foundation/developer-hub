@@ -60,7 +60,6 @@ _または凍結期間の終了時。_
 {% node #thawed-NFT-bg1 label="解凍された Asset" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
 {% node #thawed-NFT label="解凍された Asset" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -76,6 +75,7 @@ _すべての Asset が解凍された場合。_
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
+
 ## ガード設定
 
 Freeze Sol Payment ガードには以下の設定が含まれます:
@@ -226,7 +226,6 @@ Freeze Escrow PDA アカウントは、以下のような複数のパラメー�
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
 {% node #freezeEscrow-PDA3 parent="destination" x="390" y="-10" %}
@@ -293,7 +292,6 @@ Freeze Escrow PDA アカウントは、以下のような複数のパラメー�
 {% node parent="mint-candy-machine" y="-20" x="130" theme="transparent" %}
   ミントロジック
 {% /node %}
-
 
 {% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
 {% node #frozen-NFT parent="mint-candy-machine" y="120" x="29" theme="slate" %}
@@ -394,7 +392,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 
 {% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="凍結された Asset" /%}
@@ -490,7 +487,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% node parent="candy-guard-route" y="209" x="-18" %}
 {% node #destination-wallet label="Destination Wallet" theme="indigo" /%}
 {% node theme="dimmed" %}
@@ -503,7 +499,6 @@ Freeze Escrow Account から
 
 すべての資金を転送
 {% /edge %}
-
 
 {% edge from="candy-guard" to="candy-machine" /%}
 

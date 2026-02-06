@@ -5,6 +5,7 @@ description: 命名空间原始规则
 ---
 
 ## 命名空间
+
 **命名空间**规则是一个高级规则，用于减少规则集账户的大小和反序列化期间使用的计算单元。它也可用于跨多个[场景](/zh/smart-contracts/token-auth-rules/#场景)的通用规则。**命名空间**规则用于**操作**:**场景**对，并将指示评估应使用**操作**下的规则。例如，如果代币有`Transfer:Owner`、`Transfer:Delegate`和`Transfer:Authority`场景，但只有`Transfer:Delegate`需要特殊规则，**命名空间**规则可用于指示`Transfer:Owner`和`Transfer:Authority`都应使用`Transfer`下的通用规则。
 
 ```js

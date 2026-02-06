@@ -9,16 +9,19 @@ description: Metaplex CLIを使用してMPL Coreアセットをバーンする
 ## 基本的な使い方
 
 ### 単一アセットをバーン
+
 ```bash
 mplx core asset burn <assetId>
 ```
 
 ### コレクションからアセットをバーン
+
 ```bash
 mplx core asset burn <assetId> --collection <collectionId>
 ```
 
 ### 複数アセットをバーン
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```
@@ -51,17 +54,21 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 例
 
 ### 単一アセットをバーン
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
 
 ### コレクションからアセットをバーン
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe
 ```
 
 ### リストから複数アセットをバーン
+
 JSONファイル `assets-to-burn.json` を作成：
+
 ```json
 [
   "5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa",
@@ -70,6 +77,7 @@ JSONファイル `assets-to-burn.json` を作成：
 ```
 
 次に実行：
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```

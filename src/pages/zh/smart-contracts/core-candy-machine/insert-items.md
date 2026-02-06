@@ -14,9 +14,11 @@ description: 如何将 Core NFT 资产加载到 Core Candy Machine 中。
 
 {% callout title="CLI 替代方案" type="note" %}
 您也可以使用 MPLX CLI 插入项目，它会自动处理批量处理：
+
 ```bash
 mplx cm insert
 ```
+
 CLI 提供智能加载检测、进度跟踪和最佳批量大小。有关更多详细信息，请参阅 [CLI insert 命令文档](/zh/dev-tools/cli/cm/insert)。
 {% /callout %}
 

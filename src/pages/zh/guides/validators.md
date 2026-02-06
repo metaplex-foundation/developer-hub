@@ -57,6 +57,7 @@ Solana 使用权益证明（PoS）和历史证明（PoH）共识机制的独特�
 ### 选择验证者
 
 选择验证者时请考虑以下因素：
+
 - **性能**：正常运行时间和区块生产历史
 - **佣金**：验证者保留的奖励百分比（通常为 5-10%）
 - **总质押量**：更高的质押可能表明信任，但也会导致中心化
@@ -65,11 +66,13 @@ Solana 使用权益证明（PoS）和历史证明（PoH）共识机制的独特�
 ## 工具和资源
 
 ### 质押工具
+
 - [Solana Beach](https://solanabeach.io/validators) - 浏览器和验证者统计数据
 - [Validators.app](https://www.validators.app/) - 详细的验证者性能指标
 - [Stakeview.app](https://stakeview.app/) - 验证者排名和比较
 
 ### 支持质押的钱包
+
 - Phantom
 - Solflare
 - Ledger

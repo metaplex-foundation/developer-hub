@@ -28,21 +28,30 @@ faqs:
 ---
 The **Burn Delegate Plugin** allows a designated authority to burn Core Assets on behalf of the owner. Useful for game mechanics, subscription services, and automated asset lifecycle management. {% .lead %}
 {% callout title="What You'll Learn" %}
+
 - Add the Burn Delegate plugin to an Asset
 - Delegate burn authority to another address
 - Revoke burn authority
 - Use cases: games, subscriptions, automated burns
 {% /callout %}
+
 ## Summary
+
 The **Burn Delegate** is an Owner Managed plugin that allows a delegate to burn an Asset. Once added, the delegate can burn the Asset at any time without owner approval.
+
 - Delegate burn authority to a program or wallet
 - Authority is revoked on Asset transfer
 - Use [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) for irrevocable burn authority
 - No additional arguments required
+
 ## Out of Scope
+
 Collection burning (different process), permanent burn authority (see Permanent Burn Delegate), and Token Metadata burn authority (different system).
+
 ## Quick Start
+
 **Jump to:** [Add Plugin](#adding-the-burn-plugin-to-an-asset) · [Delegate Authority](#delegating-burn-authority) · [Revoke](#revoking-burn-authority)
+
 1. Add the Burn Delegate plugin: `addPlugin(umi, { asset, plugin: { type: 'BurnDelegate' } })`
 2. Optionally delegate to another address
 3. The delegate can now burn the Asset at any time
@@ -57,23 +66,32 @@ Collection burning (different process), permanent burn authority (see Permanent 
 **Choose Burn Delegate** when burn authority should reset on ownership change.
 **Choose [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate)** when authority must persist forever.
 {% /callout %}
+
 ## Common Use Cases
+
 - **Game mechanics**: Burn NFTs when items are consumed, destroyed, or lost in-game
 - **Subscription services**: Auto-burn expired subscription tokens
 - **Crafting systems**: Burn ingredient NFTs when crafting new items
 - **Achievement redemption**: Burn achievement tokens when redeemed for rewards
 - **Event tickets**: Burn tickets after event check-in
 - **Limited-time assets**: Burn assets after expiration period
+
 ## Works With
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ❌  |
+
 ## Arguments
+
 The Burn Plugin doesn't contain any arguments to pass in.
+
 ## Adding the Burn Plugin to an Asset
+
 {% dialect-switcher title="Adding a Burn Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { addPlugin } from '@metaplex-foundation/mpl-core'
@@ -85,8 +103,10 @@ import { addPlugin } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```ts
 use mpl_core::{
     instructions::AddPluginV1Builder,
@@ -119,12 +139,16 @@ pub async fn add_burn_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Delegating Burn Authority
+
 The Burn Delegate plugin authority can be delegated to a different address using the `approvePluginAuthority` function. This allows you to change who can burn the Asset.
 {% dialect-switcher title="Delegate Burn Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -138,12 +162,16 @@ import { approvePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Revoking Burn Authority
+
 The burn authority can be revoked using the `revokePluginAuthority` function, returning control to the asset owner.
 {% dialect-switcher title="Revoke Burn Authority" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
@@ -155,41 +183,65 @@ import { revokePluginAuthority } from '@metaplex-foundation/mpl-core'
     }).sendAndConfirm(umi)
 })();
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Common Errors
+
 ### `Authority mismatch`
+
 Only the burn delegate authority can burn the Asset. Verify you're signing with the correct keypair.
+
 ### `Asset is frozen`
+
 Frozen Assets cannot be burned. The freeze authority must thaw the Asset first.
+
 ## Notes
+
 - Owner Managed: requires owner signature to add
 - Authority is automatically revoked when the Asset transfers
 - Frozen Assets cannot be burned
 - Use Permanent Burn Delegate if authority must persist after transfer
 - Burning is immediate and irreversible
+
 ## Quick Reference
+
 ### Who Can Burn?
+
 | Authority | Can Burn? |
 |-----------|-----------|
 | Asset Owner | Yes (always) |
 | Burn Delegate | Yes |
 | Permanent Burn Delegate | Yes (force approve) |
 | Update Authority | No |
+
 ## FAQ
+
 ### What's the difference between Burn Delegate and Permanent Burn Delegate?
+
 Burn Delegate authority is revoked on transfer. Permanent Burn Delegate authority persists forever and uses `forceApprove`, meaning it can burn even if the Asset is frozen.
+
 ### Can the owner still burn if there's a Burn Delegate?
+
 Yes. The owner can always burn their own Asset regardless of delegates.
+
 ### Does Burn Delegate work on frozen Assets?
+
 No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
+
 ### When is Burn Delegate revoked?
+
 When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
+
 ## Related Plugins
+
 - [Permanent Burn Delegate](/smart-contracts/core/plugins/permanent-burn-delegate) - Irrevocable burn authority with forceApprove
 - [Freeze Delegate](/smart-contracts/core/plugins/freeze-delegate) - Block transfers and burns temporarily
 - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow delegate to transfer Assets
+
 ## Glossary
+
 | Term | Definition |
 |------|------------|
 | **Burn Delegate** | Owner Managed plugin allowing a delegate to burn the Asset |

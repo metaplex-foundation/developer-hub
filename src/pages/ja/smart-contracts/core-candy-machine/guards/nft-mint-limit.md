@@ -139,6 +139,7 @@ mintV1(umi, {
 _NFT Mint Limitガードはルート命令をサポートしていません。_
 
 ## NftMintLimitアカウント
+
 `NftMintLimit`ガードを使用すると、各NFT、CandyMachine、および`id`の組み合わせに対して`NftMintCounter`アカウントが作成されます。検証目的で次のようにフェッチできます:
 
 ```js

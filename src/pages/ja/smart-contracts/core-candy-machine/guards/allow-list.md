@@ -58,7 +58,6 @@ description: "Core Candy Machineの「Allowlist」ガードは、Core Candy Mach
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
 {% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
-
 {% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
@@ -132,7 +131,6 @@ Merkle Proof {% .whitespace-nowrap %}
 {% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 {% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 
-
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="Payer" theme="indigo" /%}
 {% node theme="dimmed"%}
@@ -199,7 +197,6 @@ Merkle Rootと一致しない場合、
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -386,6 +383,7 @@ _Sugarは「Proof」ルートを呼び出すために使用できません。_
 {% /dialect-switcher %}
 
 ## Allowlistアカウント
+
 `Allowlist`ガードを使用すると、ルート命令の実行後に`AllowListProof`アカウントが作成されます。フェッチできる場合、ユーザーは許可リストに含まれており、ルートは既に実行されています。検証目的で次のようにフェッチできます:
 
 ```js

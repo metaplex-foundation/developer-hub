@@ -14,7 +14,7 @@ Bubblegum V2是Metaplex协议程序的最新迭代，用于在Solana上创建和
 
 {% quick-link title="快速开始" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum-v2/sdk" description="找到您选择的语言或库，开始使用压缩NFT。" /%}
 
-{% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="寻找特定内容？查看我们的API参考并找到您的答案。" /%}
+{% quick-link title="API参考" icon="CodeBracketSquare" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" target="_blank" description="寻找特定内容？查看我们的API参考并找到您的答案。" /%}
 
 {% /quick-links %}
 
@@ -144,7 +144,6 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 - [验证和取消验证cNFT的创作者](/zh/smart-contracts/bubblegum-v2/verify-creators)。
 - [冻结和解冻cNFT](/zh/smart-contracts/bubblegum-v2/freeze-cnfts)。
 - [使cNFT成为灵魂绑定](/zh/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
-
 
 ## 下一步
 

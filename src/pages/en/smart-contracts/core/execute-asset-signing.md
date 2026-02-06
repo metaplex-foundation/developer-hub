@@ -21,6 +21,7 @@ The MPL Core Execute instruction introduces the concept of **Asset Signers** to
 MPL Core Assets.
 These **Asset Signers** act as Signers on behalf of the Asset itself which
 unlocks the ability for MPL Core Assets
+
 - to transfer out Solana and SPL Tokens.
 - to become the authority of other accounts.
 - to perform other actions and validations that have been assigned to the
@@ -28,24 +29,32 @@ unlocks the ability for MPL Core Assets
 MPL Core Assets have the ability to sign and submit transactions/CPIs to the
 blockchain. This effectively gives the Core Asset it's own wallet in the form of
 an `assetSigner`.
+
 ## Asset Signer PDA
+
 Assets are now able to access the `assetSignerPda` account/address which allows
 the `execute` instruction on the MPL Core program to pass through additional
 instructions sent to it to sign the CPI instructions with the `assetSignerPda`.
 This allows the `assetSignerPda` account to effectively own and execute account
 instructions on behalf of the current asset owner.
 You can think of the `assetSignerPda` as a wallet attached to a Core Asset.
+
 ### findAssetSignerPda()
+
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 ```
+
 ## Execute Instruction
+
 ### Overview
+
 The `execute` instruction allows users to pass in the Core Asset and also some
 pass through instructions that will get signed by the AssetSigner when it hits
 the MPL Core programs `execute` instruction on chain.
 An overview of the `execute` instruction and it's args.
+
 ```ts
 const executeIx = await execute(umi, {
     {
@@ -60,23 +69,32 @@ const executeIx = await execute(umi, {
     }
 })
 ```
+
 ### Validation
+
 {% callout title="assetSignerPda Validation" %}
 The MPL Core Execute instruction will validate that the **current Asset owner**
 has also signed the transaction. This insures only the current Asset Owner can
 execute transactions while using the `assetSignerPda` with the `execute` instruction.
 {% /callout %}
+
 ### Controlling Execute Operations
+
 The execute functionality can be controlled using the [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute). This plugin allows you to freeze the execute operations on an asset, preventing any execute instructions from being processed until unfrozen.
 The Freeze Execute Plugin is particularly useful for:
+
 - **Backed NFTs**: Prevent withdrawal of underlying assets when needed
 - **Escrowless protocols**: Temporarily lock execute functionality during protocol operations
 - **Security measures**: Add an additional layer of protection for assets that can execute complex operations
 When the Freeze Execute Plugin is active and set to `frozen: true`, any attempts to use the execute instruction will be blocked until the plugin is updated to `frozen: false`.
+
 ## Examples
+
 ### Transferring SOL From the Asset Signer
+
 In the following example we transfer SOL that had been sent to the
 `assetSignerPda` to a destination of our choice.
+
 ```js
 import {
   execute,
@@ -117,12 +135,15 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+
 ### Transferring SPL Tokens From the Asset Signer
+
 In the following example we transfer some of our SPL Token balance from the
 `assetSignerPda` account to a destination.
 This example is based on the best practices in regards to derived tokens
 accounts for a base wallet address. If tokens are not in their correctly derived
 token account based on the `assetSignerPda` address then this example will need adjusting.
+
 ```js
 import {
   execute,
@@ -173,9 +194,12 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+
 ### Transferring Ownership of an Asset to Another Asset
+
 In the following example we transfer a Core Asset that is owned by another Core
 Asset, to another.
+
 ```js
 import {
   execute,

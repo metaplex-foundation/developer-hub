@@ -18,9 +18,9 @@ npm install @metaplex-foundation/mpl-core-candy-machine
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" description="MPL Core Candy Machine Javascript SDK 生成的包 API 文档。" /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-core-candy-machine.typedoc.metaplex.com/>" description="MPL Core Candy Machine Javascript SDK 生成的包 API 文档。" /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core-candy-machine" description="NPM 上的 MPL Core Candy Machine Javascript SDK。" /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/mpl-core-candy-machine>" description="NPM 上的 MPL Core Candy Machine Javascript SDK。" /%}
 
 {% /quick-links %}
 

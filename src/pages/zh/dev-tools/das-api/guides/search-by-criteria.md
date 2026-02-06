@@ -36,6 +36,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`找到 ${searchResults.items.length} 个符合条件的资产`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -66,8 +67,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`找到 ${data.result.items.length} 个资产`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 示例" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -85,6 +88,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -127,6 +131,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -156,6 +161,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`找到钱包拥有的集合中 ${data.result.items.length} 个资产`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -199,6 +205,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   );
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 
@@ -230,8 +237,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`找到 ${data.result.items.length} 个符合复杂条件的资产`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
+
 ## 提示和最佳实践
 
 1. **从简单开始**：从基本条件开始，逐步增加复杂性

@@ -73,6 +73,7 @@ NFT에 첨부되지 않은 Inscription 데이터를 읽으려면 다른 함수�
 {% dialect-switcher title="Inscription 가져오기" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import { fetchInscription } from '@metaplex-foundation/mpl-inscription'
 
@@ -84,6 +85,7 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 {% /dialect-switcher %}
 
 ## 현재 Inscription 수 가져오기
+
 현재 총 inscription 수는 다음과 같이 가져올 수 있습니다:
 
 {% dialect-switcher title="현재 Inscription 수 가져오기" %}

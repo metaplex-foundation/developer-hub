@@ -40,7 +40,6 @@ Owner: Core Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="requiredCollection" to="collectionNftMint" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 支払者がこのコレクション
 
@@ -111,6 +110,7 @@ APIリファレンス: [create](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ミント設定
 
 Asset Gateガードには以下のミント設定が含まれます:
+
 - **Asset Address**: 所有権を証明するアセットのアドレス。これは、必要なコレクションの一部であり、ミンターに属している必要があります。
 - **Collection Address**: 所有権を証明するために使用されるコレクションのアドレス。
 

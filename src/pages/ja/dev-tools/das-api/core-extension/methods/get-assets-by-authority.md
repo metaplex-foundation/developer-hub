@@ -22,8 +22,8 @@ const assets = await das.getAssetsByAuthority(umi, {authority:  publicKey('<Publ
 console.log(assets);
 ```
 
-
 ## レスポンス例
+
 この例には配列内に1つのオブジェクトのみが含まれています。複数のCore アセットに対する権限を持つ公開鍵の場合、配列にはより多くのエントリが含まれます。
 
 ```json

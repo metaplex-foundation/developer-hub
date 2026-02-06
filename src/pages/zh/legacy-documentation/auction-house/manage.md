@@ -35,7 +35,6 @@ const auctionHouseSettings = await metaplex
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## 拍卖行账户
 
 现在我们已经创建了一个拍卖行实例,让我们看看其中存储了什么数据。

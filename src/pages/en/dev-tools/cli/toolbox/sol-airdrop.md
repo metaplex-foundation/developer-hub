@@ -9,11 +9,13 @@ The `mplx toolbox sol airdrop` command allows you to airdrop SOL to a specified 
 ## Basic Usage
 
 ### Airdrop to Current Wallet
+
 ```bash
 mplx toolbox sol airdrop <amount>
 ```
 
 ### Airdrop to Specific Address
+
 ```bash
 mplx toolbox sol airdrop <amount> <address>
 ```
@@ -26,11 +28,13 @@ mplx toolbox sol airdrop <amount> <address>
 ## Examples
 
 ### Airdrop 1 SOL to Current Wallet
+
 ```bash
 mplx toolbox sol airdrop 1
 ```
 
 ### Airdrop 2 SOL to Specific Address
+
 ```bash
 mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -38,6 +42,7 @@ mplx toolbox sol airdrop 2 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## Output
 
 After a successful airdrop, the command will display:
+
 ```
 --------------------------------
     Airdropped <amount> SOL to <address>
@@ -50,4 +55,4 @@ After a successful airdrop, the command will display:
 - The airdrop amount is specified in SOL (not lamports)
 - If no address is provided, the SOL will be airdropped to the current wallet address
 - The command requires a connection to a development network (devnet/testnet)
-- Make sure you have sufficient SOL in your wallet for the airdrop operation 
+- Make sure you have sufficient SOL in your wallet for the airdrop operation

@@ -15,11 +15,14 @@ about:
 proficiencyLevel: Beginner
 ---
 Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex Token Metadataスタンダードに似ています。ただし、プラグインを使用してアセット自体にオンチェーンでより多くのデータを保存できるため、属性などの一部のデータはオンチェーンでも保存できます。
+
 ## スキーマの例
+
 以下は、異なる種類のNFTの例です。これらの異なるタイプはすべて、`image`、`animation_url`、`properties`フィールドを使用して単一のAssetの一部にすることもできることに注意してください。すべての異なるフィールドについては、[JSONスキーマフィールド](#jsonスキーマフィールド)セクションで詳しく説明しています。
 {% totem title="例" id="schema-examples" %}
 {% totem-accordion title="画像" %}
 属性は、[Attributesプラグイン](/smart-contracts/core/plugins/attribute)を使用してオンチェーンに保存することもできます。
+
 ```json
 {
   "name": "Number #0001",
@@ -47,8 +50,10 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
   }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="アニメーションGIF" %}
+
 ```json
 {
   "name": "Number #0001",
@@ -66,8 +71,10 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
   }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="動画" %}
+
 ```json
 {
     "name": "Video Asset",
@@ -90,8 +97,10 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="オーディオ" %}
+
 ```json
 {
     "name": "Audio Asset",
@@ -114,9 +123,11 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="VR" %}
 ほとんどのエクスプローラーとウォレットは`.glb`ファイルをサポートしていますが、スキーマの一部としてフォールバック画像も用意することをお勧めします。
+
 ```json
 {
     "name": "VR Asset",
@@ -139,9 +150,11 @@ Metaplex CoreアセットのオフチェーンJSONメタデータは、Metaplex 
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% totem-accordion title="HTML" %}
 HTML Assetsの以下の例は、セキュリティリスクと見なされる可能性があるため、現在ウォレットではサポートされていません。ただし、一部のエクスプローラーは正しくレンダリングするため、HTML Assetsをサポートしていないすべてのツールに対してフォールバック画像を用意することをお勧めします。
+
 ```json
 {
     "name": "HTML Asset",
@@ -164,12 +177,17 @@ HTML Assetsの以下の例は、セキュリティリスクと見なされる可
     }
 }
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ## JSONスキーマフィールド
+
 以下は、異なるフィールドの説明です。
 Metaplex Token Metadataから知っていた一部のフィールドがない場合、それらはおそらく非推奨です。例えば、`creators`は現在[Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)の一部です。
+
 ### 必須フィールド
+
 - **name**: NFTアセットの名前
   - 例: "Solana Monkey #123", "Degen Ape #45"
 
@@ -179,7 +197,8 @@ Metaplex Token Metadataから知っていた一部のフィールドがない場
   - 例: `https://arweave.net/123abc...?ext=png`
   - サポート: PNG, GIF, JPG/JPEG
 - **category**: NFTコンテンツのタイプ
-    - 例: `image`, `video`, `audio`, `vr`, `html`
+  - 例: `image`, `video`, `audio`, `vr`, `html`
+
 ### オプションフィールド
 
 - **animation_url**: マルチメディア添付ファイル用のURI
@@ -189,14 +208,17 @@ Metaplex Token Metadataから知っていた一部のフィールドがない場
   - 例: `https://www.myproject.io/nft/123`
 - **attributes**: 特性とその値の配列。これらは[Attributesプラグイン](/smart-contracts/core/plugins/attribute)を使用してオンチェーンに保存することもできます
   - 例:
+
     ```json
     {
       "trait_type": "Background",
       "value": "Galaxy"
     }
     ```
+
 - **properties**: ファイルとカテゴリを含む追加のメタデータ
   - **files**: NFTに関連付けられたすべてのアセットの配列。`type`はファイルの[MIMEタイプ](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)です。
+
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",

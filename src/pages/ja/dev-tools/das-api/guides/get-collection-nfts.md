@@ -66,6 +66,7 @@ const response = await fetch('<ENDPOINT>', {
   console.log(`コレクション内で${data.result.items.length}個のアセットを発見`)
 })()
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

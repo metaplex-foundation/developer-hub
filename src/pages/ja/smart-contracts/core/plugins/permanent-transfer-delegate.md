@@ -28,21 +28,30 @@ faqs:
 ---
 **Permanent Transfer Delegate Plugin**は、永続的に有効な取り消し不可能なtransfer権限を提供します。通常のTransfer Delegateとは異なり、この権限は取り消されず、Assetを繰り返し転送できます。 {% .lead %}
 {% callout title="学習内容" %}
+
 - 永続的なtransfer機能を持つAssetの作成
 - Collection全体のtransfer権限の有効化
 - ユースケース：ゲーム、サブスクリプション、自動化システム
 - permanent vs 通常のtransfer delegateの理解
 {% /callout %}
+
 ## 概要
+
 **Permanent Transfer Delegate**は、作成時にのみ追加できるpermanent pluginです。delegateはオーナーの承認なしに無制限にAssetを転送できます。
+
 - Asset/Collection作成時にのみ追加可能
 - 権限は永続的（取り消されない）
 - `forceApprove`を使用 - フリーズ中でも転送可能
 - Collectionレベル：Collection内の任意のAssetを転送可能
+
 ## 対象外
+
 通常のtransfer delegate（[Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)を参照）、エスクローレスリスティング（通常のdelegateを使用）、Token Metadata transfer権限。
+
 ## クイックスタート
+
 **移動先:** [Assetの作成](#creating-a-mpl-core-asset-with-a-permanent-transfer-plugin)
+
 1. Asset/Collection作成時に`PermanentTransferDelegate` pluginを追加
 2. authorityをプログラムまたはdelegateアドレスに設定
 3. delegateはいつでも無制限にAssetを転送可能
@@ -57,27 +66,38 @@ faqs:
 **[Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)を選択**：1回限りのエスクローレス販売の場合。
 **Permanent Transfer Delegateを選択**：ゲーム、レンタル、または繰り返し転送が必要な自動化システムの場合。
 {% /callout %}
+
 ## 一般的なユースケース
+
 - **ゲームメカニクス**：ゲームイベント（バトルでの敗北、取引）発生時にAssetを転送
 - **レンタル返却**：レンタルしたNFTを自動的にオーナーに返却
 - **サブスクリプション管理**：サブスクリプションの終了または更新時にトークンを転送
 - **DAOトレジャリー管理**：DAOがAsset配布を管理できるようにする
 - **自動化システム**：転送ごとの承認なしにAssetを移動する必要があるプログラム
+
 ## 対応
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ✅  |
 | MPL Core Collection | ✅  |
+
 ### 動作
+
 - **Asset**：delegatedアドレスを使用してAssetの転送を許可します。
 - **Collection**：collection authorityを使用してCollection内の任意のAssetの転送を許可します。一度に全てを転送するわけではありません。
+
 ## 引数
+
 | 引数    | 値 |
 | ------ | ----- |
 | frozen | bool  |
+
 ## Permanent Transfer Pluginを持つMPL Core Assetの作成
+
 {% dialect-switcher title="Permanent Transfer Pluginを持つMPL Core Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { create } from '@metaplex-foundation/mpl-core'
@@ -95,8 +115,10 @@ await create(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateV1Builder,
@@ -135,33 +157,54 @@ pub async fn create_asset_with_permanent_burn_delegate_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 一般的なエラー
+
 ### `Cannot add permanent plugin after creation`
+
 Permanent pluginはAsset/Collection作成時にのみ追加できます。既存のAssetにPermanent Transfer Delegateを追加することはできません。
+
 ### `Authority mismatch`
+
 plugin authorityのみが転送できます。正しいキーペアで署名しているか確認してください。
+
 ## 注意事項
+
 - **作成時のみ**：Asset/Collection存在後は追加不可
 - **Force approve**：フリーズ中でも転送可能
 - **Collection動作**：Collection内の任意のAssetを個別に転送可能
 - **永続的**：権限は取り消されない
 - **無制限の転送**：delegateが転送できる回数に制限なし
+
 ## FAQ
+
 ### Transfer DelegateとPermanent Transfer Delegateの違いは何ですか？
+
 通常のTransfer Delegateは1回の転送後に取り消されます。Permanent Transfer Delegateは永続的に有効で、無制限に転送できます。
+
 ### Permanent Transfer Delegateはフリーズ中のAssetを転送できますか？
+
 はい。Permanent pluginは`forceApprove`を使用し、フリーズの拒否を上書きします。
+
 ### 既存のAssetにこれを追加できますか？
+
 いいえ。Permanent pluginはAsset作成時にのみ追加できます。既存のAssetには通常のTransfer Delegateを使用してください。
+
 ### CollectionレベルのPermanent Transfer Delegateはどのように機能しますか？
+
 delegateはCollection内の任意の個別Assetを転送できますが、一度に全てを転送することはできません。各転送は別々のトランザクションです。
+
 ## 関連Plugin
+
 - [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate) - 1回限りのtransfer権限
 - [Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate) - 永続的なfreeze権限
 - [Permanent Burn Delegate](/ja/smart-contracts/core/plugins/permanent-burn-delegate) - 永続的なburn権限
+
 ## 用語集
+
 | 用語 | 定義 |
 |------|------------|
 | **Permanent Plugin** | 作成時にのみ追加でき、永続的に有効なPlugin |

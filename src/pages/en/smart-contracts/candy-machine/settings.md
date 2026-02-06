@@ -174,18 +174,18 @@ To understand these **Name** and **URI** properties a bit better, let’s go thr
 
 - It contains `1000` items.
 - The name of each item is “My NFT Project #X” where X is the item’s index starting from 1.
-- Each item’s JSON metadata has been uploaded to Arweave so their URIs start with “https://arweave.net/” and finish with a unique identifier with a maximum length of 43 characters.
+- Each item’s JSON metadata has been uploaded to Arweave so their URIs start with “<https://arweave.net/”> and finish with a unique identifier with a maximum length of 43 characters.
 
 In this example, without prefixes, we would end up with:
 
 - Name Length = 20. 16 characters for “My NFT Project #” and 4 characters for the highest number which is “1000”.
-- URI Length = 63. 20 characters for “https://arweave.net/” and 43 characters for the unique identifier.
+- URI Length = 63. 20 characters for “<https://arweave.net/”> and 43 characters for the unique identifier.
 
 When inserting 1000 items, that’s a total of 83’000 characters that will be required just for storing items. However, if we use prefixes, we can significantly reduce the space needed to create our Candy Machine and, therefore, the cost of creating it on the blockchain.
 
 - Name Prefix = “My NFT Project #”
 - Name Length = 4
-- URI Prefix = “https://arweave.net/”
+- URI Prefix = “<https://arweave.net/”>
 - URI Length = 43
 
 With 1000 items, we now only need 47’000 characters to store our items.
@@ -199,7 +199,7 @@ In our above example, we could leverage the `$ID+1$` variable for the name prefi
 
 - Name Prefix = “My NFT Project #$ID+1$”
 - Name Length = 0
-- URI Prefix = “https://arweave.net/”
+- URI Prefix = “<https://arweave.net/”>
 - URI Length = 43
 
 That’s right, **our name length is now zero** and we’ve reduced the characters needed down to 43’000 characters.
@@ -254,7 +254,6 @@ Also note that, since we are not inserting any item to the Candy Machine, Hidden
 
 {% dialect-switcher title="Set up hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
-
 
 To calculate the hash you could use the following functions:
 

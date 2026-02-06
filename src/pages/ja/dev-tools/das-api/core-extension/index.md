@@ -19,7 +19,9 @@ Core DAS API拡張機能は以下のメソッドをサポートしています�
 - [`searchCollections`](/ja/dev-tools/das-api/core-extension/methods/search-collections): 検索条件を指定してコレクションのリストを返します。
 
 ## 型変換
+
 さらに、通常のDAS AssetタイプをCore AssetsとCore Collectionsに変換する機能も提供します：
+
 - [`dasAssetsToCoreAssets`](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): DAS AssetをCore Assetタイプに変換
 - [`dasAssetsToCoreCollection`](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core#convert-to-asset-example): DAS AssetをCore Collectionタイプに変換
 

@@ -78,6 +78,7 @@ minting will fail
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
 {% /diagram %}
+
 ## 가드 설정
 
 제3자 서명자 가드는 다음 설정을 포함합니다:

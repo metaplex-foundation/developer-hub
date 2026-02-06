@@ -8,7 +8,7 @@ description: Audits and how to report a vulnerability.
 
 **Please do not open a public GitHub Issue to report the vulnerability**.
 
-Instead, please email security@metaplex.foundation.
+Instead, please email <security@metaplex.foundation>.
 
 You should receive a response within 24-48 hours. If for some reason you do not, please follow up via email to ensure we received your original message.
 

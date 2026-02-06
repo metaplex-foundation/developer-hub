@@ -13,7 +13,7 @@ Metaplex provides 3 different standards for creating NFTs on the Solana blockcha
 
 Core is the newest and most advanced digital asset standard created by Metaplex. This standard provides optimized account structures and enhanced functionality through a powerful plugin system.
 
-#### Why Use Core:
+#### Why Use Core
 
 - Newest Standard: Core is the newest and most powerful digital asset standard created by Metaplex to date.
 - Simplicity: Core was designed from the ground up with a **simplicity first approach**.
@@ -26,7 +26,7 @@ Core is the newest and most advanced digital asset standard created by Metaplex.
 
 Token Metadata is the Solana NFT standard that started it all. Created back in 2021 Token Metadata paved the way for NFTs on the Solana blockchain with a staggering 512 million NFTs minted since first inception.
 
-#### Why Use Token Metadata:
+#### Why Use Token Metadata
 
 - Tried and Trusted: Token Metadata has been used as Solana's primary NFT Token Standard for the last 4 years from projects such as Solana Monkey Business, DeGods, Claynosaurus just to name a few.
 - Ecosystem Support: NFTs and pNFTs are supported Solana wide by marketplaces and wallets such as MagicEden, Tensor, Phantom, Solflare and many others.
@@ -38,7 +38,7 @@ Token Metadata is the Solana NFT standard that started it all. Created back in 2
 
 When it comes to creating NFTs that are cheap in mass then Bubblegum is the protocol to choose. Bubblegum uses the technology of **Compressed NFTs (cNFTs)** By applying a Merkle tree approach instead of creating accounts for each individual NFT.
 
-#### Why Use Bubblegum:
+#### Why Use Bubblegum
 
 - Cheap to deploy: Being a Merkle tree based product trees are cheap to deploy that can store millions of NFTs if needed.
 - Mass Airdrops: Once a tree is created the cost of airdrop cNFTs is close to non-existent as the storage of the tree has already been paid for.

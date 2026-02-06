@@ -117,4 +117,5 @@ Token Metadata 프로그램의 일부 명령어는 몇 번의 반복을 거쳐 �
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) 토큰 표준이 이제 자동으로 설정됩니다.
 
 ## Token Metadata 계정 크기 감소에 대해 어디서 더 자세히 알 수 있나요?
+
 더 많은 정보는 [특별 FAQ](/ko/smart-contracts/token-metadata/guides/account-size-reduction)를 확인하거나 남은 질문이 있는 경우 [Discord](https://discord.gg/metaplex)에 참여하세요.

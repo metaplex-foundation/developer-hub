@@ -25,6 +25,7 @@ Androidおよびkotlinをサポートする他のプラットフォームで動�
 ## はじめに
 
 ### インストール
+
 #### 要件 {#requirements}
 
 - Android 21+
@@ -35,15 +36,15 @@ settings.gradle内にmavenリポジトリを追加します：
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +53,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // バージョンを設定
+ ...
+ implementation 'com.metaplex:metaplex:+' // バージョンを設定
 }
 ```
 
@@ -64,19 +65,22 @@ dependencies {
 ライブラリはJitPack.ioを通じて利用可能になりました。
 
 まず、JitPackリポジトリをビルドに追加します：
+
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
+
 次に、アプリ/モジュールの'build.gradle'ファイルに依存関係を追加します：
+
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -97,9 +101,11 @@ val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
 # 使用方法
+
 適切に設定されると、その`Metaplex`インスタンスを使用して、さまざまな機能セットを提供するモジュールにアクセスできます。現在、`nft`プロパティを介してアクセスできるNFTモジュールが1つだけあります。そのモジュールから、NFTの検索、作成、更新ができ、さらに多くの機能が追加される予定です。
 
 ## NFT
+
 NFTモジュールは`Metaplex.nft`を介してアクセスでき、以下のメソッドを提供します。現在、読み取りメソッドのみをサポートしています。NFTの作成と更新は将来サポートされる予定です。
 
 - findByMint(mint, callback)
@@ -116,11 +122,11 @@ NFTモジュールは`Metaplex.nft`を介してアクセスでき、以下のメ
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +156,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,20 +166,21 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
 ## オークション
+
 Metaplex Auction Houseプロトコルにより、誰でも分散型販売契約を実装し、希望するSPLトークンを受け入れることができます。
 
 オークションモジュールは`Metaplex.auctions`を介してアクセスでき、以下のメソッドを提供します。現在、読み取りメソッドのみをサポートしています。Auction Houseの作成、およびビッドとリスティングの対話と作成は、将来サポートされる予定です。
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
 - さらに近日公開予定！
 
@@ -181,7 +188,7 @@ Metaplex Auction Houseプロトコルにより、誰でも分散型販売契約�
 
 **注意：** Auctions APIが提供するこれらのサスペンド関数は、ライブラリのアーキテクチャの変更です。以前は非同期コールバックメソッドのみを提供していました。すべてのユーザーが新しいサスペンド関数に移行することを強くお勧めしますが、利用可能なメソッドの非同期コールバック実装も提供しています。これらのメソッドは暫定的に提供されており、将来的に非推奨になる可能性があることに注意してください：
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
+- [`findAuctionHouseByAddress(address, callback)`](#findauctionhousebyaddress)
 - [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
 
 ### findAuctionHouseByAddress
@@ -203,6 +210,7 @@ val theAuctionHouse: AuctionHouse? = metaplex.auctions.findAuctionHouseByCreator
 返される`AuctionHouse`モデルには、チェーン上のAuction Houseアカウントに関する詳細が含まれます。将来的には、このモデルを使用してオークションと対話し、取引を実行する`AuctionHouseClient`インスタンスを構築します。
 
 ## アイデンティティ
+
 `Metaplex`インスタンスの現在のアイデンティティは`metaplex.identity()`を介してアクセスでき、SDKと対話するときに誰の代わりに行動しているかについての情報を提供します。
 
 このメソッドは、以下のインターフェースを持つアイデンティティオブジェクトを返します。すべてのメソッドにはsolana apiインスタンスが必要です
@@ -224,11 +232,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver`ドライバーは最もシンプルなアイデンティティドライバーです。これは本質的に`null`ドライバーであり、署名されたトランザクションを送信する必要がない場合に便利です。`signTransaction`メソッドを使用すると失敗を返します。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver`ドライバーは、パラメーターとして`Account`オブジェクトを受け入れます。
-
 
 ### ReadOnlyIdentityDriver
 
@@ -259,4 +265,3 @@ interface StorageDriver {
 SDKには[サンプルアプリ](https://github.com/metaplex-foundation/metaplex-android/tree/main/sample)が付属しています。クローンして電話で実行し、役立つものを取ってください。
 
 [github]: https://github.com/metaplex-foundation/metaplex-android
-[sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample

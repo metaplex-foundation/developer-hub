@@ -23,8 +23,8 @@ const assets = await das.getAssetsByCollection(umi, { collection });
 console.log(assets);
 ```
 
-
 ## 예제 응답
+
 이 예제에는 배열에 하나의 객체만 있습니다. 하나 이상의 Core 자산이 있는 컬렉션의 경우 배열에 더 많은 항목이 포함됩니다.
 
 ```json

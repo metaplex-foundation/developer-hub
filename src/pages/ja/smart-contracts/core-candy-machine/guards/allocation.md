@@ -75,7 +75,6 @@ Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## ガード設定
@@ -258,6 +257,7 @@ _Sugar は現在 route 命令をサポートしていません。_
 {% /dialect-switcher %}
 
 ## Allocation アカウント
+
 `Allocation` ガードが使用されると、route 命令の実行後に `allocationTracker` アカウントが作成されます。検証目的で次のように取得できます：
 
 ```js

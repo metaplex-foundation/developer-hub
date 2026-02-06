@@ -27,27 +27,37 @@ howToTools:
   - mpl-core SDK
 ---
 Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
+
 ## Overview
+
 In this guide, we'll explore how to create soulbound assets using MPL Core and the Umi Framework. Whether you're a developer looking to implement soulbound NFTs in TypeScript or just want to understand how they work, we'll cover everything from basic concepts to practical implementation. We'll examine different approaches for making assets soulbound and walk through creating your first soulbound NFT within a collection.
 In MPL Core, there are two main approaches to create soulbound NFTs:
+
 ### 1. Permanent Freeze Delegate Plugin
+
 - Makes assets completely non-transferrable and non-burnable
 - Can be applied at either:
   - Individual asset level
   - Collection level (more rent efficient)
 - Collection-level implementation allows thawing all assets in a single transaction
+
 ### 2. Oracle Plugin
+
 - Makes assets non-transferrable but still burnable
 - Can also be applied at:
   - Individual asset level  
   - Collection level (more rent efficient)
 - Collection-level implementation allows thawing all assets in a single transaction
+
 ## Creating Soulbound NFTs with the Permanent Freeze Delegate Plugin
+
 The Permanent Freeze Delegate Plugin provides functionality to make assets non-transferrable by freezing them. When creating a soulbound asset, you would:
+
 1. Include the Permanent Freeze plugin during asset creation
 2. Set the initial state to frozen
 3. Set the authority to None, making the frozen state permanent and immutable
 This effectively creates a permanently soulbound asset that cannot be transferred or thawed. In the following code snippet it is shown where to add those three options:
+
 ```js
   await create(umi, {
     asset: assetSigner,
@@ -63,10 +73,13 @@ This effectively creates a permanently soulbound asset that cannot be transferre
     ],
   })
 ```
+
 ### Asset-Level Implementation
+
 The Permanent Freeze Delegate Plugin can be attached to individual assets to make them soulbound. This provides more granular control but requires more rent and separate thaw transactions per asset in case it ever should not be soulbound anymore.
 {% totem %}
 {% totem-accordion title="Code Example" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -153,12 +166,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ### Collection-Level Implementation
+
 For collections where all assets should be soulbound, applying the plugin at the collection level is more efficient. This requires less rent and enables thawing the entire collection in one transaction.
 {% totem %}
 {% totem-accordion title="Code Example" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -244,12 +261,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ## Creating Soulbound NFTs with the Oracle Plugin
+
 The Oracle Plugin provides a way to approve or reject different lifecycle events for an asset. To create soulbound NFTs, we can use a special Oracle deployed by Metaplex that always rejects transfer events while still allowing other operations like burning. This differs from the Permanent Freeze Delegate Plugin approach since assets remain burnable even though they cannot be transferred.
 When creating a soulbound asset using the Oracle Plugin, one would attach the plugin to the asset. This can be done on creation or afterwards. In this example we are using a [default Oracle](/smart-contracts/core/external-plugins/oracle#default-oracles-deployed-by-metaplex) that will always reject and has been deployed by Metaplex.
 This effectively creates a permanently soulbound asset that cannot be transferred but burned. In the following code snippet it is shown how:
+
 ```js
 const ORACLE_ACCOUNT = publicKey(
   "GxaWxaQVeaNeFHehFQEDeKR65MnT6Nup81AGwh2EEnuq"
@@ -276,10 +297,13 @@ await create(umi, {
   ],
 })
 ```
+
 ### Asset-Level Implementation
+
 The Oracle Plugin can make individual assets non-transferrable while preserving the ability to burn them. This provides flexibility for cases where assets may need to be destroyed.
 {% totem %}
 {% totem-accordion title="Code Example" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -379,12 +403,16 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}
+
 ### Collection-Level Implementation
+
 Applying the Oracle Plugin at the collection level makes all assets in the collection non-transferrable but burnable. This is more rent efficient and allows managing permissions for the entire collection at once.
 {% totem %}
 {% totem-accordion title="Code Example" %}
+
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCore } from "@metaplex-foundation/mpl-core";
@@ -483,5 +511,6 @@ const DESTINATION_WALLET = publicKey("CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX
   );
 })();
 ```
+
 {% /totem-accordion  %}
 {% /totem %}

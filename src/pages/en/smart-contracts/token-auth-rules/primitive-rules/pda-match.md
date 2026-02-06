@@ -5,9 +5,11 @@ description: The PDA Match primitive rule
 ---
 
 ## PDA Match
+
 Performs a PDA derivation using `find_program_address()` and the associated Payload and Rule fields. This Rule evaluates to true if the PDA derivation matches the Payload address.
 
 ### Fields
+
 * **program** - The Program from which the PDA is derived
 * **pda_field** - The field in the Payload which the derived address much match for the Rule to evaluate to true
 * **seeds_field** - The field in the Payload which stores an Array of PDA seeds to use for derivation

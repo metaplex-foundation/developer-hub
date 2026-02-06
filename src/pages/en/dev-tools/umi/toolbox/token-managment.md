@@ -144,6 +144,7 @@ const mintKeysFromOwner = await fetchAllMintPublicKeyByOwner(umi, owner)
 This instruction creates a new Token account only if it doesn't already exist. It's particularly useful when a subsequent instruction requires a Token account, but you’re unsure whether it already exists. This instruction ensures the Token account's existence without needing to fetch it on the client side.
 
 Here’s how it works:
+
 - If the account exists, the instruction succeeds and does nothing.
 - If the account does not exist, the instruction succeeds and creates the associated token account.
 

@@ -45,7 +45,7 @@ cmd /c "curl https://release.solana.com/v1.18.18/solana-install-init-x86_64-pc-w
 solana-test-validator
 ```
 
-启动后，验证者将可在本地 URL（http://127.0.0.1:8899）访问。您需要通过使用此 URL 配置代码来建立连接。
+启动后，验证者将可在本地 URL（<http://127.0.0.1:8899）访问。您需要通过使用此> URL 配置代码来建立连接。
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -63,28 +63,34 @@ const umi = createUmi("http://127.0.0.1:8899")
 
 本地验证者不包括主网上找到的特定程序和账户。它只附带原生程序和您在测试期间创建的账户。如果您需要主网上的特定程序或账户，Solana CLI 允许您下载并将它们加载到本地验证者上。
 
-### 下载账户和程序：
+### 下载账户和程序
 
 您可以轻松地将账户或程序从源集群下载到本地验证者以进行测试。这允许您复制主网环境。
 
 **对于账户：**
+
 ```
 solana account -u <source cluster> --output <output format> --output-file <destination file name/path> <address of account to fetch>
 ```
+
 **对于程序：**
+
 ```
 solana program dump -u <source cluster> <address of account to fetch> <destination file name/path>
 ```
 
-### 加载账户和程序：
+### 加载账户和程序
 
 下载后，可以使用 CLI 将这些账户和程序加载到本地验证者中。您可以运行命令将特定账户和程序加载到本地环境中，确保它们已准备好进行测试。
 
 **对于账户：**
+
 ```
 solana-test-validator --account <address to load the account to> <path to account file> --reset
 ```
+
 **对于程序**
+
 ```
 solana-test-validator --bpf-program <address to load the program to> <path to program file> --reset
 ```
@@ -94,6 +100,7 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 使用本地验证者不会阻止我们使用浏览器，因为许多浏览器都能够连接到我们的本地端口并读取我们之前提到的 `test-ledger` 文件夹中存储的本地账本。
 
 有两种方法可以做到这一点：
+
 - 创建指向您喜欢的浏览器的本地集群的交易签名的链接。
 - 手动更改网页上的集群，然后粘贴交易链接。
 
@@ -102,6 +109,7 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 当您使用 Umi 发送交易时，您将收到两条关键信息：签名和结果。签名采用 base58 格式，因此您需要对其进行反序列化以使其对区块链可读。
 
 您可以使用以下代码执行此操作：
+
 ```typescript
 const signature = base58.deserialize(transaction.signature)[0]
 ```
@@ -159,9 +167,11 @@ mkdir ~/.local/share/metaplex-local-validator
 ```
 solana program dump -u m metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s ~/.local/share/metaplex-local-validator/mpl-token-metadata.so
 ```
+
 ```
 solana program dump -u m BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY ~/.local/share/metaplex-local-validator/mpl-bubblegum.so
 ```
+
 ```
 solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/share/metaplex-local-validator/mpl-core.so
 ```

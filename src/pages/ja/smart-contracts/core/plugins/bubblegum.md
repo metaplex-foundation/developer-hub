@@ -19,16 +19,23 @@ programmingLanguage:
 ---
 `Bubblegum` プラグインは、圧縮 NFT に使用できる Collection を作成できる `Authority Managed` プラグインです。 {% .lead %}
 このプラグインは `MPL Core Collection` でのみ使用できます。
+
 ## 対応状況
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
+
 ## 引数
+
 `Bubblegum` プラグインは引数を必要としません。
+
 ## Bubblegum プラグインを使用した Collection の作成コード例
+
 {% dialect-switcher title="Bubblegum プラグインを使用した Collection の作成" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   createCollection,
@@ -48,11 +55,15 @@ await createCollection(umi, {
     ],
   })
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## Collection に Bubblegum プラグインを追加するコード例
+
 {% dialect-switcher title="Collection に Bubblegum プラグインを追加" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import {
   addCollectionPlugin,
@@ -64,5 +75,6 @@ await addCollectionPlugin(umi, {
   },
 }).sendAndConfirm(umi);
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

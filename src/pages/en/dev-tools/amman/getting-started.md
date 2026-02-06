@@ -4,7 +4,7 @@ metaTitle: Getting Started | Amman
 description: Installation and setup of the Metaplex Amman local validator toolkit.
 ---
 
-## Prerequisites.
+## Prerequisites
 
 Before running Amman your system will need to have a few things installed on your system.
 
@@ -33,5 +33,6 @@ For ease of use you may wish to add the execution of Amman to your package.json 
     "amman:start": "npx amman start"
   },
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}

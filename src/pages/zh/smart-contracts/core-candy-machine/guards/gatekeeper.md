@@ -90,8 +90,8 @@ Core Candy Machine 端没有太多需要设置的内容，但根据选择的 Gat
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
+
 ## 守卫设置
 
 Gatekeeper 守卫包含以下设置：
@@ -164,6 +164,7 @@ mintV1(umi, {
   },
 });
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

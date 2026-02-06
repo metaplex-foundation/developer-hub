@@ -13,13 +13,11 @@ The name refers to the vending machines that dispense candy for coins via a mech
 
 {% quick-link title="CLI Commands" icon="CommandLine" href="/cli/cm" description="Create and manage candy machines using the Metaplex CLI with interactive wizard." /%}
 
-{% quick-link title="API reference" icon="JavaScript" href="https://mpl-core-candy-machine.typedoc.metaplex.com/" target="_blank" description="Check out the Javascript API docs." /%}
+{% quick-link title="API reference" icon="JavaScript" href="<https://mpl-core-candy-machine.typedoc.metaplex.com/>" target="_blank" description="Check out the Javascript API docs." /%}
 
-{% quick-link title="API reference" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" target="_blank" description="Check out the Rust API docs." /%}
+{% quick-link title="API reference" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" target="_blank" description="Check out the Rust API docs." /%}
 {% /quick-links %}
 
 {% callout %}
 This documentation refers to the latest iteration of Candy Machine known as Core Candy Machine. It allows minting [Core](/core) Assets. If you want to mint Metaplex Token Metadata NFTs [please refer to Candy Machine V3 instead](https://developers.metaplex.com/candy-machine/).
 {% /callout %}
-
-

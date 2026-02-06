@@ -13,6 +13,7 @@ To freeze a Compressed NFT that has been delegated to a leaf delegate before, we
 {% dialect-switcher title="Freeze a Compressed NFT as a leaf delegate" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -29,8 +30,10 @@ await freezeV2(umi, {
   //coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% totem-accordion title="as a permanent freeze delegate" %}
+
 ```js
 import {
   getAssetWithProof,
@@ -46,6 +49,7 @@ await freezeV2(umi, {
   coreCollection: collectionSigner.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem-accordion %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -57,6 +61,7 @@ To freeze a Compressed NFT, we can use the `delegateAndFreezeV2` instruction. Th
 {% dialect-switcher title="Delegate and Freeze a Compressed NFT" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -73,6 +78,7 @@ await delegateAndFreezeV2(umi, {
 }).sendAndConfirm(umi);
 
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -84,6 +90,7 @@ To thaw a Compressed NFT, we can use the `thawV2` instruction. This instruction 
 {% dialect-switcher title="Thaw a Compressed NFT as a leaf delegate" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -97,7 +104,8 @@ await thawV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -106,6 +114,7 @@ If the cNFT has been delegated to a permanent freeze delegate, we can thaw it li
 {% dialect-switcher title="Thaw a Compressed NFT as a permanent freeze delegate" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -118,10 +127,10 @@ await thawV2(umi, {
   authority: permanentFreezeDelegate,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## Thaw and Revoke a Delegate Authority
 
@@ -130,6 +139,7 @@ To thaw and revoke a Delegate Authority at the same time, we can use the `thawAn
 {% dialect-switcher title="Thaw and Revoke a Delegate Authority" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -143,16 +153,19 @@ await thawAndRevokeV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
 ## Make a cNFT Soulbound
+
 To make a cNFT Soulbound the cNFT has to be part of a [mpl-core collection](/smart-contracts/core/collections) with the [`permanentFreezeDelegate`](/smart-contracts/core/plugins/permanent-freeze-delegate) Plugin. Using the `setNonTransferableV2` instruction, we can make the cNFT non-transferable.
 
 {% dialect-switcher title="Make a cNFT Soulbound" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
+
 ```js
 import {
   getAssetWithProof,
@@ -167,6 +180,7 @@ await setNonTransferableV2(umi, {
     coreCollection: collection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

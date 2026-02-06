@@ -5,6 +5,7 @@ description: Pass原始规则
 ---
 
 ## Pass
+
 此规则在验证期间始终评估为true。
 
 ```js

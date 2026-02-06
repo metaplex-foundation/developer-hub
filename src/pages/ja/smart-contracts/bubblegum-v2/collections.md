@@ -14,6 +14,7 @@ MPL-Coreコレクションは[`BubblegumV2`プラグイン](/ja/smart-contracts/
 以下のセクションでは、単一ステップトランザクションでcNFTからコレクションを設定・削除する方法を示します。`coreCollection`と`newCoreCollection`パラメータを追加する際に、単一の命令で両方の操作を行うことも可能です。両方のコレクション権限が同じウォレットでない場合、両方が署名する必要があります。
 
 ## 圧縮NFTのコレクションの設定
+
 **setCollectionV2**命令は、cNFTのコレクションを設定するために使用できます。cNFTからコレクションを削除したり、cNFTのコレクションを変更したりするためにも使用できます。
 
 {% dialect-switcher title="圧縮NFTのコレクションの設定" %}

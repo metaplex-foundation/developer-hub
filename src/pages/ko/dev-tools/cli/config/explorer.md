@@ -9,6 +9,7 @@ description: 선호하는 블록체인 탐색기 설정
 ## 기본 사용법
 
 ### 탐색기 설정
+
 ```bash
 mplx config explorer set
 ```
@@ -16,21 +17,24 @@ mplx config explorer set
 ## 명령어
 
 ### 탐색기 설정
+
 사용 가능한 옵션 목록에서 선호하는 블록체인 탐색기를 설정합니다.
 
 #### 예시
+
 ```bash
 mplx config explorer set
 ```
 
 #### 참고사항
+
 - 사용 가능한 탐색기에서 선택할 수 있는 대화형 프롬프트가 열립니다
 - 구성에서 활성 탐색기를 업데이트합니다
 - 선택한 탐색기가 거래와 계정 조회에 사용됩니다
 - 사용 가능한 탐색기:
-  - Solana Explorer (https://explorer.solana.com)
-  - Solscan (https://solscan.io)
-  - Solana FM (https://solana.fm)
+  - Solana Explorer (<https://explorer.solana.com>)
+  - Solscan (<https://solscan.io>)
+  - Solana FM (<https://solana.fm>)
 
 ## 구성 파일
 

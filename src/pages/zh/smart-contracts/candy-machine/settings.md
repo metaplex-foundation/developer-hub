@@ -173,18 +173,18 @@ const candyMachineSettings = {
 
 - 它包含`1000`个项目。
 - 每个项目的名称是"My NFT Project #X",其中X是从1开始的项目索引。
-- 每个项目的JSON元数据已上传到Arweave,因此它们的URI以"https://arweave.net/"开头,以最大长度为43个字符的唯一标识符结束。
+- 每个项目的JSON元数据已上传到Arweave,因此它们的URI以"<https://arweave.net/"开头,以最大长度为43个字符的唯一标识符结束。>
 
 在此示例中,如果没有前缀,我们将得到:
 
 - Name Length = 20。"My NFT Project #"有16个字符,最高数字"1000"有4个字符。
-- URI Length = 63。"https://arweave.net/"有20个字符,唯一标识符有43个字符。
+- URI Length = 63。"<https://arweave.net/"有20个字符,唯一标识符有43个字符。>
 
 插入1000个项目时,总共需要83'000个字符来存储项目。但是,如果我们使用前缀,我们可以显著减少创建Candy Machine所需的空间,从而降低在区块链上创建它的成本。
 
 - Name Prefix = "My NFT Project #"
 - Name Length = 4
-- URI Prefix = "https://arweave.net/"
+- URI Prefix = "<https://arweave.net/>"
 - URI Length = 43
 
 有了1000个项目,我们现在只需要47'000个字符来存储我们的项目。
@@ -198,7 +198,7 @@ const candyMachineSettings = {
 
 - Name Prefix = "My NFT Project #$ID+1$"
 - Name Length = 0
-- URI Prefix = "https://arweave.net/"
+- URI Prefix = "<https://arweave.net/>"
 - URI Length = 43
 
 没错,**我们的名称长度现在为零**,我们已将所需字符减少到43'000个字符。
@@ -253,7 +253,6 @@ const candyMachineSettings = {
 
 {% dialect-switcher title="设置hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
-
 
 要计算哈希,您可以使用以下函数:
 

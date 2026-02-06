@@ -90,8 +90,8 @@ Network 请求 Gateway Token
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
+
 ## 守卫设置
 
 Gatekeeper 守卫包含以下设置：
@@ -164,6 +164,7 @@ mintV2(umi, {
   },
 });
 ```
+
 {% /totem %}
 {% /dialect %}
 {% dialect title="Sugar" id="sugar" %}

@@ -20,6 +20,7 @@ mplx toolbox sol transfer <amount> <address>
 ## 例
 
 ### アドレスに1 SOLを転送
+
 ```bash
 mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
@@ -27,6 +28,7 @@ mplx toolbox sol transfer 1 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ## 出力
 
 転送が成功した後、コマンドは以下を表示します：
+
 ```
 --------------------------------
     Transferred <amount> SOL to <address>

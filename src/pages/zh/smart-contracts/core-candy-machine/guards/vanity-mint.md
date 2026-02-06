@@ -37,7 +37,6 @@ description: "Core Candy Machine '自定义铸币' 守卫要求铸造者提供�
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 检查铸币地址
 
@@ -83,6 +82,7 @@ description: "Core Candy Machine '自定义铸币' 守卫要求铸造者提供�
 - **正则表达式**：铸币地址必须匹配的正则表达式。例如，如果您希望所有铸币以字符串 `mplx` 开头，可以将其用作 `regex` 参数。
 
 可用于正则表达式的示例：
+
 - 以特定模式开头：`^mplx`
 - 以特定模式结尾：`mplx$`
 - 以特定模式开头和结尾：`^mplx*mplx$`

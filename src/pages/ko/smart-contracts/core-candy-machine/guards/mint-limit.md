@@ -136,6 +136,7 @@ mintV1(umi, {
 _Mint Limit 가드는 route instruction을 지원하지 않습니다._
 
 ## MintLimit Accounts
+
 `MintLimit` 가드가 사용되면 각 지갑, CandyMachine, `id` 조합에 대해 `MintCounter` 계정이 생성됩니다. 검증 목적으로 다음과 같이 가져올 수 있습니다:
 
 ```js

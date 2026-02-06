@@ -53,7 +53,6 @@ Owner: System Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
 
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
@@ -129,6 +128,7 @@ API 参考：[create](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## 铸造设置
 
 Asset Payment 守卫包含以下铸造设置：
+
 - **Asset Address**：用于支付的资产地址。此资产必须属于必需的 collection 且必须属于铸造者。
 - **Collection Address**：用于支付的 Collection 地址。
 - **Destination**：将接收所有资产的钱包地址。

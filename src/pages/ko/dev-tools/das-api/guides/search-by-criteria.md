@@ -36,6 +36,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`조건과 일치하는 ${searchResults.items.length}개의 자산 발견`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 
@@ -66,8 +67,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`${data.result.items.length}개의 자산 발견`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="cURL 예제" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -85,6 +88,7 @@ curl -X POST <ENDPOINT> \
     }
   }'
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -127,6 +131,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   })
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 
@@ -156,6 +161,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`지갑이 소유한 컬렉션의 ${data.result.items.length}개 자산 발견`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -199,6 +205,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   );
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 
@@ -230,8 +237,10 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`복잡한 조건과 일치하는 ${data.result.items.length}개의 자산 발견`)
 })();
 ```
+
 {% /totem-accordion %}
 {% /totem %}
+
 ## 팁과 모범 사례
 
 1. **간단하게 시작**: 기본 조건으로 시작하여 점진적으로 복잡성 추가

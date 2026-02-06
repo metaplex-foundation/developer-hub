@@ -9,11 +9,13 @@ description: MPL Core 자산 메타데이터 및 속성 업데이트
 ## 기본 사용법
 
 ### 단일 자산 업데이트
+
 ```bash
 mplx core asset update <assetId> [options]
 ```
 
 ### 업데이트 옵션
+
 - `--name <string>`: 자산의 새 이름
 - `--uri <string>`: 자산 메타데이터의 새 URI
 - `--image <path>`: 새 이미지 파일 경로
@@ -22,21 +24,25 @@ mplx core asset update <assetId> [options]
 ## 업데이트 방법
 
 ### 1. 이름과 URI 업데이트
+
 ```bash
 mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.com/metadata.json"
 ```
 
 ### 2. JSON 파일로 업데이트
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json
 ```
 
 ### 3. 이미지로 업데이트
+
 ```bash
 mplx core asset update <assetId> --image ./asset/image.jpg
 ```
 
 ### 4. JSON과 이미지로 업데이트
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
 ```
@@ -44,16 +50,19 @@ mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/im
 ## 예시
 
 ### 자산 이름 업데이트
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --name "New Asset Name"
 ```
 
 ### 새 이미지로 자산 업데이트
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./images/new-image.png
 ```
 
 ### 새 메타데이터로 자산 업데이트
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
 ```
@@ -61,6 +70,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 ## 출력
 
 업데이트가 성공하면 명령어가 다음을 표시합니다:
+
 ```
 --------------------------------
   Asset: <assetId>

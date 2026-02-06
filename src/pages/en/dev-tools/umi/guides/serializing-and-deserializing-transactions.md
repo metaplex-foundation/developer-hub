@@ -7,6 +7,7 @@ updated: '08-15-2024'
 ---
 
 **In this guide we're going to talk about:**
+
 - Serializing and Deserializing Transaction
 - Noop Signer
 - Partially signed transactions
@@ -15,18 +16,19 @@ updated: '08-15-2024'
 ## Introduction
 
 Transactions are usually serialized to facilitate movement across different environments. But the reasons could be different:
+
 - You may require signatures from different authorities stored in separate environments.
 - You may wish to create a transaction on the frontend, but then send and validate it on the backend before storing it to a database.
 
 For example, when creating NFTs, you may need to sign the transaction with the `collectionAuthority` keypair to authorize the NFT into the Collection. To safely sign it, without exposing your keypair, you could first create the transaction in the backend, partially sign the transaction with the `collectionAuthority` without having to expose the keypair in a non secure environment, serialize the transaction and then send it. You can then safely deserialize the transactions and sign it with the `Buyer` wallet.
 
-**Note**: When using the Candy Machine, you don't need the `collectionAuthority` signature 
+**Note**: When using the Candy Machine, you don't need the `collectionAuthority` signature
 
 ## Initial Setup
 
 ### Required Packages and Imports
 
-We're going to use the following packages: 
+We're going to use the following packages:
 
 {% packagesUsed packages=["umi", "umiDefaults", "core"] type="npm" /%}
 
@@ -126,6 +128,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 Serialization of a transaction is the process of converting the transaction object into a series of bytes or string that saves the state of the transaction in an easily transmittable form. This allows it to be passed through the likes of a http request.  
 
 Within the serialization example we're going to:  
+
 - Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
 - Create a Versioned Transaction and sign it with the `collectionAuthority` and the `Asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
@@ -133,7 +136,7 @@ Within the serialization example we're going to:
 
 ### Noop Signer
 
-Partially signing transactions to then serialize them, is only possible because of the `NoopSigner`. 
+Partially signing transactions to then serialize them, is only possible because of the `NoopSigner`.
 
 Umi instructions can take `Signer` types by default that are often generated from local keypair files or `walletAdapter` signers. Sometimes you may not have access to a certain signer yet and will need to sign with said signer at a later point in time. This is where the Noop Signer comes into play.
 
@@ -141,14 +144,16 @@ The **Noop Signer** takes a publicKey and generates a special `Signer` type whic
 
 Instructions and transactions built with  *Noop Signers* will be expecting them to sign at some point before sending off the transaction to the chain and will cause a "missing signature" error if not present.
 
-The way to use it is: 
+The way to use it is:
+
 ```ts
 createNoopSigner(publickey('11111111111111111111111111111111'))
 ```
 
 ### Using Strings instead of Binary data
 
-The decision to turn Serialized Transactions into Strings before passing them between environment is rooted in: 
+The decision to turn Serialized Transactions into Strings before passing them between environment is rooted in:
+
 - Formats like Base64 are universally recognized and can be safely transmitted over HTTP without the risk of data corruption or misinterpretation.
 - Using strings aligns with standard practices for web communication. Most APIs and web services expect data in JSON or other string-based formats
 
@@ -156,7 +161,7 @@ The way to do it is to use the `base64` function present in the `@metaplex-found
 
 **Note**: you don't need to install the package since it's included in the `@metaplex-foundation/umi` package
 
-```ts 
+```ts
 // Using the base64.deserialize and passing in a serializedTx 
 const serializedTxAsString = base64.deserialize(serializedTx)[0];
 
@@ -207,6 +212,7 @@ return serializedCreateAssetTxAsString
 ## Deserialization
 
 In the deserialization example we're going to:
+
 - Transform the Transaction that we received through the request back to a Uint8Array
 - Deserialize it so we can operate on it from the point we left
 - Sign it with the `Payer` keypair since we used it through the `NoopSigner` in the other environment
@@ -230,7 +236,7 @@ await umi.rpc.sendTransaction(signedDeserializedCreateAssetTx)
 
 ## Full Code Example
 
-Naturally, to have a fully reproducible example of the instructions in action, we need to include additional steps, such as handling the frontend signer and creating a collection. 
+Naturally, to have a fully reproducible example of the instructions in action, we need to include additional steps, such as handling the frontend signer and creating a collection.
 
 Don't worry if everything isn't identical; the backend and frontend portions remain consistent.
 

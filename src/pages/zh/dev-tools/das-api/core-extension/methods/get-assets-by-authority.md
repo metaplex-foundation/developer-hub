@@ -22,8 +22,8 @@ const assets = await das.getAssetsByAuthority(umi, {authority:  publicKey('<Publ
 console.log(assets);
 ```
 
-
 ## 示例响应
+
 此示例数组中只有一个对象。对于拥有多个 Core 资产权限的公钥，数组将包含更多条目。
 
 ```json

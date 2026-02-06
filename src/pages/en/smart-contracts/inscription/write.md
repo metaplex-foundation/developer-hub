@@ -24,10 +24,10 @@ await writeData(umi, {
   offset: 0,
 })
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 For larger data it is recommended to first `allocate` the required space, wait for that transaction to finalize and then `writeData`. The following example allocates data in a associated Inscription account:
 
@@ -51,6 +51,7 @@ for (let i = 0; i < resizes; i += 1) {
   }).sendAndConfirm(umi)
 }
 ```
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}

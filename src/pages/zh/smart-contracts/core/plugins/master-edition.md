@@ -30,44 +30,61 @@ faqs:
 ---
 **Master Edition 插件**将编号的版本 Asset 分组到 Collection 下。存储最大供应量、版本名称和 URI，以创建像"限量 100 份"这样的印刷系列。 {% .lead %}
 {% callout title="您将学到" %}
+
 - 向 Collection 添加 Master Edition
 - 配置最大供应量和元数据
 - 将 Edition Asset 组合在一起
 - 了解印刷工作流程
 {% /callout %}
+
 ## 摘要
+
 **Master Edition** 插件是用于 Collection 的权限管理插件，将 [Edition](/smart-contracts/core/plugins/edition) Asset 组合在一起。存储最大供应量和可选的版本特定元数据。
+
 - 权限管理（更新权限控制）
 - 仅适用于 Collection（不适用于 Asset）
 - 值仅供参考，不强制执行
 - 与 Candy Machine 配合使用以自动创建版本
+
 ## 范围外
+
 供应强制执行（使用 Candy Machine 守卫）、单个版本号（在 Asset 上使用 Edition 插件）和自动铸造不在范围内。
+
 ## 快速开始
+
 **跳转到：** [创建 Collection](#使用-master-edition-插件创建-collection) · [更新插件](#更新-master-edition-插件)
+
 1. 使用 Master Edition 插件和最大供应量创建 Collection
 2. 使用 Edition 插件铸造 Asset（编号 1、2、3...）
 3. 根据需要更新最大供应量或元数据
 {% callout type="note" title="推荐用法" %}
 我们建议：
+
 - 使用 Master Edition 插件对版本进行分组
 - 使用带有 Edition Guard 的 Candy Machine 自动处理编号
 {% /callout %}
+
 ## 兼容性
+
 |                     |     |
 | ------------------- | --- |
 | MPL Core Asset      | ❌  |
 | MPL Core Collection | ✅  |
+
 ## 参数
+
 | 参数      | 值                   | 用途                                                                           |
 | --------- | -------------------- | ------------------------------------------------------------------------------- |
 | maxSupply | Option<number> (u32) | 指示最大印刷数量。可选以允许开放版本 |
 | name      | Option<String>       | 版本名称（如果与 Collection 名称不同）                     |
 | uri       | Option<String>       | 版本 URI（如果与 Collection URI 不同）                      |
 这些值可以由权限随时更改。它们纯粹是信息性的，不强制执行。
+
 ## 使用 Master Edition 插件创建 Collection
+
 {% dialect-switcher title="使用 Master Edition 插件创建 MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { generateSigner, publicKey } from '@metaplex-foundation/umi'
 import { createCollection } from '@metaplex-foundation/core'
@@ -86,8 +103,10 @@ await createCollection(umi, {
   ],
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
+
 ```rust
 use mpl_core::{
     instructions::CreateCollectionV1Builder,
@@ -129,12 +148,16 @@ pub async fn create_collection_with_plugin() {
     println!("Signature: {:?}", res)
 }
 ```
+
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 更新 Master Edition 插件
+
 如果 Master Edition 插件是可变的，可以像其他 Collection 插件一样更新：
 {% dialect-switcher title="更新 Master Edition 插件" %}
 {% dialect title="JavaScript" id="js" %}
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { updatePluginV1, createPlugin } from '@metaplex-foundation/mpl-core'
@@ -149,46 +172,72 @@ await updatePlugin(umi, {
   },
 }).sendAndConfirm(umi)
 ```
+
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
 _即将推出_
 {% /dialect %}
 {% /dialect-switcher %}
+
 ## 常见错误
+
 ### `Cannot add to Asset`
+
 Master Edition 仅适用于 Collection，不适用于单个 Asset。对 Asset 使用 Edition 插件。
+
 ### `Authority mismatch`
+
 只有更新权限可以添加或更新 Master Edition 插件。
+
 ## 注意事项
+
 - 所有值（maxSupply、name、uri）仅供参考——不强制执行
 - 使用 Candy Machine 守卫强制执行实际的供应限制
 - name/uri 覆盖 Collection 元数据以用于版本特定的品牌
 - 权限可以随时更新
+
 ## 快速参考
+
 ### 参数
+
 | 参数 | 类型 | 必需 | 描述 |
 |----------|------|----------|-------------|
 | `maxSupply` | `Option<u32>` | 否 | 最大版本数（开放版本为 null） |
 | `name` | `Option<String>` | 否 | 版本特定名称 |
 | `uri` | `Option<String>` | 否 | 版本特定元数据 URI |
+
 ### 版本设置模式
+
 | 步骤 | 操作 | 插件 |
 |------|--------|--------|
 | 1 | 创建 Collection | Master Edition（最大供应量） |
 | 2 | 铸造 Asset | Edition（编号 1、2、3...） |
 | 3 | 验证 | 检查版本号和供应量 |
+
 ## 常见问题
+
 ### Master Edition 会强制执行最大供应量吗？
+
 不会。`maxSupply` 仅供参考。使用带有适当守卫的 Candy Machine 在铸造期间实际强制执行供应限制。
+
 ### Master Edition name/uri 和 Collection name/uri 有什么区别？
+
 Master Edition name/uri 可以提供与基础 Collection 不同的版本特定元数据。例如，Collection 可能是"Abstract Art Series"，而 Master Edition 名称可以是"Limited Print Run 2024"。
+
 ### 可以创建开放版本（无限供应）吗？
+
 可以。将 `maxSupply` 设置为 `null` 或完全省略。这表示没有定义限制的开放版本。
+
 ### 需要同时使用 Master Edition 和 Edition 插件吗？
+
 对于正确的印刷追踪，是的。Master Edition 用于 Collection（分组和供应信息），Edition 用于每个 Asset（单个编号）。它们协同工作。
+
 ### 可以将 Master Edition 添加到现有 Collection 吗？
+
 可以，与 Asset 上的 Edition 插件不同，Master Edition 可以使用 `addCollectionPlugin` 添加到现有 Collection。
+
 ## 术语表
+
 | 术语 | 定义 |
 |------|------------|
 | **Master Edition** | 用于分组版本和存储供应量的 Collection 插件 |

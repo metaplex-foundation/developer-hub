@@ -9,11 +9,13 @@ The `mplx core asset update` command allows you to update MPL Core Assets by mod
 ## Basic Usage
 
 ### Update Single Asset
+
 ```bash
 mplx core asset update <assetId> [options]
 ```
 
 ### Update Options
+
 - `--name <string>`: New name for the asset
 - `--uri <string>`: New URI for the asset metadata
 - `--image <path>`: Path to new image file
@@ -22,21 +24,25 @@ mplx core asset update <assetId> [options]
 ## Update Methods
 
 ### 1. Update Name and URI
+
 ```bash
 mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.com/metadata.json"
 ```
 
 ### 2. Update with JSON File
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json
 ```
 
 ### 3. Update with Image
+
 ```bash
 mplx core asset update <assetId> --image ./asset/image.jpg
 ```
 
 ### 4. Update with JSON and Image
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
 ```
@@ -44,16 +50,19 @@ mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/im
 ## Examples
 
 ### Update Asset Name
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --name "New Asset Name"
 ```
 
 ### Update Asset with New Image
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./images/new-image.png
 ```
 
 ### Update Asset with New Metadata
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
 ```
@@ -61,6 +70,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 ## Output
 
 After a successful update, the command will display:
+
 ```
 --------------------------------
   Asset: <assetId>
@@ -80,4 +90,4 @@ After a successful update, the command will display:
   - File uploads to the appropriate storage
   - Metadata JSON formatting
   - Image file type detection
-  - Collection authority validation 
+  - Collection authority validation

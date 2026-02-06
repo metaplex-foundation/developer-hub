@@ -57,12 +57,12 @@ async fn upload(
 
 여기서:
 
-* `sugar_config` - 현재 sugar 구성
-* `cache` - 자산 캐시 객체 (변경 가능)
-* `data_type` - 업로드되는 자산의 유형
-* `assets` - 업로드할 자산의 벡터 (변경 가능)
-* `progress` - 콘솔에 피드백을 제공하기 위한 진행률 표시줄 참조
-* `interrupted` - 알림을 받기 위한 공유 중단 핸들러 플래그 참조
+- `sugar_config` - 현재 sugar 구성
+- `cache` - 자산 캐시 객체 (변경 가능)
+- `data_type` - 업로드되는 자산의 유형
+- `assets` - 업로드할 자산의 벡터 (변경 가능)
+- `progress` - 콘솔에 피드백을 제공하기 위한 진행률 표시줄 참조
+- `interrupted` - 알림을 받기 위한 공유 중단 핸들러 플래그 참조
 
 이 함수는 각 유형의 자산을 개별적으로 업로드하기 위해 호출됩니다&mdash;예: 이미지에 대해 한 번, 메타데이터에 대해 한 번, 애니메이션 자산이 있는 경우 한 번. 자산을 업로드한 후 해당 정보를 `cache` 객체에 업데이트하고 `sync_file` 함수를 사용하여 캐시를 파일 시스템에 저장해야 합니다. 대규모 컬렉션의 경우 캐시를 파일 시스템에 동기화하는 것이 느릴 수 있으므로, 업로드 프로세스의 속도를 늦추지 않으면서 사용자가 업로드를 중단할 경우 정보 손실 가능성을 최소화하기 위해 실용적으로 자주 수행해야 합니다.
 
@@ -86,6 +86,7 @@ fn upload_asset(
 ### Prepare
 
 모든 업로드 방법은 추가 trait `Prepare`를 구현해야 합니다. 그 이유는 지정된 미디어/메타데이터 파일의 업로드를 위해 방법을 준비하기 위함입니다. 예:
+
 - 파일이 크기 제한을 초과하는지 확인;
 - 업로드를 위한 저장 공간이 있는지 확인;
 - 업로드를 위한 자금을 확인/추가.
@@ -100,10 +101,11 @@ async fn prepare(
     asset_indices: Vec<(DataType, &[isize])>,
 ) -> Result<()>;
 ```
+
 여기서:
-* `sugar_config` - 현재 sugar 구성
-* `asset_pairs` - `index`에서 `AssetPair`로의 매핑
-* `asset_indices` - 유형별로 그룹화된 업로드될 자산 쌍 인덱스 정보가 포함된 벡터.
+- `sugar_config` - 현재 sugar 구성
+- `asset_pairs` - `index`에서 `AssetPair`로의 매핑
+- `asset_indices` - 유형별로 그룹화된 업로드될 자산 쌍 인덱스 정보가 포함된 벡터.
 
 `asset_pairs`에는 자산의 전체 정보가 포함되지만, `asset_indices`에 지정된 자산만 업로드됩니다&mdash;예: 인덱스 `1`이 `DataType::Image` 인덱스 배열에만 있는 경우 자산 `1`의 이미지만 업로드됩니다.
 

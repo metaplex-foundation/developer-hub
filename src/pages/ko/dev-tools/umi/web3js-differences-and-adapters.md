@@ -44,6 +44,7 @@ import {
 공개키 생성은 처음에는 비슷해 보일 수 있지만 패키지 간에 미묘한 차이가 있습니다. **Web3Js**는 대문자 `P`를 사용하고 `new`가 필요한 반면, **Umi** 버전은 소문자 `p`를 사용합니다.
 
 ### Umi
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
 
@@ -52,6 +53,7 @@ const umiPublicKey = publicKey("11111111111111111111111111111111");
 ```
 
 ### Web3Js
+
 ```ts
 import { PublicKey } from '@solana/web3.js';
 
@@ -62,6 +64,7 @@ const web3jsPublickey = new PublicKey("1111111111111111111111111111111111111111"
 이제 어댑터를 사용하는 방법을 살펴보겠습니다.
 
 ### Web3Js에서 Umi로
+
 ```ts
 import { PublicKey } from '@solana/web3.js';
 import { fromWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
@@ -74,6 +77,7 @@ const umiPublicKey = fromWeb3JsPublicKey(web3jsPublickey);
 ```
 
 ### Umi에서 Web3Js로
+
 ```ts
 import { publicKey } from '@metaplex-foundation/umi';
 import { toWeb3JsPublicKey } from '@metaplex-foundation/umi-web3js-adapters';
@@ -90,6 +94,7 @@ const web3jsPublickey = toWeb3JsPublicKey(umiPublicKey);
 키페어 생성은 Web3Js와 Umi의 차이가 증가하는 부분입니다. **Web3Js**에서는 단순히 `Keypair.generate()`를 사용할 수 있지만, **Umi**에서는 먼저 대부분의 Umi 및 Metaplex 관련 작업에 사용할 Umi 인스턴스를 생성해야 합니다.
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner, createSignerFromKeypair } from '@metaplex-foundation/umi'
@@ -105,6 +110,7 @@ const umiKeypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFil
 ```
 
 ### Web3Js
+
 ```ts
 import { Keypair } from '@solana/web3.js';
 
@@ -118,6 +124,7 @@ const web3jsKeypair = Keypair.fromSecretKey(new Uint8Array(walletFile));
 이제 어댑터를 사용하는 방법을 살펴보겠습니다.
 
 ### Umi에서 Web3Js로
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { generateSigner } from '@metaplex-foundation/umi'
@@ -134,6 +141,7 @@ const web3jsKeypair = toWeb3JsKeypair(umiKeypair);
 ```
 
 ### Web3Js에서 Umi로
+
 ```ts
 import { Keypair } from '@solana/web3.js';
 import { fromWeb3JsKeypair } from '@metaplex-foundation/umi-web3js-adapters';
@@ -152,6 +160,7 @@ const umiKeypair = fromWeb3JsKeypair(web3jsKeypair);
 대부분의 사용 사례에서는 다른 헬퍼와 트랜잭션 빌더를 사용하여 이를 단순화할 수 있으므로 개별 인스트럭션을 처리할 필요가 없습니다.
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -165,6 +174,7 @@ const umiInstructions = transferSol(umi, {...TransferParams}).getInstructions();
 ```
 
 ### Web3Js
+
 ```ts
 import { SystemProgram } from '@solana/web3.js';
 
@@ -175,6 +185,7 @@ const web3jsInstruction = SystemProgram.transfer({...TransferParams})
 이제 어댑터를 사용하는 방법을 살펴보겠습니다.
 
 ### Umi에서 Web3Js로
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -191,6 +202,7 @@ const web3jsInstruction = umiInstruction.map(toWeb3JsInstruction);
 ```
 
 ### Web3Js에서 Umi로
+
 ```ts
 import { SystemProgram } from '@solana/web3.js';
 import { fromWeb3JsInstruction } from '@metaplex-foundation/umi-web3js-adapters';
@@ -208,6 +220,7 @@ const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 ## 트랜잭션
 
 Solana 런타임은 두 가지 트랜잭션 버전을 지원합니다:
+
 - 레거시 트랜잭션: 추가 혜택이 없는 이전 트랜잭션 형식
 - 0 / 버전 트랜잭션: 주소 조회 테이블 지원 추가
 
@@ -216,6 +229,7 @@ Solana 런타임은 두 가지 트랜잭션 버전을 지원합니다:
 `umi`와 `umi-web3js-adapters`에서는 두 트랜잭션 타입 모두에 대한 지원을 추가했습니다!
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -230,6 +244,7 @@ const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().bu
 ```
 
 ### Web3Js
+
 ```ts
 import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
@@ -254,6 +269,7 @@ const web3jsVersionedTransaction = new VersionedTransaction(messageV0);
 이제 어댑터를 사용하는 방법을 살펴보겠습니다.
 
 ### Umi에서 Web3Js로
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox';
@@ -278,6 +294,7 @@ const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
 ```
 
 ### Web3Js에서 Umi로
+
 ```ts
 import { Transaction, VersionedTransaction, TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 import { fromWeb3JsLegacyTransaction, fromWeb3JsTransaction } from '@metaplex-foundation/umi-web3js-adapters';
@@ -297,12 +314,12 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
 ## 메시지
 
 버전 트랜잭션 생성 중에 메시지 생성을 이미 다뤘습니다. 다시 검토해보겠습니다.
 
 ### Umi
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { transfer, mplCore } from '@metaplex-foundation/mpl-core'
@@ -326,6 +343,7 @@ const umiMessage = umiVersionedTransaction.message
 ```
 
 ### Web3Js
+
 ```ts
 import { TransactionMessage, Connection, clusterApiUrl, SystemProgram } from '@solana/web3.js';
 
@@ -346,6 +364,7 @@ const Web3JsMessage = new TransactionMessage({
 이제 어댑터를 사용하는 방법을 살펴보겠습니다.
 
 ### Umi에서 Web3Js로
+
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { toWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';
@@ -361,6 +380,7 @@ const web3jsMessage = toWeb3JMessage(umiMessage);
 ```
 
 ### Web3Js에서 Umi로
+
 ```ts
 import { TransactionMessage } from '@solana/web3.js';
 import { fromWeb3JMessage } from '@metaplex-foundation/umi-web3js-adapters';

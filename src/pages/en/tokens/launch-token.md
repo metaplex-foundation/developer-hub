@@ -260,6 +260,7 @@ After running the launch script, your launch is live. Here's what happens during
 ### During the Deposit Period
 
 Users deposit SOL using your frontend or directly via the SDK. Each deposit:
+
 - Has a fee applied
 - Is tracked in a deposit PDA
 - Can be partially or fully withdrawn (with fee)

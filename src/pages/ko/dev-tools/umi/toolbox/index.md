@@ -8,7 +8,7 @@ description: Solana의 네이티브 프로그램을 위한 필수 기능 세트�
 
 {% quick-links %}
 
-{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" target="_blank" href="https://mpl-toolbox.typedoc.metaplex.com/" description="특정한 것을 찾고 계신가요? API 레퍼런스를 살펴보고 답을 찾아보세요." /%}
+{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" target="_blank" href="<https://mpl-toolbox.typedoc.metaplex.com/>" description="특정한 것을 찾고 계신가요? API 레퍼런스를 살펴보고 답을 찾아보세요." /%}
 
 {% /quick-links %}
 

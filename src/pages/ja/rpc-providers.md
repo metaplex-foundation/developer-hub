@@ -49,6 +49,7 @@ DAS APIの詳細については、[専用セクション](/ja/dev-tools/das-api)
 {% /callout %}
 
 ### DASサポート付きRPC
+
 - [Extrnode](https://docs.extrnode.com/das_api/)
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
@@ -57,6 +58,7 @@ DAS APIの詳細については、[専用セクション](/ja/dev-tools/das-api)
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
 
 ### DASサポートなしRPC
+
 - [Alchemy](https://alchemy.com/?a=metaplex)
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
@@ -67,4 +69,5 @@ DAS APIの詳細については、[専用セクション](/ja/dev-tools/das-api)
 - [Syndica](https://syndica.io/)
 
 ### さらに詳しい情報
+
 このトピックについて質問がある場合や、さらに理解を深めたい場合は、[Metaplex Discord](https://discord.gg/metaplex)サーバーに参加してお気軽にお尋ねください。

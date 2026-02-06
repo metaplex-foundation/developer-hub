@@ -16,7 +16,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 {% quick-link title="시작하기" icon="InboxArrowDown" href="/token-metadata/getting-started" description="원하는 언어나 라이브러리를 찾아 Solana에서 디지털 자산을 시작해보세요." /%}
 
-{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 살펴보고 답을 찾아보세요." /%}
+{% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="<https://mpl-token-metadata.typedoc.metaplex.com/>" target="_blank" description="특정한 것을 찾고 계신가요? API 레퍼런스를 살펴보고 답을 찾아보세요." /%}
 
 {% /quick-links %}
 

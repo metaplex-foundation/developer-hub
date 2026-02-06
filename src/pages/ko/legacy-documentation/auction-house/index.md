@@ -34,7 +34,6 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 계정은 사용자가 원하는 방식으로 구성할 수 있습니다. [전용 페이지에서 이러한 구성에 대해 자세히 이야기할 것](auction-house/settings)이지만 다음은 몇 가지 흥미로운 구성 가능한 매개변수입니다:
 
 - `requireSignOff`: 이를 통해 마켓플레이스는 어떤 자산을 목록에 올릴 수 있고 어떤 입찰을 할 수 있는지 게이트할 수 있습니다. 모든 관련 명령어에서 Auction House [권한](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities)이 트랜잭션에 서명해야 합니다.
@@ -53,7 +52,7 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction House는 또한 다른 PDA를 할당합니다: `programAsSigner` PDA를 **위임자**로 지정합니다. 위임자는 Solana SPL-token 프로그램의 기능이며 [여기](https://spl.solana.com/token#authority-delegation)에서 자세히 논의됩니다. 위임을 통해 Auction House는 나중에 판매가 진행될 때 토큰 계정에서 자산을 가져올 수 있습니다. 이렇게 하면 자산을 에스크로할 필요가 없으며 판매가 진행될 때까지 사용자의 지갑에 남아 있을 수 있습니다.
+1. Auction House는 또한 다른 PDA를 할당합니다: `programAsSigner` PDA를 **위임자**로 지정합니다. 위임자는 Solana SPL-token 프로그램의 기능이며 [여기](https://spl.solana.com/token#authority-delegation)에서 자세히 논의됩니다. 위임을 통해 Auction House는 나중에 판매가 진행될 때 토큰 계정에서 자산을 가져올 수 있습니다. 이렇게 하면 자산을 에스크로할 필요가 없으며 판매가 진행될 때까지 사용자의 지갑에 남아 있을 수 있습니다.
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 
@@ -86,7 +85,7 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 > - Bob은 목록을 보고 자산 A에 5 SOL의 입찰을 합니다. 이것은 자산 A에 대한 **구매 주문**을 생성합니다.
 > - 이를 통해 마켓플레이스는 동일한 트랜잭션에서 자산에 입찰하고 판매를 실행할 수 있으므로 실제로 Bob이 자산 A를 "구매"할 수 있습니다.
 
-2. _"입찰 가격으로 판매"_: 이것은 목록에 게시되지 않은 자산에 관심이 있는 사용자가 입찰하는 경우입니다. 이제 자산 소유자가 입찰 금액으로 자산을 목록에 게시하면 `list` 및 `executeSale` 명령어가 동일한 명령어에서 실행되므로 목록 게시자가 실제로 요청된 가격으로 자산을 "판매"합니다.
+1. _"입찰 가격으로 판매"_: 이것은 목록에 게시되지 않은 자산에 관심이 있는 사용자가 입찰하는 경우입니다. 이제 자산 소유자가 입찰 금액으로 자산을 목록에 게시하면 `list` 및 `executeSale` 명령어가 동일한 명령어에서 실행되므로 목록 게시자가 실제로 요청된 가격으로 자산을 "판매"합니다.
 
 > 예:
 >
@@ -94,7 +93,7 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 > - Alice는 입찰을 보고 자산 A를 5 SOL에 목록에 게시합니다. 이것은 자산 A에 대한 **판매 주문**을 생성합니다.
 > - 이를 통해 마켓플레이스는 동일한 트랜잭션에서 자산을 목록에 게시하고 판매를 실행할 수 있으므로 실제로 Alice가 자산 A를 "판매"할 수 있습니다.
 
-3. _목록 게시자가 입찰에 동의_: 이것은 주어진 자산에 대한 **구매 주문** 및 **판매 주문**이 존재한 후 `executeSale` 명령어가 독립적으로 실행되는 경우입니다.
+1. _목록 게시자가 입찰에 동의_: 이것은 주어진 자산에 대한 **구매 주문** 및 **판매 주문**이 존재한 후 `executeSale` 명령어가 독립적으로 실행되는 경우입니다.
 
 > 예:
 >

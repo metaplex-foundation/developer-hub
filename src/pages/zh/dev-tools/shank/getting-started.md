@@ -200,15 +200,18 @@ shank idl --out-dir ./idl --crate-root ./ --program-id MyProgram1111111111111111
 ### 常见问题
 
 **IDL 生成因解析错误失败：**
+
 - 确保您的 Rust 代码编译成功
 - 检查所有派生宏是否正确导入
 - 验证账户注解格式正确
 
 **生成的 IDL 中缺少账户：**
+
 - 确保结构体使用 `#[derive(ShankAccount)]` 注解
 - 检查结构体是否为公开且可访问
 
 **构建脚本错误：**
+
 - 确保 `shank-cli` 已安装并在 PATH 中可用
 - 验证构建脚本权限和执行权限
 

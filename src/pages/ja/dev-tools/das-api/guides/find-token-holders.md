@@ -72,6 +72,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% /totem-accordion %}
 {% totem-accordion title="cURL例" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -162,6 +163,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem %}
 
 ## 方法3：個別トークンの場合
+
 コレクションの一部ではない特定の個別NFTの保有者を見つけたい場合は、`getAsset`でNFTの特定のアドレスを使用する必要があります。
 
 {% totem %}
@@ -185,6 +187,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`トークン ${token.id} は次の所有者が保有: ${token.ownership.owner}`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript例" %}
 

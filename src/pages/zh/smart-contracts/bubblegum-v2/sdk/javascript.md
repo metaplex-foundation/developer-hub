@@ -11,15 +11,16 @@ Metaplex提供了一个JavaScript库，可用于与MPL-Bubblegum程序交互。�
 ## 安装
 
 可以使用任何JavaScript包管理器（npm、yarn、bun等）执行安装。
+
 ```sh
 npm install @metaplex-foundation/mpl-bubblegum
 ```
 
 {% quick-links %}
 
-{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="https://mpl-bubblegum.typedoc.metaplex.com/" description="MPL-Bubblegum JavaScript SDK生成的包API文档。" /%}
+{% quick-link title="typedoc" target="_blank" icon="JavaScript" href="<https://mpl-bubblegum.typedoc.metaplex.com/>" description="MPL-Bubblegum JavaScript SDK生成的包API文档。" /%}
 
-{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="NPM上的MPL-Bubblegum Javascript SDK。" /%}
+{% quick-link title="npmjs.com" target="_blank" icon="JavaScript" href="<https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum>" description="NPM上的MPL-Bubblegum Javascript SDK。" /%}
 
 {% /quick-links %}
 

@@ -104,7 +104,7 @@ const { membershipAccount } = await fanoutSdk.addMemberWallet({
 ...
 ```
 
-2. **NFT** - With this model membership is tied to an NFT mint address instead of static public address. Each NFT mint
+1. **NFT** - With this model membership is tied to an NFT mint address instead of static public address. Each NFT mint
    address can still have a different quantity of shares as in the Wallet model. The greatest benefit of this model is
    it effectively enables the simple transfer of rights to future distributions to any wallet owner that holds the given
    NFT.
@@ -130,7 +130,7 @@ const { membershipAccount } = await fanoutSdk.addMemberNft({
 ...
 ```
 
-3. **Token** - This is the most flexible membership model, but is a bit more complicated. In this model, Membership is
+1. **Token** - This is the most flexible membership model, but is a bit more complicated. In this model, Membership is
    associated with staked ownership of the specified Token. When creating a Hydra Wallet with the Token model, you
    specify the mint of an SPL Token and distribute those tokens to your members (in whatever proportion you want). Then
    those members need to stake their tokens with the Hydra Wallet to be able to claim their share of the distribution.

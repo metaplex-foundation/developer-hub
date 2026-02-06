@@ -9,6 +9,7 @@ description: 악성 행위자를 방지하고 공정한 분배를 보장하기 �
 ## 봇 방지 보호가 중요한 이유
 
 적절한 보호 없이는 봇이 다음을 수행할 수 있습니다:
+
 - 실제 사용자가 참여하기 전에 대량으로 민팅
 - 예측 가능한 패턴을 사용하여 희귀 아이템 스나이핑
 - 자동화된 요청으로 인프라를 압도
@@ -33,6 +34,7 @@ https://yourproject.com/metadata/2.json
 ```
 
 이 패턴은 봇이 다음을 수행할 수 있게 합니다:
+
 - 민팅 전에 모든 메타데이터 미리 가져오기
 - 희귀한 특성 식별 및 특정 인덱스 타겟팅
 - 알려진 메타데이터 분배를 기반으로 공격 계획 수립
@@ -45,6 +47,7 @@ https://yourproject.com/metadata/2.json
 UMI의 내장 업로더는 **Irys**와 **ArDrive Turbo**와 같은 서비스의 래퍼입니다. 이러한 서비스와 직접 작업하는 복잡성을 추상화하면서 자동으로 트랜잭션 ID 기반 URI를 생성합니다.
 
 **UMI 업로더 사용 예시:**
+
 ```typescript
 import fs from "fs";
 import mime from "mime";
@@ -88,6 +91,7 @@ await securelyStoreUris(uploadedUris);
 ```
 
 **탐색할 다른 업로드 서비스:**
+
 - **Irys**: 트랜잭션 ID를 사용한 Arweave 업로드를 위한 직접 SDK
 - **ArDrive**: 내장된 트랜잭션 ID 생성을 포함한 Arweave 기반 저장소
 - **IPFS**: Pinata, Infura 또는 Web3.Storage와 같은 서비스
@@ -121,11 +125,13 @@ await securelyStoreUris(uploadedUris);
 ```
 
 이를 단일하고 예측 가능한 URI에 업로드합니다(모든 업로드 서비스 사용 가능):
+
 ```
 https://yourproject.com/metadata/placeholder.json
 ```
 
 **모든 업로드 솔루션의 핵심 요구사항:**
+
 - **트랜잭션 ID 기반 URI**: 예측 불가능하고 비순차적인 식별자 보장
 - **영구 저장소**: 불변 저장소를 제공하는 서비스 사용(Arweave, IPFS 등)
 - **URI 저장**: 리빌 매핑을 위해 반환된 URI를 순서대로 항상 저장
@@ -252,6 +258,7 @@ const { masterHash, metadataHashes } = await generateVerificationHashes(
 ```
 
 다음에 발표:
+
 - 웹사이트
 - 영구 저장을 위한 IPFS
 - 투명성을 위한 소셜 미디어
@@ -266,6 +273,7 @@ const { masterHash, metadataHashes } = await generateVerificationHashes(
 {% /callout %}
 
 캔디 머신에 아이템을 로드할 때:
+
 - **모든 메타데이터 URI가 즉시 보입니다** 온체인 데이터를 조회하는 누구에게나
 - **봇이 즉시 스크래핑할 수 있습니다** 직접 로드하면 모든 실제 메타데이터를
 - **악성 행위자에게 특성 분석이 사소해집니다**
@@ -278,11 +286,13 @@ const { masterHash, metadataHashes } = await generateVerificationHashes(
 캔디 머신에 아이템을 로드하는 방법은 두 가지가 있으며, 올바른 방법을 선택하는 것이 보안에 영향을 줍니다:
 
 **숨겨진 설정:**
+
 - 순차적으로 민팅: 인덱스 0, 그 다음 1, 그 다음 2, 등등
 - 사용자는 예측 가능한 플레이스홀더 민트 순서를 얻습니다
 - 매핑이 여전히 최종 리빌을 무작위화할 수 있지만, 민트 순서 자체는 예측 가능합니다
 
 **구성 라인 (권장):**
+
 - 예측 불가능한 플레이스홀더 민트 인덱스 결과로 더 나은 사용자 경험
 
 #### 플레이스홀더 메타데이터를 사용한 구성 라인 사용
@@ -323,6 +333,7 @@ await addConfigLines(umi, {
 ```
 
 **플레이스홀더 메타데이터 구조:**
+
 ```json
 {
   "name": "미스터리 자산",
@@ -379,6 +390,7 @@ Next.js는 단일 프레임워크에서 프론트엔드와 백엔드 기능을 �
 - **Cloudflare Workers**: 글로벌 저지연 민팅을 위한 엣지 컴퓨팅
 
 **Next.js가 민트 사이트에 이상적인 이유:**
+
 - **통합 백엔드**: API 라우트 내장, 별도 서버 불필요
 - **쉬운 배포**: Vercel, Netlify 등에 원클릭 배포
 - **React 프론트엔드**: 지갑 연결과 민트 UI에 완벽
@@ -390,6 +402,7 @@ Next.js는 단일 프레임워크에서 프론트엔드와 백엔드 기능을 �
 백엔드에서 생성된 트랜잭션에 항상 다음 가드들을 포함하세요:
 
 **1. 제3자 서명자 가드**: 백엔드만이 민팅을 승인할 수 있도록 보장
+
 ```typescript
 const guards = {
   thirdPartySigner: {
@@ -411,6 +424,7 @@ const guards = {
 ##### 백엔드 민트 엔드포인트 구현
 
 **Next.js API 라우트 예시:**
+
 ```typescript
 // pages/api/mint.ts (Pages Router) 또는 app/api/mint/route.ts (App Router)
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -453,6 +467,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 ```
 
 **대안: Express.js/AWS Lambda 예시:**
+
 ```typescript
 // 전통적인 Express 또는 서버리스 함수
 app.post('/api/mint', async (req, res) => {
@@ -490,16 +505,19 @@ app.post('/api/mint', async (req, res) => {
 #### 플랫폼별 배포 고려사항
 
 **Next.js 배포:**
+
 - **Vercel**: 무설정 배포, Next.js에 완벽
 - **Netlify**: 유사한 사용 편의성을 가진 훌륭한 대안
 - **Railway**: 데이터베이스가 포함된 풀스택 호스팅
 
 **서버리스 배포:**
+
 - **AWS Lambda**: Serverless Framework 또는 AWS CDK 사용
 - **Cloudflare Workers**: 글로벌 엣지 배포
 - **Vercel Functions**: Next.js 배포와 함께 자동
 
 **전통적인 서버:**
+
 - **Railway/Render**: 쉬운 컨테이너 배포
 - **DigitalOcean/Linode**: Docker와 함께 VPS
 - **AWS EC2**: 완전한 제어이지만 더 많은 설정 필요
@@ -519,17 +537,20 @@ app.post('/api/mint', async (req, res) => {
 즉시 리빌에서는 각 NFT가 민트 트랜잭션 완료 직후 최종 메타데이터로 업데이트됩니다. 이는 사용자에게 즉각적인 만족을 제공하지만 더 복잡한 백엔드 인프라가 필요합니다.
 
 **프로세스:**
+
 1. 사용자가 자산을 민팅 (플레이스홀더 메타데이터 획득)
 2. 백엔드가 즉시 보안 매핑에서 민트 인덱스를 찾음
 3. 백엔드가 저장된 업로드 목록에서 최종 메타데이터 URI로 자산을 업데이트
 4. 사용자가 즉시 리빌된 자산을 받음
 
 **장점:**
+
 - 즉각적인 사용자 만족
 - 리빌 대기 기간 없음
 - 더 간단한 사용자 경험
 
 **단점:**
+
 - 더 복잡한 백엔드 구현
 - 실패한 리빌에 대한 강력한 오류 처리 필요
 
@@ -538,18 +559,21 @@ app.post('/api/mint', async (req, res) => {
 이벤트 리빌에서는 모든 자산이 민팅 후 플레이스홀더로 남아있고, 프로젝트가 미리 정해진 시간에 모든 NFT를 한 번에 리빌합니다. 이는 사용자 상호작용 없이 커뮤니티 전체 리빌 이벤트를 만듭니다.
 
 **프로세스:**
+
 1. 사용자가 자산을 민팅 (플레이스홀더 메타데이터 획득)
 2. 프로젝트 리빌 이벤트까지 자산이 플레이스홀더로 남아있음
 3. 예약된 시간에 프로젝트 백엔드가 보안 매핑을 사용하여 모든 자산을 처리
 4. 모든 자산이 동시에 최종 메타데이터로 업데이트됨
 
 **장점:**
+
 - 더 간단한 민팅 프로세스
 - 커뮤니티 전체 리빌 흥미 생성
 - 최적의 타이밍에 예약 가능 (예: 커뮤니티 이벤트 중)
 - 사용자 상호작용 불필요
 
 **단점:**
+
 - 사용자가 리빌을 기다려야 함
 - 별도의 리빌 인프라 필요
 - 리빌 기대 관리 필요
@@ -559,6 +583,7 @@ app.post('/api/mint', async (req, res) => {
 사용자 트리거 리빌에서는 사용자가 대화형 UI를 통해 자신의 NFT를 리빌할 수 있습니다. 각 사용자가 자산이 리빌되는 시기를 제어하지만, 리빌은 여전히 보안 매핑을 사용합니다.
 
 **프로세스:**
+
 1. 사용자가 자산을 민팅 (플레이스홀더 메타데이터 획득)
 2. 사용자가 리빌을 선택할 때까지 자산이 플레이스홀더로 남아있음
 3. 사용자가 리빌 웹사이트를 방문하고 특정 자산에 대한 리빌을 트리거
@@ -566,12 +591,14 @@ app.post('/api/mint', async (req, res) => {
 5. 자산이 최종 메타데이터로 업데이트됨
 
 **장점:**
+
 - 사용자가 자체 리빌 타이밍을 제어
 - 대화형 커뮤니티 참여 생성
 - 사용자에게 선택권을 주면서 기대감 조성 가능
 - 더 낮은 즉각적인 트랜잭션 비용
 
 **단점:**
+
 - 더 복잡한 UI/UX 구현
 - 리빌 완료를 위한 사용자 행동 필요
 - 사용자가 참여하지 않으면 불완전한 리빌 가능
@@ -579,17 +606,20 @@ app.post('/api/mint', async (req, res) => {
 ##### 전략 선택
 
 **즉시 리빌을 선택하는 경우:**
+
 - 즉각적인 사용자 만족을 원할 때
 - 백엔드가 복잡성을 처리할 수 있을 때
 - 리빌 관련 지원 문제를 피하고 싶을 때
 
 **이벤트 리빌을 선택하는 경우:**
+
 - 커뮤니티 전체 리빌 흥미를 만들고 싶을 때
 - 더 간단한 민팅 인프라를 선호할 때
 - 리빌 타이밍을 제어하고 싶을 때
 - 커뮤니티 이벤트 중 리빌을 예약하고 싶을 때
 
 **사용자 트리거 리빌을 선택하는 경우:**
+
 - 사용자에게 리빌 타이밍 제어권을 주고 싶을 때
 - 대화형 커뮤니티 참여를 만들고 싶을 때
 - 리빌 UI/UX를 위한 리소스가 있을 때
@@ -628,6 +658,7 @@ await publishMapping(fullMappingData);
 ```
 
 **커뮤니티를 위한 검증 함수:**
+
 ```typescript
 // 사용자가 자산을 확인하기 위해 실행할 수 있는 검증 함수
 function verifyAssetMapping(
@@ -695,6 +726,7 @@ function detectSuspiciousActivity(requests: MintRequest[]): boolean {
 #### 플랫폼별 보안 팁
 
 **Next.js 보안:**
+
 ```typescript
 // express-rate-limit으로 속도 제한 구현
 import rateLimit from 'express-rate-limit';
@@ -709,6 +741,7 @@ export default limiter(handler);
 ```
 
 **서버리스 보안:**
+
 - **AWS Lambda**: 하드코딩된 자격 증명이 아닌 IAM 역할 사용
 - **Vercel**: 환경 변수와 엣지 설정 사용
 - **Cloudflare Workers**: 속도 제한을 위한 KV 저장소 활용
@@ -734,6 +767,7 @@ export default limiter(handler);
 포괄적인 봇 방지 보호 구현은 민팅 인프라의 여러 계층에서 신중한 계획과 실행이 필요합니다. 이 가이드에서 설명하는 시간 순 접근법은 각 단계가 이전 단계를 기반으로 하여 강력한 방어 시스템을 만들도록 보장합니다.
 
 **핵심 성공 요인:**
+
 - **준비가 전부**: 런칭 전에 매핑과 검증 해시를 생성
 - **백엔드 제어가 중요**: 클라이언트가 자체 민트 트랜잭션을 생성하도록 허용하지 마세요
 - **투명성이 신뢰 구축**: 민팅 전 검증 데이터와 리빌 후 완전한 매핑 발표

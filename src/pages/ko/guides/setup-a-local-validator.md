@@ -45,7 +45,7 @@ CLI를 설치한 후, 간단한 명령어로 로컬 검증자를 시작할 수 �
 solana-test-validator
 ```
 
-시작하면 검증자는 로컬 URL(http://127.0.0.1:8899)에서 액세스할 수 있습니다. 이 URL로 코드를 구성하여 연결을 설정해야 합니다.
+시작하면 검증자는 로컬 URL(<http://127.0.0.1:8899)에서> 액세스할 수 있습니다. 이 URL로 코드를 구성하여 연결을 설정해야 합니다.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -63,28 +63,34 @@ const umi = createUmi("http://127.0.0.1:8899")
 
 로컬 검증자에는 메인넷에서 찾을 수 있는 특정 프로그램과 계정이 포함되어 있지 않습니다. 네이티브 프로그램과 테스트 중에 생성하는 계정만 포함되어 있습니다. 메인넷의 특정 프로그램이나 계정이 필요한 경우, Solana CLI를 사용하여 이들을 다운로드하고 로컬 검증자에 로드할 수 있습니다.
 
-### 계정 및 프로그램 다운로드:
+### 계정 및 프로그램 다운로드
 
 테스트 목적으로 소스 클러스터에서 로컬 검증자로 계정이나 프로그램을 쉽게 다운로드할 수 있습니다. 이를 통해 메인넷 환경을 복제할 수 있습니다.
 
 **계정의 경우:**
+
 ```
 solana account -u <source cluster> --output <output format> --output-file <destination file name/path> <address of account to fetch>
 ```
+
 **프로그램의 경우:**
+
 ```
 solana program dump -u <source cluster> <address of account to fetch> <destination file name/path>
 ```
 
-### 계정 및 프로그램 로딩:
+### 계정 및 프로그램 로딩
 
 다운로드한 후, 이러한 계정과 프로그램을 CLI를 사용하여 로컬 검증자에 로드할 수 있습니다. 특정 계정과 프로그램을 로컬 환경에 로드하여 테스트할 준비가 되도록 하는 명령어를 실행할 수 있습니다.
 
 **계정의 경우:**
+
 ```
 solana-test-validator --account <address to load the account to> <path to account file> --reset
 ```
+
 **프로그램의 경우**
+
 ```
 solana-test-validator --bpf-program <address to load the program to> <path to program file> --reset
 ```
@@ -94,6 +100,7 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 로컬 검증자를 사용하더라도 많은 익스플로러가 로컬 포트에 연결하고 앞서 언급한 `test-ledger` 폴더에 저장된 로컬 원장을 읽을 수 있는 기능을 가지고 있기 때문에 익스플로러 사용을 막지는 않습니다.
 
 이를 수행하는 방법은 두 가지가 있습니다:
+
 - 좋아하는 익스플로러의 로컬 클러스터를 가리키는 트랜잭션 서명에 대한 링크를 생성합니다.
 - 웹페이지에서 클러스터를 수동으로 변경한 다음 트랜잭션 링크를 붙여넣습니다.
 
@@ -102,6 +109,7 @@ solana-test-validator --bpf-program <address to load the program to> <path to pr
 Umi로 트랜잭션을 전송하면 서명과 결과라는 두 가지 핵심 정보를 받게 됩니다. 서명은 base58 형식이므로 블록체인에서 읽을 수 있도록 하기 위해 이를 역직렬화해야 합니다.
 
 다음 코드로 이를 수행할 수 있습니다:
+
 ```typescript
 const signature = base58.deserialize(transaction.signature)[0]
 ```
@@ -159,9 +167,11 @@ mkdir ~/.local/share/metaplex-local-validator
 ```
 solana program dump -u m metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s ~/.local/share/metaplex-local-validator/mpl-token-metadata.so
 ```
+
 ```
 solana program dump -u m BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY ~/.local/share/metaplex-local-validator/mpl-bubblegum.so
 ```
+
 ```
 solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/share/metaplex-local-validator/mpl-core.so
 ```

@@ -17,20 +17,28 @@ programmingLanguage:
   - Rust
 ---
 Metaplex提供了一个Rust库，可用于与MPL-Core程序交互。Rust库可用于Rust脚本/构建以及通过CPI指令的链上程序。
+
 ## 安装
+
 MPL-Core Rust SDK可用于脚本/桌面/移动应用程序以及Solana链上程序。
+
 ```rust
 cargo add mpl-core
 ```
+
 {% quick-links %}
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core" description="使用基于Umi框架的JavaScript库开始使用。" /%}
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core/latest/mpl_core/" description="Rust SDK typedoc平台。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core>" description="使用基于Umi框架的JavaScript库开始使用。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core/latest/mpl_core/>" description="Rust SDK typedoc平台。" /%}
 {% /quick-links %}
+
 ## 本地脚本
+
 对于本地脚本，建议使用所有列出指令的`Builder`版本。这些构建器为您抽象了大量工作，并返回可以添加到交易中的指令。
 所有Core指令的列表可以在这里找到：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 有关使用Rust的更全面指南，请查看[Metaplex Rust SDK指南](/guides/rust/metaplex-rust-sdks)页面。
+
 #### CreateV1Builder - 示例
+
 ```rust
 use mpl_core::instructions::CreateV1Builder;
 use solana_client::rpc_client;
@@ -58,11 +66,15 @@ let keypair_path = ".../my-key.json"
     println!("Signature: {:?}", res)
 }
 ```
+
 ## CPI（跨程序调用）
+
 从您自己的程序执行CPI指令可以通过使用`mpl-core` Rust crate中所有指令都提供的`CpiBuilder`版本轻松实现。
 所有Core指令的列表可以在这里找到：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
 有关使用Metaplex crate创建CPI指令的更全面指南，请查看[如何CPI到Metaplex程序指南](/guides/rust/how-to-cpi-into-a-metaplex-program)页面。
+
 #### CreateV1CpiBuilder - 示例
+
 ```rust
 CreateV1CpiBuilder::new()
         .asset(context.accounts.asset)

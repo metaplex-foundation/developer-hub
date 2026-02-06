@@ -9,11 +9,13 @@ description: Solanaで新しい代替可能トークンを作成
 ## 基本的な使用法
 
 ### インタラクティブウィザード
+
 ```bash
 mplx toolbox token create --wizard
 ```
 
 ### 直接作成
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
@@ -21,11 +23,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## オプション
 
 ### 必須オプション（ウィザードを使用しない場合）
+
 - `--name <string>`: トークンの名前（例："My Awesome Token"）
 - `--symbol <string>`: トークンシンボル（2-6文字、例："MAT"）
 - `--mint-amount <number>`: ミントするトークンの初期量（0より大きい必要があります）
 
 ### オプションのオプション
+
 - `--decimals <number>`: 小数点以下の桁数（0-9、デフォルト：0）
 - `--description <string>`: トークンとその目的の説明
 - `--image <path>`: トークン画像ファイルへのパス（PNG、JPG、またはGIF）
@@ -34,11 +38,13 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 ## 例
 
 ### 基本情報でトークンを作成
+
 ```bash
 mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 1000000
 ```
 
 ### すべてのオプションでトークンを作成
+
 ```bash
 mplx toolbox token create \
   --name "My Awesome Token" \
@@ -50,6 +56,7 @@ mplx toolbox token create \
 ```
 
 ### ウィザードを使用してトークンを作成
+
 ```bash
 mplx toolbox token create --wizard
 ```
@@ -57,6 +64,7 @@ mplx toolbox token create --wizard
 ## 出力
 
 トークンの作成が成功した後、コマンドは以下を表示します：
+
 ```
 --------------------------------
 Token created successfully!

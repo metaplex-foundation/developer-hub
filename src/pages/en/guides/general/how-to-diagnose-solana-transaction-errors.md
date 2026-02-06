@@ -9,8 +9,7 @@ updated: '06-21-2024'
 
 ## Sharing Errors to a Support Network
 
-If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send what's called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behavior on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people. 
-
+If you are receiving errors that you do not understand and wish to show to someone else it can sometimes be difficult to describe the situation. This often happens when using a form of SDK to send transactions such as Metaplex Umi, Solana SDK, Solana Web3js. These clients will often send what's called a **pre-flight transaction** or simulation to an RPC to check if the transaction is going to succeed or not. If a transaction is deemed to fail then a transaction is not sent to the chain and will just throw an error message instead. While this is good behavior on behalf of the network, it doesn't give us anything we can logically get help with. This is where skipping simulation/pre-flight comes into play and forcing the failing transaction to be registered by the chain which becomes sharable to other people.
 
 ## Skipping Preflight
 
@@ -29,6 +28,7 @@ This works on both **Mainnet** and **Devnet**. This does also work on **Localnet
 Metaplex Umi's `skipPreflight` can be found in the `sendAndConfirm()` and `send()` function args and can be enabled like so:
 
 #### sendAndConfirm()
+
 ```ts
 const tx = createV1(umi, {
     ...args
@@ -42,6 +42,7 @@ console.log(signature)
 ```
 
 #### send()
+
 ```ts
 const tx = createV1(umi, {
     ...args
@@ -115,7 +116,6 @@ Starting at an index of 0 you can count down/work out the position of the error 
 
 Here is an example of a error.rs page from the Metaplex Core program.
 
-
 [https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
 As we can see if we were receiving an error code of 20 from our failing transaction that would translate to
@@ -134,7 +134,7 @@ If we take the Mpl Core Candy Machine program as an example, this is an Anchor p
 
 [https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
-If your transaction is returning an error of `6006` we can take the end of the number, in this case `6` and work our way down the error.rs list starting from an index of 0. 
+If your transaction is returning an error of `6006` we can take the end of the number, in this case `6` and work our way down the error.rs list starting from an index of 0.
 
 ```rust
 #[msg("Candy machine is empty")]

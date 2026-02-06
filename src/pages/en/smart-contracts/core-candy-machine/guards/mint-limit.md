@@ -58,8 +58,8 @@ Mint Counter PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
   {% node  theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -136,6 +136,7 @@ mintV1(umi, {
 _The Mint Limit guard does not support the route instruction._
 
 ## MintLimit Accounts
+
 When the `MintLimit` Guard is used a `MintCounter` Account is created for each Wallet, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
 
 ```js

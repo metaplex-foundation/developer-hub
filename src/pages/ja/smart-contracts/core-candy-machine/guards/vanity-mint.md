@@ -37,7 +37,6 @@ Mint {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 ミントアドレスが
 
@@ -83,6 +82,7 @@ Vanity Mintガードには以下の設定が含まれます:
 - **Regular Expression**: ミントアドレスが一致する必要がある正規表現。例えば、すべてのミントを文字列`mplx`で始めたい場合は、これを`regex`パラメータとして使用できます。
 
 使用できる正規表現のアイデアは次のとおりです:
+
 - 特定のパターンで始まる: `^mplx`
 - 特定のパターンで終わる: `mplx$`
 - 特定のパターンで始まり、終わる: `^mplx*mplx$`

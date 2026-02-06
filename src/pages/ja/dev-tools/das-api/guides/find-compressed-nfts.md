@@ -46,6 +46,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 })();
 
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript例" %}
 
@@ -87,6 +88,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 })();
 
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -134,6 +136,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 })();
 
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript例" %}
 
@@ -181,6 +184,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 })();
 
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 
@@ -224,6 +228,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 })();
 
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript例" %}
 
@@ -267,6 +272,7 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api"
 })();
 
 ```
+
 {% /totem-accordion %}
 {% /totem %}
 

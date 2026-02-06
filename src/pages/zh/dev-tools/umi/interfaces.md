@@ -6,6 +6,7 @@ description: Umi 接口概述
 ## 核心接口
 
 Umi 定义了一组核心接口，使与 Solana 区块链的交互变得简单。它们是：
+
 - [`Signer`](https://umi.typedoc.metaplex.com/interfaces/umi.Signer.html): 表示可以签署交易和消息的钱包的接口。
 - [`EddsaInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html): 使用 EdDSA 算法创建密钥对、查找 PDA 和签署/验证消息的接口。
 - [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html): 表示 Solana RPC 客户端的接口。
@@ -34,6 +35,7 @@ interface Context {
 ```
 
 如您所见，`Signer` 接口在上下文中使用了两次：
+
 - 一次用于 `identity`，即使用您的应用程序的签名者。
 - 一次用于 `payer`，即支付交易费用和存储费用等的签名者。通常这将与 `identity` 是同一个签名者，但将它们分开为应用程序提供了更大的灵活性——例如，如果他们希望从用户那里抽象一些成本以改善用户体验。
 

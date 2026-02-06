@@ -72,6 +72,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% /totem-accordion %}
 {% totem-accordion title="cURL 예제" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -162,6 +163,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 {% /totem %}
 
 ## 방법 3: 개별 토큰의 경우
+
 컬렉션의 일부가 아닌 특정 개별 NFT의 보유자를 찾으려면 `getAsset`에서 NFT의 특정 주소를 사용해야 합니다.
 
 {% totem %}
@@ -185,6 +187,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`토큰 ${token.id}의 소유자: ${token.ownership.owner}`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 예제" %}
 

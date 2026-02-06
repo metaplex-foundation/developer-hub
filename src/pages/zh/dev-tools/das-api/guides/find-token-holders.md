@@ -72,6 +72,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 
 {% /totem-accordion %}
 {% totem-accordion title="cURL 示例" %}
+
 ```bash
 curl -X POST <ENDPOINT> \
   -H "Content-Type: application/json" \
@@ -186,6 +187,7 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
   console.log(`代币 ${token.id} 的所有者是: ${token.ownership.owner}`);
 })();
 ```
+
 {% /totem-accordion %}
 {% totem-accordion title="JavaScript 示例" %}
 

@@ -18,9 +18,9 @@ cargo add mpl-core-candy-machine-core
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-machine-core" description="开始使用我们的 MPL Core Candy Machine Rust SDK。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-machine-core>" description="开始使用我们的 MPL Core Candy Machine Rust SDK。" /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-machine-core/" description="Core Candy Machine crate 的 Rust SDK typedoc 平台。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-machine-core/>" description="Core Candy Machine crate 的 Rust SDK typedoc 平台。" /%}
 
 {% /quick-links %}
 
@@ -38,8 +38,8 @@ cargo add mpl-core-candy-guard
 
 {% quick-links %}
 
-{% quick-link title="crates.io" target="_blank" icon="Rust" href="https://crates.io/crates/mpl-core-candy-guard" description="开始使用我们的 Core Candy Guards Rust SDK。" /%}
+{% quick-link title="crates.io" target="_blank" icon="Rust" href="<https://crates.io/crates/mpl-core-candy-guard>" description="开始使用我们的 Core Candy Guards Rust SDK。" /%}
 
-{% quick-link title="docs.rs" target="_blank" icon="Rust" href="https://docs.rs/mpl-core-candy-guard" description="Core Candy Guards crate 的 Rust SDK typedoc 平台。" /%}
+{% quick-link title="docs.rs" target="_blank" icon="Rust" href="<https://docs.rs/mpl-core-candy-guard>" description="Core Candy Guards crate 的 Rust SDK typedoc 平台。" /%}
 
 {% /quick-links %}

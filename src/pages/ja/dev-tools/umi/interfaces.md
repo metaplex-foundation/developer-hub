@@ -6,6 +6,7 @@ description: Umiのインターフェースの概要
 ## コアインターフェース
 
 Umiは、Solanaブロックチェーンとの相互作用を簡単にするコアインターフェースのセットを定義します。具体的には、以下の通りです：
+
 - [`Signer`](https://umi.typedoc.metaplex.com/interfaces/umi.Signer.html): トランザクションとメッセージに署名できるウォレットを表すインターフェース。
 - [`EddsaInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.EddsaInterface.html): EdDSAアルゴリズムを使用してキーペアの作成、PDAの検索、メッセージの署名/検証を行うインターフェース。
 - [`RpcInterface`](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html): Solana RPCクライアントを表すインターフェース。
@@ -34,6 +35,7 @@ interface Context {
 ```
 
 ご覧のように、`Signer`インターフェースはコンテキスト内で2回使用されています：
+
 - `identity`として1回：あなたのアプリを使用する署名者。
 - `payer`として1回：トランザクション手数料やストレージ手数料などの費用を支払う署名者。通常、これは`identity`と同じ署名者になりますが、それらを分離することで、アプリにより多くの柔軟性を提供します（例：ユーザーエクスペリエンスを向上させるためにユーザーからいくつかのコストを抽象化したい場合）。
 

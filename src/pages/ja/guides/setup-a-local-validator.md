@@ -45,7 +45,7 @@ CLIをインストール後、簡単なコマンドを実行してローカル�
 solana-test-validator
 ```
 
-起動すると、バリデータはローカルURL（http://127.0.0.1:8899）でアクセス可能になります。このURLでコードを設定して接続を確立する必要があります。
+起動すると、バリデータはローカルURL（<http://127.0.0.1:8899）でアクセス可能になります。このURLでコードを設定して接続を確立する必要があります。>
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -63,28 +63,34 @@ const umi = createUmi("http://127.0.0.1:8899")
 
 ローカルバリデータには、メインネットで見つかる特定のプログラムやアカウントは含まれていません。ネイティブプログラムとテスト中に作成したアカウントのみが含まれています。メインネットから特定のプログラムやアカウントが必要な場合、Solana CLIを使用してそれらをダウンロードしてローカルバリデータに読み込むことができます。
 
-### アカウントとプログラムのダウンロード：
+### アカウントとプログラムのダウンロード
 
 テスト目的で、ソースクラスターからローカルバリデータにアカウントやプログラムを簡単にダウンロードできます。これにより、メインネット環境を複製できます。
 
 **アカウントの場合：**
+
 ```
 solana account -u <ソースクラスター> --output <出力形式> --output-file <宛先ファイル名/パス> <取得するアカウントのアドレス>
 ```
+
 **プログラムの場合：**
+
 ```
 solana program dump -u <ソースクラスター> <取得するアカウントのアドレス> <宛先ファイル名/パス>
 ```
 
-### アカウントとプログラムの読み込み：
+### アカウントとプログラムの読み込み
 
 ダウンロード後、これらのアカウントとプログラムはCLIを使用してローカルバリデータに読み込むことができます。特定のアカウントとプログラムをローカル環境に読み込むコマンドを実行して、テスト準備を整えることができます。
 
 **アカウントの場合：**
+
 ```
 solana-test-validator --account <アカウントを読み込むアドレス> <アカウントファイルへのパス> --reset
 ```
+
 **プログラムの場合：**
+
 ```
 solana-test-validator --bpf-program <プログラムを読み込むアドレス> <プログラムファイルへのパス> --reset
 ```
@@ -94,6 +100,7 @@ solana-test-validator --bpf-program <プログラムを読み込むアドレス>
 ローカルバリデータを使用することは、多くのエクスプローラがローカルポートに接続し、前述の`test-ledger`フォルダに保存されたローカル台帳を読み取る機能を持っているため、エクスプローラの使用を妨げません。
 
 これを行う方法は2つあります：
+
 - お気に入りのエクスプローラのローカルクラスターを指すトランザクション署名へのリンクを作成する。
 - Webページのクラスターを手動で変更し、トランザクションリンクを貼り付ける。
 
@@ -102,7 +109,8 @@ solana-test-validator --bpf-program <プログラムを読み込むアドレス>
 Umiでトランザクションを送信すると、署名と結果という2つの重要な情報を受け取ります。署名はbase58形式なので、ブロックチェーンで読み取り可能にするためにデシリアライズする必要があります。
 
 以下のコードでこれを行えます：
-```typescript 
+
+```typescript
 const signature = base58.deserialize(transaction.signature)[0]
 ```
 
@@ -159,9 +167,11 @@ mkdir ~/.local/share/metaplex-local-validator
 ```
 solana program dump -u m metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s ~/.local/share/metaplex-local-validator/mpl-token-metadata.so
 ```
+
 ```
 solana program dump -u m BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY ~/.local/share/metaplex-local-validator/mpl-bubblegum.so
 ```
+
 ```
 solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/share/metaplex-local-validator/mpl-core.so
 ```
@@ -170,22 +180,22 @@ solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/s
 
 {% totem-accordion title="追加のMetaplexプログラム" %}
 
-| 名前               | プログラムID                                | 
-| ------------------ | -------------------------------------------- | 
-| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | 
-| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | 
-| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | 
-| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | 
-| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | 
-| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | 
-| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | 
-| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | 
+| 名前               | プログラムID                                |
+| ------------------ | -------------------------------------------- |
+| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  |
+| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  |
+| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY |
+| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g |
+| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR |
+| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d |
+| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ |
+| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J |
 | Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  |
-| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | 
-| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | 
-| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | 
-| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | 
-| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | 
+| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  |
+| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  |
+| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  |
+| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  |
+| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  |
 
 {% /totem-accordion %}
 

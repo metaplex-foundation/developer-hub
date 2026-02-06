@@ -48,6 +48,7 @@ The page aims to list all the available implementations of [the interfaces defin
 | Uses a local cache to mock uploads and downloads | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-storage-mock) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-storage-mock) |
 | Uses 4EVERLAND | 4EVERLAND | [GitHub](https://github.com/4everland/umi-uploader-4everland) / [NPM](https://www.npmjs.com/package/@4everland/umi-uploader-4everland) |
 | Uses Bundlr.network (Deprecated - use `umi-uploader-irys`) | Metaplex | [GitHub](https://github.com/metaplex-foundation/umi/tree/main/packages/umi-uploader-bundlr) / [NPM](https://www.npmjs.com/package/@metaplex-foundation/umi-uploader-bundlr) |
+
 ## Downloader Interface
 
 | Description | Maintainer | Links |

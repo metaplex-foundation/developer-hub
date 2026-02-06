@@ -9,6 +9,7 @@ description: 将 DAS Assets 转换为 Core Asset 或 Collection
 ## 转换为 Asset 示例
 
 以下示例展示：
+
 1. 如何使用标准 DAS API 包获取 DAS Assets。
 2. 过滤 Assets 以仅保留 Core Assets
 3. 将所有标准 Assets 转换为 Core Assets
@@ -28,6 +29,7 @@ const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
 ## 转换为 Collection 示例
 
 以下示例展示：
+
 1. 如何使用标准 DAS API 包获取 DAS Collections。
 2. 过滤 Assets 以仅保留 Core Assets
 3. 将所有标准 Assets 转换为 Core Assets

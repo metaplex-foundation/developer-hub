@@ -14,12 +14,12 @@ MPL-404 에스크로 및 스왑 프로그램을 배포하기 전에 사용할 NF
 
 MPL-404의 메타데이터 무작위화 기능을 활용하려면 오프체인 메타데이터 URI가 일관되게 정의되고 증가해야 합니다. 일관된 기본 URI는 모든 오프체인 메타데이터 솔루션에서 사용할 수 없습니다. Shadow Drive는 증가하는 URI를 가진 가능한 오프체인 메타데이터 솔루션 중 하나입니다. URI는 다음과 같아야 합니다:
 
-- https://shdw-drive.genesysgo.net/.../0.json
-- https://shdw-drive.genesysgo.net/.../1.json
+- <https://shdw-drive.genesysgo.net/.../0.json>
+- <https://shdw-drive.genesysgo.net/.../1.json>
 
 ...
 
-- https://shdw-drive.genesysgo.net/.../999999.json
+- <https://shdw-drive.genesysgo.net/.../999999.json>
 
 ## 스왑 무작위화
 

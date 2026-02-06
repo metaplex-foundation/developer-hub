@@ -29,7 +29,6 @@ description: 获取主版 NFT 铸币的所有可打印版本
 - `supply` - 当前已铸造的版本数量
 - `max_supply` - 可铸造的最大版本数量（无限制时为 null）
 
-
 ## 测试场
 
 {% apiRenderer method="getNftEditions" noUmi=true /%}

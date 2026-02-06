@@ -9,11 +9,13 @@ description: 更新 MPL Core 资产元数据和属性
 ## 基本用法
 
 ### 更新单个资产
+
 ```bash
 mplx core asset update <assetId> [options]
 ```
 
 ### 更新选项
+
 - `--name <string>`: 资产的新名称
 - `--uri <string>`: 资产元数据的新 URI
 - `--image <path>`: 新图片文件的路径
@@ -22,21 +24,25 @@ mplx core asset update <assetId> [options]
 ## 更新方法
 
 ### 1. 更新名称和 URI
+
 ```bash
 mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.com/metadata.json"
 ```
 
 ### 2. 使用 JSON 文件更新
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json
 ```
 
 ### 3. 使用图片更新
+
 ```bash
 mplx core asset update <assetId> --image ./asset/image.jpg
 ```
 
 ### 4. 使用 JSON 和图片更新
+
 ```bash
 mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
 ```
@@ -44,16 +50,19 @@ mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/im
 ## 示例
 
 ### 更新资产名称
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --name "New Asset Name"
 ```
 
 ### 使用新图片更新资产
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./images/new-image.png
 ```
 
 ### 使用新元数据更新资产
+
 ```bash
 mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
 ```
@@ -61,6 +70,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 ## 输出
 
 成功更新后，命令将显示：
+
 ```
 --------------------------------
   Asset: <assetId>

@@ -20,17 +20,20 @@ Merkle 树是一种二叉树，用于有效地表示一组数据。树中的每�
 **示例**：假设我们有四个数据条目：A、B、C 和 D。Merkle 树结构构建如下：
 
 - **叶节点**：每个条目都被哈希：
+
 ```
 Hash(A), Hash(B), Hash(C), Hash(D)
 ```
 
 - **父节点**：叶节点对被组合并哈希：
+
 ```
 Parent1 = Hash(Hash(A) + Hash(B))
 Parent2 = Hash(Hash(C) + Hash(D))
 ```
 
 - **根节点**：从父节点计算最终哈希：
+
 ```
 Root = Hash(Parent1 + Parent2)
 ```
@@ -104,6 +107,7 @@ Solana 的状态压缩采用了一种独特类型的 Merkle 树，允许对树�
 - Anchor **0.30.1** 或更高版本。
 
 此外，在本指南中，我们将利用 **Anchor** 的单文件方法，所有必要的宏都可以在 `lib.rs` 文件中找到：
+
 - `declare_id`：指定程序的链上地址。
 - `#[program]`：指定包含程序指令逻辑的模块。
 - `#[derive(Accounts)]`：应用于结构体以指示指令所需的账户列表。

@@ -9,6 +9,7 @@ updated: '03-12-2025'
 Metaplex Core를 사용하여 Solana에서 NFT를 생성합니다. {% .lead %}
 
 ## 학습 내용
+
 이 가이드에서는 다음을 포함한 NFT 생성 방법을 설명합니다:
 
 - 커스텀 이름과 메타데이터
@@ -44,4 +45,5 @@ NFT에 맞게 다음 파라미터를 커스터마이징하세요:
 ```
 
 ## 플러그인
+
 MPL Core 자산은 컬렉션 및 자산 수준 모두에서 플러그인 사용을 지원합니다. 플러그인이 있는 Core Asset을 생성하려면 생성 시 `plugins` 배열 인자에 플러그인 유형과 파라미터를 전달합니다. 플러그인에 대한 자세한 정보는 [플러그인 개요](/ko/smart-contracts/core/plugins) 페이지에서 확인할 수 있습니다. 프로필 사진과 같은 NFT의 맥락에서 [로열티 플러그인](/ko/smart-contracts/core/plugins/royalties)이 일반적인 사용 사례입니다.

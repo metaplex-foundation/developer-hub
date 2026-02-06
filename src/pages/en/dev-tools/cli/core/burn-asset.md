@@ -9,16 +9,19 @@ The `mplx core asset burn` command allows you to permanently destroy MPL Core As
 ## Basic Usage
 
 ### Burn Single Asset
+
 ```bash
 mplx core asset burn <assetId>
 ```
 
 ### Burn Asset from Collection
+
 ```bash
 mplx core asset burn <assetId> --collection <collectionId>
 ```
 
 ### Burn Multiple Assets
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```
@@ -51,17 +54,21 @@ mplx core asset burn --list ./assets-to-burn.json
 ## Examples
 
 ### Burn a Single Asset
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa
 ```
 
 ### Burn an Asset from a Collection
+
 ```bash
 mplx core asset burn 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --collection HaKyubAWuTS9AZkpUHtFkTKAHs1KKAJ3onZPmaP9zBpe
 ```
 
 ### Burn Multiple Assets from a List
+
 Create a JSON file `assets-to-burn.json`:
+
 ```json
 [
   "5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa",
@@ -70,6 +77,7 @@ Create a JSON file `assets-to-burn.json`:
 ```
 
 Then run:
+
 ```bash
 mplx core asset burn --list ./assets-to-burn.json
 ```
