@@ -23,7 +23,6 @@ const asset = await das.getAsset(umi, assetId);
 console.log(asset);
 ```
 
-
 ## 예제 응답
 
 ```json

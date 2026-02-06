@@ -89,7 +89,6 @@ await initialize(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## `initializeAssociatedInscription`
 
 一个Inscription账户可以有多个关联Inscription账户。它们基于`associationTag`派生。例如，标签可以是文件的数据类型，如`image/png`。

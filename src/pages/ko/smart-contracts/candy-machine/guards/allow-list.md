@@ -58,7 +58,6 @@ description: "지갑 주소 목록을 사용하여 누가 민팅할 수 있는�
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
 {% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
-
 {% node #leaves label="잎" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
@@ -132,7 +131,6 @@ Merkle Proof {% .whitespace-nowrap %}
 {% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 {% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 
-
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="지불자" theme="indigo" /%}
 {% node theme="dimmed"%}
@@ -171,8 +169,8 @@ Allowlist PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="110" x="-8" %}
   {% node theme="pink" %}
-    민팅 from 
-    
+    민팅 from
+
     _Candy Machine Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -189,7 +187,7 @@ Allowlist PDA {% .whitespace-nowrap %}
 {% edge from="guardMerkleRoot" to="merkleRoot" arrow="start" path="straight" /%}
 {% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true /%}
 {% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true  %}
-지불자의 Merkle Proof가 
+지불자의 Merkle Proof가
 
 가드의 Merkle Root와 일치하지 않으면 검증이 실패합니다
 {% /edge %}
@@ -197,7 +195,6 @@ Allowlist PDA {% .whitespace-nowrap %}
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -377,7 +374,7 @@ API 참조: [route](https://mpl-candy-machine.typedoc.metaplex.com/functions/rou
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-_Sugar는 "Proof" Route를 호출하는 데 사용할 수 없습니다._ 
+_Sugar는 "Proof" Route를 호출하는 데 사용할 수 없습니다._
 
 {% /totem %}
 {% /dialect %}

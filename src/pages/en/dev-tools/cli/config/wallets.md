@@ -165,4 +165,4 @@ Wallets are stored in your configuration file at `~/.mplx/config.json`:
 ## Related Commands
 
 - [RPCs](/dev-tools/cli/config/rpcs) - Manage RPC endpoints
-- [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer 
+- [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer

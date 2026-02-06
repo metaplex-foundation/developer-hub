@@ -37,7 +37,6 @@ description: "Core Candy Machine '自定义铸币' 守卫要求铸造者提供�
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 检查铸币地址
 

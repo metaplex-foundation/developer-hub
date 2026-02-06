@@ -122,7 +122,6 @@ await thawV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## 解冻并撤销委托权限
 
 要同时解冻和撤销委托权限，我们可以使用`thawAndRevokeV2`指令。此指令可以这样使用：

@@ -52,7 +52,7 @@ Owner: System Program {% .whitespace-nowrap %}
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
     からのミント
-    
+
     _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}

@@ -41,4 +41,4 @@ After a successful transfer, the command will display:
 - The command requires a connection to a Solana network (mainnet/devnet/testnet)
 - Make sure you have sufficient SOL in your wallet for the transfer
 - The transaction signature is provided for verification purposes
-- The transfer is irreversible once confirmed on the blockchain 
+- The transfer is irreversible once confirmed on the blockchain

@@ -24,7 +24,7 @@ In Javascript we can deserialize both the base asset data and the plugin using a
 ## Deserializing Assets
 Deserializing the `Asset` account will return information about:
 - **Owner**: The owner of the asset
-- **Update Authority**: The authority over the asset, or the collection Address if it's part of one 
+- **Update Authority**: The authority over the asset, or the collection Address if it's part of one
 - **Name**: The Asset Name
 - **Uri**: The uri to the asset off-chain metadata. -->
 {% dialect-switcher title="Deserialize an Asset" %}
@@ -58,11 +58,11 @@ println!("assetV1: {:?}", asset_v1);
 {% /dialect-switcher %}
 ## Deserializing Collections
 Deserializing the `Collection` account will return information about:
-- **Update** Authority:	The authority over the collection and all the asset inside of it
-- **Name**:	The collection name.
-- **Uri**:	The uri to the collections off-chain metadata.
+- **Update** Authority: The authority over the collection and all the asset inside of it
+- **Name**: The collection name.
+- **Uri**: The uri to the collections off-chain metadata.
 - **Num Minted**: The number of assets minted in the collection.
-- **Current size**:	The number of assets currently in the collection.
+- **Current size**: The number of assets currently in the collection.
 {% dialect-switcher title="Deserialize a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -93,7 +93,7 @@ println!("collection_V1: {:?}", collection_v1);
 {% /dialect %}
 {% /dialect-switcher %}
 ## Deserializing Plugins
-As said before, 
+As said before,
 - Using **Javascript** we can deserialize the whole asset into a single variable, in this section we're going to see how we can access the specific data associated with the plugins.
 - Using **Rust** we need to deserialize specific plugin data to avoid stack violation because of the size of the account.
 {% dialect-switcher title="Deserialize Plugins" %}

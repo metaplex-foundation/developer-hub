@@ -50,4 +50,4 @@ After a successful airdrop, the command will display:
 - The airdrop amount is specified in SOL (not lamports)
 - If no address is provided, the SOL will be airdropped to the current wallet address
 - The command requires a connection to a development network (devnet/testnet)
-- Make sure you have sufficient SOL in your wallet for the airdrop operation 
+- Make sure you have sufficient SOL in your wallet for the airdrop operation

@@ -255,7 +255,6 @@ Also note that, since we are not inserting any item to the Candy Machine, Hidden
 {% dialect-switcher title="Set up hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
 
-
 To calculate the hash you could use the following functions:
 
 ```ts

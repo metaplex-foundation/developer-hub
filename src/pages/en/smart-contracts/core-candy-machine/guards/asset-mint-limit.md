@@ -6,7 +6,7 @@ description: "The Core Candy Machine 'Asset Mint Limit' guard restricts minting 
 
 ## Overview
 
-The Asset Mint Limit guard restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Core Asset. It can be considered as a combination of the [NFT Gate](/smart-contracts/core-candy-machine/guards/nft-gate) for Core Assets and [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) Guard, based on Asset Addresses instead of wallets. 
+The Asset Mint Limit guard restricts minting to holders of a specified collection and limits the amount of mints that can be done for a provided Core Asset. It can be considered as a combination of the [NFT Gate](/smart-contracts/core-candy-machine/guards/nft-gate) for Core Assets and [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) Guard, based on Asset Addresses instead of wallets.
 
 The limit is set per Collection, per candy machine and per identifier — provided in the settings — to allow multiple asset mint limits within the same Core Candy Machine.
 
@@ -55,8 +55,8 @@ Asset Mint Counter PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-30" %}
   {% node  theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_
   {% /node %}
 {% /node %}

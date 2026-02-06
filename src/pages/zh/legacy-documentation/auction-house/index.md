@@ -34,7 +34,6 @@ description: 提供拍卖行程序的概述
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 该账户可以按用户想要的任何方式配置。我们将[在专门的页面中详细讨论这些配置](/zh/legacy-documentation/auction-house/settings),但这里有一些有趣的可配置参数:
 
 - `requireSignOff`: 这允许市场控制哪些资产可以被列出以及哪些出价可以被放置。在每个相关指令上,拍卖行[权限](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities)需要签署交易。

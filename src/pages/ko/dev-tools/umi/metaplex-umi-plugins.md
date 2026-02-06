@@ -74,7 +74,6 @@ Token Metadata는 NFT와 pNFT의 생성 및 관리를 다루는 Metaplex 프로�
 - 위임
 - 컬렉션 관리
 
-
 ## [Toolbox](/ko/dev-tools/umi/toolbox)
 
 Mpl Toolbox에는 탈중앙화 애플리케이션을 시작하고 실행하는 데 필요한 필수 Solana 및 Metaplex 프로그램이 포함되어 있습니다.

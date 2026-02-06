@@ -18,9 +18,7 @@ npm install @metaplex-foundation/mpl-hybrid
 
 ## Umi 설정
 
-
 Metaplex Javascript SDK와 상호 작용하려면 `umi` 인스턴스가 필요합니다. 아직 `umi` 인스턴스를 설정하고 구성하지 않았다면 [Umi 시작 가이드](/ko/dev-tools/umi/getting-started) 페이지를 확인하세요.
-
 
 `umi` 인스턴스를 초기화하는 동안 다음을 사용하여 mpl-hybrid 패키지를 `umi`에 추가할 수 있습니다
 

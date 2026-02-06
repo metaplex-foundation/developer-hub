@@ -53,11 +53,10 @@ Owner: System Program {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="guardDestinationWallet" to="destinationWallet" /%}
 
-
 {% edge from="collectionNftMint" to="mint-candy-guard" theme="indigo" dashed=true arrow="none" /%}
 
 {% node parent="mint-candy-guard" theme="transparent" x="-180" y="20" %}
-Transfers 
+Transfers
 
 1 Asset from
 
@@ -79,8 +78,8 @@ this collection
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}

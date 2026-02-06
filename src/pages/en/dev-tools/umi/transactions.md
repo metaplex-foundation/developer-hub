@@ -243,7 +243,7 @@ console.log(
 
 ### Convert human readable (base58) transaction signature to Uint8Array
 
-In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script. 
+In some cases you might have a base58 encoded transaction signature and you want to convert it to a Uint8Array. For example this might be the case if you copied a transaction signature from an explorer and you want to use it in an umi script.
 
 This can be done using the `base58.deserialize` method.
 

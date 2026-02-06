@@ -6,8 +6,6 @@ description: 学习编写交换函数，使用户可以在MPL-Hybrid程序中将
 
 在MPL-Hybrid程序中，将您拥有的代币交换为托管中持有的NFT的操作称为`capture`（捕获）。
 
-
-
 ## 交换NFT
 
 ```ts

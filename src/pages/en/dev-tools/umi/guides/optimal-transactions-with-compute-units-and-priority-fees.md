@@ -33,7 +33,7 @@ For example, a simple token transfer might only need 20,000 CUs, while an NFT mi
 
 ## Implementation Guide
 
-This guide demonstrates how to programmatically calculate optimal values rather than guessing. 
+This guide demonstrates how to programmatically calculate optimal values rather than guessing.
 
 {% callout type="warning" %}
 The code examples use `fetch` for RPC calls since Umi hasn't implemented these methods yet. When official support is added, prefer using Umi's built-in methods.
@@ -42,7 +42,7 @@ The code examples use `fetch` for RPC calls since Umi hasn't implemented these m
 ### Calculate Priority Fees
 When using priority fees it is important to remember that those have the best effect when the competition is taken into account. Adding a huge number manually may result in overpaying more fees than required, while using a too low number might result in the transaction not being included into the block in case there is too much competition.
 
-To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 100 fees paid. This number can be aligned according to your experience. 
+To get the last paid prioritization fees that were paid for the accounts in our transaction one can use the `getRecentPrioritizationFees` RPC call. We use the result to calculate an average based on the top 100 fees paid. This number can be aligned according to your experience.
 
 The following steps are necessary:
 1. Extract writable accounts from your transaction

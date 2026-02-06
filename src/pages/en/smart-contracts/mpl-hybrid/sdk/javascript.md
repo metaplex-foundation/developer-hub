@@ -18,9 +18,7 @@ npm install @metaplex-foundation/mpl-hybrid
 
 ## Umi Setup
 
-
 An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/dev-tools/umi/getting-started) page.
-
 
 During the initialization of the `umi` instance you can add the mpl-hybrid package to `umi` using
 

@@ -37,8 +37,8 @@ The **Start Date** guard determines the start date of the mint. Before this date
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_
   {% /node %}
 {% /node %}

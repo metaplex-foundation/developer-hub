@@ -23,7 +23,6 @@ const collection = await das.getCollection(umi, collectionId);
 console.log(collection);
 ```
 
-
 ## 예제 응답
 
 ```json

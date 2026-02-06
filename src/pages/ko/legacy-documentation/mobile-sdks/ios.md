@@ -75,12 +75,12 @@ NFT 모듈은 `Metaplex.nfts()`를 통해 액세스할 수 있으며 다음 메�
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -148,11 +148,9 @@ public protocol IdentityDriver {
 
 `GuestIdentityDriver` 드라이버는 가장 간단한 ID 드라이버입니다. 본질적으로 서명된 트랜잭션을 보낼 필요가 없을 때 유용할 수 있는 `null` 드라이버입니다. `signTransaction` 메서드를 사용하면 실패를 반환합니다.
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 드라이버는 `Account` 객체를 매개변수로 받아들입니다.
-
 
 ### ReadOnlyIdentityDriver
 
@@ -185,5 +183,3 @@ SDK에는 [샘플 앱][sample]이 함께 제공됩니다. 휴대폰에서 복제
 [github]: https://github.com/metaplex-foundation/metaplex-ios
 [docs]: https://github.com/metaplex-foundation/metaplex-ios#metaplex-ios-sdk
 [sample]: https://github.com/metaplex-foundation/metaplex-ios/tree/main/Sample
-
-

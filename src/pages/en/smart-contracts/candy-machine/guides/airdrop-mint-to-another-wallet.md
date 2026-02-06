@@ -26,7 +26,7 @@ This guide explains how to mint NFTs from a Candy Machine to different wallet ad
 Minting NFTs to another wallet can be particularly useful for airdrops, giveaways, or distributing NFTs to multiple recipients. This guide will walk you through the process of minting NFTs from a Candy Machine to a different wallet address. It is important to note that the person initiating the minting process will bear the minting cost. Therefore, it is often more cost-effective to have the recipient claim the NFT themselves.
 
 {% callout type="note" title="Important Consideration" %}
-- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/smart-contracts/candy-machine/guards/allow-list) or the [NFT Gate](/smart-contracts/candy-machine/guards/nft-gate) Guard. 
+- Minting to another wallet can be expensive. You might want to consider using a claim mechanic instead, e.g. using [allowlist](/smart-contracts/candy-machine/guards/allow-list) or the [NFT Gate](/smart-contracts/candy-machine/guards/nft-gate) Guard.
 - There are different tools available for Candy Machines with or without guards. Minting without guards is generally easier.
 {% /callout %}
 
@@ -37,7 +37,7 @@ There are two approaches described in this guide:
 ## Using Sugar CLI
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
 1. `sugar mint` to mint to *one* specific wallet
-2. `sugar airdrop` to mint to *multiple* wallets 
+2. `sugar airdrop` to mint to *multiple* wallets
 
 Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [this](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine) Guide. If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
 
@@ -83,7 +83,6 @@ When minting to another wallet using Typescript, there are two main approaches d
 
 ### Mint without Guards
 For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
-
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));

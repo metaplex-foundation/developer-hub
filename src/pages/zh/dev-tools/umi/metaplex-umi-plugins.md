@@ -74,7 +74,6 @@ Token Metadata 是一个 Metaplex 程序，用于处理 NFT 和 pNFT 的创建�
 - 委托
 - 集合管理
 
-
 ## [Toolbox](/zh/dev-tools/umi/toolbox)
 
 Mpl Toolbox 包含一系列必要的 Solana 和 Metaplex 程序，帮助您快速启动去中心化应用程序。
