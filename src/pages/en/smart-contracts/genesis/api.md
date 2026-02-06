@@ -1,10 +1,53 @@
 ---
 title: API
-metaTitle: Genesis - API
-description: Public API for querying Genesis launch data by genesis address or token mint.
+metaTitle: Genesis - API | Launch Data API | Metaplex
+description: Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis API
+  - launch data API
+  - token metadata API
+  - aggregator API
+  - REST API
+about:
+  - API reference
+  - Data aggregation
+  - Launch queries
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Is authentication required?
+    a: No. The Genesis API is public with rate limits. No API key or authentication is needed.
+  - q: Which endpoint should I use if I only have a token mint?
+    a: Use /tokens/{mint} to get all launches for a token. Use /launches/{genesis_pubkey} if you have the genesis address.
+  - q: What are the rate limits?
+    a: Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
+  - q: Can a token have multiple launches?
+    a: Yes. The /tokens endpoint returns an array of launches because tokens can have multiple campaigns.
 ---
 
-The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
+The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+This reference covers:
+- Available endpoints and their use cases
+- Request/response formats with examples
+- TypeScript and Rust type definitions
+- Error handling
+{% /callout %}
+
+## Summary
+
+The Genesis API provides read-only access to launch data. Query by genesis address or token mint.
+
+- Public API with rate limits (no authentication)
+- Returns launch info, token metadata, and social links
+- TypeScript and Rust types provided
+- Standard REST error codes
 
 {% callout type="note" %}
 The API is public with rate limits. No authentication is required.
@@ -273,3 +316,33 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## FAQ
+
+### Is authentication required?
+No. The Genesis API is public with rate limits. No API key or authentication is needed.
+
+### Which endpoint should I use if I only have a token mint?
+Use `/tokens/{mint}` to get all launches for a token. Use `/launches/{genesis_pubkey}` if you have the genesis address.
+
+### What are the rate limits?
+Rate limits apply to prevent abuse. If you receive a 429 response, reduce your request frequency.
+
+### Can a token have multiple launches?
+Yes. The `/tokens` endpoint returns an array of launches because tokens can have multiple campaigns (using different `genesisIndex` values).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Address** | The PDA identifying a specific launch campaign |
+| **Base Token** | The token being launched |
+| **Launch Page** | The URL where users can participate in the launch |
+| **Launch Type** | The mechanism used (launchpool, presale, auction) |
+| **Socials** | Social media links associated with the token |
+
+## Next Steps
+
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Programmatic access to Genesis
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Additional API details and on-chain fetching
+- [Getting Started](/smart-contracts/genesis/getting-started) - Launch your own token

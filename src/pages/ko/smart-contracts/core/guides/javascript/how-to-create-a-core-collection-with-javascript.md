@@ -1,75 +1,73 @@
 ---
-title: JavaScript로 Core 컬렉션 생성하는 방법
-metaTitle: JavaScript로 Core 컬렉션 생성하는 방법 | Core 가이드
-description: Metaplex Core JavaScript 패키지로 Solana에서 Core 컬렉션을 생성하는 방법을 학습합니다.
-# remember to update dates also in /components/guides/index.js
+title: How to Create a Core Collection with Javascript
+metaTitle: How to Create a Core Collection with Javascript | Core Guides
+description: Learn how to create a Core Collection on Solana with the Metaplex Core javascript package.
 created: '08-21-2024'
-updated: '08-21-2024'
+updated: '01-31-2026'
+keywords:
+  - create collection JavaScript
+  - NFT collection tutorial
+  - mpl-core collection
+  - Solana collection
+about:
+  - Collection creation
+  - JavaScript tutorial
+  - Umi framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new Node.js project and install dependencies
+  - Configure Umi with your wallet and RPC endpoint
+  - Upload collection image and metadata
+  - Create the Collection using createCollection()
+  - Verify the Collection was created successfully
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Irys or IPFS for storage
 ---
-
-이 가이드는 Metaplex Core 온체인 프로그램을 사용하여 **Core 컬렉션**을 생성하기 위한 `@metaplex-foundation/mpl-core` JavaScript SDK 패키지의 사용법을 보여줍니다.
-
-{% callout title="Core란 무엇인가?" %}
-
-**Core**는 단일 계정 디자인을 사용하여 민팅 비용을 줄이고 대안에 비해 Solana 네트워크 부하를 개선합니다. 또한 개발자가 자산의 동작과 기능을 수정할 수 있게 해주는 유연한 플러그인 시스템을 가지고 있습니다.
-
+This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript sdk package to create a **Core Collection** using the Metaplex Core onchain program.
+{% callout title="What is Core?" %}
+**Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 {% /callout %}
-
-하지만 시작하기 전에 컬렉션에 대해 이야기해보겠습니다:
-
-{% callout title="컬렉션이란 무엇인가?" %}
-
-컬렉션은 함께 속하고, 같은 시리즈나 그룹의 일부인 자산들의 그룹입니다. 자산들을 그룹화하려면 먼저 컬렉션 이름과 컬렉션 이미지와 같은 해당 컬렉션과 관련된 메타데이터를 저장하는 목적의 컬렉션 자산을 생성해야 합니다. 컬렉션 자산은 컬렉션의 앞표지 역할을 하며 컬렉션 전체 플러그인도 저장할 수 있습니다.
-
+But before starting, let's talk about Collections: 
+{% callout title="What are Collections?" %}
+Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
 {% /callout %}
-
-## 전제 조건
-
-- 선택한 코드 에디터 (**Visual Studio Code** 권장)
-- Node **18.x.x** 이상.
-
-## 초기 설정
-
-이 가이드는 단일 파일 스크립트를 기반으로 JavaScript를 사용하여 Core 컬렉션을 생성하는 방법을 가르쳐 줍니다. 필요에 맞게 함수를 수정하고 이동해야 할 수도 있습니다.
-
-### 프로젝트 초기화
-
-선택한 패키지 매니저(npm, yarn, pnpm, bun)로 새 프로젝트를 초기화하는 것부터 시작하고(선택사항) 프롬프트가 나타날 때 필요한 세부사항을 입력합니다.
-
+## Prerequisite
+- Code Editor of your choice (recommended **Visual Studio Code**)
+- Node **18.x.x** or above.
+## Initial Setup
+This guide will teach you how to create a Core Collection using Javascript based on a single file script. You may need to modify and move functions around to suit your needs.
+### Initializing the Project
+Start by initializing a new project (optional) with the package manager of your choice (npm, yarn, pnpm, bun) and fill in required details when prompted.
 ```js
 npm init
 ```
-
-### 필요한 패키지
-
-이 가이드에 필요한 패키지를 설치합니다.
-
+### Required Packages
+Install the required packages for this guide.
 {% packagesUsed packages=["umi", "umiDefaults", "core", "@metaplex-foundation/umi-uploader-irys"] type="npm" /%}
-
 ```js
 npm i @metaplex-foundation/umi
 ```
-
 ```js
 npm i @metaplex-foundation/umi-bundle-defaults
 ```
-
 ```js
 npm i @metaplex-foundation/mpl-core
 ```
-
 ```js
 npm i @metaplex-foundation/umi-uploader-irys;
 ```
-
-### 임포트 및 래퍼 함수
-
-여기서는 이 특정 가이드에 필요한 모든 임포트를 정의하고 모든 코드가 실행될 래퍼 함수를 생성합니다.
-
+### Imports and Wrapper Function
+Here we will define all needed imports for this particular guide and create a wrapper function where all our code will execute.
 ```ts
-import {
-  createCollection,
-  mplCore
+import { 
+  createCollection, 
+  mplCore 
 } from '@metaplex-foundation/mpl-core'
 import {
   createGenericFile,
@@ -82,30 +80,22 @@ import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 import path from 'path'
-
-// 래퍼 함수 생성
+// Create the wrapper function
 const createCollection = async () => {
   ///
   ///
-  ///  모든 코드가 여기에 들어갑니다
+  ///  all our code will go in here
   ///
   ///
 }
-
-// 래퍼 함수 실행
+// run the wrapper function
 createCollection()
 ```
-
-## Umi 설정
-
-Umi를 설정할 때 다양한 소스에서 키페어/지갑을 사용하거나 생성할 수 있습니다. 테스트용 새 지갑을 생성하거나, 파일시스템에서 기존 지갑을 가져오거나, 웹사이트/dApp을 만드는 경우 `walletAdapter`를 사용할 수 있습니다.
-
-**참고**: 이 예제에서는 `generatedSigner()`로 Umi를 설정하지만 아래에서 모든 가능한 설정을 찾을 수 있습니다!
-
+## Setting up Umi
+While setting up Umi you can use or generate keypairs/wallets from different sources. You create a new wallet for testing, import an existing wallet from the filesystem, or use `walletAdapter` if you are creating a website/dApp.  
+**Note**: For this example we're going to set up Umi with a `generatedSigner()` but you can find all the possible setup down below!
 {% totem %}
-
-{% totem-accordion title="새 지갑으로" %}
-
+{% totem-accordion title="With a New Wallet" %}
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -116,20 +106,14 @@ const umi = createUmi('https://api.devnet.solana.com')
       address: 'https://devnet.irys.xyz',
     })
   )
-
 const signer = generateSigner(umi)
-
 umi.use(signerIdentity(signer))
-
-// 이것은 테스트용으로만 devnet에서 SOL을 에어드롭합니다.
+// This will airdrop SOL on devnet only for testing.
 console.log('Airdropping 1 SOL to identity')
 await umi.rpc.airdrop(umi.identity.publickey)
 ```
-
 {% /totem-accordion %}
-
-{% totem-accordion title="기존 지갑으로" %}
-
+{% totem-accordion title="With an Existing Wallet" %}
 ```ts
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplCore())
@@ -140,95 +124,68 @@ const umi = createUmi('https://api.devnet.solana.com')
       address: 'https://devnet.irys.xyz',
     })
   )
-
-// 새 키페어 서명자 생성.
+// Generate a new keypair signer.
 const signer = generateSigner(umi)
-
-// fs를 사용하고 파일시스템을 탐색하여
-// 상대 경로를 통해 사용할 지갑을 로드해야 합니다.
+// You will need to us fs and navigate the filesystem to
+// load the wallet you wish to use via relative pathing.
 const walletFile = fs.readFileSync('./keypair.json')
-
-
-// walletFile을 키페어로 변환.
+  
+// Convert your walletFile onto a keypair.
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
-
-// 키페어를 umi에 로드.
+// Load the keypair into umi.
 umi.use(keypairIdentity(umiSigner));
 ```
-
 {% /totem-accordion %}
-
-{% totem-accordion title="Wallet Adapter로" %}
-
+{% totem-accordion title="With the Wallet Adapter" %}
 ```ts
 import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters'
 import { useWallet } from '@solana/wallet-adapter-react'
-
 const wallet = useWallet()
-
 const umi = createUmi('https://api.devnet.solana.com')
 .use(mplCore())
-// Wallet Adapter를 Umi에 등록
+// Register Wallet Adapter to Umi
 .use(walletAdapterIdentity(wallet))
 ```
-
 {% /totem-accordion %}
-
 {% /totem %}
-
-**참고**: `walletAdapter` 섹션은 이미 `walletAdapter`를 설치하고 설정했다고 가정하고 Umi에 연결하는 데 필요한 코드만 제공합니다. 포괄적인 가이드는 [이것](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)을 참조하세요.
-
-## 컬렉션 메타데이터 생성
-
-지갑이나 Explorer에서 컬렉션의 인식 가능한 이미지를 표시하려면 메타데이터를 저장할 수 있는 URI를 생성해야 합니다!
-
-### 이미지 업로드
-
-Umi는 `Arweave`, `NftStorage`, `AWS`, `ShdwDrive`와 같은 저장소 솔루션에 업로드할 수 있는 다운로드 가능한 저장소 플러그인과 함께 제공됩니다. 이 가이드에서는 Arweave에 콘텐츠를 저장하는 `irysUploader()` 플러그인을 사용할 것입니다.
-
-이 예제에서는 Irys를 사용하여 Arweave에 업로드하는 로컬 접근 방식을 사용할 것입니다. 다른 저장소 제공업체에 파일을 업로드하거나 브라우저에서 업로드하려면 다른 접근 방식을 취해야 합니다. `fs`를 가져와서 사용하는 것은 브라우저 시나리오에서는 작동하지 않습니다.
-
+**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+## Creating the Metadata for the Collection
+To display a recognisable image for your Collection in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
+### Uploading the Image
+Umi comes with downloadable storage plugins that allow you to upload to storage solutions such `Arweave`, `NftStorage`, `AWS`, and `ShdwDrive`. For this guide we're going to use the `irysUploader()` plugin which stores content on  Arweave.
+In this example we're going to use a local approach using Irys to upload to Arweave; if you wish to upload files to a different storage provider or from the browser you will need to take a different approach. Importing and using `fs` won't work in a browser scenario.
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
 import fs from 'fs'
 import path from 'path'
-
-// Umi를 생성하고 Irys를 사용하도록 지시
+// Create Umi and tell it to use Irys
 const umi = createUmi('https://api.devnet.solana.com')
   .use(irysUploader())
-
-// `fs`를 사용하여 문자열 경로를 통해 파일을 읽습니다.
-// 컴퓨팅 관점에서 경로 개념을 이해해야 합니다.
+// use `fs` to read file via a string path.
+// You will need to understand the concept of pathing from a computing perspective.
 const imageFile = fs.readFileSync(
   path.join(__dirname, '..', '/assets/my-image.jpg')
 )
-
-// `createGenericFile`을 사용하여 파일을 umi가 이해할 수 있는
-// `GenericFile` 타입으로 변환합니다. 올바른 미미 태그 타입을 설정해야
-// 하며 그렇지 않으면 Arweave가 이미지를 표시하는 방법을 알 수 없습니다.
+// Use `createGenericFile` to transform the file into a `GenericFile` type
+// that umi can understand. Make sure you set the mimi tag type correctly
+// otherwise Arweave will not know how to display your image.
 const umiImageFile = createGenericFile(imageFile, 'my-image.jpeg', {
   tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
 })
-
-// 여기서 Irys를 통해 이미지를 Arweave에 업로드하고 파일이
-// 위치한 uri 주소를 반환받습니다. 이것을 로그아웃할 수 있지만
-// 업로더가 파일 배열을 받을 수 있으므로 uri 배열도 반환합니다.
-// 원하는 uri를 얻으려면 배열에서 인덱스 [0]을 호출할 수 있습니다.
+// Here we upload the image to Arweave via Irys and we get returned a uri
+// address where the file is located. You can log this out but as the
+// uploader can takes an array of files it also returns an array of uris.
+// To get the uri we want we can call index [0] in the array.
 const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
   throw new Error(err)
 })
-
 console.log(imageUri[0])
 ```
-
-### 메타데이터 업로드
-
-유효하고 작동하는 이미지 URI가 있으면 컬렉션의 메타데이터 작업을 시작할 수 있습니다.
-
-대체 가능한 토큰의 오프체인 메타데이터 표준은 다음과 같습니다. 이것을 채우고 JavaScript 없이 객체 `{}`에 쓰거나 `metadata.json` 파일에 저장해야 합니다.
-JavaScript 객체 접근 방식을 살펴보겠습니다.
-
+### Uploading the Metadata
+Once we have a valid and working image URI we can start working on the metadata for our collection.
+The standard for offchain metadata for a fungible token is as follows. This should be filled out and writen to either an object `{}` without Javascript or saved to a `metadata.json` file.
+We are going to look at the JavaScript object approach.
 ```ts
 const metadata = {
   name: 'My Collection',
@@ -246,52 +203,39 @@ const metadata = {
   },
 }
 ```
-
-여기의 필드들은 다음을 포함합니다:
-
-| 필드          | 설명                                                                                                                                                                                      |
+The fields here include:
+| field         | description                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name          | 컬렉션의 이름.                                                                                                                                                                              |
-| description   | 컬렉션의 설명.                                                                                                                                                                               |
-| image         | 이전에 업로드한 `imageUri`(또는 이미지의 온라인 위치)로 설정됩니다.                                                                                                                           |
-| animation_url | 업로드한 `animation_ulr`(또는 비디오/glb의 온라인 위치)로 설정됩니다.                                                                                                                        |
-| external_url  | 선택한 외부 주소에 링크됩니다. 일반적으로 프로젝트 웹사이트입니다.                                                                                                                           |
-| image         | 이전에 업로드한 `imageUri`(또는 이미지의 온라인 위치)로 설정됩니다.                                                                                                                           |
-| properties    | `{uri: string, type: mimeType}`의 `[] 배열`을 받는 `files` 필드를 포함합니다. 또한 `image`, `audio`, `video`, `vfx`, `html`로 설정할 수 있는 category 필드도 포함합니다.                   |
-
-메타데이터를 생성한 후 컬렉션에 첨부할 URI를 얻기 위해 JSON 파일로 업로드해야 합니다. 이를 위해 Umi의 `uploadJson()` 함수를 사용합니다:
-
+| name          | The name of your Collection.                                                                                                                                                              |
+| description   | The description of your Collection.                                                                                                                                                       |
+| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
+| animation_url | This will be set to the `animation_ulr` (or any online location of the video/glb) that you've uploaded.                                                                                   |
+| external_url  | This would link to an external address of your choice. This is normally the projects website.                                                                                             |
+| image         | This will be set to the `imageUri` (or any online location of the image) that we uploaded previously.                                                                                     |
+| properties    | Contains the `files` field that takes an `[] array` of `{uri: string, type: mimeType}`. Also contains the category field which can be set to `image`, `audio`, `video`, `vfx`, and `html` |
+After creating the metadata, we need to upload it as a JSON file, so we can get a URI to attach to our Collection. To do this, we'll use Umi's `uploadJson()` function:
 ```js
-// Umi의 `uploadJson()` 함수를 호출하여 Irys를 통해 메타데이터를 Arweave에 업로드합니다.
+// Call upon Umi's `uploadJson()` function to upload our metadata to Arweave via Irys.
 const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
   throw new Error(err)
 })
 ```
-
-이 함수는 업로드하기 전에 JavaScript 객체를 JSON으로 자동 변환합니다.
-
-이제 오류가 발생하지 않았다면 마침내 `metadataUri`에 저장된 JSON 파일의 URI를 가져야 합니다.
-
-### Core 컬렉션 민팅
-
-여기서부터 `@metaplex-foundation/mpl-core` 패키지의 `createCollection` 함수를 사용하여 Core NFT 자산을 생성할 수 있습니다.
-
+This function automatically converts our JavaScript object to JSON before uploading.
+Now we should finally have the URI of JSON file stored in the `metadataUri` providing it did not throw any errors.
+### Minting the Core Collection
+From here we can use the `createCollection` function from the `@metaplex-foundation/mpl-core` package to create our Core NFT Asset.
 ```ts
 const collection = generateSigner(umi)
-
 const tx = await createCollection(umi, {
   collection,
   name: 'My Collection',
   uri: metadataUri,
 }).sendAndConfirm(umi)
-
 const signature = base58.deserialize(tx.signature)[0]
 ```
-
-그리고 다음과 같이 세부사항을 로그아웃합니다:
-
+And log out the detail as follow: 
 ```ts
-// 서명과 트랜잭션 및 NFT 링크를 로그아웃합니다.
+// Log out the signature and the links to the transaction and the NFT.
 console.log('\nCollection Created')
 console.log('View Transaction on Solana Explorer')
 console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
@@ -299,18 +243,12 @@ console.log('\n')
 console.log('View Collection on Metaplex Explorer')
 console.log(`https://core.metaplex.com/explorer/${collection.publicKey}?env=devnet`)
 ```
-
-### 추가 작업
-
-계속하기 전에, `FreezeDelegate` 플러그인이나 `AppData` 외부 플러그인과 같은 플러그인 및/또는 외부 플러그인이 이미 포함된 컬렉션을 생성하려면 어떻게 해야 할까요? 다음과 같이 할 수 있습니다.
-
-`createCollection()` 인스트럭션은 `plugins` 필드를 통해 일반 및 외부 플러그인 추가를 지원합니다. 따라서 특정 플러그인에 필요한 모든 필드를 쉽게 추가할 수 있으며 모든 것이 인스트럭션에 의해 처리됩니다.
-
-다음은 수행 방법의 예입니다:
-
+### Additional Actions
+Before moving on, what if we want to create a collection with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
+The `createCollection()` instruction supports adding both normal and external plugin through the `plugins` field. So we can just easily add all the required field for the specific plugins, and everything it will be handled by the instruction.
+Here's an example on how to do it:
 ```typescript
 const collection = generateSigner(umi)
-
 const tx = await createCollection(umi, {
   collection: collection,
   name: 'My Collection',
@@ -325,19 +263,15 @@ const tx = await createCollection(umi, {
       type: "AppData",
       dataAuthority: { type: "UpdateAuthority"},
       schema: ExternalPluginAdapterSchema.Binary,
-    }
+    }           
   ]
 }).sendAndConfirm(umi)
-
 const signature = base58.deserialize(tx.signature)[0]
 ```
-
-**참고**: 사용할 필드와 플러그인이 확실하지 않다면 [문서](/ko/smart-contracts/core/plugins)를 참조하세요!
-
-## 전체 코드 예제
-
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
+## Full Code Example
 ```ts
-import {
+import { 
   createCollection,
   mplCore,
 } from '@metaplex-foundation/mpl-core'
@@ -351,46 +285,34 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { base58 } from '@metaplex-foundation/umi/serializers'
 import fs from 'fs'
 import path from 'path'
-
 const createCollection = async () => {
   //
-  // ** Umi 설정 **
+  // ** Setting Up Umi **
   //
-
   const umi = createUmi('https://api.devnet.solana.com')
     .use(mplCore())
     .use(irysUploader({address: 'https://devnet.irys.xyz'}))
-
   const signer = generateSigner(umi)
-
   umi.use(signerIdentity(signer))
-
-
+  
   console.log('Airdropping 1 SOL to identity')
   await umi.rpc.airdrop(umi.identity.publicKey, sol(1))
-
   //
-  // ** Arweave에 이미지 업로드 **
+  // ** Upload an image to Arweave **
   //
-
   const imageFile = fs.readFileSync(
     path.join(__dirname, '..', '/assets/my-image.jpg')
   )
-
   const umiImageFile = createGenericFile(imageFile, 'my-image.jpeg', {
     tags: [{ name: 'Content-Type', value: 'image/jpeg' }],
   })
-
   const imageUri = await umi.uploader.upload([umiImageFile]).catch((err) => {
     throw new Error(err)
   })
-
   console.log('imageUri: ' + imageUri[0])
-
   //
-  // ** Arweave에 메타데이터 업로드 **
+  // ** Upload Metadata to Arweave **
   //
-
   const metadata = {
     name: 'My Collection',
     description: 'This is a Collection on Solana',
@@ -406,27 +328,21 @@ const createCollection = async () => {
       category: 'image',
     },
   }
-
   console.log('Uploading Metadata...')
   const metadataUri = await umi.uploader.uploadJson(metadata).catch((err) => {
     throw new Error(err)
   })
-
   //
-  // ** 컬렉션 생성 **
+  // ** Creating the Collection **
   //
-
   const collection = generateSigner(umi)
-
   console.log('Creating Collection...')
   const tx = await createCollection(umi, {
     collection,
     name: 'My Collection',
     uri: metadataUri,
   }).sendAndConfirm(umi)
-
   const signature = base58.deserialize(tx.signature)[0]
-
   console.log('\Collection Created')
   console.log('View Transaction on Solana Explorer')
   console.log(`https://explorer.solana.com/tx/${signature}?cluster=devnet`)
@@ -434,6 +350,5 @@ const createCollection = async () => {
   console.log('View NFT on Metaplex Explorer')
   console.log(`https://core.metaplex.com/explorer/${nftSigner.publicKey}?env=devnet`)
 }
-
 createCollection()
 ```

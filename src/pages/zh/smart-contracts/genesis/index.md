@@ -1,157 +1,161 @@
 ---
-title: 概述
-metaTitle: Genesis - 概述
-description: 用于通过预售和发行池在Solana上发行代币的智能合约。
+title: Genesis - Solana 代币发行智能合约
+metaTitle: Genesis | Solana TGE 与代币发行平台 | 公平发射 | Metaplex
+description: 使用 Genesis 智能合约在 Solana 上发行代币。构建代币生成事件 (TGE)、公平发射、ICO、定价销售和 Launch Pool 的链上解决方案。
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - token launch
+  - TGE
+  - token generation event
+  - fair launch
+  - ICO
+  - launch pool
+  - presale
+  - Solana token
+about:
+  - Token launches
+  - Genesis protocol
+  - Fair distribution
+proficiencyLevel: Beginner
+faqs:
+  - q: 什么是 Genesis？
+    a: Genesis 是 Metaplex 为 Solana 上的代币生成事件 (TGE) 开发的智能合约。它为 Presale、Launch Pool 和拍卖提供链上基础设施。
+  - q: Genesis 支持哪些发行机制？
+    a: Genesis 支持三种机制 - Presale（固定价格）、Launch Pool（按比例分配与价格发现）和统一价格拍卖（基于出价的清算价格）。
+  - q: 使用 Genesis 需要多少费用？
+    a: Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 的协议费用。没有前期成本——您只需支付 Solana 交易费用以及募集资金的协议费用。
+  - q: 发行后可以撤销代币权限吗？
+    a: 可以。Genesis 提供了撤销铸造权限和冻结权限的指令，向持有者表明不会再铸造额外的代币。
+  - q: Launch Pool 和 Presale 有什么区别？
+    a: Presale 预先设定固定价格。Launch Pool 根据总存款有机地发现价格——存款越多意味着每个代币的隐含价格越高。
 ---
 
-Genesis是Metaplex智能合约，为Solana区块链上的**代币生成事件（TGE）**提供灵活的框架。无论您是通过预售发行新代币还是构建自定义代币分发系统，Genesis都提供链上基础设施来实现这一切。
+**Genesis** 是 Metaplex 为 Solana 上的**代币生成事件 (TGE)** 开发的智能合约。构建 Presale、Launch Pool 和拍卖，通过链上协调实现代币创建、分发和资金收集。{% .lead %}
 
-## 使用Genesis可以构建什么？
+{% callout title="选择您的路径" %}
+- **刚接触 Genesis？** 从[快速入门](/zh/smart-contracts/genesis/getting-started)开始了解流程
+- **准备好构建了？** 直接跳转到 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)
+- **需要 SDK 参考？** 查看 [JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)
+{% /callout %}
 
-Genesis支持多种发行机制，可以组合创建自定义代币发行体验：
+## 什么是 Genesis？
 
-| 机制 | 描述 | 优势 |
-|-----------|-------------|----------|
-| **预售** | 固定价格代币销售 | 固定价格降低了复杂性和投机。先到先得的动态鼓励早期参与。通过准确的需求预测获得更可预测的结果。如果需要可以实施上限和钱包门槛。 |
-| **发行池** | 无固定价格——最终价格由结束时的总存款隐含确定 | 通过无上限实现有机价格发现。通过无门槛允许整个生态系统参与。基于时间的发行池防止抢购和抢跑，具有更开放/可访问的访问。如果需要可以实施上限和钱包门槛。 |
-| **统一价格拍卖** | 基于时间的拍卖，用户以特定价格竞标特定数量的代币。出价可以是公开的或私密的。所有获胜者以清算价格获得代币。 | 特别是在大户/基金中促进价格发现。可以设置门槛或不设门槛。 |
+Genesis 为在 Solana 上发行代币提供链上基础设施。它处理：
 
-### 示例用例：发行池
+- **代币创建**，包含元数据（名称、符号、图片）
+- **资金收集**，来自参与者（SOL 存款）
+- **分发**，基于您选择的机制
+- **时间协调**，用于存款和领取窗口
 
-一个项目想要发行代币，其中：
-1. 用户在发行池期间存入SOL
-2. 存款期结束后，代币按存款比例分配
-3. 收集的SOL发送到解锁桶供团队领取
+将 Genesis 视为一个智能合约，它位于您（发行方）和参与者之间，确保公平、透明和自动化的代币分发。
 
-Genesis使整个流程可以通过单一协调的链上系统实现。
+## 发行机制
+
+Genesis 支持三种可以组合使用的机制：
+
+| 机制 | 价格 | 分发方式 | 最适合 |
+|-----------|-------|--------------|----------|
+| **[Launch Pool](/zh/smart-contracts/genesis/launch-pool)** | 结束时发现 | 按存款比例 | 公平发射、社区代币 |
+| **[Presale](/zh/smart-contracts/genesis/presale)** | 预先固定 | 先到先得 | 可预测的募集、已知估值 |
+| **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** | 清算价格 | 最高出价者获胜 | 大规模募集、机构兴趣 |
+
+### 我应该使用哪种？
+
+**Launch Pool** - 您想要有机的价格发现和公平分配。每个存款的人都能按其份额比例获得代币。没有人会被抢先交易。
+
+**Presale** - 您知道估值并希望价格可预测。设定固定价格，让参与者购买直到达到上限。
+
+**拍卖** - 您希望大型参与者进行竞价。最适合有机构兴趣的成熟项目。
 
 ## 核心概念
 
-### Genesis账户
+### Genesis Account
 
-Genesis账户是您代币发行的中央协调者。当您初始化Genesis账户时，您正在创建：
+您发行活动的中央协调器。当您初始化 Genesis Account 时，它会：
 
-- 带有元数据（名称、符号、URI）的新SPL代币
-- 持有所有铸造代币的主账户
-- 添加控制代币分配方式的"桶"的基础
+- 创建带有元数据的 SPL token
+- 将总供应量铸造到托管账户
+- 为添加分发 Bucket 提供基础
 
-将Genesis账户视为代币发行的"大脑"——它管理代币供应并协调所有不同的分配机制。
+### Bucket
 
-### 桶
+定义代币和资金如何流动的模块化组件：
 
-桶是定义代币如何在您的发行中流入和流出的模块化组件。有两种类型：
+| 类型 | 用途 | 示例 |
+|------|---------|----------|
+| **流入** | 从用户收集 SOL | Launch Pool、Presale |
+| **流出** | 为团队/金库接收资金 | 解锁 Bucket |
 
-**流入桶**从用户收集报价代币（通常是SOL）：
-- **发行池桶**：在窗口期间收集存款，按比例分配代币
+### 时间条件
 
-**流出桶**接收代币或报价代币：
-- **解锁桶**：通过结束行为接收报价代币，供团队/财库领取
+每个 Bucket 都有控制何时允许操作的时间窗口：
 
-每个桶都有可配置的时间条件来控制其何时激活，以及在满足条件时执行的行为。
+- **存款窗口** - 用户可以存入 SOL 的时间
+- **领取窗口** - 用户可以领取代币的时间
 
-### 代币流
+## 协议费用
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Genesis账户                              │
-│                   (持有所有代币)                              │
-└─────────────────────────────────────────────────────────────┘
-                            │
-                ┌───────────┴───────────┐
-                ▼                       ▼
-         ┌─────────────┐         ┌─────────────┐
-         │  发行池     │────────▶│   解锁      │
-         │    桶       │         │    桶       │
-         │  (存款)     │         │  (财库)     │
-         └─────────────┘         └─────────────┘
-                │                       │
-                ▼                       ▼
-             用户                     团队
-          存入SOL                   领取SOL
-```
+| 操作 | 费用 |
+|--------|-----|
+| 存款 | 存款金额的 {% fee product="genesis" config="launchPool" fee="deposit" /%} |
+| 提款 | 提款金额的 {% fee product="genesis" config="launchPool" fee="withdraw" /%} |
+| 领取 | 仅交易费用 |
 
-## 典型发行流程
+没有前期成本。您只需为募集的资金支付费用。
 
-以下是典型代币发行的进展方式：
+## 程序信息
 
-### 1. 设置阶段
-```
-初始化Genesis账户
-        ↓
-添加流入桶（例如发行池）
-        ↓
-添加流出桶（例如用于财库的解锁桶）
-        ↓
-最终确定Genesis账户
-```
+| 网络 | Program ID |
+|---------|------------|
+| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
 
-### 2. 活动阶段
-```
-存款期：用户存入SOL
-        ↓
-存款期结束
-        ↓
-转换：执行结束行为（将SOL发送到解锁桶）
-        ↓
-领取期：用户按其存款权重比例领取代币
-```
+## 安全性
 
-### 3. 发行后
-```
-团队从解锁桶领取SOL
-        ↓
-撤销铸币/冻结权限
-```
+发行完成后，撤销代币权限以表明不会再铸造额外的代币：
 
-## 撤销权限
+- **铸造权限** - 撤销以防止铸造新代币
+- **冻结权限** - 撤销以防止冻结代币
 
-发行完成后，您可以撤销代币的铸币和冻结权限。这向持有者和检查工具表明不能铸造更多代币且代币不能被冻结。
+有关权限管理的详细信息，请参阅[快速入门](/zh/smart-contracts/genesis/getting-started)。
 
-{% callout type="warning" %}
-**权限撤销是不可逆的。** 一旦撤销，您将永远无法铸造额外的代币或冻结代币账户。只有在确定代币发行完成后才执行此操作。
-{% /callout %}
+## 常见问题
 
-```typescript
-import { revokeMintAuthorityV2, revokeFreezeAuthorityV2 } from '@metaplex-foundation/genesis';
+### 什么是 Genesis？
+Genesis 是 Metaplex 为 Solana 上的代币生成事件 (TGE) 开发的智能合约。它为 Presale、Launch Pool 和拍卖提供链上基础设施，实现协调的代币创建和分发。
 
-// 撤销铸币权限 - 永远不能再铸造代币
-await revokeMintAuthorityV2(umi, {
-  baseMint: baseMint.publicKey,
-}).sendAndConfirm(umi);
+### Genesis 支持哪些发行机制？
+Genesis 支持三种机制：**Launch Pool**（按比例分配与价格发现）、**Presale**（固定价格）和**统一价格拍卖**（基于出价的清算价格）。
 
-// 撤销冻结权限 - 代币永远不能被冻结
-await revokeFreezeAuthorityV2(umi, {
-  baseMint: baseMint.publicKey,
-}).sendAndConfirm(umi);
-```
+### 使用 Genesis 需要多少费用？
+Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 的协议费用。没有前期成本——您只需支付 Solana 交易费用以及募集资金的协议费用。
 
-## 主要功能
+### 发行后可以撤销代币权限吗？
+可以。Genesis 提供 `revokeMintAuthorityV2` 和 `revokeFreezeAuthorityV2` 指令来永久撤销权限。
 
-### 基于时间的条件
-每个桶都有基于绝对时间戳的可配置开始和结束条件。这允许您：
-- 安排确切的发行时间
-- 创建定时阶段（存款期、领取期等）
-- 以精确的时间协调多个桶
+### Launch Pool 和 Presale 有什么区别？
+**Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。
 
-### 结束行为
-当桶的结束条件满足时执行的自动操作：
-- **SendQuoteTokenPercentage**：将收集的SOL的一定百分比转移到另一个桶
+### 我可以组合多种发行机制吗？
+可以。Genesis 使用 Bucket 系统，您可以添加多个流入 Bucket 并配置用于金库或归属的流出 Bucket。
 
-## 安全注意事项
+## 术语表
 
-{% callout type="warning" %}
-**最终确定是永久的**：一旦您最终确定Genesis账户，您就不能再添加更多的桶。在最终确定之前确保您的配置完整。
-{% /callout %}
+| 术语 | 定义 |
+|------|------------|
+| **Genesis Account** | 创建代币并管理所有 Bucket 的中央协调器 |
+| **Bucket** | 定义代币/SOL 流向的模块化组件 |
+| **流入 Bucket** | 从用户收集 SOL 的 Bucket |
+| **流出 Bucket** | 通过结束行为接收资金的 Bucket |
+| **Launch Pool** | 基于存款的分发，价格在结束时发现 |
+| **Presale** | 以预定价格进行的固定价格销售 |
+| **Quote Token** | 用户存入的代币（通常是 wSOL） |
+| **Base Token** | 正在发行和分发的代币 |
 
 ## 后续步骤
 
-准备好构建您的代币发行了吗？从这里开始：
-
-- [快速开始](/zh/smart-contracts/genesis/getting-started) - 了解发行流程并初始化您的第一个Genesis账户
-- [JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript) - 安装和配置SDK
-
-然后选择您的发行类型：
-
-- [发行池](/zh/smart-contracts/genesis/launch-pool) - 带存款窗口的代币分配
-- [预售](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
-- [统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction) - 具有统一清算价格的基于时间的拍卖
+1. **[快速入门](/zh/smart-contracts/genesis/getting-started)** - 了解 Genesis 流程
+2. **[JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)** - 安装和设置
+3. **[Launch Pool](/zh/smart-contracts/genesis/launch-pool)** - 构建按比例分配的发行
+4. **[Presale](/zh/smart-contracts/genesis/presale)** - 构建固定价格销售

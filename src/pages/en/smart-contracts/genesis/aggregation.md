@@ -1,10 +1,53 @@
 ---
 title: Aggregation API
-metaTitle: Genesis - Aggregation API
-description: Public API for querying Genesis launch data by genesis address or token mint.
+metaTitle: Genesis - Aggregation API | Launch Data | Metaplex
+description: Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis API
+  - aggregation API
+  - launch data
+  - token queries
+  - on-chain state
+about:
+  - API integration
+  - Data aggregation
+  - Launch information
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What's the difference between the API and on-chain fetching?
+    a: The API returns aggregated metadata (socials, images). On-chain fetching via the SDK returns real-time state like deposit totals and time conditions.
+  - q: How do I get real-time deposit totals?
+    a: Use fetchLaunchPoolBucketV2 or fetchPresaleBucketV2 from the Genesis SDK to read current on-chain state.
+  - q: Can I query time conditions for a bucket?
+    a: Yes. Fetch the bucket account and access depositStartCondition, depositEndCondition, claimStartCondition, and claimEndCondition.
+  - q: How do I check if a user has deposited?
+    a: Use safeFetchLaunchPoolDepositV2 or safeFetchPresaleDepositV2 with the deposit PDA. It returns null if no deposit exists.
 ---
 
-The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application.
+The Genesis API allows aggregators and applications to query launch data from Genesis token launches. Use these endpoints to display launch information, token metadata, and social links in your application. {% .lead %}
+
+{% callout title="What You'll Learn" %}
+This reference covers:
+- HTTP API endpoints for launch metadata
+- On-chain state fetching with the JavaScript SDK
+- TypeScript and Rust type definitions
+- Real-time bucket and deposit state
+{% /callout %}
+
+## Summary
+
+Access Genesis data through the HTTP API for metadata or the SDK for real-time on-chain state.
+
+- HTTP API returns launch info, token metadata, socials
+- SDK provides real-time state: deposits, counts, time conditions
+- No authentication required for HTTP API
+- On-chain fetching requires Umi and the Genesis SDK
 
 {% callout type="note" %}
 The API is public with rate limits. No authentication is required.
@@ -354,3 +397,33 @@ if (deposit) {
   console.log('Claimed:', deposit.claimed);
 }
 ```
+
+## FAQ
+
+### What's the difference between the API and on-chain fetching?
+The API returns aggregated metadata (socials, images). On-chain fetching via the SDK returns real-time state like deposit totals and time conditions.
+
+### How do I get real-time deposit totals?
+Use `fetchLaunchPoolBucketV2` or `fetchPresaleBucketV2` from the Genesis SDK to read current on-chain state.
+
+### Can I query time conditions for a bucket?
+Yes. Fetch the bucket account and access `depositStartCondition`, `depositEndCondition`, `claimStartCondition`, and `claimEndCondition`.
+
+### How do I check if a user has deposited?
+Use `safeFetchLaunchPoolDepositV2` or `safeFetchPresaleDepositV2` with the deposit PDA. It returns null if no deposit exists.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Aggregation** | Collecting and normalizing data from multiple sources |
+| **Bucket State** | Current on-chain data including deposit totals and counts |
+| **Time Condition** | Unix timestamp controlling when a phase starts or ends |
+| **Deposit PDA** | Program-derived address storing a user's deposit record |
+| **safeFetch** | Fetch variant that returns null instead of throwing on missing accounts |
+
+## Next Steps
+
+- [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) - Full SDK setup and configuration
+- [API Reference](/smart-contracts/genesis/api) - HTTP API endpoint details
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution setup

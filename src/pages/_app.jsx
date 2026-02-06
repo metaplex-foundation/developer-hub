@@ -35,6 +35,20 @@ function AppContent({ Component, pageProps }) {
         metaTitle={page.metaTitle}
         locale={page.locale}
         product={page.product?.path}
+        productName={page.product?.name}
+        navigationGroup={page.activeSection?.navigationGroup?.title}
+        sectionTitle={page.activeSection?.title}
+        created={page.created}
+        updated={page.updated}
+        isHomePage={page.pathname === '/'}
+        // Enhanced JSON-LD schema fields
+        keywords={page.keywords}
+        about={page.about}
+        proficiencyLevel={page.proficiencyLevel}
+        programmingLanguage={page.programmingLanguage}
+        howToSteps={page.howToSteps}
+        howToTools={page.howToTools}
+        faqs={page.faqs}
       />
 
       <DialectProvider>

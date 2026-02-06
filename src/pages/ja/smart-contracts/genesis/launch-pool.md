@@ -1,36 +1,300 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool
-description: ユーザーが期間中に預金し、比例的にトークンを受け取るトークン配布方式。
+metaTitle: Genesis - Launch Pool | 公平なトークン配布 | Metaplex
+description: ユーザーがウィンドウ期間中に入金し、比例配分でトークンを受け取るトークン配布方式。スナイピング対策設計による自然な価格発見メカニズム。
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - launch pool
+  - token distribution
+  - fair launch
+  - proportional distribution
+  - deposit window
+  - price discovery
+about:
+  - Launch pools
+  - Price discovery
+  - Token distribution
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - トークンを使用して Genesis Account を初期化する
+  - 入金ウィンドウ設定を持つ Launch Pool bucket を追加する
+  - 集めた資金を受け取る Unlocked bucket を追加する
+  - ファイナライズし、ユーザーがウィンドウ期間中に入金できるようにする
+howToTools:
+  - Node.js
+  - Umi framework
+  - Genesis SDK
+faqs:
+  - q: Launch Pool でトークン価格はどのように決まりますか？
+    a: 価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
+  - q: ユーザーは入金を引き出せますか？
+    a: はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
+  - q: 複数回入金するとどうなりますか？
+    a: 同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。
+  - q: ユーザーはいつトークンを請求できますか？
+    a: 入金期間が終了し、請求ウィンドウが開いた後（claimStartCondition で定義）に請求できます。End Behavior を処理するために、先に Transition を実行する必要があります。
+  - q: Launch Pool と Presale の違いは何ですか？
+    a: Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、上限に達するまで先着順で割り当てられます。
 ---
 
-Launch Poolは、自然な価格発見と限定的なスナイピングやフロントランニングのために設計されたトークンローンチメカニズムです。ユーザーは指定された期間中に預金し、期間終了時に総預金額に対する自分のシェアに比例してトークンを受け取ります。
+**Launch Pool** はトークンローンチのための自然な価格発見メカニズムを提供します。ユーザーはウィンドウ期間中に入金し、総入金額に対する自分のシェアに比例してトークンを受け取ります。スナイピングなし、フロントランニングなし、全員にとって公平な配布です。 {% .lead %}
 
-仕組み：
-
-1. 特定数量のトークンがLaunch Poolコントラクトに割り当てられます。Launch Poolは設定された期間中オープンしています。
-2. Launch Poolがオープンしている間、ユーザーはSOLを預金または出金できます（出金手数料が適用されます）。
-3. Launch Pool終了時、各ユーザーの総預金額に対するシェアに基づいてトークンが配布されます。
+{% callout title="学べること" %}
+このガイドでは以下を説明します：
+- Launch Pool の価格設定と配布の仕組み
+- 入金ウィンドウと請求ウィンドウの設定方法
+- 資金回収のための End Behavior の設定
+- ユーザー操作：入金、引き出し、請求
+{% /callout %}
 
 ## 概要
 
-Launch Poolのライフサイクル：
+Launch Pool は定義されたウィンドウ期間中に入金を受け付け、その後トークンを比例配分で配布します。最終的なトークン価格は、総入金額をトークン割り当て量で割って決定されます。
 
-1. **預金期間** - ユーザーが定められた期間中にSOLを預金
-2. **トランジション** - 終了動作を実行（例：収集されたSOLを別のバケットに送信）
-3. **請求期間** - ユーザーが預金比重に比例してトークンを請求
+- ユーザーは入金ウィンドウ期間中に SOL を入金します（{% fee product="genesis" config="launchPool" fee="deposit" /%} の手数料が適用）
+- 入金期間中は引き出しが可能です（{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料）
+- トークン配布は入金シェアに比例します
+- End Behavior が集められた SOL をトレジャリー bucket にルーティングします
+
+## 対象外
+
+固定価格販売（[Presale](/smart-contracts/genesis/presale) を参照）、入札ベースのオークション（[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を参照）、流動性プール作成（Raydium/Orca を使用）。
+
+## クイックスタート
+
+{% totem %}
+{% totem-accordion title="完全なセットアップスクリプトを表示" %}
+
+これは入金ウィンドウと請求ウィンドウを持つ Launch Pool のセットアップ方法を示しています。ユーザー向けアプリの構築については、[ユーザー操作](#ユーザー操作)を参照してください。
+
+```typescript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
+import {
+  genesis,
+  initializeV2,
+  findGenesisAccountV2Pda,
+  addLaunchPoolBucketV2,
+  findLaunchPoolBucketV2Pda,
+  addUnlockedBucketV2,
+  findUnlockedBucketV2Pda,
+  finalizeV2,
+  NOT_TRIGGERED_TIMESTAMP,
+} from '@metaplex-foundation/genesis';
+import { generateSigner, publicKey } from '@metaplex-foundation/umi';
+
+async function setupLaunchPool() {
+  const umi = createUmi('https://api.mainnet-beta.solana.com')
+    .use(mplToolbox())
+    .use(genesis());
+
+  // umi.use(keypairIdentity(yourKeypair));
+
+  const baseMint = generateSigner(umi);
+  const backendSigner = generateSigner(umi);
+  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+
+  // 1. Initialize
+  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
+    baseMint: baseMint.publicKey,
+    genesisIndex: 0,
+  });
+
+  await initializeV2(umi, {
+    baseMint,
+    fundingMode: 0,
+    totalSupplyBaseToken: TOTAL_SUPPLY,
+    name: 'My Token',
+    symbol: 'MTK',
+    uri: 'https://example.com/metadata.json',
+  }).sendAndConfirm(umi);
+
+  // 2. Define timing
+  const now = BigInt(Math.floor(Date.now() / 1000));
+  const depositStart = now + 60n;
+  const depositEnd = now + 86400n; // 24 hours
+  const claimStart = depositEnd + 1n;
+  const claimEnd = claimStart + 604800n; // 1 week
+
+  // 3. Derive bucket PDAs
+  const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+
+  // 4. Add Launch Pool bucket
+  await addLaunchPoolBucketV2(umi, {
+    genesisAccount,
+    baseMint: baseMint.publicKey,
+    baseTokenAllocation: TOTAL_SUPPLY,
+    depositStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: depositStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    depositEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: depositEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    minimumDepositAmount: null,
+    endBehaviors: [
+      {
+        __kind: 'SendQuoteTokenPercentage',
+        padding: Array(4).fill(0),
+        destinationBucket: publicKey(unlockedBucket),
+        percentageBps: 10000, // 100%
+        processed: false,
+      },
+    ],
+  }).sendAndConfirm(umi);
+
+  // 5. Add Unlocked bucket (receives SOL after transition)
+  await addUnlockedBucketV2(umi, {
+    genesisAccount,
+    baseMint: baseMint.publicKey,
+    baseTokenAllocation: 0n,
+    recipient: umi.identity.publicKey,
+    claimStartCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimStart,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    claimEndCondition: {
+      __kind: 'TimeAbsolute',
+      padding: Array(47).fill(0),
+      time: claimEnd,
+      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+    },
+    backendSigner: { signer: backendSigner.publicKey },
+  }).sendAndConfirm(umi);
+
+  // 6. Finalize
+  await finalizeV2(umi, {
+    baseMint: baseMint.publicKey,
+    genesisAccount,
+  }).sendAndConfirm(umi);
+
+  console.log('Launch Pool active!');
+  console.log('Token:', baseMint.publicKey);
+  console.log('Genesis:', genesisAccount);
+}
+
+setupLaunchPool().catch(console.error);
+```
+
+{% /totem-accordion %}
+{% /totem %}
+
+## 仕組み
+
+1. 特定量のトークンが Launch Pool bucket に割り当てられます
+2. ユーザーは入金ウィンドウ期間中に SOL を入金します（手数料付きで引き出し可能）
+3. ウィンドウが閉じると、入金シェアに基づいてトークンが比例配分されます
+
+### 価格発見
+
+トークン価格は総入金額から決まります：
+
+```
+tokenPrice = totalDeposits / tokenAllocation
+userTokens = (userDeposit / totalDeposits) * tokenAllocation
+```
+
+**例：** 1,000,000 トークンが割り当てられ、総入金額が 100 SOL の場合 = 1トークンあたり 0.0001 SOL
+
+### ライフサイクル
+
+1. **入金期間** - ユーザーは定義されたウィンドウ期間中に SOL を入金します
+2. **Transition** - End Behavior が実行されます（例：集められた SOL を別の bucket に送信）
+3. **請求期間** - ユーザーは入金の重みに比例してトークンを請求します
 
 ## 手数料
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-預金手数料の例：10 SOLの預金で9.8 SOLがユーザーの預金アカウントに計上されます。
+入金手数料の例：ユーザーが 10 SOL を入金すると、ユーザーの入金アカウントには 9.8 SOL がクレジットされます。
 
-## Launch Poolのセットアップ
+## セットアップガイド
 
-このガイドは、すでにGenesisアカウントを初期化していることを前提としています。初期化手順は[はじめに](/ja/smart-contracts/genesis/getting-started)を参照してください。
+### 前提条件
 
-### 1. Launch Poolバケットの追加
+{% totem %}
+
+```bash
+npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
+```
+
+{% /totem %}
+
+### 1. Genesis Account の初期化
+
+Genesis Account はトークンを作成し、すべての配布 bucket を調整します。
+
+{% totem %}
+
+```typescript
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
+import {
+  genesis,
+  initializeV2,
+  findGenesisAccountV2Pda,
+} from '@metaplex-foundation/genesis';
+import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
+
+const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
+  .use(genesis());
+
+// umi.use(keypairIdentity(yourKeypair));
+
+const baseMint = generateSigner(umi);
+const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
+
+const [genesisAccount] = findGenesisAccountV2Pda(umi, {
+  baseMint: baseMint.publicKey,
+  genesisIndex: 0,
+});
+
+await initializeV2(umi, {
+  baseMint,
+  fundingMode: 0,
+  totalSupplyBaseToken: TOTAL_SUPPLY,
+  name: 'My Token',
+  symbol: 'MTK',
+  uri: 'https://example.com/metadata.json',
+}).sendAndConfirm(umi);
+```
+
+{% /totem %}
+
+{% callout type="note" %}
+`totalSupplyBaseToken` は、すべての bucket 割り当ての合計と等しくなるようにしてください。
+{% /callout %}
+
+### 2. Launch Pool Bucket の追加
+
+Launch Pool bucket は入金を収集し、トークンを比例配分で配布します。ここでタイミングを設定します。
+
+{% totem %}
 
 ```typescript
 import {
@@ -41,38 +305,21 @@ import {
 } from '@metaplex-foundation/genesis';
 import { publicKey } from '@metaplex-foundation/umi';
 
-// バケットPDAを導出
-const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, {
-  genesisAccount,
-  bucketIndex: 0,
-});
+const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
+const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
 
-// オプション：ローンチ後にクォートトークンを受け取るアンロックバケット
-const [unlockedBucket] = findUnlockedBucketV2Pda(umi, {
-  genesisAccount,
-  bucketIndex: 0,
-});
-
-// タイミングを定義
 const now = BigInt(Math.floor(Date.now() / 1000));
 const depositStart = now;
-const depositEnd = now + 86400n; // 24時間
+const depositEnd = now + 86400n; // 24 hours
 const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1週間の請求期間
-
-// デフォルトスケジュール（ペナルティ/ボーナスなし）
-const defaultSchedule = {
-  slopeBps: 0n,
-  interceptBps: 0n,
-  maxBps: 0n,
-  startTime: 0n,
-  endTime: 0n,
-};
+const claimEnd = claimStart + 604800n; // 1 week
 
 await addLaunchPoolBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
-  baseTokenAllocation: 1_000_000_000_000n, // このバケット用のトークン
+  baseTokenAllocation: TOTAL_SUPPLY,
+
+  // Timing
   depositStartCondition: {
     __kind: 'TimeAbsolute',
     padding: Array(47).fill(0),
@@ -97,34 +344,41 @@ await addLaunchPoolBucketV2(umi, {
     time: claimEnd,
     triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
   },
-  depositPenalty: defaultSchedule,
-  withdrawPenalty: defaultSchedule,
-  bonusSchedule: defaultSchedule,
-  minimumDepositAmount: null,
-  // 預金終了後、収集されたSOLの100%をアンロックバケットに送信
+
+  // Optional: Minimum deposit
+  minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
+
+  // Where collected SOL goes after transition
   endBehaviors: [
     {
       __kind: 'SendQuoteTokenPercentage',
       padding: Array(4).fill(0),
       destinationBucket: publicKey(unlockedBucket),
-      percentageBps: 10000, // ベーシスポイントで100%
+      percentageBps: 10000, // 100%
       processed: false,
     },
   ],
 }).sendAndConfirm(umi);
 ```
 
-### 2. アンロックバケットの追加（オプション）
+{% /totem %}
 
-Launch Poolが`SendQuoteTokenPercentage`を使用して収集されたSOLを転送する場合、送信先バケットが必要です：
+### 3. Unlocked Bucket の追加
+
+Unlocked bucket は Transition 後に Launch Pool から SOL を受け取ります。
+
+{% totem %}
 
 ```typescript
 import { addUnlockedBucketV2 } from '@metaplex-foundation/genesis';
+import { generateSigner } from '@metaplex-foundation/umi';
+
+const backendSigner = generateSigner(umi);
 
 await addUnlockedBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
-  baseTokenAllocation: 0n, // ベーストークンなし、クォートトークンのみ受け取る
+  baseTokenAllocation: 0n,
   recipient: umi.identity.publicKey,
   claimStartCondition: {
     __kind: 'TimeAbsolute',
@@ -142,9 +396,13 @@ await addUnlockedBucketV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-### 3. Genesisアカウントの確定
+{% /totem %}
 
-すべてのバケットが設定されたら、ローンチ構成を確定します：
+### 4. ファイナライズ
+
+すべての bucket が設定されたら、ファイナライズしてローンチを有効化します。この操作は取り消せません。
+
+{% totem %}
 
 ```typescript
 import { finalizeV2 } from '@metaplex-foundation/genesis';
@@ -155,60 +413,107 @@ await finalizeV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
+{% /totem %}
+
 ## ユーザー操作
 
-### 預金
+### SOL のラッピング
 
-ユーザーは預金期間中にwSOLを預金します。預金には2%の手数料が適用されます。
+ユーザーは入金前に SOL を wSOL にラップする必要があります。
+
+{% totem %}
+
+```typescript
+import {
+  findAssociatedTokenPda,
+  createTokenIfMissing,
+  transferSol,
+  syncNative,
+} from '@metaplex-foundation/mpl-toolbox';
+import { WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
+import { publicKey, sol } from '@metaplex-foundation/umi';
+
+const userWsolAccount = findAssociatedTokenPda(umi, {
+  owner: umi.identity.publicKey,
+  mint: WRAPPED_SOL_MINT,
+});
+
+await createTokenIfMissing(umi, {
+  mint: WRAPPED_SOL_MINT,
+  owner: umi.identity.publicKey,
+  token: userWsolAccount,
+})
+  .add(
+    transferSol(umi, {
+      destination: publicKey(userWsolAccount),
+      amount: sol(10),
+    })
+  )
+  .add(syncNative(umi, { account: userWsolAccount }))
+  .sendAndConfirm(umi);
+```
+
+{% /totem %}
+
+### 入金
+
+{% totem %}
 
 ```typescript
 import {
   depositLaunchPoolV2,
   findLaunchPoolDepositV2Pda,
+  fetchLaunchPoolDepositV2,
 } from '@metaplex-foundation/genesis';
-
-const depositAmount = 10_000_000_000n; // ランポート単位で10 SOL
+import { sol } from '@metaplex-foundation/umi';
 
 await depositLaunchPoolV2(umi, {
   genesisAccount,
   bucket: launchPoolBucket,
   baseMint: baseMint.publicKey,
-  amountQuoteToken: depositAmount,
+  amountQuoteToken: sol(10).basisPoints,
 }).sendAndConfirm(umi);
 
-// 預金を確認
+// Verify
 const [depositPda] = findLaunchPoolDepositV2Pda(umi, {
   bucket: launchPoolBucket,
   recipient: umi.identity.publicKey,
 });
-
 const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
-console.log('預金額（2%手数料後）:', deposit.amountQuoteToken);
+console.log('Deposited (after fee):', deposit.amountQuoteToken);
 ```
 
-同じユーザーからの複数の預金は単一の預金アカウントに累積されます。
+{% /totem %}
 
-### 出金
+同じユーザーからの複数の入金は、単一の入金アカウントに蓄積されます。
 
-ユーザーは預金期間中に出金できます。出金には2%の手数料が適用されます。
+### 引き出し
+
+ユーザーは入金期間中に引き出すことができます。{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料が適用されます。
+
+{% totem %}
 
 ```typescript
 import { withdrawLaunchPoolV2 } from '@metaplex-foundation/genesis';
+import { sol } from '@metaplex-foundation/umi';
 
-// 部分出金
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,
   bucket: launchPoolBucket,
   baseMint: baseMint.publicKey,
-  amountQuoteToken: 3_000_000_000n, // 3 SOL
+  amountQuoteToken: sol(3).basisPoints,
 }).sendAndConfirm(umi);
 ```
 
-ユーザーが全残高を出金すると、預金PDAはクローズされます。
+{% /totem %}
 
-### トークン請求
+ユーザーが残高全額を引き出すと、入金 PDA はクローズされます。
 
-預金期間終了後、請求が開始されると、ユーザーは預金比重に比例してトークンを請求します：
+### トークンの請求
+
+入金期間が終了し、請求が開始された後：
+
+{% totem %}
 
 ```typescript
 import { claimLaunchPoolV2 } from '@metaplex-foundation/genesis';
@@ -221,20 +526,23 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-トークン割り当て式：
-```
-userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation
-```
+{% /totem %}
 
-## トランジションの実行
+トークン割り当て：`userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
-預金期間終了後、トランジションを実行して終了動作を処理します：
+## 管理者操作
+
+### Transition の実行
+
+入金が終了した後、Transition を実行して集められた SOL を Unlocked bucket に移動します。
+
+{% totem %}
 
 ```typescript
 import { transitionV2, WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
 import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
+import { publicKey } from '@metaplex-foundation/umi';
 
-// 送信先バケットのクォートトークンアカウントを取得
 const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
   owner: unlockedBucket,
   mint: WRAPPED_SOL_MINT,
@@ -246,27 +554,51 @@ await transitionV2(umi, {
   baseMint: baseMint.publicKey,
 })
   .addRemainingAccounts([
-    {
-      pubkey: unlockedBucket,
-      isSigner: false,
-      isWritable: true,
-    },
-    {
-      pubkey: publicKey(unlockedBucketQuoteTokenAccount),
-      isSigner: false,
-      isWritable: true,
-    },
+    { pubkey: unlockedBucket, isSigner: false, isWritable: true },
+    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
   ])
   .sendAndConfirm(umi);
 ```
 
-## 終了動作
+{% /totem %}
 
-終了動作は、預金期間後に収集されたクォートトークンに何が起こるかを定義します：
+**これが重要な理由：** Transition を行わないと、集められた SOL は Launch Pool bucket にロックされたままになります。ユーザーはトークンを請求できますが、チームは調達した資金にアクセスできません。
 
-### SendQuoteTokenPercentage
+## リファレンス
 
-収集されたSOLの一定割合を別のバケットに送信：
+### Time Condition
+
+4つの条件が Launch Pool のタイミングを制御します：
+
+| 条件 | 目的 |
+|------|------|
+| `depositStartCondition` | 入金の開始タイミング |
+| `depositEndCondition` | 入金の終了タイミング |
+| `claimStartCondition` | 請求の開始タイミング |
+| `claimEndCondition` | 請求の終了タイミング |
+
+`TimeAbsolute` をUnixタイムスタンプと共に使用します：
+
+{% totem %}
+
+```typescript
+import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
+
+const condition = {
+  __kind: 'TimeAbsolute',
+  padding: Array(47).fill(0),
+  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
+  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+};
+```
+
+{% /totem %}
+
+### End Behavior
+
+入金期間後に集められた SOL の処理方法を定義します：
+
+{% totem %}
 
 ```typescript
 endBehaviors: [
@@ -274,13 +606,17 @@ endBehaviors: [
     __kind: 'SendQuoteTokenPercentage',
     padding: Array(4).fill(0),
     destinationBucket: publicKey(unlockedBucket),
-    percentageBps: 10000, // 100% = 10000 bps
+    percentageBps: 10000, // 100% = 10000 basis points
     processed: false,
   },
 ]
 ```
 
-複数のバケットに資金を分割できます：
+{% /totem %}
+
+資金を複数の bucket に分割することもできます：
+
+{% totem %}
 
 ```typescript
 endBehaviors: [
@@ -301,64 +637,84 @@ endBehaviors: [
 ]
 ```
 
-## 時間条件
+{% /totem %}
 
-Launch Poolのタイミングは4つの条件で制御されます：
+### 状態の取得
 
-| 条件 | 説明 |
-|-----------|-------------|
-| `depositStartCondition` | ユーザーが預金を開始できるタイミング |
-| `depositEndCondition` | 預金が終了するタイミング |
-| `claimStartCondition` | ユーザーがトークン請求を開始できるタイミング |
-| `claimEndCondition` | 請求が終了するタイミング |
+**Bucket の状態：**
 
-特定のタイムスタンプには`TimeAbsolute`を使用：
-
-```typescript
-{
-  __kind: 'TimeAbsolute',
-  padding: Array(47).fill(0),
-  time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 今から1時間後
-  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-}
-```
-
-## 状態の取得
-
-### バケット状態
+{% totem %}
 
 ```typescript
 import { fetchLaunchPoolBucketV2 } from '@metaplex-foundation/genesis';
 
 const bucket = await fetchLaunchPoolBucketV2(umi, launchPoolBucket);
-
-console.log('総預金額:', bucket.quoteTokenDepositTotal);
-console.log('預金回数:', bucket.depositCount);
-console.log('請求回数:', bucket.claimCount);
-console.log('トークン割り当て:', bucket.bucket.baseTokenAllocation);
+console.log('Total deposits:', bucket.quoteTokenDepositTotal);
+console.log('Deposit count:', bucket.depositCount);
+console.log('Claim count:', bucket.claimCount);
+console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
 ```
 
-### 預金状態
+{% /totem %}
+
+**入金の状態：**
+
+{% totem %}
 
 ```typescript
-import {
-  fetchLaunchPoolDepositV2,
-  safeFetchLaunchPoolDepositV2,
-} from '@metaplex-foundation/genesis';
+import { fetchLaunchPoolDepositV2, safeFetchLaunchPoolDepositV2 } from '@metaplex-foundation/genesis';
 
-// 見つからない場合はエラーをスロー
-const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
-
-// 見つからない場合はnullを返す
-const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
+const deposit = await fetchLaunchPoolDepositV2(umi, depositPda); // throws if not found
+const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // returns null
 
 if (deposit) {
-  console.log('金額:', deposit.amountQuoteToken);
-  console.log('請求済み:', deposit.claimed);
+  console.log('Amount deposited:', deposit.amountQuoteToken);
+  console.log('Claimed:', deposit.claimed);
 }
 ```
 
+{% /totem %}
+
+## 注意事項
+
+- {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料が入金と引き出しの両方に適用されます
+- 同じユーザーからの複数の入金は1つの入金アカウントに蓄積されます
+- ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
+- End Behavior を処理するには、入金終了後に Transition を実行する必要があります
+- ユーザーは入金するために wSOL（ラップされた SOL）を保持している必要があります
+
+## FAQ
+
+### Launch Pool でトークン価格はどのように決まりますか？
+価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
+
+### ユーザーは入金を引き出せますか？
+はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
+
+### 複数回入金するとどうなりますか？
+同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。
+
+### ユーザーはいつトークンを請求できますか？
+入金期間が終了し、請求ウィンドウが開いた後（`claimStartCondition` で定義）に請求できます。End Behavior を処理するために、先に Transition を実行する必要があります。
+
+### Launch Pool と Presale の違いは何ですか？
+Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、先着順で上限まで割り当てられます。
+
+## 用語集
+
+| 用語 | 定義 |
+|------|------|
+| **Launch Pool** | 入金ベースの配布方式で、終了時に価格が発見される |
+| **入金ウィンドウ** | ユーザーが SOL を入金・引き出しできる期間 |
+| **請求ウィンドウ** | ユーザーが比例配分されたトークンを請求できる期間 |
+| **End Behavior** | 入金期間終了後に実行される自動アクション |
+| **Transition** | End Behavior を処理し資金をルーティングするインストラクション |
+| **比例配分** | 総入金額に対するユーザーのシェアに基づくトークン割り当て |
+| **Quote Token** | ユーザーが入金するトークン（通常は wSOL） |
+| **Base Token** | 配布されるトークン |
+
 ## 次のステップ
 
-- [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
-- [アグリゲーションAPI](/ja/smart-contracts/genesis/aggregation) - APIを通じたローンチデータの照会
+- [Presale](/smart-contracts/genesis/presale) - 固定価格トークン販売
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - 入札ベースの割り当て
+- [Aggregation API](/smart-contracts/genesis/aggregation) - API経由でローンチデータを照会

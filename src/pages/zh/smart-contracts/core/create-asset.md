@@ -1,467 +1,189 @@
 ---
-title: 创建资产
-metaTitle: 创建资产 | Core
-description: 了解如何使用 Metaplex Core 包在 Solana 上创建 Core NFT 资产。
+title: 创建 Asset
+metaTitle: 创建 Asset | Metaplex Core
+description: 了解如何使用 JavaScript 或 Rust 在 Solana 上创建 Core NFT Asset。包括上传元数据、铸造到收藏和添加插件。
+updated: '01-31-2026'
+keywords:
+  - create NFT
+  - mint NFT
+  - Solana NFT
+  - mpl-core create
+  - upload metadata
+about:
+  - NFT minting
+  - Metadata upload
+  - Asset creation
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - 使用 npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi 安装 SDK
+  - 将元数据 JSON 上传到 Arweave 或 IPFS 以获取 URI
+  - 使用元数据 URI 调用 create(umi, { asset, name, uri })
+  - 在 core.metaplex.com 验证 Asset
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Arweave or IPFS for storage
+faqs:
+  - q: Core Asset 和 Token Metadata NFT 有什么区别？
+    a: Core Asset 使用单个账户，成本降低约 80%。Token Metadata 使用 3 个以上账户（mint、metadata、token）。新项目推荐使用 Core。
+  - q: 可以在一个交易中创建多个资产吗？
+    a: 不可以。每个 create 指令创建一个资产。大量铸造请使用 Core Candy Machine 或批量交易。
+  - q: 需要先创建 Collection 吗？
+    a: 不需要。Asset 可以不属于 Collection 而存在。但是，Collection 可以启用收藏级别的版税和操作。
+  - q: 如何铸造到不同的钱包？
+    a: 在 create 函数中传递 owner 参数，使用接收者的地址。
+  - q: 应该使用什么元数据格式？
+    a: 使用标准 NFT 元数据格式，包含 name、description、image 和可选的 attributes 数组。请参阅 JSON Schema 文档。
 ---
-
-如[Core 概述](/zh/smart-contracts/core)中所述，Core 上的数字资产由恰好一个链上账户和描述代币的链外数据组成。在本页面中，我们将介绍铸造这些资产的过程。{% .lead %}
-
-## 创建过程
-
-1. **上传链外数据。** 首先，我们必须确保链外数据已准备就绪。这意味着我们必须有一个存储在某处的 JSON 文件来描述我们的资产。无论该 JSON 文件如何存储或存储在哪里都无关紧要，只要它可以通过 **URI** 访问。链外元数据可以类似于[旧的代币元数据标准](/zh/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)。
-2. **创建链上资产账户。** 然后，我们必须创建将保存我们资产数据的链上资产账户。
-
-让我们更详细地深入研究这些步骤，同时提供具体的代码示例。
-
-## 上传链外数据
-
-您可以使用任何存储服务（Arweave、IPFS、AWS 等...）来上传您的链外数据，或者简单地将其存储在您自己的服务器上。为了使其中一些对用户更容易，`Umi` 有一些专用插件，包括 `Irys（上传到 Arweave）`。一旦选择了插件，这将为您提供一个统一的界面来上传数据。
-
-{% dialect-switcher title="上传资产和 JSON 数据" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```ts
+本指南展示如何使用 Metaplex Core SDK 在 Solana 上创建 **Core Asset**（NFT）。您将上传链下元数据，创建链上 Asset 账户，并可选择将其添加到 Collection 或附加插件。 {% .lead %}
+{% callout title="您将构建" %}
+包含以下内容的 Core Asset：
+- 存储在 Arweave 上的链下元数据（名称、图像、属性）
+- 具有所有权和元数据 URI 的链上 Asset 账户
+- 可选：Collection 成员资格
+- 可选：插件（版税、冻结、属性）
+{% /callout %}
+## 摘要
+通过将元数据 JSON 上传到去中心化存储，然后使用 URI 调用 `create()` 来创建 **Core Asset**。Asset 可以独立铸造或铸造到 Collection 中，并且可以在创建时包含插件。
+- 将元数据 JSON 上传到 Arweave/IPFS，获取 URI
+- 使用 name、URI 和可选插件调用 `create()`
+- 对于收藏：传递 `collection` 参数
+- 每个资产成本约 0.0029 SOL
+## 范围外
+Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegum）、同质化代币（使用 SPL Token）和 NFT 迁移。
+## 快速开始
+**跳转至：** [上传元数据](#uploading-off-chain-data) · [创建 Asset](#create-an-asset) · [带 Collection](#create-an-asset-into-a-collection) · [带插件](#create-an-asset-with-plugins)
+1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. 上传元数据 JSON 以获取 URI
+3. 调用 `create(umi, { asset, name, uri })`
+4. 在 [core.metaplex.com](https://core.metaplex.com) 验证
+## 前提条件
+- 配置了签名者和 RPC 连接的 **Umi**
+- 用于交易费用的 **SOL**（每个资产约 0.003 SOL）
+- 准备上传的 **元数据 JSON**（名称、图像、属性）
+## 创建流程
+1. **上传链下数据。** 存储包含名称、描述、图像 URL 和属性的 JSON 文件。文件必须通过公共 **URI** 可访问。
+2. **创建链上 Asset 账户。** 使用元数据 URI 调用 `create` 指令来铸造 Asset。
+## 上传链下数据
+使用任何存储服务（Arweave、IPFS、AWS）上传您的元数据 JSON。Umi 为常见服务提供上传器插件。有关所有可用元数据字段，请参阅 [JSON Schema](/smart-contracts/core/json-schema)。
+```ts {% title="upload-metadata.ts" %}
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+// 配置上传器（Irys、AWS 等）
+umi.use(irysUploader())
+// 首先上传图像
 const [imageUri] = await umi.uploader.upload([imageFile])
+// 上传元数据 JSON
 const uri = await umi.uploader.uploadJson({
   name: 'My NFT',
   description: 'This is my NFT',
   image: imageUri,
-  // ...
+  attributes: [
+    { trait_type: 'Background', value: 'Blue' },
+  ],
 })
 ```
-
-{% totem-accordion title="选择上传器" %}
-
-要使用 Umi 选择您选择的上传器，只需安装上传器提供的插件。
-
-例如，以下是我们如何安装 Irys 插件：
-
-```ts
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-
- umi.use(irysUploader())
-```
-
-{% /totem-accordion %}
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-现在我们有了 **URI**，我们可以继续下一步。
-
-## 创建资产
-
-要创建资产，请使用 `createV1` 指令。`createV1` 指令除了设置资产的基本元数据外，还包括将资产添加到集合和分配插件，这将在[后面](#create-an-asset-with-plugins)描述。
-
-下面是一个简单的示例：
-
+获得 **URI** 后，您可以创建 Asset。
+## 创建 Asset
+使用 `create` 指令铸造新的 Core Asset。
 {% totem %}
 {% totem-accordion title="技术指令详情" %}
-**指令账户列表**
-
-| 账户          | 描述                                    |
-| ------------- | --------------------------------------- |
-| asset         | MPL Core 资产的地址。                   |
-| collection    | Core 资产所属的集合。                   |
-| authority     | 新资产的权限。                          |
-| payer         | 支付存储费用的账户。                    |
-| new owner     | 应该接收资产的所有者。                  |
-| systemProgram | 系统程序账户。                          |
-| logWrapper    | SPL Noop 程序。                         |
-
+**指令账户**
+| 账户 | 描述 |
+|---------|-------------|
+| asset | 新 MPL Core Asset 的地址（签名者） |
+| collection | 要将 Asset 添加到的收藏（可选） |
+| authority | 新资产的权限 |
+| payer | 支付存储费用的账户 |
+| owner | 将拥有资产的钱包 |
+| systemProgram | System Program 账户 |
 **指令参数**
-
-| 参数      | 描述                                            |
-| --------- | ----------------------------------------------- |
-| dataState | 数据是存储在账户状态还是账本状态中。            |
-| name      | 您的 MPL Core 资产的名称。                      |
-| uri       | 链外 JSON 元数据 URI。                          |
-| plugins   | 您希望资产拥有的插件。                          |
-
-在我们的 SDK 中，某些账户/参数可能会被抽象化和/或可选，以便于使用。
-可以在 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L18) 上查看链上指令的完整详细信息
-
+| 参数 | 描述 |
+|----------|-------------|
+| name | MPL Core Asset 的名称 |
+| uri | 链下 JSON 元数据 URI |
+| plugins | 创建时添加的插件（可选） |
+完整指令详情：[GitHub](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/instruction.rs)
 {% /totem-accordion %}
 {% /totem %}
-
-{% seperator h="6" /%}
-
-{% dialect-switcher title="创建资产" %}
-{% dialect title="JavaScript" id="js" %}
-
+{% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
+## 将 Asset 创建到 Collection 中
+要将 Asset 作为 Collection 的一部分创建，请传递 `collection` 参数。Collection 必须已经存在。
+{% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
+有关创建 Collection，请参阅 [Collection](/zh/smart-contracts/core/collections)。
+## 使用插件创建 Asset
+通过在 `plugins` 数组中传递来在创建时添加插件。此示例添加 Royalties 插件：
+{% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
+### 常用插件
+以下是一些常用的插件。完整列表请参阅 [插件概述](/zh/smart-contracts/core/plugins)。
+- [Royalties](/zh/smart-contracts/core/plugins/royalties) - 创作者版税强制
+- [Freeze Delegate](/zh/smart-contracts/core/plugins/freeze-delegate) - 允许冻结/解冻
+- [Burn Delegate](/zh/smart-contracts/core/plugins/burn-delegate) - 允许销毁
+- [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) - 允许转移
+- [Update Delegate](/zh/smart-contracts/core/plugins/update-delegate) - 允许元数据更新
+- [Attributes](/zh/smart-contracts/core/plugins/attribute) - 链上键/值数据
+完整列表请参阅 [插件概述](/zh/smart-contracts/core/plugins)。
+## 常见错误
+### `Asset account already exists`
+资产密钥对已被使用。生成新的签名者：
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { create } from '@metaplex-foundation/mpl-core'
-
-const assetSigner = generateSigner(umi)
-
-const result = await create(umi, {
-  asset: assetSigner,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
-}).sendAndConfirm(umi)
+const assetSigner = generateSigner(umi) // 必须唯一
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use mpl_core::instructions::CreateV1Builder;
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
-
-
-pub async fn create_asset() {
-
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let payer = Keypair::new();
-    let asset = Keypair::new();
-
-    let create_asset_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .instruction();
-
-    let signers = vec![&asset, &payer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_tx = Transaction::new_signed_with_payer(
-        &[create_asset_ix],
-        Some(&payer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
-
-    println!("Signature: {:?}", res)
-}
+### `Collection not found`
+收藏地址不存在或不是有效的 Core Collection。验证地址并确保您已先创建 Collection。
+### `Insufficient funds`
+您的付款钱包需要约 0.003 SOL 用于租金。使用以下命令添加资金：
+```bash
+solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-let create_ix = CreateV1CpiBuilder::new()
-        .asset(input.asset.pubkey())
-        .collection(input.collection)
-        .authority(input.authority)
-        .payer(payer)
-        .owner(input.owner)
-        .update_authority(input.update_authority)
-        .system_program(system_program::ID)
-        .data_state(input.data_state.unwrap_or(DataState::AccountState))
-        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
-        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
-        .plugins(input.plugins)
-        .invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-<!-- ### Create Asset in Ledger State
-
-{% dialect-switcher title="Create Asset in Account State" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, percentAmount } from '@metaplex-foundation/umi'
-import { create, DataState } from '@metaplex-foundation/mpl-core'
-
-const assetAddress = generateSigner(umi)
-const result = create(umi, {
-  dataState: DataState.LedgerState,
-  asset: assetAddress,
-  name: 'Test Bread',
-  uri: 'https://example.com/bread',
-  logWrapper: publicKey('noopb9bkMVfRPU8AsbpTUg8AQkHtKwMYZiFUjNRtMmV'),
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-{% totem %}
-
-```rust
-// TODO
-
-```
-
-{% totem-prose %}
-
-Note that when setting the `mint` account, it is require to specify a `bool` flag to indicate whether the account will be a signer or not – it need to be a signer if the `mint` account does not exist.
-
-{% /totem-prose %}
-
-{% /totem %}
-
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-// TODO
-
-```
-
-{% /dialect %}
-{% /dialect-switcher %} -->
-
-## 创建资产到集合
-
-如果您的 MPL Core 集合已经存在，MPL Core 资产可以直接创建到集合中。要创建集合资产，请访问[这里](/zh/smart-contracts/core/collections)。
-
-{% dialect-switcher title="创建资产到集合" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import {
-  createCollection,
-  create,
-  fetchCollection,
-} from '@metaplex-foundation/mpl-core'
-
-const collectionSigner = generateSigner(umi)
-
-// create collection
-// if you are doing this in a single script you may have
-// to use a sleep function or commitment level of 'finalized'
-// so the collection is fully written to change before fetching it.
-await createCollection(umi, {
-  collection: collectionSigner,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-}).sendAndConfirm(umi)
-
-// fetch the collection
-const collection = await fetchCollection(umi, collectionSigner.publicKey)
-
-
-// generate assetSigner and then create the asset.
-const assetSigner = generateSigner(umi)
-
-await create(umi, {
-  asset: assetSigner,
-  collection: collection,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  //owner: publicKey('11111111111111111111111111111111'), //optional to mint into a different wallet
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
-
-pub async fn create_asset_with_collection() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let signer = Keypair::new(); // Load keypair here.
-
-    let collection = Keypair::new();
-
-    let create_collection_ix = CreateCollectionV1Builder::new()
-        .collection(collection.pubkey())
-        .payer(signer.pubkey())
-        .name("My Collection".into())
-        .uri("https://example.com/my-collection.json".into())
-        .instruction();
-
-    let signers = vec![&collection, &signer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_collection_tx = Transaction::new_signed_with_payer(
-        &[create_collection_ix],
-        Some(&signer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_collection_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res);
-
-    let asset = Keypair::new();
-
-    let create_asset_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .collection(Some(collection.pubkey()))
-        .payer(signer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .instruction();
-
-    let signers = vec![&asset, &signer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_tx = Transaction::new_signed_with_payer(
-        &[create_asset_ix],
-        Some(&signer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_asset_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-```
-
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-let create_ix = CreateV1CpiBuilder::new(input.program)
-    .asset(input.asset.pubkey())
-    .collection(Some(input.collection))
-    .authority(Some(input.authority))
-    .payer(input.payer)
-    .owner(Some(input.owner))
-    .update_authority(Some(input.update_authority))
-    .system_program(system_program::ID)
-    .data_state(input.data_state.unwrap_or(DataState::AccountState))
-    .name(input.name)
-    .uri(input.uri)
-    .plugins(input.plugins)
-    .invoke();
-```
-
-{% /dialect %}
-
-{% /dialect-switcher %}
-
-## 创建带有插件的资产
-
-MPL Core 资产支持在集合和资产级别使用插件。要创建带有插件的 Core 资产，您需要在创建期间将插件类型及其参数传递到 `plugins` 数组参数中。下面的示例创建了一个带有 `Freeze` 插件的铸造。
-
-{% dialect-switcher title="创建带有插件的资产" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
+## 注意事项
+- `asset` 参数必须是 **新密钥对** - 不能重用现有账户
+- 如果铸造给不同的所有者，请传递 `owner` 参数
+- 创建时添加的插件比之后添加更便宜（一个交易 vs 两个）
+- 在立即获取资产的脚本中创建资产时使用 `commitment: 'finalized'`
+## 快速参考
+### 程序 ID
+| 网络 | 地址 |
+|---------|---------|
+| Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+| Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+### 最小代码
+```ts {% title="minimal-create.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
-import { create, ruleSet } from '@metaplex-foundation/mpl-core'
-
-const creator1 = publicKey('11111111111111111111111111111111')
-const creator2 = publicKey('22222222222222222222222222222222')
-
-const assetSigner = generateSigner(umi)
-
-await create(umi, {
-  asset: assetSigner,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  plugins: [
-    {
-      type: 'Royalties',
-      basisPoints: 500,
-      creators: [
-        {
-          address: creator1,
-          percentage: 20,
-        },
-        {
-          address: creator2,
-          percentage: 80,
-        },
-      ],
-      ruleSet: ruleSet('None'), // Compatibility rule set
-    },
-  ],
-}).sendAndConfirm(umi)
+import { create } from '@metaplex-foundation/mpl-core'
+const asset = generateSigner(umi)
+await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(umi)
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use std::str::FromStr;
-use mpl_core::{
-    instructions::CreateV1Builder,
-    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair, Royalties, RuleSet},
-};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-
-pub async fn create_asset_with_plugin() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let payer = Keypair::new();
-    let asset = Keypair::new();
-
-    let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
-    let create_asset_with_plugin_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .plugins(vec![PluginAuthorityPair {
-            plugin: Plugin::Royalties(Royalties {
-                basis_points: 500,
-                creators: vec![Creator {
-                    address: creator,
-                    percentage: 100,
-                }],
-                rule_set: RuleSet::None,
-            }),
-            authority: Some(PluginAuthority::None),
-        }])
-        .instruction();
-
-    let signers = vec![&asset, &payer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_with_plugin_tx = Transaction::new_signed_with_payer(
-        &[create_asset_with_plugin_ix],
-        Some(&payer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_asset_with_plugin_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-
+### 成本明细
+| 项目 | 成本 |
+|------|------|
+| Asset 账户租金 | ~0.0029 SOL |
+| 交易费用 | ~0.000005 SOL |
+| **总计** | **~0.003 SOL** |
+## FAQ
+### Core Asset 和 Token Metadata NFT 有什么区别？
+Core Asset 使用单个账户，成本降低约 80%。Token Metadata 使用 3 个以上账户（mint、metadata、token）。新项目推荐使用 Core。
+### 可以在一个交易中创建多个资产吗？
+不可以。每个 `create` 指令创建一个资产。大量铸造请使用 [Core Candy Machine](/smart-contracts/core-candy-machine) 或批量交易。
+### 需要先创建 Collection 吗？
+不需要。Asset 可以不属于 Collection 而存在。但是，Collection 可以启用收藏级别的版税和操作。
+### 如何铸造到不同的钱包？
+传递 `owner` 参数：
+```ts
+await create(umi, { asset, name, uri, owner: recipientAddress })
 ```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-插件列表包括但不限于：
-
-- [销毁委托](/zh/smart-contracts/core/plugins/burn-delegate)
-- [冻结委托](/zh/smart-contracts/core/plugins/freeze-delegate)
-- [版税](/zh/smart-contracts/core/plugins/royalties)
-- [转移委托](/zh/smart-contracts/core/plugins/transfer-delegate)
-- [更新委托](/zh/smart-contracts/core/plugins/update-delegate)
+### 应该使用什么元数据格式？
+使用标准 NFT 元数据格式，包含 `name`、`description`、`image` 和可选的 `attributes` 数组。请参阅 [JSON Schema](/smart-contracts/core/json-schema)。
+## 术语表
+| 术语 | 定义 |
+|------|------------|
+| **Asset** | 代表 NFT 的 Core 链上账户 |
+| **URI** | 指向链下元数据 JSON 的 URL |
+| **签名者** | 签署交易的密钥对（资产在创建时必须是签名者） |
+| **Collection** | 将相关 Asset 分组的 Core 账户 |
+| **Plugin** | 为 Asset 添加行为的模块化扩展 |
+| **租金** | 在 Solana 上保持账户活跃所需的 SOL |
