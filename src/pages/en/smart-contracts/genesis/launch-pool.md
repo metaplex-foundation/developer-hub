@@ -94,7 +94,6 @@ async function setupLaunchPool() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
   // 1. Initialize
@@ -182,7 +181,7 @@ async function setupLaunchPool() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize

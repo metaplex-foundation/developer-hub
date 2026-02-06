@@ -8,7 +8,7 @@ import {
   findAssociatedTokenPda,
   mplToolbox,
 } from '@metaplex-foundation/mpl-toolbox'
-import { keypairIdentity, publicKey } from '@metaplex-foundation/umi'
+import { keypairIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
@@ -23,7 +23,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // [/SETUP]
 
 // [MAIN]
-const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
+const [unlockedBucketQuoteTokenAccount] = findAssociatedTokenPda(umi, {
   owner: unlockedBucket,
   mint: WRAPPED_SOL_MINT,
 })
@@ -35,7 +35,7 @@ await transitionV2(umi, {
 })
   .addRemainingAccounts([
     { pubkey: unlockedBucket, isSigner: false, isWritable: true },
-    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
+    { pubkey: unlockedBucketQuoteTokenAccount, isSigner: false, isWritable: true },
   ])
   .sendAndConfirm(umi)
 // [/MAIN]

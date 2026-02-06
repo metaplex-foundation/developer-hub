@@ -118,7 +118,6 @@ async function setupPresale() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100만 토큰 (소수점 9자리)
 
   // 1. 초기화
@@ -207,7 +206,7 @@ async function setupPresale() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize
@@ -311,7 +310,6 @@ Unlocked Bucket은 트랜지션 후 Presale에서 SOL을 받습니다.
 | `depositLimit` | 사용자당 최대 총 예치 | `{ limit: sol(10).basisPoints }` |
 | `depositCooldown` | 예치 간 대기 시간 | `{ seconds: 60n }` |
 | `perCooldownDepositLimit` | 쿨다운 기간당 최대 예치 | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | 백엔드 인증 요구 | `{ signer: publicKey }` |
 
 ### 시간 조건
 

@@ -185,8 +185,6 @@ async function main() {
   // ============================================
   console.log('\nステップ3: アンロックバケットを追加中...');
 
-  const backendSigner = generateSigner(umi);
-
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -204,7 +202,7 @@ async function main() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   console.log('✓ アンロックバケット追加完了！');

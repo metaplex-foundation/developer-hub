@@ -118,7 +118,6 @@ async function setupPresale() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100万代币（9位小数）
 
   // 1. 初始化
@@ -207,7 +206,7 @@ async function setupPresale() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize
@@ -311,7 +310,6 @@ Unlocked Bucket在过渡后从Presale接收SOL。
 | `depositLimit` | 每用户最大总存款 | `{ limit: sol(10).basisPoints }` |
 | `depositCooldown` | 存款之间的等待时间 | `{ seconds: 60n }` |
 | `perCooldownDepositLimit` | 每个冷却期最大存款 | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | 要求后端授权 | `{ signer: publicKey }` |
 
 ### 时间条件
 

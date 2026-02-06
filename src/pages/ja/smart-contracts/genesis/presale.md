@@ -118,7 +118,6 @@ async function setupPresale() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
   // 1. Initialize
@@ -207,7 +206,7 @@ async function setupPresale() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize
@@ -311,7 +310,6 @@ Unlocked bucket は Transition 後に Presale から SOL を受け取ります�
 | `depositLimit` | ユーザーごとの最大入金総額 | `{ limit: sol(10).basisPoints }` |
 | `depositCooldown` | 入金間の待機時間 | `{ seconds: 60n }` |
 | `perCooldownDepositLimit` | クールダウン期間ごとの最大入金額 | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | バックエンド認証の要求 | `{ signer: publicKey }` |
 
 ### Time Condition
 

@@ -1,7 +1,7 @@
 // [IMPORTS]
 import {
-  genesis,
   addUnlockedBucketV2,
+  genesis,
 } from '@metaplex-foundation/genesis'
 import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
 import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi'
@@ -19,8 +19,6 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // [/SETUP]
 
 // [MAIN]
-const backendSigner = generateSigner(umi)
-
 await addUnlockedBucketV2(umi, {
   genesisAccount,
   baseMint: baseMint.publicKey,
@@ -38,7 +36,7 @@ await addUnlockedBucketV2(umi, {
     time: claimEnd,
     triggeredTimestamp: null,
   },
-  backendSigner: { signer: backendSigner.publicKey },
+  backendSigner: null,
 }).sendAndConfirm(umi)
 // [/MAIN]
 

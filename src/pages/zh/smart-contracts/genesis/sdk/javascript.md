@@ -175,7 +175,7 @@ await addUnlockedBucketV2(umi, {
   recipient,            // PublicKey - who can claim
   claimStartCondition,  // TimeCondition
   claimEndCondition,    // TimeCondition
-  backendSigner,        // { signer: PublicKey } | null
+  backendSigner,        // null
 }).sendAndConfirm(umi);
 ```
 

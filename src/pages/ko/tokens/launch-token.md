@@ -185,8 +185,6 @@ async function main() {
   // ============================================
   console.log('\n3단계: 잠금 해제 버킷 추가 중...');
 
-  const backendSigner = generateSigner(umi);
-
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -204,7 +202,7 @@ async function main() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   console.log('✓ 잠금 해제 버킷 추가 완료!');

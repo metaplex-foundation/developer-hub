@@ -58,7 +58,7 @@ Presales sell tokens at a predetermined price. The price is calculated from the 
 - Fixed price = SOL cap / token allocation
 - Users deposit SOL during the deposit window ({% fee product="genesis" config="presale" fee="deposit" /%} fee applies)
 - First-come-first-served up to the SOL cap
-- Optional: minimum/maximum deposit limits, cooldowns, backend authorization
+- Optional: minimum/maximum deposit limits and cooldowns.
 
 ## Out of Scope
 
@@ -118,7 +118,6 @@ async function setupPresale() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
   // 1. Initialize
@@ -207,7 +206,7 @@ async function setupPresale() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize
@@ -311,7 +310,6 @@ These options are set when creating the Presale bucket:
 | `depositLimit` | Maximum total deposit per user | `{ limit: sol(10).basisPoints }` |
 | `depositCooldown` | Time between deposits | `{ seconds: 60n }` |
 | `perCooldownDepositLimit` | Max deposit per cooldown period | `{ amount: sol(1).basisPoints }` |
-| `backendSigner` | Require backend authorization | `{ signer: publicKey }` |
 
 ### Time Conditions
 
