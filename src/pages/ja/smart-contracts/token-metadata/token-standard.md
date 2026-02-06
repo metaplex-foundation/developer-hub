@@ -68,9 +68,9 @@ Solanaでのトークンの使用が進化するにつれて、単純に「Fungi
   "name": "SolanaGame Steel Sword",
   "symbol": "SG-SS-1",
   "description": "SolanaGame steel sword available after Level 4",
-  "image": "<https://arweave.net/26YdhY_eAzv26YdhY1uu9uiA3nmDZYwP8MwZAultcE?ext=jpeg>",
-  "animation_url": "<https://arweave.net/ZAultcE_eAzv26YdhY1uu9uiA3nmDZYwP8MwuiA3nm?ext=glb>",
-  "external_url": "<https://SolanaGame.io>",
+  "image": "https://arweave.net/26YdhY_eAzv26YdhY1uu9uiA3nmDZYwP8MwZAultcE?ext=jpeg",
+  "animation_url": "https://arweave.net/ZAultcE_eAzv26YdhY1uu9uiA3nmDZYwP8MwuiA3nm?ext=glb",
+  "external_url": "https://SolanaGame.io",
   "attributes": [
     {
       "trait_type": "attack",
