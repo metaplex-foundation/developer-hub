@@ -111,8 +111,7 @@ export const cli = {
               href: '/cli/cm/withdraw',
             },
           ],
-        },
-        {
+        },        {
           title: 'Bubblegum (Compressed NFTs)',
           links: [
             {

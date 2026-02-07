@@ -31,8 +31,6 @@ mplx core collection create --wizard
 
 Compressed NFT operations require an RPC endpoint that supports the [DAS (Digital Asset Standard) API](/rpc-providers#metaplex-das-api). Standard Solana RPC endpoints do not support DAS and will not work for fetching, updating, transferring, or burning compressed NFTs.
 
-See the [RPC Providers](/rpc-providers) page for a list of providers that support DAS.
-
 ## Command Structure
 
 All Bubblegum commands follow this pattern:

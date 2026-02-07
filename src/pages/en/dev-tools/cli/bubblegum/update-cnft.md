@@ -107,8 +107,6 @@ To update a compressed NFT, you must be either:
 - **Tree Authority** - If the NFT is not in a collection
 - **Collection Update Authority** - If the NFT belongs to a [Metaplex Core collection](/smart-contracts/core/collections)
 
-**Note**: The owner of the NFT cannot update it - this is different from traditional NFTs.
-
 ## Notes
 
 - The RPC must support DAS API
