@@ -58,7 +58,6 @@ description: "ウォレットアドレスリストを使用して、誰がミン
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
 {% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
-
 {% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
@@ -132,7 +131,6 @@ allowed to mint
 {% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 {% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 
-
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="Payer" theme="indigo" /%}
 {% node theme="dimmed"%}
@@ -171,8 +169,8 @@ Allowlist PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="110" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -189,7 +187,7 @@ Allowlist PDA {% .whitespace-nowrap %}
 {% edge from="guardMerkleRoot" to="merkleRoot" arrow="start" path="straight" /%}
 {% edge from="merkleRoot" to="route-validation" arrow="none" fromPosition="top" dashed=true /%}
 {% edge from="merkleProof" to="route-validation" arrow="none" fromPosition="top" dashed=true  %}
-if the payer's Merkle Proof does not match 
+if the payer's Merkle Proof does not match
 
 the guard's Merkle Root validation will fail
 {% /edge %}
@@ -197,7 +195,6 @@ the guard's Merkle Root validation will fail
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -377,7 +374,7 @@ APIリファレンス: [route](https://mpl-candy-machine.typedoc.metaplex.com/fu
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-_Sugarは"Proof" Routeの呼び出しには使用できません。_ 
+_Sugarは"Proof" Routeの呼び出しには使用できません。_
 
 {% /totem %}
 {% /dialect %}

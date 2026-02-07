@@ -154,7 +154,7 @@ const updateAssetResponse = await updatePlugin(umi, {
 }).sendAndConfirm(umi);
 ```
 {% /dialect %}
-{% /dialect-switcher %} 
+{% /dialect-switcher %}
 ## Creating a Collection with a Permanent Freeze plugin
 The following example shows how to create a collection with a Permanent Freeze plugin.
 {% dialect-switcher title="Creating a Collection with a Permanent Freeze plugin" %}

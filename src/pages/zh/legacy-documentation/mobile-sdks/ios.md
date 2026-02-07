@@ -75,12 +75,12 @@ NFT 模块可以通过 `Metaplex.nfts()` 访问并提供以下方法。目前,�
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -148,11 +148,9 @@ public protocol IdentityDriver {
 
 `GuestIdentityDriver` 驱动程序是最简单的身份驱动程序。它本质上是一个 `null` 驱动程序,当我们不需要发送任何签名交易时很有用。如果您使用 `signTransaction` 方法,它将返回失败。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 驱动程序接受 `Account` 对象作为参数。
-
 
 ### ReadOnlyIdentityDriver
 

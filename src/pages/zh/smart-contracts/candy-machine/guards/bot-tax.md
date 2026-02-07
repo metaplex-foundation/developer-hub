@@ -82,7 +82,6 @@ description: "对无效交易收取可配置的税款。"
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
 
 ## 守卫设置

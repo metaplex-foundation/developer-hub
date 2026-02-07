@@ -79,7 +79,7 @@ The following account structs are available for deserialization within the `mpl-
 - PluginHeaderV1
 - PluginRegistryV1
 ```
-There are two ways to deserialize Core accounts within Anchor. 
+There are two ways to deserialize Core accounts within Anchor.
 - Using Anchors Account list struct (recommended in most cases),
 - Directly in the instruction functions body using `<Account>::from_bytes()`.
 ### Anchor Accounts List Method
@@ -137,7 +137,7 @@ let (_, attribute_list, _) = fetch_plugin::<BaseCollectionV1, Attributes>(&ctx.a
 {% /dialect-switcher %}
 **Note**: The `fetch_plugin()` function is only used for non-external plugins. To read external plugins, use the `fetch_external_plugin()` function, which operates in the same way as `fetch_plugin()`.
 ## The CPI Instruction Builders
-Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away! 
+Each instruction from the Core crate comes with a **CpiBuilder** version. The CpiBuilder version is created using `name of the instruction` + `CpiBuilder` and simplifies the code significantly abstracting a lot of boilerplate code away!
 If you want to learn more about all the possible instruction available in Core, you can find them on the [mpl-core docs.rs website](https://docs.rs/mpl-core/0.7.2/mpl_core/instructions/index.html)
 ### CPI Example
 Let's take the `CreateCollectionV2CpiBuilder` instruction as an example
@@ -208,4 +208,3 @@ See the [mpl-core docs.rs instructions module](https://docs.rs/mpl-core/latest/m
 - [Create Asset with Anchor](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - Step-by-step guide
 - [Rust SDK](/smart-contracts/core/sdk/rust) - Standalone Rust client usage
 - [mpl-core docs.rs](https://docs.rs/mpl-core/) - Complete API reference
-

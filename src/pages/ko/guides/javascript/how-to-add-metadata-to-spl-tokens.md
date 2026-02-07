@@ -56,9 +56,9 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -71,11 +71,11 @@ import { base58 } from "@metaplex-foundation/umi/serializers";
 
 // 기존 SPL 토큰에 메타데이터를 추가하는 래퍼 함수
 async function addMetadata() {
-	///
-	///
-	///  코드가 여기에 들어갑니다
-	///
-	///
+ ///
+ ///
+ ///  코드가 여기에 들어갑니다
+ ///
+ ///
 }
 
 // 함수 실행
@@ -92,8 +92,8 @@ addMetadata();
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // 새 키페어 서명자를 생성합니다.
 const signer = generateSigner(umi);
@@ -111,8 +111,8 @@ await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // fs를 사용하고 파일시스템을 탐색하여
 // 상대 경로를 통해 사용하고자 하는 지갑을 로드해야 합니다.
@@ -140,9 +140,9 @@ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-e
 ```typescript
 // 토큰의 샘플 메타데이터
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // 기존 SPL 토큰에 메타데이터를 추가하는 래퍼 함수
@@ -150,25 +150,25 @@ async function addMetadata() {
     const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
     // 메타데이터 데이터를 온체인에 저장할 메타데이터 계정을 도출합니다
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
    // `createV1` 헬퍼를 사용하여 이미 초기화된 토큰에 메타데이터를 추가합니다
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 ```
 
@@ -180,10 +180,10 @@ creators와 같은 null 가능한 필드는 Non Fungible에 비해 SPL 토큰에
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
-	TokenStandard
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
+ TokenStandard
 } from "@metaplex-foundation/mpl-token-metadata";
 import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
 import {
@@ -197,8 +197,8 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // 새 키페어 서명자를 생성합니다.
 const signer = generateSigner(umi);
@@ -212,37 +212,37 @@ const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
 // 토큰의 샘플 메타데이터
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // 기존 SPL 토큰에 메타데이터를 추가하는 래퍼 함수
 async function addMetadata() {
-	// 신원에 2 SOL을 에어드롭합니다
+ // 신원에 2 SOL을 에어드롭합니다
     // 429 too many requests 오류가 발생하면
     // 제공된 기본 무료 rpc 대신 다른 rpc를 사용해야 할 수 있습니다.
     await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
     // 메타데이터 데이터를 온체인에 저장할 메타데이터 계정을 도출합니다
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 
 // 함수 실행

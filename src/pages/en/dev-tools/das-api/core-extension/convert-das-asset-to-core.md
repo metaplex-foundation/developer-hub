@@ -8,7 +8,7 @@ If you are working with not only Core assets but other assets like Token Metadat
 
 ## Convert to Asset Example
 
-The following Example shows 
+The following Example shows
 1. How to fetch DAS Assets with the standard DAS API Package.
 2. Filter the Assets to only have Core Assets
 3. Cast all the Standard Assets to Core Assets
@@ -27,7 +27,7 @@ const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
 
 ## Convert to Collection Example
 
-The following Example shows 
+The following Example shows
 1. How to fetch DAS Collections with the standard DAS API Package.
 2. Filter the Assets to only have Core Assets
 3. Cast all the Standard Assets to Core Assets

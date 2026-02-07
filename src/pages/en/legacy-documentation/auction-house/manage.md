@@ -6,7 +6,7 @@ description: Explains how to manage Auction Houses.
 
 ## Introduction
 
-[On the previous page](/legacy-documentation/auction-house/settings), we went through the various settings of an Auction House. So now, let’s see how we can use these settings to create and update Auction Houses. 
+[On the previous page](/legacy-documentation/auction-house/settings), we went through the various settings of an Auction House. So now, let’s see how we can use these settings to create and update Auction Houses.
 
 We'll also talk about different ways of fetching Auction House. Lastly, we'll go see how to withdraw funds from the Auction House fee and treasury accounts.
 
@@ -34,7 +34,6 @@ const auctionHouseSettings = await metaplex
 
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## Auction House Account
 
@@ -113,7 +112,7 @@ As we've already discussed, the authority of the Auction House is one of the set
 {% dialect title="JavaScript" id="js" %}
 
 To update the settings, we need the full model in order to compare the current data with the provided data. For instance, if you only want to update the `feeWithdrawalDestination`, you need to send an instruction that updates the data whilst keeping all other properties the same.
-    
+
 Also, by default, `feeWithdrawalDestination` and the `treasuryWithdrawalDestination` are set to `metaplex.identity()`, ie., the same wallet which is set as the authority and the creator by default.
 
 ```tsx
@@ -154,10 +153,10 @@ Funds from both these accounts can be transferred back to "destination" wallets.
 {% dialect title="JavaScript" id="js" %}
 
 Here's a code snippet which transfers funds.
-    
+
 1. Auction House Fee Wallet to the Fee Withdrawal Destination Wallet.
 2. Transfers funds from Auction House Treasury Wallet to the Treasury Withdrawal Destination Wallet.
-    
+
 In both the cases, The Auction House from which the funds are being transferred and the amount of funds to withdrawn need to be specified. This amount can either be in SOL or in the SPL token used by the Auction House as a currency.
 
 ```tsx

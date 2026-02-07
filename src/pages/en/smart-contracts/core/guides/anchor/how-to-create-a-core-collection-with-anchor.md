@@ -30,7 +30,7 @@ This guide will demonstrate the use of the `mpl-core` Rust SDK crate to create a
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 {% /callout %}
-But before starting, let's talk about Collections: 
+But before starting, let's talk about Collections:
 {% callout title="What are Collections?" %}
 Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
 {% /callout %}
@@ -60,7 +60,7 @@ cargo add mpl-core --features anchor
 ```
 ## The program
 ### Imports and Templates
-Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file. 
+Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file.
 ```rust
 use anchor_lang::prelude::*;
 use mpl_core::{
@@ -148,7 +148,7 @@ pub fn create_core_collection(ctx: Context<CreateCollection>, args: CreateCollec
   Ok(())
 }
 ```
-In this function, the accounts defined in the `CreateCollection` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateCollectionV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method. 
+In this function, the accounts defined in the `CreateCollection` struct are accessed using `ctx.accounts`. Before passing these accounts to the `CreateCollectionV2CpiBuilder` program instruction, they need to be converted to their raw data form using the `.to_account_info()` method.
 This conversion is necessary because the builder requires the accounts in this format to interact correctly with the Solana runtime.
 Some of the accounts in the `CreateAsset` struct are `optional`, meaning their value could be either `Some(account)` or `None`. To handle these optional accounts before passing them to the builder, we use a match statement that allows us to check if an account is present (Some) or absent (None) and based on this check, we bind the account as `Some(account.to_account_info())` if it exists, or as `None` if it doesn't. Like this:
 ```rust
@@ -203,7 +203,7 @@ CreateCollectionV2CpiBuilder::new(&ctx.accounts.mpl_core_program.to_account_info
   .external_plugin_adapters(external_plugin_adapters)    
   .invoke()?;
 ```
-**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use!
 ## The Client
 We've now reached the "testing" part of the guide for creating a Core Collection. But before testing the program we've built, we need to compile the workspace. Use the following command to build everything so it's ready for deployment and testing:
 ```
@@ -215,7 +215,7 @@ anchor deploy
 ```
 Finally we're ready to test the program, but before, we need to work on the `create_core_collection_example.ts` in the tests folder.
 ### Imports and Templates
-Here are all the imports and the general template needed for the test. 
+Here are all the imports and the general template needed for the test.
 ```ts
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";

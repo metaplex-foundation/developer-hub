@@ -145,7 +145,6 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 - [冻结和解冻cNFT](/zh/smart-contracts/bubblegum-v2/freeze-cnfts)。
 - [使cNFT成为灵魂绑定](/zh/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft)。
 
-
 ## 下一步
 
 现在我们从高层次了解了压缩NFT的工作原理以及Bubblegum V2的新功能，我们建议查看我们的[快速开始](/zh/smart-contracts/bubblegum-v2/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum-v2/create-trees)了解更多关于可在cNFT上执行的特定操作。最后，还提供[高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)以加深您对cNFT和默克尔树的了解。

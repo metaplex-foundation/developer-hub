@@ -10,29 +10,29 @@ Metaplex Token Metadata는 [온체인 컬렉션](/ko/smart-contracts/token-metad
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// 불변, 한 번 전환되면 이 메타데이터의 모든 판매는 2차 판매로 간주됩니다.
-	pub primary_sale_happened: bool,
-	// 데이터 구조체가 변경 가능한지 여부, 기본값은 아니오
-	pub is_mutable: bool,
-	/// 에디션의 쉬운 계산을 위한 nonce, 있는 경우
-	pub edition_nonce: Option<u8>,
-	/// 토큰 표준은 결정론적이며 create master edition 호출을 성공적으로 호출하면
-	/// SemiFungible에서 NonFungible로 변경됩니다.
-	pub token_standard: Option<TokenStandard>,
-	/// Metadata를 쉽게 변경할 수 없으므로 여기 끝에 새로운 DataV2 필드를 추가합니다.
-	/// 컬렉션
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // 불변, 한 번 전환되면 이 메타데이터의 모든 판매는 2차 판매로 간주됩니다.
+ pub primary_sale_happened: bool,
+ // 데이터 구조체가 변경 가능한지 여부, 기본값은 아니오
+ pub is_mutable: bool,
+ /// 에디션의 쉬운 계산을 위한 nonce, 있는 경우
+ pub edition_nonce: Option<u8>,
+ /// 토큰 표준은 결정론적이며 create master edition 호출을 성공적으로 호출하면
+ /// SemiFungible에서 NonFungible로 변경됩니다.
+ pub token_standard: Option<TokenStandard>,
+ /// Metadata를 쉽게 변경할 수 없으므로 여기 끝에 새로운 DataV2 필드를 추가합니다.
+ /// 컬렉션
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // 컬렉션이 검증되었는지 여부
-	pub key: Pubkey,    // 컬렉션 NFT의 SPL 토큰 민트 계정
+ pub verified: bool, // 컬렉션이 검증되었는지 여부
+ pub key: Pubkey,    // 컬렉션 NFT의 SPL 토큰 민트 계정
 }
 ```
 

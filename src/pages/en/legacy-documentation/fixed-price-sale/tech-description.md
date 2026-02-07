@@ -22,7 +22,7 @@ description: Technical Description of the Fixed Price Sale Program
 
 ## Users to buy tokens have to:
 
-1. Go to store. 
+1. Go to store.
 
 2. Choose token and click "Buy"
 
@@ -78,7 +78,6 @@ description: Technical Description of the Fixed Price Sale Program
 |  end_date  |  `Option<u64>`  |    |
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
-
 
 ## TradeHistory
 

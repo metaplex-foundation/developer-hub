@@ -30,7 +30,7 @@ We will proceed to define some capabilities of RPC nodes and then present you wi
 
 Another distinguishing feature of RPCs is if they support the [Metaplex DAS API](/dev-tools/das-api). The Metaplex Digital Asset Standard (DAS) API represents a unified interface for interacting with digital assets on Solana, supporting both standard (Token Metadata) and compressed (Bubblegum) assets. The API defines a set of methods that RPCs implement in order to provide asset data.
 
-For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible. 
+For Developers the DAS API is required to interact with cNFTs, but it can also make working with TM Assets easier and faster. When reading from chain we therefore highly recommend using RPC nodes with DAS Support to make the user experience as fast as possible.
 
 You can find out more about the DAS API in a [dedicated section](/dev-tools/das-api).
 

@@ -22,7 +22,6 @@ const assets = await das.getAssetsByAuthority(umi, {authority:  publicKey('<Publ
 console.log(assets);
 ```
 
-
 ## Example Response
 This example has only one object in the array. For Public Keys who have the authority over more than one Core asset the Array will include more entries.
 

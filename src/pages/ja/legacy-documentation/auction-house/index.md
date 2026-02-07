@@ -34,7 +34,6 @@ Auction Houseプログラムを使用して、新しい**Auction House**アカ�
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 アカウントはユーザーが望む方法で設定できます。これらの設定については[専用ページで詳しく説明します](auction-house/settings)が、以下は興味深い設定可能なパラメータの一部です：
 
 - `requireSignOff`: これにより、マーケットプレイスはリストできるアセットと入札できるビッドをゲートできます。すべての関連する命令で、Auction Houseの[権限](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities)がトランザクションに署名する必要があります。

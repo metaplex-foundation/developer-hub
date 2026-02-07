@@ -79,7 +79,6 @@ description: Fixed Price Saleプログラムの技術的説明
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
 
-
 ## TradeHistory
 
 ### PDA ["history", wallet.key(), market.key()]

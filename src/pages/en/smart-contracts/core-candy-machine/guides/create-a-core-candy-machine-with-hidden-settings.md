@@ -90,7 +90,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 
 ## Create a Collection
 
-Let's now create a Collection asset. 
+Let's now create a Collection asset.
 For that, the mpl-core library provides a `createCollection` method will help us performing that action
 
 You can learn more about collections [here](https://developers.metaplex.com/core/collections)
@@ -173,7 +173,7 @@ const res = await create(umi, {
 let tx = await res.sendAndConfirm(umi);
 ```
 
-Let's now fetch our created candy machine and print the details of it. 
+Let's now fetch our created candy machine and print the details of it.
 To achieve that, we will use the `fetchCandyMachine` method from the mpl-core-candy-machine library
 
 ```ts

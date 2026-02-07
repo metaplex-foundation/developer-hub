@@ -29,7 +29,7 @@ howToTools:
 {% callout %}
 ⚠️ This is a **concept guide**, not a complete end-to-end tutorial. It is intended for developers with a working understanding of Rust and Solana, particularly using the Anchor framework. While it walks through key architectural decisions and code examples, it assumes familiarity with program structure, CPIs, and deploying Solana smart contracts.
 {% /callout %}
-> 
+>
 This guide assumes you have some basic knowledge of Solana and Rust using Anchor. It explores one way to implement a loyalty card system using Core NFT Assets on Solana, powered by Metaplex Core. Rather than prescribing a rigid approach, this guide aims to demonstrate a flexible pattern that you can adapt to your own project.
 ### What is Metaplex Core?
 Metaplex Core is a modern NFT Asset standard on Solana that provides a plugin-based architecture. Unlike the legacy Token Metadata program, Core allows developers to attach modular functionality to NFTs, such as custom data storage, ownership controls, and rule enforcement.

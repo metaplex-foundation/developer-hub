@@ -79,7 +79,6 @@ pub struct CreateV1 {
 
 {% /totem %}
 
-
 填写指令账户字段后,您可以使用 `instruction(...)` 方法生成相应的 Solana `Instruction`:
 
 {% totem %}
@@ -370,7 +369,6 @@ let metadata_pubkey = Metadata::create_pda(mint, bump)?;
 
 {% /totem-prose %}
 {% /totem %}
-
 
 ## 🔗 有用的链接
 

@@ -12,7 +12,6 @@ description: "Core Candy Machine'Bot Tax'ガードにより、ユーザーから
 Bot Taxガードは慎重に使用してください。
 {% /callout %}
 
-
 ## 概要
 
 **Bot Tax**ガードは、ボットがNFTをミントしようとすることを阻止するために無効なトランザクションに対してペナルティを課します。この金額は通常、実際のユーザーからの本物の間違いに影響を与えることなくボットを傷つけるために小さく設定されます。すべてのボット税はCandy Machineアカウントに転送されるため、ミント完了後にCandy Machineアカウントを削除してこれらの資金にアクセスできます。
@@ -52,7 +51,7 @@ Bot Taxガードは慎重に使用してください。
 {% node parent="mint-candy-guard" y="150" x="-8" %}
   {% node #mint-candy-machine theme="pink" %}
     からのミント
-    
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -82,7 +81,6 @@ Bot Taxガードは慎重に使用してください。
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 

@@ -10,29 +10,29 @@ Metaplex Token Metadata 具有[链上集合](/zh/smart-contracts/token-metadata/
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// 不可变，一旦翻转，此元数据的所有销售都被视为二次销售。
-	pub primary_sale_happened: bool,
-	// 数据结构是否可变，默认不可变
-	pub is_mutable: bool,
-	/// 用于轻松计算版本的 nonce（如果存在）
-	pub edition_nonce: Option<u8>,
-	/// Token Standard 是确定性的，如果您调用 create master edition 调用并成功，
-	/// 它将从 SemiFungible 更改为 NonFungible。
-	pub token_standard: Option<TokenStandard>,
-	/// 由于我们无法轻松更改 Metadata，我们在末尾添加新的 DataV2 字段。
-	/// Collection
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // 不可变，一旦翻转，此元数据的所有销售都被视为二次销售。
+ pub primary_sale_happened: bool,
+ // 数据结构是否可变，默认不可变
+ pub is_mutable: bool,
+ /// 用于轻松计算版本的 nonce（如果存在）
+ pub edition_nonce: Option<u8>,
+ /// Token Standard 是确定性的，如果您调用 create master edition 调用并成功，
+ /// 它将从 SemiFungible 更改为 NonFungible。
+ pub token_standard: Option<TokenStandard>,
+ /// 由于我们无法轻松更改 Metadata，我们在末尾添加新的 DataV2 字段。
+ /// Collection
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // 集合是否已验证
-	pub key: Pubkey,    // 集合 NFT 的 SPL token mint 账户
+ pub verified: bool, // 集合是否已验证
+ pub key: Pubkey,    // 集合 NFT 的 SPL token mint 账户
 }
 ```
 

@@ -254,7 +254,6 @@ const candyMachineSettings = {
 {% dialect-switcher title="隠し設定の設定" %}
 {% dialect title="JavaScript" id="js" %}
 
-
 ハッシュを計算するために、以下の関数を使用できます：
 
 ```ts

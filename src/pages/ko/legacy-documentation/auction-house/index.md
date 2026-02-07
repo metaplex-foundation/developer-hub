@@ -34,7 +34,6 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 계정은 사용자가 원하는 방식으로 구성할 수 있습니다. [전용 페이지에서 이러한 구성에 대해 자세히 이야기할 것](auction-house/settings)이지만 다음은 몇 가지 흥미로운 구성 가능한 매개변수입니다:
 
 - `requireSignOff`: 이를 통해 마켓플레이스는 어떤 자산을 목록에 올릴 수 있고 어떤 입찰을 할 수 있는지 게이트할 수 있습니다. 모든 관련 명령어에서 Auction House [권한](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities)이 트랜잭션에 서명해야 합니다.

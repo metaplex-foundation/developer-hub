@@ -32,7 +32,6 @@ git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-next
 
 Github 저장소 - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
-
 ## 설정
 
 ### .env 파일
@@ -50,7 +49,6 @@ NEXT_PUBLIC_TOKEN="11111111111111111111111111111111"
 // RPC URL
 NEXT_PUBLIC_RPC="https://myrpc.com/?api-key="
 ```
-
 
 ### 이미지 교체
 src/assets/images/에 교체할 두 개의 이미지가 있습니다:

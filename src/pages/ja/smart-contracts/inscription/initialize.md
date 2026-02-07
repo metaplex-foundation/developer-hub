@@ -89,7 +89,6 @@ await initialize(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## `initializeAssociatedInscription`
 
 1つのInscriptionアカウントは複数の関連Inscriptionアカウントを持つことができます。これらは`associationTag`に基づいて派生されます。例えば、タグはファイルのデータタイプ（例：`image/png`）にできます。

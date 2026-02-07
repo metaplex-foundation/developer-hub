@@ -46,4 +46,4 @@ If you can't find what you're looking for, check out:
 - [API Methods](/dev-tools/das-api/methods) - Complete method reference
 - [Core Extension](/dev-tools/das-api/core-extension) - Advanced SDK features
 - [DAS API UMI typedoc](https://digital-asset-standard-api-js-docs.vercel.app) - UMI typedoc for the DAS API
-- [GitHub Repository](https://github.com/metaplex-foundation/digital-asset-standard-api) - Source code and issues 
+- [GitHub Repository](https://github.com/metaplex-foundation/digital-asset-standard-api) - Source code and issues

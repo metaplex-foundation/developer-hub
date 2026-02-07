@@ -164,7 +164,7 @@ The Tree Config account contains data specific to Compressed NFTs. It stores:
 - The **Number Minted** which keeps track of the number of cNFTs minted into the tree. This value is important as it is used as a **Nonce** ("number used once") value for operations to ensure the Merkle tree leaves are unique. Thus, this nonce acts as a tree-scoped unique identifier of the asset.
 - The **Is Public** parameter which indicates whether or not anyone can mint cNFTs from the tree.
 - **Is Decompressible** is only valid for Bubblegum V1.
-- **Version** is the version of the LeafSchema that can be used. 
+- **Version** is the version of the LeafSchema that can be used.
 
 Here is how one can fetch all of that data using our libraries:
 

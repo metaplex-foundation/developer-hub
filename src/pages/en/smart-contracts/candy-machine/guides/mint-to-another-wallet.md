@@ -34,7 +34,7 @@ There are two approaches described in this guide:
 ## Using Sugar CLI
 The Sugar CLI provides two main commands for minting NFTs to other wallets:
 1. `sugar mint` to mint to *one* specific wallet
-2. `sugar airdrop` to mint to *multiple* wallets 
+2. `sugar airdrop` to mint to *multiple* wallets
 
 ### Single Recipient Minting with `sugar mint`
 To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
@@ -61,7 +61,7 @@ To mint NFTs to multiple wallets in a single command `sugar airdrop` can be used
 }
 ```
 
-By default sugar expects this file to be called `airdrop_list.json`. This default name can be changed with 
+By default sugar expects this file to be called `airdrop_list.json`. This default name can be changed with
 `--airdrop-list`.
 
 **Example**:
@@ -78,7 +78,6 @@ When minting to another wallet using Typescript, there are two main approaches d
 
 ### Mint without guards
 For Candy Machines without guards, use `mintFromCandyMachineV2`. This function allows you to directly specify the recipient as the `nftOwner`.
-
 
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));

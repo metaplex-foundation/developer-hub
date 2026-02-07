@@ -90,7 +90,6 @@ Network 请求 Gateway Token
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
 ## 守卫设置
 

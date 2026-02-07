@@ -28,7 +28,6 @@ await writeData(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 对于较大的数据，建议先`allocate`所需的空间，等待该交易完成，然后再`writeData`。以下示例在关联Inscription账户中分配数据：
 
 {% dialect-switcher title="分配空间" %}

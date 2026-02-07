@@ -11,7 +11,7 @@ This guide will demonstrate how to create an **Hybrid Collection** fully end-to-
 
 {% callout title="What is MPL-Hybrid?" %}
 
-MPL-Hybrid is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program that trades a fixed number of fungible assets for a non-fungible asset and vice versa. 
+MPL-Hybrid is a new model for digital assets, web3 games, and onchain communities. At the core of the model is a swap program that trades a fixed number of fungible assets for a non-fungible asset and vice versa.
 
 {% /callout %}
 
@@ -82,7 +82,7 @@ If you're unfamiliar with creating deterministic URIs, you can follow [this guid
 
 ### Creating the Fungible Tokens
 
-The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating, or entirely a new one! 
+The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating, or entirely a new one!
 
 If you’re unfamiliar with creating a token, you can follow [this guide](/guides/javascript/how-to-create-a-solana-token) to learn how to mint your own fungible token on Solana.
 
@@ -217,7 +217,7 @@ function addZeros(num: number, numZeros: number): number {
 | **Fee Amount**     | The amount of the token fee the user will pay when swapping to an NFT.       |
 | **Sol Fee Amount** | An additional fee (in SOL) that will be charged when swapping to NFTs, adjusted for Solana's 9 decimal places. |
 
-### Initialize the Escrow 
+### Initialize the Escrow
 
 We can now initialize the escrow using the `initEscrowV1()` method, passing in all the parameters and variables we’ve set up. This will create your own MPL-Hybrid Escrow.
 
@@ -372,7 +372,7 @@ import {
 
 ### Full Code Example
 
-If you want to simply copy and paste the full code for creating the escrow, here it is! 
+If you want to simply copy and paste the full code for creating the escrow, here it is!
 
 {% totem %}
 
@@ -451,7 +451,7 @@ function addZeros(num: number, numZeros: number): number {
 
 ## Capture & Release
 
-### Setup the Accounts 
+### Setup the Accounts
 
 After setting up Umi (as we did in the [previous section](#setting-up-umi)), the next step is configuring the accounts needed for the `Capture` & `Release` process. These accounts will feel familiar since they’re similar to what we used earlier and they are the same for both instructions:
 

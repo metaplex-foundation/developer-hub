@@ -10,7 +10,9 @@
     "sitemap": "node generate-sitemap.mjs",
     "validate-translations": "node scripts/validate-translations.js",
     "build-examples": "node scripts/build-examples.js",
-    "generate-llms": "node scripts/generate-llms-txt.mjs"
+    "generate-llms": "node scripts/generate-llms-txt.mjs",
+    "lint:md": "markdownlint-cli2 \"src/pages/**/*.md\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"src/pages/**/*.md\""
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
@@ -53,6 +55,7 @@
   "devDependencies": {
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
+    "markdownlint-cli2": "^0.20.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
     "sharp": "^0.32.6"

@@ -97,7 +97,6 @@ cargo install sugar-cli
 ```
 这将从 Crates.io 下载 Sugar 代码并自动为您安装。
 
-
 ### 从源代码构建
 
 要从源代码构建 Sugar，您需要在系统上安装 [Rust](https://www.rust-lang.org/tools/install)。建议使用 `rustup` 安装 Rust：

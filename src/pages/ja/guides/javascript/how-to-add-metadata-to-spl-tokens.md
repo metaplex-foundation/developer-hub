@@ -56,9 +56,9 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -71,11 +71,11 @@ import { base58 } from "@metaplex-foundation/umi/serializers";
 
 // 既存のSPLトークンにメタデータを追加するラッパー関数
 async function addMetadata() {
-	///
-	///
-	///  ここにコードが入ります
-	///
-	///
+ ///
+ ///
+ ///  ここにコードが入ります
+ ///
+ ///
 }
 
 // 関数を実行
@@ -92,8 +92,8 @@ Umiのインスタンス化コードはコードブロック内外のどちら�
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // 新しいキーペア署名者を生成
 const signer = generateSigner(umi);
@@ -111,8 +111,8 @@ await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // fsを使用してファイルシステムをナビゲートし、
 // 相対パスで使用したいウォレットを読み込む必要があります
@@ -140,9 +140,9 @@ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-e
 ```typescript
 // トークンのサンプルメタデータ
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // 既存のSPLトークンにメタデータを追加するラッパー関数
@@ -150,25 +150,25 @@ async function addMetadata() {
     const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
     // メタデータをオンチェーンに保存するメタデータアカウントを導出
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
    // `createV1`ヘルパーを使用して既に初期化されたトークンにメタデータを追加
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 ```
 
@@ -180,10 +180,10 @@ mintアドレスに注意してください。異なるインスタンスで関�
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
-	TokenStandard
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
+ TokenStandard
 } from "@metaplex-foundation/mpl-token-metadata";
 import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
 import {
@@ -197,8 +197,8 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // 新しいキーペア署名者を生成
 const signer = generateSigner(umi);
@@ -212,37 +212,37 @@ const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
 // トークンのサンプルメタデータ
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // 既存のSPLトークンにメタデータを追加するラッパー関数
 async function addMetadata() {
-	// アイデンティティに2 SOLをエアドロップ
+ // アイデンティティに2 SOLをエアドロップ
     // 429 too many requestsエラーが発生した場合は、
     // デフォルトで提供されている無料のRPC以外を使用する必要があります
     await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
     // メタデータをオンチェーンに保存するメタデータアカウントを導出
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 
 // 関数を実行

@@ -78,7 +78,6 @@ Typescriptを使用して別のウォレットにミントする場合、Candy M
 ### ガードなしでのミント
 ガードなしのCandy Machineの場合、`mintFromCandyMachineV2`を使用します。この関数では、受信者を`nftOwner`として直接指定できます。
 
-
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
 

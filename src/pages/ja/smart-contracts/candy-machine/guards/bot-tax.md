@@ -50,8 +50,8 @@ Bot Taxガードは注意して使用してください。
 
 {% node parent="mint-candy-guard" y="150" x="-8" %}
   {% node #mint-candy-machine theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -81,7 +81,6 @@ Instruction of the transaction minting will fail
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
