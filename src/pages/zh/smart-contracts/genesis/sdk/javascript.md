@@ -1,7 +1,7 @@
 ---
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
-description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -20,27 +20,27 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Umi and why is it required?
-    a: Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
-  - q: Can I use the Genesis SDK in a browser?
-    a: Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
-  - q: What's the difference between fetch and safeFetch?
-    a: fetch throws an error if the account doesn't exist. safeFetch returns null instead, useful for checking if an account exists without error handling.
-  - q: How do I handle transaction errors?
-    a: Wrap sendAndConfirm calls in try/catch blocks. Common errors include insufficient funds, already-initialized accounts, and time condition violations.
+  - q: 什么是 Umi，为什么需要它？
+    a: Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
+  - q: 我可以在浏览器中使用 Genesis SDK 吗？
+    a: 可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
+  - q: fetch 和 safeFetch 有什么区别？
+    a: fetch 在账户不存在时会抛出错误。safeFetch 则返回 null，适用于检查账户是否存在而无需错误处理。
+  - q: 如何处理交易错误？
+    a: 将 sendAndConfirm 调用包装在 try/catch 块中。常见错误包括资金不足、账户已初始化和时间条件违规。
 ---
 
-API reference for the Genesis JavaScript SDK. For complete tutorials, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale). {% .lead %}
+Genesis JavaScript SDK 的 API 参考。完整教程请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。 {% .lead %}
 
 {% quick-links %}
 
 {% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Auto-generated API docs" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="自动生成的 API 文档" /%}
 
 {% /quick-links %}
 
-## Installation
+## 安装
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
@@ -48,7 +48,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-## Setup
+## 设置
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -60,53 +60,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplTokenMetadata());
 ```
 
-For complete implementation examples, see [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale).
+完整的实现示例请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。
 
 ---
 
-## Instructions Reference
+## 指令参考
 
-### Core
+### 核心
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [initializeV2()](#initialize-v2) | Create Genesis Account and mint token |
-| [finalizeV2()](#finalize-v2) | Lock configuration, activate launch |
+| [initializeV2()](#initialize-v2) | 创建 Genesis Account 并铸造代币 |
+| [finalizeV2()](#finalize-v2) | 锁定配置，激活发行 |
 
 ### Buckets
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | Add proportional distribution bucket |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | Add fixed-price sale bucket |
-| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | Add treasury/recipient bucket |
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 添加按比例分配的 bucket |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 添加固定价格销售 bucket |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 添加资金库/接收者 bucket |
 
-### Launch Pool Operations
+### Launch Pool 操作
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Deposit SOL into Launch Pool |
-| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | Withdraw SOL (during deposit period) |
-| [claimLaunchPoolV2()](#claim-launch-pool-v2) | Claim tokens (after deposit period) |
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | 向 Launch Pool 存入 SOL |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | 提取 SOL（存款期间） |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 领取代币（存款期结束后） |
 
-### Presale Operations
+### Presale 操作
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [depositPresaleV2()](#deposit-presale-v2) | Deposit SOL into Presale |
-| [claimPresaleV2()](#claim-presale-v2) | Claim tokens (after deposit period) |
+| [depositPresaleV2()](#deposit-presale-v2) | 向 Presale 存入 SOL |
+| [claimPresaleV2()](#claim-presale-v2) | 领取代币（存款期结束后） |
 
-### Admin
+### 管理员
 
-| Function | Description |
+| 函数 | 描述 |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | Execute end behaviors |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | Permanently revoke mint authority |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | Permanently revoke freeze authority |
+| [transitionV2()](#transition-v2) | 执行结束行为 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 永久撤销铸造权限 |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 永久撤销冻结权限 |
 
 ---
 
-## Function Signatures
+## 函数签名
 
 ### initializeV2
 
@@ -264,9 +264,9 @@ await revokeFreezeAuthorityV2(umi, {
 
 ---
 
-## PDA Helpers
+## PDA 辅助函数
 
-| Function | Seeds |
+| 函数 | 种子 |
 |----------|-------|
 | findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
 | findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
@@ -283,31 +283,31 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ---
 
-## Fetch Functions
+## 获取函数
 
-| Function | Returns |
+| 函数 | 返回值 |
 |----------|---------|
-| fetchLaunchPoolBucketV2() | Bucket state (throws if missing) |
-| safeFetchLaunchPoolBucketV2() | Bucket state or `null` |
-| fetchPresaleBucketV2() | Bucket state (throws if missing) |
-| safeFetchPresaleBucketV2() | Bucket state or `null` |
-| fetchLaunchPoolDepositV2() | Deposit state (throws if missing) |
-| safeFetchLaunchPoolDepositV2() | Deposit state or `null` |
-| fetchPresaleDepositV2() | Deposit state (throws if missing) |
-| safeFetchPresaleDepositV2() | Deposit state or `null` |
+| fetchLaunchPoolBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchLaunchPoolBucketV2() | Bucket 状态或 `null` |
+| fetchPresaleBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchPresaleBucketV2() | Bucket 状态或 `null` |
+| fetchLaunchPoolDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchLaunchPoolDepositV2() | 存款状态或 `null` |
+| fetchPresaleDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchPresaleDepositV2() | 存款状态或 `null` |
 
 ```typescript
 const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**Bucket state fields:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**Bucket 状态字段：** `quoteTokenDepositTotal`、`depositCount`、`claimCount`、`bucket.baseTokenAllocation`
 
-**Deposit state fields:** `amountQuoteToken`, `claimed`
+**存款状态字段：** `amountQuoteToken`、`claimed`
 
 ---
 
-## Types
+## 类型
 
 ### TimeCondition
 
@@ -334,46 +334,46 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if 
 
 ---
 
-## Constants
+## 常量
 
-| Constant | Value |
+| 常量 | 值 |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
 
 ---
 
-## Common Errors
+## 常见错误
 
-| Error | Cause |
+| 错误 | 原因 |
 |-------|-------|
-| `insufficient funds` | Not enough SOL for fees |
-| `already initialized` | Genesis Account exists |
-| `already finalized` | Cannot modify after finalization |
-| `deposit period not active` | Outside deposit window |
-| `claim period not active` | Outside claim window |
+| `insufficient funds` | SOL 不足以支付费用 |
+| `already initialized` | Genesis Account 已存在 |
+| `already finalized` | 最终化后无法修改 |
+| `deposit period not active` | 不在存款窗口内 |
+| `claim period not active` | 不在领取窗口内 |
 
 ---
 
-## FAQ
+## 常见问题
 
-### What is Umi and why is it required?
-Umi is Metaplex's JavaScript framework for Solana. It provides a consistent interface for building transactions, managing signers, and interacting with Metaplex programs.
+### 什么是 Umi，为什么需要它？
+Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
 
-### Can I use the Genesis SDK in a browser?
-Yes. The SDK works in both Node.js and browser environments. For browsers, use a wallet adapter for signing instead of keypair files.
+### 我可以在浏览器中使用 Genesis SDK 吗？
+可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
 
-### What's the difference between fetch and safeFetch?
-`fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
+### fetch 和 safeFetch 有什么区别？
+`fetch` 在账户不存在时会抛出错误。`safeFetch` 则返回 `null`，适用于检查账户是否存在。
 
-### How do I handle transaction errors?
-Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
+### 如何处理交易错误？
+将 `sendAndConfirm` 调用包装在 try/catch 块中。检查错误消息以了解具体的失败原因。
 
 ---
 
-## Next Steps
+## 下一步
 
-For complete implementation tutorials:
+完整的实现教程：
 
-- [Getting Started](/smart-contracts/genesis/getting-started) - Setup and first launch
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price sales
+- [开始使用](/zh/smart-contracts/genesis/getting-started) - 设置和首次发行
+- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 按比例分配
+- [Presale](/zh/smart-contracts/genesis/presale) - 固定价格销售

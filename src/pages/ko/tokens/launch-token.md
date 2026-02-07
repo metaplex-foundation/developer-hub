@@ -55,7 +55,6 @@ import {
   addLaunchPoolBucketV2,
   addUnlockedBucketV2,
   finalizeV2,
-  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
@@ -145,25 +144,25 @@ async function main() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     depositEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
     endBehaviors: [
@@ -186,8 +185,6 @@ async function main() {
   // ============================================
   console.log('\n3단계: 잠금 해제 버킷 추가 중...');
 
-  const backendSigner = generateSigner(umi);
-
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
@@ -197,15 +194,15 @@ async function main() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
+    backendSigner: null,
   }).sendAndConfirm(umi);
 
   console.log('✓ 잠금 해제 버킷 추가 완료!');

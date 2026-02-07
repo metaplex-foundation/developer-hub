@@ -55,7 +55,6 @@ import {
   addLaunchPoolBucketV2,
   addUnlockedBucketV2,
   finalizeV2,
-  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
