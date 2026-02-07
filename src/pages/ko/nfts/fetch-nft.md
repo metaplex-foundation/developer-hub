@@ -48,4 +48,3 @@ Solana 블록체인에서 NFT 데이터를 가져옵니다. {% .lead %}
 - **Update Authority** - 컬렉션을 수정할 수 있는 사람
 - **Num Minted** - 컬렉션 내 자산 수
 - **Plugins** - 로열티나 속성 같은 첨부된 플러그인
-

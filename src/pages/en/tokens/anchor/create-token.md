@@ -60,8 +60,6 @@ This guide was tested with the following versions:
 | Node.js | 22.15.1 |
 | Yarn | 1.22.x |
 
-*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to Solana Agave 2.x/3.x, Anchor 0.30+*
-
 ## Initial Setup
 
 Start by initializing a new Anchor project:

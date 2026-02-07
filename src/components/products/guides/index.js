@@ -10,7 +10,6 @@ export const guides = {
   icon: <BookOpenIcon className="text-green-500" />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
-  heroes: null,
   sections: [
     {
       ...documentationSection('guides'),

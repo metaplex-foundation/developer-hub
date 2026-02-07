@@ -155,8 +155,7 @@ await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsF
 
 **注意**: アップロード中に各ファイルに正しい[MIMEタイプ](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)を設定することが重要です。MIMEタイプが正しく設定されていない場合、URI経由でアクセスした際にファイルが適切に表示されない可能性があります。
 
-
-```javascript 
+```javascript
 // 画像フォルダをアップロード
 const metadataUploadResponse = await turbo.uploadFolder({
     folderPath: metadataFolderPath,

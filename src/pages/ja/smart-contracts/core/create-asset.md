@@ -1,418 +1,189 @@
 ---
-title: アセットの作成
-metaTitle: アセットの作成 | Core
-description: Metaplex Coreパッケージを使用してCore NFTアセットを作成する方法を学びます。
+title: Assetの作成
+metaTitle: Assetの作成 | Metaplex Core
+description: JavaScriptまたはRustを使用してSolanaでCore NFT Assetを作成する方法を学びます。メタデータのアップロード、コレクションへのミント、プラグインの追加を含みます。
+updated: '01-31-2026'
+keywords:
+  - create NFT
+  - mint NFT
+  - Solana NFT
+  - mpl-core create
+  - upload metadata
+about:
+  - NFT minting
+  - Metadata upload
+  - Asset creation
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - npm install @metaplex-foundation/mpl-core @metaplex-foundation/umiでSDKをインストール
+  - メタデータJSONをArweaveまたはIPFSにアップロードしてURIを取得
+  - メタデータURIでcreate(umi, { asset, name, uri })を呼び出す
+  - core.metaplex.comでAssetを確認
+howToTools:
+  - Node.js
+  - Umi framework
+  - mpl-core SDK
+  - Arweave or IPFS for storage
+faqs:
+  - q: Core AssetとToken Metadata NFTの違いは何ですか？
+    a: Core Assetは単一アカウントを使用し、コストが約80%削減されます。Token Metadataは3つ以上のアカウント（mint、metadata、token）を使用します。新規プロジェクトにはCoreが推奨されます。
+  - q: 1つのトランザクションで複数のアセットを作成できますか？
+    a: いいえ。各create命令は1つのアセットを作成します。大量ミントにはCore Candy Machineまたはバッチトランザクションを使用してください。
+  - q: 最初にCollectionを作成する必要がありますか？
+    a: いいえ。AssetはCollectionなしで存在できます。ただし、Collectionはコレクションレベルのロイヤリティと操作を可能にします。
+  - q: 別のウォレットにミントするにはどうすればよいですか？
+    a: create関数でownerパラメータに受取人のアドレスを渡します。
+  - q: どのメタデータ形式を使用すべきですか？
+    a: name、description、image、およびオプションのattributes配列を含む標準NFTメタデータ形式を使用します。JSON Schemaドキュメントを参照してください。
 ---
-
-[Core概要](/ja/smart-contracts/core)で説明されているように、Core上のデジタルアセットは、正確に1つのオンチェーンアカウントとトークンを説明するオフチェーンデータで構成されています。このページでは、これらのアセットをミントするプロセスを説明します。 {% .lead %}
-
+このガイドでは、Metaplex Core SDKを使用してSolanaで**Core Asset**（NFT）を作成する方法を説明します。オフチェーンメタデータをアップロードし、オンチェーンAssetアカウントを作成し、オプションでCollectionに追加したりプラグインを添付したりします。 {% .lead %}
+{% callout title="構築するもの" %}
+以下を含むCore Asset：
+- Arweaveに保存されたオフチェーンメタデータ（名前、画像、属性）
+- 所有権とメタデータURIを持つオンチェーンAssetアカウント
+- オプション：Collectionメンバーシップ
+- オプション：プラグイン（ロイヤリティ、フリーズ、属性）
+{% /callout %}
+## 概要
+メタデータJSONを分散ストレージにアップロードし、URIで`create()`を呼び出して**Core Asset**を作成します。Assetはスタンドアロンでミントするか、Collectionにミントでき、作成時にプラグインを含めることができます。
+- メタデータJSONをArweave/IPFSにアップロードし、URIを取得
+- name、URI、オプションのプラグインで`create()`を呼び出す
+- コレクションの場合：`collection`パラメータを渡す
+- アセットあたり約0.0029 SOLのコスト
+## 対象外
+Token Metadata NFT（mpl-token-metadataを使用）、圧縮NFT（Bubblegumを使用）、ファンジブルトークン（SPL Tokenを使用）、NFT移行。
+## クイックスタート
+**ジャンプ先：** [メタデータをアップロード](#uploading-off-chain-data) · [Assetを作成](#create-an-asset) · [Collectionと共に](#create-an-asset-into-a-collection) · [プラグインと共に](#create-an-asset-with-plugins)
+1. インストール：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
+2. メタデータJSONをアップロードしてURIを取得
+3. `create(umi, { asset, name, uri })`を呼び出す
+4. [core.metaplex.com](https://core.metaplex.com)で確認
+## 前提条件
+- 署名者とRPC接続で構成された**Umi**
+- トランザクション手数料用の**SOL**（アセットあたり約0.003 SOL）
+- アップロード準備ができた**メタデータJSON**（名前、画像、属性）
 ## 作成プロセス
-
-1. **オフチェーンデータのアップロード。** まず、オフチェーンデータが準備できていることを確認する必要があります。これは、アセットを説明するJSONファイルをどこかに保存する必要があることを意味します。そのJSONファイルがどこに保存されているかは重要ではありませんが、**URI**経由でアクセス可能である必要があります。オフチェーンメタデータは、[従来のtoken metadata標準](/token-metadata/token-standard#the-non-fungible-standard)と同様に見えることができます。
-2. **オンチェーンAssetアカウントの作成。** 次に、アセットのデータを保持するオンチェーンAssetアカウントを作成する必要があります。
-
-具体的なコード例を提供しながら、これらのステップをより詳しく掘り下げてみましょう。
-
+1. **オフチェーンデータをアップロード。** 名前、説明、画像URL、属性を含むJSONファイルを保存します。ファイルは公開**URI**経由でアクセス可能である必要があります。
+2. **オンチェーンAssetアカウントを作成。** メタデータURIで`create`命令を呼び出してAssetをミントします。
 ## オフチェーンデータのアップロード
-
-オフチェーンデータをアップロードするには、任意のストレージサービス（Arweave、IPFS、AWSなど）を使用するか、自分のサーバーに保存することができます。これらのいくつかをユーザーにとってより簡単にするために、`Umi`には`Irys（Arweaveにアップロード）`や`nftStorage（IPFSにアップロード）`などの専用プラグインがあります。プラグインが選択されると、これによりユーザーはデータをアップロードするための統一されたインターフェースが提供されます。
-
-{% dialect-switcher title="アセットとJSONデータのアップロード" %}
-{% dialect title="JavaScript" id="js" %}
-{% totem %}
-
-```ts
+任意のストレージサービス（Arweave、IPFS、AWS）を使用してメタデータJSONをアップロードします。Umiは一般的なサービス用のアップローダープラグインを提供します。利用可能なすべてのメタデータフィールドについては[JSON Schema](/smart-contracts/core/json-schema)を参照してください。
+```ts {% title="upload-metadata.ts" %}
+import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
+// アップローダーを構成（Irys、AWSなど）
+umi.use(irysUploader())
+// 最初に画像をアップロード
 const [imageUri] = await umi.uploader.upload([imageFile])
+// メタデータJSONをアップロード
 const uri = await umi.uploader.uploadJson({
   name: 'My NFT',
   description: 'This is my NFT',
   image: imageUri,
-  // ...
+  attributes: [
+    { trait_type: 'Background', value: 'Blue' },
+  ],
 })
 ```
-
-{% totem-accordion title="アップローダーの選択" %}
-
-Umiを使用してお好みのアップローダーを選択するには、アップローダーが提供するプラグインをインストールするだけです。
-
-例えば、Irysプラグインをインストールする方法は次のとおりです：
-
-```ts
-import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
-
-umi.use(irysUploader())
-```
-
-{% /totem-accordion %}
-
-{% /totem %}
-{% /dialect %}
-{% /dialect-switcher %}
-
-これで**URI**が用意できたので、次のステップに進むことができます。
-
-## アセットの作成
-
-アセットを作成するには`createV1`インストラクションを使用します。`createV1`インストラクションは、アセットの基本メタデータの設定に加えて、アセットをコレクションに追加したり、[後で](#プラグイン付きアセットの作成)説明されるプラグインの割り当てなどを含みます。
-
-以下は簡単な例です：
-
+**URI**を取得したら、Assetを作成できます。
+## Assetを作成
+`create`命令を使用して新しいCore Assetをミントします。
 {% totem %}
-{% totem-accordion title="技術的インストラクション詳細" %}
-**インストラクションアカウントリスト**
-
-| アカウント      | 説明                                          |
-| ------------- | -------------------------------------------- |
-| asset         | MPL Core Assetのアドレス                      |
-| collection    | Core Assetが属するコレクション                  |
-| authority     | 新しいアセットの権限                            |
-| payer         | ストレージ手数料を支払うアカウント                |
-| new owner     | アセットを受け取る所有者                        |
-| systemProgram | システムプログラムアカウント                     |
-| logWrapper    | SPL Noopプログラム                           |
-
-**インストラクション引数**
-
-| 引数        | 説明                                                    |
-| --------- | ------------------------------------------------------ |
-| dataState | データがアカウント状態または台帳状態に格納されるかどうか        |
-| name      | MPL Core Assetの名前                                    |
-| uri       | オフチェーンJSONメタデータURI                             |
-| plugins   | アセットに持たせたいプラグイン                             |
-
-一部のアカウント/引数は、使いやすさのためにSDKで抽象化されるか、オプションである場合があります。
-オンチェーンインストラクションの詳細な説明は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L18)で見ることができます
-
+{% totem-accordion title="技術的な命令の詳細" %}
+**命令アカウント**
+| アカウント | 説明 |
+|---------|-------------|
+| asset | 新しいMPL Core Assetのアドレス（署名者） |
+| collection | Assetを追加するコレクション（オプション） |
+| authority | 新しいアセットの権限 |
+| payer | ストレージ手数料を支払うアカウント |
+| owner | アセットを所有するウォレット |
+| systemProgram | System Programアカウント |
+**命令引数**
+| 引数 | 説明 |
+|----------|-------------|
+| name | MPL Core Assetの名前 |
+| uri | オフチェーンJSONメタデータURI |
+| plugins | 作成時に追加するプラグイン（オプション） |
+完全な命令の詳細：[GitHub](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/instruction.rs)
 {% /totem-accordion %}
 {% /totem %}
-
-{% seperator h="6" /%}
-
-{% dialect-switcher title="アセットの作成" %}
-{% dialect title="JavaScript" id="js" %}
-
+{% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
+## CollectionにAssetを作成
+Collectionの一部としてAssetを作成するには、`collection`パラメータを渡します。Collectionは既に存在している必要があります。
+{% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
+Collectionの作成については[Collection](/ja/smart-contracts/core/collections)を参照してください。
+## プラグイン付きでAssetを作成
+`plugins`配列で渡すことで、作成時にプラグインを追加します。この例ではRoyaltiesプラグインを追加します：
+{% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
+### 一般的なプラグイン
+よく使用されるプラグインをいくつか紹介します。完全なリストについては[プラグイン概要](/ja/smart-contracts/core/plugins)を参照してください。
+- [Royalties](/ja/smart-contracts/core/plugins/royalties) - クリエイターロイヤリティの強制
+- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate) - フリーズ/解除を許可
+- [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate) - バーンを許可
+- [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate) - 転送を許可
+- [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate) - メタデータ更新を許可
+- [Attributes](/ja/smart-contracts/core/plugins/attribute) - オンチェーンキー/バリューデータ
+完全なリストについては[プラグイン概要](/ja/smart-contracts/core/plugins)を参照してください。
+## よくあるエラー
+### `Asset account already exists`
+アセットキーペアが既に使用されています。新しい署名者を生成してください：
 ```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import { create } from '@metaplex-foundation/mpl-core'
-
-const assetSigner = generateSigner(umi)
-
-const result = await create(umi, {
-  asset: assetSigner,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  //owner: publicKey('11111111111111111111111111111111'), //別のウォレットにミントするためのオプション
-}).sendAndConfirm(umi)
+const assetSigner = generateSigner(umi) // 一意である必要があります
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use mpl_core::instructions::CreateV1Builder;
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
-
-
-pub async fn create_asset() {
-
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let payer = Keypair::new();
-    let asset = Keypair::new();
-
-    let create_asset_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .instruction();
-
-    let signers = vec![&asset, &payer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_tx = Transaction::new_signed_with_payer(
-        &[create_asset_ix],
-        Some(&payer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client.send_and_confirm_transaction(&create_asset_tx).await.unwrap();
-
-    println!("Signature: {:?}", res)
-}
+### `Collection not found`
+コレクションアドレスが存在しないか、有効なCore Collectionではありません。アドレスを確認し、最初にCollectionを作成したことを確認してください。
+### `Insufficient funds`
+支払者ウォレットにはレント用に約0.003 SOLが必要です。以下で資金を追加：
+```bash
+solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-let create_ix = CreateV1CpiBuilder::new()
-        .asset(input.asset.pubkey())
-        .collection(input.collection)
-        .authority(input.authority)
-        .payer(payer)
-        .owner(input.owner)
-        .update_authority(input.update_authority)
-        .system_program(system_program::ID)
-        .data_state(input.data_state.unwrap_or(DataState::AccountState))
-        .name(input.name.unwrap_or(DEFAULT_ASSET_NAME.to_owned()))
-        .uri(input.uri.unwrap_or(DEFAULT_ASSET_URI.to_owned()))
-        .plugins(input.plugins)
-        .invoke();
-```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-## コレクション内でのアセット作成
-
-MPL Core Assetは、MPL Core Collectionが既に存在する場合、コレクションに直接作成できます。Collection Assetを作成するには[こちら](/ja/smart-contracts/core/collections)をご覧ください。
-
-{% dialect-switcher title="コレクション内でのアセット作成" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
-import { generateSigner, publicKey } from '@metaplex-foundation/umi'
-import {
-  createCollection,
-  create,
-  fetchCollection,
-} from '@metaplex-foundation/mpl-core'
-
-const collectionSigner = generateSigner(umi)
-
-// コレクションの作成
-// 単一のスクリプトでこれを行う場合、
-// sleep関数またはcommitment levelを'finalized'にして
-// フェッチする前にコレクションが完全に書き込まれるようにする必要があります。
-await createCollection(umi, {
-  collection: collectionSigner,
-  name: 'My Collection',
-  uri: 'https://example.com/my-collection.json',
-}).sendAndConfirm(umi)
-
-// コレクションをフェッチ
-const collection = await fetchCollection(umi, collectionSigner.publicKey)
-
-
-// assetSignerを生成してアセットを作成
-const assetSigner = generateSigner(umi)
-
-await create(umi, {
-  asset: assetSigner,
-  collection: collection,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  //owner: publicKey('11111111111111111111111111111111'), //別のウォレットにミントするためのオプション
-}).sendAndConfirm(umi)
-```
-
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use mpl_core::instructions::{CreateCollectionV1Builder, CreateV1Builder};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{signature::Keypair, signer::Signer, transaction::Transaction};
-
-pub async fn create_asset_with_collection() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let signer = Keypair::new(); // ここでkeypairをロードします。
-
-    let collection = Keypair::new();
-
-    let create_collection_ix = CreateCollectionV1Builder::new()
-        .collection(collection.pubkey())
-        .payer(signer.pubkey())
-        .name("My Collection".into())
-        .uri("https://example.com/my-collection.json".into())
-        .instruction();
-
-    let signers = vec![&collection, &signer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_collection_tx = Transaction::new_signed_with_payer(
-        &[create_collection_ix],
-        Some(&signer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_collection_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res);
-
-    let asset = Keypair::new();
-
-    let create_asset_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .collection(Some(collection.pubkey()))
-        .payer(signer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .instruction();
-
-    let signers = vec![&asset, &signer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_tx = Transaction::new_signed_with_payer(
-        &[create_asset_ix],
-        Some(&signer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_asset_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-```
-
-{% /dialect %}
-
-{% dialect title="Rust (CPI)" id="rust-cpi" %}
-
-```rust
-let create_ix = CreateV1CpiBuilder::new(input.program)
-    .asset(input.asset.pubkey())
-    .collection(Some(input.collection))
-    .authority(Some(input.authority))
-    .payer(input.payer)
-    .owner(Some(input.owner))
-    .update_authority(Some(input.update_authority))
-    .system_program(system_program::ID)
-    .data_state(input.data_state.unwrap_or(DataState::AccountState))
-    .name(input.name)
-    .uri(input.uri)
-    .plugins(input.plugins)
-    .invoke();
-```
-
-{% /dialect %}
-
-{% /dialect-switcher %}
-
-## プラグイン付きアセットの作成
-
-MPL Core Assetは、コレクションレベルとアセットレベルの両方でプラグインの使用をサポートしています。プラグイン付きのCore Assetを作成するには、作成時に`plugins`配列引数にプラグインタイプとそのパラメータを渡します。以下の例では、`Freeze`プラグインでミントを作成します。
-
-{% dialect-switcher title="プラグイン付きアセットの作成" %}
-{% dialect title="JavaScript" id="js" %}
-
-```ts
+## 注意事項
+- `asset`パラメータは**新しいキーペア**である必要があります - 既存のアカウントを再利用できません
+- 別の所有者にミントする場合は、`owner`パラメータを渡します
+- 作成時に追加されたプラグインは、後から追加するよりも安価です（1トランザクション対2トランザクション）
+- すぐにフェッチするスクリプトでアセットを作成する場合は`commitment: 'finalized'`を使用
+## クイックリファレンス
+### プログラムID
+| ネットワーク | アドレス |
+|---------|---------|
+| Mainnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+| Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
+### 最小コード
+```ts {% title="minimal-create.ts" %}
 import { generateSigner } from '@metaplex-foundation/umi'
-import { create, ruleSet } from '@metaplex-foundation/mpl-core'
-
-const creator1 = publicKey('11111111111111111111111111111111')
-const creator2 = publicKey('22222222222222222222222222222222')
-
-const assetSigner = generateSigner(umi)
-
-await create(umi, {
-  asset: assetSigner,
-  name: 'My Asset',
-  uri: 'https://example.com/my-asset.json',
-  plugins: [
-    {
-      type: 'Royalties',
-      basisPoints: 500,
-      creators: [
-        {
-          address: creator1,
-          percentage: 20,
-        },
-        {
-          address: creator2,
-          percentage: 80,
-        },
-      ],
-      ruleSet: ruleSet('None'), // 互換性ルールセット
-    },
-  ],
-}).sendAndConfirm(umi)
+import { create } from '@metaplex-foundation/mpl-core'
+const asset = generateSigner(umi)
+await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(umi)
 ```
-
-{% /dialect %}
-
-{% dialect title="Rust" id="rust" %}
-
-```rust
-use std::str::FromStr;
-use mpl_core::{
-    instructions::CreateV1Builder,
-    types::{Creator, Plugin, PluginAuthority, PluginAuthorityPair, Royalties, RuleSet},
-};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-
-pub async fn create_asset_with_plugin() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-
-    let payer = Keypair::new();
-    let asset = Keypair::new();
-
-    let creator = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-
-    let create_asset_with_plugin_ix = CreateV1Builder::new()
-        .asset(asset.pubkey())
-        .payer(payer.pubkey())
-        .name("My Nft".into())
-        .uri("https://example.com/my-nft.json".into())
-        .plugins(vec![PluginAuthorityPair {
-            plugin: Plugin::Royalties(Royalties {
-                basis_points: 500,
-                creators: vec![Creator {
-                    address: creator,
-                    percentage: 100,
-                }],
-                rule_set: RuleSet::None,
-            }),
-            authority: Some(PluginAuthority::None),
-        }])
-        .instruction();
-
-    let signers = vec![&asset, &payer];
-
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-
-    let create_asset_with_plugin_tx = Transaction::new_signed_with_payer(
-        &[create_asset_with_plugin_ix],
-        Some(&payer.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-
-    let res = rpc_client
-        .send_and_confirm_transaction(&create_asset_with_plugin_tx)
-        .await
-        .unwrap();
-
-    println!("Signature: {:?}", res)
-}
-
+### コスト内訳
+| 項目 | コスト |
+|------|------|
+| Assetアカウントレント | 約0.0029 SOL |
+| トランザクション手数料 | 約0.000005 SOL |
+| **合計** | **約0.003 SOL** |
+## FAQ
+### Core AssetとToken Metadata NFTの違いは何ですか？
+Core Assetは単一アカウントを使用し、コストが約80%削減されます。Token Metadataは3つ以上のアカウント（mint、metadata、token）を使用します。新規プロジェクトにはCoreが推奨されます。
+### 1つのトランザクションで複数のアセットを作成できますか？
+いいえ。各`create`命令は1つのアセットを作成します。大量ミントには[Core Candy Machine](/smart-contracts/core-candy-machine)またはバッチトランザクションを使用してください。
+### 最初にCollectionを作成する必要がありますか？
+いいえ。AssetはCollectionなしで存在できます。ただし、Collectionはコレクションレベルのロイヤリティと操作を可能にします。
+### 別のウォレットにミントするにはどうすればよいですか？
+`owner`パラメータを渡します：
+```ts
+await create(umi, { asset, name, uri, owner: recipientAddress })
 ```
-
-{% /dialect %}
-{% /dialect-switcher %}
-
-プラグインのリストには以下が含まれますが、これらに限定されません：
-
-- [Burn Delegate](/ja/smart-contracts/core/plugins/burn-delegate)
-- [Freeze Delegate](/ja/smart-contracts/core/plugins/freeze-delegate)  
-- [Royalties](/ja/smart-contracts/core/plugins/royalties)
-- [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate)
-- [Update Delegate](/ja/smart-contracts/core/plugins/update-delegate)
+### どのメタデータ形式を使用すべきですか？
+`name`、`description`、`image`、およびオプションの`attributes`配列を含む標準NFTメタデータ形式を使用します。[JSON Schema](/smart-contracts/core/json-schema)を参照してください。
+## 用語集
+| 用語 | 定義 |
+|------|------------|
+| **Asset** | NFTを表すCoreオンチェーンアカウント |
+| **URI** | オフチェーンメタデータJSONを指すURL |
+| **署名者** | トランザクションに署名するキーペア（アセットは作成時に署名者である必要があります） |
+| **Collection** | 関連するAssetをグループ化するCoreアカウント |
+| **Plugin** | Assetに動作を追加するモジュラー拡張機能 |
+| **レント** | Solana上でアカウントを維持するために必要なSOL |

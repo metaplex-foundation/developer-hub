@@ -268,7 +268,7 @@ ConfigLineSettings = {
 `prefixUri`を除く、URIの最大長。
 
 例：
-- 20文字のベースURI ` https://arweave.net/`
+- 20文字のベースURI `https://arweave.net/`
 - 最大43文字の一意の識別子
 
 プレフィックスなしでは63文字の保存が必要になります。`prefixUri`を使用する場合、`uriLength`は`https://arweave.net/`の20文字分削減され、一意識別子の43文字になります。

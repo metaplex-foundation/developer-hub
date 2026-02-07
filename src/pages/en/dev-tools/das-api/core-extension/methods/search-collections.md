@@ -4,7 +4,7 @@ metaTitle: Search Core Collections | DAS API Core Extension
 description: Return the list of MPL Core Collections given a search criteria
 ---
 
-Return the list of Core assets given a search criteria. 
+Return the list of Core assets given a search criteria.
 
 ## Code example
 
@@ -71,7 +71,6 @@ console.log(asset);
 ]
 ```
 
-
 ## Parameters
 
 | Name                | Required | Description                                |
@@ -102,4 +101,4 @@ console.log(asset);
 | `after`             |          | Retrieve assets after the specified ID.    |
 | `jsonUri`           |          | The value for the JSON URI.  |
 
-Technically the function accepts all the above parameters since they are inherited from the standard DAS package. Some of them are not recommended to use though, e.g. the package filters the `interface` for MPL Core either way. 
+Technically the function accepts all the above parameters since they are inherited from the standard DAS package. Some of them are not recommended to use though, e.g. the package filters the `interface` for MPL Core either way.

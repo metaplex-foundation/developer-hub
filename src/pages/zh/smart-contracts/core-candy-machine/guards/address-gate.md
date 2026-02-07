@@ -71,7 +71,6 @@ Owner: Any Program {% .whitespace-nowrap %}
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## 守卫设置
@@ -94,7 +93,6 @@ create(umi, {
 ```
 
 API 参考：[create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html)、[AddressGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AddressGate.html)
-
 
 {% /totem %}
 {% /dialect %}

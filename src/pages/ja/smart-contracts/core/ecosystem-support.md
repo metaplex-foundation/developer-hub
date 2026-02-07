@@ -1,60 +1,55 @@
 ---
-title: エコシステム対応状況
-metaTitle: エコシステム対応状況 | Core
-description: Metaplex Coreエコシステムと、Core対応のサイト/アプリ/dAppを紹介します。
+title: エコシステムサポート
+metaTitle: エコシステムサポート | Core
+description: Metaplex Coreエコシステムと、Metaplex Coreをサポートするウェブサイト/アプリ/dAppについて学びます。
+updated: '01-31-2026'
+keywords:
+  - Core marketplace
+  - Core wallet support
+  - Core ecosystem
+  - supported platforms
+about:
+  - Marketplace support
+  - Wallet compatibility
+  - Ecosystem integrations
+proficiencyLevel: Beginner
 ---
-
-以下は、エコシステムに存在する主要なマーケットプレイス、ウォレット、エクスプローラー、RPCプロバイダー、その他dAppのCore対応状況をまとめた表です。
-
-Metaplexは、Coreデジタルアセットの作成・譲渡・閲覧ができる無償のオープンソースUIも提供しています。
-URL: [https://core.metaplex.com/](https://core.metaplex.com/)
-
+以下の表には、エコシステム全体の主要なマーケットプレイス、ウォレット、エクスプローラー、RPCプロバイダー、その他のdAppのCore統合状況が含まれています。
+Metaplexは、Coreデジタルアセットの作成、転送、表示のための無料のオープンソースUIも[https://core.metaplex.com/](https://core.metaplex.com/)で提供しています。
 ## マーケットプレイス
-
-| プロジェクト                                 | ステータス |
-| -------------------------------------------- | ---------- |
-| [Tensor](https://www.tensor.trade/)          | 対応済み   |
-| [Magic Eden](https://magiceden.io/solana)    | 対応済み   |
-| [Sniper](https://www.sniper.xyz/)            | 対応済み   |
-| [OKX](https://www.okx.com/)                  | 対応済み   |
-| [Mallow](https://www.mallow.art/)            | 対応済み   |
-
+| プロジェクト                               | ステータス |
+| ----------------------------------------- | -------- |
+| [Tensor](https://www.tensor.trade/)       | 完了 |
+| [Magic Eden](https://magiceden.io/solana) | 完了 |
+| [Sniper](https://www.sniper.xyz/)         | 完了 |
+| [OKX](https://www.okx.com/)               | 完了 |
+| [Mallow](https://www.mallow.art/)         | 完了 |
 ## ウォレット
-
-| プロジェクト                          | ステータス |
-| ------------------------------------- | ---------- |
-| [Solflare](https://solflare.com/)     | 対応済み   |
-| [Phantom](https://phantom.app/)       | 対応済み   |
-| [Backpack](https://backpack.app/)     | 対応済み   |
-
+| プロジェクト                       | ステータス |
+| --------------------------------- | -------- |
+| [Solflare](https://solflare.com/) | 完了 |
+| [Phantom](https://phantom.app/)   | 完了 |
+| [Backpack](https://backpack.app/) | 完了 |
 ## エクスプローラー
-
-| プロジェクト                       | ステータス |
-| ---------------------------------- | ---------- |
-| [SolanaFM](https://solana.fm/)     | 対応済み   |
-| [Solscan](https://solscan.io/)     | 対応済み   |
-
-## RPC（DAS）
-
-| プロジェクト                                 | ステータス |
-| ------------------------------------------- | ---------- |
-| [ExtrNode](https://extrnode.com/)           | 対応済み   |
-| [Helius](https://www.helius.dev/)           | 対応済み   |
-| [Quicknode](https://www.quicknode.com/)     | 対応済み   |
-| [Shyft](https://shyft.to/)                  | 対応済み   |
-| [Triton](https://triton.one/)               | 対応済み   |
-
+| プロジェクト                    | ステータス |
+| ------------------------------ | -------- |
+| [SolanaFM](https://solana.fm/) | 完了 |
+| [Solscan](https://solscan.io/) | 完了 |
+## RPC (DAS)
+| プロジェクト                             | ステータス |
+| --------------------------------------- | -------- |
+| [ExtrNode](https://extrnode.com/)       | 完了 |
+| [Helius](https://www.helius.dev/)       | 完了 |
+| [Quicknode](https://www.quicknode.com/) | 完了 |
+| [Shyft](https://shyft.to/)              | 完了 |
+| [Triton](https://triton.one/)           | 完了 |
 ## ノーコードツール
-
-| プロジェクト                                     | ステータス |
-| ----------------------------------------------- | ---------- |
-| [Truffle](https://truffle.wtf)                  | 対応済み   |
-| [Underdog](https://www.underdogprotocol.com/)   | 対応済み   |
-
+| プロジェクト                                   | ステータス |
+| --------------------------------------------- | -------- |
+| [Truffle](https://truffle.wtf)                | 完了 |
+| [Underdog](https://www.underdogprotocol.com/) | 完了 |
 ## その他
-
-| プロジェクト                       | ステータス |
-| ---------------------------------- | ---------- |
-| [dReader](https://dreader.io/)     | 対応済み   |
-| [Matrica](https://matrica.io/)     | 対応済み   |
-
+| プロジェクト                    | ステータス |
+| ------------------------------ | -------- |
+| [dReader](https://dreader.io/) | 完了 |
+| [Matrica](https://matrica.io/) | 完了 |

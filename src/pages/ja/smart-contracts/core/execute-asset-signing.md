@@ -1,82 +1,69 @@
 ---
-title: Executeアセット署名
-metaTitle: Executeとアセット署名者 | Core
-description: MPL CoreアセットがExecute命令を使って、命令やトランザクションに署名する方法を学びます。
+title: Execute Asset Signing
+metaTitle: ExecuteとAsset Signer | Core
+description: MPL Core AssetsがExecute命令を使用して命令やトランザクションに署名する方法を学びます。
+updated: '01-31-2026'
+keywords:
+  - asset signer
+  - execute instruction
+  - NFT as signer
+  - asset PDA
+about:
+  - Asset signing
+  - Execute instruction
+  - Advanced operations
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - JavaScript
 ---
-
-MPL CoreのExecute命令は、MPL Coreアセットに「アセット署名者（Asset Signers）」という概念を導入します。
-
-これらの「アセット署名者」はアセット自身の代理としてSignerとして振る舞い、次の能力を解放します。
-
-- SolanaおよびSPLトークンの送金
-- 他アカウントのオーソリティになる
-- トランザクション/インストラクション/CPIの署名を必要とする、`assetSignerPda`に割り当てられた各種の動作やバリデーションの実行
-
-MPL Coreアセットは、トランザクション/CPIに署名してブロックチェーンへ送信できます。これは実質的に、`assetSigner`という形でCoreアセットに専用のウォレットが付与されることを意味します。
-
-## アセット署名者PDA
-
-アセットは`assetSignerPda`アカウント/アドレスへアクセスでき、これによりMPL Coreプログラムの`execute`命令は渡された追加インストラクションを`assetSignerPda`でCPI署名して中継できます。
-
-これにより、`assetSignerPda`アカウントは現在のアセット所有者の代理として、アカウントの命令を所有・実行できます。
-
-`assetSignerPda`はCoreアセットに紐づいたウォレットと捉えることができます。
-
+MPL Core Execute命令は、MPL Core Assetsに**Asset Signers**の概念を導入します。
+これらの**Asset Signers**は、Asset自体に代わって署名者として機能し、MPL Core Assetsに以下の機能を提供します：
+- SolanaとSPLトークンを転送する
+- 他のアカウントの権限になる
+- `assetSignerPda`に割り当てられたトランザクション/命令/CPI署名を必要とする他のアクションと検証を実行する
+MPL Core Assetsは、ブロックチェーンにトランザクション/CPIを署名して送信する機能を持っています。これにより、Core Assetは`assetSigner`という形で独自のウォレットを持つことができます。
+## Asset Signer PDA
+Assetsは`assetSignerPda`アカウント/アドレスにアクセスできるようになり、MPL Coreプログラムの`execute`命令が、送信された追加の命令を`assetSignerPda`でCPI命令に署名して通過させることができます。
+これにより、`assetSignerPda`アカウントは、現在のアセット所有者に代わってアカウント命令を効果的に所有および実行できます。
+`assetSignerPda`は、Core Assetに接続されたウォレットと考えることができます。
 ### findAssetSignerPda()
-
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
-
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
 ```
-
 ## Execute命令
-
 ### 概要
-
-`execute`命令は、Coreアセットに加えて、AssetSignerがチェーン上のMPL Coreプログラムの`execute`命令に到達した際に署名されるパススルーインストラクションを渡せます。
-
-`execute`命令とその引数の概要は以下のとおりです。
-
+`execute`命令を使用すると、ユーザーはCore Assetと、オンチェーンでMPL Coreプログラムの`execute`命令に到達したときにAssetSignerによって署名されるパススルー命令を渡すことができます。
+`execute`命令とその引数の概要：
 ```ts
 const executeIx = await execute(umi, {
     {
-        // 取引に署名するアセット（`fetchAsset()`で取得）
+        // `fetchAsset()`を介してトランザクションに署名するアセット
         asset: AssetV1,
-        // コレクション（`fetchCollection()`で取得）
+        // `fetchCollection()`を介したコレクション
         collection?: CollectionV1,
-        // TransactionBuilder | Instruction[] のいずれか
+        // TransactionBuilder | Instruction[]のいずれか
         instructions: ExecuteInput,
-        // 取引/インストラクションで必要となる追加Signer
+        // トランザクション/命令に必要な追加の署名者
         signers?: Signer[]
     }
 })
 ```
-
-### バリデーション
-
-{% callout title="assetSignerPdaの検証" %}
-MPL CoreのExecute命令は「現在のアセット所有者」もトランザクションへ署名していることを検証します。これにより、`execute`命令で`assetSignerPda`を使用する際、実行できるのは常に現在のアセット所有者のみであることが保証されます。
+### 検証
+{% callout title="assetSignerPda検証" %}
+MPL Core Execute命令は、**現在のAsset所有者**もトランザクションに署名していることを検証します。これにより、現在のAsset所有者のみが`execute`命令で`assetSignerPda`を使用してトランザクションを実行できることが保証されます。
 {% /callout %}
-
 ### Execute操作の制御
-
-実行機能は[Freeze Executeプラグイン](/ja/smart-contracts/core/plugins/freeze-execute)で制御できます。このプラグインにより、アセット上の実行操作を凍結し、凍結解除されるまで任意のExecute命令が処理されないようにできます。
-
-Freeze Executeプラグインが特に有用なケース:
-
-- バックドNFT: 必要に応じて基礎資産の引き出しを防ぐ
-- エスクロー不要プロトコル: プロトコル処理中に一時的に実行機能をロック
-- セキュリティ対策: 複雑な操作を実行可能なアセットに追加の保護層を付与
-
-プラグインが有効で`frozen: true`の場合、`frozen: false`に更新されるまでExecute命令の利用はブロックされます。
-
+execute機能は[Freeze Executeプラグイン](/smart-contracts/core/plugins/freeze-execute)を使用して制御できます。このプラグインにより、アセットのexecute操作をフリーズし、フリーズ解除されるまでexecute命令の処理を防ぐことができます。
+Freeze Executeプラグインは以下の場合に特に役立ちます：
+- **バックドNFT**: 必要に応じて基礎となるアセットの引き出しを防止
+- **エスクローレスプロトコル**: プロトコル操作中にexecute機能を一時的にロック
+- **セキュリティ対策**: 複雑な操作を実行できるアセットに追加の保護レイヤーを追加
+Freeze Executeプラグインがアクティブで`frozen: true`に設定されている場合、プラグインが`frozen: false`に更新されるまで、execute命令の使用はブロックされます。
 ## 例
-
-### アセット署名者からSOLを送金
-
-次の例では、`assetSignerPda`に送られていたSOLを任意の宛先へ送金します。
-
+### Asset SignerからSOLを転送する
+以下の例では、`assetSignerPda`に送信されたSOLを任意の宛先に転送します。
 ```js
 import {
   execute,
@@ -86,52 +73,40 @@ import {
 } from '@metaplex-foundation/mpl-core'
 import { transferSol } from '@metaplex-foundation/mpl-toolbox'
 import { publickey, createNoopSigner, sol } from '@metaplex-foundation/umi'
-
 const assetId = publickey('11111111111111111111111111111111')
-
 const asset = await fetchAsset(umi, assetId)
-
-// 任意 - アセットがコレクションの一部ならコレクションも取得
+// オプション - Assetがコレクションの一部の場合、コレクションオブジェクトを取得
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
-
-// アセット署名者の口座残高は1 SOL
+// Asset signerはアカウントに1 SOLの残高を持っています
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-
-// 送金先アカウント
+// SOLを転送する宛先アカウント
 const destination = publickey('2222222222222222222222222222222222')
-
-// 通常の`transferSol()` TransactionBuilder
+// 標準的な`transferSol()` transactionBuilder
 const transferSolIx = transferSol(umi, {
-  // 後段のCPIでassetSignerが署名するためnoopSignerを作成
+  // assetSignerが後でCPI中に署名するため、noopSignerを作成
   source: createNoopSigner(publicKey(assetSigner)),
-  // 送金先
+  // 宛先アドレス
   destination,
-  // 送金額
+  // 転送する金額
   amount: sol(0.5),
 })
-
-// `execute`命令を呼び出して送信
+// `execute`命令を呼び出してチェーンに送信
 const res = await execute(umi, {
-  // このアセットで実行
+  // このアセットで命令を実行
   asset,
-  // アセットがコレクションの一部なら`fetchCollection()`で取得したオブジェクトを指定
+  // Assetがコレクションの一部の場合、`fetchCollection()`を介してコレクションオブジェクトを渡す
   collection,
-  // 実行するTransactionBuilder/Instruction[]
+  // 実行するtransactionBuilder/instruction[]
   instructions: transferSolIx,
 }).sendAndConfirm(umi)
-
 console.log({ res })
 ```
-
-### アセット署名者からSPLトークンを送金
-
-次の例では、`assetSignerPda`のSPLトークン残高の一部を宛先へ送金します。
-
-この例は、基底ウォレットアドレスに対する派生トークンアカウントのベストプラクティスに基づいています。トークンが`assetSignerPda`アドレスに基づく正しい派生トークンアカウントにない場合、この例は調整が必要です。
-
+### Asset SignerからSPLトークンを転送する
+以下の例では、`assetSignerPda`アカウントからSPLトークン残高の一部を宛先に転送します。
+この例は、ベースウォレットアドレスの派生トークンアカウントに関するベストプラクティスに基づいています。トークンが`assetSignerPda`アドレスに基づいて正しく派生されたトークンアカウントにない場合、この例を調整する必要があります。
 ```js
 import {
   execute,
@@ -144,58 +119,46 @@ import {
   findAssociatedTokenPda,
 } from '@metaplex-foundation/mpl-toolbox'
 import { publickey } from '@metaplex-foundation/umi'
-
 const assetId = publickey('11111111111111111111111111111111')
-
 const asset = await fetchAsset(umi, assetId)
-
-// 任意 - アセットがコレクションの一部ならコレクションも取得
+// オプション - Assetがコレクションの一部の場合、コレクションオブジェクトを取得
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
-
 const splTokenMint = publickey('2222222222222222222222222222222222')
-
-// アセット署名者のトークン残高あり
+// Asset signerはトークン残高を持っています
 const assetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-
-// 送金先ウォレット
+// SOLを転送する宛先ウォレット
 const destinationWallet = publickey('3333333333333333333333333333333')
-
-// 通常の`transferTokens()` TransactionBuilder
+// 標準的な`transferTokens()` transactionBuilder
 const transferTokensIx = transferTokens(umi, {
-  // ソースは`assetSignerPda`由来のトークンアカウント
+  // ソースは`assetSignerPda`派生トークンアカウント
   source: findAssociatedTokenPda(umi, {
     mint: splTokenMint,
     owner: assetSignerPda,
   }),
-  // 宛先は`destinationWallet`由来のトークンアカウント
+  // 宛先は`destinationWallet`派生トークンアカウント
   destination: findAssociatedTokenPda(umi, {
     mint: splTokenMint,
     owner: destinationWallet,
   }),
-  // lamports単位の数量
+  // lamportsで送信する金額
   amount: 5000,
 })
-
-// `execute`命令を呼び出して送信
+// `execute`命令を呼び出してチェーンに送信
 const res = await execute(umi, {
-  // このアセットで実行
+  // このアセットで命令を実行
   asset,
-  // アセットがコレクションの一部なら`fetchCollection()`で取得したオブジェクトを指定
+  // Assetがコレクションの一部の場合、`fetchCollection()`を介してコレクションオブジェクトを渡す
   collection,
-  // 実行するTransactionBuilder/Instruction[]
+  // 実行するtransactionBuilder/instruction[]
   instructions: transferTokensIx,
 }).sendAndConfirm(umi)
-
 console.log({ res })
 ```
-
-### 他のアセットへ保有アセットを移転
-
-次の例では、あるCoreアセット（別のCoreアセットが所有）を、さらに別のCoreアセットへ移転します。
-
+### アセットの所有権を別のアセットに転送する
+以下の例では、別のCore Assetが所有するCore Assetを、さらに別のAssetに転送します。
 ```js
 import {
   execute,
@@ -205,49 +168,41 @@ import {
   transfer,
 } from '@metaplex-foundation/mpl-core'
 import { publickey } from '@metaplex-foundation/umi'
-
-// 移転したいアセット
+// 転送するアセット
 const assetId = publickey('11111111111111111111111111111111')
 const asset = await fetchAsset(assetId)
-
-// 任意 - アセットがコレクションの一部ならコレクションも取得
+// オプション - Assetがコレクションの一部の場合、コレクションオブジェクトを取得
 const collection =
   asset.updateAuthority.type == 'Collection' && asset.updateAuthority.address
     ? await fetchCollection(umi, asset.updateAuthority.address)
     : undefined
-
-// アセットを所有しているアセットのID
+// 転送するAssetを所有するAsset ID
 const sourceAssetId = publickey('2222222222222222222222222222222222')
-// ソースのアセット
+// ソースAssetオブジェクト
 const sourceAsset = fetchAsset(umi, sourceAssetId)
-// アセット署名者
+// Asset signerはアカウントに1 SOLの残高を持っています
 const sourceAssetSignerPda = findAssetSignerPda(umi, { asset: assetId })
-
-// 送付先アセットID
+// SOLを転送する宛先アカウント
 const destinationAssetId = publickey('33333333333333333333333333333333')
-// 送付先アセットの署名者
+// Assetを転送する宛先Asset signer
 const destinationAssetSignerPda = findAssetSignerPda(umi, {
   asset: destinationAssetId,
 })
-
 const transferAssetIx = transfer(umi, {
-  // `fetchAsset()`で取得したアセット
+  // `fetchAsset()`を介したAssetオブジェクト
   asset,
-  // 任意 - `fetchCollection()`で取得したコレクション
+  // オプション - `fetchCollection()`を介したCollectionオブジェクト
   collection,
-  // 新しいオーナー
+  // Assetの新しい所有者
   newOwner: destinationAssetSignerPda,
 }).sendAndConfirm(umi)
-
 const res = await execute(umi, {
-  // このアセットで実行
+  // このアセットで命令を実行
   asset,
-  // 任意 - コレクション
+  // Assetがコレクションの一部の場合、`fetchCollection()`を介してコレクションオブジェクトを渡す
   collection,
-  // 実行するTransactionBuilder/Instruction[]
+  // 実行するtransactionBuilder/instruction[]
   instructions: transferAssetIx,
 }).sendAndConfirm(umi)
-
 console.log({ res })
 ```
-

@@ -1,42 +1,9 @@
 pre[class*='language-'] {
-  color: theme('colors.slate.50');
-  background-color: theme('colors.slate.900');
-  border: 1px solid theme('colors.slate.800');
+  color: hsl(var(--card-foreground));
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   border-radius: 0.5rem;
   padding: 1rem;
-}
-
-/* Hero code blocks have their own container styling */
-.hero-code pre[class*='language-'],
-.dark .hero-code pre[class*='language-'],
-.hero-code .dark pre[class*='language-'] {
-  color: theme('colors.slate.50');
-  background-color: transparent !important;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  margin: 0;
-}
-
-.hero-code code {
-  margin: 0;
-  padding: 0;
-}
-
-/* Light mode code blocks */
-@media (prefers-color-scheme: light) {
-  pre[class*='language-'] {
-    color: theme('colors.slate.900');
-    background-color: theme('colors.slate.50');
-    border: 1px solid theme('colors.slate.200');
-  }
-}
-
-/* Explicit dark mode class support */
-.dark pre[class*='language-'] {
-  color: theme('colors.slate.50');
-  background-color: theme('colors.slate.900');
-  border: 1px solid theme('colors.slate.800');
 }
 
 /* Code blocks inside CodeTabs - remove border and rounded corners (parent has them) */
@@ -46,62 +13,95 @@ pre[class*='language-'] {
   margin: 0;
 }
 
-/* Ensure proper background in tabs */
-.code-tabs pre[class*='language-'] {
-  background-color: theme('colors.slate.900');
-}
-
-.code-tabs .dark pre[class*='language-'],
-.dark .code-tabs pre[class*='language-'] {
-  background-color: theme('colors.slate.900');
-}
-
-@media (prefers-color-scheme: light) {
-  .code-tabs pre[class*='language-'] {
-    background-color: theme('colors.slate.50');
-  }
-}
-
-.token.tag,
-.token.class-name,
-.token.selector,
-.token.selector .class,
-.token.selector.class,
-.token.function {
-  color: theme('colors.pink.400');
-}
-
-.token.attr-name,
+/* Keywords: const, let, var, function, return, if, else, async, await, new, import, export, from */
 .token.keyword,
-.token.rule,
-.token.pseudo-class,
-.token.important {
-  color: theme('colors.slate.300');
-}
-
 .token.module {
-  color: theme('colors.pink.400');
+  color: #c678dd; /* purple */
 }
 
-.token.attr-value,
-.token.class,
+/* Strings */
 .token.string,
-.token.property {
-  color: theme('colors.sky.300');
+.token.attr-value {
+  color: #98c379; /* green */
 }
 
-.token.punctuation,
-.token.attr-equals {
-  color: theme('colors.slate.500');
+/* Functions and class names */
+.token.function,
+.token.class-name {
+  color: #61afef; /* blue */
+}
+
+/* Comments */
+.token.comment {
+  color: #5c6370; /* gray */
+  font-style: italic;
+}
+
+/* Numbers */
+.token.number {
+  color: #d19a66; /* orange */
+}
+
+/* Operators: = + - * / etc */
+.token.operator {
+  color: #56b6c2; /* cyan */
+}
+
+/* Punctuation: () {} [] , ; */
+.token.punctuation {
+  color: #abb2bf; /* light gray */
+}
+
+/* Properties and methods */
+.token.property,
+.token.attr-name {
+  color: #e06c75; /* red/pink */
+}
+
+/* Tags (HTML/JSX) */
+.token.tag {
+  color: #e06c75; /* red/pink */
+}
+
+/* Selectors (CSS) */
+.token.selector {
+  color: #e06c75; /* red/pink */
+}
+
+/* Boolean, null, undefined */
+.token.boolean,
+.token.constant {
+  color: #d19a66; /* orange */
+}
+
+/* Regex */
+.token.regex {
+  color: #98c379; /* green */
+}
+
+/* Variables */
+.token.variable {
+  color: #e06c75; /* red/pink */
+}
+
+/* Built-in/important */
+.token.builtin,
+.token.important {
+  color: #c678dd; /* purple */
+}
+
+/* CSS specific */
+.token.rule,
+.token.pseudo-class {
+  color: #c678dd; /* purple */
 }
 
 .token.unit,
 .language-css .token.function {
-  color: theme('colors.teal.200');
+  color: #d19a66; /* orange */
 }
 
-.token.comment,
-.token.operator,
-.token.combinator {
-  color: theme('colors.slate.400');
+.token.combinator,
+.token.attr-equals {
+  color: #56b6c2; /* cyan */
 }

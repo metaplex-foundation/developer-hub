@@ -9,7 +9,6 @@ description: update 명령어.
 - Candy Machine의 항목 수는 `hiddenSettings`를 사용하는 경우에만 업데이트할 수 있습니다;
 - `hiddenSettings` 사용으로 전환하는 것은 항목 수가 0인 경우에만 가능합니다. 전환 후 항목 수를 업데이트할 수 있습니다.
 
-
 구성을 업데이트하려면 config.json(또는 동등한 파일) 파일을 수정하고 다음을 실행하세요:
 
 ```

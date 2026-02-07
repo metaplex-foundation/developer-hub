@@ -46,7 +46,6 @@ metaplex.auctionHouse().findPurchasesBy();
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 拍卖行模块中还存在其他方法,未来将添加更多方法。拍卖行模块的 *README* 将很快更新,包含所有这些方法的详细文档。
 
 **有用的链接:**

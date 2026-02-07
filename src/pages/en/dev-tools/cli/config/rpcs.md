@@ -139,4 +139,4 @@ RPCs are stored in your configuration file at `~/.mplx/config.json`:
 ## Related Commands
 
 - [Wallets](/dev-tools/cli/config/wallets) - Manage wallet configurations
-- [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer 
+- [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer

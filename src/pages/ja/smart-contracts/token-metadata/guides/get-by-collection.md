@@ -10,29 +10,29 @@ Metaplex Token Metadataには[オンチェーンコレクション](/ja/smart-co
 
 ```rust
 pub struct Metadata {
-	pub key: Key,
-	pub update_authority: Pubkey,
-	pub mint: Pubkey,
-	pub data: Data,
-	// 不変、一度フリップされると、このメタデータのすべての販売はセカンダリとみなされます。
-	pub primary_sale_happened: bool,
-	// データ構造体が変更可能かどうか、デフォルトは不可
-	pub is_mutable: bool,
-	/// エディションの簡単な計算のためのnonce（存在する場合）
-	pub edition_nonce: Option<u8>,
-	/// Token Standardは決定論的で、create master edition呼び出しを行い、
-	/// それが成功した場合、SemiFungibleからNonFungibleに変更されます。
-	pub token_standard: Option<TokenStandard>,
-	/// Metadataを簡単に変更できないため、新しいDataV2フィールドをここの最後に追加します。
-	/// Collection
-	pub collection: Option<Collection>,
+ pub key: Key,
+ pub update_authority: Pubkey,
+ pub mint: Pubkey,
+ pub data: Data,
+ // 不変、一度フリップされると、このメタデータのすべての販売はセカンダリとみなされます。
+ pub primary_sale_happened: bool,
+ // データ構造体が変更可能かどうか、デフォルトは不可
+ pub is_mutable: bool,
+ /// エディションの簡単な計算のためのnonce（存在する場合）
+ pub edition_nonce: Option<u8>,
+ /// Token Standardは決定論的で、create master edition呼び出しを行い、
+ /// それが成功した場合、SemiFungibleからNonFungibleに変更されます。
+ pub token_standard: Option<TokenStandard>,
+ /// Metadataを簡単に変更できないため、新しいDataV2フィールドをここの最後に追加します。
+ /// Collection
+ pub collection: Option<Collection>,
 ...
 }
 
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Debug, Clone)]
 pub struct Collection {
-	pub verified: bool, // コレクションが検証されているかどうか
-	pub key: Pubkey,    // コレクションNFTのSPLトークンミントアカウント
+ pub verified: bool, // コレクションが検証されているかどうか
+ pub key: Pubkey,    // コレクションNFTのSPLトークンミントアカウント
 }
 ```
 

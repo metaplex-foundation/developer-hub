@@ -1,188 +1,379 @@
 ---
 title: JavaScript SDK
-metaTitle: JavaScript SDK | Genesis
-description: 学习如何安装和配置Genesis JavaScript SDK以在Solana上发行代币。
+metaTitle: JavaScript SDK | Genesis | Metaplex
+description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis SDK
+  - JavaScript SDK
+  - TypeScript SDK
+  - token launch SDK
+  - Umi framework
+  - Genesis API reference
+about:
+  - SDK installation
+  - API reference
+  - Genesis instructions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 什么是 Umi，为什么需要它？
+    a: Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
+  - q: 我可以在浏览器中使用 Genesis SDK 吗？
+    a: 可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
+  - q: fetch 和 safeFetch 有什么区别？
+    a: fetch 在账户不存在时会抛出错误。safeFetch 则返回 null，适用于检查账户是否存在而无需错误处理。
+  - q: 如何处理交易错误？
+    a: 将 sendAndConfirm 调用包装在 try/catch 块中。常见错误包括资金不足、账户已初始化和时间条件违规。
 ---
 
-Metaplex提供了一个用于与Genesis程序交互的JavaScript库。它基于[Umi框架](/zh/dev-tools/umi)构建，作为轻量级库发布，可在任何JavaScript或TypeScript项目中使用。
+Genesis JavaScript SDK 的 API 参考。完整教程请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。 {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="API参考" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Genesis JavaScript SDK生成的API文档。" /%}
+{% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="NPM包" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPM上的Genesis JavaScript SDK。" /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="自动生成的 API 文档" /%}
 
 {% /quick-links %}
 
 ## 安装
 
-安装Genesis SDK以及所需的Metaplex和Solana依赖：
-
 ```bash
-npm install \
-  @metaplex-foundation/genesis \
-  @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults \
-  @metaplex-foundation/mpl-toolbox \
+npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
+  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-### 包概述
-
-| 包 | 用途 |
-|---------|---------|
-| `@metaplex-foundation/genesis` | 核心Genesis SDK，包含所有指令和辅助函数 |
-| `@metaplex-foundation/umi` | Metaplex的Solana框架，用于构建交易 |
-| `@metaplex-foundation/umi-bundle-defaults` | 默认Umi插件和配置 |
-| `@metaplex-foundation/mpl-toolbox` | 用于处理SPL代币的工具 |
-| `@metaplex-foundation/mpl-token-metadata` | 代币元数据程序集成 |
-
-## Umi设置
-
-Genesis SDK构建在[Umi](/zh/dev-tools/umi)之上，这是Metaplex的Solana JavaScript框架。如果您尚未设置Umi，请查看[Umi快速开始](/zh/dev-tools/umi/getting-started)指南。
-
-### 基本配置
+## 设置
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { genesis } from '@metaplex-foundation/genesis';
 import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
 
-// 创建并配置Umi实例
 const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(genesis())
   .use(mplTokenMetadata());
 ```
 
-`genesis()`插件向Umi注册所有Genesis指令和账户反序列化器。`mplTokenMetadata()`插件是必需的，因为Genesis创建带有元数据的代币。
+完整的实现示例请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。
 
-### 开发与生产环境
+---
+
+## 指令参考
+
+### 核心
+
+| 函数 | 描述 |
+|----------|-------------|
+| [initializeV2()](#initialize-v2) | 创建 Genesis Account 并铸造代币 |
+| [finalizeV2()](#finalize-v2) | 锁定配置，激活发行 |
+
+### Buckets
+
+| 函数 | 描述 |
+|----------|-------------|
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 添加按比例分配的 bucket |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 添加固定价格销售 bucket |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 添加资金库/接收者 bucket |
+
+### Launch Pool 操作
+
+| 函数 | 描述 |
+|----------|-------------|
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | 向 Launch Pool 存入 SOL |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | 提取 SOL（存款期间） |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 领取代币（存款期结束后） |
+
+### Presale 操作
+
+| 函数 | 描述 |
+|----------|-------------|
+| [depositPresaleV2()](#deposit-presale-v2) | 向 Presale 存入 SOL |
+| [claimPresaleV2()](#claim-presale-v2) | 领取代币（存款期结束后） |
+
+### 管理员
+
+| 函数 | 描述 |
+|----------|-------------|
+| [transitionV2()](#transition-v2) | 执行结束行为 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 永久撤销铸造权限 |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 永久撤销冻结权限 |
+
+---
+
+## 函数签名
+
+### initializeV2
 
 ```typescript
-// 开发：使用devnet
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// 生产：使用mainnet和可靠的RPC
-const umi = createUmi('https://your-rpc-provider.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
+await initializeV2(umi, {
+  baseMint,           // Signer - new token keypair
+  quoteMint,          // PublicKey - deposit token (wSOL)
+  fundingMode,        // number - use 0
+  totalSupplyBaseToken, // bigint - supply with decimals
+  name,               // string - token name
+  symbol,             // string - token symbol
+  uri,                // string - metadata URI
+}).sendAndConfirm(umi);
 ```
 
-## 设置签名者
-
-Genesis操作需要签名者进行交易授权。对于后端操作，您通常使用从环境变量加载的密钥对。
-
-### 从密钥创建签名者
+### finalizeV2
 
 ```typescript
-import {
-  createSignerFromKeypair,
-  signerIdentity,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-
-// 从JSON编码的密钥创建签名者的辅助函数
-const createSignerFromSecretKeyString = (
-  umi: Umi,
-  secretKeyString: string
-): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-// 从环境加载后端签名者
-const backendSigner = createSignerFromSecretKeyString(
-  umi,
-  process.env.BACKEND_KEYPAIR!
-);
-
-// 设置为交易的默认身份
-umi.use(signerIdentity(backendSigner));
+await finalizeV2(umi, {
+  baseMint,           // PublicKey
+  genesisAccount,     // PublicKey
+}).sendAndConfirm(umi);
 ```
 
-{% callout type="warning" %}
-**安全提示**：永远不要将密钥对提交到版本控制。在生产部署中使用环境变量、AWS KMS、GCP Secret Manager或硬件钱包。
-{% /callout %}
-
-### 完整设置示例
-
-以下是包含所有必需导入的完整设置：
+### addLaunchPoolBucketV2
 
 ```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import {
-  createSignerFromKeypair,
-  generateSigner,
-  signerIdentity,
-  publicKey,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-import {
-  genesis,
-  initializeV2,
-  addLaunchPoolBucketV2,
-  addUnlockedBucketV2,
-  finalizeV2,
-  findGenesisAccountV2Pda,
-} from '@metaplex-foundation/genesis';
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
-
-// 初始化Umi
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// 设置后端签名者
-const createSignerFromSecretKeyString = (umi: Umi, secretKeyString: string): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-const backendSigner = createSignerFromSecretKeyString(umi, process.env.BACKEND_KEYPAIR!);
-umi.use(signerIdentity(backendSigner));
-
-console.log('Umi已配置后端签名者:', backendSigner.publicKey);
+await addLaunchPoolBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint - tokens for this bucket
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
 ```
 
-## 错误处理
+### addPresaleBucketV2
 
 ```typescript
-try {
-  await initializeV2(umi, { ... }).sendAndConfirm(umi);
-  console.log('成功！');
-} catch (error) {
-  if (error.message.includes('insufficient funds')) {
-    console.error('交易费用SOL不足');
-  } else if (error.message.includes('already initialized')) {
-    console.error('Genesis账户已存在');
-  } else {
-    console.error('交易失败:', error);
-  }
+await addPresaleBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint
+  allocationQuoteTokenCap,  // bigint - SOL cap (sets price)
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  depositLimit,             // bigint | null - max per user
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
+```
+
+### addUnlockedBucketV2
+
+```typescript
+await addUnlockedBucketV2(umi, {
+  genesisAccount,       // PublicKey
+  baseMint,             // PublicKey
+  baseTokenAllocation,  // bigint - usually 0n
+  recipient,            // PublicKey - who can claim
+  claimStartCondition,  // TimeCondition
+  claimEndCondition,    // TimeCondition
+  backendSigner,        // null
+}).sendAndConfirm(umi);
+```
+
+### depositLaunchPoolV2
+
+```typescript
+await depositLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### depositPresaleV2
+
+```typescript
+await depositPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### withdrawLaunchPoolV2
+
+```typescript
+await withdrawLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### claimLaunchPoolV2
+
+```typescript
+await claimLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### claimPresaleV2
+
+```typescript
+await claimPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### transitionV2
+
+```typescript
+await transitionV2(umi, {
+  genesisAccount,     // PublicKey
+  primaryBucket,      // PublicKey
+  baseMint,           // PublicKey
+})
+  .addRemainingAccounts([/* destination accounts */])
+  .sendAndConfirm(umi);
+```
+
+### revokeMintAuthorityV2
+
+```typescript
+await revokeMintAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### revokeFreezeAuthorityV2
+
+```typescript
+await revokeFreezeAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+---
+
+## PDA 辅助函数
+
+| 函数 | 种子 |
+|----------|-------|
+| findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
+| findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findPresaleBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findUnlockedBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findLaunchPoolDepositV2Pda() | `bucket`, `recipient` |
+| findPresaleDepositV2Pda() | `bucket`, `recipient` |
+
+```typescript
+const [genesisAccountPda] = findGenesisAccountV2Pda(umi, { baseMint: mint.publicKey, genesisIndex: 0 });
+const [bucketPda] = findLaunchPoolBucketV2Pda(umi, { genesisAccount: genesisAccountPda, bucketIndex: 0 });
+const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipient: wallet });
+```
+
+---
+
+## 获取函数
+
+| 函数 | 返回值 |
+|----------|---------|
+| fetchLaunchPoolBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchLaunchPoolBucketV2() | Bucket 状态或 `null` |
+| fetchPresaleBucketV2() | Bucket 状态（不存在时抛出错误） |
+| safeFetchPresaleBucketV2() | Bucket 状态或 `null` |
+| fetchLaunchPoolDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchLaunchPoolDepositV2() | 存款状态或 `null` |
+| fetchPresaleDepositV2() | 存款状态（不存在时抛出错误） |
+| safeFetchPresaleDepositV2() | 存款状态或 `null` |
+
+```typescript
+const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
+const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
+```
+
+**Bucket 状态字段：** `quoteTokenDepositTotal`、`depositCount`、`claimCount`、`bucket.baseTokenAllocation`
+
+**存款状态字段：** `amountQuoteToken`、`claimed`
+
+---
+
+## 类型
+
+### TimeCondition
+
+```typescript
+{
+  __kind: 'TimeAbsolute',
+  padding: Array(47).fill(0),
+  time: bigint,                    // Unix timestamp (seconds)
+  triggeredTimestamp: null,
 }
 ```
 
-## 交易确认
+### EndBehavior
 
 ```typescript
-// 等待最终确认（最安全）
-const result = await initializeV2(umi, { ... })
-  .sendAndConfirm(umi, {
-    confirm: { commitment: 'finalized' }
-  });
-
-console.log('交易签名:', result.signature);
+{
+  __kind: 'SendQuoteTokenPercentage',
+  padding: Array(4).fill(0),
+  destinationBucket: PublicKey,
+  percentageBps: number,           // 10000 = 100%
+  processed: false,
+}
 ```
 
-## 后续步骤
+---
 
-配置好带有Genesis程序的Umi实例后，您就可以开始构建了。探索Genesis功能：
+## 常量
 
-- **[发行池](/zh/smart-contracts/genesis/launch-pool)** - 带存款窗口的代币分配
-- **[预售](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售
-- **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** - 具有统一清算价格的基于时间的拍卖
+| 常量 | 值 |
+|----------|-------|
+| `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
+
+---
+
+## 常见错误
+
+| 错误 | 原因 |
+|-------|-------|
+| `insufficient funds` | SOL 不足以支付费用 |
+| `already initialized` | Genesis Account 已存在 |
+| `already finalized` | 最终化后无法修改 |
+| `deposit period not active` | 不在存款窗口内 |
+| `claim period not active` | 不在领取窗口内 |
+
+---
+
+## 常见问题
+
+### 什么是 Umi，为什么需要它？
+Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来构建交易、管理签名者以及与 Metaplex 程序交互。
+
+### 我可以在浏览器中使用 Genesis SDK 吗？
+可以。SDK 在 Node.js 和浏览器环境中都可以使用。在浏览器中，请使用钱包适配器进行签名，而不是密钥对文件。
+
+### fetch 和 safeFetch 有什么区别？
+`fetch` 在账户不存在时会抛出错误。`safeFetch` 则返回 `null`，适用于检查账户是否存在。
+
+### 如何处理交易错误？
+将 `sendAndConfirm` 调用包装在 try/catch 块中。检查错误消息以了解具体的失败原因。
+
+---
+
+## 下一步
+
+完整的实现教程：
+
+- [开始使用](/zh/smart-contracts/genesis/getting-started) - 设置和首次发行
+- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 按比例分配
+- [Presale](/zh/smart-contracts/genesis/presale) - 固定价格销售

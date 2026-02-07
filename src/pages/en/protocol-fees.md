@@ -8,7 +8,7 @@ The Metaplex Protocol currently includes the following fees:
 
 ## Genesis
 
-Token launch platform fees for different operations. 
+Token launch platform fees for different operations.
 
 ### Launch Pool
 {% protocol-fees program="genesis" showTitle=false config="launchPool" /%}

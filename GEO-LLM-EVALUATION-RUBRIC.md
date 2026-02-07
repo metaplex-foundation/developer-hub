@@ -428,6 +428,155 @@ Use this checklist when creating new documentation:
 
 ---
 
+---
+
+## JSON-LD Structured Data Specification
+
+In addition to content quality, pages must include proper JSON-LD structured data in their frontmatter. This metadata is automatically converted to schema.org JSON-LD in the `<head>` section, making content machine-readable for search engines and AI systems.
+
+### Required Frontmatter Fields
+
+All documentation pages must include these fields:
+
+```yaml
+---
+title: Page Title
+metaTitle: Page Title | Product Name
+description: Clear description of what this page covers
+created: 'MM-DD-YYYY'    # Original creation date
+updated: 'MM-DD-YYYY'    # Last update date
+keywords:                 # Array format (not comma-separated)
+  - primary keyword
+  - secondary keyword
+  - tertiary keyword
+about:                    # Topics/concepts covered
+  - Main topic
+  - Secondary topic
+  - Technology used
+proficiencyLevel: Beginner | Intermediate | Advanced
+programmingLanguage:      # Languages with code examples
+  - JavaScript
+  - TypeScript
+  - Rust
+---
+```
+
+### Optional Fields (Context-Dependent)
+
+**For How-To/Tutorial Pages:**
+```yaml
+howToSteps:               # Generates HowTo schema
+  - Step 1 description
+  - Step 2 description
+  - Step 3 description
+  - Step 4 description
+howToTools:               # Tools used in the tutorial
+  - Tool 1
+  - Tool 2
+  - Tool 3
+```
+
+**For Pages with FAQ Sections:**
+```yaml
+faqs:                     # Generates FAQPage schema
+  - q: Question text here?
+    a: Answer text here.
+  - q: Another question?
+    a: Another answer.
+```
+
+### JSON-LD Schemas Generated
+
+The SEOHead component generates these schema.org types:
+
+| Schema Type | When Generated | Key Fields |
+|-------------|----------------|------------|
+| **TechArticle** | All pages | @id, headline, keywords, about, proficiencyLevel, programmingLanguage, author, publisher, audience, softwareRequirements |
+| **HowTo** | Pages with `howToSteps` | name, step[], tool[] |
+| **FAQPage** | Pages with `faqs` | mainEntity[] with Question/Answer pairs |
+
+### TechArticle Schema Details
+
+The TechArticle schema includes enhanced fields for better discoverability:
+
+```javascript
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": "https://developers.metaplex.com/path#article",
+  "headline": "Page Title",
+  "url": "https://developers.metaplex.com/path",
+  "inLanguage": "en",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://developers.metaplex.com/path"
+  },
+  "author": {
+    "@type": "Organization",
+    "@id": "https://developers.metaplex.com/#organization",
+    "name": "Metaplex"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Developers"
+  },
+  "discussionUrl": "https://discord.gg/metaplex",
+  "keywords": ["keyword1", "keyword2"],  // Array, not string
+  "about": ["topic1", "topic2"],
+  "proficiencyLevel": "Intermediate",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "@id": "https://developers.metaplex.com/product#documentation",
+    "name": "Product Documentation"
+  },
+  "softwareRequirements": "@metaplex-foundation/mpl-core, @metaplex-foundation/umi",
+  "mentions": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "@metaplex-foundation/mpl-core",
+      "codeRepository": "https://github.com/metaplex-foundation/mpl-core"
+    }
+  ]
+}
+```
+
+### Current Coverage (Core Documentation)
+
+| Field | Coverage | Notes |
+|-------|----------|-------|
+| `keywords` | 60/60 (100%) | All pages |
+| `about` | 60/60 (100%) | All pages |
+| `proficiencyLevel` | 60/60 (100%) | All pages |
+| `programmingLanguage` | 56/60 (93%) | Excludes index/reference pages |
+| `howToSteps` | 17/17 (100%) | All how-to guides |
+| `howToTools` | 17/17 (100%) | All how-to guides |
+| `faqs` | 36/35 (100%) | All pages with FAQ sections |
+
+### Best Practices
+
+1. **Keywords as Arrays**: Use YAML arrays, not comma-separated strings. Arrays are more machine-friendly.
+
+2. **Proficiency Levels**: Use exactly `Beginner`, `Intermediate`, or `Advanced`.
+
+3. **Programming Languages**: Use standard names (`JavaScript`, `TypeScript`, `Rust`), not abbreviations.
+
+4. **FAQ Quality**: FAQs in frontmatter should mirror the FAQ section in content. Include 3-8 real questions developers ask.
+
+5. **HowTo Steps**: Keep steps concise (one sentence each). 3-5 steps is ideal.
+
+6. **Index Pages**: Index/navigation pages may omit `programmingLanguage` since they don't contain code.
+
+### Validation
+
+To verify JSON-LD is working:
+
+1. Build the site: `pnpm build`
+2. Check a page's HTML source for `<script type="application/ld+json">`
+3. Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to validate
+4. Use [Schema.org Validator](https://validator.schema.org/) for detailed checks
+
+---
+
 ## Usage Instructions
 
 When evaluating a page, provide output in this format:

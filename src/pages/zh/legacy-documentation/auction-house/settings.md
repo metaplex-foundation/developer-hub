@@ -65,7 +65,6 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## 辅助账户
 
 拍卖行正常运作需要几个账户。一旦由拍卖行设置,权限可以根据自己的喜好重置和配置这些账户。
@@ -105,7 +104,6 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## 需要签署
 此设置允许市场控制资产列表和销售。如权限部分所述,拍卖行权限在资产控制中发挥作用。只有在 `requireSignOff = true` 时,才能进行这种审查或集中控制。
 
@@ -130,7 +128,6 @@ const auctionHouseSettings = {
 ## 可以更改销售价格
 
 `canChangeSalePrice` 允许市场更改资产的销售价格,当用户有意免费列出资产或以 0 SOL(或任何其他 SPL 代币)列出时。通过以 0 SOL 列出资产,用户允许市场应用自定义匹配算法,以便为"免费"列出的资产找到最佳价格匹配。
-
 
 这里要注意的一个重要点是,只有在 `requireSignOff` 也设置为 `true` 时,才能将 `canChangeSalePrice` 设置为 `true`。这是因为在无需许可的列表和出价的情况下,自定义匹配是不可能的。拍卖行应该能够"签署"匹配的出价并执行资产的销售。
 

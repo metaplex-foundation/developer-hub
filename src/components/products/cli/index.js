@@ -1,6 +1,5 @@
 import { documentationSection } from '@/shared/sections';
 import { CommandLineIcon, SparklesIcon } from '@heroicons/react/24/outline';
-import { Hero } from './Hero';
 
 export const cli = {
   name: 'CLI',
@@ -15,7 +14,6 @@ export const cli = {
   primaryCta: {
     disabled: false,
   },
-  heroes: [{ path: '/dev-tools/cli', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/cli'),
@@ -156,6 +154,14 @@ export const cli = {
               href: '/dev-tools/cli/toolbox/token-create',
             },
             {
+              title: 'Add Metadata to Token',
+              href: '/dev-tools/cli/toolbox/add-metadata-to-token',
+            },
+            {
+              title: 'Update Token Metadata',
+              href: '/dev-tools/cli/toolbox/update-token-metadata',
+            },
+            {
               title: 'Token Transfer',
               href: '/dev-tools/cli/toolbox/token-transfer',
             },
@@ -200,6 +206,8 @@ export const cli = {
         'Update Compressed NFT': 'Update Compressed NFT',
         'Transfer Compressed NFT': 'Transfer Compressed NFT',
         'Burn Compressed NFT': 'Burn Compressed NFT'
+        'Add Metadata to Token': 'Add Metadata to Token',
+        'Update Token Metadata': 'Update Token Metadata'
       }
     },
     ja: {
@@ -225,6 +233,8 @@ export const cli = {
         'Update Compressed NFT': '圧縮NFT更新',
         'Transfer Compressed NFT': '圧縮NFT転送',
         'Burn Compressed NFT': '圧縮NFTバーン'
+        'Add Metadata to Token': 'トークンメタデータ追加',
+        'Update Token Metadata': 'トークンメタデータ更新'
       }
     },
     ko: {
@@ -250,6 +260,8 @@ export const cli = {
         'Update Compressed NFT': '압축 NFT 업데이트',
         'Transfer Compressed NFT': '압축 NFT 전송',
         'Burn Compressed NFT': '압축 NFT 소각'
+        'Add Metadata to Token': '토큰 메타데이터 추가',
+        'Update Token Metadata': '토큰 메타데이터 업데이트'
       }
     },
     zh: {
@@ -290,6 +302,8 @@ export const cli = {
         'Transfer Compressed NFT': '转移压缩NFT',
         'Burn Compressed NFT': '销毁压缩NFT',
         'Token Creation': '创建代币',
+        'Add Metadata to Token': '添加代币元数据',
+        'Update Token Metadata': '更新代币元数据',
         'Token Transfer': '转移代币',
         'SOL Airdrop': 'SOL空投',
         'SOL Balance': 'SOL余额',

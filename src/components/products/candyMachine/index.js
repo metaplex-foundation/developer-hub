@@ -4,7 +4,6 @@ import {
   referencesSection
 } from '@/shared/sections'
 import { Square2StackIcon } from '@heroicons/react/24/solid'
-import { Hero } from './Hero'
 
 export const candyMachine = {
   name: 'Candy Machine',
@@ -15,7 +14,6 @@ export const candyMachine = {
   icon: <Square2StackIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',
   className: 'accent-pink',
-  heroes: [{ path: '/smart-contracts/candy-machine', component: Hero }],
   deprecated: true,
   sections: [
     {

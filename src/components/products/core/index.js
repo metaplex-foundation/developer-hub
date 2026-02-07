@@ -5,7 +5,6 @@ import {
   referencesSection,
 } from '@/shared/sections';
 import { StopCircleIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 
 export const core = {
   name: 'Core',
@@ -16,7 +15,6 @@ export const core = {
   icon: <StopCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
-  heroes: [{ path: '/smart-contracts/core', component: Hero }],
   protocolFees: {
     create: {
       solana: '0.0015 SOL',

@@ -156,7 +156,7 @@ createNoopSigner(publickey('11111111111111111111111111111111'))
 
 **注意**: `@metaplex-foundation/umi`パッケージに含まれているため、パッケージをインストールする必要はありません
 
-```ts 
+```ts
 // base64.deserializeを使用してserializedTxを渡す
 const serializedTxAsString = base64.deserialize(serializedTx)[0];
 

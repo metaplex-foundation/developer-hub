@@ -51,8 +51,8 @@ Owner: Token Program {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}

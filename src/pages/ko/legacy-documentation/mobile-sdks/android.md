@@ -35,15 +35,15 @@ settings.gradle 내부에 maven 저장소를 추가합니다:
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +52,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // 버전 설정
+ ...
+ implementation 'com.metaplex:metaplex:+' // 버전 설정
 }
 ```
 
@@ -67,16 +67,16 @@ dependencies {
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
 그런 다음 앱/모듈의 'build.gradle' 파일에 종속성을 추가합니다:
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -116,11 +116,11 @@ NFT 모듈은 `Metaplex.nft`를 통해 액세스할 수 있으며 다음 메서�
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +150,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,11 +160,11 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -224,11 +224,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver` 드라이버는 가장 간단한 ID 드라이버입니다. 본질적으로 서명된 트랜잭션을 보낼 필요가 없을 때 유용할 수 있는 `null` 드라이버입니다. `signTransaction` 메서드를 사용하면 실패를 반환합니다.
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 드라이버는 `Account` 객체를 매개변수로 받아들입니다.
-
 
 ### ReadOnlyIdentityDriver
 
@@ -260,5 +258,3 @@ SDK에는 [샘플 앱](https://github.com/metaplex-foundation/metaplex-android/t
 
 [github]: https://github.com/metaplex-foundation/metaplex-android
 [sample]: https://github.com/metaplex-foundation/metaplex-android/tree/main/sample
-
-

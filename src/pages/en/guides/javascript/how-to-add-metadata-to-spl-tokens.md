@@ -56,9 +56,9 @@ We will list the necessary imports and our wrapper function,
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
 import { generateSigner, signerIdentity, sol } from "@metaplex-foundation/umi";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -71,11 +71,11 @@ import { base58 } from "@metaplex-foundation/umi/serializers";
 
 // Add metadata to an existing SPL token wrapper function
 async function addMetadata() {
-	///
-	///
-	///  code will go in here
-	///
-	///
+ ///
+ ///
+ ///  code will go in here
+ ///
+ ///
 }
 
 // run the function
@@ -92,8 +92,8 @@ You can place the Umi instantiation code inside or outside the code blocks, but 
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // Generate a new keypair signer.
 const signer = generateSigner(umi);
@@ -111,8 +111,8 @@ await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
 ```ts
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // You will need to use fs and navigate the filesystem to
 // load the wallet you wish to use via relative pathing.
@@ -140,9 +140,9 @@ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-e
 ```typescript
 // Sample Metadata for our Token
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // Add metadata to an existing SPL token wrapper function
@@ -150,40 +150,40 @@ async function addMetadata() {
     const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
     // derive the metadata account that will store our metadata data onchain
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
    // add metadata to our already initialized token using `createV1` helper 
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 ```
 
 Nullable fields like creators have been left out as they might not be as necessary for SPL tokens compared to Non Fungibles.
 
-Take note of the mint address, If you will call the functions at different instances, make sure to set the address of the `mint` field in the `findMetadataPda` function as `generateSigner` will return a new keypair upon each call. 
+Take note of the mint address, If you will call the functions at different instances, make sure to set the address of the `mint` field in the `findMetadataPda` function as `generateSigner` will return a new keypair upon each call.
 
 ## Full Code Example
 
 ```typescript
 import {
-	createV1,
-	findMetadataPda,
-	mplTokenMetadata,
-	TokenStandard
+ createV1,
+ findMetadataPda,
+ mplTokenMetadata,
+ TokenStandard
 } from "@metaplex-foundation/mpl-token-metadata";
 import { mplToolbox } from "@metaplex-foundation/mpl-toolbox";
 import {
@@ -197,8 +197,8 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 
 const umi = createUmi("https://api.devnet.solana.com")
-	.use(mplTokenMetadata())
-	.use(mplToolbox());
+ .use(mplTokenMetadata())
+ .use(mplToolbox());
 
 // Generate a new keypair signer.
 const signer = generateSigner(umi);
@@ -212,37 +212,37 @@ const mint = publicKey("YOUR_TOKEN_MINT_ADDRESS");
 
 // Sample Metadata for our Token
 const tokenMetadata = {
-	name: "Solana Gold",
-	symbol: "GOLDSOL",
-	uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
+ name: "Solana Gold",
+ symbol: "GOLDSOL",
+ uri: "https://raw.githubusercontent.com/solana-developers/program-examples/new-examples/tokens/tokens/.assets/spl-token.json",
 };
 
 // Add metadata to an existing SPL token wrapper function
 async function addMetadata() {
-	// Airdrop 2 SOL to the identity
+ // Airdrop 2 SOL to the identity
     // if you end up with a 429 too many requests error, you may have to use
     // a different rpc other than the free default one supplied.
     await umi.rpc.airdrop(umi.identity.publicKey, sol(2));
 
     // derive the metadata account that will store our metadata data onchain
-	const metadataAccountAddress = await findMetadataPda(umi, {
-		mint: mint,
-	});
+ const metadataAccountAddress = await findMetadataPda(umi, {
+  mint: mint,
+ });
 
-	const tx = await createV1(umi, {
-		mint,
-		authority: umi.identity,
-		payer: umi.identity,
-		updateAuthority: umi.identity,
-		name: tokenMetadata.name,
-		symbol: tokenMetadata.symbol,
-		uri: tokenMetadata.uri,
-		sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
-		tokenStandard: TokenStandard.Fungible,
-	}).sendAndConfirm(umi);
+ const tx = await createV1(umi, {
+  mint,
+  authority: umi.identity,
+  payer: umi.identity,
+  updateAuthority: umi.identity,
+  name: tokenMetadata.name,
+  symbol: tokenMetadata.symbol,
+  uri: tokenMetadata.uri,
+  sellerFeeBasisPoints: percentAmount(5.5), // 5.5%
+  tokenStandard: TokenStandard.Fungible,
+ }).sendAndConfirm(umi);
 
-	let txSig = base58.deserialize(tx.signature);
-	console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
+ let txSig = base58.deserialize(tx.signature);
+ console.log(`https://explorer.solana.com/tx/${txSig}?cluster=devnet`);
 }
 
 // run the function

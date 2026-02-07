@@ -83,7 +83,7 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 
 ## 現在のInscription数の取得
 現在の総inscription数は以下のように取得できます：
- 
+
 {% dialect-switcher title="現在のInscription数の取得" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}

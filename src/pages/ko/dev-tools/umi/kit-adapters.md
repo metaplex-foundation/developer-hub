@@ -18,7 +18,6 @@ npm i @metaplex-foundation/umi-kit-adapters
 
 설치 후 변환 함수를 사용할 수 있습니다:
 
-
 ## 주소
 
 Umi와 `@solana/kit` 모두 주소에 base58 문자열을 사용하므로 변환이 간단합니다.

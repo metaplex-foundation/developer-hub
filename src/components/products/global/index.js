@@ -1,4 +1,3 @@
-import { Hero } from './Hero';
 import { Logo } from './Logo';
 
 export const global = {
@@ -10,7 +9,6 @@ export const global = {
   icon: <Logo />,
   github: 'https://github.com/metaplex-foundation',
   className: 'accent-sky',
-  heroes: [{ path: '/', component: Hero }],
   sections: [],
   localizedNavigation: {
     en: {

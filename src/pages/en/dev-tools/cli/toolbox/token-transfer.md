@@ -64,4 +64,4 @@ If the transfer fails, the command will display an error message and throw an ex
 
 - [Token Creation](/dev-tools/cli/toolbox/token-create) - Create new tokens
 - [Balance Check](/dev-tools/cli/toolbox/sol-balance) - Check token balances
-- [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses 
+- [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses

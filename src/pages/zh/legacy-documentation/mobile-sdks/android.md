@@ -35,15 +35,15 @@ Metaplex Android SDK 是一个允许您执行以下操作的库:
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +52,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // 设置版本
+ ...
+ implementation 'com.metaplex:metaplex:+' // 设置版本
 }
 ```
 
@@ -67,16 +67,16 @@ dependencies {
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
 然后将依赖项添加到您的应用程序/模块的 'build.gradle' 文件中:
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -116,11 +116,11 @@ NFT 模块可以通过 `Metaplex.nft` 访问并提供以下方法。目前,我�
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +150,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,11 +160,11 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -224,11 +224,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver` 驱动程序是最简单的身份驱动程序。它本质上是一个 `null` 驱动程序,当我们不需要发送任何签名交易时很有用。如果您使用 `signTransaction` 方法,它将返回失败。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver` 驱动程序接受 `Account` 对象作为参数。
-
 
 ### ReadOnlyIdentityDriver
 

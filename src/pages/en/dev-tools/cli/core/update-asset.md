@@ -80,4 +80,4 @@ After a successful update, the command will display:
   - File uploads to the appropriate storage
   - Metadata JSON formatting
   - Image file type detection
-  - Collection authority validation 
+  - Collection authority validation

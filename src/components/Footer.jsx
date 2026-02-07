@@ -10,7 +10,7 @@ export function Footer() {
   const { locale } = useLocale()
 
   return (
-    <footer className="border-t border-neutral-800 bg-neutral-900">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Logo and copyright */}
@@ -22,7 +22,7 @@ export function Footer() {
                 className="h-4 w-auto"
               />
             </Link>
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} Metaplex Foundation.
               <br />{t('allRightsReserved', 'All rights reserved.')}
             </p>
@@ -30,31 +30,31 @@ export function Footer() {
 
           {/* Resources */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold text-white">
+            <h3 className="text-sm font-semibold text-foreground">
               {t('resources', 'Resources')}
             </h3>
-            <div className="flex flex-col gap-2 text-sm text-neutral-400">
+            <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link
                 href={getLocalizedHref('/official-links', locale)}
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('officialLinks', 'Official Links')}
               </Link>
               <Link
                 href={getLocalizedHref('/security', locale)}
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('security', 'Security')}
               </Link>
               <Link
                 href={getLocalizedHref('/protocol-fees', locale)}
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('protocolFees', 'Protocol Fees')}
               </Link>
               <Link
                 href={getLocalizedHref('/stability-index', locale)}
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('stabilityIndex', 'Stability Index')}
               </Link>
@@ -63,21 +63,21 @@ export function Footer() {
 
           {/* Legal */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold text-white">
+            <h3 className="text-sm font-semibold text-foreground">
               {t('legal', 'Legal')}
             </h3>
-            <div className="flex flex-col gap-2 text-sm text-neutral-400">
+            <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link
                 href="https://www.metaplex.com/terms-and-conditions"
                 target="_blank"
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('termsAndConditions', 'Terms & Conditions')}
               </Link>
               <Link
                 href="https://www.metaplex.com/privacy-policy"
                 target="_blank"
-                className="hover:text-neutral-200 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {t('privacyPolicy', 'Privacy Policy')}
               </Link>
@@ -86,7 +86,7 @@ export function Footer() {
 
           {/* Social */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold text-white">
+            <h3 className="text-sm font-semibold text-foreground">
               {t('connect', 'Connect')}
             </h3>
             <div className="flex items-center gap-4">
@@ -96,7 +96,7 @@ export function Footer() {
                 aria-label="GitHub"
                 target="_blank"
               >
-                <GitHubIcon className="h-5 w-5 fill-neutral-400 transition-colors group-hover:fill-neutral-200" />
+                <GitHubIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
               <Link
                 href="https://discord.com/invite/metaplex"
@@ -104,7 +104,7 @@ export function Footer() {
                 aria-label="Discord"
                 target="_blank"
               >
-                <DiscordIcon className="h-5 w-5 fill-neutral-400 transition-colors group-hover:fill-neutral-200" />
+                <DiscordIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
               <Link
                 href="https://x.com/metaplex"
@@ -112,7 +112,7 @@ export function Footer() {
                 aria-label="X"
                 target="_blank"
               >
-                <XIcon className="h-5 w-5 fill-neutral-400 transition-colors group-hover:fill-neutral-200" />
+                <XIcon className="h-5 w-5 fill-muted-foreground transition-colors group-hover:fill-foreground" />
               </Link>
             </div>
           </div>

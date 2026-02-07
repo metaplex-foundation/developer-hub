@@ -37,7 +37,6 @@ Mint {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the mint Address
 

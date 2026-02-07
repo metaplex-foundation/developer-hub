@@ -2,7 +2,6 @@ import {
   documentationSection
 } from '@/shared/sections';
 import { TableCellsIcon } from '@heroicons/react/24/solid';
-import { Hero } from './Hero';
 import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const das = {
@@ -15,7 +14,6 @@ export const das = {
   github: 'https://github.com/metaplex-foundation/digital-asset-standard-api',
   navigationMenuCatergory: 'Dev Tools',
   className: 'accent-sky',
-  heroes: [{ path: '/dev-tools/das-api', component: Hero }],
   sections: [
     {
       ...documentationSection('dev-tools/das-api'),

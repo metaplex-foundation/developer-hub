@@ -6,7 +6,7 @@ description: A Javascript Framework for Solana.
 
 ## Umi Installation
 
-To use Umi you need to install Umi and all the external plugins you'll want to use. Alternatively, if you don't need a specific plugin, you can install the default bundle that includes a set of plugins that's suitable for most use cases. 
+To use Umi you need to install Umi and all the external plugins you'll want to use. Alternatively, if you don't need a specific plugin, you can install the default bundle that includes a set of plugins that's suitable for most use cases.
 
 **Note**: since the default bundle relies on web3.js for some of the interfaces you'll need to install that package as well.
 
@@ -83,7 +83,7 @@ In this section, we'll cover the essential steps to get started with Umi:
 
 Solana has different clusters (e.g., Mainnet-beta, Devnet, Testnet, ...) that serve various purposes, each with dedicated API nodes to handle RPC requests.
 
-Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument. 
+Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument.
 
 **Note**: If you're connecting to **Mainnet**, it's recommended to use a dedicated RPC endpoint from a Solana RPC provider instead of the public endpoint (`https://api.mainnet-beta.solana.com`) due to its limitations.
 
@@ -169,9 +169,9 @@ umi.use(walletAdapterIdentity(wallet))
 
 {% /totem %}
 
-**Note**: The **Umi** interface stores two instances of **Signer**: The **identity** using the app and the **payer** paying for transaction and storage fees. By default, the `signerIdentity` method will also update the **payer** attribute since, in most cases, the identity is also the payer. 
+**Note**: The **Umi** interface stores two instances of **Signer**: The **identity** using the app and the **payer** paying for transaction and storage fees. By default, the `signerIdentity` method will also update the **payer** attribute since, in most cases, the identity is also the payer.
 
-If you want to learn more, go to the [Umi Context Interfaces Paragraph](/dev-tools/umi/interfaces#the-context-interface) 
+If you want to learn more, go to the [Umi Context Interfaces Paragraph](/dev-tools/umi/interfaces#the-context-interface)
 
 ### Registering Programs and Clients
 

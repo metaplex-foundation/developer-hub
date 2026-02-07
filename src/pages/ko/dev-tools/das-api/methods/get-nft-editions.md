@@ -29,7 +29,6 @@ description: 마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션
 - `supply` - 현재 발행된 에디션 수
 - `max_supply` - 발행할 수 있는 최대 에디션 수(무제한의 경우 null)
 
-
 ## Playground
 
 {% apiRenderer method="getNftEditions" noUmi=true /%}

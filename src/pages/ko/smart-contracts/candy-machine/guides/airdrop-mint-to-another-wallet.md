@@ -83,7 +83,6 @@ Typescript를 사용하여 다른 지갑으로 민팅할 때 Candy Machine이 �
 ### 가드 없이 민팅
 가드가 없는 Candy Machine의 경우 `mintFromCandyMachineV2`를 사용하세요. 이 함수를 사용하면 수신자를 `nftOwner`로 직접 지정할 수 있습니다.
 
-
 ```js
 const candyMachineAccount = await fetchCandyMachine(umi, publicKey("CM Address"));
 

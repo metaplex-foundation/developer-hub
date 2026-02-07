@@ -1,10 +1,15 @@
 import { nodes as defaultNodes } from '@markdoc/markdoc'
 
 import { Fence } from '@/components/Fence'
+import { Heading } from '@/components/Heading'
 
 const nodes = {
   document: {
     render: undefined,
+  },
+  heading: {
+    ...defaultNodes.heading,
+    render: Heading,
   },
   table: {
     ...defaultNodes.table,

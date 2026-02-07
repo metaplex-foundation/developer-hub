@@ -1,4 +1,5 @@
 import { Callout } from '@/components/Callout'
+import { Fee } from '@/components/Fee'
 import { OfficialLinks } from '@/components/OfficialLinks'
 import { ProtocolFees } from '@/components/ProtocolFees'
 import { StabilityIndex } from '@/components/StabilityIndex'
@@ -223,6 +224,7 @@ const tags = {
       highlightLines: { type: String, default: '' },
       showLines: { type: String, default: '' },
       showCopy: { type: Boolean, default: true },
+      filename: { type: String, default: '' },
     },
   },
   'protocol-fees': {
@@ -232,6 +234,16 @@ const tags = {
       program: { type: String, required: true },
       showTitle: { type: Boolean, default: true },
       config: { type: String },
+    },
+  },
+  fee: {
+    render: Fee,
+    selfClosing: true,
+    attributes: {
+      product: { type: String, required: true },
+      config: { type: String, required: true },
+      fee: { type: String, required: true },
+      field: { type: String, default: 'solana' },
     },
   },
   'stability-index': {

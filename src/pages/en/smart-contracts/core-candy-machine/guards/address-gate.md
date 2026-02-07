@@ -48,8 +48,8 @@ Owner: Any Program {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-10" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -65,12 +65,11 @@ Owner: Any Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" path="straight" /%}
 {% edge from="address" to="payer" arrow="none" dashed=true /%}
 {% edge from="payer" to="mint-candy-guard" arrow="none" dashed=true%}
-if the payer does not match the address on the guard 
+if the payer does not match the address on the guard
 
 Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
-
 
 {% /diagram %}
 
@@ -95,13 +94,12 @@ create(umi, {
 
 API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AddressGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AddressGate.html)
 
-
 {% /totem %}
 {% /dialect %}
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add this object into the guard section your config.json file:
 
 ```json
 "addressGate" : {

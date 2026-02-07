@@ -1,188 +1,379 @@
 ---
 title: JavaScript SDK
-metaTitle: JavaScript SDK | Genesis
-description: Solana에서 토큰 런칭을 위한 Genesis JavaScript SDK 설치 및 구성 방법을 알아보세요.
+metaTitle: JavaScript SDK | Genesis | Metaplex
+description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
+created: '01-15-2025'
+updated: '01-31-2026'
+keywords:
+  - Genesis SDK
+  - JavaScript SDK
+  - TypeScript SDK
+  - token launch SDK
+  - Umi framework
+  - Genesis API reference
+about:
+  - SDK installation
+  - API reference
+  - Genesis instructions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Umi란 무엇이며 왜 필요한가요?
+    a: Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
+  - q: 브라우저에서 Genesis SDK를 사용할 수 있나요?
+    a: 네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
+  - q: fetch와 safeFetch의 차이점은 무엇인가요?
+    a: fetch는 계정이 존재하지 않으면 오류를 던집니다. safeFetch는 대신 null을 반환하며, 오류 처리 없이 계정 존재 여부를 확인하는 데 유용합니다.
+  - q: 트랜잭션 오류를 어떻게 처리하나요?
+    a: sendAndConfirm 호출을 try/catch 블록으로 감싸세요. 일반적인 오류에는 잔액 부족, 이미 초기화된 계정, 시간 조건 위반이 포함됩니다.
 ---
 
-Metaplex는 Genesis 프로그램과 상호작용하기 위한 JavaScript 라이브러리를 제공합니다. [Umi Framework](/umi) 기반으로 제작되어 모든 JavaScript 또는 TypeScript 프로젝트에서 사용할 수 있는 경량 라이브러리입니다.
+Genesis JavaScript SDK의 API 레퍼런스. 전체 튜토리얼은 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요. {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="API 레퍼런스" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="Genesis JavaScript SDK 자동 생성 API 문서." /%}
+{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="@metaplex-foundation/genesis" /%}
 
-{% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/genesis" description="NPM의 Genesis JavaScript SDK." /%}
+{% quick-link title="TypeDoc" target="_blank" icon="JavaScript" href="https://mpl-genesis.typedoc.metaplex.com/" description="자동 생성된 API 문서" /%}
 
 {% /quick-links %}
 
 ## 설치
 
-Genesis SDK와 필요한 Metaplex 및 Solana 의존성을 설치합니다:
-
 ```bash
-npm install \
-  @metaplex-foundation/genesis \
-  @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults \
-  @metaplex-foundation/mpl-toolbox \
+npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
+  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox \
   @metaplex-foundation/mpl-token-metadata
 ```
 
-### 패키지 개요
-
-| 패키지 | 목적 |
-|---------|---------|
-| `@metaplex-foundation/genesis` | 모든 인스트럭션과 헬퍼가 포함된 핵심 Genesis SDK |
-| `@metaplex-foundation/umi` | 트랜잭션 빌드를 위한 Metaplex의 Solana 프레임워크 |
-| `@metaplex-foundation/umi-bundle-defaults` | 기본 Umi 플러그인 및 구성 |
-| `@metaplex-foundation/mpl-toolbox` | SPL 토큰 작업을 위한 유틸리티 |
-| `@metaplex-foundation/mpl-token-metadata` | 토큰 메타데이터 프로그램 통합 |
-
-## Umi 설정
-
-Genesis SDK는 Metaplex의 Solana용 JavaScript 프레임워크인 [Umi](/ko/dev-tools/umi) 위에 구축되었습니다. Umi를 아직 설정하지 않았다면 [Umi 시작하기](/ko/dev-tools/umi/getting-started) 가이드를 확인하세요.
-
-### 기본 구성
+## 설정
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { genesis } from '@metaplex-foundation/genesis';
 import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
 
-// Umi 인스턴스 생성 및 구성
 const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(genesis())
   .use(mplTokenMetadata());
 ```
 
-`genesis()` 플러그인은 모든 Genesis 인스트럭션과 계정 역직렬화기를 Umi에 등록합니다. Genesis는 메타데이터가 있는 토큰을 생성하므로 `mplTokenMetadata()` 플러그인이 필요합니다.
+전체 구현 예제는 [Launch Pool](/smart-contracts/genesis/launch-pool) 또는 [Presale](/smart-contracts/genesis/presale)을 참조하세요.
 
-### 개발 vs 프로덕션
+---
+
+## 명령어 레퍼런스
+
+### 코어
+
+| Function | Description |
+|----------|-------------|
+| [initializeV2()](#initialize-v2) | Genesis 계정 생성 및 토큰 발행 |
+| [finalizeV2()](#finalize-v2) | 설정 잠금, 런칭 활성화 |
+
+### 버킷
+
+| Function | Description |
+|----------|-------------|
+| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 비례 배분 버킷 추가 |
+| [addPresaleBucketV2()](#add-presale-bucket-v2) | 고정가 판매 버킷 추가 |
+| [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 트레저리/수신자 버킷 추가 |
+
+### Launch Pool 운영
+
+| Function | Description |
+|----------|-------------|
+| [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch Pool에 SOL 예치 |
+| [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOL 출금 (예치 기간 중) |
+| [claimLaunchPoolV2()](#claim-launch-pool-v2) | 토큰 청구 (예치 기간 후) |
+
+### Presale 운영
+
+| Function | Description |
+|----------|-------------|
+| [depositPresaleV2()](#deposit-presale-v2) | Presale에 SOL 예치 |
+| [claimPresaleV2()](#claim-presale-v2) | 토큰 청구 (예치 기간 후) |
+
+### 관리자
+
+| Function | Description |
+|----------|-------------|
+| [transitionV2()](#transition-v2) | 종료 동작 실행 |
+| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 민트 권한 영구 폐기 |
+| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 동결 권한 영구 폐기 |
+
+---
+
+## 함수 시그니처
+
+### initializeV2
 
 ```typescript
-// 개발: devnet 사용
-const umi = createUmi('https://api.devnet.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// 프로덕션: 신뢰할 수 있는 RPC로 mainnet 사용
-const umi = createUmi('https://your-rpc-provider.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
+await initializeV2(umi, {
+  baseMint,           // Signer - new token keypair
+  quoteMint,          // PublicKey - deposit token (wSOL)
+  fundingMode,        // number - use 0
+  totalSupplyBaseToken, // bigint - supply with decimals
+  name,               // string - token name
+  symbol,             // string - token symbol
+  uri,                // string - metadata URI
+}).sendAndConfirm(umi);
 ```
 
-## 서명자 설정
-
-Genesis 작업에는 트랜잭션 승인을 위한 서명자가 필요합니다. 백엔드 작업의 경우 일반적으로 환경 변수에서 로드된 키페어를 사용합니다.
-
-### 비밀키에서 서명자 생성
+### finalizeV2
 
 ```typescript
-import {
-  createSignerFromKeypair,
-  signerIdentity,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-
-// JSON 인코딩된 비밀키에서 서명자를 생성하는 헬퍼
-const createSignerFromSecretKeyString = (
-  umi: Umi,
-  secretKeyString: string
-): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-// 환경에서 백엔드 서명자 로드
-const backendSigner = createSignerFromSecretKeyString(
-  umi,
-  process.env.BACKEND_KEYPAIR!
-);
-
-// 트랜잭션의 기본 아이덴티티로 설정
-umi.use(signerIdentity(backendSigner));
+await finalizeV2(umi, {
+  baseMint,           // PublicKey
+  genesisAccount,     // PublicKey
+}).sendAndConfirm(umi);
 ```
 
-{% callout type="warning" %}
-**보안 참고**: 키페어를 버전 관리에 커밋하지 마세요. 프로덕션 배포에는 환경 변수, AWS KMS, GCP Secret Manager 또는 하드웨어 지갑을 사용하세요.
-{% /callout %}
-
-### 전체 설정 예제
-
-필요한 모든 import가 포함된 전체 설정입니다:
+### addLaunchPoolBucketV2
 
 ```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import {
-  createSignerFromKeypair,
-  generateSigner,
-  signerIdentity,
-  publicKey,
-  type Signer,
-  type Umi,
-} from '@metaplex-foundation/umi';
-import {
-  genesis,
-  initializeV2,
-  addLaunchPoolBucketV2,
-  addUnlockedBucketV2,
-  finalizeV2,
-  findGenesisAccountV2Pda,
-} from '@metaplex-foundation/genesis';
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
-
-// Umi 초기화
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(genesis())
-  .use(mplTokenMetadata());
-
-// 백엔드 서명자 설정
-const createSignerFromSecretKeyString = (umi: Umi, secretKeyString: string): Signer => {
-  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-  const keypair = umi.eddsa.createKeypairFromSecretKey(secretKey);
-  return createSignerFromKeypair(umi, keypair);
-};
-
-const backendSigner = createSignerFromSecretKeyString(umi, process.env.BACKEND_KEYPAIR!);
-umi.use(signerIdentity(backendSigner));
-
-console.log('백엔드 서명자로 Umi 구성됨:', backendSigner.publicKey);
+await addLaunchPoolBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint - tokens for this bucket
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
 ```
 
-## 에러 처리
+### addPresaleBucketV2
 
 ```typescript
-try {
-  await initializeV2(umi, { ... }).sendAndConfirm(umi);
-  console.log('성공!');
-} catch (error) {
-  if (error.message.includes('insufficient funds')) {
-    console.error('트랜잭션 수수료를 위한 SOL이 부족합니다');
-  } else if (error.message.includes('already initialized')) {
-    console.error('Genesis 계정이 이미 존재합니다');
-  } else {
-    console.error('트랜잭션 실패:', error);
-  }
+await addPresaleBucketV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  baseTokenAllocation,      // bigint
+  allocationQuoteTokenCap,  // bigint - SOL cap (sets price)
+  depositStartCondition,    // TimeCondition
+  depositEndCondition,      // TimeCondition
+  claimStartCondition,      // TimeCondition
+  claimEndCondition,        // TimeCondition
+  minimumDepositAmount,     // bigint | null
+  depositLimit,             // bigint | null - max per user
+  endBehaviors,             // EndBehavior[]
+}).sendAndConfirm(umi);
+```
+
+### addUnlockedBucketV2
+
+```typescript
+await addUnlockedBucketV2(umi, {
+  genesisAccount,       // PublicKey
+  baseMint,             // PublicKey
+  baseTokenAllocation,  // bigint - usually 0n
+  recipient,            // PublicKey - who can claim
+  claimStartCondition,  // TimeCondition
+  claimEndCondition,    // TimeCondition
+  backendSigner,        // null
+}).sendAndConfirm(umi);
+```
+
+### depositLaunchPoolV2
+
+```typescript
+await depositLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### depositPresaleV2
+
+```typescript
+await depositPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### withdrawLaunchPoolV2
+
+```typescript
+await withdrawLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  amountQuoteToken,   // bigint - lamports
+}).sendAndConfirm(umi);
+```
+
+### claimLaunchPoolV2
+
+```typescript
+await claimLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### claimPresaleV2
+
+```typescript
+await claimPresaleV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### transitionV2
+
+```typescript
+await transitionV2(umi, {
+  genesisAccount,     // PublicKey
+  primaryBucket,      // PublicKey
+  baseMint,           // PublicKey
+})
+  .addRemainingAccounts([/* destination accounts */])
+  .sendAndConfirm(umi);
+```
+
+### revokeMintAuthorityV2
+
+```typescript
+await revokeMintAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+### revokeFreezeAuthorityV2
+
+```typescript
+await revokeFreezeAuthorityV2(umi, {
+  baseMint,           // PublicKey
+}).sendAndConfirm(umi);
+```
+
+---
+
+## PDA 헬퍼
+
+| Function | Seeds |
+|----------|-------|
+| findGenesisAccountV2Pda() | `baseMint`, `genesisIndex` |
+| findLaunchPoolBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findPresaleBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findUnlockedBucketV2Pda() | `genesisAccount`, `bucketIndex` |
+| findLaunchPoolDepositV2Pda() | `bucket`, `recipient` |
+| findPresaleDepositV2Pda() | `bucket`, `recipient` |
+
+```typescript
+const [genesisAccountPda] = findGenesisAccountV2Pda(umi, { baseMint: mint.publicKey, genesisIndex: 0 });
+const [bucketPda] = findLaunchPoolBucketV2Pda(umi, { genesisAccount: genesisAccountPda, bucketIndex: 0 });
+const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipient: wallet });
+```
+
+---
+
+## 조회 함수
+
+| Function | Returns |
+|----------|---------|
+| fetchLaunchPoolBucketV2() | 버킷 상태 (없으면 오류 발생) |
+| safeFetchLaunchPoolBucketV2() | 버킷 상태 또는 `null` |
+| fetchPresaleBucketV2() | 버킷 상태 (없으면 오류 발생) |
+| safeFetchPresaleBucketV2() | 버킷 상태 또는 `null` |
+| fetchLaunchPoolDepositV2() | 예치 상태 (없으면 오류 발생) |
+| safeFetchLaunchPoolDepositV2() | 예치 상태 또는 `null` |
+| fetchPresaleDepositV2() | 예치 상태 (없으면 오류 발생) |
+| safeFetchPresaleDepositV2() | 예치 상태 또는 `null` |
+
+```typescript
+const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
+const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 못하면 null
+```
+
+**버킷 상태 필드:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+
+**예치 상태 필드:** `amountQuoteToken`, `claimed`
+
+---
+
+## 타입
+
+### TimeCondition
+
+```typescript
+{
+  __kind: 'TimeAbsolute',
+  padding: Array(47).fill(0),
+  time: bigint,                    // Unix timestamp (seconds)
+  triggeredTimestamp: null,
 }
 ```
 
-## 트랜잭션 확인
+### EndBehavior
 
 ```typescript
-// finalized 확인 대기 (가장 안전)
-const result = await initializeV2(umi, { ... })
-  .sendAndConfirm(umi, {
-    confirm: { commitment: 'finalized' }
-  });
-
-console.log('트랜잭션 서명:', result.signature);
+{
+  __kind: 'SendQuoteTokenPercentage',
+  padding: Array(4).fill(0),
+  destinationBucket: PublicKey,
+  percentageBps: number,           // 10000 = 100%
+  processed: false,
+}
 ```
+
+---
+
+## 상수
+
+| Constant | Value |
+|----------|-------|
+| `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
+
+---
+
+## 일반 오류
+
+| Error | Cause |
+|-------|-------|
+| `insufficient funds` | 수수료를 위한 SOL 부족 |
+| `already initialized` | Genesis 계정이 이미 존재 |
+| `already finalized` | 확정 후 수정 불가 |
+| `deposit period not active` | 예치 기간 외 |
+| `claim period not active` | 청구 기간 외 |
+
+---
+
+## FAQ
+
+### Umi란 무엇이며 왜 필요한가요?
+Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜잭션 구축, 서명자 관리, Metaplex 프로그램과의 상호작용을 위한 일관된 인터페이스를 제공합니다.
+
+### 브라우저에서 Genesis SDK를 사용할 수 있나요?
+네. SDK는 Node.js와 브라우저 환경 모두에서 작동합니다. 브라우저에서는 키페어 파일 대신 지갑 어댑터를 사용하세요.
+
+### fetch와 safeFetch의 차이점은 무엇인가요?
+`fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
+
+### 트랜잭션 오류를 어떻게 처리하나요?
+`sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.
+
+---
 
 ## 다음 단계
 
-Genesis 프로그램으로 Umi 인스턴스가 구성되면 빌드를 시작할 준비가 됩니다. Genesis 기능을 살펴보세요:
+전체 구현 튜토리얼:
 
-- **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** - 예치 기간이 있는 토큰 배포
-- **[Presale](/ko/smart-contracts/genesis/presale)** - 고정 가격 토큰 판매
-- **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** - 균일 청산 가격의 시간 기반 경매
+- [시작하기](/smart-contracts/genesis/getting-started) - 설정 및 첫 런칭
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - 비례 배분
+- [Presale](/smart-contracts/genesis/presale) - 고정가 판매

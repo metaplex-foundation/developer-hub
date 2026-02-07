@@ -297,7 +297,6 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
 ## 消息
 
 我们已经在版本化交易创建期间涵盖了创建消息。让我们再次回顾一下。

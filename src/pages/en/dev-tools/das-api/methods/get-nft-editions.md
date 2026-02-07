@@ -29,7 +29,6 @@ The response includes:
 - `supply` - Current number of editions minted
 - `max_supply` - Maximum number of editions that can be minted (null for unlimited)
 
-
 ## Playground
 
 {% apiRenderer method="getNftEditions" noUmi=true /%}

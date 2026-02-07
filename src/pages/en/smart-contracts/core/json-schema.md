@@ -2,19 +2,23 @@
 title: JSON Schema
 metaTitle: JSON Schema | Core
 description: Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
+updated: '01-31-2026'
+keywords:
+  - NFT metadata
+  - JSON schema
+  - off-chain metadata
+  - metadata standard
+about:
+  - Metadata structure
+  - JSON format
+  - Off-chain data
+proficiencyLevel: Beginner
 ---
-
 The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
-
 ## Schema Examples
-
 Below are examples for the different known types of NFTs. It's important to note that all of these different types can also be part of a single Asset using the `image`, `animation_url`, and `properties` fields. All the different fields are further described in the [JSON Schema Fields](#json-schema-fields) section.
-
-
 {% totem title="Examples" id="schema-examples" %}
-
 {% totem-accordion title="Image" %}
-
 The Attributes  can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute).
 ```json
 {
@@ -43,11 +47,8 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
   }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="Animated GIF" %}
-
 ```json
 {
   "name": "Number #0001",
@@ -65,11 +66,8 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
   }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="Video" %}
-
 ```json
 {
     "name": "Video Asset",
@@ -92,11 +90,8 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="Audio" %}
-
 ```json
 {
     "name": "Audio Asset",
@@ -120,11 +115,8 @@ The Attributes  can alternatively be stored onchain using the [Attributes Plugin
 }
 ```
 {% /totem-accordion  %}
-
 {% totem-accordion title="VR" %}
-
 While most Explorers and wallets support `.glb` files it is recommended to also have a fallback image as part of the schema.
-
 ```json
 {
     "name": "VR Asset",
@@ -147,13 +139,9 @@ While most Explorers and wallets support `.glb` files it is recommended to also 
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="HTML" %}
-
 The following example for HTML Assets is not supported by wallets currently, as they might see them as security risk. Some explorers render them correctly though, therefore it is recommended to have a fallback image for all the tools not supporting HTML Assets.
-
 ```json
 {
     "name": "HTML Asset",
@@ -176,41 +164,29 @@ The following example for HTML Assets is not supported by wallets currently, as 
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% /totem %}
-
 ## JSON Schema Fields
-
 Below explanations for the different fields can be found.
-
 If you miss some fields that you knew from Metaplex Token Metadata those are probably deprecated. The `creators` for example are part of the [Royalties Plugin](/smart-contracts/core/plugins/royalties) now.
-
 ### Required Fields
-
 - **name**: The name of your NFT asset
   - Example: "Solana Monkey #123", "Degen Ape #45"
   
 - **description**: A detailed description of your NFT
   - Example: "A rare cosmic monkey floating through the Solana blockchain"
-
 - **image**: URI pointing to the primary image of your NFT
   - Example: `https://arweave.net/123abc...?ext=png`
   - Supports: PNG, GIF, JPG/JPEG
-
 - **category**: Type of NFT content
     - Examples: `image`, `video`, `audio`, `vr`, `html`
-
 ### Optional Fields
   
 - **animation_url**: URI for multimedia attachments
   - Example: `https://arweave.net/xyz789...?ext=mp4`
   - Supports: MP4, GIF, GLB, HTML
-
 - **external_url**: Link to an external website for the NFT
   - Example: `https://www.myproject.io/nft/123`
-
 - **attributes**: Array of traits and their values. These can alternatively be stored onchain using the [Attributes Plugin](/smart-contracts/core/plugins/attribute)
   - Example:
     ```json
@@ -219,7 +195,6 @@ If you miss some fields that you knew from Metaplex Token Metadata those are pro
       "value": "Galaxy"
     }
     ```
-
 - **properties**: Additional metadata including files and categories
   - **files**: Array of all assets associated with the NFT. the `type` is the [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) of the file.
     ```json

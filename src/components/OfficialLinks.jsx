@@ -2,6 +2,14 @@
 
 import NextLink from 'next/link'
 import { useTranslations, useLocale } from '@/contexts/LocaleContext'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 const websiteLinks = [
   { name: 'Main Website', url: 'https://metaplex.com/' },
@@ -61,56 +69,13 @@ const rulesets = [
   { name: 'Compatibility Rule Set', id: 'AdH2Utn6Fus15ZhtenW4hZBQnvtLgM1YCW2MfVp7pYS5' },
 ]
 
-function TableWrapper({ children }) {
-  return (
-    <div className="overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700">
-      {children}
-    </div>
-  )
-}
-
-function TableHead({ children }) {
-  return (
-    <thead className="bg-neutral-50 dark:bg-neutral-800">
-      {children}
-    </thead>
-  )
-}
-
-function TableBody({ children }) {
-  return (
-    <tbody className="divide-y divide-neutral-200 bg-white dark:divide-neutral-700 dark:bg-neutral-900">
-      {children}
-    </tbody>
-  )
-}
-
-function Th({ children, className = '' }) {
-  return (
-    <th
-      scope="col"
-      className={`px-4 py-3 text-left text-sm font-semibold text-neutral-900 dark:text-neutral-100 ${className}`}
-    >
-      {children}
-    </th>
-  )
-}
-
-function Td({ children, className = '' }) {
-  return (
-    <td className={`px-4 py-3 text-sm text-neutral-700 dark:text-neutral-300 ${className}`}>
-      {children}
-    </td>
-  )
-}
-
 function Link({ href, children }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+      className="text-primary hover:text-primary/80"
     >
       {children}
     </a>
@@ -131,236 +96,220 @@ export function OfficialLinks() {
     <div>
       {/* Websites */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('websites', 'Websites')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('link', 'Link')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {websiteLinks.map((link) => (
-                <tr key={link.name}>
-                  <Td>{link.name}</Td>
-                  <Td>
-                    <Link href={link.url}>{link.url}</Link>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('link', 'Link')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {websiteLinks.map((link) => (
+              <TableRow key={link.name}>
+                <TableCell>{link.name}</TableCell>
+                <TableCell>
+                  <Link href={link.url}>{link.url}</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Twitter */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('twitter', 'Twitter')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('handle', 'Handle')}</Th>
-                <Th>{t('link', 'Link')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {twitterLinks.map((link) => (
-                <tr key={link.name}>
-                  <Td>{link.name}</Td>
-                  <Td className="font-mono">{link.handle}</Td>
-                  <Td>
-                    <Link href={link.url}>{link.url}</Link>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('handle', 'Handle')}</TableHead>
+              <TableHead>{t('link', 'Link')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {twitterLinks.map((link) => (
+              <TableRow key={link.name}>
+                <TableCell>{link.name}</TableCell>
+                <TableCell className="font-mono">{link.handle}</TableCell>
+                <TableCell>
+                  <Link href={link.url}>{link.url}</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Instagram */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('instagram', 'Instagram')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('handle', 'Handle')}</Th>
-                <Th>{t('link', 'Link')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {instagramLinks.map((link) => (
-                <tr key={link.name}>
-                  <Td>{link.name}</Td>
-                  <Td className="font-mono">{link.handle}</Td>
-                  <Td>
-                    <Link href={link.url}>{link.url}</Link>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('handle', 'Handle')}</TableHead>
+              <TableHead>{t('link', 'Link')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {instagramLinks.map((link) => (
+              <TableRow key={link.name}>
+                <TableCell>{link.name}</TableCell>
+                <TableCell className="font-mono">{link.handle}</TableCell>
+                <TableCell>
+                  <Link href={link.url}>{link.url}</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* StackExchange */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('stackExchange', 'StackExchange')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('tagged', 'Tagged')}</Th>
-                <Th>{t('link', 'Link')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {stackExchangeLinks.map((link) => (
-                <tr key={link.tagged}>
-                  <Td className="font-mono">{link.tagged}</Td>
-                  <Td>
-                    <Link href={link.url}>{link.url}</Link>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('tagged', 'Tagged')}</TableHead>
+              <TableHead>{t('link', 'Link')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {stackExchangeLinks.map((link) => (
+              <TableRow key={link.tagged}>
+                <TableCell className="font-mono">{link.tagged}</TableCell>
+                <TableCell>
+                  <Link href={link.url}>{link.url}</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* StackOverflow */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('stackOverflow', 'StackOverflow')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('tagged', 'Tagged')}</Th>
-                <Th>{t('link', 'Link')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {stackOverflowLinks.map((link) => (
-                <tr key={link.tagged}>
-                  <Td className="font-mono">{link.tagged}</Td>
-                  <Td>
-                    <Link href={link.url}>{link.url}</Link>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('tagged', 'Tagged')}</TableHead>
+              <TableHead>{t('link', 'Link')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {stackOverflowLinks.map((link) => (
+              <TableRow key={link.tagged}>
+                <TableCell className="font-mono">{link.tagged}</TableCell>
+                <TableCell>
+                  <Link href={link.url}>{link.url}</Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Programs */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('programs', 'Programs')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('programId', 'Program ID')}</Th>
-                <Th>{t('github', 'Github')}</Th>
-                <Th>{t('documentation', 'Documentation')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {programs.map((program) => (
-                <tr key={program.name}>
-                  <Td className="whitespace-nowrap">{program.name}</Td>
-                  <Td className="font-mono text-xs">{program.programId}</Td>
-                  <Td>
-                    {program.github ? (
-                      <Link href={program.github}>{t('link', 'Link')}</Link>
-                    ) : (
-                      <span className="text-neutral-400">—</span>
-                    )}
-                  </Td>
-                  <Td>
-                    <NextLink
-                      href={localePath(program.docs)}
-                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                    >
-                      {t('link', 'Link')}
-                    </NextLink>
-                  </Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('programId', 'Program ID')}</TableHead>
+              <TableHead>{t('github', 'Github')}</TableHead>
+              <TableHead>{t('documentation', 'Documentation')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {programs.map((program) => (
+              <TableRow key={program.name}>
+                <TableCell className="whitespace-nowrap">{program.name}</TableCell>
+                <TableCell className="font-mono text-xs">{program.programId}</TableCell>
+                <TableCell>
+                  {program.github ? (
+                    <Link href={program.github}>{t('link', 'Link')}</Link>
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <NextLink
+                    href={localePath(program.docs)}
+                    className="text-primary hover:text-primary/80"
+                  >
+                    {t('link', 'Link')}
+                  </NextLink>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Tokens and NFTs */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('tokensAndNfts', 'Tokens and NFTs')}
         </h2>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('id', 'ID')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {tokensAndNfts.map((token) => (
-                <tr key={token.name}>
-                  <Td>{token.name}</Td>
-                  <Td className="font-mono text-xs">{token.id}</Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('id', 'ID')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {tokensAndNfts.map((token) => (
+              <TableRow key={token.name}>
+                <TableCell>{token.name}</TableCell>
+                <TableCell className="font-mono text-xs">{token.id}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Rulesets */}
       <div className="my-6">
-        <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-3 text-xl font-semibold text-foreground">
           {t('rulesets', 'Metaplex Rulesets')}
         </h2>
-        <p className="mb-3 text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="mb-3 text-sm text-muted-foreground">
           {t('rulesetsDescription', 'To be used with the pNFTs Auth Rules.')}
         </p>
-        <TableWrapper>
-          <table className="min-w-full divide-y divide-neutral-200 dark:divide-neutral-700">
-            <TableHead>
-              <tr>
-                <Th>{t('name', 'Name')}</Th>
-                <Th>{t('id', 'ID')}</Th>
-              </tr>
-            </TableHead>
-            <TableBody>
-              {rulesets.map((ruleset) => (
-                <tr key={ruleset.name}>
-                  <Td>{ruleset.name}</Td>
-                  <Td className="font-mono text-xs">{ruleset.id}</Td>
-                </tr>
-              ))}
-            </TableBody>
-          </table>
-        </TableWrapper>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('name', 'Name')}</TableHead>
+              <TableHead>{t('id', 'ID')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rulesets.map((ruleset) => (
+              <TableRow key={ruleset.name}>
+                <TableCell>{ruleset.name}</TableCell>
+                <TableCell className="font-mono text-xs">{ruleset.id}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   )

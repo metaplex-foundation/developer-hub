@@ -26,7 +26,7 @@ If you are using Windows, follow the steps below:
 
 1. Download the Winstaller executable from [here](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe).
 
-2. Try to run the binary by double-clicking on it. If you get a pop-up message warning about an untrusted binary try clicking `More Info` and then `Run Anyway`. If you do not have this option, follow steps 3 - 6. 
+2. Try to run the binary by double-clicking on it. If you get a pop-up message warning about an untrusted binary try clicking `More Info` and then `Run Anyway`. If you do not have this option, follow steps 3 - 6.
 
 3. Right-click on the executable file and go to `Properties`.
 
@@ -47,7 +47,7 @@ If you are using Windows, follow the steps below:
 8. Try running `sugar` in your terminal and see if it prints a list of commands you can use. If so you're good to go!
 
 9. Report any errors to the `#candy-machine` forum on the [Metaplex Discord](https://discord.gg/metaplex).
-   
+
 {% callout %}
 
 This installer binary downloads the latest Sugar binary version, unzips it and copies it to a folder in your `PATH` environment. If you have Rust, the binary will be copied to `~/.cargo/bin`, otherwise it creates a `SugarCLI` folder in your `%LOCALAPPDATA%` directory. Once the binary is at that location, Windows will find it automatically, and you will be able to run the sugar binary from any directory in your file system as a normal command-line application.
@@ -70,7 +70,7 @@ Binaries for the supported OS can be found at:
 When installing from crates.io or from source on Ubuntu or WSL (Windows Subsystem for Linux) you may need to install some additional dependencies:
 ```bash
 sudo apt install libudev-dev pkg-config unzip
-``` 
+```
 
 {% /callout %}
 
@@ -96,7 +96,6 @@ The next step is to install Sugar from Crates.io:
 cargo install sugar-cli
 ```
 This will download the Sugar code from Crates.io and automatically install it for you.
-
 
 ### Build From Source
 

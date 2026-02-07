@@ -1,21 +1,25 @@
 ---
 title: JSON Schema
 metaTitle: JSON Schema | Core
-description: 了解 Metaplex Core 资产的链下 JSON schema 结构和要求。
+description: 了解Metaplex Core资产的链下JSON schema结构和要求。
+updated: '01-31-2026'
+keywords:
+  - NFT metadata
+  - JSON schema
+  - off-chain metadata
+  - metadata standard
+about:
+  - Metadata structure
+  - JSON format
+  - Off-chain data
+proficiencyLevel: Beginner
 ---
-
-Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准类似。然而，由于更多数据可以使用插件存储在资产本身的链上，一些数据如属性也可以额外存储在链上。
-
-## Schema 示例
-
-以下是不同已知 NFT 类型的示例。重要的是要注意，所有这些不同类型也可以使用 `image`、`animation_url` 和 `properties` 字段成为单个 Asset 的一部分。所有不同的字段在 [JSON Schema 字段](#json-schema-字段)部分有进一步描述。
-
-
+Metaplex Core资产的链下JSON元数据与Metaplex Token Metadata标准类似。但是，由于可以使用插件在资产本身中存储更多数据，因此属性等一些数据也可以额外存储在链上。
+## Schema示例
+以下是不同已知NFT类型的示例。需要注意的是，所有这些不同类型也可以使用`image`、`animation_url`和`properties`字段成为单个Asset的一部分。所有不同的字段在[JSON Schema字段](#json-schema字段)部分进一步描述。
 {% totem title="示例" id="schema-examples" %}
-
-{% totem-accordion title="图片" %}
-
-属性也可以使用 [Attributes 插件](/zh/smart-contracts/core/plugins/attribute)在链上存储。
+{% totem-accordion title="图像" %}
+Attributes也可以使用[Attributes插件](/smart-contracts/core/plugins/attribute)存储在链上。
 ```json
 {
   "name": "Number #0001",
@@ -43,11 +47,8 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
   }
 }
 ```
-
 {% /totem-accordion  %}
-
-{% totem-accordion title="动画 GIF" %}
-
+{% totem-accordion title="动画GIF" %}
 ```json
 {
   "name": "Number #0001",
@@ -65,11 +66,8 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
   }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="视频" %}
-
 ```json
 {
     "name": "Video Asset",
@@ -92,11 +90,8 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="音频" %}
-
 ```json
 {
     "name": "Audio Asset",
@@ -120,11 +115,8 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
 }
 ```
 {% /totem-accordion  %}
-
 {% totem-accordion title="VR" %}
-
-虽然大多数浏览器和钱包支持 `.glb` 文件，但建议在 schema 中也包含一个后备图片。
-
+虽然大多数浏览器和钱包支持`.glb`文件，但建议在schema中包含一个备用图像。
 ```json
 {
     "name": "VR Asset",
@@ -147,13 +139,9 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% totem-accordion title="HTML" %}
-
-以下 HTML Assets 示例目前不被钱包支持，因为它们可能被视为安全风险。不过一些浏览器可以正确渲染它们，因此建议为所有不支持 HTML Assets 的工具提供后备图片。
-
+以下HTML Asset示例目前不受钱包支持，因为它们可能被视为安全风险。但是，一些浏览器会正确渲染它们，因此建议为所有不支持HTML Asset的工具提供备用图像。
 ```json
 {
     "name": "HTML Asset",
@@ -176,42 +164,30 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
     }
 }
 ```
-
 {% /totem-accordion  %}
-
 {% /totem %}
-
-## JSON Schema 字段
-
+## JSON Schema字段
 以下是不同字段的说明。
-
-如果您缺少一些您从 Metaplex Token Metadata 中了解的字段，那些可能已被弃用。例如 `creators` 现在是 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties)的一部分。
-
+如果您缺少Metaplex Token Metadata中已知的某些字段，这些字段可能已被弃用。例如，`creators`现在是[Royalties插件](/smart-contracts/core/plugins/royalties)的一部分。
 ### 必填字段
-
-- **name**：您的 NFT 资产名称
+- **name**：NFT资产的名称
   - 示例："Solana Monkey #123"，"Degen Ape #45"
 
-- **description**：您的 NFT 的详细描述
-  - 示例："一只罕见的宇宙猴子漂浮在 Solana 区块链上"
-
-- **image**：指向您的 NFT 主图像的 URI
+- **description**：NFT的详细描述
+  - 示例："一只稀有的宇宙猴子漂浮在Solana区块链中"
+- **image**：指向NFT主图像的URI
   - 示例：`https://arweave.net/123abc...?ext=png`
   - 支持：PNG、GIF、JPG/JPEG
-
-- **category**：NFT 内容类型
+- **category**：NFT内容类型
     - 示例：`image`、`video`、`audio`、`vr`、`html`
-
 ### 可选字段
 
-- **animation_url**：多媒体附件的 URI
+- **animation_url**：多媒体附件的URI
   - 示例：`https://arweave.net/xyz789...?ext=mp4`
   - 支持：MP4、GIF、GLB、HTML
-
-- **external_url**：链接到 NFT 外部网站的链接
+- **external_url**：NFT外部网站的链接
   - 示例：`https://www.myproject.io/nft/123`
-
-- **attributes**：特征及其值的数组。这些也可以使用 [Attributes 插件](/zh/smart-contracts/core/plugins/attribute)在链上存储
+- **attributes**：特征及其值的数组。也可以使用[Attributes插件](/smart-contracts/core/plugins/attribute)存储在链上。
   - 示例：
     ```json
     {
@@ -219,9 +195,8 @@ Metaplex Core 资产的链下 JSON 元数据与 Metaplex Token Metadata 标准�
       "value": "Galaxy"
     }
     ```
-
-- **properties**：包括文件和类别的附加元数据
-  - **files**：与 NFT 关联的所有资产的数组。`type` 是文件的 [MIME 类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)。
+- **properties**：包括文件和类别的额外元数据
+  - **files**：与NFT关联的所有资产的数组。`type`是文件的[MIME类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)。
     ```json
     {
       "uri": "https://arweave.net/abc123...?ext=png",

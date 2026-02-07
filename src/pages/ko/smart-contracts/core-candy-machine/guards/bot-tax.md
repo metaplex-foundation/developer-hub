@@ -12,7 +12,6 @@ description: "Core Candy Machine의 'Bot Tax' 가드를 사용하면 사용자�
 Bot Tax 가드는 신중하게 사용하세요.
 {% /callout %}
 
-
 ## 개요
 
 **Bot Tax** 가드는 봇이 NFT 민팅을 시도하는 것을 방지하기 위해 잘못된 트랜잭션에 대한 벌금을 청구합니다. 이 금액은 보통 실제 사용자의 진정한 실수에 영향을 주지 않으면서 봇을 제재할 수 있도록 소액으로 설정됩니다. 모든 봇 세금은 Candy Machine 계정으로 전송되므로 민팅이 끝난 후 Candy Machine 계정을 삭제하여 이 자금에 접근할 수 있습니다.
@@ -82,7 +81,6 @@ Instruction of the transaction minting will fail
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 

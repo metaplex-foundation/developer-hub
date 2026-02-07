@@ -1,19 +1,28 @@
 ---
-title: MPL Coreにおける不変性（Immutability）
-metaTitle: MPL Coreの不変性 | Core Guides
-description: MPL Coreに存在する多層的な不変化オプションを解説します。
+title: MPL Coreでの不変性
+metaTitle: MPL Coreでの不変性 | Coreガイド
+description: このガイドでは、MPL Coreのさまざまな不変性レイヤーについて説明します
+updated: '01-31-2026'
+keywords:
+  - immutable NFT
+  - immutability
+  - lock metadata
+  - permanent NFT
+about:
+  - Immutability options
+  - Metadata protection
+  - Plugin immutability
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
 ---
-
 ## 不変性とは？
-デジタルアセットの一般的な文脈では、不変性は主にトークン/NFTのメタデータ（NameやURIなど）を将来的に変更できないようにすることを指します。購入後にアセットが書き換えられないことを保証したい、というコミュニティからの要望に応える形で使われてきました。
-
-MPL Coreはプラグイン機能を備えており、メタデータ以外にも不変性を細かく設計できます。本ガイドでは、プロジェクトの要件に合わせて不変性を設計するためのオプションを紹介します。
-
-前提として、MPL Coreの[プラグイン機能](/ja/smart-contracts/core/plugins)の基本を把握しておくと理解がスムーズです。
-
-## MPL Coreでの不変化オプション
-- **メタデータの不変化**: [immutableMetadata](/ja/smart-contracts/core/plugins/immutableMetadata)プラグインにより、アセット（またはコレクション）におけるNameとURIを変更不可にできます。
-- **新規プラグイン追加の禁止**: [addBlocker](/ja/smart-contracts/core/plugins/addBlocker)プラグインにより、作成者が追加のプラグインを後から追加できないようにできます。これがないと、アップデート権限者が権限管理型プラグイン（例: Royalties）を後から追加できます。
-- **プラグイン単位の不変化**: 一部プラグインは、オーナーやアップデート権限者とは別の権限を持たせられます。その権限を外すことで、特定プラグインのデータを更新不可にできます（例: 将来ロイヤリティが変わらない保証）。権限の削除はプラグイン作成時または更新時に行えます。
-- **完全な不変化**: アセット/コレクションのアップデート権限を外すと、権限に基づく操作（メタデータ変更、権限管理型プラグインの追加など）はできなくなります。完全な不変化を目指す場合は、[一般の権限](/ja/smart-contracts/core/update#making-a-core-asset-data-immutable)に加えて、各プラグインの権限も外しておく必要があります。
-
+デジタルアセットの一般的な文脈において、不変性はしばしばトークンやNFTのメタデータを指して使用されます。過去には、購入したアセットが将来変更されないことを確認するため、コミュニティからこれが求められていました。MPL Coreが提供する追加機能により、追加の不変性機能を加えることが意味を持つ場合があります。このガイドでは、これらのさまざまなオプションとそれらをプロジェクトのニーズに合わせてデジタルアセットの不変性を調整する方法についての情報を提供することを目的としています。
+以下の違いを理解するためには、一般的なMPL Core[プラグイン機能](/smart-contracts/core/plugins)に精通していることが役立つかもしれません。
+## MPL Coreの不変性オプション
+- **不変メタデータ**: [immutableMetadata](/smart-contracts/core/plugins/immutableMetadata)プラグインは、Assetまたはコレクション全体の名前とURIを変更不可にできます。
+- **新しいプラグインの追加を禁止**: Coreは、[addBlocker](/smart-contracts/core/plugins/addBlocker)プラグインを使用して、クリエイターがアセットに追加のプラグインを追加することを禁止できます。このプラグインがないと、update authorityはロイヤリティプラグインのようなAuthority Managedプラグインを追加できます。
+- **プラグインレベルの不変性**: 一部のプラグインは、オーナーやupdate authorityとは異なるauthorityを設定できます。このauthorityを削除すると、その特定のプラグインは変更できなくなります。これは、例えばクリエイターがアセットオーナーに対してロイヤリティが将来変更されないことを保証したい場合に便利です。authorityの削除は、プラグインの作成時または更新時に行えます。
+- **完全な不変性**: アセットまたはコレクションのupdate authorityを削除すると、authorityベースのアクションはトリガーできなくなります。これには、メタデータの変更やauthorityベースのプラグインの追加が含まれます。完全な不変性を目指す場合、[一般的なauthority](/smart-contracts/core/update#making-a-core-asset-data-immutable)に加えて、プラグインのauthorityも削除されていることを確認する必要があります。
