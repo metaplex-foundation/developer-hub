@@ -28,7 +28,7 @@ sugar upload <ASSETS DIR>
 
 Candy Machine用のサンプル画像とメタデータにアクセスするには、GitHubリポジトリを訪問し、緑色の`code`ボタンをクリックして`Download ZIP`を選択してzipファイルをダウンロードしてください。
 
-[https://github.com/metaplex-foundation/example-candy-machine-assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
+[Example Candy Machine Assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
 
 Gitがインストールされている場合は、以下のコマンドを使用してリポジトリをシステムにクローンしたり、zipコピーをダウンロードしたりできます：
 

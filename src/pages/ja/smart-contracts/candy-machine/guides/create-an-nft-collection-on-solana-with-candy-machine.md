@@ -97,7 +97,7 @@ assets/
 
 Candy Machineを作成するために例となる画像とメタデータを使用したい場合は、GitHubから緑の`code`ボタンをクリックして`zip format`を選択することでzip形式でダウンロードできます。
 
-[https://github.com/metaplex-foundation/example-candy-machine-assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
+[Example Candy Machine Assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
 
 または、gitがインストールされている場合は、アセットをシステムにクローンするか、提供されたリンクからzipコピーをダウンロードできます
 
@@ -322,8 +322,8 @@ sugar guard show
 ### UI開発リソース
 
 - nextJS/React推奨
-- Metaplex Umi - [https://developers.metaplex.com/umi](https://developers.metaplex.com/umi)
-- Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
+- [Metaplex Umi](/umi)
+- [Metaplex Candy Machine SDK](/candy-machine)
 
 ### さらなる読み物
 - [Sugar CLIドキュメント](/ja/smart-contracts/candy-machine/sugar)

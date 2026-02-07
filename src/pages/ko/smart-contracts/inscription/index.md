@@ -336,7 +336,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)와 함께 일반적인 Token Metadata 표준을 사용하고 URI를 게이트웨이로 연결하면, 지갑과 탐색기와 같은 모든 도구가 데이터를 다르게 읽을 필요 없이 NFT가 일반적으로 읽히는 것과 동일하게 체인에서 직접 데이터를 읽을 수 있습니다.
 
-다음 URL 구조를 사용하여 Metaplex에서 호스팅하는 게이트웨이를 사용할 수 있습니다: `https://igw.metaplex.com/<network>/<account>`, 예: [https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) 또는 사용자 정의 URL로 게이트웨이를 직접 호스팅할 수 있습니다.
+다음 URL 구조를 사용하여 Metaplex에서 호스팅하는 게이트웨이를 사용할 수 있습니다: `https://igw.metaplex.com/<network>/<account>`, 예: [view this example on the Inscription Gateway](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) 또는 사용자 정의 URL로 게이트웨이를 직접 호스팅할 수 있습니다.
 
 ## Inscription 순위
 

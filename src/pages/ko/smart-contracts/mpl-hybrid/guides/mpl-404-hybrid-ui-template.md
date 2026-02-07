@@ -22,7 +22,7 @@ Metaplex MPL-404 Hybrid UI 템플릿은 개발자와 사용자에게 개발 시�
 
 이 UI 템플릿은 기본 Metaplex UI 템플릿을 사용하여 만들어졌습니다. 추가 문서는 다음에서 찾을 수 있습니다.
 
-기본 템플릿 Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+Base Template - [GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## 설치
 
@@ -30,7 +30,7 @@ Metaplex MPL-404 Hybrid UI 템플릿은 개발자와 사용자에게 개발 시�
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Github 저장소 - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 
 ## 설정
@@ -85,4 +85,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 이 템플릿이 구축된 헬퍼와 기능을 이해하기 위해 기본 템플릿에 대한 문서를 추가로 읽는 것이 좋습니다.
 
-Github 저장소 - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)

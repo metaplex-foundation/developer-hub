@@ -28,7 +28,7 @@ description: 使用 Nextjs、Tailwind、Metaplex Umi、Solana WalletAdapter 和 
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github 仓库 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -36,7 +36,7 @@ Github 仓库 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github 仓库 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _以下部分涵盖此页面上列出的所有模板共享的常见功能。此处不包括特定于模板的功能；有关各个模板的详细文档，请参阅相应的 GitHub 存储库。_
 
