@@ -9,21 +9,25 @@ description: 머클 트리에 압축 NFT 민트
 ## 기본 사용법
 
 ### 대화형 마법사 (권장)
+
 ```bash
 mplx bg nft create --wizard
 ```
 
 ### 특정 트리 지정
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
 ### 파일 기반 생성
+
 ```bash
 mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
 ```
 
 ### URI 기반 생성
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.json"
 ```
@@ -64,26 +68,31 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 ## 예시
 
 1. 마법사를 사용하여 생성:
+
 ```bash
 mplx bg nft create --wizard
 ```
 
-2. 특정 트리로 마법사를 사용하여 생성:
+1. 특정 트리로 마법사를 사용하여 생성:
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
-3. 기존 메타데이터 URI로 생성:
+1. 기존 메타데이터 URI로 생성:
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 ```
 
-4. 로컬 파일로 생성:
+1. 로컬 파일로 생성:
+
 ```bash
 mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
 ```
 
-5. 메타데이터 플래그로 생성:
+1. 메타데이터 플래그로 생성:
+
 ```bash
 mplx bg nft create my-tree \
   --name "Cool NFT #1" \
@@ -93,7 +102,8 @@ mplx bg nft create my-tree \
   --royalties 5
 ```
 
-6. 컬렉션에 생성:
+1. 컬렉션에 생성:
+
 ```bash
 mplx bg nft create my-tree \
   --name "Collection Item #1" \
@@ -103,7 +113,7 @@ mplx bg nft create my-tree \
 
 ## 출력
 
-```
+```text
 Uploading image... ✓
 Uploading metadata... ✓
 Creating compressed NFT... ✓

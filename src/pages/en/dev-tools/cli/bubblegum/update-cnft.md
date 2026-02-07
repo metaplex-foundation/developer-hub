@@ -9,16 +9,19 @@ The `mplx bg nft update` command updates the off-chain metadata of a compressed 
 ## Basic Usage
 
 ### Update Individual Fields
+
 ```bash
 mplx bg nft update <assetId> --name "New Name"
 ```
 
 ### Update Multiple Fields
+
 ```bash
 mplx bg nft update <assetId> --name "New Name" --description "New Description" --image ./new-image.png
 ```
 
 ### Interactive Editor
+
 ```bash
 mplx bg nft update <assetId> --editor
 ```
@@ -52,37 +55,42 @@ mplx bg nft update <assetId> --editor
 ## Examples
 
 1. Update the name:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --name "Updated NFT Name"
 ```
 
-2. Update name and description:
+1. Update name and description:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "New Name" \
   --description "This NFT has been updated"
 ```
 
-3. Update with new image:
+1. Update with new image:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "Refreshed NFT" \
   --image ./new-artwork.png
 ```
 
-4. Replace entire metadata URI:
+1. Replace entire metadata URI:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --uri "https://arweave.net/xxx"
 ```
 
-5. Use interactive editor:
+1. Use interactive editor:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --editor
 ```
 
 ## Output
 
-```
+```text
 --------------------------------
 
   Compressed NFT Update

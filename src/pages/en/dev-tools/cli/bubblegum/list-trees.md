@@ -13,6 +13,7 @@ mplx bg tree list
 ```
 
 ### Filter by Network
+
 ```bash
 mplx bg tree list --network devnet
 ```
@@ -33,23 +34,26 @@ mplx bg tree list --network devnet
 ## Examples
 
 1. List all trees:
+
 ```bash
 mplx bg tree list
 ```
 
-2. List only devnet trees:
+1. List only devnet trees:
+
 ```bash
 mplx bg tree list --network devnet
 ```
 
-3. List only mainnet trees:
+1. List only mainnet trees:
+
 ```bash
 mplx bg tree list --network mainnet
 ```
 
 ## Output
 
-```
+```text
 Saved Trees:
 ┌─────────┬────────────────────────────────────────────┬─────────┬───────────┬────────┬────────────┐
 │ Name    │ Address                                    │ Network │ Max NFTs  │ Public │ Created    │

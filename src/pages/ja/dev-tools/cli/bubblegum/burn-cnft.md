@@ -30,18 +30,20 @@ mplx bg nft burn <assetId>
 ## 例
 
 1. 圧縮NFTをバーン：
-```bash
-mplx bg nft burn CNFTAssetIdHere
-```
 
-2. JSON出力でバーン：
-```bash
-mplx bg nft burn CNFTAssetIdHere --json
-```
+   ```bash
+   mplx bg nft burn CNFTAssetIdHere
+   ```
+
+1. JSON出力でバーン：
+
+   ```bash
+   mplx bg nft burn CNFTAssetIdHere --json
+   ```
 
 ## 出力
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Burning compressed NFT... ✓

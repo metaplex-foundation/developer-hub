@@ -13,11 +13,13 @@ description: 압축 NFT용 머클 트리 생성
 ## 기본 사용법
 
 ### 대화형 마법사 (권장)
+
 ```bash
 mplx bg tree create --wizard
 ```
 
 ### 직접 생성
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "my-tree"
 ```
@@ -57,23 +59,26 @@ CLI는 다양한 컬렉션 크기에 최적화된 권장 구성을 제공합니�
 ## 예시
 
 1. 마법사를 사용하여 트리 생성:
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-2. 테스트용 작은 트리 생성:
+1. 테스트용 작은 트리 생성:
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "test-tree"
 ```
 
-3. 공개 트리 생성 (누구나 민트 가능):
+1. 공개 트리 생성 (누구나 민트 가능):
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --public --name "public-tree"
 ```
 
 ## 출력
 
-```
+```text
 --------------------------------
 Tree Created Successfully!
 

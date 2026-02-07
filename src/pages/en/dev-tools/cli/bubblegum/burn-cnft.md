@@ -30,18 +30,20 @@ mplx bg nft burn <assetId>
 ## Examples
 
 1. Burn a compressed NFT:
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere
 ```
 
-2. Burn with JSON output:
+1. Burn with JSON output:
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere --json
 ```
 
 ## Output
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Burning compressed NFT... ✓

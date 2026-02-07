@@ -9,21 +9,25 @@ description: マークルツリーに圧縮NFTをミントする
 ## 基本的な使い方
 
 ### インタラクティブウィザード（推奨）
+
 ```bash
 mplx bg nft create --wizard
 ```
 
 ### 特定のツリーを指定
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
 ### ファイルベースの作成
+
 ```bash
 mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
 ```
 
 ### URIベースの作成
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.json"
 ```
@@ -64,46 +68,52 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 ## 例
 
 1. ウィザードを使用して作成：
-```bash
-mplx bg nft create --wizard
-```
 
-2. 特定のツリーでウィザードを使用して作成：
-```bash
-mplx bg nft create my-tree --wizard
-```
+   ```bash
+   mplx bg nft create --wizard
+   ```
 
-3. 既存のメタデータURIで作成：
-```bash
-mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
-```
+1. 特定のツリーでウィザードを使用して作成：
 
-4. ローカルファイルで作成：
-```bash
-mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
-```
+   ```bash
+   mplx bg nft create my-tree --wizard
+   ```
 
-5. メタデータフラグで作成：
-```bash
-mplx bg nft create my-tree \
-  --name "Cool NFT #1" \
-  --image ./nft.png \
-  --description "とてもクールな圧縮NFT" \
-  --attributes "Background:Blue,Eyes:Laser,Hat:Crown" \
-  --royalties 5
-```
+1. 既存のメタデータURIで作成：
 
-6. コレクションに作成：
-```bash
-mplx bg nft create my-tree \
-  --name "Collection Item #1" \
-  --image ./nft.png \
-  --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
+   ```bash
+   mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
+   ```
+
+1. ローカルファイルで作成：
+
+   ```bash
+   mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
+   ```
+
+1. メタデータフラグで作成：
+
+   ```bash
+   mplx bg nft create my-tree \
+     --name "Cool NFT #1" \
+     --image ./nft.png \
+     --description "とてもクールな圧縮NFT" \
+     --attributes "Background:Blue,Eyes:Laser,Hat:Crown" \
+     --royalties 5
+   ```
+
+1. コレクションに作成：
+
+   ```bash
+   mplx bg nft create my-tree \
+     --name "Collection Item #1" \
+     --image ./nft.png \
+     --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
 
 ## 出力
 
-```
+```text
 Uploading image... ✓
 Uploading metadata... ✓
 Creating compressed NFT... ✓

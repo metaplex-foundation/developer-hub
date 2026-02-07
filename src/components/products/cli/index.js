@@ -205,7 +205,7 @@ export const cli = {
         'Fetch Compressed NFT': 'Fetch Compressed NFT',
         'Update Compressed NFT': 'Update Compressed NFT',
         'Transfer Compressed NFT': 'Transfer Compressed NFT',
-        'Burn Compressed NFT': 'Burn Compressed NFT'
+        'Burn Compressed NFT': 'Burn Compressed NFT',
         'Add Metadata to Token': 'Add Metadata to Token',
         'Update Token Metadata': 'Update Token Metadata'
       }
@@ -232,7 +232,7 @@ export const cli = {
         'Fetch Compressed NFT': '圧縮NFT取得',
         'Update Compressed NFT': '圧縮NFT更新',
         'Transfer Compressed NFT': '圧縮NFT転送',
-        'Burn Compressed NFT': '圧縮NFTバーン'
+        'Burn Compressed NFT': '圧縮NFTバーン',
         'Add Metadata to Token': 'トークンメタデータ追加',
         'Update Token Metadata': 'トークンメタデータ更新'
       }
@@ -259,7 +259,7 @@ export const cli = {
         'Fetch Compressed NFT': '압축 NFT 조회',
         'Update Compressed NFT': '압축 NFT 업데이트',
         'Transfer Compressed NFT': '압축 NFT 전송',
-        'Burn Compressed NFT': '압축 NFT 소각'
+        'Burn Compressed NFT': '압축 NFT 소각',
         'Add Metadata to Token': '토큰 메타데이터 추가',
         'Update Token Metadata': '토큰 메타데이터 업데이트'
       }

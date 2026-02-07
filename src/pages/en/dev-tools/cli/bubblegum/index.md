@@ -55,21 +55,25 @@ mplx bg <resource> <command> [options]
 ## Quick Start
 
 1. Configure a DAS-enabled RPC:
+
 ```bash
 mplx config rpcs add <name> <url>
 ```
 
-2. Create a Merkle tree:
+1. Create a Merkle tree:
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-3. Create a collection (optional but recommended):
+1. Create a collection (optional but recommended):
+
 ```bash
 mplx core collection create --wizard
 ```
 
-4. Mint compressed NFTs:
+1. Mint compressed NFTs:
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```

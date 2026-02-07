@@ -13,11 +13,13 @@ mplx bg nft fetch <assetId>
 ```
 
 ### ファイルにダウンロード
+
 ```bash
 mplx bg nft fetch <assetId> --download --output ./nfts
 ```
 
 ### プルーフのみ取得
+
 ```bash
 mplx bg nft fetch <assetId> --proof-only
 ```
@@ -47,33 +49,38 @@ mplx bg nft fetch <assetId> --proof-only
 ## 例
 
 1. NFT情報を取得して表示：
-```bash
-mplx bg nft fetch CNFTAssetIdHere
-```
 
-2. アセットデータをファイルにダウンロード：
-```bash
-mplx bg nft fetch CNFTAssetIdHere --download
-```
+   ```bash
+   mplx bg nft fetch CNFTAssetIdHere
+   ```
 
-3. 特定のディレクトリにダウンロード：
-```bash
-mplx bg nft fetch CNFTAssetIdHere --download --output ./nft-data
-```
+1. アセットデータをファイルにダウンロード：
 
-4. マークルプルーフのみを取得：
-```bash
-mplx bg nft fetch CNFTAssetIdHere --proof-only
-```
+   ```bash
+   mplx bg nft fetch CNFTAssetIdHere --download
+   ```
 
-5. JSON形式で出力：
-```bash
-mplx bg nft fetch CNFTAssetIdHere --json
-```
+1. 特定のディレクトリにダウンロード：
+
+   ```bash
+   mplx bg nft fetch CNFTAssetIdHere --download --output ./nft-data
+   ```
+
+1. マークルプルーフのみを取得：
+
+   ```bash
+   mplx bg nft fetch CNFTAssetIdHere --proof-only
+   ```
+
+1. JSON形式で出力：
+
+   ```bash
+   mplx bg nft fetch CNFTAssetIdHere --json
+   ```
 
 ## 出力
 
-```
+```text
 --------------------------------
 Compressed NFT Details
 

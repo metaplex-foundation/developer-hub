@@ -9,21 +9,25 @@ The `mplx bg nft create` command mints a compressed NFT into an existing Merkle 
 ## Basic Usage
 
 ### Interactive Wizard (Recommended)
+
 ```bash
 mplx bg nft create --wizard
 ```
 
 ### With Specific Tree
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
 ### File-Based Creation
+
 ```bash
 mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
 ```
 
 ### URI-Based Creation
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.json"
 ```
@@ -64,26 +68,31 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 ## Examples
 
 1. Create using the wizard:
+
 ```bash
 mplx bg nft create --wizard
 ```
 
-2. Create with specific tree using wizard:
+1. Create with specific tree using wizard:
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
-3. Create with existing metadata URI:
+1. Create with existing metadata URI:
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 ```
 
-4. Create with local files:
+1. Create with local files:
+
 ```bash
 mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
 ```
 
-5. Create with metadata flags:
+1. Create with metadata flags:
+
 ```bash
 mplx bg nft create my-tree \
   --name "Cool NFT #1" \
@@ -93,7 +102,8 @@ mplx bg nft create my-tree \
   --royalties 5
 ```
 
-6. Create in a collection:
+1. Create in a collection:
+
 ```bash
 mplx bg nft create my-tree \
   --name "Collection Item #1" \
@@ -103,7 +113,7 @@ mplx bg nft create my-tree \
 
 ## Output
 
-```
+```text
 Uploading image... ✓
 Uploading metadata... ✓
 Creating compressed NFT... ✓

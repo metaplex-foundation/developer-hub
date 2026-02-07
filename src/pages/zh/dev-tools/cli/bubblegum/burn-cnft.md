@@ -30,18 +30,20 @@ mplx bg nft burn <assetId>
 ## 示例
 
 1. 销毁压缩 NFT：
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere
 ```
 
-2. 以 JSON 输出销毁：
+1. 以 JSON 输出销毁：
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere --json
 ```
 
 ## 输出
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Burning compressed NFT... ✓

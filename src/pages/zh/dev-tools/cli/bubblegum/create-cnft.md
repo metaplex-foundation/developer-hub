@@ -9,21 +9,25 @@ description: 在默克尔树中铸造压缩 NFT
 ## 基本用法
 
 ### 交互式向导（推荐）
+
 ```bash
 mplx bg nft create --wizard
 ```
 
 ### 指定特定树
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
 ### 基于文件创建
+
 ```bash
 mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
 ```
 
 ### 基于 URI 创建
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.json"
 ```
@@ -64,26 +68,31 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 ## 示例
 
 1. 使用向导创建：
+
 ```bash
 mplx bg nft create --wizard
 ```
 
-2. 使用向导指定特定树创建：
+1. 使用向导指定特定树创建：
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```
 
-3. 使用现有元数据 URI 创建：
+1. 使用现有元数据 URI 创建：
+
 ```bash
 mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 ```
 
-4. 使用本地文件创建：
+1. 使用本地文件创建：
+
 ```bash
 mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
 ```
 
-5. 使用元数据标志创建：
+1. 使用元数据标志创建：
+
 ```bash
 mplx bg nft create my-tree \
   --name "Cool NFT #1" \
@@ -93,7 +102,8 @@ mplx bg nft create my-tree \
   --royalties 5
 ```
 
-6. 在集合中创建：
+1. 在集合中创建：
+
 ```bash
 mplx bg nft create my-tree \
   --name "Collection Item #1" \
@@ -103,7 +113,7 @@ mplx bg nft create my-tree \
 
 ## 输出
 
-```
+```text
 Uploading image... ✓
 Uploading metadata... ✓
 Creating compressed NFT... ✓

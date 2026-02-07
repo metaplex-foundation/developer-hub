@@ -13,11 +13,13 @@ mplx bg nft fetch <assetId>
 ```
 
 ### Download to Files
+
 ```bash
 mplx bg nft fetch <assetId> --download --output ./nfts
 ```
 
 ### Fetch Proof Only
+
 ```bash
 mplx bg nft fetch <assetId> --proof-only
 ```
@@ -47,33 +49,38 @@ mplx bg nft fetch <assetId> --proof-only
 ## Examples
 
 1. Fetch and display NFT information:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere
 ```
 
-2. Download asset data to files:
+1. Download asset data to files:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download
 ```
 
-3. Download to specific directory:
+1. Download to specific directory:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download --output ./nft-data
 ```
 
-4. Fetch only the merkle proof:
+1. Fetch only the merkle proof:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --proof-only
 ```
 
-5. Output as JSON:
+1. Output as JSON:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --json
 ```
 
 ## Output
 
-```
+```text
 --------------------------------
 Compressed NFT Details
 

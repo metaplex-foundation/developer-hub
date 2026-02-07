@@ -13,11 +13,13 @@ description: 圧縮NFT用のマークルツリーを作成する
 ## 基本的な使い方
 
 ### インタラクティブウィザード（推奨）
+
 ```bash
 mplx bg tree create --wizard
 ```
 
 ### 直接作成
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "my-tree"
 ```
@@ -57,23 +59,26 @@ CLIは、異なるコレクションサイズに最適化された推奨設定�
 ## 例
 
 1. ウィザードを使用してツリーを作成：
-```bash
-mplx bg tree create --wizard
-```
 
-2. テスト用の小さなツリーを作成：
-```bash
-mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "test-tree"
-```
+   ```bash
+   mplx bg tree create --wizard
+   ```
 
-3. パブリックツリーを作成（誰でもミント可能）：
-```bash
-mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --public --name "public-tree"
-```
+1. テスト用の小さなツリーを作成：
+
+   ```bash
+   mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "test-tree"
+   ```
+
+1. パブリックツリーを作成（誰でもミント可能）：
+
+   ```bash
+   mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --public --name "public-tree"
+   ```
 
 ## 出力
 
-```
+```text
 --------------------------------
 Tree Created Successfully!
 

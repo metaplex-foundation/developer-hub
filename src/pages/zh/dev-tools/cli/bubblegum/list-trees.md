@@ -13,6 +13,7 @@ mplx bg tree list
 ```
 
 ### 按网络筛选
+
 ```bash
 mplx bg tree list --network devnet
 ```
@@ -33,23 +34,26 @@ mplx bg tree list --network devnet
 ## 示例
 
 1. 列出所有树：
+
 ```bash
 mplx bg tree list
 ```
 
-2. 仅列出 devnet 树：
+1. 仅列出 devnet 树：
+
 ```bash
 mplx bg tree list --network devnet
 ```
 
-3. 仅列出 mainnet 树：
+1. 仅列出 mainnet 树：
+
 ```bash
 mplx bg tree list --network mainnet
 ```
 
 ## 输出
 
-```
+```text
 Saved Trees:
 ┌─────────┬────────────────────────────────────────────┬─────────┬───────────┬────────┬────────────┐
 │ Name    │ Address                                    │ Network │ Max NFTs  │ Public │ Created    │

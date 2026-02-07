@@ -13,11 +13,13 @@ description: 为压缩 NFT 创建默克尔树
 ## 基本用法
 
 ### 交互式向导（推荐）
+
 ```bash
 mplx bg tree create --wizard
 ```
 
 ### 直接创建
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "my-tree"
 ```
@@ -57,23 +59,26 @@ CLI 提供针对不同集合大小优化的推荐配置：
 ## 示例
 
 1. 使用向导创建树：
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-2. 创建用于测试的小树：
+1. 创建用于测试的小树：
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "test-tree"
 ```
 
-3. 创建公开树（任何人都可以铸造）：
+1. 创建公开树（任何人都可以铸造）：
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --public --name "public-tree"
 ```
 
 ## 输出
 
-```
+```text
 --------------------------------
 Tree Created Successfully!
 

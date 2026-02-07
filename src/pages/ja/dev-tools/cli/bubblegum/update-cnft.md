@@ -9,16 +9,19 @@ description: 圧縮NFTのメタデータを更新する
 ## 基本的な使い方
 
 ### 個別フィールドの更新
+
 ```bash
 mplx bg nft update <assetId> --name "New Name"
 ```
 
 ### 複数フィールドの更新
+
 ```bash
 mplx bg nft update <assetId> --name "New Name" --description "New Description" --image ./new-image.png
 ```
 
 ### インタラクティブエディタ
+
 ```bash
 mplx bg nft update <assetId> --editor
 ```
@@ -52,37 +55,42 @@ mplx bg nft update <assetId> --editor
 ## 例
 
 1. 名前を更新：
-```bash
-mplx bg nft update CNFTAssetIdHere --name "Updated NFT Name"
-```
 
-2. 名前と説明を更新：
-```bash
-mplx bg nft update CNFTAssetIdHere \
-  --name "New Name" \
-  --description "このNFTは更新されました"
-```
+   ```bash
+   mplx bg nft update CNFTAssetIdHere --name "Updated NFT Name"
+   ```
 
-3. 新しい画像で更新：
-```bash
-mplx bg nft update CNFTAssetIdHere \
-  --name "Refreshed NFT" \
-  --image ./new-artwork.png
-```
+1. 名前と説明を更新：
 
-4. メタデータURI全体を置換：
-```bash
-mplx bg nft update CNFTAssetIdHere --uri "https://arweave.net/xxx"
-```
+   ```bash
+   mplx bg nft update CNFTAssetIdHere \
+     --name "New Name" \
+     --description "このNFTは更新されました"
+   ```
 
-5. インタラクティブエディタを使用：
-```bash
-mplx bg nft update CNFTAssetIdHere --editor
-```
+1. 新しい画像で更新：
+
+   ```bash
+   mplx bg nft update CNFTAssetIdHere \
+     --name "Refreshed NFT" \
+     --image ./new-artwork.png
+   ```
+
+1. メタデータURI全体を置換：
+
+   ```bash
+   mplx bg nft update CNFTAssetIdHere --uri "https://arweave.net/xxx"
+   ```
+
+1. インタラクティブエディタを使用：
+
+   ```bash
+   mplx bg nft update CNFTAssetIdHere --editor
+   ```
 
 ## 出力
 
-```
+```text
 --------------------------------
 
   Compressed NFT Update

@@ -57,21 +57,25 @@ mplx bg <resource> <command> [options]
 ## 빠른 시작
 
 1. DAS 지원 RPC 구성:
+
 ```bash
 mplx config rpcs add <name> <url>
 ```
 
-2. 머클 트리 생성:
+1. 머클 트리 생성:
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-3. 컬렉션 생성 (선택 사항이지만 권장):
+1. 컬렉션 생성 (선택 사항이지만 권장):
+
 ```bash
 mplx core collection create --wizard
 ```
 
-4. 압축 NFT 민트:
+1. 압축 NFT 민트:
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```

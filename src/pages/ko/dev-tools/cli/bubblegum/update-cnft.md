@@ -9,16 +9,19 @@ description: 압축 NFT의 메타데이터 업데이트
 ## 기본 사용법
 
 ### 개별 필드 업데이트
+
 ```bash
 mplx bg nft update <assetId> --name "New Name"
 ```
 
 ### 여러 필드 업데이트
+
 ```bash
 mplx bg nft update <assetId> --name "New Name" --description "New Description" --image ./new-image.png
 ```
 
 ### 대화형 편집기
+
 ```bash
 mplx bg nft update <assetId> --editor
 ```
@@ -52,37 +55,42 @@ mplx bg nft update <assetId> --editor
 ## 예시
 
 1. 이름 업데이트:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --name "Updated NFT Name"
 ```
 
-2. 이름과 설명 업데이트:
+1. 이름과 설명 업데이트:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "New Name" \
   --description "이 NFT가 업데이트되었습니다"
 ```
 
-3. 새 이미지로 업데이트:
+1. 새 이미지로 업데이트:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "Refreshed NFT" \
   --image ./new-artwork.png
 ```
 
-4. 전체 메타데이터 URI 교체:
+1. 전체 메타데이터 URI 교체:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --uri "https://arweave.net/xxx"
 ```
 
-5. 대화형 편집기 사용:
+1. 대화형 편집기 사용:
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --editor
 ```
 
 ## 출력
 
-```
+```text
 --------------------------------
 
   Compressed NFT Update

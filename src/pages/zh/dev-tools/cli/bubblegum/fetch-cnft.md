@@ -13,11 +13,13 @@ mplx bg nft fetch <assetId>
 ```
 
 ### 下载到文件
+
 ```bash
 mplx bg nft fetch <assetId> --download --output ./nfts
 ```
 
 ### 仅获取证明
+
 ```bash
 mplx bg nft fetch <assetId> --proof-only
 ```
@@ -47,33 +49,38 @@ mplx bg nft fetch <assetId> --proof-only
 ## 示例
 
 1. 获取并显示 NFT 信息：
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere
 ```
 
-2. 将资产数据下载到文件：
+1. 将资产数据下载到文件：
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download
 ```
 
-3. 下载到指定目录：
+1. 下载到指定目录：
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download --output ./nft-data
 ```
 
-4. 仅获取默克尔证明：
+1. 仅获取默克尔证明：
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --proof-only
 ```
 
-5. 以 JSON 格式输出：
+1. 以 JSON 格式输出：
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --json
 ```
 
 ## 输出
 
-```
+```text
 --------------------------------
 Compressed NFT Details
 

@@ -57,21 +57,25 @@ mplx bg <resource> <command> [options]
 ## 快速开始
 
 1. 配置支持 DAS 的 RPC：
+
 ```bash
 mplx config rpcs add <name> <url>
 ```
 
-2. 创建默克尔树：
+1. 创建默克尔树：
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-3. 创建集合（可选但推荐）：
+1. 创建集合（可选但推荐）：
+
 ```bash
 mplx core collection create --wizard
 ```
 
-4. 铸造压缩 NFT：
+1. 铸造压缩 NFT：
+
 ```bash
 mplx bg nft create my-tree --wizard
 ```

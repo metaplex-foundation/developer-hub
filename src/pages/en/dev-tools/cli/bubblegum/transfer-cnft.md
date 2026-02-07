@@ -31,6 +31,7 @@ mplx bg nft transfer <assetId> <newOwner>
 ## Example
 
 Transfer to a new owner:
+
 ```bash
 mplx bg nft transfer CNFTAssetIdHere RecipientWalletAddressHere
 ```
@@ -38,7 +39,7 @@ mplx bg nft transfer CNFTAssetIdHere RecipientWalletAddressHere
 
 ## Output
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Executing transfer... ✓

@@ -38,7 +38,7 @@ mplx bg nft transfer CNFTAssetIdHere RecipientWalletAddressHere
 
 ## 输出
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Executing transfer... ✓

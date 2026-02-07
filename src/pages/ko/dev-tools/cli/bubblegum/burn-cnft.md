@@ -30,18 +30,20 @@ mplx bg nft burn <assetId>
 ## 예시
 
 1. 압축 NFT 소각:
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere
 ```
 
-2. JSON 출력으로 소각:
+1. JSON 출력으로 소각:
+
 ```bash
 mplx bg nft burn CNFTAssetIdHere --json
 ```
 
 ## 출력
 
-```
+```text
 Fetching asset and proof data... ✓
 Verifying ownership... ✓
 Burning compressed NFT... ✓

@@ -9,16 +9,19 @@ description: 更新压缩 NFT 的元数据
 ## 基本用法
 
 ### 更新单个字段
+
 ```bash
 mplx bg nft update <assetId> --name "New Name"
 ```
 
 ### 更新多个字段
+
 ```bash
 mplx bg nft update <assetId> --name "New Name" --description "New Description" --image ./new-image.png
 ```
 
 ### 交互式编辑器
+
 ```bash
 mplx bg nft update <assetId> --editor
 ```
@@ -52,37 +55,42 @@ mplx bg nft update <assetId> --editor
 ## 示例
 
 1. 更新名称：
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --name "Updated NFT Name"
 ```
 
-2. 更新名称和描述：
+1. 更新名称和描述：
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "New Name" \
   --description "此 NFT 已更新"
 ```
 
-3. 使用新图片更新：
+1. 使用新图片更新：
+
 ```bash
 mplx bg nft update CNFTAssetIdHere \
   --name "Refreshed NFT" \
   --image ./new-artwork.png
 ```
 
-4. 替换整个元数据 URI：
+1. 替换整个元数据 URI：
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --uri "https://arweave.net/xxx"
 ```
 
-5. 使用交互式编辑器：
+1. 使用交互式编辑器：
+
 ```bash
 mplx bg nft update CNFTAssetIdHere --editor
 ```
 
 ## 输出
 
-```
+```text
 --------------------------------
 
   Compressed NFT Update

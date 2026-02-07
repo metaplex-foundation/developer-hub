@@ -13,6 +13,7 @@ mplx bg tree list
 ```
 
 ### 네트워크로 필터링
+
 ```bash
 mplx bg tree list --network devnet
 ```
@@ -33,23 +34,26 @@ mplx bg tree list --network devnet
 ## 예시
 
 1. 모든 트리 나열:
+
 ```bash
 mplx bg tree list
 ```
 
-2. devnet 트리만 나열:
+1. devnet 트리만 나열:
+
 ```bash
 mplx bg tree list --network devnet
 ```
 
-3. mainnet 트리만 나열:
+1. mainnet 트리만 나열:
+
 ```bash
 mplx bg tree list --network mainnet
 ```
 
 ## 출력
 
-```
+```text
 Saved Trees:
 ┌─────────┬────────────────────────────────────────────┬─────────┬───────────┬────────┬────────────┐
 │ Name    │ Address                                    │ Network │ Max NFTs  │ Public │ Created    │

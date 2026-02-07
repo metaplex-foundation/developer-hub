@@ -57,24 +57,28 @@ mplx bg <resource> <command> [options]
 ## クイックスタート
 
 1. DAS対応RPCを設定：
-```bash
-mplx config rpcs add <name> <url>
-```
 
-2. マークルツリーを作成：
-```bash
-mplx bg tree create --wizard
-```
+   ```bash
+   mplx config rpcs add <name> <url>
+   ```
 
-3. コレクションを作成（オプションですが推奨）：
-```bash
-mplx core collection create --wizard
-```
+1. マークルツリーを作成：
 
-4. 圧縮NFTをミント：
-```bash
-mplx bg nft create my-tree --wizard
-```
+   ```bash
+   mplx bg tree create --wizard
+   ```
+
+1. コレクションを作成（オプションですが推奨）：
+
+   ```bash
+   mplx core collection create --wizard
+   ```
+
+1. 圧縮NFTをミント：
+
+   ```bash
+   mplx bg nft create my-tree --wizard
+   ```
 
 ## 権限モデル
 

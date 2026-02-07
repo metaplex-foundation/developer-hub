@@ -13,6 +13,7 @@ mplx bg tree list
 ```
 
 ### ネットワークでフィルター
+
 ```bash
 mplx bg tree list --network devnet
 ```
@@ -33,23 +34,26 @@ mplx bg tree list --network devnet
 ## 例
 
 1. すべてのツリーを一覧表示：
-```bash
-mplx bg tree list
-```
 
-2. devnetのツリーのみを一覧表示：
-```bash
-mplx bg tree list --network devnet
-```
+   ```bash
+   mplx bg tree list
+   ```
 
-3. mainnetのツリーのみを一覧表示：
-```bash
-mplx bg tree list --network mainnet
-```
+1. devnetのツリーのみを一覧表示：
+
+   ```bash
+   mplx bg tree list --network devnet
+   ```
+
+1. mainnetのツリーのみを一覧表示：
+
+   ```bash
+   mplx bg tree list --network mainnet
+   ```
 
 ## 出力
 
-```
+```text
 Saved Trees:
 ┌─────────┬────────────────────────────────────────────┬─────────┬───────────┬────────┬────────────┐
 │ Name    │ Address                                    │ Network │ Max NFTs  │ Public │ Created    │

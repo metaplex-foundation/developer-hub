@@ -13,11 +13,13 @@ This creates a **Bubblegum V2** tree. V2 trees are not compatible with V1 and us
 ## Basic Usage
 
 ### Interactive Wizard (Recommended)
+
 ```bash
 mplx bg tree create --wizard
 ```
 
 ### Direct Creation
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "my-tree"
 ```
@@ -57,23 +59,26 @@ The CLI provides recommended configurations optimized for different collection s
 ## Examples
 
 1. Create a tree using the wizard:
+
 ```bash
 mplx bg tree create --wizard
 ```
 
-2. Create a small tree for testing:
+1. Create a small tree for testing:
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --name "test-tree"
 ```
 
-3. Create a public tree (anyone can mint):
+1. Create a public tree (anyone can mint):
+
 ```bash
 mplx bg tree create --maxDepth 14 --maxBufferSize 64 --canopyDepth 8 --public --name "public-tree"
 ```
 
 ## Output
 
-```
+```text
 --------------------------------
 Tree Created Successfully!
 

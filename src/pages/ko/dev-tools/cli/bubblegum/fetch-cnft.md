@@ -13,11 +13,13 @@ mplx bg nft fetch <assetId>
 ```
 
 ### 파일로 다운로드
+
 ```bash
 mplx bg nft fetch <assetId> --download --output ./nfts
 ```
 
 ### 증명만 조회
+
 ```bash
 mplx bg nft fetch <assetId> --proof-only
 ```
@@ -47,33 +49,38 @@ mplx bg nft fetch <assetId> --proof-only
 ## 예시
 
 1. NFT 정보 조회 및 표시:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere
 ```
 
-2. 자산 데이터를 파일로 다운로드:
+1. 자산 데이터를 파일로 다운로드:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download
 ```
 
-3. 특정 디렉토리에 다운로드:
+1. 특정 디렉토리에 다운로드:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --download --output ./nft-data
 ```
 
-4. 머클 증명만 조회:
+1. 머클 증명만 조회:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --proof-only
 ```
 
-5. JSON 형식으로 출력:
+1. JSON 형식으로 출력:
+
 ```bash
 mplx bg nft fetch CNFTAssetIdHere --json
 ```
 
 ## 출력
 
-```
+```text
 --------------------------------
 Compressed NFT Details
 
