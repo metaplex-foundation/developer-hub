@@ -114,7 +114,7 @@ println!("Signature: {:?}", res)
 
 これはMetaplex Coreプログラムのerrorｓ.rsページの例です。
 
-[https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
+[Core Program Error Codes](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
 失敗したトランザクションからエラーコード20を受信していた場合、これは以下に変換されることがわかります：
 
@@ -130,7 +130,7 @@ println!("Signature: {:?}", res)
 
 Mpl Core Candy Machineプログラムを例にすると、これはAnchorプログラムなので、エラーコードは6xxxから始まります。
 
-[https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
+[Core Candy Machine Error Codes](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
 トランザクションが`6006`のエラーを返している場合、数字の末尾（この場合は`6`）を取り、インデックス0から開始してerrors.rsリストを下っていけます。
 

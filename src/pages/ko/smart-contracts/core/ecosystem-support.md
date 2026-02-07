@@ -15,7 +15,7 @@ about:
 proficiencyLevel: Beginner
 ---
 아래 표에는 생태계 전반의 주요 마켓플레이스, 지갑, 익스플로러, RPC 제공업체 및 기타 dApp의 Core 통합 상태가 포함되어 있습니다.
-Metaplex는 또한 [https://core.metaplex.com/](https://core.metaplex.com/)에서 Core 디지털 자산을 생성, 전송 및 조회할 수 있는 무료 오픈 소스 UI를 제공합니다.
+Metaplex는 또한 [core.metaplex.com](https://core.metaplex.com/)에서 Core 디지털 자산을 생성, 전송 및 조회할 수 있는 무료 오픈 소스 UI를 제공합니다.
 ## 마켓플레이스
 | 프로젝트                                  | 상태     |
 | ----------------------------------------- | -------- |

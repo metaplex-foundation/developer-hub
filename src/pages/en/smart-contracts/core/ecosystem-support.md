@@ -15,7 +15,7 @@ about:
 proficiencyLevel: Beginner
 ---
 The table below includes the Core integration status of many of the major marketplaces, wallets, explorers, RPC providers, and other dapps across the ecosystem.
-Metaplex also offers a free, open-source UI for creating, transferring and viewing Core digital assets at [https://core.metaplex.com/](https://core.metaplex.com/).
+Metaplex also offers a free, open-source UI for creating, transferring and viewing Core digital assets at [core.metaplex.com](https://core.metaplex.com/).
 ## Marketplaces
 | Project                                   | Status   |
 | ----------------------------------------- | -------- |

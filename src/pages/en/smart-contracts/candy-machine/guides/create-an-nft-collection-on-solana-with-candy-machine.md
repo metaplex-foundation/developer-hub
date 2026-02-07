@@ -97,7 +97,7 @@ assets/
 
 If you wish to use example images and metadata to create your Candy Machine you can download them from our github here in zip format by clicking the green `code` button and selecting the `zip format.
 
-[https://github.com/metaplex-foundation/example-candy-machine-assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
+[Example Candy Machine Assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
 
 Alternatively if you have git installed you can clone the assets to your system or download a zipped copy from the link provided
 
@@ -322,8 +322,8 @@ You can either generate your own UI and use the `umi` client wrapper and `mpl-ca
 ### Developing a UI Resources
 
 - nextJS/React recommended
-- Metaplex Umi - [https://developers.metaplex.com/umi](https://developers.metaplex.com/umi)
-- Metaplex Candy Machine SDK - [https://developers.metaplex.com/candy-machine](https://developers.metaplex.com/candy-machine)
+- [Metaplex Umi](/umi)
+- [Metaplex Candy Machine SDK](/candy-machine)
 
 ### Further Reading
 - [Sugar CLI Docs](/smart-contracts/candy-machine/sugar)

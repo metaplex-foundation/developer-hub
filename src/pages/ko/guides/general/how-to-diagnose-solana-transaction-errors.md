@@ -114,7 +114,7 @@ println!("Signature: {:?}", res)
 
 다음은 Metaplex Core 프로그램의 error.rs 페이지 예시입니다.
 
-[https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
+[Core Program Error Codes](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
 보시다시피 실패한 트랜잭션에서 20의 오류 코드를 받는다면 이는 다음과 같이 번역됩니다:
 
@@ -130,7 +130,7 @@ println!("Signature: {:?}", res)
 
 Mpl Core Candy Machine 프로그램을 예로 들면, 이는 Anchor 프로그램이므로 오류 코드가 6xxx에서 시작됩니다.
 
-[https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
+[Core Candy Machine Error Codes](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
 트랜잭션이 `6006` 오류를 반환하는 경우 숫자의 끝, 이 경우 `6`을 가져와서 인덱스 0부터 시작하여 error.rs 목록을 찾을 수 있습니다.
 

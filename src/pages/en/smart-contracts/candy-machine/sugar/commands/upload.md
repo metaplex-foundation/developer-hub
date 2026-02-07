@@ -28,7 +28,7 @@ The `upload` command can be resumed (re-run) at any point in case the upload is 
 
 To access example images and metadata for your Candy Machine, visit our GitHub repository and download the zip file by clicking the green `code` button and selecting `Download ZIP`.
 
-[https://github.com/metaplex-foundation/example-candy-machine-assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
+[Example Candy Machine Assets](https://github.com/metaplex-foundation/example-candy-machine-assets)
 
 If you have Git installed, you can also clone the repository to your system or download a zip copy using the following command:
 

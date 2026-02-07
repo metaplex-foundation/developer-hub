@@ -336,7 +336,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 结合[Inscription网关](https://github.com/metaplex-foundation/inscription-gateway)，您可以使用正常的Token Metadata标准，只需将URI指向网关，网关再直接从链上读取您的数据，而无需所有工具（如钱包和浏览器）以不同于通常读取NFT的方式读取数据。
 
-您可以使用Metaplex托管的网关，URL结构如下：`https://igw.metaplex.com/<network>/<account>`，例如[https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF)，或者使用自定义URL自行托管网关。
+您可以使用Metaplex托管的网关，URL结构如下：`https://igw.metaplex.com/<network>/<account>`，例如[view this example on the Inscription Gateway](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF)，或者使用自定义URL自行托管网关。
 
 ## Inscription排名
 

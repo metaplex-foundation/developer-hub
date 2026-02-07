@@ -15,7 +15,7 @@ about:
 proficiencyLevel: Beginner
 ---
 下表包含了整个生态系统中许多主要市场、钱包、浏览器、RPC提供商和其他dApp的Core集成状态。
-Metaplex还在[https://core.metaplex.com/](https://core.metaplex.com/)提供了一个免费的开源UI，用于创建、转移和查看Core数字资产。
+Metaplex还在[core.metaplex.com](https://core.metaplex.com/)提供了一个免费的开源UI，用于创建、转移和查看Core数字资产。
 ## 市场
 | 项目                                      | 状态     |
 | ----------------------------------------- | -------- |
