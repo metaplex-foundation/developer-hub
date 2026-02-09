@@ -716,7 +716,6 @@ await mintV1(umi, {
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
-
 ## 高度なミントテクニック
 
 これまでに説明した基本的なミント関数はほとんどのケースでうまく機能しますが、ミントプロセスを強化するために使用できる高度なテクニックがいくつかあります。これらのいくつかを探ってみましょう:
@@ -769,7 +768,6 @@ await mintV1(umi, {
 
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
-
 
 ## 次のステップ
 

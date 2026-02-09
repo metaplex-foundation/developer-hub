@@ -28,7 +28,6 @@ await writeData(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 大きなデータの場合は、まず必要なスペースを`allocate`し、そのトランザクションがファイナライズされるまで待ってから`writeData`することをお勧めします。以下の例は、関連Inscriptionアカウントにデータを割り当てます：
 
 {% dialect-switcher title="スペースの割り当て" %}

@@ -12,7 +12,6 @@ Metaplex协议的**Candy Machine**是Solana上用于公平NFT集合发布的领�
 
 {% quick-links %}
 
-
 {% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/candy-machine/getting-started" description="找到您选择的语言或库,开始使用Candy Machine。" /%}
 {% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容?我们为您提供。" /%}
 {% /quick-links %}

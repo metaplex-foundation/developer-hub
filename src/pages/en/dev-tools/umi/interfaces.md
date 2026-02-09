@@ -60,5 +60,3 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(awsUploader(...))
   .use(myProgramRepository());
 ```
-
-

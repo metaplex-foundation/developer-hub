@@ -85,7 +85,7 @@ const inscription = fetchInscription(umi, inscriptionAddress)
 
 ## Fetch current Inscription count
 The current total inscription count can be fetched like so:
- 
+
 {% dialect-switcher title="Fetch current Inscription count" %}
 {% dialect title="JavaScript" id="js" %}
 {% totem %}

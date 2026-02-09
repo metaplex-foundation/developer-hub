@@ -74,7 +74,6 @@ Token MetadataはNFTとpNFTの作成と管理を扱うMetaplexプログラムで
 - デリゲーション
 - コレクション管理
 
-
 ## [Toolbox](/ja/dev-tools/umi/toolbox)
 
 Mpl Toolboxには、分散アプリケーションを立ち上げて実行するために必要なSolanaとMetaplexプログラムが多数含まれています。

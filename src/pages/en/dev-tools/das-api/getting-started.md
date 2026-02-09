@@ -49,4 +49,4 @@ Then import that package
 import { das } from '@metaplex-foundation/mpl-core-das';
 ```
 
-After this you can either use the Core specific functions like mentioned above. 
+After this you can either use the Core specific functions like mentioned above.

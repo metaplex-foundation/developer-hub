@@ -34,7 +34,7 @@ Therefore, splitting the data into onchain and off-chain data allows users to ge
 ## Are there any costs to using Core?
 Core currently charges a very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
 ## How to create a Soulbound Asset?
-The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) can be used. 
+The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) can be used.
 To learn more check out the [Soulbound Assets Guide](/smart-contracts/core/guides/create-soulbound-nft-asset)!
 ## How to set an Asset to be Immutable?
 There are multiple levels of "immutability" in Core. You can find more information and how to implement it in [this guide](/smart-contracts/core/guides/immutability).

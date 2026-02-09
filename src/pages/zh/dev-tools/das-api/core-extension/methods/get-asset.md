@@ -23,7 +23,6 @@ const asset = await das.getAsset(umi, assetId);
 console.log(asset);
 ```
 
-
 ## 示例响应
 
 ```json

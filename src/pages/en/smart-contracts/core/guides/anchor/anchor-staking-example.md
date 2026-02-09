@@ -48,7 +48,7 @@ This plugin allows for **data storage directly on the assets, functioning as on-
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 _Learn more about it [here](/smart-contracts/core/plugins/attribute)_
 ### The Smart Contract Logic
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since these are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
+For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since these are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement.
 _Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
 Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
 **Instructions**:
@@ -57,7 +57,7 @@ Before diving into the instructions, let’s spend some time talking about the a
 ## Building the Smart Contract: A Step-by-Step Guide
 Now that we understand the logic behind our smart contract, **it’s time to dive into the code and bring everything together**!
 ### Dependencies and Imports
-Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works! 
+Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works!
 In this example, we primarily use the mpl_core crate with the [anchor](/smart-contracts/core/using-core-in-anchor) feature enabled:
 ```toml
 mpl-core = { version = "x.x.x", features = ["anchor"] } 
@@ -109,9 +109,9 @@ As constraints we checked:
 - The `owner` of the asset is the same as the `owner` in the accounts struct.
 - The `update_authority` of the asset is a Collection and the addess of that collection is the same as the `collection` in the account struct
 - The `update_authority` of the collection is the same as the `update_authority` in the account struct, since this is going to be the `update_authority` over the asset
-- The `core_program` is the same as `ID` (That I renamed as `CORE_PROGRAM_ID`) present in the `mpl_core` crate 
+- The `core_program` is the same as `ID` (That I renamed as `CORE_PROGRAM_ID`) present in the `mpl_core` crate
 ### The Staking Instruction
-We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets. 
+We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets.
 ```rust
 match fetch_plugin::<BaseAssetV1, Attributes>(
     &ctx.accounts.asset.to_account_info(), 
@@ -151,7 +151,7 @@ Err(_) => {
 }
 ```
 2. **Check for Staking Attributes**:
-If the asset already has the attribute plugin, ensure it contains the staking attributes necessary for the staking instruction. 
+If the asset already has the attribute plugin, ensure it contains the staking attributes necessary for the staking instruction.
 If it does, check if the asset is already staked and update the `staked` key with the current timeStamp as string:
 ```rust
 Ok((_, fetched_attribute_list, _)) => {
@@ -290,8 +290,8 @@ pub fn stake(ctx: Context<Stake>) -> Result<()> {
 }
 ```
 ### The Unstaking Instruction
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
-We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets. 
+The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself.
+We begin by using the `fetch_plugin` function from the mpl-core crate to retrieve information about the attribute plugin of the assets.
 ```rust
 match fetch_plugin::<BaseAssetV1, Attributes>(&ctx.accounts.asset.to_account_info(), mpl_core::types::PluginType::Attributes)
 ```

@@ -18,7 +18,6 @@ npm i @metaplex-foundation/umi-kit-adapters
 
 インストール後、変換関数が利用可能になります：
 
-
 ## アドレス
 
 UmiとLangchain`@solana/kit`の両方がアドレスにbase58文字列を使用しているため、変換は簡単です。

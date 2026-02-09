@@ -43,7 +43,7 @@ By default sugar will use the default cache file `cache.json`. You can also over
 sugar mint --cache <CACHE>
 ```
 
-You can also tell sugar to use a specific candy machine with `--candy-machine`: 
+You can also tell sugar to use a specific candy machine with `--candy-machine`:
 
 ```
 sugar mint --candy-machine <CANDY_MACHINE>

@@ -71,7 +71,6 @@ Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## ガード設定
@@ -94,7 +93,6 @@ create(umi, {
 ```
 
 API リファレンス: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/functions/create.html), [AddressGate](https://mpl-core-candy-machine.typedoc.metaplex.com/types/AddressGate.html)
-
 
 {% /totem %}
 {% /dialect %}

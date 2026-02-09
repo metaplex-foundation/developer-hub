@@ -90,7 +90,6 @@ Core Candy Machine 端没有太多需要设置的内容，但根据选择的 Gat
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
 ## 守卫设置
 

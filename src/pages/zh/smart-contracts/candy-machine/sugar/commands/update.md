@@ -9,7 +9,6 @@ description: update 命令。
 - Candy Machine 中的项目数量只能在使用 `hiddenSettings` 时更新；
 - 切换到使用 `hiddenSettings` 只有在项目数量等于 0 时才可能。切换后，您将能够更新项目数量。
 
-
 要更新配置，请修改您的 config.json（或等效文件）文件并执行：
 
 ```

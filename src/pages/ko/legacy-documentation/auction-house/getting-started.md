@@ -46,7 +46,6 @@ metaplex.auctionHouse().findPurchasesBy();
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 Auction House 모듈에 이미 존재하는 다른 메서드도 있으며 향후 더 많은 메서드가 추가될 것입니다. Auction House 모듈의 *README*는 곧 이러한 모든 메서드에 대한 자세한 문서로 업데이트될 것입니다.
 
 **유용한 링크:**

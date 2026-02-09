@@ -35,7 +35,6 @@ const auctionHouseSettings = await metaplex
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Auction Houseアカウント
 
 Auction Houseインスタンスを作成したので、その中にどのようなデータが保存されているかを見てみましょう。

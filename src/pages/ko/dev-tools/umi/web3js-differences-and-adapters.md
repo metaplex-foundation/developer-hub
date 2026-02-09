@@ -297,7 +297,6 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
 ## 메시지
 
 버전 트랜잭션 생성 중에 메시지 생성을 이미 다뤘습니다. 다시 검토해보겠습니다.

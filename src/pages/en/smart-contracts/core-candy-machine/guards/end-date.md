@@ -37,8 +37,8 @@ The **End Date** guard specifies a date to end the mint. After this date, mintin
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -91,7 +91,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add this object into the guard section your config.json file:
 
 ```json
 "endDate" : {

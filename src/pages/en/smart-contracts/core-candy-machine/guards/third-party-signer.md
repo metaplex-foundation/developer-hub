@@ -52,8 +52,8 @@ Owner: Any Program {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -126,7 +126,7 @@ create(umi, {
 });
 ```
 
-Remember to also sign the transaction with the myConfiguredSigner keypair. 
+Remember to also sign the transaction with the myConfiguredSigner keypair.
 
 {% /totem %}
 {% /dialect %}

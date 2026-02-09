@@ -29,7 +29,7 @@ npm i @ardrive/turbo-sdk
 
 ### Metadata Folder
 
-In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting. 
+In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting.
 
 To generate the metadata, you can use [one of these methods](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata following an incremental naming convention starting from 0 like this:
 
@@ -43,7 +43,7 @@ metadata/
 
 **Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)!
 
-## Setting up Turbo 
+## Setting up Turbo
 
 Since Turbo is compatible with multiple tokens and chains, we'll need to configure our Turbo instance to use Solana as the token for this guide. We do this by calling the `TurboFactory.authenticated()` method and passing in Solana-specific configuration options.
 
@@ -155,8 +155,7 @@ After ensuring the wallet has enough Winc, we can proceed with uploading the ima
 
 **Note**: It’s important to set the correct [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) for each file during the upload. If the MIME type is not set correctly, the file might not be displayed properly when accessed via the URI.
 
-
-```javascript 
+```javascript
 // Upload image folder
 const metadataUploadResponse = await turbo.uploadFolder({
     folderPath: metadataFolderPath,

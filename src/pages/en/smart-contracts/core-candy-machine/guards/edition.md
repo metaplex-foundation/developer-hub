@@ -6,7 +6,7 @@ description: "The Core Candy Machine 'Edition' guard allows the minting of Editi
 
 ## Overview
 
-The **Edition** guard is a special kind of guard. It is not used to charge the buyer, or verify conditions that they are allowed to mint. Instead the Edition guard determines which edition number a created Asset should have. 
+The **Edition** guard is a special kind of guard. It is not used to charge the buyer, or verify conditions that they are allowed to mint. Instead the Edition guard determines which edition number a created Asset should have.
 
 {% diagram  %}
 
@@ -44,8 +44,8 @@ Edition Counter PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine_
   {% /node %}
 {% /node %}
@@ -60,7 +60,7 @@ Edition Counter PDA {% .whitespace-nowrap %}
 
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="editionCounterPda" to="mint-candy-guard" arrow="none" dashed=true %}
-Determine the 
+Determine the
 
 edition number
 {% /edge %}

@@ -35,7 +35,6 @@ const auctionHouseSettings = await metaplex
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Auction House 계정
 
 이제 Auction House 인스턴스를 만들었으므로 그 안에 저장된 데이터를 살펴보겠습니다.

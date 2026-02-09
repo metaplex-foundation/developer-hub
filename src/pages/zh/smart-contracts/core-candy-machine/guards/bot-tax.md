@@ -12,7 +12,6 @@ description: "Core Candy Machine 的 'Bot Tax' 守卫允许您设置可配置的
 请谨慎使用 Bot Tax 守卫。
 {% /callout %}
 
-
 ## 概述
 
 **Bot Tax** 守卫对无效交易收取惩罚费用，以阻止机器人尝试铸造 NFT。这个金额通常很小，足以伤害机器人而不影响真实用户的真正错误。所有机器人税将转移到 Candy Machine 账户，这样一旦铸造结束，您可以通过删除 Candy Machine 账户来访问这些资金。
@@ -82,7 +81,6 @@ description: "Core Candy Machine 的 'Bot Tax' 守卫允许您设置可配置的
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 

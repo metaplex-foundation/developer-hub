@@ -145,7 +145,6 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Freeze and thaw a cNFT](/smart-contracts/bubblegum-v2/freeze-cnfts).
 - [Make a cNFT soulbound](/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
 
-
 ## Next steps
 
 Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/smart-contracts/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/smart-contracts/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.

@@ -80,4 +80,4 @@ The command will output the following information upon successful creation:
 - Plugin configuration can be done either interactively or through a JSON file
 - The JSON metadata file must include a `name` field for the collection
 - The command will automatically handle file uploads and metadata creation when using the file-based or wizard methods
-- Collection metadata follows the standard NFT metadata format with additional collection-specific fields 
+- Collection metadata follows the standard NFT metadata format with additional collection-specific fields

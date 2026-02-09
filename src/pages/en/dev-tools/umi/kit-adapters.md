@@ -18,7 +18,6 @@ npm i @metaplex-foundation/umi-kit-adapters
 
 After installation, the conversion functions are available:
 
-
 ## Addresses
 
 Both Umi and `@solana/kit` use base58 strings for addresses, making conversion straightforward.

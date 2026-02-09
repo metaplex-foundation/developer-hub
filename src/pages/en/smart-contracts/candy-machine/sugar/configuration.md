@@ -91,7 +91,7 @@ Candy Machine settings determine the type of the asset, number of assets availab
 | isSequential |    | Boolean         | A boolean indicating whether a sequential index generation should be used during mint or not |
 | ruleSet  |        | Public Key | *(optional)* The rule set used by minted `pNFT`s |
 
-The `creators` setting allows you to specify up to 4 addresses and their percentage share. 
+The `creators` setting allows you to specify up to 4 addresses and their percentage share.
 
 | Setting | Options | Value/Type | Description               |
 | ------- | ------- | --------------- | ------------------------- |

@@ -62,8 +62,8 @@ Network e.g. Captcha
 
 {% node parent="mint-candy-guard" y="150" x="-30" %}
   {% node #mint-candy-machine theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Core Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -84,12 +84,11 @@ Network e.g. Captcha
 {% node theme="transparent" parent="mint-candy-guard" x="-210" %}
 if a valid token for the given
 
-Network and payer does not exist 
+Network and payer does not exist
 
 Minting will fail
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 ## Guard Settings

@@ -11,7 +11,7 @@ updated: '04-19-2025'
 
 A **Local Validator** acts as your personal node, providing a local sandbox environment for testing applications without the need to connect to a live blockchain network. It operates a **fully customizable local test ledger**, which is a simplified version of the Solana ledger, equipped with all **native programs pre-installed** and various features enabled.
 
-### Setup 
+### Setup
 
 To start using the local validator, you'll need to install the Solana Tools CLI using the appropriate commands for your operating system.
 
@@ -53,7 +53,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 const umi = createUmi("http://127.0.0.1:8899")
 ```
 
-The local validator will generate a directory named `test-ledger` in your user folder. This directory holds all data related to your validator, including accounts and programs. 
+The local validator will generate a directory named `test-ledger` in your user folder. This directory holds all data related to your validator, including accounts and programs.
 
 To reset your local validator, you can either delete the `test-ledger` folder or use a reset command to restart the validator.
 
@@ -99,10 +99,10 @@ There are two ways to do this:
 
 ### Creating a link to the transaction signature
 
-When you send a transaction with Umi, you'll receive two key pieces of information: a signature and a result. The signature is in base58 format, so you'll need to deserialize it to make it readable for the blockchain. 
+When you send a transaction with Umi, you'll receive two key pieces of information: a signature and a result. The signature is in base58 format, so you'll need to deserialize it to make it readable for the blockchain.
 
 You can do this with the following code:
-```typescript 
+```typescript
 const signature = base58.deserialize(transaction.signature)[0]
 ```
 
@@ -132,7 +132,7 @@ console.log(`Transaction Submitted! https://solana.fm/tx/${signature}?cluster=lo
 
 As mentioned earlier, block explorers allow users to utilize a custom RPC to view transactions. To look at local validator transaction you'll need to look for an input box in the `choose cluster` modal and enter the following address: `http://127.0.0.1:8899`.
 
-Note: The [Solana Explorer](https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes. 
+Note: The [Solana Explorer](https://explorer.solana.com/) automatically defaults to the local validator port when you select Custom RPC URL, so you don’t need to make any additional changes.
 
 ## Creating a "Metaplex" Local Validator
 
@@ -142,7 +142,7 @@ Unfortunately, this part of the guide is available only for users on **Linux** o
 
 {% /callout %}
 
-With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**. 
+With the basics of the local validator setup and management, you can create and manage personalized local validators through **bash scripts**.
 
 For example, you can create a `metaplex-local-validator` that includes the main Metaplex programs: `mpl-token-metadata`, `mpl-bubblegum`, and `mpl-core`.
 
@@ -170,22 +170,22 @@ solana program dump -u m CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d ~/.local/s
 
 {% totem-accordion title="Additional Metaplex Programs" %}
 
-| Name               | Program ID                                   | 
-| ------------------ | -------------------------------------------- | 
-| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  | 
-| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  | 
-| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY | 
-| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g | 
-| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR | 
-| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d | 
-| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ | 
-| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J | 
+| Name               | Program ID                                   |
+| ------------------ | -------------------------------------------- |
+| Auction House      | hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk  |
+| Auctioneer         | neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh  |
+| Bubblegum          | BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY |
+| Candy Guard        | Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g |
+| Candy Machine v3   | CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR |
+| Core               | CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d |
+| Core Candy Guard   | CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ |
+| Core Candy Machine | CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J |
 | Gumdrop            | gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a  |
-| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  | 
-| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  | 
-| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  | 
-| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  | 
-| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  | 
+| Hydra              | hyDQ4Nz1eYyegS6JfenyKwKzYxRsCWCriYSAjtzP4Vg  |
+| Inscriptions       | 1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo  |
+| MPL-Hybrid         | MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb  |
+| Token Auth Rules   | auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg  |
+| Token Metadata     | metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s  |
 
 {% /totem-accordion %}
 

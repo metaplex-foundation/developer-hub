@@ -30,7 +30,7 @@ Program feature set includes:
 
 ## [Core](/smart-contracts/core)
 
-Core is the next generation Solana NFT standard that uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets. 
+Core is the next generation Solana NFT standard that uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 
 Program feature set includes:
 
@@ -73,7 +73,6 @@ Program feature set includes:
 - Burning
 - Delegating
 - Collection Management
-
 
 ## [Toolbox](/dev-tools/umi/toolbox)
 

@@ -254,7 +254,6 @@ const candyMachineSettings = {
 {% dialect-switcher title="设置hidden settings" %}
 {% dialect title="JavaScript" id="js" %}
 
-
 要计算哈希,您可以使用以下函数:
 
 ```ts

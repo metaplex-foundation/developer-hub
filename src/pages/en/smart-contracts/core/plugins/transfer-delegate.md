@@ -341,4 +341,3 @@ No. Once the Transfer Delegate is set, the delegate can transfer without owner a
 | **Owner Managed** | Plugin type requiring owner signature to add |
 | **Escrowless** | Selling without transferring to a holding account |
 | **Permanent Transfer Delegate** | Irrevocable version added at creation |
-

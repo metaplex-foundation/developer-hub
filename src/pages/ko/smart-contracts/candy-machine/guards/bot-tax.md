@@ -50,8 +50,8 @@ Bot Tax 가드는 신중하게 사용하세요.
 
 {% node parent="mint-candy-guard" y="150" x="-8" %}
   {% node #mint-candy-machine theme="pink" %}
-    민팅 from 
-    
+    민팅 from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -81,7 +81,6 @@ Bot Tax 가드는 신중하게 사용하세요.
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -115,7 +114,7 @@ API 참조: [create](https://mpl-candy-machine.typedoc.metaplex.com/functions/cr
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-config.json 파일의 guard 섹션에 다음 객체를 추가하세요: 
+config.json 파일의 guard 섹션에 다음 객체를 추가하세요:
 
 ```json
 "botTax" : {

@@ -38,7 +38,7 @@ await extendLut(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## Create LUT with addresses 
+## Create LUT with addresses
 
 This helper method simplifies the process of creating a LUT with initial addresses by combining the creation of an empty LUT and extending it with the given addresses into a single transaction.
 
@@ -97,7 +97,7 @@ await freezeLut(umi, {
 
 ## Deactivate a LUT
 
-This instruction puts a LUT in a “deactivation” period before it can be closed. 
+This instruction puts a LUT in a “deactivation” period before it can be closed.
 
 **Note**: Deactivating a LUT can't be used in new transactions but still maintains its data.
 

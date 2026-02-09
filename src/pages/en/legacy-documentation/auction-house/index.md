@@ -34,7 +34,6 @@ The Auction House program can be used to create a new marketplace by instantiati
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
-
 The account can be configured in whichever way the user wants. We'll talk [more about these configurations in a dedicated page](auction-house/settings) but here are some interesting configurable parameters:
 
 - `requireSignOff`: this allows marketplaces to gate which assets can be listed and which bids can be placed. On every relevant instruction, the Auction House [authority](https://docs.solana.com/staking/stake-accounts#understanding-account-authorities) needs to sign the transaction.

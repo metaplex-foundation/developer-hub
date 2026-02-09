@@ -70,11 +70,11 @@ data =  {
 There may be scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
 
 export declare type SetMintAuthorityInstructionAccounts = {
-/** Candy Machine account. \*/
+/**Candy Machine account. \*/
 candyMachine: PublicKey | Pda;
 /** Candy Machine authority _/
 authority?: Signer;
-/\*\* New candy machine authority _/
+/\*\* New candy machine authority_/
 mintAuthority: Signer;
 };
 

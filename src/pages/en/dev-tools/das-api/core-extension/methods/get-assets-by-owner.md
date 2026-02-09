@@ -23,7 +23,6 @@ const assets = await das.getAssetsByCollection(umi, { owner });
 console.log(assets);
 ```
 
-
 ## Example Response
 This example has only one object in the array. For Public Keys owning more than one Core asset the Array will include more entries.
 

@@ -60,7 +60,6 @@ _或冻结期结束时。_
 {% node #thawed-NFT-bg1 label="Thawed NFT" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
 {% node #thawed-NFT label="Thawed NFT" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -239,7 +238,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
 {% node #freezeEscrow-PDA3 parent="destination-ata" x="397" y="-10" %}
@@ -314,7 +312,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="mint-candy-machine" y="-20" x="120" theme="transparent" %}
   Mint Logic
 {% /node %}
-
 
 {% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
 {% node #frozen-NFT parent="mint-candy-machine" y="120" x="31" theme="slate" %}
@@ -463,7 +460,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% edge from="candy-machine" to="candy-guard-route" theme="pink" /%}
 {% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
-
 
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 

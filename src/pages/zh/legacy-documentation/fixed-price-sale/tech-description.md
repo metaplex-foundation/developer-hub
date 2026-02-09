@@ -79,7 +79,6 @@ description: 固定价格销售程序的技术描述
 |  state  |  `Enum {Uninitialised, Created, Active, Ended,}`  |    |
 |  funds_collected  |  `u64`  |    |
 
-
 ## TradeHistory
 
 ### PDA ["history", wallet.key(), market.key()]

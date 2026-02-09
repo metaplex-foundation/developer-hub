@@ -60,7 +60,7 @@ To distribute the proofs to the users, Gumdrop supports multiple distribution me
 - Direct wallet verification
 
 For wallet distribution, you'll need to either
-- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots. 
+- Send your users a claim URL containing the required proof data, using one of the already available Discord Bots.
 or:
 1. Store the claim data in your database indexed by wallet address
 2. Create a frontend that fetches claim data when users connect their wallet

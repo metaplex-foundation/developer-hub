@@ -33,7 +33,7 @@ This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Java
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 {% /callout %}
-But before starting, let's talk about Collections: 
+But before starting, let's talk about Collections:
 {% callout title="What are Collections?" %}
 Collections are a group of Assets that belong together, part of the same series, or group. In order to group Assets together, we must first create a Collection Asset whose purpose is to store any metadata related to that collection such as collection name and collection image. The Collection Asset acts as a front cover to your collection and can also store collection wide plugins.
 {% /callout %}
@@ -233,7 +233,7 @@ const tx = await createCollection(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-And log out the detail as follow: 
+And log out the detail as follow:
 ```ts
 // Log out the signature and the links to the transaction and the NFT.
 console.log('\nCollection Created')
@@ -268,7 +268,7 @@ const tx = await createCollection(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use!
 ## Full Code Example
 ```ts
 import { 

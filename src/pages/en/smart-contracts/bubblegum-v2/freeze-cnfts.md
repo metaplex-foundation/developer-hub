@@ -97,7 +97,7 @@ await thawV2(umi, {
   authority: delegateAuthority,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
 
@@ -118,10 +118,9 @@ await thawV2(umi, {
   authority: permanentFreezeDelegate,
 }).sendAndConfirm(umi);
 ```
-{% /totem %}    
+{% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
-
 
 ## Thaw and Revoke a Delegate Authority
 

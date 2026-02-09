@@ -12,7 +12,6 @@ Since wallet choice is up to the user, **you cannot prevent someone from minting
 Use the Bot Tax guard with caution.
 {% /callout %}
 
-
 ## Overview
 
 The **Bot Tax** guard charges a penalty for invalid transactions to discourage bots from attempting to mint NFTs. This amount is usually small to hurt bots without affecting genuine mistakes from real users. All bot taxes will be transferred to the Candy Machine account so that, once minting is over, you can access these funds by deleting the Candy Machine account.
@@ -51,8 +50,8 @@ Additionally, the Bot Tax guard enables us to ensure the mint instruction was th
 
 {% node parent="mint-candy-guard" y="150" x="-8" %}
   {% node #mint-candy-machine theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -82,7 +81,6 @@ Instruction of the transaction minting will fail
 {% /node %}
 {% edge from="candy-guard-guards" to="guards" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 
@@ -116,7 +114,7 @@ API References: [create](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add this object into the guard section your config.json file:
 
 ```json
 "botTax" : {

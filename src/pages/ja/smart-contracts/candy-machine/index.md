@@ -12,7 +12,6 @@ MetaplexプロトコルのキャンディマシンはSolanaでの公平なNFTコ
 
 {% quick-links %}
 
-
 {% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/smart-contracts/candy-machine/getting-started" description="お好みの言語またはライブラリを見つけて、キャンディマシンを始めましょう。" /%}
 {% quick-link title="APIリファレンス" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="何か特定のものをお探しですか？私たちがサポートします。" /%}
 {% /quick-links %}

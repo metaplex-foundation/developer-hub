@@ -121,4 +121,4 @@ curl -X POST <ENDPOINT> \
 
 - [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
 - [Get NFTs by Owner](/dev-tools/das-api/guides/get-nfts-by-owner) - Find all NFTs owned by a wallet
-- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries

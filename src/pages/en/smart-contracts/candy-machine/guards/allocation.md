@@ -50,8 +50,8 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_ {% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -67,14 +67,13 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" /%}
 {% edge from="allocation" to="pda" arrow="none" /%}
 {% edge from="pda" to="mint-candy-guard" arrow="none" fromPosition="top" dashed=true%}
-if the allocation tracker count 
+if the allocation tracker count
 
 is equal to the limit
 
 Minting will fail
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
-
 
 {% /diagram %}
 
@@ -188,8 +187,8 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% node parent="candy-machine" x="415" %}
   {% node #candy-guard-route theme="pink" %}
-    Route frmo the 
-    
+    Route frmo the
+
     _Candy Guard Program_
   {% /node %}
 {% /node %}
