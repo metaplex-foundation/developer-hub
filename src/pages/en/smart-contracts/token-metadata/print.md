@@ -1,7 +1,41 @@
 ---
-title: Printing Editions
-metaTitle: Printing Editions | Token Metadata
-description: Learn how to print NFT editions on Token Metadata
+title: Printed Editions
+metaTitle: Printed Editions | Token Metadata
+description: Print copies of NFTs on Solana using Token Metadata Master Editions. Create limited or open editions from an Original NFT with the PrintV1 instruction.
+updated: '02-07-2026'
+keywords:
+  - print edition NFT
+  - Master Edition
+  - Edition account
+  - NFT copies
+  - PrintV1 instruction
+about:
+  - printed editions
+  - Master Edition management
+  - NFT edition printing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Create an Original NFT with a Master Edition and Max Supply > 0
+  - Call PrintV1 to mint a new Edition NFT
+  - The Edition account is created with the edition number
+  - Confirm the transaction
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: What is a Master Edition?
+    a: A Master Edition is a PDA account attached to an Original NFT that controls the Mint and Freeze authorities. It tracks how many editions have been printed and enforces the optional Max Supply limit.
+  - q: How do I print a copy of an NFT?
+    a: Use PrintV1 referencing the Original NFT's Master Edition. This creates a new Mint, Metadata, and Edition account for the printed copy.
+  - q: Can I limit the number of editions?
+    a: Yes. Set the Max Supply on the Master Edition when creating the Original NFT. Set to 0 to disable printing, or None for unlimited editions.
+  - q: What is the difference between a Master Edition and an Edition?
+    a: A Master Edition belongs to the Original NFT and controls printing. An Edition belongs to a printed copy and records its edition number and parent Master Edition.
 ---
 
 Every NFT has the potential to be printed as multiple editions when its **Master Edition** account is configured accordingly. On this page, we'll learn how to create a printable NFT and how to print editions from it.

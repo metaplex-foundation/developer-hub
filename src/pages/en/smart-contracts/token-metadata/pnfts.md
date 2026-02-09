@@ -1,7 +1,35 @@
 ---
 title: Programmable NFTs (pNFTs)
 metaTitle: Programmable NFTs (pNFTs) | Token Metadata
-description: Learn more about Programmable NFTs (a.k.a. pNFTs) on Token Metadata
+description: Create and manage Programmable NFTs on Solana with Token Metadata. Enforce royalties and custom authorization rules using RuleSets and the Token Auth Rules program.
+updated: '02-07-2026'
+keywords:
+  - programmable NFT
+  - pNFT Solana
+  - royalty enforcement
+  - RuleSet
+  - Token Auth Rules
+  - frozen token account
+about:
+  - programmable NFTs
+  - authorization rules
+  - royalty enforcement
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What is a Programmable NFT?
+    a: A Programmable NFT (pNFT) is a token standard where the underlying token account is kept frozen at all times. All operations must go through the Token Metadata program, which enforces custom authorization rules defined in a RuleSet.
+  - q: How do pNFTs enforce royalties?
+    a: Since pNFTs can only be transferred through the Token Metadata program, creators can define RuleSet rules that only allow transfers through marketplaces and programs that honor royalties.
+  - q: What is a RuleSet?
+    a: A RuleSet is an account from the Token Auth Rules program that defines authorization rules for operations like transfers, burns, and delegates on Programmable NFTs.
+  - q: Can I convert an existing NFT to a pNFT?
+    a: No. The token standard is set at creation time and cannot be changed. You would need to create a new pNFT and have users migrate.
+  - q: What additional accounts do pNFT operations require?
+    a: pNFT operations require Token Record accounts (PDAs tracking delegation state), and may require the RuleSet account, Authorization Rules program, and Sysvar Instructions account.
 ---
 
 As mentioned in the [overview page](/smart-contracts/token-metadata#pnfts), Programmable NFTs (pNFTs) are a new asset standard that allows creators to define custom rules on specific operations and delegate more granularly to third-party authorities. {% .lead %}

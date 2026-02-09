@@ -1,7 +1,41 @@
 ---
 title: Delegated Authorities
 metaTitle: Delegated Authorities | Token Metadata
-description: Learn how to approve delegated authorities for your Assets on Token Metadata
+description: Approve and revoke delegated authorities on Solana NFTs using Token Metadata. Covers transfer, burn, update, lock, and collection delegates for standard NFTs and pNFTs.
+updated: '02-07-2026'
+keywords:
+  - NFT delegate Solana
+  - DelegateV1 instruction
+  - transfer delegate
+  - burn delegate
+  - lock delegate
+about:
+  - delegated authorities
+  - delegate management
+  - permission delegation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Choose the delegate type (transfer, burn, update, lock, etc.)
+  - Call DelegateV1 with the delegate address and type
+  - The delegate can now perform the authorized action
+  - Revoke with RevokeV1 when no longer needed
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: What types of delegates are available?
+    a: Token Metadata supports several delegate types including Transfer, Burn, Lock, Sale, Authority, Collection, Update, and Programmable Config delegates. Some are NFT-only and some are pNFT-only.
+  - q: How do I revoke a delegate?
+    a: Call RevokeV1 with the delegate address and type to remove their authorization.
+  - q: Can delegates work with Programmable NFTs?
+    a: Yes. pNFTs have additional delegate types like Locked Transfer, Migration, and Programmable Config delegates. Standard delegates also work with pNFTs.
+  - q: Is delegation recorded on-chain?
+    a: Yes. For standard NFTs, delegation uses the SPL Token delegate. For pNFTs, delegation is recorded in Token Record accounts which are PDAs managed by Token Metadata.
 ---
 
 Having a single authority on our assets is not always ideal. Sometimes we want to delegate some of these responsibilities to other wallets or programs so they can do things on our behalf. This is why Token Metadata offers a whole set of delegates with different scopes. {% .lead %}

@@ -1,7 +1,32 @@
 ---
-title: SPL Token-2022 on Token Metadata
+title: SPL Token-2022
 metaTitle: SPL Token-2022 | Token Metadata
-description: Learn about how SPL Token-2022 is integrated with Token Metadata
+description: Use Token Metadata with SPL Token-2022 (Token Extensions) on Solana. Supported extensions, creation flow, and differences from the legacy Token Program.
+updated: '02-07-2026'
+keywords:
+  - Token-2022
+  - Token Extensions
+  - SPL Token 2022
+  - non-transferable token
+  - metadata extension
+about:
+  - SPL Token-2022 integration
+  - Token Extensions
+  - extended token features
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: Does Token Metadata work with Token-2022?
+    a: Yes. Token Metadata supports SPL Token-2022 mints. You can create NFTs and fungible tokens using Token-2022 with extensions like non-transferable and metadata pointer.
+  - q: Which Token-2022 extensions are supported?
+    a: Supported extensions include non-transferable, metadata pointer, and others. Some extensions may have restrictions depending on the token standard.
+  - q: How do I create a Token-2022 NFT?
+    a: Use the same CreateV1 instruction but specify the Token-2022 program as the SPL Token program. The SDK handles the differences automatically.
+  - q: What is the benefit of using Token-2022 over the legacy Token Program?
+    a: Token-2022 provides built-in extensions like non-transferable tokens (soulbound), transfer fees, and metadata pointers, reducing the need for custom program logic.
 ---
 
 SPL Token-2022 is the latest token program on the Solana blockchain that can be used to create fungible and non-fungible tokens. It supports the same functionalities and structures of the SPL Token program, but also includes a set of extensions to add new functionalities.

@@ -1,7 +1,40 @@
 ---
 title: Verified Collections
 metaTitle: Verified Collections | Token Metadata
-description: Learn how to safely wrap Assets into collections on Token Metadata
+description: Group NFTs into verified collections on Solana using Token Metadata. Set, verify, and unverify collection membership with the VerifyV1 instruction and collection delegates.
+updated: '02-07-2026'
+keywords:
+  - NFT collection Solana
+  - verified collection
+  - VerifyV1 instruction
+  - collection delegate
+  - set collection
+about:
+  - verified collections
+  - collection management
+  - NFT grouping
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Create a Collection NFT (a standard NFT that acts as the collection parent)
+  - Set the collection field on child NFTs when minting
+  - Call VerifyV1 as the collection update authority to verify membership
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: What is a verified collection?
+    a: A verified collection is an NFT collection where the Collection field on each child NFT has been signed by the collection's update authority using the VerifyV1 instruction, proving authentic membership.
+  - q: Who can verify collection membership?
+    a: The update authority of the Collection NFT, or an approved collection delegate, can verify and unverify collection membership.
+  - q: How do I create a Collection NFT?
+    a: A Collection NFT is just a standard NFT that serves as the parent. Create it normally, then reference its mint address in the collection field of child NFTs.
+  - q: Can I change which collection an NFT belongs to?
+    a: Yes. Unverify from the old collection, update the collection field, then verify in the new collection. Both the old and new collection authorities must participate.
 ---
 
 Certified Collections enables NFTs – and tokens in general — **to be grouped together** and for that information to be **verified onchain**. Additionally, it makes it easier to manage these collections by allocating data for them onchain. {% .lead %}

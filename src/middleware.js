@@ -148,6 +148,13 @@ const redirectRules = {
     '/getting-started/js': '/smart-contracts/core-candy-machine/sdk/javascript',
     '/getting-started/rust': '/smart-contracts/core-candy-machine/sdk/rust',
   },
+  '/token-metadata': {
+    '/getting-started': '/smart-contracts/token-metadata/sdk/umi',
+    '/getting-started/umi': '/smart-contracts/token-metadata/sdk/umi',
+    '/getting-started/kit': '/smart-contracts/token-metadata/sdk/kit',
+    '/getting-started/rust': '/smart-contracts/token-metadata/sdk/rust',
+    '/getting-started/js': '/smart-contracts/token-metadata/sdk/umi',
+  },
   '/mpl-hybrid': {
     'guides/mpl-404-hyrbid-ui-template':
       '/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
@@ -173,6 +180,13 @@ const redirectRules = {
     '/getting-started': '/smart-contracts/core-candy-machine/sdk',
     '/getting-started/js': '/smart-contracts/core-candy-machine/sdk/javascript',
     '/getting-started/rust': '/smart-contracts/core-candy-machine/sdk/rust',
+  },
+  '/smart-contracts/token-metadata': {
+    '/getting-started': '/smart-contracts/token-metadata/sdk/umi',
+    '/getting-started/umi': '/smart-contracts/token-metadata/sdk/umi',
+    '/getting-started/kit': '/smart-contracts/token-metadata/sdk/kit',
+    '/getting-started/rust': '/smart-contracts/token-metadata/sdk/rust',
+    '/getting-started/js': '/smart-contracts/token-metadata/sdk/umi',
   },
   '/smart-contracts/mpl-hybrid': {
     'guides/mpl-404-hyrbid-ui-template':

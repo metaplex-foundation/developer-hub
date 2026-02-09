@@ -1,7 +1,41 @@
 ---
-title: Updating Assets
-metaTitle: Updating Assets | Token Metadata
-description: Learn how to update Assets on Token Metadata
+title: Updating Metadata
+metaTitle: Updating Metadata | Token Metadata
+description: Update NFT metadata, URI, name, creators, and other fields on Solana using the Token Metadata UpdateV1 instruction. Covers update authority, mutable vs immutable assets, and delegate updates.
+updated: '02-07-2026'
+keywords:
+  - update NFT metadata
+  - UpdateV1 instruction
+  - change NFT name
+  - update authority
+  - mutable metadata
+about:
+  - updating metadata
+  - metadata modification
+  - update authority management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Ensure you are the update authority or an authorized delegate
+  - Prepare the updated metadata fields
+  - Call UpdateV1 with the new data
+  - Confirm the transaction
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: Who can update an NFT's metadata?
+    a: Only the update authority (or an authorized update delegate) can modify the Metadata account. The update authority is set when the NFT is created.
+  - q: Can I make an NFT immutable?
+    a: Yes. Set isMutable to false in an update. Once immutable, no further changes to name, URI, symbol, creators, or seller fee basis points can be made.
+  - q: What fields can be updated?
+    a: Name, symbol, URI, seller fee basis points, creators, collection, uses, rule set, primary sale happened, and isMutable can all be updated via UpdateV1.
+  - q: Can I update a Programmable NFT?
+    a: Yes. Programmable NFTs support the same update operations as standard NFTs, but the update may be subject to authorization rules defined in the RuleSet.
 ---
 
 The update authority of an asset can update its **Metadata** account using the **Update** instruction as long as the **Is Mutable** attribute is set to `true`. The **Update** instruction requires the **Update Authority** to sign the transaction and can update the following attributes of the **Metadata** account:

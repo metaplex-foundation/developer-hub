@@ -1,7 +1,29 @@
 ---
-title: Get Mints in a Collection
-metaTitle: Get Mints in a Collection | Token Metadata Guides
-description: How-to guide to get all mints in a collection.
+title: Get Mints by Collection
+metaTitle: Get Mints by Collection | Token Metadata Guides
+description: Query all NFT mints in a Solana collection using DAS API, getProgramAccounts, or on-chain crawling. Three methods compared with code examples for Token Metadata collections.
+updated: '02-07-2026'
+keywords:
+  - get mints by collection
+  - query NFT collection
+  - DAS API collection
+  - getProgramAccounts collection
+  - collection mints
+about:
+  - collection querying
+  - DAS API usage
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is the fastest way to get all mints in a collection?
+    a: Use the DAS (Digital Asset Standard) API getAssetsByGroup method. It returns indexed results instantly without scanning the blockchain directly.
+  - q: Can I use getProgramAccounts to filter by collection?
+    a: Yes, but it is complex because the collection field comes after the variable-length creators array. You must know the exact number of creators for each account to calculate the correct byte offset.
+  - q: How many NFTs can a collection contain?
+    a: There is no hard limit on collection size. A single Collection NFT can have any number of verified child NFTs.
 ---
 
 Metaplex Token Metadata has [onchain collections](/smart-contracts/token-metadata/collections) to allow objective identifying of NFT collections instead of various subjective and potentially conflicting heuristics employed by the community in absence of an onchain standard.

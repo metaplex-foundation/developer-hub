@@ -1,8 +1,31 @@
 ---
 title: FAQ
 metaTitle: FAQ | Token Metadata
-description: Frequently asked questions about Token Metadata
+description: Frequently asked questions about the Solana Token Metadata program. Covers filtering accounts, soulbound assets, edition authorities, metadata storage, protocol fees, and deprecated instructions.
+updated: '02-07-2026'
+keywords:
+  - Token Metadata FAQ
+  - Metadata account filtering
+  - soulbound NFT
+  - edition PDA authority
+  - protocol fees
+about:
+  - Token Metadata program
+  - frequently asked questions
+  - troubleshooting
+proficiencyLevel: Beginner
+faqs:
+  - q: How can I filter Metadata accounts by collection?
+    a: Use DAS (Digital Asset Standard) for the fastest method to query collection mints. Alternatively, you can use getProgramAccounts with memcmp filters if all accounts share the same number of creators. See the Get Mints by Collection guide for details.
+  - q: How do I create a soulbound NFT with Token Metadata?
+    a: The recommended approach is to use Token-2022 with the non-transferable extension. Alternatively, use a Locked Transfer Delegate on a pNFT and then lock it, though this also prevents burning.
+  - q: Why are mint and freeze authorities transferred to the Edition PDA?
+    a: The Mint Authority is transferred (not voided) to enable future program upgrades and migrations. The Freeze Authority is transferred to enable non-transferable NFT features like escrowless marketplace listings.
+  - q: Are there fees for using Token Metadata?
+    a: Yes. Token Metadata charges small protocol fees ranging from 0.001 SOL to 0.01 SOL on certain instructions. See the Protocol Fees page for details.
 ---
+
+Frequently asked questions about the Token Metadata program. {% .lead %}
 
 ## How can I filter Metadata accounts by fields located after the `creators` array using `getProgramAccounts`?
 
@@ -108,8 +131,8 @@ Some of the instructions of the Token Metadata program have been through a few i
 - [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) use [Revoke](/smart-contracts/token-metadata/delegates) instead.
 - [FreezeDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L375)
 - [ThawDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)
-- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) has been replaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
-- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) has been replaced by [Burn](https://developers.metaplex.com/token-metadata/burn).
+- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) has been replaced by [Burn](/smart-contracts/token-metadata/burn).
+- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) has been replaced by [Burn](/smart-contracts/token-metadata/burn).
 - [VerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L411)  Sized collections have been deprecated.
 - [SetAndVerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L437)  Sized collections have been deprecated.
 - [UnverifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L423) Sized collections have been deprecated.
@@ -117,4 +140,5 @@ Some of the instructions of the Token Metadata program have been through a few i
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) the TokenStandard is automatically set now.
 
 ## Where can I learn more about Token Metadata Account Size Reduction?
-Please check the [special FAQ](/smart-contracts/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open quesitons.
+
+Please check the [Account Size Reduction guide](/smart-contracts/token-metadata/guides/account-size-reduction) for more information or join our [Discord](https://discord.gg/metaplex) in case of remaining open questions.

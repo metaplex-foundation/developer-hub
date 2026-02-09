@@ -1,7 +1,41 @@
 ---
-title: Minting Assets
-metaTitle: Minting Assets | Token Metadata
-description: Learn how to mint NFTs, SFTs and Programmable NFTs (a.k.a. Assets) on Token Metadata
+title: Creating & Minting
+metaTitle: Creating & Minting | Token Metadata
+description: Mint NFTs, fungible tokens, semi-fungible tokens, and Programmable NFTs on Solana using the Token Metadata program. Covers CreateV1, account setup, and all token standards.
+updated: '02-07-2026'
+keywords:
+  - mint NFT Solana
+  - create token metadata
+  - CreateV1 instruction
+  - mint programmable NFT
+  - SPL token creation
+about:
+  - creating and minting
+  - token creation
+  - NFT minting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Set up your SDK (Umi, Kit, or Rust)
+  - Configure mint and metadata parameters
+  - Call CreateV1 to create accounts
+  - Confirm the transaction on-chain
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: How do I mint an NFT with Token Metadata?
+    a: Use the CreateV1 instruction (or createNft helper) which creates the Mint, Metadata, and Master Edition accounts in a single transaction.
+  - q: What is the difference between creating an NFT and a fungible token?
+    a: NFTs use zero decimals, supply of 1, and a Master Edition account. Fungible tokens use one or more decimals with no Master Edition. The token standard is set automatically.
+  - q: How much does it cost to mint an NFT?
+    a: Approximately 0.01 SOL in protocol fees plus Solana rent (~0.015 SOL total on devnet).
+  - q: Can I mint directly into another wallet?
+    a: Yes. Specify a different token owner when minting. The payer still pays transaction and account fees.
 ---
 
 As we discussed in the [Token Metadata overview](/smart-contracts/token-metadata), digital assets on Solana are composed of several onchain accounts and off-chain data describing the token. On this page, we'll go over the process of minting these assets. {% .lead %}

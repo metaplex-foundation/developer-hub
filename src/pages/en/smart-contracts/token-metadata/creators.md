@@ -1,7 +1,40 @@
 ---
 title: Verified Creators
 metaTitle: Verified Creators | Token Metadata
-description: Learn how to verify the creators of an Asset on Token Metadata
+description: Verify and unverify creator signatures on Solana NFTs using Token Metadata. Prove creator authenticity with the VerifyV1 instruction and manage creator shares for royalty distribution.
+updated: '02-07-2026'
+keywords:
+  - verified creator NFT
+  - creator verification
+  - VerifyV1 creator
+  - NFT royalties
+  - creator shares
+about:
+  - verified creators
+  - creator authentication
+  - royalty distribution
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+howToSteps:
+  - Create an NFT with the creators array in the Metadata account
+  - Each creator calls VerifyV1 to sign their verification
+  - The Verified flag on the creator entry is set to true
+howToTools:
+  - Umi SDK
+  - Kit SDK
+  - Rust SDK
+faqs:
+  - q: What does verifying a creator mean?
+    a: Verifying a creator sets the Verified flag to true on that creator's entry in the Metadata account, proving they endorsed the token. Marketplaces use this to confirm authenticity.
+  - q: How are royalties distributed among creators?
+    a: Each creator has a Share percentage in the creators array. Marketplaces use these shares combined with the Seller Fee Basis Points to distribute royalties on secondary sales.
+  - q: Can a creator remove their verification?
+    a: Yes. A creator can call UnverifyV1 to remove their verification from an NFT's Metadata account.
+  - q: How many creators can an NFT have?
+    a: Up to 5 creators can be listed in the creators array. Their shares must sum to 100%.
 ---
 
 Similarly to [collections](/smart-contracts/token-metadata/collections), the creators of an asset must be verified to ensure the authenticity of the asset. {% .lead %}

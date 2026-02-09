@@ -1,10 +1,32 @@
 ---
-title: Token Standard
-metaTitle: Token Standard | Token Metadata
-description: An overview of the various Token Standards supported by Token Metadata
+title: Token Standards
+metaTitle: Token Standards | Token Metadata
+description: Understand the five token standards supported by Token Metadata — NonFungible, NonFungibleEdition, FungibleAsset, Fungible, and ProgrammableNonFungible — including their JSON schemas and how each standard is determined.
+updated: '02-07-2026'
+keywords:
+  - token standard
+  - NFT standard
+  - fungible token
+  - semi-fungible token
+  - programmable NFT
+  - JSON metadata
+about:
+  - token standards
+  - metadata JSON schema
+  - asset classification
+proficiencyLevel: Beginner
+faqs:
+  - q: How is the Token Standard determined?
+    a: The Token Standard is set automatically by the Token Metadata program based on the mint's Master Edition account, Edition account, supply, and decimal places. It cannot be manually updated.
+  - q: What is a FungibleAsset (semi-fungible token)?
+    a: A FungibleAsset is a token with zero decimals and no Master Edition, supporting rich metadata with attributes. Common in gaming for items like swords or resources.
+  - q: What is the difference between NonFungible and ProgrammableNonFungible?
+    a: Both are 1-of-1 NFTs with Master Edition accounts, but ProgrammableNonFungible tokens are kept frozen at all times to enforce custom authorization rules like royalty enforcement.
+  - q: What JSON schema should I use for my token?
+    a: Fungible tokens use a minimal schema (name, symbol, description, image). NonFungible, FungibleAsset, and ProgrammableNonFungible tokens use the full schema with attributes, properties, and animation URLs.
 ---
 
-As token usage has evolved on Solana, it has become clear that there are more types of tokens than simply "fungible" and "non-fungible" tokens.
+As token usage has evolved on Solana, it has become clear that there are more types of tokens than simply "fungible" and "non-fungible" tokens. {% .lead %}
 
 An example is something the community is calling a "semi-fungible token", an SPL token with a supply greater than 1 but which has typical NFT attributes such as an image and an attributes array in the JSON metadata.
 
@@ -167,7 +189,7 @@ These are the "standard" non-fungible tokens the community is already familiar w
 
 This standard is similar to the **Non-Fungible** standard above, except that the underlying token account is kept frozen at all times to ensure nobody can transfer, lock or burn Programmable NFTs without going through the Token Metadata program. This enables creators to define custom authorization rules for their NFTs such as enforcing secondary sales royalties.
 
-You can [read more about Programmable NFTs here](https://github.com/metaplex-foundation/mpl-token-metadata/blob/main/programs/token-metadata/program/ProgrammableNFTGuide.md).
+You can [read more about Programmable NFTs here](/smart-contracts/token-metadata/pnfts).
 
 {% partial file="token-standard-full.md" /%}
 

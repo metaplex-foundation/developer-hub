@@ -1,10 +1,34 @@
 ---
 title: Overview
 metaTitle: Overview | Token Metadata
-description: Provides a high-level overview of the Solana NFT standard.
+description: High-level overview of the Solana Token Metadata program. Learn how Metadata accounts, Master Editions, token standards, and Programmable NFTs work together to power NFTs and fungible tokens on Solana.
+updated: '02-07-2026'
+keywords:
+  - Token Metadata
+  - Solana NFT
+  - Metadata account
+  - Master Edition
+  - Programmable NFT
+  - SPL Token
+about:
+  - Token Metadata program
+  - NFT standard
+  - Digital asset management
+proficiencyLevel: Beginner
+faqs:
+  - q: What is the Token Metadata program?
+    a: The Token Metadata program attaches additional data (name, symbol, URI, creators, royalties) to SPL Tokens on Solana via Program Derived Addresses, turning them into rich digital assets like NFTs and fungible tokens.
+  - q: What is a Metadata account?
+    a: A Metadata account is a PDA derived from a Mint Account that stores on-chain data such as the token name, symbol, URI, creators, royalties, and token standard.
+  - q: What is a Master Edition account?
+    a: A Master Edition account is a PDA that proves an NFT is non-fungible by controlling its Mint and Freeze authorities. It also enables printing copies (editions) of the original NFT.
+  - q: What are Programmable NFTs?
+    a: Programmable NFTs (pNFTs) are a token standard that keeps the underlying token frozen at all times, forcing all operations through the Token Metadata program. This allows creators to enforce custom authorization rules such as royalty enforcement.
+  - q: How are token standards determined?
+    a: The Token Standard field on the Metadata account is automatically computed by the program based on the mint's supply, decimals, and associated edition accounts. It cannot be manually updated.
 ---
 
-The Token Metadata program is a fundamental program when dealing NFTs and Fungible assets on the Solana blockchain. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
+The Token Metadata program is a fundamental program when dealing with NFTs and Fungible assets on the Solana blockchain. In this overview, we explain what this program does and how we can leverage its various features at a high level. {% .lead %}
 
 {% callout %}
 Please note that certain Token Metadata instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
@@ -12,9 +36,9 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
+{% quick-link title="SDK Setup" icon="InboxArrowDown" href="/smart-contracts/token-metadata/sdk/umi" description="Install the SDK of your choice and start building with digital assets on Solana." /%}
 
-{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
+{% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-token-metadata-js-docs.vercel.app/" target="_blank" description="Looking for something specific? Have a look at our API References and find your answer." /%}
 
 {% /quick-links %}
 
@@ -22,7 +46,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 The Token Metadata program is one of the most important programs when dealing with NFTs on the Solana blockchain. Its main goal is to **attach additional data to [Fungible](https://en.wikipedia.org/wiki/Fungibility) or Non-Fungible [Tokens](https://spl.solana.com/token)** on Solana.
 
-It achieves this using [Program Derived Addresses](/understanding-programs/#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you’re not familiar with [Solana’s Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
+It achieves this using [Program Derived Addresses](/understanding-programs/#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you're not familiar with [Solana's Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
 
 {% diagram %}
 {% node %}
@@ -348,7 +372,7 @@ Note that the Master Edition account and the Edition account share the same seed
 
 ## Semi-Fungible Tokens
 
-Whilst NFTs are the biggest use case of the Token Metadata program, it’s important to notice that the program also works with Fungible Token and, what we call, Semi-Fungible Tokens or Fungible Assets.
+Whilst NFTs are the biggest use case of the Token Metadata program, it's important to notice that the program also works with Fungible Token and, what we call, Semi-Fungible Tokens or Fungible Assets.
 
 At the end of the day, the Metadata account helps attach data to tokens regardless of their fungibility. However, the standard of the off-chain JSON file will vary slightly to accommodate their needs.
 
@@ -356,7 +380,7 @@ To safely identify the fungibility of a token — and, thus, the standard that w
 
 - `NonFungible`: The Mint account is associated with a Master Edition account and, therefore, is Non-Fungible. This is your typical NFT standard.
 - `NonFungibleEdition`: This is the same as `NonFungible` but the NFT was printed from an Original NFT and, thus, is associated with an Edition account instead of a Master Edition account.
-- `FungibleAsset`: The Mint account is Fungible but has zero decimal places. Having zero decimals means we can treat the token as an asset whose supply is not limited to one. For instance, Fungible Assets can be used in the gaming industry to store resources such as “Wood” or “Iron”.
+- `FungibleAsset`: The Mint account is Fungible but has zero decimal places. Having zero decimals means we can treat the token as an asset whose supply is not limited to one. For instance, Fungible Assets can be used in the gaming industry to store resources such as "Wood" or "Iron".
 - `Fungible`: The Mint account is Fungible and has more than one decimal place. This is more likely going to be a token used as a decentralised currency.
 - `ProgrammableNonFungible`: A special `NonFungible` token that is frozen at all times to enforce custom authorization rules. See the next section for more information.
 
@@ -482,19 +506,19 @@ You can [read more about Programmable NFTs here](/smart-contracts/token-metadata
 
 ## And a lot more
 
-Whilst this provides a good overview of the Token Metadata program and what it has to offer, there’s still a lot more that can be done with it.
+Whilst this provides a good overview of the Token Metadata program and what it has to offer, there's still a lot more that can be done with it.
 
 The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
 - [Token Standards (Assets)](/smart-contracts/token-metadata/token-standard)
-- [Minting Assets](/smart-contracts/token-metadata/mint)
-- [Updating Assets](/smart-contracts/token-metadata/update)
-- [Transferring Assets](/smart-contracts/token-metadata/transfer)
-- [Burning Assets](/smart-contracts/token-metadata/burn)
+- [Creating & Minting](/smart-contracts/token-metadata/mint)
+- [Updating Metadata](/smart-contracts/token-metadata/update)
+- [Transferring NFTs](/smart-contracts/token-metadata/transfer)
+- [Burning NFTs](/smart-contracts/token-metadata/burn)
 - [Printed Editions](/smart-contracts/token-metadata/print)
 - [Verified Collections](/smart-contracts/token-metadata/collections)
 - [Verified Creators](/smart-contracts/token-metadata/creators)
 - [Delegated Authorities](/smart-contracts/token-metadata/delegates)
-- [Locking Assets](/smart-contracts/token-metadata/lock)
+- [Locking NFTs](/smart-contracts/token-metadata/lock)
 - [Programmable NFTs](/smart-contracts/token-metadata/pnfts)
 - [NFT Escrow](/smart-contracts/token-metadata/escrow)

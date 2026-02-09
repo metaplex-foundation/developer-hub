@@ -1,7 +1,25 @@
 ---
-title: FAQ - Token Metadata Account Size Reduction
+title: Account Size Reduction
 metaTitle: Token Metadata Account Size Reduction | Token Metadata Guides
-description: Learn about the impacts of the TM Account Size reduction.
+description: Understand the Token Metadata account size reduction, its impact on existing NFTs, and how to handle resized Metadata accounts in your applications on Solana.
+updated: '02-07-2026'
+keywords:
+  - account size reduction
+  - metadata account resize
+  - Token Metadata migration
+  - account data length
+about:
+  - account management
+  - migration guide
+  - backward compatibility
+proficiencyLevel: Intermediate
+faqs:
+  - q: What is the Token Metadata account size reduction?
+    a: Token Metadata reduced the size of Metadata accounts to save rent costs. Existing accounts may have a larger size than newly created accounts. Applications should handle both sizes.
+  - q: Does this affect existing NFTs?
+    a: Existing NFTs continue to work. The size reduction applies when accounts are resized during updates or when new accounts are created.
+  - q: Do I need to update my application?
+    a: If your application hardcodes Metadata account sizes or uses fixed-offset deserialization, you should update it to handle variable account sizes.
 ---
 
 On 10th of October 2024, a Metaplex Token Metadata (TM) program change was deployed to mainnet that reduces the size of all new metadata accounts created. Subsequently on October 25th, Metaplex introduced a new Resize instruction that enables existing metadata accounts to be resized. If your product fetches any metadata from TM, this change might affect you.

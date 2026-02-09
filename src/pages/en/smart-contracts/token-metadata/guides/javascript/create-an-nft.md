@@ -1,10 +1,31 @@
 ---
-title: How to Create a NFT On Solana
-metaTitle: How to Create a NFT On Solana | Token Metadata Guides
-description: Learn how to create an NFT on the Solana blockchain with the Metaplex.
+title: How to Create an NFT on Solana
+metaTitle: How to Create an NFT on Solana | Token Metadata Guides
+description: Step-by-step guide to creating an NFT on Solana using Metaplex Token Metadata. Covers uploading metadata, minting with Umi SDK, and verifying your NFT on-chain.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
-updated: '06-18-2024'
+updated: '02-07-2026'
+keywords:
+  - create NFT Solana
+  - mint NFT JavaScript
+  - Metaplex NFT tutorial
+  - Umi create NFT
+  - NFT metadata upload
+about:
+  - NFT creation tutorial
+  - JavaScript guide
+  - step-by-step minting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How do I create an NFT on Solana?
+    a: Install the Umi SDK, upload your image and metadata JSON to Arweave or IPFS, then call createNft with the metadata URI to mint the NFT on-chain.
+  - q: How much does it cost to create an NFT on Solana?
+    a: Approximately 0.01 SOL in protocol fees plus rent for the Metadata and Master Edition accounts. Total cost is typically around 0.015-0.025 SOL.
+  - q: Do I need to upload metadata before minting?
+    a: Yes. The NFT's URI field must point to a JSON file containing the name, description, image, and attributes. Upload this file to decentralized storage before minting.
 ---
 
 This is an intial guide on how to create an NFT on the Solana blockchain with the Metaplex Token Metadata protocol.

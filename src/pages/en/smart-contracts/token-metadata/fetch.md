@@ -1,7 +1,32 @@
 ---
-title: Fetching Assets
-metaTitle: Fetching Assets | Token Metadata
-description: Learn how to fetch the various onchain accounts of your assets on Token Metadata
+title: Fetching Metadata
+metaTitle: Fetching Metadata | Token Metadata
+description: Fetch NFTs and token metadata on Solana. Retrieve Metadata accounts, Master Editions, and Token Records using fetchDigitalAsset and related helpers across Umi, Kit, and Rust SDKs.
+updated: '02-07-2026'
+keywords:
+  - fetch NFT Solana
+  - fetchDigitalAsset
+  - get metadata account
+  - query NFT data
+  - DAS API
+about:
+  - fetching metadata
+  - account deserialization
+  - metadata retrieval
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: How do I fetch an NFT by mint address?
+    a: Use fetchDigitalAsset(umi, mintAddress) in Umi or fetchDigitalAsset(rpc, mintAddress) in Kit. This returns the Metadata account, Mint account, and optional Edition account.
+  - q: How do I fetch all NFTs owned by a wallet?
+    a: Use fetchAllDigitalAssetByOwner or fetchAllDigitalAssetWithTokenByOwner to retrieve all assets for a given wallet address.
+  - q: Can I fetch assets by collection?
+    a: Yes. Use DAS (Digital Asset Standard) API calls or fetchAllDigitalAssetByCreator/by-collection helpers. See the Get Mints by Collection guide for details.
+  - q: What is the difference between fetchDigitalAsset and fetchDigitalAssetWithToken?
+    a: fetchDigitalAsset returns the Metadata and Mint data. fetchDigitalAssetWithToken also includes the Token account, which shows ownership amounts and delegation status.
 ---
 
 Now that we know how to create and mint the various onchain accounts of our assets, let's learn how to fetch them. {% .lead %}

@@ -1,7 +1,32 @@
 ---
 title: NFT Escrow
 metaTitle: NFT Escrow | Token Metadata
-description: Learn more about the Token Owned Escrow feature of Token Metadata
+description: Use the Token Owned Escrow feature to store SPL tokens inside NFTs on Solana. Create escrow accounts owned by NFTs for composable digital assets with Token Metadata.
+updated: '02-07-2026'
+keywords:
+  - NFT escrow Solana
+  - Token Owned Escrow
+  - composable NFT
+  - nested tokens
+  - escrow PDA
+about:
+  - NFT escrow
+  - token-owned accounts
+  - composable assets
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+faqs:
+  - q: What is Token Owned Escrow?
+    a: Token Owned Escrow (TOE) creates a PDA escrow account derived from an NFT's mint address. This escrow can hold SPL tokens, effectively allowing NFTs to "own" other tokens.
+  - q: What are use cases for NFT Escrow?
+    a: Composable NFTs (an NFT containing other NFTs or tokens), in-game inventories attached to character NFTs, and bundling multiple assets under a single NFT.
+  - q: Who controls the escrow account?
+    a: The escrow is controlled by the Token Metadata program via a PDA. Only the NFT owner can interact with the escrow through Token Metadata instructions.
+  - q: Can I put an NFT inside another NFT?
+    a: Yes. Using Token Owned Escrow, you can transfer an NFT to the escrow account of another NFT, creating nested ownership.
 ---
 
 This extension of the Token Metadata contract was created as a new feature primitive that could optionally be added to all NFTs. At its core it is simply an escrow account attached to an NFT, enabling NFTs to become owners of other tokens. {% .lead %}

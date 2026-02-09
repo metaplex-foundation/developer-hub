@@ -1,10 +1,31 @@
 ---
-title: How to Create a Token Claimer Smart Contract leveraging Merkle Tree
-metaTitle: How to Create a Token Claimer Smart Contract | Token Metadata Guides
-description: Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!
+title: Token Claimer Smart Contract with Merkle Trees
+metaTitle: Token Claimer Smart Contract | Token Metadata Guides
+description: Build a token claimer airdrop smart contract on Solana using Anchor and Merkle Trees. Low-cost distribution of Token Metadata tokens with proof-based claiming.
 # remember to update dates also in /components/guides/index.js
 created: '01-13-2025'
-updated: '01-13-2025'
+updated: '02-07-2026'
+keywords:
+  - token claimer Solana
+  - Merkle tree airdrop
+  - Anchor smart contract
+  - token airdrop
+  - claim-based distribution
+about:
+  - Anchor development
+  - Merkle tree verification
+  - airdrop smart contract
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - TypeScript
+faqs:
+  - q: What is a token claimer smart contract?
+    a: A token claimer is an on-chain program that allows eligible users to claim tokens by providing a Merkle proof, enabling gas-efficient airdrops to large numbers of recipients.
+  - q: Why use Merkle Trees for airdrops?
+    a: Merkle Trees allow storing the entire eligible list off-chain while only keeping a single root hash on-chain. Users prove eligibility with a compact proof, saving storage and transaction costs.
+  - q: What framework is used in this guide?
+    a: This guide uses Anchor (Solana's Rust framework) for the on-chain program and TypeScript for the client-side Merkle tree generation and claim transactions.
 ---
 
 This guide leverages the use of Merkle Trees and Compression to create a low-cost Token Claimer for Token Metadata Tokens using Anchor.

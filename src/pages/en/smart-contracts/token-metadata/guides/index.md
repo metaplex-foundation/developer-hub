@@ -1,7 +1,23 @@
 ---
 title: Guides
 metaTitle: Guides | Token Metadata
-description: How-to guides for Metaplex's Token Metadata product.
+description: Step-by-step guides for Metaplex Token Metadata. Learn how to create NFTs, query collections, build airdrop smart contracts, and manage token metadata accounts on Solana.
+updated: '02-07-2026'
+keywords:
+  - Token Metadata guides
+  - NFT tutorials
+  - Solana NFT how-to
+  - Token Metadata examples
+about:
+  - Token Metadata guides
+  - tutorials
+  - how-to guides
+proficiencyLevel: Beginner
+faqs:
+  - q: What guides are available for Token Metadata?
+    a: Guides cover creating NFTs with JavaScript, querying mints by collection, managing account sizes, and building airdrop smart contracts with Anchor and Merkle trees.
+  - q: Which SDK should I use for the guides?
+    a: Most guides show examples in both Umi and Kit SDKs. Choose based on your project needs — Umi for the fluent plugin-based API, Kit for the functional @solana/kit API.
 ---
 
 The following guides for MPL Token Metadata are currently available:
