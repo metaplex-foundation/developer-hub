@@ -336,7 +336,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)と一緒に、通常のToken Metadata Standardを使用し、URIをゲートウェイに向けるだけで、ウォレットやエクスプローラーなどのすべてのツールがデータを通常NFTが読まれるのと違う方法でデータを読む必要なく、直接チェーンからデータを読み取ることができます。
 
-Metaplexがホストする以下のURL構造のゲートウェイを使用できます：`https://igw.metaplex.com/<network>/<account>`（例：[view this example on the Inscription Gateway](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF)）、またはカスタムURLでゲートウェイを自分でホストすることができます。
+Metaplexがホストする以下のURL構造のゲートウェイを使用できます：`https://igw.metaplex.com/<network>/<account>`（例：[view this example on the Inscription Gateway](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF)）、またはカスタムURLで自分でホストできます。
 
 ## Inscriptionランク
 

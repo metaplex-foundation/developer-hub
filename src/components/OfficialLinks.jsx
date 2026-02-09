@@ -190,7 +190,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>View {link.tagged} questions</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -215,7 +215,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>View {link.tagged} questions</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
