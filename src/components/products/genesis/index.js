@@ -94,6 +94,15 @@ export const genesis = {
             },
           ],
         },
+        {
+          title: 'CLI',
+          links: [
+            {
+              title: 'Genesis CLI Commands',
+              href: '/dev-tools/cli/genesis',
+            },
+          ],
+        },
       ],
     },
     {
@@ -111,6 +120,7 @@ export const genesis = {
         'SDK': 'SDK',
         'Launch Types': 'Launch Types',
         'Integrations': 'Integrations',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': 'Overview',
@@ -120,6 +130,7 @@ export const genesis = {
         'Presale': 'Presale',
         'Uniform Price Auction': 'Uniform Price Auction',
         'Aggregation API': 'Aggregation API',
+        'Genesis CLI Commands': 'Genesis CLI Commands',
       },
     },
     ja: {
@@ -130,6 +141,7 @@ export const genesis = {
         'SDK': 'SDK',
         'Launch Types': 'ローンチタイプ',
         'Integrations': 'インテグレーション',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '概要',
@@ -139,6 +151,7 @@ export const genesis = {
         'Presale': 'プレセール',
         'Uniform Price Auction': 'ユニフォームプライスオークション',
         'Aggregation API': 'アグリゲーションAPI',
+        'Genesis CLI Commands': 'Genesis CLIコマンド',
       },
     },
     ko: {
@@ -149,6 +162,7 @@ export const genesis = {
         'SDK': 'SDK',
         'Launch Types': '런치 유형',
         'Integrations': '통합',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '개요',
@@ -158,6 +172,7 @@ export const genesis = {
         'Presale': '프리세일',
         'Uniform Price Auction': '균일가 경매',
         'Aggregation API': '애그리게이션 API',
+        'Genesis CLI Commands': 'Genesis CLI 명령어',
       },
     },
     zh: {
@@ -168,6 +183,7 @@ export const genesis = {
         'SDK': 'SDK',
         'Launch Types': '发行类型',
         'Integrations': '集成',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '概述',
@@ -177,6 +193,7 @@ export const genesis = {
         'Priced Sale': '定价销售',
         'Uniform Price Auction': '统一价格拍卖',
         'Aggregation API': '聚合API',
+        'Genesis CLI Commands': 'Genesis CLI命令',
       },
     },
   },
