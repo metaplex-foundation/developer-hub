@@ -116,7 +116,7 @@ mplx genesis transition <GENESIS_ADDRESS> --bucketIndex 0
 
 ### Options
 
-- `--bucketIndex <integer>` (`-b`): Index of the bucket whose end behaviors to execute (required)
+- `--bucketIndex <integer>` (`-b`): Index of the launch pool bucket (required — no default; the target bucket must be specified explicitly because transition executes end behaviors for a specific bucket)
 
 ### Notes
 
