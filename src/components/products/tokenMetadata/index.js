@@ -101,6 +101,12 @@ export const tokenMetadata = {
               title: 'Create an NFT',
               href: '/smart-contracts/token-metadata/guides/javascript/create-an-nft',
             },
+            {
+              title: 'How to Add Metadata to a Solana Token',
+              href: '/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+              created: '2024-10-01',
+              updated: null,
+            },
           ],
         },
       ],
@@ -154,6 +160,7 @@ export const tokenMetadata = {
         'Create a claim based airdrop using Gumdrop': 'Create a claim based airdrop using Gumdrop',
         'Token Claimer (Airdrop) Smart Contract': 'Token Claimer (Airdrop) Smart Contract',
         'Create an NFT': 'Create an NFT',
+        'How to Add Metadata to a Solana Token': 'How to Add Metadata to a Solana Token',
       }
     },
     ja: {
@@ -188,6 +195,7 @@ export const tokenMetadata = {
         'Create a claim based airdrop using Gumdrop': 'Gumdropを使用したクレームベースのエアドロップを作成',
         'Token Claimer (Airdrop) Smart Contract': 'トークンクレーマー（エアドロップ）スマートコントラクト',
         'Create an NFT': 'NFTの作成',
+        'How to Add Metadata to a Solana Token': 'Solanaトークンにメタデータを追加する方法',
       }
     },
     ko: {
@@ -222,6 +230,7 @@ export const tokenMetadata = {
         'Create a claim based airdrop using Gumdrop': 'Gumdrop을 사용한 클레임 기반 에어드롭 생성',
         'Token Claimer (Airdrop) Smart Contract': '토큰 클레이머 (에어드롭) 스마트 컨트랙트',
         'Create an NFT': 'NFT 생성',
+        'How to Add Metadata to a Solana Token': 'Solana 토큰에 메타데이터 추가하는 방법',
       }
     },
     zh: {
@@ -256,6 +265,7 @@ export const tokenMetadata = {
         'Create a claim based airdrop using Gumdrop': '使用Gumdrop创建基于领取的空投',
         'Token Claimer (Airdrop) Smart Contract': '代币领取器（空投）智能合约',
         'Create an NFT': '创建NFT',
+        'How to Add Metadata to a Solana Token': '为Solana代币添加元数据',
       }
     }
   }
