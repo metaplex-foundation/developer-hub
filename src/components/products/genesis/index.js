@@ -190,7 +190,7 @@ export const genesis = {
         'Getting Started': '快速入门',
         'JavaScript SDK': 'JavaScript SDK',
         'Launch Pool': '发行池',
-        'Priced Sale': '定价销售',
+        'Presale': '预售',
         'Uniform Price Auction': '统一价格拍卖',
         'Aggregation API': '聚合API',
         'Genesis CLI Commands': 'Genesis CLI命令',
