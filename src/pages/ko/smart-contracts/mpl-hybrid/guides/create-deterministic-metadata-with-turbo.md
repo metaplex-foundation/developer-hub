@@ -1,10 +1,33 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Turbo를 사용하여 결정적 메타데이터 생성하기
 metaTitle: Turbo를 사용하여 결정적 메타데이터 생성하기 | 일반 가이드
 description: Arweave 기반 업로드를 위한 Turbo SDK를 활용하여 결정적 메타데이터를 생성하는 방법을 알아보세요.
-# remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
 updated: '10-19-2024'
+keywords:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave upload
+  - path manifest
+  - NFT metadata
+about:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave uploads
+  - path manifests
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+howToSteps:
+  - Prepare metadata files in a folder with incremental naming (0.json, 1.json, etc.)
+  - Install and configure the Turbo SDK with Solana as the payment token
+  - Calculate the required lamports for uploading the metadata folder
+  - Top up the wallet with Winc if needed using topUpWithTokens
+  - Upload the metadata folder using uploadFolder to get a manifest ID
+howToTools:
+  - Turbo SDK
+  - Arweave
 ---
 
 MPL-Hybrid 프로그램의 메타데이터 랜덤화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관성 있고 순차적인 구조를 따라야 합니다. 이를 위해 Arweave의 [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) 기능과 Turbo SDK를 사용할 것입니다. **이 가이드에서는 이를 설정하는 방법을 보여드립니다!**

@@ -5,6 +5,30 @@ description: Learn about RPCs on the Solana blockchain and how DAS by Metaplex a
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '04-19-2025'
+keywords:
+  - Solana RPC
+  - DAS
+  - Digital Asset Standard
+  - Metaplex DAS
+  - RPC endpoints
+  - digital asset indexing
+about:
+  - Remote Procedure Calls
+  - Metaplex DAS
+  - digital asset indexing
+  - Solana infrastructure
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+faqs:
+  - q: What is an RPC on Solana?
+    a: RPCs (Remote Procedure Calls) are servers that act as a bridge between applications and the Solana blockchain, handling requests for submitting transactions, retrieving data, and monitoring network status.
+  - q: What is Metaplex DAS?
+    a: Metaplex DAS (Digital Asset Standard) is a protocol that standardizes the read layer for NFTs and tokens on Solana by indexing digital assets into an optimized database for faster data retrieval.
+  - q: Which Metaplex programs are indexed by DAS?
+    a: Core, Token Metadata, and Bubblegum are all currently indexed by DAS, providing fast access to digital asset data for these standards.
+  - q: How do RPCs and DAS work together?
+    a: RPCs provide direct access to on-chain data while DAS offers an optimized indexed layer for digital assets. Developers use RPCs for general blockchain data and DAS for efficient digital asset queries.
 ---
 
 ## Roles of an RPC on the Solana Blockchain

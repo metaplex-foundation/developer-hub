@@ -2,6 +2,28 @@
 title: Metaplexプログラムへのファイバ方法
 metaTitle: Metaplexプログラムへの乙方法 | ガイド
 description: 各MetaplexプログラムへのCPIを実行する際にMetaplexが一貫性のある体験を提供する方法の概要。
+keywords:
+  - CPI
+  - Cross Program Invocation
+  - Solana CPI tutorial
+  - Metaplex CpiBuilder
+  - invoke_signed
+about:
+  - Cross Program Invocation
+  - Metaplex CPI builders
+  - Solana program interoperability
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+howToSteps:
+  - Import the CpiBuilder for the desired Metaplex instruction
+  - Initialize the CpiBuilder with the target program AccountInfo
+  - Fill in the required accounts and data arguments
+  - Choose between invoke() for regular calls or invoke_signed() for PDA signers
+  - Execute the CPI call to the Metaplex program
+howToTools:
+  - Metaplex Rust SDK
+  - mpl-core crate
 ---
 
 ## はじめに

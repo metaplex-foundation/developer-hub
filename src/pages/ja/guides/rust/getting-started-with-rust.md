@@ -2,6 +2,18 @@
 title: Rustを始める
 metaTitle: Rustを始める | ガイド
 description: SolanaエコシステムでのRustの始め方についての簡単な概要。
+keywords:
+  - Rust Solana
+  - getting started Rust
+  - Anchor framework
+  - Solana program development
+about:
+  - Rust programming
+  - Solana development
+  - Anchor framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
 
 ## はじめに

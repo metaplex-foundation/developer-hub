@@ -1,10 +1,33 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Turboを使用した決定論的メタデータの作成
 metaTitle: Turboを使用した決定論的メタデータの作成 | 一般ガイド
 description: Arweaveベースのアップロードを行うTurbo SDKを活用して決定論的メタデータを作成する方法を学習します。
-# remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
 updated: '10-19-2024'
+keywords:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave upload
+  - path manifest
+  - NFT metadata
+about:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave uploads
+  - path manifests
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+howToSteps:
+  - Prepare metadata files in a folder with incremental naming (0.json, 1.json, etc.)
+  - Install and configure the Turbo SDK with Solana as the payment token
+  - Calculate the required lamports for uploading the metadata folder
+  - Top up the wallet with Winc if needed using topUpWithTokens
+  - Upload the metadata folder using uploadFolder to get a manifest ID
+howToTools:
+  - Turbo SDK
+  - Arweave
 ---
 
 MPL-Hybridプログラムでメタデータのランダム化機能を利用するには、オフチェーンメタデータのURIが一貫性があり、段階的な構造に従う必要があります。これを達成するために、ArweaveとTurbo SDKの[パスマニフェスト](https://cookbook.arweave.dev/concepts/manifests.html)機能を使用します。**このガイドでは、その設定方法をデモンストレーションします！**

@@ -4,6 +4,28 @@ metaTitle: 创建可领取的 SPL 代币空投 | Gumdrop 指南
 description: 了解如何使用 Gumdrop 创建用户可以领取其分配的 SPL 代币空投。
 created: '01-06-2025'
 updated: '01-06-2025'
+keywords:
+  - SPL token airdrop
+  - Gumdrop
+  - claimable airdrop
+  - Merkle tree
+  - Solana token distribution
+about:
+  - Gumdrop airdrop program
+  - SPL token distribution
+  - Merkle tree verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Bash
+howToSteps:
+  - Create an SPL token with sufficient supply for the distribution
+  - Prepare a JSON distribution list with wallet addresses and token amounts
+  - Install the Gumdrop CLI and create the airdrop using the create command
+  - Set up a frontend claim interface for users to claim their tokens
+  - Close the Gumdrop after the airdrop period to recover unclaimed tokens
+howToTools:
+  - Gumdrop CLI
+  - Solana CLI
 ---
 
 ## 概述

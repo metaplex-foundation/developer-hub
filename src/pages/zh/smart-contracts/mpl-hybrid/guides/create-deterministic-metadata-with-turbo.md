@@ -1,10 +1,33 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 使用 Turbo 创建确定性元数据
 metaTitle: 使用 Turbo 创建确定性元数据 | 通用指南
 description: 了解如何利用 Turbo SDK 创建确定性元数据，用于基于 Arweave 的上传。
-# remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
 updated: '10-19-2024'
+keywords:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave upload
+  - path manifest
+  - NFT metadata
+about:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave uploads
+  - path manifests
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+howToSteps:
+  - Prepare metadata files in a folder with incremental naming (0.json, 1.json, etc.)
+  - Install and configure the Turbo SDK with Solana as the payment token
+  - Calculate the required lamports for uploading the metadata folder
+  - Top up the wallet with Winc if needed using topUpWithTokens
+  - Upload the metadata folder using uploadFolder to get a manifest ID
+howToTools:
+  - Turbo SDK
+  - Arweave
 ---
 
 要利用 MPL-Hybrid 程序中的元数据随机化功能，链外元数据 URI 需要遵循一致的增量结构。为了实现这一点，我们将使用 Arweave 的[路径清单](https://cookbook.arweave.dev/concepts/manifests.html)功能和 Turbo SDK。**本指南将演示如何设置！**

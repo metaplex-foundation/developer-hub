@@ -2,6 +2,28 @@
 title: Metaplex 프로그램에 CPI하는 방법
 metaTitle: Metaplex 프로그램에 CPI하는 방법 | 가이드
 description: 각 Metaplex 프로그램에 CPI를 수행할 때 Metaplex가 어떻게 일관된 경험을 제공하는지에 대한 개요입니다.
+keywords:
+  - CPI
+  - Cross Program Invocation
+  - Solana CPI tutorial
+  - Metaplex CpiBuilder
+  - invoke_signed
+about:
+  - Cross Program Invocation
+  - Metaplex CPI builders
+  - Solana program interoperability
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+howToSteps:
+  - Import the CpiBuilder for the desired Metaplex instruction
+  - Initialize the CpiBuilder with the target program AccountInfo
+  - Fill in the required accounts and data arguments
+  - Choose between invoke() for regular calls or invoke_signed() for PDA signers
+  - Execute the CPI call to the Metaplex program
+howToTools:
+  - Metaplex Rust SDK
+  - mpl-core crate
 ---
 
 ## 소개

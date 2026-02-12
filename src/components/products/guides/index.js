@@ -2,11 +2,11 @@ import { documentationSection } from '@/shared/sections';
 import { BookOpenIcon } from '@heroicons/react/24/outline';
 
 export const guides = {
-  name: 'Guides',
+  name: 'Solana',
   headline: 'Guides for the Solana Blockchain',
   description: 'Guides for the Solana Blockchain.',
   path: 'guides',
-  navigationMenuCatergory: 'Guides',
+  navigationMenuCatergory: 'Solana',
   icon: <BookOpenIcon className="text-green-500" />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',

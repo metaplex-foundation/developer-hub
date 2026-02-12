@@ -1,10 +1,38 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Solanaトークンの作成方法
 metaTitle: Solanaトークンの作成方法 | ガイド
 description: Metaplexパッケージを使用してSolanaブロックチェーン上でSPLトークン/ミームコインを作成する方法を学習します。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - SPL Token
+  - create Solana token
+  - meme coin
+  - fungible token
+  - Metaplex Umi
+about:
+  - SPL Token creation
+  - Metaplex Umi
+  - token metadata
+  - Solana fungible tokens
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new project and install required Metaplex packages
+  - Configure Umi with a signer and RPC connection
+  - Upload the token image to Arweave via Irys
+  - Upload the token metadata JSON to Arweave
+  - Create the Mint Account and Token Metadata using createFungible
+  - Create an Associated Token Account and mint tokens
+  - Send the transaction to the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-token-metadata
+  - mpl-toolbox
+  - Irys uploader
 ---
 
 このステップバイステップガイドでは、SolanaブロックチェーンでSolanaトークン（SPLトークン）を作成する方法を説明します。Metaplex UmiクライアントラッパーとMpl ToolboxパッケージをJavaScriptで使用できます。これにより、スクリプトやフロントエンドおよびバックエンドフレームワークで使用できる関数を作成できます。

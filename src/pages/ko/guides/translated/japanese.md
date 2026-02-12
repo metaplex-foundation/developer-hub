@@ -2,6 +2,15 @@
 title: Japanese 日本語
 metaTitle: Japanese 日本語 | 가이드
 description: 일본어로 번역된 가이드 모음입니다.
+keywords:
+  - Japanese guides
+  - Solana guides Japanese
+  - Metaplex documentation Japanese
+about:
+  - Japanese translations
+  - Solana guides
+  - Metaplex guides
+proficiencyLevel: Beginner
 ---
 
 ## Guides ガイド

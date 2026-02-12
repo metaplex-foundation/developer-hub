@@ -5,6 +5,28 @@ description: Learn how to send and transfer SPL Tokens via javascript on the Sol
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
+keywords:
+  - transfer SPL tokens
+  - send SPL tokens
+  - Solana token transfer
+  - Associated Token Account
+  - Metaplex Umi
+about:
+  - SPL token transfers
+  - Associated Token Accounts
+  - Metaplex Umi
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install Umi and mpl-toolbox packages
+  - Configure Umi with a wallet that holds SPL tokens
+  - Find the Associated Token Accounts for sender and receiver
+  - Use the transferTokens function to create a transfer instruction
+  - Send and confirm the transaction on the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-toolbox
 ---
 
 This guide will show you how to build out a Javascript function to send and transfer SPL tokens on the Solana blockchain utilizing the Metaplex Umi client wrapper and MPL Toolbox packages.

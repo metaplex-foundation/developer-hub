@@ -1,10 +1,30 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 如何在 Solana 上创建 NFT
 metaTitle: 如何在 Solana 上创建 NFT | 指南
 description: 了解如何使用 Metaplex 包在 Solana 区块链上创建 NFT。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - create NFT Solana
+  - Metaplex Core
+  - Token Metadata
+  - Bubblegum
+  - compressed NFT
+about:
+  - NFT creation
+  - Metaplex Core
+  - Token Metadata
+  - Bubblegum
+  - NFT standards
+proficiencyLevel: Beginner
+faqs:
+  - q: What are the different ways to create NFTs on Solana with Metaplex?
+    a: Metaplex provides three standards - Core (newest, with plugins and optimized accounts), Token Metadata (the original Solana NFT standard), and Bubblegum (compressed NFTs using Merkle trees for mass minting).
+  - q: Which Metaplex NFT standard should I use?
+    a: Use Core for the newest features and cost efficiency, Token Metadata for broad ecosystem support and compatibility, or Bubblegum for creating millions of NFTs at minimal cost.
+  - q: What are compressed NFTs (cNFTs)?
+    a: Compressed NFTs use Bubblegum and Merkle tree technology to store NFT data efficiently, making it extremely cheap to mint large quantities of NFTs on Solana.
 ---
 
 Metaplex 提供 3 种不同的标准在 Solana 区块链上创建 NFT，包括 **Core**、**Token Metadata** 和 **Bubblegum**。每个标准和协议为项目提供独特的优势，并跨越项目的铸造和 NFT 需求的广泛范围。

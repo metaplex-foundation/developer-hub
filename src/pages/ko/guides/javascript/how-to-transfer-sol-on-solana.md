@@ -1,10 +1,31 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Solana에서 SOL을 전송하는 방법
 metaTitle: Solana에서 SOL을 전송하는 방법 | 가이드
 description: Solana 블록체인에서 javascript를 통해 SOL을 전송하는 방법을 알아보세요.
-# remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
+keywords:
+  - transfer SOL
+  - send SOL
+  - Solana SOL transfer
+  - Solana transaction
+  - Metaplex Umi
+about:
+  - SOL transfers
+  - Metaplex Umi
+  - Solana transactions
+proficiencyLevel: Beginner
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install Umi and mpl-toolbox packages
+  - Configure Umi with a signer and RPC connection
+  - Use the transferSol function from mpl-toolbox to create a transfer instruction
+  - Send and confirm the transaction on the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-toolbox
 ---
 
 이 가이드는 Metaplex Umi 클라이언트 래퍼와 MPL Toolbox 패키지를 활용하여 Solana 블록체인에서 한 지갑에서 다른 지갑으로 SOL을 전송하는 Javascript 함수를 구축하는 방법을 보여줍니다.

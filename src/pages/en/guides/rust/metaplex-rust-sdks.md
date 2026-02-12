@@ -2,6 +2,20 @@
 title: Metaplex Rust SDKs
 metaTitle: Metaplex Rust SDKs | Guides
 description: A quick overview on Metaplex Rust SDKs.
+keywords:
+  - Metaplex Rust SDK
+  - Rust crate modules
+  - mpl-core crate
+  - SDK accounts and types
+  - Solana Rust crates
+about:
+  - Metaplex Rust SDKs
+  - instruction builders
+  - CPI builders
+  - SDK modules
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## Introduction

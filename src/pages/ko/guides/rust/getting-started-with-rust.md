@@ -2,6 +2,18 @@
 title: Rust 시작하기
 metaTitle: Rust 시작하기 | 가이드
 description: Solana 생태계에서 Rust를 시작하는 방법에 대한 간단한 개요입니다.
+keywords:
+  - Rust Solana
+  - getting started Rust
+  - Anchor framework
+  - Solana program development
+about:
+  - Rust programming
+  - Solana development
+  - Anchor framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
 
 ## 소개

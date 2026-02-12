@@ -1,10 +1,33 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 理解 Solana 程序派生地址（PDA）
 metaTitle: 理解 Solana 程序派生地址 | 指南
 description: 了解 Solana 程序派生地址（PDA）及其用例。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - Program Derived Addresses
+  - PDA
+  - Solana PDAs
+  - Ed25519 curve
+  - Solana PDA tutorial
+  - deterministic addresses
+about:
+  - Program Derived Addresses
+  - Solana account management
+  - deterministic key derivation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
+faqs:
+  - q: What are Program Derived Addresses (PDAs) on Solana?
+    a: PDAs are special account addresses deterministically derived from a program ID and seed values. They have no associated private keys, meaning only the owning program can sign transactions involving them.
+  - q: Why can't PDAs have private keys?
+    a: PDAs are derived to fall off the Ed25519 elliptic curve, which means no valid private key exists for these addresses. This ensures only the program that derived the PDA can authorize transactions for it.
+  - q: How are PDAs derived?
+    a: PDAs are derived using Pubkey::find_program_address with a program ID and seed values. The function hashes these together and ensures the resulting address is not on the Ed25519 curve.
+  - q: What are common use cases for PDAs?
+    a: PDAs are used to manage program state by creating deterministic accounts for data storage, and to authorize transactions where only the owning program can sign on behalf of the PDA.
 ---
 
 ## 概述

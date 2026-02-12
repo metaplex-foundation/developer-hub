@@ -2,6 +2,16 @@
 title: ガイド
 metaTitle: Metaplex Solana ガイド | ガイド
 description: SolanaブロックチェーンについてのMetaplexによるガイドです。
+keywords:
+  - Solana guides
+  - Solana developer tutorials
+  - Metaplex guides
+  - Solana development
+about:
+  - Solana
+  - Metaplex
+  - blockchain development
+proficiencyLevel: Beginner
 ---
 
 ![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)

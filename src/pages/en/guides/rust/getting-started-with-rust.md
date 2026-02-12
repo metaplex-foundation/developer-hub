@@ -2,6 +2,18 @@
 title: Getting Started with Rust
 metaTitle: Getting Started with Rust | Guides
 description: A quick overview on how to get started with Rust in the Solana ecosystem.
+keywords:
+  - Rust Solana
+  - getting started Rust
+  - Anchor framework
+  - Solana program development
+about:
+  - Rust programming
+  - Solana development
+  - Anchor framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
 
 ## Introduction

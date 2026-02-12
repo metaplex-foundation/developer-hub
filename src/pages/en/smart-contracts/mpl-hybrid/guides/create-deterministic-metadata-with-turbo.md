@@ -5,6 +5,29 @@ description: Learn how to create deterministic metadata leveraging the Turbo SDK
 # remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
 updated: '10-19-2024'
+keywords:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave upload
+  - path manifest
+  - NFT metadata
+about:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave uploads
+  - path manifests
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+howToSteps:
+  - Prepare metadata files in a folder with incremental naming (0.json, 1.json, etc.)
+  - Install and configure the Turbo SDK with Solana as the payment token
+  - Calculate the required lamports for uploading the metadata folder
+  - Top up the wallet with Winc if needed using topUpWithTokens
+  - Upload the metadata folder using uploadFolder to get a manifest ID
+howToTools:
+  - Turbo SDK
+  - Arweave
 ---
 
 To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**

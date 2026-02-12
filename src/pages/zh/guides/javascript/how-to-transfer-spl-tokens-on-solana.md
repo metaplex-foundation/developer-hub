@@ -1,10 +1,32 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 如何在 Solana 上发送和转移 SPL 代币
 metaTitle: 如何在 Solana 上发送和转移 SPL 代币 | 指南
 description: 了解如何使用 Metaplex 包通过 javascript 在 Solana 区块链上发送和转移 SPL 代币。
-# remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
+keywords:
+  - transfer SPL tokens
+  - send SPL tokens
+  - Solana token transfer
+  - Associated Token Account
+  - Metaplex Umi
+about:
+  - SPL token transfers
+  - Associated Token Accounts
+  - Metaplex Umi
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install Umi and mpl-toolbox packages
+  - Configure Umi with a wallet that holds SPL tokens
+  - Find the Associated Token Accounts for sender and receiver
+  - Use the transferTokens function to create a transfer instruction
+  - Send and confirm the transaction on the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-toolbox
 ---
 
 本指南将向您展示如何使用 Metaplex Umi 客户端包装器和 MPL Toolbox 包构建 Javascript 函数以在 Solana 区块链上发送和转移 SPL 代币。

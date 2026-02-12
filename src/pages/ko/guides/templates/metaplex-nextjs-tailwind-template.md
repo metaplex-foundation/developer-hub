@@ -2,6 +2,31 @@
 title: Metaplex Solana NextJs Tailwind 템플릿
 metaTitle: Metaplex Solana NextJs Tailwind 템플릿 | 웹 UI 템플릿
 description: Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter 및 Zustand를 사용하는 웹 UI 템플릿입니다.
+keywords:
+  - Next.js template
+  - Solana dApp template
+  - wallet adapter
+  - Metaplex Umi
+  - Zustand
+about:
+  - Next.js template
+  - Solana wallet adapter
+  - Metaplex Umi integration
+  - Zustand state management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Clone the template repository from GitHub
+  - Configure the RPC URL in the Umi store
+  - Use Zustand helpers to access Umi state in .ts and .tsx files
+  - Build transactions using umiWithCurrentWalletAdapter helper
+  - Send transactions using sendAndConfirmWalletAdapter helper
+howToTools:
+  - Next.js
+  - Metaplex Umi
+  - Solana Wallet Adapter
+  - Zustand
 ---
 
 프론트엔드 프레임워크로 Nextjs와 Tailwind를 활용하고 사용 편의성을 위해 Metaplex Umi, Solana WalletAdapter, Zustand 전역 스토어가 미리 설치된 다운로드 가능하고 재사용 가능한 템플릿입니다.
