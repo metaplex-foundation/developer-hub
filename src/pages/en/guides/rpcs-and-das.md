@@ -1,10 +1,10 @@
 ---
-title: RPCs and DAS
-metaTitle: RPCs and DAS on the Solana Blockchain | Guides
-description: Learn about RPCs on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
+title: RPCs, DAS, and RPC Providers
+metaTitle: RPCs, DAS, and RPC Providers on Solana | Guides
+description: Learn about RPCs on the Solana blockchain, how DAS by Metaplex aids in storing and reading data, and find RPC providers for your project.
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
-updated: '04-19-2025'
+updated: '02-13-2026'
 keywords:
   - Solana RPC
   - DAS
@@ -12,11 +12,13 @@ keywords:
   - Metaplex DAS
   - RPC endpoints
   - digital asset indexing
+  - RPC providers
 about:
   - Remote Procedure Calls
   - Metaplex DAS
   - digital asset indexing
   - Solana infrastructure
+  - RPC providers
 proficiencyLevel: Beginner
 programmingLanguage:
   - JavaScript
@@ -31,89 +33,125 @@ faqs:
     a: RPCs provide direct access to on-chain data while DAS offers an optimized indexed layer for digital assets. Developers use RPCs for general blockchain data and DAS for efficient digital asset queries.
 ---
 
+Learn about RPCs on Solana, how Metaplex DAS standardizes digital asset reads, and find the right RPC provider for your project. {% .lead %}
+
 ## Roles of an RPC on the Solana Blockchain
+
 Remote Procedure Calls (RPCs) are a crucial part of the Solana blockchain infrastructure. They serve as the bridge between users (or applications) and the blockchain, facilitating interactions and data retrieval.
 
+Solana uses independent nodes responsible for confirming programs and outputs across its clusters (Devnet, Testnet, Mainnet Beta). Not all nodes can vote on blocks — those that can't are primarily used to respond to requests. These are RPC nodes, used to send transactions through the blockchain.
+
+Solana maintains three public API nodes (one per cluster). For example, the Devnet endpoint is:
+
+```
+https://api.devnet.solana.com
+```
+
+These public endpoints are rate-limited. On Mainnet Beta, many developers use a private RPC provider for higher rate limits.
+
 #### Key Roles of an RPC
+
 1. **Facilitating Network Communication**:
-RPC servers handle requests from clients (users or applications) and interact with the blockchain to fulfill those requests. They provide a standardized way for external entities to communicate with the blockchain without requiring them to run a full node.
+RPC servers handle requests from clients (users or applications) and interact with the blockchain to fulfill those requests. They provide a standardized way for external entities to communicate with the blockchain without running a full node.
 
 2. **Submitting Transactions**:
-RPCs enable clients to submit transactions to the Solana blockchain. When a user wants to perform an action on the blockchain, such as transferring tokens or invoking a smart contract, the transaction is sent to an RPC server, which then propagates it to the network for processing and inclusion in a block.
+RPCs enable clients to submit transactions to the Solana blockchain. When a user wants to perform an action such as transferring tokens or invoking a smart contract, the transaction is sent to an RPC server, which propagates it to the network.
 
 3. **Retrieving Blockchain Data**:
-RPC servers allow clients to ask the blockchain for various types of data, including:
-- **Account Information**: details about a specific account, such as balance, token holdings, and other metadata.
-- **Transaction History**: historical transactions associated with an account or a specific transaction signature.
-- **Block Information**: details about specific blocks, including block height, block hash, and transactions included in the block.
-- **Program Logs**: Access logs and output from executed programs (smart contracts).
+RPC servers allow clients to query the blockchain for various types of data, including:
+- **Account Information**: balance, token holdings, and other metadata for a specific account.
+- **Transaction History**: historical transactions associated with an account or transaction signature.
+- **Block Information**: block height, block hash, and transactions included in a block.
+- **Program Logs**: logs and output from executed programs (smart contracts).
 
 4. **Monitoring Network Status**:
-RPCs provide endpoints to check the status of the network and nodes, such as:
-- **Node Health**: Determine if a node is online and functioning correctly.
-- **Network Latency**: Measure the time it takes for requests to be processed and responses to be received.
-- **Synchronization Status**: Check if a node is synchronized with the rest of the network.
+RPCs provide endpoints to check the status of the network, such as node health, network latency, and synchronization status.
 
 5. **Supporting Development and Debugging**:
-RPC endpoints are essential tools for developers building on Solana. They provide functionalities to:
-- **Simulate Transactions**: simulate transactions to see their potential effects before submitting them to the network.
-- **Fetch Program Accounts**: retrieve all accounts associated with a specific program, which is useful for managing program state.
-- **Get Logs**: detailed logs from transactions and programs to debug and optimize their applications.
+RPC endpoints allow developers to simulate transactions, fetch program accounts, and retrieve detailed logs for debugging.
 
-### Example RPC Endpoints
-Here are some common RPC endpoints and their functionalities:
-- **getBalance**: Retrieves the balance of a specified account.
-- **sendTransaction**: Submits a transaction to the network.
-- **getTransaction**: Fetches details about a specific transaction using its signature.
-- **getBlock**: Retrieves information about a specific block by its slot number.
-- **simulateTransaction**: Simulates a transaction to predict its outcome without executing it on the chain.
+### Common RPC Methods
+
+| Method | Description |
+|--------|-------------|
+| `getBalance` | Retrieves the balance of a specified account |
+| `sendTransaction` | Submits a transaction to the network |
+| `getTransaction` | Fetches details about a transaction by signature |
+| `getBlock` | Retrieves block information by slot number |
+| `simulateTransaction` | Simulates a transaction without executing it |
 
 ### Example Usage
-Here’s a simple example using JavaScript to interact with Solana’s RPC endpoints:
 
-```javascript
-const solanaWeb3 = require('@solana/web3.js');
+```bash
+# Get the balance of an account
+curl https://api.mainnet-beta.solana.com -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"getBalance","params":["7C4jsPZpht42Tw6MjXWF56Q5RQUocjBBmciEjDa8HRtp"]}'
 
-// Connect to the Solana cluster
-const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
-
-// Fetch the balance of an account
-async function getBalance(publicKey) {
-  const balance = await connection.getBalance(publicKey);
-  console.log(`Balance: ${balance} lamports`);
-}
-
-// Send a transaction
-async function sendTransaction(transaction, payer) {
-  const signature = await solanaWeb3.sendAndConfirmTransaction(connection, transaction, [payer]);
-  console.log(`Transaction signature: ${signature}`);
-}
-
-// Example public key (a real Solana address format)
-const publicKey = new solanaWeb3.PublicKey('7C4jsPZpht42Tw6MjXWF56Q5RQUocjBBmciEjDa8HRtp');
-
-// Get balance
-getBalance(publicKey);
+# Simulate a transaction
+curl https://api.mainnet-beta.solana.com -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"simulateTransaction","params":["<base64-encoded-tx>"]}'
 ```
+
+---
 
 ## Metaplex DAS
 
-Metaplex DAS (Digital Asset Standard) is a protocol or framework designed to standardize the read layer of NFTs and Tokens on the Solana blockchain, allowing developers to standardize their code when fetching multiple different standards and layouts of Digital Assets.
+Metaplex DAS (Digital Asset Standard) is a protocol designed to standardize the read layer for NFTs and tokens on Solana. It allows developers to use a consistent interface when fetching different standards and layouts of digital assets.
 
 ### Indexing Digital Assets
-By indexing all the Digital Assets (NFTs and Tokens), users gain access to much faster reads of data for these assets as the information is stored in an optimized database rather than fetching directly from the blockchain.
+
+By indexing all digital assets (NFTs and tokens), DAS provides much faster data reads since the information is stored in an optimized database rather than fetched directly from the blockchain.
 
 ### Syncing
-DAS has the ability to sync the reindexing of data during certain lifecycle instructions that are sent to the blockchain. By watching these instructions, such as create, update, burn, and transfer, we can always be assured that the DAS indexed data is up to date.
 
-Currently Core, Token Metadata, and Bubblegum are all indexed by DAS.
+DAS syncs by watching lifecycle instructions sent to the blockchain — create, update, burn, and transfer. This ensures the indexed data is always up to date.
 
-To find out more about Metaplex DAS you can visit these pages:
+Currently **Core**, **Token Metadata**, and **Bubblegum** are all indexed by DAS.
+
+### DAS and RPCs
+
+RPCs and DAS complement each other. Standard RPCs provide direct access to on-chain data, while DAS offers an optimized indexed layer specifically for digital assets. For developers, the DAS API is required to interact with compressed NFTs (cNFTs), and it also makes working with Token Metadata assets easier and faster. We strongly recommend using RPC nodes with DAS support for the best user experience.
+
+To learn more:
 
 - [Metaplex DAS API](/dev-tools/das-api)
-- [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
-- [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
+- [Metaplex DAS API GitHub](https://github.com/metaplex-foundation/digital-asset-standard-api)
+- [Metaplex Digital Asset RPC Infrastructure GitHub](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 
-## RPC and DAS Integration
+---
 
-RPCs and DAS complement each other in the Solana ecosystem. While standard RPCs provide direct access to on-chain data, Metaplex DAS offers an optimized, indexed layer specifically for digital assets. By leveraging both services appropriately, developers can build more efficient applications that retrieve general blockchain data through RPCs while accessing digital asset information through DAS, resulting in better performance and user experience.
+## Archive and Non-Archive Nodes
+
+**Archive nodes** store the full history of all previous blocks. This allows you to view an address's balance history and inspect any historical state. Due to the high system requirements, having access to a private archive node is highly beneficial.
+
+**Non-archive nodes** (regular nodes) only retain around the last 100 blocks. Even non-archive nodes can be resource-intensive to manage, which is why many developers choose a private RPC provider — especially for Mainnet Beta where real SOL is involved and rate limits are stricter.
+
+---
+
+## RPC Providers
+
+{% callout type="note" %}
+These lists are in alphabetical order. Choose the provider that best suits your project's needs. If we are missing a provider, let us know on [Discord](https://discord.gg/metaplex) or submit a PR.
+{% /callout %}
+
+### RPCs with DAS Support
+
+- [Extrnode](https://docs.extrnode.com/das_api/)
+- [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
+- [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
+- [QuickNode](https://quicknode.com/)
+- [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
+- [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
+
+### RPCs without DAS Support
+
+- [Alchemy](https://alchemy.com/?a=metaplex)
+- [Ankr](https://www.ankr.com/protocol/public/solana/)
+- [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
+- [Chainstack](https://chainstack.com/build-better-with-solana/)
+- [Figment](https://figment.io/)
+- [GetBlock](https://getblock.io/)
+- [NOWNodes](https://nownodes.io/)
+- [Syndica](https://syndica.io/)

@@ -1,10 +1,10 @@
 ---
 # remember to update dates also in /components/guides/index.js
-title: RPCとDAS
-metaTitle: SolanaブロックチェーンのRPCとDAS | ガイド
-description: SolanaブロックチェーンのRPCと、MetaplexのDASがSolanaでのデータ保存と読み取りをどのように支援するかについて学習します。
+title: RPC、DAS、RPCプロバイダー
+metaTitle: SolanaブロックチェーンのRPC、DAS、RPCプロバイダー | ガイド
+description: SolanaブロックチェーンのRPC、MetaplexのDASによるデータ保存と読み取りの支援、プロジェクトに適したRPCプロバイダーの選択について学習します。
 created: '06-16-2024'
-updated: '04-19-2025'
+updated: '02-13-2026'
 keywords:
   - Solana RPC
   - DAS
@@ -12,11 +12,13 @@ keywords:
   - Metaplex DAS
   - RPC endpoints
   - digital asset indexing
+  - RPC providers
 about:
   - Remote Procedure Calls
   - Metaplex DAS
   - digital asset indexing
   - Solana infrastructure
+  - RPC providers
 proficiencyLevel: Beginner
 programmingLanguage:
   - JavaScript
@@ -31,89 +33,125 @@ faqs:
     a: RPCs provide direct access to on-chain data while DAS offers an optimized indexed layer for digital assets. Developers use RPCs for general blockchain data and DAS for efficient digital asset queries.
 ---
 
+SolanaのRPC、Metaplex DASによるデジタル資産読み取りの標準化、プロジェクトに適したRPCプロバイダーの選択について学習します。 {% .lead %}
+
 ## SolanaブロックチェーンでのRPCの役割
+
 リモートプロシージャコール（RPC）は、Solanaブロックチェーンインフラストラクチャの重要な部分です。これらは、ユーザー（またはアプリケーション）とブロックチェーンの間の橋渡しとして機能し、相互作用とデータ取得を促進します。
 
+Solanaは、クラスター（Devnet、Testnet、Mainnet Beta）全体でプログラムと出力を確認する独立したノードを使用しています。すべてのノードがブロックに投票できるわけではなく、投票できないノードは主にリクエストへの応答に使用されます。これらがRPCノードで、ブロックチェーンを通じてトランザクションを送信するために使用されます。
+
+Solanaは3つのパブリックAPIノード（クラスターごとに1つ）を維持しています。例えば、Devnetのエンドポイントは：
+
+```
+https://api.devnet.solana.com
+```
+
+これらのパブリックエンドポイントはレート制限があります。Mainnet Betaでは、多くの開発者がより高いレート制限のためにプライベートRPCプロバイダーを使用しています。
+
 #### RPCの主な役割
+
 1. **ネットワーク通信の促進**:
-RPCサーバーは、クライアント（ユーザーまたはアプリケーション）からの要求を処理し、ブロックチェーンと相互作用してそれらの要求を満たします。外部エンティティがフルノードを実行する必要なくブロックチェーンと通信するための標準化された方法を提供します。
+RPCサーバーは、クライアントからの要求を処理し、ブロックチェーンと相互作用してそれらの要求を満たします。フルノードを実行する必要なくブロックチェーンと通信するための標準化された方法を提供します。
 
 2. **トランザクションの送信**:
-RPCにより、クライアントはSolanaブロックチェーンにトランザクションを送信できます。ユーザーがトークンの転送やスマートコントラクトの呼び出しなど、ブロックチェーンでアクションを実行したい場合、トランザクションはRPCサーバーに送信され、処理とブロックへの含有のためにネットワークに伝播されます。
+RPCにより、クライアントはSolanaブロックチェーンにトランザクションを送信できます。トークンの転送やスマートコントラクトの呼び出しなどのアクションを実行したい場合、トランザクションはRPCサーバーに送信され、ネットワークに伝播されます。
 
 3. **ブロックチェーンデータの取得**:
-RPCサーバーにより、クライアントはブロックチェーンに以下を含む様々な種類のデータを要求できます：
-- **アカウント情報**: 残高、トークン保有量、その他のメタデータなど、特定のアカウントに関する詳細。
-- **トランザクション履歴**: アカウントまたは特定のトランザクション署名に関連する履歴トランザクション。
-- **ブロック情報**: ブロック高、ブロックハッシュ、ブロックに含まれるトランザクションを含む、特定のブロックに関する詳細。
-- **プログラムログ**: 実行されたプログラム（スマートコントラクト）からのログと出力へのアクセス。
+RPCサーバーにより、クライアントはブロックチェーンに様々な種類のデータを要求できます：
+- **アカウント情報**: 残高、トークン保有量、その他のメタデータ。
+- **トランザクション履歴**: アカウントまたはトランザクション署名に関連する履歴。
+- **ブロック情報**: ブロック高、ブロックハッシュ、含まれるトランザクション。
+- **プログラムログ**: 実行されたプログラムからのログと出力。
 
 4. **ネットワーク状態の監視**:
-RPCは、以下のようなネットワークとノードの状態をチェックするエンドポイントを提供します：
-- **ノード健全性**: ノードがオンラインで正しく機能しているかを判断。
-- **ネットワーク待機時間**: 要求が処理され、レスポンスが受信されるまでの時間を測定。
-- **同期状態**: ノードがネットワークの残りの部分と同期しているかをチェック。
+RPCは、ノード健全性、ネットワーク待機時間、同期状態をチェックするエンドポイントを提供します。
 
 5. **開発とデバッグのサポート**:
-RPCエンドポイントは、Solanaで開発する開発者にとって不可欠なツールです。以下の機能を提供します：
-- **トランザクションのシミュレーション**: ネットワークに送信する前にトランザクションをシミュレートして、潜在的な影響を確認。
-- **プログラムアカウントの取得**: プログラム状態の管理に役立つ、特定のプログラムに関連するすべてのアカウントを取得。
-- **ログの取得**: アプリケーションのデバッグと最適化のための、トランザクションとプログラムからの詳細ログ。
+RPCエンドポイントにより、開発者はトランザクションのシミュレーション、プログラムアカウントの取得、デバッグ用の詳細ログの取得が可能です。
 
-### RPCエンドポイントの例
-以下は、一般的なRPCエンドポイントとその機能です：
-- **getBalance**: 指定されたアカウントの残高を取得。
-- **sendTransaction**: ネットワークにトランザクションを送信。
-- **getTransaction**: 署名を使用して特定のトランザクションの詳細を取得。
-- **getBlock**: スロット番号による特定のブロックに関する情報を取得。
-- **simulateTransaction**: チェーン上で実行することなく、トランザクションをシミュレートして結果を予測。
+### 一般的なRPCメソッド
+
+| メソッド | 説明 |
+|--------|-------------|
+| `getBalance` | 指定されたアカウントの残高を取得 |
+| `sendTransaction` | ネットワークにトランザクションを送信 |
+| `getTransaction` | 署名によるトランザクション詳細を取得 |
+| `getBlock` | スロット番号によるブロック情報を取得 |
+| `simulateTransaction` | 実行せずにトランザクションをシミュレート |
 
 ### 使用例
-SolanaのRPCエンドポイントと相互作用するJavaScriptを使用した簡単な例：
 
-```javascript
-const solanaWeb3 = require('@solana/web3.js');
+```bash
+# アカウントの残高を取得
+curl https://api.mainnet-beta.solana.com -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"getBalance","params":["7C4jsPZpht42Tw6MjXWF56Q5RQUocjBBmciEjDa8HRtp"]}'
 
-// Solanaクラスターに接続
-const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
-
-// アカウントの残高を取得
-async function getBalance(publicKey) {
-  const balance = await connection.getBalance(publicKey);
-  console.log(`Balance: ${balance} lamports`);
-}
-
-// トランザクションを送信
-async function sendTransaction(transaction, payer) {
-  const signature = await solanaWeb3.sendAndConfirmTransaction(connection, transaction, [payer]);
-  console.log(`Transaction signature: ${signature}`);
-}
-
-// 公開鍵の例（実際のSolanaアドレス形式）
-const publicKey = new solanaWeb3.PublicKey('7C4jsPZpht42Tw6MjXWF56Q5RQUocjBBmciEjDa8HRtp');
-
-// 残高を取得
-getBalance(publicKey);
+# トランザクションをシミュレート
+curl https://api.mainnet-beta.solana.com -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"simulateTransaction","params":["<base64-encoded-tx>"]}'
 ```
+
+---
 
 ## Metaplex DAS
 
-Metaplex DAS（Digital Asset Standard）は、SolanaブロックチェーンでのNFTとトークンの読み取り層を標準化するように設計されたプロトコルまたはフレームワークで、開発者が複数の異なる標準とデジタルアセットのレイアウトを取得する際にコードを標準化することを可能にします。
+Metaplex DAS（Digital Asset Standard）は、SolanaでのNFTとトークンの読み取り層を標準化するために設計されたプロトコルです。開発者が異なる標準とデジタル資産のレイアウトを取得する際に一貫したインターフェースを使用できます。
 
 ### デジタル資産のインデックス化
-すべてのデジタル資産（NFTとトークン）をインデックス化することで、ユーザーは情報がブロックチェーンから直接取得するのではなく最適化されたデータベースに保存されるため、これらの資産のデータをより高速に読み取ることができます。
+
+すべてのデジタル資産（NFTとトークン）をインデックス化することで、情報がブロックチェーンから直接取得するのではなく最適化されたデータベースに保存されるため、DASはより高速なデータ読み取りを提供します。
 
 ### 同期
-DASには、ブロックチェーンに送信される特定のライフサイクル命令中にデータの再インデックス化を同期する機能があります。作成、更新、焼却、転送などのこれらの命令を監視することで、DASのインデックス化されたデータが常に最新であることを保証できます。
 
-現在、Core、Token Metadata、BubblegumはすべてDASによってインデックス化されています。
+DASは、ブロックチェーンに送信されるライフサイクル命令（作成、更新、焼却、転送）を監視することで同期します。これにより、インデックス化されたデータが常に最新であることが保証されます。
 
-Metaplex DASの詳細については、以下のページを参照してください：
+現在、**Core**、**Token Metadata**、**Bubblegum**はすべてDASによってインデックス化されています。
+
+### DASとRPC
+
+RPCとDASは互いを補完します。標準RPCがオンチェーンデータへの直接アクセスを提供する一方で、DASはデジタル資産専用の最適化されたインデックス化層を提供します。開発者にとって、DAS APIは圧縮NFT（cNFT）との相互作用に必要であり、Token Metadataアセットとの作業もより簡単で高速になります。最高のユーザーエクスペリエンスのために、DASサポート付きRPCノードの使用を強くお勧めします。
+
+詳細情報：
 
 - [Metaplex DAS API](/ja/dev-tools/das-api)
-- [Metaplex DAS API Github](https://github.com/metaplex-foundation/digital-asset-standard-api)
-- [Metaplex Digital Asset RPC Infrastructure Github](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
+- [Metaplex DAS API GitHub](https://github.com/metaplex-foundation/digital-asset-standard-api)
+- [Metaplex Digital Asset RPC Infrastructure GitHub](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)
 
-## RPCとDASの統合
+---
 
-RPCとDASは、Solanaエコシステムで互いを補完します。標準RPCがオンチェーンデータへの直接アクセスを提供する一方で、Metaplex DASはデジタル資産専用の最適化されたインデックス化層を提供します。両方のサービスを適切に活用することで、開発者はRPCを通じて一般的なブロックチェーンデータを取得し、DASを通じてデジタル資産情報にアクセスする、より効率的なアプリケーションを構築でき、より良いパフォーマンスとユーザーエクスペリエンスをもたらします。
+## アーカイブと非アーカイブノード
+
+**アーカイブノード**は、すべての以前のブロックの完全な履歴を保存します。これにより、アドレスの残高履歴を表示し、履歴内の任意の状態を検査できます。高いシステム要件のため、プライベートアーカイブノードへのアクセスは非常に有益です。
+
+**非アーカイブノード**（通常のノード）は、約直近100ブロックのみを保持します。非アーカイブノードでさえリソースを大量に消費する可能性があるため、多くの開発者はプライベートRPCプロバイダーを選択します。特に実際のSOLが関与し、レート制限がより厳しいMainnet Betaでは顕著です。
+
+---
+
+## RPCプロバイダー
+
+{% callout type="note" %}
+これらのリストはアルファベット順です。プロジェクトのニーズに最も適したRPCプロバイダーを選択してください。不足しているプロバイダーがあれば、[Discord](https://discord.gg/metaplex)で知らせるか、PRを提出してください。
+{% /callout %}
+
+### DASサポート付きRPC
+
+- [Extrnode](https://docs.extrnode.com/das_api/)
+- [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
+- [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
+- [QuickNode](https://quicknode.com/)
+- [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
+- [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
+
+### DASサポートなしRPC
+
+- [Alchemy](https://alchemy.com/?a=metaplex)
+- [Ankr](https://www.ankr.com/protocol/public/solana/)
+- [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
+- [Chainstack](https://chainstack.com/build-better-with-solana/)
+- [Figment](https://figment.io/)
+- [GetBlock](https://getblock.io/)
+- [NOWNodes](https://nownodes.io/)
+- [Syndica](https://syndica.io/)
