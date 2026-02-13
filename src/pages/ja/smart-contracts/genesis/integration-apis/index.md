@@ -51,6 +51,10 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 認証は不要です。API はレート制限付きで公開されています。
 
+{% callout type="note" %}
+作成と登録エンドポイントをラップする高レベルの SDK インターフェースについては、[API クライアント](/smart-contracts/genesis/sdk/api-client)を参照してください。
+{% /callout %}
+
 ## 利用可能なエンドポイント
 
 | メソッド | エンドポイント | 説明 |
@@ -59,7 +63,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | トークンミントの全ローンチの取得 |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | アクティブおよび今後のローンチリスティングの取得 |
 | `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目スポットライトローンチの取得 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | メタデータ付きで新しいローンチを登録 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 新しいローンチを作成（未署名トランザクションを返す） |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 確認済みローンチを登録 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | オンチェーンからバケット状態を取得 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | オンチェーンからデポジット状態を取得 |
 

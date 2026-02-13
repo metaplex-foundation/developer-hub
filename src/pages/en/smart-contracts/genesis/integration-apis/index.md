@@ -51,6 +51,10 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 No authentication is required. The API is public with rate limits.
 
+{% callout type="note" %}
+For a higher-level SDK interface that wraps the create and register endpoints, see the [API Client](/smart-contracts/genesis/sdk/api-client).
+{% /callout %}
+
 ## Available Endpoints
 
 | Method | Endpoint | Description |
@@ -59,7 +63,8 @@ No authentication is required. The API is public with rate limits.
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | Get all launches for a token mint |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | Get active and upcoming launch listings |
 | `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | Register a new launch with metadata |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | Create a new launch (returns unsigned transactions) |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | Register a confirmed launch |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | Fetch bucket state from on-chain |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | Fetch deposit state from on-chain |
 

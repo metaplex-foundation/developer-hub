@@ -1,10 +1,10 @@
 ---
 title: Register
 metaTitle: Genesis - Register Launch | REST API | Metaplex
-description: "使用元数据、社交链接和发行页面 URL 注册新的 Genesis 发行。"
+description: Register a confirmed Genesis launch in the database. Call this after on-chain transactions are confirmed to make the launch discoverable.
 method: POST
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-13-2026'
 keywords:
   - Genesis API
   - register launch
@@ -20,77 +20,107 @@ programmingLanguage:
   - Rust
 ---
 
-通过 API 注册新的 Genesis 发行。提交您的发行页面 URL、网站和社交链接，以便聚合器可以发现和展示您的发行。 {% .lead %}
+Register a confirmed Genesis launch in the database. Call this after the [create launch](/smart-contracts/genesis/integration-apis/create-launch) transactions have been signed and confirmed on-chain. Registration makes the launch discoverable via the listings and spotlight APIs. {% .lead %}
 
-{% callout type="warning" title="草稿" %}
-这是一个示例页面。参数、请求/响应格式和行为可能会在实际集成确定后发生变化。
+{% callout type="note" %}
+For a higher-level interface that handles create, sign, send, and register in one call, see `createAndRegisterLaunch` in the [API Client SDK](/smart-contracts/genesis/sdk/api-client).
 {% /callout %}
 
-## 端点
+## Endpoint
 
 ```
-POST /register
+POST /launches/register
 ```
 
-## 请求体
+## Request Body
 
-| 字段 | 类型 | 必填 | 描述 |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `genesisAddress` | `string` | 是 | Genesis 账户公钥 |
-| `launchPage` | `string` | 是 | 用户可以参与发行的 URL |
-| `website` | `string` | 否 | 项目网站 URL |
-| `socials.x` | `string` | 否 | X (Twitter) 个人资料 URL |
-| `socials.telegram` | `string` | 否 | Telegram 群组 URL |
-| `socials.discord` | `string` | 否 | Discord 服务器邀请 URL |
+| `type` | `string` | Yes | Launch type. Use `"project"` |
+| `genesisAccount` | `string` | Yes | The genesis account public key (from `createLaunch` response) |
+| `network` | `string` | No | `"solana-devnet"` for devnet (omit for mainnet) |
 
-## 请求示例
+## Example Request
 
 ```bash
-curl -X POST https://api.metaplex.com/v1/register \
+curl -X POST https://api.metaplex.com/v1/launches/register \
   -H "Content-Type: application/json" \
   -d '{
-    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
-    "launchPage": "https://example.com/launch/mytoken",
-    "website": "https://example.com",
-    "socials": {
-      "x": "https://x.com/mytoken",
-      "telegram": "https://t.me/mytoken",
-      "discord": "https://discord.gg/mytoken"
-    }
+    "type": "project",
+    "genesisAccount": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
   }'
 ```
 
-## 响应
+**Devnet example:**
+
+```bash
+curl -X POST https://api.metaplex.com/v1/launches/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "project",
+    "genesisAccount": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+    "network": "solana-devnet"
+  }'
+```
+
+## Response
+
+### Success (200)
 
 ```json
 {
-  "data": {
-    "success": true,
-    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+  "success": true,
+  "existing": false,
+  "launch": {
+    "id": "launch_abc123",
+    "link": "https://www.metaplex.com/launch/mytoken"
+  },
+  "token": {
+    "id": "token_xyz789",
+    "mintAddress": "TokenMint..."
   }
 }
 ```
 
-## 请求和响应类型
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | `boolean` | Whether the request succeeded |
+| `existing` | `boolean` | `true` if this launch was already registered |
+| `launch.id` | `string` | Unique launch identifier |
+| `launch.link` | `string` | Public launch page URL |
+| `token.id` | `string` | Unique token identifier |
+| `token.mintAddress` | `string` | Token mint address |
+
+### Error
+
+```json
+{
+  "success": false,
+  "error": "Description of what went wrong"
+}
+```
+
+## Request & Response Types
 
 ### TypeScript
 
 ```ts
 interface RegisterRequest {
-  genesisAddress: string;
-  launchPage: string;
-  website?: string;
-  socials?: {
-    x?: string;
-    telegram?: string;
-    discord?: string;
-  };
+  type: 'project';
+  genesisAccount: string;
+  network?: 'solana-devnet';
 }
 
 interface RegisterResponse {
-  data: {
-    success: boolean;
-    genesisAddress: string;
+  success: boolean;
+  existing?: boolean;
+  launch: {
+    id: string;
+    link: string;
+  };
+  token: {
+    id: string;
+    mintAddress: string;
   };
 }
 ```
@@ -101,46 +131,61 @@ interface RegisterResponse {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterRequest {
-    pub genesis_address: String,
-    pub launch_page: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
+    pub genesis_account: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub website: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub socials: Option<Socials>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct RegisterData {
-    pub success: bool,
-    pub genesis_address: String,
+    pub network: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RegisterResponse {
-    pub data: RegisterData,
+    pub success: bool,
+    pub existing: Option<bool>,
+    pub launch: LaunchInfo,
+    pub token: TokenInfo,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct LaunchInfo {
+    pub id: String,
+    pub link: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TokenInfo {
+    pub id: String,
+    pub mint_address: String,
 }
 ```
 
-## 使用示例
+## Usage Examples
 
 ### TypeScript
 
 ```ts
-const response = await fetch("https://api.metaplex.com/v1/register", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
+const response = await fetch('https://api.metaplex.com/v1/launches/register', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    genesisAddress: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
-    launchPage: "https://example.com/launch/mytoken",
-    website: "https://example.com",
-    socials: {
-      x: "https://x.com/mytoken",
-    },
+    type: 'project',
+    genesisAccount: '7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN',
   }),
 });
-const { data }: RegisterResponse = await response.json();
-console.log(data.success); // true
+const data: RegisterResponse = await response.json();
+console.log(`Launch page: ${data.launch.link}`);
+```
+
+### Using the SDK
+
+```ts
+import { registerLaunch } from '@metaplex-foundation/genesis';
+
+const result = await registerLaunch(umi, {}, {
+  genesisAccount: createResult.genesisAccount,
+});
+console.log(`Launch page: ${result.launch.link}`);
 ```
 
 ### Rust
@@ -148,34 +193,29 @@ console.log(data.success); // true
 ```rust
 let client = reqwest::Client::new();
 let response: RegisterResponse = client
-    .post("https://api.metaplex.com/v1/register")
+    .post("https://api.metaplex.com/v1/launches/register")
     .json(&RegisterRequest {
-        genesis_address: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN".to_string(),
-        launch_page: "https://example.com/launch/mytoken".to_string(),
-        website: Some("https://example.com".to_string()),
-        socials: Some(Socials {
-            x: Some("https://x.com/mytoken".to_string()),
-            telegram: None,
-            discord: None,
-        }),
+        launch_type: "project".to_string(),
+        genesis_account: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN".to_string(),
+        network: None,
     })
     .send()
     .await?
     .json()
     .await?;
 
-println!("Registered: {}", response.data.success);
+println!("Launch page: {}", response.launch.link);
 ```
 
-## 错误
+## Errors
 
-| 代码 | 描述 |
+| Code | Description |
 |------|-------------|
-| `400` | 无效的请求体或缺少必填字段 |
-| `409` | 该 Genesis 地址已注册发行 |
-| `429` | 超出速率限制 |
-| `500` | 内部服务器错误 |
+| `400` | Invalid request body or genesis account not found on-chain |
+| `409` | Launch already registered for this genesis account |
+| `429` | Rate limit exceeded |
+| `500` | Internal server error |
 
 {% callout type="note" %}
-`genesisAddress` 必须对应链上一个有效的、已确认的 Genesis 账户。如果该账户不存在，注册将失败。
+The `genesisAccount` must correspond to a valid, confirmed genesis account on-chain. Registration will fail if the account does not exist or the create transactions have not been confirmed.
 {% /callout %}

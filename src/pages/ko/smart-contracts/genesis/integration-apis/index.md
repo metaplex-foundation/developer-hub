@@ -51,6 +51,10 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 인증은 필요하지 않습니다. API는 속도 제한이 있는 공개 API입니다.
 
+{% callout type="note" %}
+생성 및 등록 엔드포인트를 래핑하는 상위 레벨 SDK 인터페이스는 [API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 참조하세요.
+{% /callout %}
+
 ## 사용 가능한 엔드포인트
 
 | 메소드 | 엔드포인트 | 설명 |
@@ -59,7 +63,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 활성 및 예정된 런칭 리스팅 조회 |
 | `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 주요 스포트라이트 런칭 조회 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | 메타데이터로 새로운 런칭 등록 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 새로운 런칭 생성 (미서명 트랜잭션 반환) |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 확인된 런칭 등록 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 온체인에서 버킷 상태 조회 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | 온체인에서 예치 상태 조회 |
 

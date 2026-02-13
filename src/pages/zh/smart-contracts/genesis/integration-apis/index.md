@@ -51,6 +51,10 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 无需认证。API 是带有速率限制的公开 API。
 
+{% callout type="note" %}
+有关封装创建和注册端点的高级 SDK 接口，请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client)。
+{% /callout %}
+
 ## 可用端点
 
 | 方法 | 端点 | 描述 |
@@ -59,7 +63,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 获取代币铸造的所有发行 |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 获取活跃和即将到来的发行列表 |
 | `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选聚焦发行 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | 使用元数据注册新发行 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 创建新发行（返回未签名交易） |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 注册已确认的发行 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 从链上获取桶状态 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | 从链上获取存款状态 |
 
