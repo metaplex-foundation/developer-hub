@@ -423,7 +423,9 @@
 ## Dev Tools
 
 - [Overview](https://developers.metaplex.com/dev-tools/amman): Provides a high-level overview of Amman local validator.
+- [Overview](https://developers.metaplex.com/dev-tools/cli/genesis): Overview of Genesis CLI commands for launching tokens using the Metaplex CLI (mplx).
 - [Solana Developer Tools](https://developers.metaplex.com/dev-tools): Developer tools for building on Solana. CLI tools, TypeScript SDKs, APIs, and utilities for NFTs, tokens, and digital assets.
+- [Add Metadata to Token](https://developers.metaplex.com/dev-tools/cli/toolbox/add-metadata-to-token): Add metadata to an existing token that doesn't have a metadata account
 - [Burn Asset](https://developers.metaplex.com/dev-tools/cli/core/burn-asset): Burn MPL Core Assets using the Metaplex CLI
 - [Candy Machine Commands](https://developers.metaplex.com/dev-tools/cli/cm): Create and manage MPL Core Candy Machines using the MPLX CLI. Interactive wizard, asset upload, and complete candy machine lifecycle management.
 - [CLI Commands](https://developers.metaplex.com/dev-tools/amman/cli-commands): CLI Commands of the Metaplex Amman local validator toolkit.
@@ -431,6 +433,7 @@
 - [Create Asset](https://developers.metaplex.com/dev-tools/cli/core/create-asset): Create an MPL Core Asset using different methods
 - [Create Candy Machine](https://developers.metaplex.com/dev-tools/cli/cm/create): Create MPL Core Candy Machines using the MPLX CLI. Interactive wizard mode with validation, asset upload, and complete setup automation.
 - [Create Collection](https://developers.metaplex.com/dev-tools/cli/core/create-collection): Create an MPL Core Collection using different methods
+- [Create Genesis Account](https://developers.metaplex.com/dev-tools/cli/genesis/create): Create a new Genesis account and token mint using the Metaplex CLI.
 - [Create Token](https://developers.metaplex.com/dev-tools/cli/toolbox/token-create): Create a new fungible token on Solana
 - [Explorer Configuration](https://developers.metaplex.com/dev-tools/cli/config/explorer): Set your preferred blockchain explorer
 - [Fetch Asset or Collection](https://developers.metaplex.com/dev-tools/cli/core/fetch): Fetch MPL Core Assets or Collections by their mint address
@@ -440,8 +443,11 @@
 - [Insert Items](https://developers.metaplex.com/dev-tools/cli/cm/insert): Insert uploaded assets into your MPL Core Candy Machine using the MPLX CLI.
 - [Installation](https://developers.metaplex.com/dev-tools/cli/installation): Install and set up the Metaplex CLI
 - [Introduction](https://developers.metaplex.com/dev-tools/cli): Welcome to the Metaplex CLI
+- [Launch Pool](https://developers.metaplex.com/dev-tools/cli/genesis/launch-pool): Create a launch pool bucket, deposit, withdraw, transition, and claim tokens using the Metaplex CLI.
+- [Manage](https://developers.metaplex.com/dev-tools/cli/genesis/manage): Finalize, fetch, manage unlocked buckets, and revoke authorities for a Genesis account using the Metaplex CLI.
 - [Plugins](https://developers.metaplex.com/dev-tools/cli/core/plugins): Manage MPL Core Asset and Collection plugins
 - [Premade Configurations](https://developers.metaplex.com/dev-tools/amman/pre-made-configs): A set of premade configurations from Metaplex Amman local validator toolkit.
+- [Presale](https://developers.metaplex.com/dev-tools/cli/genesis/presale): Create a presale bucket, deposit, and claim tokens from a Genesis presale using the Metaplex CLI.
 - [RPCs](https://developers.metaplex.com/dev-tools/cli/config/rpcs): Manage RPC endpoints in your configuration
 - [Shank](https://developers.metaplex.com/dev-tools/shank): Extract IDLs from Rust Solana program code using attribute macros
 - [Shank Macros Reference](https://developers.metaplex.com/dev-tools/shank/macros): Complete reference for Shank derive macros and attributes used in Solana programs
@@ -450,6 +456,7 @@
 - [SOL Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/sol-transfer): Transfer SOL to a specified address
 - [Token Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/token-transfer): Transfer tokens to a destination address
 - [Update Asset](https://developers.metaplex.com/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata and properties
+- [Update Token Metadata](https://developers.metaplex.com/dev-tools/cli/toolbox/update-token-metadata): Update the metadata of an existing token
 - [Upload Assets](https://developers.metaplex.com/dev-tools/cli/cm/upload): Upload candy machine assets to decentralized storage using the MPLX CLI. Intelligent caching, progress tracking, and comprehensive validation.
 - [Validate Cache](https://developers.metaplex.com/dev-tools/cli/cm/validate): Validate candy machine asset cache and uploads using the MPLX CLI. Comprehensive validation, error detection, and cache integrity verification.
 - [Wallets](https://developers.metaplex.com/dev-tools/cli/config/wallets): Manage wallet configurations
