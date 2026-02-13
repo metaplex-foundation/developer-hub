@@ -23,7 +23,7 @@ export const das = {
           links: [
             { title: 'Overview', href: '/dev-tools/das-api' },
             { title: 'Getting Started', href: '/dev-tools/das-api/getting-started' },
-            { title: 'DAS API RPC Providers', href: '/rpc-providers' },
+            { title: 'DAS API RPC Providers', href: '/guides/rpc-providers' },
             { title: 'Display Options', href: '/dev-tools/das-api/display-options' },
           ],
         },

@@ -38,6 +38,15 @@ const standaloneRedirects = {
   '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',
   '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
   '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
+  // Standalone pages moved to guides
+  '/rpc-providers': '/guides/rpc-providers',
+  '/ja/rpc-providers': '/ja/guides/rpc-providers',
+  '/ko/rpc-providers': '/ko/guides/rpc-providers',
+  '/zh/rpc-providers': '/zh/guides/rpc-providers',
+  '/understanding-programs': '/guides/understanding-programs',
+  '/ja/understanding-programs': '/ja/guides/understanding-programs',
+  '/ko/understanding-programs': '/ko/guides/understanding-programs',
+  '/zh/understanding-programs': '/zh/guides/understanding-programs',
 }
 
 const redirectRules = {
