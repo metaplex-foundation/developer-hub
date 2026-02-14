@@ -424,6 +424,7 @@
 
 - [Overview](https://developers.metaplex.com/dev-tools/amman): Provides a high-level overview of Amman local validator.
 - [Solana Developer Tools](https://developers.metaplex.com/dev-tools): Developer tools for building on Solana. CLI tools, TypeScript SDKs, APIs, and utilities for NFTs, tokens, and digital assets.
+- [Add Metadata to Token](https://developers.metaplex.com/dev-tools/cli/toolbox/add-metadata-to-token): Add metadata to an existing token that doesn't have a metadata account
 - [Burn Asset](https://developers.metaplex.com/dev-tools/cli/core/burn-asset): Burn MPL Core Assets using the Metaplex CLI
 - [Candy Machine Commands](https://developers.metaplex.com/dev-tools/cli/cm): Create and manage MPL Core Candy Machines using the MPLX CLI. Interactive wizard, asset upload, and complete candy machine lifecycle management.
 - [CLI Commands](https://developers.metaplex.com/dev-tools/amman/cli-commands): CLI Commands of the Metaplex Amman local validator toolkit.
@@ -450,6 +451,7 @@
 - [SOL Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/sol-transfer): Transfer SOL to a specified address
 - [Token Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/token-transfer): Transfer tokens to a destination address
 - [Update Asset](https://developers.metaplex.com/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata and properties
+- [Update Token Metadata](https://developers.metaplex.com/dev-tools/cli/toolbox/update-token-metadata): Update the metadata of an existing token
 - [Upload Assets](https://developers.metaplex.com/dev-tools/cli/cm/upload): Upload candy machine assets to decentralized storage using the MPLX CLI. Intelligent caching, progress tracking, and comprehensive validation.
 - [Validate Cache](https://developers.metaplex.com/dev-tools/cli/cm/validate): Validate candy machine asset cache and uploads using the MPLX CLI. Comprehensive validation, error detection, and cache integrity verification.
 - [Wallets](https://developers.metaplex.com/dev-tools/cli/config/wallets): Manage wallet configurations
