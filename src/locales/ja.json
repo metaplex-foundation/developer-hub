@@ -108,6 +108,7 @@
     "link": "リンク",
     "handle": "ハンドル",
     "tagged": "タグ",
+    "viewTaggedQuestions": "{tagged}の質問を見る",
     "programId": "プログラムID",
     "github": "Github",
     "documentation": "ドキュメント",

@@ -111,7 +111,7 @@ export function OfficialLinks() {
               <TableRow key={link.name}>
                 <TableCell>{link.name}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -138,7 +138,7 @@ export function OfficialLinks() {
                 <TableCell>{link.name}</TableCell>
                 <TableCell className="font-mono">{link.handle}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -165,7 +165,7 @@ export function OfficialLinks() {
                 <TableCell>{link.name}</TableCell>
                 <TableCell className="font-mono">{link.handle}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -190,7 +190,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -215,7 +215,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
