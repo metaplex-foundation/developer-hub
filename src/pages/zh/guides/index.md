@@ -2,6 +2,16 @@
 title: 指南
 metaTitle: Metaplex Solana 指南 | 指南
 description: Metaplex 关于 Solana 区块链的指南。
+keywords:
+  - Solana guides
+  - Solana developer tutorials
+  - Metaplex guides
+  - Solana development
+about:
+  - Solana
+  - Metaplex
+  - blockchain development
+proficiencyLevel: Beginner
 ---
 
 ![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)

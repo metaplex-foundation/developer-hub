@@ -1,37 +1,60 @@
 ---
-title: 使用 Turbo 创建确定性元数据
-metaTitle: 使用 Turbo 创建确定性元数据 | 通用指南
-description: 了解如何利用 Turbo SDK 创建确定性元数据，用于基于 Arweave 的上传。
+title: Create deterministic metadata with Turbo
+metaTitle: Create deterministic metadata with Turbo | General Guides
+description: Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
 # remember to update dates also in /components/guides/index.js
 created: '10-19-2024'
 updated: '10-19-2024'
+keywords:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave upload
+  - path manifest
+  - NFT metadata
+about:
+  - deterministic metadata
+  - Turbo SDK
+  - Arweave uploads
+  - path manifests
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+howToSteps:
+  - Prepare metadata files in a folder with incremental naming (0.json, 1.json, etc.)
+  - Install and configure the Turbo SDK with Solana as the payment token
+  - Calculate the required lamports for uploading the metadata folder
+  - Top up the wallet with Winc if needed using topUpWithTokens
+  - Upload the metadata folder using uploadFolder to get a manifest ID
+howToTools:
+  - Turbo SDK
+  - Arweave
 ---
 
-要利用 MPL-Hybrid 程序中的元数据随机化功能，链外元数据 URI 需要遵循一致的增量结构。为了实现这一点，我们将使用 Arweave 的[路径清单](https://cookbook.arweave.dev/concepts/manifests.html)功能和 Turbo SDK。**本指南将演示如何设置！**
+To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**
 
-{% callout title="什么是 Turbo" %}
+{% callout title="What is Turbo" %}
 
-Turbo 是一种超高吞吐量的 Permaweb 服务，可简化向 Arweave 和从 Arweave 传输数据的资金、索引和传输。它提供图形和编程界面，用于使用信用卡或借记卡的法币支付选项以及 ETH、SOL 和 AR 等加密货币。
+Turbo is an ultrahigh-throughput Permaweb service that streamlines the funding, indexing, and transmission of data to and from Arweave. It provides graphical and programmatic interfaces for payment options in fiat currency with credit or debit cards as well as cryptocurrencies such as ETH, SOL, and AR.
 
 {% /callout %}
 
-## 先决条件
+## Prerequisite
 
-### 所需包
+### Required Packages
 
 {% packagesUsed packages=[ "@ardrive/turbo-sdk" ] type="npm" /%}
 
-安装本指南所需的包。
+Install the required packages for this guide.
 
 ```js
 npm i @ardrive/turbo-sdk
 ```
 
-### 元数据文件夹
+### Metadata Folder
 
-在此示例中，我们将向您展示如何以确定性方式上传元数据。为此，您需要在开始之前准备好所有资产。
+In this example, we will show you how to upload metadata in a deterministic way. To do so, you'll need to prepare all the assets before starting.
 
-要生成元数据，您可以使用[这些方法之一](/zh/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators)并按照从 0 开始的增量命名约定保存元数据，如下所示：
+To generate the metadata, you can use [one of these methods](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine#image-and-metadata-generators) and save the metadata following an incremental naming convention starting from 0 like this:
 
 ```
 metadata/
@@ -41,11 +64,11 @@ metadata/
 ├─ ...
 ```
 
-**注意**：创建元数据时，请确保遵循正确的 [NFT JSON 架构](/zh/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)！
+**Note**: When creating the metadata, make sure to follow the proper [JSON schema for NFTs](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)!
 
-## 设置 Turbo
+## Setting up Turbo
 
-由于 Turbo 兼容多个代币和链，我们需要将 Turbo 实例配置为在本指南中使用 Solana 作为代币。我们通过调用 `TurboFactory.authenticated()` 方法并传入 Solana 特定的配置选项来实现这一点。
+Since Turbo is compatible with multiple tokens and chains, we'll need to configure our Turbo instance to use Solana as the token for this guide. We do this by calling the `TurboFactory.authenticated()` method and passing in Solana-specific configuration options.
 
 ```javascript
 import { TurboFactory } from '@ardrive/turbo-sdk';
@@ -63,27 +86,27 @@ const turbo = TurboFactory.authenticated({
 });
 ```
 
-**注意**：在此示例中，我们明确提供 `gatewayUrl`、`paymentServiceConfig` 和 `uploadServiceConfig`，因为我们想要配置环境以在 devnet 上工作。对于主网使用，您可以将这些字段留空，Turbo 将默认为主网端点。
+**Note**: In this example, we explicitly provide the `gatewayUrl`, `paymentServiceConfig`, and `uploadServiceConfig` because we want to configure the environment to work on devnet. For mainnet usage, you can leave these fields empty, and Turbo will default to the mainnet endpoints.
 
-## 上传元数据
+## Upload the Metadata
 
-Turbo 使用 `TurboAuthenticatedClient.uploadFolder()` 函数简化了上传整个元数据文件夹的过程。此函数默认支持清单，通过 `metadataUploadResponse.manifestResponse?.id` 返回清单 ID，可用于元数据创建和托管设置。
+Turbo simplifies the process of uploading entire folders of metadata using the `TurboAuthenticatedClient.uploadFolder()` function. This function supports Manifests by default, returning a Manifest ID via `metadataUploadResponse.manifestResponse?.id`, which can be used for metadata creation and escrow setup.
 
-为了简化流程，本指南提供了一个名为 `uploadMetadata()` 的辅助函数来处理整个工作流程。
+To simplify the process, this guide provides a helper function called `uploadMetadata()` that handles the entire workflow.
 
 ```javascript
 const metadataUploadResponse = await uploadMetadata(turbo);
 ```
 
-**`uploadMetadata()` 辅助函数的步骤**
+**Steps of the `uploadMetadata()` helper**
 
-1. 通过调用 `calculateRequiredLamportsForUpload()` 确定上传需要多少 lamports，该函数计算 Winc（Turbo 的代币）中的上传成本，并使用 `TurboAuthenticatedClient.getWincForToken()` 将其转换为 lamports。
+1. Determines how many lamports are needed for the upload by calling `calculateRequiredLamportsForUpload()`, which calculates the upload cost in Winc (Turbo’s token) and converts it to lamports using `TurboAuthenticatedClient.getWincForToken()`.
 
-2. 如果钱包缺少足够的 Winc，该函数使用 `TurboAuthenticatedClient.topUpWithTokens()` 通过将 lamports 转换为 Winc 来充值所需数量。
+2. If the wallet lacks sufficient Winc, the function uses `TurboAuthenticatedClient.topUpWithTokens()` to top up the required amount by converting lamports to Winc.
 
-3. 一旦钱包有足够的 Winc，使用 `TurboAuthenticatedClient.uploadFolder()` 上传元数据文件夹，这将返回元数据的清单 ID。
+3. Once the wallet has enough Winc, upload the metadata folder using `TurboAuthenticatedClient.uploadFolder()`, which returns a Manifest ID for the metadata.
 
-### 计算所需的 Lamports
+### Calculating Required Lamports
 
 ```javascript
 const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
@@ -92,23 +115,23 @@ const requiredLamportsForMetadata = await calculateRequiredLamportsForUpload(
 );
 ```
 
-我们首先计算文件夹的总大小（以字节为单位）。以下函数递归遍历文件夹结构以汇总所有文件的大小：
+We begin by calculating the total size of the folder in bytes. The following function recursively traverses the folder structure to sum the sizes of all files:
 
 ```javascript
 function calculateFolderSize(folderPath: string): number {
   return fs.readdirSync(folderPath).reduce((totalSize, item) => {
     const fullPath = path.join(folderPath, item);
-
+    
     const stats = fs.statSync(fullPath);
 
-    return stats.isFile()
-        ? totalSize + stats.size
+    return stats.isFile() 
+        ? totalSize + stats.size 
         : totalSize + calculateFolderSize(fullPath);
   }, 0);
 }
 ```
 
-确定文件夹大小后，下一步是计算上传需要多少 lamports。这是使用 `calculateRequiredLamportsForUpload()` 函数完成的，该函数确定 Winc 成本并将其转换为 lamports：
+Once the folder size is determined, the next step is to calculate how many lamports are needed for the upload. This is done using the `calculateRequiredLamportsForUpload()` function, which determines the Winc cost and converts it into lamports:
 
 ```javascript
 async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClient, fileSize: number): Promise<number> {
@@ -140,20 +163,20 @@ async function calculateRequiredLamportsForUpload(turbo: TurboAuthenticatedClien
 }
 ```
 
-### 充值钱包并上传元数据
+### Top Up the Wallet and Upload Metadata
 
-要充值钱包，我们使用 `TurboAuthenticatedClient.topUpWithTokens()` 方法，指定在上一步中计算的 lamports 数量。此数量将转换为 Winc（Turbo 的代币），这是上传过程所需的。
+To top up the wallet, we use the `TurboAuthenticatedClient.topUpWithTokens()` method, specifying the amount of lamports calculated in the previous step. This amount is converted into Winc (Turbo’s token), which is required for the upload process.
 
-**注意**：充值过程是有条件的。如果我们在钱包中已经有足够的 Winc，`calculateRequiredLamportsForUpload()` 函数将返回 0，并且不需要充值。
+**Note**: The top-up process is conditional. If we already have enough Winc in the wallet, the `calculateRequiredLamportsForUpload()` function will return 0, and no top-up will be necessary.
 
 ```javascript
 // Top up wallet if required
 await turbo.topUpWithTokens({tokenAmount: lamportToTokenAmount(requiredLamportsForMetadata)});
 ```
 
-在确保钱包有足够的 Winc 后，我们可以继续上传图像文件夹。这是使用 `TurboAuthenticatedClient.uploadFolder()` 方法完成的。上传将返回一个清单 ID，允许访问上传的文件，格式如下：`https://arweave.net/${manifestID}/${nameOfTheFile.extension}`。
+After ensuring the wallet has enough Winc, we can proceed with uploading the image folder. This is done using the `TurboAuthenticatedClient.uploadFolder()` method. The upload will return a manifest ID that allows access to the uploaded files, formatted like this: `https://arweave.net/${manifestID}/${nameOfTheFile.extension}.`
 
-**注意**：在上传期间为每个文件设置正确的 [MIME 类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types)很重要。如果 MIME 类型设置不正确，通过 URI 访问时文件可能无法正确显示。
+**Note**: It’s important to set the correct [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types) for each file during the upload. If the MIME type is not set correctly, the file might not be displayed properly when accessed via the URI.
 
 ```javascript
 // Upload image folder
@@ -163,20 +186,20 @@ const metadataUploadResponse = await turbo.uploadFolder({
 });
 ```
 
-## 完整代码示例
+## Full code Example
 
-以下是您可以复制和粘贴以便轻松使用的完整代码示例
+Here's the full code example that you can copy and paste for easy use
 
 {% totem %}
 
-{% totem-accordion title="完整代码示例" %}
+{% totem-accordion title="Full Code Example" %}
 
 ```javascript
-import {
-    TurboFactory,
-    TurboAuthenticatedClient,
-    lamportToTokenAmount,
-    TurboUploadFolderResponse
+import { 
+    TurboFactory, 
+    TurboAuthenticatedClient, 
+    lamportToTokenAmount, 
+    TurboUploadFolderResponse 
 } from '@ardrive/turbo-sdk';
 
 import bs58 from 'bs58';
@@ -230,11 +253,11 @@ async function uploadMetadata(turbo: TurboAuthenticatedClient): Promise<TurboUpl
 function calculateFolderSize(folderPath: string): number {
   return fs.readdirSync(folderPath).reduce((totalSize, item) => {
     const fullPath = path.join(folderPath, item);
-
+    
     const stats = fs.statSync(fullPath);
 
-    return stats.isFile()
-        ? totalSize + stats.size
+    return stats.isFile() 
+        ? totalSize + stats.size 
         : totalSize + calculateFolderSize(fullPath);
   }, 0);
 }

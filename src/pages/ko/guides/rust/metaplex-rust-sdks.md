@@ -2,6 +2,20 @@
 title: Metaplex Rust SDK
 metaTitle: Metaplex Rust SDK | 가이드
 description: Metaplex Rust SDK에 대한 간단한 개요입니다.
+keywords:
+  - Metaplex Rust SDK
+  - Rust crate modules
+  - mpl-core crate
+  - SDK accounts and types
+  - Solana Rust crates
+about:
+  - Metaplex Rust SDKs
+  - instruction builders
+  - CPI builders
+  - SDK modules
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## 소개

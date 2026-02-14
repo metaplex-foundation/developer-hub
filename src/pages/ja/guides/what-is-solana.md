@@ -1,10 +1,31 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Solanaとは何か？
 metaTitle: Solanaとは何か？ | ガイド
 description: Solanaとは何で、なぜその上で構築したいのでしょうか。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2025'
 updated: '04-19-2025'
+keywords:
+  - Solana blockchain
+  - Proof of History
+  - Solana ecosystem
+  - high-performance blockchain
+  - Solana development
+about:
+  - Solana
+  - blockchain technology
+  - Proof of History
+  - decentralized applications
+proficiencyLevel: Beginner
+faqs:
+  - q: What is Solana?
+    a: Solana is a high-performance, decentralized blockchain platform designed for scalable and user-friendly applications, capable of processing thousands of transactions per second with low fees.
+  - q: What is Proof of History (PoH)?
+    a: Proof of History is Solana's novel timestamping method that cryptographically orders transactions and events, reducing the workload of the consensus algorithm for greater scalability and efficiency.
+  - q: Why should developers build on Solana?
+    a: Developers choose Solana for its performance at scale, cost efficiency with low transaction fees, rich developer tooling, composability with other protocols, and a rapidly growing user base.
+  - q: What types of applications can be built on Solana?
+    a: Solana supports DeFi protocols, NFT marketplaces, Web3 gaming, payment applications, DAOs, and many other decentralized applications.
 ---
 
 # Solana概要

@@ -2,6 +2,20 @@
 title: Rustでの作業
 metaTitle: Rustでの作業 | ガイド
 description: Rustとメタプレックスプロトコルでの作業の簡単な概要。
+keywords:
+  - Solana Rust scripts
+  - Metaplex Rust SDK
+  - instruction builders
+  - CPI builders
+  - Solana Rust client
+about:
+  - Rust development
+  - Metaplex instruction builders
+  - CPI builders
+  - Solana program development
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## はじめに

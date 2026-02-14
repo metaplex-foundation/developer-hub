@@ -4,6 +4,28 @@ metaTitle: Solana 토큰에 메타데이터를 추가하는 방법 | 가이드
 description: 이미 존재하는 Solana 토큰에 메타데이터를 추가하는 방법을 알아보세요.
 created: '10-01-2024'
 updated: '10-01-2024'
+keywords:
+  - SPL Token metadata
+  - add metadata to Solana token
+  - Token Metadata program
+  - Metaplex Umi
+about:
+  - SPL Token metadata
+  - Token Metadata program
+  - Metaplex Umi
+proficiencyLevel: Beginner
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install required Metaplex packages
+  - Configure Umi with a signer and the Token Metadata plugin
+  - Prepare off-chain token metadata with name, symbol, and URI
+  - Derive the metadata PDA for your existing token mint
+  - Add metadata using the createV1 helper from mpl-token-metadata
+  - Confirm the transaction on a Solana explorer
+howToTools:
+  - Metaplex Umi
+  - mpl-token-metadata
 ---
 
 이 가이드는 Metaplex Token Metadata 프로토콜을 사용하여 이미 초기화된 Solana 토큰(SPL 토큰)에 메타데이터를 추가하는 과정을 안내합니다.

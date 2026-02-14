@@ -1,10 +1,31 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: Solana 프로그램과 상태 개요
 metaTitle: Solana 프로그램과 상태 개요 | 가이드
 description: Solana 프로그램과 Solana에서 계정 상태에 데이터가 저장되는 방법에 대해 학습합니다.
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - Solana programs
+  - smart contracts
+  - Solana accounts
+  - Solana state management
+  - Solana Rust programs
+about:
+  - Solana programs
+  - accounts
+  - instructions
+  - state management
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
+faqs:
+  - q: What are Solana programs?
+    a: Solana programs are executable code that runs on the Solana blockchain, similar to smart contracts. They are stateless, typically written in Rust, and invoked by transactions.
+  - q: How does state management work on Solana?
+    a: State is managed externally from programs and stored in separate accounts. Programs modify state by updating data in accounts through instructions sent via transactions.
+  - q: What types of accounts exist on Solana?
+    a: Solana has Data Accounts for storing arbitrary data, SPL Token Accounts for managing token balances, and Program Accounts that contain executable program code.
 ---
 
 ## Solana 프로그램

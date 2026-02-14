@@ -1,10 +1,35 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 로컬 검증자 설정
 metaTitle: 로컬 검증자 설정 | Metaplex Guides
 description: 로컬 개발 환경을 설정하고 로컬 검증자를 사용하는 방법을 배웁니다
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2025'
 updated: '04-19-2025'
+keywords:
+  - local validator
+  - Solana testing
+  - solana-test-validator
+  - local development
+  - Metaplex local validator
+about:
+  - Solana local validator
+  - local development environment
+  - program testing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+  - Bash
+howToSteps:
+  - Install the Solana Tools CLI for your operating system
+  - Start the local validator with solana-test-validator
+  - Connect your application to the local validator at localhost port 8899
+  - Download required programs and accounts from mainnet using the Solana CLI
+  - Load programs and accounts into the local validator
+  - Create a custom Metaplex validator script with pre-loaded programs
+howToTools:
+  - Solana CLI
+  - solana-test-validator
+  - Metaplex Umi
 ---
 
 ## 개요

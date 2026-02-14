@@ -2,6 +2,16 @@
 title: Guides
 metaTitle: Metaplex Solana Guides | Guides
 description: Guides by Metaplex about the Solana blockchain.
+keywords:
+  - Solana guides
+  - Solana developer tutorials
+  - Metaplex guides
+  - Solana development
+about:
+  - Solana
+  - Metaplex
+  - blockchain development
+proficiencyLevel: Beginner
 ---
 
 ![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)

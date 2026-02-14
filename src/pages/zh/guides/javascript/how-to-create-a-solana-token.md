@@ -1,10 +1,38 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 如何创建 Solana 代币
 metaTitle: 如何创建 Solana 代币 | 指南
 description: 了解如何使用 Metaplex 包在 Solana 区块链上创建 SPL 代币/meme 币。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - SPL Token
+  - create Solana token
+  - meme coin
+  - fungible token
+  - Metaplex Umi
+about:
+  - SPL Token creation
+  - Metaplex Umi
+  - token metadata
+  - Solana fungible tokens
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new project and install required Metaplex packages
+  - Configure Umi with a signer and RPC connection
+  - Upload the token image to Arweave via Irys
+  - Upload the token metadata JSON to Arweave
+  - Create the Mint Account and Token Metadata using createFungible
+  - Create an Associated Token Account and mint tokens
+  - Send the transaction to the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-token-metadata
+  - mpl-toolbox
+  - Irys uploader
 ---
 
 本分步指南将帮助您在 Solana 区块链上创建 Solana 代币（SPL 代币）。您可以使用 Metaplex Umi 客户端包装器和 Mpl Toolbox 包与 Javascript。这使您能够创建可在脚本以及前端和后端框架中使用的函数。

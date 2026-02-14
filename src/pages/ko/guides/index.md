@@ -2,6 +2,16 @@
 title: 가이드
 metaTitle: Metaplex Solana 가이드 | 가이드
 description: Solana 블록체인에 대한 Metaplex의 가이드.
+keywords:
+  - Solana guides
+  - Solana developer tutorials
+  - Metaplex guides
+  - Solana development
+about:
+  - Solana
+  - Metaplex
+  - blockchain development
+proficiencyLevel: Beginner
 ---
 
 ![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)

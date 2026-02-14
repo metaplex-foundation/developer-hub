@@ -5,6 +5,30 @@ description: Learn how to diagnose transaction errors on Solana and find logical
 # remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-21-2024'
+keywords:
+  - transaction errors
+  - Solana debugging
+  - skipPreflight
+  - Solana error codes
+  - Anchor error codes
+about:
+  - transaction error diagnosis
+  - Solana debugging
+  - error codes
+  - preflight simulation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+  - Rust
+faqs:
+  - q: How do I share a failing Solana transaction for debugging?
+    a: Use skipPreflight when sending the transaction to force it on-chain even if it fails. This registers the full transaction details including accounts, instructions, and error logs that can be viewed on a Solana explorer.
+  - q: What do 6xxx error codes mean on Solana?
+    a: Error codes starting with 6xxx are custom Anchor program error codes starting at 6000. Subtract 6000 from the code and count down the program's errors.rs list starting at index 0 to find the specific error.
+  - q: What does the Attempt to debit an account error mean?
+    a: This common error (0x1) means the account being debited does not have any SOL. Ensure the account is funded before attempting the transaction.
+  - q: How do I decode hex error codes from Solana transactions?
+    a: Use a hex-to-decimal converter to convert the hex error code to a number, then look it up in the program's error list as either a standard error code (xx) or an Anchor error code (6xxx).
 ---
 
 ## Sharing Errors to a Support Network

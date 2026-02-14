@@ -1,10 +1,31 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 验证者和质押
 metaTitle: 验证者和质押 | 指南
 description: Solana 验证者和质押机制概述。
-# remember to update dates also in /components/guides/index.js
 created: '04-19-2025'
 updated: '04-19-2025'
+keywords:
+  - Solana validators
+  - staking SOL
+  - Proof of Stake
+  - Solana consensus
+  - delegation
+about:
+  - Solana validators
+  - staking
+  - Proof of Stake
+  - delegation
+proficiencyLevel: Beginner
+faqs:
+  - q: What do Solana validators do?
+    a: Validators process transactions, generate new blocks, and validate the blockchain state to ensure accuracy and prevent double-spending. They participate in consensus by staking SOL tokens.
+  - q: How do I stake SOL tokens?
+    a: You can stake SOL by either running a validator node (direct staking) or delegating your SOL to an existing validator using a compatible wallet like Phantom or Solflare.
+  - q: How long does it take for staked SOL to become active?
+    a: When you delegate SOL, it takes approximately 2-3 epochs (2-3 days) for your stake to become active and start earning rewards. Deactivation takes the same timeframe.
+  - q: What factors should I consider when choosing a validator?
+    a: Consider the validator's performance and uptime, commission rate (typically 5-10%), total stake amount, and their contribution to network decentralization.
 ---
 ## 概述
 

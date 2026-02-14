@@ -136,7 +136,7 @@ export function MobileNavigation({ page }) {
             href={getLocalizedHref('/guides', locale)}
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
-            <BookOpenIcon height={20} /> {t('guides', 'Guides')}
+            <BookOpenIcon height={20} /> {t('solana', 'Solana')}
           </Link>
 
           {/* Only show product-specific navigation when not on the global/home pages */}

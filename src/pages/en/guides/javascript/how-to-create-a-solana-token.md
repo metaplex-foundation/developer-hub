@@ -5,6 +5,34 @@ description: Learn how to create an SPL Token/meme coin on the Solana blockchain
 # remember to update dates also in /components/guides/index.js
 created: '04-19-2024'
 updated: '04-19-2025'
+keywords:
+  - SPL Token
+  - create Solana token
+  - meme coin
+  - fungible token
+  - Metaplex Umi
+about:
+  - SPL Token creation
+  - Metaplex Umi
+  - token metadata
+  - Solana fungible tokens
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+howToSteps:
+  - Set up a new project and install required Metaplex packages
+  - Configure Umi with a signer and RPC connection
+  - Upload the token image to Arweave via Irys
+  - Upload the token metadata JSON to Arweave
+  - Create the Mint Account and Token Metadata using createFungible
+  - Create an Associated Token Account and mint tokens
+  - Send the transaction to the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-token-metadata
+  - mpl-toolbox
+  - Irys uploader
 ---
 
 This step by step guide will assist you in creating a Solana token (SPL Token) on the Solana blockchain. You can use the Metaplex Umi client wrapper and Mpl Toolbox package with Javascript. This enables you to create a function that you can use in scripts as well as frontend and backend frameworks.

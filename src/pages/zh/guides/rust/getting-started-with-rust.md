@@ -2,6 +2,18 @@
 title: Rust 入门
 metaTitle: Rust 入门 | 指南
 description: 关于如何在 Solana 生态系统中开始使用 Rust 的快速概述。
+keywords:
+  - Rust Solana
+  - getting started Rust
+  - Anchor framework
+  - Solana program development
+about:
+  - Rust programming
+  - Solana development
+  - Anchor framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
 
 ## 介绍

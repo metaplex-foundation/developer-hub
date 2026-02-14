@@ -2,6 +2,20 @@
 title: Rust와 함께 작업하기
 metaTitle: Rust와 함께 작업하기 | 가이드
 description: Rust와 Metaplex 프로토콜로 작업하는 것에 대한 간단한 개요입니다.
+keywords:
+  - Solana Rust scripts
+  - Metaplex Rust SDK
+  - instruction builders
+  - CPI builders
+  - Solana Rust client
+about:
+  - Rust development
+  - Metaplex instruction builders
+  - CPI builders
+  - Solana program development
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## 소개

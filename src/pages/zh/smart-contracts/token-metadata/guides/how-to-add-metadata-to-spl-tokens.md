@@ -4,6 +4,28 @@ metaTitle: 如何向 Solana 代币添加元数据 | 指南
 description: 了解如何向已存在的 Solana 代币添加元数据。
 created: '10-01-2024'
 updated: '10-01-2024'
+keywords:
+  - SPL Token metadata
+  - add metadata to Solana token
+  - Token Metadata program
+  - Metaplex Umi
+about:
+  - SPL Token metadata
+  - Token Metadata program
+  - Metaplex Umi
+proficiencyLevel: Beginner
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install required Metaplex packages
+  - Configure Umi with a signer and the Token Metadata plugin
+  - Prepare off-chain token metadata with name, symbol, and URI
+  - Derive the metadata PDA for your existing token mint
+  - Add metadata using the createV1 helper from mpl-token-metadata
+  - Confirm the transaction on a Solana explorer
+howToTools:
+  - Metaplex Umi
+  - mpl-token-metadata
 ---
 
 本指南将带您使用 Metaplex Token Metadata 协议向已初始化的 Solana 代币（SPL 代币）添加元数据。

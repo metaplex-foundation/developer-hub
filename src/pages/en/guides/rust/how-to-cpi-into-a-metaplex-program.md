@@ -2,6 +2,28 @@
 title: How to CPI into a Metaplex Program
 metaTitle: How to CPI into a Metaplex Program | Guides
 description: An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
+keywords:
+  - CPI
+  - Cross Program Invocation
+  - Solana CPI tutorial
+  - Metaplex CpiBuilder
+  - invoke_signed
+about:
+  - Cross Program Invocation
+  - Metaplex CPI builders
+  - Solana program interoperability
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+howToSteps:
+  - Import the CpiBuilder for the desired Metaplex instruction
+  - Initialize the CpiBuilder with the target program AccountInfo
+  - Fill in the required accounts and data arguments
+  - Choose between invoke() for regular calls or invoke_signed() for PDA signers
+  - Execute the CPI call to the Metaplex program
+howToTools:
+  - Metaplex Rust SDK
+  - mpl-core crate
 ---
 
 ## Introduction

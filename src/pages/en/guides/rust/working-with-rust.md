@@ -2,6 +2,20 @@
 title: Working with Rust
 metaTitle: Working with Rust | Guides
 description: A quick overview on working with Rust and the Metaplex protocol.
+keywords:
+  - Solana Rust scripts
+  - Metaplex Rust SDK
+  - instruction builders
+  - CPI builders
+  - Solana Rust client
+about:
+  - Rust development
+  - Metaplex instruction builders
+  - CPI builders
+  - Solana program development
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## Introduction

@@ -1,10 +1,32 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: 付款人-权限模式
 metaTitle: 付款人-权限模式 | Metaplex Guides
 description: Solana 指令使用单独的权限和付款人的常见编程模式。
-# remember to update dates also in /components/guides/index.js
 created: '12-30-2024'
 updated: null
+keywords:
+  - payer-authority pattern
+  - Solana program design
+  - PDA signers
+  - account ownership
+  - Solana instruction pattern
+about:
+  - payer-authority pattern
+  - Solana program architecture
+  - account ownership
+  - PDA signers
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
+  - TypeScript
+faqs:
+  - q: What is the payer-authority pattern in Solana?
+    a: The payer-authority pattern separates the account paying for storage fees (payer) from the account that owns or controls the created account (authority), enabling more flexible funding and ownership semantics.
+  - q: Why would I need separate payer and authority signers?
+    a: Separate signers allow a sponsor to pay for on-chain storage while the end user retains ownership, and they simplify PDA-based interactions where PDAs cannot directly pay rent.
+  - q: How does the payer-authority pattern handle PDA signers?
+    a: Since PDAs cannot sign transactions or pay fees directly, the pattern uses a separate payer account to cover rent and storage costs on behalf of the PDA, avoiding the complexity of funneling funds into PDAs.
 ---
 
 ## P-A 模式概述

@@ -1,10 +1,32 @@
 ---
+# remember to update dates also in /components/guides/index.js
 title: SolanaでSPLトークンを送信・転送する方法
 metaTitle: SolanaでSPLトークンを送信・転送する方法 | ガイド
 description: MetaplexパッケージでSolanaブロックチェーン上でJavaScriptを使用してSPLトークンを送信・転送する方法を学習します。
-# remember to update dates also in /components/guides/index.js
 created: '06-16-2024'
 updated: '06-24-2024'
+keywords:
+  - transfer SPL tokens
+  - send SPL tokens
+  - Solana token transfer
+  - Associated Token Account
+  - Metaplex Umi
+about:
+  - SPL token transfers
+  - Associated Token Accounts
+  - Metaplex Umi
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - TypeScript
+howToSteps:
+  - Set up a new project and install Umi and mpl-toolbox packages
+  - Configure Umi with a wallet that holds SPL tokens
+  - Find the Associated Token Accounts for sender and receiver
+  - Use the transferTokens function to create a transfer instruction
+  - Send and confirm the transaction on the Solana blockchain
+howToTools:
+  - Metaplex Umi
+  - mpl-toolbox
 ---
 
 このガイドでは、Metaplex UmiクライアントラッパーとMPL Toolboxパッケージを利用してSolanaブロックチェーン上でSPLトークンを送信・転送するJavaScript関数を構築する方法を紹介します。

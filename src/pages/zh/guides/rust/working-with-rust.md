@@ -2,6 +2,20 @@
 title: 使用 Rust 工作
 metaTitle: 使用 Rust 工作 | 指南
 description: 关于使用 Rust 和 Metaplex 协议工作的快速概述。
+keywords:
+  - Solana Rust scripts
+  - Metaplex Rust SDK
+  - instruction builders
+  - CPI builders
+  - Solana Rust client
+about:
+  - Rust development
+  - Metaplex instruction builders
+  - CPI builders
+  - Solana program development
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - Rust
 ---
 
 ## 介绍

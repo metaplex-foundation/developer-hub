@@ -38,6 +38,19 @@ const standaloneRedirects = {
   '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',
   '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
   '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
+  // Standalone pages moved to guides
+  '/rpc-providers': '/guides/rpcs-and-das',
+  '/ja/rpc-providers': '/ja/guides/rpcs-and-das',
+  '/ko/rpc-providers': '/ko/guides/rpcs-and-das',
+  '/zh/rpc-providers': '/zh/guides/rpcs-and-das',
+  '/guides/rpc-providers': '/guides/rpcs-and-das',
+  '/ja/guides/rpc-providers': '/ja/guides/rpcs-and-das',
+  '/ko/guides/rpc-providers': '/ko/guides/rpcs-and-das',
+  '/zh/guides/rpc-providers': '/zh/guides/rpcs-and-das',
+  '/understanding-programs': '/guides/understanding-programs',
+  '/ja/understanding-programs': '/ja/guides/understanding-programs',
+  '/ko/understanding-programs': '/ko/guides/understanding-programs',
+  '/zh/understanding-programs': '/zh/guides/understanding-programs',
 }
 
 const redirectRules = {
@@ -64,16 +77,28 @@ const redirectRules = {
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/guides/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Japanese guide redirects
   '/ja/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/ja/guides/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/ja/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/ja/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Korean guide redirects
   '/ko/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/ko/guides/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/ko/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/ko/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Japanese smart-contracts redirects
   '/ja/smart-contracts/bubblegum': {
@@ -107,6 +132,10 @@ const redirectRules = {
   '/zh/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
       '/zh/guides/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/zh/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/zh/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Chinese smart-contracts redirects
   '/zh/smart-contracts/bubblegum': {
