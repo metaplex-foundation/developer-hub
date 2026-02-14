@@ -49,6 +49,31 @@ export const cli = {
           ],
         },
         {
+          title: 'Genesis Commands',
+          links: [
+            {
+              title: 'Overview',
+              href: '/dev-tools/cli/genesis',
+            },
+            {
+              title: 'Create Genesis Account',
+              href: '/dev-tools/cli/genesis/create',
+            },
+            {
+              title: 'Launch Pool',
+              href: '/dev-tools/cli/genesis/launch-pool',
+            },
+            {
+              title: 'Presale',
+              href: '/dev-tools/cli/genesis/presale',
+            },
+            {
+              title: 'Manage',
+              href: '/dev-tools/cli/genesis/manage',
+            },
+          ],
+        },
+        {
           title: 'Core Commands',
           links: [
             {
@@ -154,6 +179,7 @@ export const cli = {
         'Introduction': 'Introduction',
         'Configuration': 'Configuration',
         'Core Commands': 'Core Commands',
+        'Genesis Commands': 'Genesis Commands',
         'Toolbox': 'Toolbox'
       },
       links: {
@@ -162,6 +188,10 @@ export const cli = {
         'Wallets': 'Wallets',
         'RPCs': 'RPCs',
         'Explorer': 'Explorer',
+        'Create Genesis Account': 'Create Genesis Account',
+        'Launch Pool': 'Launch Pool',
+        'Presale': 'Presale',
+        'Manage': 'Manage',
         'Add Metadata to Token': 'Add Metadata to Token',
         'Update Token Metadata': 'Update Token Metadata'
       }
@@ -173,6 +203,7 @@ export const cli = {
         'Introduction': '紹介',
         'Configuration': '設定',
         'Core Commands': 'Coreコマンド',
+        'Genesis Commands': 'Genesisコマンド',
         'Toolbox': 'ツールボックス'
       },
       links: {
@@ -181,6 +212,10 @@ export const cli = {
         'Wallets': 'ウォレット',
         'RPCs': 'RPC',
         'Explorer': 'エクスプローラー',
+        'Create Genesis Account': 'Genesisアカウント作成',
+        'Launch Pool': 'ローンチプール',
+        'Presale': 'プレセール',
+        'Manage': '管理',
         'Add Metadata to Token': 'トークンメタデータ追加',
         'Update Token Metadata': 'トークンメタデータ更新'
       }
@@ -192,6 +227,7 @@ export const cli = {
         'Introduction': '소개',
         'Configuration': '구성',
         'Core Commands': 'Core 명령어',
+        'Genesis Commands': 'Genesis 명령어',
         'Toolbox': '툴박스'
       },
       links: {
@@ -200,6 +236,10 @@ export const cli = {
         'Wallets': '지갑',
         'RPCs': 'RPC',
         'Explorer': '익스플로러',
+        'Create Genesis Account': 'Genesis 계정 생성',
+        'Launch Pool': '런치 풀',
+        'Presale': '프리세일',
+        'Manage': '관리',
         'Add Metadata to Token': '토큰 메타데이터 추가',
         'Update Token Metadata': '토큰 메타데이터 업데이트'
       }
@@ -212,6 +252,7 @@ export const cli = {
         'Configuration': '配置',
         'Core Commands': 'Core命令',
         'Candy Machine Commands': 'Candy Machine命令',
+        'Genesis Commands': 'Genesis命令',
         'Toolbox': '工具箱'
       },
       links: {
@@ -239,7 +280,11 @@ export const cli = {
         'Token Transfer': '转移代币',
         'SOL Airdrop': 'SOL空投',
         'SOL Balance': 'SOL余额',
-        'SOL Transfer': 'SOL转账'
+        'SOL Transfer': 'SOL转账',
+        'Create Genesis Account': '创建Genesis账户',
+        'Launch Pool': '发行池',
+        'Presale': '预售',
+        'Manage': '管理'
       }
     }
   }
