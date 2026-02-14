@@ -181,7 +181,6 @@ async function setupLaunchPool() {
       time: claimEnd,
       triggeredTimestamp: null,
     },
-    backendSigner: null,
   }).sendAndConfirm(umi);
 
   // 6. Finalize
