@@ -128,7 +128,7 @@ Candy Machineからすべてのアセットがミントされると、その目�
 {% totem %}
 {% totem-accordion title="オンチェーンCore Candy Machineデータ構造" %}
 
-MPL Core Assetのオンチェーンアカウント構造。[リンク](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+MPL Core Assetのオンチェーンアカウント構造。[GitHubで表示](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
 | 名前           | タイプ    | サイズ | 説明                                              |     |
 | -------------- | ------- | ---- | -------------------------------------------------------- | --- |

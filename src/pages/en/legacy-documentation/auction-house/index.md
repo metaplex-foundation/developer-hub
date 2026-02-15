@@ -52,7 +52,7 @@ When a user lists an asset, the Auction House does two things:
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [here](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
+2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [in the SPL Token authority delegation docs](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 

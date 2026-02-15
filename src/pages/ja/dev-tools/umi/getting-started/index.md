@@ -99,7 +99,7 @@ const umi = createUmi('<RPC-Endpoint>', '<Commitment-Level>')
 
 Umiをセットアップする際、トランザクションを送信するためにウォレットを使用または生成する必要があります。これを行うには、**テスト用に新しいウォレットを作成**、**ファイルシステムから既存のウォレットをインポート**、またはWebベースのdApps用に**walletAdapterを使用**できます。
 
-**注意**: `walletAdapter`セクションは、`walletAdapter`が既にインストールおよび設定されていることを前提として、UmiにそれをPGする必要があるコードのみを提供します。包括的なガイドについては、[こちら](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください。
+**注意**: `walletAdapter`セクションは、`walletAdapter`が既にインストールおよび設定されていることを前提として、UmiにそれをPGする必要があるコードのみを提供します。包括的なガイドについては、[Wallet Adapterガイド](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください。
 
 {% totem %}
 

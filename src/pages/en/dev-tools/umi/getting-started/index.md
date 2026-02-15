@@ -99,7 +99,7 @@ const umi = createUmi('<RPC-Endpoint>', '<Commitment-Level>')
 
 When setting up Umi, you'll need to use or generate a wallet in order to send transactions. To do so, you can **create a new wallet** for testing, **import an existing wallet** from the filesystem, or **use a walletAdapter** for web-based dApps.
 
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [the Wallet Adapter guide](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 
 {% totem %}
 

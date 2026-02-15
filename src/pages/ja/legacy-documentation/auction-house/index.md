@@ -52,7 +52,7 @@ Auction Houseプログラムを使用して、新しい**Auction House**アカ�
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction Houseはまた、別のPDA: `programAsSigner` PDAを**デリゲート**として割り当てます。デリゲートはSolana SPL-tokenプログラムの機能であり、[こちら](https://spl.solana.com/token#authority-delegation)で詳しく説明されています。委任により、Auction Houseは後で販売が行われたときにトークンアカウントからアセットを引き出すことができます。このように、アセットはエスクローする必要がなく、販売が行われるまでユーザーのウォレットに留まることができます。
+2. Auction Houseはまた、別のPDA: `programAsSigner` PDAを**デリゲート**として割り当てます。デリゲートはSolana SPL-tokenプログラムの機能であり、[SPLトークン権限委任のドキュメント](https://spl.solana.com/token#authority-delegation)で詳しく説明されています。委任により、Auction Houseは後で販売が行われたときにトークンアカウントからアセットを引き出すことができます。このように、アセットはエスクローする必要がなく、販売が行われるまでユーザーのウォレットに留まることができます。
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 

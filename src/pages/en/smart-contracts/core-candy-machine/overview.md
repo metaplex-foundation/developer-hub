@@ -128,7 +128,7 @@ Explain what data is stored and what role that data has for the user.
 {% totem %}
 {% totem-accordion title="On Chain Core Candy Machine Data Structure" %}
 
-The onchain account structure of an MPL Core Asset. [Link](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+The onchain account structure of an MPL Core Asset. [View on GitHub](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
 | Name           | Type    | Size | Description                                              |     |
 | -------------- | ------- | ---- | -------------------------------------------------------- | --- |

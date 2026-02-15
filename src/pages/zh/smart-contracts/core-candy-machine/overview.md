@@ -128,7 +128,7 @@ description: Core Candy Machine 程序及其功能集概述,帮助您创建铸�
 {% totem %}
 {% totem-accordion title="链上 Core Candy Machine 数据结构" %}
 
-MPL Core 资产的链上账户结构。[链接](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+MPL Core 资产的链上账户结构。[查看源代码](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 
 | 名称           | 类型    | 大小 | 描述                                              |     |
 | -------------- | ------- | ---- | ------------------------------------------------ | --- |

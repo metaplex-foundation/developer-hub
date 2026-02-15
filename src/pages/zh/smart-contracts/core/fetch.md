@@ -287,7 +287,7 @@ pub async fn fetch_assets_by_update_authority() {
 {% /dialect-switcher %}
 ## DAS - 数字资产标准 API
 如果您使用启用了 DAS 的 RPC，您将能够利用索引 Asset 进行快速获取和数据检索。
-DAS 将索引从元数据、链下元数据、集合数据、插件（包括 Attributes）等所有内容。要了解更多关于 Metaplex DAS API 的信息，您可以[点击这里](/dev-tools/das-api)。除了通用的 DAS SDK，还创建了一个[针对 MPL Core 的扩展](/dev-tools/das-api/core-extension)，它直接返回正确的类型，以便进一步与 MPL Core SDK 一起使用。它还自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
+DAS 将索引从元数据、链下元数据、集合数据、插件（包括 Attributes）等所有内容。要了解更多关于 Metaplex DAS API 的信息，您可以[访问Metaplex DAS API页面](/dev-tools/das-api)。除了通用的 DAS SDK，还创建了一个[针对 MPL Core 的扩展](/dev-tools/das-api/core-extension)，它直接返回正确的类型，以便进一步与 MPL Core SDK 一起使用。它还自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
 以下是使用 DAS 获取 MPL Core Asset 返回数据的示例。
 ### FetchAsset 示例
 ```json

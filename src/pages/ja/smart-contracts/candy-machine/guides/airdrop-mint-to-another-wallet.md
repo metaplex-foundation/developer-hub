@@ -40,7 +40,7 @@ Sugar CLIは、他のウォレットにNFTをミントするための2つの主�
 1. `sugar mint`：*1つ*の特定のウォレットにミント
 2. `sugar airdrop`：*複数*のウォレットにミント
 
-Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[この](/ja/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)ガイドの最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
+Sugarを通じてミントを許可する前提条件は、**ガードが添付されていない**Candy Machineを作成することです。Sugarを使用してCandy Machineを作成するには、[NFTコレクション作成ガイド](/ja/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)の最初のステップに従ってください。Candy Machineにガードが添付されている場合、`sugar guard remove`を使用してガードを削除できます。
 
 ### `sugar mint`を使用した単一受信者ミント
 
