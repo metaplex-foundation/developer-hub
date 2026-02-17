@@ -1,7 +1,7 @@
 ---
 title: Solanaでトークンをローンチする
-metaTitle: Solana Token Launchpad | ICO, IDO, Token Sale & Fair Launch | Metaplex
-description: Launch an SPL token on Solana with Genesis — a token launchpad for fair launches, ICOs, IDOs, presales, crowdsales, and token generation events (TGE). Step-by-step TypeScript guide for on-chain token distribution.
+metaTitle: Solanaトークンローンチパッド | ICO、IDO、トークンセール＆フェアローンチ | Metaplex
+description: Genesisを使ってSolana上でSPLトークンをローンチ。フェアローンチ、ICO、IDO、Presale、クラウドセール、トークン生成イベント（TGE）に対応したトークンローンチパッドです。オンチェーントークン配布のためのTypeScriptステップバイステップガイド。
 ---
 
 [Genesis](/ja/smart-contracts/genesis) を使用して Solana 上で SPL トークンをローンチします。Genesis はオンチェーンのトークンローンチパッドおよびフェアローンチプラットフォームです。トークンセール、ICO、IDO、クラウドセールなど、Genesis Launch Pools がオンチェーンで透明にトークン配布を行います。ユーザーは設定した期間中に SOL を預け入れ、総預入額に対するシェアに比例してトークンを受け取ります。 {% .lead %}

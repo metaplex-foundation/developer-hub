@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis Presale | ICO & Fixed-Price Token Sale on Solana | Metaplex
-description: Run a token presale or ICO on Solana. Fixed-price SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token offering with the Genesis launchpad.
+metaTitle: Genesis Presale | SolanaでのICO＆固定価格トークンセール | Metaplex
+description: SolanaでトークンプレセールやICOを実施。ユーザーがSOLを預け入れ、事前に設定されたレートでトークンを受け取る固定価格SPLトークンセールです。Genesisローンチパッドによるオンチェーントークンオファリング。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:

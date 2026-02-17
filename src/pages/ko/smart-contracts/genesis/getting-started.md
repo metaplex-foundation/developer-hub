@@ -3,7 +3,7 @@ title: 시작하기
 metaTitle: Genesis 시작하기 | 솔라나에서 토큰 출시하는 방법 | Metaplex
 description: 솔라나에서 SPL 토큰을 출시하는 방법을 단계별로 배우세요. Genesis 토큰 런치패드를 사용하여 ICO, 프리세일, 공정한 출시, 토큰 세일을 계획하세요.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-17-2026'
 keywords:
   - Genesis tutorial
   - token launch flow

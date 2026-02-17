@@ -1,7 +1,7 @@
 ---
-title: Uniform Price Auction
-metaTitle: Genesis Auction | IDO & Token Auction on Solana | Metaplex
-description: IDO-style token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token offering for institutional and large-scale fundraising.
+title: 均一価格オークション
+metaTitle: Genesisオークション | SolanaでのIDO＆トークンオークション | Metaplex
+description: 均一クリアリング価格によるSolana上のIDO型トークンオークション。SPLトークンローンチのための競争入札方式で、機関投資家や大規模な資金調達に対応するオンチェーントークンオファリングです。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:

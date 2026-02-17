@@ -1,10 +1,10 @@
 ---
 title: Launch a Token on Solana
-metaTitle: Solana Token Launchpad | ICO, IDO, Token Sale & Fair Launch | Metaplex
-description: Launch an SPL token on Solana with Genesis — a token launchpad for fair launches, ICOs, IDOs, presales, crowdsales, and token generation events (TGE). Step-by-step TypeScript guide for on-chain token distribution.
+metaTitle: Launch a Token on Solana — Genesis Fair Launch Guide | Metaplex
+description: Step-by-step TypeScript guide to launching an SPL token on Solana using Genesis Launch Pools. Fair, on-chain token distribution with transparent price discovery.
 ---
 
-Launch an SPL token on Solana using [Genesis](/smart-contracts/genesis) — an on-chain token launchpad and fair launch platform. Whether you're looking to run a token sale, ICO, IDO, or crowdsale, Genesis Launch Pools handle token distribution transparently on-chain. Users deposit SOL during a window and receive tokens proportional to their share of total deposits. {% .lead %}
+Launch an SPL token on Solana using [Genesis](/smart-contracts/genesis) Launch Pools. This guide walks you through a fair launch where users deposit SOL during a window and receive tokens proportional to their share of total deposits — all handled transparently on-chain. {% .lead %}
 
 {% callout type="note" title="No-Code Option" %}
 Don't want to write code? Use the [Metaplex token launchpad](https://www.metaplex.com) to launch a token with no coding required. This guide is for developers who want to build their own token launch experience or host a token sale on their own website using the Genesis SDK.

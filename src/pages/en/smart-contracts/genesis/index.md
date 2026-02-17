@@ -1,7 +1,7 @@
 ---
 title: Genesis - Solana Token Launchpad & Launch Platform
-metaTitle: Genesis | Solana Token Launchpad | ICO, IDO, Presale & Fair Launch Platform | Metaplex
-description: Genesis is a Solana token launchpad for ICOs, IDOs, presales, fair launches, and token generation events (TGE). On-chain SPL token creation, crowdsale, and token distribution platform.
+metaTitle: Genesis — Solana Token Launchpad for Fair Launches & Token Sales | Metaplex
+description: Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:

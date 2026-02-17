@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
-metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
-description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale alternative to traditional ICOs and IDOs with organic price discovery.
+metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
+description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。従来のICOやIDOに代わる、自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:

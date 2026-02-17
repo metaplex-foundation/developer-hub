@@ -1,7 +1,7 @@
 ---
 title: はじめに
-metaTitle: Getting Started with Genesis | How to Launch a Token on Solana | Metaplex
-description: Learn how to launch an SPL token on Solana step by step. Plan your ICO, presale, fair launch, or token sale using the Genesis token launchpad.
+metaTitle: Genesisをはじめる | Solanaでトークンをローンチする方法 | Metaplex
+description: SolanaでSPLトークンをローンチする方法をステップごとに解説します。Genesisトークンローンチパッドを使ったICO、Presale、フェアローンチ、トークンセールの計画方法を学びましょう。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
