@@ -58,7 +58,7 @@ description: Core Candy Machineプログラムとその機能セットの概要�
 各アイテムは2つのパラメータで構成されます：
 
 - `name`: アセットの名前。
-- `uri`: アセットの[JSONメタデータ](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)を指すURI。これは、JSONメタデータが既にオンチェーン（例：Arweave、IPFS）またはオフチェーン（例：AWS、独自サーバー）ストレージプロバイダーを介してアップロードされていることを意味します。SugarやJS SDKなどのCandy Machine作成ツールは、これを支援するヘルパーを提供します。
+- `uri`: アセットの[JSONメタデータ](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard)を指すURI。これは、JSONメタデータが既にオンチェーン（例：Arweave、IPFS）またはオフチェーン（例：AWS、独自サーバー）ストレージプロバイダーを介してアップロードされていることを意味します。SugarやJS SDKなどのCandy Machine作成ツールは、これを支援するヘルパーを提供します。
 
 その他のパラメータはアセット間で共有されるため、繰り返しを避けるためにCandy Machineの設定に直接保持されます。詳細は[アイテムの挿入](/ja/smart-contracts/core-candy-machine/insert-items)を参照してください。
 

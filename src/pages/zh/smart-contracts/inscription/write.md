@@ -4,7 +4,7 @@ metaTitle: 写入Inscription数据 | Inscription
 description: 学习如何向您的Inscription写入数据
 ---
 
-[初始化](initialize)inscription账户后，可以向其写入数据。这对于关联inscriptions也是如此。确保您的初始化交易已完成（参见[发送交易](https://developers.metaplex.com/umi/transactions#sending-transactions)）。
+[初始化](initialize)inscription账户后，可以向其写入数据。这对于关联inscriptions也是如此。确保您的初始化交易已完成（参见[发送交易](https://metaplex.com/docs/umi/transactions#sending-transactions)）。
 
 {% dialect-switcher title="写入Inscription数据" %}
 {% dialect title="JavaScript" id="js" %}

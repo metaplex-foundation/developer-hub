@@ -32,7 +32,7 @@ That's it, you can now interact with Inscriptions by using [the various function
 
 ```ts
 // Step 1: Mint an NFT or pNFT
-// See https://developers.metaplex.com/token-metadata/mint
+// See https://metaplex.com/docs/token-metadata/mint
 
 // Step 2: Inscribe JSON
 

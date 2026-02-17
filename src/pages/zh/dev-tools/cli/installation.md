@@ -127,7 +127,7 @@ npm link
 
 如果您遇到任何问题:
 
-1. 查看[文档](https://developers.metaplex.com)
+1. 查看[文档](https://metaplex.com/docs)
 2. 搜索 [GitHub 问题](https://github.com/metaplex-foundation/cli/issues)
 3. 加入 [Discord 社区](https://discord.gg/metaplex)
 

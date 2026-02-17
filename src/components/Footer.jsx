@@ -17,7 +17,7 @@ export function Footer() {
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
             <Link href={getLocalizedHref('/', locale)} className="flex items-center gap-3">
               <img
-                src="/metaplex-logo-white.png"
+                src="/docs/metaplex-logo-white.png"
                 alt="Metaplex"
                 className="h-4 w-auto"
               />

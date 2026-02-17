@@ -32,7 +32,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 
 ```ts
 // 步骤1：铸造NFT或pNFT
-// 参见 https://developers.metaplex.com/token-metadata/mint
+// 参见 https://metaplex.com/docs/token-metadata/mint
 
 // 步骤2：铭刻JSON
 

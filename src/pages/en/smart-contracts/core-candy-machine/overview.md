@@ -58,7 +58,7 @@ However, we still don’t know which Assets should be minted from that Core Cand
 Each item is composed of two parameters:
 
 - A `name`: The name of the Asset.
-- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the Asset. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider. The tools that you can use to create the Candy Machine, like Sugar or the JS SDK offer helpers to do so.
+- A `uri`: The URI pointing to the [JSON metadata](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard) of the Asset. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider. The tools that you can use to create the Candy Machine, like Sugar or the JS SDK offer helpers to do so.
 
 All other parameters are shared between Assets and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/smart-contracts/core-candy-machine/insert-items) for more details.
 

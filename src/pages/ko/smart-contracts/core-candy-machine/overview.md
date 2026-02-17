@@ -58,7 +58,7 @@ description: Core Candy Machine 프로그램과 민팅 경험을 만드는 데 �
 각 아이템은 두 개의 매개변수로 구성됩니다:
 
 - `name`: 자산의 이름입니다.
-- `uri`: 자산의 [JSON 메타데이터](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)를 가리키는 URI입니다. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다. Sugar나 JS SDK와 같이 Candy Machine을 생성하는 데 사용할 수 있는 도구들이 이를 위한 헬퍼를 제공합니다.
+- `uri`: 자산의 [JSON 메타데이터](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard)를 가리키는 URI입니다. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다. Sugar나 JS SDK와 같이 Candy Machine을 생성하는 데 사용할 수 있는 도구들이 이를 위한 헬퍼를 제공합니다.
 
 다른 모든 매개변수는 자산 간에 공유되므로 반복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/ko/smart-contracts/core-candy-machine/insert-items)을 참조하세요.
 

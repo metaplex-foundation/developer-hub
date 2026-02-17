@@ -74,7 +74,7 @@ MetaplexプロトコルのキャンディマシンはSolanaでの公平なNFTコ
 各アイテムは2つのパラメーターで構成されています：
 
 - `name`: NFTの名前。
-- `uri`: NFTの[JSONメタデータ](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)を指すURI。これは、JSONメタデータがオンチェーン（例：Arweave、IPFS）またはオフチェーン（例：AWS、独自サーバー）のストレージプロバイダーを通じて既にアップロードされていることを意味します。
+- `uri`: NFTの[JSONメタデータ](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard)を指すURI。これは、JSONメタデータがオンチェーン（例：Arweave、IPFS）またはオフチェーン（例：AWS、独自サーバー）のストレージプロバイダーを通じて既にアップロードされていることを意味します。
 
 その他のすべてのパラメーターはすべてのNFT間で共有され、重複を避けるためにキャンディマシンの設定に直接保持されます。詳細は[アイテム挿入](/ja/smart-contracts/candy-machine/insert-items)をご覧ください。
 

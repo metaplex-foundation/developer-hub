@@ -35,8 +35,10 @@ export default async function handler(req, res) {
           .join(' ')
       : ''
 
-    // Fetch logo image
-    const logoUrl = 'https://developers.metaplex.com/metaplex-logo-white.png'
+    // Fetch logo image - use request host for self-referencing URL
+    const protocol = req.headers['x-forwarded-proto'] || 'http'
+    const host = req.headers.host
+    const logoUrl = `${protocol}://${host}/docs/metaplex-logo-white.png`
     const logoData = await fetch(logoUrl).then((r) => r.arrayBuffer())
 
     // Create ImageResponse
@@ -167,7 +169,7 @@ export default async function handler(req, res) {
                 color: '#737373',
               }}
             >
-              developers.metaplex.com
+              metaplex.com/docs
             </div>
           </div>
         </div>

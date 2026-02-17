@@ -73,7 +73,7 @@ mplx <category> <command> [options]
 ## 지원 및 리소스
 
 - [GitHub 저장소](https://github.com/metaplex-foundation/cli)
-- [문서](https://developers.metaplex.com)
+- [문서](https://metaplex.com/docs)
 - [Discord 커뮤니티](https://discord.gg/metaplex)
 
 ## 다음 단계

@@ -48,7 +48,7 @@ Metaplex Core는 플러그인 기반 아키텍처를 제공하는 Solana의 최�
     ↓
 [프로그램] → AppData 플러그인의 로열티 데이터 업데이트
 ```
-설정에 대한 자세한 내용은 [Metaplex Core 문서](https://developers.metaplex.com/core)를 참조하세요.
+설정에 대한 자세한 내용은 [Metaplex Core 문서](https://metaplex.com/docs/core)를 참조하세요.
 ## 로열티 시스템 아키텍처
 이 예에서는 Solana 블록체인에서 Metaplex Core를 사용하여 로열티 카드 시스템을 만들기 위한 잠재적 구조 하나를 개요합니다. 로열티 카드는 NFT이며, 각각 동작과 데이터 저장 방법을 관리하는 플러그인과 연결됩니다.
 ### 왜 소울바운드 NFT Asset을 사용하나요?

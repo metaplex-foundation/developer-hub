@@ -48,7 +48,7 @@ Metaplex Core是Solana上提供基于插件架构的现代NFT资产标准。与�
     ↓
 [程序] → 更新AppData插件中的忠诚数据
 ```
-有关更多设置详情，请参阅[Metaplex Core文档](https://developers.metaplex.com/core)。
+有关更多设置详情，请参阅[Metaplex Core文档](https://metaplex.com/docs/core)。
 ## 忠诚系统架构
 此示例概述了使用Metaplex Core在Solana区块链上创建忠诚卡系统的一种潜在结构。忠诚卡是NFT，每个都与管理其行为和存储数据的插件相关联。
 ### 为什么使用灵魂绑定NFT资产？

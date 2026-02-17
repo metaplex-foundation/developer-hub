@@ -73,7 +73,7 @@ mplx <カテゴリ> <コマンド> [オプション]
 ## サポートとリソース
 
 - [GitHubリポジトリ](https://github.com/metaplex-foundation/cli)
-- [ドキュメント](https://developers.metaplex.com)
+- [ドキュメント](https://metaplex.com/docs)
 - [Discordコミュニティ](https://discord.gg/metaplex)
 
 ## 次のステップ

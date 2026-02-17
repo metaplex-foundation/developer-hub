@@ -14,7 +14,7 @@ If you're looking for guidance on general web development practices or how to us
 
 ## Prerequisites
 
-- An already created Candy Machine. Find more info on how to create one [here](https://developers.metaplex.com/core-candy-machine/create).
+- An already created Candy Machine. Find more info on how to create one [here](https://metaplex.com/docs/core-candy-machine/create).
 - Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
 
 ## Required Packages

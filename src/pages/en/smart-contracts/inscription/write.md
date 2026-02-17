@@ -4,7 +4,7 @@ metaTitle: Write Inscription Data | Inscription
 description: Learn how to write Data to your Inscription
 ---
 
-After [initializing](initialize) an inscription account data can be written to it. This is also the case for associated inscriptions. Make sure that your initialization transaction has been finalized (see [Sending transactions](https://developers.metaplex.com/umi/transactions#sending-transactions)).
+After [initializing](initialize) an inscription account data can be written to it. This is also the case for associated inscriptions. Make sure that your initialization transaction has been finalized (see [Sending transactions](https://metaplex.com/docs/umi/transactions#sending-transactions)).
 
 {% dialect-switcher title="Write Inscription Data" %}
 {% dialect title="JavaScript" id="js" %}

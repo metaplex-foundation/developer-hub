@@ -74,7 +74,7 @@ However, we still don’t know which NFTs should be minted from that Candy Machi
 Each item is composed of two parameters:
 
 - A `name`: The name of the NFT.
-- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
+- A `uri`: The URI pointing to the [JSON metadata](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
 
 All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/smart-contracts/candy-machine/insert-items) for more details.
 

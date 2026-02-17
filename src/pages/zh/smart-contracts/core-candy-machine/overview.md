@@ -58,7 +58,7 @@ description: Core Candy Machine 程序及其功能集概述,帮助您创建铸�
 每个物品由两个参数组成:
 
 - `name`: 资产的名称。
-- `uri`: 指向资产 [JSON 元数据](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) 的 URI。这意味着 JSON 元数据已经通过链上(例如 Arweave、IPFS)或链下(例如 AWS、您自己的服务器)存储提供商上传。您可以使用的工具来创建 Candy Machine,如 Sugar 或 JS SDK 提供了帮助程序来完成此操作。
+- `uri`: 指向资产 [JSON 元数据](https://metaplex.com/docs/token-metadata/token-standard#the-non-fungible-standard) 的 URI。这意味着 JSON 元数据已经通过链上(例如 Arweave、IPFS)或链下(例如 AWS、您自己的服务器)存储提供商上传。您可以使用的工具来创建 Candy Machine,如 Sugar 或 JS SDK 提供了帮助程序来完成此操作。
 
 所有其他参数在资产之间共享,因此直接保存在 Candy Machine 的设置中以避免重复。有关更多详细信息,请参阅[插入物品](/zh/smart-contracts/core-candy-machine/insert-items)。
 

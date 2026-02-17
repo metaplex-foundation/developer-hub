@@ -78,7 +78,7 @@ mplx <category> <command> [options]
 ## 支持和资源
 
 - [GitHub 仓库](https://github.com/metaplex-foundation/cli)
-- [文档](https://developers.metaplex.com)
+- [文档](https://metaplex.com/docs)
 - [Discord 社区](https://discord.gg/metaplex)
 
 ## 快速入门示例

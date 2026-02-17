@@ -23,7 +23,7 @@ import { products } from '@/components/products'
  * />
  */
 
-const SITE_URL = 'https://developers.metaplex.com'
+const SITE_URL = 'https://metaplex.com/docs'
 const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 
 /**
@@ -33,16 +33,16 @@ const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 function getBaseUrl() {
   // For local development
   if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000'
+    return 'http://localhost:3000/docs'
   }
   // Requires "Automatically expose System Environment Variables" enabled in Vercel settings
   // For production on Vercel - use the project's production URL
   if (process.env.VERCEL_ENV === 'production') {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/docs`
   }
   // For preview deployments on Vercel - use preview URL for testing
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
+    return `https://${process.env.VERCEL_URL}/docs`
   }
   // Fallback to hardcoded production URL
   return SITE_URL
@@ -687,7 +687,7 @@ export function SEOHead({
       <meta name="twitter:title" content={finalMetaTitle} />
       {description && <meta name="twitter:description" content={description} />}
       <meta name="twitter:image" content={ogImageUrl} />
-      <meta property="twitter:domain" content="developers.metaplex.com" />
+      <meta property="twitter:domain" content="metaplex.com" />
 
       {/* JSON-LD Structured Data */}
       {jsonLdSchemas.map((schema, index) => (
