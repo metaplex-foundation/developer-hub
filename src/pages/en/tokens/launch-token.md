@@ -1,12 +1,22 @@
 ---
 title: Launch a Token on Solana
-metaTitle: How to Launch a Token on Solana | TGE & Fair Launch Guide | Metaplex
-description: Complete guide to launching a token generation event (TGE) on Solana. Create fair token launches using Genesis Launch Pools with step-by-step TypeScript code.
+metaTitle: Solana Token Launchpad | ICO, IDO, Token Sale & Fair Launch | Metaplex
+description: Launch an SPL token on Solana with Genesis — a token launchpad for fair launches, ICOs, IDOs, presales, crowdsales, and token generation events (TGE). Step-by-step TypeScript guide for on-chain token distribution.
 ---
 
-Launch a token using [Genesis](/smart-contracts/genesis) Launch Pools, where users deposit SOL during a window and receive tokens proportional to their share of total deposits. {% .lead %}
+Launch an SPL token on Solana using [Genesis](/smart-contracts/genesis) — an on-chain token launchpad and fair launch platform. Whether you're looking to run a token sale, ICO, IDO, or crowdsale, Genesis Launch Pools handle token distribution transparently on-chain. Users deposit SOL during a window and receive tokens proportional to their share of total deposits. {% .lead %}
+
+{% callout type="note" title="No-Code Option" %}
+Don't want to write code? Use the [Metaplex token launchpad](https://www.metaplex.com) to launch a token with no coding required. This guide is for developers who want to build their own token launch experience or host a token sale on their own website using the Genesis SDK.
+{% /callout %}
+
+{% callout type="note" title="Other Launch Methods" %}
+This guide covers the **Launch Pool** fair launch method, but Genesis also supports **[Presale](/smart-contracts/genesis/presale)** token sales where tokens are sold at a fixed price — similar to a traditional ICO or token offering. Check the [Genesis overview](/smart-contracts/genesis) to compare methods and choose the best fit for your project.
+{% /callout %}
 
 ## Overview
+
+Genesis is a Solana token launchpad that provides fair, on-chain token launch mechanisms. Unlike a traditional ICO, IDO, or centralized token sale platform where tokens are sold at a fixed price, a Launch Pool lets the market determine token distribution — every participant receives tokens proportional to their deposit, ensuring a fair and transparent token generation event (TGE). All SPL token creation, fundraising, and distribution happens on-chain with no intermediaries.
 
 A Launch Pool token launch has three phases:
 
@@ -429,6 +439,7 @@ main().catch(console.error);
 
 ## Next Steps
 
-- [Genesis Overview](/smart-contracts/genesis) - Learn more about Genesis concepts
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed Launch Pool documentation
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch data via API
+- [Genesis Overview](/smart-contracts/genesis) - Learn more about the Solana token launchpad
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed fair launch documentation
+- [Presale](/smart-contracts/genesis/presale) - Run a token presale at a fixed price
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch and token sale data via API

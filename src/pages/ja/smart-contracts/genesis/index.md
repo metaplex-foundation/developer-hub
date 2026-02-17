@@ -1,18 +1,26 @@
 ---
-title: Genesis - Solana トークンローンチスマートコントラクト
-metaTitle: Genesis | Solana TGE & トークンローンチプラットフォーム | Fair Launch | Metaplex
-description: Genesis スマートコントラクトで Solana 上にトークンをローンチ。トークン生成イベント（TGE）、Fair Launch、ICO、価格付き販売、Launch Pool をオンチェーンで構築できます。
+title: Genesis - Solana Token Launchpad & Launch Platform
+metaTitle: Genesis | Solana Token Launchpad | ICO, IDO, Presale & Fair Launch Platform | Metaplex
+description: Genesis is a Solana token launchpad for ICOs, IDOs, presales, fair launches, and token generation events (TGE). On-chain SPL token creation, crowdsale, and token distribution platform.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - token launch
+  - token launchpad
   - TGE
   - token generation event
   - fair launch
   - ICO
+  - IDO
+  - token sale
+  - crowdsale
   - launch pool
   - presale
+  - token sale platform
   - Solana token
+  - SPL token
+  - token distribution
+  - token offering
 about:
   - Token launches
   - Genesis protocol
@@ -31,24 +39,25 @@ faqs:
     a: Presale は事前に固定価格が設定されます。Launch Pool は預入総額に基づいて価格が自然に決定されます。預入額が多いほど、トークンあたりの暗示価格が高くなります。
 ---
 
-**Genesis** は、Solana 上の**トークン生成イベント（TGE）**のための Metaplex スマートコントラクトです。トークンの作成、配布、資金収集のためのオンチェーン調整機能を備えた Presale、Launch Pool、オークションを構築できます。 {% .lead %}
+**Genesis** は、Solana トークンローンチパッドであり、**トークン生成イベント（TGE）**のためのスマートコントラクトです。ICO、IDO、プレセール、フェアローンチ、クラウドセールを、SPL トークンの作成、トークン配布、資金収集のためのオンチェーン調整機能で実行できます。 {% .lead %}
 
 {% callout title="あなたに合ったパスを選択" %}
-- **Genesis が初めての方は？** [はじめに](/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
-- **構築する準備ができた方は？** [Launch Pool](/smart-contracts/genesis/launch-pool) または [Presale](/smart-contracts/genesis/presale) へ進みましょう
-- **SDK リファレンスが必要な方は？** [JavaScript SDK](/smart-contracts/genesis/sdk/javascript) をご覧ください
+- **ノーコードでローンチしたい方は？** [Metaplex トークンローンチパッド](https://www.metaplex.com)を使えば、コーディング不要でトークンをローンチできます
+- **独自のローンチパッドを構築したい方は？** Genesis SDK を使って、カスタムトークンローンチプラットフォームの構築や、独自のウェブサイトでのトークンセールの開催が可能です
+- **Genesis が初めての方は？** [はじめに](/ja/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
+- **構築する準備ができた方は？** [Launch Pool](/ja/smart-contracts/genesis/launch-pool) または [Presale](/ja/smart-contracts/genesis/presale) へ進みましょう
 {% /callout %}
 
 ## Genesis とは？
 
-Genesis は Solana 上でトークンをローンチするためのオンチェーンインフラを提供します。以下の機能を処理します：
+Genesis は、Solana 上で SPL トークンをローンチするための分散型トークンローンチプラットフォームです。ICO、IDO、トークンプレセール、フェアローンチなど、Genesis は以下を処理します：
 
 - **トークン作成** - メタデータ（名前、シンボル、画像）付き
 - **資金収集** - 参加者からの入金（SOL の預入）
 - **配布** - 選択したメカニズムに基づく分配
 - **時間調整** - 預入期間と請求期間のウィンドウ管理
 
-Genesis は、あなた（ローンチ主催者）と参加者の間に位置するスマートコントラクトであり、公平で透明性のある自動化されたトークン配布を保証します。
+Genesis は、あなた（ローンチ主催者）と参加者の間に位置するトークンローンチパッドスマートコントラクトであり、公平で透明性のある自動化されたトークン配布を保証します。従来の ICO や IDO プラットフォームに代わる、モダンなオンチェーンソリューションです。
 
 ## ローンチメカニズム
 
@@ -56,17 +65,17 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 
 | メカニズム | 価格 | 配布方法 | 最適な用途 |
 |-----------|------|---------|-----------|
-| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | 終了時に決定 | 預入額に比例 | Fair Launch、コミュニティトークン |
-| **[Presale](/smart-contracts/genesis/presale)** | 事前に固定 | 先着順 | 予測可能な調達、既知のバリュエーション |
-| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | クリアリング価格 | 最高入札者が獲得 | 大規模調達、機関投資家の関心 |
+| **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** | 終了時に決定 | 預入額に比例 | フェアローンチ、コミュニティトークン、クラウドセール |
+| **[Presale](/ja/smart-contracts/genesis/presale)** | 事前に固定 | 先着順 | ICO、トークンセール、既知のバリュエーション |
+| **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** | クリアリング価格 | 最高入札者が獲得 | IDO、大規模調達、機関投資家の関心 |
 
 ### どれを使うべきですか？
 
-**Launch Pool** - 自然な価格発見と公平な配布を求める場合。預入した全員が、自分のシェアに応じてトークンを受け取ります。先行者に奪われることはありません。
+**Launch Pool** - 自然な価格発見と公平なトークン配布を求める場合。クラウドセールと同様に、預入した全員がシェアに応じてトークンを受け取ります。先行者に奪われることはありません。
 
-**Presale** - バリュエーションが確定しており、予測可能な価格設定を求める場合。固定価格を設定し、上限に達するまで参加者が購入できます。
+**Presale** - バリュエーションが確定しており、予測可能な価格設定を求める場合。従来の ICO やトークンセールのように、固定価格を設定し、上限に達するまで参加者が購入できます。
 
-**Auction** - 大口参加者による競争入札を求める場合。機関投資家の関心がある確立されたプロジェクトに最適です。
+**Auction** - 大口参加者による競争入札を求める場合。IDO スタイルのアプローチで、機関投資家の関心がある確立されたプロジェクトに最適です。
 
 ## 主要コンセプト
 
@@ -118,7 +127,7 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 - **ミント権限** - 取り消すことで新規トークンの発行を防止
 - **フリーズ権限** - 取り消すことでトークンの凍結を防止
 
-権限管理の詳細については[はじめに](/smart-contracts/genesis/getting-started)をご覧ください。
+権限管理の詳細については[はじめに](/ja/smart-contracts/genesis/getting-started)をご覧ください。
 
 ## FAQ
 
@@ -155,7 +164,7 @@ Genesis は入金に対して {% fee product="genesis" config="launchPool" fee="
 
 ## 次のステップ
 
-1. **[はじめに](/smart-contracts/genesis/getting-started)** - Genesis の全体フローを理解する
-2. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - インストールとセットアップ
-3. **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 比例配分ローンチを構築する
-4. **[Presale](/smart-contracts/genesis/presale)** - 固定価格販売を構築する
+1. **[はじめに](/ja/smart-contracts/genesis/getting-started)** - Genesis の全体フローを理解する
+2. **[JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript)** - インストールとセットアップ
+3. **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 比例配分ローンチを構築する
+4. **[Presale](/ja/smart-contracts/genesis/presale)** - 固定価格販売を構築する

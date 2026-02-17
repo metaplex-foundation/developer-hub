@@ -1,7 +1,7 @@
 ---
 title: 시작하기
-metaTitle: Genesis - 시작하기 | 토큰 출시 흐름
-description: Genesis 토큰 출시 흐름을 이해하세요. 초기화부터 배포까지의 단계와 출시 계획 방법을 배웁니다.
+metaTitle: Genesis 시작하기 | 솔라나에서 토큰 출시하는 방법 | Metaplex
+description: 솔라나에서 SPL 토큰을 출시하는 방법을 단계별로 배우세요. Genesis 토큰 런치패드를 사용하여 ICO, 프리세일, 공정한 출시, 토큰 세일을 계획하세요.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -10,6 +10,11 @@ keywords:
   - Genesis setup
   - TGE steps
   - launch planning
+  - how to launch a token
+  - SPL token launch
+  - token launchpad
+  - ICO guide
+  - token sale guide
 about:
   - Genesis flow
   - Launch lifecycle
@@ -28,7 +33,11 @@ faqs:
     a: 원하는 공급량에 10^소수점을 곱합니다. 소수점 9자리의 100만 토큰의 경우 1,000,000,000,000,000을 사용합니다.
 ---
 
-빌드하기 전에 Genesis 토큰 출시 흐름을 이해하세요. 이 가이드는 초기화부터 배포까지 각 단계를 설명하여 출시 계획에 도움을 줍니다. {% .lead %}
+빌드하기 전에 Genesis 토큰 출시 흐름을 이해하세요. 솔라나에서 ICO, 프리세일, 공정한 출시, 토큰 세일을 계획하고 있다면, 이 가이드가 SPL 토큰 생성부터 배포까지 각 단계를 설명합니다. {% .lead %}
+
+{% callout title="노코드 옵션" %}
+코드 작성 없이 토큰을 출시하고 싶다면 [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하세요. 아래 가이드는 맞춤형 런치패드 플랫폼을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하려는 개발자를 위한 것입니다.
+{% /callout %}
 
 {% callout title="빌드할 준비가 되셨나요?" %}
 흐름을 이해했다면:
@@ -216,7 +225,7 @@ Unix 타임스탬프를 사용합니다 (밀리초가 아닌 초 단위).
 
 빌드를 시작하기 전에:
 
-- [ ] 출시 메커니즘 결정 (Launch Pool vs Presale)
+- [ ] 출시 메커니즘 결정 (공정한 출시/크라우드세일을 위한 Launch Pool, ICO 스타일 고정 가격을 위한 Presale)
 - [ ] 소수점이 포함된 총 토큰 공급량 계산
 - [ ] Bucket 할당 계획 (총 공급량과 합이 일치해야 함)
 - [ ] 시간 창 설정 (예치 시작/종료, 청구 시작/종료)
@@ -258,8 +267,9 @@ Finalize 후, Bucket 시간 조건에 따라 출시가 활성화됩니다. 현�
 
 ## 다음 단계
 
-빌드할 준비가 되셨나요? 출시 유형을 선택하세요:
+빌드할 준비가 되셨나요? 토큰 출시 유형을 선택하세요:
 
-1. **[JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript)** - 설치 및 구성
-2. **[Launch Pool 튜토리얼](/ko/smart-contracts/genesis/launch-pool)** - 비례 배분
-3. **[Presale 튜토리얼](/ko/smart-contracts/genesis/presale)** - 고정 가격 판매
+1. **[토큰 출시하기](/ko/tokens/launch-token)** - 엔드투엔드 토큰 출시 가이드
+2. **[JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript)** - 설치 및 구성
+3. **[Launch Pool 튜토리얼](/ko/smart-contracts/genesis/launch-pool)** - 비례 배분을 통한 공정한 출시
+4. **[Presale 튜토리얼](/ko/smart-contracts/genesis/presale)** - ICO 스타일 고정 가격 토큰 판매

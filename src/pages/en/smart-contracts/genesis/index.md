@@ -1,18 +1,26 @@
 ---
-title: Genesis - Solana Token Launch Smart Contract
-metaTitle: Genesis | Solana TGE & Token Launch Platform | Fair Launch | Metaplex
-description: Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
+title: Genesis - Solana Token Launchpad & Launch Platform
+metaTitle: Genesis | Solana Token Launchpad | ICO, IDO, Presale & Fair Launch Platform | Metaplex
+description: Genesis is a Solana token launchpad for ICOs, IDOs, presales, fair launches, and token generation events (TGE). On-chain SPL token creation, crowdsale, and token distribution platform.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - token launch
+  - token launchpad
   - TGE
   - token generation event
   - fair launch
   - ICO
+  - IDO
+  - token sale
+  - crowdsale
   - launch pool
   - presale
+  - token sale platform
   - Solana token
+  - SPL token
+  - token distribution
+  - token offering
 about:
   - Token launches
   - Genesis protocol
@@ -31,24 +39,25 @@ faqs:
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
 ---
 
-**Genesis** is a Metaplex smart contract for **Token Generation Events (TGE)** on Solana. Build presales, launch pools, and auctions with on-chain coordination for token creation, distribution, and fund collection. {% .lead %}
+**Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run an ICO, IDO, presale, fair launch, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}
 
 {% callout title="Choose Your Path" %}
+- **No-code launch?** Use the [Metaplex token launchpad](https://www.metaplex.com) to launch a token with no coding required
+- **Build your own launchpad?** Use the Genesis SDK to build a custom token launch platform or host a token sale on your own website
 - **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
 - **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
-- **Need SDK reference?** See [JavaScript SDK](/smart-contracts/genesis/sdk/javascript)
 {% /callout %}
 
 ## What is Genesis?
 
-Genesis provides on-chain infrastructure for launching tokens on Solana. It handles:
+Genesis is a decentralized token launch platform that provides on-chain infrastructure for launching SPL tokens on Solana. Whether you need to run an ICO, IDO, token presale, or fair launch, Genesis handles:
 
 - **Token creation** with metadata (name, symbol, image)
 - **Fund collection** from participants (SOL deposits)
 - **Distribution** based on your chosen mechanism
 - **Time coordination** for deposit and claim windows
 
-Think of Genesis as a smart contract that sits between you (the launcher) and your participants, ensuring fair, transparent, and automated token distribution.
+Think of Genesis as a token launchpad smart contract that sits between you (the launcher) and your participants, ensuring fair, transparent, and automated token distribution — a modern on-chain alternative to traditional ICO and IDO platforms.
 
 ## Launch Mechanisms
 
@@ -56,17 +65,17 @@ Genesis supports three mechanisms that can be combined:
 
 | Mechanism | Price | Distribution | Best For |
 |-----------|-------|--------------|----------|
-| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | Discovered at close | Proportional to deposit | Fair launches, community tokens |
-| **[Presale](/smart-contracts/genesis/presale)** | Fixed upfront | First-come-first-served | Predictable raises, known valuation |
-| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | Clearing price | Highest bidders win | Large raises, institutional interest |
+| **[Launch Pool](/smart-contracts/genesis/launch-pool)** | Discovered at close | Proportional to deposit | Fair launches, community tokens, crowdsales |
+| **[Presale](/smart-contracts/genesis/presale)** | Fixed upfront | First-come-first-served | ICOs, token sales, known valuation |
+| **[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction)** | Clearing price | Highest bidders win | IDOs, large raises, institutional interest |
 
 ### Which Should I Use?
 
-**Launch Pool** - You want organic price discovery and fair distribution. Everyone who deposits gets tokens proportional to their share. No one gets sniped.
+**Launch Pool** - You want organic price discovery and fair token distribution. Similar to a crowdsale, everyone who deposits gets tokens proportional to their share. No one gets sniped.
 
-**Presale** - You know your valuation and want predictable pricing. Set a fixed price and let participants buy until the cap is reached.
+**Presale** - You know your valuation and want predictable pricing. Works like a traditional ICO or token sale — set a fixed price and let participants buy until the cap is reached.
 
-**Auction** - You want competitive bidding from larger participants. Best for established projects with institutional interest.
+**Auction** - You want competitive bidding from larger participants. An IDO-style approach best suited for established projects with institutional interest.
 
 ## Core Concepts
 

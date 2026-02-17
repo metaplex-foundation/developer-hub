@@ -1,7 +1,7 @@
 ---
 title: Getting Started
-metaTitle: Genesis - Getting Started | Token Launch Flow
-description: Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+metaTitle: Getting Started with Genesis | How to Launch a Token on Solana | Metaplex
+description: Learn how to launch an SPL token on Solana step by step. Plan your ICO, presale, fair launch, or token sale using the Genesis token launchpad.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -10,6 +10,11 @@ keywords:
   - Genesis setup
   - TGE steps
   - launch planning
+  - how to launch a token
+  - SPL token launch
+  - token launchpad
+  - ICO guide
+  - token sale guide
 about:
   - Genesis flow
   - Launch lifecycle
@@ -28,7 +33,11 @@ faqs:
     a: Multiply your desired supply by 10^decimals. For 1 million tokens with 9 decimals, use 1,000,000,000,000,000.
 ---
 
-Understand the Genesis token launch flow before building. This guide explains each step from initialization to distribution, helping you plan your launch. {% .lead %}
+Understand the Genesis token launch flow before building. Whether you're planning an ICO, presale, fair launch, or token sale on Solana, this guide explains each step from SPL token creation to distribution. {% .lead %}
+
+{% callout title="No-Code Option" %}
+If you want to launch a token without writing code, use the [Metaplex token launchpad](https://www.metaplex.com). The guides below are for developers who want to build a custom launchpad platform or host a token sale on their own website.
+{% /callout %}
 
 {% callout title="Ready to Build?" %}
 Once you understand the flow:
@@ -216,11 +225,11 @@ Authority revocation is irreversible. Only do this when your launch is complete.
 
 Before you start building:
 
-- [ ] Decide on launch mechanism (Launch Pool vs Presale)
+- [ ] Decide on launch mechanism (Launch Pool for fair launch/crowdsale, Presale for ICO-style fixed price)
 - [ ] Calculate total token supply with decimals
 - [ ] Plan bucket allocations (must sum to total supply)
 - [ ] Set time windows (deposit start/end, claim start/end)
-- [ ] Decide end behaviors (where do funds go?)
+- [ ] Decide end behaviors (where do raised funds go?)
 - [ ] Prepare token metadata (name, symbol, image URI)
 
 ## FAQ
@@ -258,8 +267,9 @@ Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denomin
 
 ## Next Steps
 
-Ready to build? Choose your launch type:
+Ready to build? Choose your token launch type:
 
-1. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Install and configure
-2. **[Launch Pool Tutorial](/smart-contracts/genesis/launch-pool)** - Proportional distribution
-3. **[Presale Tutorial](/smart-contracts/genesis/presale)** - Fixed-price sale
+1. **[Launch a Token](/tokens/launch-token)** - End-to-end token launch guide
+2. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Install and configure
+3. **[Launch Pool Tutorial](/smart-contracts/genesis/launch-pool)** - Fair launch with proportional distribution
+4. **[Presale Tutorial](/smart-contracts/genesis/presale)** - ICO-style fixed-price token sale

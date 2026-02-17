@@ -1,16 +1,22 @@
 ---
 title: Presale
-metaTitle: Genesis - Presale | 고정가 토큰 판매 | Metaplex
-description: 사용자가 SOL을 예치하고 미리 정해진 비율로 토큰을 받는 고정가 토큰 판매. 가격을 미리 설정하고 제어된 배포를 실현합니다.
+metaTitle: Genesis Presale | 솔라나 ICO & 고정가 토큰 판매 | Metaplex
+description: 솔라나에서 토큰 프리세일 또는 ICO를 실행하세요. 사용자가 SOL을 예치하고 미리 정해진 비율로 SPL 토큰을 받는 고정가 토큰 판매. Genesis 런치패드를 통한 온체인 토큰 오퍼링.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - presale
-  - fixed price sale
   - token presale
+  - crypto presale
+  - fixed price sale
   - ICO
+  - ICO on Solana
   - token sale
+  - token offering
+  - initial coin offering
+  - SPL token sale
   - fixed pricing
+  - token launchpad
 about:
   - Presale mechanics
   - Fixed pricing
@@ -41,7 +47,7 @@ faqs:
     a: 예측 가능한 가격 책정이 필요하고 모금 목표가 명확할 때 Presale을 사용합니다. 자연스러운 가격 발견에는 Launch Pool을 사용합니다.
 ---
 
-**Presale**은 고정가 토큰 배포를 제공합니다. 할당량과 SOL 상한을 기반으로 토큰 가격을 미리 설정합니다. 사용자는 받을 수량을 정확히 알고, 여러분은 모금액을 정확히 파악할 수 있습니다. {% .lead %}
+**Presale**은 솔라나에서 고정가 토큰 배포를 제공합니다 — 기존 ICO 또는 초기 코인 공개의 온체인 등가물입니다. 할당량과 SOL 상한을 기반으로 SPL 토큰 가격을 미리 설정합니다. 사용자는 받을 수량을 정확히 알고, 여러분은 모금액을 정확히 파악할 수 있습니다. {% .lead %}
 
 {% callout title="학습 내용" %}
 이 가이드에서 다루는 내용:
@@ -53,7 +59,7 @@ faqs:
 
 ## 요약
 
-Presale은 미리 정해진 가격으로 토큰을 판매합니다. 가격은 설정한 토큰 할당량과 SOL 상한에서 계산됩니다.
+Presale은 기존 ICO나 토큰 오퍼링과 유사하게 미리 정해진 가격으로 토큰을 판매합니다. 가격은 설정한 토큰 할당량과 SOL 상한에서 계산되며, 알려진 밸류에이션으로 암호화폐 자금 조달에 이상적입니다.
 
 - 고정 가격 = SOL 상한 / 토큰 할당량
 - 사용자는 예치 기간 동안 SOL을 예치합니다 ({% fee product="genesis" config="presale" fee="deposit" /%} 수수료 적용)
@@ -433,6 +439,7 @@ Presale은 토큰 할당량과 SOL 상한에 의해 결정되는 고정 가격�
 
 ## 다음 단계
 
-- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 자연스러운 가격 발견
-- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 할당
-- [시작하기](/ko/smart-contracts/genesis/getting-started) - Genesis 기초
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 유기적 가격 발견을 통한 공정한 출시
+- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - IDO 스타일 입찰 기반 할당
+- [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
+- [시작하기](/ko/smart-contracts/genesis/getting-started) - Genesis 런치패드 기초
