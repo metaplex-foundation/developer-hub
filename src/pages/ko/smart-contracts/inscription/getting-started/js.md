@@ -32,7 +32,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 
 ```ts
 // 1단계: NFT 또는 pNFT 민팅
-// https://developers.metaplex.com/token-metadata/mint 참조
+// https://metaplex.com/docs/token-metadata/mint 참조
 
 // 2단계: JSON Inscribe
 

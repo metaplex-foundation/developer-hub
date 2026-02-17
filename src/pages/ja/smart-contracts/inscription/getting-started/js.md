@@ -32,7 +32,7 @@ const umi = createUmi('http://127.0.0.1:8899').use(mplInscription())
 
 ```ts
 // ステップ1: NFTまたはpNFTをミント
-// https://developers.metaplex.com/token-metadata/mint を参照
+// https://metaplex.com/docs/token-metadata/mint を参照
 
 // ステップ2: JSONをInscribe
 

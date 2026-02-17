@@ -95,7 +95,7 @@ export function MobileNavigation({ page }) {
             </button>
             <Link href={getLocalizedHref('/', locale)} className="ml-6" aria-label="Home page">
               <img
-                src="/metaplex-logo-white.png"
+                src="/docs/metaplex-logo-white.png"
                 alt="Metaplex"
                 className="h-4 w-auto"
               />

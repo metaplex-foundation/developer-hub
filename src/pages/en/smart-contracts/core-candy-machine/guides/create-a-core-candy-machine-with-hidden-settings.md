@@ -59,14 +59,14 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-You can find more details about setting up UMI [here](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
+You can find more details about setting up UMI [here](https://metaplex.com/docs/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
 
 ## Prepare Reveal Data
 Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
 This metadata will be uploaded for each asset, and we will be using the resulting URI's
 
 Please note that you will need to upload the reveal data yourself.
-This process will probably not be deterministic by default. In order to do it in a deterministic way, you can use [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
+This process will probably not be deterministic by default. In order to do it in a deterministic way, you can use [turbo](https://metaplex.com/docs/guides/general/create-deterministic-metadata-with-turbo)
 
 In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT’s name and URI.
 
@@ -93,7 +93,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 Let's now create a Collection asset.
 For that, the mpl-core library provides a `createCollection` method will help us performing that action
 
-You can learn more about collections [here](https://developers.metaplex.com/core/collections)
+You can learn more about collections [here](https://metaplex.com/docs/core/collections)
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -146,9 +146,9 @@ Next step is to create our Core Candy Machine with the Hidden Settings.
 
 To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
 
-More details on the Core Candy Machine creation and guards can be found [here](https://developers.metaplex.com/core-candy-machine/create).
+More details on the Core Candy Machine creation and guards can be found [here](https://metaplex.com/docs/core-candy-machine/create).
 
-Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards [here](https://developers.metaplex.com/candy-machine/guards).
+Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards [here](https://metaplex.com/docs/candy-machine/guards).
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

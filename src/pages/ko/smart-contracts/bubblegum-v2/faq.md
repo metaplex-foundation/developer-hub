@@ -109,6 +109,6 @@ await transfer(umi, {
    이 옵션은 머클 트리 구성을 검색하고 캐노피를 기반으로 불필요한 증명을 제거하여 `assetWithProof`를 최적화합니다. 추가 RPC 호출이 추가되지만 트랜잭션 크기를 크게 줄입니다.
 
 2. 버전화된 트랜잭션과 주소 조회 테이블 활용:
-   다른 접근 방식은 [버전화된 트랜잭션과 주소 조회 테이블](https://developers.metaplex.com/umi/toolbox/address-lookup-table)을 구현하는 것입니다. 이 방법은 트랜잭션 크기를 더 효과적으로 관리하는 데 도움이 될 수 있습니다.
+   다른 접근 방식은 [버전화된 트랜잭션과 주소 조회 테이블](https://metaplex.com/docs/umi/toolbox/address-lookup-table)을 구현하는 것입니다. 이 방법은 트랜잭션 크기를 더 효과적으로 관리하는 데 도움이 될 수 있습니다.
 
 이러한 기술을 적용하면 트랜잭션 크기 제한을 극복하고 작업을 성공적으로 실행할 수 있습니다.

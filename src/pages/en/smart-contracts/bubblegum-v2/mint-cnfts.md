@@ -79,7 +79,7 @@ await mintV2(umi, {
 
 {% totem-accordion title="Create a MPL-Core Collection" %}
 
-If you do not have a Collection yet, you can create one using the [`@metaplex-foundation/mpl-core` library](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too.
+If you do not have a Collection yet, you can create one using the [`@metaplex-foundation/mpl-core` library](https://metaplex.com/docs/core/collections#creating-a-collection-with-plugins). Keep in mind that you need to add the `BubblegumV2` Plugin to the collection, too.
 npm install @metaplex-foundation/mpl-core
 And create a Collection like so:
 

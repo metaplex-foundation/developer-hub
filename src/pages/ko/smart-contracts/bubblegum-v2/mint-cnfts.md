@@ -79,7 +79,7 @@ await mintV2(umi, {
 
 {% totem-accordion title="MPL-Core 컬렉션 생성" %}
 
-아직 컬렉션이 없다면 [`@metaplex-foundation/mpl-core` 라이브러리](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins)를 사용하여 하나를 만들 수 있습니다. 컬렉션에 `BubblegumV2` 플러그인도 추가해야 한다는 점을 명심하세요.
+아직 컬렉션이 없다면 [`@metaplex-foundation/mpl-core` 라이브러리](https://metaplex.com/docs/core/collections#creating-a-collection-with-plugins)를 사용하여 하나를 만들 수 있습니다. 컬렉션에 `BubblegumV2` 플러그인도 추가해야 한다는 점을 명심하세요.
 npm install @metaplex-foundation/mpl-core
 그리고 다음과 같이 컬렉션을 만드세요:
 

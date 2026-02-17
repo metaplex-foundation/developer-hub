@@ -20,9 +20,11 @@ export function LocaleProvider({ children }) {
   const [clientPath, setClientPath] = useState('')
 
   // Get the actual browser URL on client-side
+  // Strip basePath (/docs) since it's included in the browser URL but not in Next.js routing
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setClientPath(window.location.pathname)
+      const browserPath = window.location.pathname.replace(/^\/docs/, '') || '/'
+      setClientPath(browserPath)
     }
   }, [])
 

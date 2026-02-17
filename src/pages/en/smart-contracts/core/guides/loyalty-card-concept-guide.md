@@ -48,7 +48,7 @@ We'll also use **CPI builders** (e.g., `CreateV2CpiBuilder`) to interact with th
     ↓
 [Program] → updates loyalty data in AppData plugin
 ```
-See the [Metaplex Core documentation](https://developers.metaplex.com/core) for more setup details.
+See the [Metaplex Core documentation](https://metaplex.com/docs/core) for more setup details.
 ## Loyalty System Architecture
 This example outlines one potential structure for creating a loyalty card system using Metaplex Core on the Solana blockchain. The loyalty cards are NFTs, each associated with plugins that manage how they behave and store data.
 ### Why Use Soulbound NFT Assets?
@@ -100,7 +100,7 @@ Using per-card authorities is especially useful when you want fine-grained, asse
 This step can be handled off-chain using tools like the Metaplex JS SDK or CLI. You might create a collection NFT that represents your loyalty program (e.g., "Sol Coffee Loyalty Cards"). This collection can act as a parent to individual loyalty card NFTs, giving your program an efficient way to manage them.
 Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. While it isn’t strictly required to implement this as a Solana program instruction, doing so might be useful if you're building functionality for onboarding "manager" accounts or supporting white-labeled loyalty programs for multiple businesses.
 Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. This isn’t strictly required but helps streamline control.
-To understand more about minting a Core Collection, you could visit [Creating a Core Collection](https://developers.metaplex.com/core/collections#creating-a-collection).
+To understand more about minting a Core Collection, you could visit [Creating a Core Collection](https://metaplex.com/docs/core/collections#creating-a-collection).
 ### Step 2: Minting a Soulbound Loyalty Card
 When a user joins your program, you could mint them a loyalty card NFT with the following traits:
 - Belongs to your loyalty collection

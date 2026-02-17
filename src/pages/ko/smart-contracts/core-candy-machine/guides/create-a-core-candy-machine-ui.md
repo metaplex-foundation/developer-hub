@@ -14,7 +14,7 @@ UI 요소와 지갑 통합을 포함한 전체 웹사이트 구현을 원한다�
 
 ## 전제조건
 
-- 이미 생성된 Candy Machine. 생성 방법에 대한 자세한 정보는 [여기](https://developers.metaplex.com/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
+- 이미 생성된 Candy Machine. 생성 방법에 대한 자세한 정보는 [여기](https://metaplex.com/docs/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
 - 웹 개발과 선택한 프레임워크에 대한 기본적인 숙련도. umi와의 최고 호환성을 위해 Next JS를 권장합니다.
 
 ## 필수 패키지

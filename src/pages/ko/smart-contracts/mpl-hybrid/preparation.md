@@ -6,7 +6,7 @@ description: MPL-404 하이브리드를 생성하기 전에 준비하는 방법
 
 ## MPL-404 계획
 
-MPL-404 에스크로 및 스왑 프로그램을 배포하기 전에 사용할 NFT 컬렉션과 대체 가능한 토큰을 준비해야 합니다. 아직 준비되지 않았다면, 이 페이지의 나머지 부분을 읽은 후에 대체 불가능한 토큰에는 [Metaplex Core](https://developers.metaplex.com/core)를, 대체 가능한 토큰을 생성하기 위해서는 [Token Metadata program](https://developers.metaplex.com/token-metadata)을 사용하는 것을 권장합니다.
+MPL-404 에스크로 및 스왑 프로그램을 배포하기 전에 사용할 NFT 컬렉션과 대체 가능한 토큰을 준비해야 합니다. 아직 준비되지 않았다면, 이 페이지의 나머지 부분을 읽은 후에 대체 불가능한 토큰에는 [Metaplex Core](https://metaplex.com/docs/core)를, 대체 가능한 토큰을 생성하기 위해서는 [Token Metadata program](https://metaplex.com/docs/token-metadata)을 사용하는 것을 권장합니다.
 
 에스크로에 자금을 지원하려면 NFT, 대체 가능한 토큰 또는 둘의 조합을 추가해야 합니다. 실제로는 한 유형의 모든 자산으로 에스크로를 채우고 나머지는 모두 배포하는 것이 가장 쉽습니다. 이렇게 하면 에스크로가 균형을 유지합니다.
 
