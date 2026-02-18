@@ -1,7 +1,7 @@
 ---
 title: 入门指南
 metaTitle: Genesis 入门指南 | 如何在 Solana 上发行代币 | Metaplex
-description: 逐步学习如何在 Solana 上发行 SPL 代币。使用 Genesis 代币发射台规划您的 ICO、预售、公平发射或代币销售。
+description: 逐步学习如何在 Solana 上发行 SPL 代币。使用 Genesis 代币发射台规划您的预售、公平发射或代币销售。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -33,7 +33,7 @@ faqs:
     a: 将您想要的供应量乘以 10^decimals。对于 100 万个带 9 位小数的代币，使用 1,000,000,000,000,000。
 ---
 
-在开始构建之前，请先了解 Genesis 代币发行流程。无论您计划在 Solana 上进行 ICO、预售、公平发射还是代币销售，本指南解释从 SPL 代币创建到分发的每个步骤。 {% .lead %}
+在开始构建之前，请先了解 Genesis 代币发行流程。无论您计划在 Solana 上进行预售、公平发射还是代币销售，本指南解释从 SPL 代币创建到分发的每个步骤。 {% .lead %}
 
 {% callout title="无代码选项" %}
 如果您想不编写代码就发行代币，请使用 [Metaplex 代币发射台](https://www.metaplex.com)。以下指南适用于希望构建自定义发射台平台或在自己网站上托管代币销售的开发者。
@@ -225,7 +225,7 @@ Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team 
 
 在开始构建之前：
 
-- [ ] 决定发行机制（Launch Pool 适合公平发射/众筹，Presale 适合 ICO 风格固定价格）
+- [ ] 决定发行机制（Launch Pool 适合公平发射/众筹，Presale 适合固定价格）
 - [ ] 计算带小数位的总代币供应量
 - [ ] 规划 Bucket 分配（必须等于总供应量）
 - [ ] 设置时间窗口（存款开始/结束，领取开始/结束）
@@ -272,4 +272,4 @@ Finalize 后，发行活动根据您的 Bucket 时间条件激活。当前时间
 1. **[发行代币](/zh/tokens/launch-token)** - 端到端代币发行指南
 2. **[JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)** - 安装和配置
 3. **[Launch Pool 教程](/zh/smart-contracts/genesis/launch-pool)** - 公平发射与按比例分发
-4. **[Presale 教程](/zh/smart-contracts/genesis/presale)** - ICO 风格固定价格代币销售
+4. **[Presale 教程](/zh/smart-contracts/genesis/presale)** - 固定价格代币销售

@@ -1,7 +1,7 @@
 ---
 title: Uniform Price Auction
-metaTitle: Genesis 拍卖 | IDO 与 Solana 代币拍卖 | Metaplex
-description: Solana 上的 IDO 风格代币拍卖，采用统一清算价格。SPL 代币发行的竞争性出价——面向机构和大规模融资的链上代币发售。
+metaTitle: Genesis 拍卖 | Solana 代币拍卖 | Metaplex
+description: Solana 上的代币拍卖，采用统一清算价格。SPL 代币发行的竞争性出价——面向机构和大规模融资的链上代币发售。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -35,7 +35,7 @@ faqs:
     a: 当需要对大型参与者（鲸鱼、基金）进行价格发现时使用，他们更偏好结构化的拍卖形式，而非基于存款的发行方式。
 ---
 
-**Uniform Price Auction** 为 Solana 上的代币发行提供 IDO 风格的竞争性出价机制。所有中标者支付相同的清算价格——即最低的中标出价——确保结构化代币发售和链上融资中公平的价格发现。 {% .lead %}
+**Uniform Price Auction** 为 Solana 上的代币发行提供竞争性出价机制。所有中标者支付相同的清算价格——即最低的中标出价——确保结构化代币发售和链上融资中公平的价格发现。 {% .lead %}
 
 {% callout title="您将学到什么" %}
 本概述涵盖：
@@ -139,6 +139,6 @@ Uniform Price Auction 的详细设置文档即将推出。目前，请参见 [La
 ## 后续步骤
 
 - [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 公平发射与按比例代币分配
-- [Presale](/zh/smart-contracts/genesis/presale) - ICO 风格固定价格代币销售
+- [Presale](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
 - [发行代币](/zh/tokens/launch-token) - 端到端代币发行指南
 - [Genesis 概览](/zh/smart-contracts/genesis) - 代币发射台概念与架构

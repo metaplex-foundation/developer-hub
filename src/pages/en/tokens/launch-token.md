@@ -11,12 +11,12 @@ Don't want to write code? Use the [Metaplex token launchpad](https://www.metaple
 {% /callout %}
 
 {% callout type="note" title="Other Launch Methods" %}
-This guide covers the **Launch Pool** fair launch method, but Genesis also supports **[Presale](/smart-contracts/genesis/presale)** token sales where tokens are sold at a fixed price — similar to a traditional ICO or token offering. Check the [Genesis overview](/smart-contracts/genesis) to compare methods and choose the best fit for your project.
+This guide covers the **Launch Pool** fair launch method, but Genesis also supports **[Presale](/smart-contracts/genesis/presale)** token sales where tokens are sold at a fixed price. Check the [Genesis overview](/smart-contracts/genesis) to compare methods and choose the best fit for your project.
 {% /callout %}
 
 ## Overview
 
-Genesis is a Solana token launchpad that provides fair, on-chain token launch mechanisms. Unlike a traditional ICO, IDO, or centralized token sale platform where tokens are sold at a fixed price, a Launch Pool lets the market determine token distribution — every participant receives tokens proportional to their deposit, ensuring a fair and transparent token generation event (TGE). All SPL token creation, fundraising, and distribution happens on-chain with no intermediaries.
+Genesis is a Solana token launchpad that provides fair, on-chain token launch mechanisms. Unlike a centralized token sale platform where tokens are sold at a fixed price, a Launch Pool lets the market determine token distribution — every participant receives tokens proportional to their deposit, ensuring a fair and transparent token generation event (TGE). All SPL token creation, fundraising, and distribution happens on-chain with no intermediaries.
 
 A Launch Pool token launch has three phases:
 

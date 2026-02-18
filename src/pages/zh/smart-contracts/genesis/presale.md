@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis Presale | ICO 与固定价格代币销售 Solana | Metaplex
-description: 在 Solana 上进行代币预售或 ICO。固定价格 SPL 代币销售，用户存入 SOL 并以预定汇率获得代币。使用 Genesis 发射台进行链上代币发售。
+metaTitle: Genesis Presale | 固定价格代币销售 Solana | Metaplex
+description: 在 Solana 上进行代币预售。固定价格 SPL 代币销售，用户存入 SOL 并以预定汇率获得代币。使用 Genesis 发射台进行链上代币发售。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -47,7 +47,7 @@ faqs:
     a: 当您需要可预测的定价并明确知道要筹集多少时使用Presale。使用Launch Pool进行自然价格发现。
 ---
 
-**Presale**提供 Solana 上的固定价格代币分配——传统 ICO 或首次代币发行的链上等价方案。根据分配量和 SOL 上限预先设定 SPL 代币价格——用户确切知道会得到什么，您也确切知道会筹集多少。 {% .lead %}
+**Presale**提供 Solana 上的固定价格代币分配——传统代币发售的链上等价方案。根据分配量和 SOL 上限预先设定 SPL 代币价格——用户确切知道会得到什么，您也确切知道会筹集多少。 {% .lead %}
 
 {% callout title="学习内容" %}
 本指南涵盖：
@@ -59,7 +59,7 @@ faqs:
 
 ## 概述
 
-Presale以预定价格出售代币，类似于传统的 ICO 或代币发售。价格根据您配置的代币分配量和SOL上限计算，非常适合已知估值的加密融资。
+Presale以预定价格出售代币，类似于传统的代币发售。价格根据您配置的代币分配量和SOL上限计算，非常适合已知估值的加密融资。
 
 - 固定价格 = SOL上限 / 代币分配量
 - 用户在存款窗口期间存入SOL（收取{% fee product="genesis" config="presale" fee="deposit" /%}费用）
@@ -440,6 +440,6 @@ Presale的价格由代币分配量和SOL上限固定。Launch Pool根据总存�
 ## 下一步
 
 - [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 公平发射与有机价格发现
-- [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - IDO 风格基于出价的分配
+- [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 拍卖式基于出价的分配
 - [发行代币](/zh/tokens/launch-token) - 端到端代币发行指南
 - [开始使用](/zh/smart-contracts/genesis/getting-started) - Genesis 发射台基础

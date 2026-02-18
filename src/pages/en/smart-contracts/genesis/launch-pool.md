@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
 metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
-description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale alternative to traditional ICOs and IDOs with organic price discovery.
+description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -14,7 +14,7 @@ keywords:
   - price discovery
   - token launchpad
   - crowdsale
-  - ICO alternative
+  - token launchpad alternative
   - SPL token launch
   - on-chain token launch
 about:
@@ -47,7 +47,7 @@ faqs:
     a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 ---
 
-**Launch Pools** provide organic price discovery for fair token launches on Solana. A decentralized alternative to a traditional ICO or IDO — users deposit SOL during a window and receive SPL tokens proportional to their share of total deposits. No sniping, no front-running, fair distribution for everyone. {% .lead %}
+**Launch Pools** provide organic price discovery for fair token launches on Solana. Users deposit SOL during a window and receive SPL tokens proportional to their share of total deposits. No sniping, no front-running, fair distribution for everyone. {% .lead %}
 
 {% callout title="What You'll Learn" %}
 This guide covers:
@@ -464,7 +464,7 @@ Launch Pool discovers price organically based on deposits with proportional dist
 
 ## Next Steps
 
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale (ICO-style)
+- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
 - [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based token offering
 - [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
 - [Aggregation API](/smart-contracts/genesis/aggregation) - Query token sale data via API

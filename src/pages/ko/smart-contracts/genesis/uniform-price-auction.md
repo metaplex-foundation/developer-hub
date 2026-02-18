@@ -1,7 +1,7 @@
 ---
 title: Uniform Price Auction
-metaTitle: Genesis Auction | 솔라나 IDO & 토큰 경매 | Metaplex
-description: 균일 청산 가격을 가진 솔라나 IDO 스타일 토큰 경매. SPL 토큰 출시를 위한 경쟁 입찰 — 기관 및 대규모 온체인 자금 조달을 위한 토큰 오퍼링.
+metaTitle: Genesis Auction | 솔라나 토큰 경매 | Metaplex
+description: 균일 청산 가격을 가진 솔라나 토큰 경매. SPL 토큰 출시를 위한 경쟁 입찰 — 기관 및 대규모 온체인 자금 조달을 위한 토큰 오퍼링.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -35,7 +35,7 @@ faqs:
     a: 예치 기반 출시보다 구조화된 경매 형식을 선호하는 대규모 참가자(고래, 펀드)와의 가격 발견에 사용하세요.
 ---
 
-**Uniform Price Auction**은 솔라나에서 IDO 스타일의 경쟁 입찰을 통한 토큰 출시를 가능하게 합니다. 모든 낙찰자가 동일한 청산 가격 — 가장 낮은 낙찰가 — 을 지불하여, 구조화된 토큰 오퍼링과 온체인 자금 조달을 위한 공정한 가격 발견을 보장합니다. {% .lead %}
+**Uniform Price Auction**은 솔라나에서 경쟁 입찰을 통한 토큰 출시를 가능하게 합니다. 모든 낙찰자가 동일한 청산 가격 — 가장 낮은 낙찰가 — 을 지불하여, 구조화된 토큰 오퍼링과 온체인 자금 조달을 위한 공정한 가격 발견을 보장합니다. {% .lead %}
 
 {% callout title="학습 내용" %}
 이 개요에서 다루는 내용:
@@ -139,6 +139,6 @@ Uniform Price Auction의 상세한 설정 문서가 곧 제공될 예정입니�
 ## 다음 단계
 
 - [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 비례 토큰 배분을 통한 공정한 출시
-- [Presale](/ko/smart-contracts/genesis/presale) - ICO 스타일 고정가 토큰 판매
+- [Presale](/ko/smart-contracts/genesis/presale) - 고정가 토큰 판매
 - [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
 - [Genesis 개요](/ko/smart-contracts/genesis) - 토큰 런치패드 개념 및 아키텍처

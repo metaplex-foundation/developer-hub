@@ -1,7 +1,7 @@
 ---
 title: 均一価格オークション
-metaTitle: Genesisオークション | SolanaでのIDO＆トークンオークション | Metaplex
-description: 均一クリアリング価格によるSolana上のIDO型トークンオークション。SPLトークンローンチのための競争入札方式で、機関投資家や大規模な資金調達に対応するオンチェーントークンオファリングです。
+metaTitle: Genesisオークション | Solanaでのトークンオークション | Metaplex
+description: 均一クリアリング価格によるSolana上のトークンオークション。SPLトークンローンチのための競争入札方式で、機関投資家や大規模な資金調達に対応するオンチェーントークンオファリングです。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -35,7 +35,7 @@ faqs:
     a: 入金ベースのローンチよりも構造化されたオークション形式を好む大口参加者（ホエール、ファンド）との価格発見に使用してください。
 ---
 
-**Uniform Price Auction** は IDO スタイルのトークンオファリングとオンチェーンの資金調達のための競争入札を可能にします。すべての落札者は同じ clearing price（最低落札価格）を支払い、構造化された SPL トークン配布における公正な価格発見を実現します。 {% .lead %}
+**Uniform Price Auction** は構造化されたトークンオファリングとオンチェーンの資金調達のための競争入札を可能にします。すべての落札者は同じ clearing price（最低落札価格）を支払い、構造化された SPL トークン配布における公正な価格発見を実現します。 {% .lead %}
 
 {% callout title="学べること" %}
 この概要では以下を説明します：
@@ -139,6 +139,6 @@ Uniform Price Auction の詳細なセットアップドキュメントは近日�
 ## 次のステップ
 
 - [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチによる比例配分
-- [Presale](/ja/smart-contracts/genesis/presale) - ICO スタイルの固定価格トークン販売
+- [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
 - [トークンをローンチする](/ja/tokens/launch-token) - エンドツーエンドのトークンローンチガイド
 - [Genesis Overview](/ja/smart-contracts/genesis) - トークンローンチパッドの概念とアーキテクチャ

@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
 metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
-description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 ICO 및 IDO의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
+description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -47,7 +47,7 @@ faqs:
     a: Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
 ---
 
-**Launch Pool**은 솔라나에서 공정한 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 기존 ICO나 IDO와는 다른 온체인 토큰 배포 메커니즘으로 — 사용자는 일정 기간 동안 SOL을 예치하고 총 예치금에서의 지분에 비례하여 SPL 토큰을 받습니다. 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
+**Launch Pool**은 솔라나에서 공정한 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 기존 중앙화 토큰 판매와는 다른 온체인 토큰 배포 메커니즘으로 — 사용자는 일정 기간 동안 SOL을 예치하고 총 예치금에서의 지분에 비례하여 SPL 토큰을 받습니다. 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
 
 {% callout title="학습 내용" %}
 이 가이드에서 다루는 내용:
@@ -464,7 +464,7 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 
 ## 다음 단계
 
-- [Presale](/ko/smart-contracts/genesis/presale) - ICO 스타일 고정 가격 토큰 판매
+- [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
 - [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 토큰 오퍼링
 - [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
 - [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통한 토큰 세일 데이터 조회

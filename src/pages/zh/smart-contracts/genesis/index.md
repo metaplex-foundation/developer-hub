@@ -1,7 +1,7 @@
 ---
 title: Genesis - Solana 代币发行智能合约与代币发射台
-metaTitle: Genesis | Solana 代币发射台 | ICO、IDO、Presale 与公平发射平台 | Metaplex
-description: Genesis 是 Solana 代币发射台，支持 ICO、IDO、预售、公平发射和代币生成事件 (TGE)。链上 SPL 代币创建、众筹和代币分发平台。
+metaTitle: Genesis | Solana 代币发射台 | Presale 与公平发射代币发射台平台 | Metaplex
+description: Genesis 是 Solana 代币发射台，支持预售、公平发射和代币生成事件 (TGE)。链上 SPL 代币创建、众筹和代币分发平台。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -39,7 +39,7 @@ faqs:
     a: Presale 预先设定固定价格。Launch Pool 根据总存款有机地发现价格——存款越多意味着每个代币的隐含价格越高。
 ---
 
-**Genesis** 是 Solana 代币发射台和**代币生成事件 (TGE)** 智能合约。通过链上协调运行 ICO、IDO、预售、公平发射或众筹，实现 SPL 代币创建、代币分发和资金收集。{% .lead %}
+**Genesis** 是 Solana 代币发射台和**代币生成事件 (TGE)** 智能合约。通过链上协调运行预售、公平发射或众筹，实现 SPL 代币创建、代币分发和资金收集。{% .lead %}
 
 {% callout title="选择您的路径" %}
 - **无代码发射？** 使用 [Metaplex 代币发射台](https://www.metaplex.com) 无需编码即可发行代币
@@ -50,14 +50,14 @@ faqs:
 
 ## 什么是 Genesis？
 
-Genesis 是一个去中心化代币发行平台，为在 Solana 上发行 SPL 代币提供链上基础设施。无论您需要运行 ICO、IDO、代币预售还是公平发射，Genesis 都能处理：
+Genesis 是一个去中心化代币发行平台，为在 Solana 上发行 SPL 代币提供链上基础设施。无论您需要运行代币预售还是公平发射，Genesis 都能处理：
 
 - **代币创建**，包含元数据（名称、符号、图片）
 - **资金收集**，来自参与者（SOL 存款）
 - **分发**，基于您选择的机制
 - **时间协调**，用于存款和领取窗口
 
-将 Genesis 视为一个代币发射台智能合约，它位于您（发行方）和参与者之间，确保公平、透明和自动化的代币分发——传统 ICO 和 IDO 平台的现代链上替代方案。
+将 Genesis 视为一个代币发射台智能合约，它位于您（发行方）和参与者之间，确保公平、透明和自动化的代币分发——传统集中式代币销售平台的现代链上替代方案。
 
 ## 发行机制
 
@@ -66,16 +66,16 @@ Genesis 支持三种可以组合使用的机制：
 | 机制 | 价格 | 分发方式 | 最适合 |
 |-----------|-------|--------------|----------|
 | **[Launch Pool](/zh/smart-contracts/genesis/launch-pool)** | 结束时发现 | 按存款比例 | 公平发射、社区代币、众筹 |
-| **[Presale](/zh/smart-contracts/genesis/presale)** | 预先固定 | 先到先得 | ICO、代币销售、已知估值 |
-| **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** | 清算价格 | 最高出价者获胜 | IDO、大规模募集、机构兴趣 |
+| **[Presale](/zh/smart-contracts/genesis/presale)** | 预先固定 | 先到先得 | 代币销售、已知估值 |
+| **[统一价格拍卖](/zh/smart-contracts/genesis/uniform-price-auction)** | 清算价格 | 最高出价者获胜 | 大规模募集、机构兴趣 |
 
 ### 我应该使用哪种？
 
 **Launch Pool** - 您想要有机的价格发现和公平的代币分配。类似于众筹，每个存款的人都能按其份额比例获得代币。没有人会被抢先交易。
 
-**Presale** - 您知道估值并希望价格可预测。类似于传统的 ICO 或代币销售——设定固定价格，让参与者购买直到达到上限。
+**Presale** - 您知道估值并希望价格可预测。类似于传统的代币销售——设定固定价格，让参与者购买直到达到上限。
 
-**拍卖** - 您希望大型参与者进行竞价。IDO 风格的方式，最适合有机构兴趣的成熟项目。
+**拍卖** - 您希望大型参与者进行竞价。拍卖式的方式，最适合有机构兴趣的成熟项目。
 
 ## 核心概念
 

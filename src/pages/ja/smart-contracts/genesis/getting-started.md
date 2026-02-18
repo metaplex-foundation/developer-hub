@@ -1,7 +1,7 @@
 ---
 title: はじめに
 metaTitle: Genesisをはじめる | Solanaでトークンをローンチする方法 | Metaplex
-description: SolanaでSPLトークンをローンチする方法をステップごとに解説します。Genesisトークンローンチパッドを使ったICO、Presale、フェアローンチ、トークンセールの計画方法を学びましょう。
+description: SolanaでSPLトークンをローンチする方法をステップごとに解説します。Genesisトークンローンチパッドを使ったPresale、フェアローンチ、トークンセールの計画方法を学びましょう。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -33,7 +33,7 @@ faqs:
     a: 希望する供給量に 10^decimals を掛けます。9 桁の小数で 100 万トークンの場合、1,000,000,000,000,000 を使用します。
 ---
 
-Solana 上で ICO、プレセール、フェアローンチ、トークンセールを計画している方へ。構築を始める前に Genesis のトークンローンチフローを理解しましょう。このガイドでは、SPL トークンの作成から配布までの各ステップを説明します。 {% .lead %}
+Solana 上でプレセール、フェアローンチ、トークンセールを計画している方へ。構築を始める前に Genesis のトークンローンチフローを理解しましょう。このガイドでは、SPL トークンの作成から配布までの各ステップを説明します。 {% .lead %}
 
 {% callout title="ノーコードオプション" %}
 コードを書かずにトークンをローンチしたい場合は、[Metaplex トークンローンチパッド](https://www.metaplex.com)をご利用ください。以下のガイドは、カスタムローンチパッドプラットフォームの構築や、独自のウェブサイトでトークンセールを開催したい開発者向けです。
@@ -225,7 +225,7 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 
 構築を始める前に：
 
-- [ ] ローンチメカニズムの決定（フェアローンチ/クラウドセールには Launch Pool、ICO スタイルの固定価格には Presale）
+- [ ] ローンチメカニズムの決定（フェアローンチ/クラウドセールには Launch Pool、固定価格には Presale）
 - [ ] 小数点付きの総トークン供給量の計算
 - [ ] bucket 割り当ての計画（合計が総供給量と一致する必要あり）
 - [ ] 時間ウィンドウの設定（入金開始/終了、請求開始/終了）
@@ -272,4 +272,4 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 1. **[トークンをローンチする](/ja/tokens/launch-token)** - エンドツーエンドのトークンローンチガイド
 2. **[JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript)** - インストールと設定
 3. **[Launch Pool チュートリアル](/ja/smart-contracts/genesis/launch-pool)** - フェアローンチによる比例配分
-4. **[Presale チュートリアル](/ja/smart-contracts/genesis/presale)** - ICO スタイルの固定価格販売
+4. **[Presale チュートリアル](/ja/smart-contracts/genesis/presale)** - 固定価格トークン販売

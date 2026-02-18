@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis Presale | SolanaでのICO＆固定価格トークンセール | Metaplex
-description: SolanaでトークンプレセールやICOを実施。ユーザーがSOLを預け入れ、事前に設定されたレートでトークンを受け取る固定価格SPLトークンセールです。Genesisローンチパッドによるオンチェーントークンオファリング。
+metaTitle: Genesis Presale | Solanaでの固定価格トークンセール | Metaplex
+description: Solanaでトークンプレセールを実施。ユーザーがSOLを預け入れ、事前に設定されたレートでトークンを受け取る固定価格SPLトークンセールです。Genesisローンチパッドによるオンチェーントークンオファリング。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -47,7 +47,7 @@ faqs:
     a: 予測可能な価格設定が必要で、調達額を正確に把握したい場合は Presale を使用してください。自然な価格発見には Launch Pool を使用してください。
 ---
 
-**Presale** は Solana 上での固定価格トークン配布を提供します。従来の ICO（Initial Coin Offering）に相当するオンチェーンの仕組みです。割り当てと SOL 上限に基づいて SPL トークンの価格を事前に設定します。ユーザーは受け取る量を正確に把握でき、あなたは調達額を正確に把握できます。 {% .lead %}
+**Presale** は Solana 上での固定価格トークン配布を提供します。割り当てと SOL 上限に基づいて SPL トークンの価格を事前に設定します。ユーザーは受け取る量を正確に把握でき、あなたは調達額を正確に把握できます。 {% .lead %}
 
 {% callout title="学習内容" %}
 このガイドでは以下を説明します：
@@ -59,7 +59,7 @@ faqs:
 
 ## 概要
 
-Presale は事前に決められた価格でトークンを販売します。従来の ICO やトークンオファリングと同様に、価格は設定したトークン割り当てと SOL 上限から計算され、既知のバリュエーションでの暗号資産による資金調達に最適です。
+Presale は事前に決められた価格でトークンを販売します。価格は設定したトークン割り当てと SOL 上限から計算され、既知のバリュエーションでの暗号資産による資金調達に最適です。
 
 - 固定価格 = SOL 上限 / トークン割り当て
 - ユーザーは入金ウィンドウ中に SOL を入金（{% fee product="genesis" config="presale" fee="deposit" /%} の手数料が適用）
@@ -440,6 +440,6 @@ Presale はトークン割り当てと SOL 上限で決定される固定価格�
 ## 次のステップ
 
 - [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチによる自然な価格発見
-- [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - IDO スタイルの入札ベース割り当て
+- [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - オークション式入札ベース割り当て
 - [トークンをローンチする](/ja/tokens/launch-token) - エンドツーエンドのトークンローンチガイド
 - [Getting Started](/ja/smart-contracts/genesis/getting-started) - Genesis ローンチパッドの基礎

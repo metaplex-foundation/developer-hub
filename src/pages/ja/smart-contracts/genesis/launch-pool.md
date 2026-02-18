@@ -1,7 +1,7 @@
 ---
 title: Launch Pool
 metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
-description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。従来のICOやIDOに代わる、自然な価格発見を実現するオンチェーンクラウドセールです。
+description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -47,7 +47,7 @@ faqs:
     a: Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、上限に達するまで先着順で割り当てられます。
 ---
 
-**Launch Pool** は Solana 上でのフェアトークンローンチのための自然な価格発見メカニズムを提供します。従来の ICO や IDO に代わる分散型の手法として、ユーザーはウィンドウ期間中に SOL を入金し、総入金額に対するシェアに比例して SPL トークンを受け取ります。スナイピングなし、フロントランニングなし、全員にとって公平な配布です。 {% .lead %}
+**Launch Pool** は Solana 上でのフェアトークンローンチのための自然な価格発見メカニズムを提供します。ユーザーはウィンドウ期間中に SOL を入金し、総入金額に対するシェアに比例して SPL トークンを受け取ります。スナイピングなし、フロントランニングなし、全員にとって公平な配布です。 {% .lead %}
 
 {% callout title="学べること" %}
 このガイドでは以下を説明します：
@@ -464,7 +464,7 @@ Launch Pool は入金に基づいて自然に価格を発見し、比例配分�
 
 ## 次のステップ
 
-- [Presale](/ja/smart-contracts/genesis/presale) - ICO スタイルの固定価格トークン販売
+- [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
 - [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - 入札ベースのトークンオファリング
 - [トークンをローンチする](/ja/tokens/launch-token) - エンドツーエンドのトークンローンチガイド
 - [Aggregation API](/ja/smart-contracts/genesis/aggregation) - API 経由でトークンセールデータを照会

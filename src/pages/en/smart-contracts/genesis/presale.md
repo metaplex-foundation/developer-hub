@@ -1,7 +1,7 @@
 ---
 title: Presale
-metaTitle: Genesis Presale | ICO & Fixed-Price Token Sale on Solana | Metaplex
-description: Run a token presale or ICO on Solana. Fixed-price SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token offering with the Genesis launchpad.
+metaTitle: Genesis Presale | Fixed-Price Token Sale on Solana | Metaplex
+description: Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -13,7 +13,7 @@ keywords:
   - ICO on Solana
   - token sale
   - token offering
-  - initial coin offering
+  - initial token sale
   - SPL token sale
   - fixed pricing
   - token launchpad
@@ -47,7 +47,7 @@ faqs:
     a: Use Presale when you want predictable pricing and know exactly how much you want to raise. Use Launch Pool for organic price discovery.
 ---
 
-**Presales** offer fixed-price token distribution on Solana — the on-chain equivalent of a traditional ICO or initial coin offering. Set your SPL token price upfront based on allocation and SOL cap — users know exactly what they're getting, and you know exactly what you'll raise. {% .lead %}
+**Presales** offer fixed-price token distribution on Solana — set your SPL token price upfront based on allocation and SOL cap. Users know exactly what they're getting, and you know exactly what you'll raise. In Genesis, a "presale" means tokens are sold immediately before initial trading — buyers receive the tokens directly, not a future right to receive them. {% .lead %}
 
 {% callout title="What You'll Learn" %}
 This guide covers:
@@ -59,7 +59,7 @@ This guide covers:
 
 ## Summary
 
-Presales sell tokens at a predetermined price, similar to a traditional ICO or token offering. The price is calculated from the token allocation and SOL cap you configure, making it ideal for crypto fundraising with a known valuation.
+Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure, making it ideal for token launches with a known valuation.
 
 - Fixed price = SOL cap / token allocation
 - Users deposit SOL during the deposit window ({% fee product="genesis" config="presale" fee="deposit" /%} fee applies)
@@ -440,6 +440,6 @@ Use Presale when you want predictable pricing and know exactly how much you want
 ## Next Steps
 
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Fair launch with organic price discovery
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - IDO-style bid-based allocation
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Auction-style bid-based allocation
 - [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
 - [Getting Started](/smart-contracts/genesis/getting-started) - Genesis launchpad fundamentals
