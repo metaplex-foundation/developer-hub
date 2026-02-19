@@ -23,5 +23,5 @@ proficiencyLevel: Intermediate
 {% quick-link title="Appdataプラグインの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/onchain-ticketing-with-appdata" description="Appdataプラグインを活用したチケッティングプラットフォームの作成方法を学ぶ" /%}
 {% quick-link title="Typescriptステーキングの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/javascript/web2-typescript-staking-example" description="Typescriptのみを使用してコレクションのステーキングプログラムを作成する方法を学ぶ" /%}
 {% quick-link title="Anchorステーキングの例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/anchor/anchor-staking-example" description="コレクション用のステーキングスマートコントラクトの作成方法を学ぶ" /%}
-{% quick-link title="Gumdropを使用したクレームベースのエアドロップ作成" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Gumdropを使用してクレームベースのエアドロップを作成する方法を学ぶ" /%}
+{% quick-link title="Gumdropを使用したクレームベースのエアドロップ作成" icon="CodeBracketSquare" href="/solana/general/spl-token-claim-airdrop-using-gumdrop" description="Gumdropを使用してクレームベースのエアドロップを作成する方法を学ぶ" /%}
 {% /quick-links %}

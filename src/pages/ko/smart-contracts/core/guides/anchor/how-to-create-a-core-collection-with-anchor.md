@@ -158,7 +158,7 @@ let update_authority = match &ctx.accounts.update_authority {
 };
 ```
 필요한 모든 계정을 준비한 후 `CreateCollectionV2CpiBuilder`에 전달하고 `.invoke()`를 사용하여 명령어를 실행하거나, signer seed가 필요한 경우 `.invoke_signed()`를 사용합니다.
-Metaplex CPI Builder 작동 방식에 대한 자세한 내용은 이 [문서](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)를 참조하세요
+Metaplex CPI Builder 작동 방식에 대한 자세한 내용은 이 [문서](/solana/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)를 참조하세요
 ### 추가 작업
 계속하기 전에, `FreezeDelegate` 플러그인이나 `AppData` 외부 플러그인과 같은 플러그인이나 외부 플러그인이 이미 포함된 에셋을 생성하려면 어떻게 해야 할까요? 방법은 다음과 같습니다.
 먼저 필요한 모든 추가 임포트를 추가합니다:

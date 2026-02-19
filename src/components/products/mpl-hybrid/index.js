@@ -97,6 +97,10 @@ export const mplHybrid = {
               href: '/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
               created: '2024-12-16',
             },
+            {
+              title: 'Create deterministic Metadata with Turbo',
+              href: '/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
+            },
           ],
         },
       ],
@@ -126,7 +130,8 @@ export const mplHybrid = {
         'Swapping NFTs to Tokens': 'Swapping NFTs to Tokens',
         'Swapping Tokens to NFTs': 'Swapping Tokens to NFTs',
         'Create your first Hybrid Collection': 'Create your first Hybrid Collection',
-        'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template'
+        'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template',
+        'Create deterministic Metadata with Turbo': 'Create deterministic Metadata with Turbo'
       }
     },
     ja: {
@@ -152,7 +157,8 @@ export const mplHybrid = {
         'Swapping NFTs to Tokens': 'NFTからトークンへのスワップ',
         'Swapping Tokens to NFTs': 'トークンからNFTへのスワップ',
         'Create your first Hybrid Collection': '最初のハイブリッドコレクションを作成',
-        'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート'
+        'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート',
+        'Create deterministic Metadata with Turbo': 'Turboで決定論的メタデータを作成'
       }
     },
     ko: {
@@ -178,7 +184,8 @@ export const mplHybrid = {
         'Swapping NFTs to Tokens': 'NFT를 토큰으로 스와핑',
         'Swapping Tokens to NFTs': '토큰을 NFT로 스와핑',
         'Create your first Hybrid Collection': '첫 번째 하이브리드 컬렉션 만들기',
-        'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿'
+        'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿',
+        'Create deterministic Metadata with Turbo': 'Turbo로 결정론적 메타데이터 생성'
       }
     },
     zh: {
@@ -204,7 +211,8 @@ export const mplHybrid = {
         'Swapping NFTs to Tokens': '将NFT交换为代币',
         'Swapping Tokens to NFTs': '将代币交换为NFT',
         'Create your first Hybrid Collection': '创建您的第一个混合合集',
-        'MPL-404 Hybrid UI Template': 'MPL-404混合UI模板'
+        'MPL-404 Hybrid UI Template': 'MPL-404混合UI模板',
+        'Create deterministic Metadata with Turbo': 'Turbo创建确定性元数据'
       }
     }
   }

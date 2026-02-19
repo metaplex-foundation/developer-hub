@@ -2,7 +2,7 @@
 title: 创建您的第一个混合集合
 metaTitle: 创建您的第一个混合集合 | Hybrid指南
 description: 学习如何端到端创建混合集合！
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '09-17-2024'
 updated: '09-17-2024'
 ---

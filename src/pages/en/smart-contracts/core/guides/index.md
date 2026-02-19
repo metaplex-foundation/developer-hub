@@ -23,5 +23,5 @@ The following Guides for MPL Core are currently available:
 {% quick-link title="Appdata Plugin Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/onchain-ticketing-with-appdata" description="Learn how you can create a ticketing platform leveraging the Appdata plugin" /%}
 {% quick-link title="Typescript Staking Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/javascript/web2-typescript-staking-example" description="Learn how you can create a staking program for your collection using only Typescript" /%}
 {% quick-link title="Anchor Staking Example" icon="CodeBracketSquare" href="/smart-contracts/core/guides/anchor/anchor-staking-example" description="Learn how you can create a staking smart contract for your collection" /%}
-{% quick-link title="Create a claim based airdrop using Gumdrop" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="Learn how to create a claim based airdrop using Gumdrop" /%}
+{% quick-link title="Create a claim based airdrop using Gumdrop" icon="CodeBracketSquare" href="/solana/general/spl-token-claim-airdrop-using-gumdrop" description="Learn how to create a claim based airdrop using Gumdrop" /%}
 {% /quick-links %}

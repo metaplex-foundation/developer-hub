@@ -8,7 +8,7 @@ description: Learn to create the MPL 404 Hybrid Escrow account that makes 404 sw
 
 - A MPL Core Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
 - Core NFT Assets Minted to the Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
-- An SPL Token created with required token amount. - [Link](/guides/javascript/how-to-create-a-solana-token)
+- An SPL Token created with required token amount. - [Link](/solana/javascript/how-to-create-a-solana-token)
 - An online storage of sequential metadata JSON files at a consistent gateway/uri.
 
 Initializing the escrow is the essential step that links an NFT collection with a fungible token. Before starting this step, you should have ready a Core collection address, a fungible token mint address, and a range of off-chain metadata URIs using numerically named, sequential files. The need for Base URI string consistency will limit some off-chain metadata options. Note that the authority of the escrow needs to match the authority of the collection to perform metadata updates. Additionally, because the escrow is funded, there is no need to be the token authority which allows collections to be backed by existing memecoins or other fungible assets.
