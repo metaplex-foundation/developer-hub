@@ -89,4 +89,4 @@ Execution Time: <time> seconds
   - Create the token on the blockchain
   - Mint the initial supply
 - The transaction signature and mint address are provided for verification
-- Speed run mode can be used to measure execution time 
+- Speed run mode can be used to measure execution time

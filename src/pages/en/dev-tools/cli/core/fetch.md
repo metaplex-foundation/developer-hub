@@ -101,4 +101,4 @@ When downloading files, the following structure will be created:
 - Image files will maintain their original format and quality
 - The command will create necessary directories if they don't exist
 - For collections, both metadata and image files are downloaded together
-- For assets, you can choose to download specific components (image, metadata, or asset data) 
+- For assets, you can choose to download specific components (image, metadata, or asset data)

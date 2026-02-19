@@ -4,7 +4,7 @@ metaTitle: 'Umi - @solana/web3.js Differences and Adapters'
 description: 'Difference and Adapters to make Metaplex Umi work with Solana web3js.'
 ---
 
-The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc. 
+The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc.
 
 When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js`. This unfortunately means that, although having the same or similar import names, not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
 
@@ -12,7 +12,7 @@ To help with this issue, `Umi` provides a set of adapters that allows to parse t
 
 ## Required Package and Imports
 
-The `umi-web3js-adapters` package includes all the helper methods needed to convert between Umi and Web3.js types. 
+The `umi-web3js-adapters` package includes all the helper methods needed to convert between Umi and Web3.js types.
 
 While it's already included when you install the `@metaplex-foundation/umi` package, you can also install it separately using the following command:
 
@@ -213,7 +213,7 @@ The Solana runtime supports two transaction versions:
 
 **Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [here](https://solana.com/en/docs/advanced/versions)
 
-For `umi` and `umi-web3js-adapters` we added support for both transaction types! 
+For `umi` and `umi-web3js-adapters` we added support for both transaction types!
 
 ### Umi
 ```ts
@@ -297,8 +297,7 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
-## Messages 
+## Messages
 
 We've already covered creating messages during versioned transaction creation. Let's review it again.
 

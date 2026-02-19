@@ -90,7 +90,6 @@ Minting will fail
 {% /node %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
 
-
 {% /diagram %}
 ## 가드 설정
 

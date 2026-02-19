@@ -23,7 +23,6 @@ const assets = await das.getAssetsByCollection(umi, { collection });
 console.log(assets);
 ```
 
-
 ## レスポンス例
 この例には配列内に1つのオブジェクトのみが含まれています。複数のCore アセットを持つコレクションの場合、配列にはより多くのエントリが含まれます。
 

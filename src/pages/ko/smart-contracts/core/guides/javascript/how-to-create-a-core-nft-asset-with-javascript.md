@@ -33,7 +33,7 @@ This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Java
 {% callout title="What is Core?" %}
 **Core** uses a single account design, reducing minting costs and improving Solana network load compared to alternatives. It also has a flexible plugin system that allows for developers to modify the behavior and functionality of assets.
 {% /callout %}
-But before starting, let's talk about Assets: 
+But before starting, let's talk about Assets:
 {% callout title="What is an Asset?" %}
 Setting itself apart from existing Asset programs, like Solana’s Token program, Metaplex Core and Core NFT Assets (sometimes referred to as Core NFT Assets) do not rely on multiple accounts, like Associated Token Accounts. Instead, Core NFT Assets store the relationship between a wallet and the "mint" account within the asset itself.
 {% /callout %}
@@ -240,7 +240,7 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-And log out the detail as follow: 
+And log out the detail as follow:
 ```ts
   // Log out the signature and the links to the transaction and the NFT.
   console.log('\nNFT Created')
@@ -275,7 +275,7 @@ const tx = await create(umi, {
 }).sendAndConfirm(umi)
 const signature = base58.deserialize(tx.signature)[0]
 ```
-**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use! 
+**Note**: Refer to the [documentation](/smart-contracts/core/plugins) if you're not sure on what fields and plugin to use!
 ## Full Code Example
 ```ts
 import { create } from '@metaplex-foundation/mpl-core'

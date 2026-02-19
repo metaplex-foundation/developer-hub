@@ -93,4 +93,3 @@ To find out more about Metaplex DAS you can visit these pages:
 ## RPC and DAS Integration
 
 RPCs and DAS complement each other in the Solana ecosystem. While standard RPCs provide direct access to on-chain data, Metaplex DAS offers an optimized, indexed layer specifically for digital assets. By leveraging both services appropriately, developers can build more efficient applications that retrieve general blockchain data through RPCs while accessing digital asset information through DAS, resulting in better performance and user experience.
-

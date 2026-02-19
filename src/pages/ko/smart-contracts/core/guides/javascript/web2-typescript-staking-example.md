@@ -46,7 +46,7 @@ This plugin allows for **data storage directly on the assets, functioning as onc
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
 _Learn more about it [here](/smart-contracts/core/plugins/attribute)_
 ### The program Logic
-For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement. 
+For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement.
 _Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
 Before diving into the instructions, let’s spend some time talking about the attributes used, the `staked` and `staked_time` keys. The `staked` key indicates if the asset is staked and when it was staked if it was (unstaked = 0, staked = time of staked). The `staked_time` key tracks the total staking duration of the asset, updated only after an asset get’s unstaked.
 **Instructions**:
@@ -55,7 +55,7 @@ Before diving into the instructions, let’s spend some time talking about the a
 ## Building the Program: A Step-by-Step Guide
 Now that we understand the logic behind our program, **it’s time to dive into the code and bring everything together**!
 ### Dependencies and Imports
-Before writing our program, let's look at what package we need and what function from them to make sure our program works! 
+Before writing our program, let's look at what package we need and what function from them to make sure our program works!
 Let's look at the different packages used for this example:
 ```json
 "dependencies": {
@@ -74,8 +74,8 @@ import { addPlugin, updatePlugin, fetchAsset, removePlugin } from '@metaplex-fou
 import { base58 } from '@metaplex-foundation/umi/serializers';
 ```
 ### Umi and Core SDK Overview
-In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions. 
-**Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations. 
+In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions.
+**Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations.
 _For more information, you can find an overview [here](/dev-tools/umi/getting-started)_
 **The basic Umi setup for this example will look like this**:
 ```typescript
@@ -129,7 +129,7 @@ Before diving into the logic for staking and unstaking, we should learn **how to
 })();
 ```
 ### The Staking Instruction
-Here's the full **Staking instruction** 
+Here's the full **Staking instruction**
 We begin by using the `fetchAsset(...)` instruction from the mpl-core SDK to retrieve information about an asset, including whether it has the attribute plugin and, if so, the attributes it contains.
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);
@@ -154,7 +154,7 @@ if (!fetchedAsset.attributes) {
 } else {
 ```
 2. **Check for Staking Attributes**:
-If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction. 
+If the asset has the staking attribute, ensure it contains the staking attributes necessary for the staking instruction.
 ```typescript
 } else {
     const assetAttribute = fetchedAsset.attributes.attributeList;
@@ -296,7 +296,7 @@ tx = await transactionBuilder().add(
 })();
 ```
 ### The Unstaking Instruction
-The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself. 
+The unstaking instruction will be even easier simpler because, since the unstaking instruction can be called only after the staking instruction, many of the checks are inherently covered by the staking instruction itself.
 We start by calling the `fetchAsset(...)` instruction to retrieve all information about the asset.
 ```typescript
 const fetchedAsset = await fetchAsset(umi, asset);

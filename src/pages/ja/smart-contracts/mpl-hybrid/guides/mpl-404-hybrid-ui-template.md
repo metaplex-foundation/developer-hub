@@ -22,7 +22,7 @@ Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開
 
 このUIテンプレートは、ベースとなるMetaplex UIテンプレートを使用して作成されています。追加のドキュメントは以下で見つけることができます
 
-ベーステンプレートGithubリポジトリ - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+Base Template - [GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## インストール
 
@@ -30,8 +30,7 @@ Metaplex MPL-404 Hybrid UIテンプレートは、開発者とユーザーに開
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Githubリポジトリ - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
-
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 ## セットアップ
 
@@ -50,7 +49,6 @@ NEXT_PUBLIC_TOKEN="11111111111111111111111111111111"
 // RPC URL
 NEXT_PUBLIC_RPC="https://myrpc.com/?api-key="
 ```
-
 
 ### 画像の置換
 src/assets/images/には置換する2つの画像があります：
@@ -85,4 +83,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 このテンプレートが構築されているヘルパーと機能を理解するために、ベーステンプレートのドキュメントをさらに読むことをお勧めします
 
-Githubリポジトリ - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)

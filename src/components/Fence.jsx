@@ -64,7 +64,7 @@ export function Fence({
     <div className="not-prose">
       {/* Title bar */}
       {title && (
-        <div className="rounded-t-lg border border-b-0 border-border bg-muted px-4 py-2 font-mono text-sm text-muted-foreground">
+        <div className="border border-b-0 border-border bg-zinc-800/80 px-4 py-1.5 font-mono text-xs text-zinc-400">
           {title}
         </div>
       )}

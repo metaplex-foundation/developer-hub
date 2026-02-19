@@ -65,12 +65,12 @@ Royalty distribution (use [Royalties plugin](/smart-contracts/core/plugins/royal
 - **Brand verification**: Official brand accounts verify partnership
 - **Authenticity proof**: Original creator verifies they created the Asset
 - **Historical record**: Document who was involved in creating a Collection
-The `update authority` can: 
+The `update authority` can:
 - Add the plugin.
 - Add unverified creators to the creators array.
 - Can remove unverified creators. To remove verified creators they must unverify themselves first.
 - Can verify themselves.
-To verify a creator the `updatePlugin` instruction has to be signed by the public key that was added by the update authority to the creators array. 
+To verify a creator the `updatePlugin` instruction has to be signed by the public key that was added by the update authority to the creators array.
 ## Works With
 |                     |     |
 | ------------------- | --- |

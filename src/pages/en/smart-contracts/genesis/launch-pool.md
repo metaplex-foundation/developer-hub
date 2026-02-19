@@ -83,7 +83,6 @@ import {
   addUnlockedBucketV2,
   findUnlockedBucketV2Pda,
   finalizeV2,
-  NOT_TRIGGERED_TIMESTAMP,
 } from '@metaplex-foundation/genesis';
 import { generateSigner, publicKey } from '@metaplex-foundation/umi';
 
@@ -95,7 +94,6 @@ async function setupLaunchPool() {
   // umi.use(keypairIdentity(yourKeypair));
 
   const baseMint = generateSigner(umi);
-  const backendSigner = generateSigner(umi);
   const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
 
   // 1. Initialize
@@ -133,25 +131,25 @@ async function setupLaunchPool() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     depositEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: depositEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimStartCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
     endBehaviors: [
@@ -175,15 +173,14 @@ async function setupLaunchPool() {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimStart,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
     claimEndCondition: {
       __kind: 'TimeAbsolute',
       padding: Array(47).fill(0),
       time: claimEnd,
-      triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+      triggeredTimestamp: null,
     },
-    backendSigner: { signer: backendSigner.publicKey },
   }).sendAndConfirm(umi);
 
   // 6. Finalize
@@ -248,43 +245,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 The Genesis Account creates your token and coordinates all distribution buckets.
 
-{% totem %}
-
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
-
-const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(mplToolbox())
-  .use(genesis());
-
-// umi.use(keypairIdentity(yourKeypair));
-
-const baseMint = generateSigner(umi);
-const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
-
-const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-  baseMint: baseMint.publicKey,
-  genesisIndex: 0,
-});
-
-await initializeV2(umi, {
-  baseMint,
-  fundingMode: 0,
-  totalSupplyBaseToken: TOTAL_SUPPLY,
-  name: 'My Token',
-  symbol: 'MTK',
-  uri: 'https://example.com/metadata.json',
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/initialize_v2" frameworks="umi" filename="initializeV2" /%}
 
 {% callout type="note" %}
 The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
@@ -294,126 +255,19 @@ The `totalSupplyBaseToken` should equal the sum of all bucket allocations.
 
 The Launch Pool bucket collects deposits and distributes tokens proportionally. Configure timing here.
 
-{% totem %}
-
-```typescript
-import {
-  addLaunchPoolBucketV2,
-  findLaunchPoolBucketV2Pda,
-  findUnlockedBucketV2Pda,
-  NOT_TRIGGERED_TIMESTAMP,
-} from '@metaplex-foundation/genesis';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-const now = BigInt(Math.floor(Date.now() / 1000));
-const depositStart = now;
-const depositEnd = now + 86400n; // 24 hours
-const claimStart = depositEnd + 1n;
-const claimEnd = claimStart + 604800n; // 1 week
-
-await addLaunchPoolBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: TOTAL_SUPPLY,
-
-  // Timing
-  depositStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: depositStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  depositEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: depositEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-
-  // Optional: Minimum deposit
-  minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
-
-  // Where collected SOL goes after transition
-  endBehaviors: [
-    {
-      __kind: 'SendQuoteTokenPercentage',
-      padding: Array(4).fill(0),
-      destinationBucket: publicKey(unlockedBucket),
-      percentageBps: 10000, // 100%
-      processed: false,
-    },
-  ],
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/add_launch_pool_bucket_v2" frameworks="umi" filename="addLaunchPoolBucket" /%}
 
 ### 3. Add the Unlocked Bucket
 
 The Unlocked bucket receives SOL from the Launch Pool after the transition.
 
-{% totem %}
-
-```typescript
-import { addUnlockedBucketV2 } from '@metaplex-foundation/genesis';
-import { generateSigner } from '@metaplex-foundation/umi';
-
-const backendSigner = generateSigner(umi);
-
-await addUnlockedBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: 0n,
-  recipient: umi.identity.publicKey,
-  claimStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimStart,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  claimEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimEnd,
-    triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
-  },
-  backendSigner: { signer: backendSigner.publicKey },
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
 ### 4. Finalize
 
 Once all buckets are configured, finalize to activate the launch. This is irreversible.
 
-{% totem %}
-
-```typescript
-import { finalizeV2 } from '@metaplex-foundation/genesis';
-
-await finalizeV2(umi, {
-  baseMint: baseMint.publicKey,
-  genesisAccount,
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
 
 ## User Operations
 
@@ -421,69 +275,11 @@ await finalizeV2(umi, {
 
 Users must wrap SOL to wSOL before depositing.
 
-{% totem %}
-
-```typescript
-import {
-  findAssociatedTokenPda,
-  createTokenIfMissing,
-  transferSol,
-  syncNative,
-} from '@metaplex-foundation/mpl-toolbox';
-import { WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
-import { publicKey, sol } from '@metaplex-foundation/umi';
-
-const userWsolAccount = findAssociatedTokenPda(umi, {
-  owner: umi.identity.publicKey,
-  mint: WRAPPED_SOL_MINT,
-});
-
-await createTokenIfMissing(umi, {
-  mint: WRAPPED_SOL_MINT,
-  owner: umi.identity.publicKey,
-  token: userWsolAccount,
-})
-  .add(
-    transferSol(umi, {
-      destination: publicKey(userWsolAccount),
-      amount: sol(10),
-    })
-  )
-  .add(syncNative(umi, { account: userWsolAccount }))
-  .sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/wrap_sol" frameworks="umi" filename="wrapSol" /%}
 
 ### Depositing
 
-{% totem %}
-
-```typescript
-import {
-  depositLaunchPoolV2,
-  findLaunchPoolDepositV2Pda,
-  fetchLaunchPoolDepositV2,
-} from '@metaplex-foundation/genesis';
-import { sol } from '@metaplex-foundation/umi';
-
-await depositLaunchPoolV2(umi, {
-  genesisAccount,
-  bucket: launchPoolBucket,
-  baseMint: baseMint.publicKey,
-  amountQuoteToken: sol(10).basisPoints,
-}).sendAndConfirm(umi);
-
-// Verify
-const [depositPda] = findLaunchPoolDepositV2Pda(umi, {
-  bucket: launchPoolBucket,
-  recipient: umi.identity.publicKey,
-});
-const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
-console.log('Deposited (after fee):', deposit.amountQuoteToken);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 Multiple deposits from the same user accumulate into a single deposit account.
 
@@ -491,21 +287,7 @@ Multiple deposits from the same user accumulate into a single deposit account.
 
 Users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} fee applies.
 
-{% totem %}
-
-```typescript
-import { withdrawLaunchPoolV2 } from '@metaplex-foundation/genesis';
-import { sol } from '@metaplex-foundation/umi';
-
-await withdrawLaunchPoolV2(umi, {
-  genesisAccount,
-  bucket: launchPoolBucket,
-  baseMint: baseMint.publicKey,
-  amountQuoteToken: sol(3).basisPoints,
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
 If a user withdraws their entire balance, the deposit PDA is closed.
 
@@ -513,20 +295,7 @@ If a user withdraws their entire balance, the deposit PDA is closed.
 
 After the deposit period ends and claims open:
 
-{% totem %}
-
-```typescript
-import { claimLaunchPoolV2 } from '@metaplex-foundation/genesis';
-
-await claimLaunchPoolV2(umi, {
-  genesisAccount,
-  bucket: launchPoolBucket,
-  baseMint: baseMint.publicKey,
-  recipient: umi.identity.publicKey,
-}).sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
 Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
@@ -536,31 +305,7 @@ Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAlloc
 
 After deposits close, execute the transition to move collected SOL to the unlocked bucket.
 
-{% totem %}
-
-```typescript
-import { transitionV2, WRAPPED_SOL_MINT } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
-  owner: unlockedBucket,
-  mint: WRAPPED_SOL_MINT,
-});
-
-await transitionV2(umi, {
-  genesisAccount,
-  primaryBucket: launchPoolBucket,
-  baseMint: baseMint.publicKey,
-})
-  .addRemainingAccounts([
-    { pubkey: unlockedBucket, isSigner: false, isWritable: true },
-    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
-
-{% /totem %}
+{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
 
 **Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
@@ -582,13 +327,11 @@ Use `TimeAbsolute` with a Unix timestamp:
 {% totem %}
 
 ```typescript
-import { NOT_TRIGGERED_TIMESTAMP } from '@metaplex-foundation/genesis';
-
 const condition = {
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
   time: BigInt(Math.floor(Date.now() / 1000) + 3600), // 1 hour from now
-  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+  triggeredTimestamp: null,
 };
 ```
 

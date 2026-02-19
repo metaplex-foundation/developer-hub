@@ -65,7 +65,7 @@ Creator verification (use [Verified Creators](/smart-contracts/core/plugins/veri
 - **Fan engagement**: Community members sign limited edition pieces
 - **Authentication**: Real-world item creators sign digital twins
 - **Event memorabilia**: Conference speakers sign event NFTs
-- **Charity auctions**: Multiple celebrities sign charity NFTs 
+- **Charity auctions**: Multiple celebrities sign charity NFTs
 To add a autograph some conditions have to be met:
 - The autograph plugin must be added already.
 - The signer may only add their own address.

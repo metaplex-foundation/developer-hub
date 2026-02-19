@@ -37,7 +37,6 @@ Mint {% .whitespace-nowrap %}
 {% /node %}
 {% edge from="regEx" to="nftMint" /%}
 
-
 {% edge from="nftMint" to="mint-candy-guard" theme="indigo" dashed=true %}
 Check that the mint Address
 
@@ -56,8 +55,8 @@ matches the Regular Expression
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-9" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}
@@ -87,7 +86,7 @@ Ideas for regular expressions that can be used for example could be:
 - Ending with a specific pattern: `mplx$`
 - Starting and Ending with a specific pattern: `^mplx*mplx$`
 - Exactly matches a specific pattern: `^mplx1111111111111111111111111111111111111mplx$`
-The string `mplx` would need to be replaced with the expected characters. 
+The string `mplx` would need to be replaced with the expected characters.
 
 {% dialect-switcher title="Set up a Candy Machine using the Vanity Mint Guard where the mint starts and ends with `mplx`" %}
 {% dialect title="JavaScript" id="js" %}

@@ -48,4 +48,3 @@ When you fetch a collection, you get:
 - **Update Authority** - Who can modify the collection
 - **Num Minted** - Number of assets in the collection
 - **Plugins** - Any attached plugins like royalties or attributes
-

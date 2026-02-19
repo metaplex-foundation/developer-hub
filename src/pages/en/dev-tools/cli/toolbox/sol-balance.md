@@ -57,4 +57,4 @@ Balance: 1.5 SOL
 
 - [SOL Transfer](/dev-tools/cli/toolbox/sol-transfer) - Transfer SOL between addresses
 - [Token Transfer](/dev-tools/cli/toolbox/token-transfer) - Transfer tokens
-- [Airdrop](/dev-tools/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only) 
+- [Airdrop](/dev-tools/cli/toolbox/sol-airdrop) - Request SOL airdrop (devnet only)

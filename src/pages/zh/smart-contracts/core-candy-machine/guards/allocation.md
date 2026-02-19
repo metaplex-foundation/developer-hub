@@ -75,7 +75,6 @@ Allocation Tracker PDA {% .whitespace-nowrap %}
 {% /edge %}
 {% edge from="mint-candy-guard" to="mint-candy-machine" /%}
 
-
 {% /diagram %}
 
 ## 守卫设置

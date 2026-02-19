@@ -35,15 +35,15 @@ settings.gradle内にmavenリポジトリを追加します：
 
 ```
 repositories {
-	...
-	maven {
+ ...
+ maven {
        name = "GitHubPackages"
        url = "https://github.com/metaplex-foundation/metaplex-android"
        credentials {
-		   username = "<YOUR_GITHUB_USERNAME>"
-		   password = "<YOUR_GITHUB_TOKENS>"
+     username = "<YOUR_GITHUB_USERNAME>"
+     password = "<YOUR_GITHUB_TOKENS>"
        }
-	}
+ }
 }
 
 ```
@@ -52,8 +52,8 @@ repositories {
 
 ```
 dependencies {
-	...
-	implementation 'com.metaplex:metaplex:+' // バージョンを設定
+ ...
+ implementation 'com.metaplex:metaplex:+' // バージョンを設定
 }
 ```
 
@@ -67,16 +67,16 @@ dependencies {
 ```
 
 repositories {
-	...
-	maven { url 'https://jitpack.io' }
+ ...
+ maven { url 'https://jitpack.io' }
 }
 
 ```
 次に、アプリ/モジュールの'build.gradle'ファイルに依存関係を追加します：
 ```
 dependencies {
-	...
-	implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
+ ...
+ implementation 'com.github.metaplex-foundation:metaplex-android:{version}'
 }
 ```
 
@@ -116,11 +116,11 @@ NFTモジュールは`Metaplex.nft`を介してアクセスでき、以下のメ
 
 ```kotlin
 metaplex.nft.findByMint(mintPublicKey){
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -150,7 +150,7 @@ class NFT(
     val editionNonce: Int? = metadataAccount.editionNonce
     val tokenStandard: MetaplexTokenStandard? = metadataAccount.tokenStandard
     val collection: MetaplexCollection? = metadataAccount.collection
-	...
+ ...
 }
 ```
 
@@ -160,11 +160,11 @@ class NFT(
 
 ```kotlin
 nft..metadata(metaplex) { result ->
-	it.onSuccess {
-		...
-	}.onFailure {
-		...
-	}
+ it.onSuccess {
+  ...
+ }.onFailure {
+  ...
+ }
 }
 ```
 
@@ -224,11 +224,9 @@ interface IdentityDriver {
 
 `GuestIdentityDriver`ドライバーは最もシンプルなアイデンティティドライバーです。これは本質的に`null`ドライバーであり、署名されたトランザクションを送信する必要がない場合に便利です。`signTransaction`メソッドを使用すると失敗を返します。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver`ドライバーは、パラメーターとして`Account`オブジェクトを受け入れます。
-
 
 ### ReadOnlyIdentityDriver
 

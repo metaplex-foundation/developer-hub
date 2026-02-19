@@ -1,4 +1,8 @@
-User-agent: * 
-Disallow:
+# We welcome AI use of this content
+User-agent: *
+Allow: /
+
+# Explicit permission for search indexing, AI input (RAG), and AI training
+Content-Signal: search=yes,ai-input=yes,ai-train=yes
 
 Sitemap: https://developers.metaplex.com/sitemap.xml

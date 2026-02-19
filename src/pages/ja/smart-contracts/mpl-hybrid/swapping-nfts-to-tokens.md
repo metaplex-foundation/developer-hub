@@ -6,8 +6,6 @@ description: MPL-Hybridプログラムでユーザーが自分のNFTをトーク
 
 MPL-Hybridプログラムで所有するトークンをエスクローに保持されているNFTにスワップする行為は`capture`と呼ばれます。
 
-
-
 ## NFTのスワップ
 
 ```ts

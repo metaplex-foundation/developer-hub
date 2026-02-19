@@ -60,7 +60,6 @@ _OR at the end of the freeze period._
 {% node #thawed-NFT-bg1 label="Thawed Asset" theme="slate" parent="thawed-NFT" x="-5" y="-5" /%}
 {% node #thawed-NFT label="Thawed Asset" theme="slate" parent="thaw" y="130" x="3" /%}
 
-
 {% node #clock2 label="🕑" theme="transparent" parent="thaw" x="130" y="-30" /%}
 {% edge from="clock2" to="clockDesc2" arrow="none" theme="dimmed" path="straight" /%}
 {% node #clockDesc2  theme="transparent" parent="clock2" y="260" x="-91" %}
@@ -226,7 +225,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA3" theme="pink" path="straight" y="-10" /%}
 
 {% node #freezeEscrow-PDA3 parent="destination" x="390" y="-10" %}
@@ -293,7 +291,6 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% node parent="mint-candy-machine" y="-20" x="130" theme="transparent" %}
   Mint Logic
 {% /node %}
-
 
 {% edge from="mint-candy-machine" to="frozen-NFT" path="straight" /%}
 {% node #frozen-NFT parent="mint-candy-machine" y="120" x="29" theme="slate" %}
@@ -394,7 +391,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-guard-route" theme="pink" toPosition="left" /%}
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% edge from="candy-guard-route" to="freezeEscrow-PDA5" theme="pink" path="straight" /%}
 
 {% node #frozen-NFT parent="candy-guard-route" y="-100" x="29" label="Frozen Asset" /%}
@@ -490,7 +486,6 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% edge from="amount" to="candy-guard-route" theme="pink" toPosition="left" /%}
 
-
 {% node parent="candy-guard-route" y="209" x="-18" %}
 {% node #destination-wallet label="Destination Wallet" theme="indigo" /%}
 {% node theme="dimmed" %}
@@ -503,7 +498,6 @@ Transfer all funds from
 
 the Freeze Escrow Account
 {% /edge %}
-
 
 {% edge from="candy-guard" to="candy-machine" /%}
 

@@ -22,7 +22,7 @@ The Metaplex MPL-404 Hybrid UI Template has been built to give developers and us
 
 This UI Template is created using the base Metaplex UI Template. Aditional documentation can be found at the following
 
-Base Template Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+Base Template - [GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## Installation
 
@@ -30,8 +30,7 @@ Base Template Github Repo - [https://github.com/metaplex-foundation/metaplex-nex
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
-
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 ## Setup
 
@@ -50,7 +49,6 @@ NEXT_PUBLIC_TOKEN="11111111111111111111111111111111"
 // RPC URL
 NEXT_PUBLIC_RPC="https://myrpc.com/?api-key="
 ```
-
 
 ### Image Replacement
 In src/assets/images/ there are two images to replace:
@@ -85,4 +83,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 It is recommended to further read the documentation for the base template to understand the helpers and functionality this template is built with
 
-Github Repo - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)

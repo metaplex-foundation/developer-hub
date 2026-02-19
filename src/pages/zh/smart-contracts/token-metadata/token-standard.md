@@ -68,9 +68,9 @@ description: Token Metadata 支持的各种代币标准概述
   "name": "SolanaGame Steel Sword",
   "symbol": "SG-SS-1",
   "description": "4级后可用的 SolanaGame 钢剑",
-  "image": "<https://arweave.net/26YdhY_eAzv26YdhY1uu9uiA3nmDZYwP8MwZAultcE?ext=jpeg>",
-  "animation_url": "<https://arweave.net/ZAultcE_eAzv26YdhY1uu9uiA3nmDZYwP8MwuiA3nm?ext=glb>",
-  "external_url": "<https://SolanaGame.io>",
+  "image": "https://arweave.net/26YdhY_eAzv26YdhY1uu9uiA3nmDZYwP8MwZAultcE?ext=jpeg",
+  "animation_url": "https://arweave.net/ZAultcE_eAzv26YdhY1uu9uiA3nmDZYwP8MwuiA3nm?ext=glb",
+  "external_url": "https://SolanaGame.io",
   "attributes": [
     {
       "trait_type": "attack",

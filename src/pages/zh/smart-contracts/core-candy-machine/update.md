@@ -70,11 +70,11 @@ data =  {
 在某些情况下，您可能希望将 Candy Machine 权限转移到新地址。这可以通过 `setMintAuthority` 函数实现。
 
 export declare type SetMintAuthorityInstructionAccounts = {
-/** Candy Machine 账户。 \*/
+/**Candy Machine 账户。 \*/
 candyMachine: PublicKey | Pda;
 /** Candy Machine 权限 _/
 authority?: Signer;
-/\*\* 新的 candy machine 权限 _/
+/\*\* 新的 candy machine 权限_/
 mintAuthority: Signer;
 };
 

@@ -70,7 +70,7 @@ uri: "https://shdw-drive.genesysgo.net/<bucket-id>/"
 
 ### token
 
-The Token mint address that is being used in your MPL Hybrid 404 project. 
+The Token mint address that is being used in your MPL Hybrid 404 project.
 
 ```ts
 token: publicKey("11111111111111111111111111111111")
@@ -150,4 +150,3 @@ The `path` arg either enables of disables the metadata rerolling function on the
 // Reroll metadata on swap 0 = true, 1 = false
 path: 0,
 ```
-

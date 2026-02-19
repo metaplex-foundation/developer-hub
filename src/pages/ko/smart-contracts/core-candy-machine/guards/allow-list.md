@@ -58,7 +58,6 @@ description: "코어 캔디 머신의 '허용 목록' 가드를 사용하면 코
 {% node #plus label="+" parent="legend-hash-4" theme="transparent" x="81" y="8" /%}
 {% node #legend-hash-5 label="Hash 5" parent="legend-hash-4" x="100" theme="mint" /%}
 
-
 {% node #leaves label="Leaves" parent="hash-5" y="105" x="-170" theme="transparent" /%}
 {% node #hash-1 label="Hash 1" parent="hash-5" y="100" x="-100" theme="orange" /%}
 {% node #hash-2 label="Hash 2" parent="hash-5" y="100" x="100" theme="orange" /%}
@@ -132,7 +131,6 @@ allowed to mint
 {% edge from="merkleProof" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 {% edge from="merkleRoot" to="walletList" arrow="none" fromPosition="bottom" toPosition="top" arrow="start" /%}
 
-
 {% node parent="merkleProof" y="100" %}
 {% node #payer label="Payer" theme="indigo" /%}
 {% node theme="dimmed"%}
@@ -197,7 +195,6 @@ the guard's Merkle Root validation will fail
 {% edge from="route-validation" to="allowList-pda" path="straight" /%}
 {% edge from="allowList-pda" to="mint-candy-guard" path="straight" /%}
 {% edge from="mint-candy-guard" to="mint-candy-machine" path="straight" /%}
-
 
 {% /diagram %}
 

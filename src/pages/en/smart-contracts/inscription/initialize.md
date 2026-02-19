@@ -89,7 +89,6 @@ await initialize(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## `initializeAssociatedInscription`
 
 One Inscription account can have multiple Associated Inscription Accounts. They are derived based on the `associationTag`. For example the tag can be the datatype of the file, e.g. `image/png`.

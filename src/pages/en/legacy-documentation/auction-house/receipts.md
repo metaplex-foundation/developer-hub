@@ -15,7 +15,7 @@ Let us see how receipts are printed.
 
 To generate these receipts, the receipt printing function should be called immediately after the corresponding transaction (`PrintListingReceipt`, `PrintBidReceipt`, and `PrintPurchaseReceipt`).
 
-Additionally, the `CancelListingReceipt `and `CancelBidReceipt` instructions should be called in the case of canceled listings and bids. Calling these two instructions will fill the `canceled_at` fields of the `ListingReceipt` and `BidReceipt` accounts.
+Additionally, the `CancelListingReceipt`and `CancelBidReceipt` instructions should be called in the case of canceled listings and bids. Calling these two instructions will fill the `canceled_at` fields of the `ListingReceipt` and `BidReceipt` accounts.
 
 > While the receipts can be retrieved using the standard getProgramAccounts data flow, the official recommendation is to use Solana's AccountsDB plug-in to index and track the generated receipts.
 
@@ -28,7 +28,7 @@ There are two fields that can be introduced to each function above to print the 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
 Here's an example of printing receipts for bid, list and execute sale instructions.
-     
+
 ```tsx
 // printing the ListReceipt
 await metaplex

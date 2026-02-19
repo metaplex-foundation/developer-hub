@@ -224,6 +224,7 @@ const tags = {
       highlightLines: { type: String, default: '' },
       showLines: { type: String, default: '' },
       showCopy: { type: Boolean, default: true },
+      filename: { type: String, default: '' },
     },
   },
   'protocol-fees': {

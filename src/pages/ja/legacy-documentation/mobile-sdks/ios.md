@@ -75,12 +75,12 @@ NFTモジュールは`Metaplex.nfts()`を介してアクセスでき、以下の
 ```swift
 let ownerPublicKey = PublicKey(string: "5LeMDmNW6bQFWQjMhcTZnp6LVHTQQfUpY9jn6YH6RpyE")!
 metaplex.nft.findNftsByOwner(publicKey: ownerPublicKey) { [weak self] result in
-	switch result {
-		case .success(let nftList):
-			break
-		case .failure:
-			break
-	}
+ switch result {
+  case .success(let nftList):
+   break
+  case .failure:
+   break
+ }
 }
 ```
 
@@ -148,11 +148,9 @@ public protocol IdentityDriver {
 
 `GuestIdentityDriver`ドライバーは最もシンプルなアイデンティティドライバーです。これは本質的に`null`ドライバーであり、署名されたトランザクションを送信する必要がない場合に便利です。`signTransaction`メソッドを使用すると失敗を返します。
 
-
 ### KeypairIdentityDriver
 
 `KeypairIdentityDriver`ドライバーは、パラメーターとして`Account`オブジェクトを受け入れます。
-
 
 ### ReadOnlyIdentityDriver
 

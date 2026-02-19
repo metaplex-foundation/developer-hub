@@ -97,7 +97,6 @@ cargo install sugar-cli
 ```
 이렇게 하면 Crates.io에서 Sugar 코드를 다운로드하고 자동으로 설치합니다.
 
-
 ### 소스에서 빌드
 
 소스 코드에서 Sugar를 빌드하려면 시스템에 [Rust](https://www.rust-lang.org/tools/install)가 설치되어 있어야 합니다. `rustup`을 사용하여 Rust를 설치하는 것이 좋습니다:

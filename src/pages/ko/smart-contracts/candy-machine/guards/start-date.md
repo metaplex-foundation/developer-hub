@@ -37,8 +37,8 @@ description: "Start Date 가드는 민팅의 시작 날짜를 결정합니다."
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    민팅 from 
-    
+    민팅 from
+
     _Candy Machine Program_
   {% /node %}
 {% /node %}

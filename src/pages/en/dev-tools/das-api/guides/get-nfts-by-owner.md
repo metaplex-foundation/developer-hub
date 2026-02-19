@@ -252,4 +252,4 @@ import { dasApi } from "@metaplex-foundation/digital-asset-standard-api";
 
 - [Get Assets By Creator](/dev-tools/das-api/methods/get-assets-by-creator) - Discover all tokens created by a specific address
 - [Get All Tokens in a Collection](/dev-tools/das-api/guides/get-collection-nfts) - Retrieve all assets from a specific collection
-- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries 
+- [Search Assets by Multiple Criteria](/dev-tools/das-api/guides/search-by-criteria) - Combine multiple filters for advanced queries

@@ -43,8 +43,8 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 
 {% node parent="mint-candy-guard" #mint-candy-machine y="150" x="-8" %}
   {% node theme="pink" %}
-    Mint from 
-    
+    Mint from
+
     _Candy Machine Program_{% .whitespace-nowrap %}
   {% /node %}
 {% /node %}
@@ -59,7 +59,7 @@ Owner: Candy Guard Program {% .whitespace-nowrap %}
 
 {% edge from="candy-guard" to="candy-machine" path="straight" /%}
 {% edge from="additional" to="mint-candy-guard" arrow="none" dashed=true %}
-if the mint transaction contains instructions 
+if the mint transaction contains instructions
 
 from additional programs
 
@@ -95,7 +95,7 @@ API References: [create](https://mpl-candy-machine.typedoc.metaplex.com/function
 {% dialect title="Sugar" id="sugar" %}
 {% totem %}
 
-Add this object into the guard section your config.json file: 
+Add this object into the guard section your config.json file:
 
 ```json
 "programGate" : {

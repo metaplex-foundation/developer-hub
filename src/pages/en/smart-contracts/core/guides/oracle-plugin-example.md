@@ -61,7 +61,7 @@ In this guide, we'll use the Anchor framework, but you can also implement it usi
 For simplicity, we'll use a mono-file approach, with helpers, state, accounts, and instructions all in lib.rs instead of the usual separation.
 *Note: You can follow along and open the example on the Metaplex Foundation Github: [Oracle Trading Example](https://github.com/metaplex-foundation/mpl-core-oracle-trading-example)*
 ### Helpers & Constants
-Instead of declaring some inputs repeatedly, it’s a good idea to create constants that we can easily reference in our instructions/functions. 
+Instead of declaring some inputs repeatedly, it’s a good idea to create constants that we can easily reference in our instructions/functions.
 **Here are the constants used in this oracle protocol:**
 ```rust
 // Constants
@@ -147,8 +147,8 @@ pub struct CreateOracle<'info> {
 ```
 The struct presents two separate accounts for the signer and the payer of this instruction. This is standard for most instructions, even if not strictly necessary here, as it ensures that if a PDA signs the transaction, we still have an account to pay the fees. Both need to be signers of the transaction.
 Other details:
-- The Oracle account is initialized and has `[b"oracle"]` as seeds to ensure there is no possibility of creating more than one oracle account. The space allocated is defined by the `INIT_SPACE` constant. 
-- The `reward_vault` account is included in this instruction to save the bumps for use in the next instruction. 
+- The Oracle account is initialized and has `[b"oracle"]` as seeds to ensure there is no possibility of creating more than one oracle account. The space allocated is defined by the `INIT_SPACE` constant.
+- The `reward_vault` account is included in this instruction to save the bumps for use in the next instruction.
 - The System program is necessary for creating new accounts on Solana since the init macro will use the `create_account` instruction from the system program.
 Now let's see the `CrankOracle` Account:
 ```rust

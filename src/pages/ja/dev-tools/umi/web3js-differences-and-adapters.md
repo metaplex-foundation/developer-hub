@@ -297,7 +297,6 @@ const web3jsVersionedTransaction = new VersionedTransaction(...messageV0Params);
 const umiVersionedTransaction = fromWeb3JsTransaction(web3jsVersionedTransaction);
 ```
 
-
 ## メッセージ
 
 バージョン付きトランザクション作成時にメッセージの作成について既にカバーしました。再度確認してみましょう。

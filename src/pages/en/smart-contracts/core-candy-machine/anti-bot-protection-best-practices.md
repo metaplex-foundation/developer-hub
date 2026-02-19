@@ -741,4 +741,4 @@ Implementing comprehensive anti-bot protection requires careful planning and exe
 
 By following this structured approach, you create multiple layers of protection that make it extremely difficult for automated systems to game your mint while maintaining complete transparency and fairness for your legitimate community members.
 
-Remember that determined attackers will always look for weaknesses, so staying informed about new attack vectors and continuously improving your defenses is essential for long-term success. 
+Remember that determined attackers will always look for weaknesses, so staying informed about new attack vectors and continuously improving your defenses is essential for long-term success.

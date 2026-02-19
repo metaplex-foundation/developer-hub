@@ -70,7 +70,7 @@ mplx config wallets add dev1 /path/to/keypair.json
 mplx config wallets set
 ```
 
-Further reading see 
+Further reading see
 
 #### Configure RPC Endpoint
 ```bash
@@ -165,4 +165,4 @@ Or if you installed via yarn:
 
 ```bash
 yarn global remove @metaplex-foundation/cli
-``` 
+```

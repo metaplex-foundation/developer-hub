@@ -175,7 +175,6 @@ await addUnlockedBucketV2(umi, {
   recipient,            // PublicKey - who can claim
   claimStartCondition,  // TimeCondition
   claimEndCondition,    // TimeCondition
-  backendSigner,        // { signer: PublicKey } | null
 }).sendAndConfirm(umi);
 ```
 
@@ -316,7 +315,7 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 �
   __kind: 'TimeAbsolute',
   padding: Array(47).fill(0),
   time: bigint,                    // Unix timestamp (seconds)
-  triggeredTimestamp: NOT_TRIGGERED_TIMESTAMP,
+  triggeredTimestamp: null,
 }
 ```
 
@@ -339,7 +338,6 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 �
 | Constant | Value |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
-| `NOT_TRIGGERED_TIMESTAMP` | 시간 조건에서 사용 |
 
 ---
 
