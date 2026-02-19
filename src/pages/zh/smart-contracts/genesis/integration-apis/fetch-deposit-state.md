@@ -50,9 +50,9 @@ const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
 // Returns null if not found
 const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
 
-if (deposit) {
-  console.log('Amount:', deposit.amountQuoteToken);
-  console.log('Claimed:', deposit.claimed);
+if (maybeDeposit) {
+  console.log('Amount:', maybeDeposit.amountQuoteToken);
+  console.log('Claimed:', maybeDeposit.claimed);
 }
 ```
 
@@ -70,10 +70,10 @@ const deposit = await fetchPresaleDepositV2(umi, depositPda);
 // Returns null if not found
 const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda);
 
-if (deposit) {
-  console.log('Amount deposited:', deposit.amountQuoteToken);
-  console.log('Amount claimed:', deposit.amountClaimed);
-  console.log('Fully claimed:', deposit.claimed);
+if (maybeDeposit) {
+  console.log('Amount deposited:', maybeDeposit.amountQuoteToken);
+  console.log('Amount claimed:', maybeDeposit.amountClaimed);
+  console.log('Fully claimed:', maybeDeposit.claimed);
 }
 ```
 

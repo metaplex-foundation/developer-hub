@@ -60,7 +60,7 @@ POST /v1/launches/create
 | `finalize` | `boolean` | 否 | 是否最终确认发行（默认为 `true`） |
 | `allocations` | `array` | 是 | 分配配置数组 |
 | `externalLinks` | `object` | 否 | 网站、Twitter、Telegram 链接 |
-| `publicKey` | `string` | 是 | 与 `wallet` 相同 |
+| `publicKey` | `string` | 是 | 创建者的钱包公钥（必须与顶级 `wallet` 字段一致） |
 
 ### 分配类型
 

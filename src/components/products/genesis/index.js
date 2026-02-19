@@ -243,7 +243,7 @@ export const genesis = {
         'JavaScript SDK': 'JavaScript SDK',
         'API Client': 'API客户端',
         'Launch Pool': '发行池',
-        'Priced Sale': '定价销售',
+        'Presale': '预售',
         'Uniform Price Auction': '统一价格拍卖',
         'Get Launch': '获取发行',
         'Get Launches by Token': '按代币获取发行',

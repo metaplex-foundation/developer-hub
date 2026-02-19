@@ -2,9 +2,9 @@
 import {
   createAndRegisterLaunch,
   CreateLaunchInput,
+  genesis,
 } from '@metaplex-foundation/genesis'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
-import { genesis } from '@metaplex-foundation/genesis'
 import { keypairIdentity } from '@metaplex-foundation/umi'
 // [/IMPORTS]
 
@@ -12,7 +12,8 @@ import { keypairIdentity } from '@metaplex-foundation/umi'
 const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(genesis())
 
-// umi.use(keypairIdentity(myKeypair));
+// Use keypairIdentity to set a wallet when running server-side:
+// umi.use(keypairIdentity(myKeypair))
 // [/SETUP]
 
 // [MAIN]

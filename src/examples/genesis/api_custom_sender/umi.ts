@@ -12,11 +12,12 @@ import {
 // [MAIN]
 const options: SignAndSendOptions = {
   txSender: async (transactions) => {
-    // Custom signing and sending logic
+    // Replace myCustomSign / myCustomSend with your own
+    // signing and sending implementation.
     const signatures: Uint8Array[] = []
     for (const tx of transactions) {
-      const signed = await myCustomSign(tx)
-      const sig = await myCustomSend(signed)
+      const signed = await myCustomSign(tx)   // your signer
+      const sig = await myCustomSend(signed)   // your sender
       signatures.push(sig)
     }
     return signatures

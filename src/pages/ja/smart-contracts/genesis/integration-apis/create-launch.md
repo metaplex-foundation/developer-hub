@@ -60,7 +60,7 @@ POST /v1/launches/create
 | `finalize` | `boolean` | いいえ | ローンチをファイナライズするかどうか（デフォルトは `true`） |
 | `allocations` | `array` | はい | アロケーション設定の配列 |
 | `externalLinks` | `object` | いいえ | ウェブサイト、Twitter、Telegram のリンク |
-| `publicKey` | `string` | はい | `wallet` と同じ値 |
+| `publicKey` | `string` | はい | 作成者のウォレット公開鍵（トップレベルの `wallet` フィールドと一致する必要があります） |
 
 ### アロケーションタイプ
 

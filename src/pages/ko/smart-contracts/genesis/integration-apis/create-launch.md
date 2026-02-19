@@ -60,7 +60,7 @@ POST /v1/launches/create
 | `finalize` | `boolean` | 아니오 | 런칭 확정 여부 (기본값 `true`) |
 | `allocations` | `array` | 예 | 할당 구성 배열 |
 | `externalLinks` | `object` | 아니오 | 웹사이트, Twitter, Telegram 링크 |
-| `publicKey` | `string` | 예 | `wallet`과 동일 |
+| `publicKey` | `string` | 예 | 생성자의 지갑 공개 키 (최상위 `wallet` 필드와 동일해야 함) |
 
 ### 할당 유형
 

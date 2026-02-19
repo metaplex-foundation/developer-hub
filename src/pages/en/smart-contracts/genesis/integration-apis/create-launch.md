@@ -60,7 +60,7 @@ The `launch` object describes the full token and launch setup:
 | `finalize` | `boolean` | No | Whether to finalize the launch (defaults to `true`) |
 | `allocations` | `array` | Yes | Array of allocation configurations |
 | `externalLinks` | `object` | No | Website, Twitter, Telegram links |
-| `publicKey` | `string` | Yes | Same as `wallet` |
+| `publicKey` | `string` | Yes | Creator's wallet public key (must match the top-level `wallet` field) |
 
 ### Allocation Types
 

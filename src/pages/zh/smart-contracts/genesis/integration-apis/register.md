@@ -70,6 +70,7 @@ curl -X POST https://api.metaplex.com/v1/launches/register \
 ```json
 {
   "success": true,
+  "existing": false,
   "launch": {
     "id": "uuid-launch-id",
     "link": "https://www.metaplex.com/token/MintPublicKey..."
