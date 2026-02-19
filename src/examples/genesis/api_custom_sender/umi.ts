@@ -13,17 +13,17 @@ import {
 const options: SignAndSendOptions = {
   txSender: async (transactions) => {
     // Custom signing and sending logic
-    const signatures: Uint8Array[] = [];
+    const signatures: Uint8Array[] = []
     for (const tx of transactions) {
-      const signed = await myCustomSign(tx);
-      const sig = await myCustomSend(signed);
-      signatures.push(sig);
+      const signed = await myCustomSign(tx)
+      const sig = await myCustomSend(signed)
+      signatures.push(sig)
     }
-    return signatures;
+    return signatures
   },
-};
+}
 
-const result = await createAndRegisterLaunch(umi, input, options);
+const result = await createAndRegisterLaunch(umi, input, options)
 // [/MAIN]
 
 // [OUTPUT]

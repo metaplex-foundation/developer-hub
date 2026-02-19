@@ -10,9 +10,9 @@
 const umiSections = {
   "imports": "import {\n  createAndRegisterLaunch,\n  SignAndSendOptions,\n} from '@metaplex-foundation/genesis'",
   "setup": "// Assumes umi and input from the Easy Mode example.",
-  "main": "const options: SignAndSendOptions = {\n  txSender: async (transactions) => {\n    // Custom signing and sending logic\n    const signatures: Uint8Array[] = [];\n    for (const tx of transactions) {\n      const signed = await myCustomSign(tx);\n      const sig = await myCustomSend(signed);\n      signatures.push(sig);\n    }\n    return signatures;\n  },\n};\n\nconst result = await createAndRegisterLaunch(umi, input, options);",
+  "main": "const options: SignAndSendOptions = {\n  txSender: async (transactions) => {\n    // Custom signing and sending logic\n    const signatures: Uint8Array[] = []\n    for (const tx of transactions) {\n      const signed = await myCustomSign(tx)\n      const sig = await myCustomSend(signed)\n      signatures.push(sig)\n    }\n    return signatures\n  },\n}\n\nconst result = await createAndRegisterLaunch(umi, input, options)",
   "output": "",
-  "full": "// [IMPORTS]\nimport {\n  createAndRegisterLaunch,\n  SignAndSendOptions,\n} from '@metaplex-foundation/genesis'\n// [/IMPORTS]\n\n// [SETUP]\n// Assumes umi and input from the Easy Mode example.\n// [/SETUP]\n\n// [MAIN]\nconst options: SignAndSendOptions = {\n  txSender: async (transactions) => {\n    // Custom signing and sending logic\n    const signatures: Uint8Array[] = [];\n    for (const tx of transactions) {\n      const signed = await myCustomSign(tx);\n      const sig = await myCustomSend(signed);\n      signatures.push(sig);\n    }\n    return signatures;\n  },\n};\n\nconst result = await createAndRegisterLaunch(umi, input, options);\n// [/MAIN]\n\n// [OUTPUT]\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport {\n  createAndRegisterLaunch,\n  SignAndSendOptions,\n} from '@metaplex-foundation/genesis'\n// [/IMPORTS]\n\n// [SETUP]\n// Assumes umi and input from the Easy Mode example.\n// [/SETUP]\n\n// [MAIN]\nconst options: SignAndSendOptions = {\n  txSender: async (transactions) => {\n    // Custom signing and sending logic\n    const signatures: Uint8Array[] = []\n    for (const tx of transactions) {\n      const signed = await myCustomSign(tx)\n      const sig = await myCustomSend(signed)\n      signatures.push(sig)\n    }\n    return signatures\n  },\n}\n\nconst result = await createAndRegisterLaunch(umi, input, options)\n// [/MAIN]\n\n// [OUTPUT]\n// [/OUTPUT]\n"
 }
 
 export const metadata = {
@@ -24,7 +24,7 @@ export const metadata = {
 export const examples = {
   umi: {
     framework: 'Umi',
-    language: 'javascript',
+    language: 'typescript',
     code: umiSections.full,
     sections: umiSections,
   },

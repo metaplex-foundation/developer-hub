@@ -22,40 +22,21 @@ const input: CreateLaunchInput = {
     name: 'My Token',
     symbol: 'MTK',
     image: 'https://gateway.irys.xyz/...',
-    description: 'A project token with locked allocations.',
-    externalLinks: {
-      website: 'https://example.com',
-      twitter: '@mytoken',
-    },
   },
   launchType: 'project',
   launch: {
     launchpool: {
       tokenAllocation: 500_000_000,
-      depositStartTime: new Date('2026-04-01T00:00:00Z'),
+      depositStartTime: new Date(Date.now() + 48 * 60 * 60 * 1000),
       raiseGoal: 200,
       raydiumLiquidityBps: 5000,
-      fundsRecipient: 'FundsRecipientWallet...',
+      fundsRecipient: umi.identity.publicKey,
     },
-    lockedAllocations: [
-      {
-        name: 'Team',
-        recipient: 'TeamWallet...',
-        tokenAmount: 100_000_000,
-        vestingStartTime: new Date('2026-04-05T00:00:00Z'),
-        vestingDuration: { value: 1, unit: 'YEAR' },
-        unlockSchedule: 'MONTH',
-        cliff: {
-          duration: { value: 3, unit: 'MONTH' },
-          unlockAmount: 10_000_000,
-        },
-      },
-    ],
   },
-};
+}
 
-const result = await createAndRegisterLaunch(umi, input);
-console.log(`Launch live at: ${result.launch.link}`);
+const result = await createAndRegisterLaunch(umi, input)
+console.log(`Launch live at: ${result.launch.link}`)
 // [/MAIN]
 
 // [OUTPUT]
