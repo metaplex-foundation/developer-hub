@@ -53,7 +53,7 @@ howToTools:
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -61,7 +61,7 @@ Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailw
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github 저장소 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _다음 섹션들은 이 페이지에 나열된 모든 템플릿이 공유하는 공통 기능을 다룹니다. 템플릿별 기능은 여기에 포함되지 않습니다; 개별 템플릿에 대한 자세한 문서는 각각의 GitHub 저장소를 참조하세요._
 

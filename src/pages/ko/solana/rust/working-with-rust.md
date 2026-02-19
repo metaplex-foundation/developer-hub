@@ -28,13 +28,13 @@ Rust는 개발에 처음 도전하는 사람에게는 상당히 어려운 작업
 
 Rust를 배우려면 여기서 시작하세요. 언어의 기초부터 고급 코딩까지 다룹니다.
 
-[https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
+[The Rust Programming Language Book](https://doc.rust-lang.org/stable/book/)
 
 **Anchor**
 
 Anchor는 보안 보일러플레이트의 상당 부분을 제거하고 이를 대신 처리해 주어 개발 프로세스를 가속화함으로써 Solana 프로그램을 구축하는 데 도움이 되는 프레임워크입니다.
 
-[https://www.anchor-lang.com/](https://www.anchor-lang.com/)
+[Anchor Framework](https://www.anchor-lang.com/)
 
 ## 로컬에서 Rust 스크립트 작업하기
 

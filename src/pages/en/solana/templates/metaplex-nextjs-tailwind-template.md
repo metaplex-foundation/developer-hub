@@ -53,7 +53,7 @@ We currently have a number of templates available for Next JS with slightly diff
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ### Tailwind + Shadcn
 
@@ -61,7 +61,7 @@ Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-t
 git clone https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template.git
 ```
 
-Github Repo - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
+[GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-shadcn-template)
 
 _The following sections cover common features shared by all templates listed on this page. Template-specific features are not included here; please refer to the respective GitHub repositories for detailed documentation on individual templates._
 

@@ -138,7 +138,7 @@ println!("Signature: {:?}", res)
 
 以下是来自 Metaplex Core 程序的 error.rs 页面示例。
 
-[https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
+[Core Program Error Codes](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
 如我们所见，如果我们从失败的交易中收到错误代码 20，那将转换为
 
@@ -154,7 +154,7 @@ println!("Signature: {:?}", res)
 
 如果我们以 Mpl Core Candy Machine 程序为例，这是一个 Anchor 程序，因此我们的错误代码将从 6xxx 开始。
 
-[https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
+[Core Candy Machine Error Codes](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
 如果您的交易返回错误 `6006`，我们可以取数字的末尾，在这种情况下是 `6`，然后从索引 0 开始计算 error.rs 列表。
 

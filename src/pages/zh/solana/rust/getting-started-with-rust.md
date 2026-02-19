@@ -26,10 +26,10 @@ programmingLanguage:
 
 从这里开始学习 Rust。它从基础到使用该语言的高级编码。
 
-[https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
+[The Rust Programming Language Book](https://doc.rust-lang.org/stable/book/)
 
 ## Anchor
 
 Anchor 是一个框架，通过为您剥离大量安全样板代码并为您处理它来帮助您构建 Solana 程序，从而加快开发过程。
 
-[https://www.anchor-lang.com/](https://www.anchor-lang.com/)
+[Anchor Framework](https://www.anchor-lang.com/)

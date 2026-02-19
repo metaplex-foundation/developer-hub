@@ -110,6 +110,7 @@
     "link": "链接",
     "handle": "账号",
     "tagged": "标签",
+    "viewTaggedQuestions": "查看 {tagged} 问题",
     "programId": "程序ID",
     "github": "Github",
     "documentation": "文档",

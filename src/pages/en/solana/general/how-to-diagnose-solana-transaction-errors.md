@@ -138,7 +138,8 @@ Starting at an index of 0 you can count down/work out the position of the error 
 
 Here is an example of a error.rs page from the Metaplex Core program.
 
-[https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
+
+[Core Program Error Codes](https://github.com/metaplex-foundation/mpl-core/blob/main/programs/mpl-core/src/error.rs)
 
 As we can see if we were receiving an error code of 20 from our failing transaction that would translate to
 
@@ -154,7 +155,7 @@ As we can see if we were receiving an error code of 20 from our failing transact
 
 If we take the Mpl Core Candy Machine program as an example, this is an Anchor program so our error codes will start at 6xxx.
 
-[https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
+[Core Candy Machine Error Codes](https://github.com/metaplex-foundation/mpl-core-candy-machine/blob/main/programs/candy-machine-core/program/src/errors.rs)
 
 If your transaction is returning an error of `6006` we can take the end of the number, in this case `6` and work our way down the error.rs list starting from an index of 0.
 

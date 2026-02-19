@@ -38,7 +38,7 @@ const stackOverflowLinks = [
 const programs = [
   { name: 'Token Metadata', programId: 'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s', github: 'https://github.com/metaplex-foundation/mpl-token-metadata', docs: '/smart-contracts/token-metadata' },
   { name: 'Core', programId: 'CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d', github: 'https://github.com/metaplex-foundation/mpl-core', docs: '/smart-contracts/core' },
-  { name: 'Bubblegum v2', programId: 'BGUMzZr2wWfD2yzrXFEMTBqLwfFGaToDgqiSBVP9fSCa', github: 'https://github.com/metaplex-foundation/mpl-bubblegum', docs: '/smart-contracts/bubblegum-v2' },
+  { name: 'Bubblegum v2', programId: 'BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY', github: 'https://github.com/metaplex-foundation/mpl-bubblegum', docs: '/smart-contracts/bubblegum-v2' },
   { name: 'Bubblegum', programId: 'BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY', github: 'https://github.com/metaplex-foundation/mpl-bubblegum', docs: '/smart-contracts/bubblegum' },
   { name: 'Core Candy Machine', programId: 'CMACYFENjoBMHzapRXyo1JZkVS6EtaDDzkjMrmQLvr4J', github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-machine-core', docs: '/smart-contracts/core-candy-machine' },
   { name: 'Core Candy Guard', programId: 'CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ', github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard', docs: '/smart-contracts/core-candy-machine/guards' },
@@ -111,7 +111,7 @@ export function OfficialLinks() {
               <TableRow key={link.name}>
                 <TableCell>{link.name}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -138,7 +138,7 @@ export function OfficialLinks() {
                 <TableCell>{link.name}</TableCell>
                 <TableCell className="font-mono">{link.handle}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -165,7 +165,7 @@ export function OfficialLinks() {
                 <TableCell>{link.name}</TableCell>
                 <TableCell className="font-mono">{link.handle}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{link.name}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -190,7 +190,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -215,7 +215,7 @@ export function OfficialLinks() {
               <TableRow key={link.tagged}>
                 <TableCell className="font-mono">{link.tagged}</TableCell>
                 <TableCell>
-                  <Link href={link.url}>{link.url}</Link>
+                  <Link href={link.url}>{t('viewTaggedQuestions', 'View {tagged} questions', { tagged: link.tagged })}</Link>
                 </TableCell>
               </TableRow>
             ))}
