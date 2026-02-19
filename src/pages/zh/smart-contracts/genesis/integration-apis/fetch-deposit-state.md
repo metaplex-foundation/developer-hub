@@ -44,15 +44,15 @@ import {
   safeFetchLaunchPoolDepositV2,
 } from '@metaplex-foundation/genesis';
 
-// Throws if not found
+// Throws if not found — use when you expect the deposit to exist
 const deposit = await fetchLaunchPoolDepositV2(umi, depositPda);
+console.log('Amount:', deposit.amountQuoteToken);
+console.log('Claimed:', deposit.claimed);
 
-// Returns null if not found
+// Returns null if not found — use for optional lookups
 const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda);
-
 if (maybeDeposit) {
   console.log('Amount:', maybeDeposit.amountQuoteToken);
-  console.log('Claimed:', maybeDeposit.claimed);
 }
 ```
 
@@ -64,16 +64,16 @@ import {
   safeFetchPresaleDepositV2,
 } from '@metaplex-foundation/genesis';
 
-// Throws if not found
+// Throws if not found — use when you expect the deposit to exist
 const deposit = await fetchPresaleDepositV2(umi, depositPda);
+console.log('Amount deposited:', deposit.amountQuoteToken);
+console.log('Amount claimed:', deposit.amountClaimed);
+console.log('Fully claimed:', deposit.claimed);
 
-// Returns null if not found
+// Returns null if not found — use for optional lookups
 const maybeDeposit = await safeFetchPresaleDepositV2(umi, depositPda);
-
 if (maybeDeposit) {
   console.log('Amount deposited:', maybeDeposit.amountQuoteToken);
-  console.log('Amount claimed:', maybeDeposit.amountClaimed);
-  console.log('Fully claimed:', maybeDeposit.claimed);
 }
 ```
 

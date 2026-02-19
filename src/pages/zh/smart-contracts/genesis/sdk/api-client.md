@@ -127,7 +127,7 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 |-------|------|----------|-------------|
 | `name` | `string` | 是 | 代币名称，1–32 个字符 |
 | `symbol` | `string` | 是 | 代币符号，1–10 个字符 |
-| `image` | `string` | 是 | 图片 URL（必须是 Irys 网关 URL） |
+| `image` | `string` | 是 | 图片 URL（有效的 HTTPS URL） |
 | `description` | `string` | 否 | 最多 250 个字符 |
 | `externalLinks` | `ExternalLinks` | 否 | 网站、Twitter、Telegram 链接 |
 

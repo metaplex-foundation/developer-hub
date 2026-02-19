@@ -39,7 +39,7 @@ POST /v1/launches/register
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `launch` | `object` | Yes | The same launch configuration used in Create Launch |
 
-The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration.
+The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
 
 ## Example Request
 

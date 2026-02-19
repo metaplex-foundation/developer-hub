@@ -127,7 +127,7 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 |-------|------|----------|-------------|
 | `name` | `string` | はい | トークン名、1〜32文字 |
 | `symbol` | `string` | はい | トークンシンボル、1〜10文字 |
-| `image` | `string` | はい | 画像 URL（Irys ゲートウェイ URL である必要があります） |
+| `image` | `string` | はい | 画像 URL（有効な HTTPS URL） |
 | `description` | `string` | いいえ | 最大250文字 |
 | `externalLinks` | `ExternalLinks` | いいえ | ウェブサイト、Twitter、Telegram のリンク |
 

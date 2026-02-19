@@ -127,7 +127,7 @@ Transactions must be confirmed on-chain before calling `registerLaunch`. The reg
 |-------|------|----------|-------------|
 | `name` | `string` | Yes | Token name, 1–32 characters |
 | `symbol` | `string` | Yes | Token symbol, 1–10 characters |
-| `image` | `string` | Yes | Image URL (must be an Irys gateway URL) |
+| `image` | `string` | Yes | Image URL (valid HTTPS URL) |
 | `description` | `string` | No | Max 250 characters |
 | `externalLinks` | `ExternalLinks` | No | Website, Twitter, Telegram links |
 

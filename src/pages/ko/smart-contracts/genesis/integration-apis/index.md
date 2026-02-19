@@ -171,7 +171,7 @@ pub struct ErrorResponse {
 `Cargo.toml`에 다음 의존성을 추가하세요:
 ```toml
 [dependencies]
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```

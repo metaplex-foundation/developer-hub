@@ -171,7 +171,7 @@ pub struct ErrorResponse {
 将以下依赖项添加到您的 `Cargo.toml`：
 ```toml
 [dependencies]
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```

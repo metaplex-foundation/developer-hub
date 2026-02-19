@@ -1,5 +1,5 @@
 /**
- * Example: api_locked_allocations
+ * Example: Launch with Locked Allocations
  *
  * A project token with locked allocations.
  *
@@ -16,9 +16,9 @@ const umiSections = {
 }
 
 export const metadata = {
-  title: "api_locked_allocations",
+  title: "Launch with Locked Allocations",
   description: "A project token with locked allocations.",
-  tags: [],
+  tags: ['genesis', 'api-client', 'locked-allocations', 'streamflow', 'intermediate'],
 }
 
 export const examples = {

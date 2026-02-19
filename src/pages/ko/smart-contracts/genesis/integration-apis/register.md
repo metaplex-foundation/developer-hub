@@ -39,7 +39,7 @@ POST /v1/launches/register
 | `network` | `string` | 아니오 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'` |
 | `launch` | `object` | 예 | 런칭 생성에서 사용한 것과 동일한 런칭 구성 |
 
-`launch` 객체는 런칭 생성 엔드포인트로 전송한 것과 일치해야 API가 온체인 상태가 예상된 구성과 일치하는지 확인할 수 있습니다.
+`launch` 객체는 런칭 생성 엔드포인트로 전송한 것과 일치해야 API가 온체인 상태가 예상된 구성과 일치하는지 확인할 수 있습니다. 최상위 `network` 필드는 검증할 Solana 클러스터를 결정하며, `launch` 내의 `network`도 이와 일치해야 합니다.
 
 ## 요청 예시
 

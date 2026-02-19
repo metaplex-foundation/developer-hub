@@ -39,7 +39,7 @@ POST /v1/launches/register
 | `network` | `string` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'` |
 | `launch` | `object` | 是 | 与创建发行中使用的相同发行配置 |
 
-`launch` 对象必须与发送到创建发行端点的内容一致，以便 API 能够验证链上状态与预期配置匹配。
+`launch` 对象必须与发送到创建发行端点的内容一致，以便 API 能够验证链上状态与预期配置匹配。顶级 `network` 字段决定要验证的 Solana 集群；`launch` 中的 `network` 应与之一致。
 
 ## 请求示例
 
