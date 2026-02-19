@@ -1,10 +1,10 @@
 ---
 title: Register
 metaTitle: Genesis - Register Launch | REST API | Metaplex
-description: Register a confirmed Genesis launch in the database. Call this after on-chain transactions are confirmed to make the launch discoverable.
+description: メタデータ、ソーシャルリンク、ローンチページ URL を使用して新しい Genesis ローンチを登録します。
 method: POST
 created: '01-15-2025'
-updated: '02-13-2026'
+updated: '01-31-2026'
 keywords:
   - Genesis API
   - register launch
@@ -20,107 +20,77 @@ programmingLanguage:
   - Rust
 ---
 
-Register a confirmed Genesis launch in the database. Call this after the [create launch](/smart-contracts/genesis/integration-apis/create-launch) transactions have been signed and confirmed on-chain. Registration makes the launch discoverable via the listings and spotlight APIs. {% .lead %}
+API で新しい Genesis ローンチを登録します。ローンチページ URL、ウェブサイト、ソーシャルリンクを送信して、アグリゲーターがローンチを発見・表示できるようにします。 {% .lead %}
 
-{% callout type="note" %}
-For a higher-level interface that handles create, sign, send, and register in one call, see `createAndRegisterLaunch` in the [API Client SDK](/smart-contracts/genesis/sdk/api-client).
+{% callout type="warning" title="ドラフト" %}
+これはサンプルページです。パラメータ、リクエスト/レスポンス形式、動作は、実際のインテグレーションが確定次第変更される可能性があります。
 {% /callout %}
 
-## Endpoint
+## エンドポイント
 
 ```
-POST /launches/register
+POST /register
 ```
 
-## Request Body
+## リクエストボディ
 
-| Field | Type | Required | Description |
+| フィールド | 型 | 必須 | 説明 |
 |-------|------|----------|-------------|
-| `type` | `string` | Yes | Launch type. Use `"project"` |
-| `genesisAccount` | `string` | Yes | The genesis account public key (from `createLaunch` response) |
-| `network` | `string` | No | `"solana-devnet"` for devnet (omit for mainnet) |
+| `genesisAddress` | `string` | はい | The genesis account public key |
+| `launchPage` | `string` | はい | URL where users can participate in the launch |
+| `website` | `string` | いいえ | Project website URL |
+| `socials.x` | `string` | いいえ | X (Twitter) profile URL |
+| `socials.telegram` | `string` | いいえ | Telegram group URL |
+| `socials.discord` | `string` | いいえ | Discord server invite URL |
 
-## Example Request
+## リクエスト例
 
 ```bash
-curl -X POST https://api.metaplex.com/v1/launches/register \
+curl -X POST https://api.metaplex.com/v1/register \
   -H "Content-Type: application/json" \
   -d '{
-    "type": "project",
-    "genesisAccount": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+    "launchPage": "https://example.com/launch/mytoken",
+    "website": "https://example.com",
+    "socials": {
+      "x": "https://x.com/mytoken",
+      "telegram": "https://t.me/mytoken",
+      "discord": "https://discord.gg/mytoken"
+    }
   }'
 ```
 
-**Devnet example:**
-
-```bash
-curl -X POST https://api.metaplex.com/v1/launches/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "type": "project",
-    "genesisAccount": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
-    "network": "solana-devnet"
-  }'
-```
-
-## Response
-
-### Success (200)
+## レスポンス
 
 ```json
 {
-  "success": true,
-  "existing": false,
-  "launch": {
-    "id": "launch_abc123",
-    "link": "https://www.metaplex.com/launch/mytoken"
-  },
-  "token": {
-    "id": "token_xyz789",
-    "mintAddress": "TokenMint..."
+  "data": {
+    "success": true,
+    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
   }
 }
 ```
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | `boolean` | Whether the request succeeded |
-| `existing` | `boolean` | `true` if this launch was already registered |
-| `launch.id` | `string` | Unique launch identifier |
-| `launch.link` | `string` | Public launch page URL |
-| `token.id` | `string` | Unique token identifier |
-| `token.mintAddress` | `string` | Token mint address |
-
-### Error
-
-```json
-{
-  "success": false,
-  "error": "Description of what went wrong"
-}
-```
-
-## Request & Response Types
+## リクエスト＆レスポンス型
 
 ### TypeScript
 
 ```ts
 interface RegisterRequest {
-  type: 'project';
-  genesisAccount: string;
-  network?: 'solana-devnet';
+  genesisAddress: string;
+  launchPage: string;
+  website?: string;
+  socials?: {
+    x?: string;
+    telegram?: string;
+    discord?: string;
+  };
 }
 
 interface RegisterResponse {
-  success: boolean;
-  existing?: boolean;
-  launch: {
-    id: string;
-    link: string;
-  };
-  token: {
-    id: string;
-    mintAddress: string;
+  data: {
+    success: boolean;
+    genesisAddress: string;
   };
 }
 ```
@@ -131,61 +101,46 @@ interface RegisterResponse {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RegisterRequest {
-    #[serde(rename = "type")]
-    pub launch_type: String,
-    pub genesis_account: String,
+    pub genesis_address: String,
+    pub launch_page: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub network: Option<String>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct RegisterResponse {
-    pub success: bool,
-    pub existing: Option<bool>,
-    pub launch: LaunchInfo,
-    pub token: TokenInfo,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct LaunchInfo {
-    pub id: String,
-    pub link: String,
+    pub website: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub socials: Option<Socials>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct TokenInfo {
-    pub id: String,
-    pub mint_address: String,
+pub struct RegisterData {
+    pub success: bool,
+    pub genesis_address: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RegisterResponse {
+    pub data: RegisterData,
 }
 ```
 
-## Usage Examples
+## 使用例
 
 ### TypeScript
 
 ```ts
-const response = await fetch('https://api.metaplex.com/v1/launches/register', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+const response = await fetch("https://api.metaplex.com/v1/register", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    type: 'project',
-    genesisAccount: '7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN',
+    genesisAddress: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+    launchPage: "https://example.com/launch/mytoken",
+    website: "https://example.com",
+    socials: {
+      x: "https://x.com/mytoken",
+    },
   }),
 });
-const data: RegisterResponse = await response.json();
-console.log(`Launch page: ${data.launch.link}`);
-```
-
-### Using the SDK
-
-```ts
-import { registerLaunch } from '@metaplex-foundation/genesis';
-
-const result = await registerLaunch(umi, {}, {
-  genesisAccount: createResult.genesisAccount,
-});
-console.log(`Launch page: ${result.launch.link}`);
+const { data }: RegisterResponse = await response.json();
+console.log(data.success); // true
 ```
 
 ### Rust
@@ -193,29 +148,34 @@ console.log(`Launch page: ${result.launch.link}`);
 ```rust
 let client = reqwest::Client::new();
 let response: RegisterResponse = client
-    .post("https://api.metaplex.com/v1/launches/register")
+    .post("https://api.metaplex.com/v1/register")
     .json(&RegisterRequest {
-        launch_type: "project".to_string(),
-        genesis_account: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN".to_string(),
-        network: None,
+        genesis_address: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN".to_string(),
+        launch_page: "https://example.com/launch/mytoken".to_string(),
+        website: Some("https://example.com".to_string()),
+        socials: Some(Socials {
+            x: Some("https://x.com/mytoken".to_string()),
+            telegram: None,
+            discord: None,
+        }),
     })
     .send()
     .await?
     .json()
     .await?;
 
-println!("Launch page: {}", response.launch.link);
+println!("Registered: {}", response.data.success);
 ```
 
-## Errors
+## エラー
 
-| Code | Description |
+| コード | 説明 |
 |------|-------------|
-| `400` | Invalid request body or genesis account not found on-chain |
-| `409` | Launch already registered for this genesis account |
+| `400` | Invalid request body or missing required fields |
+| `409` | Launch already registered for this genesis address |
 | `429` | Rate limit exceeded |
 | `500` | Internal server error |
 
 {% callout type="note" %}
-The `genesisAccount` must correspond to a valid, confirmed genesis account on-chain. Registration will fail if the account does not exist or the create transactions have not been confirmed.
+`genesisAddress` はオンチェーン上の有効かつファイナライズ済みの Genesis アカウントに対応している必要があります。アカウントが存在しない場合、登録は失敗します。
 {% /callout %}
