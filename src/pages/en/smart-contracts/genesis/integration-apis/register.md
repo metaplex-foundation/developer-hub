@@ -1,10 +1,10 @@
 ---
-title: Register
+title: Register Launch
 metaTitle: Genesis - Register Launch | REST API | Metaplex
-description: Register a new Genesis launch with metadata, social links, and launch page URL. Submit launch details for aggregation.
+description: Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 method: POST
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-19-2026'
 keywords:
   - Genesis API
   - register launch
@@ -17,165 +17,117 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
-  - Rust
 ---
 
-Register a new Genesis launch with the API. Submit your launch page URL, website, and social links so aggregators can discover and display your launch. {% .lead %}
+Register a Genesis launch after the on-chain transactions from [Create Launch](/smart-contracts/genesis/integration-apis/create-launch) have been confirmed. The endpoint validates the on-chain state, creates the launch listing, and returns a launch page URL. {% .lead %}
 
-{% callout type="warning" title="Draft" %}
-This is an example page. Parameters, request/response formats, and behavior are subject to change once the actual integration is finalized.
+{% callout type="warning" title="Use the SDK instead" %}
+Most integrators should use [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) from the SDK, which handles creating transactions, signing, sending, and registering the launch in a single call. This endpoint is only needed if you require direct HTTP access without the SDK.
 {% /callout %}
 
 ## Endpoint
 
 ```
-POST /register
+POST /v1/launches/register
 ```
 
 ## Request Body
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `genesisAddress` | `string` | Yes | The genesis account public key |
-| `launchPage` | `string` | Yes | URL where users can participate in the launch |
-| `website` | `string` | No | Project website URL |
-| `socials.x` | `string` | No | X (Twitter) profile URL |
-| `socials.telegram` | `string` | No | Telegram group URL |
-| `socials.discord` | `string` | No | Discord server invite URL |
+| `genesisAccount` | `string` | Yes | The genesis account public key (from Create Launch response) |
+| `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
+| `launch` | `object` | Yes | The same launch configuration used in Create Launch |
+
+The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration.
 
 ## Example Request
 
 ```bash
-curl -X POST https://api.metaplex.com/v1/register \
+curl -X POST https://api.metaplex.com/v1/launches/register \
   -H "Content-Type: application/json" \
   -d '{
-    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
-    "launchPage": "https://example.com/launch/mytoken",
-    "website": "https://example.com",
-    "socials": {
-      "x": "https://x.com/mytoken",
-      "telegram": "https://t.me/mytoken",
-      "discord": "https://discord.gg/mytoken"
+    "genesisAccount": "GenesisAccountPDA...",
+    "network": "solana-devnet",
+    "launch": {
+      "name": "My Token",
+      "symbol": "MTK",
+      "image": "https://gateway.irys.xyz/...",
+      "decimals": 6,
+      "supply": 1000000000,
+      "network": "solana-devnet",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "type": "project",
+      "finalize": true,
+      "publicKey": "YourWalletPublicKey...",
+      "allocations": [...]
     }
   }'
 ```
 
-## Response
+## Success Response
 
 ```json
 {
-  "data": {
-    "success": true,
-    "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+  "success": true,
+  "launch": {
+    "id": "uuid-launch-id",
+    "link": "https://www.metaplex.com/token/MintPublicKey..."
+  },
+  "token": {
+    "id": "uuid-token-id",
+    "mintAddress": "MintPublicKey..."
   }
 }
 ```
 
-## Request & Response Types
+| Field | Type | Description |
+|-------|------|-------------|
+| `success` | `boolean` | `true` on success |
+| `existing` | `boolean?` | `true` if launch was already registered (idempotent) |
+| `launch.id` | `string` | Unique launch ID |
+| `launch.link` | `string` | Public launch page URL |
+| `token.id` | `string` | Unique token ID |
+| `token.mintAddress` | `string` | Token mint public key |
 
-### TypeScript
+{% callout type="note" %}
+If the launch has already been registered, the endpoint returns the existing record with `existing: true` rather than creating a duplicate.
+{% /callout %}
 
-```ts
-interface RegisterRequest {
-  genesisAddress: string;
-  launchPage: string;
-  website?: string;
-  socials?: {
-    x?: string;
-    telegram?: string;
-    discord?: string;
-  };
-}
+{% callout type="note" %}
+Mainnet launches will appear on [metaplex.com](https://www.metaplex.com) after registration. The returned `launch.link` points to the public launch page.
+{% /callout %}
 
-interface RegisterResponse {
-  data: {
-    success: boolean;
-    genesisAddress: string;
-  };
-}
-```
+## Error Response
 
-### Rust
-
-```rust
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct RegisterRequest {
-    pub genesis_address: String,
-    pub launch_page: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub website: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub socials: Option<Socials>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct RegisterData {
-    pub success: bool,
-    pub genesis_address: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct RegisterResponse {
-    pub data: RegisterData,
+```json
+{
+  "success": false,
+  "error": "Genesis account not found on-chain",
+  "details": [...]
 }
 ```
 
-## Usage Examples
-
-### TypeScript
-
-```ts
-const response = await fetch("https://api.metaplex.com/v1/register", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    genesisAddress: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
-    launchPage: "https://example.com/launch/mytoken",
-    website: "https://example.com",
-    socials: {
-      x: "https://x.com/mytoken",
-    },
-  }),
-});
-const { data }: RegisterResponse = await response.json();
-console.log(data.success); // true
-```
-
-### Rust
-
-```rust
-let client = reqwest::Client::new();
-let response: RegisterResponse = client
-    .post("https://api.metaplex.com/v1/register")
-    .json(&RegisterRequest {
-        genesis_address: "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN".to_string(),
-        launch_page: "https://example.com/launch/mytoken".to_string(),
-        website: Some("https://example.com".to_string()),
-        socials: Some(Socials {
-            x: Some("https://x.com/mytoken".to_string()),
-            telegram: None,
-            discord: None,
-        }),
-    })
-    .send()
-    .await?
-    .json()
-    .await?;
-
-println!("Registered: {}", response.data.success);
-```
-
-## Errors
+## Error Codes
 
 | Code | Description |
 |------|-------------|
-| `400` | Invalid request body or missing required fields |
-| `409` | Launch already registered for this genesis address |
-| `429` | Rate limit exceeded |
+| `400` | Invalid input, on-chain state mismatch, or genesis account not found |
 | `500` | Internal server error |
 
-{% callout type="note" %}
-The `genesisAddress` must correspond to a valid, finalized Genesis account on-chain. Registration will fail if the account does not exist.
-{% /callout %}
+## Validation
+
+The register endpoint performs extensive on-chain validation:
+
+- Fetches the Genesis V2 account and verifies it exists
+- Validates all bucket accounts match the expected allocations
+- Verifies token metadata (name, symbol, image) matches the input
+- Checks mint properties (supply, decimals, authorities)
+
+## Recommended: Use the SDK
+
+Instead of calling this endpoint directly, use [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) which handles the entire flow — creating transactions, signing, sending, and registering — in one call:
+
+{% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
+
+See [API Client](/smart-contracts/genesis/sdk/api-client) for the full SDK documentation including all three integration modes.

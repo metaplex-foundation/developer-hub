@@ -1,9 +1,9 @@
 ---
 title: Integration APIs
 metaTitle: Genesis - Integration APIs | ローンチデータ | Metaplex
-description: HTTP RESTエンドポイントとオンチェーンSDKメソッドを通じてGenesisローンチデータにアクセスします。認証不要の公開API。
+description: HTTP REST エンドポイントとオンチェーン SDK メソッドを通じて Genesis ローンチデータにアクセスします。認証不要のパブリック API です。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-19-2026'
 keywords:
   - Genesis API
   - integration API
@@ -21,7 +21,7 @@ programmingLanguage:
   - Rust
 ---
 
-Genesis Integration APIs を使用すると、アグリゲーターやアプリケーションが Genesis トークンローンチのローンチデータをクエリできます。RESTエンドポイントからメタデータにアクセスするか、SDKでリアルタイムのオンチェーン状態を取得できます。 {% .lead %}
+Genesis Integration APIs により、アグリゲーターやアプリケーションが Genesis トークンローンチのデータをクエリできます。REST エンドポイントを通じてメタデータにアクセスしたり、SDK でリアルタイムのオンチェーン状態を取得したりできます。 {% .lead %}
 
 ## ベース URL
 
@@ -31,7 +31,7 @@ https://api.metaplex.com/v1
 
 ## ネットワーク選択
 
-デフォルトでは、API は Solana メインネットからデータを返します。代わりに devnet のローンチをクエリするには、`network` クエリパラメータを追加します：
+デフォルトでは、API は Solana メインネットのデータを返します。devnet のローンチをクエリするには、`network` クエリパラメータを追加します：
 
 ```
 ?network=solana-devnet
@@ -40,7 +40,7 @@ https://api.metaplex.com/v1
 **例：**
 
 ```bash
-# メインネット（デフォルト）
+# Mainnet (default)
 curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 
 # Devnet
@@ -55,24 +55,29 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | メソッド | エンドポイント | 説明 |
 |--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis アドレスによるローンチデータの取得 |
-| `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | トークンミントの全ローンチの取得 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | アクティブおよび今後のローンチリスティングの取得 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目スポットライトローンチの取得 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | メタデータ付きで新しいローンチを登録 |
+| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis アドレスでローンチデータを取得 |
+| `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
+| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | アクティブおよび今後のローンチリスティングを取得 |
+| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目のスポットライトローンチを取得 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 確認済みローンチをリスティング用に登録 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | オンチェーンからバケット状態を取得 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | オンチェーンからデポジット状態を取得 |
+
+{% callout type="note" %}
+`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。
+{% /callout %}
 
 ## エラーコード
 
 | コード | 説明 |
 | --- | --- |
 | `400` | 不正なリクエスト - 無効なパラメータ |
-| `404` | ローンチまたはトークンが見つかりません |
+| `404` | ローンチまたはトークンが見つからない |
 | `429` | レート制限超過 |
 | `500` | 内部サーバーエラー |
 
-エラーレスポンス形式：
+エラーレスポンスの形式：
 
 ```json
 {
@@ -82,7 +87,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 }
 ```
 
-## 共通型
+## 共有型
 
 ### TypeScript
 
@@ -91,6 +96,9 @@ interface Launch {
   launchPage: string;
   type: string;
   genesisAddress: string;
+  status: 'upcoming' | 'live' | 'graduated';
+  startTime: string;
+  endTime: string;
 }
 
 interface BaseToken {
@@ -126,6 +134,9 @@ pub struct Launch {
     #[serde(rename = "type")]
     pub launch_type: String,
     pub genesis_address: String,
+    pub status: String,
+    pub start_time: String,
+    pub end_time: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

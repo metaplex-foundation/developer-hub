@@ -3,7 +3,7 @@ title: Integration APIs
 metaTitle: Genesis - Integration APIs | Launch Data | Metaplex
 description: Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-19-2026'
 keywords:
   - Genesis API
   - integration API
@@ -59,9 +59,14 @@ No authentication is required. The API is public with rate limits.
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | Get all launches for a token mint |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | Get active and upcoming launch listings |
 | `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | Register a new launch with metadata |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | Build on-chain transactions for a new launch |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | Register a confirmed launch for listing |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | Fetch bucket state from on-chain |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | Fetch deposit state from on-chain |
+
+{% callout type="note" %}
+The `POST` endpoints (`/launches/create` and `/launches/register`) are used together to create new token launches. For most use cases, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) provides a simpler interface that wraps both endpoints.
+{% /callout %}
 
 ## Error Codes
 
@@ -91,6 +96,9 @@ interface Launch {
   launchPage: string;
   type: string;
   genesisAddress: string;
+  status: 'upcoming' | 'live' | 'graduated';
+  startTime: string;
+  endTime: string;
 }
 
 interface BaseToken {
@@ -126,6 +134,9 @@ pub struct Launch {
     #[serde(rename = "type")]
     pub launch_type: String,
     pub genesis_address: String,
+    pub status: String,
+    pub start_time: String,
+    pub end_time: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

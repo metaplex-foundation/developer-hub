@@ -1,9 +1,9 @@
 ---
-title: Integration APIs
-metaTitle: Genesis - Integration APIs | 런칭 데이터 | Metaplex
-description: HTTP REST 엔드포인트와 온체인 SDK 메서드를 통해 Genesis 런칭 데이터에 접근합니다. 인증 불필요 공개 API.
+title: Integration API
+metaTitle: Genesis - Integration API | 런칭 데이터 | Metaplex
+description: HTTP REST 엔드포인트와 온체인 SDK 메서드를 통해 Genesis 런칭 데이터에 접근하세요. 인증이 필요 없는 공개 API입니다.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-19-2026'
 keywords:
   - Genesis API
   - integration API
@@ -21,7 +21,7 @@ programmingLanguage:
   - Rust
 ---
 
-Genesis Integration APIs를 사용하면 애그리게이터와 애플리케이션이 Genesis 토큰 런칭에서 런칭 데이터를 조회할 수 있습니다. REST 엔드포인트에서 메타데이터에 접근하거나 SDK로 실시간 온체인 상태를 가져올 수 있습니다. {% .lead %}
+Genesis Integration API를 사용하면 애그리게이터와 애플리케이션이 Genesis 토큰 런칭의 런칭 데이터를 조회할 수 있습니다. REST 엔드포인트를 통해 메타데이터에 접근하거나 SDK로 실시간 온체인 상태를 가져올 수 있습니다. {% .lead %}
 
 ## 기본 URL
 
@@ -31,7 +31,7 @@ https://api.metaplex.com/v1
 
 ## 네트워크 선택
 
-기본적으로 API는 솔라나 메인넷 데이터를 반환합니다. 데브넷 런칭을 조회하려면 `network` 쿼리 파라미터를 추가하세요:
+기본적으로 API는 Solana 메인넷의 데이터를 반환합니다. 데브넷 런칭을 조회하려면 `network` 쿼리 파라미터를 추가하세요:
 
 ```
 ?network=solana-devnet
@@ -49,19 +49,24 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 ## 인증
 
-인증은 필요하지 않습니다. API는 속도 제한이 있는 공개 API입니다.
+인증이 필요하지 않습니다. API는 속도 제한이 있는 공개 API입니다.
 
 ## 사용 가능한 엔드포인트
 
-| 메소드 | 엔드포인트 | 설명 |
-|--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | genesis 주소로 런칭 데이터 조회 |
+| 메서드 | 엔드포인트 | 설명 |
+|--------|------------|------|
+| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis 주소로 런칭 데이터 조회 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 활성 및 예정된 런칭 리스팅 조회 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 주요 스포트라이트 런칭 조회 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | 메타데이터로 새로운 런칭 등록 |
-| `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 온체인에서 버킷 상태 조회 |
-| `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | 온체인에서 예치 상태 조회 |
+| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 활성 및 예정된 런칭 목록 조회 |
+| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 추천 스포트라이트 런칭 조회 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 새 런칭을 위한 온체인 트랜잭션 빌드 |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 확인된 런칭을 목록에 등록 |
+| `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 온체인에서 버킷 상태 가져오기 |
+| `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | 온체인에서 예치 상태 가져오기 |
+
+{% callout type="note" %}
+`POST` 엔드포인트(`/launches/create` 및 `/launches/register`)는 새 토큰 런칭을 생성하기 위해 함께 사용됩니다. 대부분의 사용 사례에서는 두 엔드포인트를 래핑하는 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)가 더 간단한 인터페이스를 제공합니다.
+{% /callout %}
 
 ## 오류 코드
 
@@ -82,7 +87,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 }
 ```
 
-## 공통 타입
+## 공유 타입
 
 ### TypeScript
 
@@ -91,6 +96,9 @@ interface Launch {
   launchPage: string;
   type: string;
   genesisAddress: string;
+  status: 'upcoming' | 'live' | 'graduated';
+  startTime: string;
+  endTime: string;
 }
 
 interface BaseToken {
@@ -126,6 +134,9 @@ pub struct Launch {
     #[serde(rename = "type")]
     pub launch_type: String,
     pub genesis_address: String,
+    pub status: String,
+    pub start_time: String,
+    pub end_time: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -1,9 +1,9 @@
 ---
-title: Integration APIs
-metaTitle: Genesis - Integration APIs | 发行数据 | Metaplex
-description: 通过HTTP REST端点和链上SDK方法访问Genesis发行数据。无需认证的公开API。
+title: 集成 API
+metaTitle: Genesis - 集成 API | 发行数据 | Metaplex
+description: 通过 HTTP REST 端点和链上 SDK 方法访问 Genesis 发行数据。无需认证的公开 API。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-19-2026'
 keywords:
   - Genesis API
   - integration API
@@ -21,7 +21,7 @@ programmingLanguage:
   - Rust
 ---
 
-Genesis Integration APIs 允许聚合器和应用程序查询 Genesis 代币发行的发行数据。通过 REST 端点访问元数据，或使用 SDK 获取实时链上状态。 {% .lead %}
+Genesis 集成 API 允许聚合器和应用程序查询 Genesis 代币发行的发行数据。通过 REST 端点访问元数据，或使用 SDK 获取实时链上状态。{% .lead %}
 
 ## 基础 URL
 
@@ -31,7 +31,7 @@ https://api.metaplex.com/v1
 
 ## 网络选择
 
-默认情况下，API 返回 Solana 主网的数据。要查询 devnet 上的发行，请添加 `network` 查询参数：
+默认情况下，API 返回 Solana 主网的数据。要查询开发网发行，请添加 `network` 查询参数：
 
 ```
 ?network=solana-devnet
@@ -40,7 +40,7 @@ https://api.metaplex.com/v1
 **示例：**
 
 ```bash
-# 主网（默认）
+# Mainnet (default)
 curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
 
 # Devnet
@@ -49,23 +49,28 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 ## 认证
 
-无需认证。API 是带有速率限制的公开 API。
+无需认证。API 公开访问，有速率限制。
 
 ## 可用端点
 
 | 方法 | 端点 | 描述 |
 |--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | 通过 genesis 地址获取发行数据 |
+| `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | 通过 Genesis 地址获取发行数据 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 获取代币铸造的所有发行 |
 | `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 获取活跃和即将到来的发行列表 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选聚焦发行 |
-| `POST` | [`/register`](/smart-contracts/genesis/integration-apis/register) | 使用元数据注册新发行 |
-| `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 从链上获取桶状态 |
+| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选推荐发行 |
+| `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 为新发行构建链上交易 |
+| `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 注册已确认的发行以进行展示 |
+| `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 从链上获取 bucket 状态 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | 从链上获取存款状态 |
 
-## 错误代码
+{% callout type="note" %}
+`POST` 端点（`/launches/create` 和 `/launches/register`）配合使用以创建新的代币发行。对于大多数用例，[SDK API 客户端](/smart-contracts/genesis/sdk/api-client)提供了更简洁的接口，它封装了这两个端点。
+{% /callout %}
 
-| 代码 | 描述 |
+## 错误码
+
+| 状态码 | 描述 |
 | --- | --- |
 | `400` | 错误请求 - 无效参数 |
 | `404` | 未找到发行或代币 |
@@ -91,6 +96,9 @@ interface Launch {
   launchPage: string;
   type: string;
   genesisAddress: string;
+  status: 'upcoming' | 'live' | 'graduated';
+  startTime: string;
+  endTime: string;
 }
 
 interface BaseToken {
@@ -126,6 +134,9 @@ pub struct Launch {
     #[serde(rename = "type")]
     pub launch_type: String,
     pub genesis_address: String,
+    pub status: String,
+    pub start_time: String,
+    pub end_time: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -157,7 +168,7 @@ pub struct ErrorResponse {
 ```
 
 {% callout type="note" %}
-在 `Cargo.toml` 中添加以下依赖：
+将以下依赖项添加到您的 `Cargo.toml`：
 ```toml
 [dependencies]
 reqwest = { version = "0.11", features = ["json"] }
