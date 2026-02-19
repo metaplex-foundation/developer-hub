@@ -19,7 +19,7 @@ A guide to the essential Solana command-line interface (CLI) commands you'll nee
 ## Prerequisites
 
 - Basic command-line familiarity
-- Node.js 16+ installed (for MPLX CLI)
+- Node.js 16+ installed (for MPLX CLI). If you do not have it yet follow your operating system specific guide on the [Node.js Download Page](https://nodejs.org/en/download).
 
 ## Installation
 
@@ -55,7 +55,7 @@ solana --version
 
 ### MPLX CLI (Recommended for Metaplex Operations)
 
-For Metaplex-specific operations like creating tokens with metadata, NFTs, and Candy Machines, the **MPLX CLI** provides a streamlined experience with interactive wizards.
+For Metaplex-specific operations like creating tokens with metadata, NFTs, and Candy Machines, the **MPLX CLI** provides a streamlined experience with interactive wizards. This requires you to have npm/node installed. If you do not have it yet follow your operating system specific guide on the [Node.js Download Page](https://nodejs.org/en/download).
 
 ```bash
 npm install -g @metaplex-foundation/cli
