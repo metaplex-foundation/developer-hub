@@ -55,7 +55,7 @@ solana --version
 
 ### MPLX CLI (Recommended for Metaplex Operations)
 
-For Metaplex-specific operations like creating tokens with metadata, NFTs, and Candy Machines, the **MPLX CLI** provides a streamlined experience with interactive wizards.
+For Metaplex-specific operations like creating tokens with metadata, NFTs, and Candy Machines, the **MPLX CLI** provides a streamlined experience with interactive wizards. This requires you to have npm/node installed. If you do not have it yet follow your operating system specific guide on the [Node.js Download Page](https://nodejs.org/en/download).
 
 ```bash
 npm install -g @metaplex-foundation/cli
@@ -161,7 +161,7 @@ mplx toolbox sol-airdrop 1 --to <ADDRESS>
 ```
 
 {% callout title="Airdrop Limits" type="warning" %}
-Devnet airdrops are limited to 2 SOL per request with rate limiting. If airdrops fail, wait a few minutes or try a [web faucet](/guides/getting-sol-for-development).
+Devnet airdrops are limited to 2 SOL per request with rate limiting. If airdrops fail, wait a few minutes or try a [web faucet](/guides/airdrop-sol-for-development).
 {% /callout %}
 
 ### Transfer SOL
@@ -275,7 +275,7 @@ You may be rate-limited. Consider using a dedicated RPC provider like Helius, Qu
 ## Next Steps
 
 - [Create and manage keypairs](/guides/solana-keypairs-and-wallets) - Learn about wallet security
-- [Get SOL for development](/guides/getting-sol-for-development) - Airdrops and faucets
+- [Get SOL for development](/guides/airdrop-sol-for-development) - Airdrops and faucets
 - [Setup a local validator](/guides/setup-a-local-validator) - Test without network dependencies
 - [MPLX CLI Documentation](/dev-tools/cli) - Full Metaplex CLI reference
 

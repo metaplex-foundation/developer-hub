@@ -303,7 +303,7 @@ If you lost your seed phrase but still have the keypair file:
 ## Next Steps
 
 - [Grind a vanity public key](/guides/grind-vanity-public-key) - Create branded addresses
-- [Get SOL for development](/guides/getting-sol-for-development) - Fund your new wallet
+- [Get SOL for development](/guides/airdrop-sol-for-development) - Fund your new wallet
 - [Solana CLI essentials](/guides/solana-cli-essentials) - Use your wallet effectively
 
 ## FAQ

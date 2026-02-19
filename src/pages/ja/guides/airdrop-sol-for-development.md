@@ -1,6 +1,6 @@
 ---
-title: Getting SOL for Development
-metaTitle: Getting SOL for Development | Devnet Airdrops & Faucets Guide
+title: Airdrop SOL for Development
+metaTitle: Airdrop SOL for Development | Devnet Airdrops & Faucets Guide
 description: Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet.
 # remember to update dates also in /components/guides/index.js
 created: '02-04-2026'

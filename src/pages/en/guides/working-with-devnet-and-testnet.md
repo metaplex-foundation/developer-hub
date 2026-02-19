@@ -77,7 +77,7 @@ solana airdrop 2
 mplx toolbox sol-airdrop 2
 ```
 
-See [Getting SOL for Development](/guides/getting-sol-for-development) for more options.
+See [Airdrop SOL for Development](/guides/airdrop-sol-for-development) for more options.
 
 ### Devnet Characteristics
 
@@ -349,14 +349,14 @@ accounts: [
 
 Rate limited. Options:
 - Wait and retry
-- Use a [web faucet](/guides/getting-sol-for-development)
+- Use a [web faucet](/guides/airdrop-sol-for-development)
 - Switch to localnet for unlimited SOL
 
 ## Next Steps
 
 - [Amman documentation](/dev-tools/amman) - Full Amman setup and configuration
 - [Setup a local validator](/guides/setup-a-local-validator) - Basic local validator guide
-- [Getting SOL for development](/guides/getting-sol-for-development) - Devnet SOL sources
+- [Getting SOL for development](/guides/airdrop-sol-for-development) - Devnet SOL sources
 
 ## FAQ
 

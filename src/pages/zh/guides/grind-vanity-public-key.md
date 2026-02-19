@@ -235,7 +235,7 @@ mplx core create-collection --keypair ./ARTxyz....json
 ## Next Steps
 
 - [Solana keypairs and wallets](/guides/solana-keypairs-and-wallets) - Keypair security fundamentals
-- [Getting SOL for development](/guides/getting-sol-for-development) - Fund your new vanity wallet
+- [Getting SOL for development](/guides/airdrop-sol-for-development) - Fund your new vanity wallet
 - [MPLX CLI token creation](/dev-tools/cli/toolbox/token-create) - Create tokens with your vanity address
 
 ## FAQ
