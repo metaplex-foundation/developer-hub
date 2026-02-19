@@ -1,5 +1,5 @@
 ---
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 title: 使用 Turbo 创建确定性元数据
 metaTitle: 使用 Turbo 创建确定性元数据 | 通用指南
 description: 了解如何利用 Turbo SDK 创建确定性元数据，用于基于 Arweave 的上传。

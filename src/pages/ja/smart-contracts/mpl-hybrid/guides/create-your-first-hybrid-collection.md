@@ -2,7 +2,7 @@
 title: 初回ハイブリッドコレクションの作成
 metaTitle: 初回ハイブリッドコレクションの作成 | Hybridガイド
 description: ハイブリッドコレクションをエンドツーエンドで作成する方法を学びましょう！
-# /components/guides/index.jsの日付も更新することを忘れずに
+# /components/products/guides/index.jsの日付も更新することを忘れずに
 created: '09-17-2024'
 updated: '09-17-2024'
 ---

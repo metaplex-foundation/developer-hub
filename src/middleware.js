@@ -29,7 +29,7 @@ const devToolsRedirects = [
 // Standalone page redirects to new locations
 const standaloneRedirects = {
   // Legacy page redirects
-  '/community-guides': '/guides',
+  '/community-guides': '/solana',
   '/contact': '/',
   '/developer-tools': '/dev-tools',
   '/programs-and-tools': '/smart-contracts',
@@ -63,7 +63,7 @@ const redirectRules = {
   },
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/guides/javascript/how-to-create-a-solana-token',
+      '/solana/javascript/how-to-create-a-solana-token',
     '/javascript/how-to-add-metadata-to-spl-tokens':
       '/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
     '/general/create-deterministic-metadata-with-turbo':
@@ -72,7 +72,7 @@ const redirectRules = {
   // Japanese guide redirects
   '/ja/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/ja/guides/javascript/how-to-create-a-solana-token',
+      '/ja/solana/javascript/how-to-create-a-solana-token',
     '/javascript/how-to-add-metadata-to-spl-tokens':
       '/ja/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
     '/general/create-deterministic-metadata-with-turbo':
@@ -81,7 +81,7 @@ const redirectRules = {
   // Korean guide redirects
   '/ko/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/ko/guides/javascript/how-to-create-a-solana-token',
+      '/ko/solana/javascript/how-to-create-a-solana-token',
     '/javascript/how-to-add-metadata-to-spl-tokens':
       '/ko/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
     '/general/create-deterministic-metadata-with-turbo':
@@ -118,7 +118,7 @@ const redirectRules = {
   // Chinese guide redirects
   '/zh/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/zh/guides/javascript/how-to-create-a-solana-token',
+      '/zh/solana/javascript/how-to-create-a-solana-token',
     '/javascript/how-to-add-metadata-to-spl-tokens':
       '/zh/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
     '/general/create-deterministic-metadata-with-turbo':
@@ -273,6 +273,12 @@ export function middleware(request) {
     }
   }
 
+  // Redirect /guides/* to /solana/* (path rename)
+  if (pathname === '/guides' || pathname.startsWith('/guides/')) {
+    const newPath = pathname.replace('/guides', '/solana')
+    return NextResponse.redirect(new URL(newPath, request.url), 308)
+  }
+
   // Handle Japanese, Korean, and Chinese path migration redirects
   // Redirect /ja/core/* to /ja/smart-contracts/core/*, /ko/umi/* to /ko/dev-tools/umi/*, etc.
   for (const lang of ['ja', 'ko', 'zh']) {
@@ -290,6 +296,11 @@ export function middleware(request) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
           return NextResponse.redirect(new URL(newPath, request.url), 308)
         }
+      }
+      // Redirect /lang/guides/* to /lang/solana/* (path rename)
+      if (pathname === `/${lang}/guides` || pathname.startsWith(`/${lang}/guides/`)) {
+        const newPath = pathname.replace(`/${lang}/guides`, `/${lang}/solana`)
+        return NextResponse.redirect(new URL(newPath, request.url), 308)
       }
     }
   }

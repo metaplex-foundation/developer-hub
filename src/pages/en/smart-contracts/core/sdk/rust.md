@@ -29,7 +29,7 @@ cargo add mpl-core
 ## Local Scripts
 For local scripts is recommended to use the `Builder` versions of all the instructions listed. These builders abstract a lot of the work for you and return a instruction that can be added to a transaction.
 A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
+For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/solana/rust/metaplex-rust-sdks) page.
 #### CreateV1Builder - Example
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -61,7 +61,7 @@ let keypair_path = ".../my-key.json"
 ## CPI (Cross Program Invocation)
 Performing CPI instructions from your own programs can be achieved easily by using the `CpiBuilder` version of an instruction function that can be found for all instructions in the `mpl-core` Rust crate.
 A list of all Core instructions can be found here: [Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/solana/rust/how-to-cpi-into-a-metaplex-program) page.
 #### CreateV1CpiBuilder - Example
 ```rust
 CreateV1CpiBuilder::new()

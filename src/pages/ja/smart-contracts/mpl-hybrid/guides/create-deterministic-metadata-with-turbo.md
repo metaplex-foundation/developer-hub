@@ -1,5 +1,5 @@
 ---
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 title: Turboを使用した決定論的メタデータの作成
 metaTitle: Turboを使用した決定論的メタデータの作成 | 一般ガイド
 description: Arweaveベースのアップロードを行うTurbo SDKを活用して決定論的メタデータを作成する方法を学習します。

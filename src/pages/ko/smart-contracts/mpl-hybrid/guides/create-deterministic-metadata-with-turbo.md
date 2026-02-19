@@ -1,5 +1,5 @@
 ---
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 title: Turbo를 사용하여 결정적 메타데이터 생성하기
 metaTitle: Turbo를 사용하여 결정적 메타데이터 생성하기 | 일반 가이드
 description: Arweave 기반 업로드를 위한 Turbo SDK를 활용하여 결정적 메타데이터를 생성하는 방법을 알아보세요.

@@ -86,7 +86,7 @@ export const tokenMetadata = {
             },
             {
               title: 'Create a claim based airdrop using Gumdrop',
-              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+              href: '/solana/general/spl-token-claim-airdrop-using-gumdrop',
             },
             {
               title: 'Token Claimer (Airdrop) Smart Contract',

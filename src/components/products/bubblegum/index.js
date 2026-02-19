@@ -29,7 +29,7 @@ export const bubblegum = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/smart-contracts/bubblegum' },
-            { title: 'Metaplex DAS API RPCs', href: '/guides/rpcs-and-das' },
+            { title: 'Metaplex DAS API RPCs', href: '/solana/rpcs-and-das' },
             { title: 'FAQ', href: '/smart-contracts/bubblegum-v2/faq' },
           ],
         },
