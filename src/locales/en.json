@@ -107,6 +107,7 @@
     "link": "Link",
     "handle": "Handle",
     "tagged": "Tagged",
+    "viewTaggedQuestions": "View {tagged} questions",
     "programId": "Program ID",
     "github": "Github",
     "documentation": "Documentation",

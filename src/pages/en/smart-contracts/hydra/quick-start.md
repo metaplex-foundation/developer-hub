@@ -8,11 +8,11 @@ To get started with Hydra, you'll need the package for your programming environm
 
 If you are using Rust grab the crate here:
 
-[https://crates.io/crates/hydra_wallet](https://crates.io/crates/hydra_wallet)
+[hydra_wallet on crates.io](https://crates.io/crates/hydra_wallet)
 
 If you are using Javascript, grab the package here:
 
-[https://www.npmjs.com/package/@glasseaters/hydra-sdk](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
+[@glasseaters/hydra-sdk on npm](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
 
 ## Quick Start - JS
 

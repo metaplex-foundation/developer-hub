@@ -28,7 +28,7 @@ NFT旨在永久存在，永久买卖、持有和欣赏。因此，记录资产�
 
 #### S3存储费用
 
-有关详细信息，请参阅[https://aws.amazon.com/s3/pricing/](https://aws.amazon.com/s3/pricing/)。
+有关详细信息，请参阅[AWS S3 定价](https://aws.amazon.com/s3/pricing/)。
 
 ### IPFS
 
@@ -36,7 +36,7 @@ NFT旨在永久存在，永久买卖、持有和欣赏。因此，记录资产�
 
 #### IPFS存储费用
 
-有关详细信息，请参阅[https://infura.io/docs/ipfs](https://infura.io/docs/ipfs)。
+有关详细信息，请参阅[Infura IPFS 文档](https://infura.io/docs/ipfs)。
 
 ### NFT.Storage
 

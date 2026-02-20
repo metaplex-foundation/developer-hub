@@ -14,10 +14,10 @@ Rust can be quite a daunting task to look at and use if you are new to developin
 
 Start here to learn Rust. It takes from basics through to the advanced coding using the language.
 
-[https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/)
+[The Rust Programming Language Book](https://doc.rust-lang.org/stable/book/)
 
 ## Anchor
 
 Anchor is a framework that helps you build Solana programs by stripping away a chunk of the security boilerplate and handling it for you speeding up the development process.
 
-[https://www.anchor-lang.com/](https://www.anchor-lang.com/)
+[Anchor Framework](https://www.anchor-lang.com/)
