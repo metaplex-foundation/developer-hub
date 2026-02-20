@@ -39,7 +39,7 @@ The Sugar CLI provides two main commands for minting NFTs to other wallets:
 1. `sugar mint` to mint to *one* specific wallet
 2. `sugar airdrop` to mint to *multiple* wallets
 
-Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [the Create an NFT Collection guide](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine). If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
+Prerequisite to allow minting through sugar is to have your Candy Machine created **without guard attached**. To create a Candy Machine with sugar you can follow the first steps of [the Create an NFT Collection guide](/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine). If your Candy Machine has guards attached they can be removed using `sugar guard remove`.
 
 ### Single Recipient Minting with `sugar mint`
 To mint NFTs to a single recipient wallet, use the `sugar mint` command with these parameters:
