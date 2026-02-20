@@ -22,17 +22,13 @@ programmingLanguage:
 
 Retrieve active and upcoming Genesis launch listings. Returns a paginated list of launches with their metadata, token info, and social links. {% .lead %}
 
-{% callout type="warning" title="Draft" %}
-This is an example page. Parameters, request/response formats, and behavior are subject to change once the actual integration is finalized.
-{% /callout %}
-
 ## Endpoint
 
 ```
 GET /listings
 ```
 
-## Parameters
+## Query Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|

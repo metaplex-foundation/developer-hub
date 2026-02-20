@@ -22,17 +22,13 @@ programmingLanguage:
 
 Retrieve featured spotlight launches curated by the platform. Use this endpoint to highlight selected launches in your application. {% .lead %}
 
-{% callout type="warning" title="Draft" %}
-This is an example page. Parameters, request/response formats, and behavior are subject to change once the actual integration is finalized.
-{% /callout %}
-
 ## Endpoint
 
 ```
 GET /spotlight
 ```
 
-## Parameters
+## Query Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|

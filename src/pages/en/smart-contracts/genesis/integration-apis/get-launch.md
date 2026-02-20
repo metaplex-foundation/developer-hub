@@ -28,11 +28,16 @@ Retrieve launch data for a specific genesis address. Returns launch info, token 
 GET /launches/{genesis_pubkey}
 ```
 
-## Parameters
+## Path Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `genesis_pubkey` | `string` | Yes | The genesis account public key |
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
 | `network` | `string` | No | Network to query. Default: `solana-mainnet`. Use `solana-devnet` for devnet. |
 
 ## Example Request

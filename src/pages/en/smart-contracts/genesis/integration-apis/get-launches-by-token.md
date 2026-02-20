@@ -25,14 +25,19 @@ Retrieve all launches associated with a token mint address. A token can have mul
 ## Endpoint
 
 ```
-GET /tokens/{mint}
+GET /tokens/{token_address}
 ```
 
-## Parameters
+## Path Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `mint` | `string` | Yes | The token mint public key |
+| `token_address` | `string` | Yes | The token mint public key |
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
 | `network` | `string` | No | Network to query. Default: `solana-mainnet`. Use `solana-devnet` for devnet. |
 
 ## Example Request
