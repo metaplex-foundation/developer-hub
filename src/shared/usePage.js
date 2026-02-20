@@ -51,6 +51,7 @@ export function usePage(pageProps) {
     about: pageProps.markdoc?.frontmatter.about ?? null,
     proficiencyLevel: pageProps.markdoc?.frontmatter.proficiencyLevel ?? null,
     programmingLanguage: pageProps.markdoc?.frontmatter.programmingLanguage ?? null,
+    method: pageProps.markdoc?.frontmatter.method ?? null,
     faqs: pageProps.markdoc?.frontmatter.faqs ?? null,
     howToSteps: pageProps.markdoc?.frontmatter.howToSteps ?? null,
     howToTools: pageProps.markdoc?.frontmatter.howToTools ?? null,

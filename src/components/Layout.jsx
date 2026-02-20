@@ -10,6 +10,7 @@ import { TableOfContent } from '@/components/TableOfContent'
 import { ProductCardGrid } from '@/components/products/ProductCardGrid'
 import { productCategories } from '@/components/products/index'
 import { useTranslations } from '@/contexts/LocaleContext'
+import Badge from '@/components/products/Badge'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
 
@@ -129,6 +130,7 @@ export function Layout({ children, page }) {
                   )}
                   {page.title && (
                     <h1 className="font-display text-3xl tracking-tight text-foreground">
+                      {page.method && <Badge type={page.method.toLowerCase()} className="mr-2 align-middle" />}
                       {page.title}
                     </h1>
                   )}
