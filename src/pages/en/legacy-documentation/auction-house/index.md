@@ -103,9 +103,9 @@ Now that we know how the `executeSale` instruction works, let's discuss the thre
 
 ## Auctioning Fungible Assets
 
-So far, we've talked about exchanging assets using an Auction House account, but we've not dug into what type of assets can be exchanged that way. The most popular assets that can be listed in an Auction House are [Non-Fungible Tokens (NFTs)](/token-metadata/token-standard#the-non-fungible-standard).
+So far, we've talked about exchanging assets using an Auction House account, but we've not dug into what type of assets can be exchanged that way. The most popular assets that can be listed in an Auction House are [Non-Fungible Tokens (NFTs)](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard).
 
-However, these are not the only assets that can benefit from the Auction House program. In fact, an asset can be any SPL Token so long as it has a Metadata account attached to its Mint account. If you'd like to know more about SPL Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/token-metadata).
+However, these are not the only assets that can benefit from the Auction House program. In fact, an asset can be any SPL Token so long as it has a Metadata account attached to its Mint account. If you'd like to know more about SPL Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/smart-contracts/token-metadata).
 
 ## Buying asset using a custom SPL Token
 

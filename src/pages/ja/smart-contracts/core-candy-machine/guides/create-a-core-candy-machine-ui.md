@@ -14,7 +14,7 @@ UIエレメントやウォレット統合を含む完全なWebサイト実装に
 
 ## 前提条件
 
-- すでに作成されたCandy Machine。作成方法の詳細は[Core Candy Machine作成ガイド](https://developers.metaplex.com/core-candy-machine/create)をご覧ください。
+- すでに作成されたCandy Machine。作成方法の詳細は[Core Candy Machine作成ガイド](/ja/smart-contracts/core-candy-machine/create)をご覧ください。
 - Web開発と選択したフレームワークの基本的な知識。umiとの互換性を最も簡単にするために、Next JSをお勧めします。
 
 ## 必要なパッケージ

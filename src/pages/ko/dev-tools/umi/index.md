@@ -10,7 +10,7 @@ Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/umi/getting-started" description="원하는 언어나 라이브러리를 찾아서 필수 프로그램 시작하기를 해보세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/dev-tools/umi/getting-started" description="원하는 언어나 라이브러리를 찾아서 필수 프로그램 시작하기를 해보세요." /%}
 
 {% quick-link title="API 참조" icon="CodeBracketSquare" href="https://umi.typedoc.metaplex.com/" target="_blank" description="특정한 내용을 찾고 계신가요? API 참조를 확인하여 답을 찾아보세요." /%}
 

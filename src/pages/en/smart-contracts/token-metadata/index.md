@@ -12,7 +12,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/token-metadata/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -438,7 +438,7 @@ A good example of why this can be problematic is that Token Metadata cannot enfo
 
 **Programmable NFTs** were introduced to solve this problem. They are a new _opt-in_ Token Standard that **keeps the underlying token accounts frozen at all times**. That way, nobody can transfer, lock or burn Programmable NFTs without going through the Token Metadata program.
 
-It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](/token-auth-rules).
+It is then up to the creators to define custom operation-specific authorization rules that will be enforced by the Token Metadata program. These are defined in a special **RuleSet** account which is attached to the Metadata account. An example of such RuleSet could be an allowlist of program addresses that honor royalties. RuleSets are part of a new Metaplex program called [Token Auth Rules](/smart-contracts/token-auth-rules).
 
 You can [read more about Programmable NFTs here](/smart-contracts/token-metadata/pnfts).
 

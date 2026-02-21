@@ -167,5 +167,5 @@ Gumdrop 提供了一种强大且灵活的方式，通过基于领取的机制分
 ## 需要帮助？
 
 - 加入我们的 [Discord](https://discord.gg/metaplex) 获取支持
-- 查看 [Metaplex Gumdrop 文档](https://developers.metaplex.com/legacy-documentation/gumdrop)
+- 查看 [Metaplex Gumdrop 文档](/zh/legacy-documentation/gumdrop)
 - 查看[源代码](https://github.com/metaplex-foundation/gumdrop)

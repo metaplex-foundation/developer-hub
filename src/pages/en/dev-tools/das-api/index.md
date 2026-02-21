@@ -16,10 +16,10 @@ In addition to the general DAS SDK an extension for [MPL Core](/smart-contracts/
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/das-api/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/dev-tools/das-api/getting-started" description="Find the language or library of your choice and get started essentials programs." /%}
 
-{% quick-link title="Methods" icon="CodeBracketSquare" href="/das-api/methods" description="DAS API methods for fetching data." /%}
+{% quick-link title="Methods" icon="CodeBracketSquare" href="/dev-tools/das-api/methods" description="DAS API methods for fetching data." /%}
 
-{% quick-link title="MPL Core Extension" icon="CodeBracketSquare" href="/das-api/methods" description="Get and parse MPL Core assets easily" /%}
+{% quick-link title="MPL Core Extension" icon="CodeBracketSquare" href="/dev-tools/das-api/methods" description="Get and parse MPL Core assets easily" /%}
 
 {% /quick-links %}

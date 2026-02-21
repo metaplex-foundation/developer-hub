@@ -103,9 +103,9 @@ Auction Houseプログラムを使用して、新しい**Auction House**アカ�
 
 ## 代替可能なアセットのオークション
 
-これまで、Auction Houseアカウントを使用してアセットを交換することについて話してきましたが、どのタイプのアセットをこの方法で交換できるかについては掘り下げていません。Auction Houseでリストできる最も人気のあるアセットは、[非代替性トークン（NFT）](/token-metadata/token-standard#the-non-fungible-standard)です。
+これまで、Auction Houseアカウントを使用してアセットを交換することについて話してきましたが、どのタイプのアセットをこの方法で交換できるかについては掘り下げていません。Auction Houseでリストできる最も人気のあるアセットは、[非代替性トークン（NFT）](/ja/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)です。
 
-ただし、これらがAuction Houseプログラムから恩恵を受けることができる唯一のアセットではありません。実際、アセットはミントアカウントにメタデータアカウントが添付されている限り、任意のSPLトークンにすることができます。SPLトークンとメタデータアカウントについて詳しく知りたい場合は、[Token Metadataプログラムの概要で詳細を読むことができます](/token-metadata)。
+ただし、これらがAuction Houseプログラムから恩恵を受けることができる唯一のアセットではありません。実際、アセットはミントアカウントにメタデータアカウントが添付されている限り、任意のSPLトークンにすることができます。SPLトークンとメタデータアカウントについて詳しく知りたい場合は、[Token Metadataプログラムの概要で詳細を読むことができます](/ja/smart-contracts/token-metadata)。
 
 ## カスタムSPLトークンを使用してアセットを購入
 
