@@ -17,5 +17,5 @@ Metaplexプロトコルの**Candy Machine**は、Solanaにおける公平なNFT�
 {% /quick-links %}
 
 {% callout %}
-このドキュメントは、Core Candy Machineとして知られるCandy Machineの最新バージョンについて説明しています。これは[Core](/ja/smart-contracts/core)アセットのミントを可能にします。Metaplex Token MetadataのNFTをミントしたい場合は、[代わりにCandy Machine V3を参照してください](https://developers.metaplex.com/candy-machine/)。
+このドキュメントは、Core Candy Machineとして知られるCandy Machineの最新バージョンについて説明しています。これは[Core](/ja/smart-contracts/core)アセットのミントを可能にします。Metaplex Token MetadataのNFTをミントしたい場合は、[代わりにCandy Machine V3を参照してください](/ja/smart-contracts/candy-machine)。
 {% /callout %}

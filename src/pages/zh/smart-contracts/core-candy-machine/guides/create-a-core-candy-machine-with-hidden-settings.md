@@ -59,7 +59,7 @@ console.log("签名者: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-您可以在[Core NFT资产创建指南](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)中找到有关设置 UMI 的更多详细信息
+您可以在[Core NFT资产创建指南](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)中找到有关设置 UMI 的更多详细信息
 
 ## 准备揭示数据
 
@@ -67,7 +67,7 @@ umi.use(signerIdentity(signer));
 此元数据将为每个资产上传，我们将使用生成的 URI
 
 请注意，您需要自己上传揭示数据。
-此过程默认可能不是确定性的。为了以确定性方式执行，您可以使用 [turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)
+此过程默认可能不是确定性的。为了以确定性方式执行，您可以使用 [turbo](/zh/guides/general/create-deterministic-metadata-with-turbo)
 
 在此示例中，我们将使用包含五个资产的集合，因此我们的揭示数据将包含一个包含五个对象的数组，每个对象代表单个 NFT 的名称和 URI。
 
@@ -94,7 +94,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 现在让我们创建一个集合资产。
 为此，mpl-core 库提供了 `createCollection` 方法来帮助我们执行该操作
 
-您可以在[集合页面](https://developers.metaplex.com/core/collections)了解更多关于集合的信息
+您可以在[集合页面](/zh/smart-contracts/core/collections)了解更多关于集合的信息
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -147,9 +147,9 @@ console.log("集合详情: \n", collection);
 
 为此，我们将使用 mpl-core-candy-machine 库的 `create` 方法，并使用来自 `revealData` 的占位符名称、URI 和预计算哈希设置 `hiddenSettings`
 
-更多关于 Core Candy Machine 创建和守卫的详细信息可以在[Core Candy Machine创建页面](https://developers.metaplex.com/core-candy-machine/create)找到。
+更多关于 Core Candy Machine 创建和守卫的详细信息可以在[Core Candy Machine创建页面](/zh/smart-contracts/core-candy-machine/create)找到。
 
-此外，我们将配置 startDate 守卫，它决定铸造何时开始。这只是许多可用守卫中的一个，您可以在[Guards页面](https://developers.metaplex.com/candy-machine/guards)找到所有可用守卫的列表。
+此外，我们将配置 startDate 守卫，它决定铸造何时开始。这只是许多可用守卫中的一个，您可以在[Guards页面](/zh/smart-contracts/candy-machine/guards)找到所有可用守卫的列表。
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

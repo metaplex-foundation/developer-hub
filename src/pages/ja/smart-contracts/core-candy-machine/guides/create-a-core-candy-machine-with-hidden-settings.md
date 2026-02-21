@@ -59,14 +59,14 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-UMIのセットアップの詳細については、[Core NFTアセット作成ガイド](https://developers.metaplex.com/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)をご覧ください。
+UMIのセットアップの詳細については、[Core NFTアセット作成ガイド](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)をご覧ください。
 
 ## リビールデータの準備
 次に、最終的にリビールされるNFTのメタデータを含むリビールデータを準備しましょう。このデータには、コレクション内の各NFTの名前とURIが含まれ、ミント後にプレースホルダーメタデータを更新するために使用されます。
 このメタデータは各アセットにアップロードされ、結果として得られるURIを使用します。
 
 リビールデータは自分でアップロードする必要があることに注意してください。
-このプロセスはデフォルトでは決定論的ではない可能性があります。決定論的な方法で行うには、[turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo)を使用できます。
+このプロセスはデフォルトでは決定論的ではない可能性があります。決定論的な方法で行うには、[turbo](/ja/guides/general/create-deterministic-metadata-with-turbo)を使用できます。
 
 この例では、5つのアセットのコレクションを扱うため、リビールデータには5つのオブジェクトの配列が含まれ、それぞれが個々のNFTの名前とURIを表します。
 
@@ -93,7 +93,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 次にCollectionアセットを作成しましょう。
 そのために、mpl-coreライブラリは、そのアクションを実行するのに役立つ`createCollection`メソッドを提供します。
 
-コレクションの詳細については、[コレクションページ](https://developers.metaplex.com/core/collections)をご覧ください。
+コレクションの詳細については、[コレクションページ](/ja/smart-contracts/core/collections)をご覧ください。
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -146,9 +146,9 @@ console.log("Collection Details: \n", collection);
 
 これを実現するために、mpl-core-candy-machineライブラリの`create`メソッドを使用し、プレースホルダーの名前、URI、および`revealData`から事前計算されたハッシュを使用して`hiddenSettings`を設定します。
 
-Core Candy Machineの作成とguardsの詳細については、[Core Candy Machine作成ページ](https://developers.metaplex.com/core-candy-machine/create)をご覧ください。
+Core Candy Machineの作成とguardsの詳細については、[Core Candy Machine作成ページ](/ja/smart-contracts/core-candy-machine/create)をご覧ください。
 
-さらに、ミントがいつ始まるかを決定するstartDate guardを設定します。これは利用可能な多くのguardの1つに過ぎず、利用可能なすべてのguardのリストは[Guardsページ](https://developers.metaplex.com/candy-machine/guards)で見つけることができます。
+さらに、ミントがいつ始まるかを決定するstartDate guardを設定します。これは利用可能な多くのguardの1つに過ぎず、利用可能なすべてのguardのリストは[Guardsページ](/ja/smart-contracts/candy-machine/guards)で見つけることができます。
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
