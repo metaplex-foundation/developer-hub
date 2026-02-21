@@ -362,7 +362,7 @@ NFT가 Token Metadata 프로그램의 가장 큰 사용 사례이지만, 이 프
 - `Fungible`: Mint 계정은 대체 가능하며 소수점 자리가 1개 이상입니다. 이는 분산 통화로 사용될 가능성이 높은 토큰입니다.
 - `ProgrammableNonFungible`: 맞춤형 승인 규칙을 적용하기 위해 항상 동결되어 있는 특별한 `NonFungible` 토큰입니다. 자세한 내용은 다음 섹션을 참조하세요.
 
-[이러한 표준에 대해 여기서 더 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata/token-standard).
+[토큰 표준](/ko/smart-contracts/token-metadata/token-standard)에 대해 더 자세히 읽을 수 있습니다.
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -442,7 +442,7 @@ Token Metadata 프로그램이 Solana Token 프로그램 위에 구축되기 때
 
 그런 다음 크리에이터가 Token Metadata 프로그램에 의해 적용될 맞춤형 작업별 승인 규칙을 정의하는 것은 크리에이터의 몫입니다. 이들은 Metadata 계정에 첨부된 특별한 **RuleSet** 계정에 정의됩니다. 이러한 RuleSet의 예로는 로열티를 존중하는 프로그램 주소의 허용 목록이 있을 수 있습니다. RuleSet은 [Token Auth Rules](/ko/smart-contracts/token-auth-rules)라는 새로운 Metaplex 프로그램의 일부입니다.
 
-[프로그래머블 NFT에 대해 여기서 더 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata/pnfts).
+[프로그래머블 NFT](/ko/smart-contracts/token-metadata/pnfts)에 대해 더 자세히 읽을 수 있습니다.
 
 {% diagram %}
 {% node %}

@@ -148,7 +148,7 @@ console.log("Collection Details: \n", collection);
 
 Core Candy Machineの作成とguardsの詳細については、[Core Candy Machine作成ページ](/ja/smart-contracts/core-candy-machine/create)をご覧ください。
 
-さらに、ミントがいつ始まるかを決定するstartDate guardを設定します。これは利用可能な多くのguardの1つに過ぎず、利用可能なすべてのguardのリストは[Guardsページ](/ja/smart-contracts/candy-machine/guards)で見つけることができます。
+さらに、ミントがいつ始まるかを決定するstartDate guardを設定します。これは利用可能な多くのguardの1つに過ぎず、利用可能なすべてのguardのリストは[Guardsページ](/ja/smart-contracts/core-candy-machine/guards)で見つけることができます。
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

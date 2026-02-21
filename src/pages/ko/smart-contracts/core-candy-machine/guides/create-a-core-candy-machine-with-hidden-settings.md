@@ -60,7 +60,7 @@ console.log("Signer: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-UMI 설정에 대한 자세한 정보는 [여기](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
+UMI 설정에 대한 자세한 정보는 [Core NFT Asset 생성 가이드의 UMI 설정 섹션](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
 
 ## 공개 데이터 준비
 이제 최종 공개된 NFT의 메타데이터가 포함될 공개 데이터를 준비해보겠습니다. 이 데이터는 컬렉션의 각 NFT에 대한 이름과 URI를 포함하며 민팅 후 플레이스홀더 메타데이터를 업데이트하는 데 사용됩니다.
@@ -94,7 +94,7 @@ let hash = crypto.createHash('sha256').update(string).digest()
 이제 Collection asset을 생성해보겠습니다.
 이를 위해 mpl-core 라이브러리는 해당 작업을 수행하는 데 도움이 되는 `createCollection` 메서드를 제공합니다.
 
-컬렉션에 대해 자세히 알아보려면 [여기](/ko/smart-contracts/core/collections)를 참고하세요.
+컬렉션에 대해 자세히 알아보려면 [Collections 페이지](/ko/smart-contracts/core/collections)를 참고하세요.
 
 ```ts
 import { createCollection, ruleSet } from '@metaplex-foundation/mpl-core';
@@ -147,9 +147,9 @@ console.log("Collection Details: \n", collection);
 
 이를 달성하기 위해 mpl-core-candy-machine 라이브러리의 `create` 메서드를 사용하고, `revealData`에서 플레이스홀더 이름, URI, 미리 계산된 해시로 `hiddenSettings`를 설정합니다.
 
-Core Candy Machine 생성과 guard에 대한 자세한 정보는 [여기](/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
+Core Candy Machine 생성과 guard에 대한 자세한 정보는 [Core Candy Machine 생성 페이지](/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
 
-또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [여기](/ko/smart-contracts/candy-machine/guards)에서 찾을 수 있습니다.
+또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [Guards 페이지](/ko/smart-contracts/core-candy-machine/guards)에서 찾을 수 있습니다.
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
