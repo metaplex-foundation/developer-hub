@@ -68,6 +68,6 @@ Asset
 1. 使用[Master Edition](/smart-contracts/core/plugins/master-edition)插件创建Collection
 2. 创建带有[Edition](/smart-contracts/core/plugins/edition)插件的Asset。不要忘记增加插件中的编号。
 ## 相关信息
-- [从Candy Machine铸造](/core-candy-machine/mint)
+- [从Candy Machine铸造](/zh/smart-contracts/core-candy-machine/mint)
 - [Master Edition插件](/smart-contracts/core/plugins/master-edition)
 - [Edition插件](/smart-contracts/core/plugins/edition)

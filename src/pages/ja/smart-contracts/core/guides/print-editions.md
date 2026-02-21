@@ -298,6 +298,6 @@ pub async fn create_asset_with_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 関連情報
-- [Candy Machineからミント](/core-candy-machine/mint)
+- [Candy Machineからミント](/ja/smart-contracts/core-candy-machine/mint)
 - [Master Editionプラグイン](/smart-contracts/core/plugins/master-edition)
 - [Editionプラグイン](/smart-contracts/core/plugins/edition)
