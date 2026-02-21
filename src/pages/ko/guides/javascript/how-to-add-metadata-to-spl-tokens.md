@@ -9,7 +9,7 @@ updated: '10-01-2024'
 이 가이드는 Metaplex Token Metadata 프로토콜을 사용하여 이미 초기화된 Solana 토큰(SPL 토큰)에 메타데이터를 추가하는 과정을 안내합니다.
 
 {% callout %}
-따로 하는 대신 사용 가능한 [create helper](https://developers.metaplex.com/token-metadata/mint#create-helpers) 함수를 사용하여 토큰을 생성하고 초기화하는 것이 권장됩니다. 이를 수행하는 방법을 찾고 있다면 대신 이 가이드를 확인하세요 [`How to create a Solana Token`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token).
+따로 하는 대신 사용 가능한 [create helper](/ko/smart-contracts/token-metadata/mint#create-helpers) 함수를 사용하여 토큰을 생성하고 초기화하는 것이 권장됩니다. 이를 수행하는 방법을 찾고 있다면 대신 이 가이드를 확인하세요 [`How to create a Solana Token`](/ko/guides/javascript/how-to-create-a-solana-token).
 
 {% /callout %}
 

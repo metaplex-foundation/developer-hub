@@ -109,6 +109,6 @@ await transfer(umi, {
    此选项检索默克尔树配置并根据树冠删除不必要的证明来优化`assetWithProof`。虽然它增加了额外的RPC调用，但显著减少了交易大小。
 
 2. 使用版本化交易和地址查找表：
-   另一种方法是实现[版本化交易和地址查找表](https://developers.metaplex.com/umi/toolbox/address-lookup-table)。此方法可以帮助更有效地管理交易大小。
+   另一种方法是实现[版本化交易和地址查找表](/zh/dev-tools/umi/toolbox/address-lookup-table)。此方法可以帮助更有效地管理交易大小。
 
 通过应用这些技术，您可以克服交易大小限制并成功执行您的操作。

@@ -6,7 +6,7 @@ description: 在创建MPL-404混合资产之前如何准备
 
 ## MPL-404规划
 
-在部署MPL-404托管和交换程序之前，您应该准备好一组NFT和同质化代币。如果您尚未准备好这些，我们建议在阅读完本页其余部分后，使用[Metaplex Core](https://developers.metaplex.com/core)创建非同质化代币，使用[Token Metadata程序](https://developers.metaplex.com/token-metadata)创建同质化代币。
+在部署MPL-404托管和交换程序之前，您应该准备好一组NFT和同质化代币。如果您尚未准备好这些，我们建议在阅读完本页其余部分后，使用[Metaplex Core](/zh/smart-contracts/core)创建非同质化代币，使用[Token Metadata程序](/zh/smart-contracts/token-metadata)创建同质化代币。
 
 要为托管账户注资，您需要添加NFT、同质化代币或两者的混合。实际上，最简单的方法是用一种类型的所有资产填充托管账户，同时分发另一种。这将确保托管账户保持平衡。
 

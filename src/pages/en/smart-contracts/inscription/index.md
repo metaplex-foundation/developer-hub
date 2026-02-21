@@ -8,7 +8,7 @@ The Metaplex Inscription Program allows you to write data directly to Solana, us
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/inscription/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/inscription/getting-started" description="Find the language or library of your choice and get started with digital assets on Solana." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -330,7 +330,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 ## Associated Inscription Accounts
 
-The [Metaplex JSON standards](/token-metadata/token-standard) include the option of linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Association Tag**, resulting in a programmatic way to derive additional inscribed data, rather that requiring expensive JSON deserialization and parsing.
+The [Metaplex JSON standards](/smart-contracts/token-metadata/token-standard) include the option of linking associated files to a token via the files properties in the JSON schemas. The Inscription program introduces a new method of associating additional data using the power of PDAs! A PDA is derived from the Inscription and an **Association Tag**, resulting in a programmatic way to derive additional inscribed data, rather that requiring expensive JSON deserialization and parsing.
 
 ## Inscription Gateway
 
@@ -340,7 +340,7 @@ You can either use the gateway that is hosted by Metaplex using the following UR
 
 ## Inscription Rank
 
-The Inscription Rank is the unique number of each inscription. This number represents a sequential, global ranking of all Metaplex Inscriptions in existence based on the total Inscription count at the time of creation. Inscription Rank is managed through a parallelized counter that is explained further in [Inscription Sharding](/inscription/sharding).
+The Inscription Rank is the unique number of each inscription. This number represents a sequential, global ranking of all Metaplex Inscriptions in existence based on the total Inscription count at the time of creation. Inscription Rank is managed through a parallelized counter that is explained further in [Inscription Sharding](/smart-contracts/inscription/sharding).
 
 To find the `inscriptionRank` of your Inscription you need to fetch the `inscriptionMetadata` Account and read the `inscriptionRank` `bigint`:
 
@@ -415,10 +415,10 @@ Whilst this provides a good overview of the Inscription program and what it has 
 
 The other pages of this documentation aim to document it further and explain significant features in their own individual pages.
 
-- [Initialize](/inscription/initialize)
-- [Write](/inscription/write)
-- [Fetch](/inscription/fetch)
-- [Clear](/inscription/clear)
-- [close](/inscription/close)
-- [Authorities](/inscription/authority)
+- [Initialize](/smart-contracts/inscription/initialize)
+- [Write](/smart-contracts/inscription/write)
+- [Fetch](/smart-contracts/inscription/fetch)
+- [Clear](/smart-contracts/inscription/clear)
+- [close](/smart-contracts/inscription/close)
+- [Authorities](/smart-contracts/inscription/authority)
 - [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)

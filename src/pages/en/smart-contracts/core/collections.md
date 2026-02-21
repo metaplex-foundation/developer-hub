@@ -100,7 +100,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 The following snippet creates a simple collection without Plugins or anything special.
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
 ### Creating a Collection with Plugins
-The following snippet creates a collection with the [Royalties Plugin](/smart-contracts/core/plugins/royalties) attached. You can attach additional plugins as described [here](/smart-contracts/core/plugins).
+The following snippet creates a collection with the [Royalties Plugin](/smart-contracts/core/plugins/royalties) attached. You can attach additional plugins as described [on the Plugins page](/smart-contracts/core/plugins).
 {% dialect-switcher title="Create a MPL Core Collection with Plugin" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

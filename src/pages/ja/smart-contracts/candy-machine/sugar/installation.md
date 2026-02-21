@@ -24,7 +24,7 @@ bash <(curl -sSf https://sugar.metaplex.com/install.sh)
 
 Windowsを使用している場合は、以下の手順に従ってください：
 
-1. [こちら](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe)からWinstallerの実行ファイルをダウンロードしてください。
+1. [Winstallerの実行ファイル](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe)をダウンロードしてください。
 
 2. ダブルクリックしてバイナリを実行してみてください。信頼できないバイナリに関する警告のポップアップメッセージが表示された場合は、`詳細情報`をクリックしてから`実行`をクリックしてください。このオプションがない場合は、手順3〜6に従ってください。
 

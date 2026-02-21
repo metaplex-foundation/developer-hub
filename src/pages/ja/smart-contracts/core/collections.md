@@ -100,7 +100,7 @@ Core Collectionを作成するには、`CreateCollection`命令を次のよう�
 以下のスニペットは、プラグインや特別なものなしでシンプルなCollectionを作成します。
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
 ### プラグイン付きCollectionの作成
-以下のスニペットは、[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)を添付してCollectionを作成します。[こちら](/ja/smart-contracts/core/plugins)で説明されているように、追加のプラグインを添付できます。
+以下のスニペットは、[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)を添付してCollectionを作成します。[プラグインページ](/ja/smart-contracts/core/plugins)で説明されているように、追加のプラグインを添付できます。
 {% dialect-switcher title="プラグイン付きMPL Core Collectionの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

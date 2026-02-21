@@ -6,9 +6,9 @@ description: 学习创建使404交换成为可能的MPL 404混合托管账户。
 
 ## 先决条件
 
-- MPL Core集合 - [链接](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- 铸造到集合的Core NFT资产 - [链接](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
-- 创建具有所需代币数量的SPL代币 - [链接](/zh/guides/javascript/how-to-create-a-solana-token)
+- MPL Core集合 - [创建Core集合指南](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- 铸造到集合的Core NFT资产 - [创建Core NFT资产指南](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- 创建具有所需代币数量的SPL代币 - [创建Solana代币指南](/zh/guides/javascript/how-to-create-a-solana-token)
 - 在一致的网关/uri上在线存储顺序元数据JSON文件。
 
 初始化托管是将NFT集合与同质化代币链接的关键步骤。在开始此步骤之前，您应该准备好Core集合地址、同质化代币铸造地址，以及使用数字命名、顺序文件的链下元数据URI范围。对基础URI字符串一致性的需求将限制一些链下元数据选项。请注意，托管的权限需要与集合的权限匹配才能执行元数据更新。此外，由于托管是有资金的，因此无需成为代币权限，这允许集合由现有的memecoin或其他同质化资产支持。
@@ -20,7 +20,7 @@ MPL Hybrid托管是程序的核心，存储有关项目的所有信息。
 {% totem %}
 {% totem-accordion title="链上MPL-404托管数据结构" %}
 
-MPL-404托管的链上账户结构 [链接](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+MPL-404托管的链上账户结构 [查看源代码](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | 名称           | 类型   | 大小 | 描述                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

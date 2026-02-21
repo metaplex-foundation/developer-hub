@@ -144,7 +144,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 ```
 {% /totem-accordion %}
 {% /totem %}
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [the Wallet Adapter guide](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 ## Creating the Metadata for the Asset
 To display a recognisable image for your Asset in the Wallets or on the Explorer, we need to create the URI where we can store the Metadata!
 ### Uploading the Image

@@ -81,12 +81,12 @@ Core Asset 账户代表数字资产的最小数据。此结构为链上所有权
 {% seperator h="6" /%}
 {% totem %}
 {% totem-accordion title="链上 Asset 账户结构" %}
-MPL Core Asset 的链上账户结构。[链接](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+MPL Core Asset 的链上账户结构。[查看源代码](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 | 名称             | 类型            | 大小 | 描述                                                      |                                                                                                                            |
 | ---------------- | --------------- | ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | key              | u8              | 1    | 账户类型的鉴别器                                      |                                                                                                                            |
 | owner            | pubKey          | 32   | Asset 的所有者                                          |                                                                                                                            |
-| update_authority | enum<publicKey> | 33   | 新 Asset 的权限或 CollectionID                  | [链接](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
+| update_authority | enum<publicKey> | 33   | 新 Asset 的权限或 CollectionID                  | [查看源代码](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
 | name             | string          | 36   | Asset 的名称                                           |                                                                                                                            |
 | uri              | string          | 204  | 指向链下数据的 Asset URI          |                                                                                                                            |
 | seq              | string          |      | 用于压缩索引的序列号          |                                                                                                                            |

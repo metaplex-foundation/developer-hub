@@ -69,7 +69,7 @@ const auctionHouseSettings = {
 
 There are several accounts that are necessary for the Auction House to function properly. Once set by the Auction House, the authority can reset and configure these accounts as per their liking.
 
-There are some accounts that are created and controlled by the Auction House program. These accounts are Program Derived Addresses (PDAs) which you can read more about [here](https://solanacookbook.com/core-concepts/pdas.html). These are the two settings that can be used to set these accounts:
+There are some accounts that are created and controlled by the Auction House program. These accounts are Program Derived Addresses (PDAs) which you can read more about [in the Solana Cookbook](https://solanacookbook.com/core-concepts/pdas.html). These are the two settings that can be used to set these accounts:
 
 1. `auctionHouseFeeAccount`: The public key of the fee account which stores funds for paying for Auction House related transactions on behalf of the users.
 

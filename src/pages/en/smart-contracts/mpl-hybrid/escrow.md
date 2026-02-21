@@ -13,7 +13,7 @@ Initializing the escrow is the essential step that links an NFT collection with 
 {% totem %}
 {% totem-accordion title="On Chain MPL-404 Escrow Data Structure" %}
 
-The onchain account structure of an MPL-404 Escrow [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+The onchain account structure of an MPL-404 Escrow [on GitHub](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | Name           | Type   | Size | Description                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

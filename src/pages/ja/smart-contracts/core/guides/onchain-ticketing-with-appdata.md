@@ -34,10 +34,10 @@ howToTools:
 - **Listen**：ライフサイクルイベントが発生したときにプラグインに通知する「web3」webhook。これはデータの追跡やアクションの実行に特に便利です。
 - **Reject**：プラグインはライフサイクルイベントを拒否できます。
 - **Approve**：プラグインはライフサイクルイベントを承認できます。
-外部プラグインについて詳しく知りたい場合は、[こちら](/smart-contracts/core/external-plugins/overview)で詳細をお読みください。
+外部プラグインについて詳しく知りたい場合は、[外部プラグイン概要ページ](/smart-contracts/core/external-plugins/overview)で詳細をお読みください。
 ### Appdataプラグイン
 **AppDataプラグイン**により、アセット/コレクションのauthorityが`data_authority`（外部の信頼できるソースで、アセット/コレクションのauthorityが決定した誰にでも割り当てることができます）によって書き込みおよび変更できる任意のデータを保存できます。AppDataプラグインを使用すると、コレクション/アセットのauthorityは、信頼できるサードパーティにアセットへのデータ追加タスクを委任できます。
-新しいAppdataプラグインに慣れていない場合は、[こちら](/smart-contracts/core/external-plugins/app-data)で詳細をお読みください。
+新しいAppdataプラグインに慣れていない場合は、[AppDataプラグインページ](/smart-contracts/core/external-plugins/app-data)で詳細をお読みください。
 ## 概要：プログラム設計
 この例では、4つの基本操作を持つチケットソリューションを開発します：
 - **Managerのセットアップ**：チケットの作成と発行を担当するauthorityを確立します。

@@ -6,7 +6,7 @@ description: How to prepare before creating a MPL-404 hybrid
 
 ## MPL-404 Planning
 
-Before deploying the MPL-404 escrow and swap program, you should prepare a collection of NFTs and fungible tokens to be used. If you do not already have these prepared, we recommend utilizing [Metaplex Core](https://developers.metaplex.com/core) for the non-fungible tokens and the [Token Metadata program](https://developers.metaplex.com/token-metadata) to create the fungible tokens AFTER you have read the rest of this page..
+Before deploying the MPL-404 escrow and swap program, you should prepare a collection of NFTs and fungible tokens to be used. If you do not already have these prepared, we recommend utilizing [Metaplex Core](/smart-contracts/core) for the non-fungible tokens and the [Token Metadata program](/smart-contracts/token-metadata) to create the fungible tokens AFTER you have read the rest of this page..
 
 To fund the escrow, you need to add NFTs, fungibles, or some mix of both. Practically it's easiest to fill the escrow with all the assets of one type while distributing all of the other. This will ensure the escrow stays balanced.
 

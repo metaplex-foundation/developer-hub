@@ -11,7 +11,7 @@ Explain what data is stored and what role that data has for the user.
 {% totem %}
 {% totem-accordion title="On Chain MPL-Hybrid NFT Data Structure" %}
 
-The onchain account structure of an MPL-Hybrid NFT Data [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
+The onchain account structure of an MPL-Hybrid NFT Data [on GitHub](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
 
 | Name           | Type   | Size | Description                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

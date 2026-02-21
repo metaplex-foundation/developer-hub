@@ -11,7 +11,7 @@ description: MPL-Hybrid NFTデータの初期化
 {% totem %}
 {% totem-accordion title="オンチェーンMPL-Hybrid NFTデータ構造" %}
 
-MPL-Hybrid NFTデータのオンチェーンアカウント構造 [リンク](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
+MPL-Hybrid NFTデータのオンチェーンアカウント構造 [GitHubで表示](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
 
 | 名前           | タイプ   | サイズ | 説明                                      |     |
 | -------------- | ------ | ---- | ---------------------------------------- | --- |

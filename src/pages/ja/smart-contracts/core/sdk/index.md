@@ -19,6 +19,6 @@ programmingLanguage:
 ---
 新しいMetaplex Core Standardを始めるには、以下から使用する言語/ライブラリを選択してください。
 {% quick-links %}
-{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/javascript" description="Umiフレームワークに基づいたMPL-Core用JavaScriptライブラリを始める" /%}
-{% quick-link title="Rust" icon="Rust" href="/core/sdk/rust" description="MPL-Core Rustクレートを使い始める" /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/ja/smart-contracts/core/sdk/javascript" description="Umiフレームワークに基づいたMPL-Core用JavaScriptライブラリを始める" /%}
+{% quick-link title="Rust" icon="Rust" href="/ja/smart-contracts/core/sdk/rust" description="MPL-Core Rustクレートを使い始める" /%}
 {% /quick-links %}

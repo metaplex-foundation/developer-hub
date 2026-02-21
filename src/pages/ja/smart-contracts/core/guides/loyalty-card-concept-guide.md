@@ -48,7 +48,7 @@ Metaplex Coreは、プラグインベースのアーキテクチャを提供す�
     ↓
 [プログラム] → AppDataプラグインのロイヤルティデータを更新
 ```
-セットアップの詳細については、[Metaplex Coreドキュメント](https://developers.metaplex.com/core)をご覧ください。
+セットアップの詳細については、[Metaplex Coreドキュメント](/ja/smart-contracts/core)をご覧ください。
 ## ロイヤルティシステムアーキテクチャ
 この例では、Solanaブロックチェーン上でMetaplex Coreを使用してロイヤルティカードシステムを作成するための1つの潜在的な構造を概説します。ロイヤルティカードはNFTであり、それぞれの動作とデータの保存方法を管理するプラグインに関連付けられています。
 ### なぜソウルバウンドNFT Assetsを使用するのか？
@@ -100,7 +100,7 @@ let (loyalty_authority, bump) = Pubkey::find_program_address(seeds, &program_id)
 このステップは、Metaplex JS SDKやCLIなどのツールを使用してオフチェーンで処理できます。ロイヤルティプログラムを表すコレクションNFT（例：「Sol Coffee Loyalty Cards」）を作成できます。このコレクションは、個々のロイヤルティカードNFTの親として機能し、プログラムがそれらを効率的に管理する方法を提供します。
 PDAをコレクションのupdate authorityとして割り当てることで、プログラムがプログラム的にカードを発行および変更できるようになります。これをSolanaプログラム命令として実装することは厳密には必要ありませんが、「マネージャー」アカウントのオンボーディング機能を構築したり、複数のビジネス向けのホワイトラベルロイヤルティプログラムをサポートしたりする場合に役立ちます。
 PDAをコレクションのupdate authorityとして割り当てることで、プログラムがプログラム的にカードを発行および変更できるようになります。これは厳密には必要ありませんが、制御を効率化するのに役立ちます。
-Core Collectionのミントについて詳しく理解するには、[Core Collectionの作成](https://developers.metaplex.com/core/collections#creating-a-collection)をご覧ください。
+Core Collectionのミントについて詳しく理解するには、[Core Collectionの作成](/ja/smart-contracts/core/collections#creating-a-collection)をご覧ください。
 ### ステップ2：ソウルバウンドロイヤルティカードのミント
 ユーザーがプログラムに参加すると、以下の特性を持つロイヤルティカードNFTをミントできます：
 - ロイヤルティコレクションに属する

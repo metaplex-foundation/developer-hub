@@ -12,7 +12,7 @@ The name refers to the vending machines that dispense candy for coins via a mech
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/candy-machine/getting-started" description="Find the language or library of your choice and get started with Candy Machines." /%}
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-candy-machine.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? We've got you." /%}
 {% /quick-links %}
 
@@ -74,7 +74,7 @@ However, we still don’t know which NFTs should be minted from that Candy Machi
 Each item is composed of two parameters:
 
 - A `name`: The name of the NFT.
-- A `uri`: The URI pointing to the [JSON metadata](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
+- A `uri`: The URI pointing to the [JSON metadata](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard) of the NFT. This implies that the JSON metadata has already been uploaded via either an onchain (e.g. Arweave, IPFS) or off-chain (e.g. AWS, your own server) storage provider.
 
 All other parameters are shared between all NFTs and are therefore kept in the settings of the Candy Machine directly to avoid repetition. See [Inserting Items](/smart-contracts/candy-machine/insert-items) for more details.
 

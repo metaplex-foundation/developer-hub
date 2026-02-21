@@ -8,10 +8,10 @@ description: Metaplex Inscriptions로 시작하기.
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/inscription/getting-started/js" description="Umi 프레임워크 기반의 JavaScript 라이브러리로 시작하기." /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/ko/smart-contracts/inscription/getting-started/js" description="Umi 프레임워크 기반의 JavaScript 라이브러리로 시작하기." /%}
 
-{% quick-link title="Rust" icon="Rust" href="/inscription/getting-started/rust" description="Rust crate를 사용해서 시작하기." /%}
+{% quick-link title="Rust" icon="Rust" href="/ko/smart-contracts/inscription/getting-started/rust" description="Rust crate를 사용해서 시작하기." /%}
 
-{% quick-link title="CLI" icon="SolidCommandLine" href="/inscription/getting-started/cli" description="Inscriptions CLI를 사용해서 시작하기." /%}
+{% quick-link title="CLI" icon="SolidCommandLine" href="/ko/smart-contracts/inscription/getting-started/cli" description="Inscriptions CLI를 사용해서 시작하기." /%}
 
 {% /quick-links %}

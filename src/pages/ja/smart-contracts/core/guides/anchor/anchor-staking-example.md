@@ -41,12 +41,12 @@ howToTools:
 **Freeze Delegate Plugin**は**所有者管理Plugin**であり、Assetに適用するには所有者の署名が必要です。
 このPluginは**delegateがAssetをフリーズおよび解凍し、転送を防止することを可能にします**。Asset所有者またはPlugin権限者はいつでもこのPluginを取り消すことができますが、Assetがフリーズされている場合は取り消し前に解凍する必要があります。
 **このPluginの使用は軽量です**。Assetのフリーズ/解凍はPluginデータのブール値を変更するだけで済みます（唯一の引数はFrozen: boolです）。
-_詳細は[こちら](/ja/smart-contracts/core/plugins/freeze-delegate)をご覧ください_
+_詳細は[Freeze Delegateプラグインページ](/ja/smart-contracts/core/plugins/freeze-delegate)をご覧ください_
 ### Attribute Plugin
 **Attribute Plugin**は**権限者管理Plugin**であり、Assetに適用するには権限者の署名が必要です。Collectionに含まれるAssetの場合、Assetの権限者フィールドはCollectionアドレスによって占有されているため、Collection権限者が権限者として機能します。
 このPluginは**Asset上に直接データを保存し、オンチェーンの属性やトレイトとして機能します**。これらのトレイトはmpl-token-metadataプログラムのようにオフチェーンに保存されるのではなく、オンチェーンプログラムから直接アクセスできます。
 **このPluginはAttributeListフィールドを受け入れます**。これはキーと値のペアの配列で構成され、両方とも文字列です。
-_詳細は[こちら](/ja/smart-contracts/core/plugins/attribute)をご覧ください_
+_詳細は[Attributeプラグインページ](/ja/smart-contracts/core/plugins/attribute)をご覧ください_
 ### スマートコントラクトのロジック
 簡潔にするため、この例ではステーキングプログラムが意図通りに動作するために必要な**stake**と**unstake**関数の2つの命令のみを含んでいます。蓄積されたポイントを利用する**spendPoint**命令などの追加命令も追加できますが、これは読者の実装に委ねます。
 _StakeとUnstake関数の両方は、前述のPluginを異なる方法で利用します_。
@@ -79,7 +79,7 @@ use mpl_core::{
 すべての命令のアカウント構造体では、SignerとPayerを分離します。これは標準的な手順であり、PDAはアカウント作成の支払いができないため、ユーザーがPDAを命令の権限者にしたい場合、2つの異なるフィールドが必要になるからです。この分離は私たちの命令では厳密には必要ありませんが、良い慣行とされています。
 ### アカウント構造体
 この例では、mpl-core crateのanchorフラグを使用して、アカウント構造体からAssetとCollectionアカウントを直接デシリアライズし、いくつかの制約を設定します。
-_詳細は[こちら](/ja/smart-contracts/core/using-core-in-anchor)をご覧ください_
+_詳細は[AnchorでのCore使用ガイド](/ja/smart-contracts/core/using-core-in-anchor)をご覧ください_
 `stake`と`unstake`命令の両方で同じアカウントと同じ制約を使用するため、単一のアカウント構造体`Stake`を使用します。
 ```rust
 #[derive(Accounts)]

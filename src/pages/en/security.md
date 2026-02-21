@@ -24,7 +24,7 @@ Please include the requested information listed below (as much as you can provid
 
 This information will help us triage your report more quickly.
 
-You may also be eligible for a bounty. More details can be found [here](https://www.metaplex.com/bounty-program).
+You may also be eligible for a bounty. More details can be found [on the Metaplex Bounty Program page](https://www.metaplex.com/bounty-program).
 
 ## Audits
 

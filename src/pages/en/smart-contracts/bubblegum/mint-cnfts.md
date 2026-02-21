@@ -86,7 +86,7 @@ const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 
 Whilst it is possible to set and verify a Collection for a Compressed NFT _after_ it was minted, the Bubblegum program provides a convenient instruction to mint a Compressed NFT directly to a given Collection. Bubblegum uses Metaplex Token Metadata Collection NFT to group the compressed NFTs. This instruction is called **MintToCollectionV1**, and it uses the same parameters as the **MintV1** instruction, with the addition of the following parameters:
 
-- **Collection Mint**: The Mint address of the [Token Metadata Collection NFT](https://developers.metaplex.com/token-metadata/collections#creating-collection-nfts) to which the Compressed NFT will be part.
+- **Collection Mint**: The Mint address of the [Token Metadata Collection NFT](/smart-contracts/token-metadata/collections#creating-collection-nfts) to which the Compressed NFT will be part.
 - **Collection Authority**: The authority allowed to manage the given Collection NFT. This can either be the update authority of the Collection NFT or a delegated collection authority. This authority must sign the transaction regardless of whether the Bubblegum Tree is public or not.
 - **Collection Authority Record Pda**: When using a delegated collection authority, the Delegate Record PDA must be provided to ensure the authority is allowed to manage the Collection NFT. This can either be using the new "Metadata Delegate" PDA or the legacy "Collection Authority Record" PDA.
 

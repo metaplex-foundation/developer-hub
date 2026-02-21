@@ -56,8 +56,8 @@ Core Candy Machineの作成に使用される新しく生成されたキーペ�
 | collectionUpdateAuthority | signer                        |
 | itemsAvailable            | number                        |
 | isMutable                 | boolean                       |
-| configLineSettings        | [リンク](#config-line-settings) |
-| hiddenSettings            | [リンク](#hidden-settings)      |
+| configLineSettings        | [Config Line Settings](#config-line-settings) |
+| hiddenSettings            | [Hidden Settings](#hidden-settings)      |
 
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
@@ -72,8 +72,8 @@ Core Candy Machineの作成に使用される新しく生成されたキーペ�
 | collectionUpdateAuthority | signer                        |
 | itemsAvailable            | number                        |
 | isMutable                 | boolean                       |
-| configLineSettings        | [リンク](#config-line-settings) |
-| hiddenSettings            | [リンク](#hidden-settings)      |
+| configLineSettings        | [Config Line Settings](#config-line-settings) |
+| hiddenSettings            | [Hidden Settings](#hidden-settings)      |
 
 {% /dialect %}
 {% /dialect-switcher %}

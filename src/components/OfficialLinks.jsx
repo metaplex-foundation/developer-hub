@@ -244,7 +244,7 @@ export function OfficialLinks() {
                 <TableCell className="font-mono text-xs">{program.programId}</TableCell>
                 <TableCell>
                   {program.github ? (
-                    <Link href={program.github}>{t('link', 'Link')}</Link>
+                    <Link href={program.github}>{t('githubLink', 'GitHub')}</Link>
                   ) : (
                     <span className="text-muted-foreground">—</span>
                   )}
@@ -254,7 +254,7 @@ export function OfficialLinks() {
                     href={localePath(program.docs)}
                     className="text-primary hover:text-primary/80"
                   >
-                    {t('link', 'Link')}
+                    {t('docsLink', 'Docs')}
                   </NextLink>
                 </TableCell>
               </TableRow>

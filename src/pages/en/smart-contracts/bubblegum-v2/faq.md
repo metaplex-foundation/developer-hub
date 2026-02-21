@@ -109,6 +109,6 @@ When performing leaf-replacing operations like transfers or burns, you may encou
    This option retrieves the Merkle Tree configuration and optimizes the `assetWithProof` by removing unnecessary proofs based on the Canopy. While it adds an extra RPC call, it significantly reduces the transaction size.
 
 2. Utilize versioned transactions and Address Lookup Tables:
-   Another approach is to implement [versioned transactions and Address Lookup Tables](https://developers.metaplex.com/umi/toolbox/address-lookup-table). This method can help manage transaction size more effectively.
+   Another approach is to implement [versioned transactions and Address Lookup Tables](/dev-tools/umi/toolbox/address-lookup-table). This method can help manage transaction size more effectively.
 
 By applying these techniques, you can overcome transaction size limitations and successfully execute your operations.

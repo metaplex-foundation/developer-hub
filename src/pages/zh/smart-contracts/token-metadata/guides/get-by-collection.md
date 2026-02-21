@@ -123,4 +123,4 @@ Rust `Option` 在 [Borsh](https://borsh.io/) 编码中用 0 表示 `None` 变体
     - 将账户数据反序列化为 Metadata 结构/对象，并从 `mint` 字段中找到 mint 地址。将 `mint` 地址添加到 Set。
     - 这个最终的 Set 就是集合中所有项目的 mint 地址列表。
 
-交易爬取以获取集合成员的 Rust 和 TypeScript 示例代码可以在[这里](https://github.com/metaplex-foundation/get-collection)找到。
+交易爬取以获取集合成员的 Rust 和 TypeScript 示例代码可以在[get-collection代码库](https://github.com/metaplex-foundation/get-collection)中找到。

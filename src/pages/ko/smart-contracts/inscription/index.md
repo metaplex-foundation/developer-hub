@@ -8,7 +8,7 @@ Metaplex Inscription 프로그램을 사용하면 블록체인을 데이터 저�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/inscription/getting-started" description="원하는 언어나 라이브러리를 선택하고 Solana에서 디지털 자산을 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/smart-contracts/inscription/getting-started" description="원하는 언어나 라이브러리를 선택하고 Solana에서 디지털 자산을 시작하세요." /%}
 
 {% quick-link title="API 레퍼런스" icon="CodeBracketSquare" href="https://mpl-inscription.typedoc.metaplex.com/" target="_blank" description="특정한 내용을 찾고 계신가요? API 레퍼런스를 확인하고 답을 찾아보세요." /%}
 
@@ -330,7 +330,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 ## 연관된 Inscription 계정
 
-[Metaplex JSON 표준](/token-metadata/token-standard)은 JSON 스키마의 files 속성을 통해 토큰에 연관된 파일을 연결하는 옵션을 포함합니다. Inscription 프로그램은 PDA의 힘을 사용하여 추가 데이터를 연관시키는 새로운 방법을 도입합니다! PDA는 Inscription과 **연관 태그**에서 파생되어, 비싼 JSON 역직렬화 및 파싱을 요구하지 않고 추가 새겨진 데이터를 프로그래밍 방식으로 파생할 수 있는 방법을 제공합니다.
+[Metaplex JSON 표준](/ko/smart-contracts/token-metadata/token-standard)은 JSON 스키마의 files 속성을 통해 토큰에 연관된 파일을 연결하는 옵션을 포함합니다. Inscription 프로그램은 PDA의 힘을 사용하여 추가 데이터를 연관시키는 새로운 방법을 도입합니다! PDA는 Inscription과 **연관 태그**에서 파생되어, 비싼 JSON 역직렬화 및 파싱을 요구하지 않고 추가 새겨진 데이터를 프로그래밍 방식으로 파생할 수 있는 방법을 제공합니다.
 
 ## Inscription Gateway
 
@@ -340,7 +340,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 
 ## Inscription 순위
 
-Inscription 순위는 각 inscription의 고유 번호입니다. 이 번호는 생성 시점의 총 Inscription 수를 기반으로 존재하는 모든 Metaplex Inscription의 순차적, 글로벌 순위를 나타냅니다. Inscription 순위는 [Inscription Sharding](/inscription/sharding)에서 자세히 설명되는 병렬화된 카운터를 통해 관리됩니다.
+Inscription 순위는 각 inscription의 고유 번호입니다. 이 번호는 생성 시점의 총 Inscription 수를 기반으로 존재하는 모든 Metaplex Inscription의 순차적, 글로벌 순위를 나타냅니다. Inscription 순위는 [Inscription Sharding](/ko/smart-contracts/inscription/sharding)에서 자세히 설명되는 병렬화된 카운터를 통해 관리됩니다.
 
 Inscription의 `inscriptionRank`를 찾으려면 `inscriptionMetadata` 계정을 가져와서 `inscriptionRank` `bigint`를 읽어야 합니다:
 
@@ -415,10 +415,10 @@ shards.forEach((shard) => {
 
 이 문서의 다른 페이지들은 이를 더 자세히 문서화하고 중요한 기능들을 개별 페이지에서 설명하는 것을 목표로 합니다.
 
-- [초기화](/inscription/initialize)
-- [작성](/inscription/write)
-- [가져오기](/inscription/fetch)
-- [지우기](/inscription/clear)
-- [닫기](/inscription/close)
-- [권한](/inscription/authority)
+- [초기화](/ko/smart-contracts/inscription/initialize)
+- [작성](/ko/smart-contracts/inscription/write)
+- [가져오기](/ko/smart-contracts/inscription/fetch)
+- [지우기](/ko/smart-contracts/inscription/clear)
+- [닫기](/ko/smart-contracts/inscription/close)
+- [권한](/ko/smart-contracts/inscription/authority)
 - [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway)

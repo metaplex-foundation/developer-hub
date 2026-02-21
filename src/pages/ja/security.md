@@ -24,7 +24,7 @@ description: 監査と脆弱性の報告方法。
 
 この情報は、レポートをより迅速にトリアージするのに役立ちます。
 
-報奨金の対象となる場合もあります。詳細は[こちら](https://www.metaplex.com/bounty-program)で確認できます。
+報奨金の対象となる場合もあります。詳細は[Metaplex報奨金プログラムページ](https://www.metaplex.com/bounty-program)で確認できます。
 
 ## 監査
 

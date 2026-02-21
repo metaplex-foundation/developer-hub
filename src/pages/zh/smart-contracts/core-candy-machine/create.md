@@ -64,8 +64,8 @@ await createIx.sendAndConfirm(umi)
 | collectionUpdateAuthority | signer                        |
 | itemsAvailable            | number                        |
 | isMutable                 | boolean                       |
-| configLineSettings        | [链接](#config-line-settings) |
-| hiddenSettings            | [链接](#hidden-settings)      |
+| configLineSettings        | [详见Config Line Settings](#config-line-settings) |
+| hiddenSettings            | [详见Hidden Settings](#hidden-settings)      |
 
 {% /dialect %}
 {% dialect title="Rust" id="rust" %}
@@ -80,8 +80,8 @@ await createIx.sendAndConfirm(umi)
 | collectionUpdateAuthority | signer                        |
 | itemsAvailable            | number                        |
 | isMutable                 | boolean                       |
-| configLineSettings        | [链接](#config-line-settings) |
-| hiddenSettings            | [链接](#hidden-settings)      |
+| configLineSettings        | [详见Config Line Settings](#config-line-settings) |
+| hiddenSettings            | [详见Hidden Settings](#hidden-settings)      |
 
 {% /dialect %}
 {% /dialect-switcher %}
