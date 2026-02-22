@@ -37,7 +37,7 @@ Customize these parameters for your token:
 
 ## Metadata and Images
 
-The `uri` should point to a JSON file containing at least the following information. You can find more details on the [Token Metadata Standard page](/smart-contracts/token-metadata/token-standard#the-fungible-standard). You need to upload the JSON and the image url so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide](/guides/general/create-deterministic-metadata-with-turbo).
+The `uri` should point to a JSON file containing at least the following information. You can find more details on the [Token Metadata Standard page](/smart-contracts/token-metadata/token-standard#the-fungible-standard). You need to upload the JSON and the image url so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide on creating deterministic metadata with Turbo](/guides/general/create-deterministic-metadata-with-turbo).
 
 ```json
 {

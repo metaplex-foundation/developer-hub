@@ -98,8 +98,7 @@ This PDA is set as the authority for the AppData and FreezeDelegate plugins duri
 Using per-card authorities is especially useful when you want fine-grained, asset-specific control rather than managing all NFTs under a single centralized authority.
 ### Step 1: Creating the Loyalty Card Collection
 This step can be handled off-chain using tools like the Metaplex JS SDK or CLI. You might create a collection NFT that represents your loyalty program (e.g., "Sol Coffee Loyalty Cards"). This collection can act as a parent to individual loyalty card NFTs, giving your program an efficient way to manage them.
-Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. While it isn’t strictly required to implement this as a Solana program instruction, doing so might be useful if you're building functionality for onboarding "manager" accounts or supporting white-labeled loyalty programs for multiple businesses.
-Assigning a PDA as the collection's update authority allows your program to issue and modify cards programmatically. This isn’t strictly required but helps streamline control.
+Assigning a PDA as the collection’s update authority allows your program to issue and modify cards programmatically. While it isn’t strictly required, doing so helps streamline control and might be useful if you’re building functionality for onboarding "manager" accounts or supporting white-labeled loyalty programs for multiple businesses.
 To understand more about minting a Core Collection, you could visit [Creating a Core Collection](/smart-contracts/core/collections#creating-a-collection).
 ### Step 2: Minting a Soulbound Loyalty Card
 When a user joins your program, you could mint them a loyalty card NFT with the following traits:

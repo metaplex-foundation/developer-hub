@@ -86,7 +86,7 @@ const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 
 압축 NFT가 발행된 _후_ 컬렉션을 설정하고 검증할 수 있지만, Bubblegum 프로그램은 압축 NFT를 주어진 컬렉션에 직접 발행하는 편리한 명령을 제공합니다. Bubblegum은 Metaplex Token Metadata 컬렉션 NFT를 사용하여 압축 NFT를 그룹화합니다. 이 명령은 **MintToCollectionV1**이라고 하며, 다음 매개변수를 추가로 사용하여 **MintV1** 명령과 동일한 매개변수를 사용합니다:
 
-- **컬렉션 민트**: 압축 NFT가 속할 [Token Metadata 컬렉션 NFT](/ko/smart-contracts/token-metadata/collections#creating-collection-nfts)의 민트 주소입니다.
+- **컬렉션 민트**: 압축 NFT가 속할 [Token Metadata 컬렉션 NFT](/ko/smart-contracts/token-metadata/collections#nft)의 민트 주소입니다.
 - **컬렉션 권한**: 주어진 컬렉션 NFT를 관리할 수 있는 권한입니다. 컬렉션 NFT의 업데이트 권한 또는 위임된 컬렉션 권한이 될 수 있습니다. Bubblegum 트리가 공개인지 여부에 관계없이 이 권한은 트랜잭션에 서명해야 합니다.
 - **컬렉션 권한 레코드 PDA**: 위임된 컬렉션 권한을 사용할 때 권한이 컬렉션 NFT를 관리할 수 있는지 확인하기 위해 위임자 레코드 PDA를 제공해야 합니다. 새로운 "메타데이터 위임자" PDA 또는 레거시 "컬렉션 권한 레코드" PDA를 사용할 수 있습니다.
 

@@ -148,7 +148,7 @@ To achieve that, we will use the `create` method from the mpl-core-candy-machine
 
 More details on the Core Candy Machine creation and guards can be found on [the Core Candy Machine creation page](/smart-contracts/core-candy-machine/create).
 
-Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards on [the Guards page](/smart-contracts/candy-machine/guards).
+Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards on [the Guards page](/smart-contracts/core-candy-machine/guards).
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';

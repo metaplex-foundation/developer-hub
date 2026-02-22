@@ -59,7 +59,7 @@ console.log("签名者: ", signer.publicKey);
 umi.use(signerIdentity(signer));
 ```
 
-您可以在[Core NFT资产创建指南](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)中找到有关设置 UMI 的更多详细信息
+您可以在[Core NFT资产创建指南](/zh/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#umi)中找到有关设置 UMI 的更多详细信息
 
 ## 准备揭示数据
 
@@ -149,7 +149,7 @@ console.log("集合详情: \n", collection);
 
 更多关于 Core Candy Machine 创建和守卫的详细信息可以在[Core Candy Machine创建页面](/zh/smart-contracts/core-candy-machine/create)找到。
 
-此外，我们将配置 startDate 守卫，它决定铸造何时开始。这只是许多可用守卫中的一个，您可以在[Guards页面](/zh/smart-contracts/candy-machine/guards)找到所有可用守卫的列表。
+此外，我们将配置 startDate 守卫，它决定铸造何时开始。这只是许多可用守卫中的一个，您可以在[Guards页面](/zh/smart-contracts/core-candy-machine/guards)找到所有可用守卫的列表。
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
