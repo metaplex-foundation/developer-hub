@@ -44,9 +44,9 @@ npm init -y
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
-## 完整发行脚本
+## 步骤 1：初始化代币
 
-以下是带有解释性注释的完整可运行脚本。运行此脚本**一次**以设置发行。
+以下脚本创建代币并初始化 Genesis 账户。运行此脚本**一次**以设置发行。
 
 {% callout type="warning" title="需要密钥对" %}
 您需要在机器上有Solana密钥对文件来签署交易。这通常是位于`~/.config/solana/id.json`的Solana CLI钱包。更新脚本中的`walletFile`路径以指向您的密钥对文件。确保此钱包有SOL用于交易费用。
@@ -55,18 +55,14 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 创建名为`launch.ts`的文件：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   mplGenesis,
   initializeV2,
   findGenesisAccountV2Pda,
-  findLaunchPoolBucketV2Pda,
-  findUnlockedBucketV2Pda,
-  addLaunchPoolBucketV2,
-  addUnlockedBucketV2,
-  finalizeV2,
 } from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation/umi';
+import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   // ============================================
@@ -80,7 +76,7 @@ async function main() {
   // 这通常是位于~/.config/solana/id.json的Solana CLI钱包
   // 或者，使用您有权访问的任何密钥对文件
   const walletFile = '/path/to/your/keypair.json'; // <-- 更新此路径
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -119,7 +115,7 @@ async function main() {
 
   await initializeV2(umi, {
     baseMint,
-    fundingMode: 0,
+    fundingMode: 0, // 0 = SOL 资助, 1 = SPL 代币资助
     totalSupplyBaseToken: TOTAL_SUPPLY,
     name: TOKEN_NAME,
     uri: TOKEN_URI,

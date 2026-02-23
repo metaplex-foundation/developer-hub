@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-metaTitle: Getting Started with Genesis | How to Launch a Token on Solana | Metaplex
+metaTitle: Getting Started with Genesis - Launch a Token on Solana
 description: Learn how to launch an SPL token on Solana step by step. Plan your presale, fair launch, or token sale using the Genesis token launchpad.
 created: '01-15-2025'
 updated: '01-31-2026'
