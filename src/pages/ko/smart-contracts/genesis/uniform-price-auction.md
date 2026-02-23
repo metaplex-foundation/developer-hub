@@ -3,7 +3,7 @@ title: Uniform Price Auction
 metaTitle: Genesis Auction | 솔라나 토큰 경매 | Metaplex
 description: 균일 청산 가격을 가진 솔라나 토큰 경매. SPL 토큰 출시를 위한 경쟁 입찰 — 기관 및 대규모 온체인 자금 조달을 위한 토큰 오퍼링.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-23-2026'
 keywords:
   - uniform price auction
   - token auction

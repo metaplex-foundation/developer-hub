@@ -13,7 +13,6 @@ keywords:
   - how to launch a token
   - SPL token launch
   - token launchpad
-  - token sale guide Solana
   - token sale guide
 about:
   - Genesis flow

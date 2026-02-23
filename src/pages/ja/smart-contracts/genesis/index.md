@@ -1,7 +1,7 @@
 ---
 title: Genesis - Solanaトークンローンチパッド＆ローンチプラットフォーム
 metaTitle: Genesis | Solanaトークンローンチパッド | Presale＆フェアローンチプラットフォーム | Metaplex
-description: GenesisはPresale、フェアローンチ、トークン生成イベント（TGE）に対応したSolanaトークンローンチパッドです。オンチェーンでのSPLトークン作成、クラウドセール、トークン配布プラットフォーム。
+description: GenesisはPresale、フェアローンチ、トークン生成イベント（TGE）に対応したSolanaトークンローンチパッドです。オンチェーンでのSPLトークン作成、クラウドセール、トークン配布プラットフォームを提供します。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -33,7 +33,7 @@ faqs:
 **Genesis** は、Solana トークンローンチパッドであり、**トークン生成イベント（TGE）**のためのスマートコントラクトです。トークンセール、プレセール、フェアローンチ、クラウドセールを、SPL トークンの作成、トークン配布、資金収集のためのオンチェーン調整機能で実行できます。 {% .lead %}
 
 {% callout title="あなたに合ったパスを選択" %}
-- **ノーコードでローンチしたい方は？** [Metaplex トークンローンチパッド](https://www.metaplex.com)は、トークンローンチのためのツールとSDKを提供しています
+- **ローンチツールをお探しですか？** [Metaplex トークンローンチパッド](https://www.metaplex.com)は、トークンローンチのためのツールとSDKを提供しています
 - **独自のローンチパッドを構築したい方は？** Genesis SDK を使って、カスタムトークンローンチプラットフォームの構築や、独自のウェブサイトでのトークンセールの開催が可能です
 - **Genesis が初めての方は？** [はじめに](/ja/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
 - **構築する準備ができた方は？** [Launch Pool](/ja/smart-contracts/genesis/launch-pool) または [Presale](/ja/smart-contracts/genesis/presale) へ進みましょう

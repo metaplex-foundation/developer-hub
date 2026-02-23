@@ -1,6 +1,6 @@
 ---
 title: 在 Solana 上发行代币
-metaTitle: Solana 代币发射台 | 代币销售与公平发射代币发射台 | Metaplex
+metaTitle: Solana 代币发射台 | 代币销售与公平发行 | Metaplex
 description: 使用 Genesis 在 Solana 上发行 SPL 代币——支持公平发射、预售、众筹和代币生成事件 (TGE) 的代币发射台。TypeScript 链上代币分发逐步指南。
 ---
 
