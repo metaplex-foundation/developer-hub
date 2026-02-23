@@ -5,22 +5,14 @@ description: GenesisはPresale、フェアローンチ、トークン生成イ�
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
-  - token launch
   - token launchpad
   - TGE
-  - token generation event
   - fair launch
-  - ICO
   - IDO
   - token sale
-  - crowdsale
-  - launch pool
   - presale
-  - token sale platform
   - Solana token
   - SPL token
-  - token distribution
-  - token offering
 about:
   - Token launches
   - Genesis protocol

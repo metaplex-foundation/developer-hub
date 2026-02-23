@@ -36,7 +36,7 @@ faqs:
 Understand the Genesis token launch flow before building. Whether you're planning a presale, fair launch, or token sale on Solana, this guide explains each step from SPL token creation to distribution. {% .lead %}
 
 {% callout title="No-Code Option" %}
-If you want to launch a token without writing code, use the [Metaplex token launchpad](https://www.metaplex.com). The guides below are for developers who want to build a custom launchpad platform or host a token sale on their own website.
+If you want to launch a token without writing code, use the [Metaplex token launchpad](https://www.metaplex.com). The guides below are for developers looking to build a custom launchpad platform or host a token sale on their own website.
 {% /callout %}
 
 {% callout title="Ready to Build?" %}

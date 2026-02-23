@@ -177,7 +177,7 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 
 ## 后续步骤
 
-- [Genesis 概述](/zh/smart-contracts/genesis) - 了解更多关于 Solana 代币发射台
+- [Genesis 概述](/zh/smart-contracts/genesis) - 了解有关 Solana 代币发射台的更多信息
 - [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 公平发射详细文档
 - [预售](/zh/smart-contracts/genesis/presale) - 以固定价格进行代币预售
 - [聚合 API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行和代币销售数据
