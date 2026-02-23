@@ -10,7 +10,7 @@ Transfer fungible tokens (SPL tokens) between wallets on the Solana blockchain. 
 
 ## Transfer Tokens
 
-In the following section you can find a full code example and the Parameters that you might have to change. You can learn more about token transfer details in the [Token Metadata program](/token-metadata) pages.
+In the following section you can find a full code example and the Parameters that you might have to change. You can learn more about token transfer details in the [Token Metadata program](/smart-contracts/token-metadata) pages.
 
 {% code-tabs-imported from="token-metadata/fungibles/transfer" frameworks="umi,cli" /%}
 

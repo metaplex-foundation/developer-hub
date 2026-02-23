@@ -167,5 +167,5 @@ Gumdrop을 구현할 때:
 ## 도움이 필요하신가요?
 
 - 지원을 위해 [Discord](https://discord.gg/metaplex)에 참여하세요
-- [Metaplex Gumdrop 문서](https://developers.metaplex.com/legacy-documentation/gumdrop)를 확인하세요
+- [Metaplex Gumdrop 문서](/ko/legacy-documentation/gumdrop)를 확인하세요
 - [소스 코드](https://github.com/metaplex-foundation/gumdrop)를 검토하세요

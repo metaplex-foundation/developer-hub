@@ -123,4 +123,4 @@ The algorithm for doing this is shown below:
     - Deserialize the account data into a Metadata struct/object, and find the mint address from the `mint` field. Add the `mint` address to a Set.
     - This final Set is your list of mint addresses for all items in the collection.
 
-Example Rust and TypeScript code for transaction crawling to get collection members can be found [here](https://github.com/metaplex-foundation/get-collection).
+Example Rust and TypeScript code for transaction crawling to get collection members can be found [in the get-collection repository](https://github.com/metaplex-foundation/get-collection).

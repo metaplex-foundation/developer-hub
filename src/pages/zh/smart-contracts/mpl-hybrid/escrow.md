@@ -13,7 +13,7 @@ description: 初始化MPL-Hybrid托管
 {% totem %}
 {% totem-accordion title="链上MPL-404托管数据结构" %}
 
-MPL-404托管的链上账户结构 [链接](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+MPL-404托管的链上账户结构 [查看源代码](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | 名称           | 类型   | 大小 | 描述                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

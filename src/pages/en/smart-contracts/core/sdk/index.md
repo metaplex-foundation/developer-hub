@@ -19,6 +19,6 @@ programmingLanguage:
 ---
 Select the language / library you want to use below to get started with the new Metaplex Core Standard.
 {% quick-links %}
-{% quick-link title="JavaScript" icon="JavaScript" href="/core/sdk/javascript" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
-{% quick-link title="Rust" icon="Rust" href="/core/sdk/rust" description="Get started using our MPL-Core Rust crate." /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/smart-contracts/core/sdk/javascript" description="Get started with our JavaScript library for MPL-Core based on the Umi framework." /%}
+{% quick-link title="Rust" icon="Rust" href="/smart-contracts/core/sdk/rust" description="Get started using our MPL-Core Rust crate." /%}
 {% /quick-links %}

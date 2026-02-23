@@ -73,10 +73,10 @@ faqs:
 ## プラグイン
 ### Oracleプラグイン
 Oracleプラグインは、Web 2.0-3.0ワークフローでのシンプルさのために設計されています。Oracleプラグインは、MPL Core Assetの外部にあるオンチェーンOracleアカウントにアクセスでき、authorityによって設定されたライフサイクルイベントの使用を拒否できます。外部Oracleアカウントはいつでも更新でき、ライフサイクルイベントの承認動作を変更できるため、動的なエクスペリエンスが可能になります。
-Oracleプラグインの詳細については[こちら](/smart-contracts/core/external-plugins/oracle)をご覧ください。
+Oracleプラグインの詳細については[Oracleプラグインページ](/smart-contracts/core/external-plugins/oracle)をご覧ください。
 ### AppDataプラグイン
 AppDataプラグインは、Assetsに安全でパーティション化されたデータストレージを提供します。各AppDataプラグインには、そのデータセクションへの書き込みを排他的に制御するData Authorityがあります。ユーザーデータ、ゲーム状態、またはアプリケーション固有のメタデータを保存するサードパーティアプリに役立ちます。
-AppDataプラグインの詳細については[こちら](/smart-contracts/core/external-plugins/app-data)をご覧ください。
+AppDataプラグインの詳細については[AppDataプラグインページ](/smart-contracts/core/external-plugins/app-data)をご覧ください。
 ## 外部プラグイン vs 組み込みプラグイン
 | 機能 | 外部プラグイン | 組み込みプラグイン |
 |---------|------------------|------------------|

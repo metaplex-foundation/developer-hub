@@ -14,7 +14,7 @@ It works both in Android and other platforms that support kotlin.
 
 ## Stability
 
-[Stability 1 - Experimental](/smart-contracts/security)
+[Stability 1 - Experimental](/security)
 
 This project is in development. **All** interfaces are _very likely_ to change very frequently. Please use caution when making use of this library. Bugs or behavior changes may surprise users when Experimental API modifications occur.
 

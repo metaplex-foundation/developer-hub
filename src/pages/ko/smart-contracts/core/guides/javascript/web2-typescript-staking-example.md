@@ -39,12 +39,12 @@ This program operates with a standard TypeScript backend and uses the asset keyp
 The **Freeze Delegate Plugin** is an **owner managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
 **Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
-_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
+_Learn more about it [on the Freeze Delegate Plugin page](/smart-contracts/core/plugins/freeze-delegate)_
 ### The Attribute Plugin
 The **Attribute Plugin** is an **authority managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
 This plugin allows for **data storage directly on the assets, functioning as onchain attributes or traits**. These traits can be accessed directly by onchain programs since they aren’t stored off-chain as it was for the mpl-program.
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
+_Learn more about it [on the Attribute Plugin page](/smart-contracts/core/plugins/attribute)_
 ### The program Logic
 For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement.
 _Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
@@ -76,7 +76,7 @@ import { base58 } from '@metaplex-foundation/umi/serializers';
 ### Umi and Core SDK Overview
 In this guide, we’ll use both **Umi** and the **Core SDK** to create all necessary instructions.
 **Umi is a modular framework for building and using JavaScript clients for Solana programs**. It provides a zero-dependency library that defines a set of core interfaces, enabling libraries to operate independently of specific implementations.
-_For more information, you can find an overview [here](/dev-tools/umi/getting-started)_
+_For more information, you can find an overview [in the Umi Getting Started guide](/dev-tools/umi/getting-started)_
 **The basic Umi setup for this example will look like this**:
 ```typescript
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
