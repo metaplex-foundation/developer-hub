@@ -64,13 +64,12 @@
 
 - [Aggregation API](https://developers.metaplex.com/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
 - [API](https://developers.metaplex.com/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
-- [CLI Guide](https://developers.metaplex.com/smart-contracts/genesis/cli): Launch tokens using the Metaplex CLI (mplx) — create Genesis accounts, add buckets, deposit, claim, and manage your token launch from the terminal.
-- [Genesis - Solana Token Launch Smart Contract](https://developers.metaplex.com/smart-contracts/genesis): Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
-- [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+- [Genesis - Solana Token Launchpad & Launch Platform](https://developers.metaplex.com/smart-contracts/genesis): Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
+- [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Learn how to launch an SPL token on Solana step by step. Plan your presale, fair launch, or token sale using the Genesis token launchpad.
 - [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
-- [Launch Pool](https://developers.metaplex.com/smart-contracts/genesis/launch-pool): Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
-- [Presale](https://developers.metaplex.com/smart-contracts/genesis/presale): Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
-- [Uniform Price Auction](https://developers.metaplex.com/smart-contracts/genesis/uniform-price-auction): Time-based auction mechanism for token launches with uniform clearing price. Competitive bidding for larger participants.
+- [Launch Pool](https://developers.metaplex.com/smart-contracts/genesis/launch-pool): Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
+- [Presale](https://developers.metaplex.com/smart-contracts/genesis/presale): Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
+- [Uniform Price Auction](https://developers.metaplex.com/smart-contracts/genesis/uniform-price-auction): Token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token sale mechanism for institutional and large-scale fundraising.
 
 ## Core (NFT Standard)
 
@@ -396,44 +395,6 @@
 - [Search Core Assets](https://developers.metaplex.com/dev-tools/das-api/core-extension/methods/search-assets): Return the list of MPL Core assets given a search criteria
 - [Search Core Collections](https://developers.metaplex.com/dev-tools/das-api/core-extension/methods/search-collections): Return the list of MPL Core Collections given a search criteria
 
-## Guides
-
-- [Getting Started with Rust](https://developers.metaplex.com/guides/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
-- [Guides](https://developers.metaplex.com/guides): Guides by Metaplex about the Solana blockchain.
-- [Working with Rust](https://developers.metaplex.com/guides/rust/working-with-rust): A quick overview on working with Rust and the Metaplex protocol.
-- [Compute Units and Priority Fees](https://developers.metaplex.com/guides/compute-units-and-priority-fees): Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
-- [Create a Claimable SPL Token Airdrop](https://developers.metaplex.com/guides/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
-- [Getting SOL for Development](https://developers.metaplex.com/guides/getting-sol-for-development): Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet.
-- [Grind a Vanity Public Key on Solana](https://developers.metaplex.com/guides/grind-vanity-public-key): Learn how to generate custom Solana addresses with specific prefixes or suffixes using solana-keygen grind for branded tokens and recognizable wallets.
-- [Create deterministic metadata with Turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
-- [Getting SOL for Development](https://developers.metaplex.com/guides/getting-sol-for-development): Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet and testnet.
-- [Grind a Vanity Public Key on Solana](https://developers.metaplex.com/guides/grind-vanity-public-key): Learn how to generate custom Solana addresses with specific prefixes or suffixes using solana-keygen grind for branded tokens and recognizable wallets.
-- [How to Add Metadata to a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-add-metadata-to-spl-tokens): Learn how to add Metadata to an already existing Solana token.
-- [How to CPI into a Metaplex Program](https://developers.metaplex.com/guides/rust/how-to-cpi-into-a-metaplex-program): An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
-- [How to Create a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token): Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
-- [How to Create an NFT On Solana](https://developers.metaplex.com/guides/javascript/how-to-create-an-nft-on-solana): Learn how to create an NFT on the Solana blockchain with Metaplex packages.
-- [How to Diagnose Transaction Errors on Solana](https://developers.metaplex.com/guides/general/how-to-diagnose-solana-transaction-errors): Learn how to diagnose transaction errors on Solana and find logical solutions for these errors.
-- [How to Send and Transfer SOL on Solana](https://developers.metaplex.com/guides/javascript/how-to-transfer-sol-on-solana): Learn how to send and transfer SOL via javascript on the Solana blockchain.
-- [How to Send and Transfer SPL Tokens on Solana](https://developers.metaplex.com/guides/javascript/how-to-transfer-spl-tokens-on-solana): Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
-- [Japanese 日本語](https://developers.metaplex.com/guides/translated/japanese): A selection of guides translated into Japanese.
-- [Metaplex Rust SDKs](https://developers.metaplex.com/guides/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
-- [Metaplex Solana NextJs Tailwind Template](https://developers.metaplex.com/guides/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
-- [RPCs and DAS](https://developers.metaplex.com/guides/rpcs-and-das): Learn about RPCs on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
-- [Setup a Local Validator](https://developers.metaplex.com/guides/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
-- [Solana CLI Essentials](https://developers.metaplex.com/guides/solana-cli-essentials): Learn the essential Solana CLI commands for development, including installation, configuration, and common operations.
-- [Solana Keypairs and Wallets](https://developers.metaplex.com/guides/solana-keypairs-and-wallets): Learn how to create, manage, and secure Solana keypairs and wallets for development and production use.
-- [Solana Programs and State Overview](https://developers.metaplex.com/guides/solana-programs): Learn about Solana Programs and how data is stored in account state on Solana.
-- [Solana Transaction Fundamentals](https://developers.metaplex.com/guides/solana-transaction-fundamentals): Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
-- [SPL Tokens and Token Programs](https://developers.metaplex.com/guides/spl-tokens-and-token-programs): Learn how SPL tokens work on Solana, including the Token Program, mint accounts, token accounts, and how Metaplex builds on top of the token standard.
-- [The Payer-Authority Pattern](https://developers.metaplex.com/guides/general/payer-authority-pattern): A common programming pattern for Solana instructions using a separate authority and payer.
-- [Understanding Solana Accounts](https://developers.metaplex.com/guides/understanding-solana-accounts): Learn how Solana accounts work, including ownership, rent, and how they differ from Ethereum. Essential knowledge for token and NFT development.
-- [Understanding Solana Program Derived Addresses (PDAs)](https://developers.metaplex.com/guides/understanding-pdas): Learn about Solana Program Derived Addresses (PDAs) and their use cases.
-- [Using Solana Explorers](https://developers.metaplex.com/guides/using-solana-explorers): Learn how to use Solana Explorer, SolanaFM, and CLI tools to inspect transactions, accounts, and debug issues during development.
-- [Validators and Staking](https://developers.metaplex.com/guides/validators): An overview of Solana Validators and staking mechanics.
-- [What is Solana?](https://developers.metaplex.com/guides/what-is-solana): What is Solana and why would you want to build on it.
-- [Where Do I Start With Solana?](https://developers.metaplex.com/guides/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
-- [Working with Devnet](https://developers.metaplex.com/guides/working-with-devnet-and-testnet): Learn how to use Solana devnet and local validators for development. Understand when to use each environment and how to transition to mainnet.
-
 ## Dev Tools
 
 - [Overview](https://developers.metaplex.com/dev-tools/amman): Provides a high-level overview of Amman local validator.
@@ -486,6 +447,8 @@
 - [Code Tabs Test Page](https://developers.metaplex.com/test-code-tabs): Testing the new CodeTabs component
 - [Copy with Context Test](https://developers.metaplex.com/test-copy-context): Testing enhanced copy functionality
 - [Enhanced Fence Component - Test Page](https://developers.metaplex.com/test-fence-enhanced): Testing all new features of the enhanced Fence component
+- [Getting Started with Rust](https://developers.metaplex.com/solana/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
+- [Guides](https://developers.metaplex.com/solana): Guides by Metaplex about the Solana blockchain.
 - [Mint Fungible Tokens](https://developers.metaplex.com/tokens/mint-tokens): Learn how to mint additional fungible SPL tokens to a wallet on Solana using JavaScript and Umi
 - [Official Links](https://developers.metaplex.com/official-links): Official Links for Metaplex
 - [Overview](https://developers.metaplex.com/smart-contracts/fusion): Provides a high-level overview of composable NFTs using Fusion.
@@ -503,8 +466,10 @@
 - [Solana Tokens](https://developers.metaplex.com/tokens): Create, launch, and manage fungible tokens on Solana. Build token generation events (TGE), fair launches, and token sales using Metaplex Genesis and SDKs.
 - [Stability Index](https://developers.metaplex.com/stability-index): A guide to the stability levels of Metaplex products.
 - [Two Examples Test](https://developers.metaplex.com/test-two-examples): Testing two code-tabs-imported on one page
-- [Understanding Programs](https://developers.metaplex.com/understanding-programs): A quick overview of how programs work on Solana.
+- [What is Solana?](https://developers.metaplex.com/solana/what-is-solana): What is Solana and why would you want to build on it.
+- [Working with Rust](https://developers.metaplex.com/solana/rust/working-with-rust): A quick overview on working with Rust and the Metaplex protocol.
 - [Additional Signer](https://developers.metaplex.com/smart-contracts/token-auth-rules/primitive-rules/additional-signer): The Additional Signer primitive rule
+- [Airdrop SOL for Development](https://developers.metaplex.com/solana/airdrop-sol-for-development): Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet.
 - [All](https://developers.metaplex.com/smart-contracts/token-auth-rules/composite-rules/all): The All composite rule
 - [Amount](https://developers.metaplex.com/smart-contracts/token-auth-rules/primitive-rules/amount): The Amount primitive rule
 - [Any](https://developers.metaplex.com/smart-contracts/token-auth-rules/composite-rules/any): The Any composite rule
@@ -512,7 +477,9 @@
 - [Burn an NFT](https://developers.metaplex.com/nfts/burn-nft): Learn how to burn NFTs using Metaplex Core on Solana
 - [Clear Inscription Data](https://developers.metaplex.com/smart-contracts/inscription/clear): Learn how to clear Inscription data
 - [Close Inscriptions](https://developers.metaplex.com/smart-contracts/inscription/close): Learn how to close Inscription accounts
+- [Compute Units and Priority Fees](https://developers.metaplex.com/solana/compute-units-and-priority-fees): Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
 - [Constraint Types](https://developers.metaplex.com/smart-contracts/fusion/constraint-types): The different options for Trifle composition rules.
+- [Create a Claimable SPL Token Airdrop](https://developers.metaplex.com/solana/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
 - [Create a Fungible Token](https://developers.metaplex.com/tokens/create-a-token): Learn how to create a fungible SPL token with metadata on Solana
 - [Create an NFT](https://developers.metaplex.com/nfts/create-nft): Learn how to create an NFT using Metaplex Core on Solana
 - [Create deterministic metadata with Turbo](https://developers.metaplex.com/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
@@ -530,15 +497,25 @@
 - [Getting Started using JavaScript](https://developers.metaplex.com/smart-contracts/inscription/getting-started/js): Get started with Inscription using JavaScript
 - [Getting Started using Rust](https://developers.metaplex.com/smart-contracts/inscription/getting-started/rust): Get started with Inscriptions using Rust
 - [Getting started using the Inscriptions CLI](https://developers.metaplex.com/smart-contracts/inscription/getting-started/cli): Get started using the Inscriptions CLI
+- [Grind a Vanity Public Key on Solana](https://developers.metaplex.com/solana/grind-vanity-public-key): Learn how to generate custom Solana addresses with specific prefixes or suffixes using solana-keygen grind for branded tokens and recognizable wallets.
 - [Guides](https://developers.metaplex.com/smart-contracts/mpl-hybrid/guides): A list of guides and tutorials for the Metaplex Hybrid standard on the Solana blockchain.
+- [How to CPI into a Metaplex Program](https://developers.metaplex.com/solana/rust/how-to-cpi-into-a-metaplex-program): An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
+- [How to Create a Solana Token](https://developers.metaplex.com/solana/javascript/how-to-create-a-solana-token): Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
 - [How to Create a Token with Rust and Anchor](https://developers.metaplex.com/tokens/anchor/create-token): Learn how to create an SPL token with metadata on Solana using Rust, the Anchor framework, and Metaplex Token Metadata.
+- [How to Create an NFT On Solana](https://developers.metaplex.com/solana/javascript/how-to-create-an-nft-on-solana): Learn how to create an NFT on the Solana blockchain with Metaplex packages.
+- [How to Diagnose Transaction Errors on Solana](https://developers.metaplex.com/solana/general/how-to-diagnose-solana-transaction-errors): Learn how to diagnose transaction errors on Solana and find logical solutions for these errors.
+- [How to Send and Transfer SOL on Solana](https://developers.metaplex.com/solana/javascript/how-to-transfer-sol-on-solana): Learn how to send and transfer SOL via javascript on the Solana blockchain.
+- [How to Send and Transfer SPL Tokens on Solana](https://developers.metaplex.com/solana/javascript/how-to-transfer-spl-tokens-on-solana): Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
 - [Initialize Inscriptions](https://developers.metaplex.com/smart-contracts/inscription/initialize): Learn how to create Metaplex Inscriptions
 - [Initializing Escrow](https://developers.metaplex.com/smart-contracts/mpl-hybrid/escrow): Initializing MPL-Hybrid Escrow
 - [Initializing NFT Data](https://developers.metaplex.com/smart-contracts/mpl-hybrid/initializeNFTData): Initializing MPL-Hybrid NFT Data
 - [Inscription Authority](https://developers.metaplex.com/smart-contracts/inscription/authority): Learn what a Inscription Authority is and where it's stored
 - [Inscription Sharding](https://developers.metaplex.com/smart-contracts/inscription/sharding): Explains the method used to prevent write-lock contention on Inscription minting.
-- [Launch a Token on Solana](https://developers.metaplex.com/tokens/launch-token): Complete guide to launching a token generation event (TGE) on Solana. Create fair token launches using Genesis Launch Pools with step-by-step TypeScript code.
+- [Japanese 日本語](https://developers.metaplex.com/solana/translated/japanese): A selection of guides translated into Japanese.
+- [Launch a Token on Solana](https://developers.metaplex.com/tokens/launch-token): Step-by-step TypeScript guide to launching an SPL token on Solana using Genesis Launch Pools. Fair, on-chain token distribution with transparent price discovery.
 - [Metaplex MPL-404 Hybrid Solana NextJs Tailwind Template](https://developers.metaplex.com/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template): A web UI template for Metaplex MPL-404 Hybrid using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
+- [Metaplex Rust SDKs](https://developers.metaplex.com/solana/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
+- [Metaplex Solana NextJs Tailwind Template](https://developers.metaplex.com/solana/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
 - [MPL-Hybrid Javascript SDK](https://developers.metaplex.com/smart-contracts/mpl-hybrid/sdk/javascript): Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
 - [MPL-Hybrid SDKs](https://developers.metaplex.com/smart-contracts/mpl-hybrid/sdk): View the available SDKs for the MPL-Hybrid Metaplex program.
 - [Namespace](https://developers.metaplex.com/smart-contracts/token-auth-rules/primitive-rules/namespace): The Namespace primitive rule
@@ -550,17 +527,32 @@
 - [Public Key](https://developers.metaplex.com/smart-contracts/token-auth-rules/primitive-rules/pubkey-match): The Public Key primitive rule
 - [Quick Start](https://developers.metaplex.com/smart-contracts/hydra/quick-start): Provides a high-level overview over the non-Umi Hydra SDK.
 - [Read Token Data](https://developers.metaplex.com/tokens/read-token): Learn how to fetch fungible token data from the Solana blockchain
+- [RPCs, DAS, and RPC Providers](https://developers.metaplex.com/solana/rpcs-and-das): Learn about RPCs on the Solana blockchain, how DAS by Metaplex aids in storing and reading data, and find RPC providers for your project.
+- [Setup a Local Validator](https://developers.metaplex.com/solana/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
+- [Solana CLI Essentials](https://developers.metaplex.com/solana/solana-cli-essentials): Learn the essential Solana CLI commands for development, including installation, configuration, and common operations.
+- [Solana Keypairs and Wallets](https://developers.metaplex.com/solana/solana-keypairs-and-wallets): Learn how to create, manage, and secure Solana keypairs and wallets for development and production use.
+- [Solana Programs and State Overview](https://developers.metaplex.com/solana/solana-programs): Learn about Solana Programs and how data is stored in account state on Solana.
+- [Solana Transaction Fundamentals](https://developers.metaplex.com/solana/solana-transaction-fundamentals): Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
+- [SPL Tokens and Token Programs](https://developers.metaplex.com/solana/spl-tokens-and-token-programs): Learn how SPL tokens work on Solana, including the Token Program, mint accounts, token accounts, and how Metaplex builds on top of the token standard.
 - [Swapping](https://developers.metaplex.com/smart-contracts/mpl-hybrid/swapping): MPL-404 Swapping
 - [Swapping an NFT to Tokens in MPL Hybrid](https://developers.metaplex.com/smart-contracts/mpl-hybrid/swapping-nfts-to-tokens): Learn to write a swap function so users can swap their NFT into Tokens in the MPL-Hybrid Program.
 - [Swapping Tokens to NFTs](https://developers.metaplex.com/smart-contracts/mpl-hybrid/swapping-tokens-to-nfts): Learn to your SPL tokens to an NFT in the MPL-Hybrid Program.
+- [The Payer-Authority Pattern](https://developers.metaplex.com/solana/general/payer-authority-pattern): A common programming pattern for Solana instructions using a separate authority and payer.
 - [Transfer an NFT](https://developers.metaplex.com/nfts/transfer-nft): Learn how to transfer NFTs between wallets using Metaplex Core on Solana
 - [Transfer Effects](https://developers.metaplex.com/smart-contracts/fusion/transfer-effects): Effects that can be triggered on compose and decompose events.
 - [Transfer Fungible Tokens](https://developers.metaplex.com/tokens/transfer-a-token): Learn how to transfer fungible SPL tokens between wallets on Solana using JavaScript and Umi
+- [Understanding Programs](https://developers.metaplex.com/solana/understanding-programs): A quick overview of how programs work on Solana.
+- [Understanding Solana Accounts](https://developers.metaplex.com/solana/understanding-solana-accounts): Learn how Solana accounts work, including ownership, rent, and how they differ from Ethereum. Essential knowledge for token and NFT development.
+- [Understanding Solana Program Derived Addresses (PDAs)](https://developers.metaplex.com/solana/understanding-pdas): Learn about Solana Program Derived Addresses (PDAs) and their use cases.
 - [Update an NFT](https://developers.metaplex.com/nfts/update-nft): Learn how to update NFT metadata using Metaplex Core on Solana
 - [Update Token Metadata](https://developers.metaplex.com/tokens/update-token): Learn how to update fungible token metadata on Solana using JavaScript and Umi
 - [Updating the Configuration of an MPL Hybrid 404 Escrow](https://developers.metaplex.com/smart-contracts/mpl-hybrid/update-escrow): Learn to update the configuration of an MPL 404 Hybrid Escrow account.
 - [Using Buffers](https://developers.metaplex.com/smart-contracts/token-auth-rules/buffers): Documentation of Token Auth Rule Buffers.
+- [Using Solana Explorers](https://developers.metaplex.com/solana/using-solana-explorers): Learn how to use Solana Explorer, SolanaFM, and CLI tools to inspect transactions, accounts, and debug issues during development.
 - [Validating with a Rule Set](https://developers.metaplex.com/smart-contracts/token-auth-rules/validate): How to run validation using a Rule Set
+- [Validators and Staking](https://developers.metaplex.com/solana/validators): An overview of Solana Validators and staking mechanics.
+- [Where Do I Start With Solana?](https://developers.metaplex.com/solana/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
+- [Working with Devnet](https://developers.metaplex.com/solana/working-with-devnet-and-testnet): Learn how to use Solana devnet and local validators for development. Understand when to use each environment and how to transition to mainnet.
 - [Write Inscription Data](https://developers.metaplex.com/smart-contracts/inscription/write): Learn how to write Data to your Inscription
 
 ## Additional Resources
