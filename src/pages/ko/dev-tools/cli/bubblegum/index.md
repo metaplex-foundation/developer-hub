@@ -29,9 +29,9 @@ mplx core collection create --wizard
 
 ### RPC 요구 사항
 
-압축 NFT 작업에는 [DAS (Digital Asset Standard) API](/rpc-providers#metaplex-das-api)를 지원하는 RPC 엔드포인트가 필요합니다. 표준 Solana RPC 엔드포인트는 DAS를 지원하지 않으며 압축 NFT의 조회, 업데이트, 전송 또는 소각에 작동하지 않습니다.
+압축 NFT 작업에는 [DAS (Digital Asset Standard) API](/solana/rpcs-and-das#metaplex-das-api)를 지원하는 RPC 엔드포인트가 필요합니다. 표준 Solana RPC 엔드포인트는 DAS를 지원하지 않으며 압축 NFT의 조회, 업데이트, 전송 또는 소각에 작동하지 않습니다.
 
-DAS를 지원하는 프로바이더 목록은 [RPC 프로바이더](/rpc-providers) 페이지를 참조하세요.
+DAS를 지원하는 프로바이더 목록은 [RPC 프로바이더](/solana/rpcs-and-das) 페이지를 참조하세요.
 
 ## 명령 구조
 

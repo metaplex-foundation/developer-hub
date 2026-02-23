@@ -29,7 +29,7 @@ mplx core collection create --wizard
 
 ### RPC Requirements
 
-Compressed NFT operations require an RPC endpoint that supports the [DAS (Digital Asset Standard) API](/rpc-providers#metaplex-das-api). Standard Solana RPC endpoints do not support DAS and will not work for fetching, updating, transferring, or burning compressed NFTs.
+Compressed NFT operations require an RPC endpoint that supports the [DAS (Digital Asset Standard) API](/solana/rpcs-and-das#metaplex-das-api). Standard Solana RPC endpoints do not support DAS and will not work for fetching, updating, transferring, or burning compressed NFTs.
 
 ## Command Structure
 

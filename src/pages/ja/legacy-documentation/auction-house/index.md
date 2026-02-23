@@ -30,7 +30,7 @@ Auction Houseプログラムの最も重要な側面は、アセットの所有�
 
 ## オークションハウスの作成
 
-Auction Houseプログラムを使用して、新しい**Auction House**アカウントをインスタンス化することで、新しいマーケットプレイスを作成できます。Auction Houseアカウントは、特定の公開鍵と、オプションで通貨として使用するSPLトークン（詳細は後述）から派生した[プログラム派生アドレス（PDA）](../../understanding-programs#program-derived-addresses-pda)です。
+Auction Houseプログラムを使用して、新しい**Auction House**アカウントをインスタンス化することで、新しいマーケットプレイスを作成できます。Auction Houseアカウントは、特定の公開鍵と、オプションで通貨として使用するSPLトークン（詳細は後述）から派生した[プログラム派生アドレス（PDA）](/solana/understanding-programs#program-derived-addresses-pda)です。
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 

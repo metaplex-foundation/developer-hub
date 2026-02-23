@@ -130,7 +130,7 @@ Bubblegum V2는 추가 기능을 지원하면서 이전 버전과의 호환성�
 
 하나의 NFT 데이터를 가져오기 위해 수백만 개의 트랜잭션을 매번 크롤링하는 것은 최고의 사용자 경험이 아닙니다. 따라서 압축된 NFT는 일부 RPC가 실시간으로 해당 정보를 인덱싱하여 최종 사용자로부터 이를 추상화하는 것에 의존합니다. 압축된 NFT를 가져올 수 있게 하는 결과 RPC API를 **Metaplex DAS API**라고 합니다.
 
-모든 RPC가 DAS API를 지원하는 것은 아닙니다. 따라서 애플리케이션에서 압축된 NFT를 사용할 때 적절한 RPC를 선택하려면 ["Metaplex DAS API RPC"](/ko/rpc-providers) 페이지에 관심이 있을 수 있습니다.
+모든 RPC가 DAS API를 지원하는 것은 아닙니다. 따라서 애플리케이션에서 압축된 NFT를 사용할 때 적절한 RPC를 선택하려면 ["Metaplex DAS API RPC"](/ko/solana/rpcs-and-das) 페이지에 관심이 있을 수 있습니다.
 
 이에 대해 더 자세히 설명하는 고급 ["NFT 데이터 저장 및 인덱싱"](/ko/smart-contracts/bubblegum-v2/stored-nft-data) 가이드에서 다룹니다.
 

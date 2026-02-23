@@ -30,7 +30,7 @@ description: 提供拍卖行程序的概述
 
 ## 创建拍卖行
 
-拍卖行程序可用于通过实例化新的**拍卖行**账户来创建新市场。拍卖行账户是一个[程序派生地址(PDA)](/zh/understanding-programs#program-derived-addresses-pda),它从给定的公钥派生,并可选地从用作货币的 SPL 代币派生(下文将详细介绍)。
+拍卖行程序可用于通过实例化新的**拍卖行**账户来创建新市场。拍卖行账户是一个[程序派生地址(PDA)](/zh/solana/understanding-programs#program-derived-addresses-pda),它从给定的公钥派生,并可选地从用作货币的 SPL 代币派生(下文将详细介绍)。
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 

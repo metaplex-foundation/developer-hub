@@ -33,6 +33,15 @@ const standaloneRedirects = {
   '/contact': '/',
   '/developer-tools': '/dev-tools',
   '/programs-and-tools': '/smart-contracts',
+  // Legacy pages moved under /solana
+  '/rpc-providers': '/solana/rpcs-and-das',
+  '/understanding-programs': '/solana/understanding-programs',
+  '/ja/rpc-providers': '/ja/solana/rpcs-and-das',
+  '/ko/rpc-providers': '/ko/solana/rpcs-and-das',
+  '/zh/rpc-providers': '/zh/solana/rpcs-and-das',
+  '/ja/understanding-programs': '/ja/solana/understanding-programs',
+  '/ko/understanding-programs': '/ko/solana/understanding-programs',
+  '/zh/understanding-programs': '/zh/solana/understanding-programs',
   // Genesis priced-sale renamed to presale
   '/smart-contracts/genesis/priced-sale': '/smart-contracts/genesis/presale',
   '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',

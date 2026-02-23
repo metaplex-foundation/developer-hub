@@ -458,7 +458,6 @@
 - [Overview](https://developers.metaplex.com/smart-contracts/token-auth-rules): Provides a high-level overview of NFT permissions.
 - [Overview](https://developers.metaplex.com/smart-contracts/token-auth-rules/mplx-rule-sets): The pNFT Rule Sets that Metaplex Foundation manages.
 - [Protocol Fees](https://developers.metaplex.com/protocol-fees): Details of the onchain fees for Metaplex's products.
-- [RPC Providers](https://developers.metaplex.com/rpc-providers): A list of available RPCs on Solana.
 - [Security](https://developers.metaplex.com/security): Audits and how to report a vulnerability.
 - [Simple Test](https://developers.metaplex.com/test-simple): Simple test page
 - [Solana NFTs](https://developers.metaplex.com/nfts): Create, manage, and trade NFTs on Solana using Metaplex Core. Build digital collectibles, art, and gaming assets with the most efficient NFT standard.

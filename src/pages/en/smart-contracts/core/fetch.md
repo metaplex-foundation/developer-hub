@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Fetch Multiple Assets
-Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/solana/rpcs-and-das).
 ### Fetch Assets By Owner
 {% dialect-switcher title="fetch Assets by Owner" %}
 {% dialect title="JavaScript" id="js" %}
@@ -411,7 +411,7 @@ GPA queries can be expensive. Solutions:
 | Requires Special RPC | No | Yes |
 ## FAQ
 ### Should I use GPA or DAS for fetching multiple Assets?
-Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata. See [DAS RPC providers](/rpc-providers) for compatible endpoints.
+Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata. See [DAS RPC providers](/solana/rpcs-and-das) for compatible endpoints.
 ### How do I fetch an Asset's off-chain metadata?
 The `uri` field contains the metadata URL. Fetch it separately:
 ```ts
