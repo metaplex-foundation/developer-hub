@@ -1,8 +1,35 @@
 ---
 title: 압축된 NFT 소각
-metaTitle: 압축된 NFT 소각 | Bubblegum V2
+metaTitle: 압축된 NFT 소각 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 소각하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - burn compressed NFT
+  - burn cNFT
+  - delete NFT
+  - Bubblegum burn
+  - burnV2
+  - permanent burn delegate
+about:
+  - Compressed NFTs
+  - NFT lifecycle
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Burning a compressed NFT** permanently removes it from the Bubblegum Tree using the **burnV2** instruction. This page covers burning by owner, leaf delegate, and permanent burn delegate.
+
+- Burn a cNFT using the burnV2 instruction
+- Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
+- Pass the coreCollection parameter when the cNFT belongs to a collection
+
+## Out of Scope
+
 
 **burnV2** 명령어는 압축된 NFT를 소각하여 Bubblegum 트리에서 영구적으로 제거하는 데 사용할 수 있습니다. 이 작업을 승인하려면 현재 소유자나 위임 권한(있는 경우) 중 하나가 트랜잭션에 서명해야 합니다. 명령어는 다음 매개변수를 받아들입니다:
 
@@ -64,3 +91,22 @@ await burnV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Burning is **irreversible** — the cNFT is permanently removed from the merkle tree.
+- If the cNFT belongs to a collection, you must pass the `coreCollection` parameter.
+- The permanent burn delegate can burn any cNFT in the collection without the owner's signature, if the `PermanentBurnDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **burnV2** | The Bubblegum V2 instruction that permanently removes a cNFT from the merkle tree |
+| **Permanent Burn Delegate** | A collection-level authority that can burn any cNFT in the collection without owner consent |
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform actions (transfer, burn, freeze) on their behalf |
+| **getAssetWithProof** | A helper function that fetches all required parameters (proof, hashes, nonce, index) from the DAS API |

@@ -1,8 +1,36 @@
 ---
 title: 转移压缩NFT
-metaTitle: 转移压缩NFT | Bubblegum V2
+metaTitle: 转移压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum上转移压缩NFT。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - transfer compressed NFT
+  - transfer cNFT
+  - NFT transfer
+  - Bubblegum transfer
+  - transferV2
+  - permanent transfer delegate
+about:
+  - Compressed NFTs
+  - NFT transfers
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Transferring a compressed NFT** moves ownership from one wallet to another using the **transferV2** instruction. This page covers transfers by owner, delegate, permanent transfer delegate, and transferability checks.
+
+- Transfer a cNFT to a new owner using transferV2
+- Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
+- Check if a cNFT can be transferred using the canTransfer helper
+- Pass the coreCollection parameter when the cNFT belongs to a collection
+
+## Out of Scope
+
 
 **transferV2**指令可用于将压缩NFT从一个所有者转移到另一个。要授权转移，当前所有者或委托权限（如果有）必须签署交易。委托权限可以是叶子委托人或集合的`permanentTransferDelegate`。
 
@@ -108,3 +136,23 @@ const assetWithProof = await getAssetWithProof(umi, assetId, {
 const canBeTransferred = canTransfer(assetWithProof)
 console.log("canBeTransferred", canBeTransferred ? "Yes" : "No")
 ```
+
+## Notes
+
+- After a transfer, the leaf delegate is automatically reset to the new owner.
+- Frozen cNFTs and soulbound (non-transferable) cNFTs cannot be transferred. Use `canTransfer` to check.
+- The permanent transfer delegate can transfer without the owner's signature if the `PermanentTransferDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **transferV2** | The Bubblegum V2 instruction that transfers a cNFT from one owner to another |
+| **Permanent Transfer Delegate** | A collection-level authority that can transfer any cNFT without owner consent |
+| **canTransfer** | A helper function that checks whether a cNFT can be transferred (not frozen or soulbound) |
+| **Leaf Owner** | The current owner of the compressed NFT |
+| **New Leaf Owner** | The wallet address that will receive ownership of the cNFT after transfer |

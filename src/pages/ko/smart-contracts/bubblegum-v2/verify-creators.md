@@ -1,8 +1,34 @@
 ---
 title: 크리에이터 검증
-metaTitle: 크리에이터 검증 | Bubblegum V2
+metaTitle: 크리에이터 검증 - Bubblegum V2
 description: Bubblegum에서 크리에이터를 확인하고 확인 해제하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - verify creator
+  - NFT creator
+  - creator verification
+  - unverify creator
+  - verifyCreatorV2
+about:
+  - Compressed NFTs
+  - Creator verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Verifying creators** toggles the verified flag on a cNFT's creator entries. This page covers verifying and unverifying creators using the verifyCreatorV2 and unverifyCreatorV2 instructions.
+
+- Verify a creator on an existing cNFT (the creator must sign)
+- Unverify a creator from a cNFT
+- Creators can also be verified at mint time by signing the mint transaction
+
+## Out of Scope
+
 
 압축된 NFT의 메타데이터에 크리에이터 목록이 설정되어 있는 경우 이러한 크리에이터는 특별한 명령어를 사용하여 cNFT에서 자신을 확인하고 확인 해제할 수 있습니다. {% .lead %}
 
@@ -92,3 +118,22 @@ await unverifyCreatorV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Only creators already listed in the cNFT's creators array can be verified. Use `updateMetadataV2` to add creators first.
+- The creator being verified must sign the transaction themselves.
+- Creators can be verified at mint time by signing the mint transaction, avoiding the need for a separate verification step.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **verifyCreatorV2** | Instruction that sets a creator's verified flag to true on a compressed NFT |
+| **unverifyCreatorV2** | Instruction that sets a creator's verified flag to false on a compressed NFT |
+| **Creators Array** | The list of creator addresses, verification statuses, and royalty share percentages stored in cNFT metadata |
+| **Verified** | A boolean flag indicating whether a creator has confirmed their association with the cNFT |

@@ -1,8 +1,36 @@
 ---
 title: Burning Compressed NFTs
-metaTitle: Burning Compressed NFTs | Bubblegum V2
-description: Learn how to burn compressed NFTs using Bubblegum V2.
+metaTitle: Burning Compressed NFTs - Bubblegum V2 - Metaplex
+description: Learn how to burn compressed NFTs using Bubblegum V2. Covers burning by owner, delegate, and permanent burn delegate.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - burn compressed NFT
+  - burn cNFT
+  - delete NFT
+  - Bubblegum burn
+  - burnV2
+  - permanent burn delegate
+about:
+  - Compressed NFTs
+  - NFT lifecycle
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Burning a compressed NFT** permanently removes it from the Bubblegum Tree using the **burnV2** instruction. This page covers burning by owner, leaf delegate, and permanent burn delegate.
+
+- Burn a cNFT using the burnV2 instruction
+- Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
+- Pass the coreCollection parameter when the cNFT belongs to a collection
+
+## Out of Scope
+
+This page does not cover: transferring cNFTs (see [Transferring](/smart-contracts/bubblegum-v2/transfer-cnfts)), delegating authority (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), or tree creation (see [Creating Trees](/smart-contracts/bubblegum-v2/create-trees)).
 
 The **burnV2** instruction can be used to burn a Compressed NFT and, therefore, remove it from the Bubblegum Tree permanently. To authorize this operation, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameter:
 
@@ -64,3 +92,33 @@ await burnV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+
+## Notes
+
+- Burning is **irreversible** — the cNFT is permanently removed from the merkle tree.
+- If the cNFT belongs to a collection, you must pass the `coreCollection` parameter.
+- The permanent burn delegate can burn any cNFT in the collection without the owner's signature, if the `PermanentBurnDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+### Can I undo a burn?
+
+No. Burning permanently removes the cNFT from the merkle tree. The leaf is replaced with an empty hash and cannot be recovered.
+
+### Who can burn a compressed NFT?
+
+The current leaf owner, the leaf delegate (if one is set), or the permanent burn delegate (if the collection has the PermanentBurnDelegate plugin enabled).
+
+### Do I need to pass the collection when burning?
+
+Yes, if the cNFT is part of a collection. Pass the `coreCollection` parameter with the collection's public key.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **burnV2** | The Bubblegum V2 instruction that permanently removes a cNFT from the merkle tree |
+| **Permanent Burn Delegate** | A collection-level authority that can burn any cNFT in the collection without owner consent |
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform actions (transfer, burn, freeze) on their behalf |
+| **getAssetWithProof** | A helper function that fetches all required parameters (proof, hashes, nonce, index) from the DAS API |

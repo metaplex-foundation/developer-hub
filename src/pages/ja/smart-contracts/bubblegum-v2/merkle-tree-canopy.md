@@ -1,8 +1,32 @@
 ---
 title: マークルツリーキャノピー
-metaTitle: マークルツリーキャノピー | Bubblegum V2
+metaTitle: マークルツリーキャノピー - Bubblegum V2
 description: Bubblegumのマークルツリーキャノピーについて詳しく学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - canopy
+  - merkle proof
+  - proof path
+  - transaction size
+  - canopy depth
+  - composability
+about:
+  - Merkle trees
+  - Transaction optimization
+  - Compressed NFTs
+proficiencyLevel: Advanced
 ---
+
+## Summary
+
+**The Merkle Tree Canopy** caches the upper nodes of the merkle tree on-chain, reducing the proof data that must be sent in transactions. This page covers how the canopy works, its cost implications, and the tradeoff between composability and storage cost.
+
+- The canopy stores the top n levels of the tree, reducing proof sizes from d to d-n nodes
+- Larger canopies enable better composability with other Solana programs in the same transaction
+- Canopy size is fixed at tree creation and cannot be changed afterward
+- The formula for additional bytes needed is (2^(n+1) - 1) * 32
+
 
 ## はじめに
 
@@ -31,3 +55,20 @@ SolanaのネットワーキングスタックはMTUサイズ1280バイトを使�
 キャノピー深度をゼロにする理由は、可能な限り安いミントを行うためです。ただし、これには`transfer`、`delegate`、`burn`などの命令で大量の証明データを送信する必要があります。ゼロ深度キャノピーの場合、トランザクションサイズ制限の半分以上が証明データで消費され、Bubblegum命令を他のプログラム命令と組み合わせる能力に悪影響を与えます。
 
 最終的に、キャノピーサイズの決定は、コストと組み合わせやすさのトレードオフを考慮する必要があります。この評価では、cNFTの使用目的、開発プラットフォームの互換性、ツリーの所有権構造などの要因を考慮に入れる必要があります。
+
+## Notes
+
+- A canopy depth of 0 is the cheapest option but uses the most transaction space for proofs, limiting composability.
+- The canopy is automatically updated whenever the tree is modified — no additional work is required.
+- You cannot change the canopy size after tree creation. Plan your canopy depth based on expected transaction composition needs.
+- For trees deeper than 24, a canopy is required because full proofs would exceed Solana's 1232-byte transaction limit.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
+| **Canopy Depth** | The number of upper tree levels cached in the canopy |
+| **Proof Bytes** | The number of bytes consumed by merkle proofs in a transaction (32 bytes per proof node) |
+| **Composability** | The ability to include other program instructions alongside Bubblegum operations in a single transaction |
+| **MTU** | Maximum Transmission Unit — Solana uses 1280 bytes, leaving 1232 bytes for transaction data |

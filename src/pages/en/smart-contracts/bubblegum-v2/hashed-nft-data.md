@@ -1,8 +1,34 @@
 ---
 title: Hashing NFT Data
-metaTitle: Hashing NFT Data | Bubblegum V2
-description: Learn more about how NFT data is hashed on Bubblegum.
+metaTitle: Hashing NFT Data - Bubblegum V2 - Metaplex
+description: Learn how compressed NFT data is hashed into merkle tree leaves in Bubblegum V2. Covers MetadataArgsV2, data hash, creator hash, collection hash, and LeafSchemaV2.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - hashed NFT data
+  - merkle leaf
+  - data hash
+  - creator hash
+  - leaf schema
+  - LeafSchemaV2
+  - keccak-256
+about:
+  - Compressed NFTs
+  - Merkle trees
+  - Cryptographic hashing
+proficiencyLevel: Advanced
+programmingLanguage:
+  - Rust
 ---
+
+## Summary
+
+**Hashing NFT data** explains how compressed NFT metadata is transformed into merkle tree leaves using keccak-256 hashing. This page covers the MetadataArgsV2 structure, data hash, creator hash, collection hash, and the LeafSchemaV2 format.
+
+- MetadataArgsV2 is hashed with seller_fee_basis_points to create the data hash
+- Creator array is hashed separately into a creator hash
+- Both hashes are combined with other fields in LeafSchemaV2 to produce the final leaf node
+- LeafSchemaV2 adds collection_hash, asset_data_hash, and flags compared to V1
 
 In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT of Bubblegum V2 is minted with the following metadata structure as an argument to the minting instruction, note that Bubblegum v1 uses MetadataArgs instead:
 
@@ -243,3 +269,24 @@ impl LeafSchema {
 ```
 
 Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.
+
+
+## Notes
+
+- Bubblegum uses **keccak-256** (not SHA-256) for all hashing operations, consistent with Solana and Ethereum.
+- The separation of data hash and creator hash allows marketplaces to validate royalty information without reconstructing the full metadata struct.
+- LeafSchemaV2 flags use a bitmask: bit 0 = owner-level freeze, bit 1 = permanent delegate freeze, bit 3 = non-transferable (soulbound).
+- V1 and V2 leaf schemas are not interchangeable — V2 trees require LeafSchemaV2 leaves.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
+| **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
+| **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |
+| **Asset Data Hash** | keccak-256 hash of additional asset data (new in V2) |
+| **LeafSchemaV2** | The V2 leaf structure containing id, owner, delegate, nonce, data hash, creator hash, collection hash, asset data hash, and flags |
+| **Flags** | A bitmask byte in LeafSchemaV2 encoding freeze status and non-transferable status |
+| **keccak-256** | The cryptographic hash function used by Bubblegum for all leaf computations |

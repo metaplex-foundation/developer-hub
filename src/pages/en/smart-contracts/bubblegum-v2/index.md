@@ -1,10 +1,57 @@
 ---
 title: Overview
-metaTitle: Overview | Bubblegum V2
-description: Provides a high-level overview of Bubblegum V2 and compressed NFTs.
+metaTitle: Bubblegum V2 - Compressed NFTs on Solana - Metaplex
+description: Provides a high-level overview of Bubblegum V2 and compressed NFTs (cNFTs) on Solana. Learn about merkle trees, the DAS API, and new features like freeze, soulbound, and MPL-Core collections.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - compressed NFT
+  - cNFT
+  - Bubblegum
+  - merkle tree
+  - Solana NFT
+  - NFT compression
+  - MPL-Bubblegum
+  - scalable NFTs
+  - on-chain NFT
+  - Bubblegum V2
+about:
+  - Compressed NFTs
+  - Solana blockchain
+  - NFT standards
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is Bubblegum V2?
+    a: Bubblegum V2 is Metaplex's program for creating and managing compressed NFTs (cNFTs) on Solana. It uses merkle trees to store NFT data at a fraction of the cost of traditional NFTs.
+  - q: How much does it cost to mint a compressed NFT?
+    a: Costs depend on tree size. A tree holding 1 million cNFTs costs approximately 8.5 SOL in rent, making each cNFT cost roughly 0.00001 SOL — orders of magnitude cheaper than standard NFTs.
+  - q: What is the difference between Bubblegum V1 and V2?
+    a: Bubblegum V2 adds freeze/thaw functionality, soulbound NFTs, MPL-Core collection integration, royalty enforcement, permanent delegates, and a new LeafSchemaV2.
+  - q: Do I need a special RPC to use compressed NFTs?
+    a: Yes. Compressed NFTs require an RPC provider that supports the Metaplex DAS API for indexing and fetching cNFT data. See the RPC Providers page for compatible providers.
+  - q: Can compressed NFTs be used in collections?
+    a: Yes. Bubblegum V2 uses MPL-Core collections to group cNFTs, enabling collection-level features like royalty enforcement and freeze delegates.
+  - q: What is a merkle tree in the context of cNFTs?
+    a: A merkle tree is an on-chain data structure that stores hashes of cNFT data as leaves. It enables cryptographic verification of NFT ownership and data without storing the full NFT data on-chain.
 ---
 
 Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum V2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
+
+## Summary
+
+**Bubblegum V2** (MPL-Bubblegum) is the Metaplex program for creating and managing compressed NFTs on Solana. It stores NFT data as hashed leaves in on-chain merkle trees, reducing minting costs by orders of magnitude compared to traditional NFTs.
+
+- Mint millions of cNFTs for a fraction of the cost of standard Solana NFTs (~0.00001 SOL per cNFT in large trees)
+- New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
+- Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
+- Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
+
+## Out of Scope
+
+This overview does not cover: fungible tokens, Token Metadata NFTs, Bubblegum V1 migration, detailed merkle tree internals (see [Concurrent Merkle Trees](/smart-contracts/bubblegum-v2/concurrent-merkle-trees)), or on-chain program development (see [Rust SDK](/smart-contracts/bubblegum-v2/sdk/rust)).
 
 {% callout %}
 Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.
@@ -145,6 +192,61 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 - [Freeze and thaw a cNFT](/smart-contracts/bubblegum-v2/freeze-cnfts).
 - [Make a cNFT soulbound](/smart-contracts/bubblegum-v2/freeze-cnfts#create-a-soulbound-c-nft).
 
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Program** | MPL-Bubblegum (`BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY`) |
+| **Compression Program** | MPL Account Compression (fork of SPL Account Compression) |
+| **Key Accounts** | Merkle Tree Account (owned by Compression Program), TreeConfigV2 (PDA owned by Bubblegum) |
+| **Leaf Schema** | LeafSchemaV2 (id, owner, delegate, nonce, data\_hash, creator\_hash, collection\_hash, asset\_data\_hash, flags) |
+| **JS SDK** | `@metaplex-foundation/mpl-bubblegum` ([npm](https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum)) |
+| **Rust Crate** | `mpl-bubblegum` ([crates.io](https://crates.io/crates/mpl-bubblegum)) |
+| **Source** | [GitHub](https://github.com/metaplex-foundation/mpl-bubblegum) |
+
+*Maintained by Metaplex Foundation · Last verified February 2026*
+
 ## Next steps
 
 Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/smart-contracts/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/smart-contracts/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+
+## FAQ
+
+### What is Bubblegum V2?
+
+Bubblegum V2 is the latest Metaplex program for creating and managing compressed NFTs (cNFTs) on Solana. It uses merkle trees to store NFT data at a fraction of the cost of traditional NFTs, while adding new features like freeze/thaw, soulbound NFTs, and MPL-Core collection integration.
+
+### How much does it cost to mint a compressed NFT?
+
+Costs depend on the merkle tree size. A tree holding ~1 million cNFTs costs approximately 8.5 SOL in rent, making each cNFT roughly 0.00001 SOL. A smaller tree of 16,384 cNFTs costs ~0.34 SOL. These costs are orders of magnitude cheaper than standard Solana NFTs (~0.0029 SOL per Core NFT).
+
+### What is the difference between Bubblegum V1 and V2?
+
+Bubblegum V2 introduces freeze/thaw functionality, soulbound (non-transferable) NFTs, MPL-Core collection integration, royalty enforcement, permanent delegates (transfer, freeze, burn), and a new LeafSchemaV2 with collection hash, asset data hash, and flags fields.
+
+### Do I need a special RPC to use compressed NFTs?
+
+Yes. Compressed NFTs require an RPC provider that supports the Metaplex DAS API for indexing and fetching cNFT data. Not all RPCs support this. See the [RPC Providers](/rpc-providers) page for a list of compatible providers.
+
+### Can compressed NFTs be used in collections?
+
+Yes. Bubblegum V2 uses MPL-Core collections to group cNFTs. Collections enable features like royalty enforcement, freeze delegates, and soulbound NFTs. The collection must have the `BubblegumV2` plugin enabled.
+
+### What is a merkle tree in the context of cNFTs?
+
+A merkle tree is an on-chain data structure that stores hashes (called leaves) of cNFT data. It enables cryptographic verification of NFT ownership and data integrity without storing the full NFT data in on-chain accounts, which is what makes cNFTs so cost-effective.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **cNFT** | Compressed NFT — an NFT stored as a hashed leaf in a merkle tree rather than in a dedicated on-chain account |
+| **Merkle Tree** | A binary tree data structure where each leaf is a hash of data and each parent node is a hash of its children, enabling efficient cryptographic verification |
+| **Leaf** | A leaf node in the merkle tree representing one compressed NFT's hashed data (LeafSchemaV2) |
+| **Proof** | A list of sibling hashes along the path from a leaf to the root, used to verify a cNFT exists in the tree |
+| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
+| **DAS API** | Digital Asset Standard API — an RPC extension for indexing and fetching compressed NFT data from transaction history |
+| **LeafSchemaV2** | The V2 data structure containing id, owner, delegate, nonce, data hash, creator hash, collection hash, asset data hash, and flags |
+| **TreeConfig** | A PDA account derived from the merkle tree address that stores Bubblegum-specific configuration (creator, delegate, capacity, version) |
+| **Bubblegum Tree** | The combination of a Merkle Tree account and its associated TreeConfigV2 PDA account |
+| **Soulbound** | A non-transferable cNFT permanently bound to its owner's wallet, created via the permanent freeze delegate |

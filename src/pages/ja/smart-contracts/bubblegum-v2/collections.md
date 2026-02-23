@@ -1,8 +1,44 @@
 ---
 title: コレクションの検証
-metaTitle: コレクションの検証 | Bubblegum V2
+metaTitle: コレクションの検証 - Bubblegum V2
 description: Bubblegumでコレクションの設定、検証、検証解除を行う方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT collection
+  - verify collection
+  - cNFT collection
+  - MPL-Core collection
+  - setCollectionV2
+  - BubblegumV2 plugin
+about:
+  - Compressed NFTs
+  - NFT collections
+  - MPL-Core
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How do I add a cNFT to a collection after minting?
+    a: Use the setCollectionV2 instruction with the newCoreCollection parameter. The collection must have the BubblegumV2 plugin enabled.
+  - q: Can I change the collection of a cNFT?
+    a: Yes. Use setCollectionV2 with both coreCollection (current) and newCoreCollection (new) parameters. Both collection authorities must sign.
+  - q: What is the BubblegumV2 plugin?
+    a: It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, and royalty enforcement on the collection.
 ---
+
+## Summary
+
+**Managing collections** for compressed NFTs uses the **setCollectionV2** instruction to add, change, or remove MPL-Core collections on existing cNFTs. This page covers setting and removing collections after minting.
+
+- Set an MPL-Core collection on an existing cNFT using setCollectionV2
+- Remove a collection from a cNFT
+- Change between collections (both authorities must sign)
+- Collections must have the BubblegumV2 plugin enabled
+
+## Out of Scope
+
 
 cNFTは、ミント時または後でMPL-Coreコレクションに追加できます。 {% .lead %}
 
@@ -47,3 +83,22 @@ const signature = await setCollectionV2(umi, {
   newCoreCollection: newCoreCollection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
+## Notes
+
+- The MPL-Core collection must have the `BubblegumV2` plugin enabled before cNFTs can be added to it.
+- Unlike Bubblegum V1 (which uses Token Metadata collections with a "verified" boolean), V2 uses MPL-Core collections without verification flags.
+- When changing between collections, both the old and new collection authorities must sign the transaction.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **setCollectionV2** | The Bubblegum V2 instruction for setting, changing, or removing the collection of a cNFT |
+| **MPL-Core Collection** | A Core standard collection account used to group cNFTs in Bubblegum V2 |
+| **BubblegumV2 Plugin** | An MPL-Core plugin that enables V2 features on a collection (freeze, soulbound, royalties) |
+| **Collection Authority** | The update authority of the MPL-Core collection |

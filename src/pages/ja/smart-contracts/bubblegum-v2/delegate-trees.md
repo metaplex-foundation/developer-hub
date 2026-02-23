@@ -1,8 +1,34 @@
 ---
 title: ツリーのデリゲート
-metaTitle: ツリーのデリゲート | Bubblegum V2
+metaTitle: ツリーのデリゲート - Bubblegum V2
 description: Bubblegumでマークルツリーをデリゲートする方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - delegate tree
+  - tree delegation
+  - tree authority
+  - tree creator
+  - set tree delegate
+about:
+  - Compressed NFTs
+  - Tree management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Delegating trees** allows the tree creator to authorize another account to mint cNFTs from a private Bubblegum Tree. This page covers approving and revoking tree delegate authority.
+
+- Approve a tree delegate to mint cNFTs on behalf of the tree creator
+- Revoke a tree delegate by setting the delegate back to the creator
+- Only relevant for private trees (public trees allow anyone to mint)
+
+## Out of Scope
+
 
 圧縮NFTの所有者がデリゲート権限を承認できるのと同様に、Bubblegumツリーの作成者も、自分の代わりにアクションを実行する別のアカウントを承認できます。 {% .lead %}
 
@@ -55,3 +81,21 @@ await setTreeDelegate(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Tree delegation is only relevant for private trees. Public trees allow anyone to mint.
+- Only one tree delegate can be active at a time. Approving a new delegate replaces the previous one.
+- The tree creator retains full authority even when a delegate is set.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Tree Delegate** | An account authorized by the tree creator to mint cNFTs from a private tree |
+| **Tree Creator** | The account that created the Bubblegum Tree and has full management authority |
+| **setTreeDelegate** | The instruction used to approve or revoke a tree delegate |

@@ -1,8 +1,35 @@
 ---
 title: 销毁压缩NFT
-metaTitle: 销毁压缩NFT | Bubblegum V2
+metaTitle: 销毁压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum V2上销毁压缩NFT。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - burn compressed NFT
+  - burn cNFT
+  - delete NFT
+  - Bubblegum burn
+  - burnV2
+  - permanent burn delegate
+about:
+  - Compressed NFTs
+  - NFT lifecycle
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Burning a compressed NFT** permanently removes it from the Bubblegum Tree using the **burnV2** instruction. This page covers burning by owner, leaf delegate, and permanent burn delegate.
+
+- Burn a cNFT using the burnV2 instruction
+- Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
+- Pass the coreCollection parameter when the cNFT belongs to a collection
+
+## Out of Scope
+
 
 **burnV2**指令可用于销毁压缩NFT，因此将其从Bubblegum树中永久移除。要授权此操作，当前所有者或委托权限（如果有）必须签署交易。该指令接受以下参数：
 
@@ -64,3 +91,22 @@ await burnV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Burning is **irreversible** — the cNFT is permanently removed from the merkle tree.
+- If the cNFT belongs to a collection, you must pass the `coreCollection` parameter.
+- The permanent burn delegate can burn any cNFT in the collection without the owner's signature, if the `PermanentBurnDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **burnV2** | The Bubblegum V2 instruction that permanently removes a cNFT from the merkle tree |
+| **Permanent Burn Delegate** | A collection-level authority that can burn any cNFT in the collection without owner consent |
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform actions (transfer, burn, freeze) on their behalf |
+| **getAssetWithProof** | A helper function that fetches all required parameters (proof, hashes, nonce, index) from the DAS API |

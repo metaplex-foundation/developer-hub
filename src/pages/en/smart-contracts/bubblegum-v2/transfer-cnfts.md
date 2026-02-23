@@ -1,8 +1,37 @@
 ---
 title: Transferring Compressed NFTs
-metaTitle: Transferring Compressed NFTs | Bubblegum v2
-description: Learn how to transfer compressed NFTs using Bubblegum V2.
+metaTitle: Transferring Compressed NFTs - Bubblegum V2 - Metaplex
+description: Learn how to transfer compressed NFTs using Bubblegum V2. Covers transfers by owner, delegate, and permanent transfer delegate, plus transferability checks.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - transfer compressed NFT
+  - transfer cNFT
+  - NFT transfer
+  - Bubblegum transfer
+  - transferV2
+  - permanent transfer delegate
+about:
+  - Compressed NFTs
+  - NFT transfers
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Transferring a compressed NFT** moves ownership from one wallet to another using the **transferV2** instruction. This page covers transfers by owner, delegate, permanent transfer delegate, and transferability checks.
+
+- Transfer a cNFT to a new owner using transferV2
+- Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
+- Check if a cNFT can be transferred using the canTransfer helper
+- Pass the coreCollection parameter when the cNFT belongs to a collection
+
+## Out of Scope
+
+This page does not cover: burning cNFTs (see [Burning](/smart-contracts/bubblegum-v2/burn-cnfts)), delegating authority (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), or freezing (see [Freezing](/smart-contracts/bubblegum-v2/freeze-cnfts)).
 
 The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or the `permanentTransferDelegate` of the collection.
 
@@ -108,3 +137,34 @@ const assetWithProof = await getAssetWithProof(umi, assetId, {
 const canBeTransferred = canTransfer(assetWithProof)
 console.log("canBeTransferred", canBeTransferred ? "Yes" : "No")
 ```
+
+
+## Notes
+
+- After a transfer, the leaf delegate is automatically reset to the new owner.
+- Frozen cNFTs and soulbound (non-transferable) cNFTs cannot be transferred. Use `canTransfer` to check.
+- The permanent transfer delegate can transfer without the owner's signature if the `PermanentTransferDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+### Can I transfer a frozen cNFT?
+
+No. Frozen cNFTs cannot be transferred. You must thaw the cNFT first using the appropriate delegate authority.
+
+### What happens to the delegate after a transfer?
+
+The leaf delegate is automatically reset to the new owner after a successful transfer. The new owner must re-delegate if needed.
+
+### How do I check if a cNFT can be transferred?
+
+Use the `canTransfer` helper function. It returns `true` if the cNFT is not frozen and not marked as non-transferable (soulbound).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **transferV2** | The Bubblegum V2 instruction that transfers a cNFT from one owner to another |
+| **Permanent Transfer Delegate** | A collection-level authority that can transfer any cNFT without owner consent |
+| **canTransfer** | A helper function that checks whether a cNFT can be transferred (not frozen or soulbound) |
+| **Leaf Owner** | The current owner of the compressed NFT |
+| **New Leaf Owner** | The wallet address that will receive ownership of the cNFT after transfer |

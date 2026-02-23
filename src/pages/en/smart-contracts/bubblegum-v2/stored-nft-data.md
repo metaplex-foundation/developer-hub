@@ -1,8 +1,30 @@
 ---
 title: Storing and Indexing NFT Data
-metaTitle: Storing and Indexing NFT Data | Bubblegum V2
-description: Learn more about how NFT data is stored on Bubblegum.
+metaTitle: Storing and Indexing NFT Data - Bubblegum V2 - Metaplex
+description: Learn how compressed NFT data is stored in transactions and indexed by the Metaplex DAS API. Covers the reference implementation architecture including Geyser plugin, Redis, and Postgres.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT indexing
+  - DAS
+  - digital asset standard
+  - off-chain data
+  - RPC indexer
+  - Geyser plugin
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Advanced
 ---
+
+## Summary
+
+**Storing and indexing NFT data** explains how compressed NFT state is persisted in transactions and made queryable through the Metaplex DAS API. This page covers the reference indexing architecture from validator to end-user API.
+
+- cNFT data is stored in transaction logs, not in on-chain accounts
+- The DAS API indexes this data in real-time for convenient retrieval
+- The reference implementation uses a Geyser plugin, Redis queues, an ingester process, and a Postgres database
 
 As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.
 
@@ -75,3 +97,21 @@ getAssetProof(), etc.
 {% edge from="api" to="end_user" /%}
 
 {% /diagram %}
+
+
+## Notes
+
+- The DAS API is not part of the Solana protocol itself — it is an indexing layer maintained by RPC providers.
+- Different RPC providers may have different implementations. The Metaplex reference implementation is open source on GitHub.
+- Transaction data uses the spl-noop program to avoid log truncation, turning events into instruction data.
+- Sequence numbers enable the DAS API to process transactions out of order while maintaining correct state.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — the RPC extension for querying indexed cNFT data |
+| **Geyser Plugin** | A Solana validator plugin that receives real-time notifications about transactions and account updates |
+| **Plerkle** | The Metaplex Geyser plugin that captures Bubblegum and compression transactions for indexing |
+| **spl-noop** | A Solana program used to emit events as instruction data, avoiding transaction log truncation |
+| **Ingester** | A process that consumes transaction data from Redis streams and stores it in Postgres |

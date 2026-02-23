@@ -1,8 +1,35 @@
 ---
 title: 圧縮NFTのデリゲート
-metaTitle: 圧縮NFTのデリゲート | Bubblegum V2
+metaTitle: 圧縮NFTのデリゲート - Bubblegum V2
 description: Bubblegumで圧縮NFTをデリゲートする方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - delegate NFT
+  - NFT delegation
+  - leaf delegate
+  - approved operator
+  - delegate authority
+  - revoke delegate
+about:
+  - Compressed NFTs
+  - NFT delegation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Delegating compressed NFTs** allows the owner to authorize another account to perform actions on their behalf. This page covers approving and revoking delegate authorities on individual cNFTs.
+
+- Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
+- Revoke a delegate by re-delegating to the owner's own address
+- Delegate authority is reset automatically after a transfer
+
+## Out of Scope
+
 
 圧縮NFTの所有者は、cNFTの所有権を保持したまま、別のアカウントにデリゲートできます。 {% .lead %}
 
@@ -68,3 +95,21 @@ await delegate(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Delegate authority is reset to the new owner after a transfer. The new owner must re-delegate if needed.
+- Only one leaf delegate can be active at a time per cNFT. Approving a new delegate replaces the previous one.
+- To revoke a delegate, set the new delegate to the owner's own public key.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform transfer, burn, and freeze actions |
+| **Delegate Authority** | The approved account that can act on behalf of the cNFT owner |
+| **Previous Leaf Delegate** | The current delegate being replaced, or the owner if no delegate was previously set |

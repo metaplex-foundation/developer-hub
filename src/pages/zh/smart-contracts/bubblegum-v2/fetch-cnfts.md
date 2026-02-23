@@ -1,8 +1,38 @@
 ---
 title: 获取压缩NFT
-metaTitle: 获取压缩NFT | Bubblegum V2
+metaTitle: 获取压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum上获取压缩NFT。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - fetch compressed NFT
+  - read cNFT
+  - DAS API
+  - digital asset standard
+  - getAsset
+  - getAssetProof
+  - getAssetsByOwner
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Fetching compressed NFTs** retrieves cNFT data and proofs using the Metaplex DAS API. This page covers the DAS API setup, asset IDs, fetching individual and multiple cNFTs, and retrieving proofs.
+
+- Install and configure the Metaplex DAS API SDK
+- Fetch individual cNFTs using getAsset and their proofs using getAssetProof
+- Fetch multiple cNFTs by owner or by collection
+- Derive Leaf Asset IDs from merkle tree addresses and leaf indices
+
+## Out of Scope
+
 
 如[概述](/zh/smart-contracts/bubblegum#read-api)页面所述，压缩NFT不像普通NFT那样存储在链上账户中，而是记录在创建和更新它们的交易中。{% .lead %}
 
@@ -168,3 +198,25 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
+- The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
+- Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — an RPC extension for fetching compressed and standard NFT data |
+| **Asset ID** | A unique identifier for an NFT. For cNFTs, it is a PDA derived from the merkle tree and leaf index |
+| **Leaf Asset ID** | The PDA-based identifier specific to compressed NFTs, derived from tree address and leaf index |
+| **getAsset** | DAS API method that returns metadata, ownership, and compression info for a digital asset |
+| **getAssetProof** | DAS API method that returns the merkle proof and root needed for write operations on a cNFT |
+| **getAssetsByOwner** | DAS API method that returns all assets owned by a given wallet address |
+| **getAssetsByGroup** | DAS API method that returns all assets in a given group (e.g., collection) |

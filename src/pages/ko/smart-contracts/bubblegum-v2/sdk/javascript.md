@@ -1,8 +1,38 @@
 ---
 title: MPL-Bubblegum V2 JavaScript SDK
-metaTitle: JavaScript SDK | MPL-Bubblegum V2
+metaTitle: JavaScript SDK - MPL-Bubblegum V2
 description: MPL-Bubblegum JavaScript SDK를 실행하도록 프로젝트를 설정하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - JavaScript SDK
+  - TypeScript
+  - Umi
+  - MPL-Bubblegum
+  - npm install
+  - mplBubblegum
+about:
+  - Compressed NFTs
+  - JavaScript SDK
+  - Umi framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+The **MPL-Bubblegum V2 JavaScript SDK** provides a lightweight library built on the Umi framework for creating and managing compressed NFTs from JavaScript/TypeScript applications.
+
+- Install via npm: `npm install @metaplex-foundation/mpl-bubblegum`
+- Register with Umi using `.use(mplBubblegum())`
+- Includes the DAS API plugin automatically for fetching cNFTs
+
+Metaplex provides a JavaScript library that can be used to interact with the MPL-Bubblegum program. Thanks to the [Umi framework](/dev-tools/umi), it ships without many opinionated dependencies, thus providing a lightweight library that can be used in any JavaScript project.
+
+To get started, you'll need to [install the Umi framework](/dev-tools/umi/getting-started) and the MPL-Bubblegum JavaScript library.
+
 
 Metaplex는 MPL-Bubblegum 프로그램과 상호 작용하는 데 사용할 수 있는 JavaScript 라이브러리를 제공합니다. [Umi 프레임워크](/ko/dev-tools/umi) 덕분에 많은 의견이 있는 종속성 없이 제공되므로 모든 JavaScript 프로젝트에서 사용할 수 있는 경량 라이브러리를 제공합니다.
 

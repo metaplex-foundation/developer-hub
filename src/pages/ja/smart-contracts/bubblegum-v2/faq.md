@@ -1,7 +1,40 @@
 ---
 title: FAQ
-metaTitle: FAQ | Bubblegum V2
+metaTitle: FAQ - Bubblegum V2
 description: Bubblegumに関するよくある質問。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - Bubblegum FAQ
+  - compressed NFT questions
+  - cNFT cost
+  - troubleshooting
+  - transaction too large
+  - getAssetWithProof
+about:
+  - Compressed NFTs
+  - Troubleshooting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: What is Bubblegum V2?
+    a: Bubblegum V2 is the latest iteration of Metaplex's program for compressed NFTs on Solana, adding freeze/thaw, soulbound NFTs, MPL-Core collections, and royalty enforcement.
+  - q: How do I find the arguments needed for transfer, delegate, burn, etc.?
+    a: Use the getAssetWithProof helper which fetches all required parameters (proof, leaf index, nonce, etc.) from the DAS API automatically.
+  - q: How do I resolve Transaction too large errors?
+    a: Use truncateCanopy true with getAssetWithProof, or implement versioned transactions with Address Lookup Tables.
+  - q: How much does it cost to create a compressed NFT tree?
+    a: Costs vary by tree size. A 16,384-cNFT tree costs ~0.34 SOL, while a 1 million-cNFT tree costs ~8.5 SOL in rent.
+  - q: What is the difference between Bubblegum V1 and V2?
+    a: V2 adds freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates, and LeafSchemaV2.
+  - q: Do I need a special RPC provider?
+    a: Yes. You need an RPC that supports the Metaplex DAS API to fetch and index compressed NFTs.
+  - q: Can I decompress a cNFT back to a regular NFT?
+    a: Decompression is only available for Bubblegum V1 assets. V2 does not support decompression.
+  - q: How many cNFTs can I store in one tree?
+    a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
 ---
 
 ## Bubblegum V2とは何ですか？

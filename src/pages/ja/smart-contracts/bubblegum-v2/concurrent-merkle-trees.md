@@ -1,8 +1,33 @@
 ---
 title: 同時マークルツリー
-metaTitle: 同時マークルツリー | Bubblegum V2
+metaTitle: 同時マークルツリー - Bubblegum V2
 description: 同時マークルツリーとBubblegumでの使用方法について詳しく学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - concurrent merkle tree
+  - SPL account compression
+  - tree buffer
+  - max buffer
+  - merkle proof
+  - leaf validation
+  - change log
+about:
+  - Merkle trees
+  - Data structures
+  - Solana programs
+proficiencyLevel: Advanced
 ---
+
+## Summary
+
+**Concurrent Merkle Trees** explains the data structure underlying compressed NFTs. This page covers how merkle trees work, leaf paths, proofs, validation, and the concurrency mechanism that enables parallel writes within the same Solana block.
+
+- Merkle trees store cNFT data as hashed leaves with a single root representing the entire tree
+- Proofs enable verifying a specific cNFT exists without rehashing the entire tree
+- The concurrent mechanism uses a ChangeLog buffer to handle multiple writes per block
+- The rightmost proof is stored on-chain, enabling minting without sending proof data
+
 
 ## はじめに
 
@@ -58,3 +83,21 @@ description: 同時マークルツリーとBubblegumでの使用方法につい�
 {% /node %}
 
 {% node parent="i-node-4" y="100" x="-40" %}
+
+## Notes
+
+- The max buffer size set at tree creation determines how many concurrent changes can be fast-forwarded per block.
+- If more concurrent changes occur than the buffer size allows, some transactions will fail and need to be retried.
+- Proofs fetched from the DAS API may become stale if the tree is modified between fetch and use. The ChangeLog mechanism mitigates this for concurrent operations.
+- The rightmost proof optimization allows minting (appending) without any proof data, since new leaves are always added at the rightmost position.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Merkle Tree** | A binary tree where each node is a hash of its children, with leaves representing cNFT data |
+| **Merkle Root** | The single top-level hash representing the integrity of the entire tree |
+| **Leaf Path** | The leaf node hash and all intermediate nodes leading to the root |
+| **Proof** | The sibling hashes needed to recalculate the root from a given leaf |
+| **ChangeLog** | A buffer of recent tree modifications that enables concurrent writes by fast-forwarding stale proofs |
+| **spl-account-compression** | The Solana program that manages the on-chain concurrent merkle tree |

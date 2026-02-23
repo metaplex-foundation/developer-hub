@@ -1,8 +1,33 @@
 ---
 title: 동시 머클 트리
-metaTitle: 동시 머클 트리 | Bubblegum V2
+metaTitle: 동시 머클 트리 - Bubblegum V2
 description: 동시 머클 트리와 Bubblegum에서 사용되는 방식에 대해 자세히 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - concurrent merkle tree
+  - SPL account compression
+  - tree buffer
+  - max buffer
+  - merkle proof
+  - leaf validation
+  - change log
+about:
+  - Merkle trees
+  - Data structures
+  - Solana programs
+proficiencyLevel: Advanced
 ---
+
+## Summary
+
+**Concurrent Merkle Trees** explains the data structure underlying compressed NFTs. This page covers how merkle trees work, leaf paths, proofs, validation, and the concurrency mechanism that enables parallel writes within the same Solana block.
+
+- Merkle trees store cNFT data as hashed leaves with a single root representing the entire tree
+- Proofs enable verifying a specific cNFT exists without rehashing the entire tree
+- The concurrent mechanism uses a ChangeLog buffer to handle multiple writes per block
+- The rightmost proof is stored on-chain, enabling minting without sending proof data
+
 
 ## 소개
 
@@ -327,3 +352,21 @@ cNFT에 사용되는 온체인 머클 트리는 동일한 블록에서 여러 �
 이에 대한 해결책은 [spl-account-compression](https://spl.solana.com/account-compression)에서 사용하는 머클 트리가 하나의 머클 루트만 저장하는 것이 아니라 이전 루트들과 이전에 수정된 리프들의 경로에 대한 [`ChangeLog`](https://github.com/solana-labs/solana-program-library/blob/master/libraries/concurrent-merkle-tree/src/changelog.rs#L9)도 저장한다는 것입니다. 새 트랜잭션이 보낸 루트와 증명이 이전 업데이트로 무효화되었더라도 프로그램이 증명을 빨리 감습니다. 사용 가능한 `ChangeLog` 수는 트리를 생성할 때 사용되는 [최대 버퍼 크기](/ko/smart-contracts/bubblegum-v2/create-trees#creating-a-bubblegum-tree)에 의해 설정됩니다.
 
 또한 머클 트리의 가장 오른쪽 증명이 온체인에 저장됩니다. 이를 통해 증명을 보낼 필요 없이 트리에 추가할 수 있습니다. 이것이 바로 Bubblegum이 증명 없이 새로운 cNFT를 민팅할 수 있는 방법입니다.
+
+## Notes
+
+- The max buffer size set at tree creation determines how many concurrent changes can be fast-forwarded per block.
+- If more concurrent changes occur than the buffer size allows, some transactions will fail and need to be retried.
+- Proofs fetched from the DAS API may become stale if the tree is modified between fetch and use. The ChangeLog mechanism mitigates this for concurrent operations.
+- The rightmost proof optimization allows minting (appending) without any proof data, since new leaves are always added at the rightmost position.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Merkle Tree** | A binary tree where each node is a hash of its children, with leaves representing cNFT data |
+| **Merkle Root** | The single top-level hash representing the integrity of the entire tree |
+| **Leaf Path** | The leaf node hash and all intermediate nodes leading to the root |
+| **Proof** | The sibling hashes needed to recalculate the root from a given leaf |
+| **ChangeLog** | A buffer of recent tree modifications that enables concurrent writes by fast-forwarding stale proofs |
+| **spl-account-compression** | The Solana program that manages the on-chain concurrent merkle tree |

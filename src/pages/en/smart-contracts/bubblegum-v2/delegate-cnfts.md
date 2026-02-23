@@ -1,8 +1,36 @@
 ---
 title: Delegating Compressed NFTs
-metaTitle: Delegating Compressed NFTs | Bubblegum V2
-description: Learn how to delegate compressed NFTs using Bubblegum V2.
+metaTitle: Delegating Compressed NFTs - Bubblegum V2 - Metaplex
+description: Learn how to delegate and revoke delegate authority on compressed NFTs using Bubblegum V2. Covers leaf delegate approval and revocation.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - delegate NFT
+  - NFT delegation
+  - leaf delegate
+  - approved operator
+  - delegate authority
+  - revoke delegate
+about:
+  - Compressed NFTs
+  - NFT delegation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
+
+## Summary
+
+**Delegating compressed NFTs** allows the owner to authorize another account to perform actions on their behalf. This page covers approving and revoking delegate authorities on individual cNFTs.
+
+- Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
+- Revoke a delegate by re-delegating to the owner's own address
+- Delegate authority is reset automatically after a transfer
+
+## Out of Scope
+
+This page does not cover: delegating tree authority (see [Delegating Trees](/smart-contracts/bubblegum-v2/delegate-trees)), freezing cNFTs (see [Freezing](/smart-contracts/bubblegum-v2/freeze-cnfts)), or permanent collection-level delegates.
 
 The owner of a Compressed NFT can delegate it to another account while keeping ownership of the cNFT. {% .lead %}
 
@@ -68,3 +96,32 @@ await delegate(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+
+## Notes
+
+- Delegate authority is reset to the new owner after a transfer. The new owner must re-delegate if needed.
+- Only one leaf delegate can be active at a time per cNFT. Approving a new delegate replaces the previous one.
+- To revoke a delegate, set the new delegate to the owner's own public key.
+
+## FAQ
+
+### What can a delegate do with a cNFT?
+
+A leaf delegate can transfer, burn, and freeze/thaw the cNFT on the owner's behalf.
+
+### How do I revoke a delegate?
+
+Call the delegate instruction with `newLeafDelegate` set to the owner's own public key. This effectively removes the delegate.
+
+### Does the delegate persist after a transfer?
+
+No. After a transfer, the leaf delegate is automatically reset to the new owner.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform transfer, burn, and freeze actions |
+| **Delegate Authority** | The approved account that can act on behalf of the cNFT owner |
+| **Previous Leaf Delegate** | The current delegate being replaced, or the owner if no delegate was previously set |

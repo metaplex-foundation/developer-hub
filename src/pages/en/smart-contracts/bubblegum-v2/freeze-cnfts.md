@@ -1,8 +1,48 @@
 ---
 title: Freezing and Thawing Compressed NFTs
-metaTitle: Freezing and Thawing Compressed NFTs | Bubblegum V2
-description: Learn how to freeze and thaw Compressed NFTs on Bubblegum.
+metaTitle: Freezing and Thawing Compressed NFTs - Bubblegum V2 - Metaplex
+description: Learn how to freeze, thaw, and make soulbound compressed NFTs on Bubblegum V2. Covers leaf delegates, permanent freeze delegates, and non-transferable cNFTs.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - freeze NFT
+  - thaw NFT
+  - soulbound NFT
+  - non-transferable NFT
+  - permanent freeze
+  - freezeV2
+  - delegateAndFreezeV2
+about:
+  - Compressed NFTs
+  - NFT freezing
+  - Soulbound tokens
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How do I freeze a compressed NFT?
+    a: Use the freezeV2 instruction with a leaf delegate or permanent freeze delegate. The cNFT must first be delegated to the freeze authority.
+  - q: What is the difference between a leaf delegate freeze and a permanent freeze?
+    a: A leaf delegate freeze is asset-level and requires the owner to delegate first. A permanent freeze delegate operates at the collection level and can freeze any cNFT in the collection without owner interaction.
+  - q: How do I make a cNFT soulbound (non-transferable)?
+    a: Use setNonTransferableV2 with a permanent freeze delegate. The collection must have the PermanentFreezeDelegate plugin enabled.
+  - q: Can a soulbound cNFT be made transferable again?
+    a: No. The non-transferable flag set by setNonTransferableV2 is permanent and cannot be reversed.
 ---
+
+## Summary
+
+**Freezing and thawing compressed NFTs** controls transferability using Bubblegum V2's freeze instructions. This page covers freeze, delegate-and-freeze, thaw, thaw-and-revoke, and making cNFTs soulbound (non-transferable).
+
+- Freeze a cNFT via a leaf delegate or permanent freeze delegate
+- Delegate and freeze in a single transaction with delegateAndFreezeV2
+- Thaw a frozen cNFT and optionally revoke the delegate in one step
+- Make a cNFT permanently non-transferable (soulbound) with setNonTransferableV2
+
+## Out of Scope
+
+This page does not cover: delegating cNFTs without freezing (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), transferring cNFTs (see [Transferring](/smart-contracts/bubblegum-v2/transfer-cnfts)), or creating collections with freeze plugins (see [MPL-Core Collections](/smart-contracts/core/collections)).
 
 With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for various use cases, such as staking. {% .lead %}
 
@@ -169,3 +209,41 @@ await setNonTransferableV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+
+## Notes
+
+- A cNFT must be delegated to a leaf delegate before it can be frozen with `freezeV2`. Use `delegateAndFreezeV2` to do both in one transaction.
+- The permanent freeze delegate operates at the collection level and requires the `PermanentFreezeDelegate` plugin on the collection.
+- Soulbound (non-transferable) status set by `setNonTransferableV2` is **permanent** and cannot be reversed.
+- Frozen cNFTs cannot be transferred or burned by the owner. Only the freeze authority can thaw them.
+
+## FAQ
+
+### How do I freeze a compressed NFT?
+
+Use `freezeV2` with a leaf delegate or permanent freeze delegate. If the cNFT hasn't been delegated yet, use `delegateAndFreezeV2` to delegate and freeze in one transaction.
+
+### What is the difference between a leaf delegate freeze and a permanent freeze?
+
+A leaf delegate freeze is asset-level — the owner must delegate first. A permanent freeze delegate is collection-level — it can freeze any cNFT in the collection without owner interaction, if the PermanentFreezeDelegate plugin is enabled.
+
+### How do I make a cNFT soulbound?
+
+Use `setNonTransferableV2` with the permanent freeze delegate authority. The collection must have the `PermanentFreezeDelegate` plugin. This is permanent and cannot be reversed.
+
+### Can a soulbound cNFT be made transferable again?
+
+No. The non-transferable flag is permanent. Once a cNFT is made soulbound, it cannot be transferred to another wallet.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **freezeV2** | Instruction that freezes a cNFT, preventing transfers until thawed |
+| **thawV2** | Instruction that unfreezes a cNFT, allowing transfers again |
+| **delegateAndFreezeV2** | Instruction that delegates to a leaf delegate and freezes the cNFT in one transaction |
+| **thawAndRevokeV2** | Instruction that thaws a cNFT and revokes the delegate authority in one transaction |
+| **setNonTransferableV2** | Instruction that permanently makes a cNFT non-transferable (soulbound) |
+| **Permanent Freeze Delegate** | A collection-level authority that can freeze/thaw any cNFT without owner consent |
+| **Soulbound** | A non-transferable cNFT permanently bound to its owner's wallet |
