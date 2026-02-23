@@ -131,12 +131,6 @@ export const guides = {
               updated: null,
             },
             {
-              title: 'Create a Solana Token',
-              href: '/tokens/create-a-token',
-              created: '02-13-2026',
-              updated: null,
-            },
-            {
               title: 'How to Create a Solana Token',
               href: '/solana/javascript/how-to-create-a-solana-token',
               created: '2024-06-16',
