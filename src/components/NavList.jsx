@@ -177,6 +177,7 @@ const NavList = () => {
       'Programs': t('programs', 'Programs'),
       'Smart Contracts': t('smartContracts', 'Smart Contracts'),
       'Dev Tools': t('devTools', 'Dev Tools'),
+      'Solana': t('solana', 'Solana'),
     }
     return categoryMap[category] || category
   }
@@ -204,6 +205,7 @@ const NavList = () => {
           'NFTs': '/nfts',
           'Smart Contracts': '/smart-contracts',
           'Dev Tools': '/dev-tools',
+          'Solana': '/guides',
         }
 
         const path = categoryPaths[item]

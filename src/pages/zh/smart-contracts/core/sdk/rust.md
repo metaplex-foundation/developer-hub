@@ -29,7 +29,7 @@ cargo add mpl-core
 ## 本地脚本
 对于本地脚本，建议使用所有列出指令的`Builder`版本。这些构建器为您抽象了大量工作，并返回可以添加到交易中的指令。
 所有Core指令的列表可以在这里找到：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-有关使用Rust的更全面指南，请查看[Metaplex Rust SDK指南](/guides/rust/metaplex-rust-sdks)页面。
+有关使用Rust的更全面指南，请查看[Metaplex Rust SDK指南](/solana/rust/metaplex-rust-sdks)页面。
 #### CreateV1Builder - 示例
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -61,7 +61,7 @@ let keypair_path = ".../my-key.json"
 ## CPI（跨程序调用）
 从您自己的程序执行CPI指令可以通过使用`mpl-core` Rust crate中所有指令都提供的`CpiBuilder`版本轻松实现。
 所有Core指令的列表可以在这里找到：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-有关使用Metaplex crate创建CPI指令的更全面指南，请查看[如何CPI到Metaplex程序指南](/guides/rust/how-to-cpi-into-a-metaplex-program)页面。
+有关使用Metaplex crate创建CPI指令的更全面指南，请查看[如何CPI到Metaplex程序指南](/solana/rust/how-to-cpi-into-a-metaplex-program)页面。
 #### CreateV1CpiBuilder - 示例
 ```rust
 CreateV1CpiBuilder::new()

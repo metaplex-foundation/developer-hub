@@ -32,7 +32,7 @@ Customize these parameters for your NFT:
 
 ## Metadata and Images
 
-Below you can find the minimum metadata that you need to upload. Additional fields like `external_url`, `attributes`, and `properties` are optional and can be found with further description and examples in the [JSON schema](/smart-contracts/core/json-schema). You need to upload the JSON and the image so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide](/guides/general/create-deterministic-metadata-with-turbo).
+Below you can find the minimum metadata that you need to upload. Additional fields like `external_url`, `attributes`, and `properties` are optional and can be found with further description and examples in the [JSON schema](/smart-contracts/core/json-schema). You need to upload the JSON and the image so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo).
 
 ```json
 {

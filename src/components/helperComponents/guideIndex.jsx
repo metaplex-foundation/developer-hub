@@ -295,7 +295,7 @@ const tokenMetadataGuides = {
         jp: 'Gumdropを使用したSPLトークンクレームエアドロップ',
         kr: 'Gumdrop을 사용한 SPL 토큰 클레임 에어드롭'
       },
-      path: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
+      path: '/solana/general/spl-token-claim-airdrop-using-gumdrop',
       tags: [GuideTags.nfts, GuideTags.airdrop, GuideTags.tokens],
     },
     {

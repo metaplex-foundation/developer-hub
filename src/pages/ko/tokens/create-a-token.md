@@ -37,7 +37,11 @@ Token Metadata 프로그램을 사용하여 Solana에서 메타데이터가 있�
 
 ## 메타데이터와 이미지
 
+<<<<<<< HEAD
+`uri`는 최소한 다음 정보를 포함하는 JSON 파일을 가리켜야 합니다. 자세한 내용은 [Token Metadata 표준 페이지](/token-metadata/token-standard#the-fungible-standard)에서 확인할 수 있습니다. JSON과 이미지 URL을 어디서나 접근할 수 있도록 업로드해야 합니다. Arweave와 같은 web3 스토리지 제공업체 사용을 권장합니다. 코드로 수행하려면 이 [가이드](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo)를 따르세요.
+=======
 `uri`는 최소한 다음 정보를 포함하는 JSON 파일을 가리켜야 합니다. 자세한 내용은 [Token Metadata 표준 페이지](/ko/smart-contracts/token-metadata/token-standard#the-fungible-standard)에서 확인할 수 있습니다. JSON과 이미지 URL을 어디서나 접근할 수 있도록 업로드해야 합니다. Arweave와 같은 web3 스토리지 제공업체 사용을 권장합니다. 코드로 수행하려면 이 [Turbo로 결정론적 메타데이터 생성 가이드](/ko/guides/general/create-deterministic-metadata-with-turbo)를 따르세요.
+>>>>>>> main
 
 ```json
 {

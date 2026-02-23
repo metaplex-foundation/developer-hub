@@ -2,7 +2,7 @@
 title: 첫 번째 하이브리드 컬렉션 만들기
 metaTitle: 첫 번째 하이브리드 컬렉션 만들기 | Hybrid 가이드
 description: 하이브리드 컬렉션을 처음부터 끝까지 완전히 만드는 방법을 학습하세요!
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '09-17-2024'
 updated: '09-17-2024'
 ---

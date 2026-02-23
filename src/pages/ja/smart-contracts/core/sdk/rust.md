@@ -29,7 +29,7 @@ cargo add mpl-core
 ## ローカルスクリプト
 ローカルスクリプトでは、リストされたすべての命令の`Builder`バージョンを使用することをお勧めします。これらのビルダーは多くの作業を抽象化し、トランザクションに追加できる命令を返します。
 すべてのCore命令のリストはこちらにあります：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/guides/rust/metaplex-rust-sdks)ページをご覧ください。
+Rustの使用に関するより包括的なガイドについては、[Metaplex Rust SDKsガイド](/solana/rust/metaplex-rust-sdks)ページをご覧ください。
 #### CreateV1Builder - 例
 ```rust
 use mpl_core::instructions::CreateV1Builder;
@@ -61,7 +61,7 @@ let keypair_path = ".../my-key.json"
 ## CPI（Cross Program Invocation）
 自分のプログラムからCPI命令を実行するには、`mpl-core` Rustクレートのすべての命令に見つかる命令関数の`CpiBuilder`バージョンを使用することで簡単に実現できます。
 すべてのCore命令のリストはこちらにあります：[Metaplex Core - Rust Instructions](https://docs.rs/mpl-core/latest/mpl_core/instructions/index.html)
-MetaplexクレートをCPI命令の作成に使用する方法についてのより包括的なガイドは、[How to CPI into a Metaplex Programガイド](/guides/rust/how-to-cpi-into-a-metaplex-program)ページをご覧ください。
+MetaplexクレートをCPI命令の作成に使用する方法についてのより包括的なガイドは、[How to CPI into a Metaplex Programガイド](/solana/rust/how-to-cpi-into-a-metaplex-program)ページをご覧ください。
 #### CreateV1CpiBuilder - 例
 ```rust
 CreateV1CpiBuilder::new()
