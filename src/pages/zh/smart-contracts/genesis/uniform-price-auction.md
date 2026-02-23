@@ -7,8 +7,7 @@ updated: '01-31-2026'
 keywords:
   - uniform price auction
   - token auction
-  - IDO
-  - initial DEX offering
+  - token offering
   - clearing price
   - price discovery
   - sealed bid

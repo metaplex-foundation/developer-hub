@@ -8,7 +8,7 @@ keywords:
   - token launchpad
   - TGE
   - fair launch
-  - IDO
+  - token offering
   - presale
   - Solana token
   - SPL token
@@ -58,15 +58,15 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 |-----------|------|---------|-----------|
 | **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** | 終了時に決定 | 預入額に比例 | フェアローンチ、コミュニティトークン、クラウドセール |
 | **[Presale](/ja/smart-contracts/genesis/presale)** | 事前に固定 | 先着順 | トークンセール、既知のバリュエーション |
-| **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** | クリアリング価格 | 最高入札者が獲得 | 大規模調達、機関投資家の関心 |
+| **[Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction)** | クリアリング価格 | 最高入札者が獲得 | 大規模調達、機関参加者の関心 |
 
 ### どれを使うべきですか？
 
 **Launch Pool** - 自然な価格発見と公平なトークン配布を求める場合。クラウドセールと同様に、預入した全員がシェアに応じてトークンを受け取ります。先行者に奪われることはありません。
 
-**Presale** - バリュエーションが確定しており、予測可能な価格設定を求める場合。固定価格を設定し、上限に達するまで参加者が購入できます。
+**Presale** - バリュエーションが確定しており、予測可能な価格設定を求める場合。固定価格を設定し、上限に達するまで参加者が購入できます。Genesis における「Presale」とは、初回取引の直前にトークンが販売されることを意味します。購入者はトークンを直接受け取り、将来トークンを受け取る権利ではありません。
 
-**Auction** - 大口参加者による競争入札を求める場合。構造化オークションアプローチで、機関投資家の関心がある確立されたプロジェクトに最適です。
+**Auction** - 大口参加者による競争入札を求める場合。構造化オークションアプローチで、機関参加者の関心がある確立されたプロジェクトに最適です。
 
 ## 主要コンセプト
 

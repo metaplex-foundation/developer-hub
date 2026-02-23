@@ -1,14 +1,13 @@
 ---
 title: 均一価格オークション
 metaTitle: Genesisオークション | Solanaでのトークンオークション | Metaplex
-description: 均一クリアリング価格によるSolana上のトークンオークション。SPLトークンローンチのための競争入札方式で、機関投資家や大規模な資金調達に対応するオンチェーントークンオファリングです。
+description: 均一クリアリング価格によるSolana上のトークンオークション。SPLトークンローンチのための競争入札方式で、機関参加者や大規模な資金調達に対応するオンチェーントークンオファリングです。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - uniform price auction
   - token auction
-  - IDO
-  - initial DEX offering
+  - token offering
   - clearing price
   - price discovery
   - sealed bid
@@ -62,7 +61,7 @@ Uniform Price Auction はオークションウィンドウ中に入札を収集�
 | ユースケース | 説明 |
 |----------|-------------|
 | **価格発見** | 競争入札を通じて市場にトークンの公正価格を決定させる |
-| **ホエール/ファンドの参加** | 構造化されたオークション形式は大口の機関投資家に適している |
+| **ホエール/ファンドの参加** | 構造化されたオークション形式は大口の機関参加者に適している |
 | **アクセス制御** | 要件に応じてゲート付きまたはゲートなしに設定可能 |
 
 ## 仕組み
@@ -103,7 +102,7 @@ All winners pay 0.0006 SOL per token
 
 ## 注意事項
 
-- Uniform Price Auction は機関投資家の関心がある大規模なトークンローンチに適しています
+- Uniform Price Auction は機関参加者の関心がある大規模なトークンローンチに適しています
 - clearing price メカニズムにより、すべての落札者が同じ条件を得ることが保証されます
 - sealed 入札により、他の入札者の入札に基づく駆け引きを防止できます
 

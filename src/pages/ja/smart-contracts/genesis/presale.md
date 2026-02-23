@@ -9,11 +9,9 @@ keywords:
   - token presale
   - crypto presale
   - fixed price sale
-  - ICO
-  - ICO on Solana
   - token sale
   - token offering
-  - initial coin offering
+  - token offering on Solana
   - SPL token sale
   - fixed pricing
   - token launchpad
@@ -47,7 +45,7 @@ faqs:
     a: 予測可能な価格設定が必要で、調達額を正確に把握したい場合は Presale を使用してください。自然な価格発見には Launch Pool を使用してください。
 ---
 
-**Presale** は Solana 上での固定価格トークン配布を提供します。割り当てと SOL 上限に基づいて SPL トークンの価格を事前に設定します。ユーザーは受け取る量を正確に把握でき、あなたは調達額を正確に把握できます。 {% .lead %}
+**Presale** は Solana 上での固定価格トークン配布を提供します。割り当てと SOL 上限に基づいて SPL トークンの価格を事前に設定します。ユーザーは受け取る量を正確に把握でき、あなたは調達額を正確に把握できます。Genesis における「Presale」とは、初回取引の直前にトークンが販売されることを意味します。購入者はトークンを直接受け取り、将来トークンを受け取る権利ではありません。 {% .lead %}
 
 {% callout title="学習内容" %}
 このガイドでは以下を説明します：

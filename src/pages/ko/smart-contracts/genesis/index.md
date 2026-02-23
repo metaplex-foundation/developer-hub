@@ -10,8 +10,7 @@ keywords:
   - TGE
   - token generation event
   - fair launch
-  - ICO
-  - IDO
+  - token offering
   - token sale
   - crowdsale
   - launch pool
@@ -67,15 +66,15 @@ Genesis는 조합할 수 있는 세 가지 메커니즘을 지원합니다:
 |-----------|-------|--------------|----------|
 | **[Launch Pool](/ko/smart-contracts/genesis/launch-pool)** | 마감 시 발견 | 예치금에 비례 | 공정한 출시, 커뮤니티 토큰, 크라우드세일 |
 | **[Presale](/ko/smart-contracts/genesis/presale)** | 사전 고정 | 선착순 | 토큰 세일, 알려진 밸류에이션 |
-| **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** | 클리어링 가격 | 최고 입찰자 우선 | 대규모 모금, 기관 투자자 관심 |
+| **[Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction)** | 클리어링 가격 | 최고 입찰자 우선 | 대규모 모금, 기관 참가자 관심 |
 
 ### 어떤 것을 사용해야 하나요?
 
 **Launch Pool** - 유기적인 가격 발견과 공정한 토큰 배포를 원할 때. 크라우드세일과 유사하게, 예치한 모든 사람이 자신의 지분에 비례하여 토큰을 받습니다. 누구도 선점당하지 않습니다.
 
-**Presale** - 밸류에이션을 알고 있고 예측 가능한 가격 책정을 원할 때. 기존 고정가 토큰 세일처럼 가격을 설정하고 참가자들이 한도에 도달할 때까지 구매하도록 합니다.
+**Presale** - 밸류에이션을 알고 있고 예측 가능한 가격 책정을 원할 때. 가격을 설정하고 참가자들이 한도에 도달할 때까지 구매하도록 합니다. Genesis에서 "Presale"이란 초기 거래 직전에 토큰이 판매되는 것을 의미합니다. 구매자는 토큰을 직접 받으며, 미래에 토큰을 받을 권리가 아닙니다.
 
-**Auction** - 대규모 참가자들의 경쟁 입찰을 원할 때. 기관 투자자의 관심이 있는 기존 프로젝트에 가장 적합한 구조화된 경매 접근 방식입니다.
+**Auction** - 대규모 참가자들의 경쟁 입찰을 원할 때. 기관 참가자의 관심이 있는 기존 프로젝트에 가장 적합한 구조화된 경매 접근 방식입니다.
 
 ## 핵심 개념
 

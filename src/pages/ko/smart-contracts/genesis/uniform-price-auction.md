@@ -7,8 +7,7 @@ updated: '02-23-2026'
 keywords:
   - uniform price auction
   - token auction
-  - IDO
-  - initial DEX offering
+  - token offering
   - clearing price
   - price discovery
   - sealed bid
@@ -62,7 +61,7 @@ Uniform Price Auction은 경매 기간 동안 입찰을 수집한 후 단일 청
 | 사용 사례 | 설명 |
 |----------|------|
 | **가격 발견** | 경쟁 입찰을 통해 시장이 공정한 토큰 가격을 결정 |
-| **대규모 투자자/펀드 참여** | 구조화된 경매 형식이 대규모 기관 참여자에게 어필 |
+| **대규모 참가자/펀드 참여** | 구조화된 경매 형식이 대규모 기관 참가자에게 어필 |
 | **통제된 접근** | 요구 사항에 따라 게이트 또는 비게이트 가능 |
 
 ## 작동 방식
@@ -103,7 +102,7 @@ Uniform Price Auction은 경매 기간 동안 입찰을 수집한 후 단일 청
 
 ## 참고 사항
 
-- Uniform Price Auction은 기관 투자자의 관심이 있는 대규모 토큰 출시에 적합합니다
+- Uniform Price Auction은 기관 참가자의 관심이 있는 대규모 토큰 출시에 적합합니다
 - 청산 가격 메커니즘은 모든 낙찰자가 동일한 조건을 받도록 보장합니다
 - 봉인 입찰은 다른 입찰자의 입찰을 기반으로 한 조작을 방지합니다
 

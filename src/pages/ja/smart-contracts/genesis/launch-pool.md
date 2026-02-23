@@ -14,7 +14,7 @@ keywords:
   - price discovery
   - token launchpad
   - crowdsale
-  - ICO alternative
+  - token sale alternative
   - SPL token launch
   - on-chain token launch
 about:

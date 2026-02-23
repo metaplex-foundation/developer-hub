@@ -7,7 +7,7 @@ updated: '01-31-2026'
 keywords:
   - uniform price auction
   - token auction
-  - IDO
+  - token offering
   - token auction Solana
   - clearing price
   - price discovery

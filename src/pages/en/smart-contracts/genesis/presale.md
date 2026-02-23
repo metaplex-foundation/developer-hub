@@ -9,8 +9,7 @@ keywords:
   - token presale
   - crypto presale
   - fixed price sale
-  - ICO
-  - ICO on Solana
+  - token offering on Solana
   - token sale
   - token offering
   - initial token sale

@@ -13,7 +13,7 @@ keywords:
   - how to launch a token
   - SPL token launch
   - token launchpad
-  - ICO guide
+  - token launch guide
   - token sale guide
 about:
   - Genesis flow

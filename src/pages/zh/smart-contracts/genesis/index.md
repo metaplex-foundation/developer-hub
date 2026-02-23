@@ -10,8 +10,7 @@ keywords:
   - TGE
   - token generation event
   - fair launch
-  - ICO
-  - IDO
+  - token offering
   - token sale
   - crowdsale
   - launch pool
@@ -73,7 +72,7 @@ Genesis 支持三种可以组合使用的机制：
 
 **Launch Pool** - 您想要有机的价格发现和公平的代币分配。类似于众筹，每个存款的人都能按其份额比例获得代币。没有人会被抢先交易。
 
-**Presale** - 您知道估值并希望价格可预测。类似于传统的代币销售——设定固定价格，让参与者购买直到达到上限。
+**Presale** - 您知道估值并希望价格可预测。设定固定价格，让参与者购买直到达到上限。在 Genesis 中，"Presale"指的是在初始交易之前直接出售代币——购买者直接收到代币，而非未来收到代币的权利。
 
 **拍卖** - 您希望大型参与者进行竞价。拍卖式的方式，最适合有机构兴趣的成熟项目。
 

@@ -10,8 +10,7 @@ keywords:
   - TGE
   - token generation event
   - fair launch
-  - ICO
-  - IDO
+  - token offering
   - token sale
   - crowdsale
   - launch pool
