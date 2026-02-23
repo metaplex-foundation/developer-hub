@@ -1,7 +1,7 @@
 ---
 title: はじめに
-metaTitle: Genesis - はじめに | トークンローンチフロー
-description: Genesis のトークンローンチフローを理解しましょう。初期化から配布までの手順と、ローンチの計画方法を学びます。
+metaTitle: Genesisをはじめる | Solanaでトークンをローンチする方法 | Metaplex
+description: SolanaでSPLトークンをローンチする方法をステップごとに解説します。Genesisトークンローンチパッドを使ったPresale、フェアローンチ、トークンセールの計画方法を学びましょう。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
@@ -10,6 +10,11 @@ keywords:
   - Genesis setup
   - TGE steps
   - launch planning
+  - how to launch a token
+  - SPL token launch
+  - token launchpad
+  - token launch guide
+  - token sale guide
 about:
   - Genesis flow
   - Launch lifecycle
@@ -28,13 +33,17 @@ faqs:
     a: 希望する供給量に 10^decimals を掛けます。9 桁の小数で 100 万トークンの場合、1,000,000,000,000,000 を使用します。
 ---
 
-構築を始める前に Genesis のトークンローンチフローを理解しましょう。このガイドでは、初期化から配布までの各ステップを説明し、ローンチの計画を支援します。 {% .lead %}
+Solana 上でプレセール、フェアローンチ、トークンセールを計画している方へ。構築を始める前に Genesis のトークンローンチフローを理解しましょう。このガイドでは、SPL トークンの作成から配布までの各ステップを説明します。 {% .lead %}
+
+{% callout title="ノーコードオプション" %}
+コードを書かずにトークンをローンチしたい場合は、[Metaplex トークンローンチパッド](https://www.metaplex.com)をご利用ください。以下のガイドは、カスタムローンチパッドプラットフォームの構築や、独自のウェブサイトでトークンセールを開催したい開発者向けです。
+{% /callout %}
 
 {% callout title="構築の準備はできましたか？" %}
 フローを理解したら：
-- **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - インストールと関数リファレンス
-- **[Launch Pool](/smart-contracts/genesis/launch-pool)** - 比例配分の完全チュートリアル
-- **[Presale](/smart-contracts/genesis/presale)** - 固定価格販売の完全チュートリアル
+- **[JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript)** - インストールと関数リファレンス
+- **[Launch Pool](/ja/smart-contracts/genesis/launch-pool)** - 比例配分の完全チュートリアル
+- **[Presale](/ja/smart-contracts/genesis/presale)** - 固定価格販売の完全チュートリアル
 {% /callout %}
 
 ## Genesis フロー
@@ -216,7 +225,7 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 
 構築を始める前に：
 
-- [ ] ローンチメカニズムの決定（Launch Pool vs Presale）
+- [ ] ローンチメカニズムの決定（フェアローンチ/クラウドセールには Launch Pool、固定価格には Presale）
 - [ ] 小数点付きの総トークン供給量の計算
 - [ ] bucket 割り当ての計画（合計が総供給量と一致する必要あり）
 - [ ] 時間ウィンドウの設定（入金開始/終了、請求開始/終了）
@@ -260,6 +269,7 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 
 構築の準備はできましたか？ローンチタイプを選択してください：
 
-1. **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - インストールと設定
-2. **[Launch Pool チュートリアル](/smart-contracts/genesis/launch-pool)** - 比例配分
-3. **[Presale チュートリアル](/smart-contracts/genesis/presale)** - 固定価格販売
+1. **[トークンをローンチする](/ja/tokens/launch-token)** - エンドツーエンドのトークンローンチガイド
+2. **[JavaScript SDK](/ja/smart-contracts/genesis/sdk/javascript)** - インストールと設定
+3. **[Launch Pool チュートリアル](/ja/smart-contracts/genesis/launch-pool)** - フェアローンチによる比例配分
+4. **[Presale チュートリアル](/ja/smart-contracts/genesis/presale)** - 固定価格トークン販売
