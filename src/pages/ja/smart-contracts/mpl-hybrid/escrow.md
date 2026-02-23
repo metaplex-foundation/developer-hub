@@ -13,7 +13,7 @@ description: MPL-Hybridエスクローの初期化
 {% totem %}
 {% totem-accordion title="オンチェーンMPL-404エスクローデータ構造" %}
 
-MPL-404エスクローのオンチェーンアカウント構造 [リンク](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+MPL-404エスクローのオンチェーンアカウント構造 [GitHubで表示](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | 名前           | タイプ   | サイズ | 説明                                      |     |
 | -------------- | ------ | ---- | ---------------------------------------- | --- |

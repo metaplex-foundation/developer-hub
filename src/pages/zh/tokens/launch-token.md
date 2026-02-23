@@ -1,12 +1,22 @@
 ---
-title: 发行代币
-metaTitle: 使用 Genesis 发行代币指南 | Metaplex Solana
-description: 使用Solana上的Genesis Launch Pools发行代币的端到端指南。
+title: 在 Solana 上发行代币
+metaTitle: Solana 代币发射台 | 代币销售与公平发行 | Metaplex
+description: 使用 Genesis 在 Solana 上发行 SPL 代币——支持公平发射、预售、众筹和代币生成事件 (TGE) 的代币发射台。TypeScript 链上代币分发逐步指南。
 ---
 
-使用[Genesis](/zh/smart-contracts/genesis) Launch Pools发行代币。用户在您设定的期间内存入SOL，并按其在总存款中的份额比例获得代币。 {% .lead %}
+使用[Genesis](/zh/smart-contracts/genesis)在 Solana 上发行 SPL 代币——链上代币发射台和公平发射平台。无论您想进行代币销售还是众筹，Genesis Launch Pools 都能透明地处理链上代币分发。用户在您设定的期间内存入 SOL，并按其在总存款中的份额比例获得代币。 {% .lead %}
+
+{% callout type="note" title="无代码选项" %}
+不想编写代码？使用 [Metaplex 代币发射台](https://www.metaplex.com) 无需编码即可发行代币。本指南适用于希望构建自己的代币发行体验或使用 Genesis SDK 在自己网站上托管代币销售的开发者。
+{% /callout %}
+
+{% callout type="note" title="其他发行方式" %}
+本指南介绍的是**Launch Pool**方式，但Genesis还支持以固定价格出售代币的**[预售](/zh/smart-contracts/genesis/presale)**发行方式。请查看[Genesis概述](/zh/smart-contracts/genesis)比较各种方式，选择最适合您项目的方法。
+{% /callout %}
 
 ## 概述
+
+Genesis 是一个 Solana 代币发射台，提供公平的链上代币发行机制。与传统的中心化代币销售平台以固定价格出售代币不同，Launch Pool 让市场决定代币分配——每个参与者按其存款比例获得代币，确保公平透明的代币生成事件 (TGE)。所有 SPL 代币创建、融资和分发都在链上进行，无需中间人。
 
 Launch Pool代币发行有三个阶段：
 
@@ -34,9 +44,9 @@ npm init -y
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
-## 完整发行脚本
+## 步骤 1：初始化代币
 
-以下是带有解释性注释的完整可运行脚本。运行此脚本**一次**以设置发行。
+以下脚本创建代币并初始化 Genesis 账户。运行此脚本**一次**以设置发行。
 
 {% callout type="warning" title="需要密钥对" %}
 您需要在机器上有Solana密钥对文件来签署交易。这通常是位于`~/.config/solana/id.json`的Solana CLI钱包。更新脚本中的`walletFile`路径以指向您的密钥对文件。确保此钱包有SOL用于交易费用。
@@ -45,18 +55,14 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 创建名为`launch.ts`的文件：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   mplGenesis,
   initializeV2,
   findGenesisAccountV2Pda,
-  findLaunchPoolBucketV2Pda,
-  findUnlockedBucketV2Pda,
-  addLaunchPoolBucketV2,
-  addUnlockedBucketV2,
-  finalizeV2,
 } from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation/umi';
+import { generateSigner, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   // ============================================
@@ -70,7 +76,7 @@ async function main() {
   // 这通常是位于~/.config/solana/id.json的Solana CLI钱包
   // 或者，使用您有权访问的任何密钥对文件
   const walletFile = '/path/to/your/keypair.json'; // <-- 更新此路径
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -109,7 +115,7 @@ async function main() {
 
   await initializeV2(umi, {
     baseMint,
-    fundingMode: 0,
+    fundingMode: 0, // 0 = SOL 资助, 1 = SPL 代币资助
     totalSupplyBaseToken: TOTAL_SUPPLY,
     name: TOKEN_NAME,
     uri: TOKEN_URI,
@@ -167,6 +173,7 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 
 ## 后续步骤
 
-- [Genesis概述](/zh/smart-contracts/genesis) - 了解更多关于Genesis概念
-- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - Launch Pool的详细文档
-- [Integration APIs](/zh/smart-contracts/genesis/integration-apis) - 使用API查询发行数据
+- [Genesis 概述](/zh/smart-contracts/genesis) - 了解有关 Solana 代币发射台的更多信息
+- [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 公平发射详细文档
+- [预售](/zh/smart-contracts/genesis/presale) - 以固定价格进行代币预售
+- [聚合 API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行和代币销售数据

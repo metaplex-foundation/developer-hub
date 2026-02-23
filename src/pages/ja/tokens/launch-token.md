@@ -1,14 +1,24 @@
 ---
 title: Solanaでトークンをローンチする
-metaTitle: Solanaでトークンをローンチする方法 | TGE・フェアローンチガイド | Metaplex
-description: Solanaでトークン生成イベント（TGE）をローンチする完全ガイド。Genesis Launch Poolsを使用したフェアトークンローンチをステップバイステップのTypeScriptコードで作成。
+metaTitle: Solanaトークンローンチパッド | トークンセール＆フェアローンチ | Metaplex
+description: Genesisを使ってSolana上でSPLトークンをローンチ。フェアローンチ、Presale、クラウドセール、トークン生成イベント（TGE）に対応したトークンローンチパッドです。オンチェーントークン配布のためのTypeScriptステップバイステップガイド。
 ---
 
-[Genesis](/ja/smart-contracts/genesis) Launch Poolsを使用してトークンをローンチします。ユーザーは設定した期間中にSOLを預け入れ、総預入額に対する自分のシェアに比例してトークンを受け取ります。 {% .lead %}
+[Genesis](/ja/smart-contracts/genesis) を使用して Solana 上で SPL トークンをローンチします。Genesis はオンチェーンのトークンローンチパッドおよびフェアローンチプラットフォームです。トークンセール、クラウドセールなど、Genesis Launch Pools がオンチェーンで透明にトークン配布を行います。ユーザーは設定した期間中に SOL を預け入れ、総預入額に対するシェアに比例してトークンを受け取ります。 {% .lead %}
+
+{% callout type="note" title="ノーコードオプション" %}
+コードを書きたくない場合は、[Metaplex トークンローンチパッド](https://www.metaplex.com)を使えばコーディング不要でトークンをローンチできます。このガイドは、Genesis SDK を使って独自のトークンローンチ体験を構築したり、独自のウェブサイトでトークンセールを開催したい開発者向けです。
+{% /callout %}
+
+{% callout type="note" title="その他のローンチ方法" %}
+このガイドでは**Launch Pool**方式を説明していますが、Genesisは固定価格でトークンを販売する**[プレセール](/ja/smart-contracts/genesis/presale)**ローンチもサポートしています。[Genesis概要](/ja/smart-contracts/genesis)で各方式を比較し、プロジェクトに最適な方法を選択してください。
+{% /callout %}
 
 ## 概要
 
-Launch Poolトークンローンチには3つのフェーズがあります：
+Genesis は Solana トークンローンチパッドであり、公正なオンチェーントークンローンチメカニズムを提供します。集中型のトークンセールプラットフォームとは異なり、Launch Pool では市場がトークン配布を決定します。すべての参加者が預入額に比例してトークンを受け取り、公平で透明なトークン生成イベント（TGE）を実現します。SPL トークンの作成、資金調達、配布はすべてオンチェーンで行われ、仲介者は不要です。
+
+Launch Pool トークンローンチには3つのフェーズがあります：
 
 1. **セットアップ**（1回実行） - トークンを作成し、ローンチを設定して有効化
 2. **預入期間**（ユーザーが参加） - 設定した期間中にユーザーがSOLを預け入れ
@@ -429,6 +439,7 @@ main().catch(console.error);
 
 ## 次のステップ
 
-- [Genesis概要](/ja/smart-contracts/genesis) - Genesisのコンセプトについて詳しく学ぶ
-- [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - Launch Poolの詳細ドキュメント
-- [Integration APIs](/ja/smart-contracts/genesis/integration-apis) - APIでローンチデータをクエリ
+- [Genesis 概要](/ja/smart-contracts/genesis) - Solana トークンローンチパッドについて詳しく学ぶ
+- [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチの詳細ドキュメント
+- [プレセール](/ja/smart-contracts/genesis/presale) - 固定価格でのトークンプレセールを実行
+- [Aggregation API](/ja/smart-contracts/genesis/aggregation) - API でトークンセールデータをクエリ

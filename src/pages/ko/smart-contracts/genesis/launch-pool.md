@@ -1,16 +1,22 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | 공정한 토큰 배포 | Metaplex
-description: 사용자가 일정 기간 동안 예치하고 비례적으로 토큰을 받는 토큰 배포 방식입니다. 스나이핑 방지 설계를 통한 유기적인 가격 발견을 제공합니다.
+metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
+description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - launch pool
   - token distribution
   - fair launch
+  - fair launch crypto
   - proportional distribution
   - deposit window
   - price discovery
+  - token launchpad
+  - crowdsale
+  - token sale alternative
+  - SPL token launch
+  - on-chain token launch
 about:
   - Launch pools
   - Price discovery
@@ -41,7 +47,7 @@ faqs:
     a: Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
 ---
 
-**Launch Pool**은 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 사용자는 일정 기간 동안 예치하고 총 예치금에서의 지분에 비례하여 토큰을 받습니다 - 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
+**Launch Pool**은 솔라나에서 공정한 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 기존 중앙화 토큰 판매와는 다른 온체인 토큰 배포 메커니즘으로 — 사용자는 일정 기간 동안 SOL을 예치하고 총 예치금에서의 지분에 비례하여 SPL 토큰을 받습니다. 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
 
 {% callout title="학습 내용" %}
 이 가이드에서 다루는 내용:
@@ -53,7 +59,7 @@ faqs:
 
 ## 요약
 
-Launch Pool은 정해진 기간 동안 예치금을 받은 후 토큰을 비례적으로 배분합니다. 최종 토큰 가격은 총 예치금을 토큰 할당량으로 나누어 결정됩니다.
+Launch Pool은 정해진 기간 동안 예치금을 받은 후 토큰을 비례적으로 배분하는 크라우드세일 스타일의 토큰 출시 메커니즘입니다. 최종 토큰 가격은 총 예치금을 토큰 할당량으로 나누어 결정되며, 토큰 생성 이벤트(TGE)를 위한 투명한 온체인 가격 발견을 가능하게 합니다.
 
 - 사용자는 예치 기간 동안 SOL을 예치합니다 ({% fee product="genesis" config="launchPool" fee="deposit" /%} 수수료 적용)
 - 예치 기간 동안 출금 가능 ({% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료)
@@ -459,5 +465,6 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 ## 다음 단계
 
 - [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
-- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 할당
-- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통한 출시 데이터 조회
+- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 토큰 오퍼링
+- [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
+- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통한 토큰 세일 데이터 조회

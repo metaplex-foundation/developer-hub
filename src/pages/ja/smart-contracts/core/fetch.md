@@ -287,7 +287,7 @@ pub async fn fetch_assets_by_update_authority() {
 {% /dialect-switcher %}
 ## DAS - Digital Asset Standard API
 DAS対応RPCを使用すると、インデックス化されたAssetを活用して超高速のフェッチとデータ取得が可能になります。
-DASはメタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（Attributesを含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しくは[こちら](/dev-tools/das-api)をご覧ください。一般的なDAS SDKに加えて、[MPL Core用の拡張機能](/dev-tools/das-api/core-extension)が作成されており、MPL Core SDKでさらに使用できる正しい型を直接返します。また、Collectionから継承されたAssetのプラグインを自動的に継承し、DASからCoreへの型変換関数も提供します。
+DASはメタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（Attributesを含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しくは[Metaplex DAS APIページ](/dev-tools/das-api)をご覧ください。一般的なDAS SDKに加えて、[MPL Core用の拡張機能](/dev-tools/das-api/core-extension)が作成されており、MPL Core SDKでさらに使用できる正しい型を直接返します。また、Collectionから継承されたAssetのプラグインを自動的に継承し、DASからCoreへの型変換関数も提供します。
 以下は、DASでMPL Core Assetを取得した際に返されるデータの例です。
 ### FetchAssetの例
 ```json

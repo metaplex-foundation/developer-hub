@@ -28,7 +28,7 @@ For local scripts, we recommend using the `Builder` versions of all the instruct
 
 A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
+For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/solana/rust/metaplex-rust-sdks) page.
 
 #### CreateTreeConfigBuilder - Example
 
@@ -96,7 +96,7 @@ Performing CPI instructions from your own programs can be achieved easily by usi
 
 A list of all Bubblegum instructions can be found here: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/solana/rust/how-to-cpi-into-a-metaplex-program) page.
 
 #### CreateTreeConfigCpiBuilder - Example
 

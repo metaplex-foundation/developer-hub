@@ -79,7 +79,7 @@ await mintV2(umi, {
 
 {% totem-accordion title="创建MPL-Core集合" %}
 
-如果您还没有集合，可以使用[`@metaplex-foundation/mpl-core`库](https://developers.metaplex.com/core/collections#creating-a-collection-with-plugins)创建一个。请记住，您还需要将`BubblegumV2`插件添加到集合中。
+如果您还没有集合，可以使用[`@metaplex-foundation/mpl-core`库](/zh/smart-contracts/core/collections#creating-a-collection-with-plugins)创建一个。请记住，您还需要将`BubblegumV2`插件添加到集合中。
 npm install @metaplex-foundation/mpl-core
 然后像这样创建集合：
 

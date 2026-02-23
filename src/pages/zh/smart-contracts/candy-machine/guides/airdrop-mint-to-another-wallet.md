@@ -39,7 +39,7 @@ Sugar CLI 提供了两个主要命令用于将 NFT 铸造到其他钱包：
 1. `sugar mint` 铸造到*一个*特定钱包
 2. `sugar airdrop` 铸造到*多个*钱包
 
-通过 sugar 允许铸造的前提是您的 Candy Machine 创建时**没有附加守卫**。要使用 sugar 创建 Candy Machine，您可以按照[此](https://developers.metaplex.com/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)指南的第一步进行操作。如果您的 Candy Machine 已附加守卫，可以使用 `sugar guard remove` 移除它们。
+通过 sugar 允许铸造的前提是您的 Candy Machine 创建时**没有附加守卫**。要使用 sugar 创建 Candy Machine，您可以按照[在 Solana 上使用 Candy Machine 创建 NFT 集合](/zh/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)指南的第一步进行操作。如果您的 Candy Machine 已附加守卫，可以使用 `sugar guard remove` 移除它们。
 
 ### 使用 `sugar mint` 铸造到单个接收者
 要将 NFT 铸造到单个接收者钱包，使用带有以下参数的 `sugar mint` 命令：

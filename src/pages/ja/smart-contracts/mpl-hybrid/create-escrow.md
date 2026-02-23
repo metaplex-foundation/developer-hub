@@ -6,9 +6,9 @@ description: 404スワップを可能にするMPL 404 Hybridエスクローア�
 
 ## 前提条件
 
-- MPL Coreコレクション - [リンク](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
-- コレクションにミントされたCore NFTアセット - [リンク](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
-- 必要なトークン量で作成されたSPLトークン。 - [リンク](/ja/guides/javascript/how-to-create-a-solana-token)
+- MPL Coreコレクション - [Coreコレクション作成ガイド](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- コレクションにミントされたCore NFTアセット - [Core NFTアセット作成ガイド](/ja/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- 必要なトークン量で作成されたSPLトークン。 - [Solanaトークン作成ガイド](/ja/guides/javascript/how-to-create-a-solana-token)
 - 一貫したゲートウェイ/uriでの連続メタデータJSONファイルのオンラインストレージ。
 
 エスクローの初期化は、NFTコレクションと代替可能トークンをリンクする重要なステップです。このステップを開始する前に、Coreコレクションアドレス、代替可能トークンミントアドレス、そして数値的に命名された連続ファイルを使用するオフチェーンメタデータURIの範囲を準備しておく必要があります。Base URI文字列の一貫性の必要性により、一部のオフチェーンメタデータオプションが制限されます。メタデータの更新を実行するには、エスクローのオーソリティがコレクションのオーソリティと一致する必要があることに注意してください。また、エスクローが資金提供されるため、トークンオーソリティである必要がなく、コレクションを既存のミームコインや他の代替可能アセットで裏付けることが可能です。
@@ -20,7 +20,7 @@ MPL Hybridエスクローは、プロジェクトに関するすべての情報�
 {% totem %}
 {% totem-accordion title="オンチェーンMPL-404エスクローデータ構造" %}
 
-MPL-404エスクローのオンチェーンアカウント構造 [リンク](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+MPL-404エスクローのオンチェーンアカウント構造 [GitHubで表示](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | 名前           | タイプ   | サイズ | 説明                                      |     |
 | -------------- | ------ | ---- | ---------------------------------------- | --- |

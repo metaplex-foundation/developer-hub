@@ -2,7 +2,7 @@
 title: 머클 트리를 활용한 토큰 클레이머 스마트 컨트랙트 만들기
 metaTitle: 토큰 클레이머 스마트 컨트랙트 만들기 | Token Metadata 가이드
 description: 머클 트리를 활용하고 Anchor를 사용하여 Solana에서 토큰 클레이머 스마트 컨트랙트를 만드는 방법을 배우세요!
-# /components/guides/index.js의 날짜도 업데이트하는 것을 잊지 마세요
+# /components/products/guides/index.js의 날짜도 업데이트하는 것을 잊지 마세요
 created: '01-13-2025'
 updated: '01-13-2025'
 ---

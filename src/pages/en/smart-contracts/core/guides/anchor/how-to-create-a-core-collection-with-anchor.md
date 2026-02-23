@@ -158,7 +158,7 @@ let update_authority = match &ctx.accounts.update_authority {
 };
 ```
 After preparing all the necessary accounts, we pass them to the `CreateCollectionV2CpiBuilder` and use `.invoke()` to execute the instruction, or `.invoke_signed()` if we need to use signer seeds.
-For more details on how the Metaplex CPI Builder works, you can refer to this [documentation](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
+For more details on how the Metaplex CPI Builder works, you can refer to this [documentation](/solana/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
 ### Additional Actions
 Before moving on, What if we want to create the asset with plugins and/or external plugins, such as the `FreezeDelegate` plugin or the `AppData` external plugin, already included? Here's how we can do it.
 First, let's add all the additional necessary imports:

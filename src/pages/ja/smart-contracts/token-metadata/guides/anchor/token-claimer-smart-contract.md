@@ -2,7 +2,7 @@
 title: Merkle Treeを活用したToken Claimerスマートコントラクトの作り方
 metaTitle: Token Claimerスマートコントラクトの作り方 | Token Metadata ガイド
 description: Merkle TreeとAnchorを使用してSolana上でToken Claimerスマートコントラクトを作成する方法を学びましょう！
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '01-13-2025'
 updated: '01-13-2025'
 ---

@@ -1,12 +1,22 @@
 ---
 title: Solana에서 토큰 런칭하기
-metaTitle: Solana에서 토큰 런칭하는 방법 | TGE & 페어 런칭 가이드 | Metaplex
-description: Solana에서 토큰 생성 이벤트(TGE)를 런칭하는 완전 가이드. Genesis Launch Pools를 사용한 페어 토큰 런칭을 단계별 TypeScript 코드로 생성합니다.
+metaTitle: 솔라나 토큰 런치패드 | 토큰 세일 & 공정한 출시 토큰 런치패드 | Metaplex
+description: Genesis로 솔라나에서 SPL 토큰을 출시하세요 — 공정한 출시, 프리세일, 크라우드세일, 토큰 생성 이벤트(TGE)를 위한 토큰 런치패드. 온체인 토큰 배포를 위한 단계별 TypeScript 가이드.
 ---
 
-[Genesis](/ko/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+[Genesis](/ko/smart-contracts/genesis)를 사용하여 솔라나에서 SPL 토큰을 출시하세요 — 온체인 토큰 런치패드이자 공정한 출시 플랫폼입니다. 토큰 세일, 크라우드세일을 실행하려는 경우, Genesis Launch Pool은 온체인에서 투명하게 토큰 배포를 처리합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+
+{% callout type="note" title="노코드 옵션" %}
+코드를 작성하고 싶지 않으신가요? [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하여 코딩 없이 토큰을 출시하세요. 이 가이드는 Genesis SDK를 사용하여 자체 토큰 출시 경험을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하려는 개발자를 위한 것입니다.
+{% /callout %}
+
+{% callout type="note" title="다른 출시 방법" %}
+이 가이드는 **Launch Pool** 방식을 다루지만, Genesis는 고정 가격으로 토큰을 판매하는 **[프리세일](/ko/smart-contracts/genesis/presale)** 출시도 지원합니다. [Genesis 개요](/ko/smart-contracts/genesis)에서 각 방식을 비교하고 프로젝트에 가장 적합한 방법을 선택하세요.
+{% /callout %}
 
 ## 개요
+
+Genesis는 공정한 온체인 토큰 출시 메커니즘을 제공하는 솔라나 토큰 런치패드입니다. 고정 가격으로 토큰을 판매하는 기존 중앙화된 토큰 세일 플랫폼과 달리, Launch Pool은 시장이 토큰 배분을 결정합니다 — 모든 참가자가 예치금에 비례하여 토큰을 받아 공정하고 투명한 토큰 생성 이벤트(TGE)를 보장합니다. 모든 SPL 토큰 생성, 자금 조달, 배포가 중개자 없이 온체인에서 이루어집니다.
 
 Launch Pool 토큰 출시에는 세 가지 단계가 있습니다:
 
@@ -429,6 +439,7 @@ main().catch(console.error);
 
 ## 다음 단계
 
-- [Genesis 개요](/ko/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
-- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
-- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통해 출시 데이터 쿼리
+- [Genesis 개요](/ko/smart-contracts/genesis) - 솔라나 토큰 런치패드에 대해 더 알아보기
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 공정한 출시 문서
+- [프리세일](/ko/smart-contracts/genesis/presale) - 고정 가격으로 토큰 프리세일 실행
+- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통해 출시 및 토큰 세일 데이터 쿼리

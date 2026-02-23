@@ -69,7 +69,7 @@ const auctionHouseSettings = {
 
 拍卖行正常运作需要几个账户。一旦由拍卖行设置,权限可以根据自己的喜好重置和配置这些账户。
 
-有一些由拍卖行程序创建和控制的账户。这些账户是程序派生地址(PDA),您可以在[这里](https://solanacookbook.com/core-concepts/pdas.html)阅读更多相关内容。这些是可用于设置这些账户的两个设置:
+有一些由拍卖行程序创建和控制的账户。这些账户是程序派生地址(PDA),您可以在[Solana Cookbook](https://solanacookbook.com/core-concepts/pdas.html)阅读更多相关内容。这些是可用于设置这些账户的两个设置:
 
 1. `auctionHouseFeeAccount`: 存储用于代表用户支付拍卖行相关交易的资金的费用账户的公钥。
 

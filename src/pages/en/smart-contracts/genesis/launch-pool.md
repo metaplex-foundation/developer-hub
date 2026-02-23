@@ -1,16 +1,22 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | Fair Token Distribution | Metaplex
-description: Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
+description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - launch pool
   - token distribution
   - fair launch
+  - fair launch crypto
   - proportional distribution
   - deposit window
   - price discovery
+  - token launchpad
+  - crowdsale
+  - token launchpad alternative
+  - SPL token launch
+  - on-chain token launch
 about:
   - Launch pools
   - Price discovery
@@ -41,7 +47,7 @@ faqs:
     a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 ---
 
-**Launch Pools** provide organic price discovery for token launches. Users deposit during a window and receive tokens proportional to their share of total deposits - no sniping, no front-running, fair distribution for everyone. {% .lead %}
+**Launch Pools** provide organic price discovery for fair token launches on Solana. Users deposit SOL during a window and receive SPL tokens proportional to their share of total deposits. No sniping, no front-running, fair distribution for everyone. {% .lead %}
 
 {% callout title="What You'll Learn" %}
 This guide covers:
@@ -53,7 +59,7 @@ This guide covers:
 
 ## Summary
 
-Launch Pools accept deposits during a defined window, then distribute tokens proportionally. The final token price is determined by total deposits divided by token allocation.
+Launch Pools are a crowdsale-style token launch mechanism that accepts deposits during a defined window, then distributes tokens proportionally. The final token price is determined by total deposits divided by token allocation — enabling transparent, on-chain price discovery for your token generation event (TGE).
 
 - Users deposit SOL during the deposit window ({% fee product="genesis" config="launchPool" fee="deposit" /%} fee applies)
 - Withdrawals allowed during deposit period ({% fee product="genesis" config="launchPool" fee="withdraw" /%} fee)
@@ -458,6 +464,7 @@ Launch Pool discovers price organically based on deposits with proportional dist
 
 ## Next Steps
 
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sales
-- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based allocation
-- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch data via API
+- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
+- [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based token offering
+- [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
+- [Aggregation API](/smart-contracts/genesis/aggregation) - Query token sale data via API

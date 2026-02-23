@@ -183,7 +183,7 @@ let collection = match &ctx.accounts.collection {
 ```
 **注意**：如您所见，这种方法对于其他可选账户如`authority`、`owner`和`update_authority`也是重复的。
 准备好所有必要的账户后，我们将它们传递给`CreateV2CpiBuilder`并使用`.invoke()`来执行指令，如果需要使用签名者种子则使用`.invoke_signed()`。
-有关Metaplex CPI Builder工作原理的更多详细信息，您可以参考此[文档](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
+有关Metaplex CPI Builder工作原理的更多详细信息，您可以参考此[文档](/solana/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)
 ### 附加操作
 在继续之前，如果我们想在创建Asset时就包含插件和/或外部插件，例如`FreezeDelegate`插件或`AppData`外部插件呢？以下是我们如何实现。
 首先，让我们添加所有必要的额外导入：
