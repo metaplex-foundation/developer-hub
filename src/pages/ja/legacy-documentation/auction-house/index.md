@@ -52,7 +52,7 @@ Auction Houseプログラムを使用して、新しい**Auction House**アカ�
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction Houseはまた、別のPDA: `programAsSigner` PDAを**デリゲート**として割り当てます。デリゲートはSolana SPL-tokenプログラムの機能であり、[こちら](https://spl.solana.com/token#authority-delegation)で詳しく説明されています。委任により、Auction Houseは後で販売が行われたときにトークンアカウントからアセットを引き出すことができます。このように、アセットはエスクローする必要がなく、販売が行われるまでユーザーのウォレットに留まることができます。
+2. Auction Houseはまた、別のPDA: `programAsSigner` PDAを**デリゲート**として割り当てます。デリゲートはSolana SPL-tokenプログラムの機能であり、[SPLトークン権限委任のドキュメント](https://www.solana-program.com/docs/token#authority-delegation)で詳しく説明されています。委任により、Auction Houseは後で販売が行われたときにトークンアカウントからアセットを引き出すことができます。このように、アセットはエスクローする必要がなく、販売が行われるまでユーザーのウォレットに留まることができます。
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 
@@ -103,9 +103,9 @@ Auction Houseプログラムを使用して、新しい**Auction House**アカ�
 
 ## 代替可能なアセットのオークション
 
-これまで、Auction Houseアカウントを使用してアセットを交換することについて話してきましたが、どのタイプのアセットをこの方法で交換できるかについては掘り下げていません。Auction Houseでリストできる最も人気のあるアセットは、[非代替性トークン（NFT）](/token-metadata/token-standard#the-non-fungible-standard)です。
+これまで、Auction Houseアカウントを使用してアセットを交換することについて話してきましたが、どのタイプのアセットをこの方法で交換できるかについては掘り下げていません。Auction Houseでリストできる最も人気のあるアセットは、[非代替性トークン（NFT）](/ja/smart-contracts/token-metadata/token-standard)です。
 
-ただし、これらがAuction Houseプログラムから恩恵を受けることができる唯一のアセットではありません。実際、アセットはミントアカウントにメタデータアカウントが添付されている限り、任意のSPLトークンにすることができます。SPLトークンとメタデータアカウントについて詳しく知りたい場合は、[Token Metadataプログラムの概要で詳細を読むことができます](/token-metadata)。
+ただし、これらがAuction Houseプログラムから恩恵を受けることができる唯一のアセットではありません。実際、アセットはミントアカウントにメタデータアカウントが添付されている限り、任意のSPLトークンにすることができます。SPLトークンとメタデータアカウントについて詳しく知りたい場合は、[Token Metadataプログラムの概要で詳細を読むことができます](/ja/smart-contracts/token-metadata)。
 
 ## カスタムSPLトークンを使用してアセットを購入
 

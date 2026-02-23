@@ -31,7 +31,7 @@ howToTools:
 このガイドでは、Metaplex Token Metadataプロトコルを使用して、既に初期化されたSolanaトークン（SPLトークン）にメタデータを追加する手順を説明します。
 
 {% callout %}
-代わりに利用可能な[createヘルパー](https://developers.metaplex.com/token-metadata/mint#create-helpers)関数を使用してトークンを作成・初期化することを推奨します。これを行う方法については、代わりにこのガイド[`Solanaトークンの作成方法`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token)をご確認ください。
+代わりに利用可能な[createヘルパー](/ja/smart-contracts/token-metadata/mint#create-helpers)関数を使用してトークンを作成・初期化することを推奨します。これを行う方法については、代わりにこのガイド[`Solanaトークンの作成方法`](/ja/guides/javascript/how-to-create-a-solana-token)をご確認ください。
 
 {% /callout %}
 

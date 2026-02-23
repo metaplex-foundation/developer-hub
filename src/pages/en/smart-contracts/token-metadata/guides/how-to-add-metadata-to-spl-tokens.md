@@ -31,7 +31,7 @@ howToTools:
 This guide will take you through adding metadata to an already initialized Solana Token (SPL Token) using the Metaplex Token Metadata protocol.
 
 {% callout %}
-It is recommended to use the available [create helper](https://developers.metaplex.com/token-metadata/mint#create-helpers) functions to create and initialize your token instead of doing so separately. If you are looking on how to do this, check out this guide instead [`How to create a Solana Token`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token).
+It is recommended to use the available [create helper](/smart-contracts/token-metadata/mint#create-helpers) functions to create and initialize your token instead of doing so separately. If you are looking on how to do this, check out this guide instead [`How to create a Solana Token`](/guides/javascript/how-to-create-a-solana-token).
 
 {% /callout %}
 

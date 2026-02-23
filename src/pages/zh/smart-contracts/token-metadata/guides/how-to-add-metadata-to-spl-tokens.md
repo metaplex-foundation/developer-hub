@@ -31,7 +31,7 @@ howToTools:
 本指南将带您使用 Metaplex Token Metadata 协议向已初始化的 Solana 代币（SPL 代币）添加元数据。
 
 {% callout %}
-建议使用可用的 [create helper](https://developers.metaplex.com/token-metadata/mint#create-helpers) 函数来创建和初始化您的代币，而不是单独执行此操作。如果您想了解如何执行此操作，请改为查看本指南 [`如何创建 Solana 代币`](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token)。
+建议使用可用的 [create helper](/zh/smart-contracts/token-metadata/mint#create-helpers) 函数来创建和初始化您的代币，而不是单独执行此操作。如果您想了解如何执行此操作，请改为查看本指南 [`如何创建 Solana 代币`](/zh/guides/javascript/how-to-create-a-solana-token)。
 
 {% /callout %}
 

@@ -189,5 +189,5 @@ Gumdropを実装する際は：
 ## サポートが必要ですか？
 
 - サポートについては[Discord](https://discord.gg/metaplex)にご参加ください
-- [Metaplex Gumdrop Docs](https://developers.metaplex.com/legacy-documentation/gumdrop)を確認してください
+- [Metaplex Gumdrop Docs](/ja/legacy-documentation/gumdrop)を確認してください
 - [ソースコード](https://github.com/metaplex-foundation/gumdrop)をレビューしてください

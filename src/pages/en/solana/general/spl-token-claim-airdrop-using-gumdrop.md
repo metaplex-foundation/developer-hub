@@ -189,5 +189,5 @@ By following this guide, you can create a secure and efficient token distributio
 ## Need Help?
 
 - Join our [Discord](https://discord.gg/metaplex) for support
-- Check the [Metaplex Gumdrop Docs](https://developers.metaplex.com/legacy-documentation/gumdrop)
+- Check the [Metaplex Gumdrop Docs](/legacy-documentation/gumdrop)
 - Review the [source code](https://github.com/metaplex-foundation/gumdrop)

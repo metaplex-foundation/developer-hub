@@ -18,7 +18,7 @@ This guide shows you how to create and mint a fungible token with:
 
 ## Create a Token
 
-The following code is a fully runnable example. Below the parameters that you might want to customize are shown. You can learn more about token creation details in the [Token Metadata program](/token-metadata/mint#minting-tokens) pages.
+The following code is a fully runnable example. Below the parameters that you might want to customize are shown. You can learn more about token creation details in the [Token Metadata program](/smart-contracts/token-metadata/mint#minting-tokens) pages.
 
 {% code-tabs-imported from="token-metadata/fungibles/create" frameworks="umi,kit,cli" /%}
 
@@ -37,7 +37,11 @@ Customize these parameters for your token:
 
 ## Metadata and Images
 
+<<<<<<< HEAD
 The `uri` should point to a JSON file containing at least the following information. You can find more details on the [Token Metadata Standard page](/token-metadata/token-standard#the-fungible-standard). You need to upload the JSON and the image url so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo).
+=======
+The `uri` should point to a JSON file containing at least the following information. You can find more details on the [Token Metadata Standard page](/smart-contracts/token-metadata/token-standard#the-fungible-standard). You need to upload the JSON and the image url so that they are accessible from everywhere. We recommend to use a web3 storage provider like Arweave. If you want to do so by code you can follow this [guide on creating deterministic metadata with Turbo](/guides/general/create-deterministic-metadata-with-turbo).
+>>>>>>> main
 
 ```json
 {

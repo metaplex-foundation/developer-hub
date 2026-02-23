@@ -86,7 +86,7 @@ const assetId = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
 
 虽然可以在铸造后为压缩NFT设置和验证集合，但Bubblegum程序提供了一个便捷的指令，可以直接将压缩NFT铸造到给定集合。Bubblegum使用Metaplex Token Metadata集合NFT来分组压缩NFT。此指令称为**MintToCollectionV1**，它使用与**MintV1**指令相同的参数，并添加以下参数：
 
-- **集合铸造**：压缩NFT将归属的[Token Metadata集合NFT](https://developers.metaplex.com/token-metadata/collections#creating-collection-nfts)的铸造地址。
+- **集合铸造**：压缩NFT将归属的[Token Metadata集合NFT](/zh/smart-contracts/token-metadata/collections#creating-collection-nfts)的铸造地址。
 - **集合权限**：允许管理给定集合NFT的权限。这可以是集合NFT的更新权限或委托的集合权限。无论Bubblegum树是否公开，此权限都必须签署交易。
 - **集合权限记录PDA**：使用委托的集合权限时，必须提供委托记录PDA以确保该权限被允许管理集合NFT。这可以使用新的"元数据委托"PDA或旧的"集合权限记录"PDA。
 

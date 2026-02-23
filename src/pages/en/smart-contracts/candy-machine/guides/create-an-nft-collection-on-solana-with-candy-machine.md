@@ -322,8 +322,8 @@ You can either generate your own UI and use the `umi` client wrapper and `mpl-ca
 ### Developing a UI Resources
 
 - nextJS/React recommended
-- [Metaplex Umi](/umi)
-- [Metaplex Candy Machine SDK](/candy-machine)
+- [Metaplex Umi](/dev-tools/umi)
+- [Metaplex Candy Machine SDK](/smart-contracts/candy-machine)
 
 ### Further Reading
 - [Sugar CLI Docs](/smart-contracts/candy-machine/sugar)

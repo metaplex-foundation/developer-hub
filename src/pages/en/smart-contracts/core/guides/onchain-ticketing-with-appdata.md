@@ -34,10 +34,10 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Listen**: A “web3” webhook that alerts the plugin when a lifecycle event occurs. This is particularly useful for tracking data or performing actions.
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
-If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
+If you want to learn more about External Plugins, read more about them [on the External Plugins overview](/smart-contracts/core/external-plugins/overview).
 ### Appdata Plugin
 The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
-If you’re not familiar with the new Appdata Plugin, read more about it [here](/smart-contracts/core/external-plugins/app-data).
+If you’re not familiar with the new Appdata Plugin, read more about it [on the AppData Plugin page](/smart-contracts/core/external-plugins/app-data).
 ## General Overview: Program Design
 In this example, we will develop a ticketing solution that comes with four basic operations:
 - **Setting up the Manager**: Establish the authority responsible for the creation and issuance of tickets.
