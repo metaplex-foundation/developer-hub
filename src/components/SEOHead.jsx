@@ -71,9 +71,11 @@ function extractProductFromPath(pathname) {
   if (path.startsWith('/en/')) path = path.slice(4)
   else if (path.startsWith('/ja/')) path = path.slice(4)
   else if (path.startsWith('/ko/')) path = path.slice(4)
+  else if (path.startsWith('/zh/')) path = path.slice(4)
   else if (path.startsWith('/en')) path = path.slice(3)
   else if (path.startsWith('/ja')) path = path.slice(3)
   else if (path.startsWith('/ko')) path = path.slice(3)
+  else if (path.startsWith('/zh')) path = path.slice(3)
 
   // Handle smart-contracts paths
   if (path.startsWith('/smart-contracts/')) {
@@ -712,6 +714,7 @@ function getOGLocale(localeCode) {
     en: 'en_US',
     ja: 'ja_JP',
     ko: 'ko_KR',
+    zh: 'zh_CN',
   }
 
   return ogLocaleMap[localeCode] || 'en_US'
