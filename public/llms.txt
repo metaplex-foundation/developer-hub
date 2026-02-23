@@ -64,6 +64,7 @@
 
 - [Aggregation API](https://developers.metaplex.com/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
 - [API](https://developers.metaplex.com/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
+- [CLI Guide](https://developers.metaplex.com/smart-contracts/genesis/cli): Launch tokens using the Metaplex CLI (mplx) — create Genesis accounts, add buckets, deposit, claim, and manage your token launch from the terminal.
 - [Genesis - Solana Token Launch Smart Contract](https://developers.metaplex.com/smart-contracts/genesis): Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
 - [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
 - [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
@@ -399,8 +400,11 @@
 - [Getting Started with Rust](https://developers.metaplex.com/guides/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
 - [Guides](https://developers.metaplex.com/guides): Guides by Metaplex about the Solana blockchain.
 - [Working with Rust](https://developers.metaplex.com/guides/rust/working-with-rust): A quick overview on working with Rust and the Metaplex protocol.
+- [Compute Units and Priority Fees](https://developers.metaplex.com/guides/compute-units-and-priority-fees): Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
 - [Create a Claimable SPL Token Airdrop](https://developers.metaplex.com/guides/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
 - [Create deterministic metadata with Turbo](https://developers.metaplex.com/guides/general/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
+- [Getting SOL for Development](https://developers.metaplex.com/guides/getting-sol-for-development): Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet and testnet.
+- [Grind a Vanity Public Key on Solana](https://developers.metaplex.com/guides/grind-vanity-public-key): Learn how to generate custom Solana addresses with specific prefixes or suffixes using solana-keygen grind for branded tokens and recognizable wallets.
 - [How to Add Metadata to a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-add-metadata-to-spl-tokens): Learn how to add Metadata to an already existing Solana token.
 - [How to CPI into a Metaplex Program](https://developers.metaplex.com/guides/rust/how-to-cpi-into-a-metaplex-program): An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
 - [How to Create a Solana Token](https://developers.metaplex.com/guides/javascript/how-to-create-a-solana-token): Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
@@ -413,34 +417,47 @@
 - [Metaplex Solana NextJs Tailwind Template](https://developers.metaplex.com/guides/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
 - [RPCs and DAS](https://developers.metaplex.com/guides/rpcs-and-das): Learn about RPCs on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
 - [Setup a Local Validator](https://developers.metaplex.com/guides/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
+- [Solana CLI Essentials](https://developers.metaplex.com/guides/solana-cli-essentials): Learn the essential Solana CLI commands for development, including installation, configuration, and common operations.
+- [Solana Keypairs and Wallets](https://developers.metaplex.com/guides/solana-keypairs-and-wallets): Learn how to create, manage, and secure Solana keypairs and wallets for development and production use.
 - [Solana Programs and State Overview](https://developers.metaplex.com/guides/solana-programs): Learn about Solana Programs and how data is stored in account state on Solana.
+- [Solana Transaction Fundamentals](https://developers.metaplex.com/guides/solana-transaction-fundamentals): Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
+- [SPL Tokens and Token Programs](https://developers.metaplex.com/guides/spl-tokens-and-token-programs): Learn how SPL tokens work on Solana, including the Token Program, mint accounts, token accounts, and how Metaplex builds on top of the token standard.
 - [The Payer-Authority Pattern](https://developers.metaplex.com/guides/general/payer-authority-pattern): A common programming pattern for Solana instructions using a separate authority and payer.
+- [Understanding Solana Accounts](https://developers.metaplex.com/guides/understanding-solana-accounts): Learn how Solana accounts work, including ownership, rent, and how they differ from Ethereum. Essential knowledge for token and NFT development.
 - [Understanding Solana Program Derived Addresses (PDAs)](https://developers.metaplex.com/guides/understanding-pdas): Learn about Solana Program Derived Addresses (PDAs) and their use cases.
+- [Using Solana Explorers](https://developers.metaplex.com/guides/using-solana-explorers): Learn how to use Solana Explorer, SolanaFM, and CLI tools to inspect transactions, accounts, and debug issues during development.
 - [Validators and Staking](https://developers.metaplex.com/guides/validators): An overview of Solana Validators and staking mechanics.
 - [What is Solana?](https://developers.metaplex.com/guides/what-is-solana): What is Solana and why would you want to build on it.
 - [Where Do I Start With Solana?](https://developers.metaplex.com/guides/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
+- [Working with Devnet and Testnet](https://developers.metaplex.com/guides/working-with-devnet-and-testnet): Learn how to use Solana devnet, testnet, and local validators for development. Understand when to use each environment and how to transition to mainnet.
 
 ## Dev Tools
 
 - [Overview](https://developers.metaplex.com/dev-tools/amman): Provides a high-level overview of Amman local validator.
 - [Solana Developer Tools](https://developers.metaplex.com/dev-tools): Developer tools for building on Solana. CLI tools, TypeScript SDKs, APIs, and utilities for NFTs, tokens, and digital assets.
 - [Add Metadata to Token](https://developers.metaplex.com/dev-tools/cli/toolbox/add-metadata-to-token): Add metadata to an existing token that doesn't have a metadata account
+- [Bubblegum Overview](https://developers.metaplex.com/dev-tools/cli/bubblegum): Create and manage compressed NFTs using the Bubblegum V2 program
 - [Burn Asset](https://developers.metaplex.com/dev-tools/cli/core/burn-asset): Burn MPL Core Assets using the Metaplex CLI
+- [Burn Compressed NFT](https://developers.metaplex.com/dev-tools/cli/bubblegum/burn-cnft): Permanently destroy a compressed NFT
 - [Candy Machine Commands](https://developers.metaplex.com/dev-tools/cli/cm): Create and manage MPL Core Candy Machines using the MPLX CLI. Interactive wizard, asset upload, and complete candy machine lifecycle management.
 - [CLI Commands](https://developers.metaplex.com/dev-tools/amman/cli-commands): CLI Commands of the Metaplex Amman local validator toolkit.
 - [Configuration](https://developers.metaplex.com/dev-tools/amman/configuration): Configuring Amman local validator toolkit.
 - [Create Asset](https://developers.metaplex.com/dev-tools/cli/core/create-asset): Create an MPL Core Asset using different methods
 - [Create Candy Machine](https://developers.metaplex.com/dev-tools/cli/cm/create): Create MPL Core Candy Machines using the MPLX CLI. Interactive wizard mode with validation, asset upload, and complete setup automation.
 - [Create Collection](https://developers.metaplex.com/dev-tools/cli/core/create-collection): Create an MPL Core Collection using different methods
+- [Create Compressed NFT](https://developers.metaplex.com/dev-tools/cli/bubblegum/create-cnft): Mint a compressed NFT into a Merkle tree
 - [Create Token](https://developers.metaplex.com/dev-tools/cli/toolbox/token-create): Create a new fungible token on Solana
+- [Create Tree](https://developers.metaplex.com/dev-tools/cli/bubblegum/create-tree): Create a Merkle tree for compressed NFTs
 - [Explorer Configuration](https://developers.metaplex.com/dev-tools/cli/config/explorer): Set your preferred blockchain explorer
 - [Fetch Asset or Collection](https://developers.metaplex.com/dev-tools/cli/core/fetch): Fetch MPL Core Assets or Collections by their mint address
+- [Fetch Compressed NFT](https://developers.metaplex.com/dev-tools/cli/bubblegum/fetch-cnft): Retrieve compressed NFT data and merkle proof
 - [Fetch Information](https://developers.metaplex.com/dev-tools/cli/cm/fetch): Fetch and display MPL Core Candy Machine information using the MPLX CLI. View configuration, guard settings, item status, and deployment details.
 - [Getting Started](https://developers.metaplex.com/dev-tools/amman/getting-started): Installation and setup of the Metaplex Amman local validator toolkit.
 - [Getting Started with Shank](https://developers.metaplex.com/dev-tools/shank/getting-started): Learn how to install and set up Shank for IDL extraction from Rust Solana programs
 - [Insert Items](https://developers.metaplex.com/dev-tools/cli/cm/insert): Insert uploaded assets into your MPL Core Candy Machine using the MPLX CLI.
 - [Installation](https://developers.metaplex.com/dev-tools/cli/installation): Install and set up the Metaplex CLI
 - [Introduction](https://developers.metaplex.com/dev-tools/cli): Welcome to the Metaplex CLI
+- [List Trees](https://developers.metaplex.com/dev-tools/cli/bubblegum/list-trees): View all saved Bubblegum Merkle trees
 - [Plugins](https://developers.metaplex.com/dev-tools/cli/core/plugins): Manage MPL Core Asset and Collection plugins
 - [Premade Configurations](https://developers.metaplex.com/dev-tools/amman/pre-made-configs): A set of premade configurations from Metaplex Amman local validator toolkit.
 - [RPCs](https://developers.metaplex.com/dev-tools/cli/config/rpcs): Manage RPC endpoints in your configuration
@@ -450,7 +467,9 @@
 - [SOL Balance](https://developers.metaplex.com/dev-tools/cli/toolbox/sol-balance): Check SOL balance for a wallet address
 - [SOL Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/sol-transfer): Transfer SOL to a specified address
 - [Token Transfer](https://developers.metaplex.com/dev-tools/cli/toolbox/token-transfer): Transfer tokens to a destination address
+- [Transfer Compressed NFT](https://developers.metaplex.com/dev-tools/cli/bubblegum/transfer-cnft): Transfer a compressed NFT to a new owner
 - [Update Asset](https://developers.metaplex.com/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata and properties
+- [Update Compressed NFT](https://developers.metaplex.com/dev-tools/cli/bubblegum/update-cnft): Update the metadata of a compressed NFT
 - [Update Token Metadata](https://developers.metaplex.com/dev-tools/cli/toolbox/update-token-metadata): Update the metadata of an existing token
 - [Upload Assets](https://developers.metaplex.com/dev-tools/cli/cm/upload): Upload candy machine assets to decentralized storage using the MPLX CLI. Intelligent caching, progress tracking, and comprehensive validation.
 - [Validate Cache](https://developers.metaplex.com/dev-tools/cli/cm/validate): Validate candy machine asset cache and uploads using the MPLX CLI. Comprehensive validation, error detection, and cache integrity verification.
