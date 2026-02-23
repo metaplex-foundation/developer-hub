@@ -189,17 +189,6 @@ export const guides = {
             },
           ],
         },
-        {
-          title: 'Translated Guides',
-          links: [
-            {
-              title: 'Japanese 日本語',
-              href: '/solana/translated/japanese',
-              created: '2024-08-14',
-              updated: null,
-            },
-          ],
-        },
       ],
     },
   ],
