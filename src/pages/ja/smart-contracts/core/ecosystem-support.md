@@ -15,7 +15,7 @@ about:
 proficiencyLevel: Beginner
 ---
 以下の表には、エコシステム全体の主要なマーケットプレイス、ウォレット、エクスプローラー、RPCプロバイダー、その他のdAppのCore統合状況が含まれています。
-Metaplexは、Coreデジタルアセットの作成、転送、表示のための無料のオープンソースUIも[https://core.metaplex.com/](https://core.metaplex.com/)で提供しています。
+Metaplexは、Coreデジタルアセットの作成、転送、表示のための無料のオープンソースUIも[core.metaplex.com](https://core.metaplex.com/)で提供しています。
 ## マーケットプレイス
 | プロジェクト                               | ステータス |
 | ----------------------------------------- | -------- |

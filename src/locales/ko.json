@@ -108,6 +108,7 @@
     "link": "링크",
     "handle": "핸들",
     "tagged": "태그",
+    "viewTaggedQuestions": "{tagged} 질문 보기",
     "programId": "프로그램 ID",
     "github": "Github",
     "documentation": "문서",

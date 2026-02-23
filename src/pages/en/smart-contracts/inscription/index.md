@@ -336,7 +336,7 @@ The [Metaplex JSON standards](/token-metadata/token-standard) include the option
 
 Together with the [Inscription Gateway](https://github.com/metaplex-foundation/inscription-gateway) you can use the normal Token Metadata Standard and just point the URI to the gateway which again reads your data directly from chain without all tools like wallets and explorers reading the data have to read it any differently than NFTs are read usually.
 
-You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. [https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) or host the gateway yourself with a custom URL.
+You can either use the gateway that is hosted by Metaplex using the following URL structure: `https://igw.metaplex.com/<network>/<account>`, e.g. [view this example on the Inscription Gateway](https://igw.metaplex.com/devnet/Fgf4Wn3wjVcLWp5XnMQ4t4Gpaaq2iRbc2cmtXjrQd5hF) or host the gateway yourself with a custom URL.
 
 ## Inscription Rank
 

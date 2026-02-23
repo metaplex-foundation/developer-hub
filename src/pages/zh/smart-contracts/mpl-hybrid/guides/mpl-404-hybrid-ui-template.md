@@ -22,7 +22,7 @@ Metaplex MPL-404混合UI模板旨在为开发者和用户提供开发起点。�
 
 此UI模板使用基础Metaplex UI模板创建。更多文档可在以下位置找到
 
-基础模板Github仓库 - [https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
+Base Template - [GitHub Repository](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)
 
 ## 安装
 
@@ -30,7 +30,7 @@ Metaplex MPL-404混合UI模板旨在为开发者和用户提供开发起点。�
 git clone https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn.git
 ```
 
-Github仓库 - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
 
 ## 设置
 
@@ -83,4 +83,4 @@ const useUmiStore = create<UmiState>()((set) => ({
 
 建议进一步阅读基础模板的文档，以了解此模板构建所使用的辅助函数和功能
 
-Github仓库 - [https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)
+[GitHub Repository](https://github.com/metaplex-foundation/mpl-hybrid-404-ui-template-nextjs-tailwind-shadcn)

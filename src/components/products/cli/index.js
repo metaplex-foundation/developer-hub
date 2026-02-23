@@ -134,6 +134,42 @@ export const cli = {
               href: '/cli/cm/withdraw',
             },
           ],
+        },        {
+          title: 'Bubblegum (Compressed NFTs)',
+          links: [
+            {
+              title: 'Overview',
+              href: '/dev-tools/cli/bubblegum',
+            },
+            {
+              title: 'Create Tree',
+              href: '/dev-tools/cli/bubblegum/create-tree',
+            },
+            {
+              title: 'List Trees',
+              href: '/dev-tools/cli/bubblegum/list-trees',
+            },
+            {
+              title: 'Create Compressed NFT',
+              href: '/dev-tools/cli/bubblegum/create-cnft',
+            },
+            {
+              title: 'Fetch Compressed NFT',
+              href: '/dev-tools/cli/bubblegum/fetch-cnft',
+            },
+            {
+              title: 'Update Compressed NFT',
+              href: '/dev-tools/cli/bubblegum/update-cnft',
+            },
+            {
+              title: 'Transfer Compressed NFT',
+              href: '/dev-tools/cli/bubblegum/transfer-cnft',
+            },
+            {
+              title: 'Burn Compressed NFT',
+              href: '/dev-tools/cli/bubblegum/burn-cnft',
+            },
+          ],
         },
         {
           title: 'Toolbox',
@@ -180,6 +216,7 @@ export const cli = {
         'Configuration': 'Configuration',
         'Core Commands': 'Core Commands',
         'Genesis Commands': 'Genesis Commands',
+        'Bubblegum (Compressed NFTs)': 'Bubblegum (Compressed NFTs)',
         'Toolbox': 'Toolbox'
       },
       links: {
@@ -192,6 +229,13 @@ export const cli = {
         'Launch Pool': 'Launch Pool',
         'Presale': 'Presale',
         'Manage': 'Manage',
+        'Create Tree': 'Create Tree',
+        'List Trees': 'List Trees',
+        'Create Compressed NFT': 'Create Compressed NFT',
+        'Fetch Compressed NFT': 'Fetch Compressed NFT',
+        'Update Compressed NFT': 'Update Compressed NFT',
+        'Transfer Compressed NFT': 'Transfer Compressed NFT',
+        'Burn Compressed NFT': 'Burn Compressed NFT',
         'Add Metadata to Token': 'Add Metadata to Token',
         'Update Token Metadata': 'Update Token Metadata'
       }
@@ -204,6 +248,7 @@ export const cli = {
         'Configuration': '設定',
         'Core Commands': 'Coreコマンド',
         'Genesis Commands': 'Genesisコマンド',
+        'Bubblegum (Compressed NFTs)': 'Bubblegum（圧縮NFT）',
         'Toolbox': 'ツールボックス'
       },
       links: {
@@ -216,6 +261,13 @@ export const cli = {
         'Launch Pool': 'ローンチプール',
         'Presale': 'プレセール',
         'Manage': '管理',
+        'Create Tree': 'ツリー作成',
+        'List Trees': 'ツリー一覧',
+        'Create Compressed NFT': '圧縮NFT作成',
+        'Fetch Compressed NFT': '圧縮NFT取得',
+        'Update Compressed NFT': '圧縮NFT更新',
+        'Transfer Compressed NFT': '圧縮NFT転送',
+        'Burn Compressed NFT': '圧縮NFTバーン',
         'Add Metadata to Token': 'トークンメタデータ追加',
         'Update Token Metadata': 'トークンメタデータ更新'
       }
@@ -228,6 +280,7 @@ export const cli = {
         'Configuration': '구성',
         'Core Commands': 'Core 명령어',
         'Genesis Commands': 'Genesis 명령어',
+        'Bubblegum (Compressed NFTs)': 'Bubblegum (압축 NFT)',
         'Toolbox': '툴박스'
       },
       links: {
@@ -240,6 +293,13 @@ export const cli = {
         'Launch Pool': '런치 풀',
         'Presale': '프리세일',
         'Manage': '관리',
+        'Create Tree': '트리 생성',
+        'List Trees': '트리 목록',
+        'Create Compressed NFT': '압축 NFT 생성',
+        'Fetch Compressed NFT': '압축 NFT 조회',
+        'Update Compressed NFT': '압축 NFT 업데이트',
+        'Transfer Compressed NFT': '압축 NFT 전송',
+        'Burn Compressed NFT': '압축 NFT 소각',
         'Add Metadata to Token': '토큰 메타데이터 추가',
         'Update Token Metadata': '토큰 메타데이터 업데이트'
       }
@@ -253,6 +313,7 @@ export const cli = {
         'Core Commands': 'Core命令',
         'Candy Machine Commands': 'Candy Machine命令',
         'Genesis Commands': 'Genesis命令',
+        'Bubblegum (Compressed NFTs)': 'Bubblegum（压缩NFT）',
         'Toolbox': '工具箱'
       },
       links: {
@@ -274,6 +335,13 @@ export const cli = {
         'Validate Cache': '验证缓存',
         'Fetch Information': '获取信息',
         'Withdraw': '提取',
+        'Create Tree': '创建树',
+        'List Trees': '树列表',
+        'Create Compressed NFT': '创建压缩NFT',
+        'Fetch Compressed NFT': '获取压缩NFT',
+        'Update Compressed NFT': '更新压缩NFT',
+        'Transfer Compressed NFT': '转移压缩NFT',
+        'Burn Compressed NFT': '销毁压缩NFT',
         'Token Creation': '创建代币',
         'Add Metadata to Token': '添加代币元数据',
         'Update Token Metadata': '更新代币元数据',

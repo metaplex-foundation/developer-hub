@@ -8,11 +8,11 @@ description: 提供非Umi Hydra SDK的高级概述。
 
 如果您使用Rust，可以在这里获取crate：
 
-[https://crates.io/crates/hydra_wallet](https://crates.io/crates/hydra_wallet)
+[hydra_wallet on crates.io](https://crates.io/crates/hydra_wallet)
 
 如果您使用Javascript，可以在这里获取包：
 
-[https://www.npmjs.com/package/@glasseaters/hydra-sdk](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
+[@glasseaters/hydra-sdk on npm](https://www.npmjs.com/package/@glasseaters/hydra-sdk)
 
 ## 快速开始 - JS
 
