@@ -31,10 +31,8 @@ faqs:
 
 {% callout title="What This Covers" %}
 The complete CLI reference for Genesis token launches:
-- Creating Genesis accounts and token mints
-- Configuring launch pool, presale, and unlocked buckets
-- Depositing, withdrawing, transitioning, and claiming tokens
-- Revoking mint/freeze authorities
+- **API flow**: Create and register launches with a single command via the Genesis API
+- **Manual flow**: Creating Genesis accounts, configuring buckets, depositing, claiming, and revoking
 {% /callout %}
 
 ## Summary
@@ -69,7 +67,27 @@ mplx genesis --help
 
 ## General Flow
 
-Every Genesis launch follows the same high-level sequence:
+There are two ways to launch a token with the Genesis CLI:
+
+### API Flow (Recommended)
+
+Use `genesis launch create` for an all-in-one flow that calls the Genesis API, builds and signs transactions, and registers your launch on the Metaplex platform — all in a single command. Launches created through the API are compatible with [metaplex.com](https://metaplex.com) and will appear on the platform with a public launch page.
+
+```bash {% title="One-command launch" %}
+mplx genesis launch create \
+  --name "My Token" --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123" \
+  --tokenAllocation 500000000 \
+  --depositStartTime 2025-03-01T00:00:00Z \
+  --raiseGoal 200 --raydiumLiquidityBps 5000 \
+  --fundsRecipient <WALLET_ADDRESS>
+```
+
+See [Launch (API)](/dev-tools/cli/genesis/launch) for full details.
+
+### Manual Flow
+
+For full control over every step:
 
 1. **Create** — `genesis create` sets up the Genesis account and token mint.
 2. **Add Buckets** — Add one or more buckets to define how tokens are distributed. Use `bucket add-launch-pool` for proportional distribution, `bucket add-presale` for fixed-price sales, or `bucket add-unlocked` for team/treasury allocations.
@@ -80,12 +98,16 @@ Every Genesis launch follows the same high-level sequence:
 7. **Claim** — After the claim period opens, users claim their base tokens with `genesis claim` or `genesis presale claim`. Treasury wallets use `genesis claim-unlocked`.
 8. **Revoke** (optional) — `genesis revoke` permanently revokes mint and/or freeze authority on the token.
 
+If you used the manual flow and want a public launch page, use `genesis launch register` to register your genesis account on the Metaplex platform.
+
 You can check the state of your launch at any point with `genesis fetch` and `genesis bucket fetch`.
 
 ## Command Reference
 
 | Command | Description |
 |---------|-------------|
+| `genesis launch create` | Create and register a launch via the Genesis API (all-in-one) |
+| `genesis launch register` | Register an existing genesis account on the Metaplex platform |
 | `genesis create` | Create a new Genesis account and token |
 | `genesis finalize` | Lock configuration and activate the launch |
 | `genesis fetch` | Fetch Genesis account details |
