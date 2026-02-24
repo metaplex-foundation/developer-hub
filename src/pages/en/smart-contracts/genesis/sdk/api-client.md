@@ -117,7 +117,7 @@ Transactions must be confirmed on-chain before calling `registerLaunch`. The reg
 | `wallet` | `PublicKey \| string` | Yes | Creator's wallet (signs transactions) |
 | `token` | `TokenMetadata` | Yes | Token metadata |
 | `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
-| `quoteMint` | `QuoteMintInput` | No | `'SOL'` (default), `'USDC'`, or raw mint address |
+| `quoteMint` | `QuoteMintInput` | No | `'SOL'` (default) or `'USDC'` |
 | `launchType` | `LaunchType` | Yes | `'project'` |
 | `launch` | `ProjectLaunchInput` | Yes | Launch configuration |
 
