@@ -37,8 +37,8 @@ The `genesis launch` commands provide a streamlined way to launch tokens using t
 - **`genesis launch create`**: All-in-one command — builds transactions via the API, signs and sends them, and registers the launch
 - **`genesis launch register`**: Registers an existing genesis account on the Metaplex platform to get a public launch page
 - **metaplex.com compatible**: Launches created or registered through the API appear on [metaplex.com](https://metaplex.com) with a public launch page
-- **Total supply**: Fixed at 1,000,000,000 tokens
-- **Deposit period**: 48 hours
+- **Total supply**: Currently fixed at 1,000,000,000 tokens
+- **Deposit period**: Currently 48 hours
 
 ## Out of Scope
 
@@ -72,7 +72,7 @@ mplx genesis launch create \
 |------|-------------|
 | `--name <string>` | Token name (1–32 characters) |
 | `--symbol <string>` | Token symbol (1–10 characters) |
-| `--image <string>` | Token image URL (must start with `https://gateway.irys.xyz/`) |
+| `--image <string>` | Token image URL (currently must start with `https://gateway.irys.xyz/`) |
 | `--tokenAllocation <integer>` | Launch pool token allocation (portion of 1B total supply) |
 | `--depositStartTime <string>` | Deposit start time (ISO date string or unix timestamp) |
 | `--raiseGoal <integer>` | Raise goal in whole units (e.g. 200 for 200 SOL) |
@@ -88,7 +88,7 @@ mplx genesis launch create \
 | `--twitter <string>` | Project Twitter URL | — |
 | `--telegram <string>` | Project Telegram URL | — |
 | `--lockedAllocations <path>` | Path to JSON file with locked allocation configs | — |
-| `--quoteMint <string>` | Quote mint: `SOL` or `USDC` | `SOL` |
+| `--quoteMint <string>` | Quote mint (currently supports `SOL` or `USDC`) | `SOL` |
 | `--network <string>` | Network override: `solana-mainnet` or `solana-devnet` | Auto-detected |
 | `--apiUrl <string>` | Genesis API base URL | `https://api.metaplex.com` |
 
@@ -282,7 +282,7 @@ Use `genesis launch register` when you've already created a genesis account usin
 The network is auto-detected from your configured RPC endpoint. You can override it with the `--network` flag (`solana-mainnet` or `solana-devnet`).
 
 **Can I use a custom quote mint?**
-The API supports `SOL` (default) and `USDC`. Pass `--quoteMint USDC` to use USDC. Arbitrary mint addresses are not supported.
+The API currently supports `SOL` (default) and `USDC`. Pass `--quoteMint USDC` to use USDC.
 
 **What is the total token supply?**
-The total supply is fixed at 1,000,000,000 tokens when using the API flow.
+The total supply is currently fixed at 1,000,000,000 tokens when using the API flow.

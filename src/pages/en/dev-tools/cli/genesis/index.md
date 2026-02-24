@@ -41,7 +41,8 @@ The `mplx genesis` commands let you run a full Genesis token launch from your te
 
 - **Tool**: Metaplex CLI (`mplx`) with the `genesis` command group
 - **Bucket types**: Launch pool (proportional), presale (fixed-price), unlocked (treasury)
-- **Quote token**: Wrapped SOL by default, any SPL token supported
+- **Quote token (manual flow)**: Wrapped SOL by default, any SPL token mint address supported
+- **Quote token (API flow)**: Currently supports SOL or USDC only
 - **Irreversible actions**: `finalize` and `revoke` cannot be undone
 
 ## Out of Scope
