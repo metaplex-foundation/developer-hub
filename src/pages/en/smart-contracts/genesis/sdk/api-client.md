@@ -198,7 +198,7 @@ Thrown when the API returns a non-success response.
 import { isGenesisApiError } from '@metaplex-foundation/genesis';
 
 try {
-  await createLaunch(umi, input);
+  await createLaunch(umi, {}, input);
 } catch (err) {
   if (isGenesisApiError(err)) {
     console.error('API error:', err.statusCode, err.responseBody);
@@ -283,7 +283,7 @@ import {
   signAndSendLaunchTransactions,
 } from '@metaplex-foundation/genesis';
 
-const createResult = await createLaunch(umi, input);
+const createResult = await createLaunch(umi, {}, input);
 const signatures = await signAndSendLaunchTransactions(umi, createResult, {
   commitment: 'confirmed',
 });

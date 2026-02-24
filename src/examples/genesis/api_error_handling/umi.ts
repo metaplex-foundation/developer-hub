@@ -13,7 +13,7 @@ import {
 
 // [MAIN]
 try {
-  const result = await createAndRegisterLaunch(umi, input)
+  const result = await createAndRegisterLaunch(umi, {}, input)
   console.log(`Launch live at: ${result.launch.link}`)
 } catch (err) {
   if (isGenesisValidationError(err)) {

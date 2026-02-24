@@ -11,7 +11,7 @@ import {
 
 // [MAIN]
 // Step 1: Get unsigned transactions from the API
-const createResult = await createLaunch(umi, input)
+const createResult = await createLaunch(umi, {}, input)
 
 // Step 2: Sign and send each transaction
 for (const tx of createResult.transactions) {
@@ -30,7 +30,7 @@ for (const tx of createResult.transactions) {
 }
 
 // Step 3: Register the launch
-const registerResult = await registerLaunch(umi, {
+const registerResult = await registerLaunch(umi, {}, {
   genesisAccount: createResult.genesisAccount,
   createLaunchInput: input,
 })

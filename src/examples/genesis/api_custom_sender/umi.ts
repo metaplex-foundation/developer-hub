@@ -24,7 +24,7 @@ const options: SignAndSendOptions = {
   },
 }
 
-const result = await createAndRegisterLaunch(umi, input, options)
+const result = await createAndRegisterLaunch(umi, {}, input, options)
 console.log(`Launch live at: ${result.launch.link}`)
 // [/MAIN]
 

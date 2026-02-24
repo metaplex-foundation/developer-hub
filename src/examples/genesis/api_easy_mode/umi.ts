@@ -36,7 +36,7 @@ const input: CreateLaunchInput = {
   },
 }
 
-const result = await createAndRegisterLaunch(umi, input)
+const result = await createAndRegisterLaunch(umi, {}, input)
 console.log(`Launch live at: ${result.launch.link}`)
 // [/MAIN]
 
