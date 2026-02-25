@@ -418,12 +418,16 @@
 - [Fetch Information](https://developers.metaplex.com/dev-tools/cli/cm/fetch): Fetch and display MPL Core Candy Machine information using the MPLX CLI. View configuration, guard settings, item status, and deployment details.
 - [Getting Started](https://developers.metaplex.com/dev-tools/amman/getting-started): Installation and setup of the Metaplex Amman local validator toolkit.
 - [Getting Started with Shank](https://developers.metaplex.com/dev-tools/shank/getting-started): Learn how to install and set up Shank for IDL extraction from Rust Solana programs
+- [How It Works](https://developers.metaplex.com/dev-tools/skill/how-it-works): Understand the progressive disclosure architecture of the Metaplex Skill.
 - [Insert Items](https://developers.metaplex.com/dev-tools/cli/cm/insert): Insert uploaded assets into your MPL Core Candy Machine using the MPLX CLI.
 - [Installation](https://developers.metaplex.com/dev-tools/cli/installation): Install and set up the Metaplex CLI
+- [Installation](https://developers.metaplex.com/dev-tools/skill/installation): Install the Metaplex Skill in Claude Code, Cursor, Copilot, or any AI coding agent.
 - [Introduction](https://developers.metaplex.com/dev-tools/cli): Welcome to the Metaplex CLI
 - [List Trees](https://developers.metaplex.com/dev-tools/cli/bubblegum/list-trees): View all saved Bubblegum Merkle trees
+- [Metaplex Skill](https://developers.metaplex.com/dev-tools/skill): An Agent Skill that gives AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.
 - [Plugins](https://developers.metaplex.com/dev-tools/cli/core/plugins): Manage MPL Core Asset and Collection plugins
 - [Premade Configurations](https://developers.metaplex.com/dev-tools/amman/pre-made-configs): A set of premade configurations from Metaplex Amman local validator toolkit.
+- [Programs & Operations](https://developers.metaplex.com/dev-tools/skill/programs-and-operations): Detailed breakdown of programs and operations covered by the Metaplex Skill.
 - [RPCs](https://developers.metaplex.com/dev-tools/cli/config/rpcs): Manage RPC endpoints in your configuration
 - [Shank](https://developers.metaplex.com/dev-tools/shank): Extract IDLs from Rust Solana program code using attribute macros
 - [Shank Macros Reference](https://developers.metaplex.com/dev-tools/shank/macros): Complete reference for Shank derive macros and attributes used in Solana programs
