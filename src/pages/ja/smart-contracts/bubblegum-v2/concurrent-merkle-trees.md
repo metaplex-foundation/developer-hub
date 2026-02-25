@@ -21,12 +21,12 @@ proficiencyLevel: Advanced
 
 ## Summary
 
-**Concurrent Merkle Trees** explains the data structure underlying compressed NFTs. This page covers how merkle trees work, leaf paths, proofs, validation, and the concurrency mechanism that enables parallel writes within the same Solana block.
+**同時マークルツリー**は、圧縮NFTの基盤となるデータ構造を説明します。このページでは、マークルツリーの仕組み、リーフパス、証明、検証、および同じSolanaブロック内での並行書き込みを可能にする同時実行メカニズムについて説明します。
 
-- Merkle trees store cNFT data as hashed leaves with a single root representing the entire tree
-- Proofs enable verifying a specific cNFT exists without rehashing the entire tree
-- The concurrent mechanism uses a ChangeLog buffer to handle multiple writes per block
-- The rightmost proof is stored on-chain, enabling minting without sending proof data
+- マークルツリーは、ツリー全体を表す単一のルートを持つハッシュ化されたリーフとしてcNFTデータを保存します
+- 証明により、ツリー全体を再ハッシュせずに特定のcNFTの存在を検証できます
+- 同時実行メカニズムは、ChangeLogバッファを使用してブロックごとの複数の書き込みを処理します
+- 最右端の証明はオンチェーンに保存され、証明データを送信せずにミンティングを可能にします
 
 
 ## はじめに
@@ -83,21 +83,68 @@ proficiencyLevel: Advanced
 {% /node %}
 
 {% node parent="i-node-4" y="100" x="-40" %}
+{% node #leaf-3 label="リーフ 3" /%}
+{% node label="Hash(cNFT 3)" /%}
+{% /node %}
+
+{% node parent="i-node-4" y="100" x="70" %}
+{% node #leaf-4 label="リーフ 4" /%}
+{% node label="Hash(cNFT 4)" /%}
+{% /node %}
+
+{% node parent="i-node-5" y="100" x="-40" %}
+{% node #leaf-5 label="リーフ 5" /%}
+{% node label="Hash(cNFT 5)" /%}
+{% /node %}
+
+{% node parent="i-node-5" y="100" x="70" %}
+{% node #leaf-6 label="リーフ 6" /%}
+{% node label="Hash(cNFT 6)" /%}
+{% /node %}
+
+{% node parent="i-node-6" y="100" x="-40" %}
+{% node #leaf-7 label="リーフ 7" /%}
+{% node label="Hash(cNFT 7)" /%}
+{% /node %}
+
+{% node parent="i-node-6" y="100" x="70" %}
+{% node #leaf-8 label="リーフ 8" /%}
+{% node label="Hash(cNFT 8)" /%}
+{% /node %}
+
+{% edge from="i-node-1" to="root" fromPosition="top" toPosition="bottom" /%}
+{% edge from="i-node-2" to="root" fromPosition="top" toPosition="bottom" /%}
+
+{% edge from="i-node-3" to="i-node-1" fromPosition="top" toPosition="bottom" /%}
+{% edge from="i-node-4" to="i-node-1" fromPosition="top" toPosition="bottom" /%}
+{% edge from="i-node-6" to="i-node-2" fromPosition="top" toPosition="bottom" /%}
+{% edge from="i-node-5" to="i-node-2" fromPosition="top" toPosition="bottom" /%}
+
+{% edge from="leaf-1" to="i-node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-2" to="i-node-3" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-4" to="i-node-4" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-3" to="i-node-4" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-5" to="i-node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-6" to="i-node-5" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-7" to="i-node-6" fromPosition="top" toPosition="bottom" /%}
+{% edge from="leaf-8" to="i-node-6" fromPosition="top" toPosition="bottom" /%}
+
+{% /diagram %}
 
 ## Notes
 
-- The max buffer size set at tree creation determines how many concurrent changes can be fast-forwarded per block.
-- If more concurrent changes occur than the buffer size allows, some transactions will fail and need to be retried.
-- Proofs fetched from the DAS API may become stale if the tree is modified between fetch and use. The ChangeLog mechanism mitigates this for concurrent operations.
-- The rightmost proof optimization allows minting (appending) without any proof data, since new leaves are always added at the rightmost position.
+- ツリー作成時に設定された最大バッファサイズにより、ブロックごとに高速転送できる同時変更の数が決まります。
+- バッファサイズが許可する数を超える同時変更が発生した場合、一部のトランザクションは失敗し、再試行が必要です。
+- DAS APIから取得した証明は、フェッチと使用の間にツリーが変更された場合、古くなる可能性があります。ChangeLogメカニズムは、同時操作に対してこれを軽減します。
+- 最右端の証明の最適化により、新しいリーフは常に最右端の位置に追加されるため、証明データなしでミンティング（追加）が可能です。
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **Merkle Tree** | A binary tree where each node is a hash of its children, with leaves representing cNFT data |
-| **Merkle Root** | The single top-level hash representing the integrity of the entire tree |
-| **Leaf Path** | The leaf node hash and all intermediate nodes leading to the root |
-| **Proof** | The sibling hashes needed to recalculate the root from a given leaf |
-| **ChangeLog** | A buffer of recent tree modifications that enables concurrent writes by fast-forwarding stale proofs |
-| **spl-account-compression** | The Solana program that manages the on-chain concurrent merkle tree |
+| 用語 | 定義 |
+|------|------|
+| **マークルツリー** | 各ノードがその子のハッシュであり、リーフがcNFTデータを表すバイナリツリー |
+| **マークルルート** | ツリー全体の整合性を表す単一のトップレベルハッシュ |
+| **リーフパス** | リーフノードハッシュとルートに至るすべての中間ノード |
+| **証明** | 特定のリーフからルートを再計算するために必要な兄弟ハッシュ |
+| **ChangeLog** | 古い証明を高速転送することで同時書き込みを可能にする最近のツリー変更のバッファ |
+| **spl-account-compression** | オンチェーンの同時マークルツリーを管理するSolanaプログラム |

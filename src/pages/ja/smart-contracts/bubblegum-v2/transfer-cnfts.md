@@ -29,12 +29,12 @@ faqs:
 
 ## Summary
 
-**Transferring a compressed NFT** moves ownership from one wallet to another using the **transferV2** instruction. This page covers transfers by owner, delegate, permanent transfer delegate, and transferability checks.
+**圧縮NFTの転送**は、**transferV2**命令を使用して所有権を一つのウォレットから別のウォレットに移します。このページでは、所有者、デリゲート、永続転送デリゲートによる転送、および転送可否チェックについて説明します。
 
-- Transfer a cNFT to a new owner using transferV2
-- Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
-- Check if a cNFT can be transferred using the canTransfer helper
-- Pass the coreCollection parameter when the cNFT belongs to a collection
+- transferV2を使用してcNFTを新しい所有者に転送する
+- リーフ所有者、リーフデリゲート、または永続転送デリゲートを通じて転送を承認する
+- canTransferヘルパーを使用してcNFTが転送可能かどうかを確認する
+- cNFTがコレクションに属する場合はcoreCollectionパラメータを渡す
 
 **transferV2**命令は、圧縮NFTをある所有者から別の所有者に転送するために使用できます。転送を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。デリゲート権限は、リーフデリゲートまたはコレクションの`permanentTransferDelegate`のいずれかです。
 
@@ -80,23 +80,77 @@ await transferV2(umi, {
   authority: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
   // cNFTがコレクションの一部である場合、コアコレクションを渡します。
+  //coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% totem-accordion title="デリゲートを使用する場合" %}
+
+```ts
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+await transferV2(umi, {
+  ...assetWithProof,
+  authority: delegateAuthority, // <- デリゲート権限がトランザクションに署名します。
+  newLeafOwner: leafOwnerB.publicKey,
+  //coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="永続転送デリゲートを使用する場合" %}
+
+```ts
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+await transferV2(umi, {
+  ...assetWithProof,
+  authority: permanentTransferDelegate, // <- 永続デリゲート権限が署名します。
+  newLeafOwner: leafOwnerB.publicKey,
+  coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### 圧縮NFTの転送可否チェック
+
+`canTransfer`関数を使用して圧縮NFTが転送可能かどうかを確認できます。NFTが転送可能な場合は`true`、そうでない場合は`false`を返します。フリーズされたcNFTと`NonTransferable`なcNFTは転送できません。
+
+```ts
+import { canTransfer } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+
+const canBeTransferred = canTransfer(assetWithProof)
+console.log("canBeTransferred", canBeTransferred ? "Yes" : "No")
+```
 
 ## Notes
 
-- After a transfer, the leaf delegate is automatically reset to the new owner.
-- Frozen cNFTs and soulbound (non-transferable) cNFTs cannot be transferred. Use `canTransfer` to check.
-- The permanent transfer delegate can transfer without the owner's signature if the `PermanentTransferDelegate` plugin is enabled on the collection.
-
-## FAQ
-
-#
+- 転送後、リーフデリゲートは自動的に新しい所有者にリセットされます。
+- フリーズされたcNFTとソウルバウンド（転送不可）cNFTは転送できません。`canTransfer`を使用して確認してください。
+- コレクションで`PermanentTransferDelegate`プラグインが有効になっている場合、永続転送デリゲートは所有者の署名なしに転送できます。
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **transferV2** | The Bubblegum V2 instruction that transfers a cNFT from one owner to another |
-| **Permanent Transfer Delegate** | A collection-level authority that can transfer any cNFT without owner consent |
-| **canTransfer** | A helper function that checks whether a cNFT can be transferred (not frozen or soulbound) |
-| **Leaf Owner** | The current owner of the compressed NFT |
-| **New Leaf Owner** | The wallet address that will receive ownership of the cNFT after transfer |
+| 用語 | 定義 |
+|------|------|
+| **transferV2** | cNFTを一つの所有者から別の所有者に転送するBubblegum V2命令 |
+| **永続転送デリゲート** | 所有者の同意なしに任意のcNFTを転送できるコレクションレベルの権限 |
+| **canTransfer** | cNFTが転送可能かどうか（フリーズされていないか、ソウルバウンドでないか）を確認するヘルパー関数 |
+| **リーフ所有者** | 圧縮NFTの現在の所有者 |
+| **新しいリーフ所有者** | 転送後にcNFTの所有権を受け取るウォレットアドレス |

@@ -28,11 +28,11 @@ faqs:
 
 ## Summary
 
-**Verifying creators** toggles the verified flag on a cNFT's creator entries. This page covers verifying and unverifying creators using the verifyCreatorV2 and unverifyCreatorV2 instructions.
+**크리에이터 검증**은 cNFT의 크리에이터 항목에서 verified 플래그를 토글합니다. 이 페이지에서는 verifyCreatorV2 및 unverifyCreatorV2 명령어를 사용하여 크리에이터를 검증하고 검증 해제하는 방법에 대해 설명합니다.
 
-- Verify a creator on an existing cNFT (the creator must sign)
-- Unverify a creator from a cNFT
-- Creators can also be verified at mint time by signing the mint transaction
+- 기존 cNFT의 크리에이터 검증 (크리에이터가 서명해야 함)
+- cNFT에서 크리에이터 검증 해제
+- 크리에이터는 민트 트랜잭션에 서명하여 민팅 시 검증될 수도 있음
 
 압축된 NFT의 메타데이터에 크리에이터 목록이 설정되어 있는 경우 이러한 크리에이터는 특별한 명령어를 사용하여 cNFT에서 자신을 확인하고 확인 해제할 수 있습니다. {% .lead %}
 
@@ -125,19 +125,15 @@ await unverifyCreatorV2(umi, {
 
 ## Notes
 
-- Only creators already listed in the cNFT's creators array can be verified. Use `updateMetadataV2` to add creators first.
-- The creator being verified must sign the transaction themselves.
-- Creators can be verified at mint time by signing the mint transaction, avoiding the need for a separate verification step.
-
-## FAQ
-
-#
+- cNFT의 크리에이터 배열에 이미 나열된 크리에이터만 검증할 수 있습니다. 먼저 크리에이터를 추가하려면 `updateMetadataV2`를 사용하세요.
+- 검증받는 크리에이터가 직접 트랜잭션에 서명해야 합니다.
+- 크리에이터는 별도의 검증 단계 없이 민트 트랜잭션에 서명하여 민팅 시 검증될 수 있습니다.
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **verifyCreatorV2** | Instruction that sets a creator's verified flag to true on a compressed NFT |
-| **unverifyCreatorV2** | Instruction that sets a creator's verified flag to false on a compressed NFT |
-| **Creators Array** | The list of creator addresses, verification statuses, and royalty share percentages stored in cNFT metadata |
-| **Verified** | A boolean flag indicating whether a creator has confirmed their association with the cNFT |
+| 용어 | 정의 |
+|------|------|
+| **verifyCreatorV2** | 압축된 NFT에서 크리에이터의 verified 플래그를 true로 설정하는 명령어 |
+| **unverifyCreatorV2** | 압축된 NFT에서 크리에이터의 verified 플래그를 false로 설정하는 명령어 |
+| **크리에이터 배열** | cNFT 메타데이터에 저장된 크리에이터 주소, 검증 상태 및 로열티 비율 목록 |
+| **Verified** | 크리에이터가 cNFT와의 연관성을 확인했는지 나타내는 부울 플래그 |

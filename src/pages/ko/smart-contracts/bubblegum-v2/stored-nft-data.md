@@ -18,87 +18,6 @@ about:
 proficiencyLevel: Advanced
 ---
 
-## Summary
-
-**Storing and indexing NFT data** explains how compressed NFT state is persisted in transactions and made queryable through the Metaplex DAS API. This page covers the reference indexing architecture from validator to end-user API.
-
-- cNFT data is stored in transaction logs, not in on-chain accounts
-- The DAS API indexes this data in real-time for convenient retrieval
-- The reference implementation uses a Geyser plugin, Redis queues, an ingester process, and a Postgres database
-
-As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.
-
-Metaplex has created a [reference implementation](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) of the DAS API, and some RPC providers use some or all of this code for their particular implementation, while other RPC providers have written their own.  See the ["Metaplex DAS API RPCs"](/rpc-providers) page for a list of other RPC providers that support the Metaplex DAS API.
-
-The Metaplex reference implementation of the DAS API includes the following key items:
-* A Solana no-vote validator - This validator is configured to only have secure access to the validator ledger and account data under consensus.
-* A Geyser plugin - The plugin is called "Plerkle" and runs on the validator.  The plugin is notified whenever there are account updates, slot status updates, transactions, or block metadata updates.  For the purpose of cNFT indexing, the plugin's `notify_transaction` method is used to provide transaction data whenever Bubblegum or spl-account-compression transactions are seen on the validator.  In reality, these transactions are coming from the spl-noop ("no operation") program, which is used by spl-account-compression and Bubblegum to avoid log truncation by turning events into spl-noop instruction data.
-* A Redis cluster - Redis streams are used as queues for the each type of update (account, transaction, etc.).  The Geyser plugin is the producer of data going into these streams.  The Geyser plugin translates the data into the Plerkle serialization format, which uses the Flatbuffers protocol, and then puts the serialized record into the appropriate Redis data stream.
-* An ingester process - This is the the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
- * Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
-* API process - When end-users request asset data from RPC providers, the API process can retrieve the asset data from the database and serve it for the request.
-
-{% diagram %}
-{% node %}
-{% node #validator label="Validator" theme="indigo" /%}
-{% node theme="dimmed" %}
-Runs Geyser plugin \
-and is notified on \
-transactions, account \
-updates, etc.
-{% /node %}
-{% /node %}
-
-{% node x="200" parent="validator" %}
-{% node #messenger label="Message bus" theme="blue" /%}
-{% node theme="dimmed" %}
-Redis streams as queues \
-for each type of update.
-{% /node %}
-{% /node %}
-
-{% node x="200" parent="messenger" %}
-{% node #ingester label="Ingester process" theme="indigo" /%}
-{% node theme="dimmed" %}
-Parses data and stores \
-to database
-{% /node %}
-{% /node %}
-
-{% node x="28" y="150" parent="ingester" %}
-{% node #database label="Database" theme="blue" /%}
-{% node theme="dimmed" %}
-Postgres \
-database
-{% /node %}
-{% /node %}
-
-{% node x="-228" parent="database" %}
-{% node #api label="API process" theme="indigo" /%}
-{% node theme="dimmed" %}
-RPC provider runs the API\
-and serves asset data to \
-end users.
-{% /node %}
-{% /node %}
-
-{% node x="-200" parent="api" %}
-{% node #end_user label="End user" theme="mint" /%}
-{% node theme="dimmed" %}
-Calls getAsset(), \
-getAssetProof(), etc.
-{% /node %}
-{% /node %}
-
-{% edge from="validator" to="messenger" /%}
-{% edge from="messenger" to="ingester" /%}
-{% edge from="ingester" to="database" /%}
-{% edge from="database" to="api" /%}
-{% edge from="api" to="end_user" /%}
-
-{% /diagram %}
-
-
 [개요](/ko/smart-contracts/bubblegum#read-api)에서 언급했듯이 압축된 NFT(cNFT)가 생성되거나 수정될 때마다 해당 트랜잭션이 원장에 온체인으로 기록되지만 cNFT 상태 데이터는 계정 공간에 저장되지 않습니다. 이는 cNFT의 엄청난 비용 절약의 이유이지만 편의성과 유용성을 위해 cNFT 상태 데이터는 RPC 제공업체에 의해 인덱싱되고 **Metaplex DAS API**를 통해 사용할 수 있습니다.
 
 Metaplex는 DAS API의 [참조 구현](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)을 만들었으며, 일부 RPC 제공업체는 특정 구현을 위해 이 코드의 일부 또는 전부를 사용하는 반면 다른 RPC 제공업체는 자체적으로 작성했습니다. Metaplex DAS API를 지원하는 다른 RPC 제공업체 목록은 ["Metaplex DAS API RPC"](/ko/rpc-providers) 페이지를 참조하세요.
@@ -172,17 +91,15 @@ getAssetProof() 등을 호출합니다.
 
 ## Notes
 
-- The DAS API is not part of the Solana protocol itself — it is an indexing layer maintained by RPC providers.
-- Different RPC providers may have different implementations. The Metaplex reference implementation is open source on GitHub.
-- Transaction data uses the spl-noop program to avoid log truncation, turning events into instruction data.
-- Sequence numbers enable the DAS API to process transactions out of order while maintaining correct state.
+- DAS API는 Solana 프로토콜 자체의 일부가 아닙니다 — RPC 제공업체가 유지 관리하는 인덱싱 레이어입니다.
+- RPC 제공업체마다 구현이 다를 수 있습니다. Metaplex 참조 구현은 GitHub에서 오픈 소스로 제공됩니다.
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **DAS API** | Digital Asset Standard API — the RPC extension for querying indexed cNFT data |
-| **Geyser Plugin** | A Solana validator plugin that receives real-time notifications about transactions and account updates |
-| **Plerkle** | The Metaplex Geyser plugin that captures Bubblegum and compression transactions for indexing |
-| **spl-noop** | A Solana program used to emit events as instruction data, avoiding transaction log truncation |
-| **Ingester** | A process that consumes transaction data from Redis streams and stores it in Postgres |
+| 용어 | 정의 |
+|------|------|
+| **DAS API** | Digital Asset Standard API — 인덱싱된 cNFT 데이터를 쿼리하기 위한 RPC 확장 |
+| **Geyser 플러그인** | 트랜잭션 및 계정 업데이트에 대한 실시간 알림을 받는 Solana 검증자 플러그인 |
+| **Plerkle** | 인덱싱을 위해 Bubblegum 및 압축 트랜잭션을 캡처하는 Metaplex Geyser 플러그인 |
+| **spl-noop** | 트랜잭션 로그 잘림을 방지하기 위해 이벤트를 명령어 데이터로 내보내는 데 사용되는 Solana 프로그램 |
+| **인제스터** | Redis 스트림에서 트랜잭션 데이터를 소비하여 Postgres에 저장하는 프로세스 |

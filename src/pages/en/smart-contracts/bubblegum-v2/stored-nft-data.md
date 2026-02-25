@@ -16,6 +16,9 @@ about:
   - DAS API
   - NFT indexing
 proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
 
 ## Summary
@@ -26,7 +29,7 @@ proficiencyLevel: Advanced
 - The DAS API indexes this data in real-time for convenient retrieval
 - The reference implementation uses a Geyser plugin, Redis queues, an ingester process, and a Postgres database
 
-As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.
+As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded on-chain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **Metaplex DAS API**.
 
 Metaplex has created a [reference implementation](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) of the DAS API, and some RPC providers use some or all of this code for their particular implementation, while other RPC providers have written their own.  See the ["Metaplex DAS API RPCs"](/rpc-providers) page for a list of other RPC providers that support the Metaplex DAS API.
 
@@ -103,8 +106,6 @@ getAssetProof(), etc.
 
 - The DAS API is not part of the Solana protocol itself — it is an indexing layer maintained by RPC providers.
 - Different RPC providers may have different implementations. The Metaplex reference implementation is open source on GitHub.
-- Transaction data uses the spl-noop program to avoid log truncation, turning events into instruction data.
-- Sequence numbers enable the DAS API to process transactions out of order while maintaining correct state.
 
 ## Glossary
 

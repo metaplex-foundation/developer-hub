@@ -20,12 +20,12 @@ proficiencyLevel: Advanced
 
 ## Summary
 
-**The Merkle Tree Canopy** caches the upper nodes of the merkle tree on-chain, reducing the proof data that must be sent in transactions. This page covers how the canopy works, its cost implications, and the tradeoff between composability and storage cost.
+**マークルツリーキャノピー**は、マークルツリーの上位ノードをオンチェーンにキャッシュし、トランザクションで送信する必要がある証明データを削減します。このページでは、キャノピーの仕組み、コストへの影響、および組み合わせやすさとストレージコストのトレードオフについて説明します。
 
-- The canopy stores the top n levels of the tree, reducing proof sizes from d to d-n nodes
-- Larger canopies enable better composability with other Solana programs in the same transaction
-- Canopy size is fixed at tree creation and cannot be changed afterward
-- The formula for additional bytes needed is (2^(n+1) - 1) * 32
+- キャノピーはツリーの上位nレベルを保存し、証明サイズをdからd-nノードに削減します
+- キャノピーが大きいほど、同じトランザクション内で他のSolanaプログラムとの組み合わせやすさが向上します
+- キャノピーサイズはツリー作成時に固定され、後から変更できません
+- 必要な追加バイト数の計算式は (2^(n+1) - 1) * 32 です
 
 
 ## はじめに
@@ -58,17 +58,17 @@ SolanaのネットワーキングスタックはMTUサイズ1280バイトを使�
 
 ## Notes
 
-- A canopy depth of 0 is the cheapest option but uses the most transaction space for proofs, limiting composability.
-- The canopy is automatically updated whenever the tree is modified — no additional work is required.
-- You cannot change the canopy size after tree creation. Plan your canopy depth based on expected transaction composition needs.
-- For trees deeper than 24, a canopy is required because full proofs would exceed Solana's 1232-byte transaction limit.
+- キャノピー深度0が最も安価ですが、証明に最もトランザクションスペースを使用し、組み合わせやすさが制限されます。
+- キャノピーはツリーが変更されるたびに自動的に更新されます。追加の作業は必要ありません。
+- ツリー作成後はキャノピーサイズを変更できません。予想されるトランザクション構成のニーズに基づいてキャノピー深度を計画してください。
+- 深度24を超えるツリーでは、完全な証明がSolanaの1232バイトトランザクション制限を超えるため、キャノピーが必要です。
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
-| **Canopy Depth** | The number of upper tree levels cached in the canopy |
-| **Proof Bytes** | The number of bytes consumed by merkle proofs in a transaction (32 bytes per proof node) |
-| **Composability** | The ability to include other program instructions alongside Bubblegum operations in a single transaction |
-| **MTU** | Maximum Transmission Unit — Solana uses 1280 bytes, leaving 1232 bytes for transaction data |
+| 用語 | 定義 |
+|------|------|
+| **キャノピー** | トランザクションの証明サイズを削減するためにオンチェーンに保存されたマークルツリーの上位ノードのキャッシュ |
+| **キャノピー深度** | キャノピーにキャッシュされたツリーの上位レベル数 |
+| **証明バイト** | トランザクションにおけるマークル証明が消費するバイト数（証明ノードごとに32バイト） |
+| **組み合わせやすさ** | 単一のトランザクションでBubblegum操作と共に他のプログラム命令を含める能力 |
+| **MTU** | 最大転送単位 — SolanaはトランザクションデータのMTUとして1280バイトを使用し、1232バイトをデータ用に残します |

@@ -28,12 +28,12 @@ faqs:
 
 ## Summary
 
-**Updating a compressed NFT** modifies its metadata using the **updateMetadataV2** instruction. This page covers update authority rules for collection-based and tree-based cNFTs.
+**圧縮NFTの更新**は、**updateMetadataV2**命令を使用してメタデータを変更します。このページでは、コレクションベースおよびツリーベースのcNFTの更新権限ルールについて説明します。
 
-- Update cNFT metadata (name, URI, creators, royalties) using updateMetadataV2
-- Collection authority updates cNFTs that belong to a collection
-- Tree authority updates cNFTs that do not belong to a collection
-- Changes are reflected in the merkle tree and indexed by DAS API providers
+- updateMetadataV2を使用してcNFTメタデータ（名前、URI、作成者、版税）を更新する
+- コレクション権限はコレクションに属するcNFTを更新する
+- ツリー権限はコレクションに属さないcNFTを更新する
+- 変更はマークルツリーに反映され、DAS APIプロバイダーによってインデックス化されます
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
 
@@ -106,20 +106,16 @@ await updateMetadataV2(umi, {
 
 ## Notes
 
-- The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
-- Use `some()` for fields you want to update and omit fields you want to keep unchanged.
-
-## FAQ
-
-#
+- 更新権限は、cNFTがコレクションに属しているかどうかによって異なります。コレクションcNFTはコレクション権限を使用し、スタンドアロンcNFTはツリー権限を使用します。
+- 更新を適用する前にプログラムが現在のリーフを検証できるよう、`getAssetWithProof`からの`currentMetadata`を渡す必要があります。
+- 更新したいフィールドには`some()`を使用し、変更しないフィールドは省略します。
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **updateMetadataV2** | The Bubblegum V2 instruction for modifying compressed NFT metadata |
-| **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
-| **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
-| **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | The existing metadata of the cNFT, fetched via getAssetWithProof and required for verification |
+| 用語 | 定義 |
+|------|------|
+| **updateMetadataV2** | 圧縮NFTメタデータを変更するためのBubblegum V2命令 |
+| **コレクション権限** | MPL-Coreコレクションの更新権限。そのコレクション内のcNFTを更新する権限がある |
+| **ツリー権限** | コレクションに属さないcNFTを更新する権限を持つツリー作成者またはデリゲート |
+| **UpdateArgsArgs** | どのメタデータフィールドをOptionラッパーを使用して更新するかを定義するTypeScript型 |
+| **currentMetadata** | getAssetWithProofで取得したcNFTの既存メタデータ。検証に必要 |

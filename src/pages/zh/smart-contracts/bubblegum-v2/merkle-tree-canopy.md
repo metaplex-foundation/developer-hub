@@ -20,12 +20,12 @@ proficiencyLevel: Advanced
 
 ## Summary
 
-**The Merkle Tree Canopy** caches the upper nodes of the merkle tree on-chain, reducing the proof data that must be sent in transactions. This page covers how the canopy works, its cost implications, and the tradeoff between composability and storage cost.
+**默克尔树树冠**将默克尔树的上层节点缓存在链上，减少交易中必须发送的证明数据。本页面介绍树冠的工作原理、成本影响以及可组合性与存储成本之间的权衡。
 
-- The canopy stores the top n levels of the tree, reducing proof sizes from d to d-n nodes
-- Larger canopies enable better composability with other Solana programs in the same transaction
-- Canopy size is fixed at tree creation and cannot be changed afterward
-- The formula for additional bytes needed is (2^(n+1) - 1) * 32
+- 树冠存储树的前n层，将证明大小从d个节点减少到d-n个节点
+- 更大的树冠可以在同一交易中更好地与其他Solana程序组合
+- 树冠大小在创建树时固定，之后无法更改
+- 所需额外字节数的计算公式为 (2^(n+1) - 1) * 32
 
 
 ## 介绍
@@ -58,17 +58,17 @@ Solana的网络栈使用1280字节的MTU大小，扣除头部后，剩余1232字
 
 ## Notes
 
-- A canopy depth of 0 is the cheapest option but uses the most transaction space for proofs, limiting composability.
-- The canopy is automatically updated whenever the tree is modified — no additional work is required.
-- You cannot change the canopy size after tree creation. Plan your canopy depth based on expected transaction composition needs.
-- For trees deeper than 24, a canopy is required because full proofs would exceed Solana's 1232-byte transaction limit.
+- 树冠深度为0是最便宜的选项，但使用最多的交易空间用于证明，限制了可组合性。
+- 每当树被修改时，树冠会自动更新，无需额外工作。
+- 创建树后无法更改树冠大小。请根据预期的交易组合需求规划树冠深度。
+- 对于深度超过24的树，需要树冠，因为完整的证明会超过Solana的1232字节交易限制。
 
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
-| **Canopy Depth** | The number of upper tree levels cached in the canopy |
-| **Proof Bytes** | The number of bytes consumed by merkle proofs in a transaction (32 bytes per proof node) |
-| **Composability** | The ability to include other program instructions alongside Bubblegum operations in a single transaction |
-| **MTU** | Maximum Transmission Unit — Solana uses 1280 bytes, leaving 1232 bytes for transaction data |
+| 术语 | 定义 |
+|------|------|
+| **树冠** | 存储在链上的默克尔树上层节点缓存，用于减少交易中的证明大小 |
+| **树冠深度** | 树冠中缓存的树上层级别数 |
+| **证明字节数** | 交易中默克尔证明消耗的字节数（每个证明节点32字节） |
+| **可组合性** | 在单个交易中将其他程序指令与Bubblegum操作一起包含的能力 |
+| **MTU** | 最大传输单元 — Solana使用1280字节，为交易数据留出1232字节 |
