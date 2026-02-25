@@ -7,36 +7,28 @@
  * Edit the native .js/.ts and .rs files, then run: node scripts/build-examples.js
  */
 
-const kitSections = {
-  "imports": "import { create } from '@metaplex-kit/core'",
-  "setup": "// Initialize client\r\nconst client = createClient()",
-  "main": "// Create a new NFT asset\r\nconst asset = await create({\r\n  name: 'My NFT',\r\n  uri: 'https://example.com/metadata.json'\r\n})",
-  "output": "console.log('Asset created:', asset.publicKey)",
-  "full": "// [IMPORTS]\r\nimport { create } from '@metaplex-kit/core'\r\n// [/IMPORTS]\r\n\r\n// [SETUP]\r\n// Initialize client\r\nconst client = createClient()\r\n// [/SETUP]\r\n\r\n// [MAIN]\r\n// Create a new NFT asset\r\nconst asset = await create({\r\n  name: 'My NFT',\r\n  uri: 'https://example.com/metadata.json'\r\n})\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nconsole.log('Asset created:', asset.publicKey)\r\n// [/OUTPUT]\r\n"
-}
-
 const umiSections = {
-  "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\r\nimport { create } from '@metaplex-foundation/mpl-core'\r\nimport { mplCore } from '@metaplex-foundation/mpl-core'",
-  "setup": "// Initialize UMI\r\nconst umi = createUmi('https://api.devnet.solana.com')\r\n  .use(mplCore())",
-  "main": "// Create a new NFT asset\r\nconst asset = await create(umi, {\r\n  name: 'My NFT',\r\n  uri: 'https://example.com/metadata.json'\r\n}).sendAndConfirm(umi)",
+  "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { create } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'",
+  "setup": "// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())",
+  "main": "// Create a new NFT asset\nconst asset = await create(umi, {\n  name: 'My NFT',\n  uri: 'https://example.com/metadata.json'\n}).sendAndConfirm(umi)",
   "output": "console.log('Asset created:', asset.publicKey)",
-  "full": "// [IMPORTS]\r\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\r\nimport { create } from '@metaplex-foundation/mpl-core'\r\nimport { mplCore } from '@metaplex-foundation/mpl-core'\r\n// [/IMPORTS]\r\n\r\n// [SETUP]\r\n// Initialize UMI\r\nconst umi = createUmi('https://api.devnet.solana.com')\r\n  .use(mplCore())\r\n// [/SETUP]\r\n\r\n// [MAIN]\r\n// Create a new NFT asset\r\nconst asset = await create(umi, {\r\n  name: 'My NFT',\r\n  uri: 'https://example.com/metadata.json'\r\n}).sendAndConfirm(umi)\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nconsole.log('Asset created:', asset.publicKey)\r\n// [/OUTPUT]\r\n"
+  "full": "// [IMPORTS]\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { create } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'\n// [/IMPORTS]\n\n// [SETUP]\n// Initialize UMI\nconst umi = createUmi('https://api.devnet.solana.com')\n  .use(mplCore())\n// [/SETUP]\n\n// [MAIN]\n// Create a new NFT asset\nconst asset = await create(umi, {\n  name: 'My NFT',\n  uri: 'https://example.com/metadata.json'\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset created:', asset.publicKey)\n// [/OUTPUT]\n"
 }
 
 const shankSections = {
-  "imports": "use mpl_core::instructions::CreateV1;\r\nuse solana_sdk::signer::Signer;",
+  "imports": "use mpl_core::instructions::CreateV1;\nuse solana_sdk::signer::Signer;",
   "setup": "",
-  "main": "// Create a new NFT asset\r\nlet create_ix = CreateV1 {\r\n    name: \"My NFT\".to_string(),\r\n    uri: \"https://example.com/metadata.json\".to_string(),\r\n    ..Default::default()\r\n};\r\n\r\nlet instruction = create_ix.instruction();",
+  "main": "// Create a new NFT asset\nlet create_ix = CreateV1 {\n    name: \"My NFT\".to_string(),\n    uri: \"https://example.com/metadata.json\".to_string(),\n    ..Default::default()\n};\n\nlet instruction = create_ix.instruction();",
   "output": "println!(\"Asset instruction created\");",
-  "full": "// [IMPORTS]\r\nuse mpl_core::instructions::CreateV1;\r\nuse solana_sdk::signer::Signer;\r\n// [/IMPORTS]\r\n\r\n// [MAIN]\r\n// Create a new NFT asset\r\nlet create_ix = CreateV1 {\r\n    name: \"My NFT\".to_string(),\r\n    uri: \"https://example.com/metadata.json\".to_string(),\r\n    ..Default::default()\r\n};\r\n\r\nlet instruction = create_ix.instruction();\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nprintln!(\"Asset instruction created\");\r\n// [/OUTPUT]\r\n"
+  "full": "// [IMPORTS]\nuse mpl_core::instructions::CreateV1;\nuse solana_sdk::signer::Signer;\n// [/IMPORTS]\n\n// [MAIN]\n// Create a new NFT asset\nlet create_ix = CreateV1 {\n    name: \"My NFT\".to_string(),\n    uri: \"https://example.com/metadata.json\".to_string(),\n    ..Default::default()\n};\n\nlet instruction = create_ix.instruction();\n// [/MAIN]\n\n// [OUTPUT]\nprintln!(\"Asset instruction created\");\n// [/OUTPUT]\n"
 }
 
 const anchorSections = {
   "imports": "use anchor_lang::prelude::*;",
   "setup": "",
-  "main": "declare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\r\n\r\n#[program]\r\npub mod create_asset {\r\n    use super::*;\r\n\r\n    // Create a new NFT asset\r\n    pub fn create(\r\n        ctx: Context<CreateAsset>,\r\n        name: String,\r\n        uri: String\r\n    ) -> Result<()> {\r\n        let asset = &mut ctx.accounts.asset;\r\n        asset.name = name;\r\n        asset.uri = uri;\r\n        asset.owner = ctx.accounts.owner.key();\r\n\r\n        msg!(\"Asset created: {}\", asset.key());\r\n        Ok(())\r\n    }\r\n}\r\n\r\n#[derive(Accounts)]\r\npub struct CreateAsset<'info> {\r\n    #[account(init, payer = owner, space = 8 + 200)]\r\n    pub asset: Account<'info, Asset>,\r\n    #[account(mut)]\r\n    pub owner: Signer<'info>,\r\n    pub system_program: Program<'info, System>,\r\n}\r\n\r\n#[account]\r\npub struct Asset {\r\n    pub name: String,\r\n    pub uri: String,\r\n    pub owner: Pubkey,\r\n}",
+  "main": "declare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod create_asset {\n    use super::*;\n\n    // Create a new NFT asset\n    pub fn create(\n        ctx: Context<CreateAsset>,\n        name: String,\n        uri: String\n    ) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n        asset.name = name;\n        asset.uri = uri;\n        asset.owner = ctx.accounts.owner.key();\n\n        msg!(\"Asset created: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct CreateAsset<'info> {\n    #[account(init, payer = owner, space = 8 + 200)]\n    pub asset: Account<'info, Asset>,\n    #[account(mut)]\n    pub owner: Signer<'info>,\n    pub system_program: Program<'info, System>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}",
   "output": "",
-  "full": "// [IMPORTS]\r\nuse anchor_lang::prelude::*;\r\n// [/IMPORTS]\r\n\r\n// [MAIN]\r\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\r\n\r\n#[program]\r\npub mod create_asset {\r\n    use super::*;\r\n\r\n    // Create a new NFT asset\r\n    pub fn create(\r\n        ctx: Context<CreateAsset>,\r\n        name: String,\r\n        uri: String\r\n    ) -> Result<()> {\r\n        let asset = &mut ctx.accounts.asset;\r\n        asset.name = name;\r\n        asset.uri = uri;\r\n        asset.owner = ctx.accounts.owner.key();\r\n\r\n        msg!(\"Asset created: {}\", asset.key());\r\n        Ok(())\r\n    }\r\n}\r\n\r\n#[derive(Accounts)]\r\npub struct CreateAsset<'info> {\r\n    #[account(init, payer = owner, space = 8 + 200)]\r\n    pub asset: Account<'info, Asset>,\r\n    #[account(mut)]\r\n    pub owner: Signer<'info>,\r\n    pub system_program: Program<'info, System>,\r\n}\r\n\r\n#[account]\r\npub struct Asset {\r\n    pub name: String,\r\n    pub uri: String,\r\n    pub owner: Pubkey,\r\n}\r\n// [/MAIN]\r\n"
+  "full": "// [IMPORTS]\nuse anchor_lang::prelude::*;\n// [/IMPORTS]\n\n// [MAIN]\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod create_asset {\n    use super::*;\n\n    // Create a new NFT asset\n    pub fn create(\n        ctx: Context<CreateAsset>,\n        name: String,\n        uri: String\n    ) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n        asset.name = name;\n        asset.uri = uri;\n        asset.owner = ctx.accounts.owner.key();\n\n        msg!(\"Asset created: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct CreateAsset<'info> {\n    #[account(init, payer = owner, space = 8 + 200)]\n    pub asset: Account<'info, Asset>,\n    #[account(mut)]\n    pub owner: Signer<'info>,\n    pub system_program: Program<'info, System>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n// [/MAIN]\n"
 }
 
 const cliSections = {
@@ -44,7 +36,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Create an NFT using the Metaplex CLI\r\n\r\n# Interactive wizard mode (recommended)\r\nmplx core asset create --wizard\r\n\r\n# Simple creation with name and URI\r\nmplx core asset create --name \"My NFT\" --uri \"https://example.com/metadata.json\"\r\n\r\n# Create with files (image + metadata)\r\nmplx core asset create --files --image \"./my-nft.png\" --json \"./metadata.json\"\r\n"
+  "full": "# Create an NFT using the Metaplex CLI\n\n# Interactive wizard mode (recommended)\nmplx core asset create --wizard\n\n# Simple creation with name and URI\nmplx core asset create --name \"My NFT\" --uri \"https://example.com/metadata.json\"\n\n# Create with files (image + metadata)\nmplx core asset create --files --image \"./my-nft.png\" --json \"./metadata.json\"\n"
 }
 
 export const metadata = {

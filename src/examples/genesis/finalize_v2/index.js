@@ -8,11 +8,11 @@
  */
 
 const umiSections = {
-  "imports": "import {\r\n  genesis,\r\n  finalizeV2,\r\n} from '@metaplex-foundation/genesis'\r\nimport { mplToolbox } from '@metaplex-foundation/mpl-toolbox'\r\nimport { keypairIdentity } from '@metaplex-foundation/umi'\r\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'",
-  "setup": "const umi = createUmi('https://api.mainnet-beta.solana.com')\r\n  .use(mplToolbox())\r\n  .use(genesis())\r\n\r\n// umi.use(keypairIdentity(yourKeypair));\r\n\r\n// Assumes genesisAccount and baseMint from the Initialize step.",
-  "main": "await finalizeV2(umi, {\r\n  baseMint: baseMint.publicKey,\r\n  genesisAccount,\r\n}).sendAndConfirm(umi)",
+  "imports": "import {\n  genesis,\n  finalizeV2,\n} from '@metaplex-foundation/genesis'\nimport { mplToolbox } from '@metaplex-foundation/mpl-toolbox'\nimport { keypairIdentity } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'",
+  "setup": "const umi = createUmi('https://api.mainnet-beta.solana.com')\n  .use(mplToolbox())\n  .use(genesis())\n\n// umi.use(keypairIdentity(yourKeypair));\n\n// Assumes genesisAccount and baseMint from the Initialize step.",
+  "main": "await finalizeV2(umi, {\n  baseMint: baseMint.publicKey,\n  genesisAccount,\n}).sendAndConfirm(umi)",
   "output": "",
-  "full": "// [IMPORTS]\r\nimport {\r\n  genesis,\r\n  finalizeV2,\r\n} from '@metaplex-foundation/genesis'\r\nimport { mplToolbox } from '@metaplex-foundation/mpl-toolbox'\r\nimport { keypairIdentity } from '@metaplex-foundation/umi'\r\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\r\n// [/IMPORTS]\r\n\r\n// [SETUP]\r\nconst umi = createUmi('https://api.mainnet-beta.solana.com')\r\n  .use(mplToolbox())\r\n  .use(genesis())\r\n\r\n// umi.use(keypairIdentity(yourKeypair));\r\n\r\n// Assumes genesisAccount and baseMint from the Initialize step.\r\n// [/SETUP]\r\n\r\n// [MAIN]\r\nawait finalizeV2(umi, {\r\n  baseMint: baseMint.publicKey,\r\n  genesisAccount,\r\n}).sendAndConfirm(umi)\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\n// [/OUTPUT]\r\n"
+  "full": "// [IMPORTS]\nimport {\n  genesis,\n  finalizeV2,\n} from '@metaplex-foundation/genesis'\nimport { mplToolbox } from '@metaplex-foundation/mpl-toolbox'\nimport { keypairIdentity } from '@metaplex-foundation/umi'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com')\n  .use(mplToolbox())\n  .use(genesis())\n\n// umi.use(keypairIdentity(yourKeypair));\n\n// Assumes genesisAccount and baseMint from the Initialize step.\n// [/SETUP]\n\n// [MAIN]\nawait finalizeV2(umi, {\n  baseMint: baseMint.publicKey,\n  genesisAccount,\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\n// [/OUTPUT]\n"
 }
 
 export const metadata = {

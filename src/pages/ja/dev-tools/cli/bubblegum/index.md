@@ -29,9 +29,9 @@ mplx core collection create --wizard
 
 ### RPC要件
 
-圧縮NFT操作には、[DAS（Digital Asset Standard）API](/rpc-providers#metaplex-das-api)をサポートするRPCエンドポイントが必要です。標準のSolana RPCエンドポイントはDASをサポートしておらず、圧縮NFTの取得、更新、転送、バーンには機能しません。
+圧縮NFT操作には、[DAS（Digital Asset Standard）API](/solana/rpcs-and-das#metaplex-das-api)をサポートするRPCエンドポイントが必要です。標準のSolana RPCエンドポイントはDASをサポートしておらず、圧縮NFTの取得、更新、転送、バーンには機能しません。
 
-DASをサポートするプロバイダーのリストは[RPCプロバイダー](/rpc-providers)ページをご覧ください。
+DASをサポートするプロバイダーのリストは[RPCプロバイダー](/solana/rpcs-and-das)ページをご覧ください。
 
 ## コマンド構造
 

@@ -19,12 +19,12 @@ export const core = {
     create: {
       solana: '0.0015 SOL',
       payer: 'Collector',
-      notes: 'Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.',
+      notes: null,
     },
     execute: {
       solana: '0.00004872 SOL',
       payer: 'Owner',
-      notes: 'Typically paid by the current owner the Core NFT Asset that is calling the execute instruction.',
+      notes: null,
     },
   },
   sections: [

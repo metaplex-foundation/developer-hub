@@ -83,7 +83,7 @@ Metaplex Core is the recommended NFT standard for new projects on Solana. Compar
   - [Attributes](/smart-contracts/core/plugins/attribute) - On-chain key/value data (auto-indexed by DAS)
   - [Transfer Delegate](/smart-contracts/core/plugins/transfer-delegate) - Allow others to transfer
   - And many more in the [Plugins section](/smart-contracts/core/plugins)
-- **DAS Indexing**: All major [RPC providers supporting DAS](/rpc-providers) already index Core assets.
+- **DAS Indexing**: All major [RPC providers supporting DAS](/solana/rpcs-and-das) already index Core assets.
 ## Core Concepts
 ### Assets
 An **Asset** is a single on-chain account representing an NFT. Unlike Token Metadata (which uses 3+ accounts), Core Assets contain ownership, metadata URI, and plugin data in one account.
@@ -127,7 +127,7 @@ Plugins are modular extensions that add behavior to Core Assets or Collections. 
 ### How much does it cost to mint a Core Asset?
 Approximately 0.0029 SOL per base asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting. See [Differences from Token Metadata](/smart-contracts/core/tm-differences) for more details.
 ### Which RPC providers support Core?
-All major RPC providers supporting DAS (Digital Asset Standard) index Core assets. See [RPC Providers](/rpc-providers) for a current list.
+All major RPC providers supporting DAS (Digital Asset Standard) index Core assets. See [RPC Providers](/solana/rpcs-and-das) for a current list.
 ### Can I use Core for gaming assets?
 Yes. Core's plugin system makes it ideal for gaming: use Attributes for on-chain stats, Freeze Delegate for locking items, and Transfer Delegate for marketplace integration.
 ## Glossary
