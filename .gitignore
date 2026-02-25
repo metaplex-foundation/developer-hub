@@ -36,3 +36,6 @@ yarn-error.log*
 
 .claude/
 
+# Auto-generated
+public/llms.txt
+

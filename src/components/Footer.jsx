@@ -23,7 +23,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Metaplex Foundation.
+              &copy; {new Date().getFullYear()} Metaplex Global Ltd.
               <br />{t('allRightsReserved', 'All rights reserved.')}
             </p>
           </div>
@@ -68,14 +68,14 @@ export function Footer() {
             </h3>
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link
-                href="https://www.metaplex.com/terms-and-conditions"
+                href="https://www.metaplex.com/terms-of-use"
                 target="_blank"
                 className="hover:text-foreground transition-colors"
               >
-                {t('termsAndConditions', 'Terms & Conditions')}
+                {t('termsOfUse', 'Terms of Use')}
               </Link>
               <Link
-                href="https://www.metaplex.com/privacy-policy"
+                href="https://www.metaplex.com/privacy"
                 target="_blank"
                 className="hover:text-foreground transition-colors"
               >
