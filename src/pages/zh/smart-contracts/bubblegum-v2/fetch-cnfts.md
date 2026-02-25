@@ -8,7 +8,7 @@ description: 了解如何在Bubblegum上获取压缩NFT。
 
 因此，创建了一个特殊的索引器来便于检索压缩NFT。这些索引数据通过Solana RPC方法的扩展提供，我们称之为**Metaplex DAS API**。实际上，DAS API允许我们获取任何**数字资产**。这可以是压缩NFT、普通NFT，甚至是同质化资产。
 
-由于并非所有RPC都支持DAS API，如果您计划使用压缩NFT，则需要仔细选择RPC提供商。请注意，我们在[专门页面](/zh/rpc-providers)中维护了所有支持Metaplex DAS API的RPC列表。
+由于并非所有RPC都支持DAS API，如果您计划使用压缩NFT，则需要仔细选择RPC提供商。请注意，我们在[专门页面](/zh/solana/rpcs-and-das)中维护了所有支持Metaplex DAS API的RPC列表。
 
 在本页中，我们将学习如何使用Metaplex DAS API获取压缩NFT。
 

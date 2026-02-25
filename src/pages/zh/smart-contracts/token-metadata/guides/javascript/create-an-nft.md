@@ -2,7 +2,7 @@
 title: 如何在 Solana 上创建 NFT
 metaTitle: 如何在 Solana 上创建 NFT | Token Metadata 指南
 description: 学习如何使用 Metaplex 在 Solana 区块链上创建 NFT。
-# 记得同时更新 /components/guides/index.js 中的日期
+# 记得同时更新 /components/products/guides/index.js 中的日期
 created: '06-16-2024'
 updated: '06-18-2024'
 ---

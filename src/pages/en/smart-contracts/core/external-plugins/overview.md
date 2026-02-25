@@ -73,10 +73,10 @@ The Data Authority of an External Plugin is the only authority allowed to write 
 ## Plugins
 ### Oracle Plugin
 The Oracle Plugin is designed for simplicity in a web 2.0-3.0 workflow. The Oracle Plugin can access onchain Oracle accounts external from the MPL Core Asset that can reject the use of lifecycle events set by the authority. The external Oracle Account can also be updated at any time to change the authorization behavior of the lifecycle events, making for a dynamic experience.
-You can read more about the Oracle Plugin [here](/smart-contracts/core/external-plugins/oracle).
+You can read more about the Oracle Plugin [on the Oracle Plugin page](/smart-contracts/core/external-plugins/oracle).
 ### AppData Plugin
 The AppData Plugin provides secure, partitioned data storage on Assets. Each AppData plugin has a Data Authority that exclusively controls writes to that data section. Useful for third-party apps storing user data, game state, or application-specific metadata.
-You can read more about the AppData Plugin [here](/smart-contracts/core/external-plugins/app-data).
+You can read more about the AppData Plugin [on the AppData Plugin page](/smart-contracts/core/external-plugins/app-data).
 ## External Plugins vs Built-in Plugins
 | Feature | External Plugins | Built-in Plugins |
 |---------|------------------|------------------|

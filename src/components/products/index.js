@@ -26,7 +26,8 @@ export const productCategories = [
   'Tokens',
   'NFTs',
   'Smart Contracts',
-  'Dev Tools'
+  'Dev Tools',
+  'Solana',
 ]
 
 export const products = [

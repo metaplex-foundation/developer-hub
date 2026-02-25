@@ -74,7 +74,7 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 각 아이템은 두 개의 매개변수로 구성됩니다:
 
 - `name`: NFT의 이름.
-- `uri`: NFT의 [JSON 메타데이터](https://developers.metaplex.com/token-metadata/token-standard#the-non-fungible-standard)를 가리키는 URI. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다.
+- `uri`: NFT의 [JSON 메타데이터](/ko/smart-contracts/token-metadata/token-standard)를 가리키는 URI. 이는 JSON 메타데이터가 이미 온체인(예: Arweave, IPFS) 또는 오프체인(예: AWS, 자체 서버) 스토리지 제공업체를 통해 업로드되었음을 의미합니다.
 
 다른 모든 매개변수는 모든 NFT 간에 공유되므로 중복을 피하기 위해 Candy Machine의 설정에 직접 보관됩니다. 자세한 내용은 [아이템 삽입](/ko/smart-contracts/candy-machine/insert-items)을 참조하세요.
 

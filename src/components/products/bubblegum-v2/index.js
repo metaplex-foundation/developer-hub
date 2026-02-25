@@ -19,12 +19,12 @@ export const bubblegumv2 = {
     create: {
       solana: '0.00009 SOL',
       payer: 'Minter',
-      notes: 'Paid by the minter.',
+      notes: null,
     },
     transfer: {
       solana: '0.000006 SOL',
       payer: 'Collector',
-      notes: 'Paid by the owner.',
+      notes: null,
     },
   },
   sections: [
@@ -35,7 +35,7 @@ export const bubblegumv2 = {
           title: 'Introduction',
           links: [
             { title: 'Overview', href: '/smart-contracts/bubblegum-v2' },
-            { title: 'Metaplex DAS API RPCs', href: '/rpc-providers' },
+            { title: 'Metaplex DAS API RPCs', href: '/solana/rpcs-and-das' },
             { title: 'FAQ', href: '/smart-contracts/bubblegum-v2/faq' },
           ],
         },

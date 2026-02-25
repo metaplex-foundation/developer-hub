@@ -17,5 +17,5 @@ Metaplex Protocol **Candy Machine**은 Solana에서 공정한 NFT 컬렉션 출�
 {% /quick-links %}
 
 {% callout %}
-이 문서는 Core Candy Machine으로 알려진 Candy Machine의 최신 버전을 다룹니다. 이는 [Core](/core) 자산 민팅을 지원합니다. Metaplex Token Metadata NFT를 민팅하려면 [대신 Candy Machine V3를 참조하십시오](https://developers.metaplex.com/candy-machine/).
+이 문서는 Core Candy Machine으로 알려진 Candy Machine의 최신 버전을 다룹니다. 이는 [Core](/ko/smart-contracts/core) 자산 민팅을 지원합니다. Metaplex Token Metadata NFT를 민팅하려면 [대신 Candy Machine V3를 참조하십시오](/ko/smart-contracts/candy-machine).
 {% /callout %}

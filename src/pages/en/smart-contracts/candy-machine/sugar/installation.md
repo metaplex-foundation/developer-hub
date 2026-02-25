@@ -24,7 +24,7 @@ The script will install the binary to your machine and add it to your `PATH`. Th
 
 If you are using Windows, follow the steps below:
 
-1. Download the Winstaller executable from [here](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe).
+1. Download the [Winstaller executable](https://github.com/metaplex-foundation/winstaller/releases/latest/download/winstaller.exe).
 
 2. Try to run the binary by double-clicking on it. If you get a pop-up message warning about an untrusted binary try clicking `More Info` and then `Run Anyway`. If you do not have this option, follow steps 3 - 6.
 

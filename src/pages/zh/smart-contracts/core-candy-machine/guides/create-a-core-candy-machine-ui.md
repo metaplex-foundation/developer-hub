@@ -12,7 +12,7 @@ description: 如何创建与 Solana 上 Candy Machine 铸造程序交互的 UI�
 
 ## 前提条件
 
-- 已创建的 Candy Machine。在[这里](https://developers.metaplex.com/core-candy-machine/create)找到有关如何创建的更多信息。
+- 已创建的 Candy Machine。在[Core Candy Machine创建指南](/zh/smart-contracts/core-candy-machine/create)中找到有关如何创建的更多信息。
 - 对 Web 开发和您选择的框架有基本了解。我们推荐 Next JS 以便与 umi 最容易兼容。
 
 ## 所需包

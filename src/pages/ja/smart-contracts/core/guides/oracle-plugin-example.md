@@ -35,10 +35,10 @@ howToTools:
 - **Listen**：ライフサイクルイベントが発生したときにプラグインに通知する「web3」webhook。これはデータの追跡やアクションの実行に特に便利です。
 - **Reject**：プラグインはライフサイクルイベントを拒否できます。
 - **Approve**：プラグインはライフサイクルイベントを承認できます。
-外部プラグインについて詳しく知りたい場合は、[こちら](/smart-contracts/core/external-plugins/overview)で詳細をお読みください。
+外部プラグインについて詳しく知りたい場合は、[外部プラグイン概要ページ](/smart-contracts/core/external-plugins/overview)で詳細をお読みください。
 ### Oracleプラグイン
 **Oracleプラグイン**は、外部プラグインの機能を活用して、外部authorityが更新できるデータを保存します。Coreアセットの外部にある**オンチェーンデータ**アカウントにアクセスすることで、アセットのauthorityが設定したライフサイクルイベントを動的に拒否できます。外部Oracleアカウントは、ライフサイクルイベントの認可動作を変更するためにいつでも更新でき、柔軟で動的な体験を提供します。
-Oracleプラグインについて詳しく知りたい場合は、[こちら](/smart-contracts/core/external-plugins/oracle)で詳細をお読みください。
+Oracleプラグインについて詳しく知りたい場合は、[Oracleプラグインページ](/smart-contracts/core/external-plugins/oracle)で詳細をお読みください。
 ## はじめに：アイデアの背後にあるプロトコルを理解する
 米国市場営業時間中のみ取引できるNFTコレクションを作成するには、時刻に基づいてオンチェーンデータを更新する信頼できる方法が必要です。プロトコル設計は以下のようになります：
 ### プログラム概要
@@ -57,7 +57,7 @@ Oracleプラグインについて詳しく知りたい場合は、[こちら](/s
 ## 実践：プログラムの構築
 プロトコルの背後にあるロジックが明確になったので、コードに飛び込んですべてをまとめましょう！
 ### Anchor概要
-このガイドでは、Anchorフレームワークを使用しますが、ネイティブプログラムを使用して実装することもできます。Anchorフレームワークの詳細は[こちら](https://www.anchor-lang.com/)をご覧ください。
+このガイドでは、Anchorフレームワークを使用しますが、ネイティブプログラムを使用して実装することもできます。Anchorフレームワークの詳細は[Anchorのウェブサイト](https://www.anchor-lang.com/)をご覧ください。
 簡単にするため、通常の分離ではなく、ヘルパー、状態、アカウント、命令がすべてlib.rsにあるモノファイルアプローチを使用します。
 *注意：Metaplex Foundation Githubで例をフォローして開くことができます：[Oracle Trading Example](https://github.com/metaplex-foundation/mpl-core-oracle-trading-example)*
 ### ヘルパーと定数
@@ -116,9 +116,9 @@ impl Space for Oracle {
 この構造体を作成する際の選択について説明しましょう：
 - adminフィールドがないのは、一度初期化されると、誰でも対話できるパーミッションレスになるからです。
 - validationフィールドは最初に配置され、NFT上でOracleプラグイン設定でカスタムオフセットを必要とせずに、discriminatorサイズ（8バイト）だけで検索するオフセットを設定するネイティブな方法を活用するためです。
-- Oracle PDAとOracle Vault PDAの両方のbumpを保存して、これらのアカウントを命令に含めるたびにbumpを導出することを避けます。これはSolana開発の標準であり、コンピュート使用量の節約に役立ちます。詳細は[こちら](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)をお読みください。
+- Oracle PDAとOracle Vault PDAの両方のbumpを保存して、これらのアカウントを命令に含めるたびにbumpを導出することを避けます。これはSolana開発の標準であり、コンピュート使用量の節約に役立ちます。詳細は[Solana StackExchange](https://solana.stackexchange.com/questions/12200/why-do-i-need-to-store-the-bump-inside-the-pda)をお読みください。
 スペース計算に関しては、AnchorのSpace実装を直接使用し、PDAを作成してレント免除のために十分なSOLを保存するときに参照する`INIT_SPACE`という定数を作成します。
-唯一珍しい点は、mpl-coreのOracleValidation構造体のサイズが5バイトである必要があることです。残りのスペース計算は標準です。スペース計算の詳細は[こちら](https://book.anchor-lang.com/anchor_references/space.html)をご覧ください。
+唯一珍しい点は、mpl-coreのOracleValidation構造体のサイズが5バイトである必要があることです。残りのスペース計算は標準です。スペース計算の詳細は[Anchor Book](https://book.anchor-lang.com/anchor_references/space.html)をご覧ください。
 ### アカウント
 Anchorのアカウントは、Solanaプログラムへの入力からデシリアライズできる検証済みアカウントの構造です。
 プログラムの両方の命令で使用されるアカウント構造は非常に似ています。ただし、一方ではOracleアカウントを初期化し、もう一方では参照するだけです。
@@ -277,7 +277,7 @@ pub fn crank_oracle(ctx: Context<CrankOracle>) -> Result<()> {
 命令の2番目の部分は、is_within_15_minutes_of_market_open_or_closeがtrueで、reward vaultにcrankerに支払うのに十分なlamportsがあるかどうかをチェックします。両方の条件が満たされた場合、crankerに報酬を転送します。そうでなければ何もしません。
 ### NFTの作成
 この旅の最後の部分は、コレクションを作成し、そのコレクションに含めるすべてのアセットがカスタムOracleルールに従うようにOracleアカウントを指すようにすることです！
-Umiを使用するための環境をセットアップすることから始めましょう。（UmiはSolanaプログラム用のJavaScriptクライアントを構築および使用するためのモジュラーフレームワークです。詳細は[こちら](/dev-tools/umi/getting-started)をご覧ください）
+Umiを使用するための環境をセットアップすることから始めましょう。（UmiはSolanaプログラム用のJavaScriptクライアントを構築および使用するためのモジュラーフレームワークです。詳細は[Umi入門ガイド](/dev-tools/umi/getting-started)をご覧ください）
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'

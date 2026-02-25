@@ -2,7 +2,7 @@
 title: SolanaでNFTを作成する方法
 metaTitle: SolanaでNFTを作成する方法 | Token Metadata ガイド
 description: MetaplexでSolanaブロックチェーンでNFTを作成する方法を学びましょう。
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '06-16-2024'
 updated: '06-18-2024'
 ---

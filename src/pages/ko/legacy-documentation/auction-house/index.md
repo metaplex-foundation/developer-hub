@@ -30,7 +30,7 @@ Auction House 프로그램의 가장 중요한 측면은 사용자에게 자산�
 
 ## Auction House 생성
 
-Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하여 새 마켓플레이스를 만드는 데 사용할 수 있습니다. Auction House 계정은 주어진 공개 키에서 파생되고 선택적으로 통화로 사용할 SPL 토큰에서 파생되는 [Program Derived Address (PDA)](../../understanding-programs#program-derived-addresses-pda)입니다(아래에서 자세히 설명).
+Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하여 새 마켓플레이스를 만드는 데 사용할 수 있습니다. Auction House 계정은 주어진 공개 키에서 파생되고 선택적으로 통화로 사용할 SPL 토큰에서 파생되는 [Program Derived Address (PDA)](/ko/solana/understanding-programs#program-derived-addresses-pda)입니다(아래에서 자세히 설명).
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
@@ -105,7 +105,7 @@ Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하
 
 지금까지 Auction House 계정을 사용하여 자산을 교환하는 것에 대해 이야기했지만, 어떤 유형의 자산을 그런 방식으로 교환할 수 있는지에 대해서는 자세히 다루지 않았습니다. Auction House에 목록에 게시할 수 있는 가장 인기 있는 자산은 [Non-Fungible Tokens (NFT)](/ko/smart-contracts/token-metadata/token-standard#the-non-fungible-standard)입니다.
 
-그러나 이것이 Auction House 프로그램의 혜택을 받을 수 있는 유일한 자산은 아닙니다. 사실, 자산은 민트 계정에 메타데이터 계정이 첨부되어 있는 한 모든 SPL 토큰이 될 수 있습니다. SPL 토큰 및 메타데이터 계정에 대해 자세히 알고 싶다면 [토큰 메타데이터 프로그램의 개요에서 자세히 읽을 수 있습니다](/token-metadata).
+그러나 이것이 Auction House 프로그램의 혜택을 받을 수 있는 유일한 자산은 아닙니다. 사실, 자산은 민트 계정에 메타데이터 계정이 첨부되어 있는 한 모든 SPL 토큰이 될 수 있습니다. SPL 토큰 및 메타데이터 계정에 대해 자세히 알고 싶다면 [토큰 메타데이터 프로그램의 개요에서 자세히 읽을 수 있습니다](/ko/smart-contracts/token-metadata).
 
 ## 사용자 정의 SPL 토큰을 사용하여 자산 구매
 

@@ -39,7 +39,7 @@ pub struct Collection {
 However, given a collection mint address, finding all NFTs that belong to that particular collection is significantly more difficult when reading directly from chain. There is one superior method using [DAS](/dev-tools/das-api) and two basic approaches to get the data from chain directly.
 
 ## DAS API
-Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/rpc-providers#metaplex-das-api).
+Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/solana/rpcs-and-das#metaplex-das-api).
 
 {% dialect-switcher title="getAssetByGroup Example" %}
 {% dialect title="JavaScript" id="js" %}
@@ -123,4 +123,4 @@ The algorithm for doing this is shown below:
     - Deserialize the account data into a Metadata struct/object, and find the mint address from the `mint` field. Add the `mint` address to a Set.
     - This final Set is your list of mint addresses for all items in the collection.
 
-Example Rust and TypeScript code for transaction crawling to get collection members can be found [here](https://github.com/metaplex-foundation/get-collection).
+Example Rust and TypeScript code for transaction crawling to get collection members can be found [in the get-collection repository](https://github.com/metaplex-foundation/get-collection).

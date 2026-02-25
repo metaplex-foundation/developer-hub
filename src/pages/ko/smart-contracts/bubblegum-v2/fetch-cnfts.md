@@ -8,7 +8,7 @@ description: Bubblegum에서 압축된 NFT를 가져오는 방법을 알아보�
 
 따라서 압축된 NFT의 검색을 용이하게 하기 위해 특별한 인덱서가 생성되었습니다. 이 인덱스된 데이터는 **Metaplex DAS API**라고 하는 Solana RPC 메서드의 확장을 통해 사용할 수 있습니다. 실제로 DAS API를 통해 모든 **디지털 자산**을 가져올 수 있습니다. 이는 압축된 NFT, 일반 NFT, 또는 심지어 대체 가능한 자산일 수 있습니다.
 
-모든 RPC가 DAS API를 지원하지 않기 때문에 압축된 NFT를 작업할 계획이라면 RPC 제공업체를 신중하게 선택해야 합니다. Metaplex DAS API를 지원하는 모든 RPC 목록을 [전용 페이지](/ko/rpc-providers)에서 유지 관리하고 있습니다.
+모든 RPC가 DAS API를 지원하지 않기 때문에 압축된 NFT를 작업할 계획이라면 RPC 제공업체를 신중하게 선택해야 합니다. Metaplex DAS API를 지원하는 모든 RPC 목록을 [전용 페이지](/ko/solana/rpcs-and-das)에서 유지 관리하고 있습니다.
 
 이 페이지에서는 Metaplex DAS API를 사용하여 압축된 NFT를 가져오는 방법을 알아보겠습니다.
 

@@ -298,6 +298,6 @@ pub async fn create_asset_with_plugin() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 관련 정보
-- [Candy Machine에서 민팅](/core-candy-machine/mint)
+- [Candy Machine에서 민팅](/ko/smart-contracts/core-candy-machine/mint)
 - [Master Edition 플러그인](/smart-contracts/core/plugins/master-edition)
 - [Edition 플러그인](/smart-contracts/core/plugins/edition)

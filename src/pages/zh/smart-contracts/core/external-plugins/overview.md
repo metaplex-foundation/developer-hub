@@ -73,10 +73,10 @@ faqs:
 ## 插件
 ### Oracle插件
 Oracle插件是为web 2.0-3.0工作流程中的简单性而设计的。Oracle插件可以访问MPL Core Asset外部的链上Oracle账户，这些账户可以拒绝authority设置的生命周期事件的使用。外部Oracle账户也可以随时更新以更改生命周期事件的授权行为，提供动态体验。
-您可以在[这里](/smart-contracts/core/external-plugins/oracle)阅读更多关于Oracle插件的信息。
+您可以在[Oracle插件页面](/smart-contracts/core/external-plugins/oracle)阅读更多关于Oracle插件的信息。
 ### AppData插件
 AppData插件在Asset上提供安全的分区数据存储。每个AppData插件都有一个Data Authority，专门控制对该数据部分的写入。适用于存储用户数据、游戏状态或应用程序特定元数据的第三方应用。
-您可以在[这里](/smart-contracts/core/external-plugins/app-data)阅读更多关于AppData插件的信息。
+您可以在[AppData插件页面](/smart-contracts/core/external-plugins/app-data)阅读更多关于AppData插件的信息。
 ## 外部插件 vs 内置插件
 | 功能 | 外部插件 | 内置插件 |
 |---------|------------------|------------------|

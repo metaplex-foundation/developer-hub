@@ -19,6 +19,8 @@ class MyDocument extends Document {
       locale = 'ja'
     } else if (path.startsWith('/ko')) {
       locale = 'ko'
+    } else if (path.startsWith('/zh')) {
+      locale = 'zh'
     }
 
     return { ...initialProps, locale }

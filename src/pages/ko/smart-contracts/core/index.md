@@ -83,7 +83,7 @@ Metaplex Core는 Solana에서 새 프로젝트에 권장되는 NFT 표준입니�
   - [Attributes](/ko/smart-contracts/core/plugins/attribute) - 온체인 키/값 데이터 (DAS에서 자동 인덱싱)
   - [Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) - 다른 사람이 전송 가능
   - 더 많은 내용은 [플러그인 섹션](/ko/smart-contracts/core/plugins)을 참조하세요
-- **DAS 인덱싱**: [DAS를 지원하는](/rpc-providers) 모든 주요 RPC 제공자가 이미 Core 자산을 인덱싱합니다.
+- **DAS 인덱싱**: [DAS를 지원하는](/solana/rpcs-and-das) 모든 주요 RPC 제공자가 이미 Core 자산을 인덱싱합니다.
 ## 핵심 개념
 ### Asset
 **Asset**은 NFT를 나타내는 단일 온체인 계정입니다. Token Metadata(3개 이상의 계정 사용)와 달리, Core Asset은 소유권, 메타데이터 URI, 플러그인 데이터를 하나의 계정에 포함합니다.
@@ -127,7 +127,7 @@ Core Asset과 Token Metadata NFT는 별도의 표준입니다. 자동 마이그�
 ### Core Asset을 민팅하는 데 비용이 얼마나 드나요?
 기본 자산당 약 0.0029 SOL이며, Token Metadata의 약 0.022 SOL과 비교됩니다. 이로써 Core는 민팅이 약 80% 저렴합니다. 자세한 내용은 [Token Metadata와의 차이점](/ko/smart-contracts/core/tm-differences)을 참조하세요.
 ### 어떤 RPC 제공자가 Core를 지원하나요?
-DAS(Digital Asset Standard)를 지원하는 모든 주요 RPC 제공자가 Core 자산을 인덱싱합니다. 현재 목록은 [RPC 제공자](/rpc-providers)를 참조하세요.
+DAS(Digital Asset Standard)를 지원하는 모든 주요 RPC 제공자가 Core 자산을 인덱싱합니다. 현재 목록은 [RPC 제공자](/solana/rpcs-and-das)를 참조하세요.
 ### 게임 자산에 Core를 사용할 수 있나요?
 예. Core의 플러그인 시스템은 온체인 스탯용 Attributes, 아이템 잠금용 Freeze Delegate, 마켓플레이스 통합용 Transfer Delegate로 게임에 이상적입니다.
 ## 용어집

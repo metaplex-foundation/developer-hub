@@ -1,16 +1,22 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | 公平代币分发 | Metaplex
-description: 用户在指定时间窗口内存入资金，按比例接收代币的代币分发方式。具有防抢跑设计的有机价格发现机制。
+metaTitle: Genesis Launch Pool | 公平发射与 Solana 代币分发 | Metaplex
+description: Solana 上的公平发射代币分发。用户存入 SOL 并按比例获得 SPL 代币——链上众筹替代方案，具有有机价格发现机制。
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - launch pool
   - token distribution
   - fair launch
+  - fair launch crypto
   - proportional distribution
   - deposit window
   - price discovery
+  - token launchpad
+  - crowdsale
+  - token sale alternative
+  - SPL token launch
+  - on-chain token launch
 about:
   - Launch pools
   - Price discovery
@@ -41,7 +47,7 @@ faqs:
     a: Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预先设定固定价格，按先到先得的方式分配，直到达到上限。
 ---
 
-**Launch Pool** 为代币发行提供有机价格发现机制。用户在窗口期内存款，并根据其在总存款中的份额按比例获得代币——没有抢跑，没有抢先交易，每个人都能获得公平分配。 {% .lead %}
+**Launch Pool** 为 Solana 上的公平代币发射提供有机价格发现机制。用户在窗口期内存入 SOL，并根据其在总存款中的份额按比例获得 SPL 代币。没有抢跑，没有抢先交易，每个人都能获得公平分配。 {% .lead %}
 
 {% callout title="您将学到什么" %}
 本指南涵盖：
@@ -53,7 +59,7 @@ faqs:
 
 ## 概要
 
-Launch Pool 在定义的窗口期内接受存款，然后按比例分配代币。最终代币价格由总存款除以代币分配量确定。
+Launch Pool 是一种众筹风格的代币发行机制，在定义的窗口期内接受存款，然后按比例分配代币。最终代币价格由总存款除以代币分配量确定——为您的代币生成事件 (TGE) 实现透明的链上价格发现。
 
 - 用户在存款窗口期间存入 SOL（收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 费用）
 - 存款期间允许提款（收取 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用）
@@ -459,5 +465,6 @@ Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预
 ## 后续步骤
 
 - [Presale](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
-- [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 基于出价的分配
-- [Aggregation API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行数据
+- [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 基于出价的代币发售
+- [发行代币](/zh/tokens/launch-token) - 端到端代币发行指南
+- [Aggregation API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询代币销售数据

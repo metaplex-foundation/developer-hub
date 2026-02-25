@@ -18,7 +18,7 @@ Bubblegum is the Metaplex Protocol program for creating and interacting with com
 
 {% quick-links %}
 
-{% quick-link title="Getting Started" icon="InboxArrowDown" href="/bubblegum/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
+{% quick-link title="Getting Started" icon="InboxArrowDown" href="/smart-contracts/bubblegum/sdk" description="Find the language or library of your choice and get started with compressed NFTs." /%}
 
 {% quick-link title="API reference" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="Looking for something specific? Have a peak at our API References and find your answer." /%}
 
@@ -127,7 +127,7 @@ When we mint a new compressed NFT, its data is hashed and added as a new Leaf in
 
 Crawling through millions of transactions every time just to fetch the data of one NFT is admittedly not the best user experience. Therefore, compressed NFTs rely on some RPCs to index that information in real time to abstract this away from the end-user. We call the resulting RPC API, which enables fetching compressed NFTs, **the Metaplex DAS API**.
 
-Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/rpc-providers) page to select an appropriate RPC when using compressed NFTs in your application.
+Note that not all RPCs support the DAS API. As such, you may be interested in the ["Metaplex DAS API RPCs"](/solana/rpcs-and-das) page to select an appropriate RPC when using compressed NFTs in your application.
 
 We talk about this in more detail in our advanced ["Storing and indexing NFT data"](/smart-contracts/bubblegum-v2/stored-nft-data) guide.
 

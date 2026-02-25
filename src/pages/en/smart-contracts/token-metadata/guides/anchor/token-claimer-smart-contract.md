@@ -2,7 +2,7 @@
 title: How to Create a Token Claimer Smart Contract leveraging Merkle Tree
 metaTitle: How to Create a Token Claimer Smart Contract | Token Metadata Guides
 description: Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '01-13-2025'
 updated: '01-13-2025'
 ---

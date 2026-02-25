@@ -29,15 +29,33 @@ const devToolsRedirects = [
 // Standalone page redirects to new locations
 const standaloneRedirects = {
   // Legacy page redirects
-  '/community-guides': '/guides',
+  '/community-guides': '/solana',
   '/contact': '/',
   '/developer-tools': '/dev-tools',
   '/programs-and-tools': '/smart-contracts',
+  // Legacy pages moved under /solana
+  '/rpc-providers': '/solana/rpcs-and-das',
+  '/understanding-programs': '/solana/understanding-programs',
+  '/ja/rpc-providers': '/ja/solana/rpcs-and-das',
+  '/ko/rpc-providers': '/ko/solana/rpcs-and-das',
+  '/zh/rpc-providers': '/zh/solana/rpcs-and-das',
+  '/ja/understanding-programs': '/ja/solana/understanding-programs',
+  '/ko/understanding-programs': '/ko/solana/understanding-programs',
+  '/zh/understanding-programs': '/zh/solana/understanding-programs',
   // Genesis priced-sale renamed to presale
   '/smart-contracts/genesis/priced-sale': '/smart-contracts/genesis/presale',
   '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',
   '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
   '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
+  // Genesis aggregation/api pages consolidated into integration-apis
+  '/smart-contracts/genesis/aggregation': '/smart-contracts/genesis/integration-apis',
+  '/smart-contracts/genesis/api': '/smart-contracts/genesis/integration-apis',
+  '/ja/smart-contracts/genesis/aggregation': '/ja/smart-contracts/genesis/integration-apis',
+  '/ja/smart-contracts/genesis/api': '/ja/smart-contracts/genesis/integration-apis',
+  '/ko/smart-contracts/genesis/aggregation': '/ko/smart-contracts/genesis/integration-apis',
+  '/ko/smart-contracts/genesis/api': '/ko/smart-contracts/genesis/integration-apis',
+  '/zh/smart-contracts/genesis/aggregation': '/zh/smart-contracts/genesis/integration-apis',
+  '/zh/smart-contracts/genesis/api': '/zh/smart-contracts/genesis/integration-apis',
 }
 
 const redirectRules = {
@@ -63,17 +81,29 @@ const redirectRules = {
   },
   '/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/guides/javascript/how-to-create-a-solana-token',
+      '/solana/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Japanese guide redirects
   '/ja/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/ja/guides/javascript/how-to-create-a-solana-token',
+      '/ja/solana/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/ja/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/ja/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Korean guide redirects
   '/ko/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/ko/guides/javascript/how-to-create-a-solana-token',
+      '/ko/solana/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/ko/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/ko/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Japanese smart-contracts redirects
   '/ja/smart-contracts/bubblegum': {
@@ -106,7 +136,11 @@ const redirectRules = {
   // Chinese guide redirects
   '/zh/guides': {
     '/javascript/how-to-create-an-spl-token-on-solana':
-      '/zh/guides/javascript/how-to-create-a-solana-token',
+      '/zh/solana/javascript/how-to-create-a-solana-token',
+    '/javascript/how-to-add-metadata-to-spl-tokens':
+      '/zh/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens',
+    '/general/create-deterministic-metadata-with-turbo':
+      '/zh/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo',
   },
   // Chinese smart-contracts redirects
   '/zh/smart-contracts/bubblegum': {
@@ -257,6 +291,12 @@ export function middleware(request) {
     }
   }
 
+  // Redirect /guides/* to /solana/* (path rename)
+  if (pathname === '/guides' || pathname.startsWith('/guides/')) {
+    const newPath = pathname.replace('/guides', '/solana')
+    return NextResponse.redirect(new URL(newPath, request.url), 308)
+  }
+
   // Handle Japanese, Korean, and Chinese path migration redirects
   // Redirect /ja/core/* to /ja/smart-contracts/core/*, /ko/umi/* to /ko/dev-tools/umi/*, etc.
   for (const lang of ['ja', 'ko', 'zh']) {
@@ -274,6 +314,11 @@ export function middleware(request) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
           return NextResponse.redirect(new URL(newPath, request.url), 308)
         }
+      }
+      // Redirect /lang/guides/* to /lang/solana/* (path rename)
+      if (pathname === `/${lang}/guides` || pathname.startsWith(`/${lang}/guides/`)) {
+        const newPath = pathname.replace(`/${lang}/guides`, `/${lang}/solana`)
+        return NextResponse.redirect(new URL(newPath, request.url), 308)
       }
     }
   }

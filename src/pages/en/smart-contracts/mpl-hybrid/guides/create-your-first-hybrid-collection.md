@@ -2,7 +2,7 @@
 title: Create your First Hybrid Collection
 metaTitle: Create your First Hybrid Collection | Hybrid Guides
 description: Learn how to create an hybrid collection, fully end-to-end!.
-# remember to update dates also in /components/guides/index.js
+# remember to update dates also in /components/products/guides/index.js
 created: '09-17-2024'
 updated: '09-17-2024'
 ---
@@ -76,7 +76,7 @@ Manifest allows multiple transactions to be linked under a single base transacti
 - ...
 - https://arweave.net/manifestID/9999.json
 
-If you're unfamiliar with creating deterministic URIs, you can follow [this guide](/guides/general/create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
+If you're unfamiliar with creating deterministic URIs, you can follow [this guide](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo) for a detailed walkthrough. Additionally, you can find instructions on creating a [collection](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript) and the [assets](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript) required for the Hybrid program to function.
 
 **Note**: Currently, the MPL-Hybrid program randomly picks a number between the min and max URI index provided and does not check to see if the URI is already used. As such, swapping suffers from the [Birthday Paradox](https://betterexplained.com/articles/understanding-the-birthday-paradox/). In order for projects to benefit from sufficient swap randomization, we recommend preparing and uploading a minimum of 250k asset metadata that can be randomly picked from. The more available potential assets the better!
 
@@ -84,7 +84,7 @@ If you're unfamiliar with creating deterministic URIs, you can follow [this guid
 
 The MPL-Hybrid escrow requires an associated fungible token that can be used to redeem or pay for the release of an NFT. This can be an existing token that's already minted and circulating, or entirely a new one!
 
-If you’re unfamiliar with creating a token, you can follow [this guide](/guides/javascript/how-to-create-a-solana-token) to learn how to mint your own fungible token on Solana.
+If you’re unfamiliar with creating a token, you can follow [this guide](/solana/javascript/how-to-create-a-solana-token) to learn how to mint your own fungible token on Solana.
 
 ## Creating the Escrow
 
@@ -152,7 +152,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 {% /totem %}
 
-**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [this](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
+**Note**: The `walletAdapter` section provides only the code needed to connect it to Umi, assuming you've already installed and set up the `walletAdapter`. For a comprehensive guide, refer to [the Wallet Adapter guide](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)
 
 ### Setup the Parameters
 

@@ -34,10 +34,10 @@ Each External Adapter has the ability to assign lifecycle checks to Lifecycle Ev
 - **Listen**: A “web3” webhook that alerts the plugin when a lifecycle event occurs. This is particularly useful for tracking data or performing actions.
 - **Reject**: The plugin can reject a lifecycle event.
 - **Approve**: The plugin can approve a lifecycle event.
-If you want to learn more about External Plugins, read more about them [here](/smart-contracts/core/external-plugins/overview).
+If you want to learn more about External Plugins, read more about them [on the External Plugins overview](/smart-contracts/core/external-plugins/overview).
 ### Appdata Plugin
 The **AppData Plugin** allows asset/collection authorities to save arbitrary data that can be written and changed by the `data_authority`, an external source of trust and can be assigned to anyone the asset/collection authority decides to. With the AppData Plugin, collection/asset authorities can delegate the task of adding data to their assets to trusted third parties.
-If you’re not familiar with the new Appdata Plugin, read more about it [here](/smart-contracts/core/external-plugins/app-data).
+If you’re not familiar with the new Appdata Plugin, read more about it [on the AppData Plugin page](/smart-contracts/core/external-plugins/app-data).
 ## General Overview: Program Design
 In this example, we will develop a ticketing solution that comes with four basic operations:
 - **Setting up the Manager**: Establish the authority responsible for the creation and issuance of tickets.
@@ -50,7 +50,7 @@ Until the introduction of the **AppData plugin** and the **Core standard**, mana
 This advancement is a game changer for regulated use cases, such as ticketing systems since it allows venue authorities to **add data to the asset without granting them complete control over attribute changes and other data aspects**.
 This setup reduces the risk of fraudulent activities and shifts the responsibility for errors away from the venue so the issuing company retains immutable records of the assets, while specific data updates, like marking tickets as used, are securely managed through the `AppData plugin`.
 ### Using Digital Assets to store data instead of PDAs
-Instead of relying on generic external Program Derived Addresses ([PDAs](/guides/understanding-pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset.
+Instead of relying on generic external Program Derived Addresses ([PDAs](/solana/understanding-pdas)) for event-related data, **you can create the event itself as a collection asset**. This approach allow all tickets for the event to be included in the "event" collection, making general event data easily accessible and easily link event details with the ticket assets itself. You can then apply the same method for individual ticket-related data, including ticket number, hall, section, row, seat, and price directly on the Asset.
 Using Core accounts like `Collection` or `Asset` accounts to save relevant data when dealing with digital assets, rather than relying on external PDAs, let ticket purchasers view all relevant event information directly from their wallet without needing to deserialize data. In addition, storing data directly on the asset itself allows you to leverage the Digital Asset Standard (DAS) to fetch and display it on your website with a single instruction, as shown below:
 ```typescript
 const ticketData = await fetchAsset(umi, ticket);

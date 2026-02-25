@@ -6,7 +6,7 @@ description: 了解更多关于Bubblegum上NFT数据如何存储的信息。
 
 如[概述](/zh/smart-contracts/bubblegum#read-api)中所述，每当创建或修改压缩NFT（cNFT）时，相应的交易会记录在分类账上，但cNFT状态数据不存储在账户空间中。这是cNFT大幅节省成本的原因，但为了方便和可用性，cNFT状态数据由RPC提供商索引，并可通过**Metaplex DAS API**获取。
 
-Metaplex创建了DAS API的[参考实现](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)，一些RPC提供商使用部分或全部此代码用于其特定实现，而其他RPC提供商则编写了自己的实现。请参阅["Metaplex DAS API RPC"](/zh/rpc-providers)页面获取支持Metaplex DAS API的其他RPC提供商列表。
+Metaplex创建了DAS API的[参考实现](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)，一些RPC提供商使用部分或全部此代码用于其特定实现，而其他RPC提供商则编写了自己的实现。请参阅["Metaplex DAS API RPC"](/zh/solana/rpcs-and-das)页面获取支持Metaplex DAS API的其他RPC提供商列表。
 
 Metaplex DAS API参考实现包括以下关键项：
 * Solana无投票验证节点 - 此验证节点配置为仅对共识下的验证节点分类账和账户数据有安全访问权限。

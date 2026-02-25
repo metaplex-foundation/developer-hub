@@ -15,29 +15,29 @@ export const genesis = {
       deposit: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to deposits into Launch Pools.',
+        notes: null,
       },
       withdraw: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to withdrawals from Launch Pools during the deposit period.',
+        notes: null,
       },
       graduation: {
         solana: '5%',
         payer: 'Launch Pool',
-        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+        notes: null,
       },
     },
     presale: {
       deposit: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to deposits into Presales.',
+        notes: null,
       },
       graduation: {
         solana: '5%',
         payer: 'Presale',
-        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+        notes: null,
       },
     },
   },
@@ -66,6 +66,10 @@ export const genesis = {
               title: 'JavaScript SDK',
               href: '/smart-contracts/genesis/sdk/javascript',
             },
+            {
+              title: 'API Client',
+              href: '/smart-contracts/genesis/sdk/api-client',
+            },
           ],
         },
         {
@@ -86,11 +90,51 @@ export const genesis = {
           ],
         },
         {
-          title: 'Integrations',
+          title: 'Integration APIs',
           links: [
             {
-              title: 'Aggregation API',
-              href: '/smart-contracts/genesis/aggregation',
+              title: 'Overview',
+              href: '/smart-contracts/genesis/integration-apis',
+            },
+            {
+              title: 'Get Launch',
+              href: '/smart-contracts/genesis/integration-apis/get-launch',
+              method: 'get',
+            },
+            {
+              title: 'Get Launches by Token',
+              href: '/smart-contracts/genesis/integration-apis/get-launches-by-token',
+              method: 'get',
+            },
+            {
+              title: 'Get Listings',
+              href: '/smart-contracts/genesis/integration-apis/get-listings',
+              method: 'get',
+            },
+            {
+              title: 'Get Spotlight',
+              href: '/smart-contracts/genesis/integration-apis/get-spotlight',
+              method: 'get',
+            },
+            {
+              title: 'Create Launch',
+              href: '/smart-contracts/genesis/integration-apis/create-launch',
+              method: 'post',
+            },
+            {
+              title: 'Register Launch',
+              href: '/smart-contracts/genesis/integration-apis/register',
+              method: 'post',
+            },
+            {
+              title: 'Fetch Bucket State',
+              href: '/smart-contracts/genesis/integration-apis/fetch-bucket-state',
+              method: 'chain',
+            },
+            {
+              title: 'Fetch Deposit State',
+              href: '/smart-contracts/genesis/integration-apis/fetch-deposit-state',
+              method: 'chain',
             },
           ],
         },
@@ -126,6 +170,7 @@ export const genesis = {
         'Overview': 'Overview',
         'Getting Started': 'Getting Started',
         'JavaScript SDK': 'JavaScript SDK',
+        'API Client': 'API Client',
         'Launch Pool': 'Launch Pool',
         'Presale': 'Presale',
         'Uniform Price Auction': 'Uniform Price Auction',
@@ -147,6 +192,7 @@ export const genesis = {
         'Overview': '概要',
         'Getting Started': 'はじめに',
         'JavaScript SDK': 'JavaScript SDK',
+        'API Client': 'APIクライアント',
         'Launch Pool': 'ローンチプール',
         'Presale': 'プレセール',
         'Uniform Price Auction': 'ユニフォームプライスオークション',
@@ -168,6 +214,7 @@ export const genesis = {
         'Overview': '개요',
         'Getting Started': '시작하기',
         'JavaScript SDK': 'JavaScript SDK',
+        'API Client': 'API 클라이언트',
         'Launch Pool': '런치 풀',
         'Presale': '프리세일',
         'Uniform Price Auction': '균일가 경매',
@@ -189,6 +236,7 @@ export const genesis = {
         'Overview': '概述',
         'Getting Started': '快速入门',
         'JavaScript SDK': 'JavaScript SDK',
+        'API Client': 'API客户端',
         'Launch Pool': '发行池',
         'Presale': '预售',
         'Uniform Price Auction': '统一价格拍卖',
