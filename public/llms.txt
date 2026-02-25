@@ -257,42 +257,42 @@
 ## Bubblegum (Compressed NFTs)
 
 - [Overview](https://developers.metaplex.com/smart-contracts/bubblegum): Provides a high-level overview of compressed NFTs.
-- [Overview](https://developers.metaplex.com/smart-contracts/bubblegum-v2): Provides a high-level overview of Bubblegum V2 and compressed NFTs.
+- [Overview](https://developers.metaplex.com/smart-contracts/bubblegum-v2): Provides a high-level overview of Bubblegum V2 and compressed NFTs (cNFTs) on Solana. Learn about merkle trees, the DAS API, and new features like freeze, soulbound, and MPL-Core collections.
 - [Burning Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/burn-cnfts): Learn how to burn compressed NFTs on Bubblegum.
-- [Burning Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/burn-cnfts): Learn how to burn compressed NFTs using Bubblegum V2.
-- [Concurrent Merkle Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/concurrent-merkle-trees): Learn more about Concurrent Merkle Trees and how they are used on Bubblegum.
+- [Burning Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/burn-cnfts): Learn how to burn compressed NFTs using Bubblegum V2. Covers burning by owner, delegate, and permanent burn delegate.
+- [Concurrent Merkle Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/concurrent-merkle-trees): Learn how concurrent merkle trees work in Bubblegum V2. Covers leaf paths, proofs, validation, concurrency via change logs, and the SPL Account Compression program.
 - [Create 1 Million NFTs on Solana](https://developers.metaplex.com/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana): How to Create a Compressed NFT Collection of 1 Million cNFTs on Solana using the Metaplex Bubblegum program.
 - [Creating Bubblegum Trees](https://developers.metaplex.com/smart-contracts/bubblegum/create-trees): Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
-- [Creating Bubblegum Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/create-trees): Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2.
+- [Creating Bubblegum Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/create-trees): Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2. Covers tree capacity, canopy depth, max depth, and max buffer size configuration.
 - [Decompressing Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/decompress-cnfts): Learn how to redeem and decompress compressed NFTs on Bubblegum.
 - [Delegating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/delegate-cnfts): Learn how to delegate compressed NFTs on Bubblegum.
-- [Delegating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/delegate-cnfts): Learn how to delegate compressed NFTs using Bubblegum V2.
+- [Delegating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/delegate-cnfts): Learn how to delegate and revoke delegate authority on compressed NFTs using Bubblegum V2. Covers leaf delegate approval and revocation.
 - [Delegating Trees](https://developers.metaplex.com/smart-contracts/bubblegum/delegate-trees): Learn how to delegate Merkle Trees on Bubblegum.
-- [Delegating Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/delegate-trees): Learn how to delegate Merkle Trees using Bubblegum V2.
-- [FAQ](https://developers.metaplex.com/smart-contracts/bubblegum-v2/faq): Frequently asked questions about Bubblegum.
-- [Fetching Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/fetch-cnfts): Learn how to fetch compressed NFTs on Bubblegum.
-- [Freezing and Thawing Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/freeze-cnfts): Learn how to freeze and thaw Compressed NFTs on Bubblegum.
+- [Delegating Trees](https://developers.metaplex.com/smart-contracts/bubblegum-v2/delegate-trees): Learn how to delegate and revoke tree authority on Bubblegum V2 Merkle Trees. Allows a delegate to mint cNFTs on behalf of the tree creator.
+- [FAQ](https://developers.metaplex.com/smart-contracts/bubblegum-v2/faq): Frequently asked questions about Bubblegum V2 compressed NFTs. Covers common issues, costs, transaction size errors, and troubleshooting.
+- [Fetching Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/fetch-cnfts): Learn how to fetch compressed NFTs using the Metaplex DAS API. Covers getAsset, getAssetProof, getAssetsByOwner, and getAssetsByGroup methods.
+- [Freezing and Thawing Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/freeze-cnfts): Learn how to freeze, thaw, and make soulbound compressed NFTs on Bubblegum V2. Covers leaf delegates, permanent freeze delegates, and non-transferable cNFTs.
 - [Guides](https://developers.metaplex.com/smart-contracts/bubblegum/guides): A list of guides and tutorials for the Metaplex Bubblegum compressed NFTs program on the Solana blockchain.
-- [Hashing NFT Data](https://developers.metaplex.com/smart-contracts/bubblegum-v2/hashed-nft-data): Learn more about how NFT data is hashed on Bubblegum.
+- [Hashing NFT Data](https://developers.metaplex.com/smart-contracts/bubblegum-v2/hashed-nft-data): Learn how compressed NFT data is hashed into merkle tree leaves in Bubblegum V2. Covers MetadataArgsV2, data hash, creator hash, collection hash, and LeafSchemaV2.
 - [How to Interact with cNFTs on Other SVMs](https://developers.metaplex.com/smart-contracts/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms): How to Interact with compressed NFTs, using the Metaplex Bubblegum program, on Solana Virtual Machine (SVM) environments other than Solana devnet and mainnet-beta.
-- [Merkle Tree Canopy](https://developers.metaplex.com/smart-contracts/bubblegum-v2/merkle-tree-canopy): Learn more about the Merkle Tree Canopy on Bubblegum.
+- [JavaScript SDK](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk/javascript): Complete reference for the Metaplex Bubblegum V2 JavaScript SDK. Covers Umi setup, creating trees, minting, transferring, burning, updating, delegating, freezing, and fetching compressed NFTs.
+- [Managing Collections](https://developers.metaplex.com/smart-contracts/bubblegum-v2/collections): Learn how to set, change, and remove MPL-Core collections on compressed NFTs using Bubblegum V2. Covers the setCollectionV2 instruction.
+- [Merkle Tree Canopy](https://developers.metaplex.com/smart-contracts/bubblegum-v2/merkle-tree-canopy): Learn how the merkle tree canopy reduces proof sizes and enables composability for compressed NFTs in Bubblegum V2. Covers canopy depth, cost tradeoffs, and transaction size.
 - [Minting Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum.
-- [Minting Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum V2.
+- [Minting Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum V2. Covers minting with and without collections, MPL-Core collection setup, and retrieving the asset ID from mint transactions.
 - [MPL-Bubblegum Javascript SDK](https://developers.metaplex.com/smart-contracts/bubblegum/sdk/javascript): Learn how to set up your project to run the MPL-Bubblegum Javascript SDK.
 - [MPL-Bubblegum Rust SDK](https://developers.metaplex.com/smart-contracts/bubblegum/sdk/rust): Learn how to set up your project to run the MPL-Bubblegum Rust SDK.
 - [MPL-Bubblegum SDKs](https://developers.metaplex.com/smart-contracts/bubblegum/sdk): Learn to get started with the compressed NFT standard (cNFT) from Metaplex using the MPL-Bubblegum SDKs.
-- [MPL-Bubblegum SDKs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk): Get started with compressed NFTs using the MPL-Bubblegum V2 SDKs.
-- [MPL-Bubblegum V2 JavaScript SDK](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk/javascript): Learn how to set up your project to run the MPL-Bubblegum V2 JavaScript SDK.
-- [MPL-Bubblegum V2 Rust SDK](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk/rust): Learn how to set up your project to run the MPL-Bubblegum V2 Rust SDK.
-- [Storing and Indexing NFT Data](https://developers.metaplex.com/smart-contracts/bubblegum-v2/stored-nft-data): Learn more about how NFT data is stored on Bubblegum.
+- [MPL-Bubblegum SDKs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk): Get started with compressed NFTs using the MPL-Bubblegum V2 SDKs. Available in JavaScript (Umi) and Rust for both client-side and on-chain development.
+- [MPL-Bubblegum V2 Rust SDK](https://developers.metaplex.com/smart-contracts/bubblegum-v2/sdk/rust): Learn how to install and use the MPL-Bubblegum V2 Rust SDK. Covers local scripts with instruction builders and CPI integration for on-chain programs.
+- [Storing and Indexing NFT Data](https://developers.metaplex.com/smart-contracts/bubblegum-v2/stored-nft-data): Learn how compressed NFT data is stored in transactions and indexed by the Metaplex DAS API. Covers the reference implementation architecture including Geyser plugin, Redis, and Postgres.
 - [Transferring Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/transfer-cnfts): Learn how to transfer compressed NFTs on Bubblegum
-- [Transferring Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/transfer-cnfts): Learn how to transfer compressed NFTs using Bubblegum V2.
+- [Transferring Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/transfer-cnfts): Learn how to transfer compressed NFTs using Bubblegum V2. Covers transfers by owner, delegate, and permanent transfer delegate, plus transferability checks.
 - [Updating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum/update-cnfts): Learn how to update compressed NFTs on Bubblegum
-- [Updating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/update-cnfts): Learn how to update compressed NFTs on Bubblegum.
+- [Updating Compressed NFTs](https://developers.metaplex.com/smart-contracts/bubblegum-v2/update-cnfts): Learn how to update compressed NFT metadata using Bubblegum V2. Covers update authority for collection-based and tree-based cNFTs.
 - [Verifying Collections](https://developers.metaplex.com/smart-contracts/bubblegum/verify-collections): Learn how to set, verify and unverify collections on Bubblegum
-- [Verifying Collections](https://developers.metaplex.com/smart-contracts/bubblegum-v2/collections): Learn how to set, verify and unverify collections on Bubblegum.
 - [Verifying Creators](https://developers.metaplex.com/smart-contracts/bubblegum/verify-creators): Learn how to verify and unverify creators on Bubblegum
-- [Verifying Creators](https://developers.metaplex.com/smart-contracts/bubblegum-v2/verify-creators): Learn how to verify and unverify creators on Bubblegum.
+- [Verifying Creators](https://developers.metaplex.com/smart-contracts/bubblegum-v2/verify-creators): Learn how to verify and unverify creators on compressed NFTs using Bubblegum V2. Covers the verifyCreatorV2 and unverifyCreatorV2 instructions.
 
 ## Token Metadata
 

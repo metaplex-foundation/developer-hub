@@ -1,8 +1,50 @@
 ---
 title: 常见问题
-metaTitle: 常见问题 | Bubblegum V2
+metaTitle: 常见问题 - Bubblegum V2
 description: 关于Bubblegum的常见问题。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - Bubblegum FAQ
+  - compressed NFT questions
+  - cNFT cost
+  - troubleshooting
+  - transaction too large
+  - getAssetWithProof
+about:
+  - Compressed NFTs
+  - Troubleshooting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 什么是Bubblegum V2？
+    a: Bubblegum V2是Metaplex在Solana上用于压缩NFT的程序的最新版本，增加了冻结/解冻、灵魂绑定NFT、MPL-Core集合和版税强制执行功能。
+  - q: 如何找到转移、委托、销毁等操作所需的参数？
+    a: 使用getAssetWithProof辅助函数，它会自动从DAS API获取所有必需的参数（证明、叶子索引、nonce等）。
+  - q: 如何解决"交易过大"错误？
+    a: "与getAssetWithProof一起使用truncateCanopy: true，或者实现使用地址查找表的版本化交易。"
+  - q: 创建压缩NFT树需要多少费用？
+    a: 费用因树的大小而异。包含16,384个cNFT的树约需0.34 SOL，而包含100万个cNFT的树需约8.5 SOL的租金。
+  - q: Bubblegum V1和V2有什么区别？
+    a: V2增加了冻结/解冻、灵魂绑定NFT、MPL-Core集合、版税强制执行、永久委托人和LeafSchemaV2。
+  - q: 我需要特殊的RPC提供商吗？
+    a: 是的。您需要一个支持Metaplex DAS API的RPC来获取和索引压缩NFT。
+  - q: 可以将cNFT解压缩回普通NFT吗？
+    a: 解压缩仅适用于Bubblegum V1资产。V2不支持解压缩。
+  - q: 一棵树可以存储多少个cNFT？
+    a: 最大值为2^maxDepth。深度为30的树可以容纳超过10亿个cNFT，但树越大租金成本越高。
 ---
+
+## Summary
+
+本页面解答了关于Bubblegum V2压缩NFT的最常见问题。
+
+- 使用`getAssetWithProof`获取修改叶子指令的必需参数
+- 使用`truncateCanopy`或地址查找表解决"交易过大"错误
+- 创建树之前了解树的成本和容量
+- Bubblegum V2与V1树或解压缩不向后兼容
 
 ## 什么是Bubblegum V2？
 
@@ -69,12 +111,12 @@ await transferV2(umi, {
 
 ```ts
 import { publicKeyBytes } from '@metaplex-foundation/umi'
-import { transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const rpcAsset = await umi.rpc.getAsset(assetId)
 const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 
-await transfer(umi, {
+await transferV2(umi, {
   leafOwner: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
   merkleTree: rpcAssetProof.tree_id,

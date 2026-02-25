@@ -1,8 +1,38 @@
 ---
 title: 作成者の検証
-metaTitle: 作成者の検証 | Bubblegum V2
+metaTitle: 作成者の検証 - Bubblegum V2
 description: Bubblegumで作成者の検証と検証解除を行う方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - verify creator
+  - NFT creator
+  - creator verification
+  - unverify creator
+  - verifyCreatorV2
+about:
+  - Compressed NFTs
+  - Creator verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: クリエイターの配列にいないクリエイターを検証できますか？
+    a: いいえ。クリエイターはすでにcNFTのクリエイター配列にリストされている必要があります。まずupdateMetadataV2を使用してクリエイターを追加してから検証します。
+  - q: 検証トランザクションに署名するのは誰ですか？
+    a: 検証されるクリエイター自身がトランザクションに署名する必要があります。他の人に代わってクリエイターを検証することはできません。
+  - q: クリエイターはミント時に自分自身を検証できますか？
+    a: はい。クリエイターがミントトランザクションに署名すると、cNFTのクリエイター配列で自動的に検証されます。
 ---
+
+## Summary
+
+**Verifying creators** toggles the verified flag on a cNFT's creator entries. This page covers verifying and unverifying creators using the verifyCreatorV2 and unverifyCreatorV2 instructions.
+
+- Verify a creator on an existing cNFT (the creator must sign)
+- Unverify a creator from a cNFT
+- Creators can also be verified at mint time by signing the mint transaction
 
 圧縮NFTのメタデータに作成者のリストが設定されている場合、これらの作成者は特別な命令を使用してcNFT上で自分自身を検証・検証解除できます。 {% .lead %}
 
@@ -92,3 +122,22 @@ await unverifyCreatorV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Only creators already listed in the cNFT's creators array can be verified. Use `updateMetadataV2` to add creators first.
+- The creator being verified must sign the transaction themselves.
+- Creators can be verified at mint time by signing the mint transaction, avoiding the need for a separate verification step.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **verifyCreatorV2** | Instruction that sets a creator's verified flag to true on a compressed NFT |
+| **unverifyCreatorV2** | Instruction that sets a creator's verified flag to false on a compressed NFT |
+| **Creators Array** | The list of creator addresses, verification statuses, and royalty share percentages stored in cNFT metadata |
+| **Verified** | A boolean flag indicating whether a creator has confirmed their association with the cNFT |

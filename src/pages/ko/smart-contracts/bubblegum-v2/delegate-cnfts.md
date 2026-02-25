@@ -1,8 +1,39 @@
 ---
 title: 압축된 NFT 위임
-metaTitle: 압축된 NFT 위임 | Bubblegum V2
+metaTitle: 압축된 NFT 위임 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 위임하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - delegate NFT
+  - NFT delegation
+  - leaf delegate
+  - approved operator
+  - delegate authority
+  - revoke delegate
+about:
+  - Compressed NFTs
+  - NFT delegation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 위임자는 cNFT로 무엇을 할 수 있나요?
+    a: 리프 위임자는 소유자를 대신하여 cNFT를 전송, 소각 및 동결/해동할 수 있습니다.
+  - q: 위임을 취소하려면 어떻게 해야 하나요?
+    a: newLeafDelegate를 소유자 자신의 공개 키로 설정하여 delegate 명령을 호출하세요. 이렇게 하면 위임자가 효과적으로 제거됩니다.
+  - q: 전송 후에도 위임자가 유지되나요?
+    a: 아니요. 전송 후에는 리프 위임자가 자동으로 새 소유자로 재설정됩니다.
 ---
+
+## Summary
+
+**Delegating compressed NFTs** allows the owner to authorize another account to perform actions on their behalf. This page covers approving and revoking delegate authorities on individual cNFTs.
+
+- Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
+- Revoke a delegate by re-delegating to the owner's own address
+- Delegate authority is reset automatically after a transfer
 
 압축된 NFT의 소유자는 cNFT의 소유권을 유지하면서 다른 계정에 위임할 수 있습니다. {% .lead %}
 
@@ -68,3 +99,21 @@ await delegate(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Delegate authority is reset to the new owner after a transfer. The new owner must re-delegate if needed.
+- Only one leaf delegate can be active at a time per cNFT. Approving a new delegate replaces the previous one.
+- To revoke a delegate, set the new delegate to the owner's own public key.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform transfer, burn, and freeze actions |
+| **Delegate Authority** | The approved account that can act on behalf of the cNFT owner |
+| **Previous Leaf Delegate** | The current delegate being replaced, or the owner if no delegate was previously set |

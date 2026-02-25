@@ -1,8 +1,41 @@
 ---
-title: コレクションの検証
-metaTitle: コレクションの検証 | Bubblegum V2
+title: コレクションの管理
+metaTitle: コレクションの管理 - Bubblegum V2
 description: Bubblegumでコレクションの設定、検証、検証解除を行う方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT collection
+  - verify collection
+  - cNFT collection
+  - MPL-Core collection
+  - setCollectionV2
+  - BubblegumV2 plugin
+about:
+  - Compressed NFTs
+  - NFT collections
+  - MPL-Core
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: ミント後にcNFTをコレクションに追加するにはどうすればよいですか？
+    a: newCoreCollectionパラメータを指定してsetCollectionV2命令を使用します。コレクションにはBubblegumV2プラグインが有効になっている必要があります。
+  - q: cNFTのコレクションを変更できますか？
+    a: はい。coreCollection（現在）とnewCoreCollection（新規）の両方のパラメータを指定してsetCollectionV2を使用します。両方のコレクション権限が署名する必要があります。
+  - q: BubblegumV2プラグインとは何ですか？
+    a: コレクション上でフリーズ/解凍、ソウルバウンドcNFT、ロイヤリティ強制などのBubblegum V2機能を有効にするMPL-Coreコレクションプラグインです。
 ---
+
+## Summary
+
+**Managing collections** for compressed NFTs uses the **setCollectionV2** instruction to add, change, or remove MPL-Core collections on existing cNFTs. This page covers setting and removing collections after minting.
+
+- Set an MPL-Core collection on an existing cNFT using setCollectionV2
+- Remove a collection from a cNFT
+- Change between collections (both authorities must sign)
+- Collections must have the BubblegumV2 plugin enabled
 
 cNFTは、ミント時または後でMPL-Coreコレクションに追加できます。 {% .lead %}
 
@@ -47,3 +80,59 @@ const signature = await setCollectionV2(umi, {
   newCoreCollection: newCoreCollection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## 圧縮NFTのコレクションの削除
+**setCollectionV2**命令は、cNFTからコレクションを削除するためにも使用できます。
+
+{% dialect-switcher title="圧縮NFTのコレクションの削除" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
+  getAssetWithProof,
+  setCollectionV2,
+  MetadataArgsV2Args
+} from '@metaplex-foundation/mpl-bubblegum'
+import {
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
+
+const collection = unwrapOption(assetWithProof.metadata.collection)
+
+const signature = await setCollectionV2(umi, {
+  ...assetWithProof,
+  authority: collectionAuthoritySigner,
+  coreCollection: collection!.key
+}).sendAndConfirm(umi);
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## Notes
+
+- The MPL-Core collection must have the `BubblegumV2` plugin enabled before cNFTs can be added to it.
+- Unlike Bubblegum V1 (which uses Token Metadata collections with a "verified" boolean), V2 uses MPL-Core collections without verification flags.
+- When changing between collections, both the old and new collection authorities must sign the transaction.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **setCollectionV2** | The Bubblegum V2 instruction for setting, changing, or removing the collection of a cNFT |
+| **MPL-Core Collection** | A Core standard collection account used to group cNFTs in Bubblegum V2 |
+| **BubblegumV2 Plugin** | An MPL-Core plugin that enables V2 features on a collection (freeze, soulbound, royalties) |
+| **Collection Authority** | The update authority of the MPL-Core collection |

@@ -1,51 +1,66 @@
 # GEO/LLM Documentation Evaluation Rubric
 
-Use this rubric to evaluate documentation pages for Generative Engine Optimization (GEO) and LLM discoverability. Pages scoring 9+ are considered reference-grade content that LLMs will treat as canonical sources.
+Use this rubric to evaluate documentation pages for Generative Engine Optimization (GEO) and LLM discoverability. Pages scoring 90%+ of their applicable points are considered reference-grade content that LLMs will treat as canonical sources.
 
 ---
 
 ## Quick Reference
 
-**Jump to:** [Dimensions](#evaluation-dimensions) · [Scoring Summary](#scoring-summary) · [Checklist](#template-checklist) · [Example](#example-evaluation)
+**Jump to:** [Page Types](#context-dependent-page-types) · [Dimensions](#evaluation-dimensions) · [Scoring Summary](#scoring-summary) · [Checklist](#template-checklist) · [Example](#example-evaluation)
 
 | # | Dimension | Weight | Key Question |
 |---|-----------|--------|--------------|
-| 1 | [Structural Clarity](#1-structural-clarity) | High | Is the H2/H3 hierarchy logical and predictable? |
-| 2 | [Definition Quality](#2-definition-quality) | High | Does Summary answer "what does this do?" clearly? |
-| 3 | [Extractability](#3-extractability) | High | Are code blocks titled and tables used for data? |
-| 4 | [Constraint Coverage](#4-constraint-coverage) | Medium-High | Is Out of Scope explicit? |
-| 5 | [Anti-Hallucination](#5-anti-hallucination) | High | Are versions explicit and terms disambiguated? |
+| 1 | [Structure & Context Graphs](#1-structure--context-graphs) | High | Are headers pronoun-free, and are internal links present for context? |
+| 2 | [Answer Directness (BLUF)](#2-answer-directness-bluf) | High | Does the first sentence of every section directly answer the intent? |
+| 3 | [Extractability](#3-extractability) | High | Are code blocks titled, tables used for data, and diagrams described? |
+| 4 | [Constraint Clarity](#4-constraint-clarity) | Medium-High | Are caveats integrated naturally via callouts without breaking flow? |
+| 5 | [Anti-Hallucination](#5-anti-hallucination) | High | Does terminology align with llms.txt? Are versions explicit? |
 | 6 | [Authority Signals](#6-authority-signals) | Medium | Is there maintainer/date/version attribution? |
 | 7 | [Quick Reference Density](#7-quick-reference-density) | Medium-High | Are program IDs, PDAs, deps in tables? |
-| 8 | [FAQ Quality](#8-faq-quality) | Medium | Are there 6+ real questions with costs/comparisons? |
-| 9 | [Glossary](#9-glossary) | Medium | Is there a table with 8+ term definitions? |
-| 10 | [Human UX](#10-human-ux) | Medium | Is there Quick Start + jump links + callouts? |
+| 8 | [FAQ Quality](#8-faq-quality) | Context-Dep. | Are there real questions targeting costs/comparisons without fluff? |
+| 9 | [Glossary](#9-glossary) | Context-Dep. | Are specific, domain-relevant terms defined in a table? |
+| 10 | [Human UX](#10-human-ux) | Context-Dep. | Is there a Quick Start + jump links + callouts where applicable? |
+
+---
+
+## Context-Dependent Page Types
+
+Not all documentation pages serve the same user intent. Do not force content just to satisfy the rubric — LLMs penalise high noise-to-signal ratios. Identify the page type first, then mark inapplicable dimensions as N/A.
+
+| Page Type | Primary Intent | Crucial Dimensions | Exempt / Optional (N/A) |
+|-----------|---------------|--------------------|-------------------------|
+| **Tutorial / Guide** | "Show me how to build X end-to-end." | Human UX, Structure, Extractability | Quick Reference Density (can be lighter) |
+| **Concept / Architecture** | "Explain how X works conceptually." | Answer Directness, Glossary, FAQ Quality | Human UX (Quick Start), Extractability (less code expected) |
+| **Reference (API/CLI/SDK)** | "What are the exact parameters for X?" | Extractability, Constraint Clarity, Anti-Hallucination, Quick Reference | FAQ Quality, Glossary, Human UX |
+| **Overview / Index** | "Give me the lay of the land for product X." | Structure, Answer Directness, Authority Signals | Extractability (no code), Human UX (Quick Start replaced by quick-links) |
+
+If a dimension is N/A for the page type, exclude it from scoring and calculate the final score as a percentage of remaining applicable points.
 
 ---
 
 ## Evaluation Dimensions
 
-### 1. Structural Clarity (Weight: High)
+### 1. Structure & Context Graphs (Weight: High)
 
 **What to look for:**
 - Clear H2/H3 hierarchy with logical progression
 - Predictable document flow (intro → setup → implementation → errors → reference)
-- Sections that can be parsed independently
-- No deeply nested structures (H4+ should be rare)
+- Sections that can be parsed independently; no deeply nested structures (H4+ should be rare)
+- **RAG Disambiguation**: subheadings must be context-independent — avoid pronouns and shorthand that only make sense in sequence (e.g., use `### Passing the PDA to the Client`, not `### Passing It`). LLMs retrieve chunks in isolation; a header that requires the previous section to make sense produces broken extractions
+- **Internal Knowledge Graphing**: link the first mention of key concepts to their canonical pages (e.g., first mention of "ATA" links to the ATA concept page). This helps LLMs map entity relationships across the documentation graph, not just within a single page
 
 **Scoring:**
-- **10/10**: Clear hierarchy, logical flow, every section has purpose
-- **8-9/10**: Good structure with minor navigation issues
-- **6-7/10**: Structure exists but flow is unclear
-- **<6/10**: Disorganized, hard to navigate
+- **10/10**: Clear hierarchy, 100% context-independent headers, excellent internal knowledge links
+- **8-9/10**: Good structure, but 1-2 headers use pronouns or obvious internal links are missing
+- **6-7/10**: Structure exists but flow is unclear; sparse internal linking
+- **<6/10**: Disorganised, vague or pronoun-dependent headers, no internal context links
 
 **Example structure (10/10):**
 ```
 ## Summary
-## Out of Scope
 ## Quick Start
 ## Prerequisites
-## [Main Content Sections]
+## [Specific, Noun-Based Content Sections]
 ## Common Errors
 ## Notes
 ## Quick Reference
@@ -55,29 +70,46 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 
 ---
 
-### 2. Definition Quality (Weight: High)
+### 2. Answer Directness (BLUF) (Weight: High)
 
 **What to look for:**
-- Clear, declarative one-sentence definitions
-- Summary section that answers "what does this do?" (prose + bullet points)
-- Terminology callouts for disambiguation
+- **Bottom Line Up Front**: the very first sentence beneath any H2 or H3 must be a direct, declarative answer to the assumed question of that section — LLMs extract opening sentences preferentially, so burying the answer wastes the highest-value slot on the page
+- Summary section that answers "what does this do?" with a prose sentence followed by 3-4 bullet points
+- No rhetorical warm-up sentences before the actual answer
 
 **Scoring:**
-- **10/10**: Multiple definition formats (prose + bullets + callouts)
-- **8-9/10**: Good definitions, missing one format
-- **6-7/10**: Definitions exist but buried or unclear
-- **<6/10**: No clear definitions
+- **10/10**: Every section opens with a declarative answer; strong Summary block (prose + bullets)
+- **8-9/10**: Summary is strong, but some H2s start with preamble or rhetorical context
+- **6-7/10**: Answers exist but are buried two or more sentences deep
+- **<6/10**: Ambiguous openings; fails to define the core concept up front
 
-**Required elements:**
+**Required Summary format:**
 ```markdown
 ## Summary
 
-[1-2 sentence declarative summary of what this guide accomplishes]
+[1-2 sentence declarative summary of what this page accomplishes]
 
-- [Bullet point 1: Core action]
-- [Bullet point 2: Technologies used]
-- [Bullet point 3: Version/compatibility]
-- [Bullet point 4: Constraints/limitations]
+- [Bullet 1: Core action or capability]
+- [Bullet 2: Key technology or instruction used]
+- [Bullet 3: Version or compatibility note]
+- [Bullet 4: Key constraint or limitation]
+```
+
+**BLUF example:**
+
+✅ Good — declarative answer is the first sentence:
+```markdown
+## Transfer a Compressed NFT
+
+The `transferV2` instruction moves ownership from one wallet to another...
+```
+
+❌ Poor — answer is buried behind context-setting:
+```markdown
+## Transfer a Compressed NFT
+
+When working with compressed NFTs on Bubblegum V2, there are several things
+to consider. The system uses a leaf-based model which means...
 ```
 
 ---
@@ -87,23 +119,23 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 **What to look for:**
 - Code blocks with titles (` ```lang {% title="filename" %} `)
 - Tables for reference data (program IDs, versions, costs)
-- Multi-language examples (TypeScript + Rust)
-- Line number references in explanations
-- Copy-paste ready snippets
+- Multi-language examples (TypeScript + Rust) via dialect-switcher
+- Copy-paste-ready, self-contained snippets
+- **Semantic Diagramming**: architecture diagrams must have highly descriptive `alt` text or a `<figcaption>` element — a diagram with no text description is invisible to any LLM or AI system
 
 **Scoring:**
-- **10/10**: All code titled, tables for data, multi-language support
-- **8-9/10**: Most code titled, some tables
-- **6-7/10**: Code exists but poorly labeled
-- **<6/10**: Inline code, no structure
+- **10/10**: All code titled, tables for data, multi-language support, all diagrams described
+- **8-9/10**: Most code titled, some tables, minor diagram accessibility gaps
+- **6-7/10**: Code exists but poorly labelled, diagrams have no descriptions
+- **<6/10**: Inline code only, naked diagrams, no structural extractability
 
 **Example (10/10):**
 ```markdown
 | Program | Address |
 |---------|---------|
-| Token Program | `TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA` |
+| MPL-Bubblegum | `BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY` |
 
-{% dialect-switcher title="Deriving the PDA" %}
+{% dialect-switcher title="Mint a Compressed NFT" %}
 {% dialect title="TypeScript" id="ts" %}
 ```typescript
 // TypeScript example
@@ -119,29 +151,33 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 
 ---
 
-### 4. Constraint Coverage (Weight: Medium-High)
+### 4. Constraint Clarity (Weight: Medium-High)
 
 **What to look for:**
-- Explicit "Out of Scope" section
-- "Notes" section with caveats and warnings
-- Clear boundaries on what the guide does/doesn't cover
-- Version constraints and compatibility notes
+- Caveats, boundaries, and unsupported features are clearly stated
+- Key constraints are placed inline where they are relevant using semantic callouts — not aggregated into a separate section readers have to seek out
+- A Notes section consolidates any remaining caveats at the end of the page
+- Version constraints and compatibility notes stated in context
+
+> **Note on "Out of Scope" sections:** Dedicated `## Out of Scope` headings are no longer recommended. They disrupt page flow, front-load negative information, and pull readers away from the page's purpose. Use inline callouts and a Notes section instead.
 
 **Scoring:**
-- **10/10**: Explicit out-of-scope + notes + version constraints
-- **8-9/10**: Has constraints but not comprehensive
-- **6-7/10**: Implicit constraints only
-- **<6/10**: No constraint documentation
+- **10/10**: Boundaries perfectly defined via inline callouts and a consolidated Notes section — zero friction for human readers
+- **8-9/10**: Constraints exist but are slightly disruptive or buried in plain prose
+- **6-7/10**: Implicit constraints only — reader has to infer what isn't supported
+- **<6/10**: Fails to warn users of limitations or anti-patterns
 
 **Required elements:**
 ```markdown
-## Out of Scope
-[Comma-separated list of what this guide does NOT cover]
+{% callout type="note" %}
+This only applies to private trees. Public trees allow anyone to mint
+without the tree delegate's signature.
+{% /callout %}
 
 ## Notes
-- [Important caveat 1]
-- [Important caveat 2]
-- [Security consideration]
+- [Important caveat or boundary condition]
+- [Version constraint or compatibility note]
+- [Security or correctness consideration]
 ```
 
 ---
@@ -149,35 +185,39 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 ### 5. Anti-Hallucination (Weight: High)
 
 **What to look for:**
+- **llms.txt Alignment**: terminology must strictly match the canonical definitions in `/public/llms.txt`. Contradictions between a page and `llms.txt` are anti-hallucination failures — LLMs will produce conflicting answers depending on which source they retrieve
 - Explicit version numbers with "tested with" statements
-- Disambiguation from similar concepts (e.g., "SPL Token, not Token-2022")
-- Specific error messages with exact solutions
+- Specific error messages paired with exact solutions
+- Disambiguation from similar concepts (e.g., "Bubblegum V2, not Bubblegum V1", "SPL Token, not Token-2022")
 - No ambiguous language ("might work", "should be fine")
 
 **Scoring:**
-- **10/10**: All versions explicit, terminology disambiguated, exact errors
-- **9/10**: Minor ambiguity in one area
-- **7-8/10**: Some versions missing or ambiguous terms
-- **<7/10**: Vague, could cause LLM hallucination
+- **10/10**: Perfect llms.txt alignment, explicit versions, exact errors documented, proactive disambiguation
+- **9/10**: Minor ambiguity in one non-critical area
+- **7-8/10**: Terminology drifts slightly from canonical definitions; some versions missing
+- **<7/10**: Vague or contradicts llms.txt — will cause LLM hallucination
 
 **Example (10/10):**
 ```markdown
-## Tested Configuration
-
 | Tool | Version |
 |------|---------|
-| Anchor CLI | 0.32.1 |
-| Solana CLI | 3.1.6 (Agave) |
+| mpl-bubblegum | 5.x |
+| @metaplex-foundation/umi | 1.x |
 
-*Applies to Solana Agave 2.x/3.x, Anchor 0.30+*
+*Applies to Bubblegum V2 (MPL-Bubblegum). Not compatible with Bubblegum V1 trees.*
 ```
+
+**llms.txt alignment check — verify before publishing:**
+- Product names and status labels match (Core = recommended, Token Metadata = legacy)
+- Key distinctions in `llms.txt` "Important Distinctions" section are not contradicted
+- Version or feature claims do not conflict with the site-level canonical definitions
 
 ---
 
 ### 6. Authority Signals (Weight: Medium)
 
 **What to look for:**
-- Maintainer/organization attribution
+- Maintainer/organisation attribution
 - Last verified date
 - Version compatibility range
 - Links to source repositories
@@ -191,12 +231,12 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 
 **Example (9.5/10):**
 ```markdown
-*Maintained by Metaplex Foundation · Last verified January 2026 · Applies to Solana Agave 2.x/3.x, Anchor 0.30+*
+*Maintained by Metaplex Foundation · Last verified February 2026 · Applies to MPL-Bubblegum 5.x*
 ```
 
 **To reach 10/10, add:**
 ```markdown
-[View source on GitHub](https://github.com/...)
+[View source on GitHub](https://github.com/metaplex-foundation/mpl-bubblegum)
 ```
 
 ---
@@ -220,241 +260,191 @@ Use this rubric to evaluate documentation pages for Generative Engine Optimizati
 ```markdown
 ## Quick Reference
 
-### Key Program IDs
-| Program | Address |
-|---------|---------|
-| ... | ... |
-
-### PDA Seeds
-[Multi-language derivation examples]
-
-### Minimum Dependencies
-[Copy-paste ready dependency block]
+| Item | Value |
+|------|-------|
+| Program | `BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY` |
+| JS SDK | `@metaplex-foundation/mpl-bubblegum` |
+| Source | [GitHub](https://github.com/metaplex-foundation/mpl-bubblegum) |
 ```
 
 ---
 
-### 8. FAQ Quality (Weight: Medium)
+### 8. FAQ Quality (Weight: Context-Dependent)
 
 **What to look for:**
-- Real questions developers ask (not filler)
-- Clear, direct answers
-- Cost/pricing information where relevant
+- Real questions developers actually ask — no quotas, no filler
+- Clear, direct answers without marketing language
+- Cost/pricing/compute information where relevant
 - Comparison questions ("What's the difference between X and Y?")
-- "Can I use this for..." questions
+- *Exemption*: Pure API/CLI reference pages typically do not need a FAQ
 
 **Scoring:**
-- **10/10**: 6+ real questions, includes costs, has comparisons
-- **8-9/10**: Good questions, missing costs or comparisons
-- **6-7/10**: Generic FAQ
-- **<6/10**: No FAQ or useless questions
+- **10/10**: Strictly targets high-value queries (costs, comparisons, edge cases) — zero content that repeats the main text
+- **8-9/10**: Good questions, but a few border on generic or restate the content
+- **6-7/10**: Generic FAQ that adds no value ("What is Solana?")
+- **<6/10**: Useless questions or formatting that breaks FAQPage schema
+- **N/A**: Not applicable for this page type
 
 **Example questions (10/10):**
-- What is an SPL token?
-- What's the difference between X and Y?
-- How much does it cost to...?
-- Can I use this code to create...?
-- Why do I need to...?
+- What's the difference between Bubblegum V1 and V2?
+- How much does it cost to mint 1 million cNFTs?
+- Can I use a V1 tree with V2 instructions?
+- Why do I need a DAS API-compatible RPC?
 
 ---
 
-### 9. Glossary (Weight: Medium)
+### 9. Glossary (Weight: Context-Dependent)
 
 **What to look for:**
 - Table format (not prose definitions)
-- 8-15 terms
-- Concise definitions (one sentence)
-- Domain-specific terms included
-- Acronyms expanded
+- Only terms strictly relevant to this page's context — no generic padding
+- Concise definitions (one sentence each)
+- Domain-specific terms and expanded acronyms (ATA, PDA, DAS, etc.)
+- *Exemption*: Task-based tutorials and parameter-heavy reference pages rarely need a standalone glossary
 
 **Scoring:**
-- **10/10**: 8+ terms in table, concise, complete
-- **8-9/10**: Good glossary, minor gaps
-- **6-7/10**: Glossary exists but incomplete
-- **<6/10**: No glossary
-
-**Example (10/10):**
-```markdown
-## Glossary
-
-| Term | Definition |
-|------|------------|
-| **SPL Token** | Solana Program Library token standard, equivalent to ERC-20 |
-| **Mint** | The account that defines a token and can create new supply |
-| **ATA** | Associated Token Account - deterministic token account for a wallet |
-```
+- **10/10**: Table format, concise, strictly relevant — no filler terms that dilute signal density
+- **8-9/10**: Good glossary, but includes overly generic terms
+- **6-7/10**: Glossary exists but is formatted as prose or incomplete
+- **<6/10**: Exists but poorly executed
+- **N/A**: Not applicable for this page type
 
 ---
 
-### 10. Human UX (Weight: Medium)
+### 10. Human UX (Weight: Context-Dependent)
 
 **What to look for:**
 - Quick Start section with numbered steps
 - Jump links to key sections
 - "What You'll Build" callout at top
 - Expected output examples
-- Copy-paste ready complete examples
+- Copy-paste-ready complete examples
+- *Exemption*: Concept/architecture pages — no Quick Start expected
 
 **Scoring:**
-- **10/10**: Quick start + jump links + callouts + full examples
+- **10/10**: Quick Start + jump links + callouts + full copy-paste examples
 - **9/10**: Missing one element
 - **7-8/10**: Basic UX, no quick start
 - **<7/10**: Wall of text, poor navigation
-
-**Example (9.5/10):**
-```markdown
-{% callout title="What You'll Build" %}
-A single instruction that:
-- Does X
-- Does Y
-- Does Z
-{% /callout %}
-
-## Quick Start
-
-**Jump to:** [Program](#the-program) · [Client](#the-client) · [Errors](#common-errors)
-
-1. Step one
-2. Step two
-3. Step three
-```
-
-**To reach 10/10, add:**
-- Collapsible "Full Program" block with complete copy-paste code
+- **N/A**: Not applicable for this page type
 
 ---
 
 ## Scoring Summary
 
-| Dimension | Weight | Max Score |
-|-----------|--------|-----------|
-| Structural Clarity | High | 10 |
-| Definition Quality | High | 10 |
-| Extractability | High | 10 |
-| Constraint Coverage | Medium-High | 10 |
-| Anti-Hallucination | High | 10 |
-| Authority Signals | Medium | 10 |
-| Quick Reference Density | Medium-High | 10 |
-| FAQ Quality | Medium | 10 |
-| Glossary | Medium | 10 |
-| Human UX | Medium | 10 |
+Because page types vary, not all dimensions apply to every page. Score only applicable dimensions.
 
-**Overall Score Calculation:**
 ```
-(Sum of all scores) / 10 = Overall GEO Score
+Overall GEO Score = (Sum of applicable scores / Total applicable points) × 100%
 ```
+
+**Worked example:** A Reference page marks FAQ, Glossary, and Human UX as N/A. The remaining 7 dimensions are worth 70 points. The page scores 68/70. Final score: **97%**.
 
 **Score Interpretation:**
-- **9.5-10**: Reference-grade, canonical source for LLMs
-- **9.0-9.4**: Excellent, minor improvements possible
-- **8.0-8.9**: Good, will be cited but not authoritative
-- **7.0-7.9**: Adequate, may cause partial hallucinations
-- **<7.0**: Needs significant work
+- **95-100%**: Reference-grade, canonical source for LLMs
+- **90-94%**: Excellent, minor improvements possible
+- **80-89%**: Good, will be cited but may not be treated as the primary authority
+- **70-79%**: Adequate, may cause partial hallucinations or fail complex query retrieval
+- **<70%**: Needs significant structural and contextual work
 
 ---
 
 ## Template Checklist
 
-Use this checklist when creating new documentation:
+### Required (All Pages)
+- [ ] Frontmatter: title, metaTitle, description, keywords, about, proficiencyLevel
+- [ ] Summary block: 1-2 declarative sentences + 3-4 bullet points (the page-level BLUF)
+- [ ] Context-independent H2/H3 headers — no pronouns or shorthand requiring prior context
+- [ ] First sentence under every H2 is a direct declarative answer (BLUF)
+- [ ] Internal links to core concept pages on first mention of key terms
+- [ ] Notes section consolidating caveats and compatibility notes
+- [ ] Terminology verified against `/public/llms.txt`
+- [ ] Authority signals: maintainer, last verified date, version range
 
-### Required Sections
-- [ ] Frontmatter with title, metaTitle, description
-- [ ] Lead paragraph with bold key terms
-- [ ] "What You'll Build" callout
-- [ ] Summary (1-2 sentences + 4 bullet points)
-- [ ] Out of Scope (comma-separated list)
-- [ ] Quick Start with jump links
-- [ ] Prerequisites
-- [ ] Tested Configuration table
-- [ ] Main content with H2/H3 hierarchy
-- [ ] Common Errors section
-- [ ] Notes section
-- [ ] Quick Reference with tables
-- [ ] FAQ (6+ questions)
-- [ ] Glossary table (8+ terms)
+### Conditional (By Page Type)
+- [ ] "What You'll Build" callout — Tutorial pages
+- [ ] Quick Start with numbered steps + jump links — Tutorial pages
+- [ ] Prerequisites — Tutorial/Guide pages
+- [ ] Tested Configuration table — Tutorial/Guide pages
+- [ ] Common Errors section — Tutorial/Guide pages
+- [ ] Quick Reference table — Reference/How-To/Overview pages
+- [ ] FAQ (real queries only, zero filler) — Tutorial/Concept pages
+- [ ] Glossary table (strictly relevant terms only) — Concept/Overview pages
 
-### Code Block Requirements
+### Content & Formatting
 - [ ] All code blocks have `title="filename"` attribute
-- [ ] Line numbers enabled for long blocks (`showLineNumbers=true`)
-- [ ] Key lines highlighted (`highlightLines="X,Y-Z"`)
+- [ ] Long code blocks use `showLineNumbers=true`
 - [ ] Multi-language examples use dialect-switcher
 - [ ] Expected output shown for commands
+- [ ] Program IDs, dependencies, and costs are in tables
+- [ ] Architecture diagrams have descriptive alt text or figcaption
+- [ ] Inline callouts used for important constraints (not a separate Out of Scope section)
 
-### Table Requirements
-- [ ] Program IDs in table format
-- [ ] Version/dependency information in tables
-- [ ] Cost estimates in tables where applicable
-- [ ] Glossary in table format
-
-### Authority Requirements
-- [ ] Maintainer attribution
-- [ ] Last verified date
-- [ ] Version compatibility statement
-- [ ] Link to source repository (if applicable)
+### Authority & Structured Data
+- [ ] Last verified date in page body
+- [ ] Link to source repository
+- [ ] `faqs` frontmatter field mirrors FAQ section content
+- [ ] `howToSteps` / `howToTools` present on tutorial pages
+- [ ] `programmingLanguage` field set if page contains code
 
 ---
 
 ## Example Evaluation
 
 **Page:** `/tokens/anchor/create-token`
+**Page Type:** Tutorial / Guide
+**Exemptions:** None
 
 | Dimension | Score | Notes |
 |-----------|-------|-------|
-| Structural Clarity | 10/10 | Clear H2/H3 hierarchy, logical flow from setup → program → client → errors → reference |
-| Definition Quality | 10/10 | Summary (prose + bullets) and Terminology callout provide clean declarative definitions |
-| Extractability | 10/10 | Code blocks with titles, tables for program IDs, PDA seeds in both TS/Rust |
-| Constraint Coverage | 10/10 | Out of Scope section + Notes section clearly bound what this does/doesn't do |
-| Anti-Hallucination | 9.5/10 | Explicit out-of-scope, terminology disambiguation, tested versions. Minor: could add "do not confuse with Token-2022" |
-| Authority Signals | 9.5/10 | Maintainer, verification date, version table. Could add link to source repo |
-| Quick Reference Density | 10/10 | Program IDs table, PDA seeds, minimum deps - all highly extractable |
-| FAQ Quality | 10/10 | 8 real questions developers ask, clear answers, includes cost estimates |
-| Glossary | 10/10 | 10 terms with concise definitions - perfect for LLM context |
-| Human UX | 9.5/10 | Quick Start + jump links. Minor: could benefit from a "copy full program" block |
+| Structure & Context Graphs | 10/10 | Clear hierarchy, all H3s use explicit nouns — perfect for RAG chunking; internal links to ATA and PDA concept pages present |
+| Answer Directness (BLUF) | 10/10 | Strong Summary block; first sentence under every H2 is the direct answer |
+| Extractability | 10/10 | Code blocks titled, TS/Rust dialect-switcher used, architecture diagram has full semantic alt text |
+| Constraint Clarity | 10/10 | Constraints integrated via warning callouts and a Notes section — zero friction for human readers |
+| Anti-Hallucination | 9.5/10 | Exact llms.txt alignment, explicit versions. Minor: could add "not Token-2022" disambiguation near the program ID |
+| Authority Signals | 9.5/10 | Maintainer and verification date present. Missing source repo link |
+| Quick Reference Density | 10/10 | Program IDs and minimum deps in extractable tables |
+| FAQ Quality | 10/10 | 8 real developer questions, clear answers, includes cost estimates |
+| Glossary | 10/10 | 10 domain-specific terms in table format, strictly relevant |
+| Human UX | 9.5/10 | Quick Start + jump links present. Could benefit from a "copy full program" collapsible block |
 
-**Overall GEO Score: 9.8/10**
+**Overall GEO Score: 98.5%** *(98.5/100 applicable points)*
 
 **Strengths:**
-- Compressed intro - Summary + Out of Scope in ~10 lines
-- Jump links - Humans can skip to code immediately
-- Dual PDA derivation - TypeScript and Rust in dialect switcher
-- BN overflow fix - Safe arithmetic for LLM copy/paste
-- Common Errors section - Pre-answers the top 3 issues
-- Notes section - Security/correctness without being preachy
+- BLUF formatting — LLMs can extract a correct answer from any isolated chunk
+- RAG-safe headers — every H3 uses explicit nouns, no pronoun shorthand
+- Dual-language PDA derivation — TypeScript and Rust in dialect-switcher
+- Natural constraints — warnings are in semantic callouts, keeping flow smooth
+- Common Errors section — pre-answers the top 3 developer issues
 
-**Minor Improvements (optional):**
-1. Add a "Full Program" collapsible block with the complete `lib.rs` for easy copy
-2. Add GitHub link to working example repo in authority signals
-3. Consider adding `<!-- AI: This is a fungible token guide, not NFT -->` HTML comment (some crawlers respect these)
-
----
+**Improvements Needed:**
+1. Add a collapsible "Full Program" block with the complete `lib.rs` for easy copy
+2. Add GitHub source repo link to Authority Signals
+3. Add "not Token-2022" disambiguation near the program ID table
 
 ---
 
 ## JSON-LD Structured Data Specification
 
-In addition to content quality, pages must include proper JSON-LD structured data in their frontmatter. This metadata is automatically converted to schema.org JSON-LD in the `<head>` section, making content machine-readable for search engines and AI systems.
+In addition to content quality, pages must include proper JSON-LD structured data in their frontmatter. This metadata is automatically converted to schema.org JSON-LD in the `<head>` section.
 
 ### Required Frontmatter Fields
-
-All documentation pages must include these fields:
 
 ```yaml
 ---
 title: Page Title
 metaTitle: Page Title | Product Name
 description: Clear description of what this page covers
-created: 'MM-DD-YYYY'    # Original creation date
-updated: 'MM-DD-YYYY'    # Last update date
-keywords:                 # Array format (not comma-separated)
+created: 'MM-DD-YYYY'
+updated: 'MM-DD-YYYY'
+keywords:
   - primary keyword
   - secondary keyword
-  - tertiary keyword
-about:                    # Topics/concepts covered
+about:
   - Main topic
-  - Secondary topic
   - Technology used
 proficiencyLevel: Beginner | Intermediate | Advanced
-programmingLanguage:      # Languages with code examples
+programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
@@ -463,115 +453,43 @@ programmingLanguage:      # Languages with code examples
 
 ### Optional Fields (Context-Dependent)
 
-**For How-To/Tutorial Pages:**
+**For How-To/Tutorial pages:**
 ```yaml
-howToSteps:               # Generates HowTo schema
+howToSteps:
   - Step 1 description
   - Step 2 description
-  - Step 3 description
-  - Step 4 description
-howToTools:               # Tools used in the tutorial
+howToTools:
   - Tool 1
-  - Tool 2
-  - Tool 3
 ```
 
-**For Pages with FAQ Sections:**
+**For pages with FAQ sections:**
 ```yaml
-faqs:                     # Generates FAQPage schema
-  - q: Question text here?
-    a: Answer text here.
-  - q: Another question?
-    a: Another answer.
+faqs:
+  - q: Question?
+    a: Answer.
 ```
 
 ### JSON-LD Schemas Generated
 
-The SEOHead component generates these schema.org types:
-
 | Schema Type | When Generated | Key Fields |
 |-------------|----------------|------------|
-| **TechArticle** | All pages | @id, headline, keywords, about, proficiencyLevel, programmingLanguage, author, publisher, audience, softwareRequirements |
+| **TechArticle** | All pages | @id, headline, keywords, about, proficiencyLevel, programmingLanguage, author, publisher, audience |
 | **HowTo** | Pages with `howToSteps` | name, step[], tool[] |
 | **FAQPage** | Pages with `faqs` | mainEntity[] with Question/Answer pairs |
 
-### TechArticle Schema Details
-
-The TechArticle schema includes enhanced fields for better discoverability:
-
-```javascript
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "@id": "https://developers.metaplex.com/path#article",
-  "headline": "Page Title",
-  "url": "https://developers.metaplex.com/path",
-  "inLanguage": "en",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://developers.metaplex.com/path"
-  },
-  "author": {
-    "@type": "Organization",
-    "@id": "https://developers.metaplex.com/#organization",
-    "name": "Metaplex"
-  },
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "Developers"
-  },
-  "discussionUrl": "https://discord.gg/metaplex",
-  "keywords": ["keyword1", "keyword2"],  // Array, not string
-  "about": ["topic1", "topic2"],
-  "proficiencyLevel": "Intermediate",
-  "isPartOf": {
-    "@type": "CreativeWork",
-    "@id": "https://developers.metaplex.com/product#documentation",
-    "name": "Product Documentation"
-  },
-  "softwareRequirements": "@metaplex-foundation/mpl-core, @metaplex-foundation/umi",
-  "mentions": [
-    {
-      "@type": "SoftwareSourceCode",
-      "name": "@metaplex-foundation/mpl-core",
-      "codeRepository": "https://github.com/metaplex-foundation/mpl-core"
-    }
-  ]
-}
-```
-
-### Current Coverage (Core Documentation)
-
-| Field | Coverage | Notes |
-|-------|----------|-------|
-| `keywords` | 60/60 (100%) | All pages |
-| `about` | 60/60 (100%) | All pages |
-| `proficiencyLevel` | 60/60 (100%) | All pages |
-| `programmingLanguage` | 56/60 (93%) | Excludes index/reference pages |
-| `howToSteps` | 17/17 (100%) | All how-to guides |
-| `howToTools` | 17/17 (100%) | All how-to guides |
-| `faqs` | 36/35 (100%) | All pages with FAQ sections |
-
 ### Best Practices
 
-1. **Keywords as Arrays**: Use YAML arrays, not comma-separated strings. Arrays are more machine-friendly.
-
-2. **Proficiency Levels**: Use exactly `Beginner`, `Intermediate`, or `Advanced`.
-
-3. **Programming Languages**: Use standard names (`JavaScript`, `TypeScript`, `Rust`), not abbreviations.
-
-4. **FAQ Quality**: FAQs in frontmatter should mirror the FAQ section in content. Include 3-8 real questions developers ask.
-
-5. **HowTo Steps**: Keep steps concise (one sentence each). 3-5 steps is ideal.
-
-6. **Index Pages**: Index/navigation pages may omit `programmingLanguage` since they don't contain code.
+1. **Keywords as arrays**: Use YAML arrays, not comma-separated strings
+2. **Proficiency levels**: Use exactly `Beginner`, `Intermediate`, or `Advanced`
+3. **Programming languages**: Use standard names (`JavaScript`, `TypeScript`, `Rust`)
+4. **FAQ quality**: Only include real questions — mirror the FAQ content section exactly
+5. **HowTo steps**: One sentence each, 3-5 steps ideal
+6. **Index pages**: May omit `programmingLanguage` if they contain no code
 
 ### Validation
 
-To verify JSON-LD is working:
-
 1. Build the site: `pnpm build`
-2. Check a page's HTML source for `<script type="application/ld+json">`
+2. Check page HTML source for `<script type="application/ld+json">`
 3. Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to validate
 4. Use [Schema.org Validator](https://validator.schema.org/) for detailed checks
 
@@ -585,21 +503,23 @@ When evaluating a page, provide output in this format:
 ## GEO/LLM Scorecard
 
 **Page:** [URL or path]
+**Page Type:** [Tutorial / Concept / Reference / Overview]
+**Exemptions:** [List any N/A dimensions and why]
 
 | Dimension | Score | Notes |
 |-----------|-------|-------|
-| Structural Clarity | X/10 | [Brief note] |
-| Definition Quality | X/10 | [Brief note] |
-| Extractability | X/10 | [Brief note] |
-| Constraint Coverage | X/10 | [Brief note] |
+| Structure & Context Graphs | X/10 | [Brief note] |
+| Answer Directness (BLUF) | X/10 | [Brief note] |
+| Extractability | X/10 or N/A | [Brief note] |
+| Constraint Clarity | X/10 | [Brief note] |
 | Anti-Hallucination | X/10 | [Brief note] |
 | Authority Signals | X/10 | [Brief note] |
-| Quick Reference Density | X/10 | [Brief note] |
-| FAQ Quality | X/10 | [Brief note] |
-| Glossary | X/10 | [Brief note] |
-| Human UX | X/10 | [Brief note] |
+| Quick Reference Density | X/10 or N/A | [Brief note] |
+| FAQ Quality | X/10 or N/A | [Brief note] |
+| Glossary | X/10 or N/A | [Brief note] |
+| Human UX | X/10 or N/A | [Brief note] |
 
-**Overall GEO Score: X.X/10**
+**Overall GEO Score: X%** (X/Y applicable points)
 
 **Strengths:**
 - [Bullet points]

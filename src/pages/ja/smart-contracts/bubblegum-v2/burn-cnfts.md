@@ -1,8 +1,39 @@
 ---
 title: 圧縮NFTのバーン
-metaTitle: 圧縮NFTのバーン | Bubblegum V2
+metaTitle: 圧縮NFTのバーン - Bubblegum V2
 description: Bubblegum V2で圧縮NFTをバーンする方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - burn compressed NFT
+  - burn cNFT
+  - delete NFT
+  - Bubblegum burn
+  - burnV2
+  - permanent burn delegate
+about:
+  - Compressed NFTs
+  - NFT lifecycle
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: バーンを元に戻すことはできますか？
+    a: いいえ。バーンはcNFTをマークルツリーから永久に削除します。リーフは空のハッシュに置き換えられ、復元できません。
+  - q: 圧縮NFTをバーンできるのは誰ですか？
+    a: 現在のリーフ所有者、リーフデリゲート（設定されている場合）、またはパーマネントバーンデリゲート（コレクションにPermanentBurnDelegateプラグインが有効な場合）。
+  - q: バーン時にコレクションを渡す必要がありますか？
+    a: はい、cNFTがコレクションの一部である場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。
 ---
+
+## Summary
+
+**Burning a compressed NFT** permanently removes it from the Bubblegum Tree using the **burnV2** instruction. This page covers burning by owner, leaf delegate, and permanent burn delegate.
+
+- Burn a cNFT using the burnV2 instruction
+- Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
+- Pass the coreCollection parameter when the cNFT belongs to a collection
 
 **burnV2**命令は、圧縮NFTをバーンし、Bubblegumツリーから永続的に削除するために使用できます。この操作を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。命令は以下のパラメータを受け入れます：
 
@@ -47,3 +78,22 @@ await burnV2(umi, {
 {% /totem-accordion %}
 
 {% totem-accordion title="永続バーンデリゲートの使用" %}
+
+## Notes
+
+- Burning is **irreversible** — the cNFT is permanently removed from the merkle tree.
+- If the cNFT belongs to a collection, you must pass the `coreCollection` parameter.
+- The permanent burn delegate can burn any cNFT in the collection without the owner's signature, if the `PermanentBurnDelegate` plugin is enabled on the collection.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **burnV2** | The Bubblegum V2 instruction that permanently removes a cNFT from the merkle tree |
+| **Permanent Burn Delegate** | A collection-level authority that can burn any cNFT in the collection without owner consent |
+| **Leaf Delegate** | An account authorized by the cNFT owner to perform actions (transfer, burn, freeze) on their behalf |
+| **getAssetWithProof** | A helper function that fetches all required parameters (proof, hashes, nonce, index) from the DAS API |

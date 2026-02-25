@@ -1,8 +1,30 @@
 ---
 title: NFTデータの保存とインデックス化
-metaTitle: NFTデータの保存とインデックス化 | Bubblegum V2
+metaTitle: NFTデータの保存とインデックス化 - Bubblegum V2
 description: BubblegumでNFTデータがどのように保存されるかについて詳しく学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT indexing
+  - DAS
+  - digital asset standard
+  - off-chain data
+  - RPC indexer
+  - Geyser plugin
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Advanced
 ---
+
+## Summary
+
+**NFTデータの保存とインデックス化**では、圧縮NFTの状態がトランザクションに保存され、Metaplex DAS APIを通じてクエリ可能になる方法を説明します。このページでは、バリデーターからエンドユーザーAPIまでのリファレンスインデックス化アーキテクチャについて説明します。
+
+- cNFTデータはオンチェーンアカウントではなく、トランザクションログに保存されます
+- DAS APIは便利な検索のためにこのデータをリアルタイムでインデックス化します
+- リファレンス実装は、Geyserプラグイン、Redisキュー、インジェスタープロセス、Postgresデータベースを使用します
 
 [概要](/ja/smart-contracts/bubblegum#read-api)で述べたように、圧縮NFT（cNFT）が作成または変更されるたびに、対応するトランザクションが台帳にオンチェーンで記録されますが、cNFTの状態データはアカウントスペースに保存されません。これがcNFTの大幅なコスト削減の理由ですが、利便性と使いやすさのために、cNFTの状態データはRPCプロバイダーによってインデックス化され、**Metaplex DAS API**を通じて利用できます。
 
@@ -47,3 +69,45 @@ Redisストリーム。
 {% node theme="dimmed" %}
 Postgres \
 データベース
+{% /node %}
+{% /node %}
+
+{% node x="-228" parent="database" %}
+{% node #api label="APIプロセス" theme="indigo" /%}
+{% node theme="dimmed" %}
+RPCプロバイダーがAPIを実行し \
+エンドユーザーにアセットデータを \
+提供します。
+{% /node %}
+{% /node %}
+
+{% node x="-200" parent="api" %}
+{% node #end_user label="エンドユーザー" theme="mint" /%}
+{% node theme="dimmed" %}
+getAsset()、 \
+getAssetProof()などを呼び出します。
+{% /node %}
+{% /node %}
+
+{% edge from="validator" to="messenger" /%}
+{% edge from="messenger" to="ingester" /%}
+{% edge from="ingester" to="database" /%}
+{% edge from="database" to="api" /%}
+{% edge from="api" to="end_user" /%}
+
+{% /diagram %}
+
+## Notes
+
+- DAS APIはSolanaプロトコル自体の一部ではありません。RPCプロバイダーによって維持されるインデックス化レイヤーです。
+- RPCプロバイダーによって実装が異なる場合があります。Metaplexのリファレンス実装はGitHubでオープンソースとして公開されています。
+
+## Glossary
+
+| 用語 | 定義 |
+|------|------|
+| **DAS API** | Digital Asset Standard API — インデックス化されたcNFTデータをクエリするためのRPC拡張 |
+| **Geyserプラグイン** | トランザクションとアカウント更新に関するリアルタイム通知を受け取るSolanaバリデータープラグイン |
+| **Plerkle** | インデックス化のためにBubblegumと圧縮トランザクションをキャプチャするMetaplexのGeyserプラグイン |
+| **spl-noop** | トランザクションログの切り捨てを回避するために命令データとしてイベントを発行するために使用されるSolanaプログラム |
+| **インジェスター** | Redisストリームからトランザクションデータを消費してPostgresに保存するプロセス |

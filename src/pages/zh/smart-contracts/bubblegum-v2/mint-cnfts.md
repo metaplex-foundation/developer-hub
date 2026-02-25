@@ -1,8 +1,44 @@
 ---
 title: 铸造压缩NFT
-metaTitle: 铸造压缩NFT | Bubblegum V2
+metaTitle: 铸造压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum V2上铸造压缩NFT。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - mint compressed NFT
+  - mint cNFT
+  - NFT minting
+  - Bubblegum mint
+  - collection mint
+  - mintV2
+  - MPL-Core collection
+about:
+  - Compressed NFTs
+  - NFT minting
+  - Solana transactions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 如何将压缩NFT铸造到集合中？
+    a: 使用mintV2指令，将coreCollection参数设置为您的MPL-Core集合地址。集合必须启用BubblegumV2插件。
+  - q: 铸造后如何获取资产ID？
+    a: 在交易完成后使用parseLeafFromMintV2Transaction辅助函数。它返回包含资产ID的叶子模式。
+  - q: 任何人都可以从我的树中铸造吗？
+    a: 只有在树设置为公开时才可以。对于私有树，只有树创建者或树委托人才能铸造。
+  - q: 铸造需要哪些元数据字段？
+    a: MetadataArgsV2需要name、uri、sellerFeeBasisPoints、collection（或none）以及creators数组。
 ---
+
+## Summary
+
+**Minting compressed NFTs** adds new cNFTs to a Bubblegum Tree using the **mintV2** instruction. This page covers minting with and without MPL-Core collections, and retrieving the asset ID from mint transactions.
+
+- Mint cNFTs to a Bubblegum Tree using the mintV2 instruction
+- Mint directly into an MPL-Core collection with the BubblegumV2 plugin
+- Retrieve the asset ID and leaf schema from the mint transaction
+- Configure metadata including name, URI, creators, and royalties
 
 在[上一页](/zh/smart-contracts/bubblegum-v2/create-trees)中，我们看到需要一个Bubblegum树来铸造压缩NFT，以及如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
 
@@ -133,3 +169,25 @@ const assetId = leaf.id;
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- The Bubblegum Tree must be created before minting. See [Creating Trees](/smart-contracts/bubblegum-v2/create-trees).
+- For collection mints, the MPL-Core collection must have the `BubblegumV2` plugin enabled.
+- The collection authority must sign the transaction when minting to a collection, regardless of whether the tree is public or private.
+- Use `parseLeafFromMintV2Transaction` only after the transaction is **finalized**, not just confirmed.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **mintV2** | The Bubblegum V2 instruction for minting compressed NFTs, replacing the V1 mint instructions |
+| **MetadataArgsV2** | The metadata structure passed to mintV2, containing name, URI, royalties, collection, and creators |
+| **Collection Authority** | The signer authorized to manage the MPL-Core collection — required when minting to a collection |
+| **BubblegumV2 Plugin** | An MPL-Core collection plugin that enables Bubblegum V2 features (freeze, soulbound, royalties) |
+| **Asset ID** | A PDA derived from the merkle tree address and leaf index, uniquely identifying a compressed NFT |
+| **Leaf Schema** | The data structure stored as a leaf in the merkle tree, containing the cNFT's hashed metadata and ownership info |

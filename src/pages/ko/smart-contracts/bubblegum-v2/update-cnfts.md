@@ -1,8 +1,39 @@
 ---
 title: 압축된 NFT 업데이트
-metaTitle: 압축된 NFT 업데이트 | Bubblegum V2
+metaTitle: 압축된 NFT 업데이트 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 업데이트하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - update compressed NFT
+  - update cNFT
+  - NFT metadata update
+  - Bubblegum update
+  - updateMetadataV2
+about:
+  - Compressed NFTs
+  - NFT metadata
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 압축된 NFT의 메타데이터를 업데이트할 수 있는 사람은 누구인가요?
+    a: cNFT가 컬렉션에 속한 경우, 컬렉션 권한만 업데이트할 수 있습니다. 컬렉션에 속하지 않은 경우, 트리 권한(트리 생성자 또는 위임자)이 업데이트할 수 있습니다.
+  - q: cNFT에서 업데이트할 수 있는 필드는 무엇인가요?
+    a: UpdateArgsArgs에 정의된 이름, URI, 판매자 수수료 기준 포인트 및 기타 메타데이터 필드를 업데이트할 수 있습니다. 변경하려는 필드에는 some('newValue')을 사용하세요.
+  - q: 업데이트 시 컬렉션을 전달해야 하나요?
+    a: 예, cNFT가 컬렉션에 속한 경우. 컬렉션의 공개 키와 함께 coreCollection 매개변수를 전달하세요. 컬렉션 권한이 트랜잭션에 서명해야 합니다.
 ---
+
+## Summary
+
+**Updating a compressed NFT** modifies its metadata using the **updateMetadataV2** instruction. This page covers update authority rules for collection-based and tree-based cNFTs.
+
+- Update cNFT metadata (name, URI, creators, royalties) using updateMetadataV2
+- Collection authority updates cNFTs that belong to a collection
+- Tree authority updates cNFTs that do not belong to a collection
+- Changes are reflected in the merkle tree and indexed by DAS API providers
 
 **updateMetadataV2** 명령어는 압축된 NFT의 메타데이터를 수정하는 데 사용할 수 있습니다. 머클 루트가 업데이트되어 데이터의 전파된 해시를 반영하고, [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)를 준수하는 RPC 제공업체는 cNFT의 인덱스를 업데이트합니다.
 
@@ -72,3 +103,23 @@ await updateMetadataV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
+- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
+- Use `some()` for fields you want to update and omit fields you want to keep unchanged.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **updateMetadataV2** | The Bubblegum V2 instruction for modifying compressed NFT metadata |
+| **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
+| **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
+| **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
+| **currentMetadata** | The existing metadata of the cNFT, fetched via getAssetWithProof and required for verification |

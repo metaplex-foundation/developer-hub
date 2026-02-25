@@ -1,8 +1,51 @@
 ---
 title: 概要
-metaTitle: 概要 | Bubblegum V2
+metaTitle: 概要 - Bubblegum V2
 description: Bubblegum V2と圧縮NFTの概要を説明します。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - compressed NFT
+  - cNFT
+  - Bubblegum
+  - merkle tree
+  - Solana NFT
+  - NFT compression
+  - MPL-Bubblegum
+  - scalable NFTs
+  - on-chain NFT
+  - Bubblegum V2
+about:
+  - Compressed NFTs
+  - Solana blockchain
+  - NFT standards
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Bubblegum V2とは何ですか？
+    a: Bubblegum V2は、SolanaでcNFT（圧縮NFT）を作成・管理するMetaplexのプログラムです。マークルツリーを使用してNFTデータを従来のNFTのわずかなコストで保存します。
+  - q: 圧縮NFTのミントにはいくらかかりますか？
+    a: コストはツリーサイズによって異なります。100万個のcNFTを保持するツリーはレントで約8.5 SOLかかり、各cNFTのコストは約0.00001 SOLとなり、標準的なNFTより桁違いに安くなります。
+  - q: Bubblegum V1とV2の違いは何ですか？
+    a: Bubblegum V2はフリーズ/解凍機能、ソウルバウンドNFT、MPL-Coreコレクション統合、ロイヤリティ強制、パーマネントデリゲート、新しいLeafSchemaV2を追加します。
+  - q: 圧縮NFTを使用するには特別なRPCが必要ですか？
+    a: はい。圧縮NFTには、cNFTデータのインデックスと取得のためにMetaplex DAS APIをサポートするRPCプロバイダーが必要です。互換性のあるプロバイダーについてはRPCプロバイダーページをご覧ください。
+  - q: 圧縮NFTはコレクションで使用できますか？
+    a: はい。Bubblegum V2はMPL-Coreコレクションを使用してcNFTをグループ化し、ロイヤリティ強制やフリーズデリゲートなどのコレクションレベルの機能を可能にします。
+  - q: cNFTの文脈でマークルツリーとは何ですか？
+    a: マークルツリーは、cNFTデータのハッシュをリーフとして保存するオンチェーンデータ構造です。完全なNFTデータをオンチェーンに保存することなく、NFTの所有権とデータの暗号学的検証を可能にします。
 ---
+
+## Summary
+
+**Bubblegum V2** (MPL-Bubblegum) is the Metaplex program for creating and managing compressed NFTs on Solana. It stores NFT data as hashed leaves in on-chain merkle trees, reducing minting costs by orders of magnitude compared to traditional NFTs.
+
+- Mint millions of cNFTs for a fraction of the cost of standard Solana NFTs (~0.00001 SOL per cNFT in large trees)
+- New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
+- Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
+- Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
 
 Bubblegum V2は、Solana上で圧縮NFT（cNFT）を作成し、操作するための最新のMetaplexプロトコルプログラムです。大規模運用向けに構築されたBubblegum V2は、オリジナルのBubblegumの利点をすべて保持しながら、新しい強力な機能を導入しています。圧縮NFTは、オンチェーンでのデータ保存方法を再考することで、NFT作成を新しい規模のレベルまでスケールさせることを可能にします。 {% .lead %}
 
@@ -151,3 +194,22 @@ NFTデータがアカウント内に存在しないにもかかわらず、圧�
 ## 次のステップ
 
 圧縮NFTが高レベルでどのように機能し、Bubblegum V2の新機能について理解したので、圧縮NFTとの相互作用に使用できるさまざまな言語/フレームワークを列挙した[はじめに](/ja/smart-contracts/bubblegum-v2/sdk)ページをチェックすることをお勧めします。その後、さまざまな[機能ページ](/ja/smart-contracts/bubblegum-v2/create-trees)を使用して、cNFTで実行できる特定の操作について詳しく学ぶことができます。最後に、cNFTとマークルツリーの知識を深めるための[高度なガイド](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)も利用できます。
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **cNFT** | Compressed NFT — an NFT stored as a hashed leaf in a merkle tree rather than in a dedicated on-chain account |
+| **Merkle Tree** | A binary tree data structure where each leaf is a hash of data and each parent node is a hash of its children, enabling efficient cryptographic verification |
+| **Leaf** | A leaf node in the merkle tree representing one compressed NFT's hashed data (LeafSchemaV2) |
+| **Proof** | A list of sibling hashes along the path from a leaf to the root, used to verify a cNFT exists in the tree |
+| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
+| **DAS API** | Digital Asset Standard API — an RPC extension for indexing and fetching compressed NFT data from transaction history |
+| **LeafSchemaV2** | The V2 data structure containing id, owner, delegate, nonce, data hash, creator hash, collection hash, asset data hash, and flags |
+| **TreeConfig** | A PDA account derived from the merkle tree address that stores Bubblegum-specific configuration (creator, delegate, capacity, version) |
+| **Bubblegum Tree** | The combination of a Merkle Tree account and its associated TreeConfigV2 PDA account |
+| **Soulbound** | A non-transferable cNFT permanently bound to its owner's wallet, created via the permanent freeze delegate |

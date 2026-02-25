@@ -1,10 +1,35 @@
 ---
 title: Storing and Indexing NFT Data
-metaTitle: Storing and Indexing NFT Data | Bubblegum V2
-description: Learn more about how NFT data is stored on Bubblegum.
+metaTitle: Storing and Indexing NFT Data - Bubblegum V2 - Metaplex
+description: Learn how compressed NFT data is stored in transactions and indexed by the Metaplex DAS API. Covers the reference implementation architecture including Geyser plugin, Redis, and Postgres.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT indexing
+  - DAS
+  - digital asset standard
+  - off-chain data
+  - RPC indexer
+  - Geyser plugin
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 ---
 
-As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded onchain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **the Metaplex DAS API**.
+## Summary
+
+**Storing and indexing NFT data** explains how compressed NFT state is persisted in transactions and made queryable through the Metaplex DAS API. This page covers the reference indexing architecture from validator to end-user API.
+
+- cNFT data is stored in transaction logs, not in on-chain accounts
+- The DAS API indexes this data in real-time for convenient retrieval
+- The reference implementation uses a Geyser plugin, Redis queues, an ingester process, and a Postgres database
+
+As mentioned in the [Overview](/smart-contracts/bubblegum#read-api), whenever compressed NFTs (cNFTs) are created or modified, the corresponding transactions are recorded on-chain in the ledger, but the cNFT state data is not stored in account space.  This is the reason for the massive cost savings of cNFTs, but for convenience and usability, the cNFT state data is indexed by RPC providers and available via the **Metaplex DAS API**.
 
 Metaplex has created a [reference implementation](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure) of the DAS API, and some RPC providers use some or all of this code for their particular implementation, while other RPC providers have written their own.  See the ["Metaplex DAS API RPCs"](/rpc-providers) page for a list of other RPC providers that support the Metaplex DAS API.
 
@@ -12,8 +37,8 @@ The Metaplex reference implementation of the DAS API includes the following key 
 * A Solana no-vote validator - This validator is configured to only have secure access to the validator ledger and account data under consensus.
 * A Geyser plugin - The plugin is called "Plerkle" and runs on the validator.  The plugin is notified whenever there are account updates, slot status updates, transactions, or block metadata updates.  For the purpose of cNFT indexing, the plugin's `notify_transaction` method is used to provide transaction data whenever Bubblegum or spl-account-compression transactions are seen on the validator.  In reality, these transactions are coming from the spl-noop ("no operation") program, which is used by spl-account-compression and Bubblegum to avoid log truncation by turning events into spl-noop instruction data.
 * A Redis cluster - Redis streams are used as queues for the each type of update (account, transaction, etc.).  The Geyser plugin is the producer of data going into these streams.  The Geyser plugin translates the data into the Plerkle serialization format, which uses the Flatbuffers protocol, and then puts the serialized record into the appropriate Redis data stream.
-* An ingester process - This is the the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
- * Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
+* An ingester process - This is the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
+* Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
 * API process - When end-users request asset data from RPC providers, the API process can retrieve the asset data from the database and serve it for the request.
 
 {% diagram %}
@@ -75,3 +100,19 @@ getAssetProof(), etc.
 {% edge from="api" to="end_user" /%}
 
 {% /diagram %}
+
+
+## Notes
+
+- The DAS API is not part of the Solana protocol itself — it is an indexing layer maintained by RPC providers.
+- Different RPC providers may have different implementations. The Metaplex reference implementation is open source on GitHub.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — the RPC extension for querying indexed cNFT data |
+| **Geyser Plugin** | A Solana validator plugin that receives real-time notifications about transactions and account updates |
+| **Plerkle** | The Metaplex Geyser plugin that captures Bubblegum and compression transactions for indexing |
+| **spl-noop** | A Solana program used to emit events as instruction data, avoiding transaction log truncation |
+| **Ingester** | A process that consumes transaction data from Redis streams and stores it in Postgres |

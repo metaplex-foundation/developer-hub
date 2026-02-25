@@ -1,8 +1,45 @@
 ---
 title: Bubblegum 트리 생성
-metaTitle: Bubblegum 트리 생성 | Bubblegum V2
+metaTitle: Bubblegum 트리 생성 - Bubblegum V2
 description: 압축된 NFT를 보관할 수 있는 새로운 머클 트리를 생성하고 가져오는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - merkle tree
+  - create tree
+  - tree capacity
+  - canopy depth
+  - Bubblegum tree
+  - cNFT tree
+  - max depth
+  - max buffer size
+about:
+  - Compressed NFTs
+  - Merkle trees
+  - Solana accounts
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 프로젝트에 적합한 트리 크기를 어떻게 선택하나요?
+    a: 권장 설정 표를 사용하세요. 소규모 프로젝트의 경우 깊이 14 트리는 약 0.34 SOL로 16,384개의 cNFT를 보유합니다. 대규모 드롭의 경우 깊이 20 트리는 약 8.5 SOL로 100만 개의 cNFT를 보유합니다.
+  - q: 생성 후 트리 크기를 변경할 수 있나요?
+    a: 아니요. 최대 깊이, 최대 버퍼 크기 및 캐노피 깊이는 생성 시 고정됩니다. 다른 매개변수가 필요하면 새 트리를 만들어야 합니다.
+  - q: 최대 깊이와 트리 용량의 관계는 무엇인가요?
+    a: 트리가 보유할 수 있는 최대 cNFT 수는 2^maxDepth입니다. 예를 들어, maxDepth=20은 1,048,576개의 cNFT를 지원합니다.
+  - q: 최대 버퍼 크기는 무엇을 제어하나요?
+    a: 최대 버퍼 크기는 동일한 블록에서 트리에 대해 동시에 발생할 수 있는 수정 횟수를 결정합니다. 값이 높을수록 더 많은 병렬 트랜잭션이 허용되지만 트리 비용이 증가합니다.
 ---
+
+## Summary
+
+**Creating a Bubblegum Tree** is the first step before minting compressed NFTs. This page covers how to create and fetch the two required on-chain accounts: the Merkle Tree account and the TreeConfigV2 PDA.
+
+- Create a Bubblegum Tree with configurable max depth, max buffer size, and canopy depth
+- Choose tree parameters based on your project's cNFT capacity needs (16K to 1B+ cNFTs)
+- Fetch merkle tree and tree config account data after creation
+- Understand the cost tradeoffs for different tree configurations
 
 ## 소개
 
@@ -179,3 +216,27 @@ const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree });
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Tree parameters (max depth, max buffer size, canopy depth) are **immutable** after creation. Choose carefully based on your project's needs.
+- Larger trees cost more in rent but have a lower per-cNFT cost. See the recommended settings table above for cost estimates.
+- The Tree Creator is stored in the TreeConfigV2 account and can delegate minting authority to another account (see [Delegating Trees](/smart-contracts/bubblegum-v2/delegate-trees)).
+- Public trees allow anyone to mint. Private trees restrict minting to the Tree Creator or Tree Delegate.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Bubblegum Tree** | The combination of a Merkle Tree account and its associated TreeConfigV2 PDA |
+| **Merkle Tree Account** | The on-chain account holding the merkle tree data, owned by the MPL Account Compression Program |
+| **TreeConfigV2** | A PDA derived from the Merkle Tree address, storing Bubblegum-specific config (creator, delegate, capacity, mint count, public flag) |
+| **Max Depth** | The maximum depth of the merkle tree, determining capacity as 2^maxDepth |
+| **Max Buffer Size** | The number of change log entries stored, determining how many concurrent modifications the tree supports per block |
+| **Canopy Depth** | The number of upper tree levels cached on-chain, reducing proof sizes in transactions |
+| **Tree Creator** | The account that created the tree and has authority to manage it and mint cNFTs |
+| **Tree Delegate** | An account authorized by the Tree Creator to mint cNFTs on their behalf |

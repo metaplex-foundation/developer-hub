@@ -1,8 +1,51 @@
 ---
 title: 개요
-metaTitle: 개요 | Bubblegum V2
+metaTitle: 개요 - Bubblegum V2
 description: Bubblegum V2와 압축된 NFT에 대한 고수준 개요를 제공합니다.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - compressed NFT
+  - cNFT
+  - Bubblegum
+  - merkle tree
+  - Solana NFT
+  - NFT compression
+  - MPL-Bubblegum
+  - scalable NFTs
+  - on-chain NFT
+  - Bubblegum V2
+about:
+  - Compressed NFTs
+  - Solana blockchain
+  - NFT standards
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Bubblegum V2란 무엇인가요?
+    a: Bubblegum V2는 Solana에서 압축된 NFT(cNFT)를 생성하고 관리하기 위한 Metaplex의 프로그램입니다. 머클 트리를 사용하여 기존 NFT 비용의 일부로 NFT 데이터를 저장합니다.
+  - q: 압축된 NFT를 민팅하는 데 얼마나 드나요?
+    a: 비용은 트리 크기에 따라 다릅니다. 100만 개의 cNFT를 보유하는 트리는 렌트로 약 8.5 SOL이 들며, 각 cNFT 비용은 약 0.00001 SOL로 표준 NFT보다 수십 배 저렴합니다.
+  - q: Bubblegum V1과 V2의 차이점은 무엇인가요?
+    a: Bubblegum V2는 동결/해동 기능, 소울바운드 NFT, MPL-Core 컬렉션 통합, 로열티 강제, 영구 위임자 및 새로운 LeafSchemaV2를 추가합니다.
+  - q: 압축된 NFT를 사용하려면 특별한 RPC가 필요한가요?
+    a: 예. 압축된 NFT는 cNFT 데이터를 인덱싱하고 가져오기 위해 Metaplex DAS API를 지원하는 RPC 제공자가 필요합니다. 호환 제공자는 RPC 제공자 페이지를 참조하세요.
+  - q: 압축된 NFT를 컬렉션에서 사용할 수 있나요?
+    a: 예. Bubblegum V2는 MPL-Core 컬렉션을 사용하여 cNFT를 그룹화하며, 로열티 강제 및 동결 위임자와 같은 컬렉션 수준의 기능을 활성화합니다.
+  - q: cNFT 맥락에서 머클 트리란 무엇인가요?
+    a: 머클 트리는 cNFT 데이터의 해시를 리프로 저장하는 온체인 데이터 구조입니다. 전체 NFT 데이터를 온체인에 저장하지 않고도 NFT 소유권과 데이터의 암호학적 검증을 가능하게 합니다.
 ---
+
+## Summary
+
+**Bubblegum V2** (MPL-Bubblegum) is the Metaplex program for creating and managing compressed NFTs on Solana. It stores NFT data as hashed leaves in on-chain merkle trees, reducing minting costs by orders of magnitude compared to traditional NFTs.
+
+- Mint millions of cNFTs for a fraction of the cost of standard Solana NFTs (~0.00001 SOL per cNFT in large trees)
+- New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
+- Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
+- Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
 
 Bubblegum V2는 Solana에서 압축된 NFT(cNFT)를 생성하고 상호 작용하기 위한 Metaplex Protocol 프로그램의 최신 반복입니다. 대규모 운영을 위해 구축된 Bubblegum V2는 원본 Bubblegum의 모든 장점을 유지하면서 강력한 새 기능을 도입합니다. 압축된 NFT는 온체인에서 데이터를 저장하는 방식을 재고함으로써 NFT 생성을 새로운 규모로 확장할 수 있게 합니다. {% .lead %}
 
@@ -151,3 +194,22 @@ NFT 데이터가 계정 내에 있지 않더라도 압축된 NFT에서 다양한
 ## 다음 단계
 
 압축된 NFT가 높은 수준에서 어떻게 작동하는지와 Bubblegum V2의 새로운 기능을 알았으니 압축된 NFT와 상호 작용하는 데 사용할 수 있는 다양한 언어/프레임워크를 열거하는 [시작하기](/ko/smart-contracts/bubblegum-v2/sdk) 페이지를 확인하는 것을 권장합니다. 그 후 다양한 [기능 페이지](/ko/smart-contracts/bubblegum-v2/create-trees)를 사용하여 cNFT에서 수행할 수 있는 특정 작업에 대해 더 자세히 알아볼 수 있습니다. 마지막으로 cNFT와 머클 트리에 대한 지식을 깊게 하기 위해 [고급 가이드](/ko/smart-contracts/bubblegum-v2/concurrent-merkle-trees)도 사용할 수 있습니다.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **cNFT** | Compressed NFT — an NFT stored as a hashed leaf in a merkle tree rather than in a dedicated on-chain account |
+| **Merkle Tree** | A binary tree data structure where each leaf is a hash of data and each parent node is a hash of its children, enabling efficient cryptographic verification |
+| **Leaf** | A leaf node in the merkle tree representing one compressed NFT's hashed data (LeafSchemaV2) |
+| **Proof** | A list of sibling hashes along the path from a leaf to the root, used to verify a cNFT exists in the tree |
+| **Canopy** | Cached upper nodes of the merkle tree stored on-chain to reduce proof sizes in transactions |
+| **DAS API** | Digital Asset Standard API — an RPC extension for indexing and fetching compressed NFT data from transaction history |
+| **LeafSchemaV2** | The V2 data structure containing id, owner, delegate, nonce, data hash, creator hash, collection hash, asset data hash, and flags |
+| **TreeConfig** | A PDA account derived from the merkle tree address that stores Bubblegum-specific configuration (creator, delegate, capacity, version) |
+| **Bubblegum Tree** | The combination of a Merkle Tree account and its associated TreeConfigV2 PDA account |
+| **Soulbound** | A non-transferable cNFT permanently bound to its owner's wallet, created via the permanent freeze delegate |

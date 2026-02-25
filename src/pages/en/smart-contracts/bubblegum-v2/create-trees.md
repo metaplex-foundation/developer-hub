@@ -1,8 +1,45 @@
 ---
 title: Creating Bubblegum Trees
-metaTitle: Creating Bubblegum Trees | Bubblegum V2
-description: Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2.
+metaTitle: Creating Bubblegum Trees - Bubblegum V2 - Metaplex
+description: Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2. Covers tree capacity, canopy depth, max depth, and max buffer size configuration.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - merkle tree
+  - create tree
+  - tree capacity
+  - canopy depth
+  - Bubblegum tree
+  - cNFT tree
+  - max depth
+  - max buffer size
+about:
+  - Compressed NFTs
+  - Merkle trees
+  - Solana accounts
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: How do I choose the right tree size for my project?
+    a: Use the recommended settings table. For small projects, a depth-14 tree holds 16,384 cNFTs at ~0.34 SOL. For large drops, a depth-20 tree holds 1 million cNFTs at ~8.5 SOL.
+  - q: Can I change the tree size after creation?
+    a: No. The max depth, max buffer size, and canopy depth are fixed at creation time. You must create a new tree if you need different parameters.
+  - q: What is the relationship between max depth and tree capacity?
+    a: The maximum number of cNFTs a tree can hold is 2^maxDepth. For example, maxDepth=20 supports 1,048,576 cNFTs.
+  - q: What does the max buffer size control?
+    a: The max buffer size determines how many concurrent modifications can happen to the tree in the same block. Higher values allow more parallel transactions but increase tree cost.
 ---
+
+## Summary
+
+**Creating a Bubblegum Tree** is the first step before minting compressed NFTs. This page covers how to create and fetch the two required on-chain accounts: the Merkle Tree account and the TreeConfigV2 PDA.
+
+- Create a Bubblegum Tree with configurable max depth, max buffer size, and canopy depth
+- Choose tree parameters based on your project's cNFT capacity needs (16K to 1B+ cNFTs)
+- Fetch merkle tree and tree config account data after creation
+- Understand the cost tradeoffs for different tree configurations
 
 ## Introduction
 
@@ -179,3 +216,42 @@ const treeConfig = await fetchTreeConfigFromSeeds(umi, { merkleTree });
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+
+## Notes
+
+- Tree parameters (max depth, max buffer size, canopy depth) are **immutable** after creation. Choose carefully based on your project's needs.
+- Larger trees cost more in rent but have a lower per-cNFT cost. See the recommended settings table above for cost estimates.
+- The Tree Creator is stored in the TreeConfigV2 account and can delegate minting authority to another account (see [Delegating Trees](/smart-contracts/bubblegum-v2/delegate-trees)).
+- Public trees allow anyone to mint. Private trees restrict minting to the Tree Creator or Tree Delegate.
+
+## FAQ
+
+### How do I choose the right tree size for my project?
+
+Use the recommended settings table. For small projects or testing, a depth-14 tree holds 16,384 cNFTs at ~0.34 SOL. For large collections, a depth-20 tree holds 1 million cNFTs at ~8.5 SOL. For very large drops, depth-24+ trees hold millions to billions of cNFTs.
+
+### Can I change the tree size after creation?
+
+No. The max depth, max buffer size, and canopy depth are all fixed at creation time and cannot be modified. If you need different parameters, you must create a new tree.
+
+### What is the relationship between max depth and tree capacity?
+
+The maximum number of cNFTs a tree can hold is calculated as `2^maxDepth`. For example, `maxDepth=14` supports 16,384 cNFTs, `maxDepth=20` supports 1,048,576, and `maxDepth=30` supports over 1 billion.
+
+### What does the max buffer size control?
+
+The max buffer size determines the minimum concurrency limit — how many modifications can happen to the tree within the same Solana block. Higher values allow more parallel transactions (mints, transfers, burns) but increase the tree's rent cost.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Bubblegum Tree** | The combination of a Merkle Tree account and its associated TreeConfigV2 PDA |
+| **Merkle Tree Account** | The on-chain account holding the merkle tree data, owned by the MPL Account Compression Program |
+| **TreeConfigV2** | A PDA derived from the Merkle Tree address, storing Bubblegum-specific config (creator, delegate, capacity, mint count, public flag) |
+| **Max Depth** | The maximum depth of the merkle tree, determining capacity as 2^maxDepth |
+| **Max Buffer Size** | The number of change log entries stored, determining how many concurrent modifications the tree supports per block |
+| **Canopy Depth** | The number of upper tree levels cached on-chain, reducing proof sizes in transactions |
+| **Tree Creator** | The account that created the tree and has authority to manage it and mint cNFTs |
+| **Tree Delegate** | An account authorized by the Tree Creator to mint cNFTs on their behalf |

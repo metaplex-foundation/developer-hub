@@ -111,6 +111,50 @@ The `src/examples/` directory contains code examples used in the documentation.
 - Run `node scripts/build-examples.js` to regenerate all `index.js` files
 - The script parses `[IMPORTS]`, `[SETUP]`, `[MAIN]`, `[OUTPUT]` sections from source files
 
+## Localisation Workflow
+
+Documentation exists in four locales: `en`, `ja`, `ko`, `zh`. All locales must be kept in sync — the same pages must exist in every locale directory.
+
+**Editing order:**
+1. Always edit `/en` files first. The English pages are the source of truth.
+2. Once `/en` edits are complete, ask the user before creating or updating the locale files (`/ja`, `/ko`, `/zh`).
+3. Unless a request explicitly targets a specific locale, always derive locale content from the current `/en` version.
+
+**Parity rules:**
+- Every page that exists in `/en` must exist in all other locale directories with the same filename.
+- If a new page is added to `/en`, a corresponding page must be created in `/ja`, `/ko`, and `/zh` (after user confirmation).
+- Locale pages must mirror the structure, sections, code examples, frontmatter fields, and Markdoc components of the `/en` page.
+- **What to translate:** page body prose, `title`, `metaTitle`, `description`, and `faqs` Q&A content. JSON-LD FAQ schema (the `faqs` frontmatter) must be in the same language as the page — Google requires structured data to match the visible content language.
+- **Keep in English:** `keywords`, `about`, `programmingLanguage`, `proficiencyLevel`, code examples, Markdoc component names, and date fields (`created`, `updated`).
+
+## Content Quality Standard (GEO/LLM)
+
+**At the start of any session involving documentation creation or editing, you MUST read the rubric once:**
+
+```
+./GEO-LLM-EVALUATION-RUBRIC.md
+```
+
+Read it once — it stays in context for the entire session. Do not re-read it for every file. Evaluate each finished page against it before considering the work complete. Target a score of 90%+ of applicable points for the page type.
+
+**Page type matters.** The rubric defines four page types — Tutorial/Guide, Concept/Architecture, Reference (API/CLI/SDK), and Overview/Index — each with different crucial dimensions and optional (N/A) sections. Not every section belongs on every page. Check the Page Type Matrix in the rubric to determine what applies before adding sections.
+
+Requirements that apply to **all** page types regardless:
+- `## Summary` block (1-2 declarative sentences + 3-4 bullets) at the top
+- First sentence under every H2/H3 is a direct declarative answer (BLUF)
+- Headers are context-independent — no pronouns or shorthand (safe for RAG chunking)
+- First mention of key terms links to their canonical concept pages
+- Inline callouts for constraints; do **not** create `## Out of Scope` sections
+- `## Notes` section for caveats and compatibility notes
+- Frontmatter must include: `title`, `metaTitle`, `description`, `keywords`, `about`, `proficiencyLevel`, `created`, `updated`
+
+Requirements that are **conditional on page type**:
+- `## FAQ` — Tutorial and Concept pages; not required on pure Reference pages
+- `## Glossary` — Concept and Overview pages; not required on Tutorial or Reference pages
+- Quick Start + jump links — Tutorial/Guide pages
+- Quick Reference table — Reference, How-To, and Overview pages
+- `faqs` frontmatter field — only when a FAQ section is present
+
 ## Important Notes
 
 - Uses pnpm workspaces - always use `pnpm` not `npm`

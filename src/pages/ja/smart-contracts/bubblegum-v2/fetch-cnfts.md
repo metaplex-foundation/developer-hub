@@ -1,8 +1,42 @@
 ---
 title: 圧縮NFTの取得
-metaTitle: 圧縮NFTの取得 | Bubblegum V2
+metaTitle: 圧縮NFTの取得 - Bubblegum V2
 description: Bubblegumで圧縮NFTを取得する方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - fetch compressed NFT
+  - read cNFT
+  - DAS API
+  - digital asset standard
+  - getAsset
+  - getAssetProof
+  - getAssetsByOwner
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: どのRPCプロバイダーがDAS APIをサポートしていますか？
+    a: 維持されているリストについてはRPCプロバイダーページをご参照ください。Helius、Triton、ShyftなどのメジャープロバイダーがDAS APIをサポートしています。
+  - q: 圧縮NFTのアセットIDを取得するにはどうすればよいですか？
+    a: マークルツリーのアドレスとリーフインデックスがわかる場合はfindLeafAssetIdPdaを使用します。そうでなければ、getAssetsByOwnerまたはgetAssetsByGroupを使用してアセットとそのIDを検索します。
+  - q: getAssetとgetAssetProofの違いは何ですか？
+    a: getAssetはcNFTのメタデータ、所有権、圧縮情報を返します。getAssetProofは転送、バーン、更新などの書き込み操作に必要なマークルプルーフを返します。
 ---
+
+## Summary
+
+**Fetching compressed NFTs** retrieves cNFT data and proofs using the Metaplex DAS API. This page covers the DAS API setup, asset IDs, fetching individual and multiple cNFTs, and retrieving proofs.
+
+- Install and configure the Metaplex DAS API SDK
+- Fetch individual cNFTs using getAsset and their proofs using getAssetProof
+- Fetch multiple cNFTs by owner or by collection
+- Derive Leaf Asset IDs from merkle tree addresses and leaf indices
 
 [概要](/ja/smart-contracts/bubblegum#read-api)ページで述べたように、圧縮NFTは通常のNFTのようにオンチェーンアカウント内に保存されるのではなく、それらを作成し更新したトランザクションにログされます。 {% .lead %}
 
@@ -38,3 +72,25 @@ import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 umi.use(dasApi());
 ```
 {% /totem-prose %}
+
+## Notes
+
+- Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
+- The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
+- Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — an RPC extension for fetching compressed and standard NFT data |
+| **Asset ID** | A unique identifier for an NFT. For cNFTs, it is a PDA derived from the merkle tree and leaf index |
+| **Leaf Asset ID** | The PDA-based identifier specific to compressed NFTs, derived from tree address and leaf index |
+| **getAsset** | DAS API method that returns metadata, ownership, and compression info for a digital asset |
+| **getAssetProof** | DAS API method that returns the merkle proof and root needed for write operations on a cNFT |
+| **getAssetsByOwner** | DAS API method that returns all assets owned by a given wallet address |
+| **getAssetsByGroup** | DAS API method that returns all assets in a given group (e.g., collection) |
