@@ -29,11 +29,11 @@ faqs:
 
 ## Summary
 
-**Delegating compressed NFTs** allows the owner to authorize another account to perform actions on their behalf. This page covers approving and revoking delegate authorities on individual cNFTs.
+**圧縮NFTのデリゲート**では、所有者が別のアカウントに代わりにアクションを実行する権限を付与できます。このページでは、個々のcNFTでデリゲート権限を承認および取り消す方法について説明します。
 
-- Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
-- Revoke a delegate by re-delegating to the owner's own address
-- Delegate authority is reset automatically after a transfer
+- 所有者に代わってcNFTを転送、バーン、または凍結するためのリーフデリゲートを承認する
+- 所有者自身のアドレスへ再デリゲートすることでデリゲートを取り消す
+- デリゲート権限は転送後に自動的にリセットされる
 
 圧縮NFTの所有者は、cNFTの所有権を保持したまま、別のアカウントにデリゲートできます。 {% .lead %}
 

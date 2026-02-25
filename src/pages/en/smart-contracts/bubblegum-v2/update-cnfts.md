@@ -109,7 +109,7 @@ await updateMetadataV2(umi, {
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
 - You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
-- Use `some()` for fields you want to update and omit fields you want to keep unchanged.
+- Use `some()` for fields to update; omit fields you wish to leave unchanged.
 
 ## FAQ
 

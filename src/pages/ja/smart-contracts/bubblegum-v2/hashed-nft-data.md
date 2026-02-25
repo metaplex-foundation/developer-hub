@@ -2,8 +2,8 @@
 title: NFTデータのハッシュ化
 metaTitle: NFTデータのハッシュ化 - Bubblegum V2
 description: BubblegumでNFTデータがどのようにハッシュ化されるかについて詳しく学びます。
-created: '01-15-2025'
-updated: '02-24-2026'
+created: '2025-01-15'
+updated: '2026-02-24'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -23,88 +23,88 @@ programmingLanguage:
 
 ## Summary
 
-**Hashing NFT data** explains how compressed NFT metadata is transformed into merkle tree leaves using keccak-256 hashing. This page covers the MetadataArgsV2 structure, data hash, creator hash, collection hash, and the LeafSchemaV2 format.
+**NFTデータのハッシュ化**では、圧縮NFTメタデータがkeccak-256ハッシュを使用してマークルツリーのリーフに変換される方法を説明します。このページでは、MetadataArgsV2構造、データハッシュ、クリエイターハッシュ、コレクションハッシュ、LeafSchemaV2形式について説明します。
 
-- MetadataArgsV2 is hashed with seller_fee_basis_points to create the data hash
-- Creator array is hashed separately into a creator hash
-- Both hashes are combined with other fields in LeafSchemaV2 to produce the final leaf node
-- LeafSchemaV2 adds collection_hash, asset_data_hash, and flags compared to V1
+- MetadataArgsV2はseller_fee_basis_pointsとともにハッシュ化されてデータハッシュが作成される
+- クリエイター配列は個別にハッシュ化されてクリエイターハッシュになる
+- 両方のハッシュはLeafSchemaV2の他のフィールドと結合されて最終的なリーフノードが生成される
+- LeafSchemaV2はV1と比較してcollection_hash、asset_data_hash、flagsを追加している
 
-In previous sections we stated that each leaf node in a Bubblegum Merkle tree is obtained by hashing the data of the compressed NFT (cNFT).  But how exactly is this done?  We start with the metadata for the cNFT.  Each cNFT of Bubblegum V2 is minted with the following metadata structure as an argument to the minting instruction, note that Bubblegum v1 uses MetadataArgs instead:
+前のセクションで、Bubblegumマークルツリーのリーフノードはそれぞれ圧縮NFT（cNFT）のデータをハッシュ化することで得られると述べました。しかし、これは正確にはどのように行われるのでしょうか？cNFTのメタデータから始めます。Bubblegum V2の各cNFTは、ミント命令への引数として以下のメタデータ構造でミントされることに注意してください。Bubblegum v1は代わりにMetadataArgsを使用します：
 
 ```rust
 pub struct MetadataArgsV2 {
-    /// The name of the asset
+    /// アセットの名前
     pub name: String,
-    /// The symbol for the asset
+    /// アセットのシンボル
     pub symbol: String,
-    /// URI pointing to JSON representing the asset
+    /// アセットを表すJSONを指すURI
     pub uri: String,
-    /// Royalty basis points that goes to creators in secondary sales (0-10000)
+    /// 二次販売で作成者に行くロイヤリティベーシスポイント（0-10000）
     pub seller_fee_basis_points: u16,
-    /// Immutable, once flipped, all sales of this metadata are considered secondary.
+    /// 不変、一度変更されると、このメタデータのすべての販売は二次とみなされる。
     pub primary_sale_happened: bool,
-    /// Whether or not the data struct is mutable, default is not
+    /// データ構造が可変かどうか、デフォルトは不変
     pub is_mutable: bool,
-    /// Token standard.  Currently only `NonFungible` is allowed.
+    /// トークン標準。現在、`NonFungible`のみが許可されている。
     pub token_standard: Option<TokenStandard>,
-    /// Creator array
+    /// 作成者配列
     pub creators: Vec<Creator>,
-    /// Collection.  Note in V2 its just a `Pubkey` and is always considered verified.
+    /// コレクション。V2では単に`Pubkey`であり、常に検証済みとみなされる。
     pub collection: Option<Pubkey>,
 }
 ```
 
-The cNFT's metadata is hashed multiple times as shown in the diagram and described below:
+cNFTのメタデータは、図に示され以下に説明されているように複数回ハッシュ化されます：
 
 {% diagram %}
 
 {% node %}
-{% node #metadata label="Metadata Args" theme="blue" /%}
-{% node label="Name" /%}
-{% node label="Symbol" /%}
+{% node #metadata label="メタデータ引数" theme="blue" /%}
+{% node label="名前" /%}
+{% node label="シンボル" /%}
 {% node label="URI" /%}
-{% node label="Seller Fee Basis Points" /%}
-{% node label="Primary Sale Happened" /%}
-{% node label="Is Mutable" /%}
-{% node label="Token Standard" /%}
-{% node label="Collection" /%}
-{% node label="Creators" /%}
+{% node label="販売者手数料ベーシスポイント" /%}
+{% node label="主要販売が発生" /%}
+{% node label="可変性" /%}
+{% node label="トークン標準" /%}
+{% node label="コレクション" /%}
+{% node label="作成者" /%}
 {% /node %}
 
-{% node #seller-fee-basis-points parent="metadata" y="305" label="Seller Fee Basis Points" theme="blue" /%}
+{% node #seller-fee-basis-points parent="metadata" y="305" label="販売者手数料ベーシスポイント" theme="blue" /%}
 
-{% node #creators parent="metadata" y="370" label="Creators" theme="blue" /%}
+{% node #creators parent="metadata" y="370" label="作成者" theme="blue" /%}
 
 {% node parent="metadata" x="300" y="150" %}
-{% node #data-hash label="Data Hash" theme="mint" /%}
+{% node #data-hash label="データハッシュ" theme="mint" /%}
 {% node theme="transparent" %}
-Hash(Metadata Args, \
-Seller Fee Basis Points)
+ハッシュ(メタデータ引数, \
+販売者手数料ベーシスポイント)
 {% /node %}
 {% /node %}
 
 {% node parent="creators" x="300" %}
-{% node #creator-hash label="Creator Hash" theme="mint" /%}
-{% node theme="transparent" label="Hash(Creators)" /%}
+{% node #creator-hash label="クリエイターハッシュ" theme="mint" /%}
+{% node theme="transparent" label="ハッシュ(作成者)" /%}
 {% /node %}
 
 {% node parent="data-hash" x="250" %}
-{% node #leaf-schema label="Leaf Schema V2" theme="blue" /%}
+{% node #leaf-schema label="リーフスキーマ V2" theme="blue" /%}
 {% node label="ID" /%}
-{% node label="Owner" /%}
-{% node label="Delegate" /%}
-{% node label="Nonce" /%}
-{% node label="Data Hash" /%}
-{% node label="Creator Hash" /%}
-{% node label="Collection Hash (new with V2)" /%}
-{% node label="Asset Data Hash (new with V2)" /%}
-{% node label="Flags (new with V2)" /%}
+{% node label="所有者" /%}
+{% node label="デリゲート" /%}
+{% node label="ノンス" /%}
+{% node label="データハッシュ" /%}
+{% node label="クリエイターハッシュ" /%}
+{% node label="コレクションハッシュ（V2で追加）" /%}
+{% node label="アセットデータハッシュ（V2で追加）" /%}
+{% node label="フラグ（V2で追加）" /%}
 {% /node %}
 
 {% node parent="leaf-schema" x="200" %}
-{% node #leaf-node label="Leaf Node" theme="mint" /%}
-{% node theme="transparent" label="Hash(Leaf Schema)" /%}
+{% node #leaf-node label="リーフノード" theme="mint" /%}
+{% node theme="transparent" label="ハッシュ(リーフスキーマ)" /%}
 {% /node %}
 
 {% edge from="metadata" to="data-hash" /%}
@@ -118,18 +118,18 @@ Seller Fee Basis Points)
 
 {% /diagram %}
 
-First the metadata is hashed, using the keccak-256 hash function.  Keccak-256 is much stronger than SHA-256, and is used in Solana as well as other blockchains such as Ethereum.
+まず、メタデータはkeccak-256ハッシュ関数を使用してハッシュ化されます。Keccak-256はSHA-256よりもはるかに強力であり、SolanaだけでなくEthereumなどの他のブロックチェーンでも使用されています。
 
-Note that the metadata is hashed, and then hashed again with the `seller_fee_basis_points`.  This makes it easier for marketplaces to validate seller fee basis points, because they do not have to pass a full `MetadataArgs` struct around (which can be up to 457 bytes in length).  Instead, they can pass a 32-byte array of already-hashed `MetadataArgs`, and the `u16` (2 bytes) `seller_fee_basis_points`, and by hashing them together they can recreate the data hash.
+メタデータはまずハッシュ化され、次に`seller_fee_basis_points`と一緒に再度ハッシュ化されることに注意してください。これにより、マーケットプレイスは販売者手数料ベーシスポイントを検証しやすくなります。完全な`MetadataArgs`構造体（最大457バイト）を渡す必要がなく、代わりに既にハッシュ化された32バイトの`MetadataArgs`配列と`u16`（2バイト）の`seller_fee_basis_points`を渡すだけで、それらをハッシュ化してデータハッシュを再現できます。
 
 ```rust
-/// Computes the hash of the metadata.
+/// メタデータのハッシュを計算します。
 ///
-/// The hash is computed as the keccak256 hash of the metadata bytes, which is
-/// then hashed with the `seller_fee_basis_points`.
-pub fn hash_metadata(metadata: &MetadataArgs) -> Result<[u8; 32]> {
+/// ハッシュはメタデータバイトのkeccak256ハッシュとして計算され、
+/// 次に`seller_fee_basis_points`でハッシュされます。
+pub fn hash_metadata(metadata: &MetadataArgsV2) -> Result<[u8; 32]> {
     let hash = keccak::hashv(&[metadata.try_to_vec()?.as_slice()]);
-    // Calculate new data hash.
+    // 新しいデータハッシュを計算します。
     Ok(keccak::hashv(&[
         &hash.to_bytes(),
         &metadata.seller_fee_basis_points.to_le_bytes(),
@@ -138,19 +138,19 @@ pub fn hash_metadata(metadata: &MetadataArgs) -> Result<[u8; 32]> {
 }
 ```
 
-Next, the creator array is hashed individually.
+次に、クリエイター配列が個別にハッシュ化されます。
 
 ```rust
-/// Computes the hash of the creators.
+/// クリエイターのハッシュを計算します。
 ///
-/// The hash is computed as the keccak256 hash of the creators bytes.
+/// ハッシュはクリエイターバイトのkeccak256ハッシュとして計算されます。
 pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
-    // convert creator Vec to bytes Vec
+    // クリエイターVecをバイトVecに変換します
     let creator_data = creators
         .iter()
         .map(|c| [c.address.as_ref(), &[c.verified as u8], &[c.share]].concat())
         .collect::<Vec<_>>();
-    // computes the hash
+    // ハッシュを計算します
     keccak::hashv(
         creator_data
             .iter()
@@ -162,26 +162,26 @@ pub fn hash_creators(creators: &[Creator]) -> [u8; 32] {
 }
 ```
 
-Followed by the collection and asset data hash:
+次にコレクションとアセットデータハッシュが計算されます：
 
 ```rust
-/// Computes the hash of the collection (or if `None` provides default) for `LeafSchemaV2`.
+/// `LeafSchemaV2`用のコレクションのハッシュを計算します（`None`の場合はデフォルトを提供）。
 pub fn hash_collection_option(collection: Option<Pubkey>) -> Result<[u8; 32]> {
     let collection_key = collection.unwrap_or(DEFAULT_COLLECTION);
     Ok(keccak::hashv(&[collection_key.as_ref()]).to_bytes())
 }
 
-/// Computes the hash of the asset data (or if `None` provides default) for `LeafSchemaV2`.
+/// `LeafSchemaV2`用のアセットデータのハッシュを計算します（`None`の場合はデフォルトを提供）。
 pub fn hash_asset_data_option(asset_data: Option<&[u8]>) -> Result<[u8; 32]> {
-    let data = asset_data.unwrap_or(b""); // Treat None as empty data
+    let data = asset_data.unwrap_or(b""); // Noneを空データとして扱います
     Ok(keccak::hashv(&[data]).to_bytes())
 }
 
 ```
 
-The data hash and creator hash are added to a leaf schema along with other information needed to uniquely identify the leaf.
+データハッシュとクリエイターハッシュは、リーフを一意に識別するために必要な他の情報とともにリーフスキーマに追加されます。
 
-The separation of data and creator hashes is done for a similar reason as `seller_fee_basis_points` - if a marketplace wants to validate a creator array, it can pass around a 32-byte array of already-hashed `MetadataArgs` along with the creator array.  The values in the creator array can be evaluated, and then hashed into the `creator_hash` and combined with the other existing information into the leaf schema. Bubblegum V1 uses `LeafSchemaV1` while Bubblegum V2 uses `LeafSchemaV2`.
+データハッシュとクリエイターハッシュを分離する理由は、`seller_fee_basis_points`と同様です。マーケットプレイスがクリエイター配列を検証したい場合、クリエイター配列と一緒に既にハッシュ化された32バイトの`MetadataArgs`配列を渡すことができます。クリエイター配列の値を評価し、`creator_hash`にハッシュ化して、リーフスキーマ内の他の既存情報と結合できます。Bubblegum V1は`LeafSchemaV1`を使用し、Bubblegum V2は`LeafSchemaV2`を使用します。
 
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, PartialEq, Eq, Debug, Clone)]
@@ -208,15 +208,15 @@ pub enum LeafSchema {
 }
 ```
 
-Other than data, creator, collection and asset data hashes, the leaf schema contains the following other items:
+データ、クリエイター、コレクション、アセットデータハッシュ以外に、リーフスキーマには以下の項目が含まれています：
 
-* nonce: This is a "number used once" value that is unique for each leaf on the tree.  It is needed to ensure Merkle tree leaves are unique.  In practice it retrieved from off-chain indexers, similar to asset proofs.
-* id - This asset ID is a PDA derived from a fixed prefix, the Merkle tree Pubkey, and the nonce.
-* owner - The Pubkey of the cNFT owner, typically a user's wallet.
-* delegate - The delegate for the cNFT.  By default this is the user's wallet, but can be set by the `delegate` Bubblegum instruction.
-* flags - This is a bitmask with addition information about the nfts status. Bit 0 is the frozen status on asset level (by owner) and bit 1 is the frozen status by the permanent delegate on collection level. Both of them can be changed by the correct authority. Bit 3 is a general `nonTransferable` flag that can be reset by nobody and is used for soulbound assets. The other bits are reserved for future use.
+* nonce：ツリー上の各リーフに固有の「一度だけ使用される数値」です。マークルツリーのリーフが一意であることを保証するために必要です。実際には、アセットプルーフと同様に、オフチェーンインデクサーから取得されます。
+* id - このアセットIDは、固定プレフィックス、マークルツリーの公開鍵、ノンスから派生したPDAです。
+* owner - cNFT所有者の公開鍵。通常はユーザーのウォレットです。
+* delegate - cNFTのデリゲート。デフォルトではユーザーのウォレットですが、`delegate` Bubblegum命令で設定できます。
+* flags - NFTのステータスに関する追加情報を持つビットマスクです。ビット0はアセットレベル（所有者による）の凍結ステータスで、ビット1はコレクションレベルでの永久デリゲートによる凍結ステータスです。どちらも適切な権限によって変更できます。ビット3は、誰もリセットできない一般的な`nonTransferable`フラグで、ソウルバウンドアセットに使用されます。その他のビットは将来の使用のために予約されています。
 
-To create the 32-byte leaf node that exists on the Merkle tree, the entire leaf schema is hashed as follows, depending on the Schema version:
+マークルツリーに存在する32バイトのリーフノードを作成するために、リーフスキーマ全体がスキーマバージョンに応じて以下のようにハッシュ化されます：
 
 ```rust
 impl LeafSchema {
@@ -268,54 +268,7 @@ impl LeafSchema {
 }
 ```
 
-Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.
-
-
-前のセクションで、Bubblegumマークルツリーのリーフノードはそれぞれ圧縮NFT（cNFT）のデータをハッシュ化することで得られると述べました。しかし、これは正確にはどのように行われるのでしょうか？cNFTのメタデータから始めます。Bubblegum V2の各cNFTは、ミント命令への引数として以下のメタデータ構造でミントされることに注意してください。Bubblegum v1は代わりにMetadataArgsを使用します：
-
-```rust
-pub struct MetadataArgsV2 {
-    /// アセットの名前
-    pub name: String,
-    /// アセットのシンボル
-    pub symbol: String,
-    /// アセットを表すJSONを指すURI
-    pub uri: String,
-    /// 二次販売で作成者に行くロイヤリティベーシスポイント（0-10000）
-    pub seller_fee_basis_points: u16,
-    /// 不変、一度変更されると、このメタデータのすべての販売は二次とみなされる。
-    pub primary_sale_happened: bool,
-    /// データ構造が可変かどうか、デフォルトは不変
-    pub is_mutable: bool,
-    /// トークン標準。現在、`NonFungible`のみが許可されている。
-    pub token_standard: Option<TokenStandard>,
-    /// 作成者配列
-    pub creators: Vec<Creator>,
-    /// コレクション。V2では単に`Pubkey`であり、常に検証済みとみなされる。
-    pub collection: Option<Pubkey>,
-}
-```
-
-cNFTのメタデータは、図に示され以下に説明されているように複数回ハッシュ化されます：
-
-{% diagram %}
-
-{% node %}
-{% node #metadata label="メタデータ引数" theme="blue" /%}
-{% node label="名前" /%}
-{% node label="シンボル" /%}
-{% node label="URI" /%}
-{% node label="販売者手数料ベーシスポイント" /%}
-{% node label="主要販売が発生" /%}
-{% node label="可変性" /%}
-{% node label="トークン標準" /%}
-{% node label="コレクション" /%}
-{% node label="作成者" /%}
-{% /node %}
-
-{% node #seller-fee-basis-points parent="metadata" y="305" label="販売者手数料ベーシスポイント" theme="blue" /%}
-
-{% /diagram %}
+リーフを変更するBubblegum操作（`transfer`、`delegate`、`burn`など）は、マークルツリーの変更を検証するために、リーフスキーマバージョンに応じて「変更前」と「変更後」のハッシュ化されたリーフノードを`spl-account-compression`または`mpl-account-compression`に送信します。
 
 ## Notes
 

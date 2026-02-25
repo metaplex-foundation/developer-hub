@@ -2,8 +2,8 @@
 title: 存储和索引NFT数据
 metaTitle: 存储和索引NFT数据 - Bubblegum V2
 description: 了解更多关于Bubblegum上NFT数据如何存储的信息。
-created: '01-15-2025'
-updated: '02-24-2026'
+created: '2025-01-15'
+updated: '2026-02-24'
 keywords:
   - NFT indexing
   - DAS
@@ -34,8 +34,8 @@ The Metaplex reference implementation of the DAS API includes the following key 
 * A Solana no-vote validator - This validator is configured to only have secure access to the validator ledger and account data under consensus.
 * A Geyser plugin - The plugin is called "Plerkle" and runs on the validator.  The plugin is notified whenever there are account updates, slot status updates, transactions, or block metadata updates.  For the purpose of cNFT indexing, the plugin's `notify_transaction` method is used to provide transaction data whenever Bubblegum or spl-account-compression transactions are seen on the validator.  In reality, these transactions are coming from the spl-noop ("no operation") program, which is used by spl-account-compression and Bubblegum to avoid log truncation by turning events into spl-noop instruction data.
 * A Redis cluster - Redis streams are used as queues for the each type of update (account, transaction, etc.).  The Geyser plugin is the producer of data going into these streams.  The Geyser plugin translates the data into the Plerkle serialization format, which uses the Flatbuffers protocol, and then puts the serialized record into the appropriate Redis data stream.
-* An ingester process - This is the the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
- * Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
+* An ingester process - This is the consumer of the data from the Redis streams.  The ingester parses the serialized data, and then transforms it into SeaORM data objects that are stored in a Postgres database.
+* Postgres database - There are several database tables to represent assets, as well as a changelog table to store the state of Merkle trees it has seen.  The latter is used when requesting an asset proof to be used with Bubblegum instructions. Sequence numbers for Merkle tree changes are also used to enable the DAS API to process transactions out of order.
 * API process - When end-users request asset data from RPC providers, the API process can retrieve the asset data from the database and serve it for the request.
 
 {% diagram %}
@@ -113,7 +113,7 @@ Metaplex DAS API参考实现包括以下关键项：
 
 {% diagram %}
 {% node %}
-{% node #validator label="验证节点" theme="indigo" /%}
+{% node #zh-validator label="验证节点" theme="indigo" /%}
 {% node theme="dimmed" %}
 运行Geyser插件 \
 并在交易、账户 \
@@ -121,32 +121,32 @@ Metaplex DAS API参考实现包括以下关键项：
 {% /node %}
 {% /node %}
 
-{% node x="200" parent="validator" %}
-{% node #messenger label="消息总线" theme="blue" /%}
+{% node x="200" parent="zh-validator" %}
+{% node #zh-messenger label="消息总线" theme="blue" /%}
 {% node theme="dimmed" %}
 Redis流作为每种 \
 更新类型的队列。
 {% /node %}
 {% /node %}
 
-{% node x="200" parent="messenger" %}
-{% node #ingester label="摄取进程" theme="indigo" /%}
+{% node x="200" parent="zh-messenger" %}
+{% node #zh-ingester label="摄取进程" theme="indigo" /%}
 {% node theme="dimmed" %}
 解析数据并存储 \
 到数据库
 {% /node %}
 {% /node %}
 
-{% node x="28" y="150" parent="ingester" %}
-{% node #database label="数据库" theme="blue" /%}
+{% node x="28" y="150" parent="zh-ingester" %}
+{% node #zh-database label="数据库" theme="blue" /%}
 {% node theme="dimmed" %}
 Postgres \
 数据库
 {% /node %}
 {% /node %}
 
-{% node x="-228" parent="database" %}
-{% node #api label="API进程" theme="indigo" /%}
+{% node x="-228" parent="zh-database" %}
+{% node #zh-api label="API进程" theme="indigo" /%}
 {% node theme="dimmed" %}
 RPC提供商运行API\
 并向最终用户提供 \
@@ -154,19 +154,19 @@ RPC提供商运行API\
 {% /node %}
 {% /node %}
 
-{% node x="-200" parent="api" %}
-{% node #end_user label="最终用户" theme="mint" /%}
+{% node x="-200" parent="zh-api" %}
+{% node #zh-end_user label="最终用户" theme="mint" /%}
 {% node theme="dimmed" %}
 调用getAsset()、 \
 getAssetProof()等。
 {% /node %}
 {% /node %}
 
-{% edge from="validator" to="messenger" /%}
-{% edge from="messenger" to="ingester" /%}
-{% edge from="ingester" to="database" /%}
-{% edge from="database" to="api" /%}
-{% edge from="api" to="end_user" /%}
+{% edge from="zh-validator" to="zh-messenger" /%}
+{% edge from="zh-messenger" to="zh-ingester" /%}
+{% edge from="zh-ingester" to="zh-database" /%}
+{% edge from="zh-database" to="zh-api" /%}
+{% edge from="zh-api" to="zh-end_user" /%}
 
 {% /diagram %}
 

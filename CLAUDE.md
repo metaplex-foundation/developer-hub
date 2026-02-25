@@ -132,7 +132,7 @@ Documentation exists in four locales: `en`, `ja`, `ko`, `zh`. All locales must b
 **At the start of any session involving documentation creation or editing, you MUST read the rubric once:**
 
 ```
-/Users/tony/Developer/Metaplex/developer-hub/GEO-LLM-EVALUATION-RUBRIC.md
+./GEO-LLM-EVALUATION-RUBRIC.md
 ```
 
 Read it once — it stays in context for the entire session. Do not re-read it for every file. Evaluate each finished page against it before considering the work complete. Target a score of 90%+ of applicable points for the page type.

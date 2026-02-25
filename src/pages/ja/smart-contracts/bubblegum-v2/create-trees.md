@@ -90,7 +90,7 @@ faqs:
 
 - Tree parameters (max depth, max buffer size, canopy depth) are **immutable** after creation. Choose carefully based on your project's needs.
 - Larger trees cost more in rent but have a lower per-cNFT cost. See the recommended settings table above for cost estimates.
-- The Tree Creator is stored in the TreeConfigV2 account and can delegate minting authority to another account (see [Delegating Trees](/smart-contracts/bubblegum-v2/delegate-trees)).
+- The Tree Creator is stored in the TreeConfigV2 account and can delegate minting authority to another account (see [Delegating Trees](/ja/smart-contracts/bubblegum-v2/delegate-trees)).
 - Public trees allow anyone to mint. Private trees restrict minting to the Tree Creator or Tree Delegate.
 
 ## FAQ

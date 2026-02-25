@@ -205,7 +205,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 
 ## Notes
 
-- Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
+- Not all RPC providers support the DAS API. Check the [RPC Providers](/ko/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
 

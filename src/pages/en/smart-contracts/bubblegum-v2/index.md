@@ -200,11 +200,9 @@ Even though NFT data does not live inside accounts, it is still possible to exec
 | **Rust Crate** | `mpl-bubblegum` ([crates.io](https://crates.io/crates/mpl-bubblegum)) |
 | **Source** | [GitHub](https://github.com/metaplex-foundation/mpl-bubblegum) |
 
-*Maintained by Metaplex Foundation · Last verified February 2026*
-
 ## Next steps
 
-Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/smart-contracts/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterwards, the various [feature pages](/smart-contracts/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
+Now that we know how compressed NFTs work at a high level and what's new in Bubblegum V2, we recommend checking out our [Getting Started](/smart-contracts/bubblegum-v2/sdk) page which enumerates the various languages/frameworks that one can use to interact with compressed NFTs. Afterward, the various [feature pages](/smart-contracts/bubblegum-v2/create-trees) can be used to learn more about the specific operations that can be performed on cNFTs. Finally, [advanced guides](/smart-contracts/bubblegum-v2/concurrent-merkle-trees) are also available to deepen your knowledge of cNFTs and Merkle Trees.
 
 ## FAQ
 

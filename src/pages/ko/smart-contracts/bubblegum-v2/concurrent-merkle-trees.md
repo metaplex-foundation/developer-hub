@@ -2,8 +2,8 @@
 title: 동시 머클 트리
 metaTitle: 동시 머클 트리 - Bubblegum V2
 description: 동시 머클 트리와 Bubblegum에서 사용되는 방식에 대해 자세히 알아보세요.
-created: '01-15-2025'
-updated: '02-24-2026'
+created: '2025-01-15'
+updated: '2026-02-24'
 keywords:
   - concurrent merkle tree
   - SPL account compression
@@ -21,12 +21,12 @@ proficiencyLevel: Advanced
 
 ## Summary
 
-**Concurrent Merkle Trees** explains the data structure underlying compressed NFTs. This page covers how merkle trees work, leaf paths, proofs, validation, and the concurrency mechanism that enables parallel writes within the same Solana block.
+**동시 머클 트리**는 압축 NFT의 기반이 되는 데이터 구조를 설명합니다. 이 페이지에서는 머클 트리의 작동 방식, 리프 경로, 증명, 검증, 그리고 동일한 Solana 블록 내에서 병렬 쓰기를 가능하게 하는 동시성 메커니즘을 다룹니다.
 
-- Merkle trees store cNFT data as hashed leaves with a single root representing the entire tree
-- Proofs enable verifying a specific cNFT exists without rehashing the entire tree
-- The concurrent mechanism uses a ChangeLog buffer to handle multiple writes per block
-- The rightmost proof is stored on-chain, enabling minting without sending proof data
+- 머클 트리는 전체 트리를 나타내는 단일 루트와 함께 해시된 리프로 cNFT 데이터를 저장합니다
+- 증명을 통해 전체 트리를 다시 해싱하지 않고 특정 cNFT의 존재를 확인할 수 있습니다
+- 동시성 메커니즘은 ChangeLog 버퍼를 사용하여 블록당 여러 쓰기를 처리합니다
+- 가장 오른쪽 증명이 온체인에 저장되어 증명 데이터 없이 민팅이 가능합니다
 
 
 ## 소개

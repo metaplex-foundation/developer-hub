@@ -120,7 +120,7 @@ to consider. The system uses a leaf-based model which means...
 - Code blocks with titles (` ```lang {% title="filename" %} `)
 - Tables for reference data (program IDs, versions, costs)
 - Multi-language examples (TypeScript + Rust) via dialect-switcher
-- Copy-paste ready, self-contained snippets
+- Copy-paste-ready, self-contained snippets
 - **Semantic Diagramming**: architecture diagrams must have highly descriptive `alt` text or a `<figcaption>` element — a diagram with no text description is invisible to any LLM or AI system
 
 **Scoring:**
@@ -318,7 +318,7 @@ without the tree delegate's signature.
 - Jump links to key sections
 - "What You'll Build" callout at top
 - Expected output examples
-- Copy-paste ready complete examples
+- Copy-paste-ready complete examples
 - *Exemption*: Concept/architecture pages — no Quick Start expected
 
 **Scoring:**

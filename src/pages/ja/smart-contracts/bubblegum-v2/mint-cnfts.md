@@ -71,7 +71,7 @@ await mintV2(umi, {
   metadata: {
     name: 'My NFT',
     uri: 'https://example.com/my-nft.json',
-    sellerFeeBasisPoints: 550, 
+    sellerFeeBasisPoints: 550, // 5.5%
     collection: none(),
     creators: [],
   },
@@ -116,7 +116,11 @@ await mintV2(umi, {
 {% totem-accordion title="MPL-Coreコレクションの作成" %}
 
 まだコレクションがない場合は、[`@metaplex-foundation/mpl-core`ライブラリ](/ja/smart-contracts/core/collections#collectionとは)を使用して作成できます。コレクションに`BubblegumV2`プラグインも追加する必要があることに注意してください。
+
+```sh
 npm install @metaplex-foundation/mpl-core
+```
+
 次のようにコレクションを作成します：
 
 ```ts
@@ -172,7 +176,7 @@ const assetId = leaf.id;
 
 ## Notes
 
-- The Bubblegum Tree must be created before minting. See [Creating Trees](/smart-contracts/bubblegum-v2/create-trees).
+- The Bubblegum Tree must be created before minting. See [Creating Trees](/ja/smart-contracts/bubblegum-v2/create-trees).
 - For collection mints, the MPL-Core collection must have the `BubblegumV2` plugin enabled.
 - The collection authority must sign the transaction when minting to a collection, regardless of whether the tree is public or private.
 - Use `parseLeafFromMintV2Transaction` only after the transaction is **finalized**, not just confirmed.
