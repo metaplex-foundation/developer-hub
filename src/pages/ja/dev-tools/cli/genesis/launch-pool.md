@@ -56,7 +56,6 @@ Launch Pool は入金ウィンドウ中に入金を収集し、トークンを�
 
 Presale bucket、unlocked bucket、Genesis アカウントの作成、ファイナライズ、フロントエンド統合、トークンエコノミクスのモデリング。
 
-**移動先:** [bucket の追加](#add-launch-pool-bucket) · [入金](#deposit) · [出金](#withdraw) · [トランジション](#transition) · [請求](#claim) · [完全なライフサイクル](#full-lifecycle-example) · [一般的なエラー](#common-errors) · [FAQ](#faq)
 
 ## Launch Pool bucket の追加
 

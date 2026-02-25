@@ -58,8 +58,6 @@ Genesis アカウントの管理コマンド：
 
 Launch Pool の設定、Presale の設定、入金/出金フロー、フロントエンド統合、トークンエコノミクス。
 
-**移動先:** [Unlocked Bucket](#add-unlocked-bucket) · [Finalize](#finalize) · [Fetch](#fetch) · [Fetch Bucket](#fetch-bucket) · [Claim Unlocked](#claim-unlocked) · [Revoke](#revoke) · [一般的なエラー](#common-errors) · [FAQ](#faq)
-
 *Metaplex Foundation によるメンテナンス · 最終確認 2026年2月 · Metaplex CLI（mplx）が必要*
 
 ## Unlocked Bucket の追加

@@ -55,8 +55,6 @@ Presale は `quoteCap / allocation` で決定される固定価格でトーク�
 
 Launch Pool bucket、unlocked bucket、end behavior、Genesis アカウントの作成、ファイナライズ、フロントエンド統合。
 
-**移動先:** [bucket の追加](#add-presale-bucket) · [入金](#deposit) · [請求](#claim) · [完全なライフサイクル](#full-lifecycle-example) · [一般的なエラー](#common-errors) · [FAQ](#faq)
-
 *Metaplex Foundation によるメンテナンス · 最終確認 2026年2月 · Metaplex CLI（mplx）が必要*
 
 ## Presale Bucket の追加

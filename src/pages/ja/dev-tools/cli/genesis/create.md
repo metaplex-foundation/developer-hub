@@ -48,8 +48,6 @@ Genesis アカウントとトークン mint を作成します — トークン�
 
 bucket の設定、入金/請求フロー、トークンメタデータのホスティング、流動性プールのセットアップ。
 
-**移動先:** [基本的な使い方](#basic-usage) · [オプション](#options) · [例](#examples) · [出力](#output) · [一般的なエラー](#common-errors) · [FAQ](#faq)
-
 *Metaplex Foundation によるメンテナンス · 最終確認 2026年2月 · Metaplex CLI（mplx）が必要*
 
 ## 基本的な使い方

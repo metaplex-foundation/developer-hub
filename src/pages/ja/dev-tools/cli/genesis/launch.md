@@ -44,7 +44,6 @@ Genesis API を使用してトークンローンチを単一コマンドで作�
 
 手動の genesis アカウント作成、個別の bucket 設定、Presale のセットアップ、フロントエンド開発。
 
-**移動先:** [Launch Create](#launch-create) · [Launch Register](#launch-register) · [ロック付き割り当て](#locked-allocations) · [一般的なエラー](#common-errors) · [FAQ](#faq)
 
 ## Launch Create
 

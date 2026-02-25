@@ -49,8 +49,6 @@ Genesis トークンローンチの完全な CLI リファレンス：
 
 Genesis スマートコントラクトの内部構造、SDK/TypeScript 統合、フロントエンド開発、トークンエコノミクスの設計、ローンチ後の流動性プールのセットアップ。
 
-**移動先:** [前提条件](#prerequisites) · [一般的なフロー](#general-flow) · [コマンドリファレンス](#command-reference) · [一般的なエラー](#common-errors) · [FAQ](#faq) · [用語集](#glossary)
-
 *Metaplex Foundation によるメンテナンス · 最終確認 2026年2月 · Metaplex CLI（mplx）が必要*
 
 ## 前提条件
@@ -84,7 +82,7 @@ mplx genesis launch create \
   --fundsRecipient <WALLET_ADDRESS>
 ```
 
-詳細は [Launch（API）](/dev-tools/cli/genesis/launch) を参照してください。
+詳細は [Launch（API）](/ja/dev-tools/cli/genesis/launch) を参照してください。
 
 ### 手動フロー
 
@@ -132,7 +130,7 @@ mplx genesis launch create \
 - SOL を quote token として使用する場合、まず `mplx toolbox sol wrap <amount>` でラップしてください
 - ファイナライズは不可逆です — `genesis finalize` を実行する前にすべての bucket 設定を再確認してください
 - 任意のコマンドの完全なフラグドキュメントは `mplx genesis <command> --help` で確認できます
-- コンセプト、ライフサイクルの詳細、SDK ガイドについては [Genesis ドキュメント](/smart-contracts/genesis) を参照してください
+- コンセプト、ライフサイクルの詳細、SDK ガイドについては [Genesis ドキュメント](/ja/smart-contracts/genesis) を参照してください
 
 ## 一般的なエラー
 
