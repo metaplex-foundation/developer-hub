@@ -4,8 +4,6 @@ metaTitle: Get NFTs by Owner | DAS API Guides
 description: Learn how to retrieve all non-fungible tokens owned by a specific wallet
 ---
 
-# Get NFTs by Owner
-
 This guide shows you how to retrieve all non-fungible tokens (NFTs) owned by a specific wallet address using the DAS API. This is useful for building NFT galleries, portfolio trackers, or marketplace features.
 
 ## Method 1: Using Get Assets By Owner with Interface Filter (Recommended)

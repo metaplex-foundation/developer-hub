@@ -4,8 +4,6 @@ metaTitle: Bubblegum V2 (압축 NFT) | Metaplex CLI
 description: Bubblegum V2 프로그램을 사용하여 압축 NFT 생성 및 관리
 ---
 
-# Bubblegum (압축 NFT)
-
 {% callout type="note" %}
 이 CLI 명령은 **Bubblegum V2** 전용입니다. Bubblegum V2는 [Metaplex Core 컬렉션](/smart-contracts/core/collections)을 사용하며 Bubblegum V1 트리 또는 Token Metadata 컬렉션과 호환되지 않습니다.
 {% /callout %}

@@ -36,8 +36,6 @@ description: Fixed Price Saleプログラムの技術的説明
 
 3. トークンがウォレットに表示されます
 
-# アカウント
-
 ## Store
 
 | フィールド      | タイプ |説明|
@@ -96,8 +94,6 @@ description: Fixed Price Saleプログラムの技術的説明
 | フィールド      | タイプ |説明|
 | ----------- | ----------- | ------ |
 |  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  プライマリセールスロイヤリティを受け取るクリエーターのリスト  |
-
-# 命令
 
 ## CreateStore
 

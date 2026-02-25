@@ -4,8 +4,6 @@ metaTitle: Bubblegum V2 (Compressed NFTs) | Metaplex CLI
 description: Create and manage compressed NFTs using the Bubblegum V2 program
 ---
 
-# Bubblegum (Compressed NFTs)
-
 {% callout type="note" %}
 These CLI commands are for **Bubblegum V2** only. Bubblegum V2 uses [Metaplex Core collections](/smart-contracts/core/collections) and is not compatible with Bubblegum V1 trees or Token Metadata collections.
 {% /callout %}

@@ -3,8 +3,6 @@ title: Code Tabs Test Page
 description: Testing the new CodeTabs component
 ---
 
-# Code Tabs Component Test
-
 This page tests the new multi-language code tabs component.
 
 ## Basic Example

@@ -36,8 +36,6 @@ description: Fixed Price Sale 프로그램의 기술 설명
 
 3. 토큰이 지갑에 표시됩니다
 
-# 계정
-
 ## Store
 
 | 필드      | 타입 |설명|
@@ -96,8 +94,6 @@ description: Fixed Price Sale 프로그램의 기술 설명
 | 필드      | 타입 |설명|
 | ----------- | ----------- | ------ |
 |  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  1차 판매 로열티를 받을 크리에이터 목록  |
-
-# 명령어
 
 ## CreateStore
 

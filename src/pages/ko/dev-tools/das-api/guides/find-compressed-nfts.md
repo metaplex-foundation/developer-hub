@@ -4,8 +4,6 @@ metaTitle: 압축 NFT 찾기 | DAS API 가이드
 description: DAS API를 사용하여 압축 NFT를 검색하고 작업하는 방법을 알아보세요
 ---
 
-# 압축 NFT 찾기
-
 이 가이드는 DAS API를 사용하여 압축 NFT를 찾고 작업하는 방법을 보여줍니다. 압축 NFT는 Bubblegum 또는 Bubblegum V2를 사용하여 Solana에 NFT 데이터를 저장하는 공간 효율적인 방법이며, DAS API는 이를 처리하기 위한 특별한 메서드를 제공합니다.
 
 ## 방법 1: 소유자별 압축 NFT 찾기

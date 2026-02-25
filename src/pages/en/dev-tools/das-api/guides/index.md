@@ -4,8 +4,6 @@ metaTitle: Guides | DAS API
 description: Practical guides for common DAS API use cases
 ---
 
-# DAS API Guides
-
 Welcome to the DAS API guides! These practical examples will help you solve common use cases when working with digital assets on Solana.
 
 ## Getting Started

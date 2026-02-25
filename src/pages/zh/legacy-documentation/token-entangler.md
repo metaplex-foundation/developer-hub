@@ -4,8 +4,6 @@ metaTitle: 代币纠缠器 | 开发者中心
 description: Metaplex 已弃用的代币纠缠器程序文档。
 ---
 
-# 概述
-
 {% callout type="warning" %}
 
 请注意,该程序已被标记为已弃用,不再由 Metaplex 基金会团队积极维护。不保证新功能、安全修复和向后兼容性。请谨慎使用。

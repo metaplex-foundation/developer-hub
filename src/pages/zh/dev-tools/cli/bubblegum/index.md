@@ -4,8 +4,6 @@ metaTitle: Bubblegum V2（压缩 NFT）| Metaplex CLI
 description: 使用 Bubblegum V2 程序创建和管理压缩 NFT
 ---
 
-# Bubblegum（压缩 NFT）
-
 {% callout type="note" %}
 这些 CLI 命令仅适用于 **Bubblegum V2**。Bubblegum V2 使用 [Metaplex Core 集合](/smart-contracts/core/collections)，与 Bubblegum V1 树或 Token Metadata 集合不兼容。
 {% /callout %}

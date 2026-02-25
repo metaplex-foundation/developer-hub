@@ -3,8 +3,6 @@ title: Enhanced Fence Component - Test Page
 description: Testing all new features of the enhanced Fence component
 ---
 
-# Enhanced Fence Component Test
-
 This page demonstrates all the new features added to the Fence component.
 
 ---

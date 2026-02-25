@@ -28,8 +28,6 @@ faqs:
     a: Solana supports DeFi protocols, NFT marketplaces, Web3 gaming, payment applications, DAOs, and many other decentralized applications.
 ---
 
-# Solana 概述
-
 Solana 区块链是一个高性能的去中心化区块链平台，旨在支持可扩展且用户友好的应用程序。Solana 由 Solana Labs 于 2020 年推出，旨在解决早期区块链网络（如比特币和以太坊）的局限性，特别是在可扩展性、速度和成本方面。
 
 ## 关键特性和创新

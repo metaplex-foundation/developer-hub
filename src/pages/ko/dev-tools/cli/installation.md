@@ -4,8 +4,6 @@ metaTitle: 설치 | Metaplex CLI
 description: Metaplex CLI 설치 및 설정
 ---
 
-# 설치 가이드
-
 이 가이드는 시스템에 Metaplex CLI를 설치하고 설정하는 방법을 안내합니다.
 
 ## 사전 요구사항

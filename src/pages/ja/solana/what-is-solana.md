@@ -28,8 +28,6 @@ faqs:
     a: Solana supports DeFi protocols, NFT marketplaces, Web3 gaming, payment applications, DAOs, and many other decentralized applications.
 ---
 
-# Solana概要
-
 Solanaブロックチェーンは、スケーラブルでユーザーフレンドリーなアプリケーションを可能にするように設計された高性能で分散化されたブロックチェーンプラットフォームです。2020年にSolana LabsによってローンチされたSolanaは、特にスケーラビリティ、速度、コストの面でBitcoinやEthereumなどの初期のブロックチェーンネットワークの制限に対処することを目指しています。
 
 ## 主要機能とイノベーション

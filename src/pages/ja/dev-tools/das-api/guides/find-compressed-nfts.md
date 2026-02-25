@@ -4,8 +4,6 @@ metaTitle: 圧縮NFTを見つける | DAS APIガイド
 description: DAS APIを使用して圧縮NFTを発見し操作する方法を学習します
 ---
 
-# 圧縮NFTを見つける
-
 このガイドでは、DAS APIを使用して圧縮NFTを見つけて操作する方法を説明します。圧縮NFTは、BubblegumまたはBubblegum V2を使用してSolana上でNFTデータを保存する効率的な方法であり、DAS APIはそれらを処理するための特別なメソッドを提供します。
 
 ## 方法1：オーナー別に圧縮NFTを見つける

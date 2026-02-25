@@ -15,8 +15,6 @@ about:
 proficiencyLevel: Intermediate
 ---
 
-# How It Works
-
 The Metaplex Skill uses **progressive disclosure** to give AI agents exactly the context they need — nothing more, nothing less. This keeps token usage low while providing comprehensive coverage of all Metaplex programs.
 
 ## Architecture

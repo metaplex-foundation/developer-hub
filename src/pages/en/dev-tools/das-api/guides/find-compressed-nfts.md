@@ -4,8 +4,6 @@ metaTitle: Find Compressed NFTs | DAS API Guides
 description: Learn how to discover and work with compressed NFTs using the DAS API
 ---
 
-# Find Compressed NFTs
-
 This guide shows you how to find and work with compressed NFTs using the DAS API. Compressed NFTs are a space-efficient way to store NFT data on Solana using Bubblegum or Bubblegum V2, and the DAS API provides special methods to handle them.
 
 ## Method 1: Finding Compressed NFTs by Owner
