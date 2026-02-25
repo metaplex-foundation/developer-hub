@@ -160,7 +160,7 @@ A Merkle Tree for the most park can be thought of as a "database" of cNFT data. 
 
 Due to the nature of a Merkle Tree cNFT data isn't stored in Solana accounts and instead is stored in the ledger state. To be able to read the data back effectively we need to use an indexer which indexes all the cNFT data as its created/mutated. DAS enabled RPCs are RPCs that are running the DAS indexer service and allow us to query the RPC provider for this data on demand.
 
-For a full list of RPC provides that support DAS you can visit the [RPC Providers Page](/rpc-providers#rp-cs-with-das-support)
+For a full list of RPC provides that support DAS you can visit the [RPC Providers Page](/solana/rpcs-and-das#rp-cs-with-das-support)
 
 You can pick up a free account for running this guide from any of these providers. Once signed up you will want to replace your RPC instance during the previous `umi` creation.
 

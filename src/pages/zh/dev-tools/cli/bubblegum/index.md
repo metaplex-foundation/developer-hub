@@ -29,9 +29,9 @@ mplx core collection create --wizard
 
 ### RPC 要求
 
-压缩 NFT 操作需要支持 [DAS（Digital Asset Standard）API](/rpc-providers#metaplex-das-api) 的 RPC 端点。标准 Solana RPC 端点不支持 DAS，无法用于获取、更新、转移或销毁压缩 NFT。
+压缩 NFT 操作需要支持 [DAS（Digital Asset Standard）API](/solana/rpcs-and-das#metaplex-das-api) 的 RPC 端点。标准 Solana RPC 端点不支持 DAS，无法用于获取、更新、转移或销毁压缩 NFT。
 
-请参阅 [RPC 提供商](/rpc-providers) 页面获取支持 DAS 的提供商列表。
+请参阅 [RPC 提供商](/solana/rpcs-and-das) 页面获取支持 DAS 的提供商列表。
 
 ## 命令结构
 

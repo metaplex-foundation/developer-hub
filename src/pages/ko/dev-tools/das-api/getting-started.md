@@ -25,7 +25,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```
 
-이 플러그인은 Metaplex DAS API 사양을 지원하는 모든 RPC와 함께 사용할 수 있습니다. 사양을 지원하는 RPC는 [RPC 제공자 페이지](/ko/rpc-providers)에서 찾을 수 있습니다.
+이 플러그인은 Metaplex DAS API 사양을 지원하는 모든 RPC와 함께 사용할 수 있습니다. 사양을 지원하는 RPC는 [RPC 제공자 페이지](/ko/solana/rpcs-and-das)에서 찾을 수 있습니다.
 
 참고: 엔드포인트에서 DAS API를 "활성화"하려면 RPC 제공자에게 문의해야 할 수 있습니다.
 

@@ -30,7 +30,7 @@ This is where Auction House shows its power. Its a transaction protocol that all
 
 ## Creating an Auction House
 
-The Auction House program can be used to create a new marketplace by instantiating a new **Auction House** account. The Auction House account is a [Program Derived Address (PDA)](../../understanding-programs#program-derived-addresses-pda) which is derived from a given public key and, optionally, an SPL Token to use a currency (more on that below).
+The Auction House program can be used to create a new marketplace by instantiating a new **Auction House** account. The Auction House account is a [Program Derived Address (PDA)](/solana/understanding-programs#program-derived-addresses-pda) which is derived from a given public key and, optionally, an SPL Token to use a currency (more on that below).
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 

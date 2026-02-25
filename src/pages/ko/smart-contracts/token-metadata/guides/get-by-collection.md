@@ -39,7 +39,7 @@ pub struct Collection {
 그러나 컬렉션 민트 주소가 주어졌을 때, 해당 특정 컬렉션에 속하는 모든 NFT를 찾는 것은 체인에서 직접 읽을 때 상당히 더 어렵습니다. [DAS](/ko/dev-tools/das-api)를 사용하는 하나의 우수한 방법과 체인에서 직접 데이터를 가져오는 두 가지 기본 접근법이 있습니다.
 
 ## DAS API
-DAS를 사용하여 민트를 가져오는 것은 [이를 지원하는 RPC 공급자](/rpc-providers#metaplex-das-api)를 사용할 때 우수한 방법입니다.
+DAS를 사용하여 민트를 가져오는 것은 [이를 지원하는 RPC 공급자](/solana/rpcs-and-das#metaplex-das-api)를 사용할 때 우수한 방법입니다.
 
 {% dialect-switcher title="getAssetByGroup 예제" %}
 {% dialect title="JavaScript" id="js" %}

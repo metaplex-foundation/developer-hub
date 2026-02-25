@@ -127,7 +127,7 @@ Bubblegum V2引入了新的叶子模式（LeafSchemaV2），它支持额外的�
 
 每次仅为获取一个NFT的数据就要爬取数百万个交易，这显然不是最佳用户体验。因此，压缩NFT依赖某些RPC实时索引该信息，以将此抽象化，不让最终用户感知。我们将这个能够获取压缩NFT的RPC API称为**Metaplex DAS API**。
 
-请注意，并非所有RPC都支持DAS API。因此，在应用程序中使用压缩NFT时，您可能对["Metaplex DAS API RPC"](/zh/rpc-providers)页面感兴趣，以选择适当的RPC。
+请注意，并非所有RPC都支持DAS API。因此，在应用程序中使用压缩NFT时，您可能对["Metaplex DAS API RPC"](/zh/solana/rpcs-and-das)页面感兴趣，以选择适当的RPC。
 
 我们在高级["存储和索引NFT数据"](/zh/smart-contracts/bubblegum-v2/stored-nft-data)指南中更详细地讨论了这一点。
 

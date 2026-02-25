@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 获取多个 Asset
-可以使用 `getProgramAccounts`（GPA）调用获取多个 Asset，这在 RPC 方面可能相当昂贵和缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/rpc-providers)。
+可以使用 `getProgramAccounts`（GPA）调用获取多个 Asset，这在 RPC 方面可能相当昂贵和缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/solana/rpcs-and-das)。
 ### 按所有者获取 Asset
 {% dialect-switcher title="按所有者获取 Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -411,7 +411,7 @@ GPA 查询可能很昂贵。解决方案：
 | 需要特殊 RPC | 否 | 是 |
 ## 常见问题
 ### 获取多个 Asset 时应该使用 GPA 还是 DAS？
-尽可能使用 DAS。GPA 查询扫描所有程序账户，在主网上可能很慢且昂贵。DAS 提供更快的索引查询，并包含链下元数据。参见 [DAS RPC 提供商](/rpc-providers)了解兼容的端点。
+尽可能使用 DAS。GPA 查询扫描所有程序账户，在主网上可能很慢且昂贵。DAS 提供更快的索引查询，并包含链下元数据。参见 [DAS RPC 提供商](/solana/rpcs-and-das)了解兼容的端点。
 ### 如何获取 Asset 的链下元数据？
 `uri` 字段包含元数据 URL。单独获取它：
 ```ts
