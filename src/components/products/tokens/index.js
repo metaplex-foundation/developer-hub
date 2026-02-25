@@ -16,14 +16,14 @@ export const tokens = {
       deposit: { solana: '0%', payer: null, notes: null },
       phbt: { solana: '2%', label: 'PHBT', payer: null, notes: null },
       graduation: { solana: '1%', payer: null, notes: null },
-      trading: { solana: '0.4%', payer: null, notes: null },
+      trading: { solana: '0.4%', payer: null, notes: "Total pool fees are .9% with 40bps going to liquidity providers and 8bps to Raydium."},
     },
     projectTokens: {
       deposit: { solana: '2%', payer: null, notes: null },
       withdraw: { solana: '2%', payer: null, notes: null },
       graduation: { solana: '0%', payer: null, notes: null },
       withdrawLiquidity: { solana: '5%', payer: null, notes: null },
-      trading: { solana: '0.4%', payer: null, notes: null },
+      trading: { solana: '0.4%', payer: null, notes: "Total pool fees are .9% with 40bps going to liquidity providers and 8bps to Raydium."},
     },
   },
   sections: [
