@@ -178,5 +178,5 @@ Genesis には3つの bucket タイプがあります：**Launch Pool**（入金
 | **Base Units** | トークンの最小単位 — 小数点以下9桁の場合、1 トークン = 1,000,000,000 base units |
 | **End Behavior** | 入金期間後に Launch Pool から収集された quote token を宛先 bucket に転送するルール |
 | **Finalize** | Genesis の設定をロックしてローンチを有効化する不可逆な操作 |
-| **Claim Schedule** | 請求期間開始後にトークンがどのように段階的にリリースされるかを制御するべスティングルール |
+| **Claim Schedule** | 請求期間開始後にトークンがどのように段階的にリリースされるかを制御するベスティングルール |
 | **Allocation** | 特定の bucket に割り当てられた base token の量（base units で指定） |

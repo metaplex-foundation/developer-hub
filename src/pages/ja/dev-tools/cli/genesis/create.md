@@ -16,7 +16,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - Bash
 howToSteps:
-  - Run mplx genesis create with name, symbol, totalSupply, and decimals
+  - Run mplx genesis create with name, symbol, and totalSupply (decimals is optional, defaults to 9)
   - Optionally provide a metadata URI and custom quote mint
   - Save the Genesis Account address from the output for subsequent commands
 howToTools:

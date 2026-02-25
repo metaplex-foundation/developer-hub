@@ -33,13 +33,13 @@ faqs:
   - q: End behavior とは何ですか？
     a: End behavior は、入金期間終了後に Launch Pool から収集された quote token を宛先 bucket（通常は unlocked bucket）に転送します。実行には transition コマンドを使用します。
   - q: Claim schedule とは何ですか？
-    a: Claim schedule はトークン請求にべスティングを追加します。トークンは一度にすべて受け取るのではなく、オプションのクリフ期間を含めて段階的にリリースされます。
+    a: Claim schedule はトークン請求にベスティングを追加します。トークンは一度にすべて受け取るのではなく、オプションのクリフ期間を含めて段階的にリリースされます。
 ---
 
 {% callout title="このページで行うこと" %}
 CLI から Launch Pool の完全なライフサイクルを実行：
 - 割り当てと時間ウィンドウを指定して Launch Pool bucket を追加
-- オプションのペナルティ、べスティング、allowlist を設定
+- オプションのペナルティ、ベスティング、allowlist を設定
 - 入金、出金、トランジション、トークンの請求
 {% /callout %}
 
@@ -49,7 +49,7 @@ Launch Pool は入金ウィンドウ中に入金を収集し、トークンを�
 
 - **配布方法**: 比例配分 — 入金シェアがトークンシェアを決定
 - **コマンド**: `bucket add-launch-pool`、`deposit`、`withdraw`、`transition`、`claim`
-- **オプション機能**: End behavior、入金/出金ペナルティ、ボーナススケジュール、請求べスティング、allowlist
+- **オプション機能**: End behavior、入金/出金ペナルティ、ボーナススケジュール、請求ベスティング、allowlist
 - **Quote token**: デフォルトは Wrapped SOL — 入金前に SOL をラップしてください
 
 ## 対象外
@@ -87,7 +87,7 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
 | `--depositPenalty <json>` | | ペナルティスケジュール JSON | いいえ |
 | `--withdrawPenalty <json>` | | 出金ペナルティスケジュール JSON（depositPenalty と同じ形式） | いいえ |
 | `--bonusSchedule <json>` | | ボーナススケジュール JSON | いいえ |
-| `--claimSchedule <json>` | | 請求べスティングスケジュール JSON | いいえ |
+| `--claimSchedule <json>` | | 請求ベスティングスケジュール JSON | いいえ |
 | `--allowlist <json>` | | allowlist 設定 JSON | いいえ |
 
 ### JSON オプションの形式
@@ -102,7 +102,7 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
 {"slopeBps":0,"interceptBps":0,"maxBps":0,"startTime":0,"endTime":0}
 ```
 
-**請求べスティングスケジュール**：
+**請求ベスティングスケジュール**：
 ```json {% title="Claim schedule format" %}
 {"startTime":0,"endTime":0,"period":0,"cliffTime":0,"cliffAmountBps":0}
 ```
@@ -136,7 +136,7 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
   --minimumDeposit 100000000
 ```
 
-3. 請求べスティング付き：
+3. 請求ベスティング付き：
 ```bash {% title="With claim vesting" %}
 mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
   --allocation 500000000000000 \
@@ -307,7 +307,7 @@ mplx genesis revoke $GENESIS --revokeMint
 End behavior は、入金期間終了後に Launch Pool から収集された quote token を宛先 bucket（通常は unlocked bucket）に転送します。実行には `genesis transition` を呼び出す必要があります。
 
 **Claim schedule とは何ですか？**
-Claim schedule はトークン請求にべスティングを追加します。すべてのトークンを一度に受け取るのではなく、設定された `period`、`cliffTime`、`cliffAmountBps` に基づいて段階的にリリースされます。
+Claim schedule はトークン請求にベスティングを追加します。すべてのトークンを一度に受け取るのではなく、設定された `period`、`cliffTime`、`cliffAmountBps` に基づいて段階的にリリースされます。
 
 **minimumQuoteTokenThreshold が満たされない場合はどうなりますか？**
 総入金額がしきい値に達しない場合、bucket は成功せず、入金者は資金を回収できます。
@@ -322,7 +322,7 @@ Claim schedule はトークン請求にべスティングを追加します。�
 | **Launch Pool** | 入金シェアに基づいてトークンを比例配分する bucket タイプ |
 | **End Behavior** | 入金終了後に収集された quote token を宛先 bucket に転送するルール |
 | **Transition** | End behavior を実行するコマンド — 入金期間後に明示的に呼び出す必要があります |
-| **Claim Schedule** | 段階的なトークンリリースを制御するべスティング設定 |
+| **Claim Schedule** | 段階的なトークンリリースを制御するベスティング設定 |
 | **Deposit Penalty** | 入金に適用される手数料。basis points で設定し、オプションの時間ベースの傾斜あり |
 | **Withdraw Penalty** | 入金期間中の出金に適用される手数料 |
 | **Bonus Schedule** | 早期入金または特定タイミングの入金に対する追加トークン割り当て |

@@ -224,7 +224,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 ## ロック付き割り当て
 
-ロック付き割り当てにより、べスティングスケジュール付きでトークン供給量の一部を予約できます。`--lockedAllocations` で JSON 配列ファイルとして指定します。
+ロック付き割り当てにより、ベスティングスケジュール付きでトークン供給量の一部を予約できます。`--lockedAllocations` で JSON 配列ファイルとして指定します。
 
 ```json {% title="allocations.json" %}
 [
@@ -250,7 +250,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 | `name` | string | この割り当ての名前 |
 | `recipient` | string | 受取人のウォレットアドレス |
 | `tokenAmount` | number | 割り当てるトークン数 |
-| `vestingStartTime` | string | べスティング開始の ISO 日付文字列 |
+| `vestingStartTime` | string | ベスティング開始の ISO 日付文字列 |
 | `vestingDuration` | object | `value`（数値）と `unit` を持つ期間 |
 | `unlockSchedule` | string | トークンのアンロック頻度 |
 | `cliff` | object | オプションのクリフ。`duration` と `unlockAmount` を持つ |
