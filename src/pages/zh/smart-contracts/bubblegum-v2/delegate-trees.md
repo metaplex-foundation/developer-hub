@@ -17,6 +17,11 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 树委托人可以做什么？
+    a: 树委托人可以代表树创建者从树中铸造压缩NFT。这仅与私有树相关。
+  - q: 如何撤销树委托人？
+    a: 将newTreeDelegate设置为树创建者自己的公钥来使用setTreeDelegate。
 ---
 
 ## Summary
@@ -26,9 +31,6 @@ programmingLanguage:
 - Approve a tree delegate to mint cNFTs on behalf of the tree creator
 - Revoke a tree delegate by setting the delegate back to the creator
 - Only relevant for private trees (public trees allow anyone to mint)
-
-## Out of Scope
-
 
 与压缩NFT的所有者可以批准委托权限类似，Bubblegum树的创建者也可以批准另一个账户代表他们执行操作。{% .lead %}
 

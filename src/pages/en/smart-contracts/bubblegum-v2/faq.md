@@ -37,6 +37,15 @@ faqs:
     a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
 ---
 
+## Summary
+
+This page answers the most common questions about Bubblegum V2 compressed NFTs, including costs, transaction errors, and differences from V1.
+
+- Find required parameters for leaf-mutating instructions using `getAssetWithProof`
+- Resolve "Transaction too large" errors with `truncateCanopy` or Address Lookup Tables
+- Understand tree costs and capacity before creating a tree
+- Bubblegum V2 is not backward-compatible with V1 trees or decompression
+
 ## What is Bubblegum V2?
 
 Bubblegum V2 is a new iteration of the Bubblegum program that introduces several improvements and new features.

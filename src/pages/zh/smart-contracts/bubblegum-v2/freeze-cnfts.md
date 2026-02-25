@@ -21,14 +21,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I freeze a compressed NFT?
-    a: Use the freezeV2 instruction with a leaf delegate or permanent freeze delegate. The cNFT must first be delegated to the freeze authority.
-  - q: What is the difference between a leaf delegate freeze and a permanent freeze?
-    a: A leaf delegate freeze is asset-level and requires the owner to delegate first. A permanent freeze delegate operates at the collection level and can freeze any cNFT in the collection without owner interaction.
-  - q: How do I make a cNFT soulbound (non-transferable)?
-    a: Use setNonTransferableV2 with a permanent freeze delegate. The collection must have the PermanentFreezeDelegate plugin enabled.
-  - q: Can a soulbound cNFT be made transferable again?
-    a: No. The non-transferable flag set by setNonTransferableV2 is permanent and cannot be reversed.
+  - q: 如何冻结压缩NFT？
+    a: 使用带有叶子委托人或永久冻结委托人的freezeV2指令。cNFT必须首先委托给冻结权限。
+  - q: 叶子委托人冻结和永久冻结有什么区别？
+    a: 叶子委托人冻结是资产级别的，需要所有者先进行委托。永久冻结委托人在集合级别运作，无需所有者交互即可冻结集合中的任何cNFT。
+  - q: 如何使cNFT成为灵魂绑定（不可转移）？
+    a: 使用带有永久冻结委托人的setNonTransferableV2。集合必须启用PermanentFreezeDelegate插件。
+  - q: 灵魂绑定的cNFT可以再次变为可转移的吗？
+    a: 不可以。由setNonTransferableV2设置的不可转移标志是永久性的，无法撤销。
 ---
 
 ## Summary
@@ -39,9 +39,6 @@ faqs:
 - Delegate and freeze in a single transaction with delegateAndFreezeV2
 - Thaw a frozen cNFT and optionally revoke the delegate in one step
 - Make a cNFT permanently non-transferable (soulbound) with setNonTransferableV2
-
-## Out of Scope
-
 
 通过Bubblegum V2，我们可以冻结和解冻压缩NFT。这对于各种用例很有用，例如质押。{% .lead %}
 

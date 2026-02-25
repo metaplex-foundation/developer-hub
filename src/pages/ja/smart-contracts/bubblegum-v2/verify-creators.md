@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: クリエイターの配列にいないクリエイターを検証できますか？
+    a: いいえ。クリエイターはすでにcNFTのクリエイター配列にリストされている必要があります。まずupdateMetadataV2を使用してクリエイターを追加してから検証します。
+  - q: 検証トランザクションに署名するのは誰ですか？
+    a: 検証されるクリエイター自身がトランザクションに署名する必要があります。他の人に代わってクリエイターを検証することはできません。
+  - q: クリエイターはミント時に自分自身を検証できますか？
+    a: はい。クリエイターがミントトランザクションに署名すると、cNFTのクリエイター配列で自動的に検証されます。
 ---
 
 ## Summary
@@ -26,9 +33,6 @@ programmingLanguage:
 - Verify a creator on an existing cNFT (the creator must sign)
 - Unverify a creator from a cNFT
 - Creators can also be verified at mint time by signing the mint transaction
-
-## Out of Scope
-
 
 圧縮NFTのメタデータに作成者のリストが設定されている場合、これらの作成者は特別な命令を使用してcNFT上で自分自身を検証・検証解除できます。 {% .lead %}
 

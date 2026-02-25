@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 동결된 cNFT를 전송할 수 있나요?
+    a: 아니요. 동결된 cNFT는 전송할 수 없습니다. 적절한 위임 권한을 사용하여 먼저 cNFT를 해동해야 합니다.
+  - q: 전송 후 위임자는 어떻게 되나요?
+    a: 리프 위임자는 전송 성공 후 자동으로 새 소유자로 재설정됩니다. 새 소유자는 필요한 경우 다시 위임해야 합니다.
+  - q: cNFT가 전송 가능한지 확인하려면 어떻게 해야 하나요?
+    a: canTransfer 헬퍼 함수를 사용하세요. cNFT가 동결되지 않았고 전송 불가(소울바운드)로 표시되지 않은 경우 true를 반환합니다.
 ---
 
 ## Summary
@@ -28,9 +35,6 @@ programmingLanguage:
 - Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
 - Check if a cNFT can be transferred using the canTransfer helper
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **transferV2** 명령어는 압축된 NFT를 한 소유자에서 다른 소유자로 전송하는 데 사용할 수 있습니다. 전송을 승인하려면 현재 소유자나 위임 권한(있는 경우) 중 하나가 트랜잭션에 서명해야 합니다. 위임된 권한은 리프 위임자나 컬렉션의 `permanentTransferDelegate`일 수 있습니다.
 

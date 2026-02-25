@@ -38,8 +38,6 @@ faqs:
     a: A merkle tree is an on-chain data structure that stores hashes of cNFT data as leaves. It enables cryptographic verification of NFT ownership and data without storing the full NFT data on-chain.
 ---
 
-Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum V2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
-
 ## Summary
 
 **Bubblegum V2** (MPL-Bubblegum) is the Metaplex program for creating and managing compressed NFTs on Solana. It stores NFT data as hashed leaves in on-chain merkle trees, reducing minting costs by orders of magnitude compared to traditional NFTs.
@@ -49,9 +47,7 @@ Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creati
 - Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
 - Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
 
-## Out of Scope
-
-This overview does not cover: fungible tokens, Token Metadata NFTs, Bubblegum V1 migration, detailed merkle tree internals (see [Concurrent Merkle Trees](/smart-contracts/bubblegum-v2/concurrent-merkle-trees)), or on-chain program development (see [Rust SDK](/smart-contracts/bubblegum-v2/sdk/rust)).
+Bubblegum V2 is the latest iteration of the Metaplex Protocol program for creating and interacting with compressed NFTs (cNFTs) on Solana. Built for large-scale operations, Bubblegum V2 preserves all the benefits of the original Bubblegum while introducing powerful new features. Compressed NFTs make it possible to scale the creation of NFTs to new orders of magnitude by rethinking the way we store data onchain. {% .lead %}
 
 {% callout %}
 Please note that certain Bubblegum V2 instructions will require protocol fees. Please review the [Protocol Fees](/protocol-fees) page for up-to-date information.

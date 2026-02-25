@@ -19,23 +19,32 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Bubblegum V2?
-    a: Bubblegum V2 is the latest iteration of Metaplex's program for compressed NFTs on Solana, adding freeze/thaw, soulbound NFTs, MPL-Core collections, and royalty enforcement.
-  - q: How do I find the arguments needed for transfer, delegate, burn, etc.?
-    a: Use the getAssetWithProof helper which fetches all required parameters (proof, leaf index, nonce, etc.) from the DAS API automatically.
-  - q: How do I resolve Transaction too large errors?
-    a: Use truncateCanopy true with getAssetWithProof, or implement versioned transactions with Address Lookup Tables.
-  - q: How much does it cost to create a compressed NFT tree?
-    a: Costs vary by tree size. A 16,384-cNFT tree costs ~0.34 SOL, while a 1 million-cNFT tree costs ~8.5 SOL in rent.
-  - q: What is the difference between Bubblegum V1 and V2?
-    a: V2 adds freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates, and LeafSchemaV2.
-  - q: Do I need a special RPC provider?
-    a: Yes. You need an RPC that supports the Metaplex DAS API to fetch and index compressed NFTs.
-  - q: Can I decompress a cNFT back to a regular NFT?
-    a: Decompression is only available for Bubblegum V1 assets. V2 does not support decompression.
-  - q: How many cNFTs can I store in one tree?
-    a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
+  - q: Bubblegum V2とは何ですか？
+    a: Bubblegum V2は、SolanaでのMetaplexの圧縮NFTプログラムの最新バージョンで、フリーズ/解凍、ソウルバウンドNFT、MPL-Coreコレクション、ロイヤリティ強制が追加されています。
+  - q: 転送、デリゲート、バーンなどに必要な引数はどのように見つけますか？
+    a: DAS APIから必要なすべてのパラメータ（証明、リーフインデックス、ノンスなど）を自動的に取得するgetAssetWithProofヘルパーを使用します。
+  - q: 「トランザクションが大きすぎる」エラーを解決するにはどうすればよいですか？
+    a: getAssetWithProofでtruncateCanopy: trueを使用するか、アドレスルックアップテーブルを使用したバージョン化トランザクションを実装します。
+  - q: 圧縮NFTツリーの作成にはいくらかかりますか？
+    a: コストはツリーのサイズによって異なります。16,384個のcNFTのツリーは約0.34 SOL、100万個のcNFTのツリーはレントで約8.5 SOLかかります。
+  - q: Bubblegum V1とV2の違いは何ですか？
+    a: V2はフリーズ/解凍、ソウルバウンドNFT、MPL-Coreコレクション、ロイヤリティ強制、パーマネントデリゲート、LeafSchemaV2を追加します。
+  - q: 特別なRPCプロバイダーが必要ですか？
+    a: はい。圧縮NFTを取得およびインデックスするには、Metaplex DAS APIをサポートするRPCが必要です。
+  - q: cNFTを通常のNFTに解凍できますか？
+    a: 解凍はBubblegum V1アセットのみで利用できます。V2は解凍をサポートしていません。
+  - q: 1つのツリーにcNFTをいくつ保存できますか？
+    a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
 ---
+
+## Summary
+
+このページはBubblegum V2の圧縮NFTに関する最も一般的な質問に答えています。
+
+- `getAssetWithProof`を使用してリーフを変更する命令の必須パラメータを取得する
+- `truncateCanopy`またはアドレスルックアップテーブルで「トランザクションが大きすぎる」エラーを解決する
+- ツリーを作成する前にツリーのコストと容量を理解する
+- Bubblegum V2はV1ツリーや圧縮解除との後方互換性はない
 
 ## Bubblegum V2とは何ですか？
 

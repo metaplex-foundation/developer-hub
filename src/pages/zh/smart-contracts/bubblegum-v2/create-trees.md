@@ -22,14 +22,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I choose the right tree size for my project?
-    a: Use the recommended settings table. For small projects, a depth-14 tree holds 16,384 cNFTs at ~0.34 SOL. For large drops, a depth-20 tree holds 1 million cNFTs at ~8.5 SOL.
-  - q: Can I change the tree size after creation?
-    a: No. The max depth, max buffer size, and canopy depth are fixed at creation time. You must create a new tree if you need different parameters.
-  - q: What is the relationship between max depth and tree capacity?
-    a: The maximum number of cNFTs a tree can hold is 2^maxDepth. For example, maxDepth=20 supports 1,048,576 cNFTs.
-  - q: What does the max buffer size control?
-    a: The max buffer size determines how many concurrent modifications can happen to the tree in the same block. Higher values allow more parallel transactions but increase tree cost.
+  - q: 如何为我的项目选择合适的树大小？
+    a: 使用推荐设置表。对于小型项目，深度14的树以约0.34 SOL可容纳16,384个cNFT。对于大型投放，深度20的树以约8.5 SOL可容纳100万个cNFT。
+  - q: 创建后可以更改树的大小吗？
+    a: 不可以。最大深度、最大缓冲区大小和树冠深度在创建时固定。如果需要不同的参数，必须创建新树。
+  - q: 最大深度和树容量之间有什么关系？
+    a: 树可以容纳的cNFT最大数量为2^maxDepth。例如，maxDepth=20支持1,048,576个cNFT。
+  - q: 最大缓冲区大小控制什么？
+    a: 最大缓冲区大小决定在同一区块中可以对树进行多少并发修改。较高的值允许更多并行交易，但会增加树的成本。
 ---
 
 ## Summary
@@ -40,9 +40,6 @@ faqs:
 - Choose tree parameters based on your project's cNFT capacity needs (16K to 1B+ cNFTs)
 - Fetch merkle tree and tree config account data after creation
 - Understand the cost tradeoffs for different tree configurations
-
-## Out of Scope
-
 
 ## 介绍
 

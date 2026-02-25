@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: What can a delegate do with a cNFT?
+    a: A leaf delegate can transfer, burn, and freeze/thaw the cNFT on the owner's behalf.
+  - q: How do I revoke a delegate?
+    a: Call the delegate instruction with newLeafDelegate set to the owner's own public key. This effectively removes the delegate.
+  - q: Does the delegate persist after a transfer?
+    a: No. After a transfer, the leaf delegate is automatically reset to the new owner.
 ---
 
 ## Summary
@@ -27,10 +34,6 @@ programmingLanguage:
 - Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
 - Revoke a delegate by re-delegating to the owner's own address
 - Delegate authority is reset automatically after a transfer
-
-## Out of Scope
-
-This page does not cover: delegating tree authority (see [Delegating Trees](/smart-contracts/bubblegum-v2/delegate-trees)), freezing cNFTs (see [Freezing](/smart-contracts/bubblegum-v2/freeze-cnfts)), or permanent collection-level delegates.
 
 The owner of a Compressed NFT can delegate it to another account while keeping ownership of the cNFT. {% .lead %}
 

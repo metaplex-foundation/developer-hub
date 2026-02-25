@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 크리에이터 배열에 없는 크리에이터를 검증할 수 있나요?
+    a: 아니요. 크리에이터는 이미 cNFT의 크리에이터 배열에 나열되어 있어야 합니다. 먼저 updateMetadataV2를 사용하여 크리에이터를 추가한 다음 검증하세요.
+  - q: 검증 트랜잭션에 누가 서명하나요?
+    a: 검증받는 크리에이터가 트랜잭션에 서명해야 합니다. 다른 사람을 대신하여 크리에이터를 검증할 수 없습니다.
+  - q: 크리에이터가 민팅 시 스스로를 검증할 수 있나요?
+    a: 예. 크리에이터가 민트 트랜잭션에 서명하면 cNFT의 크리에이터 배열에서 자동으로 검증됩니다.
 ---
 
 ## Summary
@@ -26,9 +33,6 @@ programmingLanguage:
 - Verify a creator on an existing cNFT (the creator must sign)
 - Unverify a creator from a cNFT
 - Creators can also be verified at mint time by signing the mint transaction
-
-## Out of Scope
-
 
 압축된 NFT의 메타데이터에 크리에이터 목록이 설정되어 있는 경우 이러한 크리에이터는 특별한 명령어를 사용하여 cNFT에서 자신을 확인하고 확인 해제할 수 있습니다. {% .lead %}
 

@@ -22,14 +22,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I choose the right tree size for my project?
-    a: Use the recommended settings table. For small projects, a depth-14 tree holds 16,384 cNFTs at ~0.34 SOL. For large drops, a depth-20 tree holds 1 million cNFTs at ~8.5 SOL.
-  - q: Can I change the tree size after creation?
-    a: No. The max depth, max buffer size, and canopy depth are fixed at creation time. You must create a new tree if you need different parameters.
-  - q: What is the relationship between max depth and tree capacity?
-    a: The maximum number of cNFTs a tree can hold is 2^maxDepth. For example, maxDepth=20 supports 1,048,576 cNFTs.
-  - q: What does the max buffer size control?
-    a: The max buffer size determines how many concurrent modifications can happen to the tree in the same block. Higher values allow more parallel transactions but increase tree cost.
+  - q: プロジェクトに適したツリーサイズを選ぶにはどうすればよいですか？
+    a: 推奨設定テーブルを使用してください。小規模プロジェクトには、深度14のツリーが約0.34 SOLで16,384個のcNFTを保持します。大規模ドロップには、深度20のツリーが約8.5 SOLで100万個のcNFTを保持します。
+  - q: 作成後にツリーサイズを変更できますか？
+    a: いいえ。最大深度、最大バッファサイズ、キャノピー深度は作成時に固定されます。異なるパラメータが必要な場合は新しいツリーを作成する必要があります。
+  - q: 最大深度とツリー容量の関係は何ですか？
+    a: ツリーが保持できるcNFTの最大数は2^maxDepthです。例えば、maxDepth=20は1,048,576個のcNFTをサポートします。
+  - q: 最大バッファサイズは何を制御しますか？
+    a: 最大バッファサイズは、同じブロック内でツリーに対して行える同時変更の数を決定します。値が高いほど並列トランザクションが増えますが、ツリーのコストも増加します。
 ---
 
 ## Summary
@@ -40,9 +40,6 @@ faqs:
 - Choose tree parameters based on your project's cNFT capacity needs (16K to 1B+ cNFTs)
 - Fetch merkle tree and tree config account data after creation
 - Understand the cost tradeoffs for different tree configurations
-
-## Out of Scope
-
 
 ## はじめに
 

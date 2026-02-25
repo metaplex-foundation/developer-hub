@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 위임자는 cNFT로 무엇을 할 수 있나요?
+    a: 리프 위임자는 소유자를 대신하여 cNFT를 전송, 소각 및 동결/해동할 수 있습니다.
+  - q: 위임을 취소하려면 어떻게 해야 하나요?
+    a: newLeafDelegate를 소유자 자신의 공개 키로 설정하여 delegate 명령을 호출하세요. 이렇게 하면 위임자가 효과적으로 제거됩니다.
+  - q: 전송 후에도 위임자가 유지되나요?
+    a: 아니요. 전송 후에는 리프 위임자가 자동으로 새 소유자로 재설정됩니다.
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
 - Revoke a delegate by re-delegating to the owner's own address
 - Delegate authority is reset automatically after a transfer
-
-## Out of Scope
-
 
 압축된 NFT의 소유자는 cNFT의 소유권을 유지하면서 다른 계정에 위임할 수 있습니다. {% .lead %}
 

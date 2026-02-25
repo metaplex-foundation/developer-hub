@@ -1,6 +1,6 @@
 ---
-title: 컬렉션 확인
-metaTitle: 컬렉션 확인 - Bubblegum V2
+title: 컬렉션 관리
+metaTitle: 컬렉션 관리 - Bubblegum V2
 description: Bubblegum에서 컬렉션을 설정, 확인 및 확인 해제하는 방법을 알아보세요.
 created: '01-15-2025'
 updated: '02-24-2026'
@@ -20,12 +20,12 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I add a cNFT to a collection after minting?
-    a: Use the setCollectionV2 instruction with the newCoreCollection parameter. The collection must have the BubblegumV2 plugin enabled.
-  - q: Can I change the collection of a cNFT?
-    a: Yes. Use setCollectionV2 with both coreCollection (current) and newCoreCollection (new) parameters. Both collection authorities must sign.
-  - q: What is the BubblegumV2 plugin?
-    a: It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, and royalty enforcement on the collection.
+  - q: 민팅 후 cNFT를 컬렉션에 추가하려면 어떻게 해야 하나요?
+    a: newCoreCollection 매개변수와 함께 setCollectionV2 명령을 사용하세요. 컬렉션에는 BubblegumV2 플러그인이 활성화되어 있어야 합니다.
+  - q: cNFT의 컬렉션을 변경할 수 있나요?
+    a: 예. coreCollection(현재)과 newCoreCollection(새로운) 매개변수 모두와 함께 setCollectionV2를 사용하세요. 두 컬렉션 권한이 모두 서명해야 합니다.
+  - q: BubblegumV2 플러그인이란 무엇인가요?
+    a: 컬렉션에서 동결/해동, 소울바운드 cNFT, 로열티 강제와 같은 Bubblegum V2 기능을 활성화하는 MPL-Core 컬렉션 플러그인입니다.
 ---
 
 ## Summary
@@ -36,9 +36,6 @@ faqs:
 - Remove a collection from a cNFT
 - Change between collections (both authorities must sign)
 - Collections must have the BubblegumV2 plugin enabled
-
-## Out of Scope
-
 
 cNFT는 민팅 시 또는 나중에 MPL-Core 컬렉션에 추가될 수 있습니다. {% .lead %}
 

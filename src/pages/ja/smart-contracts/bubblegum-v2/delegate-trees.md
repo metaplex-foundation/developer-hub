@@ -17,6 +17,11 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: ツリーデリゲートは何ができますか？
+    a: ツリーデリゲートは、ツリー作成者に代わってツリーから圧縮NFTをミントできます。これはプライベートツリーにのみ関係します。
+  - q: ツリーデリゲートを取り消すにはどうすればよいですか？
+    a: newTreeDelegateをツリー作成者自身の公開鍵に設定してsetTreeDelegateを使用します。
 ---
 
 ## Summary
@@ -26,9 +31,6 @@ programmingLanguage:
 - Approve a tree delegate to mint cNFTs on behalf of the tree creator
 - Revoke a tree delegate by setting the delegate back to the creator
 - Only relevant for private trees (public trees allow anyone to mint)
-
-## Out of Scope
-
 
 圧縮NFTの所有者がデリゲート権限を承認できるのと同様に、Bubblegumツリーの作成者も、自分の代わりにアクションを実行する別のアカウントを承認できます。 {% .lead %}
 

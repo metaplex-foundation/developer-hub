@@ -21,14 +21,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I mint a compressed NFT to a collection?
-    a: Use the mintV2 instruction with the coreCollection parameter set to your MPL-Core collection address. The collection must have the BubblegumV2 plugin enabled.
-  - q: How do I get the asset ID after minting?
-    a: Use the parseLeafFromMintV2Transaction helper after the transaction is finalized. It returns the leaf schema including the asset ID.
-  - q: Can anyone mint from my tree?
-    a: Only if the tree is set to public. For private trees, only the tree creator or tree delegate can mint.
-  - q: What metadata fields are required for minting?
-    a: The MetadataArgsV2 requires name, uri, sellerFeeBasisPoints, collection (or none), and creators array.
+  - q: 如何将压缩NFT铸造到集合中？
+    a: 使用mintV2指令，将coreCollection参数设置为您的MPL-Core集合地址。集合必须启用BubblegumV2插件。
+  - q: 铸造后如何获取资产ID？
+    a: 在交易完成后使用parseLeafFromMintV2Transaction辅助函数。它返回包含资产ID的叶子模式。
+  - q: 任何人都可以从我的树中铸造吗？
+    a: 只有在树设置为公开时才可以。对于私有树，只有树创建者或树委托人才能铸造。
+  - q: 铸造需要哪些元数据字段？
+    a: MetadataArgsV2需要name、uri、sellerFeeBasisPoints、collection（或none）以及creators数组。
 ---
 
 ## Summary
@@ -39,9 +39,6 @@ faqs:
 - Mint directly into an MPL-Core collection with the BubblegumV2 plugin
 - Retrieve the asset ID and leaf schema from the mint transaction
 - Configure metadata including name, URI, creators, and royalties
-
-## Out of Scope
-
 
 在[上一页](/zh/smart-contracts/bubblegum-v2/create-trees)中，我们看到需要一个Bubblegum树来铸造压缩NFT，以及如何创建一个。现在，让我们看看如何从给定的Bubblegum树铸造压缩NFT。{% .lead %}
 

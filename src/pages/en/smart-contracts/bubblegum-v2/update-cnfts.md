@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: Who can update a compressed NFT's metadata?
+    a: If the cNFT belongs to a collection, only the collection authority can update it. If it does not belong to a collection, the tree authority (tree creator or delegate) can update it.
+  - q: What fields can I update on a cNFT?
+    a: You can update the name, URI, seller fee basis points, and other metadata fields defined in UpdateArgsArgs. Use some('newValue') for fields you want to change.
+  - q: Do I need to pass the collection when updating?
+    a: Yes, if the cNFT belongs to a collection. Pass the coreCollection parameter with the collection's public key. The collection authority must sign the transaction.
 ---
 
 ## Summary
@@ -27,10 +34,6 @@ programmingLanguage:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-
-## Out of Scope
-
-This page does not cover: minting cNFTs (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts)), verifying creators (see [Verifying Creators](/smart-contracts/bubblegum-v2/verify-creators)), or collection management (see [Collections](/smart-contracts/bubblegum-v2/collections)).
 
 The **updateMetadataV2** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.
 

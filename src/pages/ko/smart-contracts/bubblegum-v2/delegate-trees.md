@@ -17,6 +17,11 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 트리 위임자는 무엇을 할 수 있나요?
+    a: 트리 위임자는 트리 생성자를 대신하여 트리에서 압축된 NFT를 민팅할 수 있습니다. 이는 비공개 트리에만 해당됩니다.
+  - q: 트리 위임을 취소하려면 어떻게 해야 하나요?
+    a: newTreeDelegate를 트리 생성자 자신의 공개 키로 설정하여 setTreeDelegate를 사용하세요.
 ---
 
 ## Summary
@@ -26,9 +31,6 @@ programmingLanguage:
 - Approve a tree delegate to mint cNFTs on behalf of the tree creator
 - Revoke a tree delegate by setting the delegate back to the creator
 - Only relevant for private trees (public trees allow anyone to mint)
-
-## Out of Scope
-
 
 압축된 NFT의 소유자가 위임 권한을 승인할 수 있는 것과 마찬가지로 Bubblegum 트리의 제작자도 다른 계정을 승인하여 대신 작업을 수행할 수 있습니다. {% .lead %}
 

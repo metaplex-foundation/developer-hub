@@ -24,18 +24,18 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Bubblegum V2?
-    a: Bubblegum V2 is Metaplex's program for creating and managing compressed NFTs (cNFTs) on Solana. It uses merkle trees to store NFT data at a fraction of the cost of traditional NFTs.
-  - q: How much does it cost to mint a compressed NFT?
-    a: Costs depend on tree size. A tree holding 1 million cNFTs costs approximately 8.5 SOL in rent, making each cNFT cost roughly 0.00001 SOL — orders of magnitude cheaper than standard NFTs.
-  - q: What is the difference between Bubblegum V1 and V2?
-    a: Bubblegum V2 adds freeze/thaw functionality, soulbound NFTs, MPL-Core collection integration, royalty enforcement, permanent delegates, and a new LeafSchemaV2.
-  - q: Do I need a special RPC to use compressed NFTs?
-    a: Yes. Compressed NFTs require an RPC provider that supports the Metaplex DAS API for indexing and fetching cNFT data. See the RPC Providers page for compatible providers.
-  - q: Can compressed NFTs be used in collections?
-    a: Yes. Bubblegum V2 uses MPL-Core collections to group cNFTs, enabling collection-level features like royalty enforcement and freeze delegates.
-  - q: What is a merkle tree in the context of cNFTs?
-    a: A merkle tree is an on-chain data structure that stores hashes of cNFT data as leaves. It enables cryptographic verification of NFT ownership and data without storing the full NFT data on-chain.
+  - q: Bubblegum V2란 무엇인가요?
+    a: Bubblegum V2는 Solana에서 압축된 NFT(cNFT)를 생성하고 관리하기 위한 Metaplex의 프로그램입니다. 머클 트리를 사용하여 기존 NFT 비용의 일부로 NFT 데이터를 저장합니다.
+  - q: 압축된 NFT를 민팅하는 데 얼마나 드나요?
+    a: 비용은 트리 크기에 따라 다릅니다. 100만 개의 cNFT를 보유하는 트리는 렌트로 약 8.5 SOL이 들며, 각 cNFT 비용은 약 0.00001 SOL로 표준 NFT보다 수십 배 저렴합니다.
+  - q: Bubblegum V1과 V2의 차이점은 무엇인가요?
+    a: Bubblegum V2는 동결/해동 기능, 소울바운드 NFT, MPL-Core 컬렉션 통합, 로열티 강제, 영구 위임자 및 새로운 LeafSchemaV2를 추가합니다.
+  - q: 압축된 NFT를 사용하려면 특별한 RPC가 필요한가요?
+    a: 예. 압축된 NFT는 cNFT 데이터를 인덱싱하고 가져오기 위해 Metaplex DAS API를 지원하는 RPC 제공자가 필요합니다. 호환 제공자는 RPC 제공자 페이지를 참조하세요.
+  - q: 압축된 NFT를 컬렉션에서 사용할 수 있나요?
+    a: 예. Bubblegum V2는 MPL-Core 컬렉션을 사용하여 cNFT를 그룹화하며, 로열티 강제 및 동결 위임자와 같은 컬렉션 수준의 기능을 활성화합니다.
+  - q: cNFT 맥락에서 머클 트리란 무엇인가요?
+    a: 머클 트리는 cNFT 데이터의 해시를 리프로 저장하는 온체인 데이터 구조입니다. 전체 NFT 데이터를 온체인에 저장하지 않고도 NFT 소유권과 데이터의 암호학적 검증을 가능하게 합니다.
 ---
 
 ## Summary
@@ -46,9 +46,6 @@ faqs:
 - New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
 - Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
 - Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
-
-## Out of Scope
-
 
 Bubblegum V2는 Solana에서 압축된 NFT(cNFT)를 생성하고 상호 작용하기 위한 Metaplex Protocol 프로그램의 최신 반복입니다. 대규모 운영을 위해 구축된 Bubblegum V2는 원본 Bubblegum의 모든 장점을 유지하면서 강력한 새 기능을 도입합니다. 압축된 NFT는 온체인에서 데이터를 저장하는 방식을 재고함으로써 NFT 생성을 새로운 규모로 확장할 수 있게 합니다. {% .lead %}
 

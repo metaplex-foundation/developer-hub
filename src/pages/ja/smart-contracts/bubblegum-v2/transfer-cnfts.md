@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: フリーズされたcNFTを転送できますか？
+    a: いいえ。フリーズされたcNFTは転送できません。適切なデリゲート権限を使用して先にcNFTを解凍する必要があります。
+  - q: 転送後にデリゲートはどうなりますか？
+    a: リーフデリゲートは転送成功後に自動的に新しい所有者にリセットされます。新しい所有者が必要であれば再デリゲートする必要があります。
+  - q: cNFTが転送可能かどうかを確認するにはどうすればよいですか？
+    a: canTransferヘルパー関数を使用します。cNFTがフリーズされておらず、転送不可（ソウルバウンド）としてマークされていない場合にtrueを返します。
 ---
 
 ## Summary
@@ -28,9 +35,6 @@ programmingLanguage:
 - Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
 - Check if a cNFT can be transferred using the canTransfer helper
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **transferV2**命令は、圧縮NFTをある所有者から別の所有者に転送するために使用できます。転送を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。デリゲート権限は、リーフデリゲートまたはコレクションの`permanentTransferDelegate`のいずれかです。
 

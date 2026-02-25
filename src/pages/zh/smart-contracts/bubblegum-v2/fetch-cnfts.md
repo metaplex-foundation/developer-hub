@@ -20,6 +20,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 哪些RPC提供商支持DAS API？
+    a: 请查看RPC提供商页面以获取维护的列表。Helius、Triton和Shyft等主要提供商支持DAS API。
+  - q: 如何获取压缩NFT的资产ID？
+    a: 如果您知道默克尔树地址和叶子索引，请使用findLeafAssetIdPda。否则，使用getAssetsByOwner或getAssetsByGroup来发现资产及其ID。
+  - q: getAsset和getAssetProof有什么区别？
+    a: getAsset返回cNFT的元数据、所有权和压缩信息。getAssetProof返回转移、销毁和更新等写入操作所需的默克尔证明。
 ---
 
 ## Summary
@@ -30,9 +37,6 @@ programmingLanguage:
 - Fetch individual cNFTs using getAsset and their proofs using getAssetProof
 - Fetch multiple cNFTs by owner or by collection
 - Derive Leaf Asset IDs from merkle tree addresses and leaf indices
-
-## Out of Scope
-
 
 如[概述](/zh/smart-contracts/bubblegum#read-api)页面所述，压缩NFT不像普通NFT那样存储在链上账户中，而是记录在创建和更新它们的交易中。{% .lead %}
 

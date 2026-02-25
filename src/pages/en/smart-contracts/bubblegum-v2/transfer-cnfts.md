@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: Can I transfer a frozen cNFT?
+    a: No. Frozen cNFTs cannot be transferred. You must thaw the cNFT first using the appropriate delegate authority.
+  - q: What happens to the delegate after a transfer?
+    a: The leaf delegate is automatically reset to the new owner after a successful transfer. The new owner must re-delegate if needed.
+  - q: How do I check if a cNFT can be transferred?
+    a: Use the canTransfer helper function. It returns true if the cNFT is not frozen and not marked as non-transferable (soulbound).
 ---
 
 ## Summary
@@ -28,10 +35,6 @@ programmingLanguage:
 - Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
 - Check if a cNFT can be transferred using the canTransfer helper
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
-This page does not cover: burning cNFTs (see [Burning](/smart-contracts/bubblegum-v2/burn-cnfts)), delegating authority (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), or freezing (see [Freezing](/smart-contracts/bubblegum-v2/freeze-cnfts)).
 
 The **transferV2** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The delegated authority can either be a leaf delegate or the `permanentTransferDelegate` of the collection.
 

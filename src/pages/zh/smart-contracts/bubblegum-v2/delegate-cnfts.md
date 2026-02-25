@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 委托人可以对cNFT做什么？
+    a: 叶子委托人可以代表所有者转移、销毁和冻结/解冻cNFT。
+  - q: 如何撤销委托人？
+    a: 将newLeafDelegate设置为所有者自己的公钥来调用delegate指令。这实际上会移除委托人。
+  - q: 转移后委托人仍然有效吗？
+    a: 不是。转移后，叶子委托人会自动重置为新所有者。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
 - Revoke a delegate by re-delegating to the owner's own address
 - Delegate authority is reset automatically after a transfer
-
-## Out of Scope
-
 
 压缩NFT的所有者可以将其委托给另一个账户，同时保持cNFT的所有权。{% .lead %}
 

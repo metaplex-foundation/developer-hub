@@ -17,6 +17,11 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: What can a tree delegate do?
+    a: A tree delegate can mint compressed NFTs from the tree on behalf of the tree creator. This is only relevant for private trees.
+  - q: How do I revoke a tree delegate?
+    a: Use setTreeDelegate with newTreeDelegate set to the tree creator's own public key.
 ---
 
 ## Summary
@@ -26,10 +31,6 @@ programmingLanguage:
 - Approve a tree delegate to mint cNFTs on behalf of the tree creator
 - Revoke a tree delegate by setting the delegate back to the creator
 - Only relevant for private trees (public trees allow anyone to mint)
-
-## Out of Scope
-
-This page does not cover: delegating individual cNFTs (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), creating trees (see [Creating Trees](/smart-contracts/bubblegum-v2/create-trees)), or minting (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts)).
 
 Similarly to how the owner of a Compressed NFT can approve a Delegate Authority, the creator of a Bubblegum Tree can also approve another account to perform actions on their behalf. {% .lead %}
 

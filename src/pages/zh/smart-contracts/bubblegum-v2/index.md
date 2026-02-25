@@ -24,18 +24,18 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Bubblegum V2?
-    a: Bubblegum V2 is Metaplex's program for creating and managing compressed NFTs (cNFTs) on Solana. It uses merkle trees to store NFT data at a fraction of the cost of traditional NFTs.
-  - q: How much does it cost to mint a compressed NFT?
-    a: Costs depend on tree size. A tree holding 1 million cNFTs costs approximately 8.5 SOL in rent, making each cNFT cost roughly 0.00001 SOL — orders of magnitude cheaper than standard NFTs.
-  - q: What is the difference between Bubblegum V1 and V2?
-    a: Bubblegum V2 adds freeze/thaw functionality, soulbound NFTs, MPL-Core collection integration, royalty enforcement, permanent delegates, and a new LeafSchemaV2.
-  - q: Do I need a special RPC to use compressed NFTs?
-    a: Yes. Compressed NFTs require an RPC provider that supports the Metaplex DAS API for indexing and fetching cNFT data. See the RPC Providers page for compatible providers.
-  - q: Can compressed NFTs be used in collections?
-    a: Yes. Bubblegum V2 uses MPL-Core collections to group cNFTs, enabling collection-level features like royalty enforcement and freeze delegates.
-  - q: What is a merkle tree in the context of cNFTs?
-    a: A merkle tree is an on-chain data structure that stores hashes of cNFT data as leaves. It enables cryptographic verification of NFT ownership and data without storing the full NFT data on-chain.
+  - q: 什么是Bubblegum V2？
+    a: Bubblegum V2是Metaplex在Solana上创建和管理压缩NFT（cNFT）的程序。它使用默克尔树以传统NFT成本的一小部分存储NFT数据。
+  - q: 铸造压缩NFT需要多少费用？
+    a: 费用取决于树的大小。容纳100万个cNFT的树租金约为8.5 SOL，使每个cNFT的成本约为0.00001 SOL，比标准NFT便宜数个数量级。
+  - q: Bubblegum V1和V2有什么区别？
+    a: Bubblegum V2增加了冻结/解冻功能、灵魂绑定NFT、MPL-Core集合集成、版税强制执行、永久委托人以及新的LeafSchemaV2。
+  - q: 使用压缩NFT需要特殊的RPC吗？
+    a: 是的。压缩NFT需要支持Metaplex DAS API的RPC提供商来索引和获取cNFT数据。请查看RPC提供商页面了解兼容提供商。
+  - q: 压缩NFT可以用于集合吗？
+    a: 可以。Bubblegum V2使用MPL-Core集合来分组cNFT，启用集合级别的功能，如版税强制执行和冻结委托人。
+  - q: 在cNFT环境中默克尔树是什么？
+    a: 默克尔树是一种链上数据结构，将cNFT数据的哈希存储为叶子。它允许在不将完整NFT数据存储在链上的情况下对NFT所有权和数据进行加密验证。
 ---
 
 ## Summary
@@ -46,9 +46,6 @@ faqs:
 - New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
 - Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
 - Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
-
-## Out of Scope
-
 
 Bubblegum V2是Metaplex协议程序的最新迭代，用于在Solana上创建和交互压缩NFT（cNFT）。专为大规模操作而构建，Bubblegum V2保留了原始Bubblegum的所有优势，同时引入了强大的新功能。压缩NFT通过重新思考链上数据存储方式，使NFT的创建可以扩展到新的数量级。{% .lead %}
 

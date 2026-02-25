@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 冻结的cNFT可以转移吗？
+    a: 不可以。冻结的cNFT无法转移。您必须先使用适当的委托权限解冻cNFT。
+  - q: 转移后委托人会怎样？
+    a: 转移成功后，叶子委托人会自动重置为新所有者。新所有者如有需要必须重新委托。
+  - q: 如何检查cNFT是否可以转移？
+    a: 使用canTransfer辅助函数。如果cNFT未被冻结且未标记为不可转移（灵魂绑定），则返回true。
 ---
 
 ## Summary
@@ -28,9 +35,6 @@ programmingLanguage:
 - Authorize transfers via leaf owner, leaf delegate, or permanent transfer delegate
 - Check if a cNFT can be transferred using the canTransfer helper
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **transferV2**指令可用于将压缩NFT从一个所有者转移到另一个。要授权转移，当前所有者或委托权限（如果有）必须签署交易。委托权限可以是叶子委托人或集合的`permanentTransferDelegate`。
 

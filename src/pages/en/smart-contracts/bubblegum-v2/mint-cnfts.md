@@ -40,10 +40,6 @@ faqs:
 - Retrieve the asset ID and leaf schema from the mint transaction
 - Configure metadata including name, URI, creators, and royalties
 
-## Out of Scope
-
-This page does not cover: tree creation (see [Creating Trees](/smart-contracts/bubblegum-v2/create-trees)), updating metadata after mint (see [Updating cNFTs](/smart-contracts/bubblegum-v2/update-cnfts)), or collection management (see [Collections](/smart-contracts/bubblegum-v2/collections)).
-
 In [the previous page](/smart-contracts/bubblegum-v2/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs, and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
 
 The Bubblegum program offers multiple minting instructions for the different leaf schema versions. Bubblegum V2 introduces a new minting instruction called **mintV2** that is used to mint Compressed NFTs either to a given Collection or without a Collection.

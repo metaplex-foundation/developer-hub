@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 可以撤销销毁操作吗？
+    a: 不可以。销毁会将cNFT从默克尔树中永久删除。叶子被替换为空哈希，无法恢复。
+  - q: 谁可以销毁压缩NFT？
+    a: 当前叶子所有者、叶子委托人（如果已设置），或永久销毁委托人（如果集合启用了PermanentBurnDelegate插件）。
+  - q: 销毁时需要传递集合吗？
+    a: 是的，如果cNFT是集合的一部分。请传递带有集合公钥的coreCollection参数。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Burn a cNFT using the burnV2 instruction
 - Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **burnV2**指令可用于销毁压缩NFT，因此将其从Bubblegum树中永久移除。要授权此操作，当前所有者或委托权限（如果有）必须签署交易。该指令接受以下参数：
 

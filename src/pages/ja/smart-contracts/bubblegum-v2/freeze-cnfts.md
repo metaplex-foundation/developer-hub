@@ -21,14 +21,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I freeze a compressed NFT?
-    a: Use the freezeV2 instruction with a leaf delegate or permanent freeze delegate. The cNFT must first be delegated to the freeze authority.
-  - q: What is the difference between a leaf delegate freeze and a permanent freeze?
-    a: A leaf delegate freeze is asset-level and requires the owner to delegate first. A permanent freeze delegate operates at the collection level and can freeze any cNFT in the collection without owner interaction.
-  - q: How do I make a cNFT soulbound (non-transferable)?
-    a: Use setNonTransferableV2 with a permanent freeze delegate. The collection must have the PermanentFreezeDelegate plugin enabled.
-  - q: Can a soulbound cNFT be made transferable again?
-    a: No. The non-transferable flag set by setNonTransferableV2 is permanent and cannot be reversed.
+  - q: 圧縮NFTを凍結するにはどうすればよいですか？
+    a: リーフデリゲートまたはパーマネントフリーズデリゲートを指定してfreezeV2命令を使用します。cNFTは先にフリーズ権限にデリゲートされている必要があります。
+  - q: リーフデリゲートによる凍結とパーマネントフリーズの違いは何ですか？
+    a: リーフデリゲートによる凍結はアセットレベルで、所有者が先にデリゲートする必要があります。パーマネントフリーズデリゲートはコレクションレベルで動作し、所有者の操作なしにコレクション内の任意のcNFTを凍結できます。
+  - q: cNFTをソウルバウンド（転送不可）にするにはどうすればよいですか？
+    a: パーマネントフリーズデリゲートを指定してsetNonTransferableV2を使用します。コレクションにはPermanentFreezeDelegateプラグインが有効になっている必要があります。
+  - q: ソウルバウンドのcNFTを再び転送可能にできますか？
+    a: いいえ。setNonTransferableV2によって設定された転送不可フラグは永続的で、元に戻すことはできません。
 ---
 
 ## Summary
@@ -39,9 +39,6 @@ faqs:
 - Delegate and freeze in a single transaction with delegateAndFreezeV2
 - Thaw a frozen cNFT and optionally revoke the delegate in one step
 - Make a cNFT permanently non-transferable (soulbound) with setNonTransferableV2
-
-## Out of Scope
-
 
 Bubblegum V2では、圧縮NFTを凍結・解凍できます。これはステーキングなどのさまざまなユースケースに役立ちます。 {% .lead %}
 

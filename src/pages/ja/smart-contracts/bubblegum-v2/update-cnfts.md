@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 圧縮NFTのメタデータを更新できるのは誰ですか？
+    a: cNFTがコレクションに属している場合、更新できるのはコレクション権限のみです。コレクションに属していない場合、ツリー権限（ツリー作成者またはデリゲート）が更新できます。
+  - q: cNFTで更新できるフィールドは何ですか？
+    a: UpdateArgsArgsで定義された名前、URI、セラーフィーベーシスポイント、その他のメタデータフィールドを更新できます。変更したいフィールドにはsome('newValue')を使用します。
+  - q: 更新時にコレクションを渡す必要がありますか？
+    a: はい、cNFTがコレクションに属している場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。コレクション権限がトランザクションに署名する必要があります。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-
-## Out of Scope
-
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
 

@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: デリゲートはcNFTで何ができますか？
+    a: リーフデリゲートは、所有者に代わってcNFTの転送、バーン、フリーズ/解凍を行うことができます。
+  - q: デリゲートを取り消すにはどうすればよいですか？
+    a: newLeafDelegateを所有者自身の公開鍵に設定してdelegate命令を呼び出します。これにより実質的にデリゲートが削除されます。
+  - q: 転送後もデリゲートは維持されますか？
+    a: いいえ。転送後、リーフデリゲートは自動的に新しい所有者にリセットされます。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Approve a leaf delegate to transfer, burn, or freeze a cNFT on the owner's behalf
 - Revoke a delegate by re-delegating to the owner's own address
 - Delegate authority is reset automatically after a transfer
-
-## Out of Scope
-
 
 圧縮NFTの所有者は、cNFTの所有権を保持したまま、別のアカウントにデリゲートできます。 {% .lead %}
 

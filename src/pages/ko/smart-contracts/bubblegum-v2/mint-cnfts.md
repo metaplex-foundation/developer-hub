@@ -21,14 +21,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I mint a compressed NFT to a collection?
-    a: Use the mintV2 instruction with the coreCollection parameter set to your MPL-Core collection address. The collection must have the BubblegumV2 plugin enabled.
-  - q: How do I get the asset ID after minting?
-    a: Use the parseLeafFromMintV2Transaction helper after the transaction is finalized. It returns the leaf schema including the asset ID.
-  - q: Can anyone mint from my tree?
-    a: Only if the tree is set to public. For private trees, only the tree creator or tree delegate can mint.
-  - q: What metadata fields are required for minting?
-    a: The MetadataArgsV2 requires name, uri, sellerFeeBasisPoints, collection (or none), and creators array.
+  - q: 압축된 NFT를 컬렉션에 민팅하려면 어떻게 해야 하나요?
+    a: coreCollection 매개변수를 MPL-Core 컬렉션 주소로 설정하여 mintV2 명령을 사용하세요. 컬렉션에는 BubblegumV2 플러그인이 활성화되어 있어야 합니다.
+  - q: 민팅 후 자산 ID를 얻으려면 어떻게 해야 하나요?
+    a: 트랜잭션이 완료된 후 parseLeafFromMintV2Transaction 헬퍼를 사용하세요. 자산 ID를 포함한 리프 스키마를 반환합니다.
+  - q: 누구나 내 트리에서 민팅할 수 있나요?
+    a: 트리가 공개로 설정된 경우에만 가능합니다. 비공개 트리의 경우 트리 생성자 또는 트리 위임자만 민팅할 수 있습니다.
+  - q: 민팅에 필요한 메타데이터 필드는 무엇인가요?
+    a: MetadataArgsV2에는 name, uri, sellerFeeBasisPoints, collection(또는 none), 그리고 creators 배열이 필요합니다.
 ---
 
 ## Summary
@@ -39,9 +39,6 @@ faqs:
 - Mint directly into an MPL-Core collection with the BubblegumV2 plugin
 - Retrieve the asset ID and leaf schema from the mint transaction
 - Configure metadata including name, URI, creators, and royalties
-
-## Out of Scope
-
 
 [이전 페이지](/ko/smart-contracts/bubblegum-v2/create-trees)에서 압축된 NFT를 민팅하려면 Bubblegum 트리가 필요하다는 것을 보았고, 하나를 만드는 방법을 보았습니다. 이제 주어진 Bubblegum 트리에서 압축된 NFT를 민팅하는 방법을 살펴보겠습니다. {% .lead %}
 

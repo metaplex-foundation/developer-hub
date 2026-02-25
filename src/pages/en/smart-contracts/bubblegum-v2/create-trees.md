@@ -41,10 +41,6 @@ faqs:
 - Fetch merkle tree and tree config account data after creation
 - Understand the cost tradeoffs for different tree configurations
 
-## Out of Scope
-
-This page does not cover: minting cNFTs (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts)), merkle tree internals (see [Concurrent Merkle Trees](/smart-contracts/bubblegum-v2/concurrent-merkle-trees)), or canopy optimization (see [Merkle Tree Canopy](/smart-contracts/bubblegum-v2/merkle-tree-canopy)).
-
 ## Introduction
 
 Whilst the data of Compressed NFTs is stored inside transactions and not onchain accounts, we still need some onchain accounts to keep track of the Merkle Tree and its configuration. As such, before we can start minting Compressed NFTs, we need to create two accounts:

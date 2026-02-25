@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 소각을 취소할 수 있나요?
+    a: 아니요. 소각은 cNFT를 머클 트리에서 영구적으로 제거합니다. 리프는 빈 해시로 대체되며 복구할 수 없습니다.
+  - q: 압축된 NFT를 소각할 수 있는 사람은 누구인가요?
+    a: 현재 리프 소유자, 리프 위임자(설정된 경우), 또는 영구 소각 위임자(컬렉션에 PermanentBurnDelegate 플러그인이 활성화된 경우).
+  - q: 소각 시 컬렉션을 전달해야 하나요?
+    a: 예, cNFT가 컬렉션의 일부인 경우. 컬렉션의 공개 키와 함께 coreCollection 매개변수를 전달하세요.
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Burn a cNFT using the burnV2 instruction
 - Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **burnV2** 명령어는 압축된 NFT를 소각하여 Bubblegum 트리에서 영구적으로 제거하는 데 사용할 수 있습니다. 이 작업을 승인하려면 현재 소유자나 위임 권한(있는 경우) 중 하나가 트랜잭션에 서명해야 합니다. 명령어는 다음 매개변수를 받아들입니다:
 

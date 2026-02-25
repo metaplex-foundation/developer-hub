@@ -1,6 +1,6 @@
 ---
-title: コレクションの検証
-metaTitle: コレクションの検証 - Bubblegum V2
+title: コレクションの管理
+metaTitle: コレクションの管理 - Bubblegum V2
 description: Bubblegumでコレクションの設定、検証、検証解除を行う方法を学びます。
 created: '01-15-2025'
 updated: '02-24-2026'
@@ -20,12 +20,12 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I add a cNFT to a collection after minting?
-    a: Use the setCollectionV2 instruction with the newCoreCollection parameter. The collection must have the BubblegumV2 plugin enabled.
-  - q: Can I change the collection of a cNFT?
-    a: Yes. Use setCollectionV2 with both coreCollection (current) and newCoreCollection (new) parameters. Both collection authorities must sign.
-  - q: What is the BubblegumV2 plugin?
-    a: It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, and royalty enforcement on the collection.
+  - q: ミント後にcNFTをコレクションに追加するにはどうすればよいですか？
+    a: newCoreCollectionパラメータを指定してsetCollectionV2命令を使用します。コレクションにはBubblegumV2プラグインが有効になっている必要があります。
+  - q: cNFTのコレクションを変更できますか？
+    a: はい。coreCollection（現在）とnewCoreCollection（新規）の両方のパラメータを指定してsetCollectionV2を使用します。両方のコレクション権限が署名する必要があります。
+  - q: BubblegumV2プラグインとは何ですか？
+    a: コレクション上でフリーズ/解凍、ソウルバウンドcNFT、ロイヤリティ強制などのBubblegum V2機能を有効にするMPL-Coreコレクションプラグインです。
 ---
 
 ## Summary
@@ -36,9 +36,6 @@ faqs:
 - Remove a collection from a cNFT
 - Change between collections (both authorities must sign)
 - Collections must have the BubblegumV2 plugin enabled
-
-## Out of Scope
-
 
 cNFTは、ミント時または後でMPL-Coreコレクションに追加できます。 {% .lead %}
 
@@ -83,6 +80,43 @@ const signature = await setCollectionV2(umi, {
   newCoreCollection: newCoreCollection.publicKey,
 }).sendAndConfirm(umi);
 ```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## 圧縮NFTのコレクションの削除
+**setCollectionV2**命令は、cNFTからコレクションを削除するためにも使用できます。
+
+{% dialect-switcher title="圧縮NFTのコレクションの削除" %}
+{% dialect title="JavaScript" id="js" %}
+{% totem %}
+
+```ts
+import {
+  getAssetWithProof,
+  setCollectionV2,
+  MetadataArgsV2Args
+} from '@metaplex-foundation/mpl-bubblegum'
+import {
+  unwrapOption,
+  none,
+} from '@metaplex-foundation/umi';
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
+
+const collection = unwrapOption(assetWithProof.metadata.collection)
+
+const signature = await setCollectionV2(umi, {
+  ...assetWithProof,
+  authority: collectionAuthoritySigner,
+  coreCollection: collection!.key
+}).sendAndConfirm(umi);
+```
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
 
 ## Notes
 

@@ -1,5 +1,5 @@
 ---
-title: Verifying Collections
+title: Managing Collections
 metaTitle: Managing Collections - Bubblegum V2 - Metaplex
 description: Learn how to set, change, and remove MPL-Core collections on compressed NFTs using Bubblegum V2. Covers the setCollectionV2 instruction.
 created: '01-15-2025'
@@ -36,10 +36,6 @@ faqs:
 - Remove a collection from a cNFT
 - Change between collections (both authorities must sign)
 - Collections must have the BubblegumV2 plugin enabled
-
-## Out of Scope
-
-This page does not cover: minting directly to a collection (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts#minting-to-a-collection)), creating MPL-Core collections (see [MPL-Core Collections](/smart-contracts/core/collections)), or verifying creators (see [Verifying Creators](/smart-contracts/bubblegum-v2/verify-creators)).
 
 A cNFT can be added to an MPL-Core Collection either on mint or later. {% .lead %}
 

@@ -18,6 +18,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: バーンを元に戻すことはできますか？
+    a: いいえ。バーンはcNFTをマークルツリーから永久に削除します。リーフは空のハッシュに置き換えられ、復元できません。
+  - q: 圧縮NFTをバーンできるのは誰ですか？
+    a: 現在のリーフ所有者、リーフデリゲート（設定されている場合）、またはパーマネントバーンデリゲート（コレクションにPermanentBurnDelegateプラグインが有効な場合）。
+  - q: バーン時にコレクションを渡す必要がありますか？
+    a: はい、cNFTがコレクションの一部である場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Burn a cNFT using the burnV2 instruction
 - Authorize burns via the leaf owner, leaf delegate, or permanent burn delegate
 - Pass the coreCollection parameter when the cNFT belongs to a collection
-
-## Out of Scope
-
 
 **burnV2**命令は、圧縮NFTをバーンし、Bubblegumツリーから永続的に削除するために使用できます。この操作を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。命令は以下のパラメータを受け入れます：
 

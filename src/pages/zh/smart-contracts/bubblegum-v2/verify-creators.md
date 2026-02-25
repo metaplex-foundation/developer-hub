@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 可以验证不在创作者数组中的创作者吗？
+    a: 不可以。创作者必须已经在cNFT的创作者数组中列出。先使用updateMetadataV2添加创作者，然后再验证他们。
+  - q: 谁签署验证交易？
+    a: 被验证的创作者必须签署交易。您不能代表他人验证创作者。
+  - q: 创作者可以在铸造时验证自己吗？
+    a: 可以。如果创作者签署了铸造交易，他们会自动在cNFT的创作者数组中得到验证。
 ---
 
 ## Summary
@@ -26,9 +33,6 @@ programmingLanguage:
 - Verify a creator on an existing cNFT (the creator must sign)
 - Unverify a creator from a cNFT
 - Creators can also be verified at mint time by signing the mint transaction
-
-## Out of Scope
-
 
 如果压缩NFT的元数据中设置了创作者列表，这些创作者可以使用特殊指令在cNFT上验证和取消验证自己。{% .lead %}
 

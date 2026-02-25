@@ -22,14 +22,14 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I choose the right tree size for my project?
-    a: Use the recommended settings table. For small projects, a depth-14 tree holds 16,384 cNFTs at ~0.34 SOL. For large drops, a depth-20 tree holds 1 million cNFTs at ~8.5 SOL.
-  - q: Can I change the tree size after creation?
-    a: No. The max depth, max buffer size, and canopy depth are fixed at creation time. You must create a new tree if you need different parameters.
-  - q: What is the relationship between max depth and tree capacity?
-    a: The maximum number of cNFTs a tree can hold is 2^maxDepth. For example, maxDepth=20 supports 1,048,576 cNFTs.
-  - q: What does the max buffer size control?
-    a: The max buffer size determines how many concurrent modifications can happen to the tree in the same block. Higher values allow more parallel transactions but increase tree cost.
+  - q: 프로젝트에 적합한 트리 크기를 어떻게 선택하나요?
+    a: 권장 설정 표를 사용하세요. 소규모 프로젝트의 경우 깊이 14 트리는 약 0.34 SOL로 16,384개의 cNFT를 보유합니다. 대규모 드롭의 경우 깊이 20 트리는 약 8.5 SOL로 100만 개의 cNFT를 보유합니다.
+  - q: 생성 후 트리 크기를 변경할 수 있나요?
+    a: 아니요. 최대 깊이, 최대 버퍼 크기 및 캐노피 깊이는 생성 시 고정됩니다. 다른 매개변수가 필요하면 새 트리를 만들어야 합니다.
+  - q: 최대 깊이와 트리 용량의 관계는 무엇인가요?
+    a: 트리가 보유할 수 있는 최대 cNFT 수는 2^maxDepth입니다. 예를 들어, maxDepth=20은 1,048,576개의 cNFT를 지원합니다.
+  - q: 최대 버퍼 크기는 무엇을 제어하나요?
+    a: 최대 버퍼 크기는 동일한 블록에서 트리에 대해 동시에 발생할 수 있는 수정 횟수를 결정합니다. 값이 높을수록 더 많은 병렬 트랜잭션이 허용되지만 트리 비용이 증가합니다.
 ---
 
 ## Summary
@@ -40,9 +40,6 @@ faqs:
 - Choose tree parameters based on your project's cNFT capacity needs (16K to 1B+ cNFTs)
 - Fetch merkle tree and tree config account data after creation
 - Understand the cost tradeoffs for different tree configurations
-
-## Out of Scope
-
 
 ## 소개
 

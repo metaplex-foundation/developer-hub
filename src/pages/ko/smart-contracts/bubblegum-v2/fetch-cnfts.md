@@ -20,6 +20,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 어떤 RPC 제공자가 DAS API를 지원하나요?
+    a: 관리되는 목록은 RPC 제공자 페이지를 참조하세요. Helius, Triton, Shyft 등 주요 제공자가 DAS API를 지원합니다.
+  - q: 압축된 NFT의 자산 ID를 얻으려면 어떻게 해야 하나요?
+    a: 머클 트리 주소와 리프 인덱스를 알고 있다면 findLeafAssetIdPda를 사용하세요. 그렇지 않으면 getAssetsByOwner 또는 getAssetsByGroup을 사용하여 자산과 해당 ID를 검색하세요.
+  - q: getAsset와 getAssetProof의 차이점은 무엇인가요?
+    a: getAsset은 cNFT의 메타데이터, 소유권 및 압축 정보를 반환합니다. getAssetProof는 전송, 소각, 업데이트와 같은 쓰기 작업에 필요한 머클 증명을 반환합니다.
 ---
 
 ## Summary
@@ -30,9 +37,6 @@ programmingLanguage:
 - Fetch individual cNFTs using getAsset and their proofs using getAssetProof
 - Fetch multiple cNFTs by owner or by collection
 - Derive Leaf Asset IDs from merkle tree addresses and leaf indices
-
-## Out of Scope
-
 
 [개요](/ko/smart-contracts/bubblegum#read-api) 페이지에서 언급했듯이 압축된 NFT는 일반 NFT처럼 온체인 계정 내에 저장되지 않고 대신 이를 생성하고 업데이트한 트랜잭션에 기록됩니다. {% .lead %}
 

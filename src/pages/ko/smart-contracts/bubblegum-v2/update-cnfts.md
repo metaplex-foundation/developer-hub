@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 압축된 NFT의 메타데이터를 업데이트할 수 있는 사람은 누구인가요?
+    a: cNFT가 컬렉션에 속한 경우, 컬렉션 권한만 업데이트할 수 있습니다. 컬렉션에 속하지 않은 경우, 트리 권한(트리 생성자 또는 위임자)이 업데이트할 수 있습니다.
+  - q: cNFT에서 업데이트할 수 있는 필드는 무엇인가요?
+    a: UpdateArgsArgs에 정의된 이름, URI, 판매자 수수료 기준 포인트 및 기타 메타데이터 필드를 업데이트할 수 있습니다. 변경하려는 필드에는 some('newValue')을 사용하세요.
+  - q: 업데이트 시 컬렉션을 전달해야 하나요?
+    a: 예, cNFT가 컬렉션에 속한 경우. 컬렉션의 공개 키와 함께 coreCollection 매개변수를 전달하세요. 컬렉션 권한이 트랜잭션에 서명해야 합니다.
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-
-## Out of Scope
-
 
 **updateMetadataV2** 명령어는 압축된 NFT의 메타데이터를 수정하는 데 사용할 수 있습니다. 머클 루트가 업데이트되어 데이터의 전파된 해시를 반영하고, [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)를 준수하는 RPC 제공업체는 cNFT의 인덱스를 업데이트합니다.
 

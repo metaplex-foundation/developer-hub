@@ -1,6 +1,6 @@
 ---
-title: 验证集合
-metaTitle: 验证集合 - Bubblegum V2
+title: 管理集合
+metaTitle: 管理集合 - Bubblegum V2
 description: 了解如何在Bubblegum上设置、验证和取消验证集合。
 created: '01-15-2025'
 updated: '02-24-2026'
@@ -20,12 +20,12 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: How do I add a cNFT to a collection after minting?
-    a: Use the setCollectionV2 instruction with the newCoreCollection parameter. The collection must have the BubblegumV2 plugin enabled.
-  - q: Can I change the collection of a cNFT?
-    a: Yes. Use setCollectionV2 with both coreCollection (current) and newCoreCollection (new) parameters. Both collection authorities must sign.
-  - q: What is the BubblegumV2 plugin?
-    a: It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, and royalty enforcement on the collection.
+  - q: 铸造后如何将cNFT添加到集合中？
+    a: 使用带有newCoreCollection参数的setCollectionV2指令。集合必须启用BubblegumV2插件。
+  - q: 可以更改cNFT的集合吗？
+    a: 可以。使用带有coreCollection（当前）和newCoreCollection（新）两个参数的setCollectionV2。两个集合权限都必须签名。
+  - q: BubblegumV2插件是什么？
+    a: 它是一个MPL-Core集合插件，在集合上启用Bubblegum V2功能，如冻结/解冻、灵魂绑定cNFT和版税强制执行。
 ---
 
 ## Summary
@@ -36,9 +36,6 @@ faqs:
 - Remove a collection from a cNFT
 - Change between collections (both authorities must sign)
 - Collections must have the BubblegumV2 plugin enabled
-
-## Out of Scope
-
 
 cNFT可以在铸造时或之后添加到MPL-Core集合。{% .lead %}
 

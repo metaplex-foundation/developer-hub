@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: 谁可以更新压缩NFT的元数据？
+    a: 如果cNFT属于集合，只有集合权限可以更新。如果不属于集合，树权限（树创建者或委托人）可以更新。
+  - q: 可以在cNFT上更新哪些字段？
+    a: 您可以更新UpdateArgsArgs中定义的名称、URI、卖家费用基准点及其他元数据字段。对于要更改的字段使用some('newValue')。
+  - q: 更新时需要传递集合吗？
+    a: 是的，如果cNFT属于集合。请传递带有集合公钥的coreCollection参数。集合权限必须签署交易。
 ---
 
 ## Summary
@@ -27,9 +34,6 @@ programmingLanguage:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-
-## Out of Scope
-
 
 **updateMetadataV2**指令可用于修改压缩NFT的元数据。默克尔根会更新以反映数据的传播哈希，符合[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)的RPC提供商将更新其cNFT索引。
 

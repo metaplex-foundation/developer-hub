@@ -20,6 +20,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: どのRPCプロバイダーがDAS APIをサポートしていますか？
+    a: 維持されているリストについてはRPCプロバイダーページをご参照ください。Helius、Triton、ShyftなどのメジャープロバイダーがDAS APIをサポートしています。
+  - q: 圧縮NFTのアセットIDを取得するにはどうすればよいですか？
+    a: マークルツリーのアドレスとリーフインデックスがわかる場合はfindLeafAssetIdPdaを使用します。そうでなければ、getAssetsByOwnerまたはgetAssetsByGroupを使用してアセットとそのIDを検索します。
+  - q: getAssetとgetAssetProofの違いは何ですか？
+    a: getAssetはcNFTのメタデータ、所有権、圧縮情報を返します。getAssetProofは転送、バーン、更新などの書き込み操作に必要なマークルプルーフを返します。
 ---
 
 ## Summary
@@ -30,9 +37,6 @@ programmingLanguage:
 - Fetch individual cNFTs using getAsset and their proofs using getAssetProof
 - Fetch multiple cNFTs by owner or by collection
 - Derive Leaf Asset IDs from merkle tree addresses and leaf indices
-
-## Out of Scope
-
 
 [概要](/ja/smart-contracts/bubblegum#read-api)ページで述べたように、圧縮NFTは通常のNFTのようにオンチェーンアカウント内に保存されるのではなく、それらを作成し更新したトランザクションにログされます。 {% .lead %}
 

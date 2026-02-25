@@ -20,6 +20,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: Which RPC providers support the DAS API?
+    a: See the RPC Providers page for a maintained list. Major providers like Helius, Triton, and Shyft support the DAS API.
+  - q: How do I get the asset ID for a compressed NFT?
+    a: If you know the merkle tree address and leaf index, use findLeafAssetIdPda. Otherwise, use getAssetsByOwner or getAssetsByGroup to discover assets and their IDs.
+  - q: What is the difference between getAsset and getAssetProof?
+    a: getAsset returns the cNFT's metadata, ownership, and compression info. getAssetProof returns the merkle proof needed for write operations such as transfer, burn, and update.
 ---
 
 ## Summary
@@ -30,10 +37,6 @@ programmingLanguage:
 - Fetch individual cNFTs using getAsset and their proofs using getAssetProof
 - Fetch multiple cNFTs by owner or by collection
 - Derive Leaf Asset IDs from merkle tree addresses and leaf indices
-
-## Out of Scope
-
-This page does not cover: DAS API infrastructure (see [Storing and Indexing NFT Data](/smart-contracts/bubblegum-v2/stored-nft-data)), minting cNFTs (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts)), or RPC provider selection (see [RPC Providers](/rpc-providers)).
 
 As mentioned in the [Overview](/smart-contracts/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
 

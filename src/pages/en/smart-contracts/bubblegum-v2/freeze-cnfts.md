@@ -40,10 +40,6 @@ faqs:
 - Thaw a frozen cNFT and optionally revoke the delegate in one step
 - Make a cNFT permanently non-transferable (soulbound) with setNonTransferableV2
 
-## Out of Scope
-
-This page does not cover: delegating cNFTs without freezing (see [Delegating cNFTs](/smart-contracts/bubblegum-v2/delegate-cnfts)), transferring cNFTs (see [Transferring](/smart-contracts/bubblegum-v2/transfer-cnfts)), or creating collections with freeze plugins (see [MPL-Core Collections](/smart-contracts/core/collections)).
-
 With Bubblegum V2, we can freeze and thaw Compressed NFTs. This is useful for various use cases, such as staking. {% .lead %}
 
 ## Freezing a Compressed NFT

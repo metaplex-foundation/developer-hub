@@ -17,6 +17,13 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+faqs:
+  - q: Can I verify a creator who is not in the creators array?
+    a: No. The creator must already be listed in the cNFT's creators array. Use updateMetadataV2 to add the creator first, then verify them.
+  - q: Who signs the verify transaction?
+    a: The creator being verified must sign the transaction. You cannot verify a creator on someone else's behalf.
+  - q: Can a creator verify themselves at mint time?
+    a: Yes. If a creator signs the mint transaction, they are automatically verified in the cNFT's creator array.
 ---
 
 ## Summary
@@ -26,10 +33,6 @@ programmingLanguage:
 - Verify a creator on an existing cNFT (the creator must sign)
 - Unverify a creator from a cNFT
 - Creators can also be verified at mint time by signing the mint transaction
-
-## Out of Scope
-
-This page does not cover: updating metadata (see [Updating cNFTs](/smart-contracts/bubblegum-v2/update-cnfts)), collection verification (see [Collections](/smart-contracts/bubblegum-v2/collections)), or minting (see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts)).
 
 If a Compressed NFT has a list of creators set in its metadata, these creators can use special instructions to verify and unverify themselves on the cNFT. {% .lead %}
 

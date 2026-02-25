@@ -24,18 +24,18 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: What is Bubblegum V2?
-    a: Bubblegum V2 is Metaplex's program for creating and managing compressed NFTs (cNFTs) on Solana. It uses merkle trees to store NFT data at a fraction of the cost of traditional NFTs.
-  - q: How much does it cost to mint a compressed NFT?
-    a: Costs depend on tree size. A tree holding 1 million cNFTs costs approximately 8.5 SOL in rent, making each cNFT cost roughly 0.00001 SOL — orders of magnitude cheaper than standard NFTs.
-  - q: What is the difference between Bubblegum V1 and V2?
-    a: Bubblegum V2 adds freeze/thaw functionality, soulbound NFTs, MPL-Core collection integration, royalty enforcement, permanent delegates, and a new LeafSchemaV2.
-  - q: Do I need a special RPC to use compressed NFTs?
-    a: Yes. Compressed NFTs require an RPC provider that supports the Metaplex DAS API for indexing and fetching cNFT data. See the RPC Providers page for compatible providers.
-  - q: Can compressed NFTs be used in collections?
-    a: Yes. Bubblegum V2 uses MPL-Core collections to group cNFTs, enabling collection-level features like royalty enforcement and freeze delegates.
-  - q: What is a merkle tree in the context of cNFTs?
-    a: A merkle tree is an on-chain data structure that stores hashes of cNFT data as leaves. It enables cryptographic verification of NFT ownership and data without storing the full NFT data on-chain.
+  - q: Bubblegum V2とは何ですか？
+    a: Bubblegum V2は、SolanaでcNFT（圧縮NFT）を作成・管理するMetaplexのプログラムです。マークルツリーを使用してNFTデータを従来のNFTのわずかなコストで保存します。
+  - q: 圧縮NFTのミントにはいくらかかりますか？
+    a: コストはツリーサイズによって異なります。100万個のcNFTを保持するツリーはレントで約8.5 SOLかかり、各cNFTのコストは約0.00001 SOLとなり、標準的なNFTより桁違いに安くなります。
+  - q: Bubblegum V1とV2の違いは何ですか？
+    a: Bubblegum V2はフリーズ/解凍機能、ソウルバウンドNFT、MPL-Coreコレクション統合、ロイヤリティ強制、パーマネントデリゲート、新しいLeafSchemaV2を追加します。
+  - q: 圧縮NFTを使用するには特別なRPCが必要ですか？
+    a: はい。圧縮NFTには、cNFTデータのインデックスと取得のためにMetaplex DAS APIをサポートするRPCプロバイダーが必要です。互換性のあるプロバイダーについてはRPCプロバイダーページをご覧ください。
+  - q: 圧縮NFTはコレクションで使用できますか？
+    a: はい。Bubblegum V2はMPL-Coreコレクションを使用してcNFTをグループ化し、ロイヤリティ強制やフリーズデリゲートなどのコレクションレベルの機能を可能にします。
+  - q: cNFTの文脈でマークルツリーとは何ですか？
+    a: マークルツリーは、cNFTデータのハッシュをリーフとして保存するオンチェーンデータ構造です。完全なNFTデータをオンチェーンに保存することなく、NFTの所有権とデータの暗号学的検証を可能にします。
 ---
 
 ## Summary
@@ -46,9 +46,6 @@ faqs:
 - New in V2: freeze/thaw, soulbound NFTs, MPL-Core collections, royalty enforcement, permanent delegates
 - Requires an RPC provider supporting the Metaplex DAS API for indexing and fetching cNFT data
 - Uses LeafSchemaV2 with V2 Merkle Trees — not backward-compatible with V1 trees
-
-## Out of Scope
-
 
 Bubblegum V2は、Solana上で圧縮NFT（cNFT）を作成し、操作するための最新のMetaplexプロトコルプログラムです。大規模運用向けに構築されたBubblegum V2は、オリジナルのBubblegumの利点をすべて保持しながら、新しい強力な機能を導入しています。圧縮NFTは、オンチェーンでのデータ保存方法を再考することで、NFT作成を新しい規模のレベルまでスケールさせることを可能にします。 {% .lead %}
 
