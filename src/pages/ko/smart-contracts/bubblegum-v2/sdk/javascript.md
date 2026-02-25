@@ -34,7 +34,7 @@ faqs:
     a: 예. 압축 NFT를 가져오고 인덱싱하려면 Metaplex DAS API를 지원하는 RPC 제공자가 필요합니다. 표준 Solana RPC 엔드포인트는 DAS를 지원하지 않습니다. 호환 가능한 옵션은 RPC 제공자 페이지를 참조하세요.
   - q: 민팅 후 cNFT의 에셋 ID를 어떻게 가져오나요?
     a: 민트 트랜잭션이 확인된 후 parseLeafFromMintV2Transaction을 사용하세요. 트랜잭션에서 에셋 ID를 포함한 리프 스키마를 추출합니다.
-  - q: "Transaction too large" 오류가 발생하는 이유는 무엇인가요?
+  - q: '"Transaction too large" 오류가 발생하는 이유는 무엇인가요?'
     a: 머클 증명은 트리 깊이에 따라 커집니다. getAssetWithProof에 truncateCanopy true를 전달하거나 주소 조회 테이블이 있는 버전 관리 트랜잭션을 사용하세요.
   - q: 이 SDK를 Bubblegum V1 트리와 함께 사용할 수 있나요?
     a: 아니요. 이 SDK는 LeafSchemaV2를 사용하는 Bubblegum V2를 대상으로 합니다. V1 트리에는 레거시 Bubblegum SDK를 사용하세요.

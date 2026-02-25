@@ -23,8 +23,8 @@ faqs:
     a: Bubblegum V2는 Solana에서 압축된 NFT를 위한 Metaplex 프로그램의 최신 버전으로, 동결/해동, 소울바운드 NFT, MPL-Core 컬렉션 및 로열티 강제를 추가합니다.
   - q: 전송, 위임, 소각 등에 필요한 인수를 어떻게 찾나요?
     a: DAS API에서 필요한 모든 매개변수(증명, 리프 인덱스, 넌스 등)를 자동으로 가져오는 getAssetWithProof 헬퍼를 사용하세요.
-  - q: "트랜잭션이 너무 큽니다" 오류를 어떻게 해결하나요?
-    a: "getAssetWithProof와 함께 truncateCanopy: true를 사용하거나, 주소 조회 테이블을 사용한 버전화된 트랜잭션을 구현하세요."
+  - q: '"트랜잭션이 너무 큽니다" 오류를 어떻게 해결하나요?'
+    a: 'getAssetWithProof와 함께 truncateCanopy: true를 사용하거나, 주소 조회 테이블을 사용한 버전화된 트랜잭션을 구현하세요.'
   - q: 압축된 NFT 트리를 만드는 데 얼마나 드나요?
     a: 비용은 트리 크기에 따라 다릅니다. 16,384개의 cNFT 트리는 약 0.34 SOL, 100만 개의 cNFT 트리는 렌트로 약 8.5 SOL이 듭니다.
   - q: Bubblegum V1과 V2의 차이점은 무엇인가요?
