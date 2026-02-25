@@ -111,12 +111,12 @@ await transferV2(umi, {
 
 ```ts
 import { publicKeyBytes } from '@metaplex-foundation/umi'
-import { transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const rpcAsset = await umi.rpc.getAsset(assetId)
 const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 
-await transfer(umi, {
+await transferV2(umi, {
   leafOwner: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
   merkleTree: rpcAssetProof.tree_id,
