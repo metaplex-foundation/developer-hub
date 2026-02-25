@@ -6,6 +6,18 @@ description: Metaplex 제품의 온체인 수수료 세부 정보.
 
 Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
+## 토큰 런치
+
+특정 온체인 자산을 런치하기 위한 프로토콜 수수료.
+
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
 ## Genesis
 
 Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 및 졸업에 적용되는 백분율 기반 수수료입니다.

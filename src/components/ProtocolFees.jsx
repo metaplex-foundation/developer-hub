@@ -33,10 +33,12 @@ function FeesTable({ fees, t }) {
           // Handle both old format (string) and new format (object with solana)
           const solanaFee =
             typeof fee === 'string' ? fee : fee?.solana || '-'
+          const label =
+            typeof fee === 'object' && fee?.label ? fee.label : formatFeeType(type)
 
           return (
             <TableRow key={type}>
-              <TableCell className="whitespace-nowrap">{formatFeeType(type)}</TableCell>
+              <TableCell className="whitespace-nowrap">{label}</TableCell>
               <TableCell className="whitespace-nowrap font-mono">{solanaFee}</TableCell>
             </TableRow>
           )

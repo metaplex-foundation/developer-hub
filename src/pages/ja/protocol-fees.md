@@ -6,6 +6,18 @@ description: Metaplexプロダクトのオンチェーン手数料の詳細。
 
 Metaplexプロトコルには現在、以下の手数料が含まれています：
 
+## トークンローンチ
+
+特定のオンチェーン資産をローンチするためのプロトコル手数料。
+
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
 ## Genesis
 
 ローンチプール操作のためのトークンローンチプラットフォーム手数料。これらは入金、出金、卒業に適用されるパーセンテージベースの手数料です。
