@@ -89,12 +89,15 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                           : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
                       )}
                     >
+                      {link.method && (
+                        <Badge type={link.method} className="mr-1.5" />
+                      )}
                       {link.title}{' '}
                       {link.updated && isRecent(link.updated) && (
-                        <Badge type="updated" />
+                        <Badge type="updated" className="ml-1.5" />
                       )}
                       {link.created && isRecent(link.created) && (
-                        <Badge type="new" />
+                        <Badge type="new" className="ml-1.5" />
                       )}
                     </Link>
                   </li>

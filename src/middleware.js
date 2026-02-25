@@ -47,6 +47,15 @@ const standaloneRedirects = {
   '/ja/smart-contracts/genesis/priced-sale': '/ja/smart-contracts/genesis/presale',
   '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
   '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
+  // Genesis aggregation/api pages consolidated into integration-apis
+  '/smart-contracts/genesis/aggregation': '/smart-contracts/genesis/integration-apis',
+  '/smart-contracts/genesis/api': '/smart-contracts/genesis/integration-apis',
+  '/ja/smart-contracts/genesis/aggregation': '/ja/smart-contracts/genesis/integration-apis',
+  '/ja/smart-contracts/genesis/api': '/ja/smart-contracts/genesis/integration-apis',
+  '/ko/smart-contracts/genesis/aggregation': '/ko/smart-contracts/genesis/integration-apis',
+  '/ko/smart-contracts/genesis/api': '/ko/smart-contracts/genesis/integration-apis',
+  '/zh/smart-contracts/genesis/aggregation': '/zh/smart-contracts/genesis/integration-apis',
+  '/zh/smart-contracts/genesis/api': '/zh/smart-contracts/genesis/integration-apis',
 }
 
 const redirectRules = {

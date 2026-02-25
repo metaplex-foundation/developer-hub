@@ -62,8 +62,25 @@
 
 ## Genesis (Token Launch)
 
+- [API Client](https://developers.metaplex.com/smart-contracts/genesis/sdk/api-client): Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
+- [Create Launch](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
+- [Fetch Bucket State](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/fetch-bucket-state): Fetch real-time bucket state from the blockchain using the Genesis JavaScript SDK. Includes deposit totals, counts, and time conditions.
+- [Fetch Deposit State](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/fetch-deposit-state): Fetch user deposit state from the blockchain using the Genesis JavaScript SDK. Check deposit amounts and claim status.
 - [Aggregation API](https://developers.metaplex.com/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
 - [API](https://developers.metaplex.com/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
+- [CLI Guide](https://developers.metaplex.com/smart-contracts/genesis/cli): Launch tokens using the Metaplex CLI (mplx) — create Genesis accounts, add buckets, deposit, claim, and manage your token launch from the terminal.
+- [Genesis - Solana Token Launch Smart Contract](https://developers.metaplex.com/smart-contracts/genesis): Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
+- [Get Launch](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
+- [Get Launches by Token](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
+- [Get Listings](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/get-listings): Get active and upcoming Genesis launch listings. Returns a paginated list of launches with metadata.
+- [Get Spotlight](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
+- [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+- [Integration APIs](https://developers.metaplex.com/smart-contracts/genesis/integration-apis): Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
+- [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
+- [Launch Pool](https://developers.metaplex.com/smart-contracts/genesis/launch-pool): Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
+- [Presale](https://developers.metaplex.com/smart-contracts/genesis/presale): Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
+- [Register Launch](https://developers.metaplex.com/smart-contracts/genesis/integration-apis/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
+- [Uniform Price Auction](https://developers.metaplex.com/smart-contracts/genesis/uniform-price-auction): Time-based auction mechanism for token launches with uniform clearing price. Competitive bidding for larger participants.
 - [Genesis - Solana Token Launchpad & Launch Platform](https://developers.metaplex.com/smart-contracts/genesis): Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
 - [Getting Started](https://developers.metaplex.com/smart-contracts/genesis/getting-started): Learn how to launch an SPL token on Solana step by step. Plan your presale, fair launch, or token sale using the Genesis token launchpad.
 - [JavaScript SDK](https://developers.metaplex.com/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
