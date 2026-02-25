@@ -18,6 +18,8 @@ Protocol fees for launching specific types of onchain assets.
 
 {% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
 
+\* Total pool fees are 0.9%: 0.42% goes to liquidity providers and 0.08% to Raydium.
+
 ## Genesis
 
 Token launch platform fees for different operations.

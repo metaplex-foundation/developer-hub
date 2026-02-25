@@ -18,6 +18,8 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 {% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
 
+\* 총 풀 수수료는 0.9%입니다: 0.42%는 유동성 공급자에게, 0.08%는 Raydium에 지급됩니다.
+
 ## Genesis
 
 Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 및 졸업에 적용되는 백분율 기반 수수료입니다.
