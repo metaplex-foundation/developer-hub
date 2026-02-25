@@ -22,7 +22,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 The Token Metadata program is one of the most important programs when dealing with NFTs on the Solana blockchain. Its main goal is to **attach additional data to [Fungible](https://en.wikipedia.org/wiki/Fungibility) or Non-Fungible [Tokens](https://spl.solana.com/token)** on Solana.
 
-It achieves this using [Program Derived Addresses](/solana/understanding-programs/#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you’re not familiar with [Solana’s Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
+It achieves this using [Program Derived Addresses](/solana/understanding-programs#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you’re not familiar with [Solana’s Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
 
 {% diagram %}
 {% node %}

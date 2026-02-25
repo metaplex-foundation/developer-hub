@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Fetch Multiple Assets
-Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/solana/rpcs-and-das).
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC-wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/solana/rpcs-and-das).
 ### Fetch Assets By Owner
 {% dialect-switcher title="fetch Assets by Owner" %}
 {% dialect title="JavaScript" id="js" %}

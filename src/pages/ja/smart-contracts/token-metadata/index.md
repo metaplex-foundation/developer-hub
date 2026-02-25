@@ -24,7 +24,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 Token Metadataプログラムは、SolanaブロックチェーンでNFTを扱う際に最も重要なプログラムの1つです。その主な目標は、**Solanaの[Fungible](https://en.wikipedia.org/wiki/Fungibility)または非Fungible [トークン](https://spl.solana.com/token)に追加データを添付すること**です。
 
-これは、Mintアカウントのアドレスから_派生_される[Program Derived Addresses](/solana/understanding-programs/#program-derived-addresses-pda) (PDA) を使用して実現されます。[SolanaのTokenプログラム](https://spl.solana.com/token)に馴染みがない場合、_Mintアカウント_はトークンのグローバル情報を保存し、_トークンアカウント_はウォレットとMintアカウントの関係を保存する責任があります。
+これは、Mintアカウントのアドレスから_派生_される[Program Derived Addresses](/ja/solana/understanding-programs#program-derived-addresses-pda) (PDA) を使用して実現されます。[SolanaのTokenプログラム](https://spl.solana.com/token)に馴染みがない場合、_Mintアカウント_はトークンのグローバル情報を保存し、_トークンアカウント_はウォレットとMintアカウントの関係を保存する責任があります。
 
 {% diagram %}
 {% node %}
@@ -436,7 +436,7 @@ NFTがToken Metadataプログラムの最大のユースケースですが、こ
 
 Token MetadataプログラムはSolana Tokenプログラムの上に構築されているため、誰でもToken Metadataプログラムを通さずにトークン（Fungibleかどうかに関係なく）を転送できます。これはプログラムの構成可能性にとって素晴らしいことですが、Token Metadataプログラムが付加されているトークンに対してルールを強制できないことも意味します。
 
-これが問題になる理由の良い例は、Token Metadataがセカンダリセールロイヤルティを強制できないことです。Metadataアカウントには**Seller Fee Basis Points**属性がありますが、これは純粋に[指標的](/solana/understanding-programs#indicative-fields)であり、誰でもロイヤルティを尊重しないマーケットプレイスを作成できました—これは実際に起こりました。
+これが問題になる理由の良い例は、Token Metadataがセカンダリセールロイヤルティを強制できないことです。Metadataアカウントには**Seller Fee Basis Points**属性がありますが、これは純粋に[指標的](/ja/solana/understanding-programs#indicative-fields)であり、誰でもロイヤルティを尊重しないマーケットプレイスを作成できました—これは実際に起こりました。
 
 **プログラマブルNFT**は、この問題を解決するために導入されました。これらは、**基礎となるトークンアカウントを常時フリーズ状態に保つ**新しい_オプトイン_トークン標準です。そうすることで、Token Metadataプログラムを通さずに誰もプログラマブルNFTを転送、ロック、またはバーンできません。
 

@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 여러 Asset 가져오기
-여러 Asset은 `getProgramAccounts`(GPA) 호출을 사용하여 가져올 수 있습니다. 이는 RPC 측면에서 상당히 비용이 많이 들고 느릴 수 있지만, `Digital Asset Standard` API를 사용하는 방법도 있습니다. 이 방법이 더 빠르지만 [특정 RPC 제공자](/solana/rpcs-and-das)가 필요합니다.
+여러 Asset은 `getProgramAccounts`(GPA) 호출을 사용하여 가져올 수 있습니다. 이는 RPC 측면에서 상당히 비용이 많이 들고 느릴 수 있지만, `Digital Asset Standard` API를 사용하는 방법도 있습니다. 이 방법이 더 빠르지만 [특정 RPC 제공자](/ko/solana/rpcs-and-das)가 필요합니다.
 ### 소유자별 Asset 가져오기
 {% dialect-switcher title="소유자별 Asset 가져오기" %}
 {% dialect title="JavaScript" id="js" %}

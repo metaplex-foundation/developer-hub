@@ -30,7 +30,7 @@ Auction House 프로그램의 가장 중요한 측면은 사용자에게 자산�
 
 ## Auction House 생성
 
-Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하여 새 마켓플레이스를 만드는 데 사용할 수 있습니다. Auction House 계정은 주어진 공개 키에서 파생되고 선택적으로 통화로 사용할 SPL 토큰에서 파생되는 [Program Derived Address (PDA)](/solana/understanding-programs#program-derived-addresses-pda)입니다(아래에서 자세히 설명).
+Auction House 프로그램은 새 **Auction House** 계정을 인스턴스화하여 새 마켓플레이스를 만드는 데 사용할 수 있습니다. Auction House 계정은 주어진 공개 키에서 파생되고 선택적으로 통화로 사용할 SPL 토큰에서 파생되는 [Program Derived Address (PDA)](/ko/solana/understanding-programs#program-derived-addresses-pda)입니다(아래에서 자세히 설명).
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 

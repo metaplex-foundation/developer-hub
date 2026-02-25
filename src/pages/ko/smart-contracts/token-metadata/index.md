@@ -24,7 +24,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 Token Metadata 프로그램은 Solana 블록체인에서 NFT를 다룰 때 가장 중요한 프로그램 중 하나입니다. 이 프로그램의 주요 목표는 **Solana의 [대체 가능한](https://en.wikipedia.org/wiki/Fungibility) 또는 대체 불가능한 [토큰](https://spl.solana.com/token)에 추가 데이터를 첨부하는 것**입니다.
 
-이는 Mint 계정의 주소에서 _파생된_ [Program Derived Addresses](/solana/understanding-programs/#program-derived-addresses-pda) (PDA)를 사용하여 달성됩니다. [Solana의 Token 프로그램](https://spl.solana.com/token)에 익숙하지 않으시다면, _Mint 계정_은 토큰의 전역 정보를 저장하는 역할을 하고 _Token 계정_은 지갑과 Mint 계정 간의 관계를 저장합니다.
+이는 Mint 계정의 주소에서 _파생된_ [Program Derived Addresses](/ko/solana/understanding-programs#program-derived-addresses-pda) (PDA)를 사용하여 달성됩니다. [Solana의 Token 프로그램](https://spl.solana.com/token)에 익숙하지 않으시다면, _Mint 계정_은 토큰의 전역 정보를 저장하는 역할을 하고 _Token 계정_은 지갑과 Mint 계정 간의 관계를 저장합니다.
 
 {% diagram %}
 {% node %}
@@ -436,7 +436,7 @@ NFT가 Token Metadata 프로그램의 가장 큰 사용 사례이지만, 이 프
 
 Token Metadata 프로그램이 Solana Token 프로그램 위에 구축되기 때문에, 누구나 Token Metadata 프로그램을 거치지 않고 토큰(대체 가능하거나 그렇지 않은)을 전송할 수 있습니다. 이는 프로그램 조합성에는 좋지만, Token Metadata 프로그램이 자신이 첨부된 토큰에 대한 규칙을 적용할 수 없다는 의미이기도 합니다.
 
-이것이 문제가 될 수 있는 좋은 예는 Token Metadata가 2차 판매 로열티를 적용할 수 없다는 것입니다. Metadata 계정에 **Seller Fee Basis Points** 속성이 있지만, 이는 순전히 [지시적](/solana/understanding-programs#indicative-fields)이며 누구나 로열티를 존중하지 않는 마켓플레이스를 만들 수 있습니다 — 그리고 실제로 그런 일이 일어났습니다.
+이것이 문제가 될 수 있는 좋은 예는 Token Metadata가 2차 판매 로열티를 적용할 수 없다는 것입니다. Metadata 계정에 **Seller Fee Basis Points** 속성이 있지만, 이는 순전히 [지시적](/ko/solana/understanding-programs#indicative-fields)이며 누구나 로열티를 존중하지 않는 마켓플레이스를 만들 수 있습니다 — 그리고 실제로 그런 일이 일어났습니다.
 
 **프로그래머블 NFT**는 이 문제를 해결하기 위해 도입되었습니다. 이들은 **기본 토큰 계정을 항상 동결 상태로 유지하는** 새로운 _옵트인_ 토큰 표준입니다. 이런 방식으로 Token Metadata 프로그램을 거치지 않고는 누구도 프로그래머블 NFT를 전송, 잠금 또는 소각할 수 없습니다.
 
