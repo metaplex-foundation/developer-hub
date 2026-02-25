@@ -20,31 +20,62 @@ function formatFeeType(key) {
 }
 
 function FeesTable({ fees, t }) {
-  return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>{t('instruction', 'Instruction')}</TableHead>
-          <TableHead>{t('solana', 'Solana')}</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {fees.map(([type, fee]) => {
-          // Handle both old format (string) and new format (object with solana)
-          const solanaFee =
-            typeof fee === 'string' ? fee : fee?.solana || '-'
-          const label =
-            typeof fee === 'object' && fee?.label ? fee.label : formatFeeType(type)
+  // Collect unique notes in order of first appearance
+  const notesList = []
+  fees.forEach(([, fee]) => {
+    const note = typeof fee === 'object' && fee?.notes ? fee.notes : null
+    if (note && !notesList.includes(note)) {
+      notesList.push(note)
+    }
+  })
 
-          return (
-            <TableRow key={type}>
-              <TableCell className="whitespace-nowrap">{label}</TableCell>
-              <TableCell className="whitespace-nowrap font-mono">{solanaFee}</TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
-    </Table>
+  function getAsterisk(note) {
+    if (!note) return null
+    const idx = notesList.indexOf(note)
+    return idx === -1 ? null : '*'.repeat(idx + 1)
+  }
+
+  return (
+    <div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>{t('instruction', 'Instruction')}</TableHead>
+            <TableHead>{t('solana', 'Solana')}</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {fees.map(([type, fee]) => {
+            // Handle both old format (string) and new format (object with solana)
+            const solanaFee =
+              typeof fee === 'string' ? fee : fee?.solana || '-'
+            const label =
+              typeof fee === 'object' && fee?.label ? fee.label : formatFeeType(type)
+            const note = typeof fee === 'object' && fee?.notes ? fee.notes : null
+            const asterisk = getAsterisk(note)
+
+            return (
+              <TableRow key={type}>
+                <TableCell className="whitespace-nowrap">{label}</TableCell>
+                <TableCell className="whitespace-nowrap font-mono">
+                  {solanaFee}
+                  {asterisk && <sup className="ml-0.5 font-sans text-xs">{asterisk}</sup>}
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+      {notesList.length > 0 && (
+        <div className="mt-2 space-y-0.5">
+          {notesList.map((note, idx) => (
+            <p key={idx} className="text-xs text-muted-foreground">
+              <sup>{'*'.repeat(idx + 1)}</sup> {note}
+            </p>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
 

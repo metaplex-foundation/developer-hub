@@ -13,17 +13,17 @@ export const tokens = {
   className: 'accent-amber',
   protocolFees: {
     memecoins: {
-      deposit: { solana: '0%', payer: null, notes: null },
+      deposit: { solana: '0%', label: 'User Deposit', payer: null, notes: null },
       phbt: { solana: '2%', label: 'PHBT', payer: null, notes: null },
-      graduation: { solana: '1%', payer: null, notes: null },
-      trading: { solana: '0.4%', payer: null, notes: "Total pool fees are .9% with 40bps going to liquidity providers and 8bps to Raydium."},
+      graduation: { solana: '1%', label: 'Liquidity Graduation', payer: null, notes: null },
+      trading: { solana: '0.4%', label: 'Secondary Trading', payer: null, notes: 'Total pool fees are 0.9%: 0.42% goes to liquidity providers and 0.08% to Raydium.' },
     },
     projectTokens: {
-      deposit: { solana: '2%', payer: null, notes: null },
-      withdraw: { solana: '2%', payer: null, notes: null },
-      graduation: { solana: '0%', payer: null, notes: null },
-      withdrawLiquidity: { solana: '5%', payer: null, notes: null },
-      trading: { solana: '0.4%', payer: null, notes: "Total pool fees are .9% with 40bps going to liquidity providers and 8bps to Raydium."},
+      deposit: { solana: '2%', label: 'User Deposit', payer: null, notes: null },
+      withdraw: { solana: '2%', label: 'User Withdraw', payer: null, notes: null },
+      graduation: { solana: '0%', label: 'Liquidity Graduation', payer: null, notes: null },
+      withdrawLiquidity: { solana: '5%', label: 'Liquidity Withdrawal', payer: null, notes: null },
+      trading: { solana: '0.4%', label: 'Secondary Trading', payer: null, notes: 'Total pool fees are 0.9%: 0.42% goes to liquidity providers and 0.08% to Raydium.' },
     },
   },
   sections: [
