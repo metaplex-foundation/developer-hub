@@ -102,6 +102,45 @@ export const tokenMenuCategory = [launchTokenMenuItem, createATokenMenuItem, min
 
 export const anchorTokenMenuCategory = [anchorCreateTokenMenuItem]
 
+export const agentMenuCategory = [
+  {
+    name: 'Skill',
+    headline: 'AI Agent Knowledge Base',
+    description: 'Give AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/skill',
+    localizedNavigation: {
+      ja: { name: 'スキル', headline: 'AIエージェントの知識ベース' },
+      ko: { name: '스킬', headline: 'AI 에이전트 지식 베이스' },
+      zh: { name: '技能', headline: 'AI代理的知识库' },
+    },
+  },
+  {
+    name: 'Register an Agent',
+    headline: 'Register an agent on the Solana agent registry.',
+    description: 'Register an autonomous agent on the Solana agent registry using Metaplex SDKs.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/register-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントを登録', headline: 'Solanaエージェントレジストリにエージェントを登録します。' },
+      ko: { name: '에이전트 등록', headline: 'Solana 에이전트 레지스트리에 에이전트를 등록합니다.' },
+      zh: { name: '注册代理', headline: '在Solana代理注册表上注册代理。' },
+    },
+  },
+  {
+    name: 'Run an Agent',
+    headline: 'Run an autonomous agent on Solana.',
+    description: 'Run an autonomous agent on Solana using Metaplex SDKs.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/run-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントを実行', headline: 'Solana上で自律エージェントを実行します。' },
+      ko: { name: '에이전트 실행', headline: 'Solana에서 자율 에이전트를 실행합니다.' },
+      zh: { name: '运行代理', headline: '在Solana上运行自主代理。' },
+    },
+  },
+]
+
 export const nftMenuCategory = [
   {
     name: 'Create A NFT',

@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
-import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import { getLocalizedHref } from '@/config/languages'
+import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import {
   BookOpenIcon,
   ComputerDesktopIcon,
@@ -112,6 +112,12 @@ export function MobileNavigation({ page }) {
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <SparklesIcon height={20} /> {t('tokens', 'Tokens')}
+          </Link>
+          <Link
+            href={getLocalizedHref('/agents', locale)}
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
+          >
+            <SparklesIcon height={20} /> {t('agents', 'Agents')}
           </Link>
           <Link
             href={getLocalizedHref('/nfts', locale)}
