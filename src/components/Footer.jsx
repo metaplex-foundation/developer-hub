@@ -72,7 +72,7 @@ export function Footer() {
                 target="_blank"
                 className="hover:text-foreground transition-colors"
               >
-                {t('termsAndConditions', 'Terms & Conditions')}
+                {t('termsOfUse', 'Terms of Use')}
               </Link>
               <Link
                 href="https://www.metaplex.com/privacy"
