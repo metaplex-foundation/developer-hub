@@ -18,8 +18,6 @@ about:
 proficiencyLevel: Beginner
 ---
 
-# Programs & Operations
-
 The Metaplex Skill covers five programs across CLI, Umi SDK, and Kit SDK. This page provides a detailed breakdown of what each program supports and when to use it.
 
 ## Program Coverage

@@ -22,8 +22,6 @@ howToTools:
   - GitHub Copilot
 ---
 
-# Installation
-
 Install the Metaplex Skill so your AI coding agent has accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
 
 ## Via skills.sh (Recommended)
