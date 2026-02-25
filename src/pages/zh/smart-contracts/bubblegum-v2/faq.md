@@ -24,7 +24,7 @@ faqs:
   - q: 如何找到转移、委托、销毁等操作所需的参数？
     a: 使用getAssetWithProof辅助函数，它会自动从DAS API获取所有必需的参数（证明、叶子索引、nonce等）。
   - q: 如何解决"交易过大"错误？
-    a: 与getAssetWithProof一起使用truncateCanopy: true，或者实现使用地址查找表的版本化交易。
+    a: "与getAssetWithProof一起使用truncateCanopy: true，或者实现使用地址查找表的版本化交易。"
   - q: 创建压缩NFT树需要多少费用？
     a: 费用因树的大小而异。包含16,384个cNFT的树约需0.34 SOL，而包含100万个cNFT的树需约8.5 SOL的租金。
   - q: Bubblegum V1和V2有什么区别？
