@@ -8,8 +8,8 @@ description: 了解 MPL Core Candy Machine 程序可用的 SDK。
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/zh/smart-contracts/core-candy-machine/sdk/javascript" description="开始使用我们基于 Umi 框架的 MPL-Core Candy Machine JavaScript 库。" /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/core-candy-machine/sdk/javascript" description="开始使用我们基于 Umi 框架的 MPL-Core Candy Machine JavaScript 库。" /%}
 
-{% quick-link title="Rust" icon="Rust" href="/zh/smart-contracts/core-candy-machine/sdk/rust" description="开始使用我们的 MPL Core Candy Machine Rust SDK crate。" /%}
+{% quick-link title="Rust" icon="Rust" href="/core-candy-machine/sdk/rust" description="开始使用我们的 MPL Core Candy Machine Rust SDK crate。" /%}
 
 {% /quick-links %}

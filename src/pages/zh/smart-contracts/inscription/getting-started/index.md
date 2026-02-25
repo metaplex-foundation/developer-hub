@@ -8,10 +8,10 @@ description: 开始使用Metaplex Inscriptions。
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/zh/smart-contracts/inscription/getting-started/js" description="开始使用基于Umi框架的JavaScript库。" /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/inscription/getting-started/js" description="开始使用基于Umi框架的JavaScript库。" /%}
 
-{% quick-link title="Rust" icon="Rust" href="/zh/smart-contracts/inscription/getting-started/rust" description="开始使用我们的Rust crate。" /%}
+{% quick-link title="Rust" icon="Rust" href="/inscription/getting-started/rust" description="开始使用我们的Rust crate。" /%}
 
-{% quick-link title="CLI" icon="SolidCommandLine" href="/zh/smart-contracts/inscription/getting-started/cli" description="开始使用Inscriptions CLI。" /%}
+{% quick-link title="CLI" icon="SolidCommandLine" href="/inscription/getting-started/cli" description="开始使用Inscriptions CLI。" /%}
 
 {% /quick-links %}

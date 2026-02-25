@@ -4,7 +4,7 @@ metaTitle: 圧縮NFTのミント | Bubblegum V2
 description: Bubblegum V2で圧縮NFTをミントする方法を学びます。
 ---
 
-[前のページ](/ja/smart-contracts/bubblegum-v2/create-trees)では、圧縮NFTをミントするためにBubblegumツリーが必要であることを確認し、その作成方法を見ました。今度は、与えられたBubblegumツリーから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
+[前のページ](/smart-contracts/bubblegum-v2/create-trees)では、圧縮NFTをミントするためにBubblegumツリーが必要であることを確認し、その作成方法を見ました。今度は、与えられたBubblegumツリーから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
 
 Bubblegumプログラムは、異なるリーフスキーマバージョン用の複数のミント命令を提供します。Bubblegum V2は、与えられたコレクションに、またはコレクションなしで圧縮NFTをミントするために使用される**mintV2**という新しいミント命令を導入しています。
 

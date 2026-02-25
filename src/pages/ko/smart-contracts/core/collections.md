@@ -100,7 +100,7 @@ Core Collection을 생성하려면 `CreateCollection` 명령어를 다음과 같
 다음 스니펫은 플러그인이나 특별한 것 없이 간단한 Collection을 생성합니다.
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
 ### 플러그인 포함 Collection 생성
-다음 스니펫은 [Royalties 플러그인](/ko/smart-contracts/core/plugins/royalties)이 첨부된 Collection을 생성합니다. [여기](/ko/smart-contracts/core/plugins)에 설명된 대로 추가 플러그인을 첨부할 수 있습니다.
+다음 스니펫은 [Royalties 플러그인](/smart-contracts/core/plugins/royalties)이 첨부된 Collection을 생성합니다. [여기](/smart-contracts/core/plugins)에 설명된 대로 추가 플러그인을 첨부할 수 있습니다.
 {% dialect-switcher title="플러그인 포함 MPL Core Collection 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

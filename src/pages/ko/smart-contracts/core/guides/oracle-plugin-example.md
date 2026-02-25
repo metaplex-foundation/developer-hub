@@ -51,7 +51,7 @@ Oracle 플러그인에 대해 더 알아보려면 [여기](/smart-contracts/core
 - **isWithin15mOfMarketOpenOrClose**: 현재 시간이 시장 개장 또는 마감 15분 이내인지 확인합니다.
 전체 구현 세부 사항은 영문 문서의 전체 가이드를 참조하세요.
 ### NFT 생성
-Umi를 사용하여 환경을 설정하는 것부터 시작합니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. 자세한 내용은 [여기](/dev-tools/umi/getting-started)를 참조하세요)
+Umi를 사용하여 환경을 설정하는 것부터 시작합니다. (Umi는 Solana 프로그램용 JavaScript 클라이언트를 구축하고 사용하기 위한 모듈식 프레임워크입니다. 자세한 내용은 [여기](/umi/getting-started)를 참조하세요)
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'

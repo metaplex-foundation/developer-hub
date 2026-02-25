@@ -16,9 +16,9 @@ Metaplex Digital Asset Standard (DAS) APIは、Solana上のデジタルアセッ
 
 {% quick-links %}
 
-{% quick-link title="はじめに" icon="InboxArrowDown" href="/ja/dev-tools/das-api/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムの開始方法を学習します。" /%}
+{% quick-link title="はじめに" icon="InboxArrowDown" href="/das-api/getting-started" description="お好みの言語やライブラリを見つけて、基本的なプログラムの開始方法を学習します。" /%}
 
-{% quick-link title="メソッド" icon="CodeBracketSquare" href="/ja/dev-tools/das-api/methods" description="データ取得のためのDAS APIメソッド。" /%}
+{% quick-link title="メソッド" icon="CodeBracketSquare" href="/das-api/methods" description="データ取得のためのDAS APIメソッド。" /%}
 
 {% quick-link title="MPL Core拡張機能" icon="CodeBracketSquare" href="/ja/dev-tools/das-api/core-extension" description="MPL Coreアセットを簡単に取得・解析する" /%}
 

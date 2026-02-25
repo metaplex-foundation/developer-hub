@@ -75,9 +75,9 @@ npm i @metaplex-foundation/umi-bundle-tests
 ## Umi 基础
 
 在本节中，我们将介绍开始使用 Umi 的基本步骤：
-- [创建 Umi 并连接到 RPC](/zh/dev-tools/umi/getting-started#连接到-rpc)
-- [连接钱包](/zh/dev-tools/umi/getting-started#连接钱包)
-- [注册程序和客户端](/zh/dev-tools/umi/getting-started#注册程序和客户端)
+- [创建 Umi 并连接到 RPC](/umi/getting-started#连接到-rpc)
+- [连接钱包](/umi/getting-started#连接钱包)
+- [注册程序和客户端](/umi/getting-started#注册程序和客户端)
 
 ### 连接到 RPC
 

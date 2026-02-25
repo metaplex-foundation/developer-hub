@@ -8,8 +8,8 @@ description: 使用MPL-Bubblegum SDK开始学习Metaplex的压缩NFT标准(cNFT)
 
 {% quick-links %}
 
-{% quick-link title="JavaScript" icon="JavaScript" href="/zh/smart-contracts/bubblegum/sdk/javascript" description="使用基于Umi框架的MPL-Bubblegum JavaScript库开始。" /%}
+{% quick-link title="JavaScript" icon="JavaScript" href="/bubblegum/sdk/javascript" description="使用基于Umi框架的MPL-Bubblegum JavaScript库开始。" /%}
 
-{% quick-link title="Rust" icon="Rust" href="/zh/smart-contracts/bubblegum/sdk/rust" description="使用我们的MPL-Bubblegum Rust crate开始。" /%}
+{% quick-link title="Rust" icon="Rust" href="/bubblegum/sdk/rust" description="使用我们的MPL-Bubblegum Rust crate开始。" /%}
 
 {% /quick-links %}

@@ -4,7 +4,7 @@ metaTitle: コレクション内のミントの取得 | Token Metadataガイド
 description: コレクション内のすべてのミントを取得するためのハウツーガイド
 ---
 
-Metaplex Token Metadataには[オンチェーンコレクション](/ja/smart-contracts/token-metadata/collections)があり、オンチェーン標準の不在において、コミュニティが使用する様々な主観的で潜在的に競合するヒューリスティックではなく、NFTコレクションを客観的に識別できます。
+Metaplex Token Metadataには[オンチェーンコレクション](/token-metadata/collections)があり、オンチェーン標準の不在において、コミュニティが使用する様々な主観的で潜在的に競合するヒューリスティックではなく、NFTコレクションを客観的に識別できます。
 
 仕様設計により、任意のNFTを調べて、それがコレクションに属しているか、どのコレクションに属しているかを、metadataアカウントからCollectionフィールドを単純に読み取ることで非常に簡単に決定できます。オンチェーンの`Metadata`構造体には、オプションの`Collection`構造体が含まれ、これには属しているコレクションのSPLトークンミントの公開鍵である`key`フィールドがあります。
 

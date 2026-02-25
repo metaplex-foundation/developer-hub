@@ -8,7 +8,7 @@ Inscriptionアカウントが[初期化](initialize)されると、そのメタ�
 
 ## inscriptionメタデータの取得
 
-両方のinscriptionタイプはメタデータアカウントを使用します。このアカウントには、例えば`inscriptionRank`、`associatedInscriptions`、`updateAuthorities`と[その他](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html)が含まれています。メタデータは以下のように取得できます：
+両方のinscriptionタイプはメタデータアカウントを使用します。このアカウントには、例えば`inscriptionRank`、`associatedInscriptions`、`updateAuthorities`と[詳細](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html)が含まれています。メタデータは以下のように取得できます：
 
 {% dialect-switcher title="Inscriptionメタデータの取得" %}
 {% dialect title="JavaScript" id="js" %}

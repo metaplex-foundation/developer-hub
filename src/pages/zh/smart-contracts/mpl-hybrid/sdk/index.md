@@ -8,6 +8,6 @@ description: 查看MPL-Hybrid Metaplex程序的可用SDK。
 
 {% quick-links %}
 
-{% quick-link title="JavaScript SDK" icon="JavaScript" href="/zh/smart-contracts/mpl-hybrid/sdk/javascript" description="开始使用基于Umi框架的MPL-Hybrid 404 JavaScript库。" /%}
+{% quick-link title="JavaScript SDK" icon="JavaScript" href="/mpl-hybrid/sdk/javascript" description="开始使用基于Umi框架的MPL-Hybrid 404 JavaScript库。" /%}
 
 {% /quick-links %}

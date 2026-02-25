@@ -10,9 +10,9 @@ Metaplex는 Token Metadata NFT와 상호작용하기 위한 두 가지 JavaScrip
 
 {% quick-links %}
 
-{% quick-link title="Umi SDK" icon="JavaScript" href="/ko/smart-contracts/token-metadata/getting-started/umi" description="유연한 API를 가진 Umi 프레임워크 기반. Umi를 사용하는 프로젝트에 적합." /%}
+{% quick-link title="Umi SDK" icon="JavaScript" href="/token-metadata/getting-started/umi" description="유연한 API를 가진 Umi 프레임워크 기반. Umi를 사용하는 프로젝트에 적합." /%}
 
-{% quick-link title="Kit SDK" icon="JavaScript" href="/ko/smart-contracts/token-metadata/getting-started/kit" description="함수형 인스트럭션 빌더를 가진 @solana/kit 기반. 새 프로젝트에 적합." /%}
+{% quick-link title="Kit SDK" icon="JavaScript" href="/token-metadata/getting-started/kit" description="함수형 인스트럭션 빌더를 가진 @solana/kit 기반. 새 프로젝트에 적합." /%}
 
 {% /quick-links %}
 

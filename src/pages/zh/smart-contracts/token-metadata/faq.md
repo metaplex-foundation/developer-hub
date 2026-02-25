@@ -22,7 +22,7 @@ description: 关于 Token Metadata 的常见问题
 
 ## 如何按集合过滤元数据账户?
 
-如上面的问题所述,按 `creators` 数组之后的字段过滤是一项具有挑战性的任务,因为它不是固定大小的字段。我们建议使用 DAS 作为获取集合铸造的最快最简单的方法。如果您想直接从链上获取数据,可以使用以下方法,但我们有一个[指南](/zh/smart-contracts/token-metadata/guides/get-by-collection)显示了三种不同的方法来获取集合中的所有 NFT。
+如上面的问题所述,按 `creators` 数组之后的字段过滤是一项具有挑战性的任务,因为它不是固定大小的字段。我们建议使用 DAS 作为获取集合铸造的最快最简单的方法。如果您想直接从链上获取数据,可以使用以下方法,但我们有一个[指南](/smart-contracts/token-metadata/guides/get-by-collection)显示了三种不同的方法来获取集合中的所有 NFT。
 
 ## 如何创建灵魂绑定资产?
 
@@ -40,7 +40,7 @@ Token Metadata 允许您创建灵魂绑定资产。实现这一点的最佳方�
 {% /totem-accordion %}
 {% /totem %}
 
-如果需要使用 TokenKeg SPL 代币,您可以在 pNFT 上使用[锁定转移委托](/zh/smart-contracts/token-metadata/delegates#locked-transfer-委托仅限-pnft)创建灵魂绑定资产,然后锁定 pNFT。但请注意,这不仅会阻止所有者转移 pNFT,还会阻止所有者销毁它。这就是为什么对于灵魂绑定资产的建议是使用 Token22 代币。
+如果需要使用 TokenKeg SPL 代币,您可以在 pNFT 上使用[锁定转移委托](/smart-contracts/token-metadata/delegates#locked-transfer-delegate-pnft-only)创建灵魂绑定资产,然后锁定 pNFT。但请注意,这不仅会阻止所有者转移 pNFT,还会阻止所有者销毁它。这就是为什么对于灵魂绑定资产的建议是使用 Token22 代币。
 
 ## 为什么铸造和冻结权限会转移到 Edition PDA?
 
@@ -83,33 +83,33 @@ Token Metadata 允许您创建灵魂绑定资产。实现这一点的最佳方�
 
 ## 使用 Token Metadata 是否有任何成本?
 
-Token Metadata 目前对某些指令的调用者收取非常小的费用,范围在 0.001 SOL 到 0.01 SOL 之间。更多详细信息可以在[协议费用页面](/zh/protocol-fees)上找到。
+Token Metadata 目前对某些指令的调用者收取非常小的费用,范围在 0.001 SOL 到 0.01 SOL 之间。更多详细信息可以在[协议费用页面](/protocol-fees)上找到。
 
 ## 在哪里可以找到已弃用的指令?
 
 Token Metadata 程序的一些指令已经经历了几次迭代,并已弃用以支持更新的指令。已弃用的指令仍然在程序中可用,但它们不在开发者中心上记录,因为它们不再是与程序交互的推荐方式。话虽如此,如果您正在寻找已弃用的指令,可以在 Token Metadata 程序存储库中找到它们。以下是它们的列表：
 
-- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) 已被 [CreateV1](/zh/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
-- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) 已被 [CreateV1](/zh/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
+- [CreateMetadataAccountV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L448) 已被 [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
+- [UpdateMetadataAccountV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L241) 已被 [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
 - [UpdatePrimarySaleHappenedViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L112)
-- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) 请改用 [Verify](/zh/smart-contracts/token-metadata/collections)。
-- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388) 请改用 [Unverify](/zh/smart-contracts/token-metadata/collections#unverify)。
-- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267) 已被 [CreateV1](/zh/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
-- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202) 已被 [CreateV1](/zh/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
+- [SignMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L146) 请改用 [Verify](/smart-contracts/token-metadata/collections)。
+- [RemoveCreatorVerification](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L388) 请改用 [Unverify](/smart-contracts/token-metadata/collections#unverify)。
+- [CreateMasterEditionV3](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L267) 已被 [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
+- [MintNewEditionFromMasterEditionViaToken](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L202) 已被 [CreateV1](/smart-contracts/token-metadata/mint#creating-mint-and-metadata-accounts) 替换。
 - [ConvertMasterEditionV1ToV2](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L210)
 - [PuffMetadata](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L236)
-- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) 请改用 [Verify](/zh/smart-contracts/token-metadata/collections)。
-- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367) 请改用 [Verify](/zh/smart-contracts/token-metadata/collections)。
-- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334) 请改用 [Unverify](/zh/smart-contracts/token-metadata/collections#unverify)。
+- [VerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L278) 请改用 [Verify](/smart-contracts/token-metadata/collections)。
+- [SetAndVerifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L367) 请改用 [Verify](/smart-contracts/token-metadata/collections)。
+- [UnverifyCollection](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L334) 请改用 [Unverify](/smart-contracts/token-metadata/collections#unverify)。
 - [Utilize](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L296) - 使用功能已被弃用。
 - [ApproveUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L311) - 使用功能已被弃用。
 - [RevokeUseAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L324) - 使用功能已被弃用。
-- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) 请改用 [Delegate](/zh/smart-contracts/token-metadata/delegates)。
-- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) 请改用 [Revoke](/zh/smart-contracts/token-metadata/delegates)。
+- [ApproveCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L346) 请改用 [Delegate](/smart-contracts/token-metadata/delegates)。
+- [RevokeCollectionAuthority](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L354) 请改用 [Revoke](/smart-contracts/token-metadata/delegates)。
 - [FreezeDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L375)
 - [ThawDelegatedAccount](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383)
-- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) 已被 [Burn](/zh/smart-contracts/token-metadata/burn) 替换。
-- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) 已被 [Burn](/zh/smart-contracts/token-metadata/burn) 替换。
+- [BurnNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L383) 已被 [Burn](https://developers.metaplex.com/token-metadata/burn) 替换。
+- [BurnEditionNft](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L487) 已被 [Burn](https://developers.metaplex.com/token-metadata/burn) 替换。
 - [VerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L411) 大小集合已被弃用。
 - [SetAndVerifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L437) 大小集合已被弃用。
 - [UnverifySizedCollectionItem](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L423) 大小集合已被弃用。
@@ -117,4 +117,4 @@ Token Metadata 程序的一些指令已经经历了几次迭代,并已弃用以�
 - [SetTokenStandard](https://github.com/metaplex-foundation/mpl-token-metadata/blob/d1a13273cb23c033bda97b4d47b9731b51ef5a2f/programs/token-metadata/program/src/instruction/mod.rs#L464) TokenStandard 现在会自动设置。
 
 ## 在哪里可以了解更多关于 Token Metadata 账户大小缩减的信息?
-请查看[特殊常见问题](/zh/smart-contracts/token-metadata/guides/account-size-reduction)以获取更多信息,或在有其他问题的情况下加入我们的 [Discord](https://discord.gg/metaplex)。
+请查看[特殊常见问题](/smart-contracts/token-metadata/guides/account-size-reduction)以获取更多信息,或在有其他问题的情况下加入我们的 [Discord](https://discord.gg/metaplex)。

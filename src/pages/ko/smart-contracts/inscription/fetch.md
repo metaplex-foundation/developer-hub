@@ -10,7 +10,7 @@ Inscription 계정이 [초기화](initialize)되면 해당 메타데이터를 �
 
 ## inscription 메타데이터 가져오기
 
-두 inscription 유형 모두 메타데이터 계정을 사용합니다. 이 계정에는 예를 들어 `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` 및 [기타](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html) 정보가 포함됩니다. 메타데이터는 다음과 같이 가져올 수 있습니다:
+두 inscription 유형 모두 메타데이터 계정을 사용합니다. 이 계정에는 예를 들어 `inscriptionRank`, `associatedInscriptions`, `updateAuthorities` 및 [더 보기](https://mpl-inscription.typedoc.metaplex.com/types/InscriptionMetadata.html) 정보가 포함됩니다. 메타데이터는 다음과 같이 가져올 수 있습니다:
 
 {% dialect-switcher title="Inscription 메타데이터 가져오기" %}
 {% dialect title="JavaScript" id="js" %}

@@ -4,7 +4,7 @@ metaTitle: 컬렉션의 민트 가져오기 | Token Metadata 가이드
 description: 컬렉션의 모든 민트를 가져오는 방법에 대한 가이드.
 ---
 
-Metaplex Token Metadata는 [온체인 컬렉션](/ko/smart-contracts/token-metadata/collections)을 가지고 있어 온체인 표준의 부재로 인해 커뮤니티에서 사용하는 다양한 주관적이고 잠재적으로 충돌하는 휴리스틱 대신 NFT 컬렉션을 객관적으로 식별할 수 있습니다.
+Metaplex Token Metadata는 [온체인 컬렉션](/token-metadata/collections)을 가지고 있어 온체인 표준의 부재로 인해 커뮤니티에서 사용하는 다양한 주관적이고 잠재적으로 충돌하는 휴리스틱 대신 NFT 컬렉션을 객관적으로 식별할 수 있습니다.
 
 사양 설계는 주어진 NFT를 찾아보고 그것이 컬렉션에 속하는지, 그렇다면 어떤 컬렉션인지를 메타데이터 계정에서 컬렉션 필드를 간단히 읽음으로써 결정하는 것을 매우 쉽게 만듭니다. 온체인 `Metadata` 구조체는 선택적 `Collection` 구조체를 포함하며, 이는 속해 있는 컬렉션의 SPL 토큰 민트의 Pubkey인 `key` 필드를 가집니다.
 

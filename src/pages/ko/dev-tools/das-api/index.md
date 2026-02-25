@@ -17,9 +17,9 @@ Metaplex Digital Asset Standard (DAS) API는 Solana의 디지털 자산과 상�
 
 {% quick-links %}
 
-{% quick-link title="시작하기" icon="InboxArrowDown" href="/ko/dev-tools/das-api/getting-started" description="선택한 언어 또는 라이브러리를 찾고 필수 프로그램을 시작하세요." /%}
+{% quick-link title="시작하기" icon="InboxArrowDown" href="/das-api/getting-started" description="선택한 언어 또는 라이브러리를 찾고 필수 프로그램을 시작하세요." /%}
 
-{% quick-link title="메서드" icon="CodeBracketSquare" href="/ko/dev-tools/das-api/methods" description="데이터를 가져오기 위한 DAS API 메서드입니다." /%}
+{% quick-link title="메서드" icon="CodeBracketSquare" href="/das-api/methods" description="데이터를 가져오기 위한 DAS API 메서드입니다." /%}
 
 {% quick-link title="MPL Core 확장" icon="CodeBracketSquare" href="/ko/dev-tools/das-api/core-extension" description="MPL Core 자산을 쉽게 가져오고 파싱합니다" /%}
 

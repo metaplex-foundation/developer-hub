@@ -191,7 +191,7 @@ None
 {% /dialect %}
 {% /dialect-switcher %}
 ## 오프체인 메타데이터
-Asset 계정의 중요한 속성 중 하나는 오프체인 JSON 파일을 가리키는 `URI` 속성입니다. 이는 온체인 데이터 저장에 수반되는 수수료에 제약받지 않으면서 추가 데이터를 안전하게 제공하는 데 사용됩니다. 해당 JSON 파일은 [특정 표준을 따르며](/smart-contracts/token-metadata/token-standard), 누구나 토큰에 대한 유용한 정보를 찾을 수 있습니다.
+Asset 계정의 중요한 속성 중 하나는 오프체인 JSON 파일을 가리키는 `URI` 속성입니다. 이는 온체인 데이터 저장에 수반되는 수수료에 제약받지 않으면서 추가 데이터를 안전하게 제공하는 데 사용됩니다. 해당 JSON 파일은 [특정 표준을 따르며](/token-metadata/token-standard), 누구나 토큰에 대한 유용한 정보를 찾을 수 있습니다.
 오프체인 메타데이터는 공개적으로 접근 가능한 모든 위치에 저장할 수 있습니다. JSON 파일을 호스팅하는 인기 있는 장소:
 - Arweave
 - NFT.Storage/IPFS

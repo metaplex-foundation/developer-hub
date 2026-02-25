@@ -76,7 +76,7 @@ import { base58 } from '@metaplex-foundation/umi/serializers';
 ### Umi和Core SDK概述
 在本指南中，我们将使用**Umi**和**Core SDK**来创建所有必要的指令。
 **Umi是一个用于构建和使用Solana程序JavaScript客户端的模块化框架**。它提供了一个零依赖的库，定义了一组核心接口，使库能够独立于特定实现运行。
-_有关更多信息，您可以在[此处](/dev-tools/umi/getting-started)找到概述_
+_有关更多信息，您可以在[此处](/umi/getting-started)找到概述_
 **此示例的基本Umi设置如下**：
 ```typescript
 const umi = createUmi("https://api.devnet.solana.com", "finalized")

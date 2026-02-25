@@ -41,12 +41,12 @@ howToTools:
 **Freeze Delegate Plugin**은 **소유자 관리 Plugin**이며, 이는 Asset에 적용하려면 소유자의 서명이 필요함을 의미합니다.
 이 Plugin은 **delegate가 Asset을 동결하고 해동하여 전송을 방지**할 수 있게 합니다. Asset 소유자 또는 Plugin 권한자는 언제든지 이 Plugin을 취소할 수 있지만, Asset이 동결된 경우에는 취소 전에 해동해야 합니다.
 **이 Plugin을 사용하는 것은 가볍습니다.** Asset을 동결/해동하는 것은 Plugin 데이터의 불리언 값만 변경하면 됩니다 (유일한 인수는 Frozen: bool입니다).
-_자세한 내용은 [여기](/ko/smart-contracts/core/plugins/freeze-delegate)에서 확인하세요._
+_자세한 내용은 [여기](/smart-contracts/core/plugins/freeze-delegate)에서 확인하세요._
 ### Attribute Plugin
 **Attribute Plugin**은 **권한자 관리 Plugin**이며, 이는 Asset에 적용하려면 권한자의 서명이 필요함을 의미합니다. Collection에 포함된 Asset의 경우, Asset의 권한자 필드가 Collection 주소로 차지되어 있으므로 Collection 권한자가 권한자 역할을 합니다.
 이 Plugin은 **데이터를 Asset에 직접 저장하여 온체인 속성이나 특성으로 기능**합니다. 이러한 특성은 mpl-token-metadata 프로그램처럼 오프체인에 저장되지 않기 때문에 온체인 프로그램에서 직접 접근할 수 있습니다.
 **이 Plugin은 AttributeList 필드를 허용**하며, 이는 키와 값 쌍의 배열로 구성되고 둘 다 문자열입니다.
-_자세한 내용은 [여기](/ko/smart-contracts/core/plugins/attribute)에서 확인하세요._
+_자세한 내용은 [여기](/smart-contracts/core/plugins/attribute)에서 확인하세요._
 ### 스마트 컨트랙트 로직
 간단함을 위해 이 예제는 Staking 프로그램이 의도대로 작동하는 데 필수적인 **stake**와 **unstake** 함수 두 가지 명령어만 포함합니다. 누적된 포인트를 활용하기 위한 **spendPoint** 명령어와 같은 추가 명령어를 추가할 수 있지만, 이는 독자가 구현하도록 남겨둡니다.
 _Stake와 Unstake 함수 모두 앞서 소개한 Plugin을 다르게 활용합니다._
@@ -58,7 +58,7 @@ _Stake와 Unstake 함수 모두 앞서 소개한 Plugin을 다르게 활용합�
 이제 스마트 컨트랙트 뒤의 로직을 이해했으니, **코드로 들어가서 모든 것을 종합할 시간입니다!**
 ### 의존성과 임포트
 스마트 컨트랙트를 작성하기 전에, 스마트 컨트랙트가 작동하는 데 필요한 크레이트와 그 함수들을 살펴보겠습니다!
-이 예제에서는 주로 [anchor](/ko/smart-contracts/core/using-core-in-anchor) 기능이 활성화된 mpl_core 크레이트를 사용합니다:
+이 예제에서는 주로 [anchor](/smart-contracts/core/using-core-in-anchor) 기능이 활성화된 mpl_core 크레이트를 사용합니다:
 ```toml
 mpl-core = { version = "x.x.x", features = ["anchor"] }
 ```
@@ -79,7 +79,7 @@ use mpl_core::{
 모든 명령어의 계정 구조체에서 Signer와 Payer를 분리합니다. PDA는 계정 생성 비용을 지불할 수 없기 때문에 이것은 표준 절차입니다. 따라서 사용자가 PDA가 명령어의 권한자가 되기를 원한다면 두 개의 다른 필드가 필요합니다. 이 분리가 우리 명령어에 엄격하게 필요하지는 않지만, 좋은 관행으로 간주됩니다.
 ### 계정 구조체
 이 예제에서는 mpl-core 크레이트의 anchor 플래그를 사용하여 계정 구조체에서 Asset과 Collection 계정을 직접 역직렬화하고 제약 조건을 설정합니다.
-_자세한 내용은 [여기](/ko/smart-contracts/core/using-core-in-anchor)에서 확인하세요._
+_자세한 내용은 [여기](/smart-contracts/core/using-core-in-anchor)에서 확인하세요._
 `stake`와 `unstake` 명령어 모두 동일한 계정과 동일한 제약 조건을 사용하므로 단일 계정 구조체 `Stake`를 사용합니다.
 ```rust
 #[derive(Accounts)]
@@ -461,4 +461,4 @@ pub fn unstake(ctx: Context<Unstake>) -> Result<()> {
 }
 ```
 ## 결론
-축하합니다! 이제 NFT Collection을 위한 Staking 솔루션을 만들 준비가 되었습니다! Core와 Metaplex에 대해 더 알아보려면 [개발자 허브](/ko/smart-contracts/core/getting-started)를 확인하세요.
+축하합니다! 이제 NFT Collection을 위한 Staking 솔루션을 만들 준비가 되었습니다! Core와 Metaplex에 대해 더 알아보려면 [개발자 허브](/smart-contracts/core/getting-started)를 확인하세요.

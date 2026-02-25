@@ -8,12 +8,12 @@ description: NFTの開発を始めましょう。
 
 {% quick-links %}
 
-{% quick-link title="JavaScript (Umi)" icon="JavaScript" href="/ja/smart-contracts/token-metadata/getting-started/umi" description="Umiフレームワークベースの Umi SDKで始めましょう。" /%}
+{% quick-link title="JavaScript (Umi)" icon="JavaScript" href="/token-metadata/getting-started/umi" description="Umiフレームワークベースの Umi SDKで始めましょう。" /%}
 
-{% quick-link title="JavaScript (Kit)" icon="JavaScript" href="/ja/smart-contracts/token-metadata/getting-started/kit" description="@solana/kitベースのKit SDKで始めましょう。" /%}
+{% quick-link title="JavaScript (Kit)" icon="JavaScript" href="/token-metadata/getting-started/kit" description="@solana/kitベースのKit SDKで始めましょう。" /%}
 
-{% quick-link title="Rust" icon="Rust" href="/ja/smart-contracts/token-metadata/getting-started/rust" description="私たちのRustクレートを使用して始めましょう。" /%}
+{% quick-link title="Rust" icon="Rust" href="/token-metadata/getting-started/rust" description="私たちのRustクレートを使用して始めましょう。" /%}
 
 {% /quick-links %}
 
-どのJavaScript SDKを選ぶべきかわからない場合は、[比較](/ja/smart-contracts/token-metadata/getting-started/js)をご覧ください。
+どのJavaScript SDKを選ぶべきかわからない場合は、[比較](/token-metadata/getting-started/js)をご覧ください。

@@ -115,7 +115,7 @@ pNFTs 在大多数操作中需要附加账户，包括 `tokenRecord`、`authoriz
 
 ## 在任何操作上强制执行规则
 
-可编程 NFT 最重要的功能之一是它们能够在任何影响它们的操作上强制执行一组规则。整个授权层由另一个名为 [Token Auth Rules](/zh/smart-contracts/token-auth-rules) 的 Metaplex 程序提供。虽然该程序用于使 pNFTs 可编程，但它是一个通用程序，可用于为任何用例创建和验证授权规则。
+可编程 NFT 最重要的功能之一是它们能够在任何影响它们的操作上强制执行一组规则。整个授权层由另一个名为 [Token Auth Rules](/token-auth-rules) 的 Metaplex 程序提供。虽然该程序用于使 pNFTs 可编程，但它是一个通用程序，可用于为任何用例创建和验证授权规则。
 
 对于 pNFTs，支持以下操作：
 

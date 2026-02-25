@@ -17,7 +17,7 @@ Metaplex Coreを使用して、Solana上でNFTを作成します。 {% .lead %}
 
 ## NFTを作成する
 
-以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。NFT作成の詳細については、[Coreドキュメント](/ja/smart-contracts/core)をご覧ください。
+以下のコードは完全に実行可能な例です。カスタマイズ可能なパラメータを以下に示します。NFT作成の詳細については、[Coreドキュメント](/smart-contracts/core)をご覧ください。
 
 {% code-tabs-imported from="core/create-asset" frameworks="umi,cli" /%}
 
@@ -32,7 +32,7 @@ NFTに合わせて以下のパラメータをカスタマイズしてくださ�
 
 ## メタデータと画像
 
-以下は、アップロードに必要な最小限のメタデータです。`external_url`、`attributes`、`properties`などの追加フィールドはオプションで、詳細な説明と例は[JSONスキーマ](/ja/smart-contracts/core/json-schema)で確認できます。JSONと画像をどこからでもアクセスできるようにアップロードする必要があります。ArweaveなどのWeb3ストレージプロバイダーの使用をお勧めします。コードで行う場合は、この[ガイド](/ja/guides/general/create-deterministic-metadata-with-turbo)に従ってください。
+以下は、アップロードに必要な最小限のメタデータです。`external_url`、`attributes`、`properties`などの追加フィールドはオプションで、詳細な説明と例は[JSONスキーマ](/smart-contracts/core/json-schema)で確認できます。JSONと画像をどこからでもアクセスできるようにアップロードする必要があります。ArweaveなどのWeb3ストレージプロバイダーの使用をお勧めします。コードで行う場合は、この[ガイド](/guides/general/create-deterministic-metadata-with-turbo)に従ってください。
 
 ```json
 {
@@ -44,4 +44,4 @@ NFTに合わせて以下のパラメータをカスタマイズしてくださ�
 ```
 
 ## プラグイン
-MPL Coreアセットは、コレクションレベルとアセットレベルの両方でプラグインの使用をサポートしています。プラグインを持つCore Assetを作成するには、作成時に`plugins`配列引数にプラグインタイプとそのパラメータを渡します。プラグインの詳細については、[プラグイン概要](/ja/smart-contracts/core/plugins)ページをご覧ください。プロフィール画像などのNFTの文脈では、[ロイヤリティプラグイン](/ja/smart-contracts/core/plugins/royalties)が一般的なユースケースです。
+MPL Coreアセットは、コレクションレベルとアセットレベルの両方でプラグインの使用をサポートしています。プラグインを持つCore Assetを作成するには、作成時に`plugins`配列引数にプラグインタイプとそのパラメータを渡します。プラグインの詳細については、[プラグイン概要](/smart-contracts/core/plugins)ページをご覧ください。プロフィール画像などのNFTの文脈では、[ロイヤリティプラグイン](/smart-contracts/core/plugins/royalties)が一般的なユースケースです。

@@ -51,7 +51,7 @@ howToTools:
 - **isWithin15mOfMarketOpenOrClose**：检查当前时间是否在市场开盘或收盘后15分钟内。
 详细的实现内容请参阅英文文档的完整指南。
 ### 创建NFT
-首先设置您的环境以使用Umi。（Umi是用于构建和使用Solana程序JavaScript客户端的模块化框架。在[此处](/dev-tools/umi/getting-started)了解更多）
+首先设置您的环境以使用Umi。（Umi是用于构建和使用Solana程序JavaScript客户端的模块化框架。在[此处](/umi/getting-started)了解更多）
 ```ts
 import { createSignerFromKeypair, signerIdentity } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'

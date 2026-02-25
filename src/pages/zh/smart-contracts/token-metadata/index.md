@@ -12,7 +12,7 @@ Token Metadata 程序是在 Solana 区块链上处理 NFT 和同质化资产时�
 
 {% quick-links %}
 
-{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/token-metadata/getting-started" description="选择您喜欢的语言或库,开始在 Solana 上使用数字资产。" /%}
+{% quick-link title="入门指南" icon="InboxArrowDown" href="/token-metadata/getting-started" description="选择您喜欢的语言或库,开始在 Solana 上使用数字资产。" /%}
 
 {% quick-link title="API 参考" icon="CodeBracketSquare" href="https://mpl-token-metadata.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容?查看我们的 API 参考文档并找到您的答案。" /%}
 
@@ -112,7 +112,7 @@ supply and its authorities.
 
 ## JSON 标准
 
-元数据账户的一个重要属性是 `URI` 属性,它指向链外的 JSON 文件。这用于安全地提供额外数据,同时不受链上数据存储费用的限制。该 JSON 文件[遵循特定标准](/zh/smart-contracts/token-metadata/token-standard),任何人都可以使用它来查找代币的有用信息。
+元数据账户的一个重要属性是 `URI` 属性,它指向链外的 JSON 文件。这用于安全地提供额外数据,同时不受链上数据存储费用的限制。该 JSON 文件[遵循特定标准](/token-metadata/token-standard),任何人都可以使用它来查找代币的有用信息。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -360,7 +360,7 @@ JSON Metadata
 - `Fungible`:Mint 账户是同质化的,并且有多个小数位。这更有可能是用作去中心化货币的代币。
 - `ProgrammableNonFungible`:一种特殊的 `NonFungible` 代币,始终处于冻结状态以强制执行自定义授权规则。有关更多信息,请参阅下一节。
 
-您可以[在此处阅读有关这些标准的更多信息](/zh/smart-contracts/token-metadata/token-standard)。
+您可以[在此处阅读有关这些标准的更多信息](/token-metadata/token-standard)。
 
 {% diagram height="h-64 md:h-[500px]" %}
 {% node %}
@@ -438,7 +438,7 @@ JSON Metadata
 
 **可编程 NFT** 的引入是为了解决这个问题。它们是一种新的_可选_代币标准,**始终保持底层代币账户冻结**。这样,没有人可以在不通过 Token Metadata 程序的情况下转移、锁定或销毁可编程 NFT。
 
-然后由创作者定义自定义的特定于操作的授权规则,这些规则将由 Token Metadata 程序强制执行。这些在特殊的 **RuleSet** 账户中定义,该账户附加到元数据账户。这样的 RuleSet 的一个例子可以是尊重版税的程序地址的允许列表。RuleSet 是名为 [Token Auth Rules](/zh/smart-contracts/token-auth-rules) 的新 Metaplex 程序的一部分。
+然后由创作者定义自定义的特定于操作的授权规则,这些规则将由 Token Metadata 程序强制执行。这些在特殊的 **RuleSet** 账户中定义,该账户附加到元数据账户。这样的 RuleSet 的一个例子可以是尊重版税的程序地址的允许列表。RuleSet 是名为 [Token Auth Rules](/token-auth-rules) 的新 Metaplex 程序的一部分。
 
 您可以[在此处阅读有关可编程 NFT 的更多信息](/zh/smart-contracts/token-metadata/pnfts)。
 
@@ -486,13 +486,13 @@ JSON Metadata
 
 本文档的其他页面旨在进一步记录它,并在各自的页面中解释重要功能。
 
-- [代币标准(资产)](/zh/smart-contracts/token-metadata/token-standard)
-- [铸造资产](/zh/smart-contracts/token-metadata/mint)
+- [代币标准(资产)](/token-metadata/token-standard)
+- [铸造资产](/token-metadata/mint)
 - [更新资产](/zh/smart-contracts/token-metadata/update)
 - [转移资产](/zh/smart-contracts/token-metadata/transfer)
-- [销毁资产](/zh/smart-contracts/token-metadata/burn)
-- [打印版本](/zh/smart-contracts/token-metadata/print)
-- [已验证的集合](/zh/smart-contracts/token-metadata/collections)
+- [销毁资产](/token-metadata/burn)
+- [打印版本](/token-metadata/print)
+- [已验证的集合](/token-metadata/collections)
 - [已验证的创作者](/zh/smart-contracts/token-metadata/creators)
 - [委托权限](/zh/smart-contracts/token-metadata/delegates)
 - [锁定资产](/zh/smart-contracts/token-metadata/lock)

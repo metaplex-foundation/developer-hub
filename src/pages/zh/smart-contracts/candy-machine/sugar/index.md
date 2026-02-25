@@ -14,7 +14,7 @@ Sugar 是一个用于与 Candy Machine 交互的命令行工具。它允许您�
 设置 Sugar 就像打开您喜欢的终端应用程序并下载一个二进制文件一样简单。
 
 {% callout %}
-在[此处](/zh/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)找到关于如何使用 sugar 创建 Candy Machine 的完整指南。
+在[此处](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)找到关于如何使用 sugar 创建 Candy Machine 的完整指南。
 
 {% /callout %}
 

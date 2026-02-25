@@ -18,7 +18,7 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 {% quick-links %}
 
-{% quick-link title="入门指南" icon="InboxArrowDown" href="/zh/smart-contracts/bubblegum/sdk" description="选择您偏好的语言或库，开始使用压缩NFT。" /%}
+{% quick-link title="入门指南" icon="InboxArrowDown" href="/bubblegum/sdk" description="选择您偏好的语言或库，开始使用压缩NFT。" /%}
 
 {% quick-link title="API参考" icon="CodeBracketSquare" href="https://mpl-bubblegum.typedoc.metaplex.com/" target="_blank" description="正在寻找特定内容？查看我们的API参考找到您的答案。" /%}
 
@@ -146,4 +146,4 @@ Bubblegum是Metaplex协议程序，用于在Solana上创建和交互压缩NFT（
 
 ## 后续步骤
 
-现在我们了解了压缩NFT在高层次上是如何工作的，我们建议查看我们的[入门指南](/zh/smart-contracts/bubblegum/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum/create-trees)了解更多关于可以在cNFT上执行的特定操作。最后，还提供了[高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)来加深您对cNFT和默克尔树的了解。
+现在我们了解了压缩NFT在高层次上是如何工作的，我们建议查看我们的[入门指南](/bubblegum/sdk)页面，其中列举了可用于与压缩NFT交互的各种语言/框架。之后，可以使用各种[功能页面](/zh/smart-contracts/bubblegum/create-trees)了解更多关于可以在cNFT上执行的特定操作。最后，还提供了[高级指南](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)来加深您对cNFT和默克尔树的了解。

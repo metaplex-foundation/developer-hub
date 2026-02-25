@@ -8,6 +8,6 @@ description: MPL-Hybrid Metaplexプログラム用の利用可能なSDKを表示
 
 {% quick-links %}
 
-{% quick-link title="JavaScript SDK" icon="JavaScript" href="/ja/smart-contracts/mpl-hybrid/sdk/javascript" description="UmiフレームワークベースのMPL-Hybrid 404 JavaScriptライブラリを使い始めましょう。" /%}
+{% quick-link title="JavaScript SDK" icon="JavaScript" href="/mpl-hybrid/sdk/javascript" description="UmiフレームワークベースのMPL-Hybrid 404 JavaScriptライブラリを使い始めましょう。" /%}
 
 {% /quick-links %}

@@ -100,7 +100,7 @@ Collection 是属于同一系列或组的 Asset 组。为了将 Asset 分组，�
 以下代码片段创建一个没有插件或任何特殊功能的简单 Collection。
 {% code-tabs-imported from="core/create-collection" frameworks="umi" /%}
 ### 创建带插件的 Collection
-以下代码片段创建一个附加了 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties) 的 Collection。您可以按照[此处](/zh/smart-contracts/core/plugins)的说明附加其他插件。
+以下代码片段创建一个附加了 [Royalties 插件](/smart-contracts/core/plugins/royalties) 的 Collection。您可以按照[此处](/smart-contracts/core/plugins)的说明附加其他插件。
 {% dialect-switcher title="创建带插件的 MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

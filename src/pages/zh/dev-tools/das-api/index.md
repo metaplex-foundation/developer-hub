@@ -16,9 +16,9 @@ API 定义了一组 RPC 实现的方法，以提供资产数据。在大多数�
 
 {% quick-links %}
 
-{% quick-link title="快速入门" icon="InboxArrowDown" href="/zh/dev-tools/das-api/getting-started" description="选择您喜欢的语言或库，开始使用基础程序。" /%}
+{% quick-link title="快速入门" icon="InboxArrowDown" href="/das-api/getting-started" description="选择您喜欢的语言或库，开始使用基础程序。" /%}
 
-{% quick-link title="方法" icon="CodeBracketSquare" href="/zh/dev-tools/das-api/methods" description="用于获取数据的 DAS API 方法。" /%}
+{% quick-link title="方法" icon="CodeBracketSquare" href="/das-api/methods" description="用于获取数据的 DAS API 方法。" /%}
 
 {% quick-link title="MPL Core 扩展" icon="CodeBracketSquare" href="/zh/dev-tools/das-api/core-extension" description="轻松获取和解析 MPL Core 资产" /%}
 

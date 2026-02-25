@@ -14,7 +14,7 @@ Sugar는 Candy Machine과 상호작용하기 위한 명령줄 도구입니다. C
 Sugar 설정은 좋아하는 터미널 애플리케이션을 열고 바이너리 파일을 다운로드하는 것만큼 간단합니다.
 
 {% callout %}
-Sugar를 사용하여 Candy Machine을 생성하는 방법에 대한 전체 가이드는 [여기](/ko/smart-contracts/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)에서 찾을 수 있습니다.
+Sugar를 사용하여 Candy Machine을 생성하는 방법에 대한 전체 가이드는 [여기](/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine)에서 찾을 수 있습니다.
 
 {% /callout %}
 
