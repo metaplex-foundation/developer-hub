@@ -15,29 +15,29 @@ export const genesis = {
       deposit: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to deposits into Launch Pools.',
+        notes: null,
       },
       withdraw: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to withdrawals from Launch Pools during the deposit period.',
+        notes: null,
       },
       graduation: {
         solana: '5%',
         payer: 'Launch Pool',
-        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+        notes: null,
       },
     },
     presale: {
       deposit: {
         solana: '2%',
         payer: 'User',
-        notes: 'Fee applied to deposits into Presales.',
+        notes: null,
       },
       graduation: {
         solana: '5%',
         payer: 'Presale',
-        notes: 'Fee applied to total deposits at the end of the Deposit Period.',
+        notes: null,
       },
     },
   },

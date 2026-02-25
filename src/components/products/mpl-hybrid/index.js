@@ -18,7 +18,7 @@ export const mplHybrid = {
     swap: {
       solana: '0.005 SOL',
       payer: 'Collector',
-      notes: 'Paid by the individual who swaps tokens and NFTs.',
+      notes: null,
     },
   },
   sections: [
