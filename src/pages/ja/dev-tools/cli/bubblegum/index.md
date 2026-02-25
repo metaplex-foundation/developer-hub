@@ -4,6 +4,8 @@ metaTitle: Bubblegum V2（圧縮NFT）| Metaplex CLI
 description: Bubblegum V2プログラムを使用して圧縮NFTを作成・管理する
 ---
 
+# Bubblegum（圧縮NFT）
+
 {% callout type="note" %}
 これらのCLIコマンドは**Bubblegum V2**専用です。Bubblegum V2は[Metaplex Coreコレクション](/smart-contracts/core/collections)を使用し、Bubblegum V1ツリーやToken Metadataコレクションとは互換性がありません。
 {% /callout %}

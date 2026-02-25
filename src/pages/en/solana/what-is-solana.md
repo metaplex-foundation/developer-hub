@@ -28,6 +28,8 @@ faqs:
     a: Solana supports DeFi protocols, NFT marketplaces, Web3 gaming, payment applications, DAOs, and many other decentralized applications.
 ---
 
+# Solana Overview
+
 The Solana blockchain is a high-performance, decentralized blockchain platform designed to enable scalable and user-friendly applications. Launched in 2020 by Solana Labs, Solana aims to address the limitations of earlier blockchain networks such as Bitcoin and Ethereum, particularly in terms of scalability, speed, and cost.
 
 ## Key Features and Innovations

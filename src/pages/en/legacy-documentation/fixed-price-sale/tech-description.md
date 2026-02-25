@@ -36,6 +36,8 @@ description: Technical Description of the Fixed Price Sale Program
 
 3. Token will be shown in their wallets
 
+# Accounts
+
 ## Store
 
 | Field      | Type |Description|
@@ -94,6 +96,8 @@ description: Technical Description of the Fixed Price Sale Program
 | Field      | Type |Description|
 | ----------- | ----------- | ------ |
 |  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  List of creators to receive primary sales royalties  |
+
+# Instructions
 
 ## CreateStore
 

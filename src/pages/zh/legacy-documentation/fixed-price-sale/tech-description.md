@@ -36,6 +36,8 @@ description: 固定价格销售程序的技术描述
 
 3. 代币将显示在他们的钱包中
 
+# 账户
+
 ## Store
 
 | 字段      | 类型 |描述|
@@ -94,6 +96,8 @@ description: 固定价格销售程序的技术描述
 | 字段      | 类型 |描述|
 | ----------- | ----------- | ------ |
 |  creators  |  `Vec<mpl_token_metadata::state::Creator>`  |  接收主要销售版税的创作者列表  |
+
+# 指令
 
 ## CreateStore
 

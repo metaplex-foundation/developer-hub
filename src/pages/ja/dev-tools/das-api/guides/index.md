@@ -4,6 +4,8 @@ metaTitle: ガイド | DAS API
 description: 一般的なDAS APIの使用例のための実践的なガイド
 ---
 
+# DAS APIガイド
+
 DAS APIガイドへようこそ！これらの実践的な例は、Solana上のデジタルアセットを扱う際の一般的な使用例の解決に役立ちます。
 
 ## はじめに

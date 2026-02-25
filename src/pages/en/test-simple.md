@@ -3,6 +3,8 @@ title: Simple Test
 description: Simple test page
 ---
 
+# Simple Test
+
 ## First Example
 
 {% code-tabs-imported from="core/create-asset" frameworks="umi" /%}

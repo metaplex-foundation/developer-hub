@@ -54,6 +54,7 @@ let storageDriver = URLSharedStorageDriver(urlSession: URLSession.shared)
 let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storageDriver: storageDriver)
 ```
 
+# 使用方法
 適切に設定されると、その`Metaplex`インスタンスを使用して、さまざまな機能セットを提供するモジュールにアクセスできます。現在、`nfts()`メソッドを介してアクセスできるNFTモジュールが1つだけあります。そのモジュールから、NFTの検索、作成、更新ができ、さらに多くの機能が追加される予定です。
 
 ## NFT

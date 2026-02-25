@@ -96,6 +96,7 @@ val storageDriver = OkHttpSharedStorageDriver()
 val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
+# Usage
 Once properly configured, that `Metaplex` instance can be used to access modules providing different sets of features. Currently, there is only one NFT module that can be accessed via the `nft` property. From that module, you will be able to find, create and update NFTs with more features to come.
 
 ## NFTs

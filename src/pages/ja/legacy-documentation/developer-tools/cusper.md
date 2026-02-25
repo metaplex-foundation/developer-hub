@@ -3,6 +3,7 @@ title: Cusper
 metaTitle: Developer Tools | Cusper
 description: Solanaプログラムのログまたはエラーコードからカスタムプログラムエラーを解決します
 ---
+# Cusper
 
 Cusperは、Solanaプログラムのログまたはエラーコードから**Cus**tom **P**rogram **Er**rors(カスタムプログラムエラー)を解決します。[Solita](solita)によってプログラムエラーの処理を大幅に簡単にするために使用されます。
 

@@ -10,6 +10,8 @@ description: 从主版 NFT 销售印刷品
 
 {% /callout %}
 
+# 简介
+
 Metaplex 的固定价格销售程序是一个 Solana 程序,供品牌创建可以分发给大量受众的会员 NFT。这种 NFT 可用于在未来日期控制对某些事物(游戏、活动、发布等)的访问。
 如其名称所示,该程序中的所有 NFT 都以固定价格出售,通过从单个主版 NFT 铸造[印刷版](/zh/smart-contracts/token-metadata/print)来实现。因此,所有 NFT 将具有相同的元数据(除了版本号)。
 

@@ -4,6 +4,8 @@ metaTitle: 指南 | DAS API
 description: DAS API 常见用例的实用指南
 ---
 
+# DAS API 指南
+
 欢迎使用 DAS API 指南！这些实用示例将帮助您解决在 Solana 上处理数字资产时的常见用例。
 
 ## 入门

@@ -4,6 +4,8 @@ metaTitle: Token Entangler | Developer Hub
 description: Metaplexによる非推奨のToken Entanglerプログラムに関するドキュメンテーション。
 ---
 
+# 概要
+
 {% callout type="warning" %}
 
 このプログラムは非推奨としてマークされており、Metaplex Foundationチームによって積極的にメンテナンスされていないことにご注意ください。新機能、セキュリティ修正、および後方互換性は保証されません。注意してご使用ください。

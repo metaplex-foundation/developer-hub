@@ -3,6 +3,8 @@ title: Copy with Context Test
 description: Testing enhanced copy functionality
 ---
 
+# Copy with Context Feature Test
+
 This page demonstrates the new "Copy with Context" feature that allows users to copy either just the code snippet or the full runnable code with imports and setup.
 
 ## How It Works

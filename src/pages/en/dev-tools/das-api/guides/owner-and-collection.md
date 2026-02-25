@@ -4,6 +4,8 @@ metaTitle: Get Assets by Owner and Collection | DAS API Guides
 description: Learn how to find digital assets from a specific collection owned by a particular wallet
 ---
 
+# Get Assets by Owner and Collection
+
 This guide shows you how to find digital assets that belong to a specific collection and are owned by a particular wallet address. This is useful for building collection-specific portfolio views, marketplace features, or analytics tools.
 
 ## Using Search Assets with Owner and Collection Grouping

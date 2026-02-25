@@ -10,6 +10,8 @@ description: 마스터 에디션 NFT에서 프린트 판매
 
 {% /callout %}
 
+# 소개
+
 Metaplex의 Fixed-Price Sale 프로그램은 브랜드가 대규모 청중에게 배포할 수 있는 멤버십 NFT를 만들기 위한 Solana 프로그램입니다. 이 NFT는 향후 특정 항목(게임, 이벤트, 출시 등)에 대한 액세스를 제한하는 데 사용할 수 있습니다.
 이름에서 알 수 있듯이 프로그램의 모든 NFT는 단일 마스터 에디션 NFT에서 [프린트 에디션](/ko/smart-contracts/token-metadata/print)을 발행하여 고정 가격으로 판매됩니다. 결과적으로 모든 NFT는 (에디션 번호를 제외하고) 동일한 메타데이터를 갖게 됩니다.
 

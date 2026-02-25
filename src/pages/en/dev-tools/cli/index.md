@@ -4,6 +4,8 @@ metaTitle: Introduction | Metaplex CLI
 description: Welcome to the Metaplex CLI
 ---
 
+# Metaplex CLI
+
 The Metaplex CLI is a powerful command-line tool that provides a comprehensive suite of utilities for interacting with the Metaplex protocol on Solana. Whether you're a developer building NFT applications or a creator managing digital assets, the CLI offers a robust set of features to streamline your workflow.
 
 ## Key Features

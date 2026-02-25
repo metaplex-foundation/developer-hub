@@ -3,6 +3,8 @@ title: Centralized Examples Test
 description: Testing centralized code examples
 ---
 
+# Centralized Code Examples Test
+
 ## Example 1: Create an Asset
 
 {% code-tabs-imported from="core/create-asset" /%}

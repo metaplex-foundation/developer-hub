@@ -28,6 +28,8 @@ faqs:
     a: Solana supports DeFi protocols, NFT marketplaces, Web3 gaming, payment applications, DAOs, and many other decentralized applications.
 ---
 
+# Solana 개요
+
 Solana 블록체인은 확장 가능하고 사용자 친화적인 애플리케이션을 가능하게 하도록 설계된 고성능 탈중앙화 블록체인 플랫폼입니다. Solana Labs에서 2020년에 출시한 Solana는 비트코인과 이더리움과 같은 초기 블록체인 네트워크의 한계, 특히 확장성, 속도, 비용 측면의 문제를 해결하는 것을 목표로 합니다.
 
 ## 주요 기능 및 혁신

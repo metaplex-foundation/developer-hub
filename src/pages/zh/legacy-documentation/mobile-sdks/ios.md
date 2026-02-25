@@ -54,6 +54,7 @@ let storageDriver = URLSharedStorageDriver(urlSession: URLSession.shared)
 let metaplex Metaplex(connection: solana, identityDriver: identityDriver, storageDriver: storageDriver)
 ```
 
+# 使用
 正确配置后,该 `Metaplex` 实例可用于访问提供不同功能集的模块。目前,只有一个 NFT 模块可以通过 `nfts()` 方法访问。从该模块中,您将能够查找、创建和更新 NFT,未来还会有更多功能。
 
 ## NFT

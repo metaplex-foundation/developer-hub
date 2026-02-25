@@ -6,8 +6,10 @@ description: Explains how to manage timed Auctions using Auctioneer.
 
 The Timed Auction Auctioneer is an Auctioneer implementation that adds English-style auction rules built on top of Auction House.
 
+# Listing Config
 The listing config struct is used to store all feature-related parameters attached to each listing. All features can be configured on a per-listing basis.
 
+# Features
 * English Auction with start and end dates
 * Highest bid tracking
 * Reserve price (Minimum Bid)

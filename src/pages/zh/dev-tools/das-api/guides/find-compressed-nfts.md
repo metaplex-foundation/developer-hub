@@ -4,6 +4,8 @@ metaTitle: 查找压缩 NFT | DAS API 指南
 description: 了解如何使用 DAS API 发现和使用压缩 NFT
 ---
 
+# 查找压缩 NFT
+
 本指南展示如何使用 DAS API 查找和使用压缩 NFT。压缩 NFT 是在 Solana 上使用 Bubblegum 或 Bubblegum V2 存储 NFT 数据的一种高效方式，DAS API 提供了特殊的方法来处理它们。
 
 ## 方法 1：按所有者查找压缩 NFT

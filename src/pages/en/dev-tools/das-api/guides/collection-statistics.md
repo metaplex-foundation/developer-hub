@@ -4,6 +4,8 @@ metaTitle: Analyze Collection Statistics | DAS API Guides
 description: Learn how to get insights about collection distribution and ownership using the DAS API
 ---
 
+# Analyze Collection Statistics
+
 This guide shows you how to analyze collection statistics, distribution, and ownership patterns using the DAS API. This is useful for building analytics dashboards, marketplace insights, or collection management tools.
 
 ## Basic Collection Statistics

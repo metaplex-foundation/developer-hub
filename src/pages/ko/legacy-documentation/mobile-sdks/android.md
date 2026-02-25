@@ -96,6 +96,7 @@ val storageDriver = OkHttpSharedStorageDriver()
 val metaplex = Metaplex(solanaConnection, solanaIdentityDriver, storageDriver)
 ```
 
+# 사용법
 올바르게 구성되면 해당 `Metaplex` 인스턴스를 사용하여 다양한 기능 세트를 제공하는 모듈에 액세스할 수 있습니다. 현재 `nft` 속성을 통해 액세스할 수 있는 NFT 모듈이 하나만 있습니다. 해당 모듈에서 NFT를 찾고, 생성하고, 업데이트할 수 있으며 더 많은 기능이 추가될 예정입니다.
 
 ## NFT

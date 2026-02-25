@@ -4,6 +4,8 @@ metaTitle: Token Entangler | Developer Hub
 description: Documentation on the deprecated Token Entangler program by Metaplex.
 ---
 
+# Overview
+
 {% callout type="warning" %}
 
 Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.

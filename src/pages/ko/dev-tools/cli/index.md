@@ -4,6 +4,8 @@ metaTitle: 소개 | Metaplex CLI
 description: Metaplex CLI에 오신 것을 환영합니다
 ---
 
+# Metaplex CLI
+
 Metaplex CLI는 Solana에서 Metaplex 프로토콜과 상호작용하기 위한 포괄적인 유틸리티 모음을 제공하는 강력한 명령줄 도구입니다. NFT 애플리케이션을 구축하는 개발자이든 디지털 자산을 관리하는 창작자이든, CLI는 워크플로우를 간소화하는 강력한 기능 세트를 제공합니다.
 
 ## 주요 기능
