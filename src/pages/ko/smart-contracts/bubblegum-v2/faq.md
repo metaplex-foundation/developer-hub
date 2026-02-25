@@ -2,8 +2,8 @@
 title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegum에 대한 자주 묻는 질문.
-created: '01-15-2025'
-updated: '02-24-2026'
+created: '2025-01-15'
+updated: '2026-02-24'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -87,17 +87,11 @@ Bubblegum Umi 라이브러리는 위의 설명에 맞는 `getAssetWithProof` 도
 캐노피 크기에 따라 `getAssetWithProof` 도우미의 `truncateCanopy: true` 매개변수를 사용하는 것이 합리적일 수 있습니다. 트리 구성을 가져와 필요하지 않은 증명을 자릅니다. 트랜잭션 크기가 너무 커지면 도움이 됩니다.
 
 ```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId, 
-// {  truncateCanopy: true } // 증명을 가지치기하는 선택사항 
+const assetWithProof = await getAssetWithProof(umi, assetId,
+// {  truncateCanopy: true } // 증명을 가지치기하는 선택사항
 );
-await transferV2(umi, {
-  ...assetWithProof,
-  leafOwner: leafOwnerA, // 서명자로서.
-  newLeafOwner: leafOwnerB.publicKey,
-}).sendAndConfirm(umi);
-
 await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // 서명자로서.

@@ -2,8 +2,8 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK - Bubblegum V2 - Metaplex
 description: Metaplex Bubblegum V2 JavaScript SDK의 완전한 참조 문서. Umi 설정, 트리 생성, 민팅, 전송, 소각, 업데이트, 위임, 동결, 압축 NFT 가져오기를 다룹니다.
-created: '01-15-2025'
-updated: '02-25-2026'
+created: '2025-01-15'
+updated: '2026-02-25'
 keywords:
   - mpl-bubblegum JavaScript
   - Bubblegum V2 TypeScript SDK
@@ -85,7 +85,7 @@ npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-d
 {% quick-link title="npm 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="버전 기록이 있는 npmjs.com의 패키지." /%}
 {% /quick-links %}
 
-## Umi 설정
+## Umi 설정 {% #umi-setup %}
 
 `mplBubblegum` 플러그인은 모든 Bubblegum V2 명령과 DAS API 플러그인을 Umi 인스턴스에 등록합니다.
 
@@ -108,10 +108,10 @@ import { keypairIdentity } from '@metaplex-foundation/umi'
 import { readFileSync } from 'fs'
 
 const secretKey = JSON.parse(readFileSync('/path/to/keypair.json', 'utf-8'))
-const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))
 const umi = createUmi('https://api.devnet.solana.com')
   .use(mplBubblegum())
-  .use(keypairIdentity(keypair))
+const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey))
+umi.use(keypairIdentity(keypair))
 ```
 {% /totem-accordion %}
 {% totem-accordion title="브라우저 지갑 어댑터" %}
@@ -127,7 +127,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 {% /totem-accordion %}
 {% /totem %}
 
-## Bubblegum 트리 생성
+## Bubblegum 트리 생성 {% #create-a-bubblegum-tree %}
 
 `createTree`는 새로운 [머클 트리](/ko/smart-contracts/bubblegum-v2/concurrent-merkle-trees)를 온체인에 할당하고 Bubblegum V2 트리로 등록합니다. 트리 파라미터는 영구적이므로 생성 전에 신중하게 선택하세요.
 
@@ -152,7 +152,7 @@ console.log('Tree address:', merkleTree.publicKey)
 `public: false`는 트리 생성자(또는 승인된 트리 위임자)만 트리에서 민팅할 수 있음을 의미합니다. 누구나 민팅할 수 있도록 하려면 `public: true`를 설정하세요. 트리 크기 비용 추정은 [트리 생성](/ko/smart-contracts/bubblegum-v2/create-trees)을 참조하세요.
 {% /callout %}
 
-## 압축 NFT 민팅
+## 압축 NFT 민팅 {% #mint-a-compressed-nft %}
 
 ### 컬렉션 없이 민팅
 
@@ -222,7 +222,7 @@ console.log('Asset ID:', leaf.id)
 console.log('Leaf index:', leaf.nonce)
 ```
 
-## 압축 NFT 전송
+## 압축 NFT 전송 {% #transfer-a-compressed-nft %}
 
 `transferV2`는 cNFT의 소유권을 새로운 지갑으로 이전합니다. `getAssetWithProof`는 [DAS API](/ko/smart-contracts/bubblegum-v2/fetch-cnfts)에서 필요한 모든 증명 파라미터를 가져옵니다.
 
@@ -239,7 +239,7 @@ await transferV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 압축 NFT 소각
+## 압축 NFT 소각 {% #burn-a-compressed-nft %}
 
 `burnV2`는 cNFT를 영구적으로 소각하고 트리에서 리프를 제거합니다.
 
@@ -254,7 +254,7 @@ await burnV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 압축 NFT 업데이트
+## 압축 NFT 업데이트 {% #update-a-compressed-nft %}
 
 `updateMetadataV2`는 cNFT의 메타데이터를 수정합니다. 업데이트 권한은 cNFT가 컬렉션에 속하는지 여부에 따라 다릅니다. 권한 규칙은 [cNFT 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts)를 참조하세요.
 
@@ -283,7 +283,7 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 압축 NFT 위임
+## 압축 NFT 위임 {% #delegate-a-compressed-nft %}
 
 [리프 위임자](/ko/smart-contracts/bubblegum-v2/delegate-cnfts)는 소유자를 대신하여 cNFT를 전송, 소각, 동결할 수 있습니다. 위임자는 전송 후 새로운 소유자로 초기화됩니다.
 
@@ -320,7 +320,7 @@ await delegate(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 컬렉션
+## 컬렉션 {% #collections %}
 
 `setCollectionV2`는 cNFT의 MPL-Core 컬렉션을 설정, 변경 또는 제거합니다. 자세한 내용은 [컬렉션 관리](/ko/smart-contracts/bubblegum-v2/collections)를 참조하세요.
 
@@ -366,7 +366,7 @@ await setCollectionV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 동결과 해제
+## 동결과 해제 {% #freeze-and-thaw %}
 
 두 가지 동결 메커니즘을 사용할 수 있습니다. 에셋 수준 대 컬렉션 수준 동결의 전체 설명은 [cNFT 동결](/ko/smart-contracts/bubblegum-v2/freeze-cnfts)을 참조하세요.
 
@@ -421,7 +421,7 @@ await setNonTransferableV2(umi, {
 `setNonTransferableV2`는 되돌릴 수 없습니다. 이 호출 후에는 cNFT를 다시 전송 가능하게 만들 수 없습니다.
 {% /callout %}
 
-## 크리에이터 검증
+## 크리에이터 검증 {% #verify-creators %}
 
 `verifyCreatorV2`는 크리에이터 항목에 `verified` 플래그를 설정합니다. 검증되는 크리에이터는 트랜잭션에 서명해야 합니다. 자세한 내용은 [크리에이터 검증](/ko/smart-contracts/bubblegum-v2/verify-creators)을 참조하세요.
 
@@ -480,7 +480,7 @@ await unverifyCreatorV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## cNFT 가져오기
+## cNFT 가져오기 {% #fetching-cnfts %}
 
 DAS API 플러그인은 `mplBubblegum()`에 의해 자동으로 등록됩니다. 사용 가능한 메서드의 전체 설명은 [cNFT 가져오기](/ko/smart-contracts/bubblegum-v2/fetch-cnfts)를 참조하세요.
 
@@ -557,7 +557,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 // send later: await umi.rpc.sendTransaction(tx)
 ```
 
-## 일반적인 오류
+## 일반적인 오류 {% #common-errors %}
 
 ### `Transaction too large`
 머클 증명이 1232바이트 트랜잭션 제한을 초과합니다. `getAssetWithProof`에서 `{ truncateCanopy: true }`를 사용하거나 주소 조회 테이블이 있는 버전 관리 트랜잭션을 구현하세요.
@@ -586,7 +586,7 @@ RPC 제공자가 Metaplex DAS API를 지원하지 않을 수 있습니다. [호�
 - 이 SDK는 Bubblegum V2(`LeafSchemaV2`)를 대상으로 합니다. Bubblegum V1 트리나 압축 해제 워크플로와는 호환되지 않습니다.
 - cNFT와 함께 사용되는 컬렉션에는 `BubblegumV2` 플러그인이 활성화되어 있어야 합니다. 이 플러그인이 없는 표준 MPL-Core 컬렉션은 사용할 수 없습니다.
 
-## 빠른 참조
+## 빠른 참조 {% #quick-reference %}
 
 ### Bubblegum V2 함수
 
