@@ -108,8 +108,8 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 
 | ネットワーク | プログラム ID |
 |-------------|--------------|
-| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
-| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Mainnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
+| Devnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
 
 ## セキュリティ
 
