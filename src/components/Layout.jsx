@@ -7,17 +7,17 @@ import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
+import Badge from '@/components/products/Badge'
 import { ProductCardGrid } from '@/components/products/ProductCardGrid'
 import { productCategories } from '@/components/products/index'
 import { useTranslations } from '@/contexts/LocaleContext'
-import Badge from '@/components/products/Badge'
 import { useAccentClass } from '@/shared/useAccentClass'
 import { useLightense } from '@/shared/useLightense'
 
 export function Layout({ children, page }) {
   const isHomePage = page.pathname === '/'
   const isCodeViewer = page.pathname === '/code-viewer'
-  const isCategoryIndexPage = ['/tokens', '/nfts', '/smart-contracts', '/dev-tools'].some(
+  const isCategoryIndexPage = ['/tokens', '/agents', '/nfts', '/smart-contracts', '/dev-tools'].some(
     path => page.pathname === path || page.pathname.match(new RegExp(`^/(en|ja|ko|zh)${path}$`))
   )
   const hasNavigation = !!page.activeSection?.navigation
@@ -37,6 +37,7 @@ export function Layout({ children, page }) {
   const getCategoryName = (category) => {
     const categoryKeys = {
       'Tokens': 'tokens',
+      'Agents': 'agents',
       'NFTs': 'nfts',
       'Smart Contracts': 'smartContracts',
       'Dev Tools': 'devTools',
@@ -48,6 +49,7 @@ export function Layout({ children, page }) {
   const getCategoryDescription = (category) => {
     const categoryKeys = {
       'Tokens': 'tokens',
+      'Agents': 'agents',
       'NFTs': 'nfts',
       'Smart Contracts': 'smartContracts',
       'Dev Tools': 'devTools',
@@ -55,6 +57,7 @@ export function Layout({ children, page }) {
     const key = categoryKeys[category];
     const defaultDescriptions = {
       'Tokens': 'Create and launch tokens on Solana. Run token generation events (TGE), fair launches, and manage fungible tokens.',
+      'Agents': 'Create, register, and run agents. Use the Metaplex Agent skills and agent registry to manage your autonomous agents.',
       'NFTs': 'Create, manage, and trade NFTs on Solana using Metaplex Core and other NFT standards.',
       'Smart Contracts': 'Production-ready on-chain programs for NFTs, tokens, and digital assets on Solana.',
       'Dev Tools': 'SDKs, CLIs, and APIs to build, test, and deploy digital asset applications on Solana.',

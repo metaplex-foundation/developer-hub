@@ -1,3 +1,4 @@
+import { agents } from './agents';
 import { amman } from './amman';
 import { bubblegum } from './bubblegum';
 import { bubblegumv2 } from './bubblegum-v2';
@@ -13,6 +14,7 @@ import { guides } from './guides';
 import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { legacyDocumentation } from './legacyDocumentation';
+import { mplAgent } from './mpl-agent';
 import { mplHybrid } from './mpl-hybrid';
 import { nfts } from './nfts';
 import { shank } from './shank';
@@ -24,6 +26,7 @@ import { umi } from './umi';
 
 export const productCategories = [
   'Tokens',
+  'Agents',
   'NFTs',
   'Smart Contracts',
   'Dev Tools',
@@ -33,9 +36,11 @@ export const productCategories = [
 export const products = [
   global,
   tokens,
+  agents,
   nfts,
   tokenMetadata,
   core,
+  mplAgent,
   bubblegumv2,
   coreCandyMachine,
   candyMachine,
