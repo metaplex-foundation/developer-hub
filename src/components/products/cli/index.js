@@ -49,6 +49,35 @@ export const cli = {
           ],
         },
         {
+          title: 'Genesis Commands',
+          links: [
+            {
+              title: 'Overview',
+              href: '/dev-tools/cli/genesis',
+            },
+            {
+              title: 'Launch (API)',
+              href: '/dev-tools/cli/genesis/launch',
+            },
+            {
+              title: 'Create Genesis Account',
+              href: '/dev-tools/cli/genesis/create',
+            },
+            {
+              title: 'Launch Pool',
+              href: '/dev-tools/cli/genesis/launch-pool',
+            },
+            {
+              title: 'Presale',
+              href: '/dev-tools/cli/genesis/presale',
+            },
+            {
+              title: 'Manage',
+              href: '/dev-tools/cli/genesis/manage',
+            },
+          ],
+        },
+        {
           title: 'Core Commands',
           links: [
             {
@@ -190,6 +219,7 @@ export const cli = {
         'Introduction': 'Introduction',
         'Configuration': 'Configuration',
         'Core Commands': 'Core Commands',
+        'Genesis Commands': 'Genesis Commands',
         'Bubblegum (Compressed NFTs)': 'Bubblegum (Compressed NFTs)',
         'Toolbox': 'Toolbox'
       },
@@ -199,6 +229,11 @@ export const cli = {
         'Wallets': 'Wallets',
         'RPCs': 'RPCs',
         'Explorer': 'Explorer',
+        'Launch (API)': 'Launch (API)',
+        'Create Genesis Account': 'Create Genesis Account',
+        'Launch Pool': 'Launch Pool',
+        'Presale': 'Presale',
+        'Manage': 'Manage',
         'Create Tree': 'Create Tree',
         'List Trees': 'List Trees',
         'Create Compressed NFT': 'Create Compressed NFT',
@@ -217,6 +252,7 @@ export const cli = {
         'Introduction': '紹介',
         'Configuration': '設定',
         'Core Commands': 'Coreコマンド',
+        'Genesis Commands': 'Genesisコマンド',
         'Bubblegum (Compressed NFTs)': 'Bubblegum（圧縮NFT）',
         'Toolbox': 'ツールボックス'
       },
@@ -226,6 +262,11 @@ export const cli = {
         'Wallets': 'ウォレット',
         'RPCs': 'RPC',
         'Explorer': 'エクスプローラー',
+        'Launch (API)': 'ローンチ（API）',
+        'Create Genesis Account': 'Genesisアカウント作成',
+        'Launch Pool': 'ローンチプール',
+        'Presale': 'プレセール',
+        'Manage': '管理',
         'Create Tree': 'ツリー作成',
         'List Trees': 'ツリー一覧',
         'Create Compressed NFT': '圧縮NFT作成',
@@ -244,6 +285,7 @@ export const cli = {
         'Introduction': '소개',
         'Configuration': '구성',
         'Core Commands': 'Core 명령어',
+        'Genesis Commands': 'Genesis 명령어',
         'Bubblegum (Compressed NFTs)': 'Bubblegum (압축 NFT)',
         'Toolbox': '툴박스'
       },
@@ -253,6 +295,11 @@ export const cli = {
         'Wallets': '지갑',
         'RPCs': 'RPC',
         'Explorer': '익스플로러',
+        'Launch (API)': '런치 (API)',
+        'Create Genesis Account': 'Genesis 계정 생성',
+        'Launch Pool': '런치 풀',
+        'Presale': '프리세일',
+        'Manage': '관리',
         'Create Tree': '트리 생성',
         'List Trees': '트리 목록',
         'Create Compressed NFT': '압축 NFT 생성',
@@ -272,6 +319,7 @@ export const cli = {
         'Configuration': '配置',
         'Core Commands': 'Core命令',
         'Candy Machine Commands': 'Candy Machine命令',
+        'Genesis Commands': 'Genesis命令',
         'Bubblegum (Compressed NFTs)': 'Bubblegum（压缩NFT）',
         'Toolbox': '工具箱'
       },
@@ -307,7 +355,12 @@ export const cli = {
         'Token Transfer': '转移代币',
         'SOL Airdrop': 'SOL空投',
         'SOL Balance': 'SOL余额',
-        'SOL Transfer': 'SOL转账'
+        'SOL Transfer': 'SOL转账',
+        'Launch (API)': '启动（API）',
+        'Create Genesis Account': '创建Genesis账户',
+        'Launch Pool': '发行池',
+        'Presale': '预售',
+        'Manage': '管理'
       }
     }
   }
