@@ -3,7 +3,7 @@ title: Integration API
 metaTitle: Genesis - Integration API | 런칭 데이터 | Metaplex
 description: HTTP REST 엔드포인트와 온체인 SDK 메서드를 통해 Genesis 런칭 데이터에 접근하세요. 인증이 필요 없는 공개 API입니다.
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -57,8 +57,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|------------|------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis 주소로 런칭 데이터 조회 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 활성 및 예정된 런칭 목록 조회 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 추천 스포트라이트 런칭 조회 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | 필터를 사용하여 런칭 목록 조회 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 추천 스포트라이트 런칭 조회 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 새 런칭을 위한 온체인 트랜잭션 빌드 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 확인된 런칭을 목록에 등록 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 온체인에서 버킷 상태 가져오기 |
@@ -94,11 +94,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +136,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

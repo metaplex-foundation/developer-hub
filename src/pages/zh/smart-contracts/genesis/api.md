@@ -3,7 +3,7 @@ title: API
 metaTitle: Genesis - API | 发行数据 API | Metaplex
 description: 通过 Genesis 地址或代币铸币地址查询 Genesis 发行数据的公共 API。无需身份验证。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - launch data API
@@ -85,8 +85,16 @@ GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSf
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -121,8 +129,16 @@ GET /tokens/{mint}
     "launches": [
       {
         "launchPage": "https://example.com/launch/mytoken",
-        "type": "launchpool",
-        "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+        "mechanic": "launchpoolV2",
+        "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+        "spotlight": false,
+        "startTime": "2026-01-15T14:00:00.000Z",
+        "endTime": "2026-01-15T18:00:00.000Z",
+        "status": "graduated",
+        "heroUrl": "launches/abc123/hero.webp",
+        "graduatedAt": "2026-01-15T18:05:00.000Z",
+        "lastActivityAt": "2026-01-15T17:45:00.000Z",
+        "type": "project"
       }
     ],
     "baseToken": {
@@ -169,8 +185,16 @@ GET /tokens/{mint}
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
+  spotlight: boolean;
+  startTime: string;
+  endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -232,9 +256,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
+    pub mechanic: String,
+    pub genesis_address: String,
+    pub spotlight: bool,
+    pub start_time: String,
+    pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
     #[serde(rename = "type")]
     pub launch_type: String,
-    pub genesis_address: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -338,7 +370,8 @@ serde = { version = "1", features = ["derive"] }
 | **Genesis Address** | 标识特定发行活动的 PDA |
 | **Base Token** | 正在发行的代币 |
 | **Launch Page** | 用户可以参与发行的 URL |
-| **Launch Type** | 使用的机制（launchpool、presale、auction） |
+| **Mechanic** | 使用的机制（launchpoolV2、presaleV2 等） |
+| **Launch Type** | 发行的类型（project、memecoin、custom） |
 | **Socials** | 与代币关联的社交媒体链接 |
 
 ## 下一步

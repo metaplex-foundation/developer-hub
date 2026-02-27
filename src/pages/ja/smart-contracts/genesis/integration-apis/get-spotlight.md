@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Spotlight | REST API | Metaplex
 description: Genesis の注目スポットライトローンチを取得します。プラットフォームが厳選したローンチを返します。
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - spotlight
@@ -22,40 +22,43 @@ programmingLanguage:
 
 プラットフォームが厳選した注目スポットライトローンチを取得します。アプリケーションで選択されたローンチをハイライト表示するために使用します。 {% .lead %}
 
-{% callout type="warning" title="ドラフト" %}
-これはサンプルページです。パラメータ、リクエスト/レスポンス形式、動作は、実際のインテグレーションが確定次第変更される可能性があります。
-{% /callout %}
-
 ## エンドポイント
 
 ```
-GET /spotlight
+GET /launches?spotlight=true
 ```
 
 ## パラメータ
 
 | パラメータ | 型 | 必須 | 説明 |
 |-----------|------|----------|-------------|
-| `network` | `string` | いいえ | Network to query. Default: `solana-mainnet`. Use `solana-devnet` for devnet. |
-| `limit` | `number` | いいえ | Number of results to return. Default: `5`. Max: `20`. |
+| `network` | `string` | いいえ | クエリするネットワーク。デフォルト：`solana-mainnet`。devnet の場合は `solana-devnet` を使用。 |
+| `status` | `string` | いいえ | ステータスでフィルタ: `upcoming`, `live`, `graduated`。デフォルト: 全件返却。 |
 
 ## リクエスト例
 
 ```bash
-curl "https://api.metaplex.com/v1/spotlight?limit=3"
+curl "https://api.metaplex.com/v1/launches?spotlight=true"
 ```
 
 ## レスポンス
 
 ```json
 {
-  "data": {
-    "spotlight": [
-      {
+  "data": [
+    {
         "launch": {
           "launchPage": "https://example.com/launch/mytoken",
-          "type": "launchpool",
-          "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+          "mechanic": "launchpoolV2",
+          "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+          "spotlight": true,
+          "startTime": "2026-01-15T14:00:00.000Z",
+          "endTime": "2026-01-15T18:00:00.000Z",
+          "status": "live",
+          "heroUrl": "launches/abc123/hero.webp",
+          "graduatedAt": null,
+          "lastActivityAt": "2026-01-15T16:30:00.000Z",
+          "type": "project"
         },
         "baseToken": {
           "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -70,18 +73,19 @@ curl "https://api.metaplex.com/v1/spotlight?limit=3"
           "telegram": "https://t.me/mytoken",
           "discord": "https://discord.gg/mytoken"
         }
-      }
-    ]
-  }
+    }
+  ]
 }
 ```
 
 ## レスポンス型
 
+[共有型](/smart-contracts/genesis/integration-apis#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
+
 ### TypeScript
 
 ```ts
-interface SpotlightEntry {
+interface LaunchData {
   launch: Launch;
   baseToken: BaseToken;
   website: string;
@@ -89,9 +93,7 @@ interface SpotlightEntry {
 }
 
 interface SpotlightResponse {
-  data: {
-    spotlight: SpotlightEntry[];
-  };
+  data: LaunchData[];
 }
 ```
 
@@ -100,7 +102,7 @@ interface SpotlightResponse {
 ```rust
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SpotlightEntry {
+pub struct LaunchData {
     pub launch: Launch,
     pub base_token: BaseToken,
     pub website: String,
@@ -108,13 +110,8 @@ pub struct SpotlightEntry {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct SpotlightData {
-    pub spotlight: Vec<SpotlightEntry>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct SpotlightResponse {
-    pub data: SpotlightData,
+    pub data: Vec<LaunchData>,
 }
 ```
 
@@ -124,10 +121,10 @@ pub struct SpotlightResponse {
 
 ```ts
 const response = await fetch(
-  "https://api.metaplex.com/v1/spotlight?limit=3"
+  "https://api.metaplex.com/v1/launches?spotlight=true"
 );
 const { data }: SpotlightResponse = await response.json();
-data.spotlight.forEach((entry) => {
+data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.type);
 });
 ```
@@ -136,13 +133,13 @@ data.spotlight.forEach((entry) => {
 
 ```rust
 let response: SpotlightResponse = reqwest::get(
-    "https://api.metaplex.com/v1/spotlight?limit=3"
+    "https://api.metaplex.com/v1/launches?spotlight=true"
 )
 .await?
 .json()
 .await?;
 
-for entry in &response.data.spotlight {
+for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```

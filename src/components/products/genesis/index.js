@@ -107,8 +107,8 @@ export const genesis = {
               method: 'get',
             },
             {
-              title: 'Get Listings',
-              href: '/smart-contracts/genesis/integration-apis/get-listings',
+              title: 'List Launches',
+              href: '/smart-contracts/genesis/integration-apis/list-launches',
               method: 'get',
             },
             {

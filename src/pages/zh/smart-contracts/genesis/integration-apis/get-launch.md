@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launch | REST API | Metaplex
 description: 通过Genesis地址获取发行数据。返回发行信息、代币元数据和社交链接。
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - get launch
@@ -48,8 +48,16 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -69,6 +77,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 ```
 
 ## 响应类型
+
+请参阅[共享类型](/smart-contracts/genesis/integration-apis#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
 
 ### TypeScript
 

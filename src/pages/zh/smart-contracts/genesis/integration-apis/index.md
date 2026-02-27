@@ -3,7 +3,7 @@ title: 集成 API
 metaTitle: Genesis - 集成 API | 发行数据 | Metaplex
 description: 通过 HTTP REST 端点和链上 SDK 方法访问 Genesis 发行数据。无需认证的公开 API。
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -57,8 +57,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | 通过 Genesis 地址获取发行数据 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 获取代币铸造的所有发行 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 获取活跃和即将到来的发行列表 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选推荐发行 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | 使用过滤器获取发行列表 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选推荐发行 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 为新发行构建链上交易 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 注册已确认的发行以进行展示 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 从链上获取 bucket 状态 |
@@ -94,11 +94,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +136,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

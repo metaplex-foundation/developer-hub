@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launch | REST API | Metaplex
 description: Genesis 주소로 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - get launch
@@ -48,8 +48,16 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -69,6 +77,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 ```
 
 ## 응답 타입
+
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/smart-contracts/genesis/integration-apis#shared-types)을 참조하세요.
 
 ### TypeScript
 

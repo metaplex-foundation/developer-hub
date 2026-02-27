@@ -3,7 +3,7 @@ title: Integration APIs
 metaTitle: Genesis - Integration APIs | ローンチデータ | Metaplex
 description: HTTP REST エンドポイントとオンチェーン SDK メソッドを通じて Genesis ローンチデータにアクセスします。認証不要のパブリック API です。
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -57,8 +57,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis アドレスでローンチデータを取得 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | アクティブおよび今後のローンチリスティングを取得 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目のスポットライトローンチを取得 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | フィルタ付きでローンチ一覧を取得 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目のスポットライトローンチを取得 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 確認済みローンチをリスティング用に登録 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | オンチェーンからバケット状態を取得 |
@@ -94,11 +94,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +136,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Spotlight | REST API | Metaplex
 description: "获取 Genesis 精选聚焦发行。返回平台策划的精选发行。"
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - spotlight
@@ -22,14 +22,10 @@ programmingLanguage:
 
 获取平台策划的精选聚焦发行。使用此端点在您的应用中展示精选发行。 {% .lead %}
 
-{% callout type="warning" title="草稿" %}
-这是一个示例页面。参数、请求/响应格式和行为可能会在实际集成确定后发生变化。
-{% /callout %}
-
 ## 端点
 
 ```
-GET /spotlight
+GET /launches?spotlight=true
 ```
 
 ## 参数
@@ -37,25 +33,32 @@ GET /spotlight
 | 参数 | 类型 | 必填 | 描述 |
 |-----------|------|----------|-------------|
 | `network` | `string` | 否 | 要查询的网络。默认值：`solana-mainnet`。使用 `solana-devnet` 查询开发网。 |
-| `limit` | `number` | 否 | 返回的结果数量。默认值：`5`。最大值：`20`。 |
+| `status` | `string` | 否 | 按状态筛选：`upcoming`、`live`、`graduated`。默认返回全部。 |
 
 ## 请求示例
 
 ```bash
-curl "https://api.metaplex.com/v1/spotlight?limit=3"
+curl "https://api.metaplex.com/v1/launches?spotlight=true"
 ```
 
 ## 响应
 
 ```json
 {
-  "data": {
-    "spotlight": [
-      {
+  "data": [
+    {
         "launch": {
           "launchPage": "https://example.com/launch/mytoken",
-          "type": "launchpool",
-          "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+          "mechanic": "launchpoolV2",
+          "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+          "spotlight": true,
+          "startTime": "2026-01-15T14:00:00.000Z",
+          "endTime": "2026-01-15T18:00:00.000Z",
+          "status": "live",
+          "heroUrl": "launches/abc123/hero.webp",
+          "graduatedAt": null,
+          "lastActivityAt": "2026-01-15T16:30:00.000Z",
+          "type": "project"
         },
         "baseToken": {
           "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -70,18 +73,19 @@ curl "https://api.metaplex.com/v1/spotlight?limit=3"
           "telegram": "https://t.me/mytoken",
           "discord": "https://discord.gg/mytoken"
         }
-      }
-    ]
-  }
+    }
+  ]
 }
 ```
 
 ## 响应类型
 
+请参阅[共享类型](/smart-contracts/genesis/integration-apis#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
+
 ### TypeScript
 
 ```ts
-interface SpotlightEntry {
+interface LaunchData {
   launch: Launch;
   baseToken: BaseToken;
   website: string;
@@ -89,9 +93,7 @@ interface SpotlightEntry {
 }
 
 interface SpotlightResponse {
-  data: {
-    spotlight: SpotlightEntry[];
-  };
+  data: LaunchData[];
 }
 ```
 
@@ -100,7 +102,7 @@ interface SpotlightResponse {
 ```rust
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct SpotlightEntry {
+pub struct LaunchData {
     pub launch: Launch,
     pub base_token: BaseToken,
     pub website: String,
@@ -108,13 +110,8 @@ pub struct SpotlightEntry {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct SpotlightData {
-    pub spotlight: Vec<SpotlightEntry>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
 pub struct SpotlightResponse {
-    pub data: SpotlightData,
+    pub data: Vec<LaunchData>,
 }
 ```
 
@@ -124,10 +121,10 @@ pub struct SpotlightResponse {
 
 ```ts
 const response = await fetch(
-  "https://api.metaplex.com/v1/spotlight?limit=3"
+  "https://api.metaplex.com/v1/launches?spotlight=true"
 );
 const { data }: SpotlightResponse = await response.json();
-data.spotlight.forEach((entry) => {
+data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.type);
 });
 ```
@@ -136,13 +133,13 @@ data.spotlight.forEach((entry) => {
 
 ```rust
 let response: SpotlightResponse = reqwest::get(
-    "https://api.metaplex.com/v1/spotlight?limit=3"
+    "https://api.metaplex.com/v1/launches?spotlight=true"
 )
 .await?
 .json()
 .await?;
 
-for entry in &response.data.spotlight {
+for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```

@@ -3,7 +3,7 @@ title: Integration APIs
 metaTitle: Genesis - Integration APIs | Launch Data | Metaplex
 description: Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -57,8 +57,8 @@ No authentication is required. The API is public with rate limits.
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Get launch data by genesis address |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | Get all launches for a token mint |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | Get active and upcoming launch listings |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | List launches with optional filters |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | Build on-chain transactions for a new launch |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | Register a confirmed launch for listing |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | Fetch bucket state from on-chain |
@@ -94,11 +94,16 @@ Error response format:
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +136,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
