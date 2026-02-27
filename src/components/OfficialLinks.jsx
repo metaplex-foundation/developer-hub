@@ -44,7 +44,7 @@ const programs = [
   { name: 'Core Candy Guard', programId: 'CMAGAKJ67e9hRZgfC5SFTbZH8MgEmtqazKXjmkaJjWTJ', github: 'https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard', docs: '/smart-contracts/core-candy-machine/guards' },
   { name: 'Candy Machine v3', programId: 'CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR', github: 'https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core', docs: '/smart-contracts/candy-machine' },
   { name: 'Candy Guard', programId: 'Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g', github: 'https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard', docs: '/smart-contracts/candy-machine/guards' },
-  { name: 'Genesis', programId: 'GENSxbxqAy7G1fHDtNwbHsMUThb9vpYqoJJrXBbpLZn8', docs: '/smart-contracts/genesis' },
+  { name: 'Genesis', programId: 'GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B', docs: '/smart-contracts/genesis' },
   { name: 'MPL-Hybrid', programId: 'MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb', github: 'https://github.com/metaplex-foundation/mpl-hybrid', docs: '/smart-contracts/mpl-hybrid' },
   { name: 'Fusion (Trifle)', programId: 'trifMWutwBxkSuatmpPVnEe7NoE3BJKgjVi8sSyoXWX', github: 'https://github.com/metaplex-foundation/mpl-trifle', docs: '/smart-contracts/fusion' },
   { name: 'Token Auth Rules', programId: 'auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg', github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules', docs: '/smart-contracts/token-auth-rules' },
