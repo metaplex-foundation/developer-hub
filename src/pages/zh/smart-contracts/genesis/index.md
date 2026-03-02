@@ -116,8 +116,8 @@ Genesis 支持三种可以组合使用的机制：
 
 | 网络 | Program ID |
 |---------|------------|
-| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
-| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Mainnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
+| Devnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
 
 ## 安全性
 

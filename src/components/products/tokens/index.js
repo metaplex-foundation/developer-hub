@@ -11,6 +11,21 @@ export const tokens = {
   icon: <SparklesIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-amber',
+  protocolFees: {
+    memecoins: {
+      deposit: { solana: '0%', label: 'User Deposit', payer: null, notes: null },
+      phbt: { solana: '2%', label: 'PHBT', payer: null, notes: null },
+      graduation: { solana: '1%', label: 'Liquidity Graduation', payer: null, notes: null },
+      trading: { solana: '0.4%*', label: 'Secondary Trading', payer: null, notes: null },
+    },
+    projectTokens: {
+      deposit: { solana: '2%', label: 'User Deposit', payer: null, notes: null },
+      withdraw: { solana: '2%', label: 'User Withdraw', payer: null, notes: null },
+      graduation: { solana: '0%', label: 'Liquidity Graduation', payer: null, notes: null },
+      withdrawLiquidity: { solana: '5%', label: 'Liquidity Withdrawal', payer: null, notes: null },
+      trading: { solana: '0.4%*', label: 'Secondary Trading', payer: null, notes: null },
+    },
+  },
   sections: [
     {
       ...documentationSection('tokens'),

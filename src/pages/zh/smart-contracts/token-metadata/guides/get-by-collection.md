@@ -39,7 +39,7 @@ pub struct Collection {
 然而，给定一个集合 mint 地址，在直接从链上读取时，找到属于该特定集合的所有 NFT 要困难得多。使用 [DAS](/zh/dev-tools/das-api) 有一种更优越的方法，还有两种直接从链上获取数据的基本方法。
 
 ## DAS API
-当使用[支持它的 RPC 提供商](/zh/rpc-providers#metaplex-das-api)时，使用 DAS 获取 mint 是更优越的方法。
+当使用[支持它的 RPC 提供商](/zh/solana/rpcs-and-das#metaplex-das-api)时，使用 DAS 获取 mint 是更优越的方法。
 
 {% dialect-switcher title="getAssetByGroup 示例" %}
 {% dialect title="JavaScript" id="js" %}

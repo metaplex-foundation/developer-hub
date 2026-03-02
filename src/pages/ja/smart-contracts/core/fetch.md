@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 複数のAssetの取得
-複数のAssetは、`getProgramAccounts`（GPA）呼び出しを使用して取得できます。これはRPC的にかなり高コストで遅くなる可能性がありますが、`Digital Asset Standard` APIを使用する方法もあります。こちらはより高速ですが、[特定のRPCプロバイダー](/rpc-providers)が必要です。
+複数のAssetは、`getProgramAccounts`（GPA）呼び出しを使用して取得できます。これはRPC的にかなり高コストで遅くなる可能性がありますが、`Digital Asset Standard` APIを使用する方法もあります。こちらはより高速ですが、[特定のRPCプロバイダー](/ja/solana/rpcs-and-das)が必要です。
 ### 所有者別Assetの取得
 {% dialect-switcher title="所有者別Assetの取得" %}
 {% dialect title="JavaScript" id="js" %}
@@ -411,7 +411,7 @@ GPAクエリはコストがかかる場合があります。解決策：
 | 特別なRPCが必要 | いいえ | はい |
 ## FAQ
 ### 複数のAssetを取得する場合、GPAとDASのどちらを使うべきですか？
-可能な限りDASを使用してください。GPAクエリはすべてのプログラムアカウントをスキャンするため、メインネットでは遅くコストがかかる可能性があります。DASはより高速でオフチェーンメタデータも含むインデックスクエリを提供します。互換性のあるエンドポイントについては[DAS RPCプロバイダー](/rpc-providers)を参照してください。
+可能な限りDASを使用してください。GPAクエリはすべてのプログラムアカウントをスキャンするため、メインネットでは遅くコストがかかる可能性があります。DASはより高速でオフチェーンメタデータも含むインデックスクエリを提供します。互換性のあるエンドポイントについては[DAS RPCプロバイダー](/ja/solana/rpcs-and-das)を参照してください。
 ### Assetのオフチェーンメタデータはどうやって取得しますか？
 `uri`フィールドにメタデータURLが含まれています。別途取得してください：
 ```ts

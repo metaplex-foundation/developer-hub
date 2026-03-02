@@ -83,7 +83,7 @@ Metaplex Coreは、Solanaでの新規プロジェクトに推奨されるNFT標�
   - [Attributes](/ja/smart-contracts/core/plugins/attribute) - オンチェーンキー/バリューデータ（DASで自動インデックス）
   - [Transfer Delegate](/ja/smart-contracts/core/plugins/transfer-delegate) - 他者が転送可能
   - その他多数は[プラグインセクション](/ja/smart-contracts/core/plugins)をご覧ください
-- **DASインデックス**：[DASをサポートする](/rpc-providers)すべての主要RPCプロバイダーは、すでにCore assetをインデックスしています。
+- **DASインデックス**：[DASをサポートする](/ja/solana/rpcs-and-das)すべての主要RPCプロバイダーは、すでにCore assetをインデックスしています。
 ## コア概念
 ### Asset
 **Asset**は、NFTを表す単一のオンチェーンアカウントです。Token Metadata（3つ以上のアカウントを使用）とは異なり、Core Assetは所有権、メタデータURI、およびプラグインデータを1つのアカウントに含みます。
@@ -127,7 +127,7 @@ Core AssetとToken Metadata NFTは別々の標準です。自動移行はあり�
 ### Core Assetのミントにはいくらかかりますか？
 ベースアセットあたり約0.0029 SOLで、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。詳細については[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)をご覧ください。
 ### どのRPCプロバイダーがCoreをサポートしていますか？
-DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。現在のリストについては[RPCプロバイダー](/rpc-providers)をご覧ください。
+DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。現在のリストについては[RPCプロバイダー](/ja/solana/rpcs-and-das)をご覧ください。
 ### ゲームアセットにCoreを使用できますか？
 はい。Coreのプラグインシステムは、オンチェーンステータス用のAttributes、アイテムロック用のFreeze Delegate、マーケットプレイス統合用のTransfer Delegateにより、ゲームに最適です。
 ## 用語集

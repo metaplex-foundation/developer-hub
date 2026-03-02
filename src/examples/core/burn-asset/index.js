@@ -7,36 +7,28 @@
  * Edit the native .js/.ts and .rs files, then run: node scripts/build-examples.js
  */
 
-const kitSections = {
-  "imports": "import { burn } from '@metaplex-foundation/mpl-core-kit'",
-  "setup": "const client = createClient()",
-  "main": "// Permanently destroy/burn an NFT asset\r\nconst result = await burn({\r\n  asset: assetAddress,\r\n})",
-  "output": "console.log('Asset burned:', result)",
-  "full": "// [IMPORTS]\r\nimport { burn } from '@metaplex-foundation/mpl-core-kit'\r\n// [/IMPORTS]\r\n\r\n// [SETUP]\r\nconst client = createClient()\r\n// [/SETUP]\r\n\r\n// [MAIN]\r\n// Permanently destroy/burn an NFT asset\r\nconst result = await burn({\r\n  asset: assetAddress,\r\n})\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nconsole.log('Asset burned:', result)\r\n// [/OUTPUT]\r\n"
-}
-
 const umiSections = {
-  "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\r\nimport { burn } from '@metaplex-foundation/mpl-core'\r\nimport { mplCore } from '@metaplex-foundation/mpl-core'\r\nimport { publicKey } from '@metaplex-foundation/umi'",
-  "setup": "const umi = createUmi('https://api.devnet.solana.com').use(mplCore())\r\nconst assetAddress = publicKey('AssetAddressHere...')",
-  "main": "// Permanently destroy/burn an NFT asset\r\nconst result = await burn(umi, {\r\n  asset: assetAddress,\r\n}).sendAndConfirm(umi)",
+  "imports": "import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { burn } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'\nimport { publicKey } from '@metaplex-foundation/umi'",
+  "setup": "const umi = createUmi('https://api.devnet.solana.com').use(mplCore())\nconst assetAddress = publicKey('AssetAddressHere...')",
+  "main": "// Permanently destroy/burn an NFT asset\nconst result = await burn(umi, {\n  asset: assetAddress,\n}).sendAndConfirm(umi)",
   "output": "console.log('Asset burned successfully')",
-  "full": "// [IMPORTS]\r\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\r\nimport { burn } from '@metaplex-foundation/mpl-core'\r\nimport { mplCore } from '@metaplex-foundation/mpl-core'\r\nimport { publicKey } from '@metaplex-foundation/umi'\r\n// [/IMPORTS]\r\n\r\n// [SETUP]\r\nconst umi = createUmi('https://api.devnet.solana.com').use(mplCore())\r\nconst assetAddress = publicKey('AssetAddressHere...')\r\n// [/SETUP]\r\n\r\n// [MAIN]\r\n// Permanently destroy/burn an NFT asset\r\nconst result = await burn(umi, {\r\n  asset: assetAddress,\r\n}).sendAndConfirm(umi)\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nconsole.log('Asset burned successfully')\r\n// [/OUTPUT]\r\n"
+  "full": "// [IMPORTS]\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { burn } from '@metaplex-foundation/mpl-core'\nimport { mplCore } from '@metaplex-foundation/mpl-core'\nimport { publicKey } from '@metaplex-foundation/umi'\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.devnet.solana.com').use(mplCore())\nconst assetAddress = publicKey('AssetAddressHere...')\n// [/SETUP]\n\n// [MAIN]\n// Permanently destroy/burn an NFT asset\nconst result = await burn(umi, {\n  asset: assetAddress,\n}).sendAndConfirm(umi)\n// [/MAIN]\n\n// [OUTPUT]\nconsole.log('Asset burned successfully')\n// [/OUTPUT]\n"
 }
 
 const shankSections = {
-  "imports": "use mpl_core::instructions::BurnV1;\r\nuse solana_sdk::{pubkey::Pubkey, signer::Signer};",
+  "imports": "use mpl_core::instructions::BurnV1;\nuse solana_sdk::{pubkey::Pubkey, signer::Signer};",
   "setup": "",
-  "main": "// Asset address to burn\r\nlet asset = Pubkey::from_str(\"AssetAddressHere...\").unwrap();\r\n\r\n// Permanently destroy/burn an NFT asset\r\nlet burn_ix = BurnV1 {\r\n    asset,\r\n    ..Default::default()\r\n};\r\n\r\nlet instruction = burn_ix.instruction();",
+  "main": "// Asset address to burn\nlet asset = Pubkey::from_str(\"AssetAddressHere...\").unwrap();\n\n// Permanently destroy/burn an NFT asset\nlet burn_ix = BurnV1 {\n    asset,\n    ..Default::default()\n};\n\nlet instruction = burn_ix.instruction();",
   "output": "println!(\"Burn instruction created\");",
-  "full": "// [IMPORTS]\r\nuse mpl_core::instructions::BurnV1;\r\nuse solana_sdk::{pubkey::Pubkey, signer::Signer};\r\n// [/IMPORTS]\r\n\r\n// [MAIN]\r\n// Asset address to burn\r\nlet asset = Pubkey::from_str(\"AssetAddressHere...\").unwrap();\r\n\r\n// Permanently destroy/burn an NFT asset\r\nlet burn_ix = BurnV1 {\r\n    asset,\r\n    ..Default::default()\r\n};\r\n\r\nlet instruction = burn_ix.instruction();\r\n// [/MAIN]\r\n\r\n// [OUTPUT]\r\nprintln!(\"Burn instruction created\");\r\n// [/OUTPUT]\r\n"
+  "full": "// [IMPORTS]\nuse mpl_core::instructions::BurnV1;\nuse solana_sdk::{pubkey::Pubkey, signer::Signer};\n// [/IMPORTS]\n\n// [MAIN]\n// Asset address to burn\nlet asset = Pubkey::from_str(\"AssetAddressHere...\").unwrap();\n\n// Permanently destroy/burn an NFT asset\nlet burn_ix = BurnV1 {\n    asset,\n    ..Default::default()\n};\n\nlet instruction = burn_ix.instruction();\n// [/MAIN]\n\n// [OUTPUT]\nprintln!(\"Burn instruction created\");\n// [/OUTPUT]\n"
 }
 
 const anchorSections = {
   "imports": "use anchor_lang::prelude::*;",
   "setup": "",
-  "main": "declare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\r\n\r\n#[program]\r\npub mod burn_asset {\r\n    use super::*;\r\n\r\n    // Permanently destroy/burn an NFT asset\r\n    pub fn burn(ctx: Context<BurnAsset>) -> Result<()> {\r\n        let asset = &mut ctx.accounts.asset;\r\n\r\n        // Verify owner\r\n        require!(\r\n            asset.owner == ctx.accounts.owner.key(),\r\n            ErrorCode::Unauthorized\r\n        );\r\n\r\n        // Close the account to burn the asset\r\n        msg!(\"Asset burned: {}\", asset.key());\r\n        Ok(())\r\n    }\r\n}\r\n\r\n#[derive(Accounts)]\r\npub struct BurnAsset<'info> {\r\n    #[account(mut, close = owner)]\r\n    pub asset: Account<'info, Asset>,\r\n    pub owner: Signer<'info>,\r\n}\r\n\r\n#[account]\r\npub struct Asset {\r\n    pub name: String,\r\n    pub uri: String,\r\n    pub owner: Pubkey,\r\n}\r\n\r\n#[error_code]\r\npub enum ErrorCode {\r\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\r\n    Unauthorized,\r\n}",
+  "main": "declare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod burn_asset {\n    use super::*;\n\n    // Permanently destroy/burn an NFT asset\n    pub fn burn(ctx: Context<BurnAsset>) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n\n        // Verify owner\n        require!(\n            asset.owner == ctx.accounts.owner.key(),\n            ErrorCode::Unauthorized\n        );\n\n        // Close the account to burn the asset\n        msg!(\"Asset burned: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct BurnAsset<'info> {\n    #[account(mut, close = owner)]\n    pub asset: Account<'info, Asset>,\n    pub owner: Signer<'info>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n\n#[error_code]\npub enum ErrorCode {\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\n    Unauthorized,\n}",
   "output": "",
-  "full": "// [IMPORTS]\r\nuse anchor_lang::prelude::*;\r\n// [/IMPORTS]\r\n\r\n// [MAIN]\r\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\r\n\r\n#[program]\r\npub mod burn_asset {\r\n    use super::*;\r\n\r\n    // Permanently destroy/burn an NFT asset\r\n    pub fn burn(ctx: Context<BurnAsset>) -> Result<()> {\r\n        let asset = &mut ctx.accounts.asset;\r\n\r\n        // Verify owner\r\n        require!(\r\n            asset.owner == ctx.accounts.owner.key(),\r\n            ErrorCode::Unauthorized\r\n        );\r\n\r\n        // Close the account to burn the asset\r\n        msg!(\"Asset burned: {}\", asset.key());\r\n        Ok(())\r\n    }\r\n}\r\n\r\n#[derive(Accounts)]\r\npub struct BurnAsset<'info> {\r\n    #[account(mut, close = owner)]\r\n    pub asset: Account<'info, Asset>,\r\n    pub owner: Signer<'info>,\r\n}\r\n\r\n#[account]\r\npub struct Asset {\r\n    pub name: String,\r\n    pub uri: String,\r\n    pub owner: Pubkey,\r\n}\r\n\r\n#[error_code]\r\npub enum ErrorCode {\r\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\r\n    Unauthorized,\r\n}\r\n// [/MAIN]\r\n"
+  "full": "// [IMPORTS]\nuse anchor_lang::prelude::*;\n// [/IMPORTS]\n\n// [MAIN]\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod burn_asset {\n    use super::*;\n\n    // Permanently destroy/burn an NFT asset\n    pub fn burn(ctx: Context<BurnAsset>) -> Result<()> {\n        let asset = &mut ctx.accounts.asset;\n\n        // Verify owner\n        require!(\n            asset.owner == ctx.accounts.owner.key(),\n            ErrorCode::Unauthorized\n        );\n\n        // Close the account to burn the asset\n        msg!(\"Asset burned: {}\", asset.key());\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct BurnAsset<'info> {\n    #[account(mut, close = owner)]\n    pub asset: Account<'info, Asset>,\n    pub owner: Signer<'info>,\n}\n\n#[account]\npub struct Asset {\n    pub name: String,\n    pub uri: String,\n    pub owner: Pubkey,\n}\n\n#[error_code]\npub enum ErrorCode {\n    #[msg(\"Unauthorized: You are not the owner of this asset\")]\n    Unauthorized,\n}\n// [/MAIN]\n"
 }
 
 const cliSections = {
@@ -44,7 +36,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Burn an NFT using the Metaplex CLI\r\n\r\n# Burn a single asset by its mint address\r\nmplx core asset burn <assetId>\r\n\r\n# Burn an asset from that is part of a collection\r\nmplx core asset burn <assetId> --collection <collectionId>\r\n\r\n"
+  "full": "# Burn an NFT using the Metaplex CLI\n\n# Burn a single asset by its mint address\nmplx core asset burn <assetId>\n\n# Burn an asset from that is part of a collection\nmplx core asset burn <assetId> --collection <collectionId>\n\n"
 }
 
 export const metadata = {
