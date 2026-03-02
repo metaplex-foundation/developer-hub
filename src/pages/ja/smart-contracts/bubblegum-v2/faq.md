@@ -1,8 +1,50 @@
 ---
 title: FAQ
-metaTitle: FAQ | Bubblegum V2
+metaTitle: FAQ - Bubblegum V2
 description: Bubblegumに関するよくある質問。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - Bubblegum FAQ
+  - compressed NFT questions
+  - cNFT cost
+  - troubleshooting
+  - transaction too large
+  - getAssetWithProof
+about:
+  - Compressed NFTs
+  - Troubleshooting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Bubblegum V2とは何ですか？
+    a: Bubblegum V2は、SolanaでのMetaplexの圧縮NFTプログラムの最新バージョンで、フリーズ/解凍、ソウルバウンドNFT、MPL-Coreコレクション、ロイヤリティ強制が追加されています。
+  - q: 転送、デリゲート、バーンなどに必要な引数はどのように見つけますか？
+    a: DAS APIから必要なすべてのパラメータ（証明、リーフインデックス、ノンスなど）を自動的に取得するgetAssetWithProofヘルパーを使用します。
+  - q: 「トランザクションが大きすぎる」エラーを解決するにはどうすればよいですか？
+    a: "getAssetWithProofでtruncateCanopy: trueを使用するか、アドレスルックアップテーブルを使用したバージョン化トランザクションを実装します。"
+  - q: 圧縮NFTツリーの作成にはいくらかかりますか？
+    a: コストはツリーのサイズによって異なります。16,384個のcNFTのツリーは約0.34 SOL、100万個のcNFTのツリーはレントで約8.5 SOLかかります。
+  - q: Bubblegum V1とV2の違いは何ですか？
+    a: V2はフリーズ/解凍、ソウルバウンドNFT、MPL-Coreコレクション、ロイヤリティ強制、パーマネントデリゲート、LeafSchemaV2を追加します。
+  - q: 特別なRPCプロバイダーが必要ですか？
+    a: はい。圧縮NFTを取得およびインデックスするには、Metaplex DAS APIをサポートするRPCが必要です。
+  - q: cNFTを通常のNFTに解凍できますか？
+    a: 解凍はBubblegum V1アセットのみで利用できます。V2は解凍をサポートしていません。
+  - q: 1つのツリーにcNFTをいくつ保存できますか？
+    a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
 ---
+
+## Summary
+
+このページはBubblegum V2の圧縮NFTに関する最も一般的な質問に答えています。
+
+- `getAssetWithProof`を使用してリーフを変更する命令の必須パラメータを取得する
+- `truncateCanopy`またはアドレスルックアップテーブルで「トランザクションが大きすぎる」エラーを解決する
+- ツリーを作成する前にツリーのコストと容量を理解する
+- Bubblegum V2はV1ツリーや圧縮解除との後方互換性はない
 
 ## Bubblegum V2とは何ですか？
 

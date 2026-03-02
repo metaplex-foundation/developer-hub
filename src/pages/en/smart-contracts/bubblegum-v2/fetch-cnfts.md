@@ -1,8 +1,42 @@
 ---
 title: Fetching Compressed NFTs
-metaTitle: Fetching Compressed NFTs | Bubblegum V2
-description: Learn how to fetch compressed NFTs on Bubblegum.
+metaTitle: Fetching Compressed NFTs - Bubblegum V2 - Metaplex
+description: Learn how to fetch compressed NFTs using the Metaplex DAS API. Covers getAsset, getAssetProof, getAssetsByOwner, and getAssetsByGroup methods.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - fetch compressed NFT
+  - read cNFT
+  - DAS API
+  - digital asset standard
+  - getAsset
+  - getAssetProof
+  - getAssetsByOwner
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Which RPC providers support the DAS API?
+    a: See the RPC Providers page for a maintained list. Major providers like Helius, Triton, and Shyft support the DAS API.
+  - q: How do I get the asset ID for a compressed NFT?
+    a: If you know the merkle tree address and leaf index, use findLeafAssetIdPda. Otherwise, use getAssetsByOwner or getAssetsByGroup to discover assets and their IDs.
+  - q: What is the difference between getAsset and getAssetProof?
+    a: getAsset returns the cNFT's metadata, ownership, and compression info. getAssetProof returns the merkle proof needed for write operations such as transfer, burn, and update.
 ---
+
+## Summary
+
+**Fetching compressed NFTs** retrieves cNFT data and proofs using the Metaplex DAS API. This page covers the DAS API setup, asset IDs, fetching individual and multiple cNFTs, and retrieving proofs.
+
+- Install and configure the Metaplex DAS API SDK
+- Fetch individual cNFTs using getAsset and their proofs using getAssetProof
+- Fetch multiple cNFTs by owner or by collection
+- Derive Leaf Asset IDs from merkle tree addresses and leaf indices
 
 As mentioned in the [Overview](/smart-contracts/bubblegum#read-api) page, Compressed NFTs are not stored inside onchain accounts like regular NFTs but, instead, are logged in the transactions that created and updated them. {% .lead %}
 
@@ -168,3 +202,36 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+
+## Notes
+
+- Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
+- The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
+- Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
+
+## FAQ
+
+### Which RPC providers support the DAS API?
+
+See the [RPC Providers](/rpc-providers) page for a maintained list. Major providers like Helius, Triton, and Shyft support the DAS API.
+
+### How do I get the asset ID for a compressed NFT?
+
+If you know the merkle tree address and leaf index, use `findLeafAssetIdPda`. Otherwise, use `getAssetsByOwner` or `getAssetsByGroup` to discover assets and their IDs.
+
+### What is the difference between getAsset and getAssetProof?
+
+`getAsset` returns the cNFT's metadata, ownership, and compression info. `getAssetProof` returns the merkle proof needed for write operations (transfer, burn, update, etc.).
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — an RPC extension for fetching compressed and standard NFT data |
+| **Asset ID** | A unique identifier for an NFT. For cNFTs, it is a PDA derived from the merkle tree and leaf index |
+| **Leaf Asset ID** | The PDA-based identifier specific to compressed NFTs, derived from tree address and leaf index |
+| **getAsset** | DAS API method that returns metadata, ownership, and compression info for a digital asset |
+| **getAssetProof** | DAS API method that returns the merkle proof and root needed for write operations on a cNFT |
+| **getAssetsByOwner** | DAS API method that returns all assets owned by a given wallet address |
+| **getAssetsByGroup** | DAS API method that returns all assets in a given group (e.g., collection) |

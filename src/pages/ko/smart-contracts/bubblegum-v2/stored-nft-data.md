@@ -1,7 +1,21 @@
 ---
 title: NFT 데이터 저장 및 인덱싱
-metaTitle: NFT 데이터 저장 및 인덱싱 | Bubblegum V2
+metaTitle: NFT 데이터 저장 및 인덱싱 - Bubblegum V2
 description: Bubblegum에서 NFT 데이터가 저장되는 방식에 대해 자세히 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT indexing
+  - DAS
+  - digital asset standard
+  - off-chain data
+  - RPC indexer
+  - Geyser plugin
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Advanced
 ---
 
 [개요](/ko/smart-contracts/bubblegum#read-api)에서 언급했듯이 압축된 NFT(cNFT)가 생성되거나 수정될 때마다 해당 트랜잭션이 원장에 온체인으로 기록되지만 cNFT 상태 데이터는 계정 공간에 저장되지 않습니다. 이는 cNFT의 엄청난 비용 절약의 이유이지만 편의성과 유용성을 위해 cNFT 상태 데이터는 RPC 제공업체에 의해 인덱싱되고 **Metaplex DAS API**를 통해 사용할 수 있습니다.
@@ -74,3 +88,18 @@ getAssetProof() 등을 호출합니다.
 {% edge from="api" to="end_user" /%}
 
 {% /diagram %}
+
+## Notes
+
+- DAS API는 Solana 프로토콜 자체의 일부가 아닙니다 — RPC 제공업체가 유지 관리하는 인덱싱 레이어입니다.
+- RPC 제공업체마다 구현이 다를 수 있습니다. Metaplex 참조 구현은 GitHub에서 오픈 소스로 제공됩니다.
+
+## Glossary
+
+| 용어 | 정의 |
+|------|------|
+| **DAS API** | Digital Asset Standard API — 인덱싱된 cNFT 데이터를 쿼리하기 위한 RPC 확장 |
+| **Geyser 플러그인** | 트랜잭션 및 계정 업데이트에 대한 실시간 알림을 받는 Solana 검증자 플러그인 |
+| **Plerkle** | 인덱싱을 위해 Bubblegum 및 압축 트랜잭션을 캡처하는 Metaplex Geyser 플러그인 |
+| **spl-noop** | 트랜잭션 로그 잘림을 방지하기 위해 이벤트를 명령어 데이터로 내보내는 데 사용되는 Solana 프로그램 |
+| **인제스터** | Redis 스트림에서 트랜잭션 데이터를 소비하여 Postgres에 저장하는 프로세스 |

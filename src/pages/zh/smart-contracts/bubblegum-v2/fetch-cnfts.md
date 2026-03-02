@@ -1,8 +1,42 @@
 ---
 title: 获取压缩NFT
-metaTitle: 获取压缩NFT | Bubblegum V2
+metaTitle: 获取压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum上获取压缩NFT。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - fetch compressed NFT
+  - read cNFT
+  - DAS API
+  - digital asset standard
+  - getAsset
+  - getAssetProof
+  - getAssetsByOwner
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 哪些RPC提供商支持DAS API？
+    a: 请查看RPC提供商页面以获取维护的列表。Helius、Triton和Shyft等主要提供商支持DAS API。
+  - q: 如何获取压缩NFT的资产ID？
+    a: 如果您知道默克尔树地址和叶子索引，请使用findLeafAssetIdPda。否则，使用getAssetsByOwner或getAssetsByGroup来发现资产及其ID。
+  - q: getAsset和getAssetProof有什么区别？
+    a: getAsset返回cNFT的元数据、所有权和压缩信息。getAssetProof返回转移、销毁和更新等写入操作所需的默克尔证明。
 ---
+
+## Summary
+
+**获取压缩NFT**使用Metaplex DAS API检索cNFT数据和证明。本页面介绍DAS API设置、资产ID、获取单个和多个cNFT以及检索证明的方法。
+
+- 安装和配置Metaplex DAS API SDK
+- 使用getAsset获取单个cNFT，使用getAssetProof获取其证明
+- 按所有者或按集合获取多个cNFT
+- 从默克尔树地址和叶子索引派生叶子资产ID
 
 如[概述](/zh/smart-contracts/bubblegum#read-api)页面所述，压缩NFT不像普通NFT那样存储在链上账户中，而是记录在创建和更新它们的交易中。{% .lead %}
 
@@ -168,3 +202,21 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- 并非所有RPC提供商都支持DAS API。请查看[RPC提供商](/zh/rpc-providers)页面获取兼容选项。
+- 安装`mplBubblegum`时会自动包含DAS API插件，无需单独安装。
+- 通过`getAssetProof`获取的证明在树被修改后可能会过期。在执行写入操作前始终获取最新证明。
+
+## Glossary
+
+| 术语 | 定义 |
+|------|------|
+| **DAS API** | Digital Asset Standard API — 用于获取压缩和标准NFT数据的RPC扩展 |
+| **资产ID** | NFT的唯一标识符。对于cNFT，它是从默克尔树和叶子索引派生的PDA |
+| **叶子资产ID** | 特定于压缩NFT的基于PDA的标识符，从树地址和叶子索引派生 |
+| **getAsset** | 返回数字资产的元数据、所有权和压缩信息的DAS API方法 |
+| **getAssetProof** | 返回对cNFT进行写入操作所需的默克尔证明和根的DAS API方法 |
+| **getAssetsByOwner** | 返回给定钱包地址拥有的所有资产的DAS API方法 |
+| **getAssetsByGroup** | 返回给定组（如集合）中所有资产的DAS API方法 |
