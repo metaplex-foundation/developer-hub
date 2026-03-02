@@ -22,15 +22,15 @@ Launch Pool トークンローンチには3つのフェーズがあります：
 
 1. **セットアップ**（1回実行） - トークンを作成し、ローンチを設定して有効化
 2. **預入期間**（ユーザーが参加） - 設定した期間中にユーザーがSOLを預け入れ
-3. **ローンチ後**（あなた＋ユーザー） - トランジションを実行し、ユーザーがトークンを請求、権限を取り消し
+3. **ローンチ後**（あなた＋ユーザー） - 状態機械をクランクし、ユーザーがトークンを請求、権限を取り消し
 
 このガイドでは、異なるステージで実行する**4つの別々のスクリプト**の作成方法を説明します：
 
 | スクリプト | 実行タイミング | 目的 |
 |--------|-------------|---------|
 | `launch.ts` | 1回、開始時 | トークンを作成しローンチを有効化 |
-| `transition.ts` | 預入終了後 | 収集したSOLをアンロックバケットに移動 |
-| `claim.ts` | トランジション後 | ユーザーがトークンを請求するために実行 |
+| `crank.ts` | 預入終了後 | エンド動作をトリガーしてSOLをアンロックバケットに移動 |
+| `claim.ts` | クランク後 | ユーザーがトークンを請求するために実行 |
 | `revoke.ts` | ローンチ完了時 | ミント/フリーズ権限を永久に削除 |
 
 ## 前提条件
@@ -273,20 +273,21 @@ npx ts-node launch.ts
 
 ### 預入終了後
 
-預入期間が終了したら、収集したSOLをアンロックバケットに移動するために**トランジション**を実行する必要があります。`transition.ts`というファイルを作成します：
+預入期間が終了したら、`triggerBehaviorsV2`を実行してバケットに設定されたエンド動作（この場合、収集したSOLをアンロックバケットに移動）を処理します。`crank.ts`というファイルを作成します：
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  transitionV2,
+  triggerBehaviorsV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
+import { findAssociatedTokenPda, mplToolbox } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
+    .use(mplToolbox())
     .use(genesis());
 
   // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
@@ -306,28 +307,20 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('トランジションを実行中...');
+  console.log('状態をクランク中...');
 
-  await transitionV2(umi, {
+  await triggerBehaviorsV2(umi, {
     genesisAccount,
     primaryBucket: launchPoolBucket,
     baseMint,
   })
     .addRemainingAccounts([
-      {
-        pubkey: unlockedBucket,
-        isSigner: false,
-        isWritable: true,
-      },
-      {
-        pubkey: publicKey(unlockedBucketQuoteTokenAccount),
-        isSigner: false,
-        isWritable: true,
-      },
+      { pubkey: publicKey(unlockedBucket), isSigner: false, isWritable: true },
+      { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ トランジション完了！SOLがアンロックバケットに移動しました。');
+  console.log('✓ クランク完了！SOLがアンロックバケットに移動しました。');
 }
 
 main().catch(console.error);
@@ -336,12 +329,12 @@ main().catch(console.error);
 預入期間終了後に実行：
 
 ```bash
-npx ts-node transition.ts
+npx ts-node crank.ts
 ```
 
 ### ユーザーがトークンを請求
 
-トランジション後、ユーザーはトークンを請求できます。各ユーザーは総預入額に対する自分のシェアに比例してトークンを受け取ります：
+クランク後、ユーザーはトークンを請求できます。各ユーザーは総預入額に対する自分のシェアに比例してトークンを受け取ります：
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
@@ -401,8 +394,7 @@ main().catch(console.error);
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  revokeMintAuthorityV2,
-  revokeFreezeAuthorityV2,
+  revokeV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
@@ -416,20 +408,17 @@ async function main() {
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // ローンチからのトークンミントアドレスを入力
+  // ローンチからのアドレスを入力
+  const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('ミント権限を取り消し中...');
-  await revokeMintAuthorityV2(umi, {
+  console.log('ミントとフリーズ権限を取り消し中...');
+  await revokeV2(umi, {
+    genesisAccount,
     baseMint,
+    revokeMintAuthority: true,
+    revokeFreezeAuthority: true,
   }).sendAndConfirm(umi);
-  console.log('✓ ミント権限取り消し完了');
-
-  console.log('フリーズ権限を取り消し中...');
-  await revokeFreezeAuthorityV2(umi, {
-    baseMint,
-  }).sendAndConfirm(umi);
-  console.log('✓ フリーズ権限取り消し完了');
 
   console.log('\n✓ ローンチ完了！トークンは完全に分散化されました。');
 }
@@ -442,4 +431,4 @@ main().catch(console.error);
 - [Genesis 概要](/ja/smart-contracts/genesis) - Solana トークンローンチパッドについて詳しく学ぶ
 - [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチの詳細ドキュメント
 - [プレセール](/ja/smart-contracts/genesis/presale) - 固定価格でのトークンプレセールを実行
-- [Aggregation API](/ja/smart-contracts/genesis/aggregation) - API でトークンセールデータをクエリ
+- [Integration APIs](/ja/smart-contracts/genesis/integration-apis) - API でトークンセールデータをクエリ

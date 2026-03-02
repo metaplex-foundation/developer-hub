@@ -100,9 +100,8 @@ For complete implementation examples, see [Launch Pool](/smart-contracts/genesis
 
 | Function | Description |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | Execute end behaviors |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | Permanently revoke mint authority |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | Permanently revoke freeze authority |
+| [triggerBehaviorsV2()](#trigger-behaviors-v2) | Execute end behaviors |
+| [revokeV2()](#revoke-v2) | Permanently revoke mint and/or freeze authority |
 
 ---
 
@@ -233,31 +232,26 @@ await claimPresaleV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-### transitionV2
+### triggerBehaviorsV2
 
 ```typescript
-await transitionV2(umi, {
+await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
   primaryBucket,      // PublicKey
   baseMint,           // PublicKey
 })
-  .addRemainingAccounts([/* destination accounts */])
+  .addRemainingAccounts([/* destination bucket + its quote token account */])
   .sendAndConfirm(umi);
 ```
 
-### revokeMintAuthorityV2
+### revokeV2
 
 ```typescript
-await revokeMintAuthorityV2(umi, {
-  baseMint,           // PublicKey
-}).sendAndConfirm(umi);
-```
-
-### revokeFreezeAuthorityV2
-
-```typescript
-await revokeFreezeAuthorityV2(umi, {
-  baseMint,           // PublicKey
+await revokeV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  revokeMintAuthority,      // boolean
+  revokeFreezeAuthority,    // boolean
 }).sendAndConfirm(umi);
 ```
 

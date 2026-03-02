@@ -100,9 +100,8 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 | 関数 | 説明 |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | 終了動作の実行 |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | ミント権限の永久取り消し |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | フリーズ権限の永久取り消し |
+| [triggerBehaviorsV2()](#trigger-behaviors-v2) | 終了動作の実行 |
+| [revokeV2()](#revoke-v2) | ミントおよびフリーズ権限の永久取り消し |
 
 ---
 
@@ -233,31 +232,26 @@ await claimPresaleV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-### transitionV2
+### triggerBehaviorsV2
 
 ```typescript
-await transitionV2(umi, {
+await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
   primaryBucket,      // PublicKey
   baseMint,           // PublicKey
 })
-  .addRemainingAccounts([/* destination accounts */])
+  .addRemainingAccounts([/* destination bucket + its quote token account */])
   .sendAndConfirm(umi);
 ```
 
-### revokeMintAuthorityV2
+### revokeV2
 
 ```typescript
-await revokeMintAuthorityV2(umi, {
-  baseMint,           // PublicKey
-}).sendAndConfirm(umi);
-```
-
-### revokeFreezeAuthorityV2
-
-```typescript
-await revokeFreezeAuthorityV2(umi, {
-  baseMint,           // PublicKey
+await revokeV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  revokeMintAuthority,      // boolean
+  revokeFreezeAuthority,    // boolean
 }).sendAndConfirm(umi);
 ```
 
@@ -338,7 +332,6 @@ const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if 
 | 定数 | 値 |
 |----------|-------|
 | `WRAPPED_SOL_MINT` | `So11111111111111111111111111111111111111112` |
-
 
 ---
 
