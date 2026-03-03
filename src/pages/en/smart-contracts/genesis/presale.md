@@ -302,7 +302,7 @@ After the deposit period ends, run `triggerBehaviorsV2` to process the end behav
 `triggerBehaviorsV2` can only be called after the presale's `depositEndCondition` has been met. Calling it early throws a `PresaleBucketNotEnded` error.
 {% /callout %}
 
-{% code-tabs-imported from="genesis/transition_presale_v2" frameworks="umi" filename="triggerBehaviors" /%}
+{% code-tabs-imported from="genesis/trigger_presale_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
 **Why this matters:** Without triggering end behaviors, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
 

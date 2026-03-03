@@ -234,6 +234,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+Processes the configured end behaviors for a primary bucket, moving collected funds to the destination buckets defined in `endBehaviors`.
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -245,6 +247,8 @@ await triggerBehaviorsV2(umi, {
 ```
 
 ### revokeV2
+
+Permanently revokes mint and/or freeze authority for the base token.
 
 ```typescript
 await revokeV2(umi, {

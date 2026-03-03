@@ -309,9 +309,9 @@ Unlocked bucket 在 Transition 后接收来自 Launch Pool 的 SOL。
 
 ### 执行 Transition
 
-存款结束后，执行 Transition 将收集的 SOL 转移到 Unlocked bucket。
+存款结束后，运行 `triggerBehaviorsV2` 将收集的 SOL 转移到 Unlocked bucket。
 
-{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
+{% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
 **为什么这很重要：** 如果不执行 Transition，收集的 SOL 将保持锁定在 Launch Pool bucket 中。用户仍然可以领取代币，但团队无法获取募集的资金。
 
@@ -467,4 +467,4 @@ Launch Pool 根据存款有机发现价格，按比例分配。Presale 则是预
 - [Presale](/zh/smart-contracts/genesis/presale) - 固定价格代币销售
 - [Uniform Price Auction](/zh/smart-contracts/genesis/uniform-price-auction) - 基于出价的代币发售
 - [发行代币](/zh/tokens/launch-token) - 端到端代币发行指南
-- [Aggregation API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询代币销售数据
+- [Integration APIs](/zh/smart-contracts/genesis/integration-apis) - 通过 API 查询发射和代币销售数据

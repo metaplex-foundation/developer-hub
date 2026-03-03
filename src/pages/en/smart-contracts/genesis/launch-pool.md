@@ -309,9 +309,9 @@ Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAlloc
 
 ### Executing the Transition
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+After deposits close, run `triggerBehaviorsV2` to move collected SOL to the unlocked bucket.
 
-{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
+{% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
 **Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
@@ -467,4 +467,4 @@ Launch Pool discovers price organically based on deposits with proportional dist
 - [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
 - [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based token offering
 - [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query token sale data via API
+- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API

@@ -301,7 +301,7 @@ Unlocked Bucket在 `triggerBehaviorsV2` 执行后从Presale接收SOL。
 `triggerBehaviorsV2` 只能在Presale的 `depositEndCondition` 满足后调用。提前调用会抛出 `PresaleBucketNotEnded` 错误。
 {% /callout %}
 
-{% code-tabs-imported from="genesis/transition_presale_v2" frameworks="umi" filename="triggerBehaviors" /%}
+{% code-tabs-imported from="genesis/trigger_presale_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
 **为什么这很重要：** 不触发结束行为，收集的SOL将保持锁定在Presale Bucket中。用户仍然可以领取代币，但团队无法访问筹集的资金。
 

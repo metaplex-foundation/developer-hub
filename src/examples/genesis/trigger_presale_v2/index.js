@@ -1,5 +1,5 @@
 /**
- * Example: transition_presale_v2
+ * Example: trigger_presale_v2
  *
  * 
  *
@@ -16,7 +16,7 @@ const umiSections = {
 }
 
 export const metadata = {
-  title: "transition_presale_v2",
+  title: "trigger_presale_v2",
   description: "",
   tags: [],
 }

@@ -309,9 +309,9 @@ Unlocked bucket은 Transition 후 Launch Pool에서 SOL을 받습니다.
 
 ### Transition 실행
 
-예치가 종료된 후 Transition을 실행하여 수집된 SOL을 Unlocked bucket으로 이동합니다.
+예치가 종료된 후 `triggerBehaviorsV2`를 실행하여 수집된 SOL을 Unlocked bucket으로 이동합니다.
 
-{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
+{% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
 **이것이 중요한 이유:** Transition 없이는 수집된 SOL이 Launch Pool bucket에 잠겨 있습니다. 사용자는 여전히 토큰을 청구할 수 있지만, 팀은 모금된 자금에 접근할 수 없습니다.
 
@@ -467,4 +467,4 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 - [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
 - [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 토큰 오퍼링
 - [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
-- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통한 토큰 세일 데이터 조회
+- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통한 런치 및 토큰 세일 데이터 조회

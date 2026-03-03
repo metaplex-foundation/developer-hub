@@ -55,6 +55,7 @@ You need a Solana keypair file on your machine to sign transactions. This is typ
 Create a file called `launch.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -80,7 +81,7 @@ async function main() {
   // This is typically your Solana CLI wallet at ~/.config/solana/id.json
   // Or use any keypair file you have access to
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -276,6 +277,7 @@ Users deposit SOL using your frontend or directly via the SDK. Each deposit:
 Once the deposit period ends, run `triggerBehaviorsV2` to execute the end behaviors configured on the bucket — in this case, moving collected SOL to the unlocked bucket. Create a file called `crank.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -292,7 +294,7 @@ async function main() {
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -343,6 +345,7 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 Users can claim via your frontend or using this script (create `claim.ts`):
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -356,7 +359,7 @@ async function main() {
 
   // Load the user's wallet keypair (whoever deposited SOL)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -391,6 +394,7 @@ After the launch is complete, revoke mint and freeze authorities. This signals t
 Create `revoke.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -404,7 +408,7 @@ async function main() {
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 

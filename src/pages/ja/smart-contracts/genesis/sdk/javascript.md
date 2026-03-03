@@ -234,6 +234,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+プライマリーbucketに設定された End Behavior を処理し、収集した資金を `endBehaviors` で指定されたデスティネーションbucketに移動します。
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -245,6 +247,8 @@ await triggerBehaviorsV2(umi, {
 ```
 
 ### revokeV2
+
+ベーストークンのミントおよびフリーズ権限を恒久的に取り消します。
 
 ```typescript
 await revokeV2(umi, {

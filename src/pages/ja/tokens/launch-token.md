@@ -55,6 +55,7 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 `launch.ts`というファイルを作成します：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -80,7 +81,7 @@ async function main() {
   // これは通常、~/.config/solana/id.jsonにあるSolana CLIウォレットです
   // または、アクセス可能な任意のキーペアファイルを使用
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -276,6 +277,7 @@ npx ts-node launch.ts
 預入期間が終了したら、`triggerBehaviorsV2`を実行してバケットに設定されたエンド動作（この場合、収集したSOLをアンロックバケットに移動）を処理します。`crank.ts`というファイルを作成します：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -292,7 +294,7 @@ async function main() {
 
   // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -343,6 +345,7 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ユーザーはフロントエンドまたはこのスクリプトを使用して請求できます（`claim.ts`を作成）：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -356,7 +359,7 @@ async function main() {
 
   // ユーザーのウォレットキーペアを読み込み（SOLを預け入れた人）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -391,6 +394,7 @@ main().catch(console.error);
 `revoke.ts`を作成：
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -404,7 +408,7 @@ async function main() {
 
   // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
   const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
