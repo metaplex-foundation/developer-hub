@@ -1,7 +1,7 @@
 ---
-title: Get Listings
-metaTitle: Genesis - Get Listings | REST API | Metaplex
-description: Get active and upcoming Genesis launch listings. Returns a paginated list of launches with metadata.
+title: List Launches
+metaTitle: Genesis - List Launches | REST API | Metaplex
+description: Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
 method: GET
 created: '01-15-2025'
 updated: '02-26-2026'
@@ -20,7 +20,7 @@ programmingLanguage:
   - Rust
 ---
 
-Retrieve active and upcoming Genesis launch listings. Returns a paginated list of launches with their metadata, token info, and social links. {% .lead %}
+Retrieve active and upcoming Genesis launch listings. Returns a list of launches with their metadata, token info, and social links. {% .lead %}
 
 ## Endpoint
 

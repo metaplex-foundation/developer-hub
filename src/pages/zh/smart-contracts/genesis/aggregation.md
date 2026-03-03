@@ -366,7 +366,7 @@ println!("{}", response.data.base_token.name); // "My Token"
 在您的 `Cargo.toml` 中添加以下依赖：
 ```toml
 [dependencies]
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```

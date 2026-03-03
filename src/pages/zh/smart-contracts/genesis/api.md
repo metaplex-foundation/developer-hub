@@ -167,7 +167,6 @@ GET /tokens/{mint}
 ```json
 {
   "error": {
-    "code": 404,
     "message": "Launch not found"
   }
 }
@@ -206,9 +205,9 @@ interface BaseToken {
 }
 
 interface Socials {
-  x: string;
-  telegram: string;
-  discord: string;
+  x?: string;
+  telegram?: string;
+  discord?: string;
 }
 
 interface LaunchResponse {
@@ -231,7 +230,6 @@ interface TokenResponse {
 
 interface ErrorResponse {
   error: {
-    code: number;
     message: string;
   };
 }
@@ -281,9 +279,9 @@ pub struct BaseToken {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Socials {
-    pub x: String,
-    pub telegram: String,
-    pub discord: String,
+    pub x: Option<String>,
+    pub telegram: Option<String>,
+    pub discord: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -316,7 +314,6 @@ pub struct TokenResponse {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ApiError {
-    pub code: u16,
     pub message: String,
 }
 
@@ -343,7 +340,7 @@ println!("{}", response.data.base_token.name); // "My Token"
 将以下依赖添加到您的 `Cargo.toml`：
 ```toml
 [dependencies]
-reqwest = { version = "0.11", features = ["json"] }
+reqwest = { version = "0.12", features = ["json"] }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```

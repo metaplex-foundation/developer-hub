@@ -1,7 +1,7 @@
 ---
-title: Get Listings
-metaTitle: Genesis - Get Listings | REST API | Metaplex
-description: "활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터가 포함된 페이지네이션 목록을 반환합니다."
+title: 런치 목록
+metaTitle: Genesis - 런치 목록 | REST API | Metaplex
+description: "활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터가 포함된 목록을 반환합니다."
 method: GET
 created: '01-15-2025'
 updated: '02-26-2026'
@@ -20,7 +20,7 @@ programmingLanguage:
   - Rust
 ---
 
-활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터, 토큰 정보, 소셜 링크가 포함된 페이지네이션 목록을 반환합니다. {% .lead %}
+활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터, 토큰 정보, 소셜 링크가 포함된 목록을 반환합니다. {% .lead %}
 
 ## 엔드포인트
 
@@ -32,7 +32,7 @@ GET /launches
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `network` | `string` | 아니요 | Network to query. Default: `solana-mainnet`. Use `solana-devnet` for devnet. |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
 | `status` | `string` | 아니요 | 상태별 필터: `upcoming`, `live`, `graduated`. 기본값: 전체 반환. |
 | `spotlight` | `string` | 아니요 | 스포트라이트 필터: `true` 또는 `false`. 기본값: 전체 반환. |
 

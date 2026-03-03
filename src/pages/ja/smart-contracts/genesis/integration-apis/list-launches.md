@@ -1,7 +1,7 @@
 ---
-title: Get Listings
-metaTitle: Genesis - Get Listings | REST API | Metaplex
-description: アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ付きのページネーション対応リストを返します。
+title: ローンチ一覧
+metaTitle: Genesis - ローンチ一覧 | REST API | Metaplex
+description: アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ付きのリストを返します。
 method: GET
 created: '01-15-2025'
 updated: '02-26-2026'
@@ -20,7 +20,7 @@ programmingLanguage:
   - Rust
 ---
 
-アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ、トークン情報、ソーシャルリンク付きのページネーション対応リストを返します。 {% .lead %}
+アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ、トークン情報、ソーシャルリンク付きのリストを返します。 {% .lead %}
 
 ## エンドポイント
 
@@ -32,7 +32,7 @@ GET /launches
 
 | パラメータ | 型 | 必須 | 説明 |
 |-----------|------|----------|-------------|
-| `network` | `string` | いいえ | Network to query. Default: `solana-mainnet`. Use `solana-devnet` for devnet. |
+| `network` | `string` | いいえ | クエリするネットワーク。デフォルト：`solana-mainnet`。devnet の場合は `solana-devnet` を使用。 |
 | `status` | `string` | いいえ | ステータスでフィルタ: `upcoming`, `live`, `graduated`。デフォルト: 全件返却。 |
 | `spotlight` | `string` | いいえ | スポットライトでフィルタ: `true` または `false`。デフォルト: 全件返却。 |
 

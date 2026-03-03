@@ -1,7 +1,7 @@
 ---
-title: Get Listings
-metaTitle: Genesis - Get Listings | REST API | Metaplex
-description: "获取活跃和即将到来的 Genesis 发行列表。返回带有元数据的分页列表。"
+title: 发行列表
+metaTitle: Genesis - 发行列表 | REST API | Metaplex
+description: "获取活跃和即将到来的 Genesis 发行列表。返回带有元数据的列表。"
 method: GET
 created: '01-15-2025'
 updated: '02-26-2026'
@@ -20,7 +20,7 @@ programmingLanguage:
   - Rust
 ---
 
-获取活跃和即将到来的 Genesis 发行列表。返回带有元数据、代币信息和社交链接的分页列表。 {% .lead %}
+获取活跃和即将到来的 Genesis 发行列表。返回带有元数据、代币信息和社交链接的列表。 {% .lead %}
 
 ## 端点
 
