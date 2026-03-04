@@ -20,8 +20,6 @@ created: '02-23-2026'
 updated: '03-04-2026'
 ---
 
-Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base that gives AI coding agents accurate, up-to-date knowledge of Metaplex programs, CLI commands, and SDK patterns. {% .lead %}
-
 ## Summary
 
 The Metaplex Skill gives AI coding agents accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
@@ -31,7 +29,7 @@ The Metaplex Skill gives AI coding agents accurate knowledge of all Metaplex pro
 - Works with Claude Code, Cursor, Copilot, Windsurf, and other compatible agents
 - Uses progressive disclosure to minimize token usage while providing full coverage
 
-Instead of relying on hallucinated APIs or incorrect flags, your AI agent can reference the Skill to get accurate commands and code on the first try.
+Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base that gives AI coding agents accurate, up-to-date knowledge of Metaplex programs, CLI commands, and SDK patterns. Instead of relying on hallucinated APIs or incorrect flags, your AI agent can reference the Skill to get accurate commands and code on the first try. {% .lead %}
 
 {% quick-links %}
 
@@ -76,3 +74,9 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 - **[Install the Skill](/dev-tools/skill/installation)** to get started
 - **[How It Works](/dev-tools/skill/how-it-works)** to understand the architecture
 - **[Programs & Operations](/dev-tools/skill/programs-and-operations)** for detailed coverage
+
+## Notes
+
+- The Skill requires an AI coding agent that supports the [Agent Skills](https://agentskills.io) format
+- Skill files are static references bundled into your project — re-run the install command to update
+- The `npx skills add` command requires Node.js and npm/npx

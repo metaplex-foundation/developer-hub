@@ -108,6 +108,8 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 
 ## Decision Guide
 
+Use the following guidance to choose the right program and tooling for your task.
+
 ### NFTs: Core vs Token Metadata
 
 | Choose | When |

@@ -52,6 +52,8 @@ The Skill includes reference files organized by approach and program:
 
 ### CLI References
 
+These files cover `mplx` CLI commands for each program.
+
 | File | Contents |
 |------|----------|
 | `cli.md` | Shared CLI setup, configuration, toolbox commands |
@@ -63,6 +65,8 @@ The Skill includes reference files organized by approach and program:
 
 ### SDK References
 
+These files cover Umi and Kit SDK operations for each program.
+
 | File | Contents |
 |------|----------|
 | `sdk-umi.md` | Umi SDK setup and common patterns |
@@ -73,6 +77,8 @@ The Skill includes reference files organized by approach and program:
 | `sdk-token-metadata-kit.md` | Token Metadata operations via Kit SDK |
 
 ### Concepts
+
+These files cover shared knowledge like account structures and program IDs.
 
 | File | Contents |
 |------|----------|
