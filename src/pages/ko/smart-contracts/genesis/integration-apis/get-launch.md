@@ -22,6 +22,15 @@ programmingLanguage:
 
 특정 genesis 주소의 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 웹사이트, 소셜 링크를 반환합니다. {% .lead %}
 
+## Summary
+
+Genesis 계정 공개 키로 단일 런치를 조회합니다. 런치 상세 정보, 베이스 토큰 메타데이터, 웹사이트, 소셜 링크를 `LaunchData` 객체로 반환합니다.
+
+- Genesis 계정 공개 키를 경로 파라미터로 필요
+- 단일 `LaunchData` 객체 반환 (배열 아님)
+- 토큰 메타데이터(`name`, `symbol`, `image`)와 소셜 링크 포함
+- `network` 쿼리 파라미터를 통해 메인넷(기본값) 및 데브넷 지원
+
 ## 엔드포인트
 
 ```
@@ -136,6 +145,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/smart-contracts/genesis/integration-apis/get-launches-by-token) 엔드포인트를 대신 사용하세요.
-{% /callout %}
+## Notes
+
+- Genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/smart-contracts/genesis/integration-apis/get-launches-by-token) 엔드포인트를 사용하세요.
+- Genesis 주소를 찾을 수 없거나 유효한 런치가 없는 경우 `404`를 반환합니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.

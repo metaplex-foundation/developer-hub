@@ -22,6 +22,15 @@ programmingLanguage:
 
 Retrieve launch data for a specific genesis address. Returns launch info, token metadata, website, and social links. {% .lead %}
 
+## Summary
+
+Fetch a single launch by its genesis account public key. Returns the launch details, base token metadata, website, and social links wrapped in a `LaunchData` object.
+
+- Requires the genesis account public key as a path parameter
+- Returns a single `LaunchData` object (not an array)
+- Includes token metadata (`name`, `symbol`, `image`) and social links
+- Supports mainnet (default) and devnet via `network` query parameter
+
 ## Endpoint
 
 ```
@@ -141,6 +150,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
-{% /callout %}
+## Notes
+
+- Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
+- Returns `404` if the genesis address is not found or does not have a valid launch.
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).

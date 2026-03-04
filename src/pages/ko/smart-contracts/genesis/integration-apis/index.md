@@ -23,6 +23,15 @@ programmingLanguage:
 
 Genesis Integration API를 사용하면 애그리게이터와 애플리케이션이 Genesis 토큰 런칭의 런칭 데이터를 조회할 수 있습니다. REST 엔드포인트를 통해 메타데이터에 접근하거나 SDK로 실시간 온체인 상태를 가져올 수 있습니다. {% .lead %}
 
+## Summary
+
+Genesis 통합 API는 Solana의 Genesis 토큰 런치 데이터에 대한 읽기 전용 액세스를 제공합니다.
+
+- Genesis 주소, 토큰 민트 또는 모든 활성 런치를 검색 가능
+- `https://api.metaplex.com/v1`의 공개 REST API — 인증 불필요
+- 런치 메타데이터, 토큰 정보, 웹사이트, 소셜 링크 반환
+- `network` 쿼리 파라미터를 통해 Solana 메인넷(기본값) 및 데브넷 지원
+
 ## 기본 URL
 
 ```
@@ -86,6 +95,13 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
   }
 }
 ```
+
+## Notes
+
+- API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
+- 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다.
+- 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
+- `POST` 엔드포인트는 대부분의 사용 사례에서 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하세요.
 
 ## 공유 타입
 

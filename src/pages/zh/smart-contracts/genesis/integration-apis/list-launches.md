@@ -22,6 +22,15 @@ programmingLanguage:
 
 获取活跃和即将到来的 Genesis 发行列表。返回带有元数据、代币信息和社交链接的列表。 {% .lead %}
 
+## Summary
+
+使用状态和聚焦的可选过滤器列出所有 Genesis 发行。返回按最近活动排序的 `LaunchData` 对象数组。
+
+- 可通过 `status`（`upcoming`、`live`、`graduated`）和/或 `spotlight`（`true`、`false`）过滤
+- 结果按 `lastActivityAt` 降序排列
+- 每个条目包含发行详情、基础代币元数据和社交链接
+- 通过 `network` 查询参数支持主网（默认）和开发网
+
 ## 端点
 
 ```
@@ -95,7 +104,7 @@ interface LaunchData {
   socials: Socials;
 }
 
-interface ListingsResponse {
+interface LaunchesResponse {
   data: LaunchData[];
 }
 ```
@@ -113,7 +122,7 @@ pub struct LaunchData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ListingsResponse {
+pub struct LaunchesResponse {
     pub data: Vec<LaunchData>,
 }
 ```
@@ -126,7 +135,7 @@ pub struct ListingsResponse {
 const response = await fetch(
   "https://api.metaplex.com/v1/launches?status=live"
 );
-const { data }: ListingsResponse = await response.json();
+const { data }: LaunchesResponse = await response.json();
 console.log(`${data.length} launches`);
 data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.status);
@@ -136,7 +145,7 @@ data.forEach((entry) => {
 ### Rust
 
 ```rust
-let response: ListingsResponse = reqwest::get(
+let response: LaunchesResponse = reqwest::get(
     "https://api.metaplex.com/v1/launches?status=live"
 )
 .await?
@@ -145,4 +154,10 @@ let response: ListingsResponse = reqwest::get(
 
 println!("{} launches", response.data.len());
 ```
+
+## Notes
+
+- 结果不分页。端点在单个响应中返回所有匹配的发行。
+- `status` 过滤器接受 `upcoming`、`live` 或 `graduated`。省略则返回所有状态。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。
 

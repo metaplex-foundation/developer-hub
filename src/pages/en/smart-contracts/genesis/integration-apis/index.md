@@ -23,6 +23,15 @@ programmingLanguage:
 
 The Genesis Integration APIs allow aggregators and applications to query launch data from Genesis token launches. Access metadata through REST endpoints or fetch real-time on-chain state with the SDK. {% .lead %}
 
+## Summary
+
+The Genesis Integration APIs provide read-only access to launch data for Genesis token launches on Solana.
+
+- Query launches by genesis address, token mint, or browse all active launches
+- Public REST API at `https://api.metaplex.com/v1` — no authentication required
+- Returns launch metadata, token info, website, and social links
+- Supports Solana mainnet (default) and devnet via `network` query parameter
+
 ## Base URL
 
 ```
@@ -86,6 +95,13 @@ Error response format:
   }
 }
 ```
+
+## Notes
+
+- The API is rate limited. If you receive a `429` response, reduce your request frequency.
+- All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings.
+- The default network is `solana-mainnet`. Devnet data is available via `?network=solana-devnet`.
+- `POST` endpoints require the [SDK API Client](/smart-contracts/genesis/sdk/api-client) for most use cases.
 
 ## Shared Types
 

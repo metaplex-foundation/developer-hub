@@ -22,6 +22,15 @@ programmingLanguage:
 
 获取平台策划的精选聚焦发行。使用此端点在您的应用中展示精选发行。 {% .lead %}
 
+## Summary
+
+获取平台策划的聚焦精选发行。这是 `/launches` 端点预设 `spotlight=true` 的便捷过滤器。
+
+- 返回 `spotlight` 为 `true` 的 `LaunchData` 对象数组
+- 可通过 `status`（`upcoming`、`live`、`graduated`）进一步过滤
+- 每个条目包含发行详情、基础代币元数据和社交链接
+- 通过 `network` 查询参数支持主网（默认）和开发网
+
 ## 端点
 
 ```
@@ -143,3 +152,9 @@ for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```
+
+## Notes
+
+- 聚焦状态由平台管理，不能通过 API 设置。
+- 此端点使用 `spotlight=true` 作为查询参数的相同 `/launches` 路由 — 它不是一个单独的端点。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。

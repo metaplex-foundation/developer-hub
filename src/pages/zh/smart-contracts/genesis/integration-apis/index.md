@@ -23,6 +23,15 @@ programmingLanguage:
 
 Genesis 集成 API 允许聚合器和应用程序查询 Genesis 代币发行的发行数据。通过 REST 端点访问元数据，或使用 SDK 获取实时链上状态。{% .lead %}
 
+## Summary
+
+Genesis 集成 API 提供对 Solana 上 Genesis 代币发行数据的只读访问。
+
+- 通过 Genesis 地址、代币铸造地址查询或浏览所有活跃发行
+- `https://api.metaplex.com/v1` 的公开 REST API — 无需认证
+- 返回发行元数据、代币信息、网站和社交链接
+- 通过 `network` 查询参数支持 Solana 主网（默认）和开发网
+
 ## 基础 URL
 
 ```
@@ -86,6 +95,13 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
   }
 }
 ```
+
+## Notes
+
+- API 有速率限制。如果收到 `429` 响应，请降低请求频率。
+- 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。
+- 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
+- `POST` 端点在大多数使用场景下建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)。
 
 ## 共享类型
 

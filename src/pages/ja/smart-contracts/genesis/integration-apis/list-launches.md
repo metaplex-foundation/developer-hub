@@ -22,6 +22,15 @@ programmingLanguage:
 
 アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ、トークン情報、ソーシャルリンク付きのリストを返します。 {% .lead %}
 
+## Summary
+
+ステータスやスポットライトのオプションフィルタ付きで全 Genesis ローンチを一覧表示します。最新のアクティビティ順にソートされた `LaunchData` オブジェクトの配列を返します。
+
+- `status`（`upcoming`、`live`、`graduated`）および/または `spotlight`（`true`、`false`）でフィルタ可能
+- 結果は `lastActivityAt` の降順でソートされます
+- 各エントリにはローンチ詳細、ベーストークンメタデータ、ソーシャルリンクが含まれます
+- メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
 ## エンドポイント
 
 ```
@@ -95,7 +104,7 @@ interface LaunchData {
   socials: Socials;
 }
 
-interface ListingsResponse {
+interface LaunchesResponse {
   data: LaunchData[];
 }
 ```
@@ -113,7 +122,7 @@ pub struct LaunchData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ListingsResponse {
+pub struct LaunchesResponse {
     pub data: Vec<LaunchData>,
 }
 ```
@@ -126,7 +135,7 @@ pub struct ListingsResponse {
 const response = await fetch(
   "https://api.metaplex.com/v1/launches?status=live"
 );
-const { data }: ListingsResponse = await response.json();
+const { data }: LaunchesResponse = await response.json();
 console.log(`${data.length} launches`);
 data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.status);
@@ -136,7 +145,7 @@ data.forEach((entry) => {
 ### Rust
 
 ```rust
-let response: ListingsResponse = reqwest::get(
+let response: LaunchesResponse = reqwest::get(
     "https://api.metaplex.com/v1/launches?status=live"
 )
 .await?
@@ -145,4 +154,10 @@ let response: ListingsResponse = reqwest::get(
 
 println!("{} launches", response.data.len());
 ```
+
+## Notes
+
+- 結果はページネーションされません。エンドポイントは一致するすべてのローンチを単一のレスポンスで返します。
+- `status` フィルタは `upcoming`、`live`、`graduated` を受け付けます。省略するとすべてのステータスを返します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。
 

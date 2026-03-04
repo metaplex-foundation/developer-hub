@@ -22,6 +22,15 @@ programmingLanguage:
 
 Retrieve featured spotlight launches curated by the platform. Use this endpoint to highlight selected launches in your application. {% .lead %}
 
+## Summary
+
+Fetch launches that have been curated as spotlights by the platform. This is a convenience filter on the `/launches` endpoint with `spotlight=true` pre-applied.
+
+- Returns an array of `LaunchData` objects where `spotlight` is `true`
+- Can be further filtered by `status` (`upcoming`, `live`, `graduated`)
+- Each entry includes launch details, base token metadata, and social links
+- Supports mainnet (default) and devnet via `network` query parameter
+
 ## Endpoint
 
 ```
@@ -143,3 +152,9 @@ for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```
+
+## Notes
+
+- Spotlight status is curated by the platform and cannot be set via the API.
+- This endpoint uses the same `/launches` route with `spotlight=true` as a query parameter — it is not a separate endpoint.
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).

@@ -23,6 +23,15 @@ programmingLanguage:
 
 Genesis Integration APIs により、アグリゲーターやアプリケーションが Genesis トークンローンチのデータをクエリできます。REST エンドポイントを通じてメタデータにアクセスしたり、SDK でリアルタイムのオンチェーン状態を取得したりできます。 {% .lead %}
 
+## Summary
+
+Genesis 集成 API は、Solana 上の Genesis トークンローンチのデータへの読み取り専用アクセスを提供します。
+
+- Genesis アドレス、トークンミント、またはすべてのアクティブなローンチを検索可能
+- `https://api.metaplex.com/v1` の公開 REST API — 認証不要
+- ローンチメタデータ、トークン情報、ウェブサイト、ソーシャルリンクを返却
+- Solana メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
 ## ベース URL
 
 ```
@@ -186,3 +195,10 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Notes
+
+- API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
+- すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
+- デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
+- `POST` エンドポイントは、ほとんどのユースケースで [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)を使用してください。

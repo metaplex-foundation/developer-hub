@@ -22,6 +22,15 @@ programmingLanguage:
 
 Retrieve all launches associated with a token mint address. A token can have multiple launch campaigns, so the response returns an array of launches. {% .lead %}
 
+## Summary
+
+Fetch all launches linked to a token mint address. Returns an array of launches because a single token can have multiple launch campaigns using different `genesisIndex` values.
+
+- Requires the token mint public key as a path parameter
+- Returns a `TokenData` object containing a `launches` array
+- Includes base token metadata and social links alongside the launches
+- Supports mainnet (default) and devnet via `network` query parameter
+
 ## Endpoint
 
 ```
@@ -144,6 +153,8 @@ let response: TokenResponse = reqwest::get(
 println!("{} launches found", response.data.launches.len());
 ```
 
-{% callout type="note" %}
-A token can have multiple launches using different `genesisIndex` values. The response returns all associated launch campaigns.
-{% /callout %}
+## Notes
+
+- A token can have multiple launches using different `genesisIndex` values. The response returns all associated launch campaigns.
+- Returns `404` if the token mint address is not found.
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).

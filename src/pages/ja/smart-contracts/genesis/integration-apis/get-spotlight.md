@@ -22,6 +22,15 @@ programmingLanguage:
 
 プラットフォームが厳選した注目スポットライトローンチを取得します。アプリケーションで選択されたローンチをハイライト表示するために使用します。 {% .lead %}
 
+## Summary
+
+プラットフォームがスポットライトとして厳選したローンチを取得します。`/launches` エンドポイントに `spotlight=true` を事前適用した便利なフィルタです。
+
+- `spotlight` が `true` の `LaunchData` オブジェクトの配列を返します
+- `status`（`upcoming`、`live`、`graduated`）でさらにフィルタ可能
+- 各エントリにはローンチ詳細、ベーストークンメタデータ、ソーシャルリンクが含まれます
+- メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
 ## エンドポイント
 
 ```
@@ -143,3 +152,9 @@ for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```
+
+## Notes
+
+- スポットライトステータスはプラットフォームによって管理され、API 経由で設定することはできません。
+- このエンドポイントは `spotlight=true` をクエリパラメータとして使用する同じ `/launches` ルートを使用します — 別のエンドポイントではありません。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。

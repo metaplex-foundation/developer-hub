@@ -22,6 +22,15 @@ programmingLanguage:
 
 检索特定 genesis 地址的发行数据。返回发行信息、代币元数据、网站和社交链接。 {% .lead %}
 
+## Summary
+
+通过 Genesis 账户公钥获取单个发行。返回包含发行详情、基础代币元数据、网站和社交链接的 `LaunchData` 对象。
+
+- 需要 Genesis 账户公钥作为路径参数
+- 返回单个 `LaunchData` 对象（非数组）
+- 包含代币元数据（`name`、`symbol`、`image`）和社交链接
+- 通过 `network` 查询参数支持主网（默认）和开发网
+
 ## 端点
 
 ```
@@ -136,6 +145,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-查找 genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/smart-contracts/genesis/integration-apis/get-launches-by-token)端点。
-{% /callout %}
+## Notes
+
+- 查找 Genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/smart-contracts/genesis/integration-apis/get-launches-by-token)端点。
+- 如果 Genesis 地址未找到或没有有效发行，返回 `404`。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。

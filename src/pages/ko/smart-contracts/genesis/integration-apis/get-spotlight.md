@@ -22,6 +22,15 @@ programmingLanguage:
 
 플랫폼에서 큐레이팅된 주요 스포트라이트 런칭을 조회합니다. 애플리케이션에서 선택된 런칭을 하이라이트하는 데 사용합니다. {% .lead %}
 
+## Summary
+
+플랫폼에서 스포트라이트로 큐레이팅된 런치를 조회합니다. `/launches` 엔드포인트에 `spotlight=true`를 사전 적용한 편의 필터입니다.
+
+- `spotlight`가 `true`인 `LaunchData` 객체 배열 반환
+- `status`(`upcoming`, `live`, `graduated`)로 추가 필터 가능
+- 각 항목에는 런치 상세 정보, 베이스 토큰 메타데이터, 소셜 링크 포함
+- `network` 쿼리 파라미터를 통해 메인넷(기본값) 및 데브넷 지원
+
 ## 엔드포인트
 
 ```
@@ -143,3 +152,9 @@ for entry in &response.data {
     println!("{}", entry.base_token.name);
 }
 ```
+
+## Notes
+
+- 스포트라이트 상태는 플랫폼에서 관리되며 API를 통해 설정할 수 없습니다.
+- 이 엔드포인트는 `spotlight=true`를 쿼리 파라미터로 사용하는 동일한 `/launches` 라우트를 사용합니다 — 별도의 엔드포인트가 아닙니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.

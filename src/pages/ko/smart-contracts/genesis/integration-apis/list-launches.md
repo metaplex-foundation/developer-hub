@@ -22,6 +22,15 @@ programmingLanguage:
 
 활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터, 토큰 정보, 소셜 링크가 포함된 목록을 반환합니다. {% .lead %}
 
+## Summary
+
+상태 및 스포트라이트 옵션 필터를 사용하여 모든 Genesis 런치를 목록으로 조회합니다. 최근 활동순으로 정렬된 `LaunchData` 객체 배열을 반환합니다.
+
+- `status`(`upcoming`, `live`, `graduated`) 및/또는 `spotlight`(`true`, `false`)로 필터 가능
+- 결과는 `lastActivityAt` 내림차순으로 정렬
+- 각 항목에는 런치 상세 정보, 베이스 토큰 메타데이터, 소셜 링크 포함
+- `network` 쿼리 파라미터를 통해 메인넷(기본값) 및 데브넷 지원
+
 ## 엔드포인트
 
 ```
@@ -95,7 +104,7 @@ interface LaunchData {
   socials: Socials;
 }
 
-interface ListingsResponse {
+interface LaunchesResponse {
   data: LaunchData[];
 }
 ```
@@ -113,7 +122,7 @@ pub struct LaunchData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ListingsResponse {
+pub struct LaunchesResponse {
     pub data: Vec<LaunchData>,
 }
 ```
@@ -126,7 +135,7 @@ pub struct ListingsResponse {
 const response = await fetch(
   "https://api.metaplex.com/v1/launches?status=live"
 );
-const { data }: ListingsResponse = await response.json();
+const { data }: LaunchesResponse = await response.json();
 console.log(`${data.length} launches`);
 data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.status);
@@ -136,7 +145,7 @@ data.forEach((entry) => {
 ### Rust
 
 ```rust
-let response: ListingsResponse = reqwest::get(
+let response: LaunchesResponse = reqwest::get(
     "https://api.metaplex.com/v1/launches?status=live"
 )
 .await?
@@ -145,4 +154,10 @@ let response: ListingsResponse = reqwest::get(
 
 println!("{} launches", response.data.len());
 ```
+
+## Notes
+
+- 결과는 페이지네이션되지 않습니다. 엔드포인트는 일치하는 모든 런치를 단일 응답으로 반환합니다.
+- `status` 필터는 `upcoming`, `live`, `graduated`를 허용합니다. 생략하면 모든 상태를 반환합니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.
 

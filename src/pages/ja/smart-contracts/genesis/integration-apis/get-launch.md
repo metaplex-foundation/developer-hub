@@ -22,6 +22,15 @@ programmingLanguage:
 
 特定の Genesis アドレスのローンチデータを取得します。ローンチ情報、トークンメタデータ、ウェブサイト、ソーシャルリンクを返します。 {% .lead %}
 
+## Summary
+
+Genesis アカウント公開鍵で単一のローンチを取得します。ローンチ詳細、ベーストークンメタデータ、ウェブサイト、ソーシャルリンクを `LaunchData` オブジェクトで返します。
+
+- Genesis アカウント公開鍵をパスパラメータとして必要とします
+- 単一の `LaunchData` オブジェクトを返します（配列ではありません）
+- トークンメタデータ（`name`、`symbol`、`image`）とソーシャルリンクを含みます
+- メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
 ## エンドポイント
 
 ```
@@ -136,6 +145,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、代わりに [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) エンドポイントを使用してください。
-{% /callout %}
+## Notes
+
+- Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、[トークンによるローンチ取得](/smart-contracts/genesis/integration-apis/get-launches-by-token)エンドポイントを使用してください。
+- Genesis アドレスが見つからない場合や有効なローンチがない場合は `404` を返します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。

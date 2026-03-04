@@ -22,6 +22,15 @@ programmingLanguage:
 
 检索与代币铸造地址关联的所有发行。一个代币可以有多个发行活动，因此响应返回发行数组。 {% .lead %}
 
+## Summary
+
+获取与代币铸造地址关联的所有发行。由于一个代币可以使用不同的 `genesisIndex` 值拥有多个发行活动，因此返回发行数组。
+
+- 需要代币铸造公钥作为路径参数
+- 返回包含 `launches` 数组的 `TokenData` 对象
+- 发行数据中包含基础代币元数据和社交链接
+- 通过 `network` 查询参数支持主网（默认）和开发网
+
 ## 端点
 
 ```
@@ -139,6 +148,8 @@ let response: TokenResponse = reqwest::get(
 println!("{} launches found", response.data.launches.len());
 ```
 
-{% callout type="note" %}
-一个代币可以使用不同的 `genesisIndex` 值拥有多个发行。响应返回所有关联的发行活动。
-{% /callout %}
+## Notes
+
+- 一个代币可以使用不同的 `genesisIndex` 值拥有多个发行。响应返回所有关联的发行活动。
+- 如果代币铸造地址未找到，返回 `404`。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。

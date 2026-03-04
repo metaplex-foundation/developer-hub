@@ -22,6 +22,15 @@ programmingLanguage:
 
 Retrieve active and upcoming Genesis launch listings. Returns a list of launches with their metadata, token info, and social links. {% .lead %}
 
+## Summary
+
+List all Genesis launches with optional filters for status and spotlight. Returns an array of `LaunchData` objects sorted by most recent activity.
+
+- Filter by `status` (`upcoming`, `live`, `graduated`) and/or `spotlight` (`true`, `false`)
+- Results are sorted by `lastActivityAt` in descending order
+- Each entry includes launch details, base token metadata, and social links
+- Supports mainnet (default) and devnet via `network` query parameter
+
 ## Endpoint
 
 ```
@@ -95,7 +104,7 @@ interface LaunchData {
   socials: Socials;
 }
 
-interface ListingsResponse {
+interface LaunchesResponse {
   data: LaunchData[];
 }
 ```
@@ -113,7 +122,7 @@ pub struct LaunchData {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct ListingsResponse {
+pub struct LaunchesResponse {
     pub data: Vec<LaunchData>,
 }
 ```
@@ -126,7 +135,7 @@ pub struct ListingsResponse {
 const response = await fetch(
   "https://api.metaplex.com/v1/launches?status=live"
 );
-const { data }: ListingsResponse = await response.json();
+const { data }: LaunchesResponse = await response.json();
 console.log(`${data.length} launches`);
 data.forEach((entry) => {
   console.log(entry.baseToken.name, entry.launch.status);
@@ -136,7 +145,7 @@ data.forEach((entry) => {
 ### Rust
 
 ```rust
-let response: ListingsResponse = reqwest::get(
+let response: LaunchesResponse = reqwest::get(
     "https://api.metaplex.com/v1/launches?status=live"
 )
 .await?
@@ -145,4 +154,10 @@ let response: ListingsResponse = reqwest::get(
 
 println!("{} launches", response.data.len());
 ```
+
+## Notes
+
+- Results are not paginated. The endpoint returns all matching launches in a single response.
+- The `status` filter accepts `upcoming`, `live`, or `graduated`. Omit to return all statuses.
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).
 
