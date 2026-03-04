@@ -2,6 +2,8 @@
 title: How It Works
 metaTitle: How It Works | Metaplex Skill
 description: Understand the progressive disclosure architecture of the Metaplex Skill.
+created: '02-23-2026'
+updated: '03-04-2026'
 keywords:
   - progressive disclosure
   - agent skill architecture
@@ -15,7 +17,16 @@ about:
 proficiencyLevel: Intermediate
 ---
 
-The Metaplex Skill uses **progressive disclosure** to give AI agents exactly the context they need — nothing more, nothing less. This keeps token usage low while providing comprehensive coverage of all Metaplex programs.
+The Metaplex Skill uses **progressive disclosure** to give AI agents exactly the context they need — nothing more, nothing less. This keeps token usage low while providing comprehensive coverage of all Metaplex programs. {% .lead %}
+
+## Summary
+
+The Metaplex Skill uses a two-layer progressive disclosure architecture to provide AI agents with accurate Metaplex knowledge while minimizing token usage.
+
+- A lightweight router file (`SKILL.md`) maps tasks to specific reference files
+- Agents only read the files relevant to the current task
+- Reference files cover CLI commands, SDK patterns, and conceptual foundations
+- The architecture keeps context small while covering all Metaplex programs
 
 ## Architecture
 
@@ -25,7 +36,7 @@ The Skill has two layers:
 
 2. **Reference files** — Detailed files covering CLI setup, program-specific CLI commands, SDK patterns, and conceptual foundations. The agent only reads the files relevant to the current task.
 
-## How Agents Use It
+## How Agents Use the Metaplex Skill
 
 When you ask your agent to perform a Metaplex task:
 
@@ -88,3 +99,9 @@ The task router in `SKILL.md` maps each task type to the files the agent should 
 | SDK: Token Metadata with Kit | `sdk-token-metadata-kit.md` |
 | SDK: Token launch (Genesis) | `sdk-umi.md` + `sdk-genesis.md` |
 | Account structures, PDAs, concepts | `concepts.md` |
+
+## Notes
+
+- The Skill is designed for AI coding agents and may not render as human-readable documentation
+- Reference files are maintained alongside the [Skill repository](https://github.com/metaplex-foundation/skill) and may update independently of the developer hub
+- Agents that do not support the [Agent Skills](https://agentskills.io) format can still use the Skill via manual installation

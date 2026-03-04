@@ -2,6 +2,8 @@
 title: Installation
 metaTitle: Installation | Metaplex Skill
 description: Install the Metaplex Skill in Claude Code, Cursor, Copilot, or any AI coding agent.
+created: '02-23-2026'
+updated: '03-04-2026'
 keywords:
   - agent skill installation
   - Claude Code skills
@@ -22,7 +24,16 @@ howToTools:
   - GitHub Copilot
 ---
 
-Install the Metaplex Skill so your AI coding agent has accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
+Install the Metaplex Skill so your AI coding agent has accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns. {% .lead %}
+
+## Summary
+
+The Metaplex Skill can be installed via the `npx skills` CLI or by manually copying files into your agent's skills directory.
+
+- One-command install via `npx skills add` for any compatible agent
+- Manual install supported for Claude Code (project-scoped or global)
+- Works with Claude Code, Cursor, Copilot, Windsurf, and other agents
+- Verify by asking your agent to perform any Metaplex operation
 
 ## Via skills.sh (Recommended)
 
@@ -67,3 +78,9 @@ After installation, ask your agent to perform a Metaplex operation. For example:
 - *"Mint a compressed NFT to my tree"*
 
 If the Skill is loaded correctly, your agent will reference the correct CLI commands or SDK code without hallucinating flags or APIs.
+
+## Notes
+
+- The `npx skills add` command requires Node.js and npm/npx to be installed
+- Manual installation paths differ between project-scoped (`.claude/skills/`) and global (`~/.claude/skills/`) setups
+- The Skill files are static references — update by re-running the install command to get the latest version

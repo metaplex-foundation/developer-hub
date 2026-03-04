@@ -2,6 +2,8 @@
 title: Programs & Operations
 metaTitle: Programs & Operations | Metaplex Skill
 description: Detailed breakdown of programs and operations covered by the Metaplex Skill.
+created: '02-23-2026'
+updated: '03-04-2026'
 keywords:
   - Core
   - Token Metadata
@@ -18,7 +20,16 @@ about:
 proficiencyLevel: Beginner
 ---
 
-The Metaplex Skill covers five programs across CLI, Umi SDK, and Kit SDK. This page provides a detailed breakdown of what each program supports and when to use it.
+The Metaplex Skill covers five programs across CLI, Umi SDK, and Kit SDK. This page provides a detailed breakdown of what each program supports and when to use it. {% .lead %}
+
+## Summary
+
+The Metaplex Skill provides AI agents with knowledge of five Metaplex programs and their available tooling across CLI, Umi SDK, and Kit SDK.
+
+- All five programs (Core, Token Metadata, Bubblegum, Candy Machine, Genesis) support both CLI and Umi SDK
+- Kit SDK is available for Token Metadata only
+- The `mplx` CLI handles most operations without writing code
+- Use this page to determine which program and tooling approach fits your task
 
 ## Program Coverage
 
@@ -127,3 +138,11 @@ Use **Genesis** for token generation events with fair distribution mechanics and
 | **CLI** | Default choice — direct execution, no code needed |
 | **Umi SDK** | You need code, or the operation isn't supported by CLI |
 | **Kit SDK** | You specifically use `@solana/kit` and want minimal dependencies (Token Metadata only) |
+
+## Notes
+
+- Compressed NFT (Bubblegum) operations require a DAS-enabled RPC endpoint; standard Solana RPC does not support the Digital Asset Standard API
+- Candy Machine minting requires the SDK — the CLI handles setup, configuration, and item insertion only
+- Core NFT transfers are SDK-only and not available via the CLI
+- Querying assets by owner or collection requires the DAS API (SDK only)
+- Kit SDK support is limited to Token Metadata; all other programs use Umi

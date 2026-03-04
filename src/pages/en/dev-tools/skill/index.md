@@ -16,9 +16,20 @@ about:
   - AI-assisted development
   - Metaplex
 proficiencyLevel: Beginner
+created: '02-23-2026'
+updated: '03-04-2026'
 ---
 
 Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base that gives AI coding agents accurate, up-to-date knowledge of Metaplex programs, CLI commands, and SDK patterns. {% .lead %}
+
+## Summary
+
+The Metaplex Skill gives AI coding agents accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
+
+- Covers five programs: Core, Token Metadata, Bubblegum, Candy Machine, and Genesis
+- Supports CLI, Umi SDK, and Kit SDK approaches
+- Works with Claude Code, Cursor, Copilot, Windsurf, and other compatible agents
+- Uses progressive disclosure to minimize token usage while providing full coverage
 
 Instead of relying on hallucinated APIs or incorrect flags, your AI agent can reference the Skill to get accurate commands and code on the first try.
 
