@@ -3,7 +3,7 @@ title: Genesis - Solana 代币发行智能合约与代币发射台
 metaTitle: Genesis | Solana 代币发射台 | Presale 与公平发射代币发射台平台 | Metaplex
 description: Genesis 是 Solana 代币发射台，支持预售、公平发射和代币生成事件 (TGE)。链上 SPL 代币创建、众筹和代币分发平台。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '03-04-2026'
 keywords:
   - token launch
   - token launchpad
@@ -36,12 +36,15 @@ faqs:
     a: 可以。Genesis 提供了撤销铸造权限和冻结权限的指令，向持有者表明不会再铸造额外的代币。
   - q: Launch Pool 和 Presale 有什么区别？
     a: Presale 预先设定固定价格。Launch Pool 根据总存款有机地发现价格——存款越多意味着每个代币的隐含价格越高。
+  - q: 什么是 memecoin 发行类型？
+    a: Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 50/50 分配、98% Raydium LP 和永久 LP 锁仓。您只需设置存款开始时间。
 ---
 
 **Genesis** 是 Solana 代币发射台和**代币生成事件 (TGE)** 智能合约。通过链上协调运行预售、公平发射或众筹，实现 SPL 代币创建、代币分发和资金收集。{% .lead %}
 
 {% callout title="选择您的路径" %}
 - **无代码发射？** 使用 [Metaplex 代币发射台](https://www.metaplex.com) 无需编码即可发行代币
+- **快速 memecoin 发行？** 使用 `launchType: 'memecoin'` 进行带硬编码默认值的简化发行——只需设置开始时间。参见 [API 客户端](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
 - **构建自己的发射台？** 使用 Genesis SDK 构建自定义代币发行平台或在您自己的网站上托管代币销售
 - **刚接触 Genesis？** 从[快速入门](/zh/smart-contracts/genesis/getting-started)开始了解流程
 - **准备好构建了？** 直接跳转到 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)
@@ -144,6 +147,9 @@ Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposi
 
 ### Launch Pool 和 Presale 有什么区别？
 **Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。
+
+### 什么是 memecoin 发行类型？
+Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 5 亿代币分配（10 亿总供应量的 50%）、98% Raydium LP、1% 创建者解锁和永久 LP 锁仓。您只需提供存款开始时间。在 SDK 中使用 `launchType: 'memecoin'`，在 REST API 中使用 `"type": "memecoin"`。详情请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
 
 ### 我可以组合多种发行机制吗？
 可以。Genesis 使用 Bucket 系统，您可以添加多个流入 Bucket 并配置用于金库或归属的流出 Bucket。

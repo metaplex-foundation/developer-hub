@@ -3,7 +3,7 @@ title: Genesis - Solana Token Launchpad & Launch Platform
 metaTitle: Genesis — Solana Token Launchpad for Fair Launches & Token Sales | Metaplex
 description: Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '03-04-2026'
 keywords:
   - token launch
   - token launchpad
@@ -36,12 +36,15 @@ faqs:
     a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
   - q: What's the difference between Launch Pool and Presale?
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
+  - q: What is the memecoin launch type?
+    a: The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 50/50 allocation, 98% Raydium LP, and permanent LP lock. You only need to set a deposit start time.
 ---
 
 **Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run a presale, fair launch, auction, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}
 
 {% callout title="Choose Your Path" %}
 - **No-code launch?** Use the [Metaplex token launchpad](https://www.metaplex.com) to launch a token with no coding required
+- **Quick memecoin launch?** Use `launchType: 'memecoin'` for a streamlined launch with hardcoded defaults — just set a start time. See [API Client](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
 - **Build your own launchpad?** Use the Genesis SDK to build a custom token launch platform or host a token sale on your own website
 - **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
 - **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
@@ -144,6 +147,9 @@ Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` inst
 
 ### What's the difference between Launch Pool and Presale?
 **Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
+
+### What is the memecoin launch type?
+The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 500M token allocation (50% of 1B supply), 98% Raydium LP, 1% creator unlocked, and permanent LP lock. You only need to provide a deposit start time. Use `launchType: 'memecoin'` in the SDK or `"type": "memecoin"` in the REST API. See [API Client](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow) for details.
 
 ### Can I combine multiple launch mechanisms?
 Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.

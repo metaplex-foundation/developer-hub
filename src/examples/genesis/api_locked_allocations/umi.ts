@@ -34,7 +34,7 @@ const input: CreateLaunchInput = {
     launchpool: {
       tokenAllocation: 500_000_000,
       depositStartTime: new Date('2026-04-01T00:00:00Z'),
-      raiseGoal: 200,
+      raiseGoal: 250,
       raydiumLiquidityBps: 5000,
       fundsRecipient: 'FundsRecipientWallet...',
     },

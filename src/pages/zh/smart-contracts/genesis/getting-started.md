@@ -3,7 +3,7 @@ title: 入门指南
 metaTitle: Genesis 入门指南 | 如何在 Solana 上发行代币 | Metaplex
 description: 逐步学习如何在 Solana 上发行 SPL 代币。使用 Genesis 代币发射台规划您的预售、公平发射或代币销售。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '03-04-2026'
 keywords:
   - Genesis tutorial
   - token launch flow
@@ -37,6 +37,10 @@ faqs:
 
 {% callout title="无代码选项" %}
 如果您想不编写代码就发行代币，请使用 [Metaplex 代币发射台](https://www.metaplex.com)。以下指南适用于希望构建自定义发射台平台或在自己网站上托管代币销售的开发者。
+{% /callout %}
+
+{% callout title="Memecoin 发行" %}
+对于 memecoin 发行，SDK 提供了一条简化路径，可跳过大部分配置。只需设置 `launchType: 'memecoin'` 和存款开始时间即可——分配、LP、费用和锁仓计划均为硬编码默认值。详情请参阅 [API 客户端 memecoin 部分](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
 {% /callout %}
 
 {% callout title="准备好开始构建了吗？" %}

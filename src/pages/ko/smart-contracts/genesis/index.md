@@ -3,7 +3,7 @@ title: Genesis - 솔라나 토큰 런치패드 & 출시 플랫폼
 metaTitle: Genesis | 솔라나 토큰 런치패드 | Presale & 공정한 출시 토큰 런치패드 플랫폼 | Metaplex
 description: Genesis는 프리세일, 공정한 출시 및 토큰 생성 이벤트(TGE)를 위한 솔라나 토큰 런치패드입니다. 온체인 SPL 토큰 생성, 크라우드세일, 토큰 배포 플랫폼.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '03-04-2026'
 keywords:
   - token launch
   - token launchpad
@@ -36,12 +36,15 @@ faqs:
     a: 네. Genesis는 민트 및 동결 권한을 취소하는 명령어를 제공하여, 추가 토큰을 발행할 수 없음을 보유자에게 알릴 수 있습니다.
   - q: Launch Pool과 Presale의 차이점은 무엇인가요?
     a: Presale은 사전에 설정된 고정 가격을 가집니다. Launch Pool은 총 예치금을 기반으로 유기적으로 가격을 발견합니다 - 더 많은 예치금은 토큰당 더 높은 내재 가격을 의미합니다.
+  - q: 밈코인 출시 유형이란 무엇인가요?
+    a: 밈코인 출시 유형은 하드코딩된 기본값을 사용하는 간소화된 옵션입니다 — 1시간 예치 기간, 고정 50/50 할당, 98% Raydium LP, 영구 LP 잠금. 예치 시작 시간만 설정하면 됩니다.
 ---
 
 **Genesis**는 **토큰 생성 이벤트(TGE)**를 위한 솔라나 토큰 런치패드이자 스마트 컨트랙트입니다. SPL 토큰 생성, 토큰 배포, 자금 수집을 위한 온체인 조정으로 프리세일, 공정한 출시, 크라우드세일을 실행하세요. {% .lead %}
 
 {% callout title="경로를 선택하세요" %}
 - **노코드로 출시하고 싶으신가요?** [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하여 코딩 없이 토큰을 출시하세요
+- **빠른 밈코인 출시?** `launchType: 'memecoin'`을 사용하여 하드코딩된 기본값으로 간소화된 출시를 하세요 — 시작 시간만 설정하면 됩니다. [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow) 참조
 - **나만의 런치패드를 구축하고 싶으신가요?** Genesis SDK를 사용하여 맞춤형 토큰 출시 플랫폼을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하세요
 - **Genesis가 처음이신가요?** [시작하기](/ko/smart-contracts/genesis/getting-started)에서 흐름을 이해하세요
 - **구축할 준비가 되셨나요?** [Launch Pool](/ko/smart-contracts/genesis/launch-pool) 또는 [Presale](/ko/smart-contracts/genesis/presale)로 바로 이동하세요
@@ -144,6 +147,9 @@ Genesis는 예치금에 대해 {% fee product="genesis" config="launchPool" fee=
 
 ### Launch Pool과 Presale의 차이점은 무엇인가요?
 **Presale**은 사전에 설정된 고정 가격을 가집니다. **Launch Pool**은 유기적으로 가격을 발견합니다—더 많은 예치금은 토큰당 더 높은 내재 가격을 의미하며, 모든 참가자에게 비례 배분됩니다.
+
+### 밈코인 출시 유형이란 무엇인가요?
+밈코인 출시 유형은 하드코딩된 기본값을 사용하는 간소화된 옵션입니다 — 1시간 예치 기간, 고정 5억 토큰 할당 (10억 공급량의 50%), 98% Raydium LP, 1% 생성자 잠금 해제, 영구 LP 잠금. 예치 시작 시간만 제공하면 됩니다. SDK에서는 `launchType: 'memecoin'`을, REST API에서는 `"type": "memecoin"`을 사용하세요. 자세한 내용은 [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)를 참조하세요.
 
 ### 여러 출시 메커니즘을 조합할 수 있나요?
 네. Genesis는 여러 Inflow Bucket을 추가하고 트레저리 또는 베스팅을 위한 Outflow Bucket을 구성할 수 있는 Bucket 시스템을 사용합니다.

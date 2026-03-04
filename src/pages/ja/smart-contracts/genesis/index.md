@@ -3,7 +3,7 @@ title: Genesis - Solanaトークンローンチパッド＆ローンチプラッ
 metaTitle: Genesis | Solanaトークンローンチパッド | Presale＆フェアローンチプラットフォーム | Metaplex
 description: GenesisはPresale、フェアローンチ、トークン生成イベント（TGE）に対応したSolanaトークンローンチパッドです。オンチェーンでのSPLトークン作成、クラウドセール、トークン配布プラットフォームを提供します。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '03-04-2026'
 keywords:
   - token launchpad
   - TGE
@@ -28,12 +28,15 @@ faqs:
     a: はい。Genesis はミント権限とフリーズ権限を取り消す命令を提供しており、追加のトークンが発行されないことを保有者に示すことができます。
   - q: Launch Pool と Presale の違いは何ですか？
     a: Presale は事前に固定価格が設定されます。Launch Pool は預入総額に基づいて価格が自然に決定されます。預入額が多いほど、トークンあたりの暗示価格が高くなります。
+  - q: ミームコインローンチタイプとは何ですか？
+    a: ミームコインローンチタイプは、ハードコードされたデフォルト値を持つ合理化されたオプションです。1時間の入金ウィンドウ、固定50/50アロケーション、98% Raydium LP、永続的なLPロックが含まれます。入金開始時刻を設定するだけで利用できます。
 ---
 
 **Genesis** は、Solana トークンローンチパッドであり、**トークン生成イベント（TGE）**のためのスマートコントラクトです。トークンセール、プレセール、フェアローンチ、クラウドセールを、SPL トークンの作成、トークン配布、資金収集のためのオンチェーン調整機能で実行できます。 {% .lead %}
 
 {% callout title="あなたに合ったパスを選択" %}
 - **ローンチツールをお探しですか？** [Metaplex トークンローンチパッド](https://www.metaplex.com)は、トークンローンチのためのツールとSDKを提供しています
+- **手軽にミームコインをローンチしたい方は？** `launchType: 'memecoin'` を使用すると、ハードコードされたデフォルト値で合理化されたローンチが可能です。開始時刻を設定するだけです。[API クライアント](/ja/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)を参照
 - **独自のローンチパッドを構築したい方は？** Genesis SDK を使って、カスタムトークンローンチプラットフォームの構築や、独自のウェブサイトでのトークンセールの開催が可能です
 - **Genesis が初めての方は？** [はじめに](/ja/smart-contracts/genesis/getting-started)から全体の流れを理解しましょう
 - **構築する準備ができた方は？** [Launch Pool](/ja/smart-contracts/genesis/launch-pool) または [Presale](/ja/smart-contracts/genesis/presale) へ進みましょう
@@ -136,6 +139,9 @@ Genesis は入金に対して {% fee product="genesis" config="launchPool" fee="
 
 ### Launch Pool と Presale の違いは何ですか？
 **Presale** は事前に固定価格が設定されます。**Launch Pool** は価格が自然に決定されます。預入額が多いほどトークンあたりの暗示価格が高くなり、全参加者への比例配分が行われます。
+
+### ミームコインローンチタイプとは何ですか？
+ミームコインローンチタイプは、ハードコードされたデフォルト値を持つ合理化されたオプションです。1時間の入金ウィンドウ、固定5億トークンアロケーション（総供給量10億の50%）、98% Raydium LP、1%クリエーターロック解除、永続的なLPロックが含まれます。入金開始時刻を指定するだけで利用できます。SDK では `launchType: 'memecoin'` を、REST API では `"type": "memecoin"` を使用してください。詳細は [API クライアント](/ja/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)を参照してください。
 
 ### 複数のローンチメカニズムを組み合わせることはできますか？
 はい。Genesis は bucket システムを採用しており、複数の Inflow bucket を追加し、トレジャリーやベスティング用の Outflow bucket を設定できます。

@@ -3,7 +3,7 @@ title: 시작하기
 metaTitle: Genesis 시작하기 | 솔라나에서 토큰 출시하는 방법 | Metaplex
 description: 솔라나에서 SPL 토큰을 출시하는 방법을 단계별로 배우세요. Genesis 토큰 런치패드를 사용하여 프리세일, 공정한 출시, 토큰 세일을 계획하세요.
 created: '01-15-2025'
-updated: '02-17-2026'
+updated: '03-04-2026'
 keywords:
   - Genesis tutorial
   - token launch flow
@@ -37,6 +37,10 @@ faqs:
 
 {% callout title="노코드 옵션" %}
 코드 작성 없이 토큰을 출시하고 싶다면 [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하세요. 아래 가이드는 맞춤형 런치패드 플랫폼을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하려는 개발자를 위한 것입니다.
+{% /callout %}
+
+{% callout title="밈코인 출시" %}
+밈코인 출시의 경우, SDK는 대부분의 구성을 건너뛰는 간소화된 경로를 제공합니다. 예치 시작 시간만 설정하고 `launchType: 'memecoin'`을 사용하세요 — 할당, LP, 수수료, 잠금 일정은 모두 하드코딩되어 있습니다. 자세한 내용은 [API 클라이언트 밈코인 섹션](/ko/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)을 참조하세요.
 {% /callout %}
 
 {% callout title="빌드할 준비가 되셨나요?" %}
