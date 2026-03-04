@@ -138,6 +138,15 @@ export const genesis = {
             },
           ],
         },
+        {
+          title: 'CLI',
+          links: [
+            {
+              title: 'Genesis CLI Commands',
+              href: '/dev-tools/cli/genesis',
+            },
+          ],
+        },
       ],
     },
     {
@@ -154,7 +163,8 @@ export const genesis = {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
         'Launch Types': 'Launch Types',
-        'Integration APIs': 'Integration APIs',
+        'Integrations': 'Integrations',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': 'Overview',
@@ -172,6 +182,7 @@ export const genesis = {
         'Register Launch': 'Register Launch',
         'Fetch Bucket State': 'Fetch Bucket State',
         'Fetch Deposit State': 'Fetch Deposit State',
+        'Genesis CLI Commands': 'Genesis CLI Commands',
       },
     },
     ja: {
@@ -181,7 +192,8 @@ export const genesis = {
         'Introduction': '紹介',
         'SDK': 'SDK',
         'Launch Types': 'ローンチタイプ',
-        'Integration APIs': 'インテグレーションAPI',
+        'Integrations': 'インテグレーション',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '概要',
@@ -199,6 +211,7 @@ export const genesis = {
         'Register Launch': 'ローンチ登録',
         'Fetch Bucket State': 'バケット状態の取得',
         'Fetch Deposit State': 'デポジット状態の取得',
+        'Genesis CLI Commands': 'Genesis CLIコマンド',
       },
     },
     ko: {
@@ -208,7 +221,8 @@ export const genesis = {
         'Introduction': '소개',
         'SDK': 'SDK',
         'Launch Types': '런치 유형',
-        'Integration APIs': '통합 API',
+        'Integrations': '통합',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '개요',
@@ -226,6 +240,7 @@ export const genesis = {
         'Register Launch': '런치 등록',
         'Fetch Bucket State': '버킷 상태 조회',
         'Fetch Deposit State': '예치 상태 조회',
+        'Genesis CLI Commands': 'Genesis CLI 명령어',
       },
     },
     zh: {
@@ -235,7 +250,8 @@ export const genesis = {
         'Introduction': '简介',
         'SDK': 'SDK',
         'Launch Types': '发行类型',
-        'Integration APIs': '集成API',
+        'Integrations': '集成',
+        'CLI': 'CLI',
       },
       links: {
         'Overview': '概述',
@@ -253,6 +269,7 @@ export const genesis = {
         'Register Launch': '注册发行',
         'Fetch Bucket State': '获取桶状态',
         'Fetch Deposit State': '获取存款状态',
+        'Genesis CLI Commands': 'Genesis CLI命令',
       },
     },
   },

@@ -1,8 +1,36 @@
 ---
 title: 委托树
-metaTitle: 委托树 | Bubblegum V2
+metaTitle: 委托树 - Bubblegum V2
 description: 了解如何在Bubblegum V2上委托默克尔树。
+created: '2025-01-15'
+updated: '2026-02-24'
+keywords:
+  - delegate tree
+  - tree delegation
+  - tree authority
+  - tree creator
+  - set tree delegate
+about:
+  - Compressed NFTs
+  - Tree management
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 树委托人可以做什么？
+    a: 树委托人可以代表树创建者从树中铸造压缩NFT。这仅与私有树相关。
+  - q: 如何撤销树委托人？
+    a: 将newTreeDelegate设置为树创建者自己的公钥来使用setTreeDelegate。
 ---
+
+## Summary
+
+**委托树**允许树创建者授权另一个账户从私有Bubblegum树中铸造cNFT。本页面介绍批准和撤销树委托权限的方法。
+
+- 批准树委托人代表树创建者铸造cNFT
+- 通过将委托人重置为创建者来撤销树委托人
+- 仅与私有树相关（公共树允许任何人铸造）
 
 与压缩NFT的所有者可以批准委托权限类似，Bubblegum树的创建者也可以批准另一个账户代表他们执行操作。{% .lead %}
 
@@ -55,3 +83,17 @@ await setTreeDelegate(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- 树委托仅与私有树相关。公共树允许任何人铸造。
+- 一次只能有一个树委托人处于活动状态。批准新委托人会替换之前的委托人。
+- 即使设置了委托人，树创建者仍保留完整权限。
+
+## Glossary
+
+| 术语 | 定义 |
+|------|------|
+| **树委托人** | 由树创建者授权从私有树中铸造cNFT的账户 |
+| **树创建者** | 创建Bubblegum树并拥有完整管理权限的账户 |
+| **setTreeDelegate** | 用于批准或撤销树委托人的指令 |

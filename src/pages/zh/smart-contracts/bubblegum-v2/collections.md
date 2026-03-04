@@ -1,8 +1,41 @@
 ---
-title: 验证集合
-metaTitle: 验证集合 | Bubblegum V2
+title: 管理集合
+metaTitle: 管理集合 - Bubblegum V2
 description: 了解如何在Bubblegum上设置、验证和取消验证集合。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - NFT collection
+  - verify collection
+  - cNFT collection
+  - MPL-Core collection
+  - setCollectionV2
+  - BubblegumV2 plugin
+about:
+  - Compressed NFTs
+  - NFT collections
+  - MPL-Core
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 铸造后如何将cNFT添加到集合中？
+    a: 使用带有newCoreCollection参数的setCollectionV2指令。集合必须启用BubblegumV2插件。
+  - q: 可以更改cNFT的集合吗？
+    a: 可以。使用带有coreCollection（当前）和newCoreCollection（新）两个参数的setCollectionV2。两个集合权限都必须签名。
+  - q: BubblegumV2插件是什么？
+    a: 它是一个MPL-Core集合插件，在集合上启用Bubblegum V2功能，如冻结/解冻、灵魂绑定cNFT和版税强制执行。
 ---
+
+## Summary
+
+**Managing collections** for compressed NFTs uses the **setCollectionV2** instruction to add, change, or remove MPL-Core collections on existing cNFTs. This page covers setting and removing collections after minting.
+
+- Set an MPL-Core collection on an existing cNFT using setCollectionV2
+- Remove a collection from a cNFT
+- Change between collections (both authorities must sign)
+- Collections must have the BubblegumV2 plugin enabled
 
 cNFT可以在铸造时或之后添加到MPL-Core集合。{% .lead %}
 
@@ -84,3 +117,22 @@ const signature = await setCollectionV2(umi, {
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- The MPL-Core collection must have the `BubblegumV2` plugin enabled before cNFTs can be added to it.
+- Unlike Bubblegum V1 (which uses Token Metadata collections with a "verified" boolean), V2 uses MPL-Core collections without verification flags.
+- When changing between collections, both the old and new collection authorities must sign the transaction.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **setCollectionV2** | The Bubblegum V2 instruction for setting, changing, or removing the collection of a cNFT |
+| **MPL-Core Collection** | A Core standard collection account used to group cNFTs in Bubblegum V2 |
+| **BubblegumV2 Plugin** | An MPL-Core plugin that enables V2 features on a collection (freeze, soulbound, royalties) |
+| **Collection Authority** | The update authority of the MPL-Core collection |
