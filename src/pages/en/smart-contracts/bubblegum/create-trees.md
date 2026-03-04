@@ -40,7 +40,11 @@ Let's now see how one can create both of these accounts to create a Bubblegum Tr
 - **Tree Creator**: The address of the account that will be able to manage the Bubblegum Tree and mint Compressed NFTs.
 - **Max Depth** and **Max Buffer Size**: The **Max Depth** parameter is used to compute the maximum number of leaves — and therefore Compressed NFTs — that the Merkle Tree can hold. This maximum is calculated by `2^maxDepth`. The **Max Buffer Size** parameter indicates the minimum concurrency limit of the Merkle Tree. In other words, it defines how many changes can happen in the tree in parallel. These two parameters cannot be chosen arbitrarily and have to be selected from a pre-defined set of values as displayed in the table below.
 
-Below is a both our recommended tree settings for compatibility within the solana ecosystem.
+Below is an interactive calculator to help you estimate tree creation costs. Enter the number of cNFTs you need, or use the advanced mode to fine-tune all tree parameters and see how they affect cost, proof size, and tree structure.
+
+{% bubblegum-calculator /%}
+
+Below are our recommended tree settings for compatibility within the Solana ecosystem.
 
 | Number of cNFTs | Tree Depth | Canopy Depth | Concurrency Buffer | Tree Cost | Cost per cNFT |
 | --------------- | ---------- | ------------ | ------------------ | --------- | ------------- |
