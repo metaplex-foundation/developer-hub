@@ -75,7 +75,7 @@ mplx genesis launch create \
 | `--image <string>` | 代币图片 URL（目前必须以 `https://gateway.irys.xyz/` 开头） |
 | `--tokenAllocation <integer>` | Launch Pool 代币分配额（10 亿总供应量的一部分） |
 | `--depositStartTime <string>` | 存款开始时间（ISO 日期字符串或 Unix 时间戳） |
-| `--raiseGoal <integer>` | 募资目标（整数单位，例如 250 表示 250 SOL） |
+| `--raiseGoal <integer>` | 募资目标（整数单位，例如 SOL 为 250，USDC 为 5000） |
 | `--raydiumLiquidityBps <integer>` | Raydium 流动性（基点，2000–10000，即 20%–100%） |
 | `--fundsRecipient <string>` | 资金接收钱包地址 |
 
@@ -115,7 +115,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 1709251200 \
-  --raiseGoal 250 \
+  --raiseGoal 5000 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS> \
   --quoteMint USDC

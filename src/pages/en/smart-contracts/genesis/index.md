@@ -37,7 +37,7 @@ faqs:
   - q: What's the difference between Launch Pool and Presale?
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
   - q: What is the memecoin launch type?
-    a: The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 50/50 allocation, 98% Raydium LP, and permanent LP lock. You only need to set a deposit start time.
+    a: The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 500M token allocation (50% of 1B supply), 98% Raydium LP, 1% creator unlocked, and permanent LP lock. You only need to set a deposit start time.
 ---
 
 **Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run a presale, fair launch, auction, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}

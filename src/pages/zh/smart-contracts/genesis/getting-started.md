@@ -40,7 +40,7 @@ faqs:
 {% /callout %}
 
 {% callout title="Memecoin 发行" %}
-对于 memecoin 发行，SDK 提供了一条简化路径，可跳过大部分配置。只需设置 `launchType: 'memecoin'` 和存款开始时间即可——分配、LP、费用和锁仓计划均为硬编码默认值。详情请参阅 [API 客户端 memecoin 部分](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
+对于 memecoin 发行，SDK 提供了一条简化路径，可跳过大部分配置。只需设置 `launchType: 'memecoin'` 和存款开始时间即可——分配、LP、费用和锁仓计划均为硬编码默认值。详情请参阅 [API 客户端 memecoin 部分](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
 {% /callout %}
 
 {% callout title="准备好开始构建了吗？" %}

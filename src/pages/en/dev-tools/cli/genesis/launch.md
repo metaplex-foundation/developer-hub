@@ -75,7 +75,7 @@ mplx genesis launch create \
 | `--image <string>` | Token image URL (currently must start with `https://gateway.irys.xyz/`) |
 | `--tokenAllocation <integer>` | Launch pool token allocation (portion of 1B total supply) |
 | `--depositStartTime <string>` | Deposit start time (ISO date string or unix timestamp) |
-| `--raiseGoal <integer>` | Raise goal in whole units (e.g. 250 for 250 SOL) |
+| `--raiseGoal <integer>` | Raise goal in whole units (e.g. 250 for SOL, 5000 for USDC) |
 | `--raydiumLiquidityBps <integer>` | Raydium liquidity in basis points (2000–10000, i.e. 20%–100%) |
 | `--fundsRecipient <string>` | Funds recipient wallet address |
 
@@ -115,7 +115,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 1709251200 \
-  --raiseGoal 250 \
+  --raiseGoal 5000 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS> \
   --quoteMint USDC

@@ -74,7 +74,7 @@ mplx genesis launch create \
 | `--image <string>` | トークン画像の URL（現在 `https://gateway.irys.xyz/` で始まる必要があります） |
 | `--tokenAllocation <integer>` | Launch Pool のトークン割り当て（総供給量10億のうちの一部） |
 | `--depositStartTime <string>` | 入金開始時刻（ISO 日付文字列または Unix タイムスタンプ） |
-| `--raiseGoal <integer>` | 調達目標（整数単位、例: 250 SOL の場合は 250） |
+| `--raiseGoal <integer>` | 調達目標（整数単位、例: SOL の場合は 250、USDC の場合は 5000） |
 | `--raydiumLiquidityBps <integer>` | Raydium 流動性（basis points、2000〜10000、つまり 20%〜100%） |
 | `--fundsRecipient <string>` | 資金受取人のウォレットアドレス |
 
@@ -114,7 +114,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 1709251200 \
-  --raiseGoal 250 \
+  --raiseGoal 5000 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS> \
   --quoteMint USDC

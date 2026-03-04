@@ -44,7 +44,7 @@ faqs:
 
 {% callout title="选择您的路径" %}
 - **无代码发射？** 使用 [Metaplex 代币发射台](https://www.metaplex.com) 无需编码即可发行代币
-- **快速 memecoin 发行？** 使用 `launchType: 'memecoin'` 进行带硬编码默认值的简化发行——只需设置开始时间。参见 [API 客户端](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
+- **快速 memecoin 发行？** 使用 `launchType: 'memecoin'` 进行带硬编码默认值的简化发行——只需设置开始时间。参见 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
 - **构建自己的发射台？** 使用 Genesis SDK 构建自定义代币发行平台或在您自己的网站上托管代币销售
 - **刚接触 Genesis？** 从[快速入门](/zh/smart-contracts/genesis/getting-started)开始了解流程
 - **准备好构建了？** 直接跳转到 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)
@@ -149,7 +149,7 @@ Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposi
 **Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。
 
 ### 什么是 memecoin 发行类型？
-Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 5 亿代币分配（10 亿总供应量的 50%）、98% Raydium LP、1% 创建者解锁和永久 LP 锁仓。您只需提供存款开始时间。在 SDK 中使用 `launchType: 'memecoin'`，在 REST API 中使用 `"type": "memecoin"`。详情请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
+Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 5 亿代币分配（10 亿总供应量的 50%）、98% Raydium LP、1% 创建者解锁和永久 LP 锁仓。您只需提供存款开始时间。在 SDK 中使用 `launchType: 'memecoin'`，在 REST API 中使用 `"type": "memecoin"`。详情请参阅 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
 
 ### 我可以组合多种发行机制吗？
 可以。Genesis 使用 Bucket 系统，您可以添加多个流入 Bucket 并配置用于金库或归属的流出 Bucket。
