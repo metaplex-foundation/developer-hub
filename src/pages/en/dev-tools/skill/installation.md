@@ -28,7 +28,7 @@ Install the Metaplex Skill so your AI coding agent has accurate knowledge of all
 
 The fastest way to install. Run this in your project directory:
 
-```
+```bash
 npx skills add metaplex-foundation/skill
 ```
 
@@ -42,7 +42,7 @@ If you prefer not to use `npx skills`, you can copy the Skill files manually.
 
 Copy the Skill files into your project's Claude skills directory:
 
-```
+```bash
 mkdir -p .claude/skills/metaplex
 ```
 
@@ -52,7 +52,7 @@ Then copy the contents of `skills/metaplex/` from the [GitHub repository](https:
 
 To make the Skill available across all your projects:
 
-```
+```bash
 mkdir -p ~/.claude/skills/metaplex
 ```
 
@@ -62,7 +62,7 @@ Then copy the contents of `skills/metaplex/` from the [GitHub repository](https:
 
 After installation, ask your agent to perform a Metaplex operation. For example:
 
-- *Launch a token with Genesis*
+- *"Launch a token with Genesis"*
 - *"Create a Core NFT collection on devnet"*
 - *"Mint a compressed NFT to my tree"*
 

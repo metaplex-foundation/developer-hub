@@ -32,7 +32,7 @@ The Metaplex Skill covers five programs across CLI, Umi SDK, and Kit SDK. This p
 
 ## Core
 
-The next-generation NFT standard on Solana. Core NFTs are **87% cheaper** than Token Metadata NFTs and support a plugin system for royalty enforcement, freeze delegates, attributes, and more.
+The next-generation NFT standard on Solana. Core NFTs are significantly cheaper than Token Metadata NFTs and support a plugin system for royalty enforcement, freeze delegates, attributes, and more.
 
 **CLI** (`mplx core`): Create and update collections and assets, manage plugins.
 
@@ -71,6 +71,8 @@ Deploy NFT drops with configurable minting rules (guards). Guards control who ca
 ## Genesis
 
 Token launch protocol with fair distribution and automatic liquidity graduation to Raydium.
+
+**CLI** (`mplx genesis`): Create and manage token launches.
 
 **Umi SDK**: Full programmatic access for creating and managing token launches.
 

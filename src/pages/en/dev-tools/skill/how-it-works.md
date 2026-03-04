@@ -21,9 +21,9 @@ The Metaplex Skill uses **progressive disclosure** to give AI agents exactly the
 
 The Skill has two layers:
 
-1. **`SKILL.md`** — A lightweight router file (~100 lines) that the agent reads first. It contains a high-level overview of all programs, a tool selection guide, and a task router table that maps tasks to specific reference files.
+1. **`SKILL.md`** — A lightweight router file that the agent reads first. It contains a high-level overview of all programs, a tool selection guide, and a task router table that maps tasks to specific reference files.
 
-2. **Reference files** — 13 detailed files covering CLI setup, program-specific CLI commands, SDK patterns, and conceptual foundations. The agent only reads the files relevant to the current task.
+2. **Reference files** — Detailed files covering CLI setup, program-specific CLI commands, SDK patterns, and conceptual foundations. The agent only reads the files relevant to the current task.
 
 ## How Agents Use It
 
@@ -37,7 +37,7 @@ For example, if you ask *"Create a Core NFT on devnet"*, the agent reads `SKILL.
 
 ## Reference Files
 
-The Skill includes 13 reference files organized by approach and program:
+The Skill includes reference files organized by approach and program:
 
 ### CLI References
 
@@ -84,6 +84,7 @@ The task router in `SKILL.md` maps each task type to the files the agent should 
 | SDK: Core NFTs | `sdk-umi.md` + `sdk-core.md` |
 | SDK: Token Metadata | `sdk-umi.md` + `sdk-token-metadata.md` |
 | SDK: Compressed NFTs (Bubblegum) | `sdk-umi.md` + `sdk-bubblegum.md` |
+| SDK: Candy Machine (minting/guards) | `sdk-umi.md` |
 | SDK: Token Metadata with Kit | `sdk-token-metadata-kit.md` |
 | SDK: Token launch (Genesis) | `sdk-umi.md` + `sdk-genesis.md` |
 | Account structures, PDAs, concepts | `concepts.md` |
