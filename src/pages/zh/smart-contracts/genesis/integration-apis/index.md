@@ -101,7 +101,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 - API 有速率限制。如果收到 `429` 响应，请降低请求频率。
 - 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。
 - 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
-- `POST` 端点在大多数使用场景下建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)。
+- 对于 `POST` 端点，建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
 
 ## 共享类型
 
@@ -202,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| 术语 | 定义 |
+|------|------------|
+| **Genesis Address** | 唯一标识特定发行活动的 PDA（Program Derived Address） |
+| **Base Token** | 通过铸造地址标识的待发行代币 |
+| **Launch Page** | 用户可以参与发行的 URL |
+| **Mechanic** | 发行使用的分配机制（例如 `launchpoolV2`、`presaleV2`、`auction`） |
+| **Launch Type** | 发行的类别：`project`、`memecoin` 或 `custom` |
+| **Spotlight** | 平台策划的精选发行标志 |
+| **Status** | 发行的当前状态：`upcoming`、`live`、`graduated` 或 `ended` |
+| **Socials** | 与代币关联的社交媒体链接（X/Twitter、Telegram、Discord） |
+| **LaunchData** | 包含 `launch`、`baseToken`、`website` 和 `socials` 的响应包装器 |
+| **TokenData** | 代币查询的响应包装器，包含 `launches` 数组以及 `baseToken`、`website` 和 `socials` |

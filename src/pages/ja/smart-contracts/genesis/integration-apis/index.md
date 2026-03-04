@@ -74,7 +74,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | オンチェーンからデポジット状態を取得 |
 
 {% callout type="note" %}
-`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。
+`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供しており、利用を推奨します。
 {% /callout %}
 
 ## エラーコード
@@ -202,3 +202,18 @@ serde = { version = "1", features = ["derive"] }
 - すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
 - デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
 - `POST` エンドポイントは、ほとんどのユースケースで [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)を使用してください。
+
+## Glossary
+
+| 用語 | 定義 |
+|------|------------|
+| **Genesis Address** | 特定のローンチキャンペーンを一意に識別する PDA（Program Derived Address） |
+| **Base Token** | ミントアドレスで識別される、ローンチされるトークン |
+| **Launch Page** | ユーザーがローンチに参加できる URL |
+| **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`auction`） |
+| **Launch Type** | ローンチのカテゴリ：`project`、`memecoin`、`custom` |
+| **Spotlight** | プラットフォームが厳選した注目ローンチを示すフラグ |
+| **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
+| **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |
+| **LaunchData** | `launch`、`baseToken`、`website`、`socials` を含むレスポンスラッパー |
+| **TokenData** | トークンクエリ用のレスポンスラッパー。`launches` 配列と `baseToken`、`website`、`socials` を含む |

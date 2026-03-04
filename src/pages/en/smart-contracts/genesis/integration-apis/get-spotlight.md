@@ -31,6 +31,16 @@ Fetch launches that have been curated as spotlights by the platform. This is a c
 - Each entry includes launch details, base token metadata, and social links
 - Supports mainnet (default) and devnet via `network` query parameter
 
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `GET` |
+| **Path** | `/launches?spotlight=true` |
+| **Auth** | None |
+| **Response** | `LaunchData[]` |
+| **Pagination** | None |
+
 ## Endpoint
 
 ```

@@ -101,7 +101,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 - API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
 - 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다.
 - 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
-- `POST` 엔드포인트는 대부분의 사용 사례에서 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하세요.
+- `POST` 엔드포인트의 경우 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
 
 ## 공유 타입
 
@@ -202,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| 용어 | 정의 |
+|------|------------|
+| **Genesis Address** | 특정 런치 캠페인을 고유하게 식별하는 PDA (Program Derived Address) |
+| **Base Token** | 민트 주소로 식별되는 런치 대상 토큰 |
+| **Launch Page** | 사용자가 런치에 참여할 수 있는 URL |
+| **Mechanic** | 런치에 사용되는 할당 메커니즘 (예: `launchpoolV2`, `presaleV2`, `auction`) |
+| **Launch Type** | 런치의 카테고리: `project`, `memecoin`, `custom` |
+| **Spotlight** | 플랫폼에서 큐레이팅한 주요 런치를 나타내는 플래그 |
+| **Status** | 런치의 현재 상태: `upcoming`, `live`, `graduated`, `ended` |
+| **Socials** | 토큰과 관련된 소셜 미디어 링크 (X/Twitter, Telegram, Discord) |
+| **LaunchData** | `launch`, `baseToken`, `website`, `socials`를 포함하는 응답 래퍼 |
+| **TokenData** | 토큰 쿼리용 응답 래퍼. `launches` 배열과 `baseToken`, `website`, `socials` 포함 |

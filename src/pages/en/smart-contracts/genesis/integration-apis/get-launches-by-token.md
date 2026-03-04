@@ -31,6 +31,16 @@ Fetch all launches linked to a token mint address. Returns an array of launches 
 - Includes base token metadata and social links alongside the launches
 - Supports mainnet (default) and devnet via `network` query parameter
 
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `GET` |
+| **Path** | `/tokens/{token_address}` |
+| **Auth** | None |
+| **Response** | `TokenData` (contains `launches` array) |
+| **Pagination** | None |
+
 ## Endpoint
 
 ```

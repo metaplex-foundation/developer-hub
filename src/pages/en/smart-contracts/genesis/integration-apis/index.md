@@ -101,7 +101,7 @@ Error response format:
 - The API is rate limited. If you receive a `429` response, reduce your request frequency.
 - All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings.
 - The default network is `solana-mainnet`. Devnet data is available via `?network=solana-devnet`.
-- `POST` endpoints require the [SDK API Client](/smart-contracts/genesis/sdk/api-client) for most use cases.
+- For `POST` endpoints, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) is recommended as it wraps both `/launches/create` and `/launches/register`.
 
 ## Shared Types
 
@@ -202,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Address** | A PDA (Program Derived Address) that uniquely identifies a specific launch campaign |
+| **Base Token** | The token being launched, identified by its mint address |
+| **Launch Page** | The URL where users can participate in a launch |
+| **Mechanic** | The allocation mechanism used for the launch (e.g., `launchpoolV2`, `presaleV2`, `auction`) |
+| **Launch Type** | The category of the launch: `project`, `memecoin`, or `custom` |
+| **Spotlight** | A platform-curated flag indicating a featured launch |
+| **Status** | The current state of a launch: `upcoming`, `live`, `graduated`, or `ended` |
+| **Socials** | Social media links (X/Twitter, Telegram, Discord) associated with a token |
+| **LaunchData** | The response wrapper containing `launch`, `baseToken`, `website`, and `socials` |
+| **TokenData** | The response wrapper for token queries, containing a `launches` array plus `baseToken`, `website`, and `socials` |

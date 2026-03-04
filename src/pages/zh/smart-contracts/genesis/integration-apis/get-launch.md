@@ -31,6 +31,16 @@ programmingLanguage:
 - 包含代币元数据（`name`、`symbol`、`image`）和社交链接
 - 通过 `network` 查询参数支持主网（默认）和开发网
 
+## Quick Reference
+
+| 项目 | 值 |
+|------|-------|
+| **方法** | `GET` |
+| **路径** | `/launches/{genesis_pubkey}` |
+| **认证** | 无需 |
+| **响应** | `LaunchData` |
+| **分页** | 无 |
+
 ## 端点
 
 ```

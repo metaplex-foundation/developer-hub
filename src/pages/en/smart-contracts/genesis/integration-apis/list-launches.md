@@ -31,6 +31,16 @@ List all Genesis launches with optional filters for status and spotlight. Return
 - Each entry includes launch details, base token metadata, and social links
 - Supports mainnet (default) and devnet via `network` query parameter
 
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `GET` |
+| **Path** | `/launches` |
+| **Auth** | None |
+| **Response** | `LaunchData[]` |
+| **Pagination** | None |
+
 ## Endpoint
 
 ```

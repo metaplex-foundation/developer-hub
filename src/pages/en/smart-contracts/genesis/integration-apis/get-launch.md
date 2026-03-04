@@ -31,6 +31,16 @@ Fetch a single launch by its genesis account public key. Returns the launch deta
 - Includes token metadata (`name`, `symbol`, `image`) and social links
 - Supports mainnet (default) and devnet via `network` query parameter
 
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `GET` |
+| **Path** | `/launches/{genesis_pubkey}` |
+| **Auth** | None |
+| **Response** | `LaunchData` |
+| **Pagination** | None |
+
 ## Endpoint
 
 ```
