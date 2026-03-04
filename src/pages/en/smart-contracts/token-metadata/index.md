@@ -22,7 +22,7 @@ Please note that certain Token Metadata instructions will require protocol fees.
 
 The Token Metadata program is one of the most important programs when dealing with NFTs on the Solana blockchain. Its main goal is to **attach additional data to [Fungible](https://en.wikipedia.org/wiki/Fungibility) or Non-Fungible [Tokens](https://spl.solana.com/token)** on Solana.
 
-It achieves this using [Program Derived Addresses](/understanding-programs/#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you’re not familiar with [Solana’s Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
+It achieves this using [Program Derived Addresses](/solana/understanding-programs#program-derived-addresses-pda) (PDAs) that are _derived_ from the address of Mint Accounts. If you’re not familiar with [Solana’s Token program](https://spl.solana.com/token), _Mint Accounts_ are responsible for storing the global information of a Token and _Token Accounts_ store the relationship between a wallet and a Mint Account.
 
 {% diagram %}
 {% node %}
@@ -434,7 +434,7 @@ You can [read more about these standards here](/smart-contracts/token-metadata/t
 
 Because the Token Metadata program is building on top of the Solana Token program, anyone can transfer tokens (fungible or not) without going through the Token Metadata program. Whilst this is great for program composibility, it also means that the Token Metadata program cannot enforce any rules on the tokens it is attached to.
 
-A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Whilst there is **Seller Fee Basis Points** attribute on the Metadata account, it is purely [indicative](/understanding-programs#indicative-fields) and anyone could create a marketplace that does not honor royalties — which is exactly what happened.
+A good example of why this can be problematic is that Token Metadata cannot enforce secondary sales royalties. Whilst there is **Seller Fee Basis Points** attribute on the Metadata account, it is purely [indicative](/solana/understanding-programs#indicative-fields) and anyone could create a marketplace that does not honor royalties — which is exactly what happened.
 
 **Programmable NFTs** were introduced to solve this problem. They are a new _opt-in_ Token Standard that **keeps the underlying token accounts frozen at all times**. That way, nobody can transfer, lock or burn Programmable NFTs without going through the Token Metadata program.
 

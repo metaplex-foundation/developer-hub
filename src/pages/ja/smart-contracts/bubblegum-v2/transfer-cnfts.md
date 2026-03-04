@@ -1,8 +1,40 @@
 ---
 title: 圧縮NFTの転送
-metaTitle: 圧縮NFTの転送 | Bubblegum v2
+metaTitle: 圧縮NFTの転送 - Bubblegum v2
 description: Bubblegum V2で圧縮NFTを転送する方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - transfer compressed NFT
+  - transfer cNFT
+  - NFT transfer
+  - Bubblegum transfer
+  - transferV2
+  - permanent transfer delegate
+about:
+  - Compressed NFTs
+  - NFT transfers
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: フリーズされたcNFTを転送できますか？
+    a: いいえ。フリーズされたcNFTは転送できません。適切なデリゲート権限を使用して先にcNFTを解凍する必要があります。
+  - q: 転送後にデリゲートはどうなりますか？
+    a: リーフデリゲートは転送成功後に自動的に新しい所有者にリセットされます。新しい所有者が必要であれば再デリゲートする必要があります。
+  - q: cNFTが転送可能かどうかを確認するにはどうすればよいですか？
+    a: canTransferヘルパー関数を使用します。cNFTがフリーズされておらず、転送不可（ソウルバウンド）としてマークされていない場合にtrueを返します。
 ---
+
+## Summary
+
+**圧縮NFTの転送**は、**transferV2**命令を使用して所有権を一つのウォレットから別のウォレットに移します。このページでは、所有者、デリゲート、永続転送デリゲートによる転送、および転送可否チェックについて説明します。
+
+- transferV2を使用してcNFTを新しい所有者に転送する
+- リーフ所有者、リーフデリゲート、または永続転送デリゲートを通じて転送を承認する
+- canTransferヘルパーを使用してcNFTが転送可能かどうかを確認する
+- cNFTがコレクションに属する場合はcoreCollectionパラメータを渡す
 
 **transferV2**命令は、圧縮NFTをある所有者から別の所有者に転送するために使用できます。転送を認証するには、現在の所有者またはデリゲート権限（存在する場合）がトランザクションに署名する必要があります。デリゲート権限は、リーフデリゲートまたはコレクションの`permanentTransferDelegate`のいずれかです。
 
@@ -48,3 +80,77 @@ await transferV2(umi, {
   authority: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
   // cNFTがコレクションの一部である場合、コアコレクションを渡します。
+  //coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% totem-accordion title="デリゲートを使用する場合" %}
+
+```ts
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+await transferV2(umi, {
+  ...assetWithProof,
+  authority: delegateAuthority, // <- デリゲート権限がトランザクションに署名します。
+  newLeafOwner: leafOwnerB.publicKey,
+  //coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% totem-accordion title="永続転送デリゲートを使用する場合" %}
+
+```ts
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+await transferV2(umi, {
+  ...assetWithProof,
+  authority: permanentTransferDelegate, // <- 永続デリゲート権限が署名します。
+  newLeafOwner: leafOwnerB.publicKey,
+  coreCollection: coreCollection.publicKey,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+### 圧縮NFTの転送可否チェック
+
+`canTransfer`関数を使用して圧縮NFTが転送可能かどうかを確認できます。NFTが転送可能な場合は`true`、そうでない場合は`false`を返します。フリーズされたcNFTと`NonTransferable`なcNFTは転送できません。
+
+```ts
+import { canTransfer } from '@metaplex-foundation/mpl-bubblegum'
+
+const assetWithProof = await getAssetWithProof(umi, assetId, {
+  truncateCanopy: true,
+})
+
+const canBeTransferred = canTransfer(assetWithProof)
+console.log("canBeTransferred", canBeTransferred ? "Yes" : "No")
+```
+
+## Notes
+
+- 転送後、リーフデリゲートは自動的に新しい所有者にリセットされます。
+- フリーズされたcNFTとソウルバウンド（転送不可）cNFTは転送できません。`canTransfer`を使用して確認してください。
+- コレクションで`PermanentTransferDelegate`プラグインが有効になっている場合、永続転送デリゲートは所有者の署名なしに転送できます。
+
+## Glossary
+
+| 用語 | 定義 |
+|------|------|
+| **transferV2** | cNFTを一つの所有者から別の所有者に転送するBubblegum V2命令 |
+| **永続転送デリゲート** | 所有者の同意なしに任意のcNFTを転送できるコレクションレベルの権限 |
+| **canTransfer** | cNFTが転送可能かどうか（フリーズされていないか、ソウルバウンドでないか）を確認するヘルパー関数 |
+| **リーフ所有者** | 圧縮NFTの現在の所有者 |
+| **新しいリーフ所有者** | 転送後にcNFTの所有権を受け取るウォレットアドレス |

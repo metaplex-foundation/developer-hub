@@ -1,14 +1,48 @@
 ---
 title: 압축된 NFT 가져오기
-metaTitle: 압축된 NFT 가져오기 | Bubblegum V2
+metaTitle: 압축된 NFT 가져오기 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 가져오는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - fetch compressed NFT
+  - read cNFT
+  - DAS API
+  - digital asset standard
+  - getAsset
+  - getAssetProof
+  - getAssetsByOwner
+about:
+  - Compressed NFTs
+  - DAS API
+  - NFT indexing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 어떤 RPC 제공자가 DAS API를 지원하나요?
+    a: 관리되는 목록은 RPC 제공자 페이지를 참조하세요. Helius, Triton, Shyft 등 주요 제공자가 DAS API를 지원합니다.
+  - q: 압축된 NFT의 자산 ID를 얻으려면 어떻게 해야 하나요?
+    a: 머클 트리 주소와 리프 인덱스를 알고 있다면 findLeafAssetIdPda를 사용하세요. 그렇지 않으면 getAssetsByOwner 또는 getAssetsByGroup을 사용하여 자산과 해당 ID를 검색하세요.
+  - q: getAsset와 getAssetProof의 차이점은 무엇인가요?
+    a: getAsset은 cNFT의 메타데이터, 소유권 및 압축 정보를 반환합니다. getAssetProof는 전송, 소각, 업데이트와 같은 쓰기 작업에 필요한 머클 증명을 반환합니다.
 ---
+
+## Summary
+
+**Fetching compressed NFTs** retrieves cNFT data and proofs using the Metaplex DAS API. This page covers the DAS API setup, asset IDs, fetching individual and multiple cNFTs, and retrieving proofs.
+
+- Install and configure the Metaplex DAS API SDK
+- Fetch individual cNFTs using getAsset and their proofs using getAssetProof
+- Fetch multiple cNFTs by owner or by collection
+- Derive Leaf Asset IDs from merkle tree addresses and leaf indices
 
 [개요](/ko/smart-contracts/bubblegum#read-api) 페이지에서 언급했듯이 압축된 NFT는 일반 NFT처럼 온체인 계정 내에 저장되지 않고 대신 이를 생성하고 업데이트한 트랜잭션에 기록됩니다. {% .lead %}
 
 따라서 압축된 NFT의 검색을 용이하게 하기 위해 특별한 인덱서가 생성되었습니다. 이 인덱스된 데이터는 **Metaplex DAS API**라고 하는 Solana RPC 메서드의 확장을 통해 사용할 수 있습니다. 실제로 DAS API를 통해 모든 **디지털 자산**을 가져올 수 있습니다. 이는 압축된 NFT, 일반 NFT, 또는 심지어 대체 가능한 자산일 수 있습니다.
 
-모든 RPC가 DAS API를 지원하지 않기 때문에 압축된 NFT를 작업할 계획이라면 RPC 제공업체를 신중하게 선택해야 합니다. Metaplex DAS API를 지원하는 모든 RPC 목록을 [전용 페이지](/ko/rpc-providers)에서 유지 관리하고 있습니다.
+모든 RPC가 DAS API를 지원하지 않기 때문에 압축된 NFT를 작업할 계획이라면 RPC 제공업체를 신중하게 선택해야 합니다. Metaplex DAS API를 지원하는 모든 RPC 목록을 [전용 페이지](/ko/solana/rpcs-and-das)에서 유지 관리하고 있습니다.
 
 이 페이지에서는 Metaplex DAS API를 사용하여 압축된 NFT를 가져오는 방법을 알아보겠습니다.
 
@@ -168,3 +202,25 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Not all RPC providers support the DAS API. Check the [RPC Providers](/ko/rpc-providers) page for compatible options.
+- The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
+- Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **DAS API** | Digital Asset Standard API — an RPC extension for fetching compressed and standard NFT data |
+| **Asset ID** | A unique identifier for an NFT. For cNFTs, it is a PDA derived from the merkle tree and leaf index |
+| **Leaf Asset ID** | The PDA-based identifier specific to compressed NFTs, derived from tree address and leaf index |
+| **getAsset** | DAS API method that returns metadata, ownership, and compression info for a digital asset |
+| **getAssetProof** | DAS API method that returns the merkle proof and root needed for write operations on a cNFT |
+| **getAssetsByOwner** | DAS API method that returns all assets owned by a given wallet address |
+| **getAssetsByGroup** | DAS API method that returns all assets in a given group (e.g., collection) |

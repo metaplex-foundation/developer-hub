@@ -19,12 +19,12 @@ export const bubblegumv2 = {
     create: {
       solana: '0.00009 SOL',
       payer: 'Minter',
-      notes: 'Paid by the minter.',
+      notes: null,
     },
     transfer: {
       solana: '0.000006 SOL',
       payer: 'Collector',
-      notes: 'Paid by the owner.',
+      notes: null,
     },
   },
   sections: [

@@ -39,7 +39,7 @@ pub struct Collection {
 However, given a collection mint address, finding all NFTs that belong to that particular collection is significantly more difficult when reading directly from chain. There is one superior method using [DAS](/dev-tools/das-api) and two basic approaches to get the data from chain directly.
 
 ## DAS API
-Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/rpc-providers#metaplex-das-api).
+Fetching the mints using DAS is the superior method when using a [RPC Provider that supports it](/solana/rpcs-and-das#metaplex-das-api).
 
 {% dialect-switcher title="getAssetByGroup Example" %}
 {% dialect title="JavaScript" id="js" %}

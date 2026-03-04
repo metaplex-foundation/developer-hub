@@ -1,8 +1,50 @@
 ---
 title: FAQ
-metaTitle: FAQ | Bubblegum V2
+metaTitle: FAQ - Bubblegum V2
 description: Bubblegum에 대한 자주 묻는 질문.
+created: '2025-01-15'
+updated: '2026-02-24'
+keywords:
+  - Bubblegum FAQ
+  - compressed NFT questions
+  - cNFT cost
+  - troubleshooting
+  - transaction too large
+  - getAssetWithProof
+about:
+  - Compressed NFTs
+  - Troubleshooting
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: Bubblegum V2란 무엇인가요?
+    a: Bubblegum V2는 Solana에서 압축된 NFT를 위한 Metaplex 프로그램의 최신 버전으로, 동결/해동, 소울바운드 NFT, MPL-Core 컬렉션 및 로열티 강제를 추가합니다.
+  - q: 전송, 위임, 소각 등에 필요한 인수를 어떻게 찾나요?
+    a: DAS API에서 필요한 모든 매개변수(증명, 리프 인덱스, 넌스 등)를 자동으로 가져오는 getAssetWithProof 헬퍼를 사용하세요.
+  - q: '"트랜잭션이 너무 큽니다" 오류를 어떻게 해결하나요?'
+    a: 'getAssetWithProof와 함께 truncateCanopy: true를 사용하거나, 주소 조회 테이블을 사용한 버전화된 트랜잭션을 구현하세요.'
+  - q: 압축된 NFT 트리를 만드는 데 얼마나 드나요?
+    a: 비용은 트리 크기에 따라 다릅니다. 16,384개의 cNFT 트리는 약 0.34 SOL, 100만 개의 cNFT 트리는 렌트로 약 8.5 SOL이 듭니다.
+  - q: Bubblegum V1과 V2의 차이점은 무엇인가요?
+    a: V2는 동결/해동, 소울바운드 NFT, MPL-Core 컬렉션, 로열티 강제, 영구 위임자 및 LeafSchemaV2를 추가합니다.
+  - q: 특별한 RPC 제공자가 필요한가요?
+    a: 예. 압축된 NFT를 가져오고 인덱싱하려면 Metaplex DAS API를 지원하는 RPC가 필요합니다.
+  - q: cNFT를 일반 NFT로 압축 해제할 수 있나요?
+    a: 압축 해제는 Bubblegum V1 자산에서만 사용할 수 있습니다. V2는 압축 해제를 지원하지 않습니다.
+  - q: 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요?
+    a: 최대값은 2^maxDepth입니다. 깊이 30의 트리는 10억 개 이상의 cNFT를 보유할 수 있지만, 트리가 클수록 렌트 비용이 더 많이 듭니다.
 ---
+
+## Summary
+
+이 페이지는 Bubblegum V2 압축 NFT에 관한 가장 일반적인 질문에 답합니다.
+
+- `getAssetWithProof`를 사용하여 리프를 변경하는 명령어에 필요한 매개변수 찾기
+- `truncateCanopy` 또는 주소 조회 테이블로 "트랜잭션이 너무 큽니다" 오류 해결하기
+- 트리를 생성하기 전에 트리 비용과 용량 이해하기
+- Bubblegum V2는 V1 트리 또는 압축 해제와 하위 호환되지 않음
 
 ## Bubblegum V2란 무엇인가요?
 
@@ -45,17 +87,11 @@ Bubblegum Umi 라이브러리는 위의 설명에 맞는 `getAssetWithProof` 도
 캐노피 크기에 따라 `getAssetWithProof` 도우미의 `truncateCanopy: true` 매개변수를 사용하는 것이 합리적일 수 있습니다. 트리 구성을 가져와 필요하지 않은 증명을 자릅니다. 트랜잭션 크기가 너무 커지면 도움이 됩니다.
 
 ```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
-const assetWithProof = await getAssetWithProof(umi, assetId, 
-// {  truncateCanopy: true } // 증명을 가지치기하는 선택사항 
+const assetWithProof = await getAssetWithProof(umi, assetId,
+// {  truncateCanopy: true } // 증명을 가지치기하는 선택사항
 );
-await transferV2(umi, {
-  ...assetWithProof,
-  leafOwner: leafOwnerA, // 서명자로서.
-  newLeafOwner: leafOwnerB.publicKey,
-}).sendAndConfirm(umi);
-
 await transferV2(umi, {
   ...assetWithProof,
   leafOwner: leafOwnerA, // 서명자로서.
@@ -69,12 +105,12 @@ await transferV2(umi, {
 
 ```ts
 import { publicKeyBytes } from '@metaplex-foundation/umi'
-import { transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const rpcAsset = await umi.rpc.getAsset(assetId)
 const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 
-await transfer(umi, {
+await transferV2(umi, {
   leafOwner: leafOwnerA,
   newLeafOwner: leafOwnerB.publicKey,
   merkleTree: rpcAssetProof.tree_id,
