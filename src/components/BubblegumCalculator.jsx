@@ -8,14 +8,6 @@ import { useState, useMemo, useCallback } from 'react'
 const VALID_DEPTH_BUFFER_PAIRS = [
   { maxDepth: 3, maxBufferSize: 8 },
   { maxDepth: 5, maxBufferSize: 8 },
-  { maxDepth: 6, maxBufferSize: 16 },
-  { maxDepth: 7, maxBufferSize: 16 },
-  { maxDepth: 8, maxBufferSize: 16 },
-  { maxDepth: 9, maxBufferSize: 16 },
-  { maxDepth: 10, maxBufferSize: 32 },
-  { maxDepth: 11, maxBufferSize: 32 },
-  { maxDepth: 12, maxBufferSize: 32 },
-  { maxDepth: 13, maxBufferSize: 32 },
   { maxDepth: 14, maxBufferSize: 64 },
   { maxDepth: 14, maxBufferSize: 256 },
   { maxDepth: 14, maxBufferSize: 1024 },
@@ -153,7 +145,8 @@ function MerkleTreeVisualization({ maxDepth, canopyDepth }) {
 
   return (
     <div className="relative w-full overflow-hidden rounded-lg border border-slate-200 bg-gradient-to-b from-slate-50 to-white dark:border-slate-700 dark:from-slate-800/50 dark:to-slate-900/50">
-      <svg viewBox={`0 0 ${width} ${height}`} className="w-full" style={{ maxHeight: '280px' }}>
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full" style={{ maxHeight: '280px' }} role="img" aria-labelledby="merkle-tree-title">
+        <title id="merkle-tree-title">Merkle tree visualization showing {maxDepth} levels with {canopyDepth} canopy levels stored on-chain</title>
         {edges.map((e, i) => (
           <line
             key={`e-${i}`}
@@ -307,7 +300,7 @@ export function BubblegumCalculator() {
   }, [])
 
   const handleNftInput = useCallback((e) => {
-    const raw = e.target.value.replace(/,/g, '')
+    const raw = e.target.value.replace(/\D/g, '')
     const num = parseInt(raw, 10)
     if (isNaN(num) || num < 1) {
       setDesiredNfts(1)
@@ -323,6 +316,7 @@ export function BubblegumCalculator() {
       {/* Mode Toggle */}
       <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800/50">
         <button
+          type="button"
           onClick={() => setMode('simple')}
           className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
             mode === 'simple'
@@ -333,6 +327,7 @@ export function BubblegumCalculator() {
           Quick Estimate
         </button>
         <button
+          type="button"
           onClick={() => setMode('advanced')}
           className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
             mode === 'advanced'
@@ -381,11 +376,12 @@ function SimpleMode({ desiredNfts, onNftInput, setDesiredNfts, autoConfig, compu
     <div className="space-y-4">
       {/* Input */}
       <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-800/50">
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+        <label htmlFor="bubblegum-nft-count" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
           How many compressed NFTs do you need?
         </label>
         <div className="mt-2 flex items-center gap-2">
           <input
+            id="bubblegum-nft-count"
             type="text"
             value={desiredNfts.toLocaleString()}
             onChange={onNftInput}
@@ -400,6 +396,7 @@ function SimpleMode({ desiredNfts, onNftInput, setDesiredNfts, autoConfig, compu
             { label: '1B', value: 1_000_000_000 },
           ].map(({ label, value }) => (
             <button
+              type="button"
               key={label}
               onClick={() => setDesiredNfts(value)}
               className={`rounded-md border px-3 py-1 text-xs font-medium transition-colors ${
@@ -502,10 +499,11 @@ function AdvancedMode({
         <div className="grid gap-4 sm:grid-cols-3">
           {/* Max Depth */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+            <label htmlFor="bubblegum-max-depth" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
               Max Depth
             </label>
             <select
+              id="bubblegum-max-depth"
               value={maxDepth}
               onChange={(e) => onDepthChange(parseInt(e.target.value, 10))}
               className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
@@ -520,10 +518,11 @@ function AdvancedMode({
 
           {/* Max Buffer Size */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+            <label htmlFor="bubblegum-max-buffer" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
               Max Buffer Size
             </label>
             <select
+              id="bubblegum-max-buffer"
               value={maxBuffer}
               onChange={(e) => onBufferChange(parseInt(e.target.value, 10))}
               className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
@@ -538,12 +537,13 @@ function AdvancedMode({
 
           {/* Canopy Depth */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
+            <label htmlFor="bubblegum-canopy-depth" className="block text-xs font-medium text-slate-700 dark:text-slate-300">
               Canopy Depth
               <span className="ml-1 font-normal text-slate-400">({minCanopy}–{maxCanopy})</span>
             </label>
             <div className="mt-1 flex items-center gap-2">
               <input
+                id="bubblegum-canopy-depth"
                 type="range"
                 min={minCanopy}
                 max={maxCanopy}
