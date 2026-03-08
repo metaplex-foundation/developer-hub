@@ -47,6 +47,28 @@ const UNIQUE_DEPTHS = [...new Set(VALID_DEPTH_BUFFER_PAIRS.map((p) => p.maxDepth
 const LAMPORTS_PER_SOL = 1_000_000_000
 
 // ---------------------------------------------------------------------------
+// Bubblegum program constraints
+// ---------------------------------------------------------------------------
+// Maximum number of proof accounts that fit in a single Solana transaction.
+// Defined as MAX_ACC_PROOFS_SIZE in mpl-bubblegum create_tree.rs.
+const MAX_ACC_PROOFS = 17
+
+// Minimum canopy depth required by Bubblegum's check_canopy_size validation.
+// Trees with maxDepth > MAX_ACC_PROOFS must store enough canopy on-chain so
+// that the remaining proof fits in a transaction.
+function getMinCanopyDepth(maxDepth) {
+  return Math.max(0, maxDepth - MAX_ACC_PROOFS)
+}
+
+// Maximum practical canopy depth.  Canopy stores (2^(n+1) - 2) * 32 bytes.
+// At canopy depth 18 the canopy alone exceeds Solana's 10 MB account limit,
+// so 17 is the hard ceiling.  For shallow trees the canopy cannot exceed the
+// tree depth itself.
+function getMaxCanopyDepth(maxDepth) {
+  return Math.min(maxDepth, MAX_ACC_PROOFS)
+}
+
+// ---------------------------------------------------------------------------
 // Math: mirrors getConcurrentMerkleTreeAccountSize from SPL Account Compression
 // ---------------------------------------------------------------------------
 function getConcurrentMerkleTreeAccountSize(maxDepth, maxBufferSize, canopyDepth) {
@@ -234,11 +256,16 @@ export function BubblegumCalculator() {
     }
     const validBuffers = VALID_DEPTH_BUFFER_PAIRS.filter((p) => p.maxDepth === depth)
     const buffer = validBuffers[0]?.maxBufferSize ?? 8
-    const maxCanopy = depth >= 20 ? 17 : depth
+    const minCanopy = getMinCanopyDepth(depth)
+    const maxCanopy = getMaxCanopyDepth(depth)
+
+    const minDesc = minCanopy > 0
+      ? `Canopy ${minCanopy} (Bubblegum minimum)`
+      : 'No canopy — largest proof size'
 
     return [
-      { maxDepth: depth, maxBufferSize: buffer, canopyDepth: 0, label: 'Minimum cost', desc: 'No canopy — largest proof size' },
-      { maxDepth: depth, maxBufferSize: buffer, canopyDepth: Math.max(0, maxCanopy - 3), label: 'Balanced', desc: 'Moderate canopy — good composability' },
+      { maxDepth: depth, maxBufferSize: buffer, canopyDepth: minCanopy, label: 'Minimum cost', desc: minDesc },
+      { maxDepth: depth, maxBufferSize: buffer, canopyDepth: Math.max(minCanopy, maxCanopy - 3), label: 'Balanced', desc: 'Moderate canopy — good composability' },
       { maxDepth: depth, maxBufferSize: buffer, canopyDepth: maxCanopy, label: 'Maximum composability', desc: 'Full canopy — smallest proof size' },
     ]
   }, [desiredNfts])
@@ -249,8 +276,13 @@ export function BubblegumCalculator() {
     [advMaxDepth],
   )
 
+  const advMinCanopy = useMemo(
+    () => getMinCanopyDepth(advMaxDepth),
+    [advMaxDepth],
+  )
+
   const advMaxCanopy = useMemo(
-    () => (advMaxDepth >= 20 ? 17 : advMaxDepth),
+    () => getMaxCanopyDepth(advMaxDepth),
     [advMaxDepth],
   )
 
@@ -260,8 +292,9 @@ export function BubblegumCalculator() {
       setAdvMaxDepth(newDepth)
       const validBuffers = VALID_DEPTH_BUFFER_PAIRS.filter((p) => p.maxDepth === newDepth)
       setAdvMaxBuffer(validBuffers[0]?.maxBufferSize ?? 8)
-      const maxCanopy = newDepth >= 20 ? 17 : newDepth
-      setAdvCanopyDepth((prev) => Math.min(prev, maxCanopy))
+      const minCanopy = getMinCanopyDepth(newDepth)
+      const maxCanopy = getMaxCanopyDepth(newDepth)
+      setAdvCanopyDepth((prev) => Math.max(minCanopy, Math.min(prev, maxCanopy)))
     },
     [],
   )
@@ -325,6 +358,7 @@ export function BubblegumCalculator() {
           maxBuffer={advMaxBuffer}
           canopyDepth={advCanopyDepth}
           validBuffers={advValidBuffers}
+          minCanopy={advMinCanopy}
           maxCanopy={advMaxCanopy}
           onDepthChange={handleDepthChange}
           onBufferChange={setAdvMaxBuffer}
@@ -381,6 +415,12 @@ function SimpleMode({ desiredNfts, onNftInput, setDesiredNfts, autoConfig, compu
         <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
           Closest tree depth: <strong>{depth}</strong> (holds up to {formatNumber(capacity)} cNFTs)
         </p>
+        {depth > MAX_ACC_PROOFS && (
+          <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">
+            Bubblegum requires a minimum canopy depth of {getMinCanopyDepth(depth)} for this tree size.
+            Only {MAX_ACC_PROOFS} proof accounts fit in a single transaction.
+          </p>
+        )}
       </div>
 
       {/* Three Option Cards */}
@@ -441,6 +481,7 @@ function AdvancedMode({
   maxBuffer,
   canopyDepth,
   validBuffers,
+  minCanopy,
   maxCanopy,
   onDepthChange,
   onBufferChange,
@@ -499,12 +540,12 @@ function AdvancedMode({
           <div>
             <label className="block text-xs font-medium text-slate-700 dark:text-slate-300">
               Canopy Depth
-              <span className="ml-1 font-normal text-slate-400">(0–{maxCanopy})</span>
+              <span className="ml-1 font-normal text-slate-400">({minCanopy}–{maxCanopy})</span>
             </label>
             <div className="mt-1 flex items-center gap-2">
               <input
                 type="range"
-                min={0}
+                min={minCanopy}
                 max={maxCanopy}
                 value={canopyDepth}
                 onChange={(e) => onCanopyChange(parseInt(e.target.value, 10))}
@@ -514,6 +555,11 @@ function AdvancedMode({
                 {canopyDepth}
               </span>
             </div>
+            {minCanopy > 0 && (
+              <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">
+                Bubblegum requires canopy ≥ {minCanopy} for depth {maxDepth} (proof must fit in {MAX_ACC_PROOFS} accounts)
+              </p>
+            )}
           </div>
         </div>
       </div>
