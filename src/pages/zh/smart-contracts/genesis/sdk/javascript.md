@@ -100,9 +100,8 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 | 函数 | 描述 |
 |----------|-------------|
-| [transitionV2()](#transition-v2) | 执行结束行为 |
-| [revokeMintAuthorityV2()](#revoke-mint-authority-v2) | 永久撤销铸造权限 |
-| [revokeFreezeAuthorityV2()](#revoke-freeze-authority-v2) | 永久撤销冻结权限 |
+| [triggerBehaviorsV2()](#trigger-behaviors-v2) | 执行结束行为 |
+| [revokeV2()](#revoke-v2) | 永久撤销铸造和冻结权限 |
 
 ---
 
@@ -233,31 +232,26 @@ await claimPresaleV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
-### transitionV2
+### triggerBehaviorsV2
 
 ```typescript
-await transitionV2(umi, {
+await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
   primaryBucket,      // PublicKey
   baseMint,           // PublicKey
 })
-  .addRemainingAccounts([/* destination accounts */])
+  .addRemainingAccounts([/* destination bucket + its quote token account */])
   .sendAndConfirm(umi);
 ```
 
-### revokeMintAuthorityV2
+### revokeV2
 
 ```typescript
-await revokeMintAuthorityV2(umi, {
-  baseMint,           // PublicKey
-}).sendAndConfirm(umi);
-```
-
-### revokeFreezeAuthorityV2
-
-```typescript
-await revokeFreezeAuthorityV2(umi, {
-  baseMint,           // PublicKey
+await revokeV2(umi, {
+  genesisAccount,           // PublicKey
+  baseMint,                 // PublicKey
+  revokeMintAuthority,      // boolean
+  revokeFreezeAuthority,    // boolean
 }).sendAndConfirm(umi);
 ```
 

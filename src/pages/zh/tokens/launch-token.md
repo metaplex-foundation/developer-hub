@@ -22,15 +22,15 @@ Launch Pool代币发行有三个阶段：
 
 1. **设置**（运行一次） - 创建代币，配置发行并激活
 2. **存款期间**（用户参与） - 用户在您设定的期间内存入SOL
-3. **发行后**（您 + 用户） - 执行转换，用户领取代币，撤销权限
+3. **发行后**（您 + 用户） - 启动状态机，用户领取代币，撤销权限
 
 本指南将向您展示如何创建**4个独立的脚本**，在不同阶段运行：
 
 | 脚本 | 何时运行 | 目的 |
 |--------|-------------|---------|
 | `launch.ts` | 一次，开始时 | 创建代币并激活发行 |
-| `transition.ts` | 存款结束后 | 将收集的SOL移至解锁桶 |
-| `claim.ts` | 转换后 | 用户运行以领取代币 |
+| `crank.ts` | 存款结束后 | 触发终止行为，将SOL移至解锁桶 |
+| `claim.ts` | 启动后 | 用户运行以领取代币 |
 | `revoke.ts` | 发行完成时 | 永久移除铸币/冻结权限 |
 
 ## 前提条件
@@ -153,11 +153,11 @@ npx ts-node launch.ts
 
 ### 存款结束后
 
-存款期结束后，您需要运行**转换**以将收集的SOL移至解锁桶。
+存款期结束后，运行 `triggerBehaviorsV2` 以执行桶上配置的终止行为（在本例中，将收集的 SOL 移至解锁桶）。
 
 ### 用户领取代币
 
-转换后，用户可以领取他们的代币。每个用户按其在总存款中的份额比例获得代币：
+启动后，用户可以领取他们的代币。每个用户按其在总存款中的份额比例获得代币：
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
@@ -176,4 +176,4 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 - [Genesis 概述](/zh/smart-contracts/genesis) - 了解有关 Solana 代币发射台的更多信息
 - [Launch Pool](/zh/smart-contracts/genesis/launch-pool) - 公平发射详细文档
 - [预售](/zh/smart-contracts/genesis/presale) - 以固定价格进行代币预售
-- [聚合 API](/zh/smart-contracts/genesis/aggregation) - 通过 API 查询发行和代币销售数据
+- [Integration APIs](/zh/smart-contracts/genesis/integration-apis) - 通过 API 查询发行和代币销售数据

@@ -42,7 +42,7 @@ faqs:
   - q: What happens if I deposit multiple times?
     a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
   - q: When can users claim their tokens?
-    a: After the deposit period ends and the claim window opens (defined by claimStartCondition). The transition must be executed first to process end behaviors.
+    a: After the deposit period ends and the claim window opens (defined by claimStartCondition). triggerBehaviorsV2 must be executed first to process end behaviors.
   - q: What's the difference between Launch Pool and Presale?
     a: Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
 ---
@@ -226,7 +226,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 ### Lifecycle
 
 1. **Deposit Period** - Users deposit SOL during a defined window
-2. **Transition** - End behaviors execute (e.g., send collected SOL to another bucket)
+2. **`triggerBehaviorsV2`** - End behaviors execute (e.g., send collected SOL to another bucket)
 3. **Claim Period** - Users claim tokens proportional to their deposit weight
 
 ## Fees
@@ -265,7 +265,7 @@ The Launch Pool bucket collects deposits and distributes tokens proportionally. 
 
 ### 3. Add the Unlocked Bucket
 
-The Unlocked bucket receives SOL from the Launch Pool after the transition.
+The Unlocked bucket receives SOL from the Launch Pool after `triggerBehaviorsV2` executes.
 
 {% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
@@ -307,13 +307,13 @@ Token allocation: `userTokens = (userDeposit / totalDeposits) * bucketTokenAlloc
 
 ## Admin Operations
 
-### Executing the Transition
+### Executing `triggerBehaviorsV2`
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+After deposits close, run `triggerBehaviorsV2` to move collected SOL to the unlocked bucket.
 
-{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
+{% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
+**Why this matters:** Without running `triggerBehaviorsV2`, collected SOL stays locked in the Launch Pool bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
 ## Reference
 
@@ -429,7 +429,7 @@ if (deposit) {
 - The {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee applies to both deposits and withdrawals
 - Multiple deposits from the same user accumulate in one deposit account
 - If a user withdraws their entire balance, the deposit PDA closes
-- Transitions must be executed after deposits close for end behaviors to process
+- `triggerBehaviorsV2` must be executed after deposits close for end behaviors to process
 - Users must have wSOL (wrapped SOL) to deposit
 
 ## FAQ
@@ -444,7 +444,7 @@ Yes, users can withdraw during the deposit period. A {% fee product="genesis" co
 Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
 
 ### When can users claim their tokens?
-After the deposit period ends and the claim window opens (defined by `claimStartCondition`). The transition must be executed first to process end behaviors.
+After the deposit period ends and the claim window opens (defined by `claimStartCondition`). `triggerBehaviorsV2` must be executed first to process end behaviors.
 
 ### What's the difference between Launch Pool and Presale?
 Launch Pool discovers price organically based on deposits with proportional distribution. Presale has a fixed price set upfront with first-come-first-served allocation up to the cap.
@@ -457,7 +457,7 @@ Launch Pool discovers price organically based on deposits with proportional dist
 | **Deposit Window** | Time period when users can deposit and withdraw SOL |
 | **Claim Window** | Time period when users can claim their proportional tokens |
 | **End Behavior** | Automated action executed after deposit period ends |
-| **Transition** | Instruction that processes end behaviors and routes funds |
+| **`triggerBehaviorsV2`** | Instruction that processes end behaviors and routes funds |
 | **Proportional Distribution** | Token allocation based on user's share of total deposits |
 | **Quote Token** | The token users deposit (usually wSOL) |
 | **Base Token** | The token being distributed |
@@ -467,4 +467,4 @@ Launch Pool discovers price organically based on deposits with proportional dist
 - [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
 - [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based token offering
 - [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query token sale data via API
+- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API
