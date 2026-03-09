@@ -42,7 +42,7 @@ faqs:
   - q: 여러 번 예치하면 어떻게 되나요?
     a: 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.
   - q: 사용자는 언제 토큰을 청구할 수 있나요?
-    a: 예치 기간이 끝나고 청구 기간이 열린 후(claimStartCondition으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 Transition이 실행되어야 합니다.
+    a: 예치 기간이 끝나고 청구 기간이 열린 후(claimStartCondition으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 triggerBehaviorsV2가 실행되어야 합니다.
   - q: Launch Pool과 Presale의 차이점은 무엇인가요?
     a: Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
 ---
@@ -226,7 +226,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 ### 라이프사이클
 
 1. **예치 기간** - 사용자가 정해진 기간 동안 SOL을 예치
-2. **Transition** - End behavior 실행 (예: 수집된 SOL을 다른 bucket으로 전송)
+2. **`triggerBehaviorsV2`** - End behavior 실행 (예: 수집된 SOL을 다른 bucket으로 전송)
 3. **청구 기간** - 사용자가 예치 비중에 비례한 토큰을 청구
 
 ## 수수료
@@ -265,7 +265,7 @@ Launch Pool bucket은 예치금을 수집하고 토큰을 비례적으로 배분
 
 ### 3. Unlocked Bucket 추가
 
-Unlocked bucket은 Transition 후 Launch Pool에서 SOL을 받습니다.
+Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받습니다.
 
 {% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
@@ -307,13 +307,13 @@ Unlocked bucket은 Transition 후 Launch Pool에서 SOL을 받습니다.
 
 ## 관리자 작업
 
-### Transition 실행
+### `triggerBehaviorsV2` 실행
 
 예치가 종료된 후 `triggerBehaviorsV2`를 실행하여 수집된 SOL을 Unlocked bucket으로 이동합니다.
 
 {% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
-**이것이 중요한 이유:** Transition 없이는 수집된 SOL이 Launch Pool bucket에 잠겨 있습니다. 사용자는 여전히 토큰을 청구할 수 있지만, 팀은 모금된 자금에 접근할 수 없습니다.
+**이것이 중요한 이유:** `triggerBehaviorsV2`를 실행하지 않으면 수집된 SOL이 Launch Pool bucket에 잠겨 있습니다. 사용자는 여전히 토큰을 청구할 수 있지만, 팀은 모금된 자금에 접근할 수 없습니다.
 
 ## 레퍼런스
 
@@ -429,7 +429,7 @@ if (deposit) {
 - {% fee product="genesis" config="launchPool" fee="deposit" /%} 프로토콜 수수료가 예치와 출금 모두에 적용됩니다
 - 같은 사용자의 여러 예치금은 하나의 예치 계정에 누적됩니다
 - 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다
-- End behavior를 처리하려면 예치 종료 후 Transition이 실행되어야 합니다
+- End behavior를 처리하려면 예치 종료 후 `triggerBehaviorsV2`가 실행되어야 합니다
 - 사용자는 예치하려면 wSOL (래핑된 SOL)이 있어야 합니다
 
 ## FAQ
@@ -444,7 +444,7 @@ if (deposit) {
 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.
 
 ### 사용자는 언제 토큰을 청구할 수 있나요?
-예치 기간이 끝나고 청구 기간이 열린 후(`claimStartCondition`으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 Transition이 실행되어야 합니다.
+예치 기간이 끝나고 청구 기간이 열린 후(`claimStartCondition`으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 `triggerBehaviorsV2`가 실행되어야 합니다.
 
 ### Launch Pool과 Presale의 차이점은 무엇인가요?
 Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
@@ -457,7 +457,7 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 | **Deposit Window** | 사용자가 SOL을 예치하고 출금할 수 있는 기간 |
 | **Claim Window** | 사용자가 비례 토큰을 청구할 수 있는 기간 |
 | **End Behavior** | 예치 기간 종료 후 실행되는 자동 작업 |
-| **Transition** | End behavior를 처리하고 자금을 라우팅하는 명령어 |
+| **`triggerBehaviorsV2`** | End behavior를 처리하고 자금을 라우팅하는 명령어 |
 | **Proportional Distribution** | 총 예치금에서의 사용자 지분에 따른 토큰 할당 |
 | **Quote Token** | 사용자가 예치하는 토큰 (일반적으로 wSOL) |
 | **Base Token** | 배포되는 토큰 |

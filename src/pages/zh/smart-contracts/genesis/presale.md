@@ -192,7 +192,7 @@ async function setupPresale() {
     ],
   }).sendAndConfirm(umi);
 
-  // 5. 添加Unlocked Bucket（过渡后接收SOL）
+  // 5. 添加Unlocked Bucket（triggerBehaviorsV2 执行后接收SOL）
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,

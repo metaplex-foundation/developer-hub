@@ -192,7 +192,7 @@ async function setupPresale() {
     ],
   }).sendAndConfirm(umi);
 
-  // 5. Unlocked Bucket 추가 (트랜지션 후 SOL 수령)
+  // 5. Unlocked Bucket 추가 (triggerBehaviorsV2 실행 후 SOL 수령)
   await addUnlockedBucketV2(umi, {
     genesisAccount,
     baseMint: baseMint.publicKey,
