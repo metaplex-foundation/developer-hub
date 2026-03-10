@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - Vanity Mint Guard"
 metaTitle: "Core Candy Machine - Guards - Vanity Mint"
-description: "The Core Candy Machine 'Vanity Mint' guard requires the minter to provide a specific vanity mint as Asset Address"
+description: "The Core Candy Machine 'Vanity Mint' guard requires the minter to provide an asset address that matches a configured regular expression pattern, adding a Proof of Work requirement to minting."
+keywords:
+  - Vanity Mint
+  - Core Candy Machine
+  - candy guard
+  - Proof of Work
+  - vanity address
+  - regex mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Vanity address minting with regex patterns
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Vanity Mint** guard requires the minter to supply an asset address that matches a configured regular expression, effectively adding a Proof of Work requirement to the minting process. {% .lead %}
 
 ## Overview
 
@@ -116,3 +136,10 @@ _The Vanity Mint guard does not require mint settings. It expects the mint addre
 ## Route Instruction
 
 _The Vanity Mint guard does not support the route instruction._
+
+## Notes
+
+- The regular expression is matched against the **base-58 encoded** public key of the mint address. Only characters valid in base-58 encoding (alphanumeric, excluding `0`, `O`, `I`, and `l`) can appear in mint addresses.
+- More restrictive regex patterns (longer prefixes or suffixes) require exponentially more computational effort from the minter to find a matching keypair. Consider the user experience when setting pattern complexity.
+- The Vanity Mint guard does not require any mint settings or route instructions -- it only validates the mint address against the configured pattern.
+

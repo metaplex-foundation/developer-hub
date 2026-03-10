@@ -1,8 +1,28 @@
 ---
 title: "结束日期守卫"
-metaTitle: "结束日期守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'End Date' 守卫为 Core Candy Machine 及其阶段确定铸造过程的结束日期。"
+metaTitle: "结束日期守卫 - 在截止时间后停止铸造 | Core Candy Machine"
+description: "End Date 守卫设置一个截止时间，在此之后不再允许从 Core Candy Machine 铸造。配置结束时间戳以自动关闭铸造。"
+keywords:
+  - end date
+  - Core Candy Machine
+  - candy guard
+  - mint deadline
+  - minting end time
+  - time-based guard
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based minting controls
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**End Date** 守卫设置一个截止时间，在此之后不再允许从 Core Candy Machine 铸造。 {% .lead %}
 
 ## 概述
 
@@ -110,3 +130,10 @@ _End Date 守卫不需要铸造设置。_
 ## Route 指令
 
 _End Date 守卫不支持 route 指令。_
+
+## 注意事项
+
+- End Date 守卫仅阻止配置的时间戳之后的新铸造。它不会影响已经铸造的资产。
+- 要将铸造限制在特定时间窗口内，请将 End Date 守卫与 [Start Date](/zh/smart-contracts/core-candy-machine/guards/start-date) 守卫组合使用。
+- 日期值必须是通过 Umi 的 `dateTime` 辅助函数传递的有效 UTC 时间戳字符串。
+

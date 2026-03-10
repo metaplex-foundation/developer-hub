@@ -2,15 +2,47 @@
 title: Create a Core Candy Machine with Hidden Settings
 metaTitle: Create a Core Candy Machine with Hidden Settings | Core Candy Machine
 description: How to create a Core Candy Machine with hidden settings to create a hide-and-reveal NFT drop.
+keywords:
+  - hidden settings
+  - hide and reveal
+  - NFT reveal
+  - placeholder metadata
+  - candy machine reveal
+  - hidden NFT
+  - reveal mechanism
+  - Core Candy Machine hidden settings
+  - NFT drop
+about:
+  - Hidden settings
+  - Reveal mechanism
+  - NFT drops
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: What are hidden settings in Core Candy Machine?
+    a: Hidden settings allow all minted NFTs to initially share the same placeholder metadata (name and URI), which is later updated during a reveal process to show each NFT's unique traits.
+  - q: How does the hash in hidden settings work?
+    a: The hash is a SHA-256 checksum of your reveal data array. After revealing, users can recompute the hash from the updated metadata to verify that NFTs were not tampered with.
+  - q: Can I use hidden settings with Config Line Settings?
+    a: No. Hidden Settings and Config Line Settings are mutually exclusive - you must choose one or the other when creating a Candy Machine.
 ---
 
-If you are looking to create a hide-and-reveal NFT drop, you can use Core Candy Machine to achieve that goal. This guide is divided into two parts to ensure a comprehensive walkthrough of the entire process.
+## Summary
 
-In this guide (Part 1), we’ll walk you through the step-by-step process of setting up and minting your hide-and-reveal NFT drop using Core Candy Machine. Whether you’re an experienced developer or new to NFT drops, this guide will provide you with everything you need to get started. Revealing and validating your NFT drop will be covered in Part 2.
+This guide walks through creating a [Core Candy Machine](/smart-contracts/core-candy-machine) with hidden settings for a hide-and-reveal NFT drop, where all minted assets share placeholder metadata until a post-mint reveal updates each NFT with its unique name and URI. {% .lead %}
+
+- Configure hidden settings with a placeholder name, URI, and a SHA-256 hash of the reveal data
+- Create a [Core collection](/smart-contracts/core/collections) and a Candy Machine with the `hiddenSettings` field
+- Mint all assets -- each receives the same placeholder metadata until the reveal step
+- The reveal and validation process is covered in Part 2 of this guide
 
 A hide-and-reveal NFT drop can be useful when you want to reveal all the NFTs after they have been minted.
 
-How this works, is that when setting up your Core Candy Machine, you’ll configure the hidden settings field. This field will contain placeholder metadata (generic name and URI) that will be applied to all minted NFTs prior to the reveal. Additionally, it includes a pre-calculated hash of the metadata.
+How this works, is that when setting up your Core Candy Machine, you'll configure the hidden settings field. This field will contain placeholder metadata (generic name and URI) that will be applied to all minted NFTs prior to the reveal. Additionally, it includes a pre-calculated hash of the metadata.
 Every NFT that will be minted pre-reveal will have the same name and URI. After the collection has been minted, the assets will be updated with the correct name and URI (metadata).
 
 After minting our collection, a reveal process needs to be performed where we will update the Assets with the proper metadata.
@@ -29,11 +61,9 @@ You'll need to install the following packages for interacting with the Core Cand
 npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
 ```
 
-## Setting up umi
+## Setting Up Umi
 
-After setting up your environment, let's start by setting up umi.
-
-While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
+[Umi](/dev-tools/umi) is Metaplex's JavaScript client framework that provides a unified interface for interacting with Solana programs. While setting up Umi, you can create new wallets for testing, import wallets from you filesystem or even use `walletAdapter` with a UI/frontend.
 For this example, we will be creating a Keypair from a json file (wallet.json) containing a secret key.
 
 We will be using the Solana Devnet endpoint.
@@ -61,16 +91,16 @@ umi.use(signerIdentity(signer));
 
 You can find more details about setting up UMI in [the Core NFT Asset creation guide](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)
 
-## Prepare Reveal Data
-Now, let’s prepare the reveal data, which will include the metadata for the final revealed NFTs. This data contains the name and URI for each NFT in the collection and will be used to update the placeholder metadata after minting.
+## Preparing Reveal Data and Hash
+
+The reveal data is an array of `{ name, uri }` objects -- one per NFT in the collection -- that will replace the placeholder metadata after minting. We'll also generate a hash of the reveal data. This hash will be stored in the hidden settings of the Core Candy Machine and used during the validation step to confirm that the metadata was updated correctly.
+
 This metadata will be uploaded for each asset, and we will be using the resulting URI's
 
 Please note that you will need to upload the reveal data yourself.
 This process will probably not be deterministic by default. In order to do it in a deterministic way, you can use [turbo](/guides/general/create-deterministic-metadata-with-turbo)
 
-In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT’s name and URI.
-
-We’ll also generate a hash of the reveal data. This hash will be stored in the hidden settings of the Core Candy Machine and used during the validation step to confirm that the metadata was updated correctly.
+In this example, we will work with a collection of five assets, so our reveal data will include an array of five objects, each representing an individual NFT's name and URI.
 
 ```ts
 import crypto from 'crypto';
@@ -88,10 +118,9 @@ let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
 
-## Create a Collection
+## Creating a Core Collection
 
-Let's now create a Collection asset.
-For that, the mpl-core library provides a `createCollection` method will help us performing that action
+A [Core collection](/smart-contracts/core/collections) asset is required as the parent for all NFTs minted from the Candy Machine. The `createCollection` method from the `mpl-core` library handles creation in a single instruction.
 
 You can learn more about collections on [the Collections page](/smart-contracts/core/collections)
 
@@ -142,13 +171,15 @@ console.log("Collection Details: \n", collection);
 
 ## Create a Core Candy Machine with Hidden Settings
 
-Next step is to create our Core Candy Machine with the Hidden Settings.
-
-To achieve that, we will use the `create` method from the mpl-core-candy-machine library, and we will set the `hiddenSettings` with the placeholder name, URI, and pre-calculated hash from the `revealData`
+The `create` method from the `mpl-core-candy-machine` library accepts a `hiddenSettings` field that replaces `configLineSettings`. Pass the placeholder name, URI, and pre-computed hash to configure the Candy Machine for a hide-and-reveal flow.
 
 More details on the Core Candy Machine creation and guards can be found on [the Core Candy Machine creation page](/smart-contracts/core-candy-machine/create).
 
-Additionally, we’ll configure a startDate guard, which determines when minting begins. This is only one of the many guards available and you can find the list of all available guards on [the Guards page](/smart-contracts/core-candy-machine/guards).
+Additionally, we'll configure a startDate guard, which determines when minting begins. This is only one of the many [guards](/smart-contracts/core-candy-machine/guards) available and you can find the list of all available guards on [the Guards page](/smart-contracts/core-candy-machine/guards).
+
+{% callout type="note" %}
+Hidden Settings and Config Line Settings are mutually exclusive. You must set `configLineSettings: none()` when using `hiddenSettings`, and vice versa.
+{% /callout %}
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -214,7 +245,7 @@ This would return the Candy Machine Data like this:
   "items": [],
   "itemsLoaded": 0
 }
-"Candy Guard Account": 
+"Candy Guard Account":
  {
   "publicKey": "4P6VhHmNi9Qt5eRuQsE9SaE5bYWoLxpdPwmfNZeiU2mv",
   "header": {
@@ -270,11 +301,9 @@ This would return the Candy Machine Data like this:
 
 As you can see, it also prints the Candy Guard Account where we can check that actually only the `startDate` is set, as intended.
 
-## Mint the collection
+## Minting the Collection
 
-Let's now mint the 5 NFTs from our Core Candy Machine.
-
-All these minted assets will have the placeholder name and URI that we set in the `hiddenSettings` field of the Core Candy machine that we created.
+Each `mintV1` call mints one asset that receives the placeholder name and URI from the hidden settings. All these minted assets will have the placeholder name and URI that we set in the `hiddenSettings` field of the Core Candy Machine that we created.
 
 These placeholder elements will be updated during the reveal process
 
@@ -304,8 +333,15 @@ for(let i = 0; i < nftMint.length; i++) {
 };
 ```
 
+## Notes
+
+- **Hidden Settings and Config Line Settings are mutually exclusive.** When creating a Core Candy Machine, you must choose either `hiddenSettings` or `configLineSettings` -- you cannot use both. Set the unused option to `none()`.
+- **The hash validates reveal integrity.** The SHA-256 hash stored in hidden settings is computed from the reveal data array. After revealing, anyone can recompute the hash from the on-chain metadata to verify that no NFTs were tampered with.
+- **All minted NFTs share the same metadata until reveal.** Every asset minted before the reveal process will display the identical placeholder name and URI configured in hidden settings. Individual metadata is only applied during the reveal step covered in Part 2.
+
 ## Conclusion
-Congratulations! You just completed Part 1 of our guide and successfully set up your Core Candy Machine with hidden settings.
+
+You have completed Part 1 of this guide and successfully set up a Core Candy Machine with hidden settings.
 
 Let's revise all that we did:
 - We started by setting up UMI.
@@ -314,6 +350,23 @@ Let's revise all that we did:
 - We create a Core Candy Machine with hidden setting, 5 items available, and a start time guard.
 - We minted all the assets from our Core Candy Machine with a the placeholder valuee stored in the hidden setting of our Core Candy Machine.
 
-In Part 2, we’ll cover the steps to reveal the assets and validate their metadata. This will include:
+In Part 2, we'll cover the steps to reveal the assets and validate their metadata. This will include:
 - Fetching the collection assets and updating their metadata with the prepared reveal data.
 - Confirming that the reveal process was successful by hashing the metadata (name and URI) of the revealed assets and comparing it to the expected hash.
+
+## FAQ
+
+{% faq %}
+{% faqitem title="What are hidden settings in Core Candy Machine?" %}
+Hidden settings allow all minted NFTs to initially share the same placeholder metadata (name and URI), which is later updated during a reveal process to show each NFT's unique traits.
+{% /faqitem %}
+
+{% faqitem title="How does the hash in hidden settings work?" %}
+The hash is a SHA-256 checksum of your reveal data array. After revealing, users can recompute the hash from the updated metadata to verify that NFTs were not tampered with.
+{% /faqitem %}
+
+{% faqitem title="Can I use hidden settings with Config Line Settings?" %}
+No. Hidden Settings and Config Line Settings are mutually exclusive -- you must choose one or the other when creating a Candy Machine.
+{% /faqitem %}
+{% /faq %}
+

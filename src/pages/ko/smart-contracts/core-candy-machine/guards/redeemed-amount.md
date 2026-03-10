@@ -1,8 +1,28 @@
 ---
 title: "Redeemed Amount Guard"
-metaTitle: "Redeemed Amount Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Redeemed Amount' 가드는 전체 Core Candy Machine에 대해 민팅된 Asset 수가 구성된 최대 수에 도달하면 민팅을 금지합니다."
+metaTitle: "Redeemed Amount Guard - Core Candy Machine Guard | Metaplex"
+description: "Redeemed Amount 가드는 Core Candy Machine에서 민팅할 수 있는 Asset의 총 수를 제한하여 전역 민트 상한 및 Guard Groups를 활용한 단계별 민팅 전략을 가능하게 합니다."
+keywords:
+  - redeemed amount
+  - Core Candy Machine
+  - candy guard
+  - mint limit
+  - guard groups
+  - global mint cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - minting supply caps
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Redeemed Amount** 가드는 전체 Core Candy Machine에서 민팅된 Asset의 총 수가 구성된 최대값에 도달하면 민팅을 금지하여, 전역 공급 상한 및 단계별 민팅 페이즈를 가능하게 합니다. {% .lead %}
 
 ## 개요
 
@@ -134,3 +154,10 @@ _Redeemed Amount 가드는 민트 설정이 필요하지 않습니다._
 ## Route Instruction
 
 _Redeemed Amount 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- Redeemed Amount 가드는 지갑별이 아닌 전체 Core Candy Machine의 총 민트 수를 추적합니다. 지갑별 민트를 제한하려면 [Mint Limit](/ko/smart-contracts/core-candy-machine/guards/mint-limit) 가드를 대신 사용하세요.
+- `maximum` 값은 실질적인 효과를 가지려면 Candy Machine의 `itemsAvailable` 이하여야 합니다.
+- [Guard Groups](/ko/smart-contracts/core-candy-machine/guard-groups)와 함께 사용할 경우, Redeemed Amount 카운터는 모든 그룹에서 전역적으로 공유되어 단계별 가격 책정을 구현하는 데 이상적입니다.
+

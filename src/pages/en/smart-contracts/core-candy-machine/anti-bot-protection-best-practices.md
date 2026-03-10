@@ -1,14 +1,60 @@
 ---
-title: Anti-Bot Protection Best Practices
+title: Anti-Bot Protection Best Practices for Core Candy Machine
 metaTitle: Anti-Bot Protection Best Practices | Core Candy Machine
 description: Comprehensive guide on implementing anti-bot protection and security measures for Core Candy Machine mints to prevent malicious actors and ensure fair distribution.
+keywords:
+  - core candy machine
+  - anti-bot protection
+  - bot tax guard
+  - third-party signer
+  - hidden settings
+  - placeholder metadata
+  - metadata reveal
+  - config lines
+  - fisher-yates shuffle
+  - merkle proof
+  - NFT mint security
+  - rarity sniping prevention
+  - backend mint transaction
+  - rate limiting
+  - Solana NFT launch
+  - fair mint distribution
+about:
+  - Core Candy Machine anti-bot strategies
+  - NFT mint security on Solana
+  - Placeholder metadata and reveal patterns
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: Why do I need placeholder metadata if my Candy Machine is already using guards?
+    a: Guards protect the minting process, but all Candy Machine data is publicly visible on-chain. Without placeholders, bots can pre-fetch your real metadata URIs, analyze rarity traits, and target specific indexes before minting even begins. Placeholder metadata ensures trait information stays hidden until reveal.
+  - q: What is the difference between hidden settings and config lines for anti-bot protection?
+    a: Hidden settings mint assets sequentially (index 0, 1, 2, ...) making mint order predictable. Config lines allow you to load placeholder metadata with pre-randomized ordering, providing an additional layer of unpredictability on top of the post-mint reveal mapping.
+  - q: Can bots bypass the third-party signer guard by reverse-engineering my backend?
+    a: The third-party signer guard requires a cryptographic signature from a private key that only exists on your backend server. Even if an attacker reverse-engineers the frontend, they cannot forge this signature without access to the private key. This is why the private key must never be exposed in client-side code.
+  - q: Which reveal strategy should I choose for my project?
+    a: Choose instant reveal for immediate user satisfaction and lower support burden. Choose event reveal for community-wide excitement and simpler mint infrastructure. Choose user-triggered reveal for interactive engagement and user control. All three strategies provide the same underlying security benefits through the secure mapping.
+  - q: How do verification hashes prove fairness without revealing the mapping?
+    a: Pre-launch verification hashes are SHA-256 hashes of each metadata file and the complete mapping. Publishing these hashes before minting proves the mapping was predetermined. After reveal, users can hash their received metadata and compare it against the published hashes to verify the assignment was not manipulated.
 ---
 
-Protecting your Core Candy Machine launch from bots and malicious actors is crucial for ensuring a fair distribution to your community. This guide covers proven strategies and implementation patterns that successful projects use to maintain mint integrity while providing transparency to legitimate users. {% .lead %}
+## Summary
+
+Core Candy Machine anti-bot protection combines placeholder metadata, backend-controlled minting with a [third-party signer guard](/smart-contracts/core-candy-machine/guards/third-party-signer), and a post-mint reveal process to prevent rarity sniping and ensure fair NFT distribution on Solana. {% .lead %}
+
+- Placeholder metadata hides real trait data from on-chain inspection until the reveal phase
+- A backend mint endpoint with a third-party signer guard prevents bots from generating their own mint transactions
+- A pre-generated cryptographic mapping links mint indexes to final metadata and can be publicly verified after reveal
+- [Bot tax guards](/smart-contracts/core-candy-machine/guards/bot-tax) penalize failed mint attempts, discouraging automated spam
 
 ## Why Anti-Bot Protection Matters
 
-Without proper protection, bots can:
+Bot protection is essential because unprotected [Core Candy Machine](/smart-contracts/core-candy-machine) launches expose metadata, mint ordering, and transaction generation to automated exploitation. Without proper protection, bots can:
+
 - Mint large quantities before real users can participate
 - Use predictable patterns to snipe rare items
 - Overwhelm your infrastructure with automated requests
@@ -22,7 +68,7 @@ The strategies outlined in this guide work together to create multiple layers of
 
 First, create your complete collection metadata with transaction ID-based URIs instead of predictable patterns.
 
-##### The Problem with Predictable URIs
+##### Predictable URI Vulnerability
 
 Many projects make the mistake of using predictable, incremental URIs for their metadata:
 
@@ -63,7 +109,7 @@ async function uploadFiles(filePaths: string[]): Promise<string[]> {
   });
 
   const uploadedUris = await umi.uploader.upload(files);
-  
+
   // Log each uploaded URI with its index for tracking
   uploadedUris.forEach((uri, index) => {
     console.log(`Uploaded file #${index} -> ${uri}`);
@@ -77,7 +123,7 @@ const uploadedUris = await uploadFiles(allFilePaths);
 
 // Result: Automatically unpredictable URIs that MUST be stored
 // uploadedUris[0] = "https://arweave.net/BrG44HdsEhzapvs8bEqzvkq4egwevS3fRE6kLuCyOdCd"
-// uploadedUris[1] = "https://arweave.net/9jK3LpM7NqR5xY8vZ2BwC4tE6gH9sF1D3a7Q8eR2nM4K"  
+// uploadedUris[1] = "https://arweave.net/9jK3LpM7NqR5xY8vZ2BwC4tE6gH9sF1D3a7Q8eR2nM4K"
 // uploadedUris[2] = "https://arweave.net/5tH8GpN3MqL7wV9xB2CeD4yR6kJ1sK3F8gQ7eP5nL9M2"
 // ... etc for all your files
 
@@ -146,13 +192,13 @@ Before setting up your Candy Machine, generate the secure mapping that will dete
 function generateSecureMapping(totalSupply: number): number[] {
   // Create array of indices [0, 1, 2, ..., totalSupply-1]
   const indices = Array.from({ length: totalSupply }, (_, i) => i);
-  
+
   // Use cryptographically secure shuffle (Fisher-Yates)
   for (let i = indices.length - 1; i > 0; i--) {
     const j = Math.floor(crypto.getRandomValues(new Uint32Array(1))[0] / (2**32) * (i + 1));
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
-  
+
   return indices;
 }
 
@@ -191,22 +237,22 @@ Before launch, generate verification hashes that prove the fairness of your mapp
 ```typescript
 // Generate verification hashes BEFORE mint launch
 async function generateVerificationHashes(
-  mapping: number[], 
-  metadataFiles: string[], 
+  mapping: number[],
+  metadataFiles: string[],
   uploadedUris: string[]
 ): Promise<{masterHash: string, metadataHashes: string[]}> {
-  
+
   // 1. Hash each individual metadata file
-  const metadataHashes = metadataFiles.map(metadata => 
+  const metadataHashes = metadataFiles.map(metadata =>
     crypto.createHash('sha256').update(metadata).digest('hex')
   );
-  
+
   // 2. Extract transaction IDs from uploaded URIs
   const transactionIds = uploadedUris.map(uri => {
     // Extract transaction ID from URI (e.g., https://arweave.net/[ID])
     return uri.split('/').pop();
   });
-  
+
   // 3. Create verification data structure
   const verificationData = mapping.map((finalIndex, mintIndex) => ({
     mintIndex,
@@ -215,19 +261,19 @@ async function generateVerificationHashes(
     metadataUri: uploadedUris[finalIndex],
     metadataHash: metadataHashes[finalIndex],
   }));
-  
+
   // 4. Generate master hash of entire mapping
   const masterHash = crypto
     .createHash('sha256')
     .update(JSON.stringify(verificationData))
     .digest('hex');
-    
+
   return { masterHash, metadataHashes };
 }
 
 const { masterHash, metadataHashes } = await generateVerificationHashes(
-  secureMapping, 
-  allMetadataFiles, 
+  secureMapping,
+  allMetadataFiles,
   uploadedUris
 );
 ```
@@ -287,7 +333,7 @@ There are two ways to load items into a Candy Machine, and choosing the right on
 
 #### Using Config Lines with Placeholder Metadata
 
-Configure your Core Candy Machine to use placeholder metadata during the initial mint phase, potentially with pre-randomized order:
+Configure your [Core Candy Machine](/smart-contracts/core-candy-machine) to use placeholder metadata during the initial mint phase, potentially with pre-randomized order:
 
 ```typescript
 // Option 1: Simple placeholder approach
@@ -299,13 +345,13 @@ const items = Array.from({ length: 4000 }, (_, index) => ({
 // Option 2: Pre-randomized placeholder order for additional unpredictability
 function createRandomizedPlaceholders(totalSupply: number): ConfigLine[] {
   const indices = Array.from({ length: totalSupply }, (_, i) => i);
-  
+
   // Shuffle the indices for random mint order
   for (let i = indices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [indices[i], indices[j]] = [indices[j], indices[i]];
   }
-  
+
   return indices.map((randomIndex, position) => ({
     name: `Mystery Asset #${position + 1}`,
     uri: "https://yourproject.com/placeholder.json"
@@ -330,7 +376,7 @@ await addConfigLines(umi, {
   "image": "https://yourproject.com/images/mystery-box.png",
   "attributes": [
     {
-      "trait_type": "Status", 
+      "trait_type": "Status",
       "value": "Unrevealed"
     },
     {
@@ -341,7 +387,7 @@ await addConfigLines(umi, {
 }
 ```
 
-#### Benefits of This Approach
+#### Benefits of Placeholder Metadata for Anti-Bot Protection
 
 1. **Complete Metadata Privacy**: Real metadata URIs never appear in the Candy Machine
 2. **Bot Protection**: No way for bots to analyze traits before reveal
@@ -373,7 +419,7 @@ Next.js is the most popular platform for creating NFT mint sites because it prov
 
 - **AWS Lambda**: Serverless functions perfect for handling mint bursts without infrastructure management
 - **Vercel Functions**: Seamlessly integrates with Next.js deployments
-- **Netlify Functions**: Simple serverless option for smaller projects  
+- **Netlify Functions**: Simple serverless option for smaller projects
 - **Railway/Render**: Full-stack hosting with easy deployment
 - **Express.js on VPS**: Traditional server approach for maximum control
 - **Cloudflare Workers**: Edge computing for global low-latency minting
@@ -439,7 +485,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // 3. Partially sign with backend signer
     const signedTransaction = await backendSigner.signTransaction(mintTransaction);
-    
+
     // 4. Return transaction for user to sign on front end
     res.json({
       transaction: base64.encode(signedTransaction.serialize()),
@@ -474,7 +520,7 @@ app.post('/api/mint', async (req, res) => {
 
     // 3. Partially sign with backend signer
     const signedTransaction = await backendSigner.signTransaction(mintTransaction);
-    
+
     // 4. Return transaction for user to complete
     res.json({
       transaction: base64.encode(signedTransaction.serialize()),
@@ -508,9 +554,9 @@ app.post('/api/mint', async (req, res) => {
 **Critical Security Note:** Once a transaction is signed, it cannot be modified. The third-party signer guard ensures no one can generate valid mint transactions outside of your backend control.
 {% /callout %}
 
-## Post-Mint Metadata Updates (The Reveal)
+## Post-Mint Metadata Reveal Process
 
-#### The Reveal Process
+#### Reveal Strategy Overview
 
 After minting completes, implement a reveal mechanism that updates each asset's metadata from placeholder to final metadata using your secure mapping. There are three main strategies for handling the reveal process:
 
@@ -576,7 +622,7 @@ With user-triggered reveal, users can reveal their own NFTs through an interacti
 - Requires user action to complete reveal
 - May have incomplete reveals if users don't participate
 
-##### Choosing Your Strategy
+##### Choosing a Reveal Strategy
 
 **Choose Instant Reveal if:**
 - You want immediate user satisfaction
@@ -641,10 +687,10 @@ function verifyAssetMapping(
     .createHash('sha256')
     .update(receivedMetadata)
     .digest('hex');
-  
+
   // 2. Check against published hash
   const expectedHash = publishedHashes[finalIndex];
-  
+
   // 3. Verify the mapping is correct
   return metadataHash === expectedHash;
 }
@@ -717,28 +763,59 @@ export default limiter(handler);
 **Remember**: No single security measure is foolproof. The combination of all these strategies creates a robust defense against automated exploitation while maintaining a fair experience for your community.
 {% /callout %}
 
-## Summary of the Complete Process
+## Complete Anti-Bot Protection Workflow
 
 Here's the complete anti-bot protection workflow in order:
 
-1. **📁 Metadata Preparation**: Create real metadata files and upload via your chosen service for transaction ID URIs + create placeholder metadata
-2. **🎯 Mapping Generation**: Generate secure random mapping that connects mint indexes to final metadata indexes  
-3. **🔒 Verification Setup**: Create and publish hashes that prove fairness without revealing the mapping
-4. **⚙️ Candy Machine Setup**: Deploy with placeholder metadata in config lines
-5. **🛡️ Backend Protection**: Control all mints through backend with mandatory third-party signer and bot tax guards
-6. **🎭 Reveal Process**: Update all assets from placeholder to real metadata using the secure mapping
-7. **✅ Community Verification**: Publish full mapping and provide tools for users to verify their assets
+1. **Metadata Preparation**: Create real metadata files and upload via your chosen service for transaction ID URIs + create placeholder metadata
+2. **Mapping Generation**: Generate secure random mapping that connects mint indexes to final metadata indexes
+3. **Verification Setup**: Create and publish hashes that prove fairness without revealing the mapping
+4. **Candy Machine Setup**: Deploy with placeholder metadata in config lines
+5. **Backend Protection**: Control all mints through backend with mandatory third-party signer and bot tax guards
+6. **Reveal Process**: Update all assets from placeholder to real metadata using the secure mapping
+7. **Community Verification**: Publish full mapping and provide tools for users to verify their assets
 
-## Conclusion
+## Notes
 
-Implementing comprehensive anti-bot protection requires careful planning and execution across multiple layers of your minting infrastructure. The chronological approach outlined in this guide ensures that each step builds upon the previous one, creating a robust defense system.
+- All Candy Machine account data is publicly readable on-chain; never load real metadata URIs directly into config lines if you want to prevent rarity sniping.
+- The third-party signer private key must be stored exclusively on your backend server and never exposed to client-side code.
+- Generate the secure mapping and verification hashes before the mint launches; these values cannot be changed retroactively.
+- Test the entire flow (placeholder mint, mapping, reveal, verification) on devnet before deploying to mainnet.
+- Rate limiting alone is insufficient; combine it with CAPTCHA, third-party signer, and bot tax guards for layered defense.
+- Determined attackers will continuously look for weaknesses; stay informed about new attack vectors and update your defenses accordingly.
 
-**Key Success Factors:**
-- **Preparation is everything**: Generate mapping and verification hashes before launch
-- **Backend control is critical**: Never let clients generate their own mint transactions
-- **Transparency builds trust**: Publish verification data before mint and full mapping after reveal
-- **Test thoroughly**: Validate the entire flow on devnet before mainnet launch
+## FAQ
 
-By following this structured approach, you create multiple layers of protection that make it extremely difficult for automated systems to game your mint while maintaining complete transparency and fairness for your legitimate community members.
+### Why do I need placeholder metadata if my Candy Machine is already using guards?
 
-Remember that determined attackers will always look for weaknesses, so staying informed about new attack vectors and continuously improving your defenses is essential for long-term success.
+Guards protect the minting process, but all Candy Machine data is publicly visible on-chain. Without placeholders, bots can pre-fetch your real metadata URIs, analyze rarity traits, and target specific indexes before minting even begins. Placeholder metadata ensures trait information stays hidden until reveal.
+
+### What is the difference between hidden settings and config lines for anti-bot protection?
+
+[Hidden settings](/smart-contracts/core-candy-machine/settings) mint assets sequentially (index 0, 1, 2, ...) making mint order predictable. [Config lines](/smart-contracts/core-candy-machine/managing-items) allow you to load placeholder metadata with pre-randomized ordering, providing an additional layer of unpredictability on top of the post-mint reveal mapping.
+
+### Can bots bypass the third-party signer guard by reverse-engineering my backend?
+
+The [third-party signer guard](/smart-contracts/core-candy-machine/guards/third-party-signer) requires a cryptographic signature from a private key that only exists on your backend server. Even if an attacker reverse-engineers the frontend, they cannot forge this signature without access to the private key. This is why the private key must never be exposed in client-side code.
+
+### Which reveal strategy should I choose for my project?
+
+Choose instant reveal for immediate user satisfaction and lower support burden. Choose event reveal for community-wide excitement and simpler mint infrastructure. Choose user-triggered reveal for interactive engagement and user control. All three strategies provide the same underlying security benefits through the secure mapping.
+
+### How do verification hashes prove fairness without revealing the mapping?
+
+Pre-launch verification hashes are SHA-256 hashes of each metadata file and the complete mapping. Publishing these hashes before minting proves the mapping was predetermined. After reveal, users can hash their received metadata and compare it against the published hashes to verify the assignment was not manipulated.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| Third-Party Signer | A Candy Machine guard that requires a cryptographic signature from a designated backend keypair before a mint transaction is considered valid. |
+| Bot Tax | A Candy Machine guard that charges a configurable SOL penalty to any wallet whose mint transaction fails guard validation, discouraging automated spam. |
+| Hidden Settings | A Candy Machine configuration mode where all minted assets share the same name and URI, with minting proceeding in sequential index order. |
+| Placeholder Metadata | Temporary, non-revealing metadata (e.g., "Mystery Asset") loaded into a Candy Machine so that real trait data remains hidden until the post-mint reveal. |
+| Merkle Proof | A cryptographic proof derived from a Merkle tree that verifies a wallet's inclusion in an allowlist without exposing the full list on-chain. |
+| Config Lines | The on-chain data entries in a Candy Machine that store each item's name and metadata URI; publicly readable by anyone querying the account. |
+| Reveal | The post-mint process of updating each asset's placeholder metadata to its final metadata URI using a pre-generated secure mapping. |
+| Fisher-Yates Shuffle | A cryptographically unbiased algorithm for randomly permuting an array, used here to generate the secure mint-to-metadata mapping. |
+

@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - Asset Gateガード"
-metaTitle: "Core Candy Machine - Guards - Asset Gate"
-description: "Core Candy Machineの「Asset Gate」ガードは、Core Candy Machineからミントを許可するために、ミントを行うウォレットが特定のコレクションから別のCore Assetを保持している必要があります"
+metaTitle: "Asset Gateガード | Core Candy Machine"
+description: "Core Candy Machineの「Asset Gate」ガードは、ミントウォレットが指定されたコレクションからCore Assetを保有していることを要求し、保有アセットのバーンや転送は行いません。"
+keywords:
+  - asset gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - collection holder verification
+  - ownership check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - collection-based ownership gating
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Gate** ガードは、支払者が指定されたコレクションからアセットを保有している場合にのみミントを許可し、そのアセットのバーンや転送は行いません。 {% .lead %}
 
 ## 概要
 
@@ -143,3 +163,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Asset Gateガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- Asset Gateガードは所有権を検証しますが、保有アセットのバーンや転送は行いません。他のミント制限ガードと組み合わせない限り、同じアセットを使用して複数回ミントできます。
+- 検証に使用されるアセットは、ミント時にミントウォレットに属し、指定されたコレクションの一部である必要があります。
+- 所有権の検証だけでなく、ミント中にアセットのバーンを要求するには、代わりに [Asset Burn](/ja/smart-contracts/core-candy-machine/guards/asset-burn) ガードを使用してください。
+

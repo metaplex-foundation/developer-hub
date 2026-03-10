@@ -1,8 +1,27 @@
 ---
 title: "Edition ガード"
-metaTitle: "Edition ガード | Core Candy Machine"
-description: "Core Candy Machine の 'Edition' ガードは、Core Candy Machine からエディションをミントできるようにします。"
+metaTitle: "Editionガード | Core Candy Machine"
+description: "Core Candy Machineの「Edition」ガードは、Core Candy Machineからミントされるアセットに設定可能なオフセットから始まる連番のエディション番号を割り当てます。"
+keywords:
+  - edition
+  - Core Candy Machine
+  - candy guard
+  - edition number
+  - numbered editions
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - edition numbering
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Edition** ガードは、Core Candy Machineからミントされるアセットに、設定可能なオフセット値から始まる連番のエディション番号を割り当てます。 {% .lead %}
 
 ## 概要
 
@@ -103,3 +122,10 @@ _Edition ガードはミント設定を必要としません。_
 ## Route 命令
 
 _Edition ガードは route 命令を必要としません。_
+
+## 注意事項
+
+- Edition ガードはミントを制限したり手数料を課したりしません -- ミントされたアセットへのエディション番号の割り当てのみを制御します。
+- エディション番号は`editionStartOffset`の値から連番でインクリメントされます。これを`0`に設定すると、最初にミントされたアセットはエディション番号0を受け取ります。
+- エディションカウンターはオンチェーンのPDA（Edition Counter PDA）を介して追跡され、各ミントが一意の連番エディション番号を受け取ることが保証されます。
+

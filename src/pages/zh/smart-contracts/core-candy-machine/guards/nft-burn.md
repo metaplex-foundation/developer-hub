@@ -1,8 +1,28 @@
 ---
 title: "NFT 销毁守卫"
-metaTitle: "NFT 销毁守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'NFT Burn' 守卫将铸造限制为预定义的 Token Metadata NFT/pNFT Collection 的持有者，并在购买时销毁持有者的 NFT。"
+metaTitle: "NFT 销毁守卫 - 销毁 NFT 以铸造 | Core Candy Machine"
+description: "Core Candy Machine 的 NFT Burn 守卫将铸造限制为预定义的 Token Metadata NFT Collection 的持有者，并在铸造交易期间销毁持有者的 NFT。"
+keywords:
+  - NFT Burn guard
+  - Core Candy Machine
+  - candy guard
+  - burn NFT to mint
+  - token gated mint
+  - NFT collection verification
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT burn-to-mint access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Burn** 守卫将铸造限制为预定义 NFT Collection 的持有者，并在铸造交易中永久销毁持有者的 NFT 作为铸造成本。 {% .lead %}
 
 ## 概述
 
@@ -144,3 +164,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _NFT Burn 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 提供用于销毁的 NFT 必须属于指定的必需 collection，且必须由铸造者拥有。
+- 销毁是不可逆的——一旦 NFT 在铸造交易中被销毁，就无法恢复。
+- 此守卫使用 Token Metadata NFT（非 Core Assets）。`tokenStandard` 字段必须与被销毁 NFT 的实际标准匹配（例如 `NonFungible` 或 `ProgrammableNonFungible`）。
+

@@ -1,8 +1,27 @@
 ---
 title: "资产支付守卫"
 metaTitle: "资产支付守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Asset Payment' 守卫需要来自特定 collection 的另一个 Core Asset 作为从 Core Candy Machine 铸造的支付"
+description: "Core Candy Machine 的 'Asset Payment' 守卫要求铸造者转移指定 collection 中的一个 Core Asset 作为从 Core Candy Machine 铸造的支付。"
+keywords:
+  - asset payment
+  - Core Candy Machine
+  - candy guard
+  - NFT as payment
+  - collection payment
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-based mint payment
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Payment** 守卫要求铸造者转移指定 collection 中的一个 Core Asset 作为支付，才能从 Core Candy Machine 铸造。 {% .lead %}
 
 ## 概述
 
@@ -163,3 +182,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Asset Payment 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 用作支付的资产将被永久转移到目标钱包——铸造者将失去该资产的所有权。
+- 每次铸造只转移一个资产。要求多个资产作为支付，请改用 [Asset Payment Multi](/zh/smart-contracts/core-candy-machine/guards/asset-payment-multi) 守卫。
+- 资产在铸造时必须属于指定的必需 collection；来自其他 collection 的资产将被拒绝。
+

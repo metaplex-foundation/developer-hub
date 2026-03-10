@@ -1,8 +1,27 @@
 ---
 title: "版本守卫"
 metaTitle: "版本守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Edition' 守卫允许从 Core Candy Machine 铸造版本。"
+description: "Core Candy Machine 的 'Edition' 守卫为从 Core Candy Machine 铸造的资产分配从可配置偏移量开始的顺序版本号。"
+keywords:
+  - edition
+  - Core Candy Machine
+  - candy guard
+  - edition number
+  - numbered editions
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - edition numbering
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Edition** 守卫为从 Core Candy Machine 铸造的资产分配从可配置偏移值开始的顺序版本号。 {% .lead %}
 
 ## 概述
 
@@ -103,3 +122,10 @@ _Edition 守卫不需要铸造设置。_
 ## Route 指令
 
 _Edition 守卫不需要 route 指令。_
+
+## 注意事项
+
+- Edition 守卫不限制谁可以铸造或收取费用——它仅控制铸造资产的版本号分配。
+- 版本号从 `editionStartOffset` 值开始顺序递增。将其设置为 `0` 意味着第一个铸造的资产获得版本号 0。
+- 版本计数器通过链上 PDA（Edition Counter PDA）进行跟踪，确保每次铸造都获得唯一的顺序版本号。
+

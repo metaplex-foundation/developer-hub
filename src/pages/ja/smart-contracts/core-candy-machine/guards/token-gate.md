@@ -1,8 +1,27 @@
 ---
 title: Token Gateガード
-metaTitle: Token Gateガード | Core Candy Machine
-description: "Core Candy Machineの「Token Gate」ガードは、設定されたSPLトークンの保有者へのミントを制限します。"
+metaTitle: "Token Gateガード | Core Candy Machine"
+description: "Core Candy MachineのToken Gateガードは、設定されたSPLトークンの最低保有量を持つウォレットへのミントを制限し、トークンのバーンや転送は行いません。"
+keywords:
+  - Token Gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - SPL token holder
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Token-gated minting access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Gate**ガードは、設定されたSPLトークンの最低保有量を持つウォレットへのミントを制限し、トークンのバーンや転送は行いません。 {% .lead %}
 
 ## 概要
 
@@ -139,3 +158,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Token Gateガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- Token Gateガードは、支払者が必要なトークン残高を保持していることのみを**確認**します -- トークンのバーンや転送は行いません。トークンを消費するガードについては、[Token Burn](/smart-contracts/core-candy-machine/guards/token-burn)または[Token Payment](/smart-contracts/core-candy-machine/guards/token-payment)を参照してください。
+- このガードは元の**SPL Tokenプログラム**を使用します。Token-2022ミントはサポートしていません。
+- トークン残高の確認はミント時に行われます。ガード評価とトランザクション実行の間に支払者の残高が必要な**Amount**を下回った場合、ミントは失敗します。
+

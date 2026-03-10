@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - Asset Gate Guard"
-metaTitle: "Core Candy Machine - Guards - Asset Gate"
-description: "The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold another Core Asset from a specific collection to allow the mint from the Core Candy Machine"
+metaTitle: "Asset Gate Guard | Core Candy Machine"
+description: "The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold a Core Asset from a specified collection in order to mint, without burning or transferring the held Asset."
+keywords:
+  - asset gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - collection holder verification
+  - ownership check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - collection-based ownership gating
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Asset Gate** guard allows minting only if the payer holds an Asset from a specified collection, without burning or transferring that Asset. {% .lead %}
 
 ## Overview
 
@@ -113,7 +133,7 @@ The Asset Gate guard contains the following Mint Settings:
 - **Asset Address**: The address of the Asset to prove ownership with. This must be part of the required collection and must belong to the minter.
 - **Collection Address**: The Address of the Collection that is used to prove ownership.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetgate) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the Asset Gate Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -143,3 +163,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Asset Gate guard does not support the route instruction._
+
+## Notes
+
+- The Asset Gate guard verifies ownership but does not burn or transfer the held Asset. The same Asset can be used to mint multiple times unless combined with other guards that limit minting.
+- The Asset used for verification must belong to the minting wallet and must be part of the specified collection at the time of minting.
+- To require burning the held Asset during minting instead of just verifying ownership, use the [Asset Burn](/smart-contracts/core-candy-machine/guards/asset-burn) guard.
+

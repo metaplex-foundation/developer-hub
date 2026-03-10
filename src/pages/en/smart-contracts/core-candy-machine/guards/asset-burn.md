@@ -1,12 +1,32 @@
 ---
 title: Asset Burn Guard
 metaTitle: Asset Burn Guard | Core Candy Machine
-description: "The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a predefined Collection and burns the holder's Asset during purchase from the Core Candy Machine."
+description: "The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a specified collection and permanently burns one of the holder's Assets from that collection as the cost of minting."
+keywords:
+  - asset burn
+  - Core Candy Machine
+  - candy guard
+  - burn to mint
+  - collection holder
+  - NFT burning
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - burn-to-mint mechanics
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Asset Burn** guard requires the minting wallet to hold an Asset from a specified collection and permanently burns that Asset as the cost of minting a new one from the Core Candy Machine. {% .lead %}
 
 ## Overview
 
-The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
+The **Asset Burn** guard restricts the mint to holders of a predefined Collection and burns the holder's Asset. Thus, the address of the Asset to burn must be provided by the payer when minting.
 
 To have the minter burn more than one Asset the [Asset Burn Multi Guard](/smart-contracts/core-candy-machine/guards/asset-burn-multi) can be used.
 
@@ -110,7 +130,7 @@ The Asset Burn guard contains the following Mint Settings:
 - **Required Collection**: The mint address of the required Collection.
 - **Address**: The address of the Asset to burn. This must be part of the required collection and must belong to the minter.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#asseturn) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#asseturn) for more details.
 
 {% dialect-switcher title="Mint with the Asset Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -140,3 +160,11 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Asset Burn guard does not support the route instruction._
+
+## Notes
+
+- The Asset being burned is permanently destroyed and cannot be recovered. The burn happens atomically during the mint transaction.
+- The Asset must belong to the minting wallet and must be part of the specified collection. If either condition is not met, the mint transaction will fail.
+- This guard burns exactly one Asset per mint. To require burning multiple Assets per mint, use the [Asset Burn Multi](/smart-contracts/core-candy-machine/guards/asset-burn-multi) guard instead.
+- To gate minting on collection ownership without burning the Asset, use the [Asset Gate](/smart-contracts/core-candy-machine/guards/asset-gate) guard instead.
+

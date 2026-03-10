@@ -1,8 +1,28 @@
 ---
 title: "Program Gate Guard"
-metaTitle: "Program  Guard Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Program Gate' 가드는 민트 트랜잭션 중에 사용할 수 있는 프로그램을 제한합니다."
+metaTitle: "Program Gate Guard - 트랜잭션 프로그램 제한 | Core Candy Machine"
+description: "Core Candy Machine의 Program Gate 가드는 민트 트랜잭션에 포함할 수 있는 프로그램을 제한하여, 봇이 임의의 프로그램에서 악성 명령어를 추가하는 것을 방지합니다."
+keywords:
+  - Program Gate guard
+  - Core Candy Machine
+  - candy guard
+  - transaction program allowlist
+  - bot protection
+  - mint security
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - mint transaction program restrictions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Program Gate** 가드는 민트 트랜잭션에 포함할 수 있는 프로그램을 제한하여, 봇이 허가되지 않은 프로그램에서 악성 명령어를 주입하는 것을 방지합니다. {% .lead %}
 
 ## 개요
 
@@ -101,3 +121,10 @@ _Program Gate 가드는 민트 설정이 필요하지 않습니다._
 ## Route Instruction
 
 _Program Gate 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- `additional` 목록은 최대 5개의 프로그램 주소를 지원합니다. 표준 Candy Machine 민트 플로우에 필요한 프로그램은 자동으로 허용되므로 포함할 필요가 없습니다.
+- 이 가드가 활성화되면 허용 목록에 없는 프로그램의 명령어가 포함된 민트 트랜잭션은 실패합니다. 이는 효과적인 봇 방지 조치이지만, 민팅 중 제3자 프로그램이 필요한 경우 합법적인 사용 사례를 차단할 수 있습니다.
+- 이 가드는 허용된 프로그램이 내부적으로 수행하는 CPI(크로스 프로그램 호출) 호출을 제한하지 않습니다 -- 트랜잭션의 최상위 명령어만 검사합니다.
+

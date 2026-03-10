@@ -1,12 +1,32 @@
 ---
 title: Address Gate Guard
 metaTitle: Address Gate Guard | Core Candy Machine
-description: "The Core Candy Machine 'Address Gate' restricts the minting to a single address provided."
+description: "The Core Candy Machine 'Address Gate' guard restricts minting to a single specified wallet address, blocking all other wallets from minting."
+keywords:
+  - address gate
+  - Core Candy Machine
+  - candy guard
+  - wallet restriction
+  - single address minting
+  - access control
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - wallet-based access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Address Gate** guard restricts minting from a Core Candy Machine to a single wallet address, rejecting all other wallets that attempt to mint. {% .lead %}
 
 ## Overview
 
-The **Address Gate** guard restricts the mint to a single address which must match the address of the minting wallet.
+The **Address Gate** guard restricts the mint to a single address which must match the address of the minting wallet.
 
 {% diagram  %}
 
@@ -120,3 +140,9 @@ _The Address Gate guard does not need Mint Settings._
 ## Route Instruction
 
 _The Address Gate guard does not support or require the route instruction._
+
+## Notes
+
+- The Address Gate guard permits only a single wallet address. To allow multiple wallets, use the [Allow List](/smart-contracts/core-candy-machine/guards/allow-list) guard instead.
+- This guard compares the minting wallet address against the configured address at mint time; no pre-validation route instruction is required.
+

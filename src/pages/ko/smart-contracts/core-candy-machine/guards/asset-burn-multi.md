@@ -1,8 +1,28 @@
 ---
 title: 자산 소각 멀티 가드
 metaTitle: 자산 소각 멀티 가드 | 코어 캔디 머신
-description: "코어 캔디 머신의 '자산 소각 멀티' 가드는 미리 정의된 컬렉션의 보유자로 민팅을 제한하고 구매 시 보유자의 자산(들)을 소각합니다."
+description: "코어 캔디 머신의 'Asset Burn Multi' 가드는 지정된 컬렉션의 보유자로 민팅을 제한하고, 민팅 비용으로 해당 컬렉션에서 구성 가능한 수의 보유자 Asset을 소각합니다."
+keywords:
+  - asset burn multi
+  - Core Candy Machine
+  - candy guard
+  - burn multiple assets
+  - burn to mint
+  - collection holder
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - multi-asset burn-to-mint mechanics
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Burn Multi** 가드는 민팅 지갑이 지정된 컬렉션에서 구성 가능한 수의 Asset을 보유하고 영구적으로 소각해야 코어 캔디 머신에서 새로운 Asset을 민팅할 수 있습니다. {% .lead %}
 
 ## 개요
 
@@ -145,3 +165,11 @@ API 참조: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 ## 라우트 지시사항
 
 _자산 소각 멀티 가드는 라우트 지시사항을 지원하지 않습니다._
+
+## Notes
+
+- 소각되는 모든 Asset은 영구적으로 파괴되며 복구할 수 없습니다. 소각은 민트 트랜잭션 중에 원자적으로 발생합니다.
+- `assets` 배열에 제공된 Asset 주소의 수는 가드 설정에 구성된 `num` 값과 일치해야 합니다. 더 적거나 많은 주소를 제공하면 트랜잭션이 실패합니다.
+- 각 Asset은 민팅 지갑에 속해야 하며 지정된 컬렉션에 포함되어야 합니다. 어떤 Asset이라도 두 조건 중 하나를 충족하지 못하면 전체 민트 트랜잭션이 실패합니다.
+- 민팅당 단일 Asset만 소각하려면 더 간단한 [Asset Burn](/ko/smart-contracts/core-candy-machine/guards/asset-burn) 가드를 대신 사용하세요.
+

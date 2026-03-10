@@ -1,16 +1,49 @@
 ---
 title: 为 Core Candy Machine 生成自定义守卫客户端
 metaTitle: 自定义守卫客户端 | Core Candy Machine
-description: 了解如何为最新的 Core Candy Machine 程序自定义构建的守卫生成与 Umi 兼容的客户端。
+description: 了解如何使用 Kinobi 和 Shankjs 为 Core Candy Machine 程序的自定义守卫生成兼容 Umi 的 JavaScript 客户端。
+keywords:
+  - custom guard
+  - core candy machine
+  - kinobi
+  - IDL
+  - shankjs
+  - client generation
+  - umi sdk
+  - candy guard
+  - solana nft
+  - custom minting logic
+  - guard manifest
+  - code generation
+  - metaplex
+about:
+  - Custom guards
+  - Client generation
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
 
-一旦您为 Candy Machine Guard 程序编写了自定义守卫，您需要生成一个与 Umi SDK 兼容的 Kinobi 客户端，例如能够在前端中使用您的守卫。
+## 概要
+
+生成自定义守卫客户端可以从您的自定义 [Core Candy Machine](/zh/smart-contracts/core-candy-machine) 守卫程序生成兼容 [Umi](/zh/dev-tools/umi) 的 JavaScript SDK，实现前端和脚本集成。 {% .lead %}
+
+- 使用 [Shankjs](https://github.com/metaplex-foundation/shank) 从您的自定义 Candy Guard 程序生成 IDL
+- 运行 Kinobi 代码生成器生成 TypeScript 客户端文件
+- 在生成的客户端包中注册守卫清单、类型和铸造参数
+- 构建并将客户端包发布到 npm 或本地链接
 
 ## 生成 IDL 和初始客户端
 
-### 配置 Shankjs
+编写自定义守卫后的第一步是使用 [mpl-core-candy-machine 仓库](https://github.com/metaplex-foundation/mpl-core-candy-machine)中的 Shankjs 和 Kinobi 生成 IDL 和初始 TypeScript 客户端。
 
-Shankjs 是一个适用于 Anchor 和非 Anchor 程序的 IDL 生成器。您需要使用新的自定义 Candy Guard 部署密钥配置它，以正确生成可用的客户端。编辑位于 mpl-candy-machine 仓库中 `/configs/shank.cjs` 的文件。
+### 配置 Shankjs 进行 IDL 生成
+
+Shankjs 是一个适用于 Anchor 和非 Anchor 程序的 IDL 生成器。编辑位于 mpl-candy-machine 仓库中 `/configs/shank.cjs` 的文件，使用您的自定义 Candy Guard 部署密钥进行配置。
 
 ```js
 /configs/shank.cjs
@@ -18,7 +51,7 @@ Shankjs 是一个适用于 Anchor 和非 Anchor 程序的 IDL 生成器。您需
 generateIdl({
   generator: "anchor",
   programName: "candy_guard",
-  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // 您的自定义 Candy Guard 部署程序密钥。
+  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // Your custom Candy Guard deployed program key.
   idlDir,
   binaryInstallDir,
   programDir: path.join(programDir, "candy-guard", "program"),
@@ -27,7 +60,7 @@ generateIdl({
 ```
 
 {% callout %}
-如果您使用 anchor 28 生成，由于缺少 crates.io crate，您需要在 Shankjs idl 生成器中添加到 anchor 27 的回退。
+如果您使用 anchor 28 生成，由于缺少 crates.io crate，您需要在 Shankjs IDL 生成器中添加到 anchor 27 的回退。
 {% /callout %}
 
 ```js
@@ -36,7 +69,7 @@ generateIdl({
 generateIdl({
   generator: "anchor",
   programName: "candy_guard",
-  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // 您的自定义 Candy Guard 部署程序密钥。
+  programId: "Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g", // Your custom Candy Guard deployed program key.
   idlDir,
   binaryInstallDir,
   programDir: path.join(programDir, "candy-guard", "program"),
@@ -48,9 +81,9 @@ generateIdl({
 
 ```
 
-### 生成 IDL 和客户端
+### 运行 IDL 和客户端生成
 
-现在您应该能够生成 IDL 和初始客户端。从项目根目录运行
+现在您应该能够生成 IDL 和初始客户端。从项目根目录运行：
 
 ```shell
 pnpm run generate
@@ -59,16 +92,13 @@ pnpm run generate
 这将依次执行 `pnpm generate:idls` 和 `pnpm generate:clients` 脚本并构建初始客户端。
 如果由于某种原因需要单独运行这些脚本，您也可以这样做。
 
-## 将守卫添加到客户端
+## 将自定义守卫添加到生成的客户端
+
+成功生成初始客户端后，您需要创建守卫文件并在客户端的类型系统中注册它。
 
 ### 创建守卫文件
 
-成功生成初始客户端后，导航到 `/clients/js/src`。
-
-第一步是将您的新守卫添加到 `/clients/js/src/defaultGuards` 文件夹中。
-
-以下是您可以根据创建的守卫类型使用和调整的模板。
-您可以随意命名您的守卫，但我将在示例中命名为 `customGuard.ts`
+导航到生成的客户端中的 `/clients/js/src/defaultGuards`，为您的自定义守卫创建一个新文件。以下模板可以根据您创建的守卫类型进行调整。此示例使用名称 `customGuard.ts`。
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -90,8 +120,8 @@ export const customGuardManifest: GuardManifest<
     const { publicKeyArg1, arg1 } = args
     return {
       data: new Uint8Array(),
-      // 从您的铸造参数传入自定义守卫所需的任何账户。
-      // 您的守卫可能需要也可能不需要剩余账户。
+      // Pass in any accounts needed for your custom guard from your mint args.
+      // Your guard may or may not need remaining accounts.
       remainingAccounts: [
         { publicKey: publicKeyArg1, isWritable: true },
         { publicKey: publicKeyArg2, isWritable: false },
@@ -101,50 +131,50 @@ export const customGuardManifest: GuardManifest<
   routeParser: noopParser,
 }
 
-// 在这里您将填写守卫运行所需的任何自定义铸造参数。
-// 您的守卫可能需要也可能不需要 MintArgs。
+// Here you would fill out any custom Mint args needed for your guard to operate.
+// Your guard may or may not need MintArgs.
 
 export type CustomGuardMintArgs = {
   /**
-   * 自定义守卫铸造参数 1
+   * Custom Guard Mint Arg 1
    */
   publicKeyArg1: PublicKey
 
   /**
-   * 自定义守卫铸造参数 2
+   * Custom Guard Mint Arg 2
    */
   publicKeyArg2: PublicKey
 
   /**
-   * 自定义守卫铸造参数 3。
+   * Custom Guard Mint Arg 3.
    */
   arg3: Number
 }
 ```
 
-### 将守卫添加到现有文件
+### 在现有文件中注册守卫
 
-从这里您需要将新守卫添加到一些现有文件中。
+创建守卫文件后，您必须在生成的客户端中的多个现有文件中注册该守卫。
 
-从 `/clients/js/src/defaultGuards.index.ts` 导出您的新守卫
+从 `/clients/js/src/defaultGuards/index.ts` 导出您的新守卫
 
 ```ts
 ...
 export * from './tokenGate';
 export * from './tokenPayment';
 export * from './token2022Payment';
-// 将您的守卫添加到列表中
+// add your guard to the list
 export * from './customGuard';
 ```
 
-在 `/clients/js/src/defaultGuards.defaults.ts` 中将您的守卫添加到以下位置：
+在 `/clients/js/src/defaultGuards/defaults.ts` 中将您的守卫添加到以下位置：
 
 ```ts
 import { CustomGuardArgs } from "../generated"
 
 export type DefaultGuardSetArgs = GuardSetArgs & {
     ...
-     // 将您的守卫添加到列表中
+     // add your guard to the list
     customGuard: OptionOrNullable<CustomGuardArgs>;
 }
 ```
@@ -154,7 +184,7 @@ import { customGuard } from "../generated"
 
 export type DefaultGuardSet = GuardSet & {
     ...
-     // 将您的守卫添加到列表中
+     // add your guard to the list
     customGuard: Option<CustomGuard>
 }
 ```
@@ -163,14 +193,14 @@ export type DefaultGuardSet = GuardSet & {
 import { CustomGuardMintArgs } from "./defaultGuards/customGuard.ts"
 export type DefaultGuardSetMintArgs = GuardSetMintArgs & {
     ...
-    // 将您的守卫添加到列表中
+    // add your guard to the list
     customGuard: OptionOrNullable<CustomGuardMintArgs>
 }
 ```
 
 ```ts
 export const defaultCandyGuardNames: string[] = [
-  ...// 将您的守卫添加到列表中
+  ...// add your guard to the list
   'customGuard',
 ]
 ```
@@ -181,11 +211,18 @@ export const defaultCandyGuardNames: string[] = [
 import {customGuardManifest} from "./defaultGuards"
 
  umi.guards.add(
-  ...// 将您的守卫清单添加到列表中
+  ...// add your guard manifest to the list
   customGuardManifest
 )
 ```
 
 从这一点开始，您可以构建并将客户端包上传到 npm，或将其链接/移动到您想要访问新守卫客户端的项目文件夹中。
 
-值得使用 AVA 内置测试套件编写一些在多种场景下全面测试您的守卫的测试。测试示例可以在 `/clients/js/tests` 中找到。
+## 注意事项
+
+- 此工作流需要 [mpl-core-candy-machine 仓库](https://github.com/metaplex-foundation/mpl-core-candy-machine)的 fork 副本。请克隆并在该 fork 中工作。
+- 使用内置的 [AVA](https://github.com/avajs/ava) 测试套件编写在多种场景下全面测试您的自定义守卫的测试。测试示例可以在 `/clients/js/tests` 中找到。
+- 如果使用 Anchor 28，由于缺少 crates.io 依赖，您必须如上所示向 Shankjs 添加 `rustbin` 回退配置。
+- 除了添加自定义守卫注册外，不应手动编辑生成后的客户端文件。
+
+*由 [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) 维护 · 最后验证于 2026 年 3 月*

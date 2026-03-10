@@ -1,8 +1,28 @@
 ---
 title: "门卫守卫"
-metaTitle: "门卫守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 `Gatekeeper` 守卫检查铸造钱包是否拥有来自指定 Gatekeeper 网络的有效 Gateway Token。"
+metaTitle: "门卫守卫 - 铸造需要 Gateway Token | Core Candy Machine"
+description: "Gatekeeper 守卫要求铸造钱包持有来自指定 Gatekeeper 网络（如 Civic Captcha Pass）的有效 Gateway Token 才能从 Core Candy Machine 铸造。"
+keywords:
+  - gatekeeper
+  - Core Candy Machine
+  - candy guard
+  - gateway token
+  - Civic captcha
+  - bot protection
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - gateway token verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Gatekeeper** 守卫要求铸造钱包持有来自指定 Gatekeeper 网络（如 Civic Captcha Pass）的有效 Gateway Token 才能允许铸造。 {% .lead %}
 
 ## 概述
 
@@ -170,3 +190,10 @@ mintV1(umi, {
 ## Route 指令
 
 _Gatekeeper 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 铸造钱包必须在尝试铸造之前从配置的 Gatekeeper 网络获取有效的 Gateway Token。令牌获取过程（例如完成验证码）发生在 Candy Machine 程序之外。
+- 当 `expireOnUse` 设置为 `true` 时，每次铸造都需要一个新的 Gateway Token，实际上将每次验证码完成限制为一次铸造。
+- Civic Captcha Pass 网络地址为 `ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`。其他 Gatekeeper 网络可能有不同的要求和令牌发放流程。
+

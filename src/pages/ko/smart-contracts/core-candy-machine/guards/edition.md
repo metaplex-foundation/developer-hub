@@ -1,8 +1,27 @@
 ---
 title: "Edition Guard"
-metaTitle: "Edition Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Edition' 가드는 Core Candy Machine에서 Edition의 민팅을 허용합니다."
+metaTitle: "Edition 가드 | 코어 캔디 머신"
+description: "코어 캔디 머신의 'Edition' 가드는 구성 가능한 오프셋 값부터 시작하여 코어 캔디 머신에서 민팅된 Asset에 순차적인 에디션 번호를 할당합니다."
+keywords:
+  - edition
+  - Core Candy Machine
+  - candy guard
+  - edition number
+  - numbered editions
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - edition numbering
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Edition** 가드는 구성 가능한 오프셋 값부터 시작하여 코어 캔디 머신에서 민팅된 Asset에 순차적인 에디션 번호를 할당합니다. {% .lead %}
 
 ## 개요
 
@@ -103,3 +122,10 @@ _Edition 가드는 민팅 설정이 필요하지 않습니다._
 ## Route Instruction
 
 _Edition 가드는 route instruction이 필요하지 않습니다._
+
+## Notes
+
+- Edition 가드는 민팅을 제한하거나 수수료를 청구하지 않습니다 -- 민팅된 Asset에 대한 에디션 번호 할당만 제어합니다.
+- 에디션 번호는 `editionStartOffset` 값부터 순차적으로 증가합니다. 이 값을 `0`으로 설정하면 첫 번째 민팅된 Asset이 에디션 번호 0을 받습니다.
+- 에디션 카운터는 온체인 PDA(Edition Counter PDA)를 통해 추적되어, 각 민팅이 고유한 순차적 에디션 번호를 받도록 보장합니다.
+

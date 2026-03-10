@@ -1,8 +1,27 @@
 ---
 title: Asset Mint Limit Guard
-metaTitle: Asset Mint Limit Guard | Core Candy Machine
-description: "Core Candy Machine의 'Asset Mint Limit' 가드는 지정된 컬렉션의 보유자로 민팅을 제한하고 Core Candy Machine에서 제공된 Asset에 대해 구매할 수 있는 민팅 수량을 제한합니다."
+metaTitle: Asset Mint Limit 가드 | 코어 캔디 머신
+description: "코어 캔디 머신의 'Asset Mint Limit' 가드는 지정된 컬렉션의 보유자로 민팅을 제한하고 코어 캔디 머신에서 각 개별 Asset이 민팅에 사용될 수 있는 횟수를 제한합니다."
+keywords:
+  - asset mint limit
+  - Core Candy Machine
+  - candy guard
+  - mint limit per NFT
+  - collection-gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-asset mint limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Mint Limit** 가드는 지정된 Core Asset 컬렉션의 보유자로 민팅을 제한하고 각 개별 Asset이 코어 캔디 머신에서 민팅에 사용될 수 있는 횟수를 제한합니다. {% .lead %}
 
 ## 개요
 
@@ -158,3 +177,11 @@ const pda = findAssetMintCounterPda(umi, {
 
 const nftMintCounter = fetchAssetMintCounter(umi, pda)
 ```
+
+## Notes
+
+- 민트 제한 카운터는 지갑이 아닌 Asset 주소별로 추적됩니다. 여러 개의 적합한 Asset을 보유한 지갑은 각 Asset으로 제한까지 민팅할 수 있습니다.
+- 각 고유한 `id` 값은 별도의 카운터를 생성하여, 서로 다른 가드 그룹이 동일한 Candy Machine에서 독립적인 제한을 적용할 수 있습니다.
+- `AssetMintCounter` PDA는 `id`, Asset 공개 키, Candy Guard 주소, Candy Machine 주소에서 파생됩니다.
+- 이 가드는 증빙으로 사용된 Asset을 소각하거나 전송하지 않습니다 -- 소유권만 확인하고 카운터를 증가시킵니다.
+

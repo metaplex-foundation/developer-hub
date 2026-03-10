@@ -1,8 +1,27 @@
 ---
 title: Token2022 Paymentガード
-metaTitle: Token2022 Paymentガード | Core Candy Machine
-description: "Core Candy Machineの「Token2022 Payment」ガードは、支払者にSPL Token2022の設定値を請求することでミントを許可します。"
+metaTitle: "Token2022 Paymentガード | Core Candy Machine"
+description: "Core Candy MachineのToken2022 Paymentガードは、指定された量のSPL Token-2022トークンを支払者に請求し、設定された宛先ウォレットに転送してからミントを許可します。"
+keywords:
+  - Token2022 Payment
+  - Core Candy Machine
+  - candy guard
+  - SPL Token-2022
+  - token payment
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL Token-2022 payment for minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token2022 Payment**ガードは、指定された量のSPL Token-2022トークンをミンターに請求し、設定された宛先ウォレットに転送してからミントを許可します。 {% .lead %}
 
 ## 概要
 
@@ -182,3 +201,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Token Paymentガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- Token2022 Paymentガードは、ミントとトークンアカウントが元のSPL Tokenプログラムではなく**SPL Token-2022プログラム**に属している必要があります。レガシーSPLトークンを使用して請求する必要がある場合は、[Token Payment](/smart-contracts/core-candy-machine/guards/token-payment)ガードを使用してください。
+- 支払者はミント時に関連トークンアカウントに設定された**Amount**以上のトークンを保持している必要があります。そうでない場合、トランザクションは失敗します。
+- **Destination ATA**はミント前に既に存在している必要があります。ガードによって自動的に作成されることはありません。
+

@@ -1,8 +1,28 @@
 ---
 title: "Bot Tax Guard"
 metaTitle: "Bot Tax Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Bot Tax' guard allows you to set up a configurable tax to charge invalid transactions from users. This can deter spam and bots."
+description: "The Core Candy Machine 'Bot Tax' guard charges a configurable SOL penalty on invalid mint transactions to deter bots and spam from the Candy Machine."
+keywords:
+  - bot tax
+  - Core Candy Machine
+  - candy guard
+  - anti-bot protection
+  - spam prevention
+  - last instruction check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - bot mitigation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Bot Tax** guard charges a configurable SOL penalty on invalid mint transactions to discourage bots and spam attempts against the Core Candy Machine. {% .lead %}
 
 {% callout type="warning" %}
 Some wallets (such as Solflare, Phantom, and possibly others) currently auto-inject Lighthouse instructions into transactions. This causes the Bot Tax guard to trigger when `lastInstruction` is set to `true`.
@@ -134,3 +154,11 @@ _The Bot Tax guard does not need Mint Settings._
 ## Route Instruction
 
 _The Bot Tax guard does not support the route instruction._
+
+## Notes
+
+- When the Bot Tax guard is active and another guard rejects a mint, the transaction still appears to succeed on-chain but no NFT is minted. This is by design so the penalty can be collected.
+- Collected bot tax funds accumulate in the Candy Machine account and can be recovered by deleting the Candy Machine after minting concludes.
+- Setting `lastInstruction` to `true` may cause false positives with wallets (such as Solflare and Phantom) that auto-inject additional instructions into transactions. Test thoroughly before enabling this option in production.
+- Keep the penalty amount small (for example, 0.01 SOL) to avoid punishing legitimate users who encounter validation errors.
+

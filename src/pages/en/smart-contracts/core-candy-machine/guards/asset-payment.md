@@ -1,8 +1,27 @@
 ---
 title: "Asset Payment Guard"
 metaTitle: "Asset Payment Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine"
+description: "The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine."
+keywords:
+  - asset payment
+  - Core Candy Machine
+  - candy guard
+  - NFT as payment
+  - collection payment
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-based mint payment
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Asset Payment** guard requires the minter to transfer a Core Asset from a specified collection as payment in order to mint from the Core Candy Machine. {% .lead %}
 
 ## Overview
 
@@ -134,7 +153,7 @@ The Asset Payment guard contains the following Mint Settings:
 - **Collection Address**: The Address of the Collection that is used for payment.
 - **Destination**: The address of the wallet that will receive all Assets.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetpayment) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetpayment) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the Asset Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -165,3 +184,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Asset Payment guard does not support the route instruction._
+
+## Notes
+
+- The Asset used as payment is permanently transferred to the destination wallet -- the minter loses ownership of it.
+- Only one Asset is transferred per mint. To require multiple Assets as payment, use the [Asset Payment Multi](/smart-contracts/core-candy-machine/guards/asset-payment-multi) guard instead.
+- The Asset must belong to the specified required collection at the time of minting; Assets from other collections will be rejected.
+

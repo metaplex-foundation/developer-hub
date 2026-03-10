@@ -1,8 +1,27 @@
 ---
 title: Token Burnガード
-metaTitle: Token Burnガード | Core Candy Machine
-description: "Core Candy Machineの「Token Burn」ガードは、ミント通貨をSPLトークンアドレスと値に設定することでミントを許可します。"
+metaTitle: "Token Burnガード | Core Candy Machine"
+description: "Core Candy MachineのToken Burnガードは、ミントが許可される前に、設定されたミントアカウントから指定量のSPLトークンをミンターがバーンすることを要求します。"
+keywords:
+  - Token Burn
+  - Core Candy Machine
+  - candy guard
+  - SPL token burn
+  - burn to mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token burning for mint access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Burn**ガードは、ミントトランザクションが許可される前に、設定された量のSPLトークンをミンターが永久にバーンすることを要求します。 {% .lead %}
 
 ## 概要
 
@@ -137,3 +156,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Token Burnガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- バーンされたトークンは永久に破壊され、復元できません。設定された**Amount**がミントごとの意図したコストを正確に反映していることを確認してください。
+- このガードは元の**SPL Tokenプログラム**を使用します。Token-2022ミントについては、対応するToken-2022ガードバリアントを使用してください。
+- 支払者はミント時に関連トークンアカウントに設定された**Amount**以上のトークンを保持している必要があります。そうでない場合、トランザクションは失敗します。
+

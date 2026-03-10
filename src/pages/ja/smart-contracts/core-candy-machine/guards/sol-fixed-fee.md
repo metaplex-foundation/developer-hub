@@ -1,8 +1,28 @@
 ---
 title: Sol Fixed Feeガード
-metaTitle: Sol Fixed Feeガード | Core Candy Machine
-description: Core Candy Machineの「Sol Fixed Fee」ガードは、ミント時に支払者にSOLでの金額を請求します
+metaTitle: "Sol Fixed Feeガード - Core Candy Machineガード | Metaplex"
+description: "Sol Fixed Feeガードは、Core Candy Machineからのミント時に支払者に固定のSOL金額を請求し、設定された宛先ウォレットに手数料を転送します。"
+keywords:
+  - sol fixed fee
+  - Core Candy Machine
+  - candy guard
+  - SOL payment
+  - mint fee
+  - fixed fee
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Sol Fixed Fee**ガードは、Core Candy Machineからのミント時に支払者に固定のSOL金額を請求し、設定された宛先ウォレットに手数料を転送します。 {% .lead %}
 
 ## 概要
 
@@ -139,3 +159,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Sol Fixed Feeガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- Sol Fixed Feeガードは、ガード設定とミント設定の両方で`destination`ウォレットアドレスを提供する必要があります。
+- 手数料の金額はlamportsで指定します。`sol()`ヘルパーを使用してSOLをlamportsに変換してください（例: `sol(1.5)`は1,500,000,000 lamportsに相当）。
+- このガードは[Sol Payment](/smart-contracts/core-candy-machine/guards/sol-payment)ガードと同様に機能します。主な違いは、Sol Fixed Feeが定額手数料の徴収シナリオ向けに設計されていることです。
+

@@ -1,8 +1,30 @@
 ---
 title: Allowlistガード
 metaTitle: Allowlistガード | Core Candy Machine
-description: "Core Candy Machineの「Allowlist」ガードは、Core Candy Machineからミントすることが許可されたウォレットの事前定義リストを設定できます"
+description: "Core Candy Machineの「Allowlist」ガードは、事前定義されたウォレットアドレスのMerkle Treeに対してミントウォレットを検証し、ミントを許可する前にMerkle Proofの事前検証を要求します。"
+keywords:
+  - allowlist
+  - allow list
+  - Core Candy Machine
+  - candy guard
+  - Merkle Tree
+  - Merkle Proof
+  - whitelist
+  - wallet validation
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - Merkle Tree-based wallet allowlisting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allow List** ガードは、事前定義されたアドレスのMerkle Treeに対してミントウォレットを検証し、有効なMerkle Proofを提供できるウォレットのみがCore Candy Machineからミントすることを許可します。 {% .lead %}
 
 ## 概要
 
@@ -407,3 +429,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
   // または「ミント」アカウントのpublicKey
 });
 ```
+
+## 注意事項
+
+- Merkle Proofはミント前にルート命令を介して検証する必要があります。これは2段階のプロセスです: まずプルーフ付きで`route`を呼び出し、その後`mintV1`を呼び出します。
+- 非常に大きな許可リストの場合、SolanaのトランザクションサイズUの制限を超えないように、Merkle Proofはミントトランザクションから分離されています。
+- 許可リストが変更された場合、新しいMerkle Rootを計算し、ガード設定を更新する必要があります。以前に検証されたプルーフは無効になります。
+- Allow Listガードは、アドレスのリストではなく単一のアドレスにミントを制限する [Address Gate](/ja/smart-contracts/core-candy-machine/guards/address-gate) ガードとは異なります。
+

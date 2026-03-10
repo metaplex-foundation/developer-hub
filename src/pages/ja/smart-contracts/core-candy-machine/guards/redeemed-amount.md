@@ -1,8 +1,28 @@
 ---
 title: "Redeemed Amountガード"
-metaTitle: "Redeemed Amountガード | Core Candy Machine"
-description: "Core Candy Machineの「Redeemed Amount」ガードは、Core Candy Machine全体でミントされたアセットの数が設定された最大量に達したときにミントを禁止します。"
+metaTitle: "Redeemed Amountガード - Core Candy Machineガード | Metaplex"
+description: "Redeemed Amountガードは、Core Candy Machineからミントできるアセットの総数を制限し、グローバルミント上限とガードグループを使用した段階的ミント戦略を可能にします。"
+keywords:
+  - redeemed amount
+  - Core Candy Machine
+  - candy guard
+  - mint limit
+  - guard groups
+  - global mint cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - minting supply caps
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Redeemed Amount**ガードは、Core Candy Machine全体でミントされたアセットの総数が設定された最大値に達した場合にミントを禁止し、グローバルな供給上限と段階的ミントフェーズを可能にします。 {% .lead %}
 
 ## 概要
 
@@ -134,3 +154,10 @@ _Redeemed Amountガードはミント設定を必要としません。_
 ## ルート命令
 
 _Redeemed Amountガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- Redeemed AmountガードはCore Candy Machine全体のミント数を追跡します。ウォレットごとではありません。ウォレットごとのミント制限には、[Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit)ガードを使用してください。
+- `maximum`の値は、実用的な効果を持つためにはCandy Machineの`itemsAvailable`以下である必要があります。
+- [ガードグループ](/smart-contracts/core-candy-machine/guard-groups)と一緒に使用する場合、Redeemed Amountカウンターはすべてのグループ間でグローバルに共有されるため、段階的な価格フェーズの実装に最適です。
+

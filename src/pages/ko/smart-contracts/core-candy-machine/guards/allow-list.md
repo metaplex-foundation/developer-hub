@@ -1,8 +1,30 @@
 ---
 title: 허용 목록 가드
 metaTitle: 허용 목록 가드 | 코어 캔디 머신
-description: "코어 캔디 머신의 '허용 목록' 가드를 사용하면 코어 캔디 머신에서 민팅할 수 있는 미리 정의된 지갑 목록을 설정할 수 있습니다"
+description: "코어 캔디 머신의 'Allowlist' 가드는 사전 정의된 지갑 주소의 머클 트리에 대해 민팅 지갑을 검증하며, 민팅이 허용되기 전에 머클 증명 사전 검증을 요구합니다."
+keywords:
+  - allowlist
+  - allow list
+  - Core Candy Machine
+  - candy guard
+  - Merkle Tree
+  - Merkle Proof
+  - whitelist
+  - wallet validation
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - Merkle Tree-based wallet allowlisting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allow List** 가드는 사전 정의된 주소의 머클 트리에 대해 민팅 지갑을 검증하며, 유효한 머클 증명을 제공하는 지갑만 코어 캔디 머신에서 민팅할 수 있습니다. {% .lead %}
 
 ## 개요
 
@@ -405,3 +427,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
   // 또는 "민팅" 계정의 publicKey
 });
 ```
+
+## Notes
+
+- 머클 증명은 민팅 전에 라우트 지시사항을 통해 검증해야 합니다. 이는 두 단계 프로세스입니다: 먼저 증명과 함께 `route`를 호출한 다음 `mintV1`을 호출합니다.
+- 매우 큰 허용 목록의 경우, Solana의 트랜잭션 크기 제한을 초과하지 않도록 머클 증명이 민트 트랜잭션과 분리됩니다.
+- 허용 목록이 변경되면 새로운 머클 루트를 계산하고 가드 설정을 그에 맞게 업데이트해야 합니다. 이전에 검증된 증명은 무효가 됩니다.
+- Allow List 가드는 주소 목록이 아닌 단일 주소로 민팅을 제한하는 [Address Gate](/ko/smart-contracts/core-candy-machine/guards/address-gate) 가드와 다릅니다.
+

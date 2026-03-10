@@ -1,8 +1,28 @@
 ---
 title: Address Gate ガード
 metaTitle: Address Gate ガード | Core Candy Machine
-description: "Core Candy Machine の 'Address Gate' は、指定された単一のアドレスにミントを制限します。"
+description: "Core Candy Machine の 'Address Gate' ガードは、指定された単一のウォレットアドレスにミントを制限し、他のすべてのウォレットからのミントをブロックします。"
+keywords:
+  - address gate
+  - Core Candy Machine
+  - candy guard
+  - wallet restriction
+  - single address minting
+  - access control
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - wallet-based access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Address Gate** ガードは、Core Candy Machine からのミントを指定された単一のウォレットアドレスに制限し、他のすべてのウォレットからのミント試行を拒否します。 {% .lead %}
 
 ## 概要
 
@@ -120,3 +140,9 @@ _Address Gate ガードはミント設定を必要としません。_
 ## Route 命令
 
 _Address Gate ガードは route 命令をサポートまたは必要としません。_
+
+## 注意事項
+
+- Address Gate ガードは単一のウォレットアドレスのみを許可します。複数のウォレットを許可するには、代わりに [Allow List](/ja/smart-contracts/core-candy-machine/guards/allow-list) ガードを使用してください。
+- このガードは、ミント時にミントウォレットアドレスと設定されたアドレスを比較します。事前検証のルート命令は必要ありません。
+

@@ -1,8 +1,28 @@
 ---
 title: "NFT Payment Guard"
-metaTitle: "NFT Payment Guard | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Payment' guard allows minting by charging the payer an NFT/pNFT from a specified NFT collection. The NFT/pNFT used as payment will be transferred to a predefined destination."
+metaTitle: "NFT Payment Guard - Pay with NFT to Mint | Core Candy Machine"
+description: "The Core Candy Machine NFT Payment guard allows minting by charging the payer an NFT from a specified collection, transferring the NFT to a predefined destination wallet."
+keywords:
+  - NFT Payment guard
+  - Core Candy Machine
+  - candy guard
+  - pay with NFT
+  - NFT transfer on mint
+  - token gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-as-payment access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **NFT Payment** guard allows minting by charging the payer an NFT from a specified collection, transferring it to a predefined destination wallet instead of burning it. {% .lead %}
 
 ## Overview
 
@@ -135,7 +155,7 @@ The NFT Payment guard contains the following Mint Settings:
 - **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
 - **Rule Set** (optional): The Rule Set of the NFT used to pay, if we are paying using a Programmable NFT with a Rule Set.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftpayment) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftpayment) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the NFT Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -167,3 +187,12 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The NFT Payment guard does not support the route instruction._
+
+## Notes
+
+- Unlike the [NFT Burn](/smart-contracts/core-candy-machine/guards/nft-burn) guard, this guard transfers the NFT to a destination wallet rather than burning it. The NFT remains in circulation.
+- The destination wallet must be specified in both the guard settings and the mint arguments.
+- If the payer does not own an NFT from the required collection, the mint transaction will fail.
+- When paying with a Programmable NFT that has a Rule Set, include the `ruleSet` in the mint arguments to ensure the transfer complies with the NFT's authorization rules.
+- This guard uses Token Metadata NFTs (not Core Assets) for payment and collection verification.
+

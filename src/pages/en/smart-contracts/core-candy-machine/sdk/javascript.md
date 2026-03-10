@@ -1,16 +1,42 @@
 ---
-title: MPL Core Candy Machine Javascript SDK
-metaTitle: Javascript SDK | MPL Core Candy Machine
-description: Learn how to set up your project to run the MPL Core Candy Machine Javascript SDK.
+title: MPL Core Candy Machine JavaScript SDK
+metaTitle: JavaScript SDK | MPL Core Candy Machine
+description: Learn how to install and configure the MPL Core Candy Machine JavaScript SDK using the Umi framework to create and manage Candy Machines on Solana.
+keywords:
+  - core candy machine
+  - javascript sdk
+  - mpl-core-candy-machine
+  - umi framework
+  - solana nft
+  - candy machine javascript
+  - metaplex sdk
+  - nft minting
+  - npm package
+  - typescript
+  - candy machine setup
+about:
+  - JavaScript SDK
+  - Umi framework
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
 
-Metaplex provides a JavaScript library that can be used to interact with the MPL Core Candy Machine program. Thanks to the [Umi Framework](/dev-tools/umi), it ships without many opinionated dependencies thus providing a lightweight library that can be used in any JavaScript project.
+## Summary
 
-To get started, you'll need to [install the Umi framework](/dev-tools/umi/getting-started) and the MPL-Core JavaScript library.
+The MPL Core Candy Machine JavaScript SDK provides a lightweight library for creating and managing Core Candy Machines on Solana using the [Umi framework](/dev-tools/umi). {% .lead %}
+
+- Install the `@metaplex-foundation/mpl-core-candy-machine` package via npm, yarn, or bun
+- Requires a configured [Umi](/dev-tools/umi/getting-started) instance with an RPC endpoint and signer
+- Register the SDK as a plugin on your Umi instance with `.use(mplCandyMachine())`
+- Compatible with any JavaScript or TypeScript project
 
 ## Installation
 
-Installation can be executed with any of the JS package managers, npm, yarn, bun etc...
+The `@metaplex-foundation/mpl-core-candy-machine` package can be installed with any JavaScript package manager including npm, yarn, and bun.
 
 ```sh
 npm install @metaplex-foundation/mpl-core-candy-machine
@@ -26,7 +52,7 @@ npm install @metaplex-foundation/mpl-core-candy-machine
 
 ## Umi Setup
 
-An `umi` instance is required to interact with the Metaplex Javascript SDKs. If you haven't set up and configured an `umi` instance yet then you can get checkout the [Umi Getting Started](/dev-tools/umi/getting-started) page and configure your RPC endpoint and your `umi` identity/signer.
+A configured [Umi](/dev-tools/umi/getting-started) instance is required before you can interact with the Core Candy Machine SDK. If you have not yet set up Umi, visit the [Umi Getting Started](/dev-tools/umi/getting-started) page to configure your RPC endpoint and identity signer.
 
 During the initialization of the `umi` instance you can add the mpl-core package to `umi` using
 
@@ -34,7 +60,7 @@ During the initialization of the `umi` instance you can add the mpl-core package
 .use(mplCandyMachine())
 ```
 
-You can add the `mpCandyMachine()` package anywhere in your umi instance creation with `.use()`.
+You can add the `mplCandyMachine()` package anywhere in your umi instance creation with `.use()`.
 
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -46,4 +72,12 @@ const umi = createUmi('http://api.devnet.solana.com')
 .use(mplCandyMachine())
 ```
 
-From here your `umi` instance will have access to the mpl-core package and you start to explore the mpl-core feature set.
+From here your `umi` instance will have access to the mpl-core package and you can start exploring the Core Candy Machine feature set.
+
+## Notes
+
+- The JavaScript SDK requires the [Umi framework](/dev-tools/umi) as a peer dependency. You must install and configure Umi before using this SDK.
+- A Solana RPC endpoint is required. Use a dedicated RPC provider for production deployments rather than the public endpoint.
+- This SDK covers both the Core Candy Machine program and the Core Candy Guard program in a single package.
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

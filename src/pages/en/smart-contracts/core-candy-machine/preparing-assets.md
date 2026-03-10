@@ -1,20 +1,65 @@
 ---
-title: Preparing Assets
+title: Preparing Assets for a Core Candy Machine
 metaTitle: Preparing Assets | Core Candy Machine
-description: How to prepare your files and assets for uploading into a Core Candy Machine.
+description: How to prepare image files, animation media, and JSON metadata for uploading into a Core Candy Machine on Solana.
+keywords:
+  - NFT metadata
+  - JSON metadata
+  - asset preparation
+  - Arweave
+  - IPFS
+  - image upload
+  - Core Candy Machine assets
+  - NFT collection
+  - metadata standard
+  - Irys uploader
+  - Solana NFT images
+  - NFT animation files
+  - Umi storage plugin
+  - decentralized storage
+about:
+  - Asset preparation
+  - NFT metadata
+  - File uploads
+proficiencyLevel: Beginner
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: What image format is best for Core Candy Machine assets?
+    a: PNG and JPEG are the most widely supported formats across wallets and marketplaces. PNG is ideal for pixel art or images requiring transparency, while JPEG works well for photographic or high-detail artwork at smaller file sizes. Optimize images for web delivery to keep file sizes under 1 MB where possible.
+  - q: What storage provider should I use for NFT metadata and images?
+    a: Arweave (via Irys) is the most popular choice because it provides permanent, decentralized storage paid in SOL. IPFS is another decentralized option but requires pinning services to ensure persistence. Self-hosted solutions (AWS, Google Cloud) work but introduce centralization and ongoing maintenance costs.
+  - q: Can I use IPFS for Core Candy Machine assets?
+    a: Yes, IPFS URIs work with Core Candy Machine assets. However, you must use a pinning service such as Pinata, nft.storage, or a dedicated IPFS node to ensure your files remain accessible. Unpinned IPFS content may become unavailable over time.
+  - q: Do I need to upload images before creating JSON metadata files?
+    a: Yes. The JSON metadata files reference image URIs in their "image" field and "properties.files" array. You must upload all image and animation files first, collect their URIs, and then insert those URIs into each corresponding JSON metadata file before uploading the metadata itself.
+  - q: How many files do I need to prepare for a 1,000-item collection?
+    a: For a 1,000-item collection you need at minimum 1,000 image files and 1,000 JSON metadata files, plus one additional image and one JSON metadata file for the Core Collection itself. If your assets include animation files (video, audio, VR, HTML), you will also need 1,000 animation files.
 ---
 
-## Asset Files
+## Summary
 
-Creating an Asset requires a a few different files that will need to be prepared and uploaded for use in Asset data.
+Preparing assets for a [Core Candy Machine](/smart-contracts/core-candy-machine) requires uploading image files and JSON metadata to a storage provider, then creating a [Core Collection](/smart-contracts/core/collections) that groups all minted assets together.
+
+- Upload image and animation files to decentralized storage such as Arweave (via Irys) or IPFS, or to a self-hosted solution {% .lead %}
+- Build JSON metadata files following the Metaplex token standard, embedding the uploaded image URIs {% .lead %}
+- Upload completed JSON metadata files and record the resulting URIs for use as config lines {% .lead %}
+- Create a [Core](/smart-contracts/core) Collection to serve as the parent for all assets minted from the Candy Machine {% .lead %}
+
+## Required Asset Files
+
+Every [Core](/smart-contracts/core) asset minted from a Core Candy Machine requires two categories of prepared files before the machine can be [created](/smart-contracts/core-candy-machine/create) and populated.
 These include:
 
 - Image and animation files.
 - JSON Metadata files.
 
-## Asset Types
+## Supported Asset Types
 
-Assets support the following categories:
+Core assets support five media categories that determine how wallets and marketplaces render the content:
 
 - image
 - video
@@ -22,17 +67,15 @@ Assets support the following categories:
 - vr
 - html
 
-## Preparing Images
+## Preparing Image Files
 
-While there are no inherent rules regarding images, it's in best practice to optimize you images to be as `web deliverable` as possible. You need to take into account that not all users may not have access to a super quick broadband connection. Users might be in remote areas where access to the internet is sparse so trying to get your user to view a 8mb image may impact their experience with your project.
+Image files serve as the primary visual representation of each asset and are displayed across all wallets and marketplaces. While there are no enforced format restrictions, it is best practice to optimize images for web delivery. Not all users have access to high-speed internet connections -- users in remote areas may struggle to load large files, so keeping images under 1 MB improves the experience for your entire audience.
 
-Even if your Asset is of the type `audio`, `video`, `html`, or `vr` it is still worth preparing images as these will be used as fallback for areas such as wallets or marketplaces that may not support the loading of the other Asset types.
+Even if your asset is of the type `audio`, `video`, `html`, or `vr` it is still worth preparing images as these will be used as fallback for areas such as wallets or marketplaces that may not support the loading of the other asset types.
 
-## Preparing Animation Files
+## Preparing Animation and Media Files
 
-Animation files consist of the remaining types of Asset categories `audio`, `video`, `vr`, and `html`
-
-The same applies here as to preparing image files. You need to take into account. You need to take into consideration the file size and expected download sizes for your users.
+Animation and media files cover the remaining asset categories: `audio`, `video`, `vr`, and `html`. The same file-size considerations that apply to images apply here -- keep files as small as practical to minimize download times for end users.
 
 The following file types have been tested and confirmed working in nearly all major wallets and marketplaces.
 
@@ -41,15 +84,15 @@ The following file types have been tested and confirmed working in nearly all ma
 - vr (.glb)
 - html (.html)
 
-## Preparing JSON Metadata
+## Preparing JSON Metadata Files
 
-Your json metadata files will be following the same Token Standard used by the other Metaplex standards of nfts, pNfts, and cNfts.
+JSON metadata files define the on-chain attributes, name, description, and media references for each asset. These files follow the same token standard used by other Metaplex asset types including NFTs, pNFTs, and cNFTs.
 
 {% partial file="token-standard-full.md" /%}
 
-## Image and Metadata Generators
+## Automated Image and Metadata Generators
 
-There are several automated scripts and websites where you can supply the generator with your art layers and some basic information about your project and it will generate x number of Asset Image and JSON Metadata combos based on your paramenters given.
+Several open-source scripts and web applications can generate large batches of asset images and JSON metadata files from layered artwork. You supply art layers and project parameters, and the generator produces the full set of image-metadata pairs.
 
 | Name                                                        | type   | Difficulty | Requirements | Free |
 | ----------------------------------------------------------- | ------ | ---------- | ------------ | ---- |
@@ -58,7 +101,9 @@ There are several automated scripts and websites where you can supply the genera
 | [Nft Art Generator](https://nft-generator.art/)             | web UI | ⭐⭐       |              |      |
 | [bueno](https://bueno.art/generator)                        | web UI | unknown    |              |      |
 
-## Uploading Files
+## Uploading Asset Files
+
+All image and animation files must be uploaded to a storage provider before they can be referenced in JSON metadata. The choice of storage provider affects permanence, cost, and decentralization.
 
 ### Storage Options
 
@@ -68,22 +113,22 @@ _"The Arweave network is like Bitcoin, but for data: A permanent and decentraliz
 
 As Arweave is it's own blockchain we need to use a bridge in order to get our files stored on Arweave. [Irys](https://irys.xyz/) acts as a middle man between Solana and Arweave allowing you to pay for storage in SOL instead of AR while they handle the uploading of data to the Arweave chain for you.
 
-You can either implement this manually via their own [SDK](https://docs.irys.xyz/) or use an UMI plugin to upload to Arweave via Irys.
+You can either implement this manually via their own [SDK](https://docs.irys.xyz/) or use an [Umi storage plugin](/dev-tools/umi/storage) to upload to Arweave via Irys.
 
 #### Self Hosting
 
-There is also nothing wrong with self hosting your images on metadata either in AWS, Google Cloud, or even your own webserver. As long as the data is accessible from it's stored location and doesn't have something like CORS blocking it then you should be good. It would be advised to make either a few test Core Assets or small Core Candy Machine to test self hosted options to make sure the stored data is viewable.
+Self-hosting on AWS, Google Cloud, or your own web server is a valid option for storing images and metadata. As long as the data is accessible from its stored location and is not blocked by CORS restrictions, it will work. It is advisable to create a few test [Core](/smart-contracts/core) assets or a small Core Candy Machine first to verify that self-hosted files display correctly in wallets and marketplaces.
 
 ### Uploading Files with Umi
 
-Umi has a few plugins that can aid the upload process via plugins. At the time the following plugins are supported:
+[Umi](/dev-tools/umi) provides storage plugins that simplify the upload process. The following plugins are currently supported:
 
 - Irys
 - AWS
 
 #### Uploading to Arweave via Irys with Umi
 
-For a more indepth look at uploaded files with Umi please visit [Umi Storage.](/dev-tools/umi/storage)
+For a more in-depth guide on uploading files with Umi, visit [Umi Storage](/dev-tools/umi/storage).
 
 {% dialect-switcher title="Uploading Files to Arweave Via Irys with Umi" %}
 {% dialect title="JavaScript" id="js" %}
@@ -102,13 +147,11 @@ console.log(uriUploadArray)
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Assign Image URIs JSON Metadata Files
+### Assigning Image URIs to JSON Metadata
 
-Once you have uploaded all your img files to a storage medium of your choice will will need to place all the image URIs in your JSON metadata files.
+Once all image and animation files have been uploaded to a storage provider, the returned URIs must be inserted into each corresponding JSON metadata file. If your asset collection has 1,000 assets, you should have uploaded 1,000 images or animation files and received back a set of URIs indicating where each file is stored. You may need to manually log and store links if your upload platform does not support batch uploads.
 
-If your Asset collection has 1000 Assets then you should have uploaded 1000 images/animation media to a storage platform and received back a set of data/log/a way of telling where each image/animation media has been stored. You may have to manually log and store links if your upload platform of choice does not support batch uploaded and you have to single loop upload.
-
-The goal of this point is to have a list full list of URI's of where your media is that.
+The goal at this point is to have a complete list of URIs for all uploaded media.
 
 ```js
 [
@@ -119,7 +162,7 @@ The goal of this point is to have a list full list of URI's of where your media 
 
 ```
 
-With the index uri list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
+With the indexed URI list of uploaded media you will then need to loop through your JSON metadata files and add the URIs to the appropriate places.
 
 Image URIs would be inserted into the `image:` field, and also into the `properties: files: []` array.
 
@@ -140,9 +183,9 @@ Image URIs would be inserted into the `image:` field, and also into the `propert
 }
 ```
 
-### Upload JSON Metadata Files
+### Uploading JSON Metadata Files
 
-At this point you should have a folder of JSON metadata files locally built out on your machine that look like similar to this:
+At this point you should have a folder of JSON metadata files locally built out on your machine that look similar to this:
 
 {% dialect-switcher title="1.json" %}
 {% dialect title="Json" id="json" %}
@@ -180,15 +223,15 @@ At this point you should have a folder of JSON metadata files locally built out 
 
 You will need to upload all your JSON metadata to a storage medium of choice and again log all the URIs for future use.
 
-## Create Collection Asset
+## Creating a Core Collection
 
-The final step in preparation for your Core Candy Machine creation is create a Core Collection that the Core Candy Machine can use to group all the Assets together that the users purchase from your Core Candy Machine. For this we will require the `mpl-core` package.
+The final step in asset preparation is creating a [Core Collection](/smart-contracts/core/collections) that the Core Candy Machine uses to group all minted assets together. This requires the `mpl-core` package.
 
 {% callout %}
 You will need to upload an image and also prepare and upload the JSON metadata like in the previous steps to have the necessary data to create your Core Collection.
 {% /callout %}
 
-The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced Core Collection creation you can view the documentation over at Core's [Collection Management](/smart-contracts/core/collections).
+The below example creates a basic Core Collection with no plugins. To view a list of available plugins and more advanced [Core Collection](/smart-contracts/core/collections) creation you can view the documentation at [Collection Management](/smart-contracts/core/collections).
 
 {% dialect-switcher title="Create a MPL Core Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -218,11 +261,55 @@ await createCollectionV1(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Notes
+
+- Optimize all images for web delivery. Keep file sizes under 1 MB where possible to ensure fast loading across devices and network conditions.
+- When self-hosting assets, verify that CORS headers are configured correctly. Assets blocked by CORS will not render in wallets or marketplaces.
+- Store all uploaded URIs securely and back them up. Losing the URI list after uploading images means you cannot link metadata to the correct files.
+- Arweave storage is permanent and immutable. Double-check file contents before uploading because you cannot delete or modify files once they are stored on Arweave.
+- JSON metadata files must be uploaded *after* image files because metadata references image URIs that are only available after the upload completes.
+
 ## Conclusion
 
-At this point you should have all completed all the preparations needed in order to create a Core Candy Machine.
+At this point you should have completed all the preparations needed in order to [create a Core Candy Machine](/smart-contracts/core-candy-machine/create).
 
 - Upload images and other media files.
 - Assign image and media file URIs to JSON Metadata files.
 - Upload JSON Metadata files and stored URIs.
-- Created a Core Collection
+- Created a [Core Collection](/smart-contracts/core/collections).
+
+## FAQ
+
+### What image format is best for Core Candy Machine assets?
+
+PNG and JPEG are the most widely supported formats across wallets and marketplaces. PNG is ideal for pixel art or images requiring transparency, while JPEG works well for photographic or high-detail artwork at smaller file sizes. Optimize images for web delivery to keep file sizes under 1 MB where possible.
+
+### What storage provider should I use for NFT metadata and images?
+
+Arweave (via Irys) is the most popular choice because it provides permanent, decentralized storage paid in SOL. IPFS is another decentralized option but requires pinning services to ensure persistence. Self-hosted solutions (AWS, Google Cloud) work but introduce centralization and ongoing maintenance costs.
+
+### Can I use IPFS for Core Candy Machine assets?
+
+Yes, IPFS URIs work with Core Candy Machine assets. However, you must use a pinning service such as Pinata, nft.storage, or a dedicated IPFS node to ensure your files remain accessible. Unpinned IPFS content may become unavailable over time.
+
+### Do I need to upload images before creating JSON metadata files?
+
+Yes. The JSON metadata files reference image URIs in their `image` field and `properties.files` array. You must upload all image and animation files first, collect their URIs, and then insert those URIs into each corresponding JSON metadata file before uploading the metadata itself.
+
+### How many files do I need to prepare for a 1,000-item collection?
+
+For a 1,000-item collection you need at minimum 1,000 image files and 1,000 JSON metadata files, plus one additional image and one JSON metadata file for the [Core Collection](/smart-contracts/core/collections) itself. If your assets include animation files (video, audio, VR, HTML), you will also need 1,000 animation files.
+
+## Glossary
+
+| Term | Definition |
+| --- | --- |
+| JSON Metadata | A structured JSON file conforming to the Metaplex token standard that defines an asset's name, description, image URI, attributes, and associated media files. |
+| URI | Uniform Resource Identifier -- the web address where an uploaded file (image, animation, or metadata) is stored and can be retrieved. |
+| Arweave | A permanent, decentralized storage blockchain designed for immutable data storage. Files uploaded to Arweave persist indefinitely. |
+| Irys | A bridge service (formerly Bundlr) that allows Solana users to pay for Arweave storage in SOL, handling the cross-chain upload process. |
+| IPFS | InterPlanetary File System -- a peer-to-peer decentralized storage protocol. Requires pinning services to guarantee long-term file availability. |
+| Config Line | A name-URI pair inserted into a Core Candy Machine that maps to a single asset's JSON metadata file on storage. |
+| Core Collection | A Metaplex Core on-chain account that groups related assets together, serving as the parent collection for all assets minted from a Candy Machine. |
+| Token Standard | The Metaplex-defined JSON schema specifying required and optional fields (name, description, image, attributes, properties) for NFT metadata. |
+

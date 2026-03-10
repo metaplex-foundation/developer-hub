@@ -1,8 +1,28 @@
 ---
 title: Allocation ガード
 metaTitle: Mint Allocation ガード | Core Candy Machine
-description: "Core Candy Machine の 'Allocation' ガードでは、各ガードグループがミントできるアセット数の上限を指定できます。"
+description: "Core Candy Machine の 'Allocation' ガードは、設定可能なIDで識別されるPDAベースのカウンターを使用して、ガードグループごとに許可されるミントの総数を制限します。"
+keywords:
+  - allocation
+  - Core Candy Machine
+  - candy guard
+  - mint limit per group
+  - allocation tracker
+  - guard group limit
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - group-level mint allocation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allocation** ガードは、設定可能なIDで識別されるオンチェーンPDAトラッカーを使用して、特定のガードグループ内でミントできるアセットの総数を制限します。 {% .lead %}
 
 ## 概要
 
@@ -272,3 +292,10 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
   // または candyGuard: publicKey("Address") で candyGuard アドレスを指定
 });
 ```
+
+## 注意事項
+
+- Allocation Tracker PDA は、ミントを開始する前にルート命令を介して初期化する必要があります。初期化せずにミントしようとすると失敗します。
+- 各一意の `id` 値は個別のオンチェーントラッカーを作成するため、異なるガードグループは同じ Core Candy Machine 内で独立した割り当てカウントを維持できます。
+- Allocation ガードはガードグループごとの合計ミント数を制限するもので、ウォレットごとの制限ではありません。個々のウォレットごとのミント数を制限するには、代わりに [Mint Limit](/ja/smart-contracts/core-candy-machine/guards/mint-limit) ガードを使用してください。
+

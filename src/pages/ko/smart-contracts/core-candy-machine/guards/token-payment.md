@@ -1,8 +1,27 @@
 ---
 title: Token Payment Guard
-metaTitle: Token Payment Guard | Core Candy Machine
-description: "Core Candy Machine 'Token Payment' guard는 지불자에게 SPL Token의 설정된 값을 청구하여 민팅을 허용합니다."
+metaTitle: "Token Payment Guard | Core Candy Machine"
+description: "Core Candy Machine의 Token Payment 가드는 민터에게 구성된 수량의 SPL 토큰을 청구하고 지정된 대상 지갑으로 전송한 후 민팅을 진행합니다."
+keywords:
+  - Token Payment
+  - Core Candy Machine
+  - candy guard
+  - SPL token payment
+  - token transfer
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token payment for minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Payment** 가드는 민터에게 구성된 수량의 SPL 토큰을 청구하고 지정된 대상 지갑으로 전송한 후 민팅을 진행합니다. {% .lead %}
 
 ## 개요
 
@@ -174,3 +193,11 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _Token Payment guard는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 이 가드는 기존 **SPL Token 프로그램**을 사용합니다. Token-2022 프로그램에서 발행된 민트의 경우 [Token2022 Payment](/ko/smart-contracts/core-candy-machine/guards/token2022-payment) 가드를 대신 사용하세요.
+- 결제자는 민팅 시점에 연결된 토큰 계정에 구성된 **Amount** 이상의 토큰을 보유해야 합니다. 그렇지 않으면 트랜잭션이 실패합니다.
+- **Destination ATA**는 민팅 전에 이미 존재해야 합니다. 가드에 의해 자동으로 생성되지 않습니다.
+- [Token Gate](/ko/smart-contracts/core-candy-machine/guards/token-gate) 가드와 달리, Token Payment 가드는 실제로 결제자의 지갑에서 토큰을 **전송**합니다.
+

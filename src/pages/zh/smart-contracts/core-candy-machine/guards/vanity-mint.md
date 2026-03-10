@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - 自定义铸币守卫"
 metaTitle: "Core Candy Machine - 守卫 - 自定义铸币"
-description: "Core Candy Machine '自定义铸币' 守卫要求铸造者提供符合特定格式的铸币地址作为资产地址"
+description: "Core Candy Machine 的 Vanity Mint 守卫要求铸造者提供匹配配置的正则表达式模式的资产地址，有效地为铸造过程添加工作量证明要求。"
+keywords:
+  - Vanity Mint
+  - Core Candy Machine
+  - candy guard
+  - Proof of Work
+  - vanity address
+  - regex mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Vanity address minting with regex patterns
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Vanity Mint** 守卫要求铸造者提供匹配配置的正则表达式的资产地址，有效地为铸造过程添加工作量证明要求。 {% .lead %}
 
 ## 概述
 
@@ -116,3 +136,10 @@ _自定义铸币守卫不需要铸造设置。它期望铸币地址匹配。_
 ## 路由指令
 
 _自定义铸币守卫不支持路由指令。_
+
+## 注意事项
+
+- 正则表达式针对铸币地址的 **base-58 编码** 公钥进行匹配。只有 base-58 编码中有效的字符（字母数字，不包括 `0`、`O`、`I` 和 `l`）可以出现在铸币地址中。
+- 更严格的正则表达式模式（更长的前缀或后缀）要求铸造者花费指数级更多的计算量来找到匹配的密钥对。设置模式复杂度时请考虑用户体验。
+- Vanity Mint 守卫不需要任何铸造设置或路由指令——它只验证铸币地址是否匹配配置的模式。
+
