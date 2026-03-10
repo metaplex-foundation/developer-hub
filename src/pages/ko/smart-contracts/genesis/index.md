@@ -81,6 +81,17 @@ Genesis는 조합할 수 있는 세 가지 메커니즘을 지원합니다:
 
 ## 핵심 개념
 
+### 런칭 타입
+
+모든 Genesis 런칭에는 이를 분류하는 **타입**이 있습니다:
+
+| 타입 | 설명 | 설정 |
+|------|-------------|---------------|
+| **Project** | 할당, 유동성, 베스팅, 수수료를 완전히 제어할 수 있는 구조화된 런칭 | 설정 가능한 예치 기간(기본 48시간), 할당 분할, 잠금 일정 |
+| **Memecoin** | 하드코딩된 기본값으로 간소화된 공정 런칭 | 1시간 예치, 50% 할당, 98% Raydium LP, 영구 LP 잠금 |
+
+런칭 타입은 생성 후 백엔드 크랭크에 의해 [Genesis Account](#genesis-account)에 온체인으로 기록됩니다. 트레이더와 애그리게이터는 [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)(`fetchGenesisAccountV2`) 또는 [Integration APIs](/smart-contracts/genesis/integration-apis)(REST 응답의 `type` 필드)를 통해 프로그래밍 방식으로 타입을 조회할 수 있습니다.
+
 ### Genesis Account
 
 출시를 위한 중앙 조정자입니다. Genesis Account를 초기화하면:
@@ -165,6 +176,7 @@ Genesis는 예치금에 대해 {% fee product="genesis" config="launchPool" fee=
 | **Launch Pool** | 마감 시 가격이 발견되는 예치 기반 배포 |
 | **Presale** | 미리 정해진 가격으로 진행되는 고정 가격 판매 |
 | **Quote Token** | 사용자가 예치하는 토큰 (보통 wSOL) |
+| **런칭 타입** | 런칭 카테고리: `project`(전체 제어) 또는 `memecoin`(간소화된 기본값). 생성 후 백엔드 크랭크에 의해 온체인으로 설정 |
 | **Base Token** | 출시되고 배포되는 토큰 |
 
 ## 다음 단계

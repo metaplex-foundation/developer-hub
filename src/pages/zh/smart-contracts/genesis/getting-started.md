@@ -263,6 +263,7 @@ Finalize 后，发行活动根据您的 Bucket 时间条件激活。当前时间
 | **Genesis Account** | 协调发行并持有代币的 PDA |
 | **Inflow Bucket** | 从用户处收集存款的 Bucket |
 | **Outflow Bucket** | 通过结束行为接收资金的 Bucket |
+| **发行类型** | 发行类别（`project` 或 `memecoin`）。创建后由后端 crank 追溯设置在链上。可通过 [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) 或 [REST API](/smart-contracts/genesis/integration-apis) 查询 |
 | **Finalize** | 锁定配置并激活发行 |
 | **Time Condition** | 控制 Bucket 阶段的 Unix 时间戳 |
 | **End Behavior** | 存款期结束时的自动操作 |

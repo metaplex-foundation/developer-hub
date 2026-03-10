@@ -90,6 +90,8 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | Locked allocations (Streamflow) | Optional | None |
 
 当您需要控制分配、流动性和归属时使用 `'project'`。使用 `'memecoin'` 进行快速、预设的发行，配置最少。
+
+**读取发行类型：** 创建后，发行类型由后端 crank 记录在 Genesis Account 的链上数据中。要获取它，使用 [`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account)（链上 SDK）或 REST API 响应中的 [`type` 字段](/smart-contracts/genesis/integration-apis#shared-types)。[GPA 构建器](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type)支持按类型过滤所有发行。
 {% /callout %}
 
 ### 中级模式 — 自定义交易发送器

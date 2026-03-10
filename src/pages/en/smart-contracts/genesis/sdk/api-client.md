@@ -90,6 +90,8 @@ For memecoin launches, the SDK uses a streamlined input that requires only a dep
 | Locked allocations (Streamflow) | Optional | None |
 
 Use `'project'` when you need control over allocations, liquidity, and vesting. Use `'memecoin'` for a fast, opinionated launch with minimal configuration.
+
+**Reading launch type back:** After creation, the launch type is recorded on-chain in the Genesis Account by a backend crank. To retrieve it, use [`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account) (on-chain SDK) or the [`type` field](/smart-contracts/genesis/integration-apis#shared-types) in REST API responses. The [GPA builder](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type) supports filtering all launches by type.
 {% /callout %}
 
 ### Medium Mode — Custom Transaction Sender

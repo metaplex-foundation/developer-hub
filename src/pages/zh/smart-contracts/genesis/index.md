@@ -81,6 +81,17 @@ Genesis 支持三种可以组合使用的机制：
 
 ## 核心概念
 
+### 发行类型
+
+每个 Genesis 发行都有一个**类型**来对其进行分类：
+
+| 类型 | 说明 | 配置 |
+|------|-------------|---------------|
+| **Project** | 完全控制分配、流动性、归属和费用的结构化发行 | 可配置存款期（默认48小时）、分配比例、锁定计划 |
+| **Memecoin** | 使用硬编码默认值的简化公平发行 | 1小时存款、50%分配、98% Raydium LP、永久LP锁定 |
+
+发行类型在创建后由后端 crank 记录到 [Genesis Account](#genesis-account) 的链上数据中。交易者和聚合器可以通过 [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）或 [Integration APIs](/smart-contracts/genesis/integration-apis)（REST 响应中的 `type` 字段）以编程方式查询类型。
+
 ### Genesis Account
 
 您发行活动的中央协调器。当您初始化 Genesis Account 时，它会：
@@ -165,6 +176,7 @@ Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小
 | **Launch Pool** | 基于存款的分发，价格在结束时发现 |
 | **Presale** | 以预定价格进行的固定价格销售 |
 | **Quote Token** | 用户存入的代币（通常是 wSOL） |
+| **发行类型** | 发行类别：`project`（完全控制）或 `memecoin`（简化默认值）。创建后由后端 crank 在链上设置 |
 | **Base Token** | 正在发行和分发的代币 |
 
 ## 后续步骤

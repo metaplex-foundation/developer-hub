@@ -81,6 +81,17 @@ Genesis supports three mechanisms that can be combined:
 
 ## Core Concepts
 
+### Launch Types
+
+Every Genesis launch has a **type** that categorizes it:
+
+| Type | Description | Configuration |
+|------|-------------|---------------|
+| **Project** | Structured launch with full control over allocations, liquidity, vesting, and fees | Configurable deposit window (48h default), allocation splits, locked schedules |
+| **Memecoin** | Streamlined fair launch with hardcoded defaults | 1-hour deposit, 50% allocation, 98% Raydium LP, permanent LP lock |
+
+The launch type is recorded on-chain in the [Genesis Account](#genesis-account) by a backend crank after creation. Traders and aggregators can query the type programmatically via the [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) (`fetchGenesisAccountV2`) or the [Integration APIs](/smart-contracts/genesis/integration-apis) (`type` field in REST responses).
+
 ### Genesis Account
 
 The central coordinator for your launch. When you initialize a Genesis Account, it:
@@ -165,6 +176,7 @@ Yes. Genesis uses a bucket system where you can add multiple inflow buckets and 
 | **Launch Pool** | Deposit-based distribution where price is discovered at close |
 | **Presale** | Fixed-price sale at a predetermined rate |
 | **Quote Token** | The token users deposit (usually wSOL) |
+| **Launch Type** | Category of a launch: `project` (full control) or `memecoin` (streamlined defaults). Set on-chain by a backend crank after creation |
 | **Base Token** | The token being launched and distributed |
 
 ## Next Steps

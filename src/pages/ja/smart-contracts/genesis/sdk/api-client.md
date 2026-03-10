@@ -90,6 +90,8 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | Locked allocations (Streamflow) | Optional | None |
 
 アロケーション、流動性、ベスティングを細かく制御する必要がある場合は `'project'` を使用してください。最小限の設定で迅速かつ意見の強いローンチを行う場合は `'memecoin'` を使用してください。
+
+**ローンチタイプの読み取り：** 作成後、ローンチタイプはバックエンドクランクによってGenesis Accountにオンチェーンで記録されます。取得するには、[`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account)（オンチェーンSDK）またはREST API応答の[`type`フィールド](/smart-contracts/genesis/integration-apis#shared-types)を使用します。[GPAビルダー](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type)はタイプ別の全ローンチのフィルタリングをサポートします。
 {% /callout %}
 
 ### ミディアムモード — カスタムトランザクション送信
