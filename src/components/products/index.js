@@ -16,6 +16,7 @@ import { legacyDocumentation } from './legacyDocumentation';
 import { mplHybrid } from './mpl-hybrid';
 import { nfts } from './nfts';
 import { shank } from './shank';
+import { skill } from './skill';
 import { sugar } from './sugar';
 import { tokenAuthRules } from './tokenAuthRules';
 import { tokenMetadata } from './tokenMetadata';
@@ -50,6 +51,7 @@ export const products = [
   umi,
   cli,
   shank,
+  skill,
   amman,
   sugar,
   legacyDocumentation,
