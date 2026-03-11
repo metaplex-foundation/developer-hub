@@ -2,6 +2,17 @@
 title: Getting Started
 metaTitle: Getting Started with MPL Agent Registry | Metaplex
 description: Install the MPL Agent Registry SDK and register your first agent identity on Solana.
+keywords:
+  - MPL Agent Registry
+  - getting started
+  - agent identity SDK
+  - Umi
+  - Solana
+about:
+  - Smart Contracts
+  - Solana
+  - Metaplex
+proficiencyLevel: Beginner
 created: '02-25-2026'
 updated: '03-11-2026'
 ---
@@ -18,9 +29,11 @@ npm install @metaplex-foundation/mpl-agent-registry
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { mplCore } from '@metaplex-foundation/mpl-core';
 import { mplAgentIdentity, mplAgentTools } from '@metaplex-foundation/mpl-agent-registry';
 
 const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplCore())
   .use(mplAgentIdentity())
   .use(mplAgentTools());
 ```

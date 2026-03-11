@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import {
   BookOpenIcon,
   ComputerDesktopIcon,
+  CpuChipIcon,
   DocumentTextIcon,
   HomeIcon,
   PhotoIcon,
@@ -117,7 +118,7 @@ export function MobileNavigation({ page }) {
             href={getLocalizedHref('/agents', locale)}
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
-            <SparklesIcon height={20} /> {t('agents', 'Agents')}
+            <CpuChipIcon height={20} /> {t('agents', 'Agents')}
           </Link>
           <Link
             href={getLocalizedHref('/nfts', locale)}

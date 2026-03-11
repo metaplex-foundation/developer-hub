@@ -2,6 +2,17 @@
 title: Agent Identity
 metaTitle: Agent Identity Program | MPL Agent Registry | Metaplex
 description: Technical reference for the MPL Agent Identity program — instruction accounts, PDA derivation, account structure, and error codes.
+keywords:
+  - Agent Identity program
+  - RegisterIdentityV1
+  - AgentIdentityV1
+  - PDA derivation
+  - lifecycle hooks
+about:
+  - Smart Contracts
+  - Solana
+  - Metaplex
+proficiencyLevel: Advanced
 created: '02-25-2026'
 updated: '03-11-2026'
 ---

@@ -1,6 +1,6 @@
 ---
 title: Metaplex Skill
-metaTitle: Metaplex Skill | Dev Tools
+metaTitle: Metaplex Skill | Agents
 description: An Agent Skill that gives AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.
 keywords:
   - agent skill

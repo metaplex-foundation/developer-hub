@@ -2,6 +2,17 @@
 title: Read Agent Data
 metaTitle: Read Agent Data on Solana | Metaplex Agent Registry
 description: Verify agent registration and read agent identity data on Solana.
+keywords:
+  - read agent data
+  - agent identity
+  - AgentIdentity plugin
+  - Asset Signer
+  - agent wallet
+about:
+  - Agent Data
+  - Solana
+  - Metaplex
+proficiencyLevel: Beginner
 created: '02-25-2026'
 updated: '03-11-2026'
 ---
@@ -87,7 +98,7 @@ The document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) age
       "name": "A2A",
       "endpoint": "https://metaplex.com/agent/<ASSET_PUBKEY>/agent-card.json",
       "version": "0.3.0"
-    },
+    }
   ],
   "active": true,
   "registrations": [

@@ -2,6 +2,17 @@
 title: Agent Tools
 metaTitle: Agent Tools Program | MPL Agent Registry | Metaplex
 description: Technical reference for the MPL Agent Tools program — executive profiles, execution delegation, accounts, and PDA derivation.
+keywords:
+  - Agent Tools program
+  - executive profile
+  - execution delegation
+  - RegisterExecutiveV1
+  - DelegateExecutionV1
+about:
+  - Smart Contracts
+  - Solana
+  - Metaplex
+proficiencyLevel: Advanced
 created: '03-11-2026'
 updated: '03-11-2026'
 ---

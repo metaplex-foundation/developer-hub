@@ -2,6 +2,17 @@
 title: Register an Agent
 metaTitle: Register an Agent on Solana | Metaplex Agent Registry
 description: Register an agent identity on Solana by binding an identity record to an MPL Core asset.
+keywords:
+  - register agent
+  - agent identity
+  - MPL Core
+  - AgentIdentity plugin
+  - ERC-8004
+about:
+  - Agent Registration
+  - Solana
+  - Metaplex
+proficiencyLevel: Beginner
 created: '02-25-2026'
 updated: '03-11-2026'
 ---
@@ -144,9 +155,16 @@ import { generateSigner } from '@metaplex-foundation/umi';
 import { create, createCollection } from '@metaplex-foundation/mpl-core';
 import { registerIdentityV1 } from '@metaplex-foundation/mpl-agent-registry';
 
-// 1. Create an asset (if it doesn't already exist)
-const asset = generateSigner(umi);
+// 1. Create a collection
+const collection = generateSigner(umi);
+await createCollection(umi, {
+  collection,
+  name: 'Agent Collection',
+  uri: 'https://example.com/collection.json',
+}).sendAndConfirm(umi);
 
+// 2. Create an asset
+const asset = generateSigner(umi);
 await create(umi, {
   asset,
   name: 'My Agent',
@@ -154,7 +172,7 @@ await create(umi, {
   collection,
 }).sendAndConfirm(umi);
 
-// 2. Register identity
+// 3. Register identity
 await registerIdentityV1(umi, {
   asset: asset.publicKey,
   collection: collection.publicKey,

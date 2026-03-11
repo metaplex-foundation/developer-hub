@@ -2,6 +2,17 @@
 title: MPL Agent Registry
 metaTitle: MPL Agent Registry — On-Chain Agent Identity for Solana | Metaplex
 description: On-chain programs for registering agent identity and delegating execution on Solana using MPL Core assets.
+keywords:
+  - MPL Agent Registry
+  - agent identity
+  - execution delegation
+  - MPL Core
+  - Solana smart contracts
+about:
+  - Smart Contracts
+  - Solana
+  - Metaplex
+proficiencyLevel: Intermediate
 created: '02-25-2026'
 updated: '03-11-2026'
 ---
