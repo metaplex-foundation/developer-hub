@@ -3,7 +3,7 @@ title: Agent Identity
 metaTitle: Agent Identity Program | MPL Agent Registry | Metaplex
 description: Technical reference for the MPL Agent Identity program — instruction accounts, PDA derivation, account structure, and error codes.
 created: '02-25-2026'
-updated: '02-25-2026'
+updated: '03-11-2026'
 ---
 
 The Agent Identity program registers an on-chain identity record for an MPL Core asset. {% .lead %}
@@ -17,7 +17,7 @@ The Agent Identity program registers an on-chain identity record for an MPL Core
 
 ## Instruction: RegisterIdentityV1
 
-Registers an agent identity by creating a PDA and attaching an `AppData` plugin to the MPL Core asset.
+Registers an agent identity by creating a PDA, and attaching an `AgentIdentity` plugin to the MPL Core asset with lifecycle hooks for Transfer, Update, and Execute.
 
 ### Accounts
 
@@ -31,12 +31,30 @@ Registers an agent identity by creating a PDA and attaching an `AppData` plugin 
 | `mplCoreProgram` | No | No | No | MPL Core program |
 | `systemProgram` | No | No | No | System program |
 
+### Arguments
+
+| Argument | Type | Description |
+|----------|------|-------------|
+| `agentRegistrationUri` | `string` | URI pointing to off-chain agent registration metadata |
+
 ### What It Does
 
 1. Derives a PDA from seeds `["agent_identity", <asset>]`
 2. Creates and initializes the `AgentIdentityV1` account (40 bytes)
-3. CPIs into MPL Core to attach an `AppData` external plugin to the asset, with the PDA as the `data_authority`
-4. If the AppData plugin already exists, the instruction succeeds without creating a duplicate
+3. CPIs into MPL Core to attach an `AgentIdentity` plugin to the asset with the provided URI
+4. Registers lifecycle checks for **Transfer**, **Update**, and **Execute** events (approve, listen, and reject)
+
+### Lifecycle Checks
+
+The `AgentIdentity` plugin registers hooks on three lifecycle events:
+
+| Event | Approve | Listen | Reject |
+|-------|---------|--------|--------|
+| Transfer | Yes | Yes | Yes |
+| Update | Yes | Yes | Yes |
+| Execute | Yes | Yes | Yes |
+
+This means the identity plugin can participate in approving, observing, or rejecting transfers, updates, and executions on the asset.
 
 ## PDA Derivation
 

@@ -3,7 +3,7 @@ title: Getting Started
 metaTitle: Getting Started with MPL Agent Registry | Metaplex
 description: Install the MPL Agent Registry SDK and register your first agent identity on Solana.
 created: '02-25-2026'
-updated: '02-25-2026'
+updated: '03-11-2026'
 ---
 
 Install the SDK and register your first agent identity. {% .lead %}
@@ -18,10 +18,11 @@ npm install @metaplex-foundation/mpl-agent-registry
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplAgentIdentity } from '@metaplex-foundation/mpl-agent-registry';
+import { mplAgentIdentity, mplAgentTools } from '@metaplex-foundation/mpl-agent-registry';
 
 const umi = createUmi('https://api.mainnet-beta.solana.com')
-  .use(mplAgentIdentity());
+  .use(mplAgentIdentity())
+  .use(mplAgentTools());
 ```
 
 ## Register an Identity
@@ -54,10 +55,11 @@ await create(umi, {
   collection,
 }).sendAndConfirm(umi);
 
-// Register the identity
+// Register the identity with a URI pointing to agent metadata
 await registerIdentityV1(umi, {
   asset: asset.publicKey,
   collection: collection.publicKey,
+  agentRegistrationUri: 'https://example.com/agent-registration.json',
 }).sendAndConfirm(umi);
 
 // Verify
@@ -66,24 +68,24 @@ const identity = await fetchAgentIdentityV1(umi, pda);
 console.log(identity.asset); // matches asset.publicKey
 ```
 
-## Verify the AppData Plugin
+## Verify the AgentIdentity Plugin
 
-After registration, the asset will have an `AppData` plugin with the PDA as its data authority:
+After registration, the asset will have an `AgentIdentity` plugin with the URI and lifecycle checks:
 
 ```typescript
 import { fetchAsset } from '@metaplex-foundation/mpl-core';
-import { publicKey } from '@metaplex-foundation/umi';
 
 const assetData = await fetchAsset(umi, asset.publicKey);
-const pda = findAgentIdentityV1Pda(umi, { asset: asset.publicKey });
 
-const appData = assetData.appDatas?.find(
-  (ad) => ad.dataAuthority.type === 'Address'
-    && ad.dataAuthority.address === publicKey(pda)
-);
-console.log('Identity registered:', !!appData);
+// Check the AgentIdentity plugin
+const agentIdentity = assetData.agentIdentities?.[0];
+console.log(agentIdentity?.uri);               // 'https://example.com/agent-registration.json'
+console.log(agentIdentity?.lifecycleChecks?.transfer);  // truthy
+console.log(agentIdentity?.lifecycleChecks?.update);    // truthy
+console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 ```
 
 ## Next Steps
 
 - **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Full details on the identity program
+- **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation

@@ -1,11 +1,10 @@
-import { buildProductTranslations } from '@/config/navigation-translations'
 import { documentationSection } from '@/shared/sections'
 import { SparklesIcon } from '@heroicons/react/24/solid'
 
 export const agents = {
-  name: 'Skill',
-  headline: 'AI Agent Knowledge Base',
-  description: 'Give AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.',
+  name: 'Agents',
+  headline: 'AI Agents on Solana',
+  description: 'Register agent identity, delegate execution, and give AI agents knowledge of Metaplex programs.',
   navigationMenuCatergory: undefined,
   path: 'agents',
   icon: <SparklesIcon />,
@@ -32,16 +31,16 @@ export const agents = {
           title: 'Getting Started',
           links: [
             {
-              title: 'Skill',
-              href: '/agents/skill',
-            },
-            {
               title: 'Register an Agent',
               href: '/agents/register-agent',
             },
             {
-              title: 'Run an Agent',
+              title: 'Read Agent Data',
               href: '/agents/run-agent',
+            },
+            {
+              title: 'Run an Agent',
+              href: '/agents/run-an-agent',
             },
           ],
         },

@@ -1,0 +1,132 @@
+---
+title: Agent Tools
+metaTitle: Agent Tools Program | MPL Agent Registry | Metaplex
+description: Technical reference for the MPL Agent Tools program — executive profiles, execution delegation, accounts, and PDA derivation.
+created: '03-11-2026'
+updated: '03-11-2026'
+---
+
+The Agent Tools program manages executive delegation for agent assets, allowing asset owners to delegate execution permissions to executive profiles. {% .lead %}
+
+## Program ID
+
+| Network | Address |
+|---------|---------|
+| Mainnet | `TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S` |
+| Devnet | `TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S` |
+
+## Overview
+
+The tools program provides two instructions:
+
+1. **RegisterExecutiveV1** — Create an executive profile that can act as an executor for agent assets
+2. **DelegateExecutionV1** — Grant an executive profile permission to execute on behalf of an agent asset
+
+An executive profile is registered once per authority. Delegation is per asset — an asset owner creates a delegation record linking their agent asset to a specific executive profile.
+
+## Instruction: RegisterExecutiveV1
+
+Creates an executive profile PDA for the given authority.
+
+### Accounts
+
+| Account | Writable | Signer | Optional | Description |
+|---------|----------|--------|----------|-------------|
+| `executiveProfile` | Yes | No | No | PDA to be created (auto-derived from authority) |
+| `payer` | Yes | Yes | No | Pays for account rent and fees |
+| `authority` | No | Yes | Yes | The authority for this executive profile (defaults to `payer`) |
+| `systemProgram` | No | No | No | System program |
+
+### What It Does
+
+1. Derives a PDA from seeds `["executive_profile", <authority>]`
+2. Validates the account is uninitialized
+3. Creates and initializes the `ExecutiveProfileV1` account (40 bytes) storing the authority
+
+## Instruction: DelegateExecutionV1
+
+Delegates execution permission for an agent asset to an executive profile.
+
+### Accounts
+
+| Account | Writable | Signer | Optional | Description |
+|---------|----------|--------|----------|-------------|
+| `executiveProfile` | No | No | No | The registered executive profile |
+| `agentAsset` | No | No | No | The MPL Core asset to delegate |
+| `agentIdentity` | No | No | No | The agent identity PDA for the asset |
+| `executionDelegateRecord` | Yes | No | No | PDA to be created (auto-derived) |
+| `payer` | Yes | Yes | No | Pays for account rent and fees |
+| `authority` | No | Yes | Yes | Must be the asset owner (defaults to `payer`) |
+| `systemProgram` | No | No | No | System program |
+
+### What It Does
+
+1. Validates the executive profile exists and is initialized
+2. Validates the agent asset is a valid MPL Core asset
+3. Validates the agent identity is registered for the asset
+4. Validates the signer is the asset owner
+5. Derives a PDA from seeds `["execution_delegate_record", <executive_profile>, <agent_asset>]`
+6. Creates and initializes the `ExecutionDelegateRecordV1` account (104 bytes)
+
+## PDA Derivation
+
+| Account | Seeds | Size |
+|---------|-------|------|
+| `ExecutiveProfileV1` | `["executive_profile", <authority>]` | 40 bytes |
+| `ExecutionDelegateRecordV1` | `["execution_delegate_record", <executive_profile>, <agent_asset>]` | 104 bytes |
+
+```typescript
+import {
+  findExecutiveProfileV1Pda,
+  findExecutionDelegateRecordV1Pda,
+} from '@metaplex-foundation/mpl-agent-registry';
+
+const profilePda = findExecutiveProfileV1Pda(umi, {
+  authority: authorityPublicKey,
+});
+
+const delegatePda = findExecutionDelegateRecordV1Pda(umi, {
+  executiveProfile: profilePda,
+  agentAsset: assetPublicKey,
+});
+```
+
+## Account: ExecutiveProfileV1
+
+40 bytes, 8-byte aligned.
+
+| Offset | Field | Type | Size | Description |
+|--------|-------|------|------|-------------|
+| 0 | `key` | `u8` | 1 | Account discriminator (`1` = ExecutiveProfileV1) |
+| 1 | `_padding` | `[u8; 7]` | 7 | Alignment padding |
+| 8 | `authority` | `Pubkey` | 32 | The authority for this executive profile |
+
+## Account: ExecutionDelegateRecordV1
+
+104 bytes, 8-byte aligned.
+
+| Offset | Field | Type | Size | Description |
+|--------|-------|------|------|-------------|
+| 0 | `key` | `u8` | 1 | Account discriminator (`2` = ExecutionDelegateRecordV1) |
+| 1 | `bump` | `u8` | 1 | PDA bump seed |
+| 2 | `_padding` | `[u8; 6]` | 6 | Alignment padding |
+| 8 | `executiveProfile` | `Pubkey` | 32 | The executive profile address |
+| 40 | `authority` | `Pubkey` | 32 | The executive authority |
+| 72 | `agentAsset` | `Pubkey` | 32 | The agent asset address |
+
+## Errors
+
+| Code | Name | Description |
+|------|------|-------------|
+| 0 | `InvalidSystemProgram` | System program account is incorrect |
+| 1 | `InvalidInstructionData` | Instruction data is malformed |
+| 2 | `InvalidAccountData` | Invalid account data |
+| 3 | `InvalidMplCoreProgram` | MPL Core program account is incorrect |
+| 4 | `InvalidCoreAsset` | Asset is not a valid MPL Core asset |
+| 5 | `ExecutiveProfileMustBeUninitialized` | Executive profile already exists |
+| 6 | `InvalidExecutionDelegateRecordDerivation` | Delegation record PDA derivation mismatch |
+| 7 | `ExecutionDelegateRecordMustBeUninitialized` | Delegation record already exists |
+| 8 | `InvalidAgentIdentity` | Agent identity account is invalid |
+| 9 | `AgentIdentityNotRegistered` | Asset does not have a registered identity |
+| 10 | `AssetOwnerMustBeTheOneToDelegateExecution` | Only the asset owner can delegate execution |
+| 11 | `InvalidExecutiveProfileDerivation` | Executive profile PDA derivation mismatch |

@@ -128,15 +128,27 @@ export const agentMenuCategory = [
     },
   },
   {
-    name: 'Run an Agent',
-    headline: 'Run an autonomous agent on Solana.',
-    description: 'Run an autonomous agent on Solana using Metaplex SDKs.',
+    name: 'Read Agent Data',
+    headline: 'Read and verify agent identity on Solana.',
+    description: 'Read and verify agent identity data on Solana using Metaplex SDKs.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/run-agent',
     localizedNavigation: {
-      ja: { name: 'エージェントを実行', headline: 'Solana上で自律エージェントを実行します。' },
-      ko: { name: '에이전트 실행', headline: 'Solana에서 자율 에이전트를 실행합니다.' },
-      zh: { name: '运行代理', headline: '在Solana上运行自主代理。' },
+      ja: { name: 'エージェントデータを読み取る', headline: 'Solana上でエージェントIDを読み取り、検証します。' },
+      ko: { name: '에이전트 데이터 읽기', headline: 'Solana에서 에이전트 ID를 읽고 검증합니다.' },
+      zh: { name: '读取代理数据', headline: '在Solana上读取和验证代理身份。' },
+    },
+  },
+  {
+    name: 'Run an Agent',
+    headline: 'Delegate execution to run an autonomous agent.',
+    description: 'Set up an executive profile and delegate execution permissions to run an agent on Solana.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/run-an-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントを実行', headline: '実行を委任して自律エージェントを実行します。' },
+      ko: { name: '에이전트 실행', headline: '실행을 위임하여 자율 에이전트를 실행합니다.' },
+      zh: { name: '运行代理', headline: '委托执行以运行自主代理。' },
     },
   },
 ]
@@ -212,6 +224,7 @@ const NavList = () => {
   const getTranslatedCategory = (category) => {
     const categoryMap = {
       'Tokens': t('tokens', 'Tokens'),
+      'Agents': t('agents', 'Agents'),
       'NFTs': t('nfts', 'NFTs'),
       'Programs': t('programs', 'Programs'),
       'Smart Contracts': t('smartContracts', 'Smart Contracts'),
@@ -241,6 +254,7 @@ const NavList = () => {
         // Map categories to their index page paths
         const categoryPaths = {
           'Tokens': '/tokens',
+          'Agents': '/agents',
           'NFTs': '/nfts',
           'Smart Contracts': '/smart-contracts',
           'Dev Tools': '/dev-tools',

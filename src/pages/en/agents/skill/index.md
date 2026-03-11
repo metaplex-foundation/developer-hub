@@ -35,9 +35,9 @@ Instead of relying on hallucinated APIs or incorrect flags, your AI agent can re
 
 {% quick-links %}
 
-{% quick-link title="Installation" icon="InboxArrowDown" href="/dev-tools/skill/installation" description="Install the Skill in Claude Code, Cursor, Copilot, or any agent that supports the Agent Skills format." /%}
+{% quick-link title="Installation" icon="InboxArrowDown" href="/agents/skill/installation" description="Install the Skill in Claude Code, Cursor, Copilot, or any agent that supports the Agent Skills format." /%}
 
-{% quick-link title="How It Works" icon="CodeBracketSquare" href="/dev-tools/skill/how-it-works" description="Learn how progressive disclosure keeps context lightweight while providing full coverage." /%}
+{% quick-link title="How It Works" icon="CodeBracketSquare" href="/agents/skill/how-it-works" description="Learn how progressive disclosure keeps context lightweight while providing full coverage." /%}
 
 {% /quick-links %}
 
@@ -73,9 +73,9 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 
 ## Next Steps
 
-- **[Install the Skill](/dev-tools/skill/installation)** to get started
-- **[How It Works](/dev-tools/skill/how-it-works)** to understand the architecture
-- **[Programs & Operations](/dev-tools/skill/programs-and-operations)** for detailed coverage
+- **[Install the Skill](/agents/skill/installation)** to get started
+- **[How It Works](/agents/skill/how-it-works)** to understand the architecture
+- **[Programs & Operations](/agents/skill/programs-and-operations)** for detailed coverage
 
 ## Notes
 

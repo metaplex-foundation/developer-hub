@@ -5,7 +5,7 @@ export const mplAgent = {
   name: 'Agent Registry',
   headline: 'Agent Identity Registry',
   description:
-    'On-chain program for registering agent identity on MPL Core assets.',
+    'On-chain programs for agent identity and execution delegation on MPL Core assets.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/mpl-agent',
   icon: <CpuChipIcon />,
@@ -35,6 +35,10 @@ export const mplAgent = {
             {
               title: 'Agent Identity',
               href: '/smart-contracts/mpl-agent/identity',
+            },
+            {
+              title: 'Agent Tools',
+              href: '/smart-contracts/mpl-agent/tools',
             },
           ],
         },
