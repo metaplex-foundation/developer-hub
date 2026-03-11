@@ -116,8 +116,8 @@ No upfront costs. You only pay fees on funds raised.
 
 | Network | Program ID |
 |---------|------------|
-| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
-| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Mainnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
+| Devnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
 
 ## Security
 
@@ -140,7 +140,7 @@ Genesis supports three mechanisms: **Launch Pool** (proportional distribution wi
 Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
 
 ### Can I revoke token authorities after launch?
-Yes. Genesis provides `revokeMintAuthorityV2` and `revokeFreezeAuthorityV2` instructions to permanently revoke authorities.
+Yes. Genesis provides the `revokeV2` instruction to permanently revoke mint and/or freeze authority.
 
 ### What's the difference between Launch Pool and Presale?
 **Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.

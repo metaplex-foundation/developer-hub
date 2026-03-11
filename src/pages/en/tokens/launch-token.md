@@ -22,15 +22,15 @@ A Launch Pool token launch has three phases:
 
 1. **Setup** (you run once) - Create the token, configure the launch, and activate it
 2. **Deposit Period** (users interact) - Users deposit SOL during the window you configured
-3. **Post-Launch** (you + users) - Execute the transition, users claim tokens, you revoke authorities
+3. **Post-Launch** (you + users) - Crank the state machine, users claim tokens, you revoke authorities
 
 This guide walks you through creating **four separate scripts** that you'll run at different stages:
 
 | Script | When to Run | Purpose |
 |--------|-------------|---------|
 | `launch.ts` | Once, to start | Creates your token and activates the launch |
-| `transition.ts` | After deposits close | Moves collected SOL to your unlocked bucket |
-| `claim.ts` | After transition | Users run this to claim their tokens |
+| `crank.ts` | After deposits close | Triggers conditions and behaviors to move SOL to your unlocked bucket |
+| `claim.ts` | After crank | Users run this to claim their tokens |
 | `revoke.ts` | When launch is complete | Permanently removes mint/freeze authorities |
 
 ## Prerequisites
@@ -55,6 +55,7 @@ You need a Solana keypair file on your machine to sign transactions. This is typ
 Create a file called `launch.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -80,7 +81,7 @@ async function main() {
   // This is typically your Solana CLI wallet at ~/.config/solana/id.json
   // Or use any keypair file you have access to
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -273,25 +274,27 @@ Users deposit SOL using your frontend or directly via the SDK. Each deposit:
 
 ### After Deposits Close
 
-Once the deposit period ends, you need to run the **transition** to move the collected SOL to the unlocked bucket. Create a file called `transition.ts`:
+Once the deposit period ends, run `triggerBehaviorsV2` to execute the end behaviors configured on the bucket — in this case, moving collected SOL to the unlocked bucket. Create a file called `crank.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  transitionV2,
+  triggerBehaviorsV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
+import { findAssociatedTokenPda, mplToolbox } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
+    .use(mplToolbox())
     .use(genesis());
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -306,28 +309,20 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('Executing transition...');
+  console.log('Cranking state...');
 
-  await transitionV2(umi, {
+  await triggerBehaviorsV2(umi, {
     genesisAccount,
     primaryBucket: launchPoolBucket,
     baseMint,
   })
     .addRemainingAccounts([
-      {
-        pubkey: unlockedBucket,
-        isSigner: false,
-        isWritable: true,
-      },
-      {
-        pubkey: publicKey(unlockedBucketQuoteTokenAccount),
-        isSigner: false,
-        isWritable: true,
-      },
+      { pubkey: publicKey(unlockedBucket), isSigner: false, isWritable: true },
+      { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ Transition complete! SOL moved to unlocked bucket.');
+  console.log('✓ Crank complete! SOL moved to unlocked bucket.');
 }
 
 main().catch(console.error);
@@ -336,12 +331,12 @@ main().catch(console.error);
 Run after the deposit period ends:
 
 ```bash
-npx ts-node transition.ts
+npx ts-node crank.ts
 ```
 
 ### Users Claim Tokens
 
-After the transition, users can claim their tokens. Each user receives tokens proportional to their share of total deposits:
+After the crank, users can claim their tokens. Each user receives tokens proportional to their share of total deposits:
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
@@ -350,6 +345,7 @@ userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 Users can claim via your frontend or using this script (create `claim.ts`):
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -363,7 +359,7 @@ async function main() {
 
   // Load the user's wallet keypair (whoever deposited SOL)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
@@ -398,11 +394,11 @@ After the launch is complete, revoke mint and freeze authorities. This signals t
 Create `revoke.ts`:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  revokeMintAuthorityV2,
-  revokeFreezeAuthorityV2,
+  revokeV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
@@ -412,24 +408,21 @@ async function main() {
 
   // Load your wallet keypair (same wallet used for launch)
   const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // Fill in your token mint address from the launch
+  // Fill in these addresses from the launch
+  const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('Revoking mint authority...');
-  await revokeMintAuthorityV2(umi, {
+  console.log('Revoking mint and freeze authorities...');
+  await revokeV2(umi, {
+    genesisAccount,
     baseMint,
+    revokeMintAuthority: true,
+    revokeFreezeAuthority: true,
   }).sendAndConfirm(umi);
-  console.log('✓ Mint authority revoked');
-
-  console.log('Revoking freeze authority...');
-  await revokeFreezeAuthorityV2(umi, {
-    baseMint,
-  }).sendAndConfirm(umi);
-  console.log('✓ Freeze authority revoked');
 
   console.log('\n✓ Launch complete! Token is fully decentralized.');
 }
@@ -442,4 +435,4 @@ main().catch(console.error);
 - [Genesis Overview](/smart-contracts/genesis) - Learn more about the Solana token launchpad
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed fair launch documentation
 - [Presale](/smart-contracts/genesis/presale) - Run a token presale at a fixed price
-- [Aggregation API](/smart-contracts/genesis/aggregation) - Query launch and token sale data via API
+- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API

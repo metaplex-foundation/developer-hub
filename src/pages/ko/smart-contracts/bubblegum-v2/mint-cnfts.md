@@ -1,8 +1,44 @@
 ---
 title: 압축된 NFT 민팅
-metaTitle: 압축된 NFT 민팅 | Bubblegum V2
+metaTitle: 압축된 NFT 민팅 - Bubblegum V2
 description: Bubblegum V2에서 압축된 NFT를 민팅하는 방법을 알아보세요.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - mint compressed NFT
+  - mint cNFT
+  - NFT minting
+  - Bubblegum mint
+  - collection mint
+  - mintV2
+  - MPL-Core collection
+about:
+  - Compressed NFTs
+  - NFT minting
+  - Solana transactions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+faqs:
+  - q: 압축된 NFT를 컬렉션에 민팅하려면 어떻게 해야 하나요?
+    a: coreCollection 매개변수를 MPL-Core 컬렉션 주소로 설정하여 mintV2 명령을 사용하세요. 컬렉션에는 BubblegumV2 플러그인이 활성화되어 있어야 합니다.
+  - q: 민팅 후 자산 ID를 얻으려면 어떻게 해야 하나요?
+    a: 트랜잭션이 완료된 후 parseLeafFromMintV2Transaction 헬퍼를 사용하세요. 자산 ID를 포함한 리프 스키마를 반환합니다.
+  - q: 누구나 내 트리에서 민팅할 수 있나요?
+    a: 트리가 공개로 설정된 경우에만 가능합니다. 비공개 트리의 경우 트리 생성자 또는 트리 위임자만 민팅할 수 있습니다.
+  - q: 민팅에 필요한 메타데이터 필드는 무엇인가요?
+    a: MetadataArgsV2에는 name, uri, sellerFeeBasisPoints, collection(또는 none), 그리고 creators 배열이 필요합니다.
 ---
+
+## Summary
+
+**Minting compressed NFTs** adds new cNFTs to a Bubblegum Tree using the **mintV2** instruction. This page covers minting with and without MPL-Core collections, and retrieving the asset ID from mint transactions.
+
+- Mint cNFTs to a Bubblegum Tree using the mintV2 instruction
+- Mint directly into an MPL-Core collection with the BubblegumV2 plugin
+- Retrieve the asset ID and leaf schema from the mint transaction
+- Configure metadata including name, URI, creators, and royalties
 
 [이전 페이지](/ko/smart-contracts/bubblegum-v2/create-trees)에서 압축된 NFT를 민팅하려면 Bubblegum 트리가 필요하다는 것을 보았고, 하나를 만드는 방법을 보았습니다. 이제 주어진 Bubblegum 트리에서 압축된 NFT를 민팅하는 방법을 살펴보겠습니다. {% .lead %}
 
@@ -133,3 +169,25 @@ const assetId = leaf.id;
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- The Bubblegum Tree must be created before minting. See [Creating Trees](/smart-contracts/bubblegum-v2/create-trees).
+- For collection mints, the MPL-Core collection must have the `BubblegumV2` plugin enabled.
+- The collection authority must sign the transaction when minting to a collection, regardless of whether the tree is public or private.
+- Use `parseLeafFromMintV2Transaction` only after the transaction is **finalized**, not just confirmed.
+
+## FAQ
+
+#
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **mintV2** | The Bubblegum V2 instruction for minting compressed NFTs, replacing the V1 mint instructions |
+| **MetadataArgsV2** | The metadata structure passed to mintV2, containing name, URI, royalties, collection, and creators |
+| **Collection Authority** | The signer authorized to manage the MPL-Core collection — required when minting to a collection |
+| **BubblegumV2 Plugin** | An MPL-Core collection plugin that enables Bubblegum V2 features (freeze, soulbound, royalties) |
+| **Asset ID** | A PDA derived from the merkle tree address and leaf index, uniquely identifying a compressed NFT |
+| **Leaf Schema** | The data structure stored as a leaf in the merkle tree, containing the cNFT's hashed metadata and ownership info |

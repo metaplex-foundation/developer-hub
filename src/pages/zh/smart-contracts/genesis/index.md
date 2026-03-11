@@ -116,8 +116,8 @@ Genesis 支持三种可以组合使用的机制：
 
 | 网络 | Program ID |
 |---------|------------|
-| Mainnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
-| Devnet | `GENSkbxvLc7iBQvEAJv3Y5wVMHGD3RjfCNwWgU8Tqgkc` |
+| Mainnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
+| Devnet | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` |
 
 ## 安全性
 
@@ -140,7 +140,7 @@ Genesis 支持三种机制：**Launch Pool**（按比例分配与价格发现）
 Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 的协议费用。没有前期成本——您只需支付 Solana 交易费用以及募集资金的协议费用。
 
 ### 发行后可以撤销代币权限吗？
-可以。Genesis 提供 `revokeMintAuthorityV2` 和 `revokeFreezeAuthorityV2` 指令来永久撤销权限。
+可以。Genesis 提供 `revokeV2` 指令来永久撤销铸造和冻结权限。
 
 ### Launch Pool 和 Presale 有什么区别？
 **Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。

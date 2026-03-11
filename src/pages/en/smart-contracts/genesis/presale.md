@@ -73,7 +73,7 @@ Organic price discovery (see [Launch Pool](/smart-contracts/genesis/launch-pool)
 
 1. You allocate tokens to the Presale with a SOL cap that determines the fixed price
 2. Users deposit SOL during the deposit window at the fixed rate
-3. After the deposit period ends, you execute the transition to move funds
+3. After the deposit period ends, you run `triggerBehaviorsV2` to process end behaviors and move funds
 4. Users claim their tokens based on their deposit amount
 
 ### Price Calculation
@@ -260,7 +260,7 @@ The Presale bucket collects deposits and distributes tokens. Configure timing an
 
 ### 3. Add the Unlocked Bucket
 
-The Unlocked bucket receives SOL from the Presale after the transition.
+The Unlocked bucket receives SOL from the Presale after end behaviors are triggered.
 
 {% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
@@ -294,13 +294,17 @@ Token allocation: `userTokens = (userDeposit / allocationQuoteTokenCap) * baseTo
 
 ## Admin Operations
 
-### Executing the Transition
+### Triggering End Behaviors
 
-After deposits close, execute the transition to move collected SOL to the unlocked bucket.
+After the deposit period ends, run `triggerBehaviorsV2` to process the end behaviors configured on the presale bucket — in this case, moving collected SOL to the unlocked bucket.
 
-{% code-tabs-imported from="genesis/transition_presale_v2" frameworks="umi" filename="transitionPresale" /%}
+{% callout type="warning" title="Must wait for deposit period to end" %}
+`triggerBehaviorsV2` can only be called after the presale's `depositEndCondition` has been met. Calling it early throws a `PresaleBucketNotEnded` error.
+{% /callout %}
 
-**Why this matters:** Without transition, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
+{% code-tabs-imported from="genesis/trigger_presale_v2" frameworks="umi" filename="triggerBehaviors" /%}
+
+**Why this matters:** Without triggering end behaviors, collected SOL stays locked in the Presale bucket. Users can still claim tokens, but the team cannot access the raised funds.
 
 ## Reference
 
@@ -403,7 +407,7 @@ if (deposit) {
 - The {% fee product="genesis" config="presale" fee="deposit" /%} protocol fee applies to deposits
 - Users must wrap SOL to wSOL before depositing
 - Multiple deposits from the same user accumulate in one deposit account
-- The transition must be executed after deposits close for the team to access funds
+- Run `triggerBehaviorsV2` after deposits close for the team to access raised funds; it cannot be called before the deposit period ends
 - Finalization is permanent—double-check all configuration before calling `finalizeV2`
 
 ## FAQ
@@ -434,7 +438,7 @@ Use Presale when you want predictable pricing and know exactly how much you want
 | **Minimum Deposit** | Minimum amount required per deposit transaction |
 | **Cooldown** | Time users must wait between deposits |
 | **End Behavior** | Automated action after deposit period ends |
-| **Transition** | Instruction that processes end behaviors |
+| **Trigger** | `triggerBehaviorsV2` instruction that processes end behaviors after the deposit period ends |
 
 ## Next Steps
 

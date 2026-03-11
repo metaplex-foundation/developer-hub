@@ -1,8 +1,32 @@
 ---
 title: MPL-Bubblegum V2 Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum V2
+metaTitle: Rust SDK - MPL-Bubblegum V2
 description: MPL-Bubblegum V2 Rust SDKを実行するためのプロジェクト設定方法を学びます。
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - Rust SDK
+  - MPL-Bubblegum Rust
+  - Cargo
+  - Solana program
+  - CPI
+  - instruction builder
+about:
+  - Compressed NFTs
+  - Rust SDK
+  - Solana programs
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
+
+## Summary
+
+**MPL-Bubblegum V2 Rust SDK**は、ローカルスクリプト用の命令ビルダーと、圧縮NFTとやり取りするオンチェーンプログラム用のCPIビルダーを提供します。
+
+- Cargoでインストール：`cargo add mpl-bubblegum`
+- ローカルスクリプトには`Builder`型を、オンチェーンCPIには`CpiBuilder`型を使用します
+- 完全な命令リファレンスはdocs.rsで確認できます
 
 MetaplexはMPL-Bubblegumプログラムとの相互作用に使用できるRustライブラリを提供しています。Rustライブラリは、Rustスクリプト/ビルドや、CPI命令を介したオンチェーンプログラムで使用できます。
 

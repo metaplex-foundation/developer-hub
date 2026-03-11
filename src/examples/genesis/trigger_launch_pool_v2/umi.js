@@ -1,14 +1,14 @@
 // [IMPORTS]
 import {
   genesis,
-  transitionV2,
+  triggerBehaviorsV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis'
 import {
   findAssociatedTokenPda,
   mplToolbox,
 } from '@metaplex-foundation/mpl-toolbox'
-import { keypairIdentity } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
@@ -23,19 +23,19 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // [/SETUP]
 
 // [MAIN]
-const [unlockedBucketQuoteTokenAccount] = findAssociatedTokenPda(umi, {
+const unlockedBucketQuoteTokenAccount = findAssociatedTokenPda(umi, {
   owner: unlockedBucket,
   mint: WRAPPED_SOL_MINT,
 })
 
-await transitionV2(umi, {
+await triggerBehaviorsV2(umi, {
   genesisAccount,
   primaryBucket: launchPoolBucket,
-  baseMint: baseMint.publicKey,
+  baseMint,
 })
   .addRemainingAccounts([
-    { pubkey: unlockedBucket, isSigner: false, isWritable: true },
-    { pubkey: unlockedBucketQuoteTokenAccount, isSigner: false, isWritable: true },
+    { pubkey: publicKey(unlockedBucket), isSigner: false, isWritable: true },
+    { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
   ])
   .sendAndConfirm(umi)
 // [/MAIN]
