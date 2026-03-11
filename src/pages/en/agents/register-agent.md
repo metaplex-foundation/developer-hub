@@ -17,11 +17,11 @@ This guide shows you how to register an agent with:
 
 ## Prerequisites
 
-You need an MPL Core asset before registering. If you don't already have one, see [Create an NFT](/nfts/create-nft). You can learn more about the identity program in the [MPL Agent Registry](/smart-contracts/mpl-agent) docs.
+You need an MPL Core asset before registering. If you don't have one yet, see [Create an NFT](/nfts/create-nft). For more on the identity program itself, see the [MPL Agent Registry](/smart-contracts/mpl-agent) docs.
 
 ## Register an Agent
 
-When you register an agent, the registry program creates a PDA derived from the asset's public key. This makes agents discoverable — anyone can derive the PDA from an asset address and check if it has a registered identity.
+Registration creates a PDA derived from the asset's public key and attaches an `AgentIdentity` plugin with lifecycle hooks for Transfer, Update, and Execute. The PDA makes agents discoverable — anyone can derive it from an asset address and check whether it has a registered identity.
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -50,7 +50,7 @@ await registerIdentityV1(umi, {
 
 ## Agent Registration Document
 
-The `agentRegistrationUri` should point to a JSON document that describes the agent's identity, services, and metadata. This follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) agent registration standard adapted for Solana. You need to upload the JSON and any associated image so that they are accessible from everywhere. We recommend using a web3 storage provider like Arweave. If you want to upload by code you can follow this [guide](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo).
+The `agentRegistrationUri` points to a JSON document describing the agent's identity, services, and metadata. The format follows [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) adapted for Solana. Upload the JSON (and any associated image) to a permanent storage provider like Arweave so it's publicly accessible. For programmatic uploads, see this [guide](/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo).
 
 ```json
 {
@@ -103,7 +103,7 @@ The `agentRegistrationUri` should point to a JSON document that describes the ag
 
 ### Services
 
-Each entry in the `services` array describes a way to interact with the agent:
+Each service entry describes a way to interact with the agent:
 
 | Field | Required | Description |
 |-------|----------|-------------|
@@ -115,7 +115,7 @@ Each entry in the `services` array describes a way to interact with the agent:
 
 ### Registrations
 
-Each entry in the `registrations` array links back to an on-chain identity record:
+Each registration entry links back to an on-chain identity record:
 
 | Field | Required | Description |
 |-------|----------|-------------|

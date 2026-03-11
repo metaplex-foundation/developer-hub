@@ -6,11 +6,11 @@ created: '02-25-2026'
 updated: '03-11-2026'
 ---
 
-Read and verify agent identity data on-chain after an agent has been [registered](/agents/register-agent). {% .lead %}
+Read and verify agent identity data on-chain after [registration](/agents/register-agent). {% .lead %}
 
 ## Check Registration
 
-Use the safe fetch method to check whether an asset has a registered identity:
+The safe fetch method returns `null` instead of throwing if the identity doesn't exist, which is useful for checking whether an asset has been registered:
 
 ```typescript
 import { safeFetchAgentIdentityV1, findAgentIdentityV1Pda } from '@metaplex-foundation/mpl-agent-registry';
@@ -23,7 +23,7 @@ console.log('Registered:', identity !== null);
 
 ## Fetch from Seeds
 
-If you only have the asset's public key:
+You can also fetch the identity directly from the asset's public key without manually deriving the PDA:
 
 ```typescript
 import { fetchAgentIdentityV1FromSeeds } from '@metaplex-foundation/mpl-agent-registry';
@@ -35,7 +35,7 @@ const identity = await fetchAgentIdentityV1FromSeeds(umi, {
 
 ## Verify the AgentIdentity Plugin
 
-Registration attaches an `AgentIdentity` plugin to the MPL Core asset with the registration URI and lifecycle hooks:
+Registration attaches an `AgentIdentity` plugin to the Core asset. You can read it directly off the fetched asset to inspect the registration URI and lifecycle hooks:
 
 ```typescript
 import { fetchAsset } from '@metaplex-foundation/mpl-core';
@@ -51,7 +51,7 @@ console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 
 ## Read the Registration Document
 
-The `uri` field on the `AgentIdentity` plugin points to an off-chain JSON document that describes the agent's capabilities and metadata. Fetch it to get the full agent profile:
+The `uri` on the `AgentIdentity` plugin points to an off-chain JSON document with the agent's full profile — name, description, service endpoints, and more. Fetch it like any other URI:
 
 ```typescript
 import { fetchAsset } from '@metaplex-foundation/mpl-core';
@@ -70,7 +70,7 @@ if (agentIdentity?.uri) {
 }
 ```
 
-A typical registration document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) agent registration standard:
+The document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) agent registration standard. A typical one looks like this:
 
 ```json
 {
@@ -104,9 +104,7 @@ See [Register an Agent](/agents/register-agent#agent-registration-document) for 
 
 ## Fetch the Agent's Wallet
 
-Every MPL Core asset has a built-in wallet called the **Asset Signer** — a PDA derived from the asset's public key. Because it's a PDA, no private key exists for it, making it unstealable. The agent's wallet can hold SOL, tokens, and other assets.
-
-Use the `findAssetSignerPda` helper from `@metaplex-foundation/mpl-core` to derive the wallet address and check its balance:
+Every Core asset has a built-in wallet called the **Asset Signer** — a PDA derived from the asset's public key. No private key exists, so it can't be stolen. The wallet can hold SOL, tokens, or any other asset. Derive the address with `findAssetSignerPda`:
 
 ```typescript
 import { findAssetSignerPda } from '@metaplex-foundation/mpl-core';
@@ -118,6 +116,6 @@ console.log('Agent wallet:', assetSignerPda);
 console.log('Balance:', balance.basisPoints.toString(), 'lamports');
 ```
 
-The wallet address is deterministic — anyone can derive it from the asset's public key to send funds or check balances. Only the asset can sign for this wallet through MPL Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction via a delegated [executive](/agents/run-an-agent).
+The address is deterministic, so anyone can derive it from the asset's public key to send funds or check balances. Only the asset itself can sign for this wallet, through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction via a delegated [executive](/agents/run-an-agent).
 
-For more details on accounts, PDAs, and error codes, see the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs.
+See the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs for account layouts, PDA derivation details, and error codes.

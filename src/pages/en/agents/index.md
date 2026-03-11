@@ -5,11 +5,11 @@ description: Create, register, and run autonomous agents on Solana. Use the Meta
 tableOfContents: false
 ---
 
-Build and run autonomous agents on Solana using MPL Core assets as the foundation for agent identity, wallets, and execution. {% .lead %}
+Autonomous agents on Solana, built on MPL Core assets. {% .lead %}
 
 ## How Agent Assets Work
 
-Every [MPL Core](/smart-contracts/core) asset has a built-in wallet — a PDA derived from the asset's public key. Because it's a PDA, no private key exists for it, which means the wallet is **unstealable**. Only the asset itself can sign for its own wallet through MPL Core's [Execute](/smart-contracts/core/plugins) lifecycle hook.
+Every [MPL Core](/smart-contracts/core) asset has a built-in wallet — a PDA derived from the asset's public key. No private key exists for it, so the wallet can't be stolen. Only the asset itself can sign for its own wallet through Core's [Execute](/smart-contracts/core/execute-asset-signing) lifecycle hook.
 
 This makes Core assets a natural fit for autonomous agents:
 

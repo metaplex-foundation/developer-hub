@@ -6,45 +6,31 @@ created: '03-11-2026'
 updated: '03-11-2026'
 ---
 
-Set up an executive profile and delegate execution permissions to run an autonomous agent on Solana. {% .lead %}
-
-## What You'll Learn
-
-This guide shows you how to:
-
-- Create an executive profile that can act on behalf of agent assets
-- Delegate execution from a registered agent asset to an executive
-- Verify delegation on-chain
+Set up an executive profile and delegate execution to run an agent on Solana. {% .lead %}
 
 ## Why Delegation Is Needed
 
-Every MPL Core asset has a built-in wallet — a PDA derived from the asset's public key. This wallet is **unstealable** because no private key exists for it. Only the asset can sign for its own wallet through Core's Execute lifecycle hook.
+Every Core asset has a built-in wallet (the [Asset Signer](/smart-contracts/core/execute-asset-signing)) — a PDA with no private key, which means it can't be stolen. Only the asset itself can sign for that wallet through Core's Execute lifecycle hook.
 
-But Solana doesn't support background tasks or on-chain inference. An agent can't wake up and submit its own transactions — something off-chain has to sign and send them. At the same time, the agent owner shouldn't need to manually approve every action their agent takes.
+The problem is that Solana doesn't support background tasks or on-chain inference. An agent can't wake up and submit its own transactions. Something off-chain has to do it. But the agent owner also shouldn't have to sit at their computer approving every action.
 
-Execution delegation solves this. The owner delegates to an **executive** — a trusted off-chain operator that signs transactions on the agent's behalf using the Execute hook. The owner stays in control of _who_ runs their agent without needing to be online for every transaction.
+Execution delegation bridges this gap. The owner delegates to an **executive** — a trusted off-chain operator that signs transactions on the agent's behalf using the Execute hook. The owner controls _who_ runs their agent without needing to be online for every transaction.
 
 ## What Is an Executive?
 
-An executive is an on-chain profile that represents an entity authorized to act on behalf of agent assets. Think of it as a service account — a wallet registers itself as an executive once, and then individual agent asset owners can delegate execution to that executive.
+An executive is an on-chain profile representing a wallet authorized to operate agent assets. Think of it as a service account: you register a wallet as an executive once, and then individual agent owners can delegate execution to it.
 
-This two-step model separates **identity** (who the agent is) from **execution** (who operates it):
+This separates **identity** (who the agent is) from **execution** (who operates it). An executive profile is a PDA derived from the wallet's public key — one per wallet. Delegation is per-asset: the agent owner creates a delegation record linking their agent to a specific executive. A single executive can run many agents, and an owner can switch executives without touching the agent's identity.
 
-1. **Executive profile** — A one-time registration for any wallet that wants to run agents. The profile is a PDA derived from the wallet's public key.
-2. **Execution delegation** — An agent asset owner grants a specific executive permission to act on behalf of their agent. The delegation record is a PDA derived from the executive profile and the agent asset.
-
-This means a single executive can run multiple agents, and an agent owner can switch executives without re-registering the agent's identity.
-
-Because every executive profile is registered on-chain, the registry provides a verifiable directory of all executives. Anyone can enumerate executive profiles, check which agents they operate, and inspect their delegation history. This forms the foundation for a future reputation system where executives can be rated based on their on-chain behavior.
+Every executive profile lives on-chain, so the registry acts as a verifiable directory. Anyone can enumerate profiles, see which agents an executive operates, and inspect delegation history. This lays the groundwork for a reputation layer where executives are rated based on their on-chain track record.
 
 ## Prerequisites
 
-- A [registered agent](/agents/register-agent) with an identity record and AgentIdentity plugin
-- The `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+)
+You need a [registered agent](/agents/register-agent) with an identity record and AgentIdentity plugin, and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+).
 
 ## Register an Executive Profile
 
-Before an executive can run any agent, it needs a profile. This is a one-time setup per wallet.
+Before an executive can run any agent, it needs a profile. This is a one-time setup per wallet:
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -59,11 +45,11 @@ await registerExecutiveV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
-The program creates a PDA from seeds `["executive_profile", <authority>]`. Since the PDA is derived from the authority's public key, each wallet can only have one executive profile.
+The profile PDA is derived from seeds `["executive_profile", <authority>]`, so each wallet can only have one.
 
 ## Delegate Execution
 
-Once an executive profile exists, the agent asset owner can delegate execution to it. This creates a delegation record linking the agent asset to the executive.
+With the executive profile in place, the agent asset owner can delegate execution to it. This creates a delegation record on-chain linking the agent to the executive:
 
 ```typescript
 import { delegateExecutionV1 } from '@metaplex-foundation/mpl-agent-registry';
@@ -107,7 +93,7 @@ Only the asset owner can delegate execution. The program validates that:
 
 ## Verify Delegation
 
-Check whether a delegation record exists between an executive and an agent asset:
+To check whether a delegation exists, derive the delegation record PDA and see if the account exists:
 
 ```typescript
 import {
@@ -178,4 +164,4 @@ await delegateExecutionV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
-For technical details on accounts, PDA layouts, and error codes, see the [Agent Tools](/smart-contracts/mpl-agent/tools) smart contract reference.
+See the [Agent Tools](/smart-contracts/mpl-agent/tools) smart contract reference for account layouts, PDA derivation details, and error codes.
