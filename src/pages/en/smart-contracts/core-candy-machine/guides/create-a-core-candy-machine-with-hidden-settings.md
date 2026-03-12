@@ -356,17 +356,15 @@ In Part 2, we'll cover the steps to reveal the assets and validate their metadat
 
 ## FAQ
 
-{% faq %}
-{% faqitem title="What are hidden settings in Core Candy Machine?" %}
+### What are hidden settings in Core Candy Machine?
+
 Hidden settings allow all minted NFTs to initially share the same placeholder metadata (name and URI), which is later updated during a reveal process to show each NFT's unique traits.
-{% /faqitem %}
 
-{% faqitem title="How does the hash in hidden settings work?" %}
+### How does the hash in hidden settings work?
+
 The hash is a SHA-256 checksum of your reveal data array. After revealing, users can recompute the hash from the updated metadata to verify that NFTs were not tampered with.
-{% /faqitem %}
 
-{% faqitem title="Can I use hidden settings with Config Line Settings?" %}
+### Can I use hidden settings with Config Line Settings?
+
 No. Hidden Settings and Config Line Settings are mutually exclusive -- you must choose one or the other when creating a Candy Machine.
-{% /faqitem %}
-{% /faq %}
 

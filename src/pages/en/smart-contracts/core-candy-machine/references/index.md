@@ -48,4 +48,3 @@ The Rust API documentation is split between two crates:
 - [mpl-core-candy-machine-core](https://docs.rs/mpl-core-candy-machine-core/) -- covers Candy Machine creation, configuration, and asset management
 - [mpl-core-candy-guard](https://docs.rs/mpl-core-candy-guard/) -- covers guard creation, configuration, and minting condition enforcement
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

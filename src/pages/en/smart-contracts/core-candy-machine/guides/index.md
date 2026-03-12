@@ -32,4 +32,3 @@ These guides walk you through common [Core Candy Machine](/smart-contracts/core-
 
 {% quick-link title="Create a Core Candy Machine with Hidden Settings" icon="CodeBracketSquare" href="/smart-contracts/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings" description="Learn how to build your own Core Candy Machine with Hidden Settings" /%}
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

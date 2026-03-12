@@ -842,22 +842,20 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 
 ## 常见问题
 
-{% faq %}
-{% faqitem title="是否需要为 Core Candy Machine 构建自己的铸造网站？" %}
+### 是否需要为 Core Candy Machine 构建自己的铸造网站？
+
 虽然不是必需的，但自定义网站能提供最佳用户体验。您也可以使用 Metaplex CLI 在没有前端的情况下进行铸造。
-{% /faqitem %}
 
-{% faqitem title="哪个框架最适合构建 Candy Machine 铸造 UI？" %}
+### 哪个框架最适合构建 Candy Machine 铸造 UI？
+
 推荐使用 Next.js 以获得与 Umi 和钱包适配器的最佳兼容性。[`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template) 提供了一个即用的起始模板。
-{% /faqitem %}
 
-{% faqitem title="如何检查钱包是否有资格铸造？" %}
+### 如何检查钱包是否有资格铸造？
+
 获取 Candy Guard 账户并验证每个活跃守卫的条件是否满足连接的钱包——检查 SOL 余额、代币持有量、铸造限制、开始日期和白名单状态。
-{% /faqitem %}
 
-{% faqitem title="能否在一个交易中铸造多个 NFT？" %}
+### 能否在一个交易中铸造多个 NFT？
+
 可以。使用 Umi 的交易构建器组合多个 `mintV1` 指令，但需检查 `fitsInOneTransaction()` 以避免超出交易大小限制。
-{% /faqitem %}
-{% /faq %}
 
 *由 Metaplex Foundation 维护。最后验证于 2026 年 3 月。适用于 `@metaplex-foundation/mpl-core-candy-machine`。*

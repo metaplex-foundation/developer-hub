@@ -438,4 +438,3 @@ The `updateCandyGuard` instruction replaces the entire guards and groups configu
 | Bot Tax | A guard that charges a small SOL penalty to wallets that fail other guard checks, used to deter bot activity. |
 | Route Instruction | A special instruction on the Candy Guard program that executes guard-specific logic outside of the mint flow, such as Allow List verification. |
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · Applies to MPL Core Candy Machine*

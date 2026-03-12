@@ -80,4 +80,3 @@ From here your `umi` instance will have access to the mpl-core package and you c
 - A Solana RPC endpoint is required. Use a dedicated RPC provider for production deployments rather than the public endpoint.
 - This SDK covers both the Core Candy Machine program and the Core Candy Guard program in a single package.
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

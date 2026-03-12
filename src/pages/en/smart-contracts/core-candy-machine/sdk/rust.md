@@ -79,4 +79,3 @@ cargo add mpl-core-candy-guard
 - The `mpl-core-candy-machine-core` and `mpl-core-candy-guard` crates are separate packages. Install both if you need full Candy Machine and guard functionality.
 - Refer to the [docs.rs documentation](https://docs.rs/mpl-core-candy-machine-core/) for detailed type and function signatures.
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

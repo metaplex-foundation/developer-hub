@@ -225,4 +225,3 @@ From this point you can build and upload your client package to npm or link/move
 - If using Anchor 28, you must add the `rustbin` fallback configuration to Shankjs as shown above due to a missing crates.io dependency.
 - The generated client files should not be edited manually after generation except for adding your custom guard registrations.
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

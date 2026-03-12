@@ -60,7 +60,6 @@ Launch pool configuration, presale configuration, deposit/withdraw flows, fronte
 
 **Jump to:** [Unlocked Bucket](#add-unlocked-bucket) · [Finalize](#finalize) · [Fetch](#fetch) · [Fetch Bucket](#fetch-bucket) · [Claim Unlocked](#claim-unlocked) · [Revoke](#revoke) · [Common Errors](#common-errors) · [FAQ](#faq)
 
-*Maintained by Metaplex Foundation · Last verified February 2026 · Requires Metaplex CLI (mplx)*
 
 ## Add Unlocked Bucket
 

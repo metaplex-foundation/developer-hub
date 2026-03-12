@@ -842,22 +842,20 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 
 ## FAQ
 
-{% faq %}
-{% faqitem title="Core Candy Machine用に独自のミントWebサイトを構築する必要がありますか？" %}
+### Core Candy Machine用に独自のミントWebサイトを構築する必要がありますか？
+
 必須ではありませんが、カスタムWebサイトは最高のユーザーエクスペリエンスを提供します。Metaplex CLIを使用してフロントエンドなしでミントすることもできます。
-{% /faqitem %}
 
-{% faqitem title="Candy MachineミントUIの構築に最適なフレームワークは何ですか？" %}
+### Candy MachineミントUIの構築に最適なフレームワークは何ですか？
+
 Umiとウォレットアダプターとの互換性が最も良いNext.jsが推奨されます。[`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template)は、すぐに使える出発点を提供します。
-{% /faqitem %}
 
-{% faqitem title="ウォレットがミント可能かどうかを確認するにはどうすればよいですか？" %}
+### ウォレットがミント可能かどうかを確認するにはどうすればよいですか？
+
 Candy Guardアカウントを取得し、接続されたウォレットに対して各アクティブガードの条件を検証します。SOL残高、トークン保有量、ミント制限、開始日、およびアローリストのステータスを確認してください。
-{% /faqitem %}
 
-{% faqitem title="1つのトランザクションで複数のNFTをミントできますか？" %}
+### 1つのトランザクションで複数のNFTをミントできますか？
+
 はい。Umiのトランザクションビルダーを使用して複数の`mintV1`命令を組み合わせますが、トランザクションサイズ制限を超えないように`fitsInOneTransaction()`を確認してください。
-{% /faqitem %}
-{% /faq %}
 
 *Metaplex Foundationによりメンテナンス。最終確認 2026年3月。`@metaplex-foundation/mpl-core-candy-machine`に適用。*

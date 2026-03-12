@@ -295,7 +295,6 @@ With more than 23 default guards and the ability to create custom guards, creato
 - The Candy Guard program is separate from the Candy Machine Core program. Forking the guard program for custom logic does not require modifying the core minting program.
 - Guard validation failures with [Bot Tax](/smart-contracts/core-candy-machine/guards/bot-tax) enabled will charge the failed minter rather than simply rejecting the transaction.
 
-*Maintained by [Metaplex Foundation](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-core-candy-machine)*
 
 ## FAQ
 

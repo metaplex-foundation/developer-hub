@@ -356,18 +356,16 @@ for(let i = 0; i < nftMint.length; i++) {
 
 ## FAQ
 
-{% faq %}
-{% faqitem title="Core Candy Machineの隠し設定とは何ですか？" %}
+### Core Candy Machineの隠し設定とは何ですか？
+
 隠し設定により、ミントされたすべてのNFTが最初は同じプレースホルダーメタデータ（名前とURI）を共有し、後のリビールプロセスで各NFTの固有の特性を表示するように更新されます。
-{% /faqitem %}
 
-{% faqitem title="隠し設定のハッシュはどのように機能しますか？" %}
+### 隠し設定のハッシュはどのように機能しますか？
+
 ハッシュは、リビールデータ配列のSHA-256チェックサムです。リビール後、ユーザーは更新されたメタデータからハッシュを再計算して、NFTが改ざんされていないことを確認できます。
-{% /faqitem %}
 
-{% faqitem title="隠し設定とConfig Line Settingsを併用できますか？" %}
+### 隠し設定とConfig Line Settingsを併用できますか？
+
 いいえ。隠し設定とConfig Line Settingsは相互排他的です。Candy Machineを作成する際にいずれか一方を選択する必要があります。
-{% /faqitem %}
-{% /faq %}
 
 *Metaplex Foundationによりメンテナンス。最終確認 2026年3月。`@metaplex-foundation/mpl-core-candy-machine`に適用。*

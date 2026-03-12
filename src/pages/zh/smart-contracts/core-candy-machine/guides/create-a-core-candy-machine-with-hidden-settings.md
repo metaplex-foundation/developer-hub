@@ -356,18 +356,16 @@ for(let i = 0; i < nftMint.length; i++) {
 
 ## 常见问题
 
-{% faq %}
-{% faqitem title="Core Candy Machine 中的隐藏设置是什么？" %}
+### Core Candy Machine 中的隐藏设置是什么？
+
 隐藏设置允许所有铸造的 NFT 最初共享相同的占位符元数据（名称和 URI），随后通过揭示过程更新以显示每个 NFT 的独特属性。
-{% /faqitem %}
 
-{% faqitem title="隐藏设置中的哈希如何工作？" %}
+### 隐藏设置中的哈希如何工作？
+
 哈希是揭示数据数组的 SHA-256 校验和。揭示后，用户可以从更新的元数据重新计算哈希，以验证 NFT 未被篡改。
-{% /faqitem %}
 
-{% faqitem title="隐藏设置能与 Config Line Settings 一起使用吗？" %}
+### 隐藏设置能与 Config Line Settings 一起使用吗？
+
 不能。Hidden Settings 和 Config Line Settings 是互斥的——创建 Candy Machine 时必须选择其中之一。
-{% /faqitem %}
-{% /faq %}
 
 *由 Metaplex Foundation 维护。最后验证于 2026 年 3 月。适用于 `@metaplex-foundation/mpl-core-candy-machine`。*

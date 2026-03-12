@@ -49,4 +49,3 @@ Select the language or library below to get started with the Core Candy Machine 
 
 {% /quick-links %}
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation/mpl-core-candy-machine) · Last verified March 2026*

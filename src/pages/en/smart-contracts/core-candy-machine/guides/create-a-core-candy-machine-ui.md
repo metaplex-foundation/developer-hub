@@ -842,21 +842,19 @@ By focusing on these areas, you'll be well-prepared to launch and maintain a suc
 
 ## FAQ
 
-{% faq %}
-{% faqitem title="Do I need to build my own mint website for Core Candy Machine?" %}
+### Do I need to build my own mint website for Core Candy Machine?
+
 While not required, a custom website provides the best user experience. You can also use the Metaplex CLI for minting without a frontend.
-{% /faqitem %}
 
-{% faqitem title="Which framework is best for building a Candy Machine mint UI?" %}
+### Which framework is best for building a Candy Machine mint UI?
+
 Next.js is recommended for the best compatibility with Umi and wallet adapters. The [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template) provides a ready-to-use starting point.
-{% /faqitem %}
 
-{% faqitem title="How do I check if a wallet is eligible to mint?" %}
-Fetch the Candy Guard account and validate each active guard's conditions against the connected wallet -- check SOL balance, token holdings, mint limits, start dates, and allowlist status.
-{% /faqitem %}
+### How do I check if a wallet is eligible to mint?
 
-{% faqitem title="Can I mint multiple NFTs in one transaction?" %}
+Fetch the Candy Guard account and validate each active guard's conditions against the connected wallet — check SOL balance, token holdings, mint limits, start dates, and allowlist status.
+
+### Can I mint multiple NFTs in one transaction?
+
 Yes. Combine multiple `mintV1` instructions using Umi's transaction builder, but check `fitsInOneTransaction()` to avoid exceeding the transaction size limit.
-{% /faqitem %}
-{% /faq %}
 

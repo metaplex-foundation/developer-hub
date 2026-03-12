@@ -356,18 +356,16 @@ for(let i = 0; i < nftMint.length; i++) {
 
 ## FAQ
 
-{% faq %}
-{% faqitem title="Core Candy Machine의 hidden settings란 무엇인가요?" %}
+### Core Candy Machine의 hidden settings란 무엇인가요?
+
 Hidden settings는 모든 민팅된 NFT가 처음에 동일한 플레이스홀더 메타데이터(이름과 URI)를 공유하도록 하며, 이후 공개 과정에서 각 NFT의 고유한 특성을 보여주도록 업데이트됩니다.
-{% /faqitem %}
 
-{% faqitem title="Hidden settings의 해시는 어떻게 작동하나요?" %}
+### Hidden settings의 해시는 어떻게 작동하나요?
+
 해시는 공개 데이터 배열의 SHA-256 체크섬입니다. 공개 후 사용자는 업데이트된 메타데이터에서 해시를 재계산하여 NFT가 변조되지 않았는지 확인할 수 있습니다.
-{% /faqitem %}
 
-{% faqitem title="Config Line Settings와 함께 hidden settings를 사용할 수 있나요?" %}
+### Config Line Settings와 함께 hidden settings를 사용할 수 있나요?
+
 아니요. Hidden Settings와 Config Line Settings는 상호 배타적입니다 -- Candy Machine을 생성할 때 둘 중 하나를 선택해야 합니다.
-{% /faqitem %}
-{% /faq %}
 
 *Metaplex Foundation에서 유지관리. 2026년 3월 검증. `@metaplex-foundation/mpl-core-candy-machine`에 적용.*
