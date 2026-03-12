@@ -39,7 +39,7 @@ description: 审计和漏洞报告方法。
 | 协议                    | 最后一次主要一次性审计日期 |
 | ---------------------- | ------------------------- |
 | Core                   | 2024-05-06                |
-| Token Metadata         | 2025-01-21                |
+| Token Metadata         | 2025-11-08                |
 | Inscriptions           | 2024-01-16                |
 | Bubblegum/Compression  | 2025-05-12                |
 | Trifle/Fusion          | 2023-04-13                |

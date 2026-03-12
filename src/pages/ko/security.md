@@ -39,7 +39,7 @@ description: 감사 및 취약점 보고 방법.
 | 프로토콜              | 마지막 주요 일회성 감사 날짜 |
 | --------------------- | ----------------------------- |
 | Core                  | 2024-05-06                    |
-| Token Metadata        | 2025-01-21                    |
+| Token Metadata        | 2025-11-08                    |
 | Inscriptions          | 2024-01-16                    |
 | Bubblegum/Compression | 2025-05-12                    |
 | Trifle/Fusion         | 2023-04-13                    |
