@@ -74,10 +74,15 @@ if (agentIdentity?.uri) {
   const response = await fetch(agentIdentity.uri);
   const registration = await response.json();
 
-  console.log(registration.name);          // "My Trading Agent"
-  console.log(registration.description);   // "An autonomous agent that..."
-  console.log(registration.capabilities);  // ["swap", "stake", "rebalance"]
-  console.log(registration.endpoint);      // "https://api.example.com/agent"
+  console.log(registration.name);          // "Plexpert"
+  console.log(registration.description);   // "An informational agent..."
+  console.log(registration.active);        // true
+
+  for (const service of registration.services) {
+    console.log(service.name);             // "web", "A2A", "MCP", etc.
+    console.log(service.endpoint);         // service URL
+    console.log(service.version);          // protocol version (if set)
+  }
 }
 ```
 
@@ -130,3 +135,9 @@ console.log('Balance:', balance.basisPoints.toString(), 'lamports');
 The address is deterministic, so anyone can derive it from the asset's public key to send funds or check balances. Only the asset itself can sign for this wallet, through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction via a delegated [executive](/agents/run-an-agent).
 
 See the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs for account layouts, PDA derivation details, and error codes.
+
+## Notes
+
+- The Asset Signer is a PDA — no private key exists for it. It can receive funds from any source, but only the asset itself can sign outgoing transactions through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction.
+- `safeFetchAgentIdentityV1` returns `null` for unregistered assets rather than throwing, making it safe for existence checks without try/catch.
+- `findAssetSignerPda` derives the wallet address deterministically. The same address is returned regardless of network, so you can use it on devnet and mainnet with the same asset key.

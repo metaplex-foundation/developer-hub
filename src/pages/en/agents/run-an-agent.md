@@ -129,6 +129,8 @@ console.log('Delegated:', account.exists);
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { generateSigner } from '@metaplex-foundation/umi';
+import { create, createCollection } from '@metaplex-foundation/mpl-core';
 import { mplAgentIdentity, mplAgentTools } from '@metaplex-foundation/mpl-agent-registry';
 import {
   registerIdentityV1,
@@ -137,13 +139,20 @@ import {
   findAgentIdentityV1Pda,
   findExecutiveProfileV1Pda,
 } from '@metaplex-foundation/mpl-agent-registry';
-import { generateSigner, create } from '@metaplex-foundation/mpl-core';
 
 const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplAgentIdentity())
   .use(mplAgentTools());
 
-// 1. Create an asset
+// 1. Create a collection
+const collection = generateSigner(umi);
+await createCollection(umi, {
+  collection,
+  name: 'Agent Collection',
+  uri: 'https://example.com/collection.json',
+}).sendAndConfirm(umi);
+
+// 2. Create an asset
 const asset = generateSigner(umi);
 await create(umi, {
   asset,
@@ -152,7 +161,7 @@ await create(umi, {
   collection,
 }).sendAndConfirm(umi);
 
-// 2. Register identity
+// 3. Register identity
 await registerIdentityV1(umi, {
   asset: asset.publicKey,
   collection: collection.publicKey,

@@ -21,6 +21,8 @@ The Agent Tools program manages executive delegation for agent assets, allowing 
 
 ## Program ID
 
+The same program address is deployed on both Mainnet and Devnet.
+
 | Network | Address |
 |---------|---------|
 | Mainnet | `TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S` |
@@ -41,6 +43,8 @@ Creates an executive profile PDA for the given authority.
 
 ### Accounts
 
+Four accounts are required: the profile PDA to create, a payer, an optional authority, and the system program.
+
 | Account | Writable | Signer | Optional | Description |
 |---------|----------|--------|----------|-------------|
 | `executiveProfile` | Yes | No | No | PDA to be created (auto-derived from authority) |
@@ -59,6 +63,8 @@ Creates an executive profile PDA for the given authority.
 Delegates execution permission for an agent asset to an executive profile.
 
 ### Accounts
+
+Seven accounts are required, including the executive profile, the agent asset, its identity PDA, and the delegation record PDA to create.
 
 | Account | Writable | Signer | Optional | Description |
 |---------|----------|--------|----------|-------------|
@@ -80,6 +86,8 @@ Delegates execution permission for an agent asset to an executive profile.
 6. Creates and initializes the `ExecutionDelegateRecordV1` account (104 bytes)
 
 ## PDA Derivation
+
+Both account types are PDAs derived from deterministic seeds. Use the SDK helpers to compute them.
 
 | Account | Seeds | Size |
 |---------|-------|------|
@@ -104,7 +112,7 @@ const delegatePda = findExecutionDelegateRecordV1Pda(umi, {
 
 ## Account: ExecutiveProfileV1
 
-40 bytes, 8-byte aligned.
+Stores the authority that owns this executive profile. 40 bytes, 8-byte aligned.
 
 | Offset | Field | Type | Size | Description |
 |--------|-------|------|------|-------------|
@@ -114,7 +122,7 @@ const delegatePda = findExecutionDelegateRecordV1Pda(umi, {
 
 ## Account: ExecutionDelegateRecordV1
 
-104 bytes, 8-byte aligned.
+Links an executive profile to an agent asset, recording who is authorized to execute on its behalf. 104 bytes, 8-byte aligned.
 
 | Offset | Field | Type | Size | Description |
 |--------|-------|------|------|-------------|
@@ -126,6 +134,8 @@ const delegatePda = findExecutionDelegateRecordV1Pda(umi, {
 | 72 | `agentAsset` | `Pubkey` | 32 | The agent asset address |
 
 ## Errors
+
+The program returns these errors when validation fails during registration or delegation.
 
 | Code | Name | Description |
 |------|------|-------------|
