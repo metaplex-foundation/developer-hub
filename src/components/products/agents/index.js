@@ -25,6 +25,10 @@ export const agents = {
               title: 'Overview',
               href: '/agents',
             },
+            {
+              title: 'What Is an Agent?',
+              href: '/agents/what-is-an-agent',
+            },
           ],
         },
         {

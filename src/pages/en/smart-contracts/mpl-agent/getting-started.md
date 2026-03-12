@@ -8,16 +8,28 @@ keywords:
   - agent identity SDK
   - Umi
   - Solana
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Smart Contracts
   - Solana
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 Install the SDK and register your first agent identity. {% .lead %}
+
+## Summary
+
+Install the `@metaplex-foundation/mpl-agent-registry` package, configure Umi with the identity and tools plugins, and register your first agent identity on an MPL Core asset.
+
+- **Install** the SDK via npm and configure Umi with `mplAgentIdentity()` and `mplAgentTools()`
+- **Create** an MPL Core collection and asset if you don't already have one
+- **Register** an identity with `registerIdentityV1` and verify the attached `AgentIdentity` plugin
+- **Requires** `@metaplex-foundation/umi-bundle-defaults` and `@metaplex-foundation/mpl-core`
 
 ## Installation
 
@@ -102,3 +114,5 @@ console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 
 - **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Full details on the identity program
 - **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

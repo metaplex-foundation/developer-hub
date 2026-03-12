@@ -8,16 +8,28 @@ keywords:
   - AgentIdentityV1
   - PDA derivation
   - lifecycle hooks
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Smart Contracts
   - Solana
   - Metaplex
 proficiencyLevel: Advanced
 created: '02-25-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 The Agent Identity program registers an on-chain identity record for an MPL Core asset. {% .lead %}
+
+## Summary
+
+The Agent Identity program (`1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p`) creates a PDA-based identity record for an MPL Core asset and attaches an `AgentIdentity` plugin with lifecycle hooks for Transfer, Update, and Execute.
+
+- **Single instruction** — `RegisterIdentityV1` handles PDA creation, account initialization, and plugin attachment in one transaction
+- **40-byte account** — the `AgentIdentityV1` PDA stores only the discriminator, bump, and asset public key
+- **Lifecycle hooks** — the plugin registers approve, listen, and reject checks on Transfer, Update, and Execute events
+- **Deterministic PDA** — derived from seeds `["agent_identity", <asset_pubkey>]` for easy on-chain lookups
 
 ## Program ID
 
@@ -127,3 +139,5 @@ const results = await getAgentIdentityV1GpaBuilder(umi)
 | 2 | `InvalidAccountData` | PDA derivation does not match the asset |
 | 3 | `InvalidMplCoreProgram` | MPL Core program account is incorrect |
 | 4 | `InvalidCoreAsset` | Asset is not a valid MPL Core asset |
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

@@ -8,16 +8,36 @@ keywords:
   - MPL Core
   - AgentIdentity plugin
   - ERC-8004
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Agent Registration
   - Solana
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 Register an agent on Solana by binding an identity record to an MPL Core asset. {% .lead %}
+
+## Summary
+
+The `registerIdentityV1` instruction binds an on-chain identity record to an MPL Core asset, creating a discoverable PDA and attaching lifecycle hooks for Transfer, Update, and Execute.
+
+- **Creates** a PDA derived from the asset's public key for on-chain discoverability
+- **Attaches** an `AgentIdentity` plugin with lifecycle hooks to the Core asset
+- **Links** to an off-chain registration document following [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) for agent metadata
+- **Requires** an existing MPL Core asset and the `@metaplex-foundation/mpl-agent-registry` SDK
+
+## Quick Start
+
+1. [Prerequisites](#prerequisites) — Get an MPL Core asset and install the SDK
+2. [Register an Agent](#register-an-agent) — Call `registerIdentityV1` to bind identity
+3. [Agent Registration Document](#agent-registration-document) — Create the off-chain metadata JSON
+4. [Verify Registration](#verify-registration) — Confirm the identity was attached
+5. [Full Example](#full-example) — End-to-end code sample
 
 ## What You'll Learn
 This guide shows you how to register an agent with:
@@ -179,3 +199,12 @@ await registerIdentityV1(umi, {
   agentRegistrationUri: 'https://example.com/agent-registration.json',
 }).sendAndConfirm(umi);
 ```
+
+## Notes
+
+- Registration is a one-time operation per asset. Calling `registerIdentityV1` on an already-registered asset will fail.
+- The `agentRegistrationUri` should point to permanently hosted JSON (e.g. Arweave). If the URI becomes unreachable, the on-chain identity still exists but clients won't be able to fetch the agent's metadata.
+- The `collection` parameter is optional but recommended — it enables collection-level authority checks during registration.
+- Lifecycle hooks for Transfer, Update, and Execute are automatically attached. These hooks allow the identity plugin to participate in approving or rejecting operations on the asset.
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

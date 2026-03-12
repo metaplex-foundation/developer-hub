@@ -8,16 +8,36 @@ keywords:
   - execution delegation
   - Agent Tools
   - autonomous agent
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Execution Delegation
   - Solana
   - Metaplex
 proficiencyLevel: Intermediate
 created: '03-11-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 Set up an executive profile and delegate execution to run an agent on Solana. {% .lead %}
+
+## Summary
+
+Execution delegation allows an off-chain executive to sign transactions on behalf of an agent asset, bridging the gap between on-chain identity and off-chain operation.
+
+- **Register an executive profile** — a one-time on-chain setup per wallet that creates a verifiable operator identity
+- **Delegate execution** — the asset owner links their agent to a specific executive via an on-chain delegation record
+- **Verify delegation** — derive the delegation record PDA and check whether the account exists
+- **Requires** a [registered agent](/agents/register-agent) and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+)
+
+## Quick Start
+
+1. [Why Delegation Is Needed](#why-delegation-is-needed) — Understand the problem delegation solves
+2. [Register an Executive Profile](#register-an-executive-profile) — One-time setup per wallet
+3. [Delegate Execution](#delegate-execution) — Link agent to executive
+4. [Verify Delegation](#verify-delegation) — Confirm the delegation record exists
+5. [Full Example](#full-example) — End-to-end code sample
 
 ## Why Delegation Is Needed
 
@@ -168,12 +188,12 @@ await registerIdentityV1(umi, {
   agentRegistrationUri: 'https://example.com/agent-registration.json',
 }).sendAndConfirm(umi);
 
-// 3. Register executive profile
+// 4. Register executive profile
 await registerExecutiveV1(umi, {
   payer: umi.payer,
 }).sendAndConfirm(umi);
 
-// 4. Delegate execution
+// 5. Delegate execution
 const agentIdentity = findAgentIdentityV1Pda(umi, { asset: asset.publicKey });
 const executiveProfile = findExecutiveProfileV1Pda(umi, { authority: umi.payer.publicKey });
 
@@ -184,4 +204,13 @@ await delegateExecutionV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
+## Notes
+
+- Each wallet can only have one executive profile. The PDA is derived from `["executive_profile", <authority>]`, so calling `registerExecutiveV1` again with the same wallet will fail.
+- Delegation is per-asset — an owner must create a separate delegation record for each agent they want the executive to operate.
+- Only the asset owner can delegate execution. The program validates ownership on-chain.
+- An owner can switch executives by creating a new delegation record with a different executive profile.
+
 See the [Agent Tools](/smart-contracts/mpl-agent/tools) smart contract reference for account layouts, PDA derivation details, and error codes.
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

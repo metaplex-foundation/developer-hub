@@ -8,16 +8,28 @@ keywords:
   - execution delegation
   - RegisterExecutiveV1
   - DelegateExecutionV1
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Smart Contracts
   - Solana
   - Metaplex
 proficiencyLevel: Advanced
 created: '03-11-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 The Agent Tools program manages executive delegation for agent assets, allowing asset owners to delegate execution permissions to executive profiles. {% .lead %}
+
+## Summary
+
+The Agent Tools program (`TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S`) provides two instructions for managing execution delegation: `RegisterExecutiveV1` creates an executive profile, and `DelegateExecutionV1` grants that profile permission to execute on behalf of an agent asset.
+
+- **Two instructions** — `RegisterExecutiveV1` (one-time profile setup) and `DelegateExecutionV1` (per-asset delegation)
+- **ExecutiveProfileV1** — 40-byte PDA derived from `["executive_profile", <authority>]`, one per wallet
+- **ExecutionDelegateRecordV1** — 104-byte PDA linking an executive profile to a specific agent asset
+- **Owner-only delegation** — only the asset owner can create delegation records; the program validates ownership on-chain
 
 ## Program ID
 
@@ -151,3 +163,5 @@ The program returns these errors when validation fails during registration or de
 | 9 | `AgentIdentityNotRegistered` | Asset does not have a registered identity |
 | 10 | `AssetOwnerMustBeTheOneToDelegateExecution` | Only the asset owner can delegate execution |
 | 11 | `InvalidExecutiveProfileDerivation` | Executive profile PDA derivation mismatch |
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

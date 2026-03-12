@@ -14,10 +14,19 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '02-25-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 The **MPL Agent Registry** provides on-chain programs for registering agent identity and delegating execution permissions on Solana using MPL Core assets. {% .lead %}
+
+## Summary
+
+The MPL Agent Registry is a pair of on-chain Solana programs that bind verifiable identity records to MPL Core assets and manage execution delegation through executive profiles.
+
+- **Agent Identity program** — registers an identity PDA and attaches an `AgentIdentity` plugin with lifecycle hooks to a Core asset
+- **Agent Tools program** — manages executive profiles and execution delegation records
+- **JavaScript/TypeScript SDK** — `@metaplex-foundation/mpl-agent-registry` provides instruction builders and account fetchers
+- **Same addresses on Mainnet and Devnet** — both programs are deployed at identical addresses across networks
 
 {% callout title="Choose Your Path" %}
 - **Quick start?** See [Getting Started](/smart-contracts/mpl-agent/getting-started) for installation and first registration
@@ -68,3 +77,5 @@ npm install @metaplex-foundation/mpl-agent-registry
 1. **[Getting Started](/smart-contracts/mpl-agent/getting-started)** — Installation, setup, and first registration
 2. **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Identity program details, accounts, and PDA derivation
 3. **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*

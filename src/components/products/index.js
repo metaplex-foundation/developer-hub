@@ -37,6 +37,7 @@ export const productCategories = [
 export const products = [
   global,
   tokens,
+  skill,
   agents,
   nfts,
   tokenMetadata,
@@ -56,7 +57,6 @@ export const products = [
   umi,
   cli,
   shank,
-  skill,
   amman,
   sugar,
   legacyDocumentation,

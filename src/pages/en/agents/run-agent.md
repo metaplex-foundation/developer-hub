@@ -8,16 +8,28 @@ keywords:
   - AgentIdentity plugin
   - Asset Signer
   - agent wallet
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 about:
   - Agent Data
   - Solana
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 Read and verify agent identity data on-chain after [registration](/agents/register-agent). {% .lead %}
+
+## Summary
+
+Read agent identity data, verify registration status, inspect the AgentIdentity plugin, fetch the off-chain registration document, and derive the agent's built-in wallet address.
+
+- **Check registration** using `safeFetchAgentIdentityV1` which returns `null` for unregistered assets
+- **Inspect the AgentIdentity plugin** directly on the fetched Core asset for URI and lifecycle hooks
+- **Fetch the registration document** from the on-chain URI to read agent metadata and service endpoints
+- **Derive the agent's wallet** using `findAssetSignerPda` — a PDA with no private key that holds the agent's funds
 
 ## Check Registration
 
@@ -141,3 +153,5 @@ See the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs for
 - The Asset Signer is a PDA — no private key exists for it. It can receive funds from any source, but only the asset itself can sign outgoing transactions through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction.
 - `safeFetchAgentIdentityV1` returns `null` for unregistered assets rather than throwing, making it safe for existence checks without try/catch.
 - `findAssetSignerPda` derives the wallet address deterministically. The same address is returned regardless of network, so you can use it on devnet and mainnet with the same asset key.
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
