@@ -50,6 +50,11 @@ const standaloneRedirects = {
   // Genesis aggregation/api pages consolidated into integration-apis
   '/smart-contracts/genesis/aggregation': '/smart-contracts/genesis/integration-apis',
   '/smart-contracts/genesis/api': '/smart-contracts/genesis/integration-apis',
+  // Skill moved from dev-tools to agents
+  '/dev-tools/skill': '/agents/skill',
+  '/dev-tools/skill/installation': '/agents/skill/installation',
+  '/dev-tools/skill/how-it-works': '/agents/skill/how-it-works',
+  '/dev-tools/skill/programs-and-operations': '/agents/skill/programs-and-operations',
   '/ja/smart-contracts/genesis/aggregation': '/ja/smart-contracts/genesis/integration-apis',
   '/ja/smart-contracts/genesis/api': '/ja/smart-contracts/genesis/integration-apis',
   '/ko/smart-contracts/genesis/aggregation': '/ko/smart-contracts/genesis/integration-apis',
