@@ -9,6 +9,16 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  redirects: async () => {
+    return [
+      {
+        has: [{ type: 'host', value: 'developers.metaplex.com' }],
+        source: '/:path*',
+        destination: 'https://metaplex.com/docs/:path*',
+        permanent: true,
+      },
+    ]
+  },
   webpack: (config, { isServer }) => {
     // Tell webpack to NOT parse example files as modules
     // This prevents webpack from trying to resolve their imports
