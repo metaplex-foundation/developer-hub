@@ -78,7 +78,7 @@ Categories include:
 ## Support and Resources
 
 - [GitHub Repository](https://github.com/metaplex-foundation/cli)
-- [Documentation](https://developers.metaplex.com)
+- [Documentation](https://metaplex.com/docs)
 - [Discord Community](https://discord.gg/metaplex)
 
 ## Quick Start Examples

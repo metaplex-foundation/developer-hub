@@ -129,7 +129,7 @@ npm link
 
 문제가 발생한 경우:
 
-1. [문서](https://developers.metaplex.com) 확인
+1. [문서](https://metaplex.com/docs) 확인
 2. [GitHub 이슈](https://github.com/metaplex-foundation/cli/issues) 검색
 3. [Discord 커뮤니티](https://discord.gg/metaplex) 참여
 

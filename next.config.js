@@ -3,6 +3,7 @@ const path = require('path')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/docs',
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md'],
   experimental: {

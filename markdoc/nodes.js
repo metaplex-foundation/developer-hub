@@ -2,6 +2,7 @@ import { nodes as defaultNodes } from '@markdoc/markdoc'
 
 import { Fence } from '@/components/Fence'
 import { Heading } from '@/components/Heading'
+import { MarkdocLink } from '@/components/MarkdocLink'
 
 const nodes = {
   document: {
@@ -10,6 +11,10 @@ const nodes = {
   heading: {
     ...defaultNodes.heading,
     render: Heading,
+  },
+  link: {
+    ...defaultNodes.link,
+    render: MarkdocLink,
   },
   table: {
     ...defaultNodes.table,

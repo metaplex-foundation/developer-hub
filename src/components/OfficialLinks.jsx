@@ -13,7 +13,7 @@ import {
 
 const websiteLinks = [
   { name: 'Main Website', url: 'https://metaplex.com/' },
-  { name: 'Documentation', url: 'https://developers.metaplex.com/' },
+  { name: 'Documentation', url: 'https://metaplex.com/docs/' },
   { name: 'Github', url: 'https://github.com/metaplex-foundation' },
 ]
 

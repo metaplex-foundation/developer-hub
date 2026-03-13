@@ -127,7 +127,7 @@ npm link
 
 If you encounter any issues:
 
-1. Check the [documentation](https://developers.metaplex.com)
+1. Check the [documentation](https://metaplex.com/docs)
 2. Search [GitHub issues](https://github.com/metaplex-foundation/cli/issues)
 3. Join the [Discord community](https://discord.gg/metaplex)
 

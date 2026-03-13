@@ -43,7 +43,7 @@ export function Header({ page }) {
           <div className="flex flex-shrink-0 flex-col">
             <Link href={getLocalizedHref('/', locale)}>
               <img
-                src="/metaplex-logo-white.png"
+                src="/docs/metaplex-logo-white.png"
                 alt="Metaplex"
                 className="h-4 w-auto no-lightense"
               />

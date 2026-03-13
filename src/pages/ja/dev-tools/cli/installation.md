@@ -129,7 +129,7 @@ npm link
 
 問題が発生した場合：
 
-1. [ドキュメント](https://developers.metaplex.com)を確認
+1. [ドキュメント](https://metaplex.com/docs)を確認
 2. [GitHubの課題](https://github.com/metaplex-foundation/cli/issues)を検索
 3. [Discordコミュニティ](https://discord.gg/metaplex)に参加
 

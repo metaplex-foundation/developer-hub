@@ -242,6 +242,17 @@ const redirectRules = {
   },
 }
 
+/**
+ * Create a basePath-aware redirect.
+ * Using request.nextUrl.clone() ensures basePath is automatically included
+ * in the redirect URL. new URL(path, request.url) does NOT include basePath.
+ */
+function redirectTo(request, path, status = 308) {
+  const url = request.nextUrl.clone()
+  url.pathname = path
+  return NextResponse.redirect(url, status)
+}
+
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
@@ -249,12 +260,12 @@ export function middleware(request) {
   // This ensures users visiting /en/core are redirected to /core
   if (pathname === '/en' || pathname.startsWith('/en/')) {
     const newPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
-    return NextResponse.redirect(new URL(newPath, request.url), 308)
+    return redirectTo(request, newPath)
   }
 
   // Handle standalone page redirects first
   if (standaloneRedirects[pathname]) {
-    return NextResponse.redirect(new URL(standaloneRedirects[pathname], request.url), 308)
+    return redirectTo(request, standaloneRedirects[pathname])
   }
 
   // Handle legacy redirects FIRST (specific sub-path redirects)
@@ -264,13 +275,13 @@ export function middleware(request) {
     if (pathname.startsWith(rootPath)) {
       if (typeof rule === 'string') {
         // Direct redirect
-        return NextResponse.redirect(new URL(rule, request.url), 308)
+        return redirectTo(request, rule)
       } else if (typeof rule === 'object') {
         // Nested redirects
         const subPath = pathname.slice(rootPath.length) || '/'
         const destination = rule[subPath]
         if (destination) {
-          return NextResponse.redirect(new URL(destination, request.url), 308)
+          return redirectTo(request, destination)
         }
       }
     }
@@ -282,7 +293,7 @@ export function middleware(request) {
   for (const product of smartContractRedirects) {
     if (pathname === `/${product}` || pathname.startsWith(`/${product}/`)) {
       const newPath = pathname.replace(`/${product}`, `/smart-contracts/${product}`)
-      return NextResponse.redirect(new URL(newPath, request.url), 308)
+      return redirectTo(request, newPath)
     }
   }
 
@@ -292,7 +303,7 @@ export function middleware(request) {
   for (const product of devToolsRedirects) {
     if (pathname === `/${product}` || pathname.startsWith(`/${product}/`)) {
       const newPath = pathname.replace(`/${product}`, `/dev-tools/${product}`)
-      return NextResponse.redirect(new URL(newPath, request.url), 308)
+      return redirectTo(request, newPath)
     }
   }
 
@@ -310,14 +321,14 @@ export function middleware(request) {
       for (const product of smartContractRedirects) {
         if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/smart-contracts/${product}`)
-          return NextResponse.redirect(new URL(newPath, request.url), 308)
+          return redirectTo(request, newPath)
         }
       }
       // Dev tools redirects for localized paths
       for (const product of devToolsRedirects) {
         if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
-          return NextResponse.redirect(new URL(newPath, request.url), 308)
+          return redirectTo(request, newPath)
         }
       }
       // Redirect /lang/guides/* to /lang/solana/* (path rename)
@@ -337,7 +348,7 @@ export function middleware(request) {
       !pathname.startsWith('/api') &&
       !pathname.includes('.')) {
     const url = request.nextUrl.clone()
-    url.pathname = `/en${pathname}`
+    url.pathname = `/en${pathname === '/' ? '' : pathname}`
     return NextResponse.rewrite(url)
   }
 
@@ -346,6 +357,8 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
+    // Explicitly match the root path (basePath root may not match the regex below)
+    '/',
     // Match all paths except static files, _next, and api
     '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
