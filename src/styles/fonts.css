@@ -11,7 +11,7 @@
   font-display: block;
   font-style: normal;
   font-named-instance: 'Regular';
-  src: url('/fonts/Inter-roman.var.woff2') format('woff2');
+  src: url('/docs/fonts/Inter-roman.var.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';
@@ -19,5 +19,5 @@
   font-display: block;
   font-style: italic;
   font-named-instance: 'Italic';
-  src: url('/fonts/Inter-italic.var.woff2') format('woff2');
+  src: url('/docs/fonts/Inter-italic.var.woff2') format('woff2');
 }
