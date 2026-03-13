@@ -39,12 +39,12 @@ howToTools:
 **Freeze Delegateプラグイン**は**オーナー管理プラグイン**であり、アセットに適用するにはオーナーの署名が必要です。
 このプラグインにより、**delegateがアセットをフリーズおよび解凍し、転送を防止**できます。アセットオーナーまたはプラグインauthorityは、アセットがフリーズされている場合を除き、いつでもこのプラグインを取り消すことができます（フリーズされている場合は、取り消す前に解凍する必要があります）。
 **このプラグインの使用は軽量**で、アセットのフリーズ/解凍はプラグインデータ内のブール値を変更するだけです（唯一の引数はFrozen: boolです）。
-_詳細は[こちら](/smart-contracts/core/plugins/freeze-delegate)をご覧ください_
+_詳細は[Freeze Delegateプラグインページ](/smart-contracts/core/plugins/freeze-delegate)をご覧ください_
 ### Attributeプラグイン
 **Attributeプラグイン**は**authority管理プラグイン**であり、アセットに適用するにはauthorityの署名が必要です。コレクションに含まれるアセットの場合、アセットのauthorityフィールドはコレクションアドレスで占有されているため、コレクションauthorityがauthorityとして機能します。
 このプラグインにより、**データをアセットに直接保存でき、オンチェーンのattributesやtraitsとして機能**します。これらのtraitsは、mpl-programのようにオフチェーンに保存されないため、オンチェーンプログラムから直接アクセスできます。
 **このプラグインはAttributeListフィールドを受け入れ**、keyとvalueのペアの配列で構成され、両方とも文字列です。
-_詳細は[こちら](/smart-contracts/core/plugins/attribute)をご覧ください_
+_詳細は[Attributeプラグインページ](/smart-contracts/core/plugins/attribute)をご覧ください_
 ### プログラムロジック
 簡単にするため、この例にはステーキングプログラムが意図したとおりに動作するために不可欠な**stake**と**unstake**関数の2つの命令のみが含まれています。蓄積されたポイントを利用するための**spendPoint**命令などの追加命令を追加することもできますが、これは読者の実装に委ねます。
 _StakeとUnstake関数の両方が、前述のプラグインを異なる方法で利用します_。
@@ -76,7 +76,7 @@ import { base58 } from '@metaplex-foundation/umi/serializers';
 ### UmiとCore SDKの概要
 このガイドでは、**Umi**と**Core SDK**の両方を使用して必要なすべての命令を作成します。
 **UmiはSolanaプログラム用のJavaScriptクライアントを構築および使用するためのモジュラーフレームワーク**です。コアインターフェースのセットを定義するゼロ依存ライブラリを提供し、ライブラリが特定の実装から独立して動作できるようにします。
-_詳細については、[こちら](/dev-tools/umi/getting-started)で概要を確認できます_
+_詳細については、[Umi入門ガイド](/dev-tools/umi/getting-started)で概要を確認できます_
 **この例の基本的なUmiセットアップは次のようになります**：
 ```typescript
 const umi = createUmi("https://api.devnet.solana.com", "finalized")

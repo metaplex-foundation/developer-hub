@@ -11,7 +11,7 @@ description: 初始化MPL-Hybrid NFT数据
 {% totem %}
 {% totem-accordion title="链上MPL-Hybrid NFT数据结构" %}
 
-MPL-Hybrid NFT数据的链上账户结构 [链接](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
+MPL-Hybrid NFT数据的链上账户结构 [查看源代码](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/nft_data.rs)
 
 | 名称           | 类型   | 大小 | 描述                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

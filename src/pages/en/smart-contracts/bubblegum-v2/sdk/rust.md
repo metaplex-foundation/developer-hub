@@ -1,8 +1,32 @@
 ---
 title: MPL-Bubblegum V2 Rust SDK
-metaTitle: Rust SDK | MPL-Bubblegum V2
-description: Learn how to set up your project to run the MPL-Bubblegum V2 Rust SDK.
+metaTitle: Rust SDK - MPL-Bubblegum V2 - Metaplex
+description: Learn how to install and use the MPL-Bubblegum V2 Rust SDK. Covers local scripts with instruction builders and CPI integration for on-chain programs.
+created: '01-15-2025'
+updated: '02-24-2026'
+keywords:
+  - Rust SDK
+  - MPL-Bubblegum Rust
+  - Cargo
+  - Solana program
+  - CPI
+  - instruction builder
+about:
+  - Compressed NFTs
+  - Rust SDK
+  - Solana programs
+proficiencyLevel: Beginner
+programmingLanguage:
+  - Rust
 ---
+
+## Summary
+
+The **MPL-Bubblegum V2 Rust SDK** provides instruction builders for local scripts and CPI builders for on-chain programs interacting with compressed NFTs.
+
+- Install via Cargo: `cargo add mpl-bubblegum`
+- Use `Builder` types for local scripts and `CpiBuilder` types for on-chain CPI
+- Full instruction reference available on docs.rs
 
 Metaplex provides a Rust library that can be used to interact with the MPL-Bubblegum program. The Rust library can be used in Rust scripts/builds as well as onchain programs via CPI instructions.
 
@@ -28,7 +52,7 @@ For local scripts, we recommend using the `Builder` versions of all the instruct
 
 A list of all Bubblegum instructions can be found here: [MPL-Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/guides/rust/metaplex-rust-sdks) page.
+For a more comprehensive guide on using Rust check out the [Metaplex Rust SDKs Guide](/solana/rust/metaplex-rust-sdks) page.
 
 #### CreateTreeConfigBuilder - Example
 
@@ -96,7 +120,7 @@ Performing CPI instructions from your own programs can be achieved easily by usi
 
 A list of all Bubblegum instructions can be found here: [Metaplex Bubblegum - Rust Instructions](https://docs.rs/mpl-bubblegum/latest/mpl_bubblegum/instructions/index.html)
 
-For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/guides/rust/how-to-cpi-into-a-metaplex-program) page.
+For a more comprehensive guide using Metaplex crates to create CPI instructions check out the [How to CPI into a Metaplex Program guide](/solana/rust/how-to-cpi-into-a-metaplex-program) page.
 
 #### CreateTreeConfigCpiBuilder - Example
 

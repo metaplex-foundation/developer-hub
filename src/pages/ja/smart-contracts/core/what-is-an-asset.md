@@ -81,12 +81,12 @@ Core Assetアカウントは、デジタルアセットの最小限のデータ�
 {% seperator h="6" /%}
 {% totem %}
 {% totem-accordion title="オンチェーンAssetアカウント構造" %}
-MPL Core Assetのオンチェーンアカウント構造。[リンク](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
+MPL Core Assetのオンチェーンアカウント構造。[GitHubで表示](https://github.com/metaplex-foundation/mpl-core/blob/ce5d16f2de3c0038caae81a8c6496420b1a0462a/programs/mpl-core/src/state/asset.rs#L19)
 | 名前             | 型              | サイズ | 説明                                                      |                                                                                                                            |
 | ---------------- | --------------- | ---- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | key              | u8              | 1    | アカウントタイプの識別子                                      |                                                                                                                            |
 | owner            | pubKey          | 32   | Assetの所有者                                          |                                                                                                                            |
-| update_authority | enum<publicKey> | 33   | 新しいAssetの権限またはCollectionID                  | [リンク](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
+| update_authority | enum<publicKey> | 33   | 新しいAssetの権限またはCollectionID                  | [UpdateAuthority列挙型](https://github.com/metaplex-foundation/mpl-core/blob/main/clients/rust/src/generated/types/update_authority.rs#L14) |
 | name             | string          | 36   | Assetの名前                                           |                                                                                                                            |
 | uri              | string          | 204  | オフチェーンデータを指すAssetのURI          |                                                                                                                            |
 | seq              | string          |      | 圧縮でのインデックス用シーケンス番号          |                                                                                                                            |

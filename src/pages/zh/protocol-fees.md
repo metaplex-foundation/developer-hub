@@ -6,6 +6,20 @@ description: Metaplex产品链上费用详情。
 
 Metaplex协议目前包含以下费用：
 
+## 代币发行
+
+特定链上资产发行的协议费用。
+
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
+\* 总池费用为0.9%：0.42%归流动性提供者，0.08%归Raydium。
+
 ## Genesis
 
 代币发行平台费用，用于Launch Pool操作。这些是按百分比收取的费用，适用于存款、取款和毕业。

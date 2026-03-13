@@ -2,7 +2,7 @@
 title: 如何创建利用 Merkle 树的代币领取智能合约
 metaTitle: 如何创建代币领取智能合约 | Token Metadata 指南
 description: 学习如何在 Solana 上使用 Anchor 创建利用 Merkle 树的代币领取智能合约！
-# 记得同时更新 /components/guides/index.js 中的日期
+# 记得同时更新 /components/products/guides/index.js 中的日期
 created: '01-13-2025'
 updated: '01-13-2025'
 ---

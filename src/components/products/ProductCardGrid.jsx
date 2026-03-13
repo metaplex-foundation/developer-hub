@@ -1,7 +1,7 @@
 import { getLocalizedHref } from '@/config/languages'
 import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import Link from 'next/link'
-import { anchorTokenMenuCategory, nftMenuCategory, tokenMenuCategory } from '../NavList'
+import { agentMenuCategory, anchorTokenMenuCategory, nftMenuCategory, tokenMenuCategory } from '../NavList'
 import { Card, CardContent } from '../ui/card'
 import { products as allProducts, productCategories } from './index'
 
@@ -53,6 +53,8 @@ export function ProductCardGrid({ category }) {
 
   if (category === 'Tokens') {
     items = tokenMenuCategory
+  } else if (category === 'Agents') {
+    items = agentMenuCategory;
   } else if (category === 'NFTs') {
     items = nftMenuCategory;
   } else if (category === 'Anchor') {
@@ -116,6 +118,7 @@ export function AllProductCardGrids() {
   const getCategoryName = (category) => {
     const categoryKeys = {
       Tokens: 'tokens',
+      Agents: 'agents',
       NFTs: 'nfts',
       'Smart Contracts': 'smartContracts',
       'Dev Tools': 'devTools',
@@ -127,6 +130,7 @@ export function AllProductCardGrids() {
   const getCategoryDescription = (category) => {
     const categoryKeys = {
       Tokens: 'tokens',
+      Agents: 'agents',
       NFTs: 'nfts',
       'Smart Contracts': 'smartContracts',
       'Dev Tools': 'devTools',
@@ -135,6 +139,8 @@ export function AllProductCardGrids() {
     const defaultDescriptions = {
       Tokens:
         'Create, read, update, burn, and transfer tokens on the Solana blockchain using Metaplex SDKs.',
+      Agents:
+        'Create, register, and run autonomous agents on Solana using Metaplex SDKs.',
       NFTs: 'Create, read, update, burn, and transfer NFTs on the Solana blockchain using Metaplex SDKs.',
       'Smart Contracts':
         'On-chain programs for creating and managing digital assets on Solana.',

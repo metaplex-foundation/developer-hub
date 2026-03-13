@@ -69,7 +69,7 @@ const auctionHouseSettings = {
 
 Auction Houseが適切に機能するために必要ないくつかのアカウントがあります。Auction Houseによって設定されると、権限はこれらのアカウントをリセットして、好みに応じて設定できます。
 
-Auction Houseプログラムによって作成および制御されるアカウントがいくつかあります。これらのアカウントはプログラム派生アドレス（PDA）であり、[こちら](https://solanacookbook.com/core-concepts/pdas.html)で詳しく読むことができます。これらは、これらのアカウントを設定するために使用できる2つの設定です：
+Auction Houseプログラムによって作成および制御されるアカウントがいくつかあります。これらのアカウントはプログラム派生アドレス（PDA）であり、[Solana Cookbook](https://solanacookbook.com/core-concepts/pdas.html)で詳しく読むことができます。これらは、これらのアカウントを設定するために使用できる2つの設定です：
 
 1. `auctionHouseFeeAccount`: ユーザーに代わってAuction House関連のトランザクションの支払いに資金を保存する手数料アカウントの公開鍵。
 

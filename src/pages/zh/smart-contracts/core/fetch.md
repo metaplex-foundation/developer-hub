@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 获取多个 Asset
-可以使用 `getProgramAccounts`（GPA）调用获取多个 Asset，这在 RPC 方面可能相当昂贵和缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/rpc-providers)。
+可以使用 `getProgramAccounts`（GPA）调用获取多个 Asset，这在 RPC 方面可能相当昂贵和缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/solana/rpcs-and-das)。
 ### 按所有者获取 Asset
 {% dialect-switcher title="按所有者获取 Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -287,7 +287,7 @@ pub async fn fetch_assets_by_update_authority() {
 {% /dialect-switcher %}
 ## DAS - 数字资产标准 API
 如果您使用启用了 DAS 的 RPC，您将能够利用索引 Asset 进行快速获取和数据检索。
-DAS 将索引从元数据、链下元数据、集合数据、插件（包括 Attributes）等所有内容。要了解更多关于 Metaplex DAS API 的信息，您可以[点击这里](/dev-tools/das-api)。除了通用的 DAS SDK，还创建了一个[针对 MPL Core 的扩展](/dev-tools/das-api/core-extension)，它直接返回正确的类型，以便进一步与 MPL Core SDK 一起使用。它还自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
+DAS 将索引从元数据、链下元数据、集合数据、插件（包括 Attributes）等所有内容。要了解更多关于 Metaplex DAS API 的信息，您可以[访问Metaplex DAS API页面](/dev-tools/das-api)。除了通用的 DAS SDK，还创建了一个[针对 MPL Core 的扩展](/dev-tools/das-api/core-extension)，它直接返回正确的类型，以便进一步与 MPL Core SDK 一起使用。它还自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
 以下是使用 DAS 获取 MPL Core Asset 返回数据的示例。
 ### FetchAsset 示例
 ```json
@@ -411,7 +411,7 @@ GPA 查询可能很昂贵。解决方案：
 | 需要特殊 RPC | 否 | 是 |
 ## 常见问题
 ### 获取多个 Asset 时应该使用 GPA 还是 DAS？
-尽可能使用 DAS。GPA 查询扫描所有程序账户，在主网上可能很慢且昂贵。DAS 提供更快的索引查询，并包含链下元数据。参见 [DAS RPC 提供商](/rpc-providers)了解兼容的端点。
+尽可能使用 DAS。GPA 查询扫描所有程序账户，在主网上可能很慢且昂贵。DAS 提供更快的索引查询，并包含链下元数据。参见 [DAS RPC 提供商](/solana/rpcs-and-das)了解兼容的端点。
 ### 如何获取 Asset 的链下元数据？
 `uri` 字段包含元数据 URL。单独获取它：
 ```ts

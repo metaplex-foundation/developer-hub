@@ -322,8 +322,8 @@ sugar guard show
 ### UI開発リソース
 
 - nextJS/React推奨
-- [Metaplex Umi](/umi)
-- [Metaplex Candy Machine SDK](/candy-machine)
+- [Metaplex Umi](/ja/dev-tools/umi)
+- [Metaplex Candy Machine SDK](/ja/smart-contracts/candy-machine)
 
 ### さらなる読み物
 - [Sugar CLIドキュメント](/ja/smart-contracts/candy-machine/sugar)

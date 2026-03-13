@@ -24,7 +24,7 @@ description: 監査と脆弱性の報告方法。
 
 この情報は、レポートをより迅速にトリアージするのに役立ちます。
 
-報奨金の対象となる場合もあります。詳細は[こちら](https://www.metaplex.com/bounty-program)で確認できます。
+報奨金の対象となる場合もあります。詳細は[Metaplex報奨金プログラムページ](https://www.metaplex.com/bounty-program)で確認できます。
 
 ## 監査
 
@@ -39,7 +39,7 @@ description: 監査と脆弱性の報告方法。
 | プロトコル              | 最後の主要な1回限り監査日 |
 | --------------------- | ----------------------------- |
 | Core                  | 2024-05-06                    |
-| Token Metadata        | 2025-01-21                    |
+| Token Metadata        | 2025-11-08                    |
 | Inscriptions          | 2024-01-16                    |
 | Bubblegum/Compression | 2025-05-12                    |
 | Trifle/Fusion         | 2023-04-13                    |

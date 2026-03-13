@@ -25,7 +25,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```
 
-このプラグインは、Metaplex DAS API仕様をサポートするあらゆるRPCで使用できます – 仕様をサポートするRPCは[RPCプロバイダーページ](/ja/rpc-providers)で見つけることができます。
+このプラグインは、Metaplex DAS API仕様をサポートするあらゆるRPCで使用できます – 仕様をサポートするRPCは[RPCプロバイダーページ](/ja/solana/rpcs-and-das)で見つけることができます。
 
 注意：エンドポイントでDAS APIを「有効化」するためにRPCプロバイダーに連絡する必要がある場合があります。
 

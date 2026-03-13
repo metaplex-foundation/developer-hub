@@ -102,6 +102,57 @@ export const tokenMenuCategory = [launchTokenMenuItem, createATokenMenuItem, min
 
 export const anchorTokenMenuCategory = [anchorCreateTokenMenuItem]
 
+export const agentMenuCategory = [
+  {
+    name: 'Skill',
+    headline: 'AI Agent Knowledge Base',
+    description: 'Give AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/skill',
+    localizedNavigation: {
+      ja: { name: 'スキル', headline: 'AIエージェントの知識ベース' },
+      ko: { name: '스킬', headline: 'AI 에이전트 지식 베이스' },
+      zh: { name: '技能', headline: 'AI代理的知识库' },
+    },
+  },
+  {
+    name: 'Register an Agent',
+    headline: 'Register an agent on the Solana agent registry.',
+    description: 'Register an autonomous agent on the Solana agent registry using Metaplex SDKs.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/register-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントを登録', headline: 'Solanaエージェントレジストリにエージェントを登録します。' },
+      ko: { name: '에이전트 등록', headline: 'Solana 에이전트 레지스트리에 에이전트를 등록합니다.' },
+      zh: { name: '注册代理', headline: '在Solana代理注册表上注册代理。' },
+    },
+  },
+  {
+    name: 'Read Agent Data',
+    headline: 'Read and verify agent identity on Solana.',
+    description: 'Read and verify agent identity data on Solana using Metaplex SDKs.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/run-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントデータを読み取る', headline: 'Solana上でエージェントIDを読み取り、検証します。' },
+      ko: { name: '에이전트 데이터 읽기', headline: 'Solana에서 에이전트 ID를 읽고 검증합니다.' },
+      zh: { name: '读取代理数据', headline: '在Solana上读取和验证代理身份。' },
+    },
+  },
+  {
+    name: 'Run an Agent',
+    headline: 'Delegate execution to run an autonomous agent.',
+    description: 'Set up an executive profile and delegate execution permissions to run an agent on Solana.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/run-an-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントを実行', headline: '実行を委任して自律エージェントを実行します。' },
+      ko: { name: '에이전트 실행', headline: '실행을 위임하여 자율 에이전트를 실행합니다.' },
+      zh: { name: '运行代理', headline: '委托执行以运行自主代理。' },
+    },
+  },
+]
+
 export const nftMenuCategory = [
   {
     name: 'Create A NFT',
@@ -173,10 +224,12 @@ const NavList = () => {
   const getTranslatedCategory = (category) => {
     const categoryMap = {
       'Tokens': t('tokens', 'Tokens'),
+      'Agents': t('agents', 'Agents'),
       'NFTs': t('nfts', 'NFTs'),
       'Programs': t('programs', 'Programs'),
       'Smart Contracts': t('smartContracts', 'Smart Contracts'),
       'Dev Tools': t('devTools', 'Dev Tools'),
+      'Solana': t('solana', 'Solana'),
     }
     return categoryMap[category] || category
   }
@@ -201,9 +254,11 @@ const NavList = () => {
         // Map categories to their index page paths
         const categoryPaths = {
           'Tokens': '/tokens',
+          'Agents': '/agents',
           'NFTs': '/nfts',
           'Smart Contracts': '/smart-contracts',
           'Dev Tools': '/dev-tools',
+          'Solana': '/guides',
         }
 
         const path = categoryPaths[item]

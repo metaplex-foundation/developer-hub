@@ -148,7 +148,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 ```
 {% /totem-accordion %}
 {% /totem %}
-**注意**: `walletAdapter`セクションは、`walletAdapter`がすでにインストールされセットアップされていることを前提として、Umiに接続するために必要なコードのみを提供します。包括的なガイドについては、[こちら](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください。
+**注意**: `walletAdapter`セクションは、`walletAdapter`がすでにインストールされセットアップされていることを前提として、Umiに接続するために必要なコードのみを提供します。包括的なガイドについては、[Wallet Adapterガイド](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md)を参照してください。
 ## Collectionのメタデータの作成
 ウォレットやExplorerでCollectionの認識可能な画像を表示するには、メタデータを保存するURIを作成する必要があります！
 ### 画像のアップロード

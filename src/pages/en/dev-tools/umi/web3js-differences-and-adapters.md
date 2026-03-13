@@ -211,7 +211,7 @@ The Solana runtime supports two transaction versions:
 - Legacy Transaction: Older transaction format with no additional benefit
 - 0 / Versioned Transaction: Added support for Address Lookup Tables
 
-**Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [here](https://solana.com/en/docs/advanced/versions)
+**Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [in the Solana Versioned Transactions docs](https://solana.com/en/docs/advanced/versions)
 
 For `umi` and `umi-web3js-adapters` we added support for both transaction types!
 

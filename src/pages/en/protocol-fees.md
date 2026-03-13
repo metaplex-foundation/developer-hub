@@ -6,6 +6,20 @@ description: Details of the onchain fees for Metaplex's products.
 
 The Metaplex Protocol currently includes the following fees:
 
+## Token Launches
+
+Protocol fees for launching specific types of onchain assets.
+
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
+\* Total pool fees are 0.9%: 0.42% goes to liquidity providers and 0.08% to Raydium.
+
 ## Genesis
 
 Token launch platform fees for different operations.

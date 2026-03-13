@@ -8,6 +8,6 @@ Below are the available SDKs for the MPL-Hybrid 404 program that guide you throu
 
 {% quick-links %}
 
-{% quick-link title="JavaScript SDK" icon="JavaScript" href="/mpl-hybrid/sdk/javascript" description="Get started with our MPL-Hybrid 404 JavaScript library based on the Umi framework." /%}
+{% quick-link title="JavaScript SDK" icon="JavaScript" href="/smart-contracts/mpl-hybrid/sdk/javascript" description="Get started with our MPL-Hybrid 404 JavaScript library based on the Umi framework." /%}
 
 {% /quick-links %}

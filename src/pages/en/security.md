@@ -24,7 +24,7 @@ Please include the requested information listed below (as much as you can provid
 
 This information will help us triage your report more quickly.
 
-You may also be eligible for a bounty. More details can be found [here](https://www.metaplex.com/bounty-program).
+You may also be eligible for a bounty. More details can be found [on the Metaplex Bounty Program page](https://www.metaplex.com/bounty-program).
 
 ## Audits
 
@@ -39,7 +39,7 @@ Large one-off audits are also performed when there are large changes to the code
 | Protocol              | Last major one-off audit date |
 | --------------------- | ----------------------------- |
 | Core                  | 2024-05-06                    |
-| Token Metadata        | 2025-01-21                    |
+| Token Metadata        | 2025-11-08                    |
 | Inscriptions          | 2024-01-16                    |
 | Bubblegum/Compression | 2025-05-12                    |
 | Trifle/Fusion         | 2023-04-13                    |

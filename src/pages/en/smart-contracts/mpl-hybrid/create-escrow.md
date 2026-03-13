@@ -6,9 +6,15 @@ description: Learn to create the MPL 404 Hybrid Escrow account that makes 404 sw
 
 ## Prerequisites
 
+<<<<<<< HEAD
 - A MPL Core Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
 - Core NFT Assets Minted to the Collection - [Link](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
-- An SPL Token created with required token amount. - [Link](/guides/javascript/how-to-create-a-solana-token)
+- An SPL Token created with required token amount. - [Link](/solana/javascript/how-to-create-a-solana-token)
+=======
+- A MPL Core Collection - [Create a Core Collection guide](/smart-contracts/core/guides/javascript/how-to-create-a-core-collection-with-javascript)
+- Core NFT Assets Minted to the Collection - [Create a Core NFT Asset guide](/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript)
+- An SPL Token created with required token amount. - [Create a Solana Token guide](/guides/javascript/how-to-create-a-solana-token)
+>>>>>>> main
 - An online storage of sequential metadata JSON files at a consistent gateway/uri.
 
 Initializing the escrow is the essential step that links an NFT collection with a fungible token. Before starting this step, you should have ready a Core collection address, a fungible token mint address, and a range of off-chain metadata URIs using numerically named, sequential files. The need for Base URI string consistency will limit some off-chain metadata options. Note that the authority of the escrow needs to match the authority of the collection to perform metadata updates. Additionally, because the escrow is funded, there is no need to be the token authority which allows collections to be backed by existing memecoins or other fungible assets.
@@ -20,7 +26,7 @@ The MPL Hybrid Escrow is the heart of the program which stores all information r
 {% totem %}
 {% totem-accordion title="On Chain MPL-404 Escrow Data Structure" %}
 
-The onchain account structure of an MPL-404 Escrow [Link](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
+The onchain account structure of an MPL-404 Escrow [on GitHub](https://github.com/metaplex-foundation/mpl-hybrid/blob/main/programs/mpl-hybrid/src/state/escrow.rs)
 
 | Name           | Type   | Size | Description                                      |     |
 | -------------- | ------ | ---- | ------------------------------------------------ | --- |

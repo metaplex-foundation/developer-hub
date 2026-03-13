@@ -394,7 +394,7 @@ import {
 
 const shardKeys = []
 for (let shardNumber = 0; shardNumber < 32; shardNumber += 1) {
-  k.push(findInscriptionShardPda(umi, { shardNumber }))
+  shardKeys.push(findInscriptionShardPda(umi, { shardNumber }))
 }
 
 const shards = await fetchAllInscriptionShard(umi, shardKeys)

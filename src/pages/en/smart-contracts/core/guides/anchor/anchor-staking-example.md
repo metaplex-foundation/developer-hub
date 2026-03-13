@@ -41,12 +41,12 @@ This program operates with a standard Anchor, leveraging a mono-file approach wh
 The **Freeze Delegate Plugin** is an **owner-managed plugin**, that means that it requires the owner's signature to be applied to the asset.
 This plugin allows the **delegate to freeze and thaw the asset, preventing transfers**. The asset owner or plugin authority can revoke this plugin at any time, except when the asset is frozen (in which case it must be thawed before revocation).
 **Using this plugin is lightweight**, as freezing/thawing the asset involves just changing a boolean value in the plugin data (the only argument being Frozen: bool).
-_Learn more about it [here](/smart-contracts/core/plugins/freeze-delegate)_
+_Learn more about it [on the Freeze Delegate Plugin page](/smart-contracts/core/plugins/freeze-delegate)_
 ### The Attribute Plugin
 The **Attribute Plugin** is an **authority-managed plugin**, that means that it requires the authority's signature to be applied to the asset. For an asset included in a collection, the collection authority serves as the authority since the asset's authority field is occupied by the collection address.
 This plugin allows for **data storage directly on the assets, functioning as on-chain attributes or traits**. These traits can be accessed directly by on-chain programs since they aren’t stored off-chain as it was for the mpl-token-metadata program.
 **This plugin accepts an AttributeList field**, which consists of an array of key and value pairs, both of which are strings.
-_Learn more about it [here](/smart-contracts/core/plugins/attribute)_
+_Learn more about it [on the Attribute Plugin page](/smart-contracts/core/plugins/attribute)_
 ### The Smart Contract Logic
 For simplicity, this example includes only two instructions: the **stake** and **unstake** functions since these are essential for a staking program to work as intended. While additional instructions, such as a **spendPoint** instruction, could be added to utilize accumulated points, this is left to the reader to implement.
 _Both the Stake and Unstake functions utilize, differently, the plugins introduced previously_.
@@ -79,7 +79,7 @@ For simplicity and the sake of this exercise, we’ll use a mono-file approach w
 In the account struct of all instructions, we will separate the Signer and the Payer. This is a standard procedure because PDAs cannot pay for account creation, so if the user wants a PDA to be the authority over the instruction, there need to be two different fields for it. While this separation isn't strictly necessary for our instructions, it's considered good practice.
 ### The Account Struct
 For this example we use the anchor flag from the mpl-core crate to directly deserialize the Asset and Collection account from the account struct and put some constraint on that
-_Learn more about it [here](/smart-contracts/core/using-core-in-anchor)_
+_Learn more about it [in Using Core in Anchor](/smart-contracts/core/using-core-in-anchor)_
 We're going to use a single account struct, `Stake`, for both the `stake` and `unstake` instructions since they use the same accounts and same constraints.
 ```rust
 #[derive(Accounts)]

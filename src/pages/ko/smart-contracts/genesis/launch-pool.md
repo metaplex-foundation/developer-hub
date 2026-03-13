@@ -1,16 +1,22 @@
 ---
 title: Launch Pool
-metaTitle: Genesis - Launch Pool | 공정한 토큰 배포 | Metaplex
-description: 사용자가 일정 기간 동안 예치하고 비례적으로 토큰을 받는 토큰 배포 방식입니다. 스나이핑 방지 설계를 통한 유기적인 가격 발견을 제공합니다.
+metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
+description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - launch pool
   - token distribution
   - fair launch
+  - fair launch crypto
   - proportional distribution
   - deposit window
   - price discovery
+  - token launchpad
+  - crowdsale
+  - token sale alternative
+  - SPL token launch
+  - on-chain token launch
 about:
   - Launch pools
   - Price discovery
@@ -36,12 +42,12 @@ faqs:
   - q: 여러 번 예치하면 어떻게 되나요?
     a: 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.
   - q: 사용자는 언제 토큰을 청구할 수 있나요?
-    a: 예치 기간이 끝나고 청구 기간이 열린 후(claimStartCondition으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 Transition이 실행되어야 합니다.
+    a: 예치 기간이 끝나고 청구 기간이 열린 후(claimStartCondition으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 triggerBehaviorsV2가 실행되어야 합니다.
   - q: Launch Pool과 Presale의 차이점은 무엇인가요?
     a: Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
 ---
 
-**Launch Pool**은 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 사용자는 일정 기간 동안 예치하고 총 예치금에서의 지분에 비례하여 토큰을 받습니다 - 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
+**Launch Pool**은 솔라나에서 공정한 토큰 출시를 위한 유기적인 가격 발견을 제공합니다. 기존 중앙화 토큰 판매와는 다른 온체인 토큰 배포 메커니즘으로 — 사용자는 일정 기간 동안 SOL을 예치하고 총 예치금에서의 지분에 비례하여 SPL 토큰을 받습니다. 스나이핑 없음, 프론트러닝 없음, 모두에게 공정한 배분. {% .lead %}
 
 {% callout title="학습 내용" %}
 이 가이드에서 다루는 내용:
@@ -53,7 +59,7 @@ faqs:
 
 ## 요약
 
-Launch Pool은 정해진 기간 동안 예치금을 받은 후 토큰을 비례적으로 배분합니다. 최종 토큰 가격은 총 예치금을 토큰 할당량으로 나누어 결정됩니다.
+Launch Pool은 정해진 기간 동안 예치금을 받은 후 토큰을 비례적으로 배분하는 크라우드세일 스타일의 토큰 출시 메커니즘입니다. 최종 토큰 가격은 총 예치금을 토큰 할당량으로 나누어 결정되며, 토큰 생성 이벤트(TGE)를 위한 투명한 온체인 가격 발견을 가능하게 합니다.
 
 - 사용자는 예치 기간 동안 SOL을 예치합니다 ({% fee product="genesis" config="launchPool" fee="deposit" /%} 수수료 적용)
 - 예치 기간 동안 출금 가능 ({% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료)
@@ -220,7 +226,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 ### 라이프사이클
 
 1. **예치 기간** - 사용자가 정해진 기간 동안 SOL을 예치
-2. **Transition** - End behavior 실행 (예: 수집된 SOL을 다른 bucket으로 전송)
+2. **`triggerBehaviorsV2`** - End behavior 실행 (예: 수집된 SOL을 다른 bucket으로 전송)
 3. **청구 기간** - 사용자가 예치 비중에 비례한 토큰을 청구
 
 ## 수수료
@@ -259,7 +265,7 @@ Launch Pool bucket은 예치금을 수집하고 토큰을 비례적으로 배분
 
 ### 3. Unlocked Bucket 추가
 
-Unlocked bucket은 Transition 후 Launch Pool에서 SOL을 받습니다.
+Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받습니다.
 
 {% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
@@ -301,13 +307,13 @@ Unlocked bucket은 Transition 후 Launch Pool에서 SOL을 받습니다.
 
 ## 관리자 작업
 
-### Transition 실행
+### `triggerBehaviorsV2` 실행
 
-예치가 종료된 후 Transition을 실행하여 수집된 SOL을 Unlocked bucket으로 이동합니다.
+예치가 종료된 후 `triggerBehaviorsV2`를 실행하여 수집된 SOL을 Unlocked bucket으로 이동합니다.
 
-{% code-tabs-imported from="genesis/transition_launch_pool_v2" frameworks="umi" filename="transitionLaunchPool" /%}
+{% code-tabs-imported from="genesis/trigger_launch_pool_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
-**이것이 중요한 이유:** Transition 없이는 수집된 SOL이 Launch Pool bucket에 잠겨 있습니다. 사용자는 여전히 토큰을 청구할 수 있지만, 팀은 모금된 자금에 접근할 수 없습니다.
+**이것이 중요한 이유:** `triggerBehaviorsV2`를 실행하지 않으면 수집된 SOL이 Launch Pool bucket에 잠겨 있습니다. 사용자는 여전히 토큰을 청구할 수 있지만, 팀은 모금된 자금에 접근할 수 없습니다.
 
 ## 레퍼런스
 
@@ -423,7 +429,7 @@ if (deposit) {
 - {% fee product="genesis" config="launchPool" fee="deposit" /%} 프로토콜 수수료가 예치와 출금 모두에 적용됩니다
 - 같은 사용자의 여러 예치금은 하나의 예치 계정에 누적됩니다
 - 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다
-- End behavior를 처리하려면 예치 종료 후 Transition이 실행되어야 합니다
+- End behavior를 처리하려면 예치 종료 후 `triggerBehaviorsV2`가 실행되어야 합니다
 - 사용자는 예치하려면 wSOL (래핑된 SOL)이 있어야 합니다
 
 ## FAQ
@@ -438,7 +444,7 @@ if (deposit) {
 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.
 
 ### 사용자는 언제 토큰을 청구할 수 있나요?
-예치 기간이 끝나고 청구 기간이 열린 후(`claimStartCondition`으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 Transition이 실행되어야 합니다.
+예치 기간이 끝나고 청구 기간이 열린 후(`claimStartCondition`으로 정의됨)에 가능합니다. End behavior를 처리하기 위해 먼저 `triggerBehaviorsV2`가 실행되어야 합니다.
 
 ### Launch Pool과 Presale의 차이점은 무엇인가요?
 Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로 가격을 발견합니다. Presale은 미리 정해진 고정 가격으로 상한까지 선착순 할당합니다.
@@ -451,7 +457,7 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 | **Deposit Window** | 사용자가 SOL을 예치하고 출금할 수 있는 기간 |
 | **Claim Window** | 사용자가 비례 토큰을 청구할 수 있는 기간 |
 | **End Behavior** | 예치 기간 종료 후 실행되는 자동 작업 |
-| **Transition** | End behavior를 처리하고 자금을 라우팅하는 명령어 |
+| **`triggerBehaviorsV2`** | End behavior를 처리하고 자금을 라우팅하는 명령어 |
 | **Proportional Distribution** | 총 예치금에서의 사용자 지분에 따른 토큰 할당 |
 | **Quote Token** | 사용자가 예치하는 토큰 (일반적으로 wSOL) |
 | **Base Token** | 배포되는 토큰 |
@@ -459,5 +465,6 @@ Launch Pool은 비례 배분과 함께 예치금을 기반으로 유기적으로
 ## 다음 단계
 
 - [Presale](/ko/smart-contracts/genesis/presale) - 고정 가격 토큰 판매
-- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 할당
-- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통한 출시 데이터 조회
+- [Uniform Price Auction](/ko/smart-contracts/genesis/uniform-price-auction) - 입찰 기반 토큰 오퍼링
+- [토큰 출시하기](/ko/tokens/launch-token) - 엔드투엔드 토큰 출시 가이드
+- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통한 런치 및 토큰 세일 데이터 조회

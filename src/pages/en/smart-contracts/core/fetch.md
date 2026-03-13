@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Fetch Multiple Assets
-Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/rpc-providers).
+Multiple Assets can either be fetched using a `getProgramAccounts` (GPA) call, which can be quite expensive and slow RPC-wise, or using the `Digital Asset Standard` API, which is faster but requires [specific RPC providers](/solana/rpcs-and-das).
 ### Fetch Assets By Owner
 {% dialect-switcher title="fetch Assets by Owner" %}
 {% dialect title="JavaScript" id="js" %}
@@ -287,7 +287,7 @@ pub async fn fetch_assets_by_update_authority() {
 {% /dialect-switcher %}
 ## DAS - Digital Asset Standard API
 If you use a DAS enabled RPC you'll be able to take advantage of indexed Assets for lighting fast fetches and data retrieval.
-DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [click here](/dev-tools/das-api). In addition to the general DAS SDK an [extension for MPL Core](/dev-tools/das-api/core-extension) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for DAS-to-Core type conversions.
+DAS will index everything from metadata, off chain metadata, collection data, plugins (including Attributes), and more. To learn more about the Metaplex DAS API you can [visit the Metaplex DAS API page](/dev-tools/das-api). In addition to the general DAS SDK an [extension for MPL Core](/dev-tools/das-api/core-extension) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for DAS-to-Core type conversions.
 Below is an example of returned data from fetching a MPL Core Asset with DAS.
 ### FetchAsset Example
 ```json
@@ -411,7 +411,7 @@ GPA queries can be expensive. Solutions:
 | Requires Special RPC | No | Yes |
 ## FAQ
 ### Should I use GPA or DAS for fetching multiple Assets?
-Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata. See [DAS RPC providers](/rpc-providers) for compatible endpoints.
+Use DAS whenever possible. GPA queries scan all program accounts and can be slow and expensive on mainnet. DAS provides indexed queries that are faster and include off-chain metadata. See [DAS RPC providers](/solana/rpcs-and-das) for compatible endpoints.
 ### How do I fetch an Asset's off-chain metadata?
 The `uri` field contains the metadata URL. Fetch it separately:
 ```ts

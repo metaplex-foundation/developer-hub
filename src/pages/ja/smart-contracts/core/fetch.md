@@ -95,7 +95,7 @@ pub async fn fetch_asset() {
 {% /dialect %}
 {% /dialect-switcher %}
 ## 複数のAssetの取得
-複数のAssetは、`getProgramAccounts`（GPA）呼び出しを使用して取得できます。これはRPC的にかなり高コストで遅くなる可能性がありますが、`Digital Asset Standard` APIを使用する方法もあります。こちらはより高速ですが、[特定のRPCプロバイダー](/rpc-providers)が必要です。
+複数のAssetは、`getProgramAccounts`（GPA）呼び出しを使用して取得できます。これはRPC的にかなり高コストで遅くなる可能性がありますが、`Digital Asset Standard` APIを使用する方法もあります。こちらはより高速ですが、[特定のRPCプロバイダー](/ja/solana/rpcs-and-das)が必要です。
 ### 所有者別Assetの取得
 {% dialect-switcher title="所有者別Assetの取得" %}
 {% dialect title="JavaScript" id="js" %}
@@ -287,7 +287,7 @@ pub async fn fetch_assets_by_update_authority() {
 {% /dialect-switcher %}
 ## DAS - Digital Asset Standard API
 DAS対応RPCを使用すると、インデックス化されたAssetを活用して超高速のフェッチとデータ取得が可能になります。
-DASはメタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（Attributesを含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しくは[こちら](/dev-tools/das-api)をご覧ください。一般的なDAS SDKに加えて、[MPL Core用の拡張機能](/dev-tools/das-api/core-extension)が作成されており、MPL Core SDKでさらに使用できる正しい型を直接返します。また、Collectionから継承されたAssetのプラグインを自動的に継承し、DASからCoreへの型変換関数も提供します。
+DASはメタデータ、オフチェーンメタデータ、コレクションデータ、プラグイン（Attributesを含む）など、すべてをインデックス化します。Metaplex DAS APIについて詳しくは[Metaplex DAS APIページ](/dev-tools/das-api)をご覧ください。一般的なDAS SDKに加えて、[MPL Core用の拡張機能](/dev-tools/das-api/core-extension)が作成されており、MPL Core SDKでさらに使用できる正しい型を直接返します。また、Collectionから継承されたAssetのプラグインを自動的に継承し、DASからCoreへの型変換関数も提供します。
 以下は、DASでMPL Core Assetを取得した際に返されるデータの例です。
 ### FetchAssetの例
 ```json
@@ -411,7 +411,7 @@ GPAクエリはコストがかかる場合があります。解決策：
 | 特別なRPCが必要 | いいえ | はい |
 ## FAQ
 ### 複数のAssetを取得する場合、GPAとDASのどちらを使うべきですか？
-可能な限りDASを使用してください。GPAクエリはすべてのプログラムアカウントをスキャンするため、メインネットでは遅くコストがかかる可能性があります。DASはより高速でオフチェーンメタデータも含むインデックスクエリを提供します。互換性のあるエンドポイントについては[DAS RPCプロバイダー](/rpc-providers)を参照してください。
+可能な限りDASを使用してください。GPAクエリはすべてのプログラムアカウントをスキャンするため、メインネットでは遅くコストがかかる可能性があります。DASはより高速でオフチェーンメタデータも含むインデックスクエリを提供します。互換性のあるエンドポイントについては[DAS RPCプロバイダー](/ja/solana/rpcs-and-das)を参照してください。
 ### Assetのオフチェーンメタデータはどうやって取得しますか？
 `uri`フィールドにメタデータURLが含まれています。別途取得してください：
 ```ts

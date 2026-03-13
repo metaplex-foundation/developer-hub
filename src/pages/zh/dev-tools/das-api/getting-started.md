@@ -25,7 +25,7 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 const umi = createUmi("exampleDasProvider.com").use(dasApi());
 ```
 
-该插件可与任何支持 Metaplex DAS API 规范的 RPC 一起使用 – 支持该规范的 RPC 可以在 [RPC 提供商页面](/zh/rpc-providers)找到。
+该插件可与任何支持 Metaplex DAS API 规范的 RPC 一起使用 – 支持该规范的 RPC 可以在 [RPC 提供商页面](/zh/solana/rpcs-and-das)找到。
 
 注意：您可能需要联系您的 RPC 提供商在您的端点上"启用"DAS API。
 

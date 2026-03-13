@@ -183,7 +183,7 @@ let collection = match &ctx.accounts.collection {
 ```
 **注意**: ご覧のとおり、このアプローチは`authority`、`owner`、`update_authority`などの他のオプションアカウントでも繰り返されます。
 必要なすべてのアカウントを準備した後、それらを`CreateV2CpiBuilder`に渡し、`.invoke()`を使用して命令を実行するか、署名者シードを使用する必要がある場合は`.invoke_signed()`を使用します。
-Metaplex CPIビルダーの動作の詳細については、この[ドキュメント](/guides/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)を参照してください
+Metaplex CPIビルダーの動作の詳細については、この[ドキュメント](/solana/rust/how-to-cpi-into-a-metaplex-program#using-metaplex-rust-transaction-cpi-builders)を参照してください
 ### 追加アクション
 次に進む前に、`FreezeDelegate`プラグインや`AppData`外部プラグインなどのプラグインや外部プラグインを既に含めた状態でアセットを作成したい場合はどうすればよいでしょうか？その方法を説明します。
 まず、追加で必要なすべてのインポートを追加しましょう：

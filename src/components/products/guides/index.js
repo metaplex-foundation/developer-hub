@@ -2,216 +2,190 @@ import { documentationSection } from '@/shared/sections';
 import { BookOpenIcon } from '@heroicons/react/24/outline';
 
 export const guides = {
-  name: 'Guides',
+  name: 'Solana',
   headline: 'Guides for the Solana Blockchain',
   description: 'Guides for the Solana Blockchain.',
-  path: 'guides',
-  navigationMenuCatergory: 'Guides',
+  path: 'solana',
+  navigationMenuCatergory: 'Solana',
   icon: <BookOpenIcon className="text-green-500" />,
   github: 'https://github.com/metaplex-foundation/mpl-core',
   className: 'accent-green',
   sections: [
     {
-      ...documentationSection('guides'),
+      ...documentationSection('solana'),
       navigation: [
         {
           title: 'Solana Basics',
           links: [
             {
               title: 'What is Solana?',
-              href: '/guides/what-is-solana',
+              href: '/solana/what-is-solana',
               created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
-              title: 'Validators and Staking',
-              href: '/guides/validators',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              title: 'Understanding Solana Accounts',
+              href: '/solana/understanding-solana-accounts',
+              created: '02-04-2026',
+              updated: null,
             },
             {
-              title: 'RPCs and DAS',
-              href: '/guides/rpcs-and-das',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              title: 'Solana Keypairs and Wallets',
+              href: '/solana/solana-keypairs-and-wallets',
+              created: '02-04-2026',
+              updated: null,
+            },
+            {
+              title: 'Solana Transaction Fundamentals',
+              href: '/solana/solana-transaction-fundamentals',
+              created: '02-04-2026',
+              updated: null,
             },
             {
               title: 'Solana Programs',
-              href: '/guides/solana-programs',
+              href: '/solana/solana-programs',
               created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
               title: 'Understanding PDAs',
-              href: '/guides/understanding-pdas',
+              href: '/solana/understanding-pdas',
               created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              updated: null,
+            },
+            {
+              title: 'Validators and Staking',
+              href: '/solana/validators',
+              created: '2021-10-01',
+              updated: null,
+            },
+            {
+              title: 'RPCs and DAS',
+              href: '/solana/rpcs-and-das',
+              created: '2021-10-01',
+              updated: null,
+            },
+            {
+              title: 'Understanding Programs',
+              href: '/solana/understanding-programs',
+              created: '2021-10-01',
+              updated: null,
+            },
+            {
+              title: 'SPL Tokens and Token Programs',
+              href: '/solana/spl-tokens-and-token-programs',
+              created: '02-06-2026',
+              updated: null,
+            },
+            {
+              title: 'Compute Units and Priority Fees',
+              href: '/solana/compute-units-and-priority-fees',
+              created: '02-04-2026',
+              updated: null,
+            },
+          ],
+        },
+        {
+          title: 'Getting Started',
+          links: [
+            {
+              title: 'Solana CLI Essentials',
+              href: '/solana/solana-cli-essentials',
+              created: '02-04-2026',
+              updated: null,
+            },
+            {
+              title: 'Airdrop SOL for Development',
+              href: '/solana/airdrop-sol-for-development',
+              created: '02-04-2026',
+              updated: null,
+            },
+            {
+              title: 'Working with Devnet and Testnet',
+              href: '/solana/working-with-devnet-and-testnet',
+              created: '02-04-2026',
+              updated: null,
+            },
+            {
+              title: 'Using Solana Explorers',
+              href: '/solana/using-solana-explorers',
+              created: '02-06-2026',
+              updated: null,
             },
             {
               title: 'Setup a Local Validator',
-              href: '/guides/setup-a-local-validator',
+              href: '/solana/setup-a-local-validator',
               created: '2021-11-6',
-              updated: null, // null means it's never been updated
+              updated: null,
+            },
+            {
+              title: 'Grind a Vanity Public Key on Solana',
+              href: '/solana/grind-vanity-public-key',
+              created: '02-04-2026',
+              updated: null,
             },
             {
               title: 'How to Diagnose Transaction Errors on Solana',
-              href: '/guides/general/how-to-diagnose-solana-transaction-errors',
+              href: '/solana/general/how-to-diagnose-solana-transaction-errors',
               created: '2024-08-29',
-              updated: null, // null means it's never been updated
-            },
-          ],
-        },
-        {
-          title: 'General',
-          links: [
-            {
-              title: 'Creating an NFT Collection With Candy Machine',
-              href: '/candy-machine/guides/create-an-nft-collection-on-solana-with-candy-machine',
-            },
-            {
-              title: 'Create deterministic Metadata with Turbo',
-              href: '/guides/general/create-deterministic-metadata-with-turbo',
-            },
-            {
-              title: 'The Payer-Authority Pattern',
-              href: '/guides/general/payer-authority-pattern',
-            },
-            {
-              title: 'Create a claim based airdrop using Gumdrop',
-              href: '/guides/general/spl-token-claim-airdrop-using-gumdrop',
-              created: '2025-01-06',
-              updated: null, // null means it's never been updated
-            }
-          ]
-        },
-        {
-          title: 'Javascript',
-          links: [
-            {
-              title: 'Creating an NFT',
-              href: '/guides/javascript/how-to-create-an-nft-on-solana',
-              created: '06-24-2024',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
               title: 'How to Create a Solana Token',
-              href: '/guides/javascript/how-to-create-a-solana-token',
+              href: '/solana/javascript/how-to-create-a-solana-token',
               created: '2024-06-16',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'How to Add Metadata to a Solana Token',
-              href: '/guides/javascript/how-to-add-metadata-to-spl-tokens',
-              created: '2024-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Transferring Tokens',
-              href: '/guides/javascript/how-to-transfer-spl-tokens-on-solana',
-              created: '2024-06-16',
-              updated: '06-22-2024', // null means it's never been updated
+              updated: null,
             },
             {
               title: 'Transferring SOL',
-              href: '/guides/javascript/how-to-transfer-sol-on-solana',
+              href: '/solana/javascript/how-to-transfer-sol-on-solana',
               created: '2024-06-16',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
-              title: 'Optimal transaction landing using umi',
-              href: '/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
-              created: '2024-12-01',
-              updated: null, // null means it's never been updated
+              title: 'Transferring Tokens',
+              href: '/solana/javascript/how-to-transfer-spl-tokens-on-solana',
+              created: '2024-06-16',
+              updated: '06-22-2024',
             },
-            {
-              title: 'Serializing and Deserializing Transactions',
-              href: '/umi/guides/serializing-and-deserializing-transactions',
-            }
           ],
         },
         {
-          title: 'Rust',
+          title: 'Metaplex Development',
           links: [
             {
+              title: 'Creating an NFT',
+              href: '/solana/javascript/how-to-create-an-nft-on-solana',
+              created: '06-24-2024',
+              updated: null,
+            },
+            {
+              title: 'The Payer-Authority Pattern',
+              href: '/solana/general/payer-authority-pattern',
+            },
+            {
               title: 'Getting Started with Rust',
-              href: '/guides/rust/getting-started-with-rust',
+              href: '/solana/rust/getting-started-with-rust',
               created: '2021-10-01',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
               title: 'Metaplex Rust SDKs',
-              href: '/guides/rust/metaplex-rust-sdks',
+              href: '/solana/rust/metaplex-rust-sdks',
               created: '07-01-2024',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
             {
               title: 'CPI into a Metaplex Program',
-              href: '/guides/rust/how-to-cpi-into-a-metaplex-program',
+              href: '/solana/rust/how-to-cpi-into-a-metaplex-program',
               created: '07-01-2024',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
-          ],
-        },
-        {
-          title: 'Templates',
-          links: [
             {
               title: 'NextJs Template',
-              href: '/guides/templates/metaplex-nextjs-tailwind-template',
+              href: '/solana/templates/metaplex-nextjs-tailwind-template',
               created: '2024-09-04',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'MPL-404 Hybrid UI Template',
-              href: '/mpl-hybrid/guides/mpl-404-hybrid-ui-template',
-              created: '2024-12-16',
-              updated: null, // null means it's never been updated
-            },
-          ],
-        },
-        {
-          title: 'Metaplex Program Guides',
-          links: [
-            {
-              title: 'Bubblegum',
-              href: '/bubblegum/guides/',
-              created: '2024-11-13',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Core',
-              href: '/core/guides/',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Candy Machine',
-              href: '/candy-machine/guides/',
-              created: '2021-10-01',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'Core Candy Machine',
-              href: '/core-candy-machine/guides/',
-              created: '2024-09-20',
-              updated: null, // null means it's never been updated
-            },
-            {
-              title: 'MPL-Hybrid / MPL-404',
-              href: '/mpl-hybrid/guides',
-              created: '2025-01-06',
-              updated: null, // null means it's never been updated
-            },
-          ],
-        },
-        {
-          title: 'Translated Guides',
-          links: [
-            {
-              title: 'Japanese 日本語',
-              href: '/guides/translated/japanese',
-              created: '2024-08-14',
-              updated: null, // null means it's never been updated
+              updated: null,
             },
           ],
         },
@@ -224,42 +198,39 @@ export const guides = {
       description: 'Guides for the Solana Blockchain.',
       sections: {
         'Solana Basics': 'Solana Basics',
-        'General': 'General',
-        'Javascript': 'Javascript',
-        'Rust': 'Rust',
-        'Templates': 'Templates',
-        'Metaplex Program Guides': 'Metaplex Program Guides',
+        'Getting Started': 'Getting Started',
+        'Metaplex Development': 'Metaplex Development',
         'Translated Guides': 'Translated Guides'
       },
       links: {
         'What is Solana?': 'What is Solana?',
-        'Validators and Staking': 'Validators and Staking',
-        'RPCs and DAS': 'RPCs and DAS',
+        'Understanding Solana Accounts': 'Understanding Solana Accounts',
+        'Solana Keypairs and Wallets': 'Solana Keypairs and Wallets',
+        'Solana Transaction Fundamentals': 'Solana Transaction Fundamentals',
         'Solana Programs': 'Solana Programs',
         'Understanding PDAs': 'Understanding PDAs',
+        'Validators and Staking': 'Validators and Staking',
+        'RPCs and DAS': 'RPCs and DAS',
+        'Understanding Programs': 'Understanding Programs',
+        'SPL Tokens and Token Programs': 'SPL Tokens and Token Programs',
+        'Compute Units and Priority Fees': 'Compute Units and Priority Fees',
+        'Solana CLI Essentials': 'Solana CLI Essentials',
+        'Airdrop SOL for Development': 'Airdrop SOL for Development',
+        'Working with Devnet and Testnet': 'Working with Devnet and Testnet',
+        'Using Solana Explorers': 'Using Solana Explorers',
         'Setup a Local Validator': 'Setup a Local Validator',
+        'Grind a Vanity Public Key on Solana': 'Grind a Vanity Public Key on Solana',
         'How to Diagnose Transaction Errors on Solana': 'How to Diagnose Transaction Errors on Solana',
-        'Creating an NFT Collection With Candy Machine': 'Creating an NFT Collection With Candy Machine',
-        'Create deterministic Metadata with Turbo': 'Create deterministic Metadata with Turbo',
-        'The Payer-Authority Pattern': 'The Payer-Authority Pattern',
-        'Create a claim based airdrop using Gumdrop': 'Create a claim based airdrop using Gumdrop',
-        'Creating an NFT': 'Creating an NFT',
+        'Create a Solana Token': 'Create a Solana Token',
         'How to Create a Solana Token': 'How to Create a Solana Token',
-        'How to Add Metadata to a Solana Token': 'How to Add Metadata to a Solana Token',
-        'Transferring Tokens': 'Transferring Tokens',
         'Transferring SOL': 'Transferring SOL',
-        'Optimal transaction landing using umi': 'Optimal transaction landing using umi',
-        'Serializing and Deserializing Transactions': 'Serializing and Deserializing Transactions',
+        'Transferring Tokens': 'Transferring Tokens',
+        'Creating an NFT': 'Creating an NFT',
+        'The Payer-Authority Pattern': 'The Payer-Authority Pattern',
         'Getting Started with Rust': 'Getting Started with Rust',
         'Metaplex Rust SDKs': 'Metaplex Rust SDKs',
         'CPI into a Metaplex Program': 'CPI into a Metaplex Program',
         'NextJs Template': 'NextJs Template',
-        'MPL-404 Hybrid UI Template': 'MPL-404 Hybrid UI Template',
-        'Bubblegum': 'Bubblegum',
-        'Core': 'Core',
-        'Candy Machine': 'Candy Machine',
-        'Core Candy Machine': 'Core Candy Machine',
-        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': 'Japanese 日本語'
       }
     },
@@ -268,42 +239,39 @@ export const guides = {
       description: 'Solanaブロックチェーンのガイド。',
       sections: {
         'Solana Basics': 'Solanaの基本',
-        'General': '一般',
-        'Javascript': 'JavaScript',
-        'Rust': 'Rust',
-        'Templates': 'テンプレート',
-        'Metaplex Program Guides': 'Metaplexプログラムガイド',
+        'Getting Started': 'はじめに',
+        'Metaplex Development': 'Metaplex開発',
         'Translated Guides': '翻訳ガイド'
       },
       links: {
         'What is Solana?': 'Solanaとは？',
-        'Validators and Staking': 'バリデーターとステーキング',
-        'RPCs and DAS': 'RPCとDAS',
+        'Understanding Solana Accounts': 'Solanaアカウントの理解',
+        'Solana Keypairs and Wallets': 'Solanaキーペアとウォレット',
+        'Solana Transaction Fundamentals': 'Solanaトランザクションの基本',
         'Solana Programs': 'Solanaプログラム',
         'Understanding PDAs': 'PDAの理解',
+        'Validators and Staking': 'バリデーターとステーキング',
+        'RPCs and DAS': 'RPCとDAS',
+        'Understanding Programs': 'プログラムの理解',
+        'SPL Tokens and Token Programs': 'SPLトークンとトークンプログラム',
+        'Compute Units and Priority Fees': 'コンピュートユニットと優先手数料',
+        'Solana CLI Essentials': 'Solana CLIエッセンシャル',
+        'Airdrop SOL for Development': '開発用SOLのエアドロップ',
+        'Working with Devnet and Testnet': 'DevnetとTestnetの使い方',
+        'Using Solana Explorers': 'Solanaエクスプローラーの使い方',
         'Setup a Local Validator': 'ローカルバリデーターのセットアップ',
+        'Grind a Vanity Public Key on Solana': 'Solanaでバニティ公開鍵を生成',
         'How to Diagnose Transaction Errors on Solana': 'Solanaでトランザクションエラーを診断する方法',
-        'Creating an NFT Collection With Candy Machine': 'Candy MachineでNFTコレクションを作成',
-        'Create deterministic Metadata with Turbo': 'Turboで決定論的メタデータを作成',
-        'The Payer-Authority Pattern': 'Payer-Authorityパターン',
-        'Create a claim based airdrop using Gumdrop': 'Gumdropを使用したクレームベースのエアドロップを作成',
-        'Creating an NFT': 'NFTの作成',
+        'Create a Solana Token': 'Solanaトークンの作成',
         'How to Create a Solana Token': 'Solanaトークンの作成方法',
-        'How to Add Metadata to a Solana Token': 'Solanaトークンにメタデータを追加する方法',
-        'Transferring Tokens': 'トークンの転送',
         'Transferring SOL': 'SOLの転送',
-        'Optimal transaction landing using umi': 'Umiを使用した最適なトランザクション着地',
-        'Serializing and Deserializing Transactions': 'トランザクションのシリアライズとデシリアライズ',
+        'Transferring Tokens': 'トークンの転送',
+        'Creating an NFT': 'NFTの作成',
+        'The Payer-Authority Pattern': 'Payer-Authorityパターン',
         'Getting Started with Rust': 'Rustを始める',
         'Metaplex Rust SDKs': 'Metaplex Rust SDK',
         'CPI into a Metaplex Program': 'MetaplexプログラムへのCPI',
         'NextJs Template': 'NextJSテンプレート',
-        'MPL-404 Hybrid UI Template': 'MPL-404ハイブリッドUIテンプレート',
-        'Bubblegum': 'Bubblegum',
-        'Core': 'Core',
-        'Candy Machine': 'Candy Machine',
-        'Core Candy Machine': 'Core Candy Machine',
-        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': '日本語'
       }
     },
@@ -312,43 +280,81 @@ export const guides = {
       description: 'Solana 블록체인을 위한 가이드.',
       sections: {
         'Solana Basics': 'Solana 기초',
-        'General': '일반',
-        'Javascript': 'JavaScript',
-        'Rust': 'Rust',
-        'Templates': '템플릿',
-        'Metaplex Program Guides': 'Metaplex 프로그램 가이드',
+        'Getting Started': '시작하기',
+        'Metaplex Development': 'Metaplex 개발',
         'Translated Guides': '번역된 가이드'
       },
       links: {
         'What is Solana?': 'Solana란 무엇인가?',
-        'Validators and Staking': '검증자와 스테이킹',
-        'RPCs and DAS': 'RPC와 DAS',
+        'Understanding Solana Accounts': 'Solana 계정 이해하기',
+        'Solana Keypairs and Wallets': 'Solana 키페어와 지갑',
+        'Solana Transaction Fundamentals': 'Solana 트랜잭션 기초',
         'Solana Programs': 'Solana 프로그램',
         'Understanding PDAs': 'PDA 이해하기',
+        'Validators and Staking': '검증자와 스테이킹',
+        'RPCs and DAS': 'RPC와 DAS',
+        'Understanding Programs': '프로그램 이해하기',
+        'SPL Tokens and Token Programs': 'SPL 토큰과 토큰 프로그램',
+        'Compute Units and Priority Fees': '컴퓨트 유닛과 우선순위 수수료',
+        'Solana CLI Essentials': 'Solana CLI 필수 사항',
+        'Airdrop SOL for Development': '개발용 SOL 에어드롭',
+        'Working with Devnet and Testnet': 'Devnet과 Testnet 사용하기',
+        'Using Solana Explorers': 'Solana 익스플로러 사용하기',
         'Setup a Local Validator': '로컬 검증자 설정',
+        'Grind a Vanity Public Key on Solana': 'Solana에서 바니티 공개키 생성',
         'How to Diagnose Transaction Errors on Solana': 'Solana에서 트랜잭션 오류 진단 방법',
-        'Creating an NFT Collection With Candy Machine': 'Candy Machine으로 NFT 컬렉션 생성',
-        'Create deterministic Metadata with Turbo': 'Turbo로 결정론적 메타데이터 생성',
-        'The Payer-Authority Pattern': 'Payer-Authority 패턴',
-        'Create a claim based airdrop using Gumdrop': 'Gumdrop을 사용한 클레임 기반 에어드롭 생성',
-        'Creating an NFT': 'NFT 생성',
+        'Create a Solana Token': 'Solana 토큰 생성',
         'How to Create a Solana Token': 'Solana 토큰 생성 방법',
-        'How to Add Metadata to a Solana Token': 'Solana 토큰에 메타데이터 추가하는 방법',
-        'Transferring Tokens': '토큰 전송',
         'Transferring SOL': 'SOL 전송',
-        'Optimal transaction landing using umi': 'Umi를 사용한 최적의 트랜잭션 착지',
-        'Serializing and Deserializing Transactions': '트랜잭션 직렬화 및 역직렬화',
+        'Transferring Tokens': '토큰 전송',
+        'Creating an NFT': 'NFT 생성',
+        'The Payer-Authority Pattern': 'Payer-Authority 패턴',
         'Getting Started with Rust': 'Rust 시작하기',
         'Metaplex Rust SDKs': 'Metaplex Rust SDK',
         'CPI into a Metaplex Program': 'Metaplex 프로그램으로 CPI',
         'NextJs Template': 'NextJS 템플릿',
-        'MPL-404 Hybrid UI Template': 'MPL-404 하이브리드 UI 템플릿',
-        'Bubblegum': 'Bubblegum',
-        'Core': 'Core',
-        'Candy Machine': 'Candy Machine',
-        'Core Candy Machine': 'Core Candy Machine',
-        'MPL-Hybrid / MPL-404': 'MPL-Hybrid / MPL-404',
         'Japanese 日本語': '일본어 日本語'
+      }
+    },
+    zh: {
+      headline: 'Solana区块链指南',
+      description: 'Solana区块链指南。',
+      sections: {
+        'Solana Basics': 'Solana基础',
+        'Getting Started': '入门',
+        'Metaplex Development': 'Metaplex开发',
+        'Translated Guides': '翻译指南'
+      },
+      links: {
+        'What is Solana?': '什么是Solana？',
+        'Understanding Solana Accounts': '理解Solana账户',
+        'Solana Keypairs and Wallets': 'Solana密钥对和钱包',
+        'Solana Transaction Fundamentals': 'Solana交易基础',
+        'Solana Programs': 'Solana程序',
+        'Understanding PDAs': '理解PDA',
+        'Validators and Staking': '验证者和质押',
+        'RPCs and DAS': 'RPC和DAS',
+        'Understanding Programs': '理解程序',
+        'SPL Tokens and Token Programs': 'SPL代币和代币程序',
+        'Compute Units and Priority Fees': '计算单元和优先费用',
+        'Solana CLI Essentials': 'Solana CLI基础',
+        'Airdrop SOL for Development': '空投开发用SOL',
+        'Working with Devnet and Testnet': '使用Devnet和Testnet',
+        'Using Solana Explorers': '使用Solana浏览器',
+        'Setup a Local Validator': '设置本地验证者',
+        'Grind a Vanity Public Key on Solana': '在Solana上生成自定义公钥',
+        'How to Diagnose Transaction Errors on Solana': '如何诊断Solana交易错误',
+        'Create a Solana Token': '创建Solana代币',
+        'How to Create a Solana Token': '如何创建Solana代币',
+        'Transferring SOL': '转移SOL',
+        'Transferring Tokens': '转移代币',
+        'Creating an NFT': '创建NFT',
+        'The Payer-Authority Pattern': 'Payer-Authority模式',
+        'Getting Started with Rust': 'Rust入门',
+        'Metaplex Rust SDKs': 'Metaplex Rust SDK',
+        'CPI into a Metaplex Program': 'CPI到Metaplex程序',
+        'NextJs Template': 'NextJS模板',
+        'Japanese 日本語': '日语 日本語'
       }
     }
   }

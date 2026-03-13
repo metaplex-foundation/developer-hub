@@ -23,5 +23,5 @@ proficiencyLevel: Intermediate
 {% quick-link title="Appdata插件示例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/onchain-ticketing-with-appdata" description="了解如何利用Appdata插件创建票务平台" /%}
 {% quick-link title="Typescript质押示例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/javascript/web2-typescript-staking-example" description="了解如何仅使用Typescript为您的收藏品创建质押程序" /%}
 {% quick-link title="Anchor质押示例" icon="CodeBracketSquare" href="/smart-contracts/core/guides/anchor/anchor-staking-example" description="了解如何为您的收藏品创建质押智能合约" /%}
-{% quick-link title="使用Gumdrop创建基于声明的空投" icon="CodeBracketSquare" href="/guides/general/spl-token-claim-airdrop-using-gumdrop" description="了解如何使用Gumdrop创建基于声明的空投" /%}
+{% quick-link title="使用Gumdrop创建基于声明的空投" icon="CodeBracketSquare" href="/solana/general/spl-token-claim-airdrop-using-gumdrop" description="了解如何使用Gumdrop创建基于声明的空投" /%}
 {% /quick-links %}

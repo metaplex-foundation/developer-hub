@@ -30,7 +30,7 @@ This is where Auction House shows its power. Its a transaction protocol that all
 
 ## Creating an Auction House
 
-The Auction House program can be used to create a new marketplace by instantiating a new **Auction House** account. The Auction House account is a [Program Derived Address (PDA)](../../understanding-programs#program-derived-addresses-pda) which is derived from a given public key and, optionally, an SPL Token to use a currency (more on that below).
+The Auction House program can be used to create a new marketplace by instantiating a new **Auction House** account. The Auction House account is a [Program Derived Address (PDA)](/solana/understanding-programs#program-derived-addresses-pda) which is derived from a given public key and, optionally, an SPL Token to use a currency (more on that below).
 
    ![Properties.PNG](https://i.imgur.com/2HPpM9g.png#radius)
 
@@ -52,7 +52,7 @@ When a user lists an asset, the Auction House does two things:
 
 ![](https://i.imgur.com/ki27Ds8.png#radius)
 
-2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [here](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
+2. Auction House also assigns another PDA: `programAsSigner` PDA as the **Delegate**. Delegates are a feature of the Solana SPL-token program and are discussed in detail [in the SPL Token authority delegation docs](https://spl.solana.com/token#authority-delegation). Delegation allows the Auction House to pull assets out of a token account when a sale goes through at a later point. This way, the asset need not be escrowed and can stay in the user's wallet up until the sale goes through.
 
 ![](https://i.imgur.com/aIRl7Hb.png#radius)
 
@@ -103,9 +103,9 @@ Now that we know how the `executeSale` instruction works, let's discuss the thre
 
 ## Auctioning Fungible Assets
 
-So far, we've talked about exchanging assets using an Auction House account, but we've not dug into what type of assets can be exchanged that way. The most popular assets that can be listed in an Auction House are [Non-Fungible Tokens (NFTs)](/token-metadata/token-standard#the-non-fungible-standard).
+So far, we've talked about exchanging assets using an Auction House account, but we've not dug into what type of assets can be exchanged that way. The most popular assets that can be listed in an Auction House are [Non-Fungible Tokens (NFTs)](/smart-contracts/token-metadata/token-standard#the-non-fungible-standard).
 
-However, these are not the only assets that can benefit from the Auction House program. In fact, an asset can be any SPL Token so long as it has a Metadata account attached to its Mint account. If you'd like to know more about SPL Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/token-metadata).
+However, these are not the only assets that can benefit from the Auction House program. In fact, an asset can be any SPL Token so long as it has a Metadata account attached to its Mint account. If you'd like to know more about SPL Token and Metadata accounts, you can [read more about this in the overview of our Token Metadata program](/smart-contracts/token-metadata).
 
 ## Buying asset using a custom SPL Token
 

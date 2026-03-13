@@ -160,7 +160,7 @@ umi.use(keypairIdentity(keypair))
 
 由于默克尔树的性质，cNFT数据不存储在Solana账户中，而是存储在账本状态中。为了能够有效地读取数据，我们需要使用索引器，该索引器在创建/变更cNFT数据时对其进行索引。启用DAS的RPC是运行DAS索引器服务的RPC，允许我们按需向RPC提供商查询此数据。
 
-有关支持DAS的RPC提供商的完整列表，您可以访问[RPC提供商页面](/zh/rpc-providers#rp-cs-with-das-support)
+有关支持DAS的RPC提供商的完整列表，您可以访问[RPC提供商页面](/zh/solana/rpcs-and-das#rp-cs-with-das-support)
 
 您可以从这些提供商中的任何一个获取免费账户来运行本指南。注册后，您需要在之前的`umi`创建期间替换您的RPC实例。
 

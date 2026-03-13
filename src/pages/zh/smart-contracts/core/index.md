@@ -83,7 +83,7 @@ Metaplex Core 是 Solana 上新项目推荐的 NFT 标准。与 Token Metadata �
   - [Attributes](/zh/smart-contracts/core/plugins/attribute) - 链上键/值数据（DAS 自动索引）
   - [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) - 允许他人转移
   - 更多内容请参阅[插件部分](/zh/smart-contracts/core/plugins)
-- **DAS 索引**：所有[支持 DAS](/rpc-providers) 的主要 RPC 提供商已经索引 Core 资产。
+- **DAS 索引**：所有[支持 DAS](/solana/rpcs-and-das) 的主要 RPC 提供商已经索引 Core 资产。
 ## 核心概念
 ### Asset
 **Asset** 是代表 NFT 的单个链上账户。与 Token Metadata（使用 3 个以上账户）不同，Core Asset 在一个账户中包含所有权、元数据 URI 和插件数据。
@@ -127,7 +127,7 @@ Core Asset 和 Token Metadata NFT 是不同的标准。没有自动迁移。新�
 ### 铸造 Core Asset 需要多少费用？
 每个基础资产约 0.0029 SOL，而 Token Metadata 约为 0.022 SOL。这使 Core 的铸造成本降低约 80%。更多详情请参阅[与 Token Metadata 的区别](/zh/smart-contracts/core/tm-differences)。
 ### 哪些 RPC 提供商支持 Core？
-所有支持 DAS（Digital Asset Standard）的主要 RPC 提供商都会索引 Core 资产。当前列表请参阅 [RPC 提供商](/rpc-providers)。
+所有支持 DAS（Digital Asset Standard）的主要 RPC 提供商都会索引 Core 资产。当前列表请参阅 [RPC 提供商](/solana/rpcs-and-das)。
 ### 我可以将 Core 用于游戏资产吗？
 可以。Core 的插件系统非常适合游戏：使用 Attributes 存储链上属性，Freeze Delegate 锁定物品，Transfer Delegate 进行市场集成。
 ## 术语表

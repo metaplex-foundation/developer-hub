@@ -115,7 +115,7 @@ If you have a `ruleSet` on your pNFT Asset that requires additional data for val
 
 ## Enforcing rules on any operation
 
-One of the most important features of Programmable NFTs is their ability to enforce a set of rules on any operation that affects them. The entire authorization layer is provided by another Metaplex program called [Token Auth Rules](/token-auth-rules). Whilst that program is used to make pNFTs programmable, it is a generic program that can be used to create and validate authorization rules for any use case.
+One of the most important features of Programmable NFTs is their ability to enforce a set of rules on any operation that affects them. The entire authorization layer is provided by another Metaplex program called [Token Auth Rules](/smart-contracts/token-auth-rules). Whilst that program is used to make pNFTs programmable, it is a generic program that can be used to create and validate authorization rules for any use case.
 
 In the case of pNFTs, the following operations are supported:
 

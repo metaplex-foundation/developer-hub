@@ -41,12 +41,12 @@ howToTools:
 **Freeze Delegate Plugin** 是一个**所有者管理的 Plugin**，这意味着它需要所有者的签名才能应用到 Asset 上。
 此 Plugin 允许**委托人冻结和解冻 Asset，防止转移**。Asset 所有者或 Plugin 权限方可以随时撤销此 Plugin，除非 Asset 处于冻结状态（在这种情况下必须先解冻才能撤销）。
 **使用此 Plugin 非常轻量**，因为冻结/解冻 Asset 只需更改 Plugin 数据中的布尔值（唯一的参数是 Frozen: bool）。
-_在[这里](/zh/smart-contracts/core/plugins/freeze-delegate)了解更多_
+_在[Freeze Delegate插件页面](/zh/smart-contracts/core/plugins/freeze-delegate)了解更多_
 ### Attribute Plugin
 **Attribute Plugin** 是一个**权限管理的 Plugin**，这意味着它需要权限方的签名才能应用到 Asset 上。对于包含在 Collection 中的 Asset，Collection 权限方作为权限方，因为 Asset 的权限字段被 Collection 地址占用。
 此 Plugin 允许**直接在 Asset 上存储数据，作为链上属性或特征**。这些特征可以直接被链上程序访问，因为它们不像 mpl-token-metadata 程序那样存储在链下。
 **此 Plugin 接受 AttributeList 字段**，它由键值对数组组成，键和值都是字符串。
-_在[这里](/zh/smart-contracts/core/plugins/attribute)了解更多_
+_在[Attribute插件页面](/zh/smart-contracts/core/plugins/attribute)了解更多_
 ### 智能合约逻辑
 为简单起见，本示例仅包含两个指令：**stake** 和 **unstake** 函数，因为这些是质押程序正常工作所必需的。虽然可以添加额外的指令，如 **spendPoint** 指令来使用累积的积分，但这留给读者自行实现。
 _Stake 和 Unstake 函数都以不同方式使用了前面介绍的 Plugin_。
@@ -79,7 +79,7 @@ use mpl_core::{
 在所有指令的账户结构中，我们将 Signer 和 Payer 分开。这是标准做法，因为 PDA 无法支付账户创建费用，所以如果用户希望 PDA 作为指令的权限方，需要有两个不同的字段。虽然这种分离对我们的指令来说并非严格必要，但被认为是良好的实践。
 ### 账户结构
 在本示例中，我们使用 mpl-core crate 的 anchor 标志直接从账户结构中反序列化 Asset 和 Collection 账户，并对其设置一些约束
-_在[这里](/zh/smart-contracts/core/using-core-in-anchor)了解更多_
+_在[在Anchor中使用Core指南](/zh/smart-contracts/core/using-core-in-anchor)了解更多_
 我们将使用单个账户结构 `Stake` 用于 `stake` 和 `unstake` 指令，因为它们使用相同的账户和相同的约束。
 ```rust
 #[derive(Accounts)]

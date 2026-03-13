@@ -71,9 +71,11 @@ function extractProductFromPath(pathname) {
   if (path.startsWith('/en/')) path = path.slice(4)
   else if (path.startsWith('/ja/')) path = path.slice(4)
   else if (path.startsWith('/ko/')) path = path.slice(4)
+  else if (path.startsWith('/zh/')) path = path.slice(4)
   else if (path.startsWith('/en')) path = path.slice(3)
   else if (path.startsWith('/ja')) path = path.slice(3)
   else if (path.startsWith('/ko')) path = path.slice(3)
+  else if (path.startsWith('/zh')) path = path.slice(3)
 
   // Handle smart-contracts paths
   if (path.startsWith('/smart-contracts/')) {
@@ -150,7 +152,7 @@ function generateBreadcrumbSchema(pathname, productName, productPath, sectionTit
     } else if (firstSegment === 'dev-tools') {
       items.push({ name: 'Dev Tools', url: `${SITE_URL}/dev-tools` })
     } else if (firstSegment === 'guides') {
-      items.push({ name: 'Guides', url: `${SITE_URL}/guides` })
+      items.push({ name: 'Solana', url: `${SITE_URL}/guides` })
     } else if (firstSegment === 'legacy-documentation') {
       items.push({ name: 'Legacy Documentation', url: `${SITE_URL}/legacy-documentation` })
     }
@@ -712,6 +714,7 @@ function getOGLocale(localeCode) {
     en: 'en_US',
     ja: 'ja_JP',
     ko: 'ko_KR',
+    zh: 'zh_CN',
   }
 
   return ogLocaleMap[localeCode] || 'en_US'

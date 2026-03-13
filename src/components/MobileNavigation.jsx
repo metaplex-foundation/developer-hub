@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react'
 
 import { Navigation } from '@/components/Navigation'
 import { Sections } from '@/components/products/Sections'
-import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import { getLocalizedHref } from '@/config/languages'
+import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import {
   BookOpenIcon,
   ComputerDesktopIcon,
+  CpuChipIcon,
   DocumentTextIcon,
   HomeIcon,
   PhotoIcon,
@@ -114,6 +115,12 @@ export function MobileNavigation({ page }) {
             <SparklesIcon height={20} /> {t('tokens', 'Tokens')}
           </Link>
           <Link
+            href={getLocalizedHref('/agents', locale)}
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
+          >
+            <CpuChipIcon height={20} /> {t('agents', 'Agents')}
+          </Link>
+          <Link
             href={getLocalizedHref('/nfts', locale)}
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
@@ -136,7 +143,7 @@ export function MobileNavigation({ page }) {
             href={getLocalizedHref('/guides', locale)}
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
-            <BookOpenIcon height={20} /> {t('guides', 'Guides')}
+            <BookOpenIcon height={20} /> {t('solana', 'Solana')}
           </Link>
 
           {/* Only show product-specific navigation when not on the global/home pages */}

@@ -1,16 +1,21 @@
 ---
 title: Uniform Price Auction
-metaTitle: Genesis - Uniform Price Auction | Token Auction | Metaplex
-description: Time-based auction mechanism for token launches with uniform clearing price. Competitive bidding for larger participants.
+metaTitle: Genesis Auction | Token Auction on Solana | Metaplex
+description: Token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token sale mechanism for institutional and large-scale fundraising.
 created: '01-15-2025'
 updated: '01-31-2026'
 keywords:
   - uniform price auction
   - token auction
+  - token offering
+  - token auction Solana
   - clearing price
   - price discovery
   - sealed bid
   - competitive bidding
+  - token offering
+  - SPL token auction
+  - crypto fundraising
 about:
   - Auction mechanics
   - Price discovery
@@ -30,7 +35,7 @@ faqs:
     a: Use it for price discovery with larger participants (whales, funds) who prefer structured auction formats over deposit-based launches.
 ---
 
-**Uniform Price Auctions** enable competitive bidding for token launches. All winning bidders pay the same clearing price—the lowest winning bid—ensuring fair price discovery for structured token distributions. {% .lead %}
+**Uniform Price Auctions** enable competitive bidding for token launches on Solana. All winning bidders pay the same clearing price — the lowest winning bid — ensuring fair price discovery for structured token sales and on-chain fundraising. {% .lead %}
 
 {% callout title="What You'll Learn" %}
 This overview covers:
@@ -133,6 +138,7 @@ Use it for price discovery with larger participants (whales, funds) who prefer s
 
 ## Next Steps
 
-- [Launch Pool](/smart-contracts/genesis/launch-pool) - Proportional distribution with price discovery
-- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sales
-- [Genesis Overview](/smart-contracts/genesis) - Core concepts and architecture
+- [Launch Pool](/smart-contracts/genesis/launch-pool) - Fair launch with proportional token distribution
+- [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
+- [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
+- [Genesis Overview](/smart-contracts/genesis) - Token launchpad concepts and architecture

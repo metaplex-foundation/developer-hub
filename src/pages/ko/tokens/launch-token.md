@@ -1,26 +1,36 @@
 ---
 title: Solana에서 토큰 런칭하기
-metaTitle: Solana에서 토큰 런칭하는 방법 | TGE & 페어 런칭 가이드 | Metaplex
-description: Solana에서 토큰 생성 이벤트(TGE)를 런칭하는 완전 가이드. Genesis Launch Pools를 사용한 페어 토큰 런칭을 단계별 TypeScript 코드로 생성합니다.
+metaTitle: 솔라나 토큰 런치패드 | 토큰 세일 & 공정한 출시 토큰 런치패드 | Metaplex
+description: Genesis로 솔라나에서 SPL 토큰을 출시하세요 — 공정한 출시, 프리세일, 크라우드세일, 토큰 생성 이벤트(TGE)를 위한 토큰 런치패드. 온체인 토큰 배포를 위한 단계별 TypeScript 가이드.
 ---
 
-[Genesis](/ko/smart-contracts/genesis) Launch Pools를 사용하여 토큰을 출시합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+[Genesis](/ko/smart-contracts/genesis)를 사용하여 솔라나에서 SPL 토큰을 출시하세요 — 온체인 토큰 런치패드이자 공정한 출시 플랫폼입니다. 토큰 세일, 크라우드세일을 실행하려는 경우, Genesis Launch Pool은 온체인에서 투명하게 토큰 배포를 처리합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+
+{% callout type="note" title="노코드 옵션" %}
+코드를 작성하고 싶지 않으신가요? [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하여 코딩 없이 토큰을 출시하세요. 이 가이드는 Genesis SDK를 사용하여 자체 토큰 출시 경험을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하려는 개발자를 위한 것입니다.
+{% /callout %}
+
+{% callout type="note" title="다른 출시 방법" %}
+이 가이드는 **Launch Pool** 방식을 다루지만, Genesis는 고정 가격으로 토큰을 판매하는 **[프리세일](/ko/smart-contracts/genesis/presale)** 출시도 지원합니다. [Genesis 개요](/ko/smart-contracts/genesis)에서 각 방식을 비교하고 프로젝트에 가장 적합한 방법을 선택하세요.
+{% /callout %}
 
 ## 개요
+
+Genesis는 공정한 온체인 토큰 출시 메커니즘을 제공하는 솔라나 토큰 런치패드입니다. 고정 가격으로 토큰을 판매하는 기존 중앙화된 토큰 세일 플랫폼과 달리, Launch Pool은 시장이 토큰 배분을 결정합니다 — 모든 참가자가 예치금에 비례하여 토큰을 받아 공정하고 투명한 토큰 생성 이벤트(TGE)를 보장합니다. 모든 SPL 토큰 생성, 자금 조달, 배포가 중개자 없이 온체인에서 이루어집니다.
 
 Launch Pool 토큰 출시에는 세 가지 단계가 있습니다:
 
 1. **설정** (한 번 실행) - 토큰을 생성하고, 출시를 구성하고, 활성화합니다
 2. **예치 기간** (사용자 참여) - 설정한 기간 동안 사용자가 SOL을 예치합니다
-3. **출시 후** (당신 + 사용자) - 전환을 실행하고, 사용자가 토큰을 청구하고, 권한을 철회합니다
+3. **출시 후** (당신 + 사용자) - 상태 머신 크랭크 실행, 사용자가 토큰을 청구하고, 권한을 철회합니다
 
 이 가이드에서는 서로 다른 단계에서 실행할 **4개의 별도 스크립트**를 만드는 방법을 안내합니다:
 
 | 스크립트 | 실행 시점 | 목적 |
 |--------|-------------|---------|
 | `launch.ts` | 한 번, 시작 시 | 토큰을 생성하고 출시를 활성화 |
-| `transition.ts` | 예치 종료 후 | 수집된 SOL을 잠금 해제 버킷으로 이동 |
-| `claim.ts` | 전환 후 | 사용자가 토큰을 청구하기 위해 실행 |
+| `crank.ts` | 예치 종료 후 | 종료 동작을 트리거하여 SOL을 잠금 해제 버킷으로 이동 |
+| `claim.ts` | 크랭크 후 | 사용자가 토큰을 청구하기 위해 실행 |
 | `revoke.ts` | 출시 완료 시 | 민트/동결 권한을 영구적으로 제거 |
 
 ## 사전 요구 사항
@@ -263,20 +273,21 @@ npx ts-node launch.ts
 
 ### 예치 종료 후
 
-예치 기간이 끝나면 수집된 SOL을 잠금 해제 버킷으로 이동하기 위해 **전환**을 실행해야 합니다. `transition.ts`라는 파일을 만듭니다:
+예치 기간이 끝나면 `triggerBehaviorsV2`를 실행하여 버킷에 설정된 종료 동작(이 경우 수집된 SOL을 잠금 해제 버킷으로 이동)을 처리합니다. `crank.ts`라는 파일을 만듭니다:
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  transitionV2,
+  triggerBehaviorsV2,
   WRAPPED_SOL_MINT,
 } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
+import { findAssociatedTokenPda, mplToolbox } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
+    .use(mplToolbox())
     .use(genesis());
 
   // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
@@ -296,28 +307,20 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('전환 실행 중...');
+  console.log('상태 크랭킹 중...');
 
-  await transitionV2(umi, {
+  await triggerBehaviorsV2(umi, {
     genesisAccount,
     primaryBucket: launchPoolBucket,
     baseMint,
   })
     .addRemainingAccounts([
-      {
-        pubkey: unlockedBucket,
-        isSigner: false,
-        isWritable: true,
-      },
-      {
-        pubkey: publicKey(unlockedBucketQuoteTokenAccount),
-        isSigner: false,
-        isWritable: true,
-      },
+      { pubkey: publicKey(unlockedBucket), isSigner: false, isWritable: true },
+      { pubkey: publicKey(unlockedBucketQuoteTokenAccount), isSigner: false, isWritable: true },
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ 전환 완료! SOL이 잠금 해제 버킷으로 이동했습니다.');
+  console.log('✓ 크랭크 완료! SOL이 잠금 해제 버킷으로 이동했습니다.');
 }
 
 main().catch(console.error);
@@ -326,12 +329,12 @@ main().catch(console.error);
 예치 기간 종료 후 실행:
 
 ```bash
-npx ts-node transition.ts
+npx ts-node crank.ts
 ```
 
 ### 사용자가 토큰 청구
 
-전환 후 사용자는 토큰을 청구할 수 있습니다. 각 사용자는 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다:
+크랭크 후 사용자는 토큰을 청구할 수 있습니다. 각 사용자는 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다:
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
@@ -391,8 +394,7 @@ main().catch(console.error);
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
-  revokeMintAuthorityV2,
-  revokeFreezeAuthorityV2,
+  revokeV2,
 } from '@metaplex-foundation/genesis';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
@@ -406,20 +408,17 @@ async function main() {
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // 출시에서 가져온 토큰 민트 주소 입력
+  // 출시에서 가져온 주소 입력
+  const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('민트 권한 철회 중...');
-  await revokeMintAuthorityV2(umi, {
+  console.log('민트 및 동결 권한 철회 중...');
+  await revokeV2(umi, {
+    genesisAccount,
     baseMint,
+    revokeMintAuthority: true,
+    revokeFreezeAuthority: true,
   }).sendAndConfirm(umi);
-  console.log('✓ 민트 권한 철회 완료');
-
-  console.log('동결 권한 철회 중...');
-  await revokeFreezeAuthorityV2(umi, {
-    baseMint,
-  }).sendAndConfirm(umi);
-  console.log('✓ 동결 권한 철회 완료');
 
   console.log('\n✓ 출시 완료! 토큰이 완전히 탈중앙화되었습니다.');
 }
@@ -429,6 +428,7 @@ main().catch(console.error);
 
 ## 다음 단계
 
-- [Genesis 개요](/ko/smart-contracts/genesis) - Genesis 개념에 대해 더 알아보기
-- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 Launch Pool 문서
-- [Aggregation API](/ko/smart-contracts/genesis/aggregation) - API를 통해 출시 데이터 쿼리
+- [Genesis 개요](/ko/smart-contracts/genesis) - 솔라나 토큰 런치패드에 대해 더 알아보기
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 공정한 출시 문서
+- [프리세일](/ko/smart-contracts/genesis/presale) - 고정 가격으로 토큰 프리세일 실행
+- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통해 출시 및 토큰 세일 데이터 쿼리
