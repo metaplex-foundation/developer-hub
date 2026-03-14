@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launch | REST API | Metaplex
 description: Genesis 주소로 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - get launch
@@ -21,6 +21,25 @@ programmingLanguage:
 ---
 
 특정 genesis 주소의 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 웹사이트, 소셜 링크를 반환합니다. {% .lead %}
+
+## Summary
+
+Genesis 계정 공개 키로 단일 런치를 조회합니다. 런치 상세 정보, 베이스 토큰 메타데이터, 웹사이트, 소셜 링크를 `LaunchData` 객체로 반환합니다.
+
+- Genesis 계정 공개 키를 경로 파라미터로 필요
+- 단일 `LaunchData` 객체 반환 (배열 아님)
+- 토큰 메타데이터(`name`, `symbol`, `image`)와 소셜 링크 포함
+- `network` 쿼리 파라미터를 통해 메인넷(기본값) 및 데브넷 지원
+
+## Quick Reference
+
+| 항목 | 값 |
+|------|-------|
+| **메서드** | `GET` |
+| **경로** | `/launches/{genesis_pubkey}` |
+| **인증** | 불필요 |
+| **응답** | `LaunchData` |
+| **페이지네이션** | 없음 |
 
 ## 엔드포인트
 
@@ -48,8 +67,16 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -69,6 +96,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 ```
 
 ## 응답 타입
+
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/smart-contracts/genesis/integration-apis#shared-types)을 참조하세요.
 
 ### TypeScript
 
@@ -126,6 +155,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/smart-contracts/genesis/integration-apis/get-launches-by-token) 엔드포인트를 대신 사용하세요.
-{% /callout %}
+## Notes
+
+- Genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/smart-contracts/genesis/integration-apis/get-launches-by-token) 엔드포인트를 사용하세요.
+- Genesis 주소를 찾을 수 없거나 유효한 런치가 없는 경우 `404`를 반환합니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.

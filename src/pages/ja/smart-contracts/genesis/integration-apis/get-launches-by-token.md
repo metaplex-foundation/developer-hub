@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launches by Token | REST API | Metaplex
 description: トークンミントアドレスに関連するすべてのローンチを取得します。ローンチ情報、トークンメタデータ、ソーシャルリンクを返します。
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - token launches
@@ -21,6 +21,25 @@ programmingLanguage:
 ---
 
 トークンミントアドレスに関連するすべてのローンチを取得します。1つのトークンに複数のローンチキャンペーンが存在する場合があるため、レスポンスはローンチの配列を返します。 {% .lead %}
+
+## Summary
+
+トークンミントアドレスに関連するすべてのローンチを取得します。1つのトークンが異なる `genesisIndex` 値で複数のローンチキャンペーンを持つことができるため、ローンチの配列を返します。
+
+- トークンミント公開鍵をパスパラメータとして必要とします
+- `launches` 配列を含む `TokenData` オブジェクトを返します
+- ローンチと共にベーストークンメタデータとソーシャルリンクを含みます
+- メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
+## Quick Reference
+
+| 項目 | 値 |
+|------|-------|
+| **メソッド** | `GET` |
+| **パス** | `/tokens/{mint}` |
+| **認証** | 不要 |
+| **レスポンス** | `TokenData`（`launches` 配列を含む） |
+| **ページネーション** | なし |
 
 ## エンドポイント
 
@@ -49,8 +68,16 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
     "launches": [
       {
         "launchPage": "https://example.com/launch/mytoken",
-        "type": "launchpool",
-        "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+        "mechanic": "launchpoolV2",
+        "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+        "spotlight": false,
+        "startTime": "2026-01-15T14:00:00.000Z",
+        "endTime": "2026-01-15T18:00:00.000Z",
+        "status": "graduated",
+        "heroUrl": "launches/abc123/hero.webp",
+        "graduatedAt": "2026-01-15T18:05:00.000Z",
+        "lastActivityAt": "2026-01-15T17:45:00.000Z",
+        "type": "project"
       }
     ],
     "baseToken": {
@@ -71,6 +98,8 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
 ```
 
 ## レスポンス型
+
+[共有型](/smart-contracts/genesis/integration-apis#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
 
 ### TypeScript
 
@@ -129,6 +158,8 @@ let response: TokenResponse = reqwest::get(
 println!("{} launches found", response.data.launches.len());
 ```
 
-{% callout type="note" %}
-1つのトークンは異なる `genesisIndex` 値を使用して複数のローンチを持つことができます。レスポンスは関連するすべてのローンチキャンペーンを返します。
-{% /callout %}
+## Notes
+
+- 1つのトークンは異なる `genesisIndex` 値を使用して複数のローンチを持つことができます。レスポンスは関連するすべてのローンチキャンペーンを返します。
+- トークンミントアドレスが見つからない場合は `404` を返します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。

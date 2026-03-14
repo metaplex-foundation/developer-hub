@@ -3,7 +3,7 @@ title: Integration API
 metaTitle: Genesis - Integration API | 런칭 데이터 | Metaplex
 description: HTTP REST 엔드포인트와 온체인 SDK 메서드를 통해 Genesis 런칭 데이터에 접근하세요. 인증이 필요 없는 공개 API입니다.
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -22,6 +22,15 @@ programmingLanguage:
 ---
 
 Genesis Integration API를 사용하면 애그리게이터와 애플리케이션이 Genesis 토큰 런칭의 런칭 데이터를 조회할 수 있습니다. REST 엔드포인트를 통해 메타데이터에 접근하거나 SDK로 실시간 온체인 상태를 가져올 수 있습니다. {% .lead %}
+
+## Summary
+
+Genesis 통합 API는 Solana의 Genesis 토큰 런치 데이터에 대한 읽기 전용 액세스를 제공합니다.
+
+- Genesis 주소, 토큰 민트 또는 모든 활성 런치를 검색 가능
+- `https://api.metaplex.com/v1`의 공개 REST API — 인증 불필요
+- 런치 메타데이터, 토큰 정보, 웹사이트, 소셜 링크 반환
+- `network` 쿼리 파라미터를 통해 Solana 메인넷(기본값) 및 데브넷 지원
 
 ## 기본 URL
 
@@ -57,8 +66,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|------------|------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis 주소로 런칭 데이터 조회 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 활성 및 예정된 런칭 목록 조회 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 추천 스포트라이트 런칭 조회 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | 필터를 사용하여 런칭 목록 조회 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 추천 스포트라이트 런칭 조회 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 새 런칭을 위한 온체인 트랜잭션 빌드 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 확인된 런칭을 목록에 등록 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 온체인에서 버킷 상태 가져오기 |
@@ -87,6 +96,13 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 }
 ```
 
+## Notes
+
+- API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
+- 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다.
+- 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
+- `POST` 엔드포인트의 경우 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
+
 ## 공유 타입
 
 ### TypeScript
@@ -94,11 +110,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +152,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -176,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| 용어 | 정의 |
+|------|------------|
+| **Genesis Address** | 특정 런치 캠페인을 고유하게 식별하는 PDA (Program Derived Address) |
+| **Base Token** | 민트 주소로 식별되는 런치 대상 토큰 |
+| **Launch Page** | 사용자가 런치에 참여할 수 있는 URL |
+| **Mechanic** | 런치에 사용되는 할당 메커니즘 (예: `launchpoolV2`, `presaleV2`, `auction`) |
+| **Launch Type** | 런치의 카테고리: `project`, `memecoin`, `custom` |
+| **Spotlight** | 플랫폼에서 큐레이팅한 주요 런치를 나타내는 플래그 |
+| **Status** | 런치의 현재 상태: `upcoming`, `live`, `graduated`, `ended` |
+| **Socials** | 토큰과 관련된 소셜 미디어 링크 (X/Twitter, Telegram, Discord) |
+| **LaunchData** | `launch`, `baseToken`, `website`, `socials`를 포함하는 응답 래퍼 |
+| **TokenData** | 토큰 쿼리용 응답 래퍼. `launches` 배열과 `baseToken`, `website`, `socials` 포함 |

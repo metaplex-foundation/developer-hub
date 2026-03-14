@@ -4,7 +4,7 @@ metaTitle: Genesis - 创建发行 | REST API | Metaplex
 description: 为新的 Genesis 代币发行构建链上交易。返回可供签名和发送的未签名交易。
 method: POST
 created: '02-19-2026'
-updated: '02-19-2026'
+updated: '03-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -56,9 +56,9 @@ POST /v1/launches/create
 | `supply` | `number` | 否 | 代币总供应量（默认为 1,000,000,000） |
 | `network` | `string` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'` |
 | `quoteMint` | `string` | 否 | 报价代币铸造地址（默认为 wrapped SOL） |
-| `type` | `string` | 是 | `'project'` |
+| `type` | `string` | 是 | `'project'` 或 `'memecoin'` |
 | `finalize` | `boolean` | 否 | 是否最终确认发行（默认为 `true`） |
-| `allocations` | `array` | 是 | 分配配置数组 |
+| `allocations` | `array` | 有条件 | 分配配置数组（`project` 类型必填，`memecoin` 类型忽略） |
 | `externalLinks` | `object` | 否 | 网站、Twitter、Telegram 链接 |
 | `publicKey` | `string` | 是 | 创建者的钱包公钥（必须与顶级 `wallet` 字段一致） |
 
@@ -76,7 +76,11 @@ POST /v1/launches/create
 SDK 的 `buildCreateLaunchPayload` 函数负责将简化的 `CreateLaunchInput` 转换为此完整载荷格式。请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client)文档。
 {% /callout %}
 
-## 请求示例
+### Memecoin 类型
+
+当 `type` 为 `'memecoin'` 时，API 使用硬编码的分配和参数。您不需要提供 `allocations` 数组——API 会自动以固定比例构建（50% launchpool、49% Raydium LP 占 98%、1% 创建者解锁）。存款窗口为 1 小时，LP 永久锁仓，最低募集金额为 50 SOL 或 5,000 USDC。
+
+## 请求示例 — Project 类型
 
 ```bash
 curl -X POST https://api.metaplex.com/v1/launches/create \
@@ -95,6 +99,28 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
       "finalize": true,
       "publicKey": "YourWalletPublicKey...",
       "allocations": [...]
+    }
+  }'
+```
+
+## 请求示例 — Memecoin 类型
+
+```bash
+curl -X POST https://api.metaplex.com/v1/launches/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "wallet": "YourWalletPublicKey...",
+    "launch": {
+      "name": "My Memecoin",
+      "symbol": "MEME",
+      "image": "https://gateway.irys.xyz/...",
+      "decimals": 6,
+      "supply": 1000000000,
+      "network": "solana-devnet",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "type": "memecoin",
+      "finalize": true,
+      "publicKey": "YourWalletPublicKey..."
     }
   }'
 ```

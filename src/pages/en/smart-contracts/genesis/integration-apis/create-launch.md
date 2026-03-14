@@ -4,7 +4,7 @@ metaTitle: Genesis - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '02-19-2026'
+updated: '03-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -56,9 +56,9 @@ The `launch` object describes the full token and launch setup:
 | `supply` | `number` | No | Total token supply (defaults to 1,000,000,000) |
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `quoteMint` | `string` | No | Quote token mint address (defaults to wrapped SOL) |
-| `type` | `string` | Yes | `'project'` |
+| `type` | `string` | Yes | `'project'` or `'memecoin'` |
 | `finalize` | `boolean` | No | Whether to finalize the launch (defaults to `true`) |
-| `allocations` | `array` | Yes | Array of allocation configurations |
+| `allocations` | `array` | Conditional | Array of allocation configurations (required for `project`, ignored for `memecoin`) |
 | `externalLinks` | `object` | No | Website, Twitter, Telegram links |
 | `publicKey` | `string` | Yes | Creator's wallet public key (must match the top-level `wallet` field) |
 
@@ -76,7 +76,11 @@ Each allocation in the `allocations` array has a `type` field:
 The SDK's `buildCreateLaunchPayload` function handles converting the simplified `CreateLaunchInput` into this full payload format. See the [API Client](/smart-contracts/genesis/sdk/api-client) docs.
 {% /callout %}
 
-## Example Request
+### Memecoin Type
+
+When `type` is `'memecoin'`, the API uses hardcoded allocations and parameters. You do not need to provide an `allocations` array — the API builds it automatically with fixed splits (50% launchpool, 49% Raydium LP at 98%, 1% creator unlocked). The deposit window is 1 hour, LP is permanently locked, and the minimum raise is 50 SOL or 5,000 USDC.
+
+## Example Request — Project Type
 
 ```bash
 curl -X POST https://api.metaplex.com/v1/launches/create \
@@ -95,6 +99,28 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
       "finalize": true,
       "publicKey": "YourWalletPublicKey...",
       "allocations": [...]
+    }
+  }'
+```
+
+## Example Request — Memecoin Type
+
+```bash
+curl -X POST https://api.metaplex.com/v1/launches/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "wallet": "YourWalletPublicKey...",
+    "launch": {
+      "name": "My Memecoin",
+      "symbol": "MEME",
+      "image": "https://gateway.irys.xyz/...",
+      "decimals": 6,
+      "supply": 1000000000,
+      "network": "solana-devnet",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "type": "memecoin",
+      "finalize": true,
+      "publicKey": "YourWalletPublicKey..."
     }
   }'
 ```

@@ -4,7 +4,7 @@ metaTitle: Genesis - ローンチ作成 | REST API | Metaplex
 description: 新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。署名・送信可能な未署名トランザクションを返します。
 method: POST
 created: '02-19-2026'
-updated: '02-19-2026'
+updated: '03-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -56,9 +56,9 @@ POST /v1/launches/create
 | `supply` | `number` | いいえ | トークンの総供給量（デフォルトは1,000,000,000） |
 | `network` | `string` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'` |
 | `quoteMint` | `string` | いいえ | クォートトークンのミントアドレス（デフォルトはラップド SOL） |
-| `type` | `string` | はい | `'project'` |
+| `type` | `string` | はい | `'project'` または `'memecoin'` |
 | `finalize` | `boolean` | いいえ | ローンチをファイナライズするかどうか（デフォルトは `true`） |
-| `allocations` | `array` | はい | アロケーション設定の配列 |
+| `allocations` | `array` | 条件付き | アロケーション設定の配列（`project` の場合は必須、`memecoin` の場合は無視） |
 | `externalLinks` | `object` | いいえ | ウェブサイト、Twitter、Telegram のリンク |
 | `publicKey` | `string` | はい | 作成者のウォレット公開鍵（トップレベルの `wallet` フィールドと一致する必要があります） |
 
@@ -76,7 +76,11 @@ POST /v1/launches/create
 SDK の `buildCreateLaunchPayload` 関数は、簡略化された `CreateLaunchInput` をこの完全なペイロード形式に変換します。詳細は [API クライアント](/smart-contracts/genesis/sdk/api-client)のドキュメントを参照してください。
 {% /callout %}
 
-## リクエスト例
+### Memecoin タイプ
+
+`type` が `'memecoin'` の場合、API はハードコードされたアロケーションとパラメータを使用します。`allocations` 配列を指定する必要はありません。API が固定の分割（50% launchpool、49% Raydium LP（98%）、1% クリエーターロック解除）で自動的に構築します。入金ウィンドウは1時間、LP は永続的にロックされ、最低調達額は 50 SOL または 5,000 USDC です。
+
+## リクエスト例 — Project タイプ
 
 ```bash
 curl -X POST https://api.metaplex.com/v1/launches/create \
@@ -95,6 +99,28 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
       "finalize": true,
       "publicKey": "YourWalletPublicKey...",
       "allocations": [...]
+    }
+  }'
+```
+
+## リクエスト例 — Memecoin タイプ
+
+```bash
+curl -X POST https://api.metaplex.com/v1/launches/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "wallet": "YourWalletPublicKey...",
+    "launch": {
+      "name": "My Memecoin",
+      "symbol": "MEME",
+      "image": "https://gateway.irys.xyz/...",
+      "decimals": 6,
+      "supply": 1000000000,
+      "network": "solana-devnet",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "type": "memecoin",
+      "finalize": true,
+      "publicKey": "YourWalletPublicKey..."
     }
   }'
 ```
