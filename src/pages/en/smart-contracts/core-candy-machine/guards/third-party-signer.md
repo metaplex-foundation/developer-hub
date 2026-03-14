@@ -1,8 +1,28 @@
 ---
 title: Third Party Signer Guard
-metaTitle: Third Party Signer Guard | Core Candy Machine
-description: "The Core Candy Machine 'Third Party Signer' guard requires a predefined address to sign each mint transaction or the transaction will fail."
+metaTitle: "Third Party Signer Guard - Core Candy Machine Guard | Metaplex"
+description: "The Third Party Signer guard requires a predefined address to co-sign each mint transaction on a Core Candy Machine, enabling centralized mint authorization and gated access workflows."
+keywords:
+  - third party signer
+  - Core Candy Machine
+  - candy guard
+  - co-signer
+  - authorized minting
+  - gated mint
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - transaction co-signing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Third Party Signer** guard requires a predefined address to co-sign each mint transaction on a Core Candy Machine, enabling centralized mint authorization and gated access workflows. {% .lead %}
 
 ## Overview
 
@@ -135,3 +155,10 @@ Remember to also sign the transaction with the myConfiguredSigner keypair.
 ## Route Instruction
 
 _The Third Party Signer guard does not support the route instruction._
+
+## Notes
+
+- The `signerKey` configured in the guard settings must exactly match the public key of the signer passed in the mint settings, or the transaction will fail.
+- The third-party signer keypair must be available to sign the transaction at mint time. In a backend-gated workflow, the signer keypair is typically held server-side and signs transactions before forwarding them to the blockchain.
+- This guard does not restrict who can initiate the mint -- it only requires that the designated signer co-signs. Combine it with other guards (such as [Allow List](/smart-contracts/core-candy-machine/guards/allow-list)) for wallet-level access control.
+

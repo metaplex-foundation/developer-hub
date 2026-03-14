@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Token Payment Guard'
-metaTitle: 'Freeze Token Payment Guard | Core Candy Machine'
-description: "The Core Candy Machine 'Freeze Token Payment' guard allows you to set an SPL Token as the currency of minting and its value while also freezing the minted Core NFT Assets upon purchase for a set duration of time."
+metaTitle: "Freeze Token Payment Guard - Charge SPL Tokens and Freeze Minted Assets | Core Candy Machine"
+description: "The Freeze Token Payment guard charges the payer a specified amount of SPL tokens and freezes the minted Core Asset for a configurable period. Frozen Assets cannot be transferred until thawed via the route instruction."
+keywords:
+  - freeze token payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SPL token payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SPL token payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Freeze Token Payment** guard charges the payer a specified amount of SPL tokens and freezes the minted Core Asset for a configurable duration, preventing transfers until the asset is thawed. {% .lead %}
 
 ## Overview
 
@@ -87,7 +108,7 @@ The Freeze Token Payment guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Here’s how we can create a Candy Machine using the Freeze Token Payment guard. Note that, in this example, we’re using Umi's identity as the destination wallet.
+Here's how we can create a Candy Machine using the Freeze Token Payment guard. Note that, in this example, we're using Umi's identity as the destination wallet.
 
 ```tsx
 import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
@@ -118,7 +139,7 @@ The Freeze Token Payment guard contains the following Mint Settings:
 - **Mint**: The address of the mint account defining the SPL Token we want to pay with.
 - **Destination Associated Token Address (ATA)**: The address of the associated token account to eventually send the tokens to.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#freezetokenpayment) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#freezetokenpayment) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the Freeze Token Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -480,7 +501,7 @@ Candy Machine Guard Program {% .whitespace-nowrap %}
 
 {% node parent="candy-guard-route" y="-32" x="95" theme="transparent" %}
   Unlock funds
-  
+
   from the escrow
 {% /node %}
 
@@ -676,3 +697,13 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## Notes
+
+- The Freeze Escrow account must be initialized via the `initialize` route instruction before any minting can occur.
+- The maximum Freeze Period is 30 days (2,592,000 seconds). The period starts from the first Frozen Asset minted, not from initialization.
+- Tokens in the Freeze Escrow cannot be unlocked until every Frozen Asset has been thawed.
+- The Destination ATA must be a valid Associated Token Address derived from the SPL Token mint and the destination wallet.
+- Deleting the Candy Guard account while Frozen Assets exist makes those Assets permanently frozen until another thaw condition is met.
+- When multiple guard groups share the same Destination ATA, they share a single Freeze Escrow and Freeze Period.
+

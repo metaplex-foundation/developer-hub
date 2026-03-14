@@ -1,8 +1,27 @@
 ---
 title: Token Gate Guard
 metaTitle: Token Gate Guard | Core Candy Machine
-description: "The Core Candy Machine 'Token Gate' guard restricts minting to holders of a configured SPL Token."
+description: "The Core Candy Machine 'Token Gate' guard restricts minting to holders of a configured SPL Token, requiring a minimum token balance without transferring or burning tokens."
+keywords:
+  - Token Gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - SPL token holder
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Token-gated minting access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Token Gate** guard restricts minting to wallets that hold a minimum amount of a configured SPL token, without burning or transferring those tokens. {% .lead %}
 
 ## Overview
 
@@ -113,7 +132,7 @@ The Token Gate guard contains the following Mint Settings:
 
 - **Mint**: The address of the mint account defining the SPL Token we want to gate with.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokengate) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokengate) for more details.
 
 {% dialect-switcher title="Mint with the Token Gate Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,3 +158,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Token Gate guard does not support the route instruction._
+
+## Notes
+
+- The Token Gate guard only **checks** that the payer holds the required token balance -- it does not burn or transfer any tokens. For guards that consume tokens, see [Token Burn](/smart-contracts/core-candy-machine/guards/token-burn) or [Token Payment](/smart-contracts/core-candy-machine/guards/token-payment).
+- This guard uses the original **SPL Token program**. It does not support Token-2022 mints.
+- The token balance check occurs at the time of minting. If the payer's balance drops below the required **Amount** between guard evaluation and transaction execution, the mint will fail.
+

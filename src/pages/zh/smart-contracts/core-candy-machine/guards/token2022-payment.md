@@ -1,8 +1,27 @@
 ---
 title: Token2022 支付守卫
-metaTitle: Token2022 支付守卫 | Core Candy Machine
-description: "Core Candy Machine 'Token2022 支付' 守卫通过向付款人收取设定数量的 SPL Token2022 来允许铸造。"
+metaTitle: "Token2022 支付守卫 | Core Candy Machine"
+description: "Core Candy Machine 的 Token2022 Payment 守卫通过向铸造者收取设定数量的 SPL Token-2022 代币来允许铸造，将代币转移到配置的目标钱包。"
+keywords:
+  - Token2022 Payment
+  - Core Candy Machine
+  - candy guard
+  - SPL Token-2022
+  - token payment
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL Token-2022 payment for minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token2022 Payment** 守卫向铸造者收取指定数量的 SPL Token-2022 代币，将其转移到配置的目标钱包后才允许铸造继续。 {% .lead %}
 
 ## 概述
 
@@ -182,3 +201,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## 路由指令
 
 _代币支付守卫不支持路由指令。_
+
+## 注意事项
+
+- Token2022 Payment 守卫要求铸币和代币账户属于 **SPL Token-2022 程序**，而非原始 SPL Token 程序。如果需要使用传统 SPL 代币收费，请使用 [Token Payment](/zh/smart-contracts/core-candy-machine/guards/token-payment) 守卫。
+- 付款人在铸造时必须在其关联代币账户中持有至少配置的 **数量** 的代币，否则交易将失败。
+- **目标 ATA** 必须在铸造前已存在；守卫不会自动创建。
+

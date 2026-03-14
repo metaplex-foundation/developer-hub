@@ -1,8 +1,50 @@
 ---
-title: Updating The Core Candy Machine
+title: Updating a Core Candy Machine
 metaTitle: Update a Core Candy Machine | Core Candy Machine
-description: Learn how to update your Core Candy Machine and it's various settings.
+description: Learn how to update your Core Candy Machine settings, reassign authority, modify guards, and manually wrap or unwrap Candy Guard accounts.
+keywords:
+  - core candy machine
+  - update candy machine
+  - candy machine settings
+  - candy guard update
+  - set mint authority
+  - solana NFT
+  - metaplex
+  - mpl-core-candy-machine
+  - wrap candy guard
+  - unwrap candy guard
+  - guard configuration
+  - candy machine authority
+about:
+  - Core Candy Machine configuration updates
+  - Candy Guard management on Solana
+  - Metaplex mpl-core-candy-machine SDK
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: Can I change the itemsAvailable count after minting has started?
+    a: No. Some Core Candy Machine settings, including itemsAvailable, are locked once the first item has been minted. Update these fields before any minting occurs.
+  - q: Does updating Candy Guards replace all existing guard settings?
+    a: Yes. The updateCandyGuard function overwrites the entire guards object. You must include all guards you want to keep, even if their settings have not changed. Fetch the current guard account first and spread its values into your update call.
+  - q: Do I need to update the collection authority when I reassign the Candy Machine authority?
+    a: Yes. The Core Candy Machine authority and the collection asset update authority must match. After calling setMintAuthority, update the collection asset to use the same new authority.
+  - q: What is the difference between wrapping and unwrapping a Candy Guard?
+    a: Wrapping associates a Candy Guard account with a Core Candy Machine so the guard rules are enforced during minting. Unwrapping dissociates them, removing guard enforcement. Most projects keep guards wrapped at all times.
 ---
+
+## Summary
+
+The `updateCandyMachine` function modifies a Core Candy Machine's on-chain settings after initial creation, while `updateCandyGuard` lets you change the [guards](/smart-contracts/core-candy-machine/guards) that control minting access.
+
+- Update Candy Machine data fields such as `itemsAvailable`, `isMutable`, [Config Line Settings](/smart-contracts/core-candy-machine/create#config-line-settings), and [Hidden Settings](/smart-contracts/core-candy-machine/create#hidden-settings)
+- Reassign the mint authority to a new wallet using `setMintAuthority`
+- Modify guard rules with `updateCandyGuard` -- note that the entire guards object is replaced on each update
+- Manually associate or dissociate Candy Guard accounts using `wrap` and `unwrap`
+{.lead}
 
 {% dialect-switcher title="Updating a Core Candy Machine" %}
 {% dialect title="JavaScript" id="js" %}
@@ -28,24 +70,28 @@ await updateCandyMachine(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Args
+## Update Function Arguments
+
+The `updateCandyMachine` function accepts the Candy Machine public key and a `data` object containing the fields to modify.
 
 {% dialect-switcher title="Update Core Candy Machine Args" %}
 {% dialect title="JavaScript" id="js" %}
 
-Available arguments that can be passed into the updateCandyMachine function.
-
-| name         | type      |
-| ------------ | --------- |
-| candyMachine | publicKey |
-| data         | data      |
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| candyMachine | publicKey | The public key of the Candy Machine to update  |
+| data         | data      | Object containing the updated settings         |
 
 {% /dialect %}
 {% /dialect-switcher %}
 
-Some settings are unabled to be changed/updated once minting has started.
+{% callout type="warning" %}
+Some settings cannot be changed once minting has started. Always finalize your configuration before the first mint occurs.
+{% /callout %}
 
-### data
+### Candy Machine Data Object
+
+The `data` object defines the mutable settings of a Core Candy Machine. Pass this object to `updateCandyMachine` with the fields you want to change.
 
 {% dialect-switcher title="Candy Machine Data Object" %}
 {% dialect title="JavaScript" id="js" %}
@@ -65,9 +111,9 @@ data =  {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Assigning a new Authority to the Candy Machine
+## Assigning a New Authority
 
-There may be scenarios where you may wish to transfer the Candy Machine authority across to a new address. This can be achieved with the `setMintAuthority` function.
+The `setMintAuthority` function transfers the Core Candy Machine's mint authority to a new wallet address. Both the current authority and the new authority must sign the transaction.
 
 export declare type SetMintAuthorityInstructionAccounts = {
 /**Candy Machine account. \*/
@@ -96,11 +142,13 @@ await setMintAuthority(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-When assigning a new Authority to a Core Candy Machine you will also have to update the Collection Asset to the same update Authority.
+{% callout type="warning" %}
+When assigning a new authority to a Core Candy Machine you must also update the collection asset to use the same update authority. The Candy Machine authority and the collection update authority must match for minting to succeed.
+{% /callout %}
 
-## Updating guards
+## Updating Candy Guards
 
-Did you set something wrong in your guards? Did you change your mind about the mint price? Do you need to delay the start of the mint of a little? No worries, guards can easily be updated following the same settings used when creating them.
+The `updateCandyGuard` function replaces the entire [guards](/smart-contracts/core-candy-machine/guards) configuration on a Candy Guard account. Use it to change mint prices, adjust start dates, enable new guards, or disable existing ones.
 
 You can enable new guards by providing their settings or disable current ones by giving them empty settings.
 
@@ -109,9 +157,9 @@ You can enable new guards by providing their settings or disable current ones by
 
 You may update the guards of a Core Candy Machine the same way you created them. That is, by providing their settings inside the `guards` object of the `updateCandyGuard` function. Any guard set to `none()` or not provided will be disabled.
 
-Note that the entire `guards` object will be updated meaning **it will override all existing guards**!
-
-Therefore, make sure to provide the settings for all guards you want to enable, even if their settings are not changing. You may want to fetch the candy guard account first to fallback to its current guards.
+{% callout type="warning" %}
+The entire `guards` object will be updated meaning **it will override all existing guards**. Make sure to provide the settings for all guards you want to enable, even if their settings are not changing. Fetch the candy guard account first to fall back to its current guards.
+{% /callout %}
 
 ```tsx
 import { some, none, sol } from '@metaplex-foundation/umi'
@@ -135,11 +183,9 @@ API References: [updateCandyGuard](https://mpl-core-candy-machine.typedoc.metapl
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Wrapping and unwrapping Candy Guard accounts manually
+## Wrapping and Unwrapping Candy Guard Accounts
 
-So far we’ve managed both Core Candy Machine and Core Candy Guard accounts together because that makes the most sense for most projects.
-
-However, it is important to note that Core Candy Machines and Core Candy Guards can be created and associated in different steps, even using our SDKs.
+Wrapping associates a Candy Guard with a Core Candy Machine so that the guard rules are enforced during minting. Unwrapping dissociates them. Most projects create both accounts together, but you can manage them independently when needed.
 
 You will first need to create the two accounts separately and associate/dissociate them manually.
 
@@ -148,7 +194,7 @@ You will first need to create the two accounts separately and associate/dissocia
 
 The `create` function of the Umi library already takes care of creating and associating a brand new Candy Guard account for every Candy Machine account created.
 
-However, if you wanted to create them separately and manually associate/dissociate them, this is how you’d do it.
+However, if you wanted to create them separately and manually associate/dissociate them, this is how you'd do it.
 
 ```ts
 import {
@@ -219,3 +265,29 @@ API References: [createCandyMachine](https://mpl-core-candy-machine.typedoc.meta
 
 {% /dialect %}
 {% /dialect-switcher %}
+
+## Notes
+
+- Some Candy Machine settings -- including `itemsAvailable` -- are locked once the first item has been minted. Finalize all data fields before minting begins.
+- Calling `updateCandyGuard` replaces the **entire** guards object. Always fetch the current guard state and spread existing values before applying changes, or you will unintentionally disable active guards.
+- The Core Candy Machine authority and the collection asset update authority must match. If you reassign authority with `setMintAuthority`, update the collection asset authority as well.
+- Wrapping and unwrapping are separate from guard creation. A Candy Guard has no effect on minting until it is wrapped (associated) with a Candy Machine.
+
+## FAQ
+
+### Can I change the itemsAvailable count after minting has started?
+
+No. Some Core Candy Machine settings, including `itemsAvailable`, are locked once the first item has been minted. Update these fields before any minting occurs.
+
+### Does updating Candy Guards replace all existing guard settings?
+
+Yes. The `updateCandyGuard` function overwrites the entire `guards` object. You must include all guards you want to keep, even if their settings have not changed. Fetch the current guard account first and spread its values into your update call.
+
+### Do I need to update the collection authority when I reassign the Candy Machine authority?
+
+Yes. The Core Candy Machine authority and the collection asset update authority must match. After calling `setMintAuthority`, update the collection asset to use the same new authority.
+
+### What is the difference between wrapping and unwrapping a Candy Guard?
+
+Wrapping associates a Candy Guard account with a Core Candy Machine so the guard rules are enforced during minting. Unwrapping dissociates them, removing guard enforcement. Most projects keep guards wrapped at all times.
+

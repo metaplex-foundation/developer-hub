@@ -1,8 +1,28 @@
 ---
 title: "NFT Burnガード"
-metaTitle: "NFT Burnガード  | Core Candy Machine"
-description: "Core Candy Machineの「NFT Burn」ガードは、事前定義されたToken Metadata NFT/pNFTコレクションの保有者へのミントを制限し、購入中に保有者のNFTをバーンします。"
+metaTitle: "NFT Burnガード - NFTをバーンしてミント | Core Candy Machine"
+description: "Core Candy MachineのNFT Burnガードは、事前定義されたToken Metadata NFTコレクションの保有者へのミントを制限し、ミントトランザクション中に保有者のNFTをバーンします。"
+keywords:
+  - NFT Burn guard
+  - Core Candy Machine
+  - candy guard
+  - burn NFT to mint
+  - token gated mint
+  - NFT collection verification
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT burn-to-mint access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Burn**ガードは、事前定義されたNFTコレクションの保有者へのミントを制限し、ミントトランザクションのコストとして保有者のNFTを永久にバーンします。 {% .lead %}
 
 ## 概要
 
@@ -144,3 +164,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _NFT Burnガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- バーン対象として提供するNFTは、指定された必須コレクションに属し、ミンターが所有している必要があります。
+- バーンは不可逆です -- ミントトランザクション中にNFTがバーンされると、復元することはできません。
+- このガードはToken Metadata NFT（Core Assetsではない）を使用します。`tokenStandard`フィールドは、バーンするNFTの実際の標準（例: `NonFungible`や`ProgrammableNonFungible`）と一致する必要があります。
+

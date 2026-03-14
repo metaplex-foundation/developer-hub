@@ -1,16 +1,49 @@
 ---
 title: Generating Custom Guard Client for Core Candy Machine
-metaTitle: Custom Guard Client | Core Candy Machine.
-description: Learn how to generate a Umi compatible client for your custom built guards for the newest Core Candy Machine program.
+metaTitle: Custom Guard Client | Core Candy Machine
+description: Learn how to generate a Umi-compatible JavaScript client for custom guards on the Core Candy Machine program using Kinobi and Shankjs.
+keywords:
+  - custom guard
+  - core candy machine
+  - kinobi
+  - IDL
+  - shankjs
+  - client generation
+  - umi sdk
+  - candy guard
+  - solana nft
+  - custom minting logic
+  - guard manifest
+  - code generation
+  - metaplex
+about:
+  - Custom guards
+  - Client generation
+proficiencyLevel: Advanced
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
 
-Once you have written your custom guard for the Candy Machine Guard program you'll need to generate a Kinobi client that works with the Umi SDK to for example be able to use your guard in a frontend.
+## Summary
+
+Generating a custom guard client produces a [Umi](/dev-tools/umi)-compatible JavaScript SDK from your custom [Core Candy Machine](/smart-contracts/core-candy-machine) guard program, enabling frontend and script integration. {% .lead %}
+
+- Use [Shankjs](https://github.com/metaplex-foundation/shank) to generate an IDL from your custom Candy Guard program
+- Run the Kinobi code generator to produce TypeScript client files
+- Register your guard manifest, types, and mint args in the generated client package
+- Build and publish the client package to npm or link it locally
 
 ## Generate IDL and Initial Client
 
-### Configuring Shankjs
+The first step after writing your custom guard is to generate an IDL and an initial TypeScript client using Shankjs and Kinobi from the [mpl-core-candy-machine repository](https://github.com/metaplex-foundation/mpl-core-candy-machine).
 
-Shankjs is a IDL generator that works on both Anchor and non Anchor programs. You want to configure this with your new custom Candy Guard deployment key to properly generate a working client. Edit the file located at `/configs/shank.cjs` in the mpl-candy-machine repo.
+### Configuring Shankjs for IDL Generation
+
+Shankjs is an IDL generator that works on both Anchor and non-Anchor programs. Configure it with your custom Candy Guard deployment key by editing the file located at `/configs/shank.cjs` in the mpl-candy-machine repo.
 
 ```js
 /configs/shank.cjs
@@ -48,7 +81,7 @@ generateIdl({
 
 ```
 
-### Generate IDL and Client
+### Running the IDL and Client Generation
 
 Now you should be able to generate the IDL and the initial client. From the root of the project run
 
@@ -59,16 +92,13 @@ pnpm run generate
 this will in turn execute both scripts `pnpm generate:idls` and `pnpm generate:clients` and build out the initial clients.
 If you need to run these separately for what ever reason you are able to do so.
 
-## Adding Guard(s) to the client
+## Adding Custom Guards to the Generated Client
 
-### Create Guard File
+After successful generation of the initial client, you need to create a guard file and register it in the client's type system.
 
-Once a successful generation of the initial client is made navigate to `/clients/js/src`.
+### Creating the Guard File
 
-The first step would be to add you new guard into the `/clients/js/src/defaultGuards` folder.
-
-Below is a template you could use and adjust to your needs based on the type of guard you have created.
-You can name your guard what ever you want but I'm going to name my example `customGuard.ts`
+Navigate to `/clients/js/src/defaultGuards` in the generated client and create a new file for your custom guard. The template below can be adjusted based on the type of guard you have created. This example uses the name `customGuard.ts`.
 
 ```ts
 import { PublicKey } from '@metaplex-foundation/umi'
@@ -122,11 +152,11 @@ export type CustomGuardMintArgs = {
 }
 ```
 
-### Add Guard to Existing Files
+### Registering the Guard in Existing Files
 
-From here you need to add your new guard to some existing files.
+After creating the guard file, you must register the guard in several existing files within the generated client.
 
-Export your new guard from `/clients/js/src/defaultGuards.index.ts`
+Export your new guard from `/clients/js/src/defaultGuards/index.ts`
 
 ```ts
 ...
@@ -137,7 +167,7 @@ export * from './token2022Payment';
 export * from './customGuard';
 ```
 
-Within `/clients/js/src/defaultGuards.defaults.ts` add your guard to these locations;
+Within `/clients/js/src/defaultGuards/defaults.ts` add your guard to these locations;
 
 ```ts
 import { CustomGuardArgs } from "../generated"
@@ -180,7 +210,7 @@ Finally you need to add the exported customGuardManifest to the plugin file loca
 ```ts
 import {customGuardManifest} from "./defaultGuards"
 
-umi.guards.add(
+ umi.guards.add(
   ...// add your guard manifest to the list
   customGuardManifest
 )
@@ -188,4 +218,10 @@ umi.guards.add(
 
 From this point you can build and upload your client package to npm or link/move it to your project folder where you would like to access the new guard client.
 
-It is worth using the built in testing suite of AVA to write some tests that fully test your guard in multiple scenarios. Examples of tests can be found in `/clients/js/tests`.
+## Notes
+
+- This workflow requires a forked copy of the [mpl-core-candy-machine repository](https://github.com/metaplex-foundation/mpl-core-candy-machine). Clone and work within that fork.
+- Use the built-in [AVA](https://github.com/avajs/ava) testing suite to write tests that fully exercise your custom guard across multiple scenarios. Examples of tests can be found in `/clients/js/tests`.
+- If using Anchor 28, you must add the `rustbin` fallback configuration to Shankjs as shown above due to a missing crates.io dependency.
+- The generated client files should not be edited manually after generation except for adding your custom guard registrations.
+

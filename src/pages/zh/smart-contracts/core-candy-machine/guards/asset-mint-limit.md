@@ -1,8 +1,27 @@
 ---
 title: 资产铸造限制守卫
 metaTitle: 资产铸造限制守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Asset Mint Limit' 守卫将铸造限制为指定 collection 的持有者，并限制 Core Candy Machine 上为提供的资产可以购买的铸造数量。"
+description: "Core Candy Machine 的 'Asset Mint Limit' 守卫将铸造限制为指定 collection 的持有者，并限制每个资产可以从 Core Candy Machine 铸造的次数。"
+keywords:
+  - asset mint limit
+  - Core Candy Machine
+  - candy guard
+  - mint limit per NFT
+  - collection-gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-asset mint limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Mint Limit** 守卫将铸造限制为指定 Core Asset collection 的持有者，并限制每个资产可以从 Core Candy Machine 铸造的次数。 {% .lead %}
 
 ## 概述
 
@@ -158,3 +177,11 @@ const pda = findAssetMintCounterPda(umi, {
 
 const nftMintCounter = fetchAssetMintCounter(umi, pda)
 ```
+
+## 注意事项
+
+- 铸造限制计数器按资产地址追踪，而不是按钱包。持有多个符合条件的资产的钱包可以用每个资产铸造到限制上限。
+- 每个唯一的 `id` 值会创建一个单独的计数器，允许不同的守卫组在同一 Candy Machine 上强制执行独立的限制。
+- `AssetMintCounter` PDA 从 `id`、Asset 公钥、Candy Guard 地址和 Candy Machine 地址派生。
+- 此守卫不会销毁或转移用作证明的资产——它只验证所有权并递增计数器。
+

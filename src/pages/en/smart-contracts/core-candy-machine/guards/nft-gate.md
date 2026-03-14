@@ -1,8 +1,28 @@
 ---
 title: "NFT Gate Guard"
-metaTitle: "NFT Gate Guard Guard | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Gate' guard restricts minting to holders of a specified NFT/pNFT collection."
+metaTitle: "NFT Gate Guard - Token-Gated Minting | Core Candy Machine"
+description: "The Core Candy Machine NFT Gate guard restricts minting to holders of a specified NFT collection, requiring proof of ownership without burning or transferring the NFT."
+keywords:
+  - NFT Gate guard
+  - Core Candy Machine
+  - candy guard
+  - token gated minting
+  - NFT collection verification
+  - proof of ownership
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-gated access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **NFT Gate** guard restricts minting to holders of a specified NFT collection by verifying ownership without burning or transferring the NFT. {% .lead %}
 
 ## Overview
 
@@ -114,7 +134,7 @@ The NFT Gate guard contains the following Mint Settings:
 - **Mint**: The mint address of the NFT to provide as proof that the payer owns an NFT from the required collection.
 - **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftgate) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftgate) for more details.
 
 {% dialect-switcher title="Set up a Candy Machine using the NFT Gate Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -140,3 +160,11 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The NFT Gate guard does not support the route instruction._
+
+## Notes
+
+- The NFT used as proof of ownership is not burned or transferred -- the payer retains the NFT after minting.
+- Unlike the [NFT Burn](/smart-contracts/core-candy-machine/guards/nft-burn) guard, this guard only checks ownership and does not consume the NFT.
+- A single NFT from the required collection can be used to mint multiple times unless combined with the [NFT Mint Limit](/smart-contracts/core-candy-machine/guards/nft-mint-limit) guard.
+- This guard uses Token Metadata NFTs (not Core Assets) for the collection verification.
+

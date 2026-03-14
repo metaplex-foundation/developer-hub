@@ -1,8 +1,28 @@
 ---
 title: 配额守卫
 metaTitle: 铸造配额守卫 | Core Candy Machine
-description: "了解 Core Candy Machine 的 'Allocation' 守卫，您可以为 Core Candy Machine 的守卫组指定最大铸造数量。"
+description: "Core Candy Machine 的 'Allocation' 守卫限制每个守卫组允许的总铸造数量，通过基于 PDA 的计数器按可配置 ID 进行跟踪。"
+keywords:
+  - allocation
+  - Core Candy Machine
+  - candy guard
+  - mint limit per group
+  - allocation tracker
+  - guard group limit
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - group-level mint allocation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allocation** 守卫限制特定守卫组内可以铸造的资产总数，使用由可配置 ID 标识的链上 PDA 追踪器。 {% .lead %}
 
 ## 概述
 
@@ -272,3 +292,10 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
   // 或者使用您的 candyGuard 地址 candyGuard: publicKey("Address")
 });
 ```
+
+## 注意事项
+
+- 配额追踪器 PDA 必须在任何铸造发生之前通过 route 指令进行初始化。未初始化就尝试铸造将会失败。
+- 每个唯一的 `id` 值会创建一个单独的链上追踪器，因此不同的守卫组可以在同一个 Core Candy Machine 内维护独立的配额计数。
+- Allocation 守卫限制的是每个守卫组的总铸造数量，而不是每个钱包。要限制每个钱包的铸造数量，请改用 [Mint Limit](/zh/smart-contracts/core-candy-machine/guards/mint-limit) 守卫。
+

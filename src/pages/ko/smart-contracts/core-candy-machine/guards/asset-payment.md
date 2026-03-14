@@ -1,8 +1,27 @@
 ---
 title: "Asset Payment Guard"
-metaTitle: "Asset Payment Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Asset Payment' 가드는 Core Candy Machine에서 민팅을 위한 지불로 특정 컬렉션의 다른 Core Asset을 요구합니다."
+metaTitle: "Asset Payment 가드 | 코어 캔디 머신"
+description: "코어 캔디 머신의 'Asset Payment' 가드는 코어 캔디 머신에서 민팅하기 위해 특정 컬렉션의 다른 Core Asset을 지불로 요구합니다."
+keywords:
+  - asset payment
+  - Core Candy Machine
+  - candy guard
+  - NFT as payment
+  - collection payment
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-based mint payment
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Payment** 가드는 코어 캔디 머신에서 민팅하기 위해 민터가 지정된 컬렉션의 Core Asset을 지불로 전송해야 합니다. {% .lead %}
 
 ## 개요
 
@@ -165,3 +184,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _Asset Payment 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 지불로 사용된 Asset은 목적지 지갑으로 영구적으로 전송됩니다 -- 민터는 소유권을 잃습니다.
+- 민팅당 하나의 Asset만 전송됩니다. 여러 Asset을 지불로 요구하려면 [Asset Payment Multi](/ko/smart-contracts/core-candy-machine/guards/asset-payment-multi) 가드를 대신 사용하세요.
+- Asset은 민팅 시점에 지정된 필수 컬렉션에 속해야 합니다. 다른 컬렉션의 Asset은 거부됩니다.
+

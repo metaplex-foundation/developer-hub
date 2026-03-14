@@ -1,16 +1,59 @@
 ---
-title: Inserting Items
+title: Inserting Items into a Core Candy Machine
 metaTitle: Inserting Items | Core Candy Machine
-description: How to load Core NFT Assets into a Core Candy Machine.
+description: Learn how to insert config line items into a Core Candy Machine, including batch insertion, prefix optimization, and overriding previously loaded items.
+keywords:
+  - core candy machine
+  - insert items
+  - config lines
+  - addConfigLines
+  - candy machine loading
+  - NFT minting setup
+  - batch insert
+  - prefix name
+  - prefix URI
+  - candy machine items
+  - mpl-core-candy-machine
+  - Metaplex
+  - Solana NFT
+about:
+  - Core Candy Machine item insertion
+  - Config line management for NFT minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: How many items can I insert per transaction in a Core Candy Machine?
+    a: The number of items per transaction depends on the Name Length and URI Length values in your Config Line Settings. Shorter names and URIs allow more items per transaction because Solana transactions have a size limit. Using prefixes significantly reduces these lengths and lets you fit more items per call.
+  - q: Can I update or override items that have already been inserted?
+    a: Yes. The addConfigLines function accepts an index parameter that controls where items are written. By specifying the index of a previously inserted item, you overwrite that slot with new data. This works for any item that has not yet been minted.
+  - q: Do all items need to be inserted before minting can begin?
+    a: Yes. When using Config Line Settings, the Core Candy Machine enforces that every slot (up to itemsAvailable) must contain a config line before any minting transaction is allowed.
+  - q: What is the difference between inserting items with and without prefixes?
+    a: Without prefixes, you store the full name and URI for each item. With prefixes, the Core Candy Machine stores the shared prefix once and you only insert the unique suffix for each item. This reduces on-chain storage, lowers rent costs, and lets you fit more items per transaction.
 ---
 
-Now that we have a name and URI for all of our items, all we need to do is insert them into our Core Candy Machine account.
+## Summary
 
-This is an important part of the process and, when using Config Line Settings, **minting will not be permitted until all items have been inserted**.
+The `addConfigLines` instruction loads name and URI data into a [Core Candy Machine](/smart-contracts/core-candy-machine) so that each slot is ready to mint as a unique Core NFT Asset.
 
-Note that the name and URI of each inserted item are respectively constraint by the **Name Length** and **URI Length** attributes of the Config Line Settings.
+- Use `addConfigLines` to insert one or more config lines at a specified index
+- Optimize batch sizes with [Config Line Settings](/smart-contracts/core-candy-machine/create#config-line-settings) prefixes to fit more items per transaction
+- Override previously inserted items by targeting their index position
+- All items must be inserted before minting is permitted
 
-Additionally, because transactions are limited to a certain size, we cannot insert thousands of items within the same transaction. The number of items we can insert per transaction will depend on the **Name Length** and **URI Length** attributes defined in the Config Line Settings. The shorter our names and URIs are, the more we'll be able to fit into a transaction.
+## Loading Items into a Core Candy Machine
+
+The `addConfigLines` instruction writes name and URI pairs into the on-chain account so the [Core Candy Machine](/smart-contracts/core-candy-machine) knows what metadata to assign at mint time. Each item must conform to the **Name Length** and **URI Length** constraints defined in the [Config Line Settings](/smart-contracts/core-candy-machine/create#config-line-settings) of your machine.
+
+Because Solana transactions have a size limit, you cannot insert thousands of items in a single transaction. The number of items you can include per call depends on how long each name and URI string is. Shorter strings mean more items per transaction.
+
+{% callout type="note" %}
+When using Config Line Settings, **minting will not be permitted until all items have been inserted**. Verify that `itemsLoaded` equals `itemsAvailable` before proceeding to add [guards](/smart-contracts/core-candy-machine/guards) or open minting.
+{% /callout %}
 
 {% callout title="CLI Alternative" type="note" %}
 You can also insert items using the MPLX CLI, which handles batch processing automatically:
@@ -57,9 +100,7 @@ API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex
 
 ## Inserting Items Using Prefixes
 
-When using name and/or URI prefixes, you only need to insert the part that comes after them.
-
-Note that, since using prefixes can significantly reduce the Name Length and URI Length, it should help you fit a lot more items per transaction.
+Prefix-based insertion stores only the unique suffix of each name and URI, because the shared prefix is already saved in the [Config Line Settings](/smart-contracts/core-candy-machine/create#config-line-settings). This dramatically reduces the per-item data size and lets you fit significantly more items into each transaction.
 
 {% dialect-switcher title="Add config lines from a given index" %}
 {% dialect title="JavaScript" id="js" %}
@@ -102,7 +143,7 @@ API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex
 
 ## Overriding Existing Items
 
-When inserting items, you may provide the position in which these items should be inserted. This enables you to insert items in any order you want but also allows you to update items that have already been inserted.
+The `addConfigLines` instruction lets you overwrite previously inserted items by specifying the index of the slot you want to replace. This is useful for correcting metadata errors or swapping out items before minting begins.
 
 {% dialect-switcher title="Override config lines" %}
 {% dialect title="JavaScript" id="js" %}
@@ -137,6 +178,33 @@ API References: [addConfigLines](https://mpl-core-candy-machine.typedoc.metaplex
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Conclusion
+## Next Steps After Inserting Items
 
-And just like that, we have a loaded Core Candy Machine ready to mint Assets! However, we've not created any requirements for our minting process. How can we configure the price of the mint? How can we ensure that buyers are holders of a specific token or an Asset from a specific collection? How can we set the start date of our mint? What about the end conditions?
+Once all items are loaded (`itemsLoaded` equals `itemsAvailable`), the Core Candy Machine is ready for minting configuration. The next step is to set up [guards](/smart-contracts/core-candy-machine/guards) that control who can mint, when minting opens, what payment is required, and any other access conditions you need for your launch.
+
+## Notes
+
+- **Transaction size limit**: Solana transactions are capped at 1232 bytes. The number of config lines you can insert per transaction depends directly on the combined Name Length and URI Length values in your Config Line Settings.
+- **Name Length and URI Length constraints**: Each inserted item's name (excluding the prefix) must not exceed the `nameLength` value, and each URI (excluding the prefix) must not exceed the `uriLength` value defined at creation time. Exceeding these limits causes the transaction to fail.
+- **All items must be loaded before minting**: The Core Candy Machine program rejects mint instructions until every slot (from index 0 to `itemsAvailable - 1`) has been populated with a config line.
+- **Prefixes reduce storage cost**: Using `prefixName` and `prefixUri` stores the shared string portion once on-chain rather than repeating it for every item, which lowers the rent cost of the Candy Machine account.
+- **Overrides are pre-mint only**: You can overwrite any config line that has not yet been minted. Once an item has been minted, its on-chain data is finalized.
+
+## FAQ
+
+### How many items can I insert per transaction in a Core Candy Machine?
+
+The number of items per transaction depends on the **Name Length** and **URI Length** values in your [Config Line Settings](/smart-contracts/core-candy-machine/create#config-line-settings). Shorter names and URIs allow more items per transaction because Solana transactions have a size limit of 1232 bytes. Using prefixes significantly reduces these lengths and lets you fit more items per call.
+
+### Can I update or override items that have already been inserted?
+
+Yes. The `addConfigLines` function accepts an `index` parameter that controls where items are written. By specifying the index of a previously inserted item, you overwrite that slot with new data. This works for any item that has not yet been minted.
+
+### Do all items need to be inserted before minting can begin?
+
+Yes. When using Config Line Settings, the Core Candy Machine enforces that every slot (up to `itemsAvailable`) must contain a config line before any minting transaction is allowed.
+
+### What is the difference between inserting items with and without prefixes?
+
+Without prefixes, you store the full name and URI for each item. With prefixes, the Core Candy Machine stores the shared prefix once and you only insert the unique suffix for each item. This reduces on-chain storage, lowers rent costs, and lets you fit more items per transaction.
+

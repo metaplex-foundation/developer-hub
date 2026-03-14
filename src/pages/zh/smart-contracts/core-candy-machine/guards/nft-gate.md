@@ -1,8 +1,28 @@
 ---
 title: "NFT 门控守卫"
-metaTitle: "NFT 门控守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'NFT Gate' 守卫将铸造限制为指定 NFT/pNFT collection 的持有者。"
+metaTitle: "NFT 门控守卫 - 代币门控铸造 | Core Candy Machine"
+description: "Core Candy Machine 的 NFT Gate 守卫将铸造限制为指定 NFT collection 的持有者，要求所有权证明但不销毁或转移 NFT。"
+keywords:
+  - NFT Gate guard
+  - Core Candy Machine
+  - candy guard
+  - token gated minting
+  - NFT collection verification
+  - proof of ownership
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-gated access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Gate** 守卫通过验证所有权来将铸造限制为指定 NFT collection 的持有者，且不会销毁或转移 NFT。 {% .lead %}
 
 ## 概述
 
@@ -140,3 +160,11 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _NFT Gate 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 用作所有权证明的 NFT 不会被销毁或转移——付款人在铸造后仍保留该 NFT。
+- 与 [NFT Burn](/zh/smart-contracts/core-candy-machine/guards/nft-burn) 守卫不同，此守卫仅检查所有权，不会消耗 NFT。
+- 除非与 [NFT Mint Limit](/zh/smart-contracts/core-candy-machine/guards/nft-mint-limit) 守卫结合使用，否则来自必需 collection 的单个 NFT 可用于多次铸造。
+- 此守卫使用 Token Metadata NFT（非 Core Assets）进行 collection 验证。
+

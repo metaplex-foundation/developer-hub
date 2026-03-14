@@ -1,8 +1,28 @@
 ---
 title: "Redeemed Amount Guard"
-metaTitle: "Redeemed Amount Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Redeemed Amount' guard forbids minting when the number of minted Assets for the entire Core Candy Machine reaches the configured maximum amount."
+metaTitle: "Redeemed Amount Guard - Core Candy Machine Guard | Metaplex"
+description: "The Redeemed Amount guard limits the total number of Assets that can be minted from a Core Candy Machine, enabling global mint caps and tiered minting strategies with Guard Groups."
+keywords:
+  - redeemed amount
+  - Core Candy Machine
+  - candy guard
+  - mint limit
+  - guard groups
+  - global mint cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - minting supply caps
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Redeemed Amount** guard forbids minting when the total number of minted Assets across the entire Core Candy Machine reaches a configured maximum, enabling global supply caps and tiered minting phases. {% .lead %}
 
 ## Overview
 
@@ -95,7 +115,7 @@ create(umi, {
 
 Notice that, even if the Candy Machine contains 500 items, only 300 of these items will be mintable because of this guard.
 
-Thus, this guard becomes more useful when using [Guard Groups](/smart-contracts/core-candy-machine/guard-groups). Here’s another example using two groups such that the first 300 Assets can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
+Thus, this guard becomes more useful when using [Guard Groups](/smart-contracts/core-candy-machine/guard-groups). Here's another example using two groups such that the first 300 Assets can be minted for 1 SOL but the last 200 will need 2 SOL to mint.
 
 {% dialect-switcher title="Using the Redeemed Amount Guard with groups example" %}
 {% dialect title="JavaScript" id="js" %}
@@ -134,3 +154,10 @@ _The Redeemed Amount guard does not need Mint Settings._
 ## Route Instruction
 
 _The Redeemed Amount guard does not support the route instruction._
+
+## Notes
+
+- The Redeemed Amount guard tracks total mints across the entire Core Candy Machine, not per-wallet. To limit mints per wallet, use the [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) guard instead.
+- The `maximum` value must be less than or equal to `itemsAvailable` on the Candy Machine to have any practical effect.
+- When used with [Guard Groups](/smart-contracts/core-candy-machine/guard-groups), the Redeemed Amount counter is shared globally across all groups, making it ideal for implementing tiered pricing phases.
+

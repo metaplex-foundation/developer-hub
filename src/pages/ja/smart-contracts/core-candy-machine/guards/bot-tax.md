@@ -1,8 +1,28 @@
 ---
 title: "Bot Tax Guard"
-metaTitle: "Bot Tax Guard | Core Candy Machine"
-description: "Core Candy Machine'Bot Tax'ガードにより、ユーザーからの無効なトランザクションに対して設定可能な税金を設定できます。これによりスパムとボットを抑制できます。"
+metaTitle: "Bot Taxガード | Core Candy Machine"
+description: "Core Candy Machineの「Bot Tax」ガードは、無効なミントトランザクションに対して設定可能なSOLペナルティを課し、ボットやスパムをCandy Machineから抑制します。"
+keywords:
+  - bot tax
+  - Core Candy Machine
+  - candy guard
+  - anti-bot protection
+  - spam prevention
+  - last instruction check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - bot mitigation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Bot Tax** ガードは、無効なミントトランザクションに対して設定可能なSOLペナルティを課し、Core Candy Machineに対するボットやスパムの試行を抑制します。 {% .lead %}
 
 {% callout type="warning" %}
 一部のウォレット（Solflare、Phantom、および他の可能性があるもの）は現在、トランザクションにLighthouse命令を自動注入します。これにより、`lastInstruction`が`true`に設定されているときBot Taxガードがトリガーされます。
@@ -134,3 +154,11 @@ _Bot Taxガードはミント設定を必要としません。_
 ## Route命令
 
 _Bot Taxガードはroute命令をサポートしていません。_
+
+## 注意事項
+
+- Bot Taxガードが有効な状態で別のガードがミントを拒否した場合、トランザクションはオンチェーンでは成功したように見えますが、NFTはミントされません。これはペナルティを徴収できるようにするための設計です。
+- 徴収されたボット税の資金はCandy Machineアカウントに蓄積され、ミント終了後にCandy Machineを削除することで回収できます。
+- `lastInstruction`を`true`に設定すると、トランザクションに追加の命令を自動注入するウォレット（SolflareやPhantomなど）で偽陽性が発生する可能性があります。本番環境でこのオプションを有効にする前に十分にテストしてください。
+- 正当なユーザーが検証エラーに遭遇した際にペナルティを与えないよう、ペナルティ額は小さく（例: 0.01 SOL）設定してください。
+

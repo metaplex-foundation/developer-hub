@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Sol Payment Guard'
-metaTitle: Freeze Sol Payment Guard | Core Candy Machine
-description: "The Core Candy Machine 'Freeze Sol Payment' allows you to set the price of minting in SOL while also freezing the minted Core NFT Assets upon purchase for a set duration of time."
+metaTitle: "Freeze Sol Payment Guard - Charge SOL and Freeze Minted Assets | Core Candy Machine"
+description: "The Freeze Sol Payment guard charges the payer in SOL and freezes the minted Core Asset for a configurable period. Frozen Assets cannot be transferred until thawed via the route instruction."
+keywords:
+  - freeze sol payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SOL payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Freeze Sol Payment** guard charges the payer an amount in SOL and freezes the minted Core Asset for a configurable duration, preventing transfers until the asset is thawed. {% .lead %}
 
 ## Overview
 
@@ -123,7 +144,7 @@ The Freeze Sol Payment guard contains the following Mint Settings:
 
 - **Destination**: The address of the wallet that should eventually receive all payments related to this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#freezesolpayment) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#freezesolpayment) for more details.
 
 {% dialect-switcher title="Mint with the Freeze Sol Payment Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -651,3 +672,12 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## Notes
+
+- The Freeze Escrow account must be initialized via the `initialize` route instruction before any minting can occur.
+- The maximum Freeze Period is 30 days (2,592,000 seconds). The period starts from the first Frozen Asset minted, not from initialization.
+- Funds in the Freeze Escrow cannot be unlocked until every Frozen Asset has been thawed.
+- Deleting the Candy Guard account while Frozen Assets exist makes those Assets permanently frozen until another thaw condition is met.
+- When multiple guard groups share the same Destination address, they share a single Freeze Escrow and Freeze Period.
+

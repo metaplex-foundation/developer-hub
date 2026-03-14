@@ -1,8 +1,27 @@
 ---
 title: 代币销毁守卫
-metaTitle: 代币销毁守卫 | Core Candy Machine
-description: "Core Candy Machine '代币销毁' 守卫通过将铸造货币设置为 SPL 代币地址和值来允许铸造。"
+metaTitle: "代币销毁守卫 | Core Candy Machine"
+description: "Core Candy Machine 的 Token Burn 守卫要求铸造者在允许铸造之前从配置的铸币账户永久销毁指定数量的 SPL 代币。"
+keywords:
+  - Token Burn
+  - Core Candy Machine
+  - candy guard
+  - SPL token burn
+  - burn to mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token burning for mint access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Burn** 守卫要求铸造者在允许铸造交易继续之前永久销毁配置数量的 SPL 代币。 {% .lead %}
 
 ## 概述
 
@@ -137,3 +156,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## 路由指令
 
 _代币销毁守卫不支持路由指令。_
+
+## 注意事项
+
+- 销毁的代币将被永久销毁且无法恢复。确保配置的 **数量** 准确反映每次铸造的预期成本。
+- 此守卫使用原始 **SPL Token 程序**。对于 Token-2022 铸币，请使用相应的 Token-2022 守卫变体。
+- 付款人在铸造时必须在其关联代币账户中持有至少配置的 **数量** 的代币，否则交易将失败。
+

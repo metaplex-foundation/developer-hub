@@ -1,8 +1,28 @@
 ---
 title: "End Date ガード"
-metaTitle: "End Date ガード | Core Candy Machine"
-description: "Core Candy Machine の 'End Date' ガードは、Core Candy Machine とそのフェーズのミントプロセスを終了する日付を決定します。"
+metaTitle: "End Dateガード - 期限後にミントを停止 | Core Candy Machine"
+description: "End Dateガードは、Core Candy Machineからのミントが許可されなくなる期限を設定します。終了タイムスタンプを設定してミントを自動的に終了します。"
+keywords:
+  - end date
+  - Core Candy Machine
+  - candy guard
+  - mint deadline
+  - minting end time
+  - time-based guard
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based minting controls
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**End Date** ガードは、Core Candy Machineからのミントが許可されなくなる期限を設定します。 {% .lead %}
 
 ## 概要
 
@@ -110,3 +130,10 @@ _End Date ガードはミント設定を必要としません。_
 ## Route 命令
 
 _End Date ガードは route 命令をサポートしません。_
+
+## 注意事項
+
+- End Date ガードは、設定されたタイムスタンプ以降の新しいミントのみを防止します。既にミントされたアセットには影響しません。
+- 特定の期間にミントを制限するには、End Date ガードと [Start Date](/ja/smart-contracts/core-candy-machine/guards/start-date) ガードを組み合わせてください。
+- 日付の値は、Umiの`dateTime`ヘルパーを通じて渡される有効なUTCタイムスタンプ文字列である必要があります。
+

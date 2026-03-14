@@ -1,8 +1,28 @@
 ---
 title: "End Date Guard"
-metaTitle: "End Date Guard | Core Candy Machine"
-description: "The Core Candy Machine 'End Date' guard determines a date to end the minting process for the Core Candy Machine and its phases."
+metaTitle: "End Date Guard - Stop Minting After a Deadline | Core Candy Machine"
+description: "The End Date guard sets a deadline after which minting from a Core Candy Machine is no longer allowed. Configure an end timestamp to automatically close your mint."
+keywords:
+  - end date
+  - Core Candy Machine
+  - candy guard
+  - mint deadline
+  - minting end time
+  - time-based guard
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based minting controls
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **End Date** guard sets a deadline after which minting from a Core Candy Machine is no longer allowed. {% .lead %}
 
 ## Overview
 
@@ -110,3 +130,10 @@ _The End Date guard does not need Mint Settings._
 ## Route Instruction
 
 _The End Date guard does not support the route instruction._
+
+## Notes
+
+- The End Date guard only prevents new mints after the configured timestamp. It does not affect Assets that were already minted.
+- To restrict minting to a specific window, combine the End Date guard with the [Start Date](/smart-contracts/core-candy-machine/guards/start-date) guard.
+- The date value must be a valid UTC timestamp string passed through the `dateTime` helper from Umi.
+

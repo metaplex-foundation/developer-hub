@@ -1,8 +1,28 @@
 ---
 title: Mint Limit Guard
-metaTitle: "Mint Limit Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Mint Limit' 가드는 각 지갑이 민팅할 수 있는 Asset 수에 제한을 지정할 수 있습니다."
+metaTitle: "Mint Limit 가드 - 지갑별 민팅 수량 제한 | 코어 캔디 머신"
+description: "Mint Limit 가드는 코어 캔디 머신에서 각 지갑이 민팅할 수 있는 Asset 수를 제한합니다. 제한은 지갑별, 캔디 머신별, 식별자별로 추적됩니다."
+keywords:
+  - mint limit
+  - Core Candy Machine
+  - candy guard
+  - per-wallet limit
+  - mint counter
+  - minting cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-wallet minting limits
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Mint Limit** 가드는 코어 캔디 머신에서 각 지갑이 민팅할 수 있는 Asset 수를 제한하며, 지갑별, 캔디 머신별, 구성 가능한 식별자별로 추적됩니다. {% .lead %}
 
 ## 개요
 
@@ -154,3 +174,10 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 // 이미 민팅된 수량
 console.log(mintCounter.count)
 ```
+
+## Notes
+
+- Mint Limit 카운터는 지갑 주소, Candy Machine 주소, 가드 `id`에서 파생된 `MintCounter` PDA를 통해 온체인에서 추적됩니다. 각 고유한 조합은 별도의 카운터 계정을 생성합니다.
+- 별도의 [가드 그룹](/ko/smart-contracts/core-candy-machine/guard-groups)에서 서로 다른 `id` 값을 사용하면 각 그룹이 같은 지갑에 대해 독립적인 민트 제한을 적용할 수 있습니다.
+- `MintCounter` 계정은 Candy Machine이 완전히 민팅된 후에도 온체인에 유지됩니다. `safeFetchMintCounterFromSeeds`를 사용하여 특정 지갑이 민팅한 Asset 수를 확인할 수 있습니다.
+

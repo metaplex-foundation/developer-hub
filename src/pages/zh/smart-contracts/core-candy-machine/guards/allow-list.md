@@ -1,8 +1,30 @@
 ---
 title: 允许列表守卫
 metaTitle: 允许列表守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Allowlist' 守卫允许您设置预定义的钱包列表，这些钱包可以从您的 Core Candy Machine 铸造"
+description: "Core Candy Machine 的 'Allowlist' 守卫根据预定义钱包地址的 Merkle Tree 验证铸造钱包，要求在允许铸造之前进行 Merkle Proof 预验证。"
+keywords:
+  - allowlist
+  - allow list
+  - Core Candy Machine
+  - candy guard
+  - Merkle Tree
+  - Merkle Proof
+  - whitelist
+  - wallet validation
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - Merkle Tree-based wallet allowlisting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allow List** 守卫根据预定义地址的 Merkle Tree 验证铸造钱包，只允许提供有效 Merkle Proof 的钱包从 Core Candy Machine 铸造。 {% .lead %}
 
 ## 概述
 
@@ -405,3 +427,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
   // 或者 "铸造" 账户的 publicKey
 });
 ```
+
+## 注意事项
+
+- Merkle Proof 必须在铸造之前通过 route 指令进行验证。这是一个两步过程：首先调用 `route` 提供证明，然后调用 `mintV1`。
+- 对于非常大的允许列表，Merkle Proof 与铸造交易分离以避免超过 Solana 的交易大小限制。
+- 如果允许列表发生更改，必须计算新的 Merkle Root 并相应更新守卫设置。之前验证的证明将失效。
+- Allow List 守卫与 [Address Gate](/zh/smart-contracts/core-candy-machine/guards/address-gate) 守卫不同，后者将铸造限制为单个地址而不是地址列表。
+

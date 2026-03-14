@@ -63,7 +63,6 @@ The **Bubblegum V2 JavaScript SDK** wraps all MPL-Bubblegum V2 program instructi
 - Use `getAssetWithProof` before any write operation (transfer, burn, update, delegate, freeze, verify)
 - Applies to Bubblegum V2 (MPL-Bubblegum 5.x) — not compatible with V1 trees
 
-*Maintained by Metaplex Foundation · Last verified February 2026 · Applies to MPL-Bubblegum 5.x · [View source on GitHub](https://github.com/metaplex-foundation/mpl-bubblegum)*
 
 ## Quick Start
 

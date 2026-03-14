@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Sol Payment Guard'
-metaTitle: Freeze Sol Payment Guard | Core Candy Machine
-description: "Core Candy Machine의 'Freeze Sol Payment'를 사용하면 SOL로 민팅 가격을 설정하고 구매 시 민팅된 Core NFT Asset을 설정된 기간 동안 동결할 수 있습니다."
+metaTitle: "Freeze Sol Payment 가드 - SOL 청구 및 민팅된 Asset 동결 | 코어 캔디 머신"
+description: "Freeze Sol Payment 가드는 지불자에게 SOL을 청구하고 민팅된 Core Asset을 구성 가능한 기간 동안 동결합니다. 동결된 Asset은 route instruction을 통해 해제될 때까지 전송할 수 없습니다."
+keywords:
+  - freeze sol payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SOL payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Freeze Sol Payment** 가드는 지불자에게 SOL 금액을 청구하고 민팅된 Core Asset을 구성 가능한 기간 동안 동결하여, Asset이 해제될 때까지 전송을 방지합니다. {% .lead %}
 
 ## 개요
 
@@ -651,3 +672,12 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## Notes
+
+- Freeze Escrow 계정은 민팅이 시작되기 전에 `initialize` route instruction을 통해 초기화해야 합니다.
+- 최대 동결 기간은 30일(2,592,000초)입니다. 기간은 초기화 시점이 아닌 첫 번째 동결된 Asset이 민팅된 시점부터 시작됩니다.
+- Freeze Escrow의 자금은 모든 동결된 Asset이 해제될 때까지 잠금 해제할 수 없습니다.
+- 동결된 Asset이 존재하는 상태에서 Candy Guard 계정을 삭제하면, 다른 해제 조건이 충족될 때까지 해당 Asset은 영구적으로 동결됩니다.
+- 여러 가드 그룹이 같은 Destination 주소를 공유하면, 단일 Freeze Escrow와 동결 기간을 공유합니다.
+

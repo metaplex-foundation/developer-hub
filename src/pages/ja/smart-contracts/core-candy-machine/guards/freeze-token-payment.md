@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Token Payment ガード'
-metaTitle: 'Freeze Token Payment ガード | Core Candy Machine'
-description: "Core Candy Machine の 'Freeze Token Payment' ガードを使用すると、SPL Token をミント通貨として設定し、その価値を定義しつつ、購入されたCore NFT Asset を一定期間凍結することができます。"
+metaTitle: "Freeze Token Paymentガード - SPLトークンを課金しミント済みアセットを凍結 | Core Candy Machine"
+description: "Freeze Token Paymentガードは、支払者に指定量のSPLトークンを課金し、ミントされたCore Assetを設定可能な期間凍結します。凍結されたアセットはルート命令で解凍されるまで転送できません。"
+keywords:
+  - freeze token payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SPL token payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SPL token payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Freeze Token Payment** ガードは、支払者に指定量のSPLトークンを課金し、ミントされたCore Assetを設定可能な期間凍結し、アセットが解凍されるまで転送を防止します。 {% .lead %}
 
 ## 概要
 
@@ -676,3 +697,13 @@ Freeze Escrow アカウントは Destination アドレスから派生した PDA 
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## 注意事項
+
+- Freeze Escrowアカウントは、ミントが開始される前に`initialize`ルート命令を介して初期化する必要があります。
+- 最大凍結期間は30日間（2,592,000秒）です。期間は初期化時ではなく、最初の凍結されたアセットがミントされた時点から開始されます。
+- Freeze Escrow内のトークンは、すべての凍結されたアセットが解凍されるまでロック解除できません。
+- Destination ATAは、SPLトークンミントと宛先ウォレットから派生した有効なAssociated Token Addressである必要があります。
+- 凍結されたアセットが存在する状態でCandy Guardアカウントを削除すると、別の解凍条件が満たされるまでそれらのアセットは永久に凍結されます。
+- 複数のガードグループが同じDestination ATAを共有する場合、単一のFreeze EscrowとFreeze Periodを共有します。
+

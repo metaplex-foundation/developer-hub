@@ -1,8 +1,28 @@
 ---
 title: "End Date Guard"
-metaTitle: "End Date Guard | Core Candy Machine"
-description: "Core Candy Machine의 'End Date' 가드는 Core Candy Machine과 그 단계들의 민팅 과정을 종료할 날짜를 결정합니다."
+metaTitle: "End Date 가드 - 마감일 이후 민팅 중단 | 코어 캔디 머신"
+description: "End Date 가드는 코어 캔디 머신에서 마감일 이후의 민팅을 더 이상 허용하지 않는 마감 시간을 설정합니다. 종료 타임스탬프를 구성하여 민팅을 자동으로 종료하세요."
+keywords:
+  - end date
+  - Core Candy Machine
+  - candy guard
+  - mint deadline
+  - minting end time
+  - time-based guard
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based minting controls
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**End Date** 가드는 코어 캔디 머신에서 마감일 이후의 민팅을 더 이상 허용하지 않는 마감 시간을 설정합니다. {% .lead %}
 
 ## 개요
 
@@ -110,3 +130,10 @@ _End Date 가드는 민팅 설정이 필요하지 않습니다._
 ## Route Instruction
 
 _End Date 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- End Date 가드는 구성된 타임스탬프 이후의 새로운 민팅만 방지합니다. 이미 민팅된 Asset에는 영향을 주지 않습니다.
+- 특정 기간에만 민팅을 제한하려면 End Date 가드를 [Start Date](/ko/smart-contracts/core-candy-machine/guards/start-date) 가드와 결합하세요.
+- 날짜 값은 Umi의 `dateTime` 헬퍼를 통해 전달되는 유효한 UTC 타임스탬프 문자열이어야 합니다.
+

@@ -1,8 +1,28 @@
 ---
 title: "NFT Gateガード"
-metaTitle: "NFT Gateガード | Core Candy Machine"
-description: "Core Candy Machineの「NFT Gate」ガードは、指定されたNFT/pNFTコレクションの保有者へのミントを制限します。"
+metaTitle: "NFT Gateガード - トークンゲート付きミント | Core Candy Machine"
+description: "Core Candy MachineのNFT Gateガードは、指定されたNFTコレクションの保有者へのミントを制限し、NFTのバーンや転送なしに所有権の証明を要求します。"
+keywords:
+  - NFT Gate guard
+  - Core Candy Machine
+  - candy guard
+  - token gated minting
+  - NFT collection verification
+  - proof of ownership
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-gated access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Gate**ガードは、指定されたNFTコレクションの保有者へのミントを制限し、NFTのバーンや転送なしに所有権を検証します。 {% .lead %}
 
 ## 概要
 
@@ -140,3 +160,11 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _NFT Gateガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- 所有権の証明として使用するNFTはバーンも転送もされません -- ミント後も支払者がNFTを保持します。
+- [NFT Burn](/smart-contracts/core-candy-machine/guards/nft-burn)ガードとは異なり、このガードは所有権の確認のみを行い、NFTを消費しません。
+- 必須コレクションからの単一のNFTは、[NFT Mint Limit](/smart-contracts/core-candy-machine/guards/nft-mint-limit)ガードと組み合わせない限り、複数回ミントに使用できます。
+- このガードはコレクション検証にToken Metadata NFT（Core Assetsではない）を使用します。
+

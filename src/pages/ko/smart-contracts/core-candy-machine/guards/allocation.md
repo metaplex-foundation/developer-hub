@@ -1,8 +1,28 @@
 ---
 title: 할당 가드
 metaTitle: 민트 할당 가드 | 코어 캔디 머신
-description: "코어 캔디 머신에서 가드 그룹당 최대 민팅 수를 지정할 수 있는 '할당' 가드에 대해 알아보세요."
+description: "코어 캔디 머신의 'Allocation' 가드는 가드 그룹당 허용되는 총 민팅 수를 제한하며, 구성 가능한 ID로 식별되는 PDA 기반 카운터로 추적합니다."
+keywords:
+  - allocation
+  - Core Candy Machine
+  - candy guard
+  - mint limit per group
+  - allocation tracker
+  - guard group limit
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - group-level mint allocation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Allocation** 가드는 특정 가드 그룹 내에서 민팅할 수 있는 총 Asset 수를 제한하며, 구성 가능한 ID로 식별되는 온체인 PDA 트래커를 사용합니다. {% .lead %}
 
 ## 개요
 
@@ -272,3 +292,10 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
   // 또는 candyGuard: publicKey("Address") candyGuard 주소와 함께
 });
 ```
+
+## Notes
+
+- Allocation Tracker PDA는 민팅이 시작되기 전에 라우트 지시사항을 통해 초기화해야 합니다. 초기화하지 않고 민팅을 시도하면 실패합니다.
+- 각 고유한 `id` 값은 별도의 온체인 트래커를 생성하므로, 서로 다른 가드 그룹이 동일한 코어 캔디 머신 내에서 독립적인 할당 카운트를 유지할 수 있습니다.
+- Allocation 가드는 가드 그룹당 총 민팅 수를 제한하며, 지갑당 제한이 아닙니다. 개별 지갑당 민팅을 제한하려면 [Mint Limit](/ko/smart-contracts/core-candy-machine/guards/mint-limit) 가드를 대신 사용하세요.
+

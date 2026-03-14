@@ -1,8 +1,28 @@
 ---
 title: "NFT Payment Guard"
-metaTitle: "NFT Payment Guard | Core Candy Machine"
-description: "Core Candy Machine의 'NFT Payment' 가드는 지정된 NFT 컬렉션에서 결제자에게 NFT/pNFT를 청구하여 민팅을 허용합니다. 결제로 사용된 NFT/pNFT는 사전 정의된 목적지로 전송됩니다."
+metaTitle: "NFT Payment Guard - NFT로 민팅 결제 | Core Candy Machine"
+description: "Core Candy Machine의 NFT Payment 가드는 지정된 컬렉션에서 결제자에게 NFT를 청구하여 민팅을 허용하고, 소각 대신 사전 정의된 대상 지갑으로 NFT를 전송합니다."
+keywords:
+  - NFT Payment guard
+  - Core Candy Machine
+  - candy guard
+  - pay with NFT
+  - NFT transfer on mint
+  - token gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-as-payment access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Payment** 가드는 지정된 컬렉션에서 결제자에게 NFT를 청구하여 민팅을 허용하고, 소각 대신 사전 정의된 대상 지갑으로 NFT를 전송합니다. {% .lead %}
 
 ## 개요
 
@@ -167,3 +187,12 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _NFT Payment 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- [NFT Burn](/ko/smart-contracts/core-candy-machine/guards/nft-burn) 가드와 달리, 이 가드는 NFT를 소각하지 않고 대상 지갑으로 전송합니다. NFT는 유통 상태로 남습니다.
+- 대상 지갑은 가드 설정과 민트 인수 모두에서 지정해야 합니다.
+- 결제자가 필수 컬렉션에서 NFT를 소유하지 않으면 민트 트랜잭션이 실패합니다.
+- Rule Set이 있는 Programmable NFT로 결제할 때, 전송이 NFT의 인가 규칙을 준수하도록 민트 인수에 `ruleSet`을 포함하세요.
+- 이 가드는 결제 및 컬렉션 검증을 위해 Token Metadata NFT(Core Asset이 아님)를 사용합니다.
+

@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Token Payment Guard'
-metaTitle: 'Freeze Token Payment Guard | Core Candy Machine'
-description: "Core Candy Machine의 'Freeze Token Payment' 가드를 사용하면 SPL 토큰을 민팅 화폐로 설정하고 그 값을 설정하는 동시에 구매 시 민팅된 Core NFT Asset을 설정된 기간 동안 동결할 수 있습니다."
+metaTitle: "Freeze Token Payment 가드 - SPL 토큰 청구 및 민팅된 Asset 동결 | 코어 캔디 머신"
+description: "Freeze Token Payment 가드는 지불자에게 지정된 금액의 SPL 토큰을 청구하고 민팅된 Core Asset을 구성 가능한 기간 동안 동결합니다. 동결된 Asset은 route instruction을 통해 해제될 때까지 전송할 수 없습니다."
+keywords:
+  - freeze token payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SPL token payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SPL token payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Freeze Token Payment** 가드는 지불자에게 지정된 금액의 SPL 토큰을 청구하고 민팅된 Core Asset을 구성 가능한 기간 동안 동결하여, Asset이 해제될 때까지 전송을 방지합니다. {% .lead %}
 
 ## 개요
 
@@ -576,7 +597,7 @@ Freeze Token Payment 가드 내에서 Asset의 동결을 중단하는 것이 가
 
 Freeze Escrow 계정은 Destination 주소에서 파생된 PDA입니다. 이는 **여러 Freeze Token Payment 가드**가 **같은 Destination 주소**를 사용하도록 구성된 경우, 모두 **같은 Freeze Escrow 계정을 공유**한다는 의미입니다.
 
-따라서 같은 동결 기간을 공유하고 모든 자금이 같은 escrow 계정에 의해 수집됩니다. 이는 또한 구성된 Destination 주소당 한 번만 `initialize` route instruction을 호출하면 된다는 것을 의미합니다.이는 route instruction이 구성된 Destination 주소당 한 번만 필요하다는 것을 의미합니다. `unlockFunds`에 대해서도 마찬가지입니다. `thaw`의 경우 같은 escrow 계정을 공유한다면 원하는 라벨을 사용할 수 있습니다.
+따라서 같은 동결 기간을 공유하고 모든 자금이 같은 escrow 계정에 의해 수집됩니다. 이는 또한 구성된 Destination 주소당 한 번만 `initialize` route instruction을 호출하면 된다는 것을 의미합니다. 이는 route instruction이 구성된 Destination 주소당 한 번만 필요하다는 것을 의미합니다. `unlockFunds`에 대해서도 마찬가지입니다. `thaw`의 경우 같은 escrow 계정을 공유한다면 원하는 라벨을 사용할 수 있습니다.
 
 서로 다른 Destination 주소로 여러 Freeze Token Payment 가드를 사용하는 것도 가능합니다. 이 경우 각 Freeze Token Payment 가드는 자체 Freeze Escrow 계정과 자체 동결 기간을 갖습니다.
 
@@ -676,3 +697,13 @@ Owner: Candy Machine Core Program {% .whitespace-nowrap %}
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## Notes
+
+- Freeze Escrow 계정은 민팅이 시작되기 전에 `initialize` route instruction을 통해 초기화해야 합니다.
+- 최대 동결 기간은 30일(2,592,000초)입니다. 기간은 초기화 시점이 아닌 첫 번째 동결된 Asset이 민팅된 시점부터 시작됩니다.
+- Freeze Escrow의 토큰은 모든 동결된 Asset이 해제될 때까지 잠금 해제할 수 없습니다.
+- Destination ATA는 SPL 토큰 민트와 목적지 지갑에서 파생된 유효한 Associated Token Address여야 합니다.
+- 동결된 Asset이 존재하는 상태에서 Candy Guard 계정을 삭제하면, 다른 해제 조건이 충족될 때까지 해당 Asset은 영구적으로 동결됩니다.
+- 여러 가드 그룹이 같은 Destination ATA를 공유하면, 단일 Freeze Escrow와 동결 기간을 공유합니다.
+

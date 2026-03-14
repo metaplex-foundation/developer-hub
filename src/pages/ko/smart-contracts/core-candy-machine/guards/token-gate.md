@@ -1,8 +1,27 @@
 ---
 title: Token Gate Guard
-metaTitle: Token Gate Guard | Core Candy Machine
-description: "Core Candy Machine 'Token Gate' guard는 구성된 SPL Token 보유자로 민팅을 제한합니다."
+metaTitle: "Token Gate Guard | Core Candy Machine"
+description: "Core Candy Machine의 Token Gate 가드는 구성된 SPL 토큰의 최소 잔액을 보유한 지갑으로 민팅을 제한하며, 토큰을 소각하거나 전송하지 않습니다."
+keywords:
+  - Token Gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - SPL token holder
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Token-gated minting access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Gate** 가드는 구성된 SPL 토큰의 최소 수량을 보유한 지갑으로 민팅을 제한하며, 해당 토큰을 소각하거나 전송하지 않습니다. {% .lead %}
 
 ## 개요
 
@@ -139,3 +158,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _Token Gate guard는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- Token Gate 가드는 결제자가 필요한 토큰 잔액을 보유하고 있는지만 **확인**합니다 -- 토큰을 소각하거나 전송하지 않습니다. 토큰을 소비하는 가드는 [Token Burn](/ko/smart-contracts/core-candy-machine/guards/token-burn) 또는 [Token Payment](/ko/smart-contracts/core-candy-machine/guards/token-payment)를 참조하세요.
+- 이 가드는 기존 **SPL Token 프로그램**을 사용합니다. Token-2022 민트는 지원하지 않습니다.
+- 토큰 잔액 확인은 민팅 시점에 발생합니다. 가드 평가와 트랜잭션 실행 사이에 결제자의 잔액이 필요한 **Amount** 미만으로 떨어지면 민트가 실패합니다.
+

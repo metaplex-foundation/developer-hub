@@ -1,8 +1,27 @@
 ---
 title: "Asset Payment Multiガード"
 metaTitle: "Asset Payment Multiガード | Core Candy Machine"
-description: "Core Candy Machineの「Asset Payment Multi」ガードは、Core Candy Machineからのミントの支払いとして、特定のコレクションから他のCore Assetを請求します。"
+description: "Core Candy Machineの「Asset Payment Multi」ガードは、Core Candy Machineからのミントの支払いとして、指定されたコレクションから1つ以上のCore Assetを請求します。"
+keywords:
+  - asset payment multi
+  - Core Candy Machine
+  - candy guard
+  - multiple NFT payment
+  - bulk asset payment
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - multi-asset mint payment
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Payment Multi** ガードは、Core Candy Machineからミントするための支払いとして、指定されたコレクションから1つ以上のCore Assetを転送することをミンターに要求します。 {% .lead %}
 
 ## 概要
 
@@ -167,3 +186,11 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Asset Payment Multiガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- 支払いとして使用されるすべてのアセットは宛先ウォレットに永久に転送されます -- ミンターはそれぞれの所有権を失います。
+- ガード設定の`num`フィールドは、ミント時に`assets`配列で提供されるアセットアドレスの数と一致する必要があります。
+- `assets`配列内のすべてのアセットは指定された必要なコレクションに属している必要があります。いずれかのアセットが異なるコレクションからのものである場合、ミントトランザクションは失敗します。
+- 単一のアセットのみを支払いとして要求する場合は、代わりに [Asset Payment](/ja/smart-contracts/core-candy-machine/guards/asset-payment) ガードを使用してください。
+

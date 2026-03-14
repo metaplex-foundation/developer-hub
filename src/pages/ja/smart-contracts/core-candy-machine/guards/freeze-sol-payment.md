@@ -1,8 +1,29 @@
 ---
 title: 'Freeze Sol Payment ガード'
-metaTitle: Freeze Sol Payment ガード | Core Candy Machine
-description: "Core Candy Machine の 'Freeze Sol Payment' を使用すると、ミント価格を SOL で設定しつつ、購入されたCore NFT Asset を一定期間凍結することができます。"
+metaTitle: "Freeze Sol Paymentガード - SOLを課金しミント済みアセットを凍結 | Core Candy Machine"
+description: "Freeze Sol Paymentガードは、支払者にSOLを課金し、ミントされたCore Assetを設定可能な期間凍結します。凍結されたアセットはルート命令で解凍されるまで転送できません。"
+keywords:
+  - freeze sol payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SOL payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Freeze Sol Payment** ガードは、支払者にSOLを課金し、ミントされたCore Assetを設定可能な期間凍結し、アセットが解凍されるまで転送を防止します。 {% .lead %}
 
 ## 概要
 
@@ -651,3 +672,12 @@ Freeze Escrow アカウントは Destination アドレスから派生した PDA 
 {% edge from="candy-guard" to="candy-machine" /%}
 
 {% /diagram %}
+
+## 注意事項
+
+- Freeze Escrowアカウントは、ミントが開始される前に`initialize`ルート命令を介して初期化する必要があります。
+- 最大凍結期間は30日間（2,592,000秒）です。期間は初期化時ではなく、最初の凍結されたアセットがミントされた時点から開始されます。
+- Freeze Escrow内の資金は、すべての凍結されたアセットが解凍されるまでロック解除できません。
+- 凍結されたアセットが存在する状態でCandy Guardアカウントを削除すると、別の解凍条件が満たされるまでそれらのアセットは永久に凍結されます。
+- 複数のガードグループが同じDestinationアドレスを共有する場合、単一のFreeze EscrowとFreeze Periodを共有します。
+

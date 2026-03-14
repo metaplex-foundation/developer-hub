@@ -1,8 +1,27 @@
 ---
 title: "Edition Guard"
 metaTitle: "Edition Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Edition' guard allows the minting of Editions from a Core Candy Machine."
+description: "The Core Candy Machine 'Edition' guard assigns sequential edition numbers to Assets minted from a Core Candy Machine, starting from a configurable offset."
+keywords:
+  - edition
+  - Core Candy Machine
+  - candy guard
+  - edition number
+  - numbered editions
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - edition numbering
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Edition** guard assigns sequential edition numbers to Assets minted from a Core Candy Machine, starting from a configurable offset value. {% .lead %}
 
 ## Overview
 
@@ -103,3 +122,10 @@ _The Edition guard does not need Mint Settings._
 ## Route Instruction
 
 _The Edition guard does not require a route instruction._
+
+## Notes
+
+- The Edition guard does not restrict who can mint or charge a fee -- it solely controls edition number assignment on minted Assets.
+- Edition numbers increment sequentially from the `editionStartOffset` value. Setting this to `0` means the first minted Asset receives edition number 0.
+- The edition counter is tracked via an on-chain PDA (Edition Counter PDA), ensuring each mint receives a unique, sequential edition number.
+

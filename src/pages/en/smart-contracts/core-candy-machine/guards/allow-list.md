@@ -1,8 +1,30 @@
 ---
 title: Allowlist Guard
 metaTitle: Allowlist Guard | Core Candy Machine
-description: "The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine"
+description: "The Core Candy Machine 'Allowlist' guard validates the minting wallet against a Merkle Tree of predefined wallet addresses, requiring a Merkle Proof pre-validation before minting is permitted."
+keywords:
+  - allowlist
+  - allow list
+  - Core Candy Machine
+  - candy guard
+  - Merkle Tree
+  - Merkle Proof
+  - whitelist
+  - wallet validation
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - Merkle Tree-based wallet allowlisting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Allow List** guard validates the minting wallet against a Merkle Tree of predefined addresses, only permitting wallets that provide a valid Merkle Proof to mint from the Core Candy Machine. {% .lead %}
 
 ## Overview
 
@@ -85,7 +107,7 @@ To verify that a leaf is part of the tree, we simply need a list of all the inte
 
 {% /diagram %}
 
-Therefore, the Allow List guard’s settings require a Merkle Root which acts as a source of truth for the preconfigured list of allowed wallets. For a wallet to prove it is on the allowed list, it must provide a valid Merkle Proof that allows the program to re-compute the Merkle Root and ensure it matches the guard’s settings.
+Therefore, the Allow List guard's settings require a Merkle Root which acts as a source of truth for the preconfigured list of allowed wallets. For a wallet to prove it is on the allowed list, it must provide a valid Merkle Proof that allows the program to re-compute the Merkle Root and ensure it matches the guard's settings.
 
 Note that our SDKs provide helpers to make it easy to create Merkle Root and Merkle Proofs for a given list of wallets.
 
@@ -276,7 +298,7 @@ The Allow List guard contains the following Mint Settings:
 
 Note that, before being able to mint, **we must validate the minting wallet by providing a Merkle Proof**. See [Validate a Merkle Proof](#validate-a-merkle-proof) below for more details.
 
-Also note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
+Also note that, if you're planning on constructing instructions without the help of our SDKs, you will need to add the Allow List Proof PDA to the remaining accounts of the mint instruction. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allowlist) for more details.
 
 {% dialect-switcher title="Mint with the Allow List guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -326,13 +348,13 @@ Instead of passing the Merkle Proof directly to the mint instruction, the mintin
 
 This route instruction will compute the Merkle Root from the provided Merkle Proof and, if valid, will create a new PDA account acting as proof that the minting wallet is part of the allowed list. Therefore, when minting, the Allow List guard only needs to check for the existence of this PDA account to authorize or deny minting to the wallet.
 
-So why can’t we just verify the Merkle Proof directly within the mint instruction? That’s simply because, for big allow lists, Merkle Proofs can end up being pretty lengthy. After a certain size, it becomes impossible to include it within the mint transaction that already contains a decent amount of instructions. By separating the validation process from the minting process, we make it possible for allow lists to be as big as we need them to be.
+So why can't we just verify the Merkle Proof directly within the mint instruction? That's simply because, for big allow lists, Merkle Proofs can end up being pretty lengthy. After a certain size, it becomes impossible to include it within the mint transaction that already contains a decent amount of instructions. By separating the validation process from the minting process, we make it possible for allow lists to be as big as we need them to be.
 
 This path of the route instruction accepts the following arguments:
 
 - **Path** = `proof`: Selects the path to execute in the route instruction.
 - **Merkle Root**: The Root of the Merkle Tree representing the allow list.
-- **Merkle Proof**: The list of intermediary hashes that should be used to compute the Merkle Root and verify that it matches the Merkle Root stored on the guard’s settings.
+- **Merkle Proof**: The list of intermediary hashes that should be used to compute the Merkle Root and verify that it matches the Merkle Root stored on the guard's settings.
 - **Minter** (optional): The minter account as a signer if it is not the same as the payer. When provided, this account must be part of the allow list for the proof to be valid.
 
 {% dialect-switcher title="Pre-Validate a Wallet" %}
@@ -405,3 +427,11 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
   // or publicKey of the "minting" account
 });
 ```
+
+## Notes
+
+- The Merkle Proof must be validated via the route instruction before minting. This is a two-step process: first call `route` with the proof, then call `mintV1`.
+- For very large allow lists, the Merkle Proof is separated from the mint transaction to avoid exceeding Solana's transaction size limits.
+- If the allow list changes, a new Merkle Root must be computed and the guard settings must be updated accordingly. Previously validated proofs will become invalid.
+- The Allow List guard differs from the [Address Gate](/smart-contracts/core-candy-machine/guards/address-gate) guard, which restricts minting to a single address rather than a list of addresses.
+

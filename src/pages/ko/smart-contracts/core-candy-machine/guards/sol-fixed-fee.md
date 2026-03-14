@@ -1,8 +1,28 @@
 ---
 title: Sol Fixed Fee Guard
-metaTitle: Sol Fixed Fee Guard | Core Candy Machine
-description: Core Candy Machine의 'Sol Fixed Fee' 가드는 민팅 시 결제자에게 SOL 수수료를 청구합니다
+metaTitle: "Sol Fixed Fee Guard - Core Candy Machine Guard | Metaplex"
+description: "Sol Fixed Fee 가드는 Core Candy Machine에서 민팅 시 결제자에게 고정 SOL 수수료를 청구하고 구성된 대상 지갑으로 수수료를 전송합니다."
+keywords:
+  - sol fixed fee
+  - Core Candy Machine
+  - candy guard
+  - SOL payment
+  - mint fee
+  - fixed fee
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Sol Fixed Fee** 가드는 Core Candy Machine에서 민팅 시 결제자에게 고정 SOL 수수료를 청구하고 구성된 대상 지갑으로 수수료를 전송합니다. {% .lead %}
 
 ## 개요
 
@@ -139,3 +159,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _Sol Fixed Fee 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- Sol Fixed Fee 가드는 가드 설정과 민트 설정 모두에서 `destination` 지갑 주소를 제공해야 합니다.
+- 수수료 금액은 lamports로 지정됩니다. SOL을 lamports로 변환하려면 `sol()` 헬퍼를 사용하세요(예: `sol(1.5)`는 1,500,000,000 lamports).
+- 이 가드는 [Sol Payment](/ko/smart-contracts/core-candy-machine/guards/sol-payment) 가드와 유사하게 작동합니다. 주요 차이점은 Sol Fixed Fee가 고정 수수료 징수 시나리오를 위해 설계되었다는 것입니다.
+

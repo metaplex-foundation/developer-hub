@@ -2,21 +2,52 @@
 title: Hidden Settings로 Core Candy Machine 만들기
 metaTitle: Hidden Settings로 Core Candy Machine 만들기 | Core Candy Machine
 description: 숨기기-공개 NFT 드롭을 생성하기 위해 hidden settings로 Core Candy Machine을 만드는 방법.
+keywords:
+  - hidden settings
+  - hide and reveal
+  - NFT reveal
+  - placeholder metadata
+  - candy machine reveal
+  - hidden NFT
+  - reveal mechanism
+  - Core Candy Machine hidden settings
+  - NFT drop
+about:
+  - Hidden settings
+  - Reveal mechanism
+  - NFT drops
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: Core Candy Machine의 hidden settings란 무엇인가요?
+    a: Hidden settings는 모든 민팅된 NFT가 처음에 동일한 플레이스홀더 메타데이터(이름과 URI)를 공유하도록 하며, 이후 공개 과정에서 각 NFT의 고유한 특성을 보여주도록 업데이트됩니다.
+  - q: Hidden settings의 해시는 어떻게 작동하나요?
+    a: 해시는 공개 데이터 배열의 SHA-256 체크섬입니다. 공개 후 사용자는 업데이트된 메타데이터에서 해시를 재계산하여 NFT가 변조되지 않았는지 확인할 수 있습니다.
+  - q: Config Line Settings와 함께 hidden settings를 사용할 수 있나요?
+    a: 아니요. Hidden Settings와 Config Line Settings는 상호 배타적입니다 -- Candy Machine을 생성할 때 둘 중 하나를 선택해야 합니다.
 ---
 
-숨기기-공개 NFT 드롭을 만들고 싶다면, Core Candy Machine을 사용하여 그 목표를 달성할 수 있습니다. 이 가이드는 전체 과정의 포괄적인 안내를 보장하기 위해 두 부분으로 나뉩니다.
+## 요약
 
-이 가이드(1부)에서는 Core Candy Machine을 사용하여 숨기기-공개 NFT 드롭을 설정하고 민팅하는 단계별 과정을 안내합니다. 숙련된 개발자이든 NFT 드롭을 처음 접하는 사람이든, 이 가이드는 시작하는 데 필요한 모든 것을 제공합니다. NFT 드롭 공개와 검증은 2부에서 다뤄집니다.
+이 가이드는 숨기기-공개 NFT 드롭을 위한 hidden settings가 포함된 [Core Candy Machine](/ko/smart-contracts/core-candy-machine) 생성을 안내하며, 모든 민팅된 에셋이 민팅 후 공개에서 각 NFT의 고유한 이름과 URI로 업데이트될 때까지 플레이스홀더 메타데이터를 공유합니다. {% .lead %}
+
+- 플레이스홀더 이름, URI, 공개 데이터의 SHA-256 해시로 hidden settings를 구성합니다
+- [Core 컬렉션](/ko/smart-contracts/core/collections)과 `hiddenSettings` 필드가 있는 Candy Machine을 생성합니다
+- 모든 에셋을 민팅합니다 -- 공개 단계까지 각 에셋은 동일한 플레이스홀더 메타데이터를 받습니다
+- 공개 및 검증 과정은 이 가이드의 2부에서 다룹니다
 
 숨기기-공개 NFT 드롭은 모든 NFT를 민팅한 후 공개하고 싶을 때 유용할 수 있습니다.
 
 이것이 작동하는 방식은 Core Candy Machine을 설정할 때 hidden settings 필드를 구성하는 것입니다. 이 필드는 공개 전 모든 민팅된 NFT에 적용될 플레이스홀더 메타데이터(일반적인 이름과 URI)를 포함합니다. 또한 메타데이터의 미리 계산된 해시도 포함합니다.
+공개 전에 민팅될 모든 NFT는 동일한 이름과 URI를 갖게 됩니다. 컬렉션이 민팅된 후, 에셋은 올바른 이름과 URI(메타데이터)로 업데이트됩니다.
 
-공개 전에 민팅될 모든 NFT는 동일한 이름과 URI를 갖게 됩니다. 컬렉션이 민팅된 후, asset은 올바른 이름과 URI(메타데이터)로 업데이트됩니다.
+컬렉션을 민팅한 후, 적절한 메타데이터로 에셋을 업데이트하는 공개 과정이 수행되어야 합니다.
 
-컬렉션을 민팅한 후, 적절한 메타데이터로 Asset을 업데이트하는 공개 과정이 수행되어야 합니다.
-
-Asset이 올바르게 업데이트되었는지 확인하기 위해 검증 단계가 수행됩니다. 이는 공개된 Asset의 업데이트된 메타데이터(이름과 URI)를 해시하고 hidden settings에 저장된 원래 해시와 비교하는 것을 포함합니다. 이는 모든 NFT가 정확하게 업데이트되었음을 보장합니다.
+에셋이 올바르게 업데이트되었는지 확인하기 위해 검증 단계가 수행됩니다. 이는 공개된 에셋의 업데이트된 메타데이터(이름과 URI)를 해시하고 hidden settings에 저장된 원래 해시와 비교하는 것을 포함합니다. 이는 모든 NFT가 정확하게 업데이트되었음을 보장합니다.
 
 공개와 검증 단계 모두 이 가이드의 2부에서 다뤄질 것입니다.
 
@@ -30,11 +61,9 @@ Core Candy Machine과 상호작용하기 위해 다음 패키지를 설치해야
 npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
 ```
 
-## umi 설정
+## Umi 설정
 
-환경을 설정한 후, umi 설정을 시작해보겠습니다.
-
-Umi를 설정하는 동안 테스트용 새 지갑을 생성하거나, 파일시스템에서 지갑을 가져오거나, UI/프론트엔드에서 `walletAdapter`를 사용할 수도 있습니다.
+[Umi](/ko/dev-tools/umi)는 Solana 프로그램과 상호작용하기 위한 통합 인터페이스를 제공하는 Metaplex의 JavaScript 클라이언트 프레임워크입니다. Umi를 설정하는 동안 테스트용 새 지갑을 생성하거나, 파일시스템에서 지갑을 가져오거나, UI/프론트엔드에서 `walletAdapter`를 사용할 수도 있습니다.
 이 예제에서는 비밀 키가 포함된 json 파일(wallet.json)에서 Keypair를 생성하겠습니다.
 
 Solana Devnet 엔드포인트를 사용할 것입니다.
@@ -45,38 +74,38 @@ import { generateSigner, some, none, createSignerFromKeypair, signerIdentity, tr
 import { mplCandyMachine as mplCoreCandyMachine } from '@metaplex-foundation/mpl-core-candy-machine';
 import * as fs from 'fs';
 
-// `mplCoreCandyMachine()` 플러그인을 로드하면서 Solana Devnet을 엔드포인트로 사용합니다.
+// We will be using Solana Devnet as the endpoint while also loading the `mplCoreCandyMachine()` plugin.
 const umi = createUmi("https://api.devnet.solana.com")
             .use(mplCoreCandyMachine());
 
-// 비밀 키가 포함된 wallet json 파일에서 Keypair를 생성하고, 생성된 키페어를 기반으로 서명자를 생성합니다.
+// Let's create a Keypair from our wallet json file that contains a secret key, and create a signer based on the created keypair
 const walletFile = fs.readFileSync('./wallet.json');
 
 let keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(walletFile));
 const signer = createSignerFromKeypair(umi, keypair);
 console.log("Signer: ", signer.publicKey);
 
-// 주어진 서명자로 신원과 지불자를 설정합니다.
+// Set the identity and the payer to the given signer
 umi.use(signerIdentity(signer));
 ```
 
-UMI 설정에 대한 자세한 정보는 [Core NFT Asset 생성 가이드의 UMI 설정 섹션](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
+UMI 설정에 대한 자세한 정보는 [Core NFT Asset 생성 가이드](/ko/smart-contracts/core/guides/javascript/how-to-create-a-core-nft-asset-with-javascript#setting-up-umi)에서 찾을 수 있습니다.
 
-## 공개 데이터 준비
-이제 최종 공개된 NFT의 메타데이터가 포함될 공개 데이터를 준비해보겠습니다. 이 데이터는 컬렉션의 각 NFT에 대한 이름과 URI를 포함하며 민팅 후 플레이스홀더 메타데이터를 업데이트하는 데 사용됩니다.
-이 메타데이터는 각 asset에 대해 업로드되며, 결과 URI를 사용할 것입니다.
+## 공개 데이터 및 해시 준비
+
+공개 데이터는 컬렉션의 각 NFT에 대한 `{ name, uri }` 객체 배열로, 민팅 후 플레이스홀더 메타데이터를 대체합니다. 또한 공개 데이터의 해시를 생성합니다. 이 해시는 Core Candy Machine의 hidden settings에 저장되며 검증 단계에서 메타데이터가 올바르게 업데이트되었는지 확인하는 데 사용됩니다.
+
+이 메타데이터는 각 에셋에 대해 업로드되며, 결과 URI를 사용할 것입니다.
 
 공개 데이터를 직접 업로드해야 한다는 점을 참고하세요.
 이 과정은 기본적으로 결정론적이지 않을 것입니다. 결정론적인 방식으로 수행하려면 [turbo](/ko/guides/general/create-deterministic-metadata-with-turbo)를 사용할 수 있습니다.
 
-이 예제에서는 5개 asset의 컬렉션으로 작업할 것이므로, 공개 데이터에는 각각 개별 NFT의 이름과 URI를 나타내는 5개 객체의 배열이 포함됩니다.
-
-또한 공개 데이터의 해시를 생성할 것입니다. 이 해시는 Core Candy Machine의 hidden settings에 저장되며 검증 단계에서 메타데이터가 올바르게 업데이트되었는지 확인하는 데 사용됩니다.
+이 예제에서는 5개 에셋의 컬렉션으로 작업할 것이므로, 공개 데이터에는 각각 개별 NFT의 이름과 URI를 나타내는 5개 객체의 배열이 포함됩니다.
 
 ```ts
 import crypto from 'crypto';
 
-// 공개 과정에서 사용될 asset의 공개 데이터
+// Reveal data of our assets, to be used during the reveal process
 const revealData = [
       { name: 'Nft #1', uri: 'http://example.com/1.json' },
       { name: 'Nft #2', uri: 'http://example.com/2.json' },
@@ -89,10 +118,9 @@ let string = JSON.stringify(revealData)
 let hash = crypto.createHash('sha256').update(string).digest()
 ```
 
-## 컬렉션 생성
+## Core 컬렉션 생성
 
-이제 Collection asset을 생성해보겠습니다.
-이를 위해 mpl-core 라이브러리는 해당 작업을 수행하는 데 도움이 되는 `createCollection` 메서드를 제공합니다.
+[Core 컬렉션](/ko/smart-contracts/core/collections) 에셋은 Candy Machine에서 민팅된 모든 NFT의 상위 에셋으로 필요합니다. `mpl-core` 라이브러리의 `createCollection` 메서드가 단일 명령으로 생성을 처리합니다.
 
 컬렉션에 대해 자세히 알아보려면 [Collections 페이지](/ko/smart-contracts/core/collections)를 참고하세요.
 
@@ -143,13 +171,15 @@ console.log("Collection Details: \n", collection);
 
 ## Hidden Settings로 Core Candy Machine 생성
 
-다음 단계는 Hidden Settings로 Core Candy Machine을 생성하는 것입니다.
-
-이를 달성하기 위해 mpl-core-candy-machine 라이브러리의 `create` 메서드를 사용하고, `revealData`에서 플레이스홀더 이름, URI, 미리 계산된 해시로 `hiddenSettings`를 설정합니다.
+`mpl-core-candy-machine` 라이브러리의 `create` 메서드는 `configLineSettings`를 대체하는 `hiddenSettings` 필드를 허용합니다. 숨기기-공개 흐름을 위해 Candy Machine을 구성하려면 플레이스홀더 이름, URI, 미리 계산된 해시를 전달합니다.
 
 Core Candy Machine 생성과 guard에 대한 자세한 정보는 [Core Candy Machine 생성 페이지](/ko/smart-contracts/core-candy-machine/create)에서 찾을 수 있습니다.
 
-또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 guard 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [Guards 페이지](/ko/smart-contracts/core-candy-machine/guards)에서 찾을 수 있습니다.
+또한 민팅이 시작되는 시점을 결정하는 startDate guard를 구성합니다. 이는 사용 가능한 많은 [guard](/ko/smart-contracts/core-candy-machine/guards) 중 하나일 뿐이며 사용 가능한 모든 guard의 목록은 [Guards 페이지](/ko/smart-contracts/core-candy-machine/guards)에서 찾을 수 있습니다.
+
+{% callout type="note" %}
+Hidden Settings와 Config Line Settings는 상호 배타적입니다. `hiddenSettings`를 사용할 때는 `configLineSettings: none()`으로 설정해야 하며, 그 반대도 마찬가지입니다.
+{% /callout %}
 
 ```ts
 import { create } from '@metaplex-foundation/mpl-core-candy-machine';
@@ -273,9 +303,7 @@ console.log("Candy Machine Details: \n", candyMachineDetails);
 
 ## 컬렉션 민팅
 
-이제 Core Candy Machine에서 5개의 NFT를 민팅해보겠습니다.
-
-민팅된 모든 asset은 생성한 Core Candy Machine의 `hiddenSettings` 필드에 설정한 플레이스홀더 이름과 URI를 갖게 됩니다.
+각 `mintV1` 호출은 hidden settings의 플레이스홀더 이름과 URI를 받는 하나의 에셋을 민팅합니다. 민팅된 모든 에셋은 생성한 Core Candy Machine의 `hiddenSettings` 필드에 설정한 플레이스홀더 이름과 URI를 갖게 됩니다.
 
 이러한 플레이스홀더 요소는 공개 과정에서 업데이트됩니다.
 
@@ -305,16 +333,39 @@ for(let i = 0; i < nftMint.length; i++) {
 };
 ```
 
+## 참고사항
+
+- **Hidden Settings와 Config Line Settings는 상호 배타적입니다.** Core Candy Machine을 생성할 때 `hiddenSettings` 또는 `configLineSettings` 중 하나를 선택해야 합니다 -- 둘 다 사용할 수 없습니다. 사용하지 않는 옵션은 `none()`으로 설정하세요.
+- **해시는 공개 무결성을 검증합니다.** hidden settings에 저장된 SHA-256 해시는 공개 데이터 배열에서 계산됩니다. 공개 후 누구나 온체인 메타데이터에서 해시를 재계산하여 NFT가 변조되지 않았는지 확인할 수 있습니다.
+- **모든 민팅된 NFT는 공개까지 동일한 메타데이터를 공유합니다.** 공개 과정 전에 민팅된 모든 에셋은 hidden settings에 구성된 동일한 플레이스홀더 이름과 URI를 표시합니다. 개별 메타데이터는 2부에서 다루는 공개 단계에서만 적용됩니다.
+
 ## 결론
-축하합니다! 가이드의 1부를 완료하고 hidden settings로 Core Candy Machine을 성공적으로 설정했습니다.
+
+가이드의 1부를 완료하고 hidden settings로 Core Candy Machine을 성공적으로 설정했습니다.
 
 우리가 한 모든 일을 다시 살펴보겠습니다:
 - UMI 설정부터 시작했습니다.
-- UMI를 설정한 후, 초기 민팅 후 asset을 업데이트하는 데 사용될 메타데이터(이름과 URI)가 포함된 배열을 생성했습니다. 여기에는 검증 목적으로 해시 계산이 포함되었습니다.
-- 민팅된 asset이 속할 Collection asset을 생성했습니다.
+- UMI를 설정한 후, 초기 민팅 후 에셋을 업데이트하는 데 사용될 메타데이터(이름과 URI)가 포함된 배열을 생성했습니다. 여기에는 검증 목적으로 해시 계산이 포함되었습니다.
+- 민팅된 에셋이 속할 Collection 에셋을 생성했습니다.
 - hidden setting, 5개의 사용 가능한 아이템, 시작 시간 guard가 있는 Core Candy Machine을 생성했습니다.
-- Core Candy Machine의 hidden setting에 저장된 플레이스홀더 값으로 Core Candy Machine에서 모든 asset을 민팅했습니다.
+- Core Candy Machine의 hidden setting에 저장된 플레이스홀더 값으로 Core Candy Machine에서 모든 에셋을 민팅했습니다.
 
-2부에서는 asset을 공개하고 메타데이터를 검증하는 단계를 다룰 것입니다. 여기에는 다음이 포함됩니다:
-- 컬렉션 asset을 가져와서 준비된 공개 데이터로 메타데이터를 업데이트합니다.
-- 공개된 asset의 메타데이터(이름과 URI)를 해시하고 예상 해시와 비교하여 공개 과정이 성공했는지 확인합니다.
+2부에서는 에셋을 공개하고 메타데이터를 검증하는 단계를 다룰 것입니다. 여기에는 다음이 포함됩니다:
+- 컬렉션 에셋을 가져와서 준비된 공개 데이터로 메타데이터를 업데이트합니다.
+- 공개된 에셋의 메타데이터(이름과 URI)를 해시하고 예상 해시와 비교하여 공개 과정이 성공했는지 확인합니다.
+
+## FAQ
+
+### Core Candy Machine의 hidden settings란 무엇인가요?
+
+Hidden settings는 모든 민팅된 NFT가 처음에 동일한 플레이스홀더 메타데이터(이름과 URI)를 공유하도록 하며, 이후 공개 과정에서 각 NFT의 고유한 특성을 보여주도록 업데이트됩니다.
+
+### Hidden settings의 해시는 어떻게 작동하나요?
+
+해시는 공개 데이터 배열의 SHA-256 체크섬입니다. 공개 후 사용자는 업데이트된 메타데이터에서 해시를 재계산하여 NFT가 변조되지 않았는지 확인할 수 있습니다.
+
+### Config Line Settings와 함께 hidden settings를 사용할 수 있나요?
+
+아니요. Hidden Settings와 Config Line Settings는 상호 배타적입니다 -- Candy Machine을 생성할 때 둘 중 하나를 선택해야 합니다.
+
+*Metaplex Foundation에서 유지관리. 2026년 3월 검증. `@metaplex-foundation/mpl-core-candy-machine`에 적용.*

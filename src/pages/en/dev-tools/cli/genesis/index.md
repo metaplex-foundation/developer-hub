@@ -51,7 +51,6 @@ Genesis smart contract internals, SDK/TypeScript integration, frontend developme
 
 **Jump to:** [Prerequisites](#prerequisites) · [General Flow](#general-flow) · [Command Reference](#command-reference) · [Common Errors](#common-errors) · [FAQ](#faq) · [Glossary](#glossary)
 
-*Maintained by Metaplex Foundation · Last verified February 2026 · Requires Metaplex CLI (mplx)*
 
 ## Prerequisites
 

@@ -1,8 +1,28 @@
 ---
 title: Sol Fixed Fee Guard
-metaTitle: Sol Fixed Fee Guard | Core Candy Machine
-description: The Core Candy Machine 'Sol Fixed Fee' guard charges the payer an amount in SOL when minting
+metaTitle: "Sol Fixed Fee Guard - Core Candy Machine Guard | Metaplex"
+description: "The Sol Fixed Fee guard charges the payer a fixed amount in SOL upon minting from a Core Candy Machine, transferring the fee to a configured destination wallet."
+keywords:
+  - sol fixed fee
+  - Core Candy Machine
+  - candy guard
+  - SOL payment
+  - mint fee
+  - fixed fee
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Sol Fixed Fee** guard charges the payer a fixed amount in SOL when minting from a Core Candy Machine, transferring the fee to a configured destination wallet. {% .lead %}
 
 ## Overview
 
@@ -87,7 +107,7 @@ The Sol Payment guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Note that, in this example, we’re using the current identity as the destination wallet.
+Note that, in this example, we're using the current identity as the destination wallet.
 
 ```ts
 create(umi, {
@@ -113,7 +133,7 @@ The Sol Fixed Fee guard contains the following Mint Settings:
 
 - **Destination**: The address of the wallet that should receive all payments related to this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#solfixedfee) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#solfixedfee) for more details.
 
 {% dialect-switcher title="Mint with the Sol Fixed Fee Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,3 +159,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Sol Fixed Fee guard does not support the route instruction._
+
+## Notes
+
+- The Sol Fixed Fee guard requires the `destination` wallet address to be provided in both the guard settings and the mint settings.
+- The fee amount is specified in lamports. Use the `sol()` helper to convert SOL to lamports (e.g., `sol(1.5)` equals 1,500,000,000 lamports).
+- This guard works similarly to the [Sol Payment](/smart-contracts/core-candy-machine/guards/sol-payment) guard. The key difference is that Sol Fixed Fee is designed for flat fee collection scenarios.
+

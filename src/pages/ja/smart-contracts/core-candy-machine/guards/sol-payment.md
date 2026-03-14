@@ -1,8 +1,28 @@
 ---
-title: "Sol Payment Guard"
-metaTitle: Sol Payment Guard | Core Candy Machine
-description: "Core Candy Machine'Sol Payment'ガードは、ミント時にペイヤーからSOL量を請求します。"
+title: "Sol Paymentガード"
+metaTitle: "Sol Paymentガード - Core Candy Machineガード | Metaplex"
+description: "Sol Paymentガードは、Core Candy Machineからのミント時に支払者に設定可能なSOL金額を請求し、指定された宛先ウォレットに支払いを転送します。"
+keywords:
+  - sol payment
+  - Core Candy Machine
+  - candy guard
+  - SOL transfer
+  - mint payment
+  - lamports
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Sol Payment**ガードは、Core Candy Machineからのミント時に支払者に設定可能なSOL金額を請求し、指定された宛先ウォレットに支払いを転送します。 {% .lead %}
 
 ## 概要
 
@@ -137,3 +157,10 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## Route命令
 
 _Sol Paymentガードはroute命令をサポートしていません。_
+
+## 注意事項
+
+- Sol Paymentガードは、ガード設定とミント設定の両方で`destination`ウォレットアドレスを提供する必要があります。
+- 支払い金額はlamportsで指定します。`sol()`ヘルパーを使用してSOLをlamportsに変換してください（例: `sol(1.5)`は1,500,000,000 lamportsに相当）。
+- 支払者はミント支払いとSolanaトランザクション手数料の両方をカバーするのに十分なSOL残高を持っている必要があります。
+

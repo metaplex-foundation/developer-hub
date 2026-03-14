@@ -1,8 +1,28 @@
 ---
 title: Third Party Signer Guard
-metaTitle: Third Party Signer Guard | Core Candy Machine
-description: "Core Candy Machine의 'Third Party Signer' 가드는 각 민트 트랜잭션에 사전 정의된 주소가 서명하도록 요구하며, 그렇지 않으면 트랜잭션이 실패합니다."
+metaTitle: "Third Party Signer Guard - Core Candy Machine Guard | Metaplex"
+description: "Third Party Signer 가드는 Core Candy Machine에서 각 민트 트랜잭션에 사전 정의된 주소가 공동 서명하도록 요구하여, 중앙화된 민트 인가 및 게이트 접근 워크플로우를 가능하게 합니다."
+keywords:
+  - third party signer
+  - Core Candy Machine
+  - candy guard
+  - co-signer
+  - authorized minting
+  - gated mint
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - transaction co-signing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Third Party Signer** 가드는 Core Candy Machine에서 각 민트 트랜잭션에 사전 정의된 주소가 공동 서명하도록 요구하여, 중앙화된 민트 인가 및 게이트 접근 워크플로우를 가능하게 합니다. {% .lead %}
 
 ## 개요
 
@@ -135,3 +155,10 @@ myConfiguredSigner 키페어로도 트랜잭션에 서명하는 것을 기억하
 ## Route Instruction
 
 _Third Party Signer 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 가드 설정에서 구성된 `signerKey`는 민트 설정에서 전달되는 서명자의 공개 키와 정확히 일치해야 합니다. 그렇지 않으면 트랜잭션이 실패합니다.
+- 제3자 서명자 키페어는 민팅 시점에 트랜잭션에 서명할 수 있어야 합니다. 백엔드 게이트 워크플로우에서는 서명자 키페어가 일반적으로 서버 측에서 보유되며 블록체인으로 전달하기 전에 트랜잭션에 서명합니다.
+- 이 가드는 민트를 시작할 수 있는 사람을 제한하지 않습니다 -- 지정된 서명자가 공동 서명하도록만 요구합니다. 지갑 수준의 접근 제어를 위해 [Allow List](/ko/smart-contracts/core-candy-machine/guards/allow-list)와 같은 다른 가드와 결합하세요.
+

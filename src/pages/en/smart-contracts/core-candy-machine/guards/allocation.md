@@ -1,8 +1,28 @@
 ---
 title: Allocation Guard
 metaTitle: Mint Allocation Guard | Core Candy Machine
-description: "Learn about the Core Candy Machine 'Allocation' guard in which you can specify the maximum number of mints in a guard group for a Core Candy Machine."
+description: "The Core Candy Machine 'Allocation' guard limits the total number of mints allowed per guard group, tracked by a PDA-based counter identified by a configurable ID."
+keywords:
+  - allocation
+  - Core Candy Machine
+  - candy guard
+  - mint limit per group
+  - allocation tracker
+  - guard group limit
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - group-level mint allocation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Allocation** guard limits the total number of Assets that can be minted within a specific guard group, using an on-chain PDA tracker identified by a configurable ID. {% .lead %}
 
 ## Overview
 
@@ -123,7 +143,7 @@ The Allocation guard contains the following Mint Settings:
 
 - **ID**: A unique identifier for this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allocation) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#allocation) for more details.
 
 {% dialect-switcher title="Mint with the Allocation Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -272,3 +292,10 @@ const allocationTracker = await safeFetchAllocationTrackerFromSeeds(umi, {
   // or candyGuard: publicKey("Address") with your candyGuard Address
 });
 ```
+
+## Notes
+
+- The Allocation Tracker PDA must be initialized via the route instruction before any minting can occur. Attempting to mint without initializing it will fail.
+- Each unique `id` value creates a separate on-chain tracker, so different guard groups can maintain independent allocation counts within the same Core Candy Machine.
+- The Allocation guard limits total mints per guard group, not per wallet. To limit mints per individual wallet, use the [Mint Limit](/smart-contracts/core-candy-machine/guards/mint-limit) guard instead.
+

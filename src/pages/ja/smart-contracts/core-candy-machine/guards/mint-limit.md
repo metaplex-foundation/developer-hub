@@ -1,8 +1,28 @@
 ---
 title: Mint Limitガード
-metaTitle: "Mint Limitガード | Core Candy Machine"
-description: "Core Candy Machineの「Mint Limit」ガードは、各ウォレットがミントできるアセットの数に制限を指定できます。"
+metaTitle: "Mint Limitガード - ウォレットごとのミント数量を制限 | Core Candy Machine"
+description: "Mint Limitガードは、各ウォレットがCore Candy Machineからミントできるアセットの数を制限します。制限はウォレットごと、Candy Machineごと、識別子ごとに追跡されます。"
+keywords:
+  - mint limit
+  - Core Candy Machine
+  - candy guard
+  - per-wallet limit
+  - mint counter
+  - minting cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-wallet minting limits
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Mint Limit** ガードは、各ウォレットがCore Candy Machineからミントできるアセットの数を制限し、ウォレットごと、Candy Machineごと、設定可能な識別子ごとに追跡します。 {% .lead %}
 
 ## 概要
 
@@ -154,3 +174,10 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 // 既にミントされた量
 console.log(mintCounter.count)
 ```
+
+## 注意事項
+
+- Mint Limitカウンターは、ウォレットアドレス、Candy Machineアドレス、およびガードの`id`から派生した`MintCounter` PDAを介してオンチェーンで追跡されます。各一意の組み合わせが個別のカウンターアカウントを作成します。
+- 個別の[ガードグループ](/ja/smart-contracts/core-candy-machine/guard-groups)で異なる`id`値を使用すると、各グループが同じウォレットに対して独立したミント制限を適用できます。
+- `MintCounter`アカウントは、Candy Machineが完全にミントアウトした後もオンチェーンに残ります。`safeFetchMintCounterFromSeeds`を使用して、特定のウォレットがミントしたアセット数を確認できます。
+
