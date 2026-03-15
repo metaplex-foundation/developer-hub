@@ -164,4 +164,4 @@ The program returns these errors when validation fails during registration or de
 | 10 | `AssetOwnerMustBeTheOneToDelegateExecution` | Only the asset owner can delegate execution |
 | 11 | `InvalidExecutiveProfileDerivation` | Executive profile PDA derivation mismatch |
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*

@@ -140,4 +140,4 @@ const results = await getAgentIdentityV1GpaBuilder(umi)
 | 3 | `InvalidMplCoreProgram` | MPL Core program account is incorrect |
 | 4 | `InvalidCoreAsset` | Asset is not a valid MPL Core asset |
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
