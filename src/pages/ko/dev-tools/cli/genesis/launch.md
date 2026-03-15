@@ -61,7 +61,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
-  --raiseGoal 200 \
+  --raiseGoal 250 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
@@ -75,7 +75,7 @@ mplx genesis launch create \
 | `--image <string>` | token 이미지 URL (현재 `https://gateway.irys.xyz/`로 시작해야 함) |
 | `--tokenAllocation <integer>` | Launch Pool token 할당량 (10억 총 공급량의 일부) |
 | `--depositStartTime <string>` | 입금 시작 시간 (ISO 날짜 문자열 또는 Unix 타임스탬프) |
-| `--raiseGoal <integer>` | 모금 목표 (정수 단위, 예: 200 SOL의 경우 200) |
+| `--raiseGoal <integer>` | 모금 목표 (정수 단위, 예: SOL의 경우 250, USDC의 경우 5000) |
 | `--raydiumLiquidityBps <integer>` | Raydium 유동성 (basis point, 2000~10000, 즉 20%~100%) |
 | `--fundsRecipient <string>` | 자금 수령인 지갑 주소 |
 
@@ -102,7 +102,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
-  --raiseGoal 200 \
+  --raiseGoal 250 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
@@ -115,7 +115,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 1709251200 \
-  --raiseGoal 200 \
+  --raiseGoal 5000 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS> \
   --quoteMint USDC
@@ -133,7 +133,7 @@ mplx genesis launch create \
   --telegram "https://t.me/myproject" \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
-  --raiseGoal 200 \
+  --raiseGoal 250 \
   --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS> \
   --lockedAllocations allocations.json
@@ -192,7 +192,7 @@ launch 구성 JSON 파일은 `launch create` 입력과 동일한 형식을 사�
     "launchpool": {
       "tokenAllocation": 500000000,
       "depositStartTime": "2025-03-01T00:00:00Z",
-      "raiseGoal": 200,
+      "raiseGoal": 250,
       "raydiumLiquidityBps": 5000,
       "fundsRecipient": "<WALLET_ADDRESS>"
     }

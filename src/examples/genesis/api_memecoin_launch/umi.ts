@@ -20,19 +20,13 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 const input: CreateLaunchInput = {
   wallet: umi.identity.publicKey,
   token: {
-    name: 'My Token',
-    symbol: 'MTK',
+    name: 'My Memecoin',
+    symbol: 'MEME',
     image: 'https://gateway.irys.xyz/...',
   },
-  launchType: 'project',
+  launchType: 'memecoin',
   launch: {
-    launchpool: {
-      tokenAllocation: 500_000_000,
-      depositStartTime: new Date(Date.now() + 48 * 60 * 60 * 1000),
-      raiseGoal: 250,
-      raydiumLiquidityBps: 5000,
-      fundsRecipient: umi.identity.publicKey,
-    },
+    depositStartTime: new Date(Date.now() + 60 * 60 * 1000), // 1 hour from now
   },
 }
 

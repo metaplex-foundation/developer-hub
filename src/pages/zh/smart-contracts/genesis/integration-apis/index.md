@@ -3,7 +3,7 @@ title: 集成 API
 metaTitle: Genesis - 集成 API | 发行数据 | Metaplex
 description: 通过 HTTP REST 端点和链上 SDK 方法访问 Genesis 发行数据。无需认证的公开 API。
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -22,6 +22,15 @@ programmingLanguage:
 ---
 
 Genesis 集成 API 允许聚合器和应用程序查询 Genesis 代币发行的发行数据。通过 REST 端点访问元数据，或使用 SDK 获取实时链上状态。{% .lead %}
+
+## Summary
+
+Genesis 集成 API 提供对 Solana 上 Genesis 代币发行数据的只读访问。
+
+- 通过 Genesis 地址、代币铸造地址查询或浏览所有活跃发行
+- `https://api.metaplex.com/v1` 的公开 REST API — 无需认证
+- 返回发行元数据、代币信息、网站和社交链接
+- 通过 `network` 查询参数支持 Solana 主网（默认）和开发网
 
 ## 基础 URL
 
@@ -57,8 +66,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | 通过 Genesis 地址获取发行数据 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | 获取代币铸造的所有发行 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | 获取活跃和即将到来的发行列表 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选推荐发行 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | 使用过滤器获取发行列表 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 获取精选推荐发行 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 为新发行构建链上交易 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 注册已确认的发行以进行展示 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | 从链上获取 bucket 状态 |
@@ -87,6 +96,13 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 }
 ```
 
+## Notes
+
+- API 有速率限制。如果收到 `429` 响应，请降低请求频率。
+- 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。
+- 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
+- 对于 `POST` 端点，建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
+
 ## 共享类型
 
 ### TypeScript
@@ -94,11 +110,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +152,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -176,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| 术语 | 定义 |
+|------|------------|
+| **Genesis Address** | 唯一标识特定发行活动的 PDA（Program Derived Address） |
+| **Base Token** | 通过铸造地址标识的待发行代币 |
+| **Launch Page** | 用户可以参与发行的 URL |
+| **Mechanic** | 发行使用的分配机制（例如 `launchpoolV2`、`presaleV2`、`auction`） |
+| **Launch Type** | 发行的类别：`project`、`memecoin` 或 `custom` |
+| **Spotlight** | 平台策划的精选发行标志 |
+| **Status** | 发行的当前状态：`upcoming`、`live`、`graduated` 或 `ended` |
+| **Socials** | 与代币关联的社交媒体链接（X/Twitter、Telegram、Discord） |
+| **LaunchData** | 包含 `launch`、`baseToken`、`website` 和 `socials` 的响应包装器 |
+| **TokenData** | 代币查询的响应包装器，包含 `launches` 数组以及 `baseToken`、`website` 和 `socials` |

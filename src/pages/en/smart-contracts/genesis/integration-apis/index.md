@@ -3,7 +3,7 @@ title: Integration APIs
 metaTitle: Genesis - Integration APIs | Launch Data | Metaplex
 description: Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -22,6 +22,15 @@ programmingLanguage:
 ---
 
 The Genesis Integration APIs allow aggregators and applications to query launch data from Genesis token launches. Access metadata through REST endpoints or fetch real-time on-chain state with the SDK. {% .lead %}
+
+## Summary
+
+The Genesis Integration APIs provide read-only access to launch data for Genesis token launches on Solana.
+
+- Query launches by genesis address, token mint, or browse all active launches
+- Public REST API at `https://api.metaplex.com/v1` — no authentication required
+- Returns launch metadata, token info, website, and social links
+- Supports Solana mainnet (default) and devnet via `network` query parameter
 
 ## Base URL
 
@@ -57,8 +66,8 @@ No authentication is required. The API is public with rate limits.
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Get launch data by genesis address |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | Get all launches for a token mint |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | Get active and upcoming launch listings |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | List launches with optional filters |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | Build on-chain transactions for a new launch |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | Register a confirmed launch for listing |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | Fetch bucket state from on-chain |
@@ -87,6 +96,13 @@ Error response format:
 }
 ```
 
+## Notes
+
+- The API is rate limited. If you receive a `429` response, reduce your request frequency.
+- All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings.
+- The default network is `solana-mainnet`. Devnet data is available via `?network=solana-devnet`.
+- For `POST` endpoints, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) is recommended as it wraps both `/launches/create` and `/launches/register`.
+
 ## Shared Types
 
 ### TypeScript
@@ -94,11 +110,16 @@ Error response format:
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +152,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -176,3 +202,18 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| **Genesis Address** | A PDA (Program Derived Address) that uniquely identifies a specific launch campaign |
+| **Base Token** | The token being launched, identified by its mint address |
+| **Launch Page** | The URL where users can participate in a launch |
+| **Mechanic** | The allocation mechanism used for the launch (e.g., `launchpoolV2`, `presaleV2`, `auction`) |
+| **Launch Type** | The category of the launch: `project`, `memecoin`, or `custom` |
+| **Spotlight** | A platform-curated flag indicating a featured launch |
+| **Status** | The current state of a launch: `upcoming`, `live`, `graduated`, or `ended` |
+| **Socials** | Social media links (X/Twitter, Telegram, Discord) associated with a token |
+| **LaunchData** | The response wrapper containing `launch`, `baseToken`, `website`, and `socials` |
+| **TokenData** | The response wrapper for token queries, containing a `launches` array plus `baseToken`, `website`, and `socials` |

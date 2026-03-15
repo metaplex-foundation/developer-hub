@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launch | REST API | Metaplex
 description: Get launch data by genesis address. Returns launch info, token metadata, and social links.
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - get launch
@@ -21,6 +21,25 @@ programmingLanguage:
 ---
 
 Retrieve launch data for a specific genesis address. Returns launch info, token metadata, website, and social links. {% .lead %}
+
+## Summary
+
+Fetch a single launch by its genesis account public key. Returns the launch details, base token metadata, website, and social links wrapped in a `LaunchData` object.
+
+- Requires the genesis account public key as a path parameter
+- Returns a single `LaunchData` object (not an array)
+- Includes token metadata (`name`, `symbol`, `image`) and social links
+- Supports mainnet (default) and devnet via `network` query parameter
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `GET` |
+| **Path** | `/launches/{genesis_pubkey}` |
+| **Auth** | None |
+| **Response** | `LaunchData` |
+| **Pagination** | None |
 
 ## Endpoint
 
@@ -53,8 +72,16 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -74,6 +101,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 ```
 
 ## Response Type
+
+See [Shared Types](/smart-contracts/genesis/integration-apis#shared-types) for `Launch`, `BaseToken`, and `Socials` definitions.
 
 ### TypeScript
 
@@ -131,6 +160,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
-{% /callout %}
+## Notes
+
+- Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
+- Returns `404` if the genesis address is not found or does not have a valid launch.
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).

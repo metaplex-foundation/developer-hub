@@ -4,7 +4,7 @@ metaTitle: Genesis - Get Launch | REST API | Metaplex
 description: 通过Genesis地址获取发行数据。返回发行信息、代币元数据和社交链接。
 method: GET
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - get launch
@@ -21,6 +21,25 @@ programmingLanguage:
 ---
 
 检索特定 genesis 地址的发行数据。返回发行信息、代币元数据、网站和社交链接。 {% .lead %}
+
+## Summary
+
+通过 Genesis 账户公钥获取单个发行。返回包含发行详情、基础代币元数据、网站和社交链接的 `LaunchData` 对象。
+
+- 需要 Genesis 账户公钥作为路径参数
+- 返回单个 `LaunchData` 对象（非数组）
+- 包含代币元数据（`name`、`symbol`、`image`）和社交链接
+- 通过 `network` 查询参数支持主网（默认）和开发网
+
+## Quick Reference
+
+| 项目 | 值 |
+|------|-------|
+| **方法** | `GET` |
+| **路径** | `/launches/{genesis_pubkey}` |
+| **认证** | 无需 |
+| **响应** | `LaunchData` |
+| **分页** | 无 |
 
 ## 端点
 
@@ -48,8 +67,16 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
   "data": {
     "launch": {
       "launchPage": "https://example.com/launch/mytoken",
-      "type": "launchpool",
-      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN"
+      "mechanic": "launchpoolV2",
+      "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
+      "spotlight": false,
+      "startTime": "2026-01-15T14:00:00.000Z",
+      "endTime": "2026-01-15T18:00:00.000Z",
+      "status": "graduated",
+      "heroUrl": "launches/abc123/hero.webp",
+      "graduatedAt": "2026-01-15T18:05:00.000Z",
+      "lastActivityAt": "2026-01-15T17:45:00.000Z",
+      "type": "project"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -69,6 +96,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 ```
 
 ## 响应类型
+
+请参阅[共享类型](/smart-contracts/genesis/integration-apis#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
 
 ### TypeScript
 
@@ -126,6 +155,8 @@ let response: LaunchResponse = reqwest::get(
 println!("{}", response.data.base_token.name); // "My Token"
 ```
 
-{% callout type="note" %}
-查找 genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/smart-contracts/genesis/integration-apis/get-launches-by-token)端点。
-{% /callout %}
+## Notes
+
+- 查找 Genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/smart-contracts/genesis/integration-apis/get-launches-by-token)端点。
+- 如果 Genesis 地址未找到或没有有效发行，返回 `404`。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。

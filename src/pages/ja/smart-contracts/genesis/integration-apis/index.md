@@ -3,7 +3,7 @@ title: Integration APIs
 metaTitle: Genesis - Integration APIs | ローンチデータ | Metaplex
 description: HTTP REST エンドポイントとオンチェーン SDK メソッドを通じて Genesis ローンチデータにアクセスします。認証不要のパブリック API です。
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '02-26-2026'
 keywords:
   - Genesis API
   - integration API
@@ -22,6 +22,15 @@ programmingLanguage:
 ---
 
 Genesis Integration APIs により、アグリゲーターやアプリケーションが Genesis トークンローンチのデータをクエリできます。REST エンドポイントを通じてメタデータにアクセスしたり、SDK でリアルタイムのオンチェーン状態を取得したりできます。 {% .lead %}
+
+## Summary
+
+Genesis 統合 API は、Solana 上の Genesis トークンローンチのデータへの読み取り専用アクセスを提供します。
+
+- Genesis アドレス、トークンミント、またはすべてのアクティブなローンチを検索可能
+- `https://api.metaplex.com/v1` の公開 REST API — 認証不要
+- ローンチメタデータ、トークン情報、ウェブサイト、ソーシャルリンクを返却
+- Solana メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
 
 ## ベース URL
 
@@ -57,15 +66,15 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 |--------|----------|-------------|
 | `GET` | [`/launches/{genesis_pubkey}`](/smart-contracts/genesis/integration-apis/get-launch) | Genesis アドレスでローンチデータを取得 |
 | `GET` | [`/tokens/{mint}`](/smart-contracts/genesis/integration-apis/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
-| `GET` | [`/listings`](/smart-contracts/genesis/integration-apis/get-listings) | アクティブおよび今後のローンチリスティングを取得 |
-| `GET` | [`/spotlight`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目のスポットライトローンチを取得 |
+| `GET` | [`/launches`](/smart-contracts/genesis/integration-apis/list-launches) | フィルタ付きでローンチ一覧を取得 |
+| `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | 注目のスポットライトローンチを取得 |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | 確認済みローンチをリスティング用に登録 |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | オンチェーンからバケット状態を取得 |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | オンチェーンからデポジット状態を取得 |
 
 {% callout type="note" %}
-`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。
+`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供しており、利用を推奨します。
 {% /callout %}
 
 ## エラーコード
@@ -94,11 +103,16 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ```ts
 interface Launch {
   launchPage: string;
-  type: string;
+  mechanic: string;
   genesisAddress: string;
-  status: 'upcoming' | 'live' | 'graduated';
+  spotlight: boolean;
   startTime: string;
   endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'project' | 'memecoin' | 'custom';
 }
 
 interface BaseToken {
@@ -131,12 +145,17 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Launch {
     pub launch_page: String,
-    #[serde(rename = "type")]
-    pub launch_type: String,
+    pub mechanic: String,
     pub genesis_address: String,
-    pub status: String,
+    pub spotlight: bool,
     pub start_time: String,
     pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -176,3 +195,25 @@ tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 ```
 {% /callout %}
+
+## Notes
+
+- API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
+- すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
+- デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
+- `POST` エンドポイントは、ほとんどのユースケースで [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)を使用してください。
+
+## Glossary
+
+| 用語 | 定義 |
+|------|------------|
+| **Genesis Address** | 特定のローンチキャンペーンを一意に識別する PDA（Program Derived Address） |
+| **Base Token** | ミントアドレスで識別される、ローンチされるトークン |
+| **Launch Page** | ユーザーがローンチに参加できる URL |
+| **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`auction`） |
+| **Launch Type** | ローンチのカテゴリ：`project`、`memecoin`、`custom` |
+| **Spotlight** | プラットフォームが厳選した注目ローンチを示すフラグ |
+| **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
+| **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |
+| **LaunchData** | `launch`、`baseToken`、`website`、`socials` を含むレスポンスラッパー |
+| **TokenData** | トークンクエリ用のレスポンスラッパー。`launches` 配列と `baseToken`、`website`、`socials` を含む |

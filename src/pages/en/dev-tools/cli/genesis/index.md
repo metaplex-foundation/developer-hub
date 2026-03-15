@@ -80,7 +80,7 @@ mplx genesis launch create \
   --image "https://gateway.irys.xyz/abc123" \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
-  --raiseGoal 200 --raydiumLiquidityBps 5000 \
+  --raiseGoal 250 --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
 
