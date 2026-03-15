@@ -19,7 +19,7 @@ export function Footer() {
               <img
                 src="/docs/metaplex-logo-white.png"
                 alt="Metaplex"
-                className="h-4 w-auto"
+                className="h-4 w-auto no-lightense"
               />
             </Link>
             <p className="text-sm text-muted-foreground">
