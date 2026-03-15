@@ -33,27 +33,7 @@ class MyDocument extends Document {
       <Html className="antialiased [font-feature-settings:'ss01'] scrollbar overflow-y-scroll" lang={locale}>
       <Head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/docs/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/docs/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/docs/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/docs/site.webmanifest" />
-        <link rel="mask-icon" href="/docs/safari-pinned-tab.svg" color="#30383b" />
-        <meta name="msapplication-TileColor" content="#00aba9" />
-        <meta name="theme-color" content="#ffffff" />
+        <link rel="icon" href="/docs/favicon.png" />
       </Head>
       <body className="bg-background text-foreground">
         <Main />
