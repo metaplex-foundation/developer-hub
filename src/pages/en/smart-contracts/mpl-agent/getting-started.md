@@ -115,4 +115,4 @@ console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 - **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Full details on the identity program
 - **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*

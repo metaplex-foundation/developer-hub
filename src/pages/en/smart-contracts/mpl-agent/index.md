@@ -78,4 +78,4 @@ npm install @metaplex-foundation/mpl-agent-registry
 2. **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Identity program details, accounts, and PDA derivation
 3. **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*

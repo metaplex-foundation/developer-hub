@@ -207,4 +207,4 @@ await registerIdentityV1(umi, {
 - The `collection` parameter is optional but recommended — it enables collection-level authority checks during registration.
 - Lifecycle hooks for Transfer, Update, and Execute are automatically attached. These hooks allow the identity plugin to participate in approving or rejecting operations on the asset.
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent-registry)*
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
