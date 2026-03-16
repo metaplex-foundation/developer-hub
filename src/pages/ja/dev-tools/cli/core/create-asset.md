@@ -19,7 +19,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 画像ファイルとJSONメタデータファイルを提供して単一のアセットを作成します。コマンドは両方のファイルのアップロードとアセットの作成を処理します。
 
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 ### 3. インタラクティブウィザード
@@ -39,7 +39,7 @@ mplx core asset create --wizard
 ### ファイルベースオプション
 - `--files`: ファイルベースの作成を示すフラグ
 - `--image <path>`: アップロードしてアセットに割り当てる画像ファイルへのパス
-- `--json <path>`: JSONメタデータファイルへのパス
+- `--offchain <path>`: JSONメタデータファイルへのパス
 
 ### プラグインオプション
 - `--plugins`: インタラクティブなプラグイン選択を使用
@@ -59,7 +59,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 3. ファイルからアセットを作成：
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 4. コレクション付きのアセットを作成：
@@ -69,7 +69,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 5. ファイルとコレクション付きのアセットを作成：
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json" --collection "collection_id_here"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
 ```
 
 ## 出力

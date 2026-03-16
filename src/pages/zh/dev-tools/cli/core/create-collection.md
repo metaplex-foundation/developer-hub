@@ -19,7 +19,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 通过提供图片文件和 JSON 元数据文件来创建单个集合。命令将处理两个文件的上传并创建集合。
 
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ### 3. 交互式向导
@@ -38,7 +38,7 @@ mplx core collection create --wizard
 ### 基于文件选项
 - `--files`: 指示基于文件创建的标志
 - `--image <path>`: 要上传并分配给集合的图片文件路径
-- `--json <path>`: JSON 元数据文件路径
+- `--offchain <path>`: JSON 元数据文件路径
 
 ### 插件选项
 - `--plugins`: 使用交互式插件选择
@@ -58,7 +58,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 
 3. 从文件创建集合：
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ## 输出
@@ -75,7 +75,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 
 ## 注意事项
 
-- 使用基于文件创建方法时，`--image` 和 `--json` 标志都是必需的
+- 使用基于文件创建方法时，`--image` 和 `--offchain` 标志都是必需的
 - 向导方法提供了创建集合的引导式体验，包括文件上传和元数据创建
 - 插件配置可以通过交互方式或 JSON 文件完成
 - JSON 元数据文件必须包含集合的 `name` 字段

@@ -17,14 +17,14 @@ mplx core fetch asset <assetId>
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
 mplx core fetch asset <assetId> --download --image
-mplx core fetch asset <assetId> --download --metadata
+mplx core fetch asset <assetId> --download --offchain
 ```
 
 ### 자산 가져오기 옵션
 - `--download`: 자산 파일을 디스크에 다운로드 (추가 플래그로 개별 파일 선택 가능)
 - `--output <path>`: 다운로드한 자산을 저장할 디렉토리 경로 (--download 필요)
 - `--image`: 이미지 파일 다운로드 (--download 필요)
-- `--metadata`: 메타데이터 파일 다운로드 (--download 필요)
+- `--offchain`: 메타데이터 파일 다운로드 (--download 필요)
 - `--asset`: 자산 데이터 파일 다운로드 (--download 필요)
 
 ## 컬렉션 가져오기

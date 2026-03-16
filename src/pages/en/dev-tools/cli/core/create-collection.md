@@ -19,7 +19,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 Create a single Collection by providing an image file and a JSON metadata file. The command will handle uploading both files and creating the collection.
 
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ### 3. Interactive Wizard
@@ -38,7 +38,7 @@ mplx core collection create --wizard
 ### File-based Options
 - `--files`: Flag to indicate file-based creation
 - `--image <path>`: Path to image file to upload and assign to Collection
-- `--json <path>`: Path to JSON metadata file
+- `--offchain <path>`: Path to offchain JSON metadata file to upload
 
 ### Plugin Options
 - `--plugins`: Use interactive plugin selection
@@ -58,8 +58,18 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 
 3. Create a collection from files:
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
+
+## JSON Output
+
+Pass `--json` to get structured machine-readable output instead of formatted text:
+
+```bash
+mplx core collection create --name "My Collection" --uri "https://example.com/metadata.json" --json
+```
+
+Returns: `{ collection, signature, explorer, coreExplorer }`
 
 ## Output
 
@@ -75,7 +85,7 @@ The command will output the following information upon successful creation:
 
 ## Notes
 
-- When using the file-based creation method, both `--image` and `--json` flags are required
+- When using the file-based creation method, both `--image` and `--offchain` flags are required
 - The wizard method provides a guided experience for creating collections, including file uploads and metadata creation
 - Plugin configuration can be done either interactively or through a JSON file
 - The JSON metadata file must include a `name` field for the collection

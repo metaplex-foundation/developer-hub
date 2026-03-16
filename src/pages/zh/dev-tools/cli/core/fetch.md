@@ -17,14 +17,14 @@ mplx core fetch asset <assetId>
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
 mplx core fetch asset <assetId> --download --image
-mplx core fetch asset <assetId> --download --metadata
+mplx core fetch asset <assetId> --download --offchain
 ```
 
 ### 资产获取选项
 - `--download`: 将资产文件下载到磁盘（也可以使用额外标志选择单个文件）
 - `--output <path>`: 保存下载资产的目录路径（需要 --download）
 - `--image`: 下载图片文件（需要 --download）
-- `--metadata`: 下载元数据文件（需要 --download）
+- `--offchain`: 下载元数据文件（需要 --download）
 - `--asset`: 下载资产数据文件（需要 --download）
 
 ## 获取集合
