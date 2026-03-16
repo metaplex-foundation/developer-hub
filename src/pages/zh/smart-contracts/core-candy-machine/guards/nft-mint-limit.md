@@ -1,8 +1,29 @@
 ---
 title: "NFT 铸造限制守卫"
-metaTitle: "NFT 铸造限制守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'NFT Mint Limit' 守卫将铸造限制为指定 NFT/pNFT collection 的持有者，并限制为提供的 NFT 可以铸造的资产数量。"
+metaTitle: "NFT 铸造限制守卫 - 每 NFT 铸造上限 | Core Candy Machine"
+description: "Core Candy Machine 的 NFT Mint Limit 守卫将铸造限制为指定 NFT collection 的持有者，并使用链上计数器 PDA 限制每个 NFT 可以铸造的资产数量，将代币门控访问与每 NFT 速率限制相结合。"
+keywords:
+  - NFT Mint Limit guard
+  - Core Candy Machine
+  - candy guard
+  - per-NFT mint cap
+  - mint counter PDA
+  - token gated minting
+  - rate limiting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-NFT mint rate limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Mint Limit** 守卫将铸造限制为指定 NFT collection 的持有者，并使用链上计数器 PDA 限制每个 NFT 可以铸造的资产数量。 {% .lead %}
 
 ## 概述
 
@@ -158,3 +179,11 @@ const pda = findNftMintCounterPda(umi, {
 
 const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
+
+## 注意事项
+
+- 铸造计数器按 NFT 地址、按 Candy Machine 和按守卫 ID 跟踪——而非按钱包。来自同一 collection 的不同 NFT 各自拥有独立的计数器。
+- 使用不同的守卫 ID 可以在同一 Candy Machine 中设置多个独立的铸造限制（例如，每个守卫组不同的限制）。
+- `NftMintCounter` PDA 从 `[candyGuard, candyMachine, id, mint]` 派生，可以获取以检查 NFT 已使用了多少次铸造。
+- 此守卫使用 Token Metadata NFT（非 Core Assets）进行 collection 验证。
+

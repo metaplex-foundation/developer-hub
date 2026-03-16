@@ -50,7 +50,6 @@ Bucket configuration, deposit/claim flows, token metadata hosting, liquidity poo
 
 **Jump to:** [Basic Usage](#basic-usage) · [Options](#options) · [Examples](#examples) · [Output](#output) · [Common Errors](#common-errors) · [FAQ](#faq)
 
-*Maintained by Metaplex Foundation · Last verified February 2026 · Requires Metaplex CLI (mplx)*
 
 ## Basic Usage
 

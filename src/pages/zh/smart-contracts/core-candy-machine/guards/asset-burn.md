@@ -1,8 +1,28 @@
 ---
 title: 资产销毁守卫
 metaTitle: 资产销毁守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Asset Burn' 守卫将铸造限制为预定义 Collection 的持有者，并在从 Core Candy Machine 购买时销毁持有者的资产。"
+description: "Core Candy Machine 的 'Asset Burn' 守卫将铸造限制为指定 collection 的持有者，并在铸造时永久销毁持有者的一个资产作为铸造成本。"
+keywords:
+  - asset burn
+  - Core Candy Machine
+  - candy guard
+  - burn to mint
+  - collection holder
+  - NFT burning
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - burn-to-mint mechanics
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Burn** 守卫要求铸造钱包持有指定 collection 的资产，并在铸造新资产时永久销毁该资产作为铸造成本。 {% .lead %}
 
 ## 概述
 
@@ -140,3 +160,11 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Asset Burn 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 被销毁的资产将被永久销毁且无法恢复。销毁在铸造交易中原子性地发生。
+- 资产必须属于铸造钱包且必须属于指定的 collection。如果任一条件不满足，铸造交易将失败。
+- 此守卫每次铸造只销毁一个资产。要求每次铸造销毁多个资产，请改用 [Asset Burn Multi](/zh/smart-contracts/core-candy-machine/guards/asset-burn-multi) 守卫。
+- 要基于 collection 所有权来门控铸造而不销毁资产，请改用 [Asset Gate](/zh/smart-contracts/core-candy-machine/guards/asset-gate) 守卫。
+

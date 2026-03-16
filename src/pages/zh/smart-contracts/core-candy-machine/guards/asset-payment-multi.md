@@ -1,8 +1,27 @@
 ---
 title: "多资产支付守卫"
 metaTitle: "多资产支付守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Asset Payment Multi' 守卫收取来自特定 collection 的其他 Core Asset 作为从 Core Candy Machine 铸造的支付。"
+description: "Core Candy Machine 的 'Asset Payment Multi' 守卫收取指定 collection 中的一个或多个 Core Asset 作为从 Core Candy Machine 铸造的支付。"
+keywords:
+  - asset payment multi
+  - Core Candy Machine
+  - candy guard
+  - multiple NFT payment
+  - bulk asset payment
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - multi-asset mint payment
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Payment Multi** 守卫要求铸造者转移指定 collection 中的一个或多个 Core Asset 作为支付，才能从 Core Candy Machine 铸造。 {% .lead %}
 
 ## 概述
 
@@ -99,7 +118,7 @@ Owner: System Program {% .whitespace-nowrap %}
 
 ## 守卫设置
 
-Asset Payment 守卫包含以下设置：
+Asset Payment Multi 守卫包含以下设置：
 
 - **Required Collection**：必需 Collection 的铸造地址。我们用于支付的资产必须属于此 collection。
 - **Destination**：将接收所有资产的钱包地址。
@@ -130,7 +149,7 @@ API 参考：[create](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 
 ## 铸造设置
 
-Asset Payment 守卫包含以下铸造设置：
+Asset Payment Multi 守卫包含以下铸造设置：
 - **[Asset Address]**：用于支付的资产地址数组。这些资产必须属于必需的 collection 且必须属于铸造者。
 - **Collection Address**：用于支付的 Collection 地址。
 - **Destination**：将接收所有资产的钱包地址。
@@ -141,7 +160,7 @@ Asset Payment 守卫包含以下铸造设置：
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-您可以使用 `mintArgs` 参数传递 Asset Payment 守卫的铸造设置，如下所示。
+您可以使用 `mintArgs` 参数传递 Asset Payment Multi 守卫的铸造设置，如下所示。
 
 ```ts
 
@@ -167,3 +186,11 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Asset Payment Multi 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 所有用作支付的资产将被永久转移到目标钱包——铸造者将失去每个资产的所有权。
+- 守卫设置中的 `num` 字段必须与铸造时 `assets` 数组中提供的资产地址数量匹配。
+- `assets` 数组中的每个资产都必须属于指定的必需 collection；如果任何资产来自不同的 collection，铸造交易将失败。
+- 要仅要求一个资产作为支付，请改用 [Asset Payment](/zh/smart-contracts/core-candy-machine/guards/asset-payment) 守卫。
+

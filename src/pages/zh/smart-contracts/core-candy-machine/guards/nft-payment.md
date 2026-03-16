@@ -1,8 +1,28 @@
 ---
 title: "NFT 支付守卫"
-metaTitle: "NFT 支付守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'NFT Payment' 守卫通过向付款人收取来自指定 NFT collection 的 NFT/pNFT 来允许铸造。用于支付的 NFT/pNFT 将被转移到预定义的目的地。"
+metaTitle: "NFT 支付守卫 - 以 NFT 支付铸造 | Core Candy Machine"
+description: "Core Candy Machine 的 NFT Payment 守卫通过向付款人收取来自指定 collection 的 NFT 来允许铸造，将 NFT 转移到预定义的目标钱包。"
+keywords:
+  - NFT Payment guard
+  - Core Candy Machine
+  - candy guard
+  - pay with NFT
+  - NFT transfer on mint
+  - token gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-as-payment access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Payment** 守卫通过向付款人收取来自指定 collection 的 NFT 来允许铸造，将其转移到预定义的目标钱包而非销毁。 {% .lead %}
 
 ## 概述
 
@@ -165,3 +185,12 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _NFT Payment 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 与 [NFT Burn](/zh/smart-contracts/core-candy-machine/guards/nft-burn) 守卫不同，此守卫将 NFT 转移到目标钱包而非销毁。NFT 仍保留在流通中。
+- 目标钱包必须在守卫设置和铸造参数中同时指定。
+- 如果付款人没有拥有来自必需 collection 的 NFT，铸造交易将失败。
+- 使用带有 Rule Set 的可编程 NFT 支付时，请在铸造参数中包含 `ruleSet`，以确保转移符合 NFT 的授权规则。
+- 此守卫使用 Token Metadata NFT（非 Core Assets）进行支付和 collection 验证。
+

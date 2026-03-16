@@ -1,8 +1,28 @@
 ---
 title: 주소 게이트 가드
 metaTitle: 주소 게이트 가드 | 코어 캔디 머신
-description: "코어 캔디 머신의 '주소 게이트'는 제공된 단일 주소로 민팅을 제한합니다."
+description: "코어 캔디 머신의 'Address Gate' 가드는 지정된 단일 지갑 주소로만 민팅을 제한하고 다른 모든 지갑의 민팅을 차단합니다."
+keywords:
+  - address gate
+  - Core Candy Machine
+  - candy guard
+  - wallet restriction
+  - single address minting
+  - access control
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - wallet-based access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Address Gate** 가드는 코어 캔디 머신에서의 민팅을 단일 지갑 주소로 제한하며, 민팅을 시도하는 다른 모든 지갑을 거부합니다. {% .lead %}
 
 ## 개요
 
@@ -120,3 +140,9 @@ _주소 게이트 가드는 민트 설정이 필요하지 않습니다._
 ## 라우트 지시사항
 
 _주소 게이트 가드는 라우트 지시사항을 지원하지 않으며 필요로 하지 않습니다._
+
+## Notes
+
+- Address Gate 가드는 단일 지갑 주소만 허용합니다. 여러 지갑을 허용하려면 [Allow List](/ko/smart-contracts/core-candy-machine/guards/allow-list) 가드를 대신 사용하세요.
+- 이 가드는 민팅 시 민팅 지갑 주소를 구성된 주소와 비교합니다. 사전 검증 라우트 지시사항은 필요하지 않습니다.
+

@@ -1,8 +1,27 @@
 ---
 title: Token Burn Guard
-metaTitle: Token Burn Guard | Core Candy Machine
-description: "Core Candy Machine 'Token Burn' guard는 SPL 토큰 주소와 값으로 민팅 화폐를 설정하여 민팅을 허용합니다."
+metaTitle: "Token Burn Guard | Core Candy Machine"
+description: "Core Candy Machine의 Token Burn 가드는 민팅이 허용되기 전에 민터가 구성된 민트 계정에서 지정된 수량의 SPL 토큰을 소각하도록 요구합니다."
+keywords:
+  - Token Burn
+  - Core Candy Machine
+  - candy guard
+  - SPL token burn
+  - burn to mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token burning for mint access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Burn** 가드는 민트 트랜잭션이 진행되기 전에 민터가 구성된 수량의 SPL 토큰을 영구적으로 소각하도록 요구합니다. {% .lead %}
 
 ## 개요
 
@@ -137,3 +156,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _Token Burn guard는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 소각된 토큰은 영구적으로 파괴되며 복구할 수 없습니다. 구성된 **Amount**가 민트당 의도된 비용을 정확히 반영하는지 확인하세요.
+- 이 가드는 기존 **SPL Token 프로그램**을 사용합니다. Token-2022 민트의 경우 해당하는 Token-2022 가드 변형을 대신 사용하세요.
+- 결제자는 민팅 시점에 연결된 토큰 계정에 구성된 **Amount** 이상의 토큰을 보유해야 합니다. 그렇지 않으면 트랜잭션이 실패합니다.
+

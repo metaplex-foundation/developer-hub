@@ -1,8 +1,28 @@
 ---
 title: 铸造限制守卫
-metaTitle: "铸造限制守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Mint Limit' 守卫允许指定每个钱包可以铸造的资产数量限制。"
+metaTitle: "铸造限制守卫 - 限制每个钱包的铸造数量 | Core Candy Machine"
+description: "Mint Limit 守卫限制每个钱包可以从 Core Candy Machine 铸造的资产数量。限制按钱包、按 Candy Machine 和按标识符进行跟踪。"
+keywords:
+  - mint limit
+  - Core Candy Machine
+  - candy guard
+  - per-wallet limit
+  - mint counter
+  - minting cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-wallet minting limits
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Mint Limit** 守卫限制每个钱包可以从 Core Candy Machine 铸造的资产数量，按钱包、按 Candy Machine 和按可配置标识符进行跟踪。 {% .lead %}
 
 ## 概述
 
@@ -154,3 +174,10 @@ const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
 // 已铸造数量
 console.log(mintCounter.count)
 ```
+
+## 注意事项
+
+- Mint Limit 计数器通过 `MintCounter` PDA 在链上跟踪，该 PDA 从钱包地址、Candy Machine 地址和守卫 `id` 派生。每个唯一组合创建一个单独的计数器账户。
+- 在不同的[守卫组](/zh/smart-contracts/core-candy-machine/guard-groups)中使用不同的 `id` 值，允许每个组为同一钱包强制执行独立的铸造限制。
+- `MintCounter` 账户在 Candy Machine 完全铸造完毕后仍然保留在链上。您可以使用 `safeFetchMintCounterFromSeeds` 获取它以检查给定钱包已铸造了多少资产。
+

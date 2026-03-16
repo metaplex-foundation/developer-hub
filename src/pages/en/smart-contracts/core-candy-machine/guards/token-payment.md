@@ -1,8 +1,27 @@
 ---
 title: Token Payment Guard
 metaTitle: Token Payment Guard | Core Candy Machine
-description: "The Core Candy Machine 'Token Payment' guard allows minting by charging the payer a set value of an SPL Token."
+description: "The Core Candy Machine 'Token Payment' guard allows minting by charging the payer a configured amount of SPL tokens, transferring them to a specified destination wallet."
+keywords:
+  - Token Payment
+  - Core Candy Machine
+  - candy guard
+  - SPL token payment
+  - token transfer
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token payment for minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Token Payment** guard charges the minter a configured amount of SPL tokens, transferring them to a specified destination wallet before allowing the mint to proceed. {% .lead %}
 
 ## Overview
 
@@ -113,7 +132,7 @@ The Token Payment guard contains the following settings:
 {% dialect title="JavaScript" id="js" %}
 {% totem %}
 
-Note that, in this example, we’re using the current identity as the destination wallet.
+Note that, in this example, we're using the current identity as the destination wallet.
 
 ```ts
 import { findAssociatedTokenPda } from "@metaplex-foundation/mpl-toolbox";
@@ -145,7 +164,7 @@ The Token Payment guard contains the following Mint Settings:
 - **Mint**: The address of the mint account defining the SPL Token we want to pay with.
 - **Destination Associated Token Address (ATA)**: The address of the associated token account to send the tokens to.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokenpayment) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokenpayment) for more details.
 
 {% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -174,3 +193,11 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Token Payment guard does not support the route instruction._
+
+## Notes
+
+- This guard uses the original **SPL Token program**. For mints issued under the Token-2022 program, use the [Token2022 Payment](/smart-contracts/core-candy-machine/guards/token2022-payment) guard instead.
+- The payer must hold at least the configured **Amount** of tokens in their associated token account at the time of minting; otherwise the transaction will fail.
+- The **Destination ATA** must already exist before minting; it is not created automatically by the guard.
+- Unlike the [Token Gate](/smart-contracts/core-candy-machine/guards/token-gate) guard, the Token Payment guard actually **transfers** tokens out of the payer's wallet.
+

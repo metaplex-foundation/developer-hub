@@ -1,8 +1,28 @@
 ---
 title: "Start Date Guard"
-metaTitle: Start Date Guard | Core Candy Machine
-description: "The Core Candy Machine 'Start Date' guard determines the start date of the mint for the Core Candy Machine or phase."
+metaTitle: "Start Date Guard - Core Candy Machine Guard | Metaplex"
+description: "The Start Date guard sets the earliest date and time when minting is allowed on a Core Candy Machine, blocking all mint attempts before the configured timestamp."
+keywords:
+  - start date
+  - Core Candy Machine
+  - candy guard
+  - mint schedule
+  - launch date
+  - time-based minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based mint control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Start Date** guard sets the earliest date and time when minting is allowed on a Core Candy Machine, blocking all mint attempts before the configured timestamp. {% .lead %}
 
 ## Overview
 
@@ -97,3 +117,10 @@ _The Start Date guard does not need Mint Settings._
 ## Route Instruction
 
 _The Start Date guard does not support the route instruction._
+
+## Notes
+
+- The Start Date guard uses UTC timestamps. Ensure date values passed via `dateTime()` are in ISO 8601 format with explicit timezone information.
+- To define both a start and end window for minting, combine the Start Date guard with the [End Date](/smart-contracts/core-candy-machine/guards/end-date) guard.
+- The date comparison uses the on-chain Solana cluster clock, which may have slight drift from wall-clock time.
+

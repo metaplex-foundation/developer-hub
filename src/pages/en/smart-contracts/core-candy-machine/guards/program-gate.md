@@ -1,8 +1,28 @@
 ---
 title: "Program Gate Guard"
-metaTitle: "Program  Guard Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Program Gate' guard restricts the programs that can be used during the mint transaction."
+metaTitle: "Program Gate Guard - Restrict Transaction Programs | Core Candy Machine"
+description: "The Core Candy Machine Program Gate guard restricts which programs can be included in a mint transaction, preventing bots from adding malicious instructions from arbitrary programs."
+keywords:
+  - Program Gate guard
+  - Core Candy Machine
+  - candy guard
+  - transaction program allowlist
+  - bot protection
+  - mint security
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - mint transaction program restrictions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Program Gate** guard restricts which programs can appear in a mint transaction, preventing bots from injecting malicious instructions from unauthorized programs. {% .lead %}
 
 ## Overview
 
@@ -101,3 +121,10 @@ _The Program Gate guard does not need Mint Settings._
 ## Route Instruction
 
 _The Program Gate guard does not support the route instruction._
+
+## Notes
+
+- The `additional` list supports a maximum of 5 program addresses. Programs required for the standard Candy Machine mint flow are automatically allowed and do not need to be included.
+- When this guard is enabled, any mint transaction that contains instructions from programs not in the allowlist will fail. This is an effective anti-bot measure but may block legitimate use cases if third-party programs are needed during the mint.
+- This guard does not restrict CPI (cross-program invocation) calls made internally by allowed programs -- it only checks the top-level instructions in the transaction.
+

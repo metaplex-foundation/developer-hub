@@ -1,16 +1,65 @@
 ---
 title: Candy Guards
 metaTitle: Candy Guards | Core Candy Machine
-description: Learn about the different types of guards available for the Core Candy Machine and their functionality.
+description: Candy Guards are modular access-control components that restrict and customize minting on a Core Candy Machine. Learn about guard types, the Candy Guard account, available guards, and how to compose them.
+keywords:
+  - candy guard
+  - guard
+  - access control
+  - sol payment
+  - start date
+  - mint limit
+  - bot tax
+  - allow list
+  - NFT gate
+  - token gate
+  - custom guard
+  - minting restrictions
+  - Core Candy Machine guards
+  - Solana NFT mint
+  - guard groups
+  - freeze payment
+about:
+  - Candy Guards
+  - Access control
+  - NFT minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: Can I create custom Candy Guards?
+    a: Yes. Because guards live in a separate Candy Guard program, anyone can fork and deploy their own Candy Guard program with custom guard logic while still relying on the Core Candy Machine Core program for minting. The Metaplex SDKs also let you register custom Candy Guard programs so you can use their standard API.
+  - q: How many guards can I use at once on a single Core Candy Machine?
+    a: You can enable any combination of the available guards simultaneously. Guards are composable, so you activate only the ones you need. For more complex scenarios you can also use guard groups to define multiple sets of guards on a single machine.
+  - q: Do all guards require mint settings or route instructions?
+    a: No. Only certain guards need additional on-chain accounts (mint settings) or a dedicated route instruction. Most guards are self-contained. Check the individual guard page to see whether mint settings or a route instruction applies.
+  - q: What happens if a minter fails a guard check?
+    a: The transaction is rejected. If the Bot Tax guard is enabled, the failing wallet is charged a configurable SOL penalty instead of receiving an outright error, which discourages bots from spamming invalid mint attempts.
+  - q: Does updating guards on a Core Candy Machine replace all existing guard settings?
+    a: Yes. A guard update overwrites the entire guard configuration. You must re-specify every guard you want active, not just the ones you are changing.
+  - q: What is the difference between a Candy Guard and a guard group?
+    a: A Candy Guard is the on-chain account that holds one default set of guards. Guard groups let you define multiple named sets of guards within the same Candy Guard account so different wallets or phases can follow different rules.
 ---
 
-## What is a guard?
+## Summary
 
-A guard is a modular piece of code that can restrict access to the mint of a Core Candy Machine and even add new features to it!
+Candy Guards are modular, composable access-control components that attach to a [Core Candy Machine](/smart-contracts/core-candy-machine) to restrict and customize the [minting](/smart-contracts/core-candy-machine/mint) process on Solana. {% .lead %}
+
+- Each guard handles a single responsibility such as payment, scheduling, or wallet gating. {% .lead %}
+- Guards are defined in a separate on-chain Core Candy Guard account that becomes the Mint Authority of the Candy Machine. {% .lead %}
+- Over 25 built-in guards ship with the default Candy Guard program, covering SOL/token payments, allow lists, time windows, bot protection, and more. {% .lead %}
+- Custom guards can be created by forking and deploying your own Candy Guard program. {% .lead %}
+
+## What Is a Candy Guard?
+
+A Candy Guard is a modular on-chain component that enforces a single access-control rule during the [minting](/smart-contracts/core-candy-machine/mint) process of a [Core Candy Machine](/smart-contracts/core-candy-machine). Each guard activates independently and can be combined with other guards to build the exact minting experience you need.
 
 There is a large set of guards to choose from and each of them can be activated and configured at will.
 
-We’ll touch on [all available guards](/smart-contracts/core-candy-machine/guards) later in this documentation but let’s go through a few examples here to illustrate that.
+We'll touch on [all available guards](#available-guards) later in this documentation but let's go through a few examples here to illustrate that.
 
 - When the **Start Date** guard is enabled, minting will be forbidden before the preconfigured date. There is also an **End Date** guard to forbid minting after a given date.
 - When the **Sol Payment** guard is enabled, the minting wallet will have to pay a configured amount to a configured destination wallet. Similar guards exist for paying with tokens or NFTs of a specific collection.
@@ -19,9 +68,9 @@ We’ll touch on [all available guards](/smart-contracts/core-candy-machine/guar
 
 As you can see, each guard takes care of one responsibility and one responsibility only which makes them composable. In other words, you can pick and choose the guards your need to create your perfect Candy Machine.
 
-## The Core Candy Guard account
+## Core Candy Guard Account
 
-Each Core Candy Machine account should typically be associated with its own Core Candy Guard account which will add a layer of protection to it.
+The Core Candy Guard account is the on-chain account that stores every activated guard and its configuration for a given [Core Candy Machine](/smart-contracts/core-candy-machine). Each Core Candy Machine account should typically be associated with its own Core Candy Guard account which will add a layer of protection to it.
 
 This works by creating a Core Candy Guard account and making it the **Mint Authority** of the Core Candy Machine account. By doing so, it is no longer possible to mint directly from the main Core Candy Machine program. Instead, we must mint via the Core Candy Guard program which, if all guards are resolved successfully, will defer to the Core Candy Machine Core program to finish the minting process.
 
@@ -98,9 +147,9 @@ Mint Authority = Alice {% .font-semibold %}
 
 Note that, since Core Candy Machine and Core Candy Guard accounts work hand and hand together, our SDKs treat them as one entity. When you create a Core Candy Machine with our SDKs, an associated Core Candy Guard account will also be created by default. The same goes when updating Core Candy Machines as they allow you to update guards at the same time. We will see some concrete examples on this page.
 
-## Why another program?
+## Why Guards Use a Separate Program
 
-The reason guards don’t live in the main Core Candy Machine program is to separate the access control logic from the main Core Candy Machine responsibility which is to mint an NFT.
+Guards live in a dedicated Candy Guard program — separate from the Core Candy Machine Core program — so that access-control logic is fully decoupled from mint logic. The reason guards don't live in the main Core Candy Machine program is to separate the access control logic from the main Core Candy Machine responsibility which is to mint an NFT.
 
 This enables guards to not only be modular but extendable. Anyone can create and deploy their own Core Candy Guard program to create custom guards whilst relying on the Core Candy Machine Core program for all the rest.
 
@@ -172,11 +221,9 @@ My Custom Guard {% .font-semibold %}
 
 Note that our SDKs also offer ways to register your own Core Candy Guard programs and their custom guards so you can leverage their friendly API and easily share your guards with others.
 
-## All available guards
+## Available Guards
 
-Alright, now that we understand what guards are, let’s see what default guards are available to us.
-
-In the following list, we’ll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
+The default Core Candy Guard program ships with over 25 built-in guards covering payment, scheduling, gating, and bot protection. In the following list, we'll provide a short description of each guard with a link pointing to their dedicated page for more advanced reading.
 
 - [**Address Gate**](/smart-contracts/core-candy-machine/guards/address-gate): Restricts the mint to a single address.
 - [**Allocation**](/smart-contracts/core-candy-machine/guards/allocation): Allows specifying a limit on the number of NFTs each guard group can mint.
@@ -209,6 +256,52 @@ In the following list, we’ll provide a short description of each guard with a 
 - [**Token22 Payment**](/smart-contracts/core-candy-machine/guards/token2022-payment): Set the price of the mint in token22 (token extension) amount.
 - [**Vanity Mint**](/smart-contracts/core-candy-machine/guards/vanity-mint): Restricts the mint to by expecting the new mint address to match a specific pattern.
 
-## Conclusion
+## Notes
 
-Guards are important components of Core Candy Machines. They make it easy to configure the minting process whilst allowing anyone to create their own guards for application-specific needs.
+- Guards are fully composable. You can activate any combination of the built-in guards on a single Core Candy Machine to create the exact minting experience you need.
+- Creating custom guards requires forking and deploying your own Candy Guard program. The [Core](/smart-contracts/core) Candy Machine Core program itself does not need to change.
+- Updating the guards on a Core Candy Machine overwrites the entire guard configuration. Always re-specify every guard you want active, not just the ones you are modifying.
+- Some guards such as [Allow List](/smart-contracts/core-candy-machine/guards/allow-list) require a [route instruction](/smart-contracts/core-candy-machine/guard-route) to be called before minting to validate prerequisites.
+- You can organize guards into multiple named sets using [guard groups](/smart-contracts/core-candy-machine/guard-groups), enabling different rules for different minting phases or wallet tiers.
+
+## FAQ
+
+### Can I create custom Candy Guards?
+
+Yes. Because guards live in a separate Candy Guard program, anyone can fork and deploy their own Candy Guard program with custom guard logic while still relying on the Core Candy Machine Core program for minting. The Metaplex SDKs also let you register custom Candy Guard programs so you can use their standard API.
+
+### How many guards can I use at once on a single Core Candy Machine?
+
+You can enable any combination of the available guards simultaneously. Guards are composable, so you activate only the ones you need. For more complex scenarios you can also use [guard groups](/smart-contracts/core-candy-machine/guard-groups) to define multiple sets of guards on a single machine.
+
+### Do all guards require mint settings or route instructions?
+
+No. Only certain guards need additional on-chain accounts (mint settings) or a dedicated [route instruction](/smart-contracts/core-candy-machine/guard-route). Most guards are self-contained. Check the individual guard page to see whether mint settings or a route instruction applies.
+
+### What happens if a minter fails a guard check?
+
+The transaction is rejected. If the [Bot Tax](/smart-contracts/core-candy-machine/guards/bot-tax) guard is enabled, the failing wallet is charged a configurable SOL penalty instead of receiving an outright error, which discourages bots from spamming invalid mint attempts.
+
+### Does updating guards on a Core Candy Machine replace all existing guard settings?
+
+Yes. A guard update overwrites the entire guard configuration. You must re-specify every guard you want active, not just the ones you are changing.
+
+### What is the difference between a Candy Guard and a guard group?
+
+A Candy Guard is the on-chain account that holds one default set of guards. [Guard groups](/smart-contracts/core-candy-machine/guard-groups) let you define multiple named sets of guards within the same Candy Guard account so different wallets or phases can follow different rules.
+
+## Glossary
+
+| Term | Definition |
+|------|------------|
+| Guard | A modular on-chain component that enforces a single access-control rule during minting. |
+| Candy Guard | The on-chain account that stores the full set of activated guards for a Core Candy Machine. |
+| Candy Guard Program | The Solana program that owns Candy Guard accounts and evaluates all guard conditions before delegating to the Core Candy Machine Core program. |
+| Mint Authority | The public key authorized to invoke mint on a Core Candy Machine; set to the Candy Guard account when guards are active. |
+| Sol Payment | A guard that requires the minting wallet to pay a specified amount of SOL to a destination wallet. |
+| Bot Tax | A guard that charges a configurable SOL penalty on failed mint transactions to deter bots. |
+| Allow List | A guard that restricts minting to wallets present in a predefined Merkle-tree-based list. |
+| Guard Groups | Named sets of guards within a single Candy Guard account, enabling different rules for different minting phases or wallet tiers. |
+| Route Instruction | A dedicated instruction that some guards require to be called before minting to validate or set up prerequisites. See [Guard Route](/smart-contracts/core-candy-machine/guard-route). |
+| Mint Settings | Additional on-chain account data that certain guards create or require during the mint process. |
+

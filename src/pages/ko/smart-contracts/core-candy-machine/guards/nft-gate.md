@@ -1,8 +1,28 @@
 ---
 title: "NFT Gate Guard"
-metaTitle: "NFT Gate Guard Guard | Core Candy Machine"
-description: "Core Candy Machine의 'NFT Gate' 가드는 지정된 NFT/pNFT 컬렉션 보유자로 민팅을 제한합니다."
+metaTitle: "NFT Gate Guard - 토큰 게이트 민팅 | Core Candy Machine"
+description: "Core Candy Machine의 NFT Gate 가드는 지정된 NFT 컬렉션 보유자로 민팅을 제한하며, NFT를 소각하거나 전송하지 않고 소유권 증명만 요구합니다."
+keywords:
+  - NFT Gate guard
+  - Core Candy Machine
+  - candy guard
+  - token gated minting
+  - NFT collection verification
+  - proof of ownership
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-gated access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Gate** 가드는 지정된 NFT 컬렉션 보유자로 민팅을 제한하며, NFT를 소각하거나 전송하지 않고 소유권만 검증합니다. {% .lead %}
 
 ## 개요
 
@@ -140,3 +160,11 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _NFT Gate 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 소유권 증명으로 사용된 NFT는 소각되거나 전송되지 않습니다 -- 결제자는 민팅 후에도 NFT를 보유합니다.
+- [NFT Burn](/ko/smart-contracts/core-candy-machine/guards/nft-burn) 가드와 달리, 이 가드는 소유권만 확인하고 NFT를 소비하지 않습니다.
+- [NFT Mint Limit](/ko/smart-contracts/core-candy-machine/guards/nft-mint-limit) 가드와 결합하지 않는 한, 필수 컬렉션의 단일 NFT로 여러 번 민팅할 수 있습니다.
+- 이 가드는 컬렉션 검증을 위해 Token Metadata NFT(Core Asset이 아님)를 사용합니다.
+

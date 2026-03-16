@@ -1,8 +1,28 @@
 ---
 title: "开始日期守卫"
-metaTitle: 开始日期守卫 | Core Candy Machine
-description: "Core Candy Machine '开始日期' 守卫决定了 Candy Machine 或阶段的铸造开始日期。"
+metaTitle: "开始日期守卫 - Core Candy Machine 守卫 | Metaplex"
+description: "Start Date 守卫设置 Core Candy Machine 上允许铸造的最早日期和时间，在配置的时间戳之前阻止所有铸造尝试。"
+keywords:
+  - start date
+  - Core Candy Machine
+  - candy guard
+  - mint schedule
+  - launch date
+  - time-based minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based mint control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Start Date** 守卫设置 Core Candy Machine 上允许铸造的最早日期和时间，在配置的时间戳之前阻止所有铸造尝试。 {% .lead %}
 
 ## 概述
 
@@ -97,3 +117,10 @@ _开始日期守卫不需要铸造设置。_
 ## 路由指令
 
 _开始日期守卫不支持路由指令。_
+
+## 注意事项
+
+- Start Date 守卫使用 UTC 时间戳。确保通过 `dateTime()` 传递的日期值采用 ISO 8601 格式并包含明确的时区信息。
+- 要同时定义铸造的开始和结束窗口，请将 Start Date 守卫与 [End Date](/zh/smart-contracts/core-candy-machine/guards/end-date) 守卫结合使用。
+- 日期比较使用链上 Solana 集群时钟，该时钟可能与实际时间存在轻微偏差。
+

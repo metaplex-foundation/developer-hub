@@ -1,8 +1,28 @@
 ---
 title: "已兑换数量守卫"
-metaTitle: "已兑换数量守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Redeemed Amount' 守卫在整个 Core Candy Machine 的铸造资产数量达到配置的最大数量时禁止铸造。"
+metaTitle: "已兑换数量守卫 - Core Candy Machine 守卫 | Metaplex"
+description: "Redeemed Amount 守卫限制可从 Core Candy Machine 铸造的资产总数，支持全局铸造上限和使用守卫组实现分层铸造策略。"
+keywords:
+  - redeemed amount
+  - Core Candy Machine
+  - candy guard
+  - mint limit
+  - guard groups
+  - global mint cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - minting supply caps
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Redeemed Amount** 守卫在整个 Core Candy Machine 的已铸造资产总数达到配置的最大值时禁止铸造，支持全局供应上限和分层铸造阶段。 {% .lead %}
 
 ## 概述
 
@@ -134,3 +154,10 @@ _Redeemed Amount 守卫不需要铸造设置。_
 ## Route 指令
 
 _Redeemed Amount 守卫不支持 route 指令。_
+
+## 注意事项
+
+- Redeemed Amount 守卫跟踪整个 Core Candy Machine 的总铸造数，而非按钱包计算。如需限制每个钱包的铸造数量，请使用 [Mint Limit](/zh/smart-contracts/core-candy-machine/guards/mint-limit) 守卫。
+- `maximum` 值必须小于或等于 Candy Machine 上的 `itemsAvailable` 才有实际效果。
+- 与[守卫组](/zh/smart-contracts/core-candy-machine/guard-groups)一起使用时，Redeemed Amount 计数器在所有组之间全局共享，非常适合实现分层定价阶段。
+

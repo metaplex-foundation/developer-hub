@@ -1,8 +1,28 @@
 ---
 title: 地址门控守卫
 metaTitle: 地址门控守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Address Gate' 守卫将铸造限制为提供的单个地址。"
+description: "Core Candy Machine 的 'Address Gate' 守卫将铸造限制为单个指定的钱包地址，阻止所有其他钱包进行铸造。"
+keywords:
+  - address gate
+  - Core Candy Machine
+  - candy guard
+  - wallet restriction
+  - single address minting
+  - access control
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - wallet-based access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Address Gate** 守卫将 Core Candy Machine 的铸造限制为单个钱包地址，拒绝所有其他尝试铸造的钱包。 {% .lead %}
 
 ## 概述
 
@@ -120,3 +140,9 @@ _Address Gate 守卫不需要铸造设置。_
 ## Route 指令
 
 _Address Gate 守卫不支持或不需要 route 指令。_
+
+## 注意事项
+
+- Address Gate 守卫仅允许单个钱包地址。要允许多个钱包，请改用 [Allow List](/zh/smart-contracts/core-candy-machine/guards/allow-list) 守卫。
+- 此守卫在铸造时将铸造钱包地址与配置的地址进行比较；不需要预验证 route 指令。
+

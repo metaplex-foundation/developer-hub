@@ -1,8 +1,28 @@
 ---
-title: "Start Date ガード"
-metaTitle: Start Date ガード | Core Candy Machine
-description: "Core Candy Machine の 'Start Date' ガードは、Core Candy Machine またはフェーズのミント開始日を決定します。"
+title: "Start Dateガード"
+metaTitle: "Start Dateガード - Core Candy Machineガード | Metaplex"
+description: "Start Dateガードは、Core Candy Machineでミントが許可される最も早い日時を設定し、設定されたタイムスタンプより前のすべてのミント試行をブロックします。"
+keywords:
+  - start date
+  - Core Candy Machine
+  - candy guard
+  - mint schedule
+  - launch date
+  - time-based minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - time-based mint control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Start Date**ガードは、Core Candy Machineでミントが許可される最も早い日時を設定し、設定されたタイムスタンプより前のすべてのミント試行をブロックします。 {% .lead %}
 
 ## 概要
 
@@ -97,3 +117,10 @@ _Start Date ガードはミント設定を必要としません。_
 ## Route 命令
 
 _Start Date ガードは route 命令をサポートしません。_
+
+## 注意事項
+
+- Start DateガードはUTCタイムスタンプを使用します。`dateTime()`で渡す日付値はISO 8601形式で明示的なタイムゾーン情報を含むようにしてください。
+- ミントの開始と終了の両方のウィンドウを定義するには、Start Dateガードと[End Date](/smart-contracts/core-candy-machine/guards/end-date)ガードを組み合わせてください。
+- 日付比較はオンチェーンのSolanaクラスタークロックを使用するため、実時間とわずかなずれが生じる場合があります。
+

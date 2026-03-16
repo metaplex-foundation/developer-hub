@@ -1,8 +1,28 @@
 ---
 title: "程序门控守卫"
-metaTitle: "程序门控守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Program Gate' 守卫限制可以在铸造交易中使用的程序。"
+metaTitle: "程序门控守卫 - 限制交易程序 | Core Candy Machine"
+description: "Core Candy Machine 的 Program Gate 守卫限制哪些程序可以包含在铸造交易中，防止机器人从任意程序添加恶意指令。"
+keywords:
+  - Program Gate guard
+  - Core Candy Machine
+  - candy guard
+  - transaction program allowlist
+  - bot protection
+  - mint security
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - mint transaction program restrictions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Program Gate** 守卫限制哪些程序可以出现在铸造交易中，防止机器人从未授权的程序注入恶意指令。 {% .lead %}
 
 ## 概述
 
@@ -101,3 +121,10 @@ _Program Gate 守卫不需要铸造设置。_
 ## Route 指令
 
 _Program Gate 守卫不支持 route 指令。_
+
+## 注意事项
+
+- `additional` 列表最多支持 5 个程序地址。标准 Candy Machine 铸造流程所需的程序会自动允许，无需包含在列表中。
+- 启用此守卫后，任何包含不在允许列表中的程序指令的铸造交易都将失败。这是一种有效的反机器人措施，但如果铸造过程中需要第三方程序，可能会阻止合法用例。
+- 此守卫不限制允许程序内部进行的 CPI（跨程序调用）——它只检查交易中的顶层指令。
+

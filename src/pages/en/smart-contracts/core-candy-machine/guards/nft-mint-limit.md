@@ -1,8 +1,29 @@
 ---
 title: "NFT Mint Limit Guard"
-metaTitle: "NFT Mint Limit Guard | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Mint Limit' guard restricts minting to holders of a specified NFT/pNFT collection and limits the amount of Assets that can be minted for a provided NFT."
+metaTitle: "NFT Mint Limit Guard - Per-NFT Mint Cap | Core Candy Machine"
+description: "The Core Candy Machine NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the number of Assets each NFT can mint, combining token-gated access with per-NFT rate limiting."
+keywords:
+  - NFT Mint Limit guard
+  - Core Candy Machine
+  - candy guard
+  - per-NFT mint cap
+  - mint counter PDA
+  - token gated minting
+  - rate limiting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-NFT mint rate limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **NFT Mint Limit** guard restricts minting to holders of a specified NFT collection and caps the number of Assets each individual NFT can mint using an on-chain counter PDA. {% .lead %}
 
 ## Overview
 
@@ -113,7 +134,7 @@ The NFT Mint Limit guard contains the following Mint Settings:
 - **ID**: A unique identifier for this guard.
 - **Mint**: The mint address of the NFT to provide as proof that the payer owns an NFT from the required collection.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftmintlimit) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftmintlimit) for more details.
 
 {% dialect-switcher title="Mint with the NFT Mint Limit Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -142,7 +163,7 @@ _The NFT Mint Limit guard does not support the route instruction._
 When the `NftMintLimit` Guard is used a `NftMintCounter` Account is created for each NFT, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
 
 ```js
-import { 
+import {
   findNftMintCounterPda,
   fetchNftMintCounter
  } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -155,6 +176,14 @@ const pda = findNftMintCounterPda(umi, {
   candyGuard: candyMachine.mintAuthority
   // or candyGuard: publicKey("Address") with your candyGuard Address
 });
-      
+
 const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
+
+## Notes
+
+- The mint counter is tracked per NFT address, per Candy Machine, and per guard ID -- not per wallet. Different NFTs from the same collection each have their own independent counter.
+- Using different guard IDs allows you to set multiple independent mint limits within the same Candy Machine (for example, different limits per guard group).
+- The `NftMintCounter` PDA is derived from `[candyGuard, candyMachine, id, mint]` and can be fetched to check how many mints an NFT has already used.
+- This guard uses Token Metadata NFTs (not Core Assets) for the collection verification.
+

@@ -2,11 +2,50 @@
 title: Create a Website for minting Assets from your Core Candy Machine
 metaTitle: Create a Website for minting Assets from your Core Candy Machine | Core Candy Machine
 description: How to create an UI to interact with your Candy Machine minting Program on Solana.
+keywords:
+  - candy machine UI
+  - mint website
+  - NFT mint page
+  - candy machine frontend
+  - wallet adapter
+  - mint function
+  - fetch candy machine
+  - candy guard data
+  - mint eligibility
+  - guard routes
+  - Core Candy Machine UI
+  - Solana NFT minting
+about:
+  - Mint UI development
+  - Frontend integration
+  - Candy Machine interaction
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
+faqs:
+  - q: Do I need to build my own mint website for Core Candy Machine?
+    a: While not required, a custom website provides the best user experience. You can also use the Metaplex CLI for minting without a frontend.
+  - q: Which framework is best for building a Candy Machine mint UI?
+    a: Next.js is recommended for the best compatibility with Umi and wallet adapters. The metaplex-nextjs-tailwind-template provides a ready-to-use starting point.
+  - q: How do I check if a wallet is eligible to mint?
+    a: Fetch the Candy Guard account and validate each active guard's conditions against the connected wallet - check SOL balance, token holdings, mint limits, start dates, and allowlist status.
+  - q: Can I mint multiple NFTs in one transaction?
+    a: Yes. Combine multiple mintV1 instructions using Umi's transaction builder, but check fitsInOneTransaction() to avoid exceeding the transaction size limit.
 ---
 
-If you are looking to launch a Core NFT Collection on Solana, you would typically use a Candy Machine where your users can come and buy your Assets. To provide a user-friendly experience, it is recommended to have a website for it. This guide will focus on how to build your own mint function. It will also show you how to fetch data from the Candy Machine to, for example, display the remaining amount that can be minted.
+## Summary
 
-This guide focuses on the core Candy Machine functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
+This guide explains how to build a frontend mint UI for a [Core Candy Machine](/smart-contracts/core-candy-machine), covering on-chain data fetching, wallet eligibility checks, guard route execution, and the mint transaction itself. {% .lead %}
+
+- Fetch Candy Machine and Candy Guard accounts to display mint progress, pricing, and guard configuration
+- Validate wallet eligibility against active guards (SOL balance, token holdings, mint limits, start dates, allowlists)
+- Execute guard route instructions where required before minting (e.g., Allowlist proof)
+- Build and send `mintV1` transactions with the correct `mintArgs` for each active guard
+
+This guide focuses on the core [Candy Machine](/smart-contracts/core-candy-machine) functionality and interactions, rather than providing a complete website implementation. It will not cover aspects like adding buttons to a website or integrating with a wallet adapter. Instead, it provides essential information on working with the Core Candy Machine.
 
 For a full website implementation, including UI elements and wallet integration, you may want to start with a template like the [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template). This template includes many setup steps for components like the Wallet Adapter.
 
@@ -15,7 +54,7 @@ If you're looking for guidance on general web development practices or how to us
 ## Prerequisites
 
 - An already created Candy Machine. Find more info on how to create one in [the Core Candy Machine creation guide](/smart-contracts/core-candy-machine/create).
-- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to umi.
+- Basic familiarity with web development and your chosen framework. We recommend Next JS for easiest compatibility to [Umi](/dev-tools/umi).
 
 ## Required Packages
 
@@ -27,9 +66,9 @@ Regardless of your chosen template or implementation, you'll need to install the
 npm i @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-core-candy-machine
 ```
 
-## Fetch On-chain Data
+## Fetching On-Chain Candy Machine Data
 
-After setting up your environment, we can start focusing on the Candy Machine. Mint UIs often want to show data such as:
+The Candy Machine and Candy Guard accounts store all the information a mint UI needs to display progress, pricing, and eligibility. Mint UIs often want to show data such as:
 
 - Number of already minted Assets
 - Number of Assets in the Candy Machine
@@ -39,8 +78,9 @@ After setting up your environment, we can start focusing on the Candy Machine. M
 
 It can also make sense to fetch additional data that is not shown to the user but used in background calculations. For example, when using the [Redeemed Amount](/smart-contracts/core-candy-machine/guards/redeemed-amount) Guard, you would want to fetch the already redeemed amount to see if the user is allowed to mint more.
 
-### Fetch Candy Machine Data
-In the Candy Machine Account, data such as the number of Available and Redeemed assets is stored. It also stores the `mintAuthority`, which is usually the address of your Candy Guard.  
+### Fetching Candy Machine Account Data
+
+The Candy Machine account stores the number of available and redeemed assets, plus the `mintAuthority` (usually the address of your [Candy Guard](/smart-contracts/core-candy-machine/guards)).
 
 To fetch the Candy Machine, the `fetchCandyMachine` function can be used as shown below:
 
@@ -134,8 +174,9 @@ This would return the Candy Machine Data like this:
 
 From a UI perspective the most important field in here are `itemsRedeemed`, `itemsAvailable` and `mintAuthority`. In some cases it might also be interesting to show some of the `items` on your website as teaser pictures.
 
-#### Show remaining Asset Amount
-To display a section like `13 / 16 Assets minted` one would use something like:
+#### Displaying Remaining Asset Count
+
+Use `itemsRedeemed` and `itemsAvailable` from the Candy Machine account to display mint progress. To display a section like `13 / 16 Assets minted` one would use something like:
 
 ```ts
 const mintedString = `${candyMachine.itemsRedeemed} / ${candyMachine.itemsAvailable} Assets minted`
@@ -147,8 +188,9 @@ If you want to get the remaining mintable Assets like `3 available` you would in
 const availableString = `${candyMachine.itemsAvailable - candyMachine.itemsRedeemed} available`;
 ```
 
-### Fetch Candy Guard Data
-The Candy Guard contains the conditions that have to be met to allow minting. This can for example be a Sol or Token Payment happening, limiting the amount of Assets one Wallet is allowed to mint and way more. You can find more information about Candy Guards on the [Candy Guard Page](/smart-contracts/core-candy-machine/guards).
+### Fetching Candy Guard Account Data
+
+The [Candy Guard](/smart-contracts/core-candy-machine/guards) account defines the conditions that must be met before minting is allowed, such as SOL or token payments, wallet mint limits, start dates, and allowlists. You can find more information about Candy Guards on the [Candy Guard Page](/smart-contracts/core-candy-machine/guards).
 
 Similar to the Candy Machine Data it is not a necessity to fetch the guard account. Doing so can allow more flexibility like just updating the SOL price in the Candy Guard and automatically updating the numbers on the website, too.
 
@@ -425,8 +467,9 @@ In this Object the most important field for the UI is the `guards` object. It co
 {% /dialect %}
 {% /dialect-switcher %}
 
-### Fetch additional Candy Machine related Accounts
-The choice of Guards you implement may necessitate fetching additional accounts. For instance, if you plan to verify a wallet's minting eligibility and are utilizing the `mintLimit` Guard, you would need to retrieve the `mintCounter` account. This account maintains a record of how many NFTs a particular wallet has already minted under that specific guard.
+### Fetching Additional Guard-Related Accounts
+
+Some guards store per-wallet or per-group state in separate on-chain accounts. Fetching these accounts lets you check eligibility before attempting a mint. For instance, if you plan to verify a wallet's minting eligibility and are utilizing the `mintLimit` Guard, you would need to retrieve the `mintCounter` account. This account maintains a record of how many NFTs a particular wallet has already minted under that specific guard.
 
 #### `MintLimit` Accounts
 When the [`MintLimit`](/smart-contracts/core-candy-machine/guards/mint-limit) guard is active, it's advisable to retrieve the `MintCounter` account for the user's wallet. This allows you to check whether the user has reached their minting limit or if they're still eligible to mint additional items.
@@ -450,7 +493,7 @@ Similar to the `MintLimit` guard it can make sense to fetch the `NftMintCounter`
 The following code snippet demonstrates how to fetch the `NftMintCounter` account. Note that this example assumes you've already obtained the Candy Machine and Candy Guard data:
 
 ```ts
-import { 
+import {
   findNftMintCounterPda,
   fetchNftMintCounter
  } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -461,7 +504,7 @@ const pda = findNftMintCounterPda(umi, {
   candyGuard: candyMachine.mintAuthority,
   candyMachine: candyMachine.publicKey,
 });
-      
+
 const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
 
@@ -471,7 +514,7 @@ Similar to the `NftMintCounter` guard it can make sense to fetch the `AssetMintC
 The following code snippet demonstrates how to fetch the `AssetMintCounter` account. Note that this example assumes you've already obtained the Candy Machine data:
 
 ```ts
-import { 
+import {
   findAssetMintCounterPda,
   fetchAssetMintCounter
  } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -530,8 +573,9 @@ const allowListProof = await safeFetchAllowListProofFromSeeds(umi, {
 });
 ```
 
-### Fetch Wallet Data
-To validate the legibility you may also want to fetch information about the connected wallet. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs the wallet owns.
+### Fetching Wallet Data for Eligibility
+
+Wallet account data -- SOL balance, token holdings, and owned NFTs -- is needed to validate guard conditions client-side before attempting a mint. Depending on the Guards you are using you may want to know how much SOL is in the wallet and which Tokens and NFTs the wallet owns.
 
 To fetch the SOL balance the built in `getAccount` umi function can be used to fetch the wallet account:
 ```ts
@@ -555,8 +599,9 @@ const assets = await umi.rpc.getAssetsByOwner({
 
 ```
 
-## Verify legibility
-After fetching all the required data you can then verify if the connected wallet is allowed to mint or not.
+## Verifying Mint Eligibility
+
+Each active guard defines a condition the connected wallet must satisfy before a mint instruction will succeed on-chain. After fetching all the required data you can then verify if the connected wallet is allowed to mint or not.
 
 It's important to note that when groups are attached to a Candy Machine, the `default` guards apply universally across all created groups.  Also, when groups are enabled the ability to mint from the `default` group becomes disabled and you must use the created groups for minting.
 
@@ -601,7 +646,7 @@ if (solPayment){
 3. Make sure the `mintLimit` was not reached yet:
 ```ts
 import { unwrapOption } from '@metaplex-foundation/umi';
-import { 
+import {
   safeFetchMintCounterFromSeeds,
 } from "@metaplex-foundation/mpl-core-candy-machine";
 
@@ -625,7 +670,8 @@ if (mintLimit){
 When a wallet is not eligible to mint it is helpful to disable the mint button and show the user the reason for not being eligible to mint. E.g. a `Not enough SOL!` message.
 
 ## Guard Routes
-Certain Guards require specific instructions to be executed before minting can occur. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type.
+
+Certain guards require a `route` instruction to be executed before the mint instruction will succeed. These instructions create accounts that store data or provide proof of a wallet's eligibility to mint. The execution frequency of these instructions varies depending on the Guard type.
 
 {% callout type="note" title="Target Audience of this section" %}
 In case you are not using the `Allocation`, `FreezeSolPayment`, `FreezeTokenPayment` or `Allowlist` guard it is safe to skip this section.
@@ -652,7 +698,7 @@ import {
 } from "@metaplex-foundation/umi";
 
 // assuming you fetched the AllowListProof as described above
-if (allowListProof === null) { 
+if (allowListProof === null) {
   route(umi, {
     guard: "allowList",
     candyMachine: candyMachine.publicKey,
@@ -667,10 +713,11 @@ if (allowListProof === null) {
 }
 ```
 
-## Create a Mint Function
-It is recommended to implement legibility checks for all the guards that are attached. Keep in mind that if there are any groups attached the `default` guards will apply to all additional groups, while simultaneously disabling the `default` group.
+## Building the Mint Function
 
-After those checks are done and, if required, the route instructions were run the mint transaction can be built. Depending on the guards, `mintArgs` may have to be passed in. These are arguments that help build the mint transaction by passing in the correct accounts and data. For example the `mintLimit` guard requires the `mintCounter` account. The Umi SDK abstracts these details away but still requires some information to build the transaction correctly.
+The mint function combines eligibility validation, guard route execution, and the `mintV1` instruction with correctly populated `mintArgs`. It is recommended to implement eligibility checks for all the guards that are attached. Keep in mind that if there are any groups attached the `default` guards will apply to all additional groups, while simultaneously disabling the `default` group.
+
+After those checks are done and, if required, the route instructions were run the mint transaction can be built. Depending on the guards, `mintArgs` may have to be passed in. These are arguments that help build the mint transaction by passing in the correct accounts and data. For example the `mintLimit` guard requires the `mintCounter` account. The [Umi](/dev-tools/umi) SDK abstracts these details away but still requires some information to build the transaction correctly.
 
 Assuming again a Candy Machine with `startDate`, `SolPayment` and `mintLimit` Guards attached let's see how to build the `mintArgs`.
 
@@ -718,7 +765,7 @@ console.log(`NFT ${nftMint.publicKey} minted!`)
 
 ## Advanced Minting Techniques
 
-While the basic minting function we've discussed works well for most cases, there are some advanced techniques you can use to enhance your minting process. Let's explore a couple of these:
+Beyond the basic single-mint flow, Core Candy Machine supports batching multiple mints into one transaction and using guard groups to implement tiered minting strategies.
 
 ### Minting Multiple NFTs in One Transaction
 
@@ -736,7 +783,7 @@ If you add to many `mintV1` instructions into a transaction you will receive a `
 
 ### Guard Groups
 
-Guard groups are a powerful feature of Core Candy Machine that allow you to define multiple sets of guards with different configurations. They can be particularly useful in scenarios such as:
+[Guard groups](/smart-contracts/core-candy-machine/guard-groups) allow you to define multiple sets of guards with different configurations on a single Candy Machine. They can be particularly useful in scenarios such as:
 
 1. Tiered minting: Different groups for VIP, early access, and public sale.
 2. Multiple payment options: Groups for SOL payment, SPL token payment, etc.
@@ -769,6 +816,12 @@ await mintV1(umi, {
 console.log(`NFT ${nftMint.publicKey} minted!`)
 ```
 
+## Notes
+
+- **Client-side validation is advisory only.** The eligibility checks described in this guide run in the browser and do not replace on-chain guard validation. The Candy Machine program performs its own guard checks during the mint transaction; a failing guard will cause the transaction to revert regardless of client-side logic.
+- **Compute units may need increasing.** Depending on the number and complexity of active guards, the default compute unit limit may not be sufficient. Use `setComputeUnitLimit` to raise the budget when transactions fail with a compute-exceeded error.
+- **Guard groups disable default-only minting.** When one or more guard groups are attached to a Candy Machine, the `default` group can no longer be used on its own for minting. You must specify a `group` label in the `mintV1` call, and both the `default` guards and the selected group's guards will be enforced.
+
 ## Next Steps
 
 Now that you've mastered the essentials of interacting with the Candy Machine in your frontend, you might want to consider the following steps to further enhance and distribute your project:
@@ -786,3 +839,22 @@ Now that you've mastered the essentials of interacting with the Candy Machine in
 8. Monitoring: Set up monitoring tools to keep track of your Candy Machine UIs status and quickly address any issues that may arise.
 
 By focusing on these areas, you'll be well-prepared to launch and maintain a successful NFT minting project using Core Candy Machine.
+
+## FAQ
+
+### Do I need to build my own mint website for Core Candy Machine?
+
+While not required, a custom website provides the best user experience. You can also use the Metaplex CLI for minting without a frontend.
+
+### Which framework is best for building a Candy Machine mint UI?
+
+Next.js is recommended for the best compatibility with Umi and wallet adapters. The [`metaplex-nextjs-tailwind-template`](https://github.com/metaplex-foundation/metaplex-nextjs-tailwind-template) provides a ready-to-use starting point.
+
+### How do I check if a wallet is eligible to mint?
+
+Fetch the Candy Guard account and validate each active guard's conditions against the connected wallet — check SOL balance, token holdings, mint limits, start dates, and allowlist status.
+
+### Can I mint multiple NFTs in one transaction?
+
+Yes. Combine multiple `mintV1` instructions using Umi's transaction builder, but check `fitsInOneTransaction()` to avoid exceeding the transaction size limit.
+

@@ -1,8 +1,28 @@
 ---
 title: Mint Limit Guard
-metaTitle: "Mint Limit Guard | Core Candy Machine"
-description: "The Core Candy Machine 'Mint Limit' guard allows specifying a limit on the number of Assets each wallet can mint."
+metaTitle: "Mint Limit Guard - Restrict Per-Wallet Minting Quantity | Core Candy Machine"
+description: "The Mint Limit guard restricts the number of Assets each wallet can mint from a Core Candy Machine. Limits are tracked per wallet, per Candy Machine, and per identifier."
+keywords:
+  - mint limit
+  - Core Candy Machine
+  - candy guard
+  - per-wallet limit
+  - mint counter
+  - minting cap
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-wallet minting limits
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Mint Limit** guard restricts the number of Assets each wallet can mint from a Core Candy Machine, tracked per wallet, per Candy Machine, and per configurable identifier. {% .lead %}
 
 ## Overview
 
@@ -110,7 +130,7 @@ The Mint Limit guard contains the following Mint Settings:
 
 - **ID**: A unique identifier for this guard.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#mintlimit) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#mintlimit) for more details.
 
 {% dialect-switcher title="Mint with the Mint Limit Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -145,12 +165,19 @@ import { umi } from "@metaplex-foundation/mpl-core-candy-machine";
 const mintCounter = await safeFetchMintCounterFromSeeds(umi, {
   id: 1, // The mintLimit id you set in your guard config
   user: umi.identity.publicKey,
-  candyMachine: candyMachine.publicKey, 
+  candyMachine: candyMachine.publicKey,
   // or candyMachine: publicKey("Address") with your CM Address
-  candyGuard: candyMachine.mintAuthority, 
+  candyGuard: candyMachine.mintAuthority,
   // or candyGuard: publicKey("Address") with your candyGuard Address
 });
 
 // Amount already minted
 console.log(mintCounter.count)
 ```
+
+## Notes
+
+- The Mint Limit counter is tracked on-chain via a `MintCounter` PDA derived from the wallet address, the Candy Machine address, and the guard `id`. Each unique combination creates a separate counter account.
+- Using different `id` values in separate [guard groups](/smart-contracts/core-candy-machine/guard-groups) allows each group to enforce its own independent mint limit for the same wallet.
+- The `MintCounter` account persists on-chain even after the Candy Machine is fully minted out. You can fetch it with `safeFetchMintCounterFromSeeds` to check how many Assets a given wallet has minted.
+

@@ -1,8 +1,28 @@
 ---
 title: "NFT Paymentガード"
-metaTitle: "NFT Paymentガード | Core Candy Machine"
-description: "Core Candy Machineの「NFT Payment」ガードは、支払者に指定されたNFTコレクションからNFT/pNFTを請求することでミントを許可します。支払いとして使用されるNFT/pNFTは、事前定義された宛先に転送されます。"
+metaTitle: "NFT Paymentガード - NFTで支払ってミント | Core Candy Machine"
+description: "Core Candy MachineのNFT Paymentガードは、指定されたコレクションからNFTを支払者に請求してミントを許可し、NFTを事前定義された宛先ウォレットに転送します。"
+keywords:
+  - NFT Payment guard
+  - Core Candy Machine
+  - candy guard
+  - pay with NFT
+  - NFT transfer on mint
+  - token gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT-as-payment access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Payment**ガードは、指定されたコレクションからNFTを支払者に請求してミントを許可し、バーンする代わりに事前定義された宛先ウォレットに転送します。 {% .lead %}
 
 ## 概要
 
@@ -165,3 +185,12 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _NFT Paymentガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- [NFT Burn](/smart-contracts/core-candy-machine/guards/nft-burn)ガードとは異なり、このガードはNFTをバーンするのではなく宛先ウォレットに転送します。NFTは流通し続けます。
+- 宛先ウォレットはガード設定とミント引数の両方で指定する必要があります。
+- 支払者が必要なコレクションからNFTを所有していない場合、ミントトランザクションは失敗します。
+- Rule Setを持つProgrammable NFTで支払う場合は、転送がNFTの認証ルールに準拠するようにミント引数に`ruleSet`を含めてください。
+- このガードは支払いとコレクション検証にToken Metadata NFT（Core Assetsではない）を使用します。
+

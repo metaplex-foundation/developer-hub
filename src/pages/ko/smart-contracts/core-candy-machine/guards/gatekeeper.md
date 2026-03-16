@@ -1,8 +1,28 @@
 ---
 title: "Gatekeeper Guard"
-metaTitle: "Gatekeeper Guard | Core Candy Machine"
-description: "Core Candy Machine `Gatekeeper` 가드는 민팅 지갑이 지정된 Gatekeeper Network에서 유효한 Gateway Token을 가지고 있는지 확인합니다."
+metaTitle: "Gatekeeper 가드 - 민팅에 Gateway Token 필요 | 코어 캔디 머신"
+description: "Gatekeeper 가드는 코어 캔디 머신에서 민팅하기 전에 민팅 지갑이 Civic Captcha Pass와 같은 지정된 Gatekeeper Network에서 유효한 Gateway Token을 보유해야 합니다."
+keywords:
+  - gatekeeper
+  - Core Candy Machine
+  - candy guard
+  - gateway token
+  - Civic captcha
+  - bot protection
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - gateway token verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Gatekeeper** 가드는 민팅이 허용되기 전에 민팅 지갑이 Civic Captcha Pass와 같은 지정된 Gatekeeper Network에서 유효한 Gateway Token을 보유해야 합니다. {% .lead %}
 
 ## 개요
 
@@ -170,3 +190,10 @@ mintV1(umi, {
 ## Route Instruction
 
 _Gatekeeper 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 민팅 지갑은 민팅을 시도하기 전에 구성된 Gatekeeper Network에서 유효한 Gateway Token을 획득해야 합니다. 토큰 획득 과정(예: captcha 완료)은 Candy Machine 프로그램 외부에서 진행됩니다.
+- `expireOnUse`가 `true`로 설정되면 각 민팅에 새로운 Gateway Token이 필요하며, 사실상 각 captcha 완료가 단일 민팅으로 제한됩니다.
+- Civic Captcha Pass 네트워크 주소는 `ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`입니다. 다른 Gatekeeper Network는 다른 요구사항과 토큰 발급 절차를 가질 수 있습니다.
+

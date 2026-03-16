@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - Vanity Mint Guard"
 metaTitle: "Core Candy Machine - Guards - Vanity Mint"
-description: "Core Candy Machine 'Vanity Mint' guard는 민터가 Asset Address로 특정 베니티 민트를 제공해야 합니다"
+description: "Core Candy Machine의 Vanity Mint 가드는 민터가 구성된 정규식 패턴과 일치하는 Asset 주소를 제공하도록 요구하여 민팅 프로세스에 작업 증명 요구 사항을 추가합니다."
+keywords:
+  - Vanity Mint
+  - Core Candy Machine
+  - candy guard
+  - Proof of Work
+  - vanity address
+  - regex mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Vanity address minting with regex patterns
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Vanity Mint** 가드는 민터가 구성된 정규식과 일치하는 Asset 주소를 제공하도록 요구하여, 민팅 프로세스에 작업 증명 요구 사항을 효과적으로 추가합니다. {% .lead %}
 
 ## 개요
 
@@ -116,3 +136,10 @@ _Vanity Mint guard는 민팅 설정을 필요로 하지 않습니다. 민트 주
 ## Route Instruction
 
 _Vanity Mint guard는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 정규식은 민트 주소의 **base-58 인코딩된** 공개 키와 매칭됩니다. base-58 인코딩에서 유효한 문자(영숫자, `0`, `O`, `I`, `l` 제외)만 민트 주소에 나타날 수 있습니다.
+- 더 제한적인 정규식 패턴(더 긴 접두사 또는 접미사)은 민터가 일치하는 키페어를 찾는 데 기하급수적으로 더 많은 계산 노력을 필요로 합니다. 패턴 복잡성을 설정할 때 사용자 경험을 고려하세요.
+- Vanity Mint 가드는 민트 설정이나 route instruction이 필요하지 않습니다 -- 구성된 패턴에 대해 민트 주소만 검증합니다.
+

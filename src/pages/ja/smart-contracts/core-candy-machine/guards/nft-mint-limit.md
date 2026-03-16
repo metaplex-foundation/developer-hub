@@ -1,8 +1,29 @@
 ---
 title: "NFT Mint Limitガード"
-metaTitle: "NFT Mint Limitガード | Core Candy Machine"
-description: "Core Candy Machineの「NFT Mint Limit」ガードは、指定されたNFT/pNFTコレクションの保有者へのミントを制限し、提供されたNFTに対してミントできるアセットの量を制限します。"
+metaTitle: "NFT Mint Limitガード - NFTごとのミント上限 | Core Candy Machine"
+description: "Core Candy MachineのNFT Mint Limitガードは、指定されたNFTコレクションの保有者へのミントを制限し、オンチェーンカウンターPDAを使用して各NFTがミントできるアセット数を制限します。"
+keywords:
+  - NFT Mint Limit guard
+  - Core Candy Machine
+  - candy guard
+  - per-NFT mint cap
+  - mint counter PDA
+  - token gated minting
+  - rate limiting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-NFT mint rate limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Mint Limit**ガードは、指定されたNFTコレクションの保有者へのミントを制限し、オンチェーンカウンターPDAを使用して各NFTがミントできるアセット数に上限を設けます。 {% .lead %}
 
 ## 概要
 
@@ -158,3 +179,11 @@ const pda = findNftMintCounterPda(umi, {
 
 const nftMintCounter = fetchNftMintCounter(umi, pda)
 ```
+
+## 注意事項
+
+- ミントカウンターはNFTアドレスごと、Candy Machineごと、ガードIDごとに追跡されます -- ウォレットごとではありません。同じコレクションの異なるNFTはそれぞれ独立したカウンターを持ちます。
+- 異なるガードIDを使用することで、同じCandy Machine内で複数の独立したミント制限を設定できます（例: ガードグループごとに異なる制限）。
+- `NftMintCounter` PDAは`[candyGuard, candyMachine, id, mint]`から導出され、NFTが既に使用したミント数を確認するためにフェッチできます。
+- このガードはコレクション検証にToken Metadata NFT（Core Assetsではない）を使用します。
+

@@ -1,8 +1,28 @@
 ---
 title: Asset Burn Multiガード
 metaTitle: Asset Burn Multiガード | Core Candy Machine
-description: "Core Candy Machineの「Asset Burn Multi」ガードは、事前定義されたコレクションの保有者へのミントを制限し、購入時に保有者のアセットをバーンします。"
+description: "Core Candy Machineの「Asset Burn Multi」ガードは、指定されたコレクションの保有者へのミントを制限し、ミントのコストとして設定可能な数のアセットをそのコレクションからバーンします。"
+keywords:
+  - asset burn multi
+  - Core Candy Machine
+  - candy guard
+  - burn multiple assets
+  - burn to mint
+  - collection holder
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - multi-asset burn-to-mint mechanics
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Burn Multi** ガードは、ミントウォレットが指定されたコレクションから設定可能な数のアセットを保有し、Core Candy Machineから新しいアセットをミントするコストとしてそれらを永久にバーンすることを要求します。 {% .lead %}
 
 ## 概要
 
@@ -145,3 +165,11 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Asset Burn Multiガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- バーンされるすべてのアセットは永久に破棄され、復元できません。バーンはミントトランザクション中にアトミックに実行されます。
+- `assets`配列で提供されるアセットアドレスの数は、ガード設定で設定された`num`値と一致する必要があります。アドレスが少なすぎたり多すぎたりすると、トランザクションは失敗します。
+- 各アセットはミントウォレットに属し、指定されたコレクションの一部である必要があります。いずれかのアセットがいずれかの条件を満たさない場合、ミントトランザクション全体が失敗します。
+- ミントごとに1つのアセットのみをバーンする場合は、よりシンプルな [Asset Burn](/ja/smart-contracts/core-candy-machine/guards/asset-burn) ガードを使用してください。
+

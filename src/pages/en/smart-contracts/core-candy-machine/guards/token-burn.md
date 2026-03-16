@@ -1,12 +1,31 @@
 ---
 title: Token Burn Guard
 metaTitle: Token Burn Guard | Core Candy Machine
-description: "The Core Candy Machine 'Token Burn' guard allows minting by setting the minting currency to an SPL token address and value."
+description: "The Core Candy Machine 'Token Burn' guard requires the minter to burn a specified amount of SPL tokens from a configured mint account before minting is allowed."
+keywords:
+  - Token Burn
+  - Core Candy Machine
+  - candy guard
+  - SPL token burn
+  - burn to mint
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token burning for mint access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Token Burn** guard requires the minter to permanently burn a configured amount of SPL tokens before the mint transaction is allowed to proceed. {% .lead %}
 
 ## Overview
 
-The **Token Burn** guard allows minting by burning some of the payer’s tokens from a configured mint account. If the payer does not have the required amount of tokens to burn, minting will fail.
+The **Token Burn** guard allows minting by burning some of the payer's tokens from a configured mint account. If the payer does not have the required amount of tokens to burn, minting will fail.
 
 {% diagram  %}
 
@@ -111,7 +130,7 @@ The Token Burn guard contains the following Mint Settings:
 
 - **Mint**: The address of the mint account defining the SPL Token we want to burn.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokenburn) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#tokenburn) for more details.
 
 {% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -137,3 +156,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The Token Burn guard does not support the route instruction._
+
+## Notes
+
+- Burned tokens are permanently destroyed and cannot be recovered. Ensure the configured **Amount** accurately reflects the intended cost per mint.
+- This guard uses the original **SPL Token program**. For Token-2022 mints, use the corresponding Token-2022 guard variant instead.
+- The payer must hold at least the configured **Amount** of tokens in their associated token account at the time of minting; otherwise the transaction will fail.
+

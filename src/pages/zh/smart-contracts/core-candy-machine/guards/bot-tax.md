@@ -1,8 +1,28 @@
 ---
 title: "机器人税守卫"
 metaTitle: "机器人税守卫 | Core Candy Machine"
-description: "Core Candy Machine 的 'Bot Tax' 守卫允许您设置可配置的税费来对用户的无效交易收费。这可以阻止垃圾邮件和机器人。"
+description: "Core Candy Machine 的 'Bot Tax' 守卫对无效的铸造交易收取可配置的 SOL 罚款，以阻止机器人和垃圾邮件。"
+keywords:
+  - bot tax
+  - Core Candy Machine
+  - candy guard
+  - anti-bot protection
+  - spam prevention
+  - last instruction check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - bot mitigation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Bot Tax** 守卫对无效的铸造交易收取可配置的 SOL 罚款，以阻止机器人和针对 Core Candy Machine 的垃圾邮件尝试。 {% .lead %}
 
 {% callout type="warning" %}
 一些钱包（如 Solflare、Phantom 和可能的其他钱包）目前会自动向交易注入 Lighthouse 指令。当 `lastInstruction` 设置为 `true` 时，这会导致 Bot Tax 守卫被触发。
@@ -134,3 +154,11 @@ _Bot Tax 守卫不需要铸造设置。_
 ## Route 指令
 
 _Bot Tax 守卫不支持 route 指令。_
+
+## 注意事项
+
+- 当 Bot Tax 守卫处于活动状态且另一个守卫拒绝铸造时，交易在链上仍然显示为成功但不会铸造 NFT。这是设计使然，以便可以收取罚款。
+- 收取的机器人税资金累积在 Candy Machine 账户中，可以在铸造结束后通过删除 Candy Machine 来回收。
+- 将 `lastInstruction` 设置为 `true` 可能会导致自动向交易注入额外指令的钱包（如 Solflare 和 Phantom）出现误报。在生产环境中启用此选项之前请彻底测试。
+- 将罚款金额保持在较小水平（例如 0.01 SOL），以避免惩罚遇到验证错误的合法用户。
+

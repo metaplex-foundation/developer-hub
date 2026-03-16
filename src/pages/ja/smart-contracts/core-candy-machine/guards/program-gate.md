@@ -1,8 +1,28 @@
 ---
 title: "Program Gateガード"
-metaTitle: "Program Gateガード | Core Candy Machine"
-description: "Core Candy Machineの「Program Gate」ガードは、ミントトランザクション中に使用できるプログラムを制限します。"
+metaTitle: "Program Gateガード - トランザクションプログラムの制限 | Core Candy Machine"
+description: "Core Candy MachineのProgram Gateガードは、ミントトランザクションに含めることができるプログラムを制限し、ボットが任意のプログラムから悪意のある命令を追加することを防ぎます。"
+keywords:
+  - Program Gate guard
+  - Core Candy Machine
+  - candy guard
+  - transaction program allowlist
+  - bot protection
+  - mint security
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - mint transaction program restrictions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Program Gate**ガードは、ミントトランザクションに含めることができるプログラムを制限し、ボットが未承認のプログラムから悪意のある命令を注入することを防ぎます。 {% .lead %}
 
 ## 概要
 
@@ -101,3 +121,10 @@ _Program Gateガードはミント設定を必要としません。_
 ## ルート命令
 
 _Program Gateガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- `additional`リストは最大5つのプログラムアドレスをサポートします。標準的なCandy Machineミントフローに必要なプログラムは自動的に許可されるため、含める必要はありません。
+- このガードが有効な場合、許可リストにないプログラムからの命令を含むミントトランザクションは失敗します。これは効果的なボット対策ですが、ミント中にサードパーティプログラムが必要な正当なユースケースをブロックする可能性があります。
+- このガードは、許可されたプログラムによって内部的に行われるCPI（クロスプログラム呼び出し）を制限しません -- トランザクション内のトップレベルの命令のみをチェックします。
+

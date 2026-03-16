@@ -1,8 +1,28 @@
 ---
 title: "SOL 支付守卫"
-metaTitle: SOL 支付守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Sol Payment' 守卫在铸造时向付款人收取一定数量的 SOL。"
+metaTitle: "SOL 支付守卫 - Core Candy Machine 守卫 | Metaplex"
+description: "Sol Payment 守卫在从 Core Candy Machine 铸造时向付款人收取可配置数量的 SOL，将付款转移到指定的目标钱包。"
+keywords:
+  - sol payment
+  - Core Candy Machine
+  - candy guard
+  - SOL transfer
+  - mint payment
+  - lamports
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Sol Payment** 守卫在从 Core Candy Machine 铸造时向付款人收取可配置数量的 SOL，将付款转移到指定的目标钱包。 {% .lead %}
 
 ## 概述
 
@@ -139,3 +159,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Sol Payment 守卫不支持 route 指令。_
+
+## 注意事项
+
+- Sol Payment 守卫要求在守卫设置和铸造设置中同时提供 `destination` 钱包地址。
+- 付款金额以 lamports 为单位指定。使用 `sol()` 辅助函数将 SOL 转换为 lamports（例如 `sol(1.5)` 等于 1,500,000,000 lamports）。
+- 付款人必须有足够的 SOL 余额来支付铸造付款和 Solana 交易费用。
+

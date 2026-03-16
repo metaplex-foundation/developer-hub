@@ -1,8 +1,28 @@
 ---
 title: SOL 固定费用守卫
-metaTitle: SOL 固定费用守卫 | Core Candy Machine
-description: "Core Candy Machine 的 'Sol Fixed Fee' 守卫在铸造时向付款人收取一定数量的 SOL"
+metaTitle: "SOL 固定费用守卫 - Core Candy Machine 守卫 | Metaplex"
+description: "Sol Fixed Fee 守卫在从 Core Candy Machine 铸造时向付款人收取固定数量的 SOL，将费用转移到配置的目标钱包。"
+keywords:
+  - sol fixed fee
+  - Core Candy Machine
+  - candy guard
+  - SOL payment
+  - mint fee
+  - fixed fee
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment collection
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Sol Fixed Fee** 守卫在从 Core Candy Machine 铸造时向付款人收取固定数量的 SOL，将费用转移到配置的目标钱包。 {% .lead %}
 
 ## 概述
 
@@ -139,3 +159,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Sol Fixed Fee 守卫不支持 route 指令。_
+
+## 注意事项
+
+- Sol Fixed Fee 守卫要求在守卫设置和铸造设置中同时提供 `destination` 钱包地址。
+- 费用金额以 lamports 为单位指定。使用 `sol()` 辅助函数将 SOL 转换为 lamports（例如 `sol(1.5)` 等于 1,500,000,000 lamports）。
+- 此守卫的工作方式类似于 [Sol Payment](/zh/smart-contracts/core-candy-machine/guards/sol-payment) 守卫。主要区别在于 Sol Fixed Fee 专为固定费用收取场景设计。
+

@@ -57,7 +57,6 @@ Launch pool buckets, unlocked buckets, end behaviors, Genesis account creation, 
 
 **Jump to:** [Add Bucket](#add-presale-bucket) · [Deposit](#deposit) · [Claim](#claim) · [Full Lifecycle](#full-lifecycle-example) · [Common Errors](#common-errors) · [FAQ](#faq)
 
-*Maintained by Metaplex Foundation · Last verified February 2026 · Requires Metaplex CLI (mplx)*
 
 ## Add Presale Bucket
 

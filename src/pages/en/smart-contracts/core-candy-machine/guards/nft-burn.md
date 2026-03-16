@@ -1,12 +1,32 @@
 ---
 title: "NFT Burn Guard"
-metaTitle: "NFT Burn Guard  | Core Candy Machine"
-description: "The Core Candy Machine 'NFT Burn' guard restricts the mint to holders of a predefined Token Metadata NFT/pNFT Collection and burns the holder's NFT during purchase."
+metaTitle: "NFT Burn Guard - Burn NFT to Mint | Core Candy Machine"
+description: "The Core Candy Machine NFT Burn guard restricts minting to holders of a predefined Token Metadata NFT Collection and burns the holder's NFT during the mint transaction."
+keywords:
+  - NFT Burn guard
+  - Core Candy Machine
+  - candy guard
+  - burn NFT to mint
+  - token gated mint
+  - NFT collection verification
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT burn-to-mint access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **NFT Burn** guard restricts minting to holders of a predefined NFT Collection and permanently burns the holder's NFT as a cost of the mint transaction. {% .lead %}
 
 ## Overview
 
-The **NFT Burn** guard restricts the mint to holders of a predefined NFT Collection and burns the holder's NFT. Thus, the mint address of the NFT to burn must be provided by the payer when minting.
+The **NFT Burn** guard restricts the mint to holders of a predefined NFT Collection and burns the holder's NFT. Thus, the mint address of the NFT to burn must be provided by the payer when minting.
 
 {% diagram  %}
 
@@ -112,7 +132,7 @@ The NFT Burn guard contains the following Mint Settings:
 - **Token Standard**: The token standard of the NFT to burn.
 - **Token Account** (optional): You may optionally provide the token account linking the NFT with its owner explicitly. By default, the associated token account of the payer will be used.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#nftburn) for more details.
 
 {% dialect-switcher title="Mint with the NFT Burn Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -144,3 +164,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _The NFT Burn guard does not support the route instruction._
+
+## Notes
+
+- The NFT provided for burning must belong to the specified required collection and must be owned by the minter.
+- Burning is irreversible -- once the NFT is burned during the mint transaction, it cannot be recovered.
+- This guard uses Token Metadata NFTs (not Core Assets). The `tokenStandard` field must match the actual standard of the NFT being burned (e.g., `NonFungible` or `ProgrammableNonFungible`).
+

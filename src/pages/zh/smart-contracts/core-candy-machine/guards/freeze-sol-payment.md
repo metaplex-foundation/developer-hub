@@ -1,8 +1,29 @@
 ---
 title: '冻结 SOL 支付守卫'
-metaTitle: 冻结 SOL 支付守卫 | Core Candy Machine
-description: "Core Candy Machine '冻结 SOL 支付' 允许您以 SOL 设置铸造价格，同时在购买后将铸造的 Core NFT 资产冻结一段设定的时间。"
+metaTitle: "冻结 SOL 支付守卫 - 收取 SOL 并冻结铸造资产 | Core Candy Machine"
+description: "Freeze Sol Payment 守卫向付款人收取 SOL 并在可配置的时间段内冻结铸造的 Core Asset。冻结的资产在通过 route 指令解冻之前无法转移。"
+keywords:
+  - freeze sol payment
+  - Core Candy Machine
+  - candy guard
+  - frozen assets
+  - freeze escrow
+  - SOL payment
+  - thaw NFT
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - SOL payment with asset freezing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Freeze Sol Payment** 守卫向付款人收取一定数量的 SOL 并在可配置的时间段内冻结铸造的 Core Asset，在资产解冻之前阻止转移。 {% .lead %}
 
 ## 概述
 
@@ -248,3 +269,12 @@ API 参考：[route](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 因此，它们也将共享相同的冻结期限，所有资金将由同一个托管账户收集。这也意味着，我们只需要在每个配置的目标地址调用一次 `initialize` 路由指令。这意味着路由指令只需要在每个配置的目标地址执行一次。`unlockFunds` 同样适用。要 `thaw`，您可以使用任何共享同一托管账户的标签。
 
 也可以使用具有不同目标地址的多个冻结 SOL 支付守卫。在这种情况下，每个冻结 SOL 支付守卫将拥有自己的冻结托管账户和自己的冻结期限。
+
+## 注意事项
+
+- 冻结托管账户必须在任何铸造发生之前通过 `initialize` 路由指令进行初始化。
+- 最长冻结期限为 30 天（2,592,000 秒）。期限从第一个冻结资产铸造时开始计算，而不是从初始化开始。
+- 冻结托管中的资金在每个冻结资产都被解冻之前无法解锁。
+- 在冻结资产存在时删除 Candy Guard 账户会使这些资产永久冻结，直到满足另一个解冻条件。
+- 当多个守卫组共享相同的目标地址时，它们共享一个冻结托管和冻结期限。
+

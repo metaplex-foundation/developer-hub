@@ -1,8 +1,28 @@
 ---
 title: "Gatekeeper Guard"
-metaTitle: "Gatekeeper Guard | Core Candy Machine"
-description: "The Core Candy Machine `Gatekeeper` guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network."
+metaTitle: "Gatekeeper Guard - Require a Gateway Token for Minting | Core Candy Machine"
+description: "The Gatekeeper guard requires the minting wallet to hold a valid Gateway Token from a specified Gatekeeper Network such as Civic Captcha Pass before minting from a Core Candy Machine."
+keywords:
+  - gatekeeper
+  - Core Candy Machine
+  - candy guard
+  - gateway token
+  - Civic captcha
+  - bot protection
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - gateway token verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Gatekeeper** guard requires the minting wallet to hold a valid Gateway Token from a specified Gatekeeper Network, such as Civic Captcha Pass, before minting is allowed. {% .lead %}
 
 ## Overview
 
@@ -10,7 +30,7 @@ The **Gatekeeper** guard checks whether the minting wallet has a valid **Gateway
 
 In most cases, this token will be obtained after completing a Captcha challenge but any Gatekeeper Network may be used.
 
-There isn’t much to set up on the Core Candy Machine side but, depending on the selected Gatekeeper Network, you may need to ask the minting wallet to perform so pre-validation checks to grant them the required Gateway Token.
+There isn't much to set up on the Core Candy Machine side but, depending on the selected Gatekeeper Network, you may need to ask the minting wallet to perform so pre-validation checks to grant them the required Gateway Token.
 
 Here are some additional recommended materials you may find helpful when setting up a Gatekeep Network.
 
@@ -142,9 +162,9 @@ The Gatekeeper guard accepts the following mint settings:
 
 - **Gatekeeper Network**: The public key of the Gatekeeper Network that will be used to check the validity of the minting wallet.
 - **Expire On Use**: Whether we should mark the Gateway Token of the minting wallet as expired after the NFT has been minting.
-- **Token Account** (optional): As a little disclaimer, you should very rarely need to provide this setting but it’s here if you need to. This refers to the Gateway Token PDA derived from the payer and the Gatekeeper Network which is used to verify the payer's eligibility to mint. This PDA address can be inferred by our SDKs which is why you do not need to provide it. However, some Gatekeeper Networks may issue multiple Gateway Tokens to the same wallet. To differentiate their PDA addresses, it uses a **Seeds** array which defaults to `[0, 0, 0, 0, 0, 0, 0, 0]`.
+- **Token Account** (optional): As a little disclaimer, you should very rarely need to provide this setting but it's here if you need to. This refers to the Gateway Token PDA derived from the payer and the Gatekeeper Network which is used to verify the payer's eligibility to mint. This PDA address can be inferred by our SDKs which is why you do not need to provide it. However, some Gatekeeper Networks may issue multiple Gateway Tokens to the same wallet. To differentiate their PDA addresses, it uses a **Seeds** array which defaults to `[0, 0, 0, 0, 0, 0, 0, 0]`.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#gatekeeper) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#gatekeeper) for more details.
 
 {% dialect-switcher title="Mint with the Gatekeeper Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -170,3 +190,10 @@ mintV1(umi, {
 ## Route Instruction
 
 _The Gatekeeper guard does not support the route instruction._
+
+## Notes
+
+- The minting wallet must obtain a valid Gateway Token from the configured Gatekeeper Network before attempting to mint. The token acquisition process (e.g., completing a captcha) happens outside the Candy Machine program.
+- When `expireOnUse` is set to `true`, each mint requires a fresh Gateway Token, effectively limiting each captcha completion to a single mint.
+- The Civic Captcha Pass network address is `ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`. Other Gatekeeper Networks may have different requirements and token issuance processes.
+

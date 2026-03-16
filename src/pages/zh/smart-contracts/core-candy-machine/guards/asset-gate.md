@@ -1,8 +1,28 @@
 ---
 title: "Core Candy Machine - 资产门控守卫"
-metaTitle: "Core Candy Machine - Guards - Asset Gate"
-description: "Core Candy Machine 的 'Asset Gate' 守卫要求铸造钱包持有来自特定 collection 的另一个 Core Asset 才能允许从 Core Candy Machine 铸造"
+metaTitle: "资产门控守卫 | Core Candy Machine"
+description: "Core Candy Machine 的 'Asset Gate' 守卫要求铸造钱包持有来自指定 collection 的 Core Asset 才能铸造，而不会销毁或转移所持有的资产。"
+keywords:
+  - asset gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - collection holder verification
+  - ownership check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - collection-based ownership gating
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Gate** 守卫仅在付款人持有指定 collection 的资产时允许铸造，而不会销毁或转移该资产。 {% .lead %}
 
 ## 概述
 
@@ -143,3 +163,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## Route 指令
 
 _Asset Gate 守卫不支持 route 指令。_
+
+## 注意事项
+
+- Asset Gate 守卫验证所有权但不会销毁或转移所持有的资产。除非与其他限制铸造的守卫组合使用，否则同一资产可以多次用于铸造。
+- 用于验证的资产必须在铸造时属于铸造钱包且属于指定的 collection。
+- 要在铸造期间销毁所持有的资产而不仅仅是验证所有权，请改用 [Asset Burn](/zh/smart-contracts/core-candy-machine/guards/asset-burn) 守卫。
+

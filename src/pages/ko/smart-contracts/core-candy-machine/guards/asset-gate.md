@@ -1,8 +1,28 @@
 ---
 title: "코어 캔디 머신 - 자산 게이트 가드"
-metaTitle: "코어 캔디 머신 - 가드 - 자산 게이트"
-description: "코어 캔디 머신의 '자산 게이트' 가드는 민팅 지갑이 특정 컬렉션의 다른 코어 자산을 보유해야 코어 캔디 머신에서 민팅을 허용합니다"
+metaTitle: "자산 게이트 가드 | 코어 캔디 머신"
+description: "코어 캔디 머신의 'Asset Gate' 가드는 민팅 지갑이 지정된 컬렉션의 Core Asset을 보유해야 민팅을 허용하며, 보유한 Asset을 소각하거나 전송하지 않습니다."
+keywords:
+  - asset gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - collection holder verification
+  - ownership check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - collection-based ownership gating
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Asset Gate** 가드는 지불자가 지정된 컬렉션의 Asset을 보유한 경우에만 민팅을 허용하며, 해당 Asset을 소각하거나 전송하지 않습니다. {% .lead %}
 
 ## 개요
 
@@ -143,3 +163,10 @@ API 참조: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functio
 ## 라우트 지시사항
 
 _자산 게이트 가드는 라우트 지시사항을 지원하지 않습니다._
+
+## Notes
+
+- Asset Gate 가드는 소유권을 확인하지만 보유한 Asset을 소각하거나 전송하지 않습니다. 민팅을 제한하는 다른 가드와 결합하지 않는 한, 동일한 Asset을 사용하여 여러 번 민팅할 수 있습니다.
+- 검증에 사용되는 Asset은 민팅 시점에 민팅 지갑에 속해야 하며 지정된 컬렉션에 포함되어야 합니다.
+- 소유권 확인 대신 민팅 중에 보유한 Asset을 소각하려면 [Asset Burn](/ko/smart-contracts/core-candy-machine/guards/asset-burn) 가드를 사용하세요.
+

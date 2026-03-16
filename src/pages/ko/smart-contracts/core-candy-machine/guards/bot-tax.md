@@ -1,8 +1,28 @@
 ---
 title: "Bot Tax Guard"
-metaTitle: "Bot Tax Guard | Core Candy Machine"
-description: "Core Candy Machine의 'Bot Tax' 가드를 사용하면 사용자로부터의 잘못된 트랜잭션에 대해 청구할 구성 가능한 세금을 설정할 수 있습니다. 이는 스팸과 봇을 방지할 수 있습니다."
+metaTitle: "Bot Tax 가드 | 코어 캔디 머신"
+description: "코어 캔디 머신의 'Bot Tax' 가드는 봇과 스팸을 방지하기 위해 잘못된 민팅 트랜잭션에 대해 구성 가능한 SOL 벌금을 청구합니다."
+keywords:
+  - bot tax
+  - Core Candy Machine
+  - candy guard
+  - anti-bot protection
+  - spam prevention
+  - last instruction check
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - bot mitigation
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Bot Tax** 가드는 코어 캔디 머신에 대한 봇과 스팸 시도를 방지하기 위해 잘못된 민팅 트랜잭션에 대해 구성 가능한 SOL 벌금을 청구합니다. {% .lead %}
 
 {% callout type="warning" %}
 일부 지갑(예: Solflare, Phantom 및 기타 가능한 지갑)은 현재 트랜잭션에 Lighthouse 지시문을 자동 주입합니다. 이로 인해 `lastInstruction`이 `true`로 설정되어 있을 때 Bot Tax 가드가 트리거됩니다.
@@ -134,3 +154,11 @@ _Bot Tax 가드는 민팅 설정이 필요하지 않습니다._
 ## Route Instruction
 
 _Bot Tax 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- Bot Tax 가드가 활성화되어 있고 다른 가드가 민팅을 거부하면, 트랜잭션은 온체인에서 성공한 것처럼 표시되지만 NFT는 민팅되지 않습니다. 이는 벌금을 징수할 수 있도록 의도된 설계입니다.
+- 징수된 봇 세금 자금은 Candy Machine 계정에 누적되며, 민팅이 완료된 후 Candy Machine을 삭제하여 회수할 수 있습니다.
+- `lastInstruction`을 `true`로 설정하면 트랜잭션에 추가 지시문을 자동 주입하는 지갑(예: Solflare 및 Phantom)에서 오탐지가 발생할 수 있습니다. 프로덕션에서 이 옵션을 활성화하기 전에 철저히 테스트하세요.
+- 정상적인 사용자가 검증 오류를 만났을 때 불이익을 받지 않도록 벌금 금액을 작게 유지하세요 (예: 0.01 SOL).
+

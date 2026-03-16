@@ -1,8 +1,28 @@
 ---
 title: 第三方签名者守卫
-metaTitle: 第三方签名者守卫 | Core Candy Machine
-description: "Core Candy Machine '第三方签名者' 守卫要求预定义的地址签署每笔铸造交易，否则交易将失败。"
+metaTitle: "第三方签名者守卫 - Core Candy Machine 守卫 | Metaplex"
+description: "Third Party Signer 守卫要求预定义的地址共同签署 Core Candy Machine 上的每笔铸造交易，支持集中式铸造授权和门控访问工作流。"
+keywords:
+  - third party signer
+  - Core Candy Machine
+  - candy guard
+  - co-signer
+  - authorized minting
+  - gated mint
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - transaction co-signing
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Third Party Signer** 守卫要求预定义的地址共同签署 Core Candy Machine 上的每笔铸造交易，支持集中式铸造授权和门控访问工作流。 {% .lead %}
 
 ## 概述
 
@@ -135,3 +155,10 @@ create(umi, {
 ## 路由指令
 
 _第三方签名者守卫不支持路由指令。_
+
+## 注意事项
+
+- 守卫设置中配置的 `signerKey` 必须与铸造设置中传递的签名者公钥完全匹配，否则交易将失败。
+- 第三方签名者密钥对必须在铸造时可用于签署交易。在后端门控工作流中，签名者密钥对通常由服务器端持有，并在将交易转发到区块链之前进行签名。
+- 此守卫不限制谁可以发起铸造——它只要求指定的签名者共同签署。可与其他守卫（如 [Allow List](/zh/smart-contracts/core-candy-machine/guards/allow-list)）结合使用以实现钱包级别的访问控制。
+

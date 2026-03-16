@@ -1,8 +1,28 @@
 ---
 title: "NFT Burn Guard"
-metaTitle: "NFT Burn Guard  | Core Candy Machine"
-description: "Core Candy Machine의 'NFT Burn' 가드는 사전 정의된 Token Metadata NFT/pNFT 컬렉션 보유자로 민팅을 제한하고 구매 중에 보유자의 NFT를 소각합니다."
+metaTitle: "NFT Burn Guard - NFT 소각으로 민팅 | Core Candy Machine"
+description: "Core Candy Machine의 NFT Burn 가드는 사전 정의된 Token Metadata NFT 컬렉션 보유자로 민팅을 제한하고 민트 트랜잭션 중에 보유자의 NFT를 소각합니다."
+keywords:
+  - NFT Burn guard
+  - Core Candy Machine
+  - candy guard
+  - burn NFT to mint
+  - token gated mint
+  - NFT collection verification
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - NFT burn-to-mint access control
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**NFT Burn** 가드는 사전 정의된 NFT 컬렉션 보유자로 민팅을 제한하고 민트 트랜잭션의 비용으로 보유자의 NFT를 영구적으로 소각합니다. {% .lead %}
 
 ## 개요
 
@@ -144,3 +164,10 @@ API References: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/fun
 ## Route Instruction
 
 _NFT Burn 가드는 route instruction을 지원하지 않습니다._
+
+## Notes
+
+- 소각을 위해 제공되는 NFT는 지정된 필수 컬렉션에 속해야 하며 민터가 소유해야 합니다.
+- 소각은 되돌릴 수 없습니다 -- 민트 트랜잭션 중에 NFT가 소각되면 복구할 수 없습니다.
+- 이 가드는 Token Metadata NFT(Core Asset이 아님)를 사용합니다. `tokenStandard` 필드는 소각되는 NFT의 실제 표준과 일치해야 합니다(예: `NonFungible` 또는 `ProgrammableNonFungible`).
+

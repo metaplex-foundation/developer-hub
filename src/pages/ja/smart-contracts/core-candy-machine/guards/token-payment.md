@@ -1,8 +1,27 @@
 ---
 title: Token Paymentガード
-metaTitle: Token Paymentガード | Core Candy Machine
-description: "Core Candy Machineの「Token Payment」ガードは、支払者にSPLトークンの設定値を請求することでミントを許可します。"
+metaTitle: "Token Paymentガード | Core Candy Machine"
+description: "Core Candy MachineのToken Paymentガードは、設定された量のSPLトークンをミンターに請求し、指定された宛先ウォレットに転送してからミントを許可します。"
+keywords:
+  - Token Payment
+  - Core Candy Machine
+  - candy guard
+  - SPL token payment
+  - token transfer
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - SPL token payment for minting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Payment**ガードは、設定された量のSPLトークンをミンターに請求し、指定された宛先ウォレットに転送してからミントを許可します。 {% .lead %}
 
 ## 概要
 
@@ -174,3 +193,11 @@ APIリファレンス: [mintV1](https://mpl-core-candy-machine.typedoc.metaplex.
 ## ルート命令
 
 _Token Paymentガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- このガードは元の**SPL Tokenプログラム**を使用します。Token-2022プログラムで発行されたミントについては、[Token2022 Payment](/smart-contracts/core-candy-machine/guards/token2022-payment)ガードを使用してください。
+- 支払者はミント時に関連トークンアカウントに設定された**Amount**以上のトークンを保持している必要があります。そうでない場合、トランザクションは失敗します。
+- **Destination ATA**はミント前に既に存在している必要があります。ガードによって自動的に作成されることはありません。
+- [Token Gate](/smart-contracts/core-candy-machine/guards/token-gate)ガードとは異なり、Token Paymentガードは実際に支払者のウォレットからトークンを**転送**します。
+

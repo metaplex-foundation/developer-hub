@@ -2,7 +2,26 @@
 title: Asset Mint Limit Guard
 metaTitle: Asset Mint Limit Guard | Core Candy Machine
 description: "The Core Candy Machine 'Asset Mint Limit' guard restricts minting to holders of a specified collection and limits the amount of mints that can be purchased for a provided Asset on the Core Candy Machine."
+keywords:
+  - asset mint limit
+  - Core Candy Machine
+  - candy guard
+  - mint limit per NFT
+  - collection-gated minting
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - per-asset mint limiting
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+The **Asset Mint Limit** guard restricts minting to holders of a specified Core Asset collection and limits how many times each individual Asset can be used to mint from the Core Candy Machine. {% .lead %}
 
 ## Overview
 
@@ -113,7 +132,7 @@ The NFT Mint Limit guard contains the following Mint Settings:
 - **ID**: A unique identifier for this guard.
 - **Asset**: The address of the Asset to provide as proof that the payer owns an Asset from the required collection.
 
-Note that, if you’re planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard’s program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetmintlimit) for more details.
+Note that, if you're planning on constructing instructions without the help of our SDKs, you will need to provide these Mint Settings and more as a combination of instruction arguments and remaining accounts. See the [Core Candy Guard's program documentation](https://github.com/metaplex-foundation/mpl-core-candy-machine/tree/main/programs/candy-guard#assetmintlimit) for more details.
 
 {% dialect-switcher title="Mint with the Asset Mint Limit Guard" %}
 {% dialect title="JavaScript" id="js" %}
@@ -142,7 +161,7 @@ _The Asset Mint Limit guard does not support the route instruction._
 When the `AssetMintLimit` Guard is used a `AssetMintCounter` Account is created for each Core NFT Asset, CandyMachine and `id` combination. For validation purposes it can be fetched like this:
 
 ```js
-import { 
+import {
   findAssetMintCounterPda,
   fetchNftMintCounter
  } from "@metaplex-foundation/mpl-core-candy-machine";
@@ -155,6 +174,14 @@ const pda = findAssetMintCounterPda(umi, {
   candyGuard: candyMachine.mintAuthority
   // or candyGuard: publicKey("Address") with your candyGuard Address
 });
-      
+
 const nftMintCounter = fetchAssetMintCounter(umi, pda)
 ```
+
+## Notes
+
+- The mint limit counter is tracked per Asset address, not per wallet. A wallet holding multiple qualifying Assets can mint up to the limit with each one.
+- Each unique `id` value creates a separate counter, allowing different guard groups to enforce independent limits on the same Candy Machine.
+- The `AssetMintCounter` PDA is derived from the `id`, the Asset public key, the Candy Guard address, and the Candy Machine address.
+- This guard does not burn or transfer the Asset used as proof -- it only verifies ownership and increments the counter.
+

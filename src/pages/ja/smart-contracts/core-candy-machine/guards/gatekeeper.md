@@ -1,8 +1,28 @@
 ---
 title: "Gatekeeperガード"
-metaTitle: "Gatekeeperガード | Core Candy Machine"
-description: "Core Candy Machineの`Gatekeeper`ガードは、ミントを行うウォレットが指定されたGatekeeper Networkから有効なGateway Tokenを持っているかどうかを確認します。"
+metaTitle: "Gatekeeperガード - ミントにGateway Tokenを要求 | Core Candy Machine"
+description: "Gatekeeperガードは、Core Candy Machineからミントする前に、ミントウォレットがCivic Captcha Passなどの指定されたGatekeeper Networkから有効なGateway Tokenを保有していることを要求します。"
+keywords:
+  - gatekeeper
+  - Core Candy Machine
+  - candy guard
+  - gateway token
+  - Civic captcha
+  - bot protection
+  - Solana NFT
+  - minting restriction
+about:
+  - Candy Machine guards
+  - gateway token verification
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Gatekeeper** ガードは、ミントが許可される前に、ミントウォレットがCivic Captcha Passなどの指定されたGatekeeper Networkから有効なGateway Tokenを保有していることを要求します。 {% .lead %}
 
 ## 概要
 
@@ -170,3 +190,10 @@ mintV1(umi, {
 ## ルート命令
 
 _Gatekeeperガードはルート命令をサポートしていません。_
+
+## 注意事項
+
+- ミントウォレットは、ミントを試行する前に設定されたGatekeeper Networkから有効なGateway Tokenを取得する必要があります。トークンの取得プロセス（例: captchaの完了）はCandy Machineプログラムの外部で行われます。
+- `expireOnUse`が`true`に設定されている場合、各ミントには新しいGateway Tokenが必要となり、各captcha完了が事実上1回のミントに制限されます。
+- Civic Captcha PassネットワークのアドレスはZ`ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6`です。他のGatekeeper Networkには異なる要件とトークン発行プロセスがある場合があります。
+

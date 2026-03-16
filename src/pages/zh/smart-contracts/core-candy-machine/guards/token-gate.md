@@ -1,8 +1,27 @@
 ---
 title: 代币门控守卫
-metaTitle: 代币门控守卫 | Core Candy Machine
-description: "Core Candy Machine '代币门控' 守卫将铸造限制为配置的 SPL 代币的持有者。"
+metaTitle: "代币门控守卫 | Core Candy Machine"
+description: "Core Candy Machine 的 Token Gate 守卫将铸造限制为持有配置的 SPL 代币最低余额的钱包，无需转移或销毁代币。"
+keywords:
+  - Token Gate
+  - Core Candy Machine
+  - candy guard
+  - token gating
+  - SPL token holder
+  - minting restriction
+  - Solana NFT
+about:
+  - Candy Machine guards
+  - Token-gated minting access
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '03-10-2026'
+updated: '03-10-2026'
 ---
+
+**Token Gate** 守卫将铸造限制为持有配置的 SPL 代币最低数量的钱包，不会销毁或转移这些代币。 {% .lead %}
 
 ## 概述
 
@@ -137,3 +156,10 @@ API 参考：[mintV1](https://mpl-core-candy-machine.typedoc.metaplex.com/functi
 ## 路由指令
 
 _代币门控守卫不支持路由指令。_
+
+## 注意事项
+
+- Token Gate 守卫仅 **检查** 付款人是否持有所需的代币余额——它不会销毁或转移任何代币。如需消耗代币的守卫，请参阅 [Token Burn](/zh/smart-contracts/core-candy-machine/guards/token-burn) 或 [Token Payment](/zh/smart-contracts/core-candy-machine/guards/token-payment)。
+- 此守卫使用原始 **SPL Token 程序**，不支持 Token-2022 铸币。
+- 代币余额检查在铸造时进行。如果付款人的余额在守卫评估和交易执行之间低于所需 **数量**，铸造将失败。
+
