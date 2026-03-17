@@ -27,6 +27,23 @@ const SITE_URL = 'https://metaplex.com/docs'
 const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 
 /**
+ * Get the base URL for the current environment
+ * Uses localhost/Vercel preview URLs for testing, SITE_URL for production
+ */
+function getBaseUrl() {
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000/docs'
+  }
+  if (process.env.VERCEL_ENV === 'production') {
+    return SITE_URL
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/docs`
+  }
+  return SITE_URL
+}
+
+/**
  * Generate dynamic OG image URL
  * Uses the /api/og endpoint to create dynamic social preview images
  */
@@ -35,7 +52,7 @@ function generateOGImageUrl(title, description, product) {
   if (title) params.set('title', title)
   if (description) params.set('description', description)
   if (product) params.set('product', product)
-  return `${SITE_URL}/api/og?${params.toString()}`
+  return `${getBaseUrl()}/api/og?${params.toString()}`
 }
 
 /**
