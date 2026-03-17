@@ -19,7 +19,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 이미지 파일과 JSON 메타데이터 파일을 제공하여 단일 컬렉션을 생성합니다. 명령어가 두 파일 업로드 및 컬렉션 생성을 처리합니다.
 
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ### 3. 대화형 마법사
@@ -38,7 +38,7 @@ mplx core collection create --wizard
 ### 파일 기반 옵션
 - `--files`: 파일 기반 생성을 나타내는 플래그
 - `--image <path>`: 업로드하고 컬렉션에 할당할 이미지 파일 경로
-- `--json <path>`: JSON 메타데이터 파일 경로
+- `--offchain <path>`: JSON 메타데이터 파일 경로
 
 ### 플러그인 옵션
 - `--plugins`: 대화형 플러그인 선택 사용
@@ -58,7 +58,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 
 3. 파일에서 컬렉션 생성:
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ## 출력
@@ -75,7 +75,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 
 ## 참고사항
 
-- 파일 기반 생성 방법을 사용할 때는 `--image`와 `--json` 플래그가 모두 필요합니다
+- 파일 기반 생성 방법을 사용할 때는 `--image`와 `--offchain` 플래그가 모두 필요합니다
 - 마법사 방법은 파일 업로드 및 메타데이터 생성을 포함하여 컬렉션 생성을 위한 가이드 경험을 제공합니다
 - 플러그인 구성은 대화형으로 또는 JSON 파일을 통해 수행할 수 있습니다
 - JSON 메타데이터 파일은 컬렉션에 대한 `name` 필드를 포함해야 합니다

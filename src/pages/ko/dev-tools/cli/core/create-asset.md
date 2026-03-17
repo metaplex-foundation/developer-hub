@@ -19,7 +19,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 이미지 파일과 JSON 메타데이터 파일을 제공하여 단일 자산을 생성합니다. 명령어가 두 파일 업로드 및 자산 생성을 처리합니다.
 
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 ### 3. 대화형 마법사
@@ -39,7 +39,7 @@ mplx core asset create --wizard
 ### 파일 기반 옵션
 - `--files`: 파일 기반 생성을 나타내는 플래그
 - `--image <path>`: 업로드하고 자산에 할당할 이미지 파일 경로
-- `--json <path>`: JSON 메타데이터 파일 경로
+- `--offchain <path>`: JSON 메타데이터 파일 경로
 
 ### 플러그인 옵션
 - `--plugins`: 대화형 플러그인 선택 사용
@@ -59,7 +59,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 3. 파일에서 자산 생성:
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 4. 컬렉션과 함께 자산 생성:
@@ -69,7 +69,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 5. 파일과 컬렉션으로 자산 생성:
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json" --collection "collection_id_here"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
 ```
 
 ## 출력

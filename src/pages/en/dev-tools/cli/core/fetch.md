@@ -17,14 +17,14 @@ mplx core fetch asset <assetId>
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
 mplx core fetch asset <assetId> --download --image
-mplx core fetch asset <assetId> --download --metadata
+mplx core fetch asset <assetId> --download --offchain
 ```
 
 ### Asset Fetch Options
 - `--download`: Download asset files to disk (can select individual files also with additional flags)
 - `--output <path>`: Directory path where to save the downloaded assets (requires --download)
 - `--image`: Download the image file (requires --download)
-- `--metadata`: Download the metadata file (requires --download)
+- `--offchain`: Download the metadata file (requires --download)
 - `--asset`: Download the asset data file (requires --download)
 
 ## Fetch Collection
