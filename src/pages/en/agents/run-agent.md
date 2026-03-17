@@ -102,7 +102,7 @@ The document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) age
 
 ```json
 {
-  "type": "agent-registration-v1",
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "An informational agent providing help related to Metaplex protocols and tools.",
   "description": "An autonomous agent that executes DeFi strategies on Solana.",
   "image": "https://arweave.net/agent-avatar-tx-hash",
@@ -120,8 +120,8 @@ The document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) age
   "active": true,
   "registrations": [
     {
-      "agentId": "AgentAssetPublicKey111111111111111111111111111",
-      "agentRegistry": "solana:mainnet:1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p"
+      "agentId": "<MINT_ADDRESS>",
+      "agentRegistry": "solana:101:metaplex"
     }
   ],
   "supportedTrust": ["reputation", "crypto-economic"]
