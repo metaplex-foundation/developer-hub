@@ -26,6 +26,7 @@ import { MarkdocGrid as AllProductsGrid } from '@/components/products/GridAllPro
 import { MarkdocProductCardGrid } from '@/components/products/ProductCardGrid'
 import { CodeTabs, CodeTab } from '@/components/code/CodeTabs'
 import { CodeTabsImported } from '@/components/code/CodeTabsImported'
+import { BubblegumCalculator } from '@/components/BubblegumCalculator'
 
 const tags = {
   callout: {
@@ -245,6 +246,11 @@ const tags = {
       fee: { type: String, required: true },
       field: { type: String, default: 'solana' },
     },
+  },
+  'bubblegum-calculator': {
+    render: BubblegumCalculator,
+    selfClosing: true,
+    attributes: {},
   },
   'stability-index': {
     render: StabilityIndex,
