@@ -6,6 +6,10 @@ description: 지갑 구성 관리
 
 CLI에서 지갑 구성을 관리합니다. 다양한 용도로 지갑을 추가, 나열, 제거 및 활성화할 수 있습니다.
 
+{% callout type="note" %}
+[MPL Core 에셋의 PDA를 지갑으로](/dev-tools/cli/config/asset-signer-wallets) 사용할 수도 있습니다. `mplx config wallets add <name> --asset <assetId>`로 등록하면 모든 명령어가 자동으로 PDA를 통해 작동합니다.
+{% /callout %}
+
 ## 기본 사용법
 
 ```bash
