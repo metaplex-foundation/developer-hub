@@ -6,6 +6,10 @@ description: ウォレット設定の管理
 
 CLI内のウォレット設定を管理します。異なる目的のためにウォレットを追加、リスト表示、削除、アクティブ化できます。
 
+{% callout type="note" %}
+[MPL CoreアセットのPDAをウォレットとして](/dev-tools/cli/config/asset-signer-wallets)使用することもできます。`mplx config wallets add <name> --asset <assetId>`で登録すると、すべてのコマンドが自動的にPDAを通じて動作します。
+{% /callout %}
+
 ## 基本的な使用法
 
 ```bash

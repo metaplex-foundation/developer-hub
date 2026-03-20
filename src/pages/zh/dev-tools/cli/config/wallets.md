@@ -6,6 +6,10 @@ description: 管理钱包配置
 
 在 CLI 中管理钱包配置。您可以添加、列出、删除和设置不同用途的活动钱包。
 
+{% callout type="note" %}
+您还可以将[MPL Core资产的PDA用作钱包](/dev-tools/cli/config/asset-signer-wallets)。使用`mplx config wallets add <name> --asset <assetId>`注册后，所有命令将自动通过PDA操作。
+{% /callout %}
+
 ## 基本用法
 
 ```bash
