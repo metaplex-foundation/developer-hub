@@ -171,7 +171,7 @@ const coreGuides = {
         jp: 'AnchorでCore NFTアセットを作成する方法',
         kr: 'Anchor로 Core NFT 자산 생성하는 방법',
       },
-      path: '/docs/docs/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
+      path: '/docs/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor',
       tags: [GuideTags.nfts, GuideTags.anchor, GuideTags.rust],
     },
     {
