@@ -69,31 +69,6 @@ The simplest approach. One function call handles everything: creates the on-chai
 | `token.id` | `string` | Token ID |
 | `token.mintAddress` | `string` | Token mint address |
 
-### Memecoin Launch — Simplified Flow
-
-For memecoin launches, the SDK uses a streamlined input that requires only a deposit start time. All other parameters — allocation splits, LP configuration, and fees — are hardcoded to sensible defaults.
-
-{% code-tabs-imported from="genesis/api_memecoin_launch" frameworks="umi" filename="memecoinLaunch" /%}
-
-{% callout type="note" title="Project vs Memecoin" %}
-
-| Aspect | Project | Memecoin |
-|--------|---------|----------|
-| Deposit window | 48 hours | 1 hour |
-| Token allocation | Configurable | Fixed 500M (50% of 1B) |
-| Raydium LP | 20–100% configurable | Fixed 98% |
-| Creator unlocked | Remainder | Fixed 1% |
-| Protocol fees | Configurable | Fixed 1% |
-| LP lock | Configurable schedule | Permanent |
-| Min raise | Configurable | 50 SOL / 5,000 USDC |
-| Deposit bonus / Withdraw penalty | Optional | None |
-| Locked allocations (Streamflow) | Optional | None |
-
-Use `'project'` when you need control over allocations, liquidity, and vesting. Use `'memecoin'` for a fast, opinionated launch with minimal configuration.
-
-**Reading launch type back:** After creation, the launch type is recorded on-chain in the Genesis Account by a backend crank. To retrieve it, use [`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account) (on-chain SDK) or the [`type` field](/smart-contracts/genesis/integration-apis#shared-types) in REST API responses. The [GPA builder](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type) supports filtering all launches by type.
-{% /callout %}
-
 ### Medium Mode — Custom Transaction Sender
 
 Use `createAndRegisterLaunch` with a custom `txSender` callback for scenarios like multisig wallets or custom retry logic.
@@ -143,8 +118,8 @@ Transactions must be confirmed on-chain before calling `registerLaunch`. The reg
 | `token` | `TokenMetadata` | Yes | Token metadata |
 | `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `quoteMint` | `QuoteMintInput` | No | `'SOL'` (default) or `'USDC'` |
-| `launchType` | `LaunchType` | Yes | `'project'` or `'memecoin'` |
-| `launch` | `ProjectLaunchInput \| MemecoinLaunchInput` | Yes | Launch configuration (fields depend on `launchType`) |
+| `launchType` | `CreateLaunchType` | Yes | `'launchpool'` or `'bondingCurve'` — the underlying launch mechanism |
+| `launch` | `LaunchpoolLaunchInput \| BondingCurveLaunchInput` | Yes | Launch configuration (fields depend on `launchType`) |
 
 ### TokenMetadata
 
@@ -173,14 +148,6 @@ Transactions must be confirmed on-chain before calling `registerLaunch`. The reg
 | `raiseGoal` | `number` | Minimum quote tokens to raise, in whole units (e.g. 250 SOL). Minimum 250 SOL or 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | % of raised funds for Raydium LP, in basis points (2000–10000) |
 | `fundsRecipient` | `PublicKey \| string` | Receives the unlocked portion of raised funds |
-
-### MemecoinLaunchInput
-
-When `launchType` is `'memecoin'`, the `launch` object only requires a deposit start time. All allocation and fee parameters are hardcoded.
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `depositStartTime` | `Date \| string` | When the 1-hour deposit period opens |
 
 ### LockedAllocation (Streamflow Lockup)
 

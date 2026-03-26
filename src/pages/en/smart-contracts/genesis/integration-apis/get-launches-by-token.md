@@ -82,7 +82,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       }
     ],
     "baseToken": {
@@ -167,4 +167,4 @@ println!("{} launches found", response.data.launches.len());
 
 - A token can have multiple launches using different `genesisIndex` values. The response returns all associated launch campaigns.
 - Returns `404` if the token mint address is not found.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `bondingCurve`).

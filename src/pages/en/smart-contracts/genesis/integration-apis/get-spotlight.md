@@ -77,7 +77,7 @@ curl "https://api.metaplex.com/v1/launches?spotlight=true"
           "heroUrl": "launches/abc123/hero.webp",
           "graduatedAt": null,
           "lastActivityAt": "2026-01-15T16:30:00.000Z",
-          "type": "project"
+          "type": "launchpool"
         },
         "baseToken": {
           "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -167,4 +167,4 @@ for entry in &response.data {
 
 - Spotlight status is curated by the platform and cannot be set via the API.
 - This endpoint uses the same `/launches` route with `spotlight=true` as a query parameter — it is not a separate endpoint.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `bondingCurve`).

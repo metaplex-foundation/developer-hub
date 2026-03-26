@@ -62,14 +62,22 @@
 
 ## Genesis (Token Launch)
 
-- [Aggregation API](https://metaplex.com/docs/smart-contracts/genesis/aggregation): Public API for querying Genesis launch data by genesis address or token mint. Includes on-chain state fetching.
-- [API](https://metaplex.com/docs/smart-contracts/genesis/api): Public API for querying Genesis launch data by genesis address or token mint. No authentication required.
-- [Genesis - Solana Token Launch Smart Contract](https://metaplex.com/docs/smart-contracts/genesis): Launch tokens on Solana with Genesis smart contract. Build token generation events (TGE), fair launches, ICOs, priced sales, and launch pools on-chain.
-- [Getting Started](https://metaplex.com/docs/smart-contracts/genesis/getting-started): Understand the Genesis token launch flow. Learn the steps from initialization to distribution and how to plan your launch.
+- [API Client](https://metaplex.com/docs/smart-contracts/genesis/sdk/api-client): Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
+- [Create Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
+- [Fetch Bucket State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-bucket-state): Fetch real-time bucket state from the blockchain using the Genesis JavaScript SDK. Includes deposit totals, counts, and time conditions.
+- [Fetch Deposit State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-deposit-state): Fetch user deposit state from the blockchain using the Genesis JavaScript SDK. Check deposit amounts and claim status.
+- [Genesis - Solana Token Launchpad & Launch Platform](https://metaplex.com/docs/smart-contracts/genesis): Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
+- [Get Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
+- [Get Launches by Token](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
+- [Get Spotlight](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
+- [Getting Started](https://metaplex.com/docs/smart-contracts/genesis/getting-started): Learn how to launch an SPL token on Solana step by step. Plan your presale, fair launch, or token sale using the Genesis token launchpad.
+- [Integration APIs](https://metaplex.com/docs/smart-contracts/genesis/integration-apis): Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 - [JavaScript SDK](https://metaplex.com/docs/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
-- [Launch Pool](https://metaplex.com/docs/smart-contracts/genesis/launch-pool): Token distribution where users deposit during a window and receive tokens proportionally. Organic price discovery with anti-sniping design.
-- [Presale](https://metaplex.com/docs/smart-contracts/genesis/presale): Fixed-price token sale where users deposit SOL and receive tokens at a predetermined rate. Set your price upfront with controlled distribution.
-- [Uniform Price Auction](https://metaplex.com/docs/smart-contracts/genesis/uniform-price-auction): Time-based auction mechanism for token launches with uniform clearing price. Competitive bidding for larger participants.
+- [Launch Pool](https://metaplex.com/docs/smart-contracts/genesis/launch-pool): Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
+- [List Launches](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
+- [Presale](https://metaplex.com/docs/smart-contracts/genesis/presale): Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
+- [Register Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
+- [Uniform Price Auction](https://metaplex.com/docs/smart-contracts/genesis/uniform-price-auction): Token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token sale mechanism for institutional and large-scale fundraising.
 
 ## Core (NFT Standard)
 
@@ -201,98 +209,98 @@
 
 ## Core Candy Machine
 
-- [Overview](https://metaplex.com/docs/smart-contracts/core-candy-machine): Provides a high-level overview of Core Candy Machines.
-- [Address Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/address-gate): The Core Candy Machine 'Address Gate' restricts the minting to a single address provided.
-- [Allocation Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/allocation): Learn about the Core Candy Machine 'Allocation' guard in which you can specify the maximum number of mints in a guard group for a Core Candy Machine.
-- [Allowlist Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/allow-list): The Core Candy Machine 'Allowlist' guard guard allows you to set a list of predefined wallets that are allowed to mint from your Core Candy Machine
-- [Anti-Bot Protection Best Practices](https://metaplex.com/docs/smart-contracts/core-candy-machine/anti-bot-protection-best-practices): Comprehensive guide on implementing anti-bot protection and security measures for Core Candy Machine mints to prevent malicious actors and ensure fair distribution.
-- [API References](https://metaplex.com/docs/smart-contracts/core-candy-machine/references): References and code snippets for Metaplex's Candy Machine product.
-- [Asset Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-burn): The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a predefined Collection and burns the holder's Asset during purchase from the Core Candy Machine.
-- [Asset Burn Multi Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-burn-multi): The Core Candy Machine 'Asset Burn Multi' guard restricts minting to holders of a predefined Collection and burns the holder's Asset(s) upon purchase.
+- [Address Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/address-gate): The Core Candy Machine 'Address Gate' guard restricts minting to a single specified wallet address, blocking all other wallets from minting.
+- [Allocation Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/allocation): The Core Candy Machine 'Allocation' guard limits the total number of mints allowed per guard group, tracked by a PDA-based counter identified by a configurable ID.
+- [Allowlist Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/allow-list): The Core Candy Machine 'Allowlist' guard validates the minting wallet against a Merkle Tree of predefined wallet addresses, requiring a Merkle Proof pre-validation before minting is permitted.
+- [Anti-Bot Protection Best Practices for Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/anti-bot-protection-best-practices): Comprehensive guide on implementing anti-bot protection and security measures for Core Candy Machine mints to prevent malicious actors and ensure fair distribution.
+- [API References for Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/references): API reference documentation links for the Core Candy Machine JavaScript SDK and Rust crates, including TypeDoc and docs.rs resources.
+- [Asset Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-burn): The Core Candy Machine 'Asset Burn' guard restricts minting to holders of a specified collection and permanently burns one of the holder's Assets from that collection as the cost of minting.
+- [Asset Burn Multi Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-burn-multi): The Core Candy Machine 'Asset Burn Multi' guard restricts minting to holders of a specified collection and burns a configurable number of the holder's Assets from that collection as the cost of minting.
 - [Asset Mint Limit Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-mint-limit): The Core Candy Machine 'Asset Mint Limit' guard restricts minting to holders of a specified collection and limits the amount of mints that can be purchased for a provided Asset on the Core Candy Machine.
-- [Asset Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-payment): The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine
-- [Asset Payment Multi Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-payment-multi): The Core Candy Machine 'Asset Payment Multi' guard that charges other Core Asset(s) from a specific collection as payment for the mint from the Core Candy Machine.
-- [Bot Tax Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/bot-tax): The Core Candy Machine 'Bot Tax' guard allows you to set up a configurable tax to charge invalid transactions from users. This can deter spam and bots.
-- [Candy Guards](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards): Learn about the different types of guards available for the Core Candy Machine and their functionality.
-- [Core Candy Machine - Asset Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-gate): The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold another Core Asset from a specific collection to allow the mint from the Core Candy Machine
-- [Core Candy Machine - Vanity Mint Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/vanity-mint): The Core Candy Machine 'Vanity Mint' guard requires the minter to provide a specific vanity mint as Asset Address
-- [Core Candy Machine Rust SDK](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk/rust): Get Started with the mpl-core-candy-machine Rust SDK for the Core Candy Machine program from Metaplex.
+- [Asset Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-payment): The Core Candy Machine 'Asset Payment' guard requires another Core Asset from a specific collection as payment for the mint from the Core Candy Machine.
+- [Asset Payment Multi Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-payment-multi): The Core Candy Machine 'Asset Payment Multi' guard charges one or more Core Assets from a specific collection as payment for minting from the Core Candy Machine.
+- [Bot Tax Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/bot-tax): The Core Candy Machine 'Bot Tax' guard charges a configurable SOL penalty on invalid mint transactions to deter bots and spam from the Candy Machine.
+- [Candy Guards](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards): Candy Guards are modular access-control components that restrict and customize minting on a Core Candy Machine. Learn about guard types, the Candy Guard account, available guards, and how to compose them.
+- [Core Candy Machine - Asset Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/asset-gate): The Core Candy Machine 'Asset Gate' guard requires the minting wallet to hold a Core Asset from a specified collection in order to mint, without burning or transferring the held Asset.
+- [Core Candy Machine - NFT Minting & Distribution on Solana](https://metaplex.com/docs/smart-contracts/core-candy-machine): Core Candy Machine is the Metaplex program for minting and distributing Core Assets on Solana. Configure guards, insert items, and launch NFT collections with customizable mint rules.
+- [Core Candy Machine - Vanity Mint Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/vanity-mint): The Core Candy Machine 'Vanity Mint' guard requires the minter to provide an asset address that matches a configured regular expression pattern, adding a Proof of Work requirement to minting.
+- [Core Candy Machine Program Overview](https://metaplex.com/docs/smart-contracts/core-candy-machine/overview): A comprehensive overview of the Core Candy Machine program architecture, lifecycle, account structure, and guard system for launching MPL Core Asset collections on Solana.
+- [Core Candy Machine Rust SDK](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk/rust): Get started with the mpl-core-candy-machine-core and mpl-core-candy-guard Rust crates for building and managing Core Candy Machines on Solana.
 - [Create a Core Candy Machine with Hidden Settings](https://metaplex.com/docs/smart-contracts/core-candy-machine/guides/create-a-core-candy-machine-with-hidden-settings): How to create a Core Candy Machine with hidden settings to create a hide-and-reveal NFT drop.
 - [Create a Website for minting Assets from your Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/guides/create-a-core-candy-machine-ui): How to create an UI to interact with your Candy Machine minting Program on Solana.
-- [Creating a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/create): Learn how to create your Core Candy Machine and it's various settings in both Javascript and Rust.
-- [Edition Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/edition): The Core Candy Machine 'Edition' guard allows the minting of Editions from a Core Candy Machine.
-- [End Date Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/end-date): The Core Candy Machine 'End Date' guard determines a date to end the minting process for the Core Candy Machine and its phases.
-- [Fetching a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/fetching-a-candy-machine): How to fetch the data of a Core Core Candy Machine from the Solana blockchain.
-- [Freeze Sol Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/freeze-sol-payment): The Core Candy Machine 'Freeze Sol Payment' allows you to set the price of minting in SOL while also freezing the minted Core NFT Assets upon purchase for a set duration of time.
-- [Freeze Token Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/freeze-token-payment): The Core Candy Machine 'Freeze Token Payment' guard allows you to set an SPL Token as the currency of minting and its value while also freezing the minted Core NFT Assets upon purchase for a set duration of time.
-- [Gatekeeper Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/gatekeeper): The Core Candy Machine `Gatekeeper` guard checks whether the minting wallet has a valid Gateway Token from a specified Gatekeeper Network.
-- [Generating Custom Guard Client for Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/custom-guards/generating-client): Learn how to generate a Umi compatible client for your custom built guards for the newest Core Candy Machine program.
-- [Guard Groups](https://metaplex.com/docs/smart-contracts/core-candy-machine/guard-groups): Explains how to configure and use multiple groups of guards with a Core Candy Machine.
-- [Guides for Metaplex Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/guides): A list of guides for the Metaplex Core Candy Machine for creating Core based NFT collections on Solana.
-- [Inserting Items](https://metaplex.com/docs/smart-contracts/core-candy-machine/insert-items): How to load Core NFT Assets into a Core Candy Machine.
-- [Mint Limit Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/mint-limit): The Core Candy Machine 'Mint Limit' guard allows specifying a limit on the number of Assets each wallet can mint.
-- [Minting](https://metaplex.com/docs/smart-contracts/core-candy-machine/mint): How to mint from a Core Candy Machine allowing users to purchase your Core NFT Assets.
-- [MPL Core Candy Machine Javascript SDK](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk/javascript): Learn how to set up your project to run the MPL Core Candy Machine Javascript SDK.
-- [MPL Core Candy Machine SDKs](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk): Find out about the SDKs available for the MPL Core Candy Machine program.
-- [NFT Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-burn): The Core Candy Machine 'NFT Burn' guard restricts the mint to holders of a predefined Token Metadata NFT/pNFT Collection and burns the holder's NFT during purchase.
-- [NFT Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-gate): The Core Candy Machine 'NFT Gate' guard restricts minting to holders of a specified NFT/pNFT collection.
-- [NFT Mint Limit Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-mint-limit): The Core Candy Machine 'NFT Mint Limit' guard restricts minting to holders of a specified NFT/pNFT collection and limits the amount of Assets that can be minted for a provided NFT.
-- [NFT Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-payment): The Core Candy Machine 'NFT Payment' guard allows minting by charging the payer an NFT/pNFT from a specified NFT collection. The NFT/pNFT used as payment will be transferred to a predefined destination.
-- [Preparing Assets](https://metaplex.com/docs/smart-contracts/core-candy-machine/preparing-assets): How to prepare your files and assets for uploading into a Core Candy Machine.
-- [Program Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/program-gate): The Core Candy Machine 'Program Gate' guard restricts the programs that can be used during the mint transaction.
-- [Program Overview](https://metaplex.com/docs/smart-contracts/core-candy-machine/overview): An overview of the Core Candy Machine program and its feature sets to help you create a minting experience.
-- [Redeemed Amount Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/redeemed-amount): The Core Candy Machine 'Redeemed Amount' guard forbids minting when the number of minted Assets for the entire Core Candy Machine reaches the configured maximum amount.
-- [Sol Fixed Fee Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/sol-fixed-fee): The Core Candy Machine 'Sol Fixed Fee' guard charges the payer an amount in SOL when minting
-- [Sol Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/sol-payment): The Core Candy Machine 'Sol Payment' guard charges the payer an amount in SOL when minting.
-- [Special Guard Instructions](https://metaplex.com/docs/smart-contracts/core-candy-machine/guard-route): Explains how to execute guard-specific instructions for the Core Candy Machine.
-- [Start Date Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/start-date): The Core Candy Machine 'Start Date' guard determines the start date of the mint for the Core Candy Machine or phase.
-- [Third Party Signer Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/third-party-signer): The Core Candy Machine 'Third Party Signer' guard requires a predefined address to sign each mint transaction or the transaction will fail.
-- [Token Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-burn): The Core Candy Machine 'Token Burn' guard allows minting by setting the minting currency to an SPL token address and value.
-- [Token Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-gate): The Core Candy Machine 'Token Gate' guard restricts minting to holders of a configured SPL Token.
-- [Token Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-payment): The Core Candy Machine 'Token Payment' guard allows minting by charging the payer a set value of an SPL Token.
-- [Token2022 Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token2022-payment): The Core Candy Machine 'Token2022 Payment' guard allows minting by charging the payer a set value of an SPL Token2022.
-- [Updating The Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/update): Learn how to update your Core Candy Machine and it's various settings.
-- [Withdrawing a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/withdrawing-a-candy-machine): How to withdraw a Core Candy Machine and claim back rent from it.
+- [Creating a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/create): Step-by-step tutorial for creating a Core Candy Machine on Solana with configurable settings including Config Line Settings, Hidden Settings, and guards using the mpl-core-candy-machine SDK.
+- [Edition Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/edition): The Core Candy Machine 'Edition' guard assigns sequential edition numbers to Assets minted from a Core Candy Machine, starting from a configurable offset.
+- [End Date Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/end-date): The End Date guard sets a deadline after which minting from a Core Candy Machine is no longer allowed. Configure an end timestamp to automatically close your mint.
+- [Fetching a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/fetching-a-candy-machine): How to fetch the on-chain data of a Core Candy Machine account from the Solana blockchain using the mpl-core-candy-machine SDK.
+- [Freeze Sol Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/freeze-sol-payment): The Freeze Sol Payment guard charges the payer in SOL and freezes the minted Core Asset for a configurable period. Frozen Assets cannot be transferred until thawed via the route instruction.
+- [Freeze Token Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/freeze-token-payment): The Freeze Token Payment guard charges the payer a specified amount of SPL tokens and freezes the minted Core Asset for a configurable period. Frozen Assets cannot be transferred until thawed via the route instruction.
+- [Gatekeeper Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/gatekeeper): The Gatekeeper guard requires the minting wallet to hold a valid Gateway Token from a specified Gatekeeper Network such as Civic Captcha Pass before minting from a Core Candy Machine.
+- [Generating Custom Guard Client for Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/custom-guards/generating-client): Learn how to generate a Umi-compatible JavaScript client for custom guards on the Core Candy Machine program using Kinobi and Shankjs.
+- [Guard Groups](https://metaplex.com/docs/smart-contracts/core-candy-machine/guard-groups): Guard Groups allow a single Core Candy Machine to define multiple independent sets of guards, each with its own label and access-control rules, enabling sequential and parallel minting workflows.
+- [Guides for Metaplex Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/guides): Step-by-step guides and tutorials for building with the Metaplex Core Candy Machine, including minting UIs and hidden settings.
+- [Inserting Items into a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/insert-items): Learn how to insert config line items into a Core Candy Machine, including batch insertion, prefix optimization, and overriding previously loaded items.
+- [Mint Limit Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/mint-limit): The Mint Limit guard restricts the number of Assets each wallet can mint from a Core Candy Machine. Limits are tracked per wallet, per Candy Machine, and per identifier.
+- [Minting from a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/mint): How to mint Core NFT Assets from a Core Candy Machine using the mintV1 instruction, including guard configuration, guard groups, pre-validation, and bot tax behavior.
+- [MPL Core Candy Machine JavaScript SDK](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk/javascript): Learn how to install and configure the MPL Core Candy Machine JavaScript SDK using the Umi framework to create and manage Candy Machines on Solana.
+- [MPL Core Candy Machine SDKs](https://metaplex.com/docs/smart-contracts/core-candy-machine/sdk): Choose from JavaScript and Rust SDKs to integrate the MPL Core Candy Machine program into your Solana project.
+- [NFT Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-burn): The Core Candy Machine NFT Burn guard restricts minting to holders of a predefined Token Metadata NFT Collection and burns the holder's NFT during the mint transaction.
+- [NFT Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-gate): The Core Candy Machine NFT Gate guard restricts minting to holders of a specified NFT collection, requiring proof of ownership without burning or transferring the NFT.
+- [NFT Mint Limit Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-mint-limit): The Core Candy Machine NFT Mint Limit guard restricts minting to holders of a specified NFT collection and limits the number of Assets each NFT can mint, combining token-gated access with per-NFT rate limiting.
+- [NFT Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/nft-payment): The Core Candy Machine NFT Payment guard allows minting by charging the payer an NFT from a specified collection, transferring the NFT to a predefined destination wallet.
+- [Preparing Assets for a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/preparing-assets): How to prepare image files, animation media, and JSON metadata for uploading into a Core Candy Machine on Solana.
+- [Program Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/program-gate): The Core Candy Machine Program Gate guard restricts which programs can be included in a mint transaction, preventing bots from adding malicious instructions from arbitrary programs.
+- [Redeemed Amount Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/redeemed-amount): The Redeemed Amount guard limits the total number of Assets that can be minted from a Core Candy Machine, enabling global mint caps and tiered minting strategies with Guard Groups.
+- [Route Instruction for Core Candy Machine Guards](https://metaplex.com/docs/smart-contracts/core-candy-machine/guard-route): The Route instruction allows individual guards on a Core Candy Machine to expose their own custom on-chain logic, such as pre-validation steps that run before minting.
+- [Sol Fixed Fee Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/sol-fixed-fee): The Sol Fixed Fee guard charges the payer a fixed amount in SOL upon minting from a Core Candy Machine, transferring the fee to a configured destination wallet.
+- [Sol Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/sol-payment): The Sol Payment guard charges the payer a configurable amount in SOL when minting from a Core Candy Machine, transferring the payment to a specified destination wallet.
+- [Start Date Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/start-date): The Start Date guard sets the earliest date and time when minting is allowed on a Core Candy Machine, blocking all mint attempts before the configured timestamp.
+- [Third Party Signer Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/third-party-signer): The Third Party Signer guard requires a predefined address to co-sign each mint transaction on a Core Candy Machine, enabling centralized mint authorization and gated access workflows.
+- [Token Burn Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-burn): The Core Candy Machine 'Token Burn' guard requires the minter to burn a specified amount of SPL tokens from a configured mint account before minting is allowed.
+- [Token Gate Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-gate): The Core Candy Machine 'Token Gate' guard restricts minting to holders of a configured SPL Token, requiring a minimum token balance without transferring or burning tokens.
+- [Token Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token-payment): The Core Candy Machine 'Token Payment' guard allows minting by charging the payer a configured amount of SPL tokens, transferring them to a specified destination wallet.
+- [Token2022 Payment Guard](https://metaplex.com/docs/smart-contracts/core-candy-machine/guards/token2022-payment): The Core Candy Machine 'Token2022 Payment' guard allows minting by charging the payer a set amount of SPL Token-2022 tokens, transferring them to a configured destination wallet.
+- [Updating a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/update): Learn how to update your Core Candy Machine settings, reassign authority, modify guards, and manually wrap or unwrap Candy Guard accounts.
+- [Withdrawing a Core Candy Machine](https://metaplex.com/docs/smart-contracts/core-candy-machine/withdrawing-a-candy-machine): How to withdraw and permanently delete a Core Candy Machine to reclaim on-chain storage rent on Solana.
 
 ## Bubblegum (Compressed NFTs)
 
 - [Overview](https://metaplex.com/docs/smart-contracts/bubblegum): Provides a high-level overview of compressed NFTs.
-- [Overview](https://metaplex.com/docs/smart-contracts/bubblegum-v2): Provides a high-level overview of Bubblegum V2 and compressed NFTs.
+- [Overview](https://metaplex.com/docs/smart-contracts/bubblegum-v2): Provides a high-level overview of Bubblegum V2 and compressed NFTs (cNFTs) on Solana. Learn about merkle trees, the DAS API, and new features like freeze, soulbound, and MPL-Core collections.
 - [Burning Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/burn-cnfts): Learn how to burn compressed NFTs on Bubblegum.
-- [Burning Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/burn-cnfts): Learn how to burn compressed NFTs using Bubblegum V2.
-- [Concurrent Merkle Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/concurrent-merkle-trees): Learn more about Concurrent Merkle Trees and how they are used on Bubblegum.
+- [Burning Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/burn-cnfts): Learn how to burn compressed NFTs using Bubblegum V2. Covers burning by owner, delegate, and permanent burn delegate.
+- [Concurrent Merkle Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/concurrent-merkle-trees): Learn how concurrent merkle trees work in Bubblegum V2. Covers leaf paths, proofs, validation, concurrency via change logs, and the SPL Account Compression program.
 - [Create 1 Million NFTs on Solana](https://metaplex.com/docs/smart-contracts/bubblegum/guides/javascript/how-to-create-1000000-nfts-on-solana): How to Create a Compressed NFT Collection of 1 Million cNFTs on Solana using the Metaplex Bubblegum program.
 - [Creating Bubblegum Trees](https://metaplex.com/docs/smart-contracts/bubblegum/create-trees): Learn how to create and fetch new Merkle Trees that can hold compressed NFTs.
-- [Creating Bubblegum Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/create-trees): Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2.
+- [Creating Bubblegum Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/create-trees): Learn how to create and fetch Merkle Trees for compressed NFTs using Bubblegum V2. Covers tree capacity, canopy depth, max depth, and max buffer size configuration.
 - [Decompressing Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/decompress-cnfts): Learn how to redeem and decompress compressed NFTs on Bubblegum.
 - [Delegating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/delegate-cnfts): Learn how to delegate compressed NFTs on Bubblegum.
-- [Delegating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/delegate-cnfts): Learn how to delegate compressed NFTs using Bubblegum V2.
+- [Delegating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/delegate-cnfts): Learn how to delegate and revoke delegate authority on compressed NFTs using Bubblegum V2. Covers leaf delegate approval and revocation.
 - [Delegating Trees](https://metaplex.com/docs/smart-contracts/bubblegum/delegate-trees): Learn how to delegate Merkle Trees on Bubblegum.
-- [Delegating Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/delegate-trees): Learn how to delegate Merkle Trees using Bubblegum V2.
-- [FAQ](https://metaplex.com/docs/smart-contracts/bubblegum-v2/faq): Frequently asked questions about Bubblegum.
-- [Fetching Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/fetch-cnfts): Learn how to fetch compressed NFTs on Bubblegum.
-- [Freezing and Thawing Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/freeze-cnfts): Learn how to freeze and thaw Compressed NFTs on Bubblegum.
+- [Delegating Trees](https://metaplex.com/docs/smart-contracts/bubblegum-v2/delegate-trees): Learn how to delegate and revoke tree authority on Bubblegum V2 Merkle Trees. Allows a delegate to mint cNFTs on behalf of the tree creator.
+- [FAQ](https://metaplex.com/docs/smart-contracts/bubblegum-v2/faq): Frequently asked questions about Bubblegum V2 compressed NFTs. Covers common issues, costs, transaction size errors, and troubleshooting.
+- [Fetching Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/fetch-cnfts): Learn how to fetch compressed NFTs using the Metaplex DAS API. Covers getAsset, getAssetProof, getAssetsByOwner, and getAssetsByGroup methods.
+- [Freezing and Thawing Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/freeze-cnfts): Learn how to freeze, thaw, and make soulbound compressed NFTs on Bubblegum V2. Covers leaf delegates, permanent freeze delegates, and non-transferable cNFTs.
 - [Guides](https://metaplex.com/docs/smart-contracts/bubblegum/guides): A list of guides and tutorials for the Metaplex Bubblegum compressed NFTs program on the Solana blockchain.
-- [Hashing NFT Data](https://metaplex.com/docs/smart-contracts/bubblegum-v2/hashed-nft-data): Learn more about how NFT data is hashed on Bubblegum.
+- [Hashing NFT Data](https://metaplex.com/docs/smart-contracts/bubblegum-v2/hashed-nft-data): Learn how compressed NFT data is hashed into merkle tree leaves in Bubblegum V2. Covers MetadataArgsV2, data hash, creator hash, collection hash, and LeafSchemaV2.
 - [How to Interact with cNFTs on Other SVMs](https://metaplex.com/docs/smart-contracts/bubblegum/guides/javascript/how-to-interact-with-cnfts-on-other-svms): How to Interact with compressed NFTs, using the Metaplex Bubblegum program, on Solana Virtual Machine (SVM) environments other than Solana devnet and mainnet-beta.
-- [Merkle Tree Canopy](https://metaplex.com/docs/smart-contracts/bubblegum-v2/merkle-tree-canopy): Learn more about the Merkle Tree Canopy on Bubblegum.
+- [JavaScript SDK](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk/javascript): Complete reference for the Metaplex Bubblegum V2 JavaScript SDK. Covers Umi setup, creating trees, minting, transferring, burning, updating, delegating, freezing, and fetching compressed NFTs.
+- [Managing Collections](https://metaplex.com/docs/smart-contracts/bubblegum-v2/collections): Learn how to set, change, and remove MPL-Core collections on compressed NFTs using Bubblegum V2. Covers the setCollectionV2 instruction.
+- [Merkle Tree Canopy](https://metaplex.com/docs/smart-contracts/bubblegum-v2/merkle-tree-canopy): Learn how the merkle tree canopy reduces proof sizes and enables composability for compressed NFTs in Bubblegum V2. Covers canopy depth, cost tradeoffs, and transaction size.
 - [Minting Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum.
-- [Minting Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum V2.
+- [Minting Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/mint-cnfts): Learn how to mint compressed NFTs on Bubblegum V2. Covers minting with and without collections, MPL-Core collection setup, and retrieving the asset ID from mint transactions.
 - [MPL-Bubblegum Javascript SDK](https://metaplex.com/docs/smart-contracts/bubblegum/sdk/javascript): Learn how to set up your project to run the MPL-Bubblegum Javascript SDK.
 - [MPL-Bubblegum Rust SDK](https://metaplex.com/docs/smart-contracts/bubblegum/sdk/rust): Learn how to set up your project to run the MPL-Bubblegum Rust SDK.
 - [MPL-Bubblegum SDKs](https://metaplex.com/docs/smart-contracts/bubblegum/sdk): Learn to get started with the compressed NFT standard (cNFT) from Metaplex using the MPL-Bubblegum SDKs.
-- [MPL-Bubblegum SDKs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk): Get started with compressed NFTs using the MPL-Bubblegum V2 SDKs.
-- [MPL-Bubblegum V2 JavaScript SDK](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk/javascript): Learn how to set up your project to run the MPL-Bubblegum V2 JavaScript SDK.
-- [MPL-Bubblegum V2 Rust SDK](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk/rust): Learn how to set up your project to run the MPL-Bubblegum V2 Rust SDK.
-- [Storing and Indexing NFT Data](https://metaplex.com/docs/smart-contracts/bubblegum-v2/stored-nft-data): Learn more about how NFT data is stored on Bubblegum.
+- [MPL-Bubblegum SDKs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk): Get started with compressed NFTs using the MPL-Bubblegum V2 SDKs. Available in JavaScript (Umi) and Rust for both client-side and on-chain development.
+- [MPL-Bubblegum V2 Rust SDK](https://metaplex.com/docs/smart-contracts/bubblegum-v2/sdk/rust): Learn how to install and use the MPL-Bubblegum V2 Rust SDK. Covers local scripts with instruction builders and CPI integration for on-chain programs.
+- [Storing and Indexing NFT Data](https://metaplex.com/docs/smart-contracts/bubblegum-v2/stored-nft-data): Learn how compressed NFT data is stored in transactions and indexed by the Metaplex DAS API. Covers the reference implementation architecture including Geyser plugin, Redis, and Postgres.
 - [Transferring Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/transfer-cnfts): Learn how to transfer compressed NFTs on Bubblegum
-- [Transferring Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/transfer-cnfts): Learn how to transfer compressed NFTs using Bubblegum V2.
+- [Transferring Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/transfer-cnfts): Learn how to transfer compressed NFTs using Bubblegum V2. Covers transfers by owner, delegate, and permanent transfer delegate, plus transferability checks.
 - [Updating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum/update-cnfts): Learn how to update compressed NFTs on Bubblegum
-- [Updating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/update-cnfts): Learn how to update compressed NFTs on Bubblegum.
+- [Updating Compressed NFTs](https://metaplex.com/docs/smart-contracts/bubblegum-v2/update-cnfts): Learn how to update compressed NFT metadata using Bubblegum V2. Covers update authority for collection-based and tree-based cNFTs.
 - [Verifying Collections](https://metaplex.com/docs/smart-contracts/bubblegum/verify-collections): Learn how to set, verify and unverify collections on Bubblegum
-- [Verifying Collections](https://metaplex.com/docs/smart-contracts/bubblegum-v2/collections): Learn how to set, verify and unverify collections on Bubblegum.
 - [Verifying Creators](https://metaplex.com/docs/smart-contracts/bubblegum/verify-creators): Learn how to verify and unverify creators on Bubblegum
-- [Verifying Creators](https://metaplex.com/docs/smart-contracts/bubblegum-v2/verify-creators): Learn how to verify and unverify creators on Bubblegum.
+- [Verifying Creators](https://metaplex.com/docs/smart-contracts/bubblegum-v2/verify-creators): Learn how to verify and unverify creators on compressed NFTs using Bubblegum V2. Covers the verifyCreatorV2 and unverifyCreatorV2 instructions.
 
 ## Token Metadata
 
@@ -309,6 +317,7 @@
 - [Getting Started with Kit SDK](https://metaplex.com/docs/smart-contracts/token-metadata/getting-started/kit): Get started with NFTs using the Metaplex Token Metadata Kit SDK.
 - [Getting Started with Umi SDK](https://metaplex.com/docs/smart-contracts/token-metadata/getting-started/umi): Get started with NFTs using the Metaplex Token Metadata Umi SDK.
 - [Guides](https://metaplex.com/docs/smart-contracts/token-metadata/guides): How-to guides for Metaplex's Token Metadata product.
+- [How to Add Metadata to a Solana Token](https://metaplex.com/docs/smart-contracts/token-metadata/guides/how-to-add-metadata-to-spl-tokens): Learn how to add Metadata to an already existing Solana token.
 - [How to Create a NFT On Solana](https://metaplex.com/docs/smart-contracts/token-metadata/guides/javascript/create-an-nft): Learn how to create an NFT on the Solana blockchain with the Metaplex.
 - [How to Create a Token Claimer Smart Contract leveraging Merkle Tree](https://metaplex.com/docs/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract): Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!
 - [Locking Assets](https://metaplex.com/docs/smart-contracts/token-metadata/lock): Learn how to lock/freeze Assets on Token Metadata
@@ -394,55 +403,43 @@
 - [Search Core Assets](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-assets): Return the list of MPL Core assets given a search criteria
 - [Search Core Collections](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-collections): Return the list of MPL Core Collections given a search criteria
 
-## Guides
-
-- [Getting Started with Rust](https://metaplex.com/docs/guides/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
-- [Guides](https://metaplex.com/docs/guides): Guides by Metaplex about the Solana blockchain.
-- [Working with Rust](https://metaplex.com/docs/guides/rust/working-with-rust): A quick overview on working with Rust and the Metaplex protocol.
-- [Create a Claimable SPL Token Airdrop](https://metaplex.com/docs/guides/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
-- [Create deterministic metadata with Turbo](https://metaplex.com/docs/guides/general/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
-- [How to Add Metadata to a Solana Token](https://metaplex.com/docs/guides/javascript/how-to-add-metadata-to-spl-tokens): Learn how to add Metadata to an already existing Solana token.
-- [How to CPI into a Metaplex Program](https://metaplex.com/docs/guides/rust/how-to-cpi-into-a-metaplex-program): An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
-- [How to Create a Solana Token](https://metaplex.com/docs/guides/javascript/how-to-create-a-solana-token): Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
-- [How to Create an NFT On Solana](https://metaplex.com/docs/guides/javascript/how-to-create-an-nft-on-solana): Learn how to create an NFT on the Solana blockchain with Metaplex packages.
-- [How to Diagnose Transaction Errors on Solana](https://metaplex.com/docs/guides/general/how-to-diagnose-solana-transaction-errors): Learn how to diagnose transaction errors on Solana and find logical solutions for these errors.
-- [How to Send and Transfer SOL on Solana](https://metaplex.com/docs/guides/javascript/how-to-transfer-sol-on-solana): Learn how to send and transfer SOL via javascript on the Solana blockchain.
-- [How to Send and Transfer SPL Tokens on Solana](https://metaplex.com/docs/guides/javascript/how-to-transfer-spl-tokens-on-solana): Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
-- [Japanese 日本語](https://metaplex.com/docs/guides/translated/japanese): A selection of guides translated into Japanese.
-- [Metaplex Rust SDKs](https://metaplex.com/docs/guides/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
-- [Metaplex Solana NextJs Tailwind Template](https://metaplex.com/docs/guides/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
-- [RPCs and DAS](https://metaplex.com/docs/guides/rpcs-and-das): Learn about RPCs on the Solana blockchain and how DAS by Metaplex aids in storing and reading data on Solana.
-- [Setup a Local Validator](https://metaplex.com/docs/guides/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
-- [Solana Programs and State Overview](https://metaplex.com/docs/guides/solana-programs): Learn about Solana Programs and how data is stored in account state on Solana.
-- [The Payer-Authority Pattern](https://metaplex.com/docs/guides/general/payer-authority-pattern): A common programming pattern for Solana instructions using a separate authority and payer.
-- [Understanding Solana Program Derived Addresses (PDAs)](https://metaplex.com/docs/guides/understanding-pdas): Learn about Solana Program Derived Addresses (PDAs) and their use cases.
-- [Validators and Staking](https://metaplex.com/docs/guides/validators): An overview of Solana Validators and staking mechanics.
-- [What is Solana?](https://metaplex.com/docs/guides/what-is-solana): What is Solana and why would you want to build on it.
-- [Where Do I Start With Solana?](https://metaplex.com/docs/guides/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
-
 ## Dev Tools
 
 - [Overview](https://metaplex.com/docs/dev-tools/amman): Provides a high-level overview of Amman local validator.
+- [Overview](https://metaplex.com/docs/dev-tools/cli/genesis): Overview of Genesis CLI commands for launching tokens using the Metaplex CLI (mplx).
 - [Solana Developer Tools](https://metaplex.com/docs/dev-tools): Developer tools for building on Solana. CLI tools, TypeScript SDKs, APIs, and utilities for NFTs, tokens, and digital assets.
 - [Add Metadata to Token](https://metaplex.com/docs/dev-tools/cli/toolbox/add-metadata-to-token): Add metadata to an existing token that doesn't have a metadata account
+- [Asset-Signer Wallets](https://metaplex.com/docs/dev-tools/cli/config/asset-signer-wallets): Use an MPL Core Asset's signer PDA as your active CLI wallet. All commands automatically wrap in execute — transfer SOL, tokens, and assets from a PDA without custom scripts.
+- [Bubblegum Overview](https://metaplex.com/docs/dev-tools/cli/bubblegum): Create and manage compressed NFTs using the Bubblegum V2 program
 - [Burn Asset](https://metaplex.com/docs/dev-tools/cli/core/burn-asset): Burn MPL Core Assets using the Metaplex CLI
+- [Burn Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/burn-cnft): Permanently destroy a compressed NFT
 - [Candy Machine Commands](https://metaplex.com/docs/dev-tools/cli/cm): Create and manage MPL Core Candy Machines using the MPLX CLI. Interactive wizard, asset upload, and complete candy machine lifecycle management.
 - [CLI Commands](https://metaplex.com/docs/dev-tools/amman/cli-commands): CLI Commands of the Metaplex Amman local validator toolkit.
 - [Configuration](https://metaplex.com/docs/dev-tools/amman/configuration): Configuring Amman local validator toolkit.
 - [Create Asset](https://metaplex.com/docs/dev-tools/cli/core/create-asset): Create an MPL Core Asset using different methods
 - [Create Candy Machine](https://metaplex.com/docs/dev-tools/cli/cm/create): Create MPL Core Candy Machines using the MPLX CLI. Interactive wizard mode with validation, asset upload, and complete setup automation.
 - [Create Collection](https://metaplex.com/docs/dev-tools/cli/core/create-collection): Create an MPL Core Collection using different methods
+- [Create Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/create-cnft): Mint a compressed NFT into a Merkle tree
+- [Create Genesis Account](https://metaplex.com/docs/dev-tools/cli/genesis/create): Create a new Genesis account and token mint using the Metaplex CLI.
 - [Create Token](https://metaplex.com/docs/dev-tools/cli/toolbox/token-create): Create a new fungible token on Solana
+- [Create Tree](https://metaplex.com/docs/dev-tools/cli/bubblegum/create-tree): Create a Merkle tree for compressed NFTs
+- [Execute](https://metaplex.com/docs/dev-tools/cli/core/execute): Inspect an MPL Core Asset's signer PDA address and SOL balance, and understand how execute wraps transactions for PDA wallets in the Metaplex CLI.
 - [Explorer Configuration](https://metaplex.com/docs/dev-tools/cli/config/explorer): Set your preferred blockchain explorer
 - [Fetch Asset or Collection](https://metaplex.com/docs/dev-tools/cli/core/fetch): Fetch MPL Core Assets or Collections by their mint address
+- [Fetch Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/fetch-cnft): Retrieve compressed NFT data and merkle proof
 - [Fetch Information](https://metaplex.com/docs/dev-tools/cli/cm/fetch): Fetch and display MPL Core Candy Machine information using the MPLX CLI. View configuration, guard settings, item status, and deployment details.
 - [Getting Started](https://metaplex.com/docs/dev-tools/amman/getting-started): Installation and setup of the Metaplex Amman local validator toolkit.
 - [Getting Started with Shank](https://metaplex.com/docs/dev-tools/shank/getting-started): Learn how to install and set up Shank for IDL extraction from Rust Solana programs
 - [Insert Items](https://metaplex.com/docs/dev-tools/cli/cm/insert): Insert uploaded assets into your MPL Core Candy Machine using the MPLX CLI.
 - [Installation](https://metaplex.com/docs/dev-tools/cli/installation): Install and set up the Metaplex CLI
 - [Introduction](https://metaplex.com/docs/dev-tools/cli): Welcome to the Metaplex CLI
+- [Launch (API)](https://metaplex.com/docs/dev-tools/cli/genesis/launch): Create and register token launches via the Genesis API using the Metaplex CLI (mplx).
+- [Launch Pool](https://metaplex.com/docs/dev-tools/cli/genesis/launch-pool): Create a launch pool bucket, deposit, withdraw, transition, and claim tokens using the Metaplex CLI.
+- [List Trees](https://metaplex.com/docs/dev-tools/cli/bubblegum/list-trees): View all saved Bubblegum Merkle trees
+- [Manage](https://metaplex.com/docs/dev-tools/cli/genesis/manage): Finalize, fetch, manage unlocked buckets, and revoke authorities for a Genesis account using the Metaplex CLI.
 - [Plugins](https://metaplex.com/docs/dev-tools/cli/core/plugins): Manage MPL Core Asset and Collection plugins
 - [Premade Configurations](https://metaplex.com/docs/dev-tools/amman/pre-made-configs): A set of premade configurations from Metaplex Amman local validator toolkit.
+- [Presale](https://metaplex.com/docs/dev-tools/cli/genesis/presale): Create a presale bucket, deposit, and claim tokens from a Genesis presale using the Metaplex CLI.
 - [RPCs](https://metaplex.com/docs/dev-tools/cli/config/rpcs): Manage RPC endpoints in your configuration
 - [Shank](https://metaplex.com/docs/dev-tools/shank): Extract IDLs from Rust Solana program code using attribute macros
 - [Shank Macros Reference](https://metaplex.com/docs/dev-tools/shank/macros): Complete reference for Shank derive macros and attributes used in Solana programs
@@ -450,7 +447,10 @@
 - [SOL Balance](https://metaplex.com/docs/dev-tools/cli/toolbox/sol-balance): Check SOL balance for a wallet address
 - [SOL Transfer](https://metaplex.com/docs/dev-tools/cli/toolbox/sol-transfer): Transfer SOL to a specified address
 - [Token Transfer](https://metaplex.com/docs/dev-tools/cli/toolbox/token-transfer): Transfer tokens to a destination address
+- [Transfer Asset](https://metaplex.com/docs/dev-tools/cli/core/transfer-asset): Transfer ownership of an MPL Core Asset to a new wallet using the Metaplex CLI mplx core asset transfer command.
+- [Transfer Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/transfer-cnft): Transfer a compressed NFT to a new owner
 - [Update Asset](https://metaplex.com/docs/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata and properties
+- [Update Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/update-cnft): Update the metadata of a compressed NFT
 - [Update Token Metadata](https://metaplex.com/docs/dev-tools/cli/toolbox/update-token-metadata): Update the metadata of an existing token
 - [Upload Assets](https://metaplex.com/docs/dev-tools/cli/cm/upload): Upload candy machine assets to decentralized storage using the MPLX CLI. Intelligent caching, progress tracking, and comprehensive validation.
 - [Validate Cache](https://metaplex.com/docs/dev-tools/cli/cm/validate): Validate candy machine asset cache and uploads using the MPLX CLI. Comprehensive validation, error detection, and cache integrity verification.
@@ -459,11 +459,14 @@
 
 ## Other
 
+- [Agent Kit](https://metaplex.com/docs/agents): Create, register, and run autonomous agents on Solana. Use the Metaplex Agent skills and agent registry to manage your autonomous agents.
 - [Burn Fungible Tokens](https://metaplex.com/docs/tokens/burn-tokens): Learn how to burn fungible SPL tokens on Solana using JavaScript and Umi
 - [Centralized Examples Test](https://metaplex.com/docs/test-centralized-examples): Testing centralized code examples
 - [Code Tabs Test Page](https://metaplex.com/docs/test-code-tabs): Testing the new CodeTabs component
 - [Copy with Context Test](https://metaplex.com/docs/test-copy-context): Testing enhanced copy functionality
 - [Enhanced Fence Component - Test Page](https://metaplex.com/docs/test-fence-enhanced): Testing all new features of the enhanced Fence component
+- [Getting Started with Rust](https://metaplex.com/docs/solana/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
+- [Guides](https://metaplex.com/docs/solana): Guides by Metaplex about the Solana blockchain.
 - [Mint Fungible Tokens](https://metaplex.com/docs/tokens/mint-tokens): Learn how to mint additional fungible SPL tokens to a wallet on Solana using JavaScript and Umi
 - [Official Links](https://metaplex.com/docs/official-links): Official Links for Metaplex
 - [Overview](https://metaplex.com/docs/smart-contracts/fusion): Provides a high-level overview of composable NFTs using Fusion.
@@ -473,7 +476,6 @@
 - [Overview](https://metaplex.com/docs/smart-contracts/token-auth-rules): Provides a high-level overview of NFT permissions.
 - [Overview](https://metaplex.com/docs/smart-contracts/token-auth-rules/mplx-rule-sets): The pNFT Rule Sets that Metaplex Foundation manages.
 - [Protocol Fees](https://metaplex.com/docs/protocol-fees): Details of the onchain fees for Metaplex's products.
-- [RPC Providers](https://metaplex.com/docs/rpc-providers): A list of available RPCs on Solana.
 - [Security](https://metaplex.com/docs/security): Audits and how to report a vulnerability.
 - [Simple Test](https://metaplex.com/docs/test-simple): Simple test page
 - [Solana NFTs](https://metaplex.com/docs/nfts): Create, manage, and trade NFTs on Solana using Metaplex Core. Build digital collectibles, art, and gaming assets with the most efficient NFT standard.
@@ -481,8 +483,12 @@
 - [Solana Tokens](https://metaplex.com/docs/tokens): Create, launch, and manage fungible tokens on Solana. Build token generation events (TGE), fair launches, and token sales using Metaplex Genesis and SDKs.
 - [Stability Index](https://metaplex.com/docs/stability-index): A guide to the stability levels of Metaplex products.
 - [Two Examples Test](https://metaplex.com/docs/test-two-examples): Testing two code-tabs-imported on one page
-- [Understanding Programs](https://metaplex.com/docs/understanding-programs): A quick overview of how programs work on Solana.
+- [What is Solana?](https://metaplex.com/docs/solana/what-is-solana): What is Solana and why would you want to build on it.
+- [Working with Rust](https://metaplex.com/docs/solana/rust/working-with-rust): A quick overview on working with Rust and the Metaplex protocol.
 - [Additional Signer](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/additional-signer): The Additional Signer primitive rule
+- [Agent Identity](https://metaplex.com/docs/smart-contracts/mpl-agent/identity): Technical reference for the MPL Agent Identity program — instruction accounts, PDA derivation, account structure, and error codes.
+- [Agent Tools](https://metaplex.com/docs/smart-contracts/mpl-agent/tools): Technical reference for the MPL Agent Tools program — executive profiles, execution delegation, accounts, and PDA derivation.
+- [Airdrop SOL for Development](https://metaplex.com/docs/solana/airdrop-sol-for-development): Learn how to get free SOL for development using airdrops, faucets, and other methods on Solana devnet.
 - [All](https://metaplex.com/docs/smart-contracts/token-auth-rules/composite-rules/all): The All composite rule
 - [Amount](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/amount): The Amount primitive rule
 - [Any](https://metaplex.com/docs/smart-contracts/token-auth-rules/composite-rules/any): The Any composite rule
@@ -490,9 +496,12 @@
 - [Burn an NFT](https://metaplex.com/docs/nfts/burn-nft): Learn how to burn NFTs using Metaplex Core on Solana
 - [Clear Inscription Data](https://metaplex.com/docs/smart-contracts/inscription/clear): Learn how to clear Inscription data
 - [Close Inscriptions](https://metaplex.com/docs/smart-contracts/inscription/close): Learn how to close Inscription accounts
+- [Compute Units and Priority Fees](https://metaplex.com/docs/solana/compute-units-and-priority-fees): Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
 - [Constraint Types](https://metaplex.com/docs/smart-contracts/fusion/constraint-types): The different options for Trifle composition rules.
+- [Create a Claimable SPL Token Airdrop](https://metaplex.com/docs/solana/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
 - [Create a Fungible Token](https://metaplex.com/docs/tokens/create-a-token): Learn how to create a fungible SPL token with metadata on Solana
 - [Create an NFT](https://metaplex.com/docs/nfts/create-nft): Learn how to create an NFT using Metaplex Core on Solana
+- [Create deterministic metadata with Turbo](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
 - [Create or Update Rule Sets](https://metaplex.com/docs/smart-contracts/token-auth-rules/create-or-update): How to Create and Update Rule Sets
 - [Create your First Hybrid Collection](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/create-your-first-hybrid-collection): Learn how to create an hybrid collection, fully end-to-end!.
 - [Creating an MPL 404 Hybrid Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/create-escrow): Learn to create the MPL 404 Hybrid Escrow account that makes 404 swaps possible.
@@ -504,18 +513,33 @@
 - [Funding the MPL Hybrid 404 Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/funding-escrow): Learn to fund the MPL 404 Hybrid Escrow account with SPL Tokens that makes 404 swaps possible.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/fusion/getting-started): How to use Metaplex Fusion.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/inscription/getting-started): Get started with Metaplex Inscriptions.
+- [Getting Started](https://metaplex.com/docs/smart-contracts/mpl-agent/getting-started): Install the MPL Agent Registry SDK and register your first agent identity on Solana.
 - [Getting Started using JavaScript](https://metaplex.com/docs/smart-contracts/inscription/getting-started/js): Get started with Inscription using JavaScript
 - [Getting Started using Rust](https://metaplex.com/docs/smart-contracts/inscription/getting-started/rust): Get started with Inscriptions using Rust
 - [Getting started using the Inscriptions CLI](https://metaplex.com/docs/smart-contracts/inscription/getting-started/cli): Get started using the Inscriptions CLI
+- [Grind a Vanity Public Key on Solana](https://metaplex.com/docs/solana/grind-vanity-public-key): Learn how to generate custom Solana addresses with specific prefixes or suffixes using solana-keygen grind for branded tokens and recognizable wallets.
 - [Guides](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides): A list of guides and tutorials for the Metaplex Hybrid standard on the Solana blockchain.
+- [How It Works](https://metaplex.com/docs/agents/skill/how-it-works): Understand the progressive disclosure architecture of the Metaplex Skill.
+- [How to CPI into a Metaplex Program](https://metaplex.com/docs/solana/rust/how-to-cpi-into-a-metaplex-program): An overview of how Metaplex makes a consistent experience when performing a CPI into each Metaplex program.
+- [How to Create a Solana Token](https://metaplex.com/docs/solana/javascript/how-to-create-a-solana-token): Learn how to create an SPL Token/meme coin on the Solana blockchain with Metaplex packages.
 - [How to Create a Token with Rust and Anchor](https://metaplex.com/docs/tokens/anchor/create-token): Learn how to create an SPL token with metadata on Solana using Rust, the Anchor framework, and Metaplex Token Metadata.
+- [How to Create an NFT On Solana](https://metaplex.com/docs/solana/javascript/how-to-create-an-nft-on-solana): Learn how to create an NFT on the Solana blockchain with Metaplex packages.
+- [How to Diagnose Transaction Errors on Solana](https://metaplex.com/docs/solana/general/how-to-diagnose-solana-transaction-errors): Learn how to diagnose transaction errors on Solana and find logical solutions for these errors.
+- [How to Send and Transfer SOL on Solana](https://metaplex.com/docs/solana/javascript/how-to-transfer-sol-on-solana): Learn how to send and transfer SOL via javascript on the Solana blockchain.
+- [How to Send and Transfer SPL Tokens on Solana](https://metaplex.com/docs/solana/javascript/how-to-transfer-spl-tokens-on-solana): Learn how to send and transfer SPL Tokens via javascript on the Solana blockchain with Metaplex packages.
 - [Initialize Inscriptions](https://metaplex.com/docs/smart-contracts/inscription/initialize): Learn how to create Metaplex Inscriptions
 - [Initializing Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/escrow): Initializing MPL-Hybrid Escrow
 - [Initializing NFT Data](https://metaplex.com/docs/smart-contracts/mpl-hybrid/initializeNFTData): Initializing MPL-Hybrid NFT Data
 - [Inscription Authority](https://metaplex.com/docs/smart-contracts/inscription/authority): Learn what a Inscription Authority is and where it's stored
 - [Inscription Sharding](https://metaplex.com/docs/smart-contracts/inscription/sharding): Explains the method used to prevent write-lock contention on Inscription minting.
-- [Launch a Token on Solana](https://metaplex.com/docs/tokens/launch-token): Complete guide to launching a token generation event (TGE) on Solana. Create fair token launches using Genesis Launch Pools with step-by-step TypeScript code.
+- [Installation](https://metaplex.com/docs/agents/skill/installation): Install the Metaplex Skill in Claude Code, Cursor, Copilot, or any AI coding agent.
+- [Japanese 日本語](https://metaplex.com/docs/solana/translated/japanese): A selection of guides translated into Japanese.
+- [Launch a Token on Solana](https://metaplex.com/docs/tokens/launch-token): Step-by-step TypeScript guide to launching an SPL token on Solana using Genesis Launch Pools. Fair, on-chain token distribution with transparent price discovery.
 - [Metaplex MPL-404 Hybrid Solana NextJs Tailwind Template](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template): A web UI template for Metaplex MPL-404 Hybrid using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
+- [Metaplex Rust SDKs](https://metaplex.com/docs/solana/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
+- [Metaplex Skill](https://metaplex.com/docs/agents/skill): An Agent Skill that gives AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.
+- [Metaplex Solana NextJs Tailwind Template](https://metaplex.com/docs/solana/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
+- [MPL Agent Registry](https://metaplex.com/docs/smart-contracts/mpl-agent): On-chain programs for registering agent identity and delegating execution on Solana using MPL Core assets.
 - [MPL-Hybrid Javascript SDK](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk/javascript): Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
 - [MPL-Hybrid SDKs](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk): View the available SDKs for the MPL-Hybrid Metaplex program.
 - [Namespace](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/namespace): The Namespace primitive rule
@@ -524,20 +548,40 @@
 - [PDA Match](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/pda-match): The PDA Match primitive rule
 - [Preparation](https://metaplex.com/docs/smart-contracts/mpl-hybrid/preparation): How to prepare before creating a MPL-404 hybrid
 - [Program Owned](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/program-owned): The Program Owned primitive rule
+- [Programs & Operations](https://metaplex.com/docs/agents/skill/programs-and-operations): Detailed breakdown of programs and operations covered by the Metaplex Skill.
 - [Public Key](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/pubkey-match): The Public Key primitive rule
 - [Quick Start](https://metaplex.com/docs/smart-contracts/hydra/quick-start): Provides a high-level overview over the non-Umi Hydra SDK.
+- [Read Agent Data](https://metaplex.com/docs/agents/run-agent): Verify agent registration and read agent identity data on Solana.
 - [Read Token Data](https://metaplex.com/docs/tokens/read-token): Learn how to fetch fungible token data from the Solana blockchain
+- [Register an Agent](https://metaplex.com/docs/agents/register-agent): Register an agent identity on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset.
+- [RPCs, DAS, and RPC Providers](https://metaplex.com/docs/solana/rpcs-and-das): Learn about RPCs on the Solana blockchain, how DAS by Metaplex aids in storing and reading data, and find RPC providers for your project.
+- [Run an Agent](https://metaplex.com/docs/agents/run-an-agent): Set up an executive profile and delegate execution to run an autonomous agent on Solana.
+- [Setup a Local Validator](https://metaplex.com/docs/solana/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
+- [Solana CLI Essentials](https://metaplex.com/docs/solana/solana-cli-essentials): Learn the essential Solana CLI commands for development, including installation, configuration, and common operations.
+- [Solana Keypairs and Wallets](https://metaplex.com/docs/solana/solana-keypairs-and-wallets): Learn how to create, manage, and secure Solana keypairs and wallets for development and production use.
+- [Solana Programs and State Overview](https://metaplex.com/docs/solana/solana-programs): Learn about Solana Programs and how data is stored in account state on Solana.
+- [Solana Transaction Fundamentals](https://metaplex.com/docs/solana/solana-transaction-fundamentals): Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
+- [SPL Tokens and Token Programs](https://metaplex.com/docs/solana/spl-tokens-and-token-programs): Learn how SPL tokens work on Solana, including the Token Program, mint accounts, token accounts, and how Metaplex builds on top of the token standard.
 - [Swapping](https://metaplex.com/docs/smart-contracts/mpl-hybrid/swapping): MPL-404 Swapping
 - [Swapping an NFT to Tokens in MPL Hybrid](https://metaplex.com/docs/smart-contracts/mpl-hybrid/swapping-nfts-to-tokens): Learn to write a swap function so users can swap their NFT into Tokens in the MPL-Hybrid Program.
 - [Swapping Tokens to NFTs](https://metaplex.com/docs/smart-contracts/mpl-hybrid/swapping-tokens-to-nfts): Learn to your SPL tokens to an NFT in the MPL-Hybrid Program.
+- [The Payer-Authority Pattern](https://metaplex.com/docs/solana/general/payer-authority-pattern): A common programming pattern for Solana instructions using a separate authority and payer.
 - [Transfer an NFT](https://metaplex.com/docs/nfts/transfer-nft): Learn how to transfer NFTs between wallets using Metaplex Core on Solana
 - [Transfer Effects](https://metaplex.com/docs/smart-contracts/fusion/transfer-effects): Effects that can be triggered on compose and decompose events.
 - [Transfer Fungible Tokens](https://metaplex.com/docs/tokens/transfer-a-token): Learn how to transfer fungible SPL tokens between wallets on Solana using JavaScript and Umi
+- [Understanding Programs](https://metaplex.com/docs/solana/understanding-programs): A quick overview of how programs work on Solana.
+- [Understanding Solana Accounts](https://metaplex.com/docs/solana/understanding-solana-accounts): Learn how Solana accounts work, including ownership, rent, and how they differ from Ethereum. Essential knowledge for token and NFT development.
+- [Understanding Solana Program Derived Addresses (PDAs)](https://metaplex.com/docs/solana/understanding-pdas): Learn about Solana Program Derived Addresses (PDAs) and their use cases.
 - [Update an NFT](https://metaplex.com/docs/nfts/update-nft): Learn how to update NFT metadata using Metaplex Core on Solana
 - [Update Token Metadata](https://metaplex.com/docs/tokens/update-token): Learn how to update fungible token metadata on Solana using JavaScript and Umi
 - [Updating the Configuration of an MPL Hybrid 404 Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/update-escrow): Learn to update the configuration of an MPL 404 Hybrid Escrow account.
 - [Using Buffers](https://metaplex.com/docs/smart-contracts/token-auth-rules/buffers): Documentation of Token Auth Rule Buffers.
+- [Using Solana Explorers](https://metaplex.com/docs/solana/using-solana-explorers): Learn how to use Solana Explorer, SolanaFM, and CLI tools to inspect transactions, accounts, and debug issues during development.
 - [Validating with a Rule Set](https://metaplex.com/docs/smart-contracts/token-auth-rules/validate): How to run validation using a Rule Set
+- [Validators and Staking](https://metaplex.com/docs/solana/validators): An overview of Solana Validators and staking mechanics.
+- [What Is an Agent?](https://metaplex.com/docs/agents/what-is-an-agent): Autonomous agents on Solana are MPL Core assets with built-in wallets and on-chain identity records. Learn how agent identity, wallets, and execution delegation work.
+- [Where Do I Start With Solana?](https://metaplex.com/docs/solana/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
+- [Working with Devnet](https://metaplex.com/docs/solana/working-with-devnet-and-testnet): Learn how to use Solana devnet and local validators for development. Understand when to use each environment and how to transition to mainnet.
 - [Write Inscription Data](https://metaplex.com/docs/smart-contracts/inscription/write): Learn how to write Data to your Inscription
 
 ## Additional Resources

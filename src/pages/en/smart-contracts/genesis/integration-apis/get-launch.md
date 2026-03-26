@@ -81,7 +81,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "heroUrl": "launches/abc123/hero.webp",
       "graduatedAt": "2026-01-15T18:05:00.000Z",
       "lastActivityAt": "2026-01-15T17:45:00.000Z",
-      "type": "project"
+      "type": "launchpool"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -164,4 +164,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
 - Returns `404` if the genesis address is not found or does not have a valid launch.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `bondingCurve`).

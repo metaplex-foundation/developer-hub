@@ -119,7 +119,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'bondingCurve';
 }
 
 interface BaseToken {
@@ -211,7 +211,7 @@ serde = { version = "1", features = ["derive"] }
 | **Base Token** | The token being launched, identified by its mint address |
 | **Launch Page** | The URL where users can participate in a launch |
 | **Mechanic** | The allocation mechanism used for the launch (e.g., `launchpoolV2`, `presaleV2`, `auction`) |
-| **Launch Type** | The category of the launch: `project`, `memecoin`, or `custom` |
+| **Launch Type** | The underlying mechanism of the launch: `launchpool` or `bondingCurve` |
 | **Spotlight** | A platform-curated flag indicating a featured launch |
 | **Status** | The current state of a launch: `upcoming`, `live`, `graduated`, or `ended` |
 | **Socials** | Social media links (X/Twitter, Telegram, Discord) associated with a token |
