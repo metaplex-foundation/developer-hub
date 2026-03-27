@@ -39,6 +39,10 @@ export const agents = {
               href: '/agents/skill',
             },
             {
+              title: 'Mint an Agent',
+              href: '/agents/mint-agent',
+            },
+            {
               title: 'Register an Agent',
               href: '/agents/register-agent',
             },
