@@ -1,6 +1,7 @@
 // [IMPORTS]
 import { fetchAsset } from '@metaplex-foundation/mpl-core'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { publicKey } from '@metaplex-foundation/umi'
 import { mplAgentIdentity } from '@metaplex-foundation/mpl-agent-registry'
 // [/IMPORTS]
 
@@ -10,7 +11,9 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // [/SETUP]
 
 // [MAIN]
-const assetData = await fetchAsset(umi, result.assetAddress)
+// Replace with the assetAddress returned by mintAndSubmitAgent or mintAgent
+const assetAddress = publicKey('YOUR_ASSET_ADDRESS')
+const assetData = await fetchAsset(umi, assetAddress)
 const agentIdentity = assetData.agentIdentities?.[0]
 
 console.log('Registration URI:', agentIdentity?.uri)
