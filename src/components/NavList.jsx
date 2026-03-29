@@ -116,6 +116,18 @@ export const agentMenuCategory = [
     },
   },
   {
+    name: 'Mint an Agent',
+    headline: 'Create an onchain AI agent in a single transaction.',
+    description: 'Mint an MPL Core asset and register an Agent Identity PDA in one atomic transaction using the Metaplex API.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/mint-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントのミント', headline: '1回のトランザクションでオンチェーンAIエージェントを作成します。' },
+      ko: { name: '에이전트 민팅', headline: '단일 트랜잭션으로 온체인 AI 에이전트를 생성합니다.' },
+      zh: { name: '铸造 Agent', headline: '在单笔交易中创建链上 AI Agent。' },
+    },
+  },
+  {
     name: 'Register an Agent',
     headline: 'Register an agent on the Metaplex 014 agent registry.',
     description: 'Register an autonomous agent on the Metaplex 014 agent registry using Metaplex SDKs.',
