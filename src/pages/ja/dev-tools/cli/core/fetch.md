@@ -17,14 +17,14 @@ mplx core fetch asset <assetId>
 ```bash
 mplx core fetch asset <assetId> --download --output ./assets
 mplx core fetch asset <assetId> --download --image
-mplx core fetch asset <assetId> --download --metadata
+mplx core fetch asset <assetId> --download --offchain
 ```
 
 ### アセット取得オプション
 - `--download`: アセットファイルをディスクにダウンロード（追加フラグで個別ファイルも選択可能）
 - `--output <path>`: ダウンロードしたアセットを保存するディレクトリパス（--downloadが必要）
 - `--image`: 画像ファイルをダウンロード（--downloadが必要）
-- `--metadata`: メタデータファイルをダウンロード（--downloadが必要）
+- `--offchain`: メタデータファイルをダウンロード（--downloadが必要）
 - `--asset`: アセットデータファイルをダウンロード（--downloadが必要）
 
 ## コレクションの取得

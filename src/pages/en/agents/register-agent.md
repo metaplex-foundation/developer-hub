@@ -1,7 +1,7 @@
 ---
 title: Register an Agent
-metaTitle: Register an Agent on Solana | Metaplex Agent Registry
-description: Register an agent identity on Solana by binding an identity record to an MPL Core asset.
+metaTitle: Register an Agent on Solana | Metaplex 014 Agent Registry
+description: Register an agent identity on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset.
 keywords:
   - register agent
   - agent identity
@@ -20,7 +20,7 @@ created: '02-25-2026'
 updated: '03-12-2026'
 ---
 
-Register an agent on Solana by binding an identity record to an MPL Core asset. {% .lead %}
+Register an agent on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset. {% .lead %}
 
 ## Summary
 
@@ -85,7 +85,7 @@ The `agentRegistrationUri` points to a JSON document describing the agent's iden
 
 ```json
 {
-  "type": "agent-registration-v1",
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
   "name": "Plexpert",
   "description": "An informational agent providing help related to Metaplex protocols and tools.",
   "image": "https://arweave.net/agent-avatar-tx-hash",
@@ -108,8 +108,8 @@ The `agentRegistrationUri` points to a JSON document describing the agent's iden
   "active": true,
   "registrations": [
     {
-      "agentId": "AgentAssetPublicKey111111111111111111111111111",
-      "agentRegistry": "solana:mainnet:1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p"
+      "agentId": "<MINT_ADDRESS>",
+      "agentRegistry": "solana:101:metaplex"
     }
   ],
   "supportedTrust": [
@@ -123,7 +123,7 @@ The `agentRegistrationUri` points to a JSON document describing the agent's iden
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `type` | Yes | Schema identifier. Use `agent-registration-v1`. |
+| `type` | Yes | Schema identifier. Use `https://eips.ethereum.org/EIPS/eip-8004#registration-v1`. |
 | `name` | Yes | Human-readable agent name |
 | `description` | Yes | Natural language description of the agent — what it does, how it works, and how to interact with it |
 | `image` | Yes | Avatar or logo URI |
@@ -150,8 +150,8 @@ Each registration entry links back to an on-chain identity record:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `agentId` | Yes | The agent's on-chain asset public key |
-| `agentRegistry` | Yes | Registry address in `{namespace}:{chainId}:{programId}` format |
+| `agentId` | Yes | The agent's mint address |
+| `agentRegistry` | Yes | Constant registry identifier — use `solana:101:metaplex` |
 
 ## Verify Registration
 

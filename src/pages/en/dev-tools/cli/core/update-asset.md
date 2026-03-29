@@ -17,7 +17,7 @@ mplx core asset update <assetId> [options]
 - `--name <string>`: New name for the asset
 - `--uri <string>`: New URI for the asset metadata
 - `--image <path>`: Path to new image file
-- `--json <path>`: Path to JSON file containing new metadata
+- `--offchain <path>`: Path to JSON file containing new metadata
 
 ## Update Methods
 
@@ -28,7 +28,7 @@ mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.c
 
 ### 2. Update with JSON File
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json
+mplx core asset update <assetId> --offchain ./asset/metadata.json
 ```
 
 ### 3. Update with Image
@@ -38,7 +38,7 @@ mplx core asset update <assetId> --image ./asset/image.jpg
 
 ### 4. Update with JSON and Image
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
+mplx core asset update <assetId> --offchain ./asset/metadata.json --image ./asset/image.jpg
 ```
 
 ## Examples
@@ -55,7 +55,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./im
 
 ### Update Asset with New Metadata
 ```bash
-mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
+mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --offchain ./metadata/new-metadata.json
 ```
 
 ## Output
@@ -72,9 +72,9 @@ After a successful update, the command will display:
 
 ## Notes
 
-- You must provide at least one update flag: `--name`, `--uri`, `--image`, `--json`, or `--edit`
-- The `--name` and `--uri` flags cannot be used together with `--json` or `--edit`
-- When using `--json`, the metadata file must contain a valid `name` field
+- You must provide at least one update flag: `--name`, `--uri`, `--image`, `--offchain`, or `--edit`
+- The `--name` and `--uri` flags cannot be used together with `--offchain` or `--edit`
+- When using `--offchain`, the metadata file must contain a valid `name` field
 - The `--image` flag will update both the image URI in the metadata and the image file reference
 - The command will automatically handle:
   - File uploads to the appropriate storage

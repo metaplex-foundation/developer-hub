@@ -1,7 +1,7 @@
 ---
-title: Agent Kit
-metaTitle: Solanaでエージェントを作成・実行する | エージェントレジストリ | Metaplex
-description: Solana上で自律エージェントを作成、登録、実行します。Metaplexエージェントスキルとエージェントレジストリを使用して、自律エージェントを管理します。
+title: エージェントキット
+metaTitle: Solanaでエージェントを作成・実行 | エージェントレジストリ | Metaplex
+description: Solana上で自律型エージェントを作成、登録、実行します。Metaplexエージェントスキルとエージェントレジストリを使用してエージェントを管理します。
 tableOfContents: false
 keywords:
   - Solana agents
@@ -16,7 +16,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-11-2026'
-updated: '03-11-2026'
+updated: '03-12-2026'
 ---
 
 {% product-card-grid category="Agents" /%}

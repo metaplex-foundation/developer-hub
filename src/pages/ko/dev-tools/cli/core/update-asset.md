@@ -17,7 +17,7 @@ mplx core asset update <assetId> [options]
 - `--name <string>`: 자산의 새 이름
 - `--uri <string>`: 자산 메타데이터의 새 URI
 - `--image <path>`: 새 이미지 파일 경로
-- `--json <path>`: 새 메타데이터가 포함된 JSON 파일 경로
+- `--offchain <path>`: 새 메타데이터가 포함된 JSON 파일 경로
 
 ## 업데이트 방법
 
@@ -28,7 +28,7 @@ mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.c
 
 ### 2. JSON 파일로 업데이트
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json
+mplx core asset update <assetId> --offchain ./asset/metadata.json
 ```
 
 ### 3. 이미지로 업데이트
@@ -38,7 +38,7 @@ mplx core asset update <assetId> --image ./asset/image.jpg
 
 ### 4. JSON과 이미지로 업데이트
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
+mplx core asset update <assetId> --offchain ./asset/metadata.json --image ./asset/image.jpg
 ```
 
 ## 예시
@@ -55,7 +55,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./im
 
 ### 새 메타데이터로 자산 업데이트
 ```bash
-mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
+mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --offchain ./metadata/new-metadata.json
 ```
 
 ## 출력
@@ -72,9 +72,9 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 
 ## 참고사항
 
-- 최소한 하나의 업데이트 플래그를 제공해야 합니다: `--name`, `--uri`, `--image`, `--json` 또는 `--edit`
-- `--name` 및 `--uri` 플래그는 `--json` 또는 `--edit`와 함께 사용할 수 없습니다
-- `--json`을 사용할 때 메타데이터 파일은 유효한 `name` 필드를 포함해야 합니다
+- 최소한 하나의 업데이트 플래그를 제공해야 합니다: `--name`, `--uri`, `--image`, `--offchain` 또는 `--edit`
+- `--name` 및 `--uri` 플래그는 `--offchain` 또는 `--edit`와 함께 사용할 수 없습니다
+- `--offchain`을 사용할 때 메타데이터 파일은 유효한 `name` 필드를 포함해야 합니다
 - `--image` 플래그는 메타데이터의 이미지 URI와 이미지 파일 참조를 모두 업데이트합니다
 - 명령어는 다음을 자동으로 처리합니다:
   - 적절한 스토리지에 파일 업로드

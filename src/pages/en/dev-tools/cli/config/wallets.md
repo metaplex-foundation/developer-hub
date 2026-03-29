@@ -6,6 +6,10 @@ description: Manage wallet configurations
 
 Manage wallet configurations in your CLI. You can add, list, remove, and set active wallets for different purposes.
 
+{% callout type="note" %}
+You can also use an [MPL Core Asset's PDA as a wallet](/dev-tools/cli/config/asset-signer-wallets). Register one with `mplx config wallets add <name> --asset <assetId>` and all commands will automatically operate through the PDA.
+{% /callout %}
+
 ## Basic Usage
 
 ```bash
@@ -164,5 +168,6 @@ Wallets are stored in your configuration file at `~/.mplx/config.json`:
 
 ## Related Commands
 
+- [Asset-Signer Wallets](/dev-tools/cli/config/asset-signer-wallets) - Use an MPL Core Asset's PDA as your active wallet
 - [RPCs](/dev-tools/cli/config/rpcs) - Manage RPC endpoints
 - [Explorer](/dev-tools/cli/config/explorer) - Set preferred blockchain explorer

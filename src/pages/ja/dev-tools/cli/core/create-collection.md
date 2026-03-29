@@ -19,7 +19,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 画像ファイルとJSONメタデータファイルを提供して単一のコレクションを作成します。コマンドは両方のファイルのアップロードとコレクションの作成を処理します。
 
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ### 3. インタラクティブウィザード
@@ -38,7 +38,7 @@ mplx core collection create --wizard
 ### ファイルベースオプション
 - `--files`: ファイルベースの作成を示すフラグ
 - `--image <path>`: アップロードしてコレクションに割り当てる画像ファイルへのパス
-- `--json <path>`: JSONメタデータファイルへのパス
+- `--offchain <path>`: JSONメタデータファイルへのパス
 
 ### プラグインオプション
 - `--plugins`: インタラクティブなプラグイン選択を使用
@@ -58,7 +58,7 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 
 3. ファイルからコレクションを作成：
 ```bash
-mplx core collection create --files --image "./my-collection.png" --json "./metadata.json"
+mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
 ## 出力
@@ -75,7 +75,7 @@ mplx core collection create --files --image "./my-collection.png" --json "./meta
 
 ## 注意事項
 
-- ファイルベースの作成方法を使用する場合、`--image`と`--json`フラグの両方が必要です
+- ファイルベースの作成方法を使用する場合、`--image`と`--offchain`フラグの両方が必要です
 - ウィザード方法は、ファイルのアップロードとメタデータの作成を含むガイド付きのコレクション作成体験を提供します
 - プラグイン設定は、インタラクティブまたはJSONファイル経由で行えます
 - JSONメタデータファイルには、コレクションの`name`フィールドが含まれている必要があります

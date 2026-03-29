@@ -28,23 +28,18 @@ const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 
 /**
  * Get the base URL for the current environment
- * Uses Vercel's automatic URL for preview deployments
+ * Uses localhost/Vercel preview URLs for testing, SITE_URL for production
  */
 function getBaseUrl() {
-  // For local development
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:3000/docs'
   }
-  // Requires "Automatically expose System Environment Variables" enabled in Vercel settings
-  // For production on Vercel - use the project's production URL
   if (process.env.VERCEL_ENV === 'production') {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/docs`
+    return SITE_URL
   }
-  // For preview deployments on Vercel - use preview URL for testing
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}/docs`
   }
-  // Fallback to hardcoded production URL
   return SITE_URL
 }
 

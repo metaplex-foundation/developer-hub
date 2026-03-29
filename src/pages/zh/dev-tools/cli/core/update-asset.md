@@ -17,7 +17,7 @@ mplx core asset update <assetId> [options]
 - `--name <string>`: 资产的新名称
 - `--uri <string>`: 资产元数据的新 URI
 - `--image <path>`: 新图片文件的路径
-- `--json <path>`: 包含新元数据的 JSON 文件路径
+- `--offchain <path>`: 包含新元数据的 JSON 文件路径
 
 ## 更新方法
 
@@ -28,7 +28,7 @@ mplx core asset update <assetId> --name "Updated Asset" --uri "https://example.c
 
 ### 2. 使用 JSON 文件更新
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json
+mplx core asset update <assetId> --offchain ./asset/metadata.json
 ```
 
 ### 3. 使用图片更新
@@ -38,7 +38,7 @@ mplx core asset update <assetId> --image ./asset/image.jpg
 
 ### 4. 使用 JSON 和图片更新
 ```bash
-mplx core asset update <assetId> --json ./asset/metadata.json --image ./asset/image.jpg
+mplx core asset update <assetId> --offchain ./asset/metadata.json --image ./asset/image.jpg
 ```
 
 ## 示例
@@ -55,7 +55,7 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --image ./im
 
 ### 使用新元数据更新资产
 ```bash
-mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./metadata/new-metadata.json
+mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --offchain ./metadata/new-metadata.json
 ```
 
 ## 输出
@@ -72,9 +72,9 @@ mplx core asset update 5avjMVza8SuMhgTfzEGNWJskDELMCQk9juAAc8zeQoNa --json ./met
 
 ## 注意事项
 
-- 您必须至少提供一个更新标志：`--name`、`--uri`、`--image`、`--json` 或 `--edit`
-- `--name` 和 `--uri` 标志不能与 `--json` 或 `--edit` 一起使用
-- 使用 `--json` 时，元数据文件必须包含有效的 `name` 字段
+- 您必须至少提供一个更新标志：`--name`、`--uri`、`--image`、`--offchain` 或 `--edit`
+- `--name` 和 `--uri` 标志不能与 `--offchain` 或 `--edit` 一起使用
+- 使用 `--offchain` 时，元数据文件必须包含有效的 `name` 字段
 - `--image` 标志将同时更新元数据中的图片 URI 和图片文件引用
 - 命令将自动处理：
   - 文件上传到适当的存储

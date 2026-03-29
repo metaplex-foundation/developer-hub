@@ -19,7 +19,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 Create a single Asset by providing an image file and a JSON metadata file. The command will handle uploading both files and creating the asset.
 
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 ### 3. Interactive Wizard
@@ -39,7 +39,7 @@ mplx core asset create --wizard
 ### File-based Options
 - `--files`: Flag to indicate file-based creation
 - `--image <path>`: Path to image file to upload and assign to Asset
-- `--json <path>`: Path to JSON metadata file
+- `--offchain <path>`: Path to offchain JSON metadata file to upload
 
 ### Plugin Options
 - `--plugins`: Use interactive plugin selection
@@ -59,7 +59,7 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 3. Create an asset from files:
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
 4. Create an asset with a collection:
@@ -69,8 +69,18 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 5. Create an asset with files and a collection:
 ```bash
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json" --collection "collection_id_here"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
 ```
+
+## JSON Output
+
+Pass `--json` to get structured machine-readable output instead of formatted text:
+
+```bash
+mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json" --json
+```
+
+Returns: `{ asset, signature, explorer, coreExplorer }`
 
 ## Output
 

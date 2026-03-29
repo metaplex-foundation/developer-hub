@@ -129,14 +129,14 @@ export const agentMenuCategory = [
   },
   {
     name: 'Register an Agent',
-    headline: 'Register an agent on the Solana agent registry.',
-    description: 'Register an autonomous agent on the Solana agent registry using Metaplex SDKs.',
+    headline: 'Register an agent on the Metaplex 014 agent registry.',
+    description: 'Register an autonomous agent on the Metaplex 014 agent registry using Metaplex SDKs.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/register-agent',
     localizedNavigation: {
-      ja: { name: 'エージェントを登録', headline: 'Solanaエージェントレジストリにエージェントを登録します。' },
-      ko: { name: '에이전트 등록', headline: 'Solana 에이전트 레지스트리에 에이전트를 등록합니다.' },
-      zh: { name: '注册代理', headline: '在Solana代理注册表上注册代理。' },
+      ja: { name: 'エージェントを登録', headline: 'Metaplex 014エージェントレジストリにエージェントを登録します。' },
+      ko: { name: '에이전트 등록', headline: 'Metaplex 014 에이전트 레지스트리에 에이전트를 등록합니다.' },
+      zh: { name: '注册代理', headline: '在Metaplex 014代理注册表上注册代理。' },
     },
   },
   {
