@@ -19,6 +19,20 @@ umi.use(keypairIdentity(keypair))
 // [/SETUP]
 
 // [MAIN]
+const input = {
+  wallet: umi.identity.publicKey,
+  name: 'My Agent',
+  uri: 'https://example.com/metadata.json',
+  agentMetadata: {
+    type: 'agent',
+    name: 'My Agent',
+    description: 'An autonomous agent',
+    services: [],
+    registrations: [],
+    supportedTrust: [],
+  },
+}
+
 try {
   const result = await mintAgent(umi, {}, input)
 } catch (err) {

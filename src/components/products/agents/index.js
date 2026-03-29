@@ -1,5 +1,6 @@
 import { documentationSection } from '@/shared/sections'
 import { SparklesIcon } from '@heroicons/react/24/solid'
+import { buildProductTranslations } from '@/config/navigation-translations'
 
 export const agents = {
   name: 'Agents',
@@ -59,4 +60,57 @@ export const agents = {
       ],
     },
   ],
+  localizedNavigation: buildProductTranslations({
+    headlineTranslations: {
+      ja: 'Solana上のAIエージェント',
+      ko: 'Solana의 AI 에이전트',
+      zh: 'Solana 上的 AI Agent',
+    },
+    descriptionTranslations: {
+      ja: 'エージェントのアイデンティティを登録し、実行を委任し、AIエージェントにMetaplexプログラムの知識を提供します。',
+      ko: '에이전트 신원을 등록하고, 실행을 위임하며, AI 에이전트에 Metaplex 프로그램에 대한 지식을 부여합니다.',
+      zh: '注册 Agent 身份、委托执行，并为 AI Agent 提供 Metaplex 程序的知识。',
+    },
+    sectionKeys: {
+      'Introduction': 'sections.introduction',
+      'Getting Started': {
+        ja: 'はじめに',
+        ko: '시작하기',
+        zh: '快速入门',
+      },
+    },
+    linkKeys: {
+      'Overview': 'links.overview',
+      'What Is an Agent?': {
+        ja: 'エージェントとは？',
+        ko: '에이전트란?',
+        zh: '什么是 Agent？',
+      },
+      'Skill': {
+        ja: 'Skill',
+        ko: 'Skill',
+        zh: 'Skill',
+      },
+      'Mint an Agent': {
+        ja: 'エージェントのミント',
+        ko: '에이전트 민팅',
+        zh: '铸造 Agent',
+      },
+      'Register an Agent': {
+        ja: 'エージェントの登録',
+        ko: '에이전트 등록',
+        zh: '注册 Agent',
+      },
+      'Read Agent Data': {
+        ja: 'エージェントデータの読み取り',
+        ko: '에이전트 데이터 읽기',
+        zh: '读取 Agent 数据',
+      },
+      'Run an Agent': {
+        ja: 'エージェントの実行',
+        ko: '에이전트 실행',
+        zh: '运行 Agent',
+      },
+    },
+  }),
 }

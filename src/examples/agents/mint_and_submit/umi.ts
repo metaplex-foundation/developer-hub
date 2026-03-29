@@ -1,8 +1,7 @@
 // [IMPORTS]
-import { mintAndSubmitAgent } from '@metaplex-foundation/mpl-agent-registry'
+import { mintAndSubmitAgent, mplAgentIdentity } from '@metaplex-foundation/mpl-agent-registry'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { keypairIdentity } from '@metaplex-foundation/umi'
-import { mplAgentIdentity } from '@metaplex-foundation/mpl-agent-registry'
 // [/IMPORTS]
 
 // [SETUP]
