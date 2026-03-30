@@ -792,7 +792,7 @@ Guards protect the minting process, but all Candy Machine data is publicly visib
 
 ### What is the difference between hidden settings and config lines for anti-bot protection?
 
-[Hidden settings](/smart-contracts/core-candy-machine/settings) mint assets sequentially (index 0, 1, 2, ...) making mint order predictable. [Config lines](/smart-contracts/core-candy-machine/managing-items) allow you to load placeholder metadata with pre-randomized ordering, providing an additional layer of unpredictability on top of the post-mint reveal mapping.
+[Hidden settings](/smart-contracts/core-candy-machine/create#hidden-settings-field) mint assets sequentially (index 0, 1, 2, ...) making mint order predictable. [Config lines](/smart-contracts/core-candy-machine/insert-items) allow you to load placeholder metadata with pre-randomized ordering, providing an additional layer of unpredictability on top of the post-mint reveal mapping.
 
 ### Can bots bypass the third-party signer guard by reverse-engineering my backend?
 
