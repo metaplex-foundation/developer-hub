@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 通过将身份记录绑定到 MPL Core 资产，在 Metaplex 014 代理注册表上注册代理。{% .lead %}
@@ -200,11 +200,27 @@ await registerIdentityV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
+## 链接 Genesis 代币
+
+注册身份后，您可以选择使用 `setAgentTokenV1` 将 [Genesis](/smart-contracts/genesis) 代币链接到代理。这会将代币发行与代理的链上身份关联。Genesis 账户必须使用 `Mint` 资金模式。
+
+```typescript
+import { setAgentTokenV1 } from '@metaplex-foundation/mpl-agent-registry';
+
+await setAgentTokenV1(umi, {
+  asset: asset.publicKey,
+  genesisAccount: genesisAccountPublicKey,
+}).sendAndConfirm(umi);
+```
+
+{% callout type="note" %}
+每个身份只能设置一次代理代币。此指令的 `authority` 必须是资产的 [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA。完整的账户详情请参阅 [Agent Identity](/smart-contracts/mpl-agent/identity#instruction-setagenttokenv1) 参考。
+{% /callout %}
+
 ## 注意事项
 
 - 注册是每个资产一次性的操作。对已注册的资产调用 `registerIdentityV1` 将失败。
 - `agentRegistrationUri` 应指向永久托管的 JSON（例如 Arweave）。如果 URI 变得不可访问，链上身份仍然存在，但客户端将无法获取代理的元数据。
 - `collection` 参数是可选的但建议使用——它在注册时启用集合级别的权限检查。
 - Transfer、Update 和 Execute 的生命周期钩子会自动附加。这些钩子允许身份插件参与批准或拒绝对资产的操作。
-
-*由 Metaplex 维护 · 2026 年 3 月验证 · [在 GitHub 上查看源码](https://github.com/metaplex-foundation/mpl-agent)*
+- 通过 `setAgentTokenV1` 链接 Genesis 代币是可选的，可以在注册后随时进行。

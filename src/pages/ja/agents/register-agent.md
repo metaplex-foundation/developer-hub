@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 MPL CoreアセットにIDレコードを紐付けて、Metaplex 014エージェントレジストリにエージェントを登録します。{% .lead %}
@@ -200,11 +200,27 @@ await registerIdentityV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
+## Genesisトークンをリンク
+
+IDを登録した後、オプションで`setAgentTokenV1`を使用して[Genesis](/smart-contracts/genesis)トークンをエージェントにリンクできます。これにより、トークンローンチがエージェントのオンチェーンIDに関連付けられます。Genesisアカウントは`Mint`ファンディングモードを使用する必要があります。
+
+```typescript
+import { setAgentTokenV1 } from '@metaplex-foundation/mpl-agent-registry';
+
+await setAgentTokenV1(umi, {
+  asset: asset.publicKey,
+  genesisAccount: genesisAccountPublicKey,
+}).sendAndConfirm(umi);
+```
+
+{% callout type="note" %}
+エージェントトークンはIDごとに1回のみ設定できます。この命令の`authority`はアセットの[Asset Signer](/smart-contracts/core/execute-asset-signing) PDAである必要があります。完全なアカウント詳細については、[Agent Identity](/smart-contracts/mpl-agent/identity#instruction-setagenttokenv1)リファレンスをご覧ください。
+{% /callout %}
+
 ## 注意事項
 
 - 登録はアセットごとに1回限りの操作です。すでに登録済みのアセットに対して`registerIdentityV1`を呼び出すと失敗します。
 - `agentRegistrationUri`は永続的にホストされたJSON（例：Arweave）を指す必要があります。URIにアクセスできなくなっても、オンチェーンIDは存在し続けますが、クライアントはエージェントのメタデータを取得できなくなります。
 - `collection`パラメータはオプションですが推奨されます。登録時のコレクションレベルの権限チェックを有効にします。
 - Transfer、Update、Executeのライフサイクルフックは自動的にアタッチされます。これらのフックにより、IDプラグインがアセットに対する操作の承認または拒否に参加できます。
-
-*Metaplexが管理 · 2026年3月検証済み · [GitHubでソースを見る](https://github.com/metaplex-foundation/mpl-agent)*
+- `setAgentTokenV1`によるGenesisトークンのリンクはオプションであり、登録後いつでも行えます。

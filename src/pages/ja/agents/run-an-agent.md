@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 エグゼクティブプロファイルを設定し、実行を委任してSolana上でエージェントを実行します。{% .lead %}
@@ -37,7 +37,8 @@ updated: '03-12-2026'
 2. [エグゼクティブプロファイルを登録](#エグゼクティブプロファイルを登録) — ウォレットごとに1回のセットアップ
 3. [実行を委任](#実行を委任) — エージェントをエグゼクティブにリンク
 4. [委任を確認](#委任を確認) — 委任レコードの存在を確認
-5. [完全な例](#完全な例) — エンドツーエンドのコードサンプル
+5. [委任を取り消し](#委任を取り消し) — エグゼクティブの権限を削除
+6. [完全な例](#完全な例) — エンドツーエンドのコードサンプル
 
 ## 委任が必要な理由
 
@@ -145,6 +146,41 @@ const account = await umi.rpc.getAccount(delegateRecord);
 console.log('Delegated:', account.exists);
 ```
 
+## 委任を取り消し
+
+`revokeExecutionV1`命令は、委任レコードアカウントを閉じることでエグゼクティブの権限を削除します。閉じられたアカウントのレントは指定された宛先に返金されます。
+
+**アセットオーナー**または**エグゼクティブ権限者**のいずれかが委任を取り消すことができます：
+
+```typescript
+import { revokeExecutionV1, findExecutionDelegateRecordV1Pda, findExecutiveProfileV1Pda } from '@metaplex-foundation/mpl-agent-registry';
+
+const executiveProfile = findExecutiveProfileV1Pda(umi, {
+  authority: executiveAuthorityPublicKey,
+});
+
+const delegateRecord = findExecutionDelegateRecordV1Pda(umi, {
+  executiveProfile,
+  agentAsset: agentAssetPublicKey,
+});
+
+await revokeExecutionV1(umi, {
+  executionDelegateRecord: delegateRecord,
+  agentAsset: agentAssetPublicKey,
+  destination: umi.payer.publicKey,
+}).sendAndConfirm(umi);
+```
+
+### RevokeExecutionV1 パラメータ
+
+| パラメータ | 説明 |
+|-----------|-------------|
+| `executionDelegateRecord` | 閉じる委任レコードPDA |
+| `agentAsset` | エージェントのMPL Coreアセット |
+| `destination` | 閉じられたアカウントから返金されるレントの受取先 |
+| `payer` | 支払者（デフォルトは`umi.payer`） |
+| `authority` | アセットオーナーまたはエグゼクティブ権限者である必要がある（デフォルトは`payer`） |
+
 ## 完全な例
 
 ```typescript
@@ -209,8 +245,7 @@ await delegateExecutionV1(umi, {
 - 各ウォレットは1つのエグゼクティブプロファイルしか持てません。PDAは`["executive_profile", <authority>]`から派生されるため、同じウォレットで`registerExecutiveV1`を再度呼び出すと失敗します。
 - 委任はアセットごとです。オーナーはエグゼクティブに操作させたい各エージェントに対して個別の委任レコードを作成する必要があります。
 - アセットオーナーのみが実行を委任できます。プログラムはオンチェーンで所有権を検証します。
-- オーナーは異なるエグゼクティブプロファイルで新しい委任レコードを作成することでエグゼクティブを切り替えられます。
+- アセットオーナーまたはエグゼクティブ権限者のいずれかが委任を取り消すことができます — 双方にこの権利があります。
+- オーナーは現在の委任を取り消し、異なるエグゼクティブプロファイルで新しい委任を作成することでエグゼクティブを切り替えられます。
 
 アカウントレイアウト、PDA派生の詳細、エラーコードについては、[Agent Tools](/smart-contracts/mpl-agent/tools)スマートコントラクトリファレンスをご覧ください。
-
-*Metaplexが管理 · 2026年3月検証済み · [GitHubでソースを見る](https://github.com/metaplex-foundation/mpl-agent)*

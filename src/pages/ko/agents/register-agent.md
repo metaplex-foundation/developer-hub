@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 MPL Core 자산에 신원 기록을 바인딩하여 Metaplex 014 에이전트 레지스트리에 에이전트를 등록합니다. {% .lead %}
@@ -200,11 +200,27 @@ await registerIdentityV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
+## Genesis 토큰 링크
+
+신원을 등록한 후 선택적으로 `setAgentTokenV1`을 사용하여 [Genesis](/smart-contracts/genesis) 토큰을 에이전트에 링크할 수 있습니다. 이를 통해 토큰 출시가 에이전트의 온체인 신원에 연결됩니다. Genesis 계정은 `Mint` 펀딩 모드를 사용해야 합니다.
+
+```typescript
+import { setAgentTokenV1 } from '@metaplex-foundation/mpl-agent-registry';
+
+await setAgentTokenV1(umi, {
+  asset: asset.publicKey,
+  genesisAccount: genesisAccountPublicKey,
+}).sendAndConfirm(umi);
+```
+
+{% callout type="note" %}
+에이전트 토큰은 신원당 한 번만 설정할 수 있습니다. 이 명령의 `authority`는 자산의 [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA여야 합니다. 전체 계정 세부사항은 [Agent Identity](/smart-contracts/mpl-agent/identity#instruction-setagenttokenv1) 레퍼런스를 참조하세요.
+{% /callout %}
+
 ## 참고사항
 
 - 등록은 자산당 1회 작업입니다. 이미 등록된 자산에 대해 `registerIdentityV1`을 호출하면 실패합니다.
 - `agentRegistrationUri`는 영구적으로 호스팅된 JSON(예: Arweave)을 가리켜야 합니다. URI에 접근할 수 없게 되더라도 온체인 신원은 여전히 존재하지만 클라이언트는 에이전트의 메타데이터를 가져올 수 없습니다.
 - `collection` 매개변수는 선택사항이지만 권장됩니다 — 등록 시 컬렉션 수준 권한 검사를 활성화합니다.
 - Transfer, Update, Execute 라이프사이클 훅은 자동으로 첨부됩니다. 이러한 훅을 통해 신원 플러그인이 자산에 대한 작업의 승인 또는 거부에 참여할 수 있습니다.
-
-*Metaplex 관리 · 2026년 3월 검증 완료 · [GitHub에서 소스 보기](https://github.com/metaplex-foundation/mpl-agent)*
+- `setAgentTokenV1`을 통한 Genesis 토큰 링크는 선택사항이며 등록 후 언제든지 수행할 수 있습니다.

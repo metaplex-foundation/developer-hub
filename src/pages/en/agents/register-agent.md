@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 Register an agent on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset. {% .lead %}
@@ -200,11 +200,27 @@ await registerIdentityV1(umi, {
 }).sendAndConfirm(umi);
 ```
 
+## Link a Genesis Token
+
+After registering an identity, you can optionally link a [Genesis](/smart-contracts/genesis) token to the agent using `setAgentTokenV1`. This associates a token launch with the agent's on-chain identity. The Genesis account must use the `Mint` funding mode.
+
+```typescript
+import { setAgentTokenV1 } from '@metaplex-foundation/mpl-agent-registry';
+
+await setAgentTokenV1(umi, {
+  asset: asset.publicKey,
+  genesisAccount: genesisAccountPublicKey,
+}).sendAndConfirm(umi);
+```
+
+{% callout type="note" %}
+The agent token can only be set once per identity. The `authority` for this instruction must be the asset's [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA. See the [Agent Identity](/smart-contracts/mpl-agent/identity#instruction-setagenttokenv1) reference for full account details.
+{% /callout %}
+
 ## Notes
 
 - Registration is a one-time operation per asset. Calling `registerIdentityV1` on an already-registered asset will fail.
 - The `agentRegistrationUri` should point to permanently hosted JSON (e.g. Arweave). If the URI becomes unreachable, the on-chain identity still exists but clients won't be able to fetch the agent's metadata.
 - The `collection` parameter is optional but recommended — it enables collection-level authority checks during registration.
 - Lifecycle hooks for Transfer, Update, and Execute are automatically attached. These hooks allow the identity plugin to participate in approving or rejecting operations on the asset.
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
+- Linking a Genesis token via `setAgentTokenV1` is optional and can be done at any time after registration.

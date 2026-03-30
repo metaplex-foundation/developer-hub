@@ -153,5 +153,3 @@ console.log('Balance:', balance.basisPoints.toString(), 'lamports');
 - Asset SignerはPDAです。秘密鍵は存在しません。任意のソースから資金を受け取れますが、発信トランザクションに署名できるのはCoreの[Execute](/smart-contracts/core/execute-asset-signing)命令を通じたアセット自身のみです。
 - `safeFetchAgentIdentityV1`は未登録アセットに対してスローする代わりに`null`を返すため、try/catchなしでの存在チェックに安全です。
 - `findAssetSignerPda`はウォレットアドレスを決定論的に派生します。ネットワークに関係なく同じアドレスが返されるため、同じアセットキーでdevnetとmainnetの両方で使用できます。
-
-*Metaplexが管理 · 2026年3月検証済み · [GitHubでソースを見る](https://github.com/metaplex-foundation/mpl-agent)*

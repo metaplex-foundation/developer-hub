@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 设置执行者配置文件并委托执行，以在 Solana 上运行代理。{% .lead %}
@@ -37,7 +37,8 @@ updated: '03-12-2026'
 2. [注册执行者配置文件](#注册执行者配置文件) — 每个钱包一次性设置
 3. [委托执行](#委托执行) — 将代理链接到执行者
 4. [验证委托](#验证委托) — 确认委托记录存在
-5. [完整示例](#完整示例) — 端到端代码示例
+5. [撤销委托](#撤销委托) — 移除执行者的权限
+6. [完整示例](#完整示例) — 端到端代码示例
 
 ## 为什么需要委托
 
@@ -145,6 +146,41 @@ const account = await umi.rpc.getAccount(delegateRecord);
 console.log('Delegated:', account.exists);
 ```
 
+## 撤销委托
+
+`revokeExecutionV1` 指令通过关闭委托记录账户来移除执行者的权限。关闭账户的租金将退还到指定的目标地址。
+
+**资产所有者**或**执行者权限方**都可以撤销委托：
+
+```typescript
+import { revokeExecutionV1, findExecutionDelegateRecordV1Pda, findExecutiveProfileV1Pda } from '@metaplex-foundation/mpl-agent-registry';
+
+const executiveProfile = findExecutiveProfileV1Pda(umi, {
+  authority: executiveAuthorityPublicKey,
+});
+
+const delegateRecord = findExecutionDelegateRecordV1Pda(umi, {
+  executiveProfile,
+  agentAsset: agentAssetPublicKey,
+});
+
+await revokeExecutionV1(umi, {
+  executionDelegateRecord: delegateRecord,
+  agentAsset: agentAssetPublicKey,
+  destination: umi.payer.publicKey,
+}).sendAndConfirm(umi);
+```
+
+### RevokeExecutionV1 参数
+
+| 参数 | 说明 |
+|-----------|-------------|
+| `executionDelegateRecord` | 要关闭的委托记录 PDA |
+| `agentAsset` | 代理的 MPL Core 资产 |
+| `destination` | 接收关闭账户退还租金的地址 |
+| `payer` | 支付者（默认为 `umi.payer`） |
+| `authority` | 必须是资产所有者或执行者权限方（默认为 `payer`） |
+
 ## 完整示例
 
 ```typescript
@@ -209,8 +245,7 @@ await delegateExecutionV1(umi, {
 - 每个钱包只能有一个执行者配置文件。PDA 从 `["executive_profile", <authority>]` 派生，因此使用同一钱包再次调用 `registerExecutiveV1` 将失败。
 - 委托是按资产进行的——所有者必须为每个要让执行者运营的代理创建单独的委托记录。
 - 只有资产所有者可以委托执行。程序在链上验证所有权。
-- 所有者可以通过使用不同的执行者配置文件创建新的委托记录来切换执行者。
+- 资产所有者或执行者权限方都可以撤销委托——双方都拥有此权利。
+- 所有者可以通过撤销当前委托并使用不同的执行者配置文件创建新委托来切换执行者。
 
 有关账户布局、PDA 派生详情和错误代码，请参阅 [Agent Tools](/smart-contracts/mpl-agent/tools) 智能合约参考。
-
-*由 Metaplex 维护 · 2026 年 3 月验证 · [在 GitHub 上查看源码](https://github.com/metaplex-foundation/mpl-agent)*

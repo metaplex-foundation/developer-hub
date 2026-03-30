@@ -1,7 +1,7 @@
 ---
-title: Getting Started
-metaTitle: Getting Started with MPL Agent Registry | Metaplex
-description: Install the MPL Agent Registry SDK and register your first agent identity on Solana.
+title: 시작하기
+metaTitle: MPL Agent Registry 시작하기 | Metaplex
+description: MPL Agent Registry SDK를 설치하고 Solana에서 첫 번째 에이전트 신원을 등록합니다.
 keywords:
   - MPL Agent Registry
   - getting started
@@ -17,27 +17,27 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
-Install the SDK and register your first agent identity. {% .lead %}
+SDK를 설치하고 첫 번째 에이전트 신원을 등록합니다. {% .lead %}
 
-## Summary
+## 요약
 
-Install the `@metaplex-foundation/mpl-agent-registry` package, configure Umi with the identity and tools plugins, and register your first agent identity on an MPL Core asset.
+`@metaplex-foundation/mpl-agent-registry` 패키지를 설치하고, Umi를 identity 및 tools 플러그인으로 구성한 다음, MPL Core 자산에 첫 번째 에이전트 신원을 등록합니다.
 
-- **Install** the SDK via npm and configure Umi with `mplAgentIdentity()` and `mplAgentTools()`
-- **Create** an MPL Core collection and asset if you don't already have one
-- **Register** an identity with `registerIdentityV1` and verify the attached `AgentIdentity` plugin
-- **Requires** `@metaplex-foundation/umi-bundle-defaults` and `@metaplex-foundation/mpl-core`
+- SDK를 npm으로 **설치**하고 Umi를 `mplAgentIdentity()` 및 `mplAgentTools()`로 구성합니다
+- 아직 없다면 MPL Core 컬렉션과 자산을 **생성**합니다
+- `registerIdentityV1`로 신원을 **등록**하고 첨부된 `AgentIdentity` 플러그인을 확인합니다
+- `@metaplex-foundation/umi-bundle-defaults` 및 `@metaplex-foundation/mpl-core`가 **필요**합니다
 
-## Installation
+## 설치
 
 ```shell
 npm install @metaplex-foundation/mpl-agent-registry
 ```
 
-## Setup
+## 설정
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -50,9 +50,9 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplAgentTools());
 ```
 
-## Register an Identity
+## 신원 등록
 
-You need an MPL Core asset. If you don't have one, create it first:
+MPL Core 자산이 필요합니다. 아직 없다면 먼저 생성하세요:
 
 ```typescript
 import { generateSigner } from '@metaplex-foundation/umi';
@@ -93,9 +93,9 @@ const identity = await fetchAgentIdentityV1(umi, pda);
 console.log(identity.asset); // matches asset.publicKey
 ```
 
-## Verify the AgentIdentity Plugin
+## AgentIdentity 플러그인 확인
 
-After registration, the asset will have an `AgentIdentity` plugin with the URI and lifecycle checks:
+등록 후 자산에는 URI와 라이프사이클 검사가 포함된 `AgentIdentity` 플러그인이 첨부됩니다:
 
 ```typescript
 import { fetchAsset } from '@metaplex-foundation/mpl-core';
@@ -110,7 +110,7 @@ console.log(agentIdentity?.lifecycleChecks?.update);    // truthy
 console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 ```
 
-## Next Steps
+## 다음 단계
 
-- **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Full details on the identity program
-- **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
+- **[Agent Identity](/smart-contracts/mpl-agent/identity)** — 신원 프로그램에 대한 전체 세부사항
+- **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive 프로필 및 실행 위임

@@ -153,5 +153,3 @@ See the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs for
 - The Asset Signer is a PDA — no private key exists for it. It can receive funds from any source, but only the asset itself can sign outgoing transactions through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction.
 - `safeFetchAgentIdentityV1` returns `null` for unregistered assets rather than throwing, making it safe for existence checks without try/catch.
 - `findAssetSignerPda` derives the wallet address deterministically. The same address is returned regardless of network, so you can use it on devnet and mainnet with the same asset key.
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*

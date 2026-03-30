@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 이그제큐티브 프로필을 설정하고 실행을 위임하여 Solana에서 에이전트를 실행합니다. {% .lead %}
@@ -37,7 +37,8 @@ updated: '03-12-2026'
 2. [이그제큐티브 프로필 등록](#이그제큐티브-프로필-등록) — 지갑당 1회 설정
 3. [실행 위임](#실행-위임) — 에이전트를 이그제큐티브에 연결
 4. [위임 확인](#위임-확인) — 위임 레코드 존재 확인
-5. [전체 예제](#전체-예제) — 엔드투엔드 코드 샘플
+5. [위임 취소](#위임-취소) — 이그제큐티브의 권한 제거
+6. [전체 예제](#전체-예제) — 엔드투엔드 코드 샘플
 
 ## 위임이 필요한 이유
 
@@ -145,6 +146,41 @@ const account = await umi.rpc.getAccount(delegateRecord);
 console.log('Delegated:', account.exists);
 ```
 
+## 위임 취소
+
+`revokeExecutionV1` 명령은 위임 레코드 계정을 닫아 이그제큐티브의 권한을 제거합니다. 닫힌 계정의 렌트는 지정된 대상에 환불됩니다.
+
+**자산 소유자** 또는 **이그제큐티브 권한자** 모두 위임을 취소할 수 있습니다:
+
+```typescript
+import { revokeExecutionV1, findExecutionDelegateRecordV1Pda, findExecutiveProfileV1Pda } from '@metaplex-foundation/mpl-agent-registry';
+
+const executiveProfile = findExecutiveProfileV1Pda(umi, {
+  authority: executiveAuthorityPublicKey,
+});
+
+const delegateRecord = findExecutionDelegateRecordV1Pda(umi, {
+  executiveProfile,
+  agentAsset: agentAssetPublicKey,
+});
+
+await revokeExecutionV1(umi, {
+  executionDelegateRecord: delegateRecord,
+  agentAsset: agentAssetPublicKey,
+  destination: umi.payer.publicKey,
+}).sendAndConfirm(umi);
+```
+
+### RevokeExecutionV1 매개변수
+
+| 매개변수 | 설명 |
+|-----------|-------------|
+| `executionDelegateRecord` | 닫을 위임 레코드 PDA |
+| `agentAsset` | 에이전트의 MPL Core 자산 |
+| `destination` | 닫힌 계정에서 환불되는 렌트의 수신자 |
+| `payer` | 지불자 (기본값: `umi.payer`) |
+| `authority` | 자산 소유자 또는 이그제큐티브 권한자여야 함 (기본값: `payer`) |
+
 ## 전체 예제
 
 ```typescript
@@ -209,8 +245,7 @@ await delegateExecutionV1(umi, {
 - 각 지갑은 하나의 이그제큐티브 프로필만 가질 수 있습니다. PDA는 `["executive_profile", <authority>]`에서 파생되므로 같은 지갑으로 `registerExecutiveV1`을 다시 호출하면 실패합니다.
 - 위임은 자산별입니다 — 소유자는 이그제큐티브가 운영할 각 에이전트에 대해 별도의 위임 레코드를 생성해야 합니다.
 - 자산 소유자만 실행을 위임할 수 있습니다. 프로그램은 온체인에서 소유권을 검증합니다.
-- 소유자는 다른 이그제큐티브 프로필로 새 위임 레코드를 생성하여 이그제큐티브를 전환할 수 있습니다.
+- 자산 소유자 또는 이그제큐티브 권한자 모두 위임을 취소할 수 있습니다 — 양측 모두 이 권리를 가집니다.
+- 소유자는 현재 위임을 취소하고 다른 이그제큐티브 프로필로 새 위임을 생성하여 이그제큐티브를 전환할 수 있습니다.
 
 계정 레이아웃, PDA 파생 세부사항 및 오류 코드에 대해서는 [Agent Tools](/smart-contracts/mpl-agent/tools) 스마트 컨트랙트 레퍼런스를 참조하세요.
-
-*Metaplex 관리 · 2026년 3월 검증 완료 · [GitHub에서 소스 보기](https://github.com/metaplex-foundation/mpl-agent)*

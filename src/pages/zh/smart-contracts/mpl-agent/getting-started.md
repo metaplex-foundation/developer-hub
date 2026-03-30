@@ -1,7 +1,7 @@
 ---
-title: Getting Started
-metaTitle: Getting Started with MPL Agent Registry | Metaplex
-description: Install the MPL Agent Registry SDK and register your first agent identity on Solana.
+title: 入门指南
+metaTitle: MPL Agent Registry 入门指南 | Metaplex
+description: 安装 MPL Agent Registry SDK 并在 Solana 上注册您的第一个代理身份。
 keywords:
   - MPL Agent Registry
   - getting started
@@ -17,27 +17,27 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
-Install the SDK and register your first agent identity. {% .lead %}
+安装 SDK 并注册您的第一个代理身份。{% .lead %}
 
-## Summary
+## 概述
 
-Install the `@metaplex-foundation/mpl-agent-registry` package, configure Umi with the identity and tools plugins, and register your first agent identity on an MPL Core asset.
+安装 `@metaplex-foundation/mpl-agent-registry` 包，使用 identity 和 tools 插件配置 Umi，然后在 MPL Core 资产上注册您的第一个代理身份。
 
-- **Install** the SDK via npm and configure Umi with `mplAgentIdentity()` and `mplAgentTools()`
-- **Create** an MPL Core collection and asset if you don't already have one
-- **Register** an identity with `registerIdentityV1` and verify the attached `AgentIdentity` plugin
-- **Requires** `@metaplex-foundation/umi-bundle-defaults` and `@metaplex-foundation/mpl-core`
+- **安装** SDK（通过 npm）并使用 `mplAgentIdentity()` 和 `mplAgentTools()` 配置 Umi
+- **创建** MPL Core 集合和资产（如果还没有的话）
+- **注册** 身份（使用 `registerIdentityV1`）并验证附加的 `AgentIdentity` 插件
+- **需要** `@metaplex-foundation/umi-bundle-defaults` 和 `@metaplex-foundation/mpl-core`
 
-## Installation
+## 安装
 
 ```shell
 npm install @metaplex-foundation/mpl-agent-registry
 ```
 
-## Setup
+## 设置
 
 ```typescript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -50,9 +50,9 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
   .use(mplAgentTools());
 ```
 
-## Register an Identity
+## 注册身份
 
-You need an MPL Core asset. If you don't have one, create it first:
+您需要一个 MPL Core 资产。如果还没有，请先创建一个：
 
 ```typescript
 import { generateSigner } from '@metaplex-foundation/umi';
@@ -93,9 +93,9 @@ const identity = await fetchAgentIdentityV1(umi, pda);
 console.log(identity.asset); // matches asset.publicKey
 ```
 
-## Verify the AgentIdentity Plugin
+## 验证 AgentIdentity 插件
 
-After registration, the asset will have an `AgentIdentity` plugin with the URI and lifecycle checks:
+注册后，资产将拥有带有 URI 和生命周期检查的 `AgentIdentity` 插件：
 
 ```typescript
 import { fetchAsset } from '@metaplex-foundation/mpl-core';
@@ -110,7 +110,7 @@ console.log(agentIdentity?.lifecycleChecks?.update);    // truthy
 console.log(agentIdentity?.lifecycleChecks?.execute);   // truthy
 ```
 
-## Next Steps
+## 后续步骤
 
-- **[Agent Identity](/smart-contracts/mpl-agent/identity)** — Full details on the identity program
-- **[Agent Tools](/smart-contracts/mpl-agent/tools)** — Executive profiles and execution delegation
+- **[Agent Identity](/smart-contracts/mpl-agent/identity)** — 身份程序的完整详情
+- **[Agent Tools](/smart-contracts/mpl-agent/tools)** — 执行档案和执行委托

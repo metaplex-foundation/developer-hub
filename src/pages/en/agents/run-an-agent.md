@@ -17,7 +17,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '03-30-2026'
 ---
 
 Set up an executive profile and delegate execution to run an agent on Solana. {% .lead %}
@@ -37,7 +37,8 @@ Execution delegation allows an off-chain executive to sign transactions on behal
 2. [Register an Executive Profile](#register-an-executive-profile) — One-time setup per wallet
 3. [Delegate Execution](#delegate-execution) — Link agent to executive
 4. [Verify Delegation](#verify-delegation) — Confirm the delegation record exists
-5. [Full Example](#full-example) — End-to-end code sample
+5. [Revoke Delegation](#revoke-delegation) — Remove an executive's permission
+6. [Full Example](#full-example) — End-to-end code sample
 
 ## Why Delegation Is Needed
 
@@ -145,6 +146,41 @@ const account = await umi.rpc.getAccount(delegateRecord);
 console.log('Delegated:', account.exists);
 ```
 
+## Revoke Delegation
+
+The `revokeExecutionV1` instruction removes an executive's permission by closing the delegation record account. Rent from the closed account is refunded to the specified destination.
+
+Either the **asset owner** or the **executive authority** can revoke a delegation:
+
+```typescript
+import { revokeExecutionV1, findExecutionDelegateRecordV1Pda, findExecutiveProfileV1Pda } from '@metaplex-foundation/mpl-agent-registry';
+
+const executiveProfile = findExecutiveProfileV1Pda(umi, {
+  authority: executiveAuthorityPublicKey,
+});
+
+const delegateRecord = findExecutionDelegateRecordV1Pda(umi, {
+  executiveProfile,
+  agentAsset: agentAssetPublicKey,
+});
+
+await revokeExecutionV1(umi, {
+  executionDelegateRecord: delegateRecord,
+  agentAsset: agentAssetPublicKey,
+  destination: umi.payer.publicKey,
+}).sendAndConfirm(umi);
+```
+
+### RevokeExecutionV1 Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `executionDelegateRecord` | The delegation record PDA to close |
+| `agentAsset` | The agent's MPL Core asset |
+| `destination` | Receives the refunded rent from the closed account |
+| `payer` | The payer (defaults to `umi.payer`) |
+| `authority` | Must be the asset owner or executive authority (defaults to `payer`) |
+
 ## Full Example
 
 ```typescript
@@ -209,8 +245,7 @@ await delegateExecutionV1(umi, {
 - Each wallet can only have one executive profile. The PDA is derived from `["executive_profile", <authority>]`, so calling `registerExecutiveV1` again with the same wallet will fail.
 - Delegation is per-asset — an owner must create a separate delegation record for each agent they want the executive to operate.
 - Only the asset owner can delegate execution. The program validates ownership on-chain.
-- An owner can switch executives by creating a new delegation record with a different executive profile.
+- Either the asset owner or the executive authority can revoke a delegation — both parties have this right.
+- An owner can switch executives by revoking the current delegation and creating a new one with a different executive profile.
 
 See the [Agent Tools](/smart-contracts/mpl-agent/tools) smart contract reference for account layouts, PDA derivation details, and error codes.
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
