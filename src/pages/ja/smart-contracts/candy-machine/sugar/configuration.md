@@ -141,7 +141,7 @@ Sugarは様々なストレージプロバイダーをサポートしています
 |  |   | "bundlr" |  [Bundlr](https://bundlr.network)を使用してArweaveにアップロード、支払いはSOLで行われます（mainnetとdevnetの両方で動作；devnetではファイルは7日間のみ保存）
 |  |   | "aws" | Amazon Web Services（AWS）にアップロード |
 |  |   | "pinata" | [Pinata](https://www.pinata.cloud)にアップロード（すべてのネットワークで動作；無料および階層サブスクリプション） |
-|  |   | "sdrive" | [SDrive Cloud Storage](https://sdrive.app)を使用してShadow Driveにアップロード |
+|  |   | "sdrive" | SDrive Cloud Storageを使用してShadow Driveにアップロード |
 |awsConfig | | | *（"aws"が使用される場合に必須）* |
 | | bucket | String | AWSバケット名
 | | profile | String | 資格情報ファイル名から使用するAWSプロファイル |

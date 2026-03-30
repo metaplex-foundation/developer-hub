@@ -28,11 +28,11 @@ description: 审计和漏洞报告方法。
 
 ## 审计
 
-持续的自动和手动安全审计由我们的审计合作伙伴[Sec3](https://www.sec3.dev/)、[Accretion](https://www.accretion.fi/)和[OtterSec](https://osec.io)定期执行。
+持续的自动和手动安全审计由我们的审计合作伙伴[Sec3](https://www.sec3.dev/)、[Accretion](https://accretion.xyz)和[OtterSec](https://osec.io)定期执行。
 
 自动审计在每个PR上运行，安全问题必须在合并到主分支之前解决。对于超过特定阈值的更改，会启动持续的手动审计，安全问题必须在合并到主分支之前解决。
 
-[OShield](https://www.oshield.xyz)（原MadShield）负责我们许多历史审计。
+OShield（原MadShield）负责我们许多历史审计。
 
 如下所述，当代码或功能有重大变化时，也会执行大规模的一次性审计。
 

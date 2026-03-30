@@ -30,7 +30,7 @@ howToTools:
   - Arweave
 ---
 
-MPL-Hybridプログラムでメタデータのランダム化機能を利用するには、オフチェーンメタデータのURIが一貫性があり、段階的な構造に従う必要があります。これを達成するために、ArweaveとTurbo SDKの[パスマニフェスト](https://cookbook.arweave.dev/concepts/manifests.html)機能を使用します。**このガイドでは、その設定方法をデモンストレーションします！**
+MPL-Hybridプログラムでメタデータのランダム化機能を利用するには、オフチェーンメタデータのURIが一貫性があり、段階的な構造に従う必要があります。これを達成するために、ArweaveとTurbo SDKの[パスマニフェスト](https://cookbook.arweave.net/concepts/manifests.html)機能を使用します。**このガイドでは、その設定方法をデモンストレーションします！**
 
 {% callout title="Turboとは" %}
 

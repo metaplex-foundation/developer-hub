@@ -51,5 +51,4 @@ Metaplex also offers a free, open-source UI for creating, transferring and viewi
 ## Other
 | Project                        | Status   |
 | ------------------------------ | -------- |
-| [dReader](https://dreader.io/) | Complete |
 | [Matrica](https://matrica.io/) | Complete |

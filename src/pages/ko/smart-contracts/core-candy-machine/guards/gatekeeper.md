@@ -34,7 +34,7 @@ Core Candy Machine 측면에서는 설정할 것이 많지 않지만, 선택한 
 
 다음은 Gatekeep Network 설정 시 도움이 될 수 있는 추가 권장 자료입니다.
 
-- [The CIVIC Documentation](https://docs.civic.com/civic-pass/overview)
+- [The CIVIC Documentation](https://docs.civic.com)
 - [Gateway JS Library](https://www.npmjs.com/package/@identity.com/solana-gateway-ts)
 - [Gateway React Components](https://www.npmjs.com/package/@civic/solana-gateway-react)
 

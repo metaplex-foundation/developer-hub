@@ -34,7 +34,7 @@ Core Candy Machine 端没有太多需要设置的内容，但根据选择的 Gat
 
 以下是设置 Gatekeeper 网络时可能有帮助的一些额外推荐材料。
 
-- [CIVIC 文档](https://docs.civic.com/civic-pass/overview)
+- [CIVIC 文档](https://docs.civic.com)
 - [Gateway JS 库](https://www.npmjs.com/package/@identity.com/solana-gateway-ts)
 - [Gateway React 组件](https://www.npmjs.com/package/@civic/solana-gateway-react)
 

@@ -68,7 +68,7 @@ If you’re missing any of these prerequisites, don’t worry! We’ll give you 
 
 ### Creating the NFT Collection
 
-To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. For this, we use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave in combination with the Turbo SDK.
+To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. For this, we use the [path manifest](https://cookbook.arweave.net/concepts/manifests.html) feature from Arweave in combination with the Turbo SDK.
 
 Manifest allows multiple transactions to be linked under a single base transaction ID and assigned human-readable file names, like this:
 - https://arweave.net/manifestID/0.json

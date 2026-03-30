@@ -68,7 +68,7 @@ Metaplex Skill은 모든 Metaplex 프로그램, CLI 명령 및 SDK 패턴에 대
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - [Cursor](https://www.cursor.com/)
 - [GitHub Copilot](https://github.com/features/copilot)
-- [Codex](https://openai.com/index/codex/)
+- [Codex](https://openai.com/codex/)
 - [Windsurf](https://windsurf.com/)
 
 ## 다음 단계

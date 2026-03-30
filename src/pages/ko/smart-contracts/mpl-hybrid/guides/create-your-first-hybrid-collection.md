@@ -68,7 +68,7 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 ### NFT 컬렉션 만들기
 
-MPL-Hybrid 프로그램에서 메타데이터 무작위화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관되고 증분적인 구조를 따라야 합니다. 이를 위해 Turbo SDK와 함께 Arweave의 [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) 기능을 사용합니다.
+MPL-Hybrid 프로그램에서 메타데이터 무작위화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관되고 증분적인 구조를 따라야 합니다. 이를 위해 Turbo SDK와 함께 Arweave의 [path manifest](https://cookbook.arweave.net/concepts/manifests.html) 기능을 사용합니다.
 
 Manifest는 여러 트랜잭션을 단일 기본 트랜잭션 ID 하에 연결하고 사람이 읽을 수 있는 파일 이름을 할당할 수 있게 해줍니다:
 - https://arweave.net/manifestID/0.json

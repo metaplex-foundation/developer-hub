@@ -30,7 +30,7 @@ howToTools:
   - Arweave
 ---
 
-MPL-Hybrid 프로그램의 메타데이터 랜덤화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관성 있고 순차적인 구조를 따라야 합니다. 이를 위해 Arweave의 [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) 기능과 Turbo SDK를 사용할 것입니다. **이 가이드에서는 이를 설정하는 방법을 보여드립니다!**
+MPL-Hybrid 프로그램의 메타데이터 랜덤화 기능을 활용하려면, 오프체인 메타데이터 URI가 일관성 있고 순차적인 구조를 따라야 합니다. 이를 위해 Arweave의 [path manifest](https://cookbook.arweave.net/concepts/manifests.html) 기능과 Turbo SDK를 사용할 것입니다. **이 가이드에서는 이를 설정하는 방법을 보여드립니다!**
 
 {% callout title="Turbo란 무엇인가요" %}
 

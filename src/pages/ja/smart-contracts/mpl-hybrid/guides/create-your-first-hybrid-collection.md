@@ -68,7 +68,7 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 ### NFTコレクションの作成
 
-MPL-Hybridプログラムでメタデータランダム化機能を利用するには、オフチェーンメタデータURIが一貫した増分構造に従う必要があります。このため、TurboSDKと組み合わせてArweaveの[パスマニフェスト](https://cookbook.arweave.dev/concepts/manifests.html)機能を使用します。
+MPL-Hybridプログラムでメタデータランダム化機能を利用するには、オフチェーンメタデータURIが一貫した増分構造に従う必要があります。このため、TurboSDKと組み合わせてArweaveの[パスマニフェスト](https://cookbook.arweave.net/concepts/manifests.html)機能を使用します。
 
 マニフェストにより、複数のトランザクションを単一のベーストランザクションID下でリンクし、人間が読める形式のファイル名を割り当てることができます：
 - https://arweave.net/manifestID/0.json

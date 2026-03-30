@@ -133,7 +133,7 @@ proficiencyLevel: Advanced
 
 当我们谈论在区块链上存储数据状态时，如果我们存储这个默克尔根，我们可以有效地存储一个代表之前哈希以创建根的所有数据完整性的单一值。如果树上的任何叶值发生变化，现有的默克尔根将变得无效，需要重新计算。
 
-对于Bubblegum压缩NFT，叶节点哈希是[叶子模式](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum-v2/program/src/state/leaf_schema.rs#L40)的哈希。叶子模式包含叶子ID、所有者/委托人信息、代表cNFT[创作者](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum-v2/program/src/state/metaplex_adapter.rs#L103)的[`creator_hash`](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum-v2/program/src/lib.rs#L433)，以及代表压缩NFT的[元数据](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum-v2/program/src/state/metaplex_adapter.rs#L81)的[`data_hash`](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum-v2/program/src/lib.rs#L450)（它再次包含创作者数组）。因此，我们需要以密码学方式验证单个压缩NFT的所有信息都存储在哈希叶子模式中。
+对于Bubblegum压缩NFT，叶节点哈希是[叶子模式](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum/program/src/state/leaf_schema.rs#L40)的哈希。叶子模式包含叶子ID、所有者/委托人信息、代表cNFT[创作者](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum/program/src/state/metaplex_adapter.rs#L103)的[`creator_hash`](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum/program/src/lib.rs#L433)，以及代表压缩NFT的[元数据](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum/program/src/state/metaplex_adapter.rs#L81)的[`data_hash`](https://github.com/metaplex-foundation/mpl-bubblegum/blob/main/programs/bubblegum/program/src/lib.rs#L450)（它再次包含创作者数组）。因此，我们需要以密码学方式验证单个压缩NFT的所有信息都存储在哈希叶子模式中。
 
 ## 叶子路径
 

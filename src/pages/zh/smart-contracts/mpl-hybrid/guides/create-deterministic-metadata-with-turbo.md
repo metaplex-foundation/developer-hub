@@ -30,7 +30,7 @@ howToTools:
   - Arweave
 ---
 
-要利用 MPL-Hybrid 程序中的元数据随机化功能，链外元数据 URI 需要遵循一致的增量结构。为了实现这一点，我们将使用 Arweave 的[路径清单](https://cookbook.arweave.dev/concepts/manifests.html)功能和 Turbo SDK。**本指南将演示如何设置！**
+要利用 MPL-Hybrid 程序中的元数据随机化功能，链外元数据 URI 需要遵循一致的增量结构。为了实现这一点，我们将使用 Arweave 的[路径清单](https://cookbook.arweave.net/concepts/manifests.html)功能和 Turbo SDK。**本指南将演示如何设置！**
 
 {% callout title="什么是 Turbo" %}
 

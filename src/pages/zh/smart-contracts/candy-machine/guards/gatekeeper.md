@@ -14,7 +14,7 @@ description: "Gatekeeper 守卫检查铸造钱包是否具有来自指定 Gateke
 
 以下是一些在设置 Gatekeeper Network 时可能有用的额外推荐材料。
 
-- [CIVIC 文档](https://docs.civic.com/civic-pass/overview)
+- [CIVIC 文档](https://docs.civic.com)
 - [Gateway JS 库](https://www.npmjs.com/package/@identity.com/solana-gateway-ts)
 - [Gateway React 组件](https://www.npmjs.com/package/@civic/solana-gateway-react)
 

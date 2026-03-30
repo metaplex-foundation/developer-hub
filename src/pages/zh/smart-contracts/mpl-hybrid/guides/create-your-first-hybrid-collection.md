@@ -68,7 +68,7 @@ npm i @metaplex-foundation/mpl-token-metadata
 
 ### 创建NFT集合
 
-要使用MPL-Hybrid程序中的元数据随机化功能，链下元数据URI需要遵循一致的递增结构。为此，我们使用Arweave的[路径清单](https://cookbook.arweave.dev/concepts/manifests.html)功能与Turbo SDK结合。
+要使用MPL-Hybrid程序中的元数据随机化功能，链下元数据URI需要遵循一致的递增结构。为此，我们使用Arweave的[路径清单](https://cookbook.arweave.net/concepts/manifests.html)功能与Turbo SDK结合。
 
 清单允许多个交易链接在单个基础交易ID下，并分配人类可读的文件名，如下所示：
 - https://arweave.net/manifestID/0.json

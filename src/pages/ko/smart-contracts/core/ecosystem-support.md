@@ -51,5 +51,4 @@ Metaplex는 또한 [core.metaplex.com](https://core.metaplex.com/)에서 Core �
 ## 기타
 | 프로젝트                       | 상태     |
 | ------------------------------ | -------- |
-| [dReader](https://dreader.io/) | 완료     |
 | [Matrica](https://matrica.io/) | 완료     |

@@ -28,11 +28,11 @@ description: 監査と脆弱性の報告方法。
 
 ## 監査
 
-継続的な自動および手動セキュリティ監査は、監査パートナーである[Sec3](https://www.sec3.dev/)、[Accretion](https://www.accretion.fi/)、および[OtterSec](https://osec.io)によって定期的に実行されています。
+継続的な自動および手動セキュリティ監査は、監査パートナーである[Sec3](https://www.sec3.dev/)、[Accretion](https://accretion.xyz)、および[OtterSec](https://osec.io)によって定期的に実行されています。
 
 自動監査はすべてのPRに対して実行され、メインブランチにマージする前にセキュリティ問題を解決する必要があります。継続的な手動監査は特定の閾値を超える変更に対して開始され、メインブランチにマージする前にセキュリティ問題を解決する必要があります。
 
-[OShield](https://www.oshield.xyz)（旧MadShield）は、私たちの歴史的監査の多くを担当しています。
+OShield（旧MadShield）は、私たちの歴史的監査の多くを担当しています。
 
 大規模な1回限りの監査は、以下に詳述されているように、コードや機能に大きな変更がある場合にも実行されます。
 

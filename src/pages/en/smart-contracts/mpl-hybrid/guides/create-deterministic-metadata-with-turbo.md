@@ -30,7 +30,7 @@ howToTools:
   - Arweave
 ---
 
-To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.dev/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**
+To utilize the metadata randomization feature in the MPL-Hybrid program, the off-chain metadata URIs need to follow a consistent, incremental structure. To achieve this, we will use the [path manifest](https://cookbook.arweave.net/concepts/manifests.html) feature from Arweave and the Turbo SDK. **This guide will demonstrate how to set this up!**
 
 {% callout title="What is Turbo" %}
 

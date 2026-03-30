@@ -68,7 +68,7 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - [Cursor](https://www.cursor.com/)
 - [GitHub Copilot](https://github.com/features/copilot)
-- [Codex](https://openai.com/index/codex/)
+- [Codex](https://openai.com/codex/)
 - [Windsurf](https://windsurf.com/)
 
 ## Next Steps

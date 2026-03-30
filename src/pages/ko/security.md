@@ -28,11 +28,11 @@ description: 감사 및 취약점 보고 방법.
 
 ## 감사
 
-정기적인 자동 및 수동 보안 감사는 감사 파트너인 [Sec3](https://www.sec3.dev/), [Accretion](https://www.accretion.fi/), [OtterSec](https://osec.io)에 의해 정기적으로 수행됩니다.
+정기적인 자동 및 수동 보안 감사는 감사 파트너인 [Sec3](https://www.sec3.dev/), [Accretion](https://accretion.xyz), [OtterSec](https://osec.io)에 의해 정기적으로 수행됩니다.
 
 자동 감사는 모든 PR에 대해 수행되며 메인 브랜치에 병합하기 전에 보안 이슈를 해결해야 합니다. 지속적인 수동 감사는 특정 임계값 이상의 변경 사항에 대해 시작되며 메인 브랜치에 병합하기 전에 보안 이슈를 해결해야 합니다.
 
-[OShield](https://www.oshield.xyz) (이전 MadShield)는 많은 역사적 감사를 담당하고 있습니다.
+OShield (이전 MadShield)는 많은 역사적 감사를 담당하고 있습니다.
 
 아래에 자세히 설명된 대로 코드 또는 기능에 큰 변경 사항이 있을 때도 대규모 일회성 감사가 수행됩니다.
 

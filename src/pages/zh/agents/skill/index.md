@@ -68,7 +68,7 @@ Skill 适用于任何支持 [Agent Skills](https://agentskills.io) 格式的 AI 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 - [Cursor](https://www.cursor.com/)
 - [GitHub Copilot](https://github.com/features/copilot)
-- [Codex](https://openai.com/index/codex/)
+- [Codex](https://openai.com/codex/)
 - [Windsurf](https://windsurf.com/)
 
 ## 下一步

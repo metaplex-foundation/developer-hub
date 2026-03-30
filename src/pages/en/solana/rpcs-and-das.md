@@ -142,7 +142,6 @@ These lists are in alphabetical order. Choose the provider that best suits your 
 - [Helius](https://docs.helius.xyz/compression-and-das-api/digital-asset-standard-das-api)
 - [Hello Moon](https://docs.hellomoon.io/reference/rpc-endpoint-for-digital-asset-standard)
 - [QuickNode](https://quicknode.com/)
-- [Shyft](https://docs.shyft.to/solana-rpcs-das-api/compression-das-api)
 - [Triton](https://docs.triton.one/rpc-pool/metaplex-digital-assets-api)
 
 ### RPCs without DAS Support

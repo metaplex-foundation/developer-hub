@@ -141,7 +141,7 @@ The table below provides an overview of the settings available:
 |  |   | "bundlr" |  Uploads to Arweave using [Bundlr](https://bundlr.network) and payments are made in SOL (works on both mainnet and devnet; files are only stored for 7 days on devnet)
 |  |   | "aws" | Uploads to Amazon Web Services (AWS) |
 |  |   | "pinata" | Uploads to [Pinata](https://www.pinata.cloud) (works on all networks; free and tiered subscriptions) |
-|  |   | "sdrive" | Uploads to Shador Drive using [SDrive Cloud Storage](https://sdrive.app) |
+|  |   | "sdrive" | Uploads to Shadow Drive using SDrive Cloud Storage |
 |awsConfig | | | *(required when "aws" is used)* |
 | | bucket | String | AWS bucket name
 | | profile | String | AWS profile to use from the credentials file name |

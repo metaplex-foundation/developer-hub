@@ -28,11 +28,11 @@ You may also be eligible for a bounty. More details can be found [on the Metaple
 
 ## Audits
 
-Ongoing automated and manual security audits are routinely performed by our audit partners [Sec3](https://www.sec3.dev/), [Accretion](https://www.accretion.fi/), and [OtterSec](https://osec.io).
+Ongoing automated and manual security audits are routinely performed by our audit partners [Sec3](https://www.sec3.dev/), [Accretion](https://accretion.xyz), and [OtterSec](https://osec.io).
 
 Automated audits are performed for every PR and security issues must be resolved before merging into the main branch. Manual ongoing audits are initiated for changes above a specific threshold and security issues must be resolved before merging into the main branch.
 
-[OShield](https://www.oshield.xyz) (formerly MadShield) is responsible for many of our historical audits.
+OShield (formerly MadShield) is responsible for many of our historical audits.
 
 Large one-off audits are also performed when there are large changes to the code or functionality as detailed below.
 
