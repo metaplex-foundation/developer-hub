@@ -30,7 +30,7 @@ export async function getServerSideProps({ res }) {
             .map((route) => {
               return `
                 <url>
-                  <loc>${`https://metaplex.com/docs`}${route}</loc>
+                  <loc>${`https://www.metaplex.com/docs`}${route}</loc>
                 </url>
               `
             })
