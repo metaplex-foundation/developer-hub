@@ -31,6 +31,10 @@ SDKをインストールし、最初のエージェントIDを登録します。
 - `registerIdentityV1`でIDを**登録**し、アタッチされた`AgentIdentity`プラグインを確認
 - `@metaplex-foundation/umi-bundle-defaults`と`@metaplex-foundation/mpl-core`が**必要**
 
+{% callout title="1回のAPI呼び出しで済ませたい場合" %}
+[Mint Agent API](/agents/mint-agent)は、1ステップでCoreアセットの作成とID登録を行います。手動でのアセット作成やSDKセットアップは不要です。登録プロセスを細かく制御する必要がある場合は、このページをご利用ください。
+{% /callout %}
+
 ## インストール
 
 ```shell

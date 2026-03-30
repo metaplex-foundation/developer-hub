@@ -25,12 +25,13 @@ The MPL Agent Registry is a pair of on-chain Solana programs that bind verifiabl
 
 - **Agent Identity program** — registers an identity PDA, attaches an `AgentIdentity` plugin with lifecycle hooks, and optionally links a [Genesis](/smart-contracts/genesis) token
 - **Agent Tools program** — manages executive profiles, execution delegation records, and delegation revocation
+- **Metaplex Agent API** — [`mintAndSubmitAgent`](/agents/mint-agent) creates a Core asset and registers identity in a single API call (recommended)
 - **JavaScript/TypeScript SDK** — `@metaplex-foundation/mpl-agent-registry` provides instruction builders and account fetchers
 - **Same addresses on Mainnet and Devnet** — both programs are deployed at identical addresses across networks
 
 {% callout title="Choose Your Path" %}
-- **Quick start?** See [Getting Started](/smart-contracts/mpl-agent/getting-started) for installation and first registration
-- **Register an agent?** Follow the [Register an Agent](/agents/register-agent) guide
+- **Fastest path?** Use the [Mint Agent API](/agents/mint-agent) — one call to create and register an agent
+- **Manual registration?** See [Getting Started](/smart-contracts/mpl-agent/getting-started) for SDK setup and individual instructions
 - **Read agent data?** Follow the [Read Agent Data](/agents/run-agent) guide
 {% /callout %}
 

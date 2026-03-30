@@ -31,6 +31,10 @@ SDK를 설치하고 첫 번째 에이전트 신원을 등록합니다. {% .lead 
 - `registerIdentityV1`로 신원을 **등록**하고 첨부된 `AgentIdentity` 플러그인을 확인합니다
 - `@metaplex-foundation/umi-bundle-defaults` 및 `@metaplex-foundation/mpl-core`가 **필요**합니다
 
+{% callout title="단일 API 호출을 선호하시나요?" %}
+[Mint Agent API](/agents/mint-agent)는 한 번의 단계로 Core 자산 생성과 신원 등록을 수행합니다. 수동 자산 생성이나 SDK 설정이 필요 없습니다. 등록 프로세스를 세밀하게 제어해야 하는 경우 이 페이지를 사용하세요.
+{% /callout %}
+
 ## 설치
 
 ```shell
