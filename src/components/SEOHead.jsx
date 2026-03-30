@@ -223,8 +223,8 @@ function toISO8601Date(dateStr) {
 /**
  * Generate TechArticle schema for documentation pages
  * Enhanced with: @id (fragment), mainEntityOfPage, audience, keywords (array),
- * about, proficiencyLevel, programmingLanguage, isPartOf (CreativeWork),
- * discussionUrl, softwareRequirements (text + structured mentions)
+ * about, proficiencyLevel, isPartOf (CreativeWork),
+ * discussionUrl, dependencies (text + structured mentions)
  */
 function generateTechArticleSchema({
   title,
@@ -318,12 +318,9 @@ function generateTechArticleSchema({
   }
 
   // Programming languages used in code examples
-  if (programmingLanguage && programmingLanguage.length > 0) {
-    schema.programmingLanguage = programmingLanguage.map(lang => ({
-      '@type': 'ComputerLanguage',
-      name: lang,
-    }))
-  }
+  // Note: programmingLanguage is not a valid TechArticle property (it belongs to SoftwareSourceCode).
+  // Instead, languages are expressed via structured 'mentions' below.
+
 
   // isPartOf - use CreativeWork for doc sections (not WebSite which implies whole site)
   if (productName && productPath) {
@@ -370,9 +367,10 @@ function generateTechArticleSchema({
     })
   }
 
-  // softwareRequirements as text (broad compatibility)
+  // dependencies is the TechArticle-native property for prerequisites
+  // (softwareRequirements belongs to SoftwareApplication, not TechArticle)
   if (requirements.length > 0) {
-    schema.softwareRequirements = requirements.join(', ')
+    schema.dependencies = requirements.join(', ')
   }
 
   // mentions for structured software references (richer data)
