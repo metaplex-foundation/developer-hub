@@ -39,10 +39,6 @@ faqs:
 如果您想不编写代码就发行代币，请使用 [Metaplex 代币发射台](https://www.metaplex.com)。以下指南适用于希望构建自定义发射台平台或在自己网站上托管代币销售的开发者。
 {% /callout %}
 
-{% callout title="Memecoin 发行" %}
-对于 memecoin 发行，SDK 提供了一条简化路径，可跳过大部分配置。只需设置 `launchType: 'memecoin'` 和存款开始时间即可——分配、LP、费用和锁仓计划均为硬编码默认值。详情请参阅 [API 客户端 memecoin 部分](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
-{% /callout %}
-
 {% callout title="准备好开始构建了吗？" %}
 一旦您了解了流程：
 - **[JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript)** - 安装和函数参考
@@ -263,7 +259,7 @@ Finalize 后，发行活动根据您的 Bucket 时间条件激活。当前时间
 | **Genesis Account** | 协调发行并持有代币的 PDA |
 | **Inflow Bucket** | 从用户处收集存款的 Bucket |
 | **Outflow Bucket** | 通过结束行为接收资金的 Bucket |
-| **发行类型** | 发行类别（`project` 或 `memecoin`）。创建后由后端 crank 追溯设置在链上。可通过 [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) 或 [REST API](/smart-contracts/genesis/integration-apis) 查询 |
+| **发行类型** | 发行的底层机制（`launchpool` 或 `presale`）。创建后由后端 crank 追溯设置在链上。可通过 [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) 或 [REST API](/smart-contracts/genesis/integration-apis) 查询 |
 | **Finalize** | 锁定配置并激活发行 |
 | **Time Condition** | 控制 Bucket 阶段的 Unix 时间戳 |
 | **End Behavior** | 存款期结束时的自动操作 |

@@ -187,7 +187,7 @@ Launch config JSON 文件使用与 `launch create` 输入相同的格式：
       "twitter": "https://x.com/myproject"
     }
   },
-  "launchType": "project",
+  "launchType": "launchpool",
   "launch": {
     "launchpool": {
       "tokenAllocation": 500000000,
@@ -268,7 +268,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 | Locked allocations file not found | 文件路径错误 | 验证分配 JSON 文件的路径 |
 | Must contain a JSON array | 分配文件不是数组 | 确保 JSON 文件包含数组 `[...]`，而不是对象 |
 | raydiumLiquidityBps out of range | 值超出 2000–10000 范围 | 使用 2000（20%）到 10000（100%）之间的值 |
-| Launch config missing required fields | register 的配置不完整 | 确保您的 launch config JSON 包含 `token`、`launch` 和 `launchType: "project"` |
+| Launch config missing required fields | register 的配置不完整 | 确保您的 launch config JSON 包含 `token`、`launch` 和 `launchType: "launchpool"` |
 
 ## 常见问题
 

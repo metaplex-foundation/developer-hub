@@ -37,7 +37,7 @@ faqs:
   - q: What's the difference between Launch Pool and Presale?
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
   - q: What launch types does Genesis support?
-    a: Genesis supports multiple launch types that represent the underlying mechanism — Launch Pool (fair launch with proportional distribution and price discovery) and Bonding Curve (continuous pricing via an automated market maker curve) and Presale.
+    a: Genesis supports multiple launch types that represent the underlying mechanism — Launch Pool (fair launch with proportional distribution and price discovery) and Presale (fixed-price token sale).
 ---
 
 **Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run a presale, fair launch, auction, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}

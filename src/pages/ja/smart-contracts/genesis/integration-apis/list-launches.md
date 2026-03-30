@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       },
       "baseToken": {
         "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - 結果はページネーションされません。エンドポイントは一致するすべてのローンチを単一のレスポンスで返します。
 - `status` フィルタは `upcoming`、`live`、`graduated` を受け付けます。省略するとすべてのステータスを返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
 

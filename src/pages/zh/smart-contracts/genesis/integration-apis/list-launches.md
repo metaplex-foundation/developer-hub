@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       },
       "baseToken": {
         "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - 结果不分页。端点在单个响应中返回所有匹配的发行。
 - `status` 过滤器接受 `upcoming`、`live` 或 `graduated`。省略则返回所有状态。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。
 
