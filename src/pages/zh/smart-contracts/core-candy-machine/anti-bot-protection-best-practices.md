@@ -792,7 +792,7 @@ export default limiter(handler);
 
 ### 隐藏设置和配置行在防机器人保护方面有什么区别？
 
-[隐藏设置](/zh/smart-contracts/core-candy-machine/settings)按顺序铸造资产（索引 0、1、2...），使铸造顺序可预测。[配置行](/zh/smart-contracts/core-candy-machine/managing-items)允许您加载带有预随机化排序的占位符元数据，在铸造后揭示映射之上提供额外的不可预测层。
+[隐藏设置](/zh/smart-contracts/core-candy-machine/create#hidden-settings-field)按顺序铸造资产（索引 0、1、2...），使铸造顺序可预测。[配置行](/zh/smart-contracts/core-candy-machine/insert-items)允许您加载带有预随机化排序的占位符元数据，在铸造后揭示映射之上提供额外的不可预测层。
 
 ### 机器人能否通过逆向工程我的后端来绕过第三方签名者守卫？
 
