@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - Results are not paginated. The endpoint returns all matching launches in a single response.
 - The `status` filter accepts `upcoming`, `live`, or `graduated`. Omit to return all statuses.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `bondingCurve`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `presale`).
 

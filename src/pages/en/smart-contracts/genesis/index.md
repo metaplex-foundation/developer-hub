@@ -87,7 +87,7 @@ Every Genesis launch has a **type** that represents the underlying mechanism:
 | Type | Description | Use Case |
 |------|-------------|----------|
 | **Launch Pool** (`launchpool`) | Proportional distribution with price discovery via a deposit window | Fair launches, community tokens, crowdsales |
-| **Bonding Curve** (`bondingCurve`) | Continuous pricing via an automated market maker curve | Instant liquidity, dynamic pricing |
+| **Presale** (`presale`) | Fixed-price token sale at a predetermined rate | Token sales, known valuation |
 
 The launch type is recorded on-chain in the [Genesis Account](#genesis-account) by a backend crank after creation. Traders and aggregators can query the type programmatically via the [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) (`fetchGenesisAccountV2`) or the [Integration APIs](/smart-contracts/genesis/integration-apis) (`type` field in REST responses).
 
@@ -172,7 +172,7 @@ Yes. Genesis uses a bucket system where you can add multiple inflow buckets and 
 | **Launch Pool** | Deposit-based distribution where price is discovered at close |
 | **Presale** | Fixed-price sale at a predetermined rate |
 | **Quote Token** | The token users deposit (usually wSOL) |
-| **Launch Type** | The underlying mechanism of a launch: `launchpool` (proportional distribution) or `bondingCurve` (automated market maker). Set on-chain by a backend crank after creation |
+| **Launch Type** | The underlying mechanism of a launch: `launchpool` or `presale`. Set on-chain by a backend crank after creation |
 | **Base Token** | The token being launched and distributed |
 
 ## Next Steps

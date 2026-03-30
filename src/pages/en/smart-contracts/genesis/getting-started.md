@@ -258,7 +258,7 @@ Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denomin
 | **Genesis Account** | PDA that coordinates the launch and holds tokens |
 | **Inflow Bucket** | Bucket that collects deposits from users |
 | **Outflow Bucket** | Bucket that receives funds via end behaviors |
-| **Launch Type** | The underlying mechanism of a launch (`launchpool` or `bondingCurve`). Set on-chain retroactively by a backend crank. Queryable via [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) or [REST API](/smart-contracts/genesis/integration-apis) |
+| **Launch Type** | The underlying mechanism of a launch (`launchpool` or `presale`). Set on-chain retroactively by a backend crank. Queryable via [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) or [REST API](/smart-contracts/genesis/integration-apis) |
 | **Finalize** | Lock configuration and activate the launch |
 | **Time Condition** | Unix timestamp controlling bucket phases |
 | **End Behavior** | Automated action when deposit period ends |

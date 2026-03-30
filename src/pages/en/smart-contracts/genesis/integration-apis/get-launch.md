@@ -164,4 +164,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - Finding genesis pubkeys requires indexing or `getProgramAccounts`. If you only have a token mint, use the [Get Launches by Token](/smart-contracts/genesis/integration-apis/get-launches-by-token) endpoint instead.
 - Returns `404` if the genesis address is not found or does not have a valid launch.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `bondingCurve`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `presale`).

@@ -56,7 +56,7 @@ The `launch` object describes the full token and launch setup:
 | `supply` | `number` | No | Total token supply (defaults to 1,000,000,000) |
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `quoteMint` | `string` | No | Quote token mint address (defaults to wrapped SOL) |
-| `type` | `string` | Yes | `'launchpool'` or `'bondingCurve'` |
+| `type` | `string` | Yes | `'launchpool'` or `'presale'` |
 | `finalize` | `boolean` | No | Whether to finalize the launch (defaults to `true`) |
 | `allocations` | `array` | Yes | Array of allocation configurations |
 | `externalLinks` | `object` | No | Website, Twitter, Telegram links |

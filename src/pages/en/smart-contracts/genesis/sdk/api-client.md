@@ -118,8 +118,8 @@ Transactions must be confirmed on-chain before calling `registerLaunch`. The reg
 | `token` | `TokenMetadata` | Yes | Token metadata |
 | `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `quoteMint` | `QuoteMintInput` | No | `'SOL'` (default) or `'USDC'` |
-| `launchType` | `CreateLaunchType` | Yes | `'launchpool'` or `'bondingCurve'` — the underlying launch mechanism |
-| `launch` | `LaunchpoolLaunchInput \| BondingCurveLaunchInput` | Yes | Launch configuration (fields depend on `launchType`) |
+| `launchType` | `CreateLaunchType` | Yes | `'launchpool'` — the underlying launch mechanism |
+| `launch` | `LaunchpoolLaunchInput` | Yes | Launch configuration |
 
 ### TokenMetadata
 

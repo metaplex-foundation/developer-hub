@@ -27,7 +27,7 @@ faqs:
   - q: What's the difference between fetch and safeFetch?
     a: fetch throws an error if the account doesn't exist. safeFetch returns null instead, useful for checking if an account exists without error handling.
   - q: How do I retrieve the launch type for a token?
-    a: Fetch the GenesisAccountV2 on-chain account using fetchGenesisAccountV2FromSeeds with the token mint. The launchType field returns 0 (Uninitialized), 3 (LaunchPoolV1), or 4 (BondingCurveV1). You can also query all launches of a given type using the GPA builder.
+    a: Fetch the GenesisAccountV2 on-chain account using fetchGenesisAccountV2FromSeeds with the token mint. The launchType field returns 0 (Uninitialized) or 3 (LaunchPoolV1). You can also query all launches of a given type using the GPA builder.
   - q: How do I handle transaction errors?
     a: Wrap sendAndConfirm calls in try/catch blocks. Common errors include insufficient funds, already-initialized accounts, and time condition violations.
 ---
@@ -310,7 +310,7 @@ const [genesisAccountPda] = findGenesisAccountV2Pda(umi, {
   genesisIndex: 0,
 });
 const account = await fetchGenesisAccountV2(umi, genesisAccountPda);
-console.log(account.data.launchType); // 0 = Uninitialized, 3 = LaunchPoolV1, 4 = BondingCurveV1
+console.log(account.data.launchType); // 0 = Uninitialized, 3 = LaunchPoolV1
 
 // Or fetch directly from seeds
 const account2 = await fetchGenesisAccountV2FromSeeds(umi, {
@@ -321,8 +321,6 @@ const account2 = await fetchGenesisAccountV2FromSeeds(umi, {
 // Check launch type
 if (account2.data.launchType === LaunchType.LaunchPoolV1) {
   console.log('This is a launch pool');
-} else if (account2.data.launchType === LaunchType.BondingCurveV1) {
-  console.log('This is a bonding curve launch');
 }
 ```
 
@@ -341,11 +339,6 @@ import {
 // Get all launch pool launches
 const launchpools = await getGenesisAccountV2GpaBuilder(umi)
   .whereField('launchType', LaunchType.LaunchPoolV1)
-  .getDeserialized();
-
-// Get all bonding curve launches
-const bondingCurves = await getGenesisAccountV2GpaBuilder(umi)
-  .whereField('launchType', LaunchType.BondingCurveV1)
   .getDeserialized();
 
 // Filter by multiple fields
@@ -397,11 +390,10 @@ The on-chain launch type, set retroactively by a backend crank via the `setLaunc
 enum LaunchType {
   Uninitialized = 0,   // Not yet set by the crank
   LaunchPoolV1 = 3,    // Launch pool (proportional distribution)
-  BondingCurveV1 = 4,  // Bonding curve (automated market maker)
 }
 ```
 
-The [Integration APIs](/smart-contracts/genesis/integration-apis) return this as a string (`'launchpool'` or `'bondingCurve'`), while the on-chain SDK uses the numeric enum above.
+The [Integration APIs](/smart-contracts/genesis/integration-apis) return this as a string (`'launchpool'`), while the on-chain SDK uses the numeric enum above.
 
 ### GenesisAccountV2
 
@@ -420,7 +412,7 @@ Top-level on-chain account for a Genesis launch. One account per token mint per 
   totalAllocatedSupplyBaseToken: bigint;   // Supply allocated to buckets
   totalProceedsQuoteToken: bigint;         // Total deposits collected
   fundingMode: number;                     // Funding mode (0)
-  launchType: number;                      // 0 = Uninitialized, 3 = LaunchPoolV1, 4 = BondingCurveV1
+  launchType: number;                      // 0 = Uninitialized, 3 = LaunchPoolV1
   bucketCount: number;                     // Number of buckets
 }
 ```
@@ -484,7 +476,7 @@ Yes. The SDK works in both Node.js and browser environments. For browsers, use a
 `fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
 
 ### How do I retrieve the launch type for a token?
-Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized), `3` (LaunchPoolV1), or `4` (BondingCurveV1). To query all launches of a given type, use the [GPA builder](#gpa-builder--query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
+Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder--query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
 
 ### How do I handle transaction errors?
 Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
