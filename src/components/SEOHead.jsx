@@ -23,7 +23,7 @@ import { products } from '@/components/products'
  * />
  */
 
-const SITE_URL = 'https://metaplex.com/docs'
+const SITE_URL = 'https://www.metaplex.com/docs'
 const LOGO_URL = `${SITE_URL}/metaplex-logo-white.png`
 
 /**
