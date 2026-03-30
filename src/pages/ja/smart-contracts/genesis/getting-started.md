@@ -259,7 +259,7 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 | **Genesis Account** | ローンチを調整しトークンを保持する PDA |
 | **Inflow Bucket** | ユーザーからの入金を収集する bucket |
 | **Outflow Bucket** | 終了動作を通じて資金を受け取る bucket |
-| **ローンチタイプ** | ローンチの基盤メカニズム：`launchpool` または `presale`。作成後にバックエンドクランクによってオンチェーンで遡及的に設定。[SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)または[REST API](/smart-contracts/genesis/integration-apis)で照会可能 |
+| **ローンチタイプ** | ローンチの基盤メカニズム：`launchpool` または `presale`。作成後にバックエンドクランクによってオンチェーンで遡及的に設定。[SDK](/ja/smart-contracts/genesis/sdk/javascript#genesis-account)または[REST API](/ja/smart-contracts/genesis/integration-apis)で照会可能 |
 | **ファイナライズ** | 設定をロックしてローンチを有効化する |
 | **時間条件** | bucket のフェーズを制御する Unix タイムスタンプ |
 | **終了動作** | 入金期間終了時に実行される自動アクション |
