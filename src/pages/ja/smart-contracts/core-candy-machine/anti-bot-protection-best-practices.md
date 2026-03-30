@@ -792,7 +792,7 @@ export default limiter(handler);
 
 ### ボット対策でHidden SettingsとConfig Linesの違いは何ですか？
 
-[Hidden Settings](/ja/smart-contracts/core-candy-machine/settings)はアセットを順次ミントし（インデックス0、1、2、...）、ミント順序が予測可能になります。[Config Lines](/ja/smart-contracts/core-candy-machine/managing-items)では事前ランダム化された順序でプレースホルダーメタデータをロードでき、ミント後のリビールマッピングに加えて追加の予測不可能性の層を提供します。
+[Hidden Settings](/ja/smart-contracts/core-candy-machine/create#hidden-settings-field)はアセットを順次ミントし（インデックス0、1、2、...）、ミント順序が予測可能になります。[Config Lines](/ja/smart-contracts/core-candy-machine/insert-items)では事前ランダム化された順序でプレースホルダーメタデータをロードでき、ミント後のリビールマッピングに加えて追加の予測不可能性の層を提供します。
 
 ### ボットはバックエンドをリバースエンジニアリングしてThird-Party Signerガードをバイパスできますか？
 

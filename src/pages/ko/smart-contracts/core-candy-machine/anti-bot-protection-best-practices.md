@@ -792,7 +792,7 @@ export default limiter(handler);
 
 ### 봇 방지 보호에서 숨겨진 설정과 구성 라인의 차이점은 무엇인가요?
 
-[숨겨진 설정](/ko/smart-contracts/core-candy-machine/settings)은 자산을 순차적으로(인덱스 0, 1, 2, ...) 민팅하여 민트 순서가 예측 가능합니다. [구성 라인](/ko/smart-contracts/core-candy-machine/managing-items)은 사전 무작위화된 순서로 플레이스홀더 메타데이터를 로드할 수 있어 포스트 민트 리빌 매핑 위에 추가 예측 불가능성 계층을 제공합니다.
+[숨겨진 설정](/ko/smart-contracts/core-candy-machine/create#hidden-settings-field)은 자산을 순차적으로(인덱스 0, 1, 2, ...) 민팅하여 민트 순서가 예측 가능합니다. [구성 라인](/ko/smart-contracts/core-candy-machine/insert-items)은 사전 무작위화된 순서로 플레이스홀더 메타데이터를 로드할 수 있어 포스트 민트 리빌 매핑 위에 추가 예측 불가능성 계층을 제공합니다.
 
 ### 봇이 백엔드를 역공학하여 제3자 서명자 가드를 우회할 수 있나요?
 
