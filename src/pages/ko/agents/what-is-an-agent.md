@@ -35,7 +35,7 @@ Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-
 
 이것이 Core 자산을 자율 에이전트에 적합하게 만듭니다:
 
-- **자산이 에이전트의 신원** — [AgentIdentity](/agents/register-agent) 플러그인으로 온체인에 등록됩니다
+- **자산이 에이전트의 신원** — [AgentIdentity](/agents/create-agent) 플러그인으로 온체인에 등록됩니다
 - **자산의 PDA 지갑이 에이전트의 자금을 보유** — 에이전트만이 독점적으로 제어하는 SOL, 토큰 및 기타 자산
 - **이그제큐티브가 에이전트를 대신하여 행동** — Solana에는 백그라운드 작업이나 온체인 추론이 없으므로 위임된 [이그제큐티브](/agents/run-an-agent)가 에이전트를 대신하여 트랜잭션에 서명합니다. 소유자는 모든 작업을 승인할 필요가 없습니다.
 
@@ -44,7 +44,7 @@ Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-
 ## 다음 단계
 
 - **[스킬](/agents/skill)** — AI 코딩 에이전트에 Metaplex 프로그램의 완전한 지식 제공
-- **[에이전트 등록](/agents/register-agent)** — MPL Core 자산에 신원 기록 바인딩
+- **[에이전트 생성](/agents/create-agent)** — 에이전트를 민트하고 등록
 - **[에이전트 데이터 읽기](/agents/run-agent)** — 등록 확인 및 온체인 에이전트 신원 검사
 - **[에이전트 실행](/agents/run-an-agent)** — 이그제큐티브 프로필 설정 및 실행 위임
 

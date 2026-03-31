@@ -35,7 +35,7 @@ Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-a
 
 这使得 Core 资产天然适合作为自主代理：
 
-- **资产就是代理的身份** — 通过 [AgentIdentity](/agents/register-agent) 插件在链上注册
+- **资产就是代理的身份** — 通过 [AgentIdentity](/agents/create-agent) 插件在链上注册
 - **资产的 PDA 钱包持有代理的资金** — 仅由代理控制的 SOL、代币和其他资产
 - **执行者代表代理行动** — 由于 Solana 不支持后台任务或链上推理，委托的[执行者](/agents/run-an-agent)代表代理签署交易。所有者无需批准每个操作。
 
@@ -44,7 +44,7 @@ Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-a
 ## 下一步
 
 - **[技能](/agents/skill)** — 为 AI 编码代理提供 Metaplex 程序的完整知识
-- **[注册代理](/agents/register-agent)** — 将身份记录绑定到 MPL Core 资产
+- **[创建代理](/agents/create-agent)** — 铸造并注册代理
 - **[读取代理数据](/agents/run-agent)** — 验证注册并检查链上代理身份
 - **[运行代理](/agents/run-an-agent)** — 设置执行者配置文件并委托执行
 

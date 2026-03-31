@@ -32,7 +32,7 @@ Install the `@metaplex-foundation/mpl-agent-registry` package, configure Umi wit
 - **Requires** `@metaplex-foundation/umi-bundle-defaults` and `@metaplex-foundation/mpl-core`
 
 {% callout title="Prefer a single API call?" %}
-The [Mint Agent API](/agents/mint-agent) creates a Core asset and registers the identity in one step — no manual asset creation or SDK setup required. Use this page if you need fine-grained control over the registration process.
+The [Metaplex Agent API](/agents/create-agent#mint-an-agent-with-the-api) creates a Core asset and registers the identity in one step — no manual asset creation or SDK setup required. Use this page if you need fine-grained control over the registration process.
 {% /callout %}
 
 ## Installation

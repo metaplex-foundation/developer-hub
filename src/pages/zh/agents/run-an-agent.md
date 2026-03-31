@@ -29,7 +29,7 @@ updated: '03-30-2026'
 - **注册执行者配置文件** — 每个钱包一次性的链上设置，创建可验证的运营者身份
 - **委托执行** — 资产所有者通过链上委托记录将其代理链接到特定执行者
 - **验证委托** — 派生委托记录 PDA 并检查账户是否存在
-- **需要**一个[已注册的代理](/agents/register-agent)和 `@metaplex-foundation/mpl-agent-registry` 包（v0.2.0+）
+- **需要**一个[已注册的代理](/agents/create-agent)和 `@metaplex-foundation/mpl-agent-registry` 包（v0.2.0+）
 
 ## 快速开始
 
@@ -58,7 +58,7 @@ updated: '03-30-2026'
 
 ## 前提条件
 
-您需要一个具有身份记录和 AgentIdentity 插件的[已注册代理](/agents/register-agent)，以及 `@metaplex-foundation/mpl-agent-registry` 包（v0.2.0+）。
+您需要一个具有身份记录和 AgentIdentity 插件的[已注册代理](/agents/create-agent)，以及 `@metaplex-foundation/mpl-agent-registry` 包（v0.2.0+）。
 
 ## 注册执行者配置文件
 

@@ -20,7 +20,7 @@ created: '02-25-2026'
 updated: '03-12-2026'
 ---
 
-[登録](/agents/register-agent)後にオンチェーンでエージェントIDデータを読み取り、確認します。{% .lead %}
+[登録](/agents/create-agent)後にオンチェーンでエージェントIDデータを読み取り、確認します。{% .lead %}
 
 ## 概要
 
@@ -128,7 +128,7 @@ if (agentIdentity?.uri) {
 }
 ```
 
-フィールドの完全なリファレンスについては、[エージェントを登録](/agents/register-agent#agent-registration-document)をご覧ください。
+フィールドの完全なリファレンスについては、[エージェントを登録](/agents/create-agent#agent-registration-document)をご覧ください。
 
 ## エージェントのウォレットを取得
 

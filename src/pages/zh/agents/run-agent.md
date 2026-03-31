@@ -20,7 +20,7 @@ created: '02-25-2026'
 updated: '03-12-2026'
 ---
 
-[注册](/agents/register-agent)后在链上读取和验证代理身份数据。{% .lead %}
+[注册](/agents/create-agent)后在链上读取和验证代理身份数据。{% .lead %}
 
 ## 概述
 
@@ -128,7 +128,7 @@ if (agentIdentity?.uri) {
 }
 ```
 
-完整字段参考请参阅[注册代理](/agents/register-agent#agent-registration-document)。
+完整字段参考请参阅[注册代理](/agents/create-agent#agent-registration-document)。
 
 ## 获取代理钱包
 

@@ -29,7 +29,7 @@ updated: '03-30-2026'
 - **이그제큐티브 프로필 등록** — 지갑당 1회의 온체인 설정으로 검증 가능한 운영자 신원 생성
 - **실행 위임** — 자산 소유자가 온체인 위임 레코드를 통해 에이전트를 특정 이그제큐티브에 연결
 - **위임 확인** — 위임 레코드 PDA를 파생하여 계정 존재 여부 확인
-- [등록된 에이전트](/agents/register-agent)와 `@metaplex-foundation/mpl-agent-registry` 패키지(v0.2.0+)가 **필요**
+- [등록된 에이전트](/agents/create-agent)와 `@metaplex-foundation/mpl-agent-registry` 패키지(v0.2.0+)가 **필요**
 
 ## 빠른 시작
 
@@ -58,7 +58,7 @@ updated: '03-30-2026'
 
 ## 사전 요구사항
 
-신원 기록과 AgentIdentity 플러그인이 있는 [등록된 에이전트](/agents/register-agent)와 `@metaplex-foundation/mpl-agent-registry` 패키지(v0.2.0+)가 필요합니다.
+신원 기록과 AgentIdentity 플러그인이 있는 [등록된 에이전트](/agents/create-agent)와 `@metaplex-foundation/mpl-agent-registry` 패키지(v0.2.0+)가 필요합니다.
 
 ## 이그제큐티브 프로필 등록
 

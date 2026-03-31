@@ -35,7 +35,7 @@ Every [MPL Core](/smart-contracts/core) asset has a built-in wallet — a PDA de
 
 This makes Core assets a natural fit for autonomous agents:
 
-- **The asset is the agent's identity** — registered on-chain with an [AgentIdentity](/agents/register-agent) plugin
+- **The asset is the agent's identity** — registered on-chain with an [AgentIdentity](/agents/create-agent) plugin
 - **The asset's PDA wallet holds the agent's funds** — SOL, tokens, and other assets controlled exclusively by the agent
 - **Executives act on the agent's behalf** — since Solana has no background tasks or on-chain inference, a delegated [executive](/agents/run-an-agent) signs transactions for the agent. The owner doesn't need to approve every action.
 
@@ -44,7 +44,7 @@ The owner retains full control. They choose which executive to delegate to, and 
 ## Next Steps
 
 - **[Skill](/agents/skill)** — Give AI coding agents full knowledge of Metaplex programs
-- **[Register an Agent](/agents/register-agent)** — Bind an identity record to an MPL Core asset
+- **[Create an Agent](/agents/create-agent)** — Mint and register an agent on Solana
 - **[Read Agent Data](/agents/run-agent)** — Verify registration and inspect agent identity on-chain
 - **[Run an Agent](/agents/run-an-agent)** — Set up an executive profile and delegate execution
 

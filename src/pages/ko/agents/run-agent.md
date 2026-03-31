@@ -20,7 +20,7 @@ created: '02-25-2026'
 updated: '03-12-2026'
 ---
 
-[등록](/agents/register-agent) 후 온체인에서 에이전트 신원 데이터를 읽고 확인합니다. {% .lead %}
+[등록](/agents/create-agent) 후 온체인에서 에이전트 신원 데이터를 읽고 확인합니다. {% .lead %}
 
 ## 요약
 
@@ -128,7 +128,7 @@ if (agentIdentity?.uri) {
 }
 ```
 
-전체 필드 레퍼런스는 [에이전트 등록](/agents/register-agent#agent-registration-document)을 참조하세요.
+전체 필드 레퍼런스는 [에이전트 등록](/agents/create-agent#agent-registration-document)을 참조하세요.
 
 ## 에이전트의 지갑 가져오기
 

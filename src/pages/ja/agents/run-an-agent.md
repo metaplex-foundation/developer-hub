@@ -29,7 +29,7 @@ updated: '03-30-2026'
 - **エグゼクティブプロファイルを登録** — ウォレットごとに1回のオンチェーンセットアップで検証可能なオペレーターIDを作成
 - **実行を委任** — アセットオーナーがオンチェーンの委任レコードを通じてエージェントを特定のエグゼクティブにリンク
 - **委任を確認** — 委任レコードPDAを派生し、アカウントが存在するかチェック
-- [登録済みエージェント](/agents/register-agent)と`@metaplex-foundation/mpl-agent-registry`パッケージ（v0.2.0以上）が**必要**
+- [登録済みエージェント](/agents/create-agent)と`@metaplex-foundation/mpl-agent-registry`パッケージ（v0.2.0以上）が**必要**
 
 ## クイックスタート
 
@@ -58,7 +58,7 @@ updated: '03-30-2026'
 
 ## 前提条件
 
-IDレコードとAgentIdentityプラグインを持つ[登録済みエージェント](/agents/register-agent)と、`@metaplex-foundation/mpl-agent-registry`パッケージ（v0.2.0以上）が必要です。
+IDレコードとAgentIdentityプラグインを持つ[登録済みエージェント](/agents/create-agent)と、`@metaplex-foundation/mpl-agent-registry`パッケージ（v0.2.0以上）が必要です。
 
 ## エグゼクティブプロファイルを登録
 

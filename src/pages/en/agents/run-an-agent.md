@@ -29,7 +29,7 @@ Execution delegation allows an off-chain executive to sign transactions on behal
 - **Register an executive profile** — a one-time on-chain setup per wallet that creates a verifiable operator identity
 - **Delegate execution** — the asset owner links their agent to a specific executive via an on-chain delegation record
 - **Verify delegation** — derive the delegation record PDA and check whether the account exists
-- **Requires** a [registered agent](/agents/register-agent) and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+)
+- **Requires** a [registered agent](/agents/create-agent) and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+)
 
 ## Quick Start
 
@@ -58,7 +58,7 @@ Every executive profile lives on-chain, so the registry acts as a verifiable dir
 
 ## Prerequisites
 
-You need a [registered agent](/agents/register-agent) with an identity record and AgentIdentity plugin, and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+).
+You need a [registered agent](/agents/create-agent) with an identity record and AgentIdentity plugin, and the `@metaplex-foundation/mpl-agent-registry` package (v0.2.0+).
 
 ## Register an Executive Profile
 

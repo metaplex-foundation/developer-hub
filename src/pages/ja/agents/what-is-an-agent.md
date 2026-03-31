@@ -35,7 +35,7 @@ Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-co
 
 これにより、Coreアセットは自律型エージェントに最適です：
 
-- **アセットがエージェントのIDとなる** — [AgentIdentity](/agents/register-agent)プラグインでオンチェーンに登録されます
+- **アセットがエージェントのIDとなる** — [AgentIdentity](/agents/create-agent)プラグインでオンチェーンに登録されます
 - **アセットのPDAウォレットがエージェントの資金を保持する** — エージェントのみが制御するSOL、トークン、その他のアセット
 - **エグゼクティブがエージェントに代わって行動する** — Solanaにはバックグラウンドタスクやオンチェーン推論がないため、委任された[エグゼクティブ](/agents/run-an-agent)がエージェントに代わってトランザクションに署名します。オーナーはすべてのアクションを承認する必要はありません。
 
@@ -44,7 +44,7 @@ Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-co
 ## 次のステップ
 
 - **[スキル](/agents/skill)** — AIコーディングエージェントにMetaplexプログラムの完全な知識を付与
-- **[エージェントを登録](/agents/register-agent)** — MPL CoreアセットにIDレコードを紐付け
+- **[エージェントを作成](/agents/create-agent)** — エージェントをミントして登録
 - **[エージェントデータを読み取る](/agents/run-agent)** — 登録を確認し、オンチェーンでエージェントIDを検査
 - **[エージェントを実行](/agents/run-an-agent)** — エグゼクティブプロファイルを設定し、実行を委任
 

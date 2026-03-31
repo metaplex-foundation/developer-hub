@@ -32,7 +32,7 @@ updated: '03-30-2026'
 - **需要** `@metaplex-foundation/umi-bundle-defaults` 和 `@metaplex-foundation/mpl-core`
 
 {% callout title="更倾向于单次 API 调用？" %}
-[Mint Agent API](/agents/mint-agent) 可以一步完成 Core 资产创建和身份注册，无需手动创建资产或配置 SDK。如果您需要对注册流程进行精细控制，请使用本页面。
+[Mint Agent API](/agents/create-agent) 可以一步完成 Core 资产创建和身份注册，无需手动创建资产或配置 SDK。如果您需要对注册流程进行精细控制，请使用本页面。
 {% /callout %}
 
 ## 安装

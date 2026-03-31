@@ -20,7 +20,7 @@ created: '02-25-2026'
 updated: '03-12-2026'
 ---
 
-Read and verify agent identity data on-chain after [registration](/agents/register-agent). {% .lead %}
+Read and verify agent identity data on-chain after [registration](/agents/create-agent). {% .lead %}
 
 ## Summary
 
@@ -128,7 +128,7 @@ The document follows the [ERC-8004](https://eips.ethereum.org/EIPS/eip-8004) age
 }
 ```
 
-See [Register an Agent](/agents/register-agent#agent-registration-document) for the full field reference.
+See [Register an Agent](/agents/create-agent#agent-registration-document) for the full field reference.
 
 ## Fetch the Agent's Wallet
 
