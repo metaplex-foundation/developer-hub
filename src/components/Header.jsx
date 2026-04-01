@@ -54,7 +54,7 @@ export function Header({ page }) {
 
 
 
-        <div className="relative flex basis-0 items-center justify-end gap-4 sm:gap-6 lg:flex-grow">
+        <div className="relative flex flex-shrink-0 items-center justify-end gap-4 sm:gap-6">
           <Link
             href="https://discord.com/invite/metaplex"
             target="_blank"
