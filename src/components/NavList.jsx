@@ -259,15 +259,15 @@ const NavList = () => {
   }
 
   return (
-    <div className="hidden cursor-pointer gap-6 lg:flex">
-      {/* <div className="hidden flex-col lg:flex">
+    <div className="hidden cursor-pointer gap-6 nav:flex">
+      {/* <div className="hidden flex-col nav:flex">
         <Link href={getLocalizedHref("/#", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             {t('token', 'Tokens')}
           </div>
         </Link>
       </div>
-      <div className="hidden flex-col lg:flex">
+      <div className="hidden flex-col nav:flex">
         <Link href={getLocalizedHref("/#", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             {t('nfts', 'NFTs')}
@@ -288,7 +288,7 @@ const NavList = () => {
         const path = categoryPaths[item]
         if (path) {
           return (
-            <div className="hidden flex-col lg:flex" key={index}>
+            <div className="hidden flex-col nav:flex" key={index}>
               <Link href={getLocalizedHref(path, locale)}>
                 <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground">
                   {getTranslatedCategory(item)}
@@ -300,7 +300,7 @@ const NavList = () => {
 
         // Fallback to dropdown for any other categories
         return (
-          <div className="hidden flex-col lg:flex" key={index}>
+          <div className="hidden flex-col nav:flex" key={index}>
             <SwitcherPopover menuItem={productCategories[index]}>
               <Popover.Button className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-black dark:text-white">
                 {getTranslatedCategory(item)}
@@ -310,7 +310,7 @@ const NavList = () => {
         )
       })}
 
-      {/* <div className="hidden flex-col lg:flex">
+      {/* <div className="hidden flex-col nav:flex">
         <Link href="/code-viewer">
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             Playground

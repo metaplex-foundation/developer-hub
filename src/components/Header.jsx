@@ -36,7 +36,7 @@ export function Header({ page }) {
       )}
     >
       <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8 xl:px-12">
-        <div className="mr-6 flex lg:hidden">
+        <div className="mr-6 flex nav:hidden">
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center gap-12">

@@ -86,6 +86,9 @@ module.exports = {
   		]
   	},
   	extend: {
+  		screens: {
+  			nav: '1060px',
+  		},
   		fontFamily: {
   			sans: [
   				'Inter',
