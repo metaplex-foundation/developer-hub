@@ -181,7 +181,7 @@ export function CodeTabsWithContext({
                     ? 'DAS (cURL)'
                     : tab.language === 'bash' || tab.language === 'shell'
                       ? tab.framework
-                      : `${tab.framework} (${tab.language === 'javascript' ? 'JS' : 'RS'})`
+                      : `${tab.framework} (${tab.language === 'javascript' ? 'JS' : tab.language === 'typescript' ? 'TS' : tab.language === 'rust' ? 'RS' : tab.language?.toUpperCase?.() ?? 'RS'})`
                 )}
               </button>
             )
