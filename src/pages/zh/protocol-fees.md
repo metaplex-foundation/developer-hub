@@ -6,61 +6,65 @@ description: Metaplex产品链上费用详情。
 
 Metaplex协议目前包含以下费用：
 
-## 代币发行
+{% totem %}
 
-特定链上资产发行的协议费用。
+{% totem-accordion title="Genesis" %}
 
-### Memecoins
-
-{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
-
-### Project Tokens
-
-{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
-
-\* 总池费用为0.9%：0.42%归流动性提供者，0.08%归Raydium。
-
-## Genesis
-
-代币发行平台费用，用于Launch Pool操作。这些是按百分比收取的费用，适用于存款、取款和毕业。
+联合曲线生命周期全程的代币发行平台费用。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
-## Core
+{% /totem-accordion %}
 
-由铸造者支付，通常是铸造新发行NFT的个人收藏者。包括所有"创建"NFT的指令，包括创建打印版本的指令。
+{% totem-accordion title="Core" %}
+
+由铸造者支付（通常是铸造新发行品的个人收藏者）。包括所有"创建"NFT的指令，包括创建打印版本的指令。
 
 {% protocol-fees program="core" showTitle=false /%}
 
-## Bubblegum v2
+{% /totem-accordion %}
+
+{% totem-accordion title="Bubblegum v2" %}
 
 具有改进功能和灵活性的压缩NFT。
 
 {% protocol-fees program="bubblegum-v2" showTitle=false /%}
 
-## Token Metadata
+{% /totem-accordion %}
 
-由铸造者支付，通常是铸造新发行NFT的个人收藏者。或者，创作者可以考虑使用Core（下一代NFT）以获得最大的可组合性和更低的铸造成本，或使用Bubblegum（压缩NFT）。
+{% totem-accordion title="Token Metadata" %}
+
+由铸造者支付（通常是铸造新发行品的个人收藏者）。或者，创作者可以考虑使用Core（下一代NFT）以获得最大的可组合性和更低的铸造成本，或使用Bubblegum（压缩NFT）。
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
-## Bubblegum v1（旧版）
+{% /totem-accordion %}
 
-原始的压缩NFT程序。
+{% totem-accordion title="Bubblegum v1（旧版）" %}
+
+原始压缩NFT程序。
 
 {% protocol-fees program="bubblegum" showTitle=false /%}
 
-## MPL-Hybrid
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-Hybrid" %}
 
 由交换代币和NFT的个人支付。
 
 {% protocol-fees program="mpl-hybrid" showTitle=false /%}
 
-## Fusion（Trifle）
+{% /totem-accordion %}
 
-可组合NFT费用，用于合并、拆分和约束编辑操作。
+{% totem-accordion title="Fusion (Trifle)" %}
+
+用于合并、拆分和约束编辑操作的可组合NFT费用。
 
 {% protocol-fees program="fusion" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% /totem %}
 
 ## 常见问题
 

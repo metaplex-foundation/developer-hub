@@ -61,7 +61,7 @@ This guide covers:
 Presales sell tokens at a predetermined price. The price is calculated from the token allocation and SOL cap you configure, making it ideal for token launches with a known valuation.
 
 - Fixed price = SOL cap / token allocation
-- Users deposit SOL during the deposit window ({% fee product="genesis" config="presale" fee="deposit" /%} fee applies)
+- Users deposit SOL during the deposit window (0% fee applies)
 - First-come-first-served up to the SOL cap
 - Optional: minimum/maximum deposit limits and cooldowns.
 
@@ -91,7 +91,7 @@ For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
 
 ### Fees
 
-{% protocol-fees program="genesis" config="presale" showTitle=false /%}
+Presale deposits have a 0% fee. See the [Protocol Fees](/smart-contracts/genesis#protocol-fees) section for the full bonding curve and post-bond fee breakdown.
 
 ## Quick Start
 
@@ -404,7 +404,7 @@ if (deposit) {
 
 ## Notes
 
-- The {% fee product="genesis" config="presale" fee="deposit" /%} protocol fee applies to deposits
+- The 0% protocol fee applies to deposits
 - Users must wrap SOL to wSOL before depositing
 - Multiple deposits from the same user accumulate in one deposit account
 - Run `triggerBehaviorsV2` after deposits close for the team to access raised funds; it cannot be called before the deposit period ends

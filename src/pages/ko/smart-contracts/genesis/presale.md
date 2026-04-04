@@ -60,7 +60,7 @@ faqs:
 Presale은 기존 고정가 토큰 판매와 유사하게 미리 정해진 가격으로 토큰을 판매합니다. 가격은 설정한 토큰 할당량과 SOL 상한에서 계산되며, 알려진 밸류에이션으로 암호화폐 자금 조달에 이상적입니다.
 
 - 고정 가격 = SOL 상한 / 토큰 할당량
-- 사용자는 예치 기간 동안 SOL을 예치합니다 ({% fee product="genesis" config="presale" fee="deposit" /%} 수수료 적용)
+- 사용자는 예치 기간 동안 SOL을 예치합니다 (0% 수수료 적용)
 - SOL 상한까지 선착순
 - 옵션: 최소/최대 예치 한도, 쿨다운, 백엔드 인증
 
@@ -90,7 +90,7 @@ tokens = deposit / price
 
 ### 수수료
 
-{% protocol-fees program="genesis" config="presale" showTitle=false /%}
+Presale deposits have a 0% fee. See the [Protocol Fees](/smart-contracts/genesis#protocol-fees) section for the full bonding curve and post-bond fee breakdown.
 
 ## 빠른 시작
 
@@ -403,7 +403,7 @@ if (deposit) {
 
 ## 참고 사항
 
-- 예치에는 {% fee product="genesis" config="presale" fee="deposit" /%} 프로토콜 수수료가 적용됩니다
+- 예치에는 0% 프로토콜 수수료가 적용됩니다
 - 사용자는 예치 전에 SOL을 wSOL로 래핑해야 합니다
 - 동일한 사용자의 여러 예치는 하나의 예치 계정에 누적됩니다
 - 팀이 자금에 접근하려면 예치 기간 종료 후 `triggerBehaviorsV2`를 실행해야 합니다. 예치 기간 전에는 호출할 수 없습니다

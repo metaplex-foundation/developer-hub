@@ -6,65 +6,65 @@ description: Details of the onchain fees for Metaplex's products.
 
 The Metaplex Protocol currently includes the following fees:
 
-## Token Launches
+{% totem %}
 
-Protocol fees for launching specific types of onchain assets.
+{% totem-accordion title="Genesis" %}
 
-### Memecoins
+Token launch platform fees across the bonding curve lifecycle.
 
-{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+{% protocol-fees program="genesis" showTitle=false /%}
 
-### Project Tokens
+{% /totem-accordion %}
 
-{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
-
-\* Total pool fees are 0.9%: 0.42% goes to liquidity providers and 0.08% to Raydium.
-
-## Genesis
-
-Token launch platform fees for different operations.
-
-### Launch Pool
-{% protocol-fees program="genesis" showTitle=false config="launchPool" /%}
-
-### Presale
-{% protocol-fees program="genesis" showTitle=false config="presale" /%}
-
-## Core
+{% totem-accordion title="Core" %}
 
 Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.
 
 {% protocol-fees program="core" showTitle=false /%}
 
-## Bubblegum v2
+{% /totem-accordion %}
+
+{% totem-accordion title="Bubblegum v2" %}
 
 Compressed NFTs with improved features and flexibility.
 
 {% protocol-fees program="bubblegum-v2" showTitle=false /%}
 
-## Token Metadata
+{% /totem-accordion %}
+
+{% totem-accordion title="Token Metadata" %}
 
 Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs).
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
-## Bubblegum v1 (Legacy)
+{% /totem-accordion %}
+
+{% totem-accordion title="Bubblegum v1 (Legacy)" %}
 
 The original compressed NFT program.
 
 {% protocol-fees program="bubblegum" showTitle=false /%}
 
-## MPL-Hybrid
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-Hybrid" %}
 
 Paid by the individual who swaps tokens and NFTs.
 
 {% protocol-fees program="mpl-hybrid" showTitle=false /%}
 
-## Fusion (Trifle)
+{% /totem-accordion %}
+
+{% totem-accordion title="Fusion (Trifle)" %}
 
 Composable NFT fees for combine, split, and constraint editing operations.
 
 {% protocol-fees program="fusion" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% /totem %}
 
 ## FAQs
 

@@ -38,7 +38,7 @@ faqs:
   - q: Launch Pool 中的代币价格是如何确定的？
     a: 价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
   - q: 用户可以提取他们的存款吗？
-    a: 可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
+    a: 可以，用户可以在存款期间提取。需要支付 0% 的提款费用，以防止系统被利用。
   - q: 如果我多次存款会怎样？
     a: 同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。
   - q: 用户何时可以领取他们的代币？
@@ -61,8 +61,8 @@ faqs:
 
 Launch Pool 是一种众筹风格的代币发行机制，在定义的窗口期内接受存款，然后按比例分配代币。最终代币价格由总存款除以代币分配量确定——为您的代币生成事件 (TGE) 实现透明的链上价格发现。
 
-- 用户在存款窗口期间存入 SOL（收取 {% fee product="genesis" config="launchPool" fee="deposit" /%} 费用）
-- 存款期间允许提款（收取 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用）
+- 用户在存款窗口期间存入 SOL（收取 0% 费用）
+- 存款期间允许提款（收取 0% 费用）
 - 代币分配与存款份额成比例
 - 结束行为将收集的 SOL 路由到资金库 bucket
 
@@ -291,7 +291,7 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 
 ### 提款
 
-用户可以在存款期间提款。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用。
+用户可以在存款期间提款。需要支付 0% 费用。
 
 {% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
@@ -426,7 +426,7 @@ if (deposit) {
 
 ## 注意事项
 
-- {% fee product="genesis" config="launchPool" fee="deposit" /%} 协议费用适用于存款和提款
+- 0% 协议费用适用于存款和提款
 - 同一用户的多次存款会累积在一个存款账户中
 - 如果用户提取全部余额，存款 PDA 将被关闭
 - 存款结束后必须执行 `triggerBehaviorsV2` 以处理结束行为
@@ -438,7 +438,7 @@ if (deposit) {
 价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
 
 ### 用户可以提取他们的存款吗？
-可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
+可以，用户可以在存款期间提取。需要支付 0% 的提款费用，以防止系统被利用。
 
 ### 如果我多次存款会怎样？
 同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。

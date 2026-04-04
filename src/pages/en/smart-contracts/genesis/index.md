@@ -3,7 +3,7 @@ title: Genesis - Solana Token Launchpad & Launch Platform
 metaTitle: Genesis — Solana Token Launchpad for Fair Launches & Token Sales | Metaplex
 description: Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
 created: '01-15-2025'
-updated: '03-04-2026'
+updated: '04-02-2026'
 keywords:
   - token launch
   - token launchpad
@@ -31,20 +31,20 @@ faqs:
   - q: What launch mechanisms does Genesis support?
     a: Genesis supports three mechanisms - Presale (fixed price), Launch Pool (proportional distribution with price discovery), and Uniform Price Auction (bid-based with clearing price).
   - q: How much does it cost to use Genesis?
-    a: Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs - you only pay Solana transaction fees plus the protocol fee on funds raised.
+    a: Genesis uses a bonding curve fee model. Pre-bond swaps have a 0.50% protocol fee (plus 0.60% creator fee if enabled). Post-bond trading has a 0.90% base fee or 1.25% with creator revenue sharing. Launch pool deposits are free (0% fee). Graduation costs 0.194 SOL for Raydium migration.
   - q: Can I revoke token authorities after launch?
     a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
   - q: What's the difference between Launch Pool and Presale?
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
-  - q: What is the memecoin launch type?
-    a: The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 500M token allocation (50% of 1B supply), 98% Raydium LP, 1% creator unlocked, and permanent LP lock. You only need to set a deposit start time.
+  - q: How does the bonding curve work?
+    a: The bonding curve handles pre-bond price discovery and collects a 0.50% protocol fee on swaps. When the graduating market cap is reached, liquidity automatically migrates to a Raydium pool. Post-bond trading uses a 0.90% base fee or 1.25% with creator revenue sharing.
 ---
 
 **Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run a presale, fair launch, auction, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}
 
 {% callout title="Choose Your Path" %}
 - **No-code launch?** Use the [Metaplex token launchpad](https://www.metaplex.com) to launch a token with no coding required
-- **Quick memecoin launch?** Use `launchType: 'memecoin'` for a streamlined launch with hardcoded defaults — just set a start time. See [API Client](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
+- **Quick launch?** Use the bonding curve for automated price discovery and graduation to Raydium. See [Protocol Fees](#protocol-fees) for the fee breakdown
 - **Build your own launchpad?** Use the Genesis SDK to build a custom token launch platform or host a token sale on your own website
 - **New to Genesis?** Start with [Getting Started](/smart-contracts/genesis/getting-started) to understand the flow
 - **Ready to build?** Jump to [Launch Pool](/smart-contracts/genesis/launch-pool) or [Presale](/smart-contracts/genesis/presale)
@@ -81,16 +81,9 @@ Genesis supports three mechanisms that can be combined:
 
 ## Core Concepts
 
-### Launch Types
+### Bonding Curve
 
-Every Genesis launch has a **type** that categorizes it:
-
-| Type | Description | Configuration |
-|------|-------------|---------------|
-| **Project** | Structured launch with full control over allocations, liquidity, vesting, and fees | Configurable deposit window (48h default), allocation splits, locked schedules |
-| **Memecoin** | Streamlined fair launch with hardcoded defaults | 1-hour deposit, 50% allocation, 98% Raydium LP, permanent LP lock |
-
-The launch type is recorded on-chain in the [Genesis Account](#genesis-account) by a backend crank after creation. Traders and aggregators can query the type programmatically via the [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) (`fetchGenesisAccountV2`) or the [Integration APIs](/smart-contracts/genesis/integration-apis) (`type` field in REST responses).
+Every Genesis launch uses a **bonding curve** that manages price discovery and graduation to a Raydium liquidity pool. The bonding curve handles the pre-bond trading phase, collects protocol fees, and automatically migrates liquidity when the graduating market cap is reached.
 
 ### Genesis Account
 
@@ -118,13 +111,64 @@ Every bucket has time windows that control when actions are allowed:
 
 ## Protocol Fees
 
-| Action | Fee |
-|--------|-----|
-| Deposit | {% fee product="genesis" config="launchPool" fee="deposit" /%} of deposit amount |
-| Withdraw | {% fee product="genesis" config="launchPool" fee="withdraw" /%} of withdrawal amount |
-| Claim | Transaction fee only |
+Genesis uses a bonding curve fee model. Fees differ between the pre-bond phase (before graduation), post-bond trading, and the launch pool mechanism.
 
-No upfront costs. You only pay fees on funds raised.
+### Bonding Curve (Pre-Bond)
+
+| Fee | Amount |
+|-----|--------|
+| Protocol fee | 0.50% |
+| Creator fee (with creator rev) | 0.60% |
+
+**Graduation** costs 0.194 SOL for Raydium migration. The bonding curve protocol covers this cost; launch pool creators pay upfront.
+
+**Graduating market cap** targets 10–15% below the Pump benchmark (~410 SOL assuming 85 SOL in liquidity) while staying in the same ballpark.
+
+### Post-Bond Trading (Base)
+
+Standard configuration without creator revenue sharing — **0.90% total fee**:
+
+| Component | Amount |
+|-----------|--------|
+| Base fee | 0.50% |
+| LP fees (compounded back into pool) | 0.42% |
+| Raydium fee | 0.08% |
+| Metaplex fee (Raydium "Creator Fee") | 0.40% |
+
+### Post-Bond Trading (With Creator Revenue)
+
+Preferred configuration with creator revenue sharing — **1.25% total fee**:
+
+| Component | Amount |
+|-----------|--------|
+| Base LP fee (both sides) | 0.25% |
+| LP fees (compounded) | 0.15% |
+| Raydium fee | 0.10% |
+| Metaplex fee (from Raydium "Creator Fee") | 0.40% |
+| Creator fee (from Raydium "Creator Fee") | 0.60% |
+
+### Launch Pool
+
+| Fee | Amount |
+|-----|--------|
+| Deposit fee | 0% |
+| Withdraw fee + variable penalties | 0% |
+| Creator withdraw fee | 5% |
+
+The creator withdraw fee is variable and can be effectively zero if the project dedicates 100% to liquidity.
+
+**Liquidity requirement:** 100% locked during the launch.
+
+### Post-Launch Liquidity
+
+| Parameter | Value |
+|-----------|-------|
+| Minimum locked liquidity | 20% (quarterly unlocks over 1 year) |
+| Total swap fee | 0.90% |
+| Base fee | 0.50% |
+| LP fees (compounded back into pool) | 0.42% |
+| Raydium fee | 0.08% |
+| Metaplex fee (Raydium "Creator Fee") | 0.40% |
 
 ## Program Information
 
@@ -151,7 +195,7 @@ Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana
 Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
 
 ### How much does it cost to use Genesis?
-Genesis charges a {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee on deposits. There are no upfront costs—you only pay Solana transaction fees plus the protocol fee on funds raised.
+Genesis uses a bonding curve fee model. Pre-bond swaps have a 0.50% protocol fee (plus 0.60% creator fee if enabled). Post-bond trading has a 0.90% base fee or 1.25% with creator revenue sharing. Launch pool deposits are free (0% fee). Graduation costs 0.194 SOL for Raydium migration.
 
 ### Can I revoke token authorities after launch?
 Yes. Genesis provides the `revokeV2` instruction to permanently revoke mint and/or freeze authority.
@@ -159,8 +203,8 @@ Yes. Genesis provides the `revokeV2` instruction to permanently revoke mint and/
 ### What's the difference between Launch Pool and Presale?
 **Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
 
-### What is the memecoin launch type?
-The memecoin launch type is a streamlined option with hardcoded defaults — 1-hour deposit window, fixed 500M token allocation (50% of 1B supply), 98% Raydium LP, 1% creator unlocked, and permanent LP lock. You only need to provide a deposit start time. Use `launchType: 'memecoin'` in the SDK or `"type": "memecoin"` in the REST API. See [API Client](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow) for details.
+### How does the bonding curve work?
+The bonding curve handles pre-bond price discovery and collects a 0.50% protocol fee on swaps (plus 0.60% creator fee if enabled). When the graduating market cap is reached, liquidity automatically migrates to a Raydium pool at a cost of 0.194 SOL. Post-bond trading uses a 0.90% base fee or 1.25% with creator revenue sharing. See [Protocol Fees](#protocol-fees) for the full breakdown.
 
 ### Can I combine multiple launch mechanisms?
 Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.
@@ -176,7 +220,7 @@ Yes. Genesis uses a bucket system where you can add multiple inflow buckets and 
 | **Launch Pool** | Deposit-based distribution where price is discovered at close |
 | **Presale** | Fixed-price sale at a predetermined rate |
 | **Quote Token** | The token users deposit (usually wSOL) |
-| **Launch Type** | Category of a launch: `project` (full control) or `memecoin` (streamlined defaults). Set on-chain by a backend crank after creation |
+| **Bonding Curve** | Pre-bond pricing mechanism that discovers price through swaps and automatically graduates liquidity to Raydium when the market cap target is reached |
 | **Base Token** | The token being launched and distributed |
 
 ## Next Steps

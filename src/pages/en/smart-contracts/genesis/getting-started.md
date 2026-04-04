@@ -175,10 +175,10 @@ Use Unix timestamps (seconds, not milliseconds).
 
 **What happens:** Users deposit SOL into your inflow bucket(s).
 
-- **Launch Pool:** Users deposit SOL, can withdraw with {% fee product="genesis" config="launchPool" fee="withdraw" /%} fee
+- **Launch Pool:** Users deposit SOL, can withdraw with no fee (variable penalties may apply)
 - **Presale:** Users deposit SOL at fixed price, up to a per-user deposit cap (maximum amount each user can contribute)
 
-A {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee applies to all deposits.
+Deposits have a 0% protocol fee. See [Protocol Fees](/smart-contracts/genesis#protocol-fees) for the full fee breakdown.
 
 ## Step 5: Transition
 

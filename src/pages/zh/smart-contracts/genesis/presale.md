@@ -60,7 +60,7 @@ faqs:
 Presale以预定价格出售代币，类似于传统的代币发售。价格根据您配置的代币分配量和SOL上限计算，非常适合已知估值的加密融资。
 
 - 固定价格 = SOL上限 / 代币分配量
-- 用户在存款窗口期间存入SOL（收取{% fee product="genesis" config="presale" fee="deposit" /%}费用）
+- 用户在存款窗口期间存入SOL（收取0%费用）
 - 先到先得，直到SOL上限
 - 可选：最小/最大存款限额、冷却时间、后端授权
 
@@ -90,7 +90,7 @@ tokens = deposit / price
 
 ### 费用
 
-{% protocol-fees program="genesis" config="presale" showTitle=false /%}
+Presale deposits have a 0% fee. See the [Protocol Fees](/smart-contracts/genesis#protocol-fees) section for the full bonding curve and post-bond fee breakdown.
 
 ## 快速开始
 
@@ -403,7 +403,7 @@ if (deposit) {
 
 ## 注意事项
 
-- 存款需支付{% fee product="genesis" config="presale" fee="deposit" /%}协议费
+- 存款需支付0%协议费
 - 用户必须在存款前将SOL包装为wSOL
 - 同一用户的多次存款累积在一个存款账户中
 - 存款期结束后运行 `triggerBehaviorsV2`，团队才能访问资金；存款期结束前无法调用
