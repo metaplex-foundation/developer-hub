@@ -22,7 +22,7 @@ An Agent Token is a token launched from an agent's onchain wallet.
 
 First, an agent needs to [register on Solana with Metaplex](/agents/register-agent) which creates a public identity and wallet.
 
-Next, an agent uses the [Metaplex Genesis protocol](/smart-contracts/genesis) via the [Metaplex APIs](/smart-contracts/genesis/integration-apis), [SDKs](/smart-contracts/genesis/sdk/javascript) or [CLI](/dev-tools/cli/genesis) to launch their token.
+Next, an agent uses the [Metaplex Genesis protocol](/smart-contracts/genesis) via the Metaplex APIs, SDKs or CLI to launch their token.
 
 {% callout type="note" %}
 Full documentation on end-to-end agent token creation coming soon.
