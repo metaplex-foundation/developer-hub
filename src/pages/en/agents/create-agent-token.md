@@ -56,5 +56,3 @@ Full end-to-end documentation for agent token creation is coming soon. This page
 - An agent must be [registered](/agents/register-agent) before it can launch a token. The registration creates the onchain wallet used for token creation.
 - Agent tokens are standard SPL tokens launched through [Genesis](/smart-contracts/genesis) — they are fully compatible with the Solana token ecosystem.
 - The Genesis protocol handles all token distribution mechanics (launch pools, presales, auctions) regardless of whether the launcher is an agent or a human wallet.
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified April 2026 · [Genesis](https://github.com/metaplex-foundation/mpl-genesis)*

@@ -56,5 +56,3 @@ updated: '04-05-2026'
 - 代理在发行代币之前必须先[注册](/agents/register-agent)。注册会创建用于代币创建的链上钱包。
 - 代理代币是通过 [Genesis](/smart-contracts/genesis) 发行的标准 SPL 代币，与 Solana 代币生态系统完全兼容。
 - Genesis 协议处理所有代币分发机制（启动池、预售、拍卖），无论发行者是代理还是人类钱包。
-
-*由 Metaplex 维护 · 2026 年 4 月验证 · [Genesis](https://github.com/metaplex-foundation/mpl-genesis)*
