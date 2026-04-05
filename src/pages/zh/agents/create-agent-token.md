@@ -22,7 +22,7 @@ updated: '04-05-2026'
 
 首先，代理需要[在 Solana 上向 Metaplex 注册](/agents/register-agent)，这将创建公开身份和钱包。
 
-然后，代理通过 [Metaplex API](/smart-contracts/genesis/integration-apis)、[SDK](/smart-contracts/genesis/sdk/javascript) 或 [CLI](/dev-tools/cli/genesis) 使用 [Metaplex Genesis 协议](/smart-contracts/genesis)发行代币。
+然后，代理通过 Metaplex API、SDK 或 CLI 使用 [Metaplex Genesis 协议](/smart-contracts/genesis)发行代币。
 
 {% callout type="note" %}
 代理代币创建的完整端到端文档即将推出。

@@ -22,7 +22,7 @@ updated: '04-05-2026'
 
 まず、エージェントは[Solana上でMetaplexに登録](/agents/register-agent)する必要があります。これにより、公開IDとウォレットが作成されます。
 
-次に、エージェントは[Metaplex Genesisプロトコル](/smart-contracts/genesis)を[Metaplex API](/smart-contracts/genesis/integration-apis)、[SDK](/smart-contracts/genesis/sdk/javascript)、または[CLI](/dev-tools/cli/genesis)経由で使用してトークンを発行します。
+次に、エージェントは[Metaplex Genesisプロトコル](/smart-contracts/genesis)をMetaplex API、SDK、またはCLI経由で使用してトークンを発行します。
 
 {% callout type="note" %}
 エージェントトークン作成のエンドツーエンドの完全なドキュメントは近日公開予定です。
