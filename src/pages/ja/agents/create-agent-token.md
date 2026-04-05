@@ -56,5 +56,3 @@ Genesisの完全なドキュメントは[Genesis概要](/smart-contracts/genesis
 - エージェントはトークンを発行する前に[登録](/agents/register-agent)が必要です。登録によりトークン作成に使用されるオンチェーンウォレットが作成されます。
 - エージェントトークンは[Genesis](/smart-contracts/genesis)を通じて発行される標準的なSPLトークンです。Solanaトークンエコシステムと完全に互換性があります。
 - Genesisプロトコルは、発行者がエージェントであるか人間のウォレットであるかに関係なく、すべてのトークン配布メカニズム（ローンチプール、プレセール、オークション）を処理します。
-
-*Metaplexが管理 · 2026年4月検証済み · [Genesis](https://github.com/metaplex-foundation/mpl-genesis)*
