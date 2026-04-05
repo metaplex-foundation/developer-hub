@@ -152,6 +152,18 @@ export const agentMenuCategory = [
     },
   },
   {
+    name: 'Create an Agent Token',
+    headline: 'Launch a token from an agent\'s onchain wallet.',
+    description: 'Launch a token from an agent\'s onchain wallet using the Metaplex Genesis protocol.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/create-agent-token',
+    localizedNavigation: {
+      ja: { name: 'エージェントトークンの作成', headline: 'エージェントのオンチェーンウォレットからトークンを発行します。' },
+      ko: { name: '에이전트 토큰 생성', headline: '에이전트의 온체인 지갑에서 토큰을 발행합니다.' },
+      zh: { name: '创建代理代币', headline: '从代理的链上钱包发行代币。' },
+    },
+  },
+  {
     name: 'Run an Agent',
     headline: 'Delegate execution to run an autonomous agent.',
     description: 'Set up an executive profile and delegate execution permissions to run an agent on Solana.',

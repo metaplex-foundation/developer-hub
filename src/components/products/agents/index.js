@@ -52,6 +52,10 @@ export const agents = {
               href: '/agents/run-agent',
             },
             {
+              title: 'Create an Agent Token',
+              href: '/agents/create-agent-token',
+            },
+            {
               title: 'Run an Agent',
               href: '/agents/run-an-agent',
             },
