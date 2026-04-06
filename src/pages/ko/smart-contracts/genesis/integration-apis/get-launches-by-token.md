@@ -77,7 +77,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       }
     ],
     "baseToken": {
@@ -162,4 +162,4 @@ println!("{} launches found", response.data.launches.len());
 
 - 하나의 토큰은 다른 `genesisIndex` 값을 사용하여 여러 런치를 가질 수 있습니다. 응답은 관련된 모든 런치 캠페인을 반환합니다.
 - 토큰 민트 주소를 찾을 수 없는 경우 `404`를 반환합니다.
-- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool` 또는 `presale`)을 나타냅니다.

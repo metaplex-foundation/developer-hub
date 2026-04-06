@@ -76,7 +76,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "heroUrl": "launches/abc123/hero.webp",
       "graduatedAt": "2026-01-15T18:05:00.000Z",
       "lastActivityAt": "2026-01-15T17:45:00.000Z",
-      "type": "project"
+      "type": "launchpool"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -159,4 +159,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - 查找 Genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/smart-contracts/genesis/integration-apis/get-launches-by-token)端点。
 - 如果 Genesis 地址未找到或没有有效发行，返回 `404`。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示发行类别（`project`、`memecoin` 或 `custom`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。

@@ -119,7 +119,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'presale';
 }
 
 interface BaseToken {
@@ -211,7 +211,7 @@ serde = { version = "1", features = ["derive"] }
 | **Base Token** | 通过铸造地址标识的待发行代币 |
 | **Launch Page** | 用户可以参与发行的 URL |
 | **Mechanic** | 发行使用的分配机制（例如 `launchpoolV2`、`presaleV2`、`auction`） |
-| **Launch Type** | 发行的类别：`project`、`memecoin` 或 `custom` |
+| **Launch Type** | 发行的底层机制：`launchpool` 或 `presale` |
 | **Spotlight** | 平台策划的精选发行标志 |
 | **Status** | 发行的当前状态：`upcoming`、`live`、`graduated` 或 `ended` |
 | **Socials** | 与代币关联的社交媒体链接（X/Twitter、Telegram、Discord） |

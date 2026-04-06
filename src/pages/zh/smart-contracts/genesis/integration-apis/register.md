@@ -57,7 +57,7 @@ curl -X POST https://api.metaplex.com/v1/launches/register \
       "supply": 1000000000,
       "network": "solana-devnet",
       "quoteMint": "So11111111111111111111111111111111111111112",
-      "type": "project",
+      "type": "launchpool",
       "finalize": true,
       "publicKey": "YourWalletPublicKey...",
       "allocations": [...]

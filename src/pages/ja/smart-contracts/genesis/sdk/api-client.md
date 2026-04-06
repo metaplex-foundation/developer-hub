@@ -69,31 +69,6 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `token.id` | `string` | トークン ID |
 | `token.mintAddress` | `string` | トークンミントアドレス |
 
-### Memecoin Launch — Simplified Flow
-
-ミームコインローンチの場合、SDK は入金開始時刻のみを必要とする合理化された入力を使用します。アロケーション分割、LP 設定、手数料などのその他のパラメータはすべて、適切なデフォルト値にハードコードされています。
-
-{% code-tabs-imported from="genesis/api_memecoin_launch" frameworks="umi" filename="memecoinLaunch" /%}
-
-{% callout type="note" title="Project vs Memecoin" %}
-
-| Aspect | Project | Memecoin |
-|--------|---------|----------|
-| Deposit window | 48 hours | 1 hour |
-| Token allocation | Configurable | Fixed 500M (50% of 1B) |
-| Raydium LP | 20–100% configurable | Fixed 98% |
-| Creator unlocked | Remainder | Fixed 1% |
-| Protocol fees | Configurable | Fixed 1% |
-| LP lock | Configurable schedule | Permanent |
-| Min raise | Configurable | 50 SOL / 5,000 USDC |
-| Deposit bonus / Withdraw penalty | Optional | None |
-| Locked allocations (Streamflow) | Optional | None |
-
-アロケーション、流動性、ベスティングを細かく制御する必要がある場合は `'project'` を使用してください。最小限の設定で迅速かつ意見の強いローンチを行う場合は `'memecoin'` を使用してください。
-
-**ローンチタイプの読み取り：** 作成後、ローンチタイプはバックエンドクランクによってGenesis Accountにオンチェーンで記録されます。取得するには、[`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account)（オンチェーンSDK）またはREST API応答の[`type`フィールド](/smart-contracts/genesis/integration-apis#shared-types)を使用します。[GPAビルダー](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type)はタイプ別の全ローンチのフィルタリングをサポートします。
-{% /callout %}
-
 ### ミディアムモード — カスタムトランザクション送信
 
 マルチシグウォレットやカスタムリトライロジックなどのシナリオに対応するため、`createAndRegisterLaunch` にカスタム `txSender` コールバックを指定して使用します。
@@ -143,8 +118,8 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `token` | `TokenMetadata` | はい | トークンメタデータ |
 | `network` | `SvmNetwork` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'` |
 | `quoteMint` | `QuoteMintInput` | いいえ | `'SOL'`（デフォルト）、`'USDC'`、または生のミントアドレス |
-| `launchType` | `LaunchType` | はい | `'project'` または `'memecoin'` |
-| `launch` | `ProjectLaunchInput \| MemecoinLaunchInput` | はい | ローンチ設定（`launchType` に依存） |
+| `launchType` | `CreateLaunchType` | はい | `'launchpool'` — 基盤ローンチメカニズム |
+| `launch` | `LaunchpoolLaunchInput` | はい | ローンチ設定 |
 
 ### TokenMetadata
 
@@ -173,14 +148,6 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `raiseGoal` | `number` | 最低調達目標（整数単位、例：250 SOL）。最低 250 SOL または 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | Raydium LP に使用する調達資金の割合（ベーシスポイント、2000〜10000） |
 | `fundsRecipient` | `PublicKey \| string` | ロック解除された調達資金の受取先 |
-
-### MemecoinLaunchInput
-
-`launchType` が `'memecoin'` の場合、`launch` オブジェクトには入金開始時刻のみが必要です。すべてのアロケーションおよび手数料パラメータはハードコードされています。
-
-| フィールド | 型 | 説明 |
-|-------|------|-------------|
-| `depositStartTime` | `Date \| string` | 1時間の入金期間が開始する時刻 |
 
 ### LockedAllocation（Streamflow ロックアップ）
 

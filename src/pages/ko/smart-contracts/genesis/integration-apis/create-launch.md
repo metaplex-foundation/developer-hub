@@ -56,9 +56,9 @@ POST /v1/launches/create
 | `supply` | `number` | 아니오 | 총 토큰 공급량 (기본값 1,000,000,000) |
 | `network` | `string` | 아니오 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'` |
 | `quoteMint` | `string` | 아니오 | 견적 토큰 민트 주소 (기본값은 래핑된 SOL) |
-| `type` | `string` | 예 | `'project'` 또는 `'memecoin'` |
+| `type` | `string` | 예 | `'launchpool'` 또는 `'presale'` |
 | `finalize` | `boolean` | 아니오 | 런칭 확정 여부 (기본값 `true`) |
-| `allocations` | `array` | 조건부 | 할당 구성 배열 (`project`의 경우 필수, `memecoin`의 경우 무시됨) |
+| `allocations` | `array` | 예 | 할당 구성 배열 |
 | `externalLinks` | `object` | 아니오 | 웹사이트, Twitter, Telegram 링크 |
 | `publicKey` | `string` | 예 | 생성자의 지갑 공개 키 (최상위 `wallet` 필드와 동일해야 함) |
 
@@ -76,11 +76,7 @@ POST /v1/launches/create
 SDK의 `buildCreateLaunchPayload` 함수는 간소화된 `CreateLaunchInput`을 이 전체 페이로드 형식으로 변환하는 것을 처리합니다. [API 클라이언트](/smart-contracts/genesis/sdk/api-client) 문서를 참조하세요.
 {% /callout %}
 
-### Memecoin Type
-
-`type`이 `'memecoin'`인 경우, API는 하드코딩된 할당 및 매개변수를 사용합니다. `allocations` 배열을 제공할 필요가 없습니다 — API가 고정된 분할 비율(50% launchpool, 49% Raydium LP 98%, 1% 생성자 잠금 해제)로 자동 빌드합니다. 예치 기간은 1시간이며, LP는 영구 잠금되고, 최소 모금액은 50 SOL 또는 5,000 USDC입니다.
-
-## 요청 예시 — Project Type
+## 요청 예시 — Launch Pool Type
 
 ```bash
 curl -X POST https://api.metaplex.com/v1/launches/create \
@@ -95,32 +91,10 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
       "supply": 1000000000,
       "network": "solana-devnet",
       "quoteMint": "So11111111111111111111111111111111111111112",
-      "type": "project",
+      "type": "launchpool",
       "finalize": true,
       "publicKey": "YourWalletPublicKey...",
       "allocations": [...]
-    }
-  }'
-```
-
-## 요청 예시 — Memecoin Type
-
-```bash
-curl -X POST https://api.metaplex.com/v1/launches/create \
-  -H "Content-Type: application/json" \
-  -d '{
-    "wallet": "YourWalletPublicKey...",
-    "launch": {
-      "name": "My Memecoin",
-      "symbol": "MEME",
-      "image": "https://gateway.irys.xyz/...",
-      "decimals": 6,
-      "supply": 1000000000,
-      "network": "solana-devnet",
-      "quoteMint": "So11111111111111111111111111111111111111112",
-      "type": "memecoin",
-      "finalize": true,
-      "publicKey": "YourWalletPublicKey..."
     }
   }'
 ```

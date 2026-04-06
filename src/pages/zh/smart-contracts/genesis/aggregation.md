@@ -112,7 +112,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "heroUrl": "launches/abc123/hero.webp",
       "graduatedAt": "2026-01-15T18:05:00.000Z",
       "lastActivityAt": "2026-01-15T17:45:00.000Z",
-      "type": "project"
+      "type": "launchpool"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -162,7 +162,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       }
     ],
     "baseToken": {
@@ -219,7 +219,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'presale';
 }
 
 interface BaseToken {

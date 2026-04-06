@@ -187,7 +187,7 @@ The launch config JSON file uses the same format as the `launch create` input:
       "twitter": "https://x.com/myproject"
     }
   },
-  "launchType": "project",
+  "launchType": "launchpool",
   "launch": {
     "launchpool": {
       "tokenAllocation": 500000000,
@@ -268,7 +268,7 @@ Locked allocations let you reserve a portion of the token supply with vesting sc
 | Locked allocations file not found | Wrong file path | Verify the path to your allocations JSON file |
 | Must contain a JSON array | Allocations file is not an array | Ensure the JSON file contains an array `[...]`, not an object |
 | raydiumLiquidityBps out of range | Value outside 2000–10000 | Use a value between 2000 (20%) and 10000 (100%) |
-| Launch config missing required fields | Incomplete config for register | Ensure your launch config JSON has `token`, `launch`, and `launchType: "project"` |
+| Launch config missing required fields | Incomplete config for register | Ensure your launch config JSON has `token`, `launch`, and `launchType: "launchpool"` |
 
 ## FAQ
 

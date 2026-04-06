@@ -112,7 +112,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'presale';
 }
 
 interface BaseToken {
@@ -211,7 +211,7 @@ serde = { version = "1", features = ["derive"] }
 | **Base Token** | ミントアドレスで識別される、ローンチされるトークン |
 | **Launch Page** | ユーザーがローンチに参加できる URL |
 | **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`auction`） |
-| **Launch Type** | ローンチのカテゴリ：`project`、`memecoin`、`custom` |
+| **Launch Type** | ローンチの基盤メカニズム：`launchpool` または `presale` |
 | **Spotlight** | プラットフォームが厳選した注目ローンチを示すフラグ |
 | **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
 | **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |

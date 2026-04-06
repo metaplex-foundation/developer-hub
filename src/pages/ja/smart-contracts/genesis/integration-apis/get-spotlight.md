@@ -77,7 +77,7 @@ curl "https://api.metaplex.com/v1/launches?spotlight=true"
           "heroUrl": "launches/abc123/hero.webp",
           "graduatedAt": null,
           "lastActivityAt": "2026-01-15T16:30:00.000Z",
-          "type": "project"
+          "type": "launchpool"
         },
         "baseToken": {
           "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -167,4 +167,4 @@ for entry in &response.data {
 
 - スポットライトステータスはプラットフォームによって管理され、API 経由で設定することはできません。
 - このエンドポイントは `spotlight=true` をクエリパラメータとして使用する同じ `/launches` ルートを使用します — 別のエンドポイントではありません。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
