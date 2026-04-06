@@ -36,7 +36,7 @@ export function Header({ page }) {
       )}
     >
       <div className="mx-auto flex max-w-[1800px] flex-wrap items-center justify-between px-4 py-5 sm:px-6 lg:px-8 xl:px-12">
-        <div className="mr-6 flex lg:hidden">
+        <div className="mr-6 flex nav:hidden">
           <MobileNavigation page={page} />
         </div>
         <div className="relative flex flex-grow basis-0 items-center gap-12">
@@ -54,7 +54,7 @@ export function Header({ page }) {
 
 
 
-        <div className="relative flex basis-0 items-center justify-end gap-4 sm:gap-6 lg:flex-grow">
+        <div className="relative flex flex-shrink-0 items-center justify-end gap-4 sm:gap-6">
           <Link
             href="https://discord.com/invite/metaplex"
             target="_blank"
