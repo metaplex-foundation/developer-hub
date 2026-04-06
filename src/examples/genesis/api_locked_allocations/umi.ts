@@ -29,7 +29,7 @@ const input: CreateLaunchInput = {
       twitter: '@mytoken',
     },
   },
-  launchType: 'project',
+  launchType: 'launchpool',
   launch: {
     launchpool: {
       tokenAllocation: 500_000_000,

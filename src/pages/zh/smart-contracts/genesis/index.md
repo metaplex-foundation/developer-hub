@@ -36,15 +36,14 @@ faqs:
     a: 可以。Genesis 提供了撤销铸造权限和冻结权限的指令，向持有者表明不会再铸造额外的代币。
   - q: Launch Pool 和 Presale 有什么区别？
     a: Presale 预先设定固定价格。Launch Pool 根据总存款有机地发现价格——存款越多意味着每个代币的隐含价格越高。
-  - q: 什么是 memecoin 发行类型？
-    a: Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 50/50 分配、98% Raydium LP 和永久 LP 锁仓。您只需设置存款开始时间。
+  - q: Genesis 支持哪些发行类型？
+    a: Genesis 支持多种发行类型，代表底层机制——Launch Pool（公平发射，按比例分配与价格发现）和 Presale（固定价格代币销售）。
 ---
 
 **Genesis** 是 Solana 代币发射台和**代币生成事件 (TGE)** 智能合约。通过链上协调运行预售、公平发射或众筹，实现 SPL 代币创建、代币分发和资金收集。{% .lead %}
 
 {% callout title="选择您的路径" %}
 - **无代码发射？** 使用 [Metaplex 代币发射台](https://www.metaplex.com) 无需编码即可发行代币
-- **快速 memecoin 发行？** 使用 `launchType: 'memecoin'` 进行带硬编码默认值的简化发行——只需设置开始时间。参见 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)
 - **构建自己的发射台？** 使用 Genesis SDK 构建自定义代币发行平台或在您自己的网站上托管代币销售
 - **刚接触 Genesis？** 从[快速入门](/zh/smart-contracts/genesis/getting-started)开始了解流程
 - **准备好构建了？** 直接跳转到 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)
@@ -85,10 +84,10 @@ Genesis 支持三种可以组合使用的机制：
 
 每个 Genesis 发行都有一个**类型**来对其进行分类：
 
-| 类型 | 说明 | 配置 |
-|------|-------------|---------------|
-| **Project** | 完全控制分配、流动性、归属和费用的结构化发行 | 可配置存款期（默认48小时）、分配比例、锁定计划 |
-| **Memecoin** | 使用硬编码默认值的简化公平发行 | 1小时存款、50%分配、98% Raydium LP、永久LP锁定 |
+| 类型 | 说明 | 用例 |
+|------|-------------|----------|
+| **Launch Pool** (`launchpool`) | 通过存款窗口实现按比例分配与价格发现 | 公平发射、社区代币、众筹 |
+| **Presale** (`presale`) | 以预定价格进行的固定价格代币销售 | 代币销售、已知估值 |
 
 发行类型在创建后由后端 crank 记录到 [Genesis Account](#genesis-account) 的链上数据中。交易者和聚合器可以通过 [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）或 [Integration APIs](/smart-contracts/genesis/integration-apis)（REST 响应中的 `type` 字段）以编程方式查询类型。
 
@@ -159,9 +158,6 @@ Genesis 对存款收取 {% fee product="genesis" config="launchPool" fee="deposi
 ### Launch Pool 和 Presale 有什么区别？
 **Presale** 预先设定固定价格。**Launch Pool** 有机地发现价格——存款越多意味着每个代币的隐含价格越高，所有参与者按比例分配。
 
-### 什么是 memecoin 发行类型？
-Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小时存款窗口、固定 5 亿代币分配（10 亿总供应量的 50%）、98% Raydium LP、1% 创建者解锁和永久 LP 锁仓。您只需提供存款开始时间。在 SDK 中使用 `launchType: 'memecoin'`，在 REST API 中使用 `"type": "memecoin"`。详情请参阅 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow)。
-
 ### 我可以组合多种发行机制吗？
 可以。Genesis 使用 Bucket 系统，您可以添加多个流入 Bucket 并配置用于金库或归属的流出 Bucket。
 
@@ -176,7 +172,7 @@ Memecoin 发行类型是一种带有硬编码默认值的简化选项——1 小
 | **Launch Pool** | 基于存款的分发，价格在结束时发现 |
 | **Presale** | 以预定价格进行的固定价格销售 |
 | **Quote Token** | 用户存入的代币（通常是 wSOL） |
-| **发行类型** | 发行类别：`project`（完全控制）或 `memecoin`（简化默认值）。创建后由后端 crank 在链上设置 |
+| **发行类型** | 发行的底层机制：`launchpool` 或 `presale`。创建后由后端 crank 在链上设置 |
 | **Base Token** | 正在发行和分发的代币 |
 
 ## 后续步骤

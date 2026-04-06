@@ -94,7 +94,7 @@ GET https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSf
       "heroUrl": "launches/abc123/hero.webp",
       "graduatedAt": "2026-01-15T18:05:00.000Z",
       "lastActivityAt": "2026-01-15T17:45:00.000Z",
-      "type": "project"
+      "type": "launchpool"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -138,7 +138,7 @@ GET /tokens/{mint}
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       }
     ],
     "baseToken": {
@@ -193,7 +193,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'presale';
 }
 
 interface BaseToken {
@@ -368,7 +368,7 @@ serde = { version = "1", features = ["derive"] }
 | **Base Token** | 正在发行的代币 |
 | **Launch Page** | 用户可以参与发行的 URL |
 | **Mechanic** | 使用的机制（launchpoolV2、presaleV2 等） |
-| **Launch Type** | 发行的类型（project、memecoin、custom） |
+| **Launch Type** | 发行的底层机制（`launchpool` 或 `presale`） |
 | **Socials** | 与代币关联的社交媒体链接 |
 
 ## 下一步

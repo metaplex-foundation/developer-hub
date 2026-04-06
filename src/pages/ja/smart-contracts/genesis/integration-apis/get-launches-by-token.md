@@ -77,7 +77,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       }
     ],
     "baseToken": {
@@ -162,4 +162,4 @@ println!("{} launches found", response.data.launches.len());
 
 - 1つのトークンは異なる `genesisIndex` 値を使用して複数のローンチを持つことができます。レスポンスは関連するすべてのローンチキャンペーンを返します。
 - トークンミントアドレスが見つからない場合は `404` を返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

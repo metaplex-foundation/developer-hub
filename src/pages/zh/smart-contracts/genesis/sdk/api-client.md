@@ -69,31 +69,6 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `token.id` | `string` | 代币 ID |
 | `token.mintAddress` | `string` | 代币铸造地址 |
 
-### Memecoin 发行 — 简化流程
-
-对于 memecoin 发行，SDK 使用简化输入，只需要一个存款开始时间。所有其他参数——分配比例、LP 配置和费用——均硬编码为合理的默认值。
-
-{% code-tabs-imported from="genesis/api_memecoin_launch" frameworks="umi" filename="memecoinLaunch" /%}
-
-{% callout type="note" title="Project vs Memecoin" %}
-
-| Aspect | Project | Memecoin |
-|--------|---------|----------|
-| Deposit window | 48 hours | 1 hour |
-| Token allocation | Configurable | Fixed 500M (50% of 1B) |
-| Raydium LP | 20–100% configurable | Fixed 98% |
-| Creator unlocked | Remainder | Fixed 1% |
-| Protocol fees | Configurable | Fixed 1% |
-| LP lock | Configurable schedule | Permanent |
-| Min raise | Configurable | 50 SOL / 5,000 USDC |
-| Deposit bonus / Withdraw penalty | Optional | None |
-| Locked allocations (Streamflow) | Optional | None |
-
-当您需要控制分配、流动性和归属时使用 `'project'`。使用 `'memecoin'` 进行快速、预设的发行，配置最少。
-
-**读取发行类型：** 创建后，发行类型由后端 crank 记录在 Genesis Account 的链上数据中。要获取它，使用 [`fetchGenesisAccountV2`](/smart-contracts/genesis/sdk/javascript#genesis-account)（链上 SDK）或 REST API 响应中的 [`type` 字段](/smart-contracts/genesis/integration-apis#shared-types)。[GPA 构建器](/smart-contracts/genesis/sdk/javascript#gpa-builder--query-by-launch-type)支持按类型过滤所有发行。
-{% /callout %}
-
 ### 中级模式 — 自定义交易发送器
 
 使用 `createAndRegisterLaunch` 配合自定义 `txSender` 回调，适用于多签钱包或自定义重试逻辑等场景。
@@ -143,8 +118,8 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `token` | `TokenMetadata` | 是 | 代币元数据 |
 | `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'` |
 | `quoteMint` | `QuoteMintInput` | 否 | `'SOL'`（默认）、`'USDC'` 或原始铸造地址 |
-| `launchType` | `LaunchType` | 是 | `'project'` 或 `'memecoin'` |
-| `launch` | `ProjectLaunchInput \| MemecoinLaunchInput` | 是 | 发行配置（字段取决于 `launchType`） |
+| `launchType` | `CreateLaunchType` | 是 | `'launchpool'` — 底层发行机制 |
+| `launch` | `LaunchpoolLaunchInput` | 是 | 发行配置 |
 
 ### TokenMetadata
 
@@ -173,14 +148,6 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `raiseGoal` | `number` | 最低募集报价代币数量，以整数单位表示（例如 250 SOL）。最低 250 SOL 或 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | 用于 Raydium LP 的募集资金百分比，以基点表示（2000–10000） |
 | `fundsRecipient` | `PublicKey \| string` | 接收解锁部分募集资金的地址 |
-
-### MemecoinLaunchInput
-
-当 `launchType` 为 `'memecoin'` 时，`launch` 对象只需要一个存款开始时间。所有分配和费用参数均为硬编码。
-
-| 字段 | 类型 | 描述 |
-|-------|------|-------------|
-| `depositStartTime` | `Date \| string` | 1 小时存款期开始时间 |
 
 ### LockedAllocation（Streamflow 锁仓）
 

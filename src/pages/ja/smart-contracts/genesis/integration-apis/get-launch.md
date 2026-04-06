@@ -76,7 +76,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "heroUrl": "launches/abc123/hero.webp",
       "graduatedAt": "2026-01-15T18:05:00.000Z",
       "lastActivityAt": "2026-01-15T17:45:00.000Z",
-      "type": "project"
+      "type": "launchpool"
     },
     "baseToken": {
       "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -159,4 +159,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、[トークンによるローンチ取得](/smart-contracts/genesis/integration-apis/get-launches-by-token)エンドポイントを使用してください。
 - Genesis アドレスが見つからない場合や有効なローンチがない場合は `404` を返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチカテゴリ（`project`、`memecoin`、`custom`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

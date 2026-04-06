@@ -186,7 +186,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> --launchConfig launch.json
       "twitter": "https://x.com/myproject"
     }
   },
-  "launchType": "project",
+  "launchType": "launchpool",
   "launch": {
     "launchpool": {
       "tokenAllocation": 500000000,
@@ -267,7 +267,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 | Locked allocations file not found | ファイルパスが間違っている | 割り当て JSON ファイルのパスを確認してください |
 | Must contain a JSON array | 割り当てファイルが配列でない | JSON ファイルがオブジェクトではなく配列 `[...]` を含むことを確認してください |
 | raydiumLiquidityBps out of range | 値が 2000〜10000 の範囲外 | 2000（20%）から 10000（100%）の間の値を使用してください |
-| Launch config missing required fields | register 用の設定が不完全 | ローンチ設定 JSON に `token`、`launch`、`launchType: "project"` が含まれていることを確認してください |
+| Launch config missing required fields | register 用の設定が不完全 | ローンチ設定 JSON に `token`、`launch`、`launchType: "launchpool"` が含まれていることを確認してください |
 
 ## FAQ
 

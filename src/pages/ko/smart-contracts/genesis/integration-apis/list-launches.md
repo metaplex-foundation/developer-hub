@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       },
       "baseToken": {
         "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - 결과는 페이지네이션되지 않습니다. 엔드포인트는 일치하는 모든 런치를 단일 응답으로 반환합니다.
 - `status` 필터는 `upcoming`, `live`, `graduated`를 허용합니다. 생략하면 모든 상태를 반환합니다.
-- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 런치 카테고리(`project`, `memecoin`, `custom`)를 나타냅니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool` 또는 `presale`)을 나타냅니다.
 

@@ -24,7 +24,7 @@ const input: CreateLaunchInput = {
     symbol: 'MTK',
     image: 'https://gateway.irys.xyz/...',
   },
-  launchType: 'project',
+  launchType: 'launchpool',
   launch: {
     launchpool: {
       tokenAllocation: 500_000_000,

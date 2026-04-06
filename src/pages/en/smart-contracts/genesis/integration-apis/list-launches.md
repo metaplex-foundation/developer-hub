@@ -80,7 +80,7 @@ Results are sorted by `lastActivityAt` in descending order.
         "heroUrl": "launches/abc123/hero.webp",
         "graduatedAt": "2026-01-15T18:05:00.000Z",
         "lastActivityAt": "2026-01-15T17:45:00.000Z",
-        "type": "project"
+        "type": "launchpool"
       },
       "baseToken": {
         "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - Results are not paginated. The endpoint returns all matching launches in a single response.
 - The `status` filter accepts `upcoming`, `live`, or `graduated`. Omit to return all statuses.
-- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the launch category (`project`, `memecoin`, or `custom`).
+- The `mechanic` field indicates the allocation mechanism (e.g., `launchpoolV2`, `presaleV2`). The `type` field indicates the underlying launch mechanism (`launchpool` or `presale`).
 
