@@ -73,8 +73,6 @@ This guide covers:
 - **Creator fees** — optional per-swap fee earned on the bonding curve and in the post-graduation Raydium pool; configurable per-wallet or derived automatically for agent launches
 - **First buy** — optional fee-free initial purchase reserved for the launching wallet or agent PDA at curve creation
 
-*Maintained by Metaplex Foundation · Last verified April 2026 · Applies to `@metaplex-foundation/genesis` 1.x*
-
 ## Quick Start
 
 **Jump to:** [Installation](#installation) · [Setup](#umi-setup) · [One-Liner Launch](#launching-a-bonding-curve-one-liner-flow) · [Creator Fees](#creator-fees) · [First Buy](#first-buy) · [Manual Signing](#manual-signing-flow) · [Token Metadata](#token-metadata) · [Devnet](#devnet-testing) · [Errors](#common-errors) · [API Reference](#api-reference)
@@ -91,15 +89,6 @@ For custom signing or retry logic, use [Manual Signing Flow](#manual-signing-flo
 - A Solana wallet keypair funded with SOL for transaction fees and the optional first buy amount
 - A Solana RPC endpoint (mainnet-beta or devnet)
 - An image pre-uploaded to [Irys](https://irys.xyz) — the token metadata `image` field must be an Irys gateway URL
-
-## Tested Configuration
-
-| Tool | Version |
-|------|---------|
-| `@metaplex-foundation/genesis` | 1.x |
-| `@metaplex-foundation/umi` | 1.x |
-| `@metaplex-foundation/umi-bundle-defaults` | 1.x |
-| Node.js | 18+ |
 
 ## Installation
 
@@ -180,38 +169,9 @@ const result = await createAndRegisterLaunch(umi, {}, {
 });
 ```
 
-### Agent Launch and Automatic Creator Fee Wallet
-
-When launching on behalf of a Metaplex agent, pass the `agent` field. The SDK automatically derives the agent's [Core asset](https://developers.metaplex.com/core) signer PDA and uses it as the creator fee wallet — no manual `creatorFeeWallet` needed.
-
-```typescript {% title="agent-launch.ts" showLineNumbers=true %}
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  agent: {
-    mint: agentAssetAddress,  // Core asset (NFT) address of the agent
-    setToken: true,           // set the launched token as the agent's primary token
-  },
-  launchType: 'bondingCurve',
-  token: {
-    name: 'Agent Token',
-    symbol: 'AGT',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {},
-});
-```
-
-When `agent` is provided:
-
-- The creator fee wallet is automatically set to the agent's Core asset signer PDA — derived from seeds `['mpl-core-execute', <agent_mint>]`
-- The first buy buyer (if `firstBuyAmount` is set) defaults to the same agent PDA
-- Launch transactions are wrapped in Core execute instructions for the agent to execute
-
-{% callout type="warning" %}
-`setToken: true` permanently associates the launched token with the agent as its primary token. **This is irreversible.** Only set this to `true` when you are certain this is the token you want permanently linked to the agent.
+{% callout type="note" %}
+Launching on behalf of a Metaplex agent? The agent-specific flow — automatic PDA fee routing, Core execute wrapping, and `setToken` association — is covered in [Create an Agent Token](/agents/create-agent-token).
 {% /callout %}
-
-To override the automatically derived creator fee wallet, set `launch.creatorFeeWallet` explicitly — it takes precedence over the agent PDA. If neither `agent` nor `creatorFeeWallet` is provided, fees default to the launching wallet.
 
 For how creator fees interact with swap pricing, see [Bonding Curve V2 — Theory of Operation](/smart-contracts/genesis/bonding-curve-v2#fee-structure).
 

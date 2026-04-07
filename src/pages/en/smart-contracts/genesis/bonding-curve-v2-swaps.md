@@ -75,7 +75,6 @@ Bonding curve V2 swaps use the Genesis SDK to interact with the `BondingCurveBuc
 - **wSOL is manual** — the swap instruction does not wrap or unwrap native SOL; callers must handle the wSOL [associated token account (ATA)](https://spl.solana.com/associated-token-account) themselves
 - **Program ID** — `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` on Solana mainnet
 
-*Maintained by Metaplex Foundation · Last verified March 2026 · Applies to `@metaplex-foundation/genesis` 1.x*
 
 ## Quick Start
 
