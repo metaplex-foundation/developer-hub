@@ -48,12 +48,6 @@ Paid by the minter, which is typically individual collectors minting new drops. 
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
-## Bubblegum v1 (Legacy)
-
-The original compressed NFT program.
-
-{% protocol-fees program="bubblegum" showTitle=false /%}
-
 ## MPL-Hybrid
 
 Paid by the individual who swaps tokens and NFTs.
@@ -74,6 +68,4 @@ The Metaplex Foundation is constantly monitoring community feedback related to t
 
 ### How are Metaplex Protocol Fees Used?
 
-All protocol fees are used to further the objectives of the Metaplex Foundation, which is a non-profit organization established to foster the research, development and adoption of the Metaplex ecosystem. This includes providing incentives and assistance to the Metaplex community for the continued development, security, governance, and administration of the Metaplex Protocol and Metaplex DAO.
-
-Currently, 50% of protocol fees are converted to $MPLX and contributed to the Metaplex DAO treasury. The remaining 50% are reserved by the Metaplex Foundation to support the long-term sustainable development of the Metaplex ecosystem.
+All protocol fees are used to further the objectives of the Metaplex Foundation, which is a non-profit organisation established to foster the research, development and adoption of the Metaplex ecosystem. Currently, 50% of protocol fees are converted to $MPLX and contributed to the Metaplex DAO treasury. The remaining 50% is reserved by the Metaplex Foundation for its operations.
