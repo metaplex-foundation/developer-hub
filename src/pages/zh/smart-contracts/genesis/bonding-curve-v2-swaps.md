@@ -218,7 +218,7 @@ for (const curve of allCurves) {
 | `virtualSol` | `bigint` | 初始化时添加的虚拟 SOL 储备（仅用于定价）。 |
 | `virtualTokens` | `bigint` | 初始化时添加的虚拟代币储备（仅用于定价）。 |
 | `depositFee` | `number` | 适用于每次兑换 SOL 侧的协议手续费率。 |
-| `withdrawFee` | `number` | 适用于每次兑换 SOL 侧的创作者手续费率。 |
+| `withdrawFee` | `number` | 适用于卖出 SOL 输出侧的协议手续费率。 |
 | `swapStartCondition` | `object` | 允许交易前必须满足的条件。 |
 | `swapEndCondition` | `object` | 触发时结束交易的条件。 |
 
@@ -776,7 +776,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 | 账户 | 描述 |
 |---------|-------------|
 | `feeQuoteTokenAccount` | 协议手续费目标地址（wSOL ATA） |
-| `creatorFeeQuoteTokenAccount` | 创作者手续费目标地址（wSOL ATA） |
+| `creatorFeeQuoteTokenAccount` | 累积创作者费的桶的 wSOL ATA；配置了 `CreatorFee` 扩展时自动解析 |
 | `firstBuyerAccount` | 仅指定首次购买钱包时需要 |
 
 ### 账户发现

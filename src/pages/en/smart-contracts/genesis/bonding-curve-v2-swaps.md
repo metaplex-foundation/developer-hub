@@ -217,7 +217,7 @@ The `BondingCurveBucketV2` account contains all fields needed to compute quotes,
 | `virtualSol` | `bigint` | Virtual SOL reserve added at initialization (pricing only). |
 | `virtualTokens` | `bigint` | Virtual token reserve added at initialization (pricing only). |
 | `depositFee` | `number` | Protocol fee rate applied to the SOL side of every swap. |
-| `withdrawFee` | `number` | Creator fee rate applied to the SOL side of every swap. |
+| `withdrawFee` | `number` | Protocol fee rate applied to the SOL output side of sells. |
 | `swapStartCondition` | `object` | Condition that must be met before trading is allowed. |
 | `swapEndCondition` | `object` | Condition that ends trading when triggered. |
 
@@ -775,7 +775,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 | Account | Description |
 |---------|-------------|
 | `feeQuoteTokenAccount` | Protocol fee destination (wSOL ATA) |
-| `creatorFeeQuoteTokenAccount` | Creator fee destination (wSOL ATA) |
+| `creatorFeeQuoteTokenAccount` | Bucket's wSOL ATA where creator fees are accrued; auto-resolved when a `CreatorFee` extension is configured |
 | `firstBuyerAccount` | Required only for the designated first-buy wallet |
 
 ### Account Discovery

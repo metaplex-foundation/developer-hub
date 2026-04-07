@@ -218,7 +218,7 @@ for (const curve of allCurves) {
 | `virtualSol` | `bigint` | 初期化時に追加された仮想 SOL リザーブ（価格計算専用）。 |
 | `virtualTokens` | `bigint` | 初期化時に追加された仮想トークンリザーブ（価格計算専用）。 |
 | `depositFee` | `number` | 各スワップの SOL 側に適用されるプロトコル手数料率。 |
-| `withdrawFee` | `number` | 各スワップの SOL 側に適用されるクリエイター手数料率。 |
+| `withdrawFee` | `number` | 売りの SOL 出力側に適用されるプロトコル手数料率。 |
 | `swapStartCondition` | `object` | 取引を許可する前に満たす必要がある条件。 |
 | `swapEndCondition` | `object` | トリガーされると取引を終了させる条件。 |
 
@@ -776,7 +776,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 | アカウント | 説明 |
 |---------|-------------|
 | `feeQuoteTokenAccount` | プロトコル手数料の送金先（wSOL ATA） |
-| `creatorFeeQuoteTokenAccount` | クリエイター手数料の送金先（wSOL ATA） |
+| `creatorFeeQuoteTokenAccount` | クリエイター手数料が累積されるバケットの wSOL ATA；`CreatorFee`エクステンションが設定されている場合に自動解決される |
 | `firstBuyerAccount` | 指定の最初の購入ウォレットの場合のみ必要 |
 
 ### アカウント検索

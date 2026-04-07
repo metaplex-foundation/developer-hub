@@ -146,9 +146,9 @@ All protocol parameters — supply splits, virtual reserves, fund flows, and loc
 
 ## Creator Fees
 
-A creator fee is an optional per-swap fee earned on every buy and sell on the bonding curve, and continues to accrue from trades in the Raydium CPMM pool after graduation.
+A creator fee is an optional per-swap fee charged on every buy and sell on the bonding curve. Fees are **accrued** in the bucket rather than transferred directly on each swap — collect them by calling the permissionless `claimBondingCurveCreatorFeeV2` instruction. After graduation, fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`. See the [Bonding Curve Swap Integration Guide](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees) for the full claiming flow.
 
-By default, creator fees go to the launching wallet. For current fee rates, see the [Genesis Protocol Fees](/smart-contracts/genesis) page.
+By default, the creator fee wallet is the launching wallet. For current fee rates, see the [Genesis Protocol Fees](/smart-contracts/genesis) page.
 
 ### Redirecting Creator Fees to a Specific Wallet
 
@@ -407,7 +407,7 @@ try {
 - Virtual reserves, supply splits, and lock schedules are set by protocol defaults when `launch: {}` is empty; there is no API to override these per-launch
 - The `agent.setToken` flag is irreversible — once a token is set as an agent's primary token it cannot be changed or reassigned
 - First buy is configured at launch creation and cannot be added after the curve is live; `firstBuyAmount: 0` or omitting the field disables it entirely
-- Creator fees on the bonding curve continue to accrue in the Raydium CPMM pool after graduation — the fee configuration carries over automatically
+- Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions
 
 ## API Reference
 

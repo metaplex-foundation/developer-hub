@@ -133,14 +133,18 @@ Every swap is subject to a protocol swap fee. Creators can optionally add a crea
 
 | Fee | Who sets it | Destination |
 |-----|-------------|-------------|
-| **Protocol swap fee** | Protocol (not configurable by creator) | Metaplex fee wallet (`feeQuoteTokenAccount`) |
-| **Creator fee** | Creator or agent (optional) | Creator wallet (`creatorFeeQuoteTokenAccount`) |
+| **Protocol swap fee** | Protocol (not configurable by creator) | Metaplex fee wallet (`feeQuoteTokenAccount`) — transferred on every swap |
+| **Creator fee** | Creator or agent (optional) | Accrued in bucket (`creatorFeeAccrued`) — claimed via permissionless `claimBondingCurveCreatorFeeV2` |
 
 Both fees are calculated **independently** on the gross SOL amount and do not compound. The net amount entering or leaving the curve is:
 
 ```
 net = gross − protocolFee − creatorFee
 ```
+
+{% callout type="note" %}
+The protocol swap fee is transferred to the Metaplex fee wallet on every swap. Creator fees are **accrued** in the bucket (`creatorFeeAccrued`) rather than transferred immediately — call the permissionless `claimBondingCurveCreatorFeeV2` instruction to collect them. After graduation, creator fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`.
+{% /callout %}
 
 For current protocol fee schedules, see the [Protocol Fees](/protocol-fees) page.
 
@@ -211,11 +215,12 @@ The bucket includes an extensions block with independently configurable optional
 | Extension | Description |
 |-----------|-------------|
 | **First Buy** | Designates a buyer and SOL amount for a fee-free initial purchase. Consumed after the first buy completes. |
-| **Creator Fee** | An optional creator fee with a destination wallet address and fee rate. Calculated independently from the protocol fee — does not compound with it. The first buy waives both. |
+| **Creator Fee** | An optional creator fee with a destination wallet address and fee rate. Fees are accrued in the bucket (`creatorFeeAccrued`) rather than transferred per-swap — collect via the permissionless `claimBondingCurveCreatorFeeV2` instruction. Calculated independently from the protocol fee — does not compound with it. The first buy waives both. |
 
 ## Notes
 
 - Virtual reserves exist only in the pricing math — they are never deposited onchain as real assets
+- Creator fees are accrued in the bucket (`creatorFeeAccrued`), not transferred per-swap; collect via the permissionless `claimBondingCurveCreatorFeeV2` instruction; post-graduation Raydium fees are claimed via `claimRaydiumCreatorFeeV2`
 - `ceil(k / x)` division is used in all swap calculations to ensure the pool never loses value
 - Graduation fires automatically on full token exhaustion — no separate instruction is required
 - The protocol swap fee rate is set by Metaplex and is not configurable by creators; see [Protocol Fees](/protocol-fees) for current rates
@@ -253,7 +258,7 @@ The system clamps the token output to the remaining balance and uses the reverse
 | **Graduation** | The event triggered automatically when all curve tokens are sold; migrates accumulated SOL into a Raydium CPMM pool |
 | **Raydium CPMM** | The Raydium constant product market maker pool that receives the bonding curve's liquidity at graduation for ongoing secondary trading |
 | **First buy** | An optional extension that designates a wallet and SOL amount for a one-time fee-free initial purchase at curve creation |
-| **Creator fee** | An optional per-swap fee configured by the creator, paid to a designated wallet; calculated independently from the protocol fee |
+| **Creator fee** | An optional per-swap fee configured by the creator; accrued in the bucket (`creatorFeeAccrued`) and collected via the permissionless `claimBondingCurveCreatorFeeV2` instruction; calculated independently from the protocol fee |
 | **Protocol swap fee** | A per-swap fee set by Metaplex and charged on every buy and sell; not configurable by creators |
 | **Graduation fee** | A one-time fee charged at graduation to cover the cost of initializing the Raydium CPMM pool |
 | **Reserve exhaustion / clamping** | When a swap would exceed available reserves, the system caps the output and recalculates the input via the reverse formula rather than failing the transaction |

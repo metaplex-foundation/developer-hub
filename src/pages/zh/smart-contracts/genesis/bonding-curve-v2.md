@@ -134,13 +134,17 @@ requiredAmountIn = newInputReserve - inputReserve
 | 费用 | 设定者 | 接收方 |
 |------|--------|--------|
 | **协议交换费** | 协议（创作者不可配置） | Metaplex 费用钱包（`feeQuoteTokenAccount`） |
-| **创作者费** | 创作者或 Agent（可选） | 创作者钱包（`creatorFeeQuoteTokenAccount`） |
+| **创作者费** | 创作者或 Agent（可选） | 累积在桶中（`creatorFeeAccrued`）；通过无权限的 `claimBondingCurveCreatorFeeV2` 领取 |
 
 两种费用都针对总 SOL 金额**独立**计算，不复合。净金额：
 
 ```
 net = gross − protocolFee − creatorFee
 ```
+
+{% callout type="note" %}
+协议交换费在每次兑换时转入 Metaplex 费用钱包。创作者费不会立即转账，而是**累积**在桶中（`creatorFeeAccrued`）——调用无权限的 `claimBondingCurveCreatorFeeV2` 指令来收取。毕业后，创作者费继续从 Raydium LP 交易中累积，通过 `claimRaydiumCreatorFeeV2` 领取。
+{% /callout %}
 
 有关当前协议费用计划，请参阅[协议费用](/protocol-fees)页面。
 
@@ -211,11 +215,12 @@ Genesis 绑定曲线 V2 发行经历三个顺序阶段：
 | 扩展功能 | 描述 |
 |----------|------|
 | **首次购买** | 为免费初次购买指定购买者和 SOL 金额。首次购买完成后被消耗。 |
-| **创作者费** | 具有目标钱包地址和费率的可选创作者费。与协议费独立计算，不复合。首次购买时免除。 |
+| **创作者费** | 具有目标钱包地址和费率的可选创作者费。费用累积在桶中（`creatorFeeAccrued`）而非每次兑换时转账——通过无权限的 `claimBondingCurveCreatorFeeV2` 指令收取。与协议费独立计算，不复合。首次购买时免除。 |
 
 ## Notes
 
 - 虚拟储备金仅存在于定价数学中——它们从未作为真实资产存入链上
+- 创作者费累积在桶中（`creatorFeeAccrued`），不会每次兑换时转账；通过无权限的 `claimBondingCurveCreatorFeeV2` 指令收取；毕业后的 Raydium 费用通过 `claimRaydiumCreatorFeeV2` 领取
 - `ceil(k / x)` 除法用于所有交换计算，确保池不会贬值
 - 毕业在代币完全耗尽时自动发生，无需单独的指令
 - 协议交换费率由 Metaplex 设定，创作者不可配置。当前费率请参阅[协议费用](/protocol-fees)
@@ -253,7 +258,7 @@ Genesis 绑定曲线 V2 发行经历三个顺序阶段：
 | **毕业** | 所有曲线代币售出时自动触发的事件；将累积的 SOL 迁移至 Raydium CPMM 池 |
 | **Raydium CPMM** | 毕业时接收绑定曲线流动性的 Raydium 恒定乘积做市商池，用于持续的二级交易 |
 | **首次购买** | 曲线创建时指定钱包和 SOL 金额以进行一次性免费初次购买的可选扩展功能 |
-| **创作者费** | 由创作者设定并支付给指定钱包的每次交换可选费用。与协议费独立计算 |
+| **创作者费** | 由创作者设定的每次交换可选费用；累积在桶中（`creatorFeeAccrued`），通过无权限的 `claimBondingCurveCreatorFeeV2` 指令收取；与协议费独立计算 |
 | **协议交换费** | 由 Metaplex 设定并对每次买入和卖出收取的每次交换费用。创作者不可配置 |
 | **毕业费用** | 毕业时收取的一次性费用，用于覆盖初始化 Raydium CPMM 池的成本 |
 | **储备金耗尽/钳制** | 当交换超过可用储备金时，系统限制输出并用反向公式重新计算输入。交易不会失败 |

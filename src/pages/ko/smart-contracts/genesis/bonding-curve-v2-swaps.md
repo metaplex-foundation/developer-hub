@@ -218,7 +218,7 @@ for (const curve of allCurves) {
 | `virtualSol` | `bigint` | 초기화 시 추가된 가상 SOL 예비금 (가격 산정 전용). |
 | `virtualTokens` | `bigint` | 초기화 시 추가된 가상 토큰 예비금 (가격 산정 전용). |
 | `depositFee` | `number` | 모든 스왑의 SOL 측에 적용되는 프로토콜 수수료율. |
-| `withdrawFee` | `number` | 모든 스왑의 SOL 측에 적용되는 창작자 수수료율. |
+| `withdrawFee` | `number` | 매도의 SOL 출력 측에 적용되는 프로토콜 수수료율. |
 | `swapStartCondition` | `object` | 거래가 허용되기 전에 충족되어야 하는 조건. |
 | `swapEndCondition` | `object` | 발동 시 거래를 종료하는 조건. |
 
@@ -776,7 +776,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 | 계정 | 설명 |
 |---------|-------------|
 | `feeQuoteTokenAccount` | 프로토콜 수수료 목적지 (wSOL ATA) |
-| `creatorFeeQuoteTokenAccount` | 창작자 수수료 목적지 (wSOL ATA) |
+| `creatorFeeQuoteTokenAccount` | 창작자 수수료가 누적되는 버킷의 wSOL ATA；`CreatorFee` 확장이 구성된 경우 자동 해결됨 |
 | `firstBuyerAccount` | 지정된 첫 번째 구매 지갑에만 필요 |
 
 ### 계정 검색
