@@ -13,111 +13,64 @@ export const genesis = {
   protocolFees: {
     bondingCurve: {
       protocolFee: {
-        label: 'Protocol fee (pre-bond)',
+        label: 'Protocol fee',
         solana: '0.50%',
-        notes: 'Applied to bonding-curve swaps before graduation',
       },
-      creatorFee: {
-        label: 'Creator fee (pre-bond, optional)',
+      creatorRevenue: {
+        label: 'Creator revenue',
         solana: '0.60%',
-        notes: 'Enabled when creator revenue sharing is active',
-      },
-      graduationCost: {
-        label: 'Graduation migration cost',
-        solana: '0.194 SOL',
-        notes: 'Covered by the bonding curve protocol; launch pool creators pay upfront',
       },
     },
-    postBond: {
-      totalFee: {
-        label: 'Total swap fee (post-bond)',
-        solana: '0.90%',
-        notes: 'Base configuration without creator revenue sharing',
+    postBondTrading: {
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.40%',
       },
-      baseFee: {
-        label: 'Base fee',
-        solana: '0.50%',
+      creatorRevenue: {
+        label: 'Creator revenue',
+        solana: '0.60%',
       },
       lpFees: {
-        label: 'LP fees (compounded back into pool)',
-        solana: '0.42%',
+        label: 'LP fees',
+        solana: '0.17%',
       },
       raydiumFee: {
         label: 'Raydium fee',
         solana: '0.08%',
-      },
-      metaplexFee: {
-        label: 'Metaplex fee (from Raydium "Creator Fee")',
-        solana: '0.40%',
-      },
-    },
-    postBondCreatorRev: {
-      totalFee: {
-        label: 'Total swap fee (post-bond + creator rev)',
-        solana: '1.25%',
-        notes: 'Preferred configuration with creator revenue sharing',
-      },
-      baseLpFee: {
-        label: 'Base LP fee (both sides)',
-        solana: '0.25%',
-      },
-      lpFees: {
-        label: 'LP fees (compounded)',
-        solana: '0.15%',
-      },
-      raydiumFee: {
-        label: 'Raydium fee',
-        solana: '0.10%',
-      },
-      metaplexFee: {
-        label: 'Metaplex fee (from Raydium "Creator Fee")',
-        solana: '0.40%',
-      },
-      creatorFee: {
-        label: 'Creator fee (from Raydium "Creator Fee")',
-        solana: '0.60%',
       },
     },
     launchPool: {
       deposit: {
-        label: 'Deposit fee',
+        label: 'User deposit fee',
         solana: '0%',
       },
       withdraw: {
-        label: 'Withdraw fee + variable penalties',
-        solana: '0%',
+        label: 'User withdraw fee',
+        solana: '2%',
       },
       creatorWithdraw: {
         label: 'Creator withdraw fee',
         solana: '5%',
-        notes: 'Variable — effectively zero if 100% is dedicated to liquidity',
+        notes: 'This fee only applies when creators withdraw liquidity',
       },
     },
-    postLaunch: {
+    launchPoolTrading: {
       liquidityRequirement: {
-        label: 'Minimum locked liquidity',
+        label: 'Liquidity requirement',
         solana: '20%',
-        notes: 'Quarterly unlocks over 1 year',
+        notes: '1 year lock with quarterly unlock',
       },
-      totalFee: {
-        label: 'Total swap fee',
-        solana: '0.90%',
-      },
-      baseFee: {
-        label: 'Base fee',
+      protocolFee: {
+        label: 'Protocol fee',
         solana: '0.50%',
       },
       lpFees: {
-        label: 'LP fees (compounded back into pool)',
+        label: 'LP fees',
         solana: '0.42%',
       },
       raydiumFee: {
         label: 'Raydium fee',
         solana: '0.08%',
-      },
-      metaplexFee: {
-        label: 'Metaplex fee (from Raydium "Creator Fee")',
-        solana: '0.40%',
       },
     },
   },
