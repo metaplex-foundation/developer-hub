@@ -216,7 +216,14 @@ function localizeProduct(product, locale) {
           links: navGroup.links.map(link => ({
             ...link,
             title: (productNav.links && productNav.links[link.title]) || link.title,
-            href: getHref(link.href)
+            href: link.href ? getHref(link.href) : link.href,
+            ...(link.children && {
+              children: link.children.map(child => ({
+                ...child,
+                title: (productNav.links && productNav.links[child.title]) || child.title,
+                href: getHref(child.href)
+              }))
+            })
           }))
         }))
       } else if (section.navigation) {
@@ -225,7 +232,13 @@ function localizeProduct(product, locale) {
           ...navGroup,
           links: navGroup.links.map(link => ({
             ...link,
-            href: getHref(link.href)
+            href: link.href ? getHref(link.href) : link.href,
+            ...(link.children && {
+              children: link.children.map(child => ({
+                ...child,
+                href: getHref(child.href)
+              }))
+            })
           }))
         }))
       }
