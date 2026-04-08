@@ -51,10 +51,6 @@ The `genesis launch` commands provide a streamlined way to launch tokens using t
 - **metaplex.com compatible**: Launches created or registered through the API appear on [metaplex.com](https://metaplex.com) with a public launch page
 - **Total supply**: Currently fixed at 1,000,000,000 tokens
 
-## Out of Scope
-
-Manual genesis account creation, individual bucket configuration, presale setup, frontend development.
-
 **Jump to:** [Launch Create](#launch-create) · [Bonding Curve](#bonding-curve) · [Agent Launches](#agent-launches) · [Launch Register](#launch-register) · [Locked Allocations](#locked-allocations) · [Common Errors](#common-errors) · [FAQ](#faq)
 
 ## Launch Create
@@ -97,7 +93,7 @@ mplx genesis launch create \
 | `--raiseGoal <integer>` | Raise goal in whole units (e.g. 250 = 250 SOL) | Launchpool only | — |
 | `--raydiumLiquidityBps <integer>` | Raydium liquidity in basis points (2000–10000, i.e. 20%–100%) | Launchpool only | — |
 | `--fundsRecipient <string>` | Wallet receiving unlocked portion of raised funds | Launchpool only | — |
-| `--creatorFeeWallet <string>` | Wallet to receive creator fees from swaps | No (bonding-curve only) | Launching wallet |
+| `--creatorFeeWallet <string>` | Wallet to receive creator fees (always enabled, fees accrue and are claimed after graduation) | No (bonding-curve only) | Launching wallet |
 | `--firstBuyAmount <number>` | SOL amount for fee-free initial purchase at launch | No (bonding-curve only) | — |
 | `--agentMint <string>` | Agent's Core asset address — auto-derives creator fee wallet from agent PDA | No | — |
 | `--agentSetToken` | Permanently link the launched token to the agent (**irreversible**). Requires `--agentMint` | No | `false` |
@@ -169,6 +165,10 @@ mplx genesis launch create --launchType bonding-curve \
 ```
 
 Only `--name`, `--symbol`, and `--image` are required — all protocol parameters use defaults.
+
+{% callout type="note" %}
+Creator fees are always enabled on bonding curve launches — they default to the launching wallet. Fees accrue in the bucket during trading and must be claimed separately after the curve graduates to Raydium.
+{% /callout %}
 
 ### With Creator Fee
 
