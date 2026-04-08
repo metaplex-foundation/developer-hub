@@ -13,7 +13,7 @@ export function Prose({ as: Component = 'div', className, ...props }) {
         // links
         'prose-a:font-semibold prose-a:text-primary prose-a:underline prose-a:decoration-primary/30 hover:prose-a:decoration-primary/60',
         // pre
-        'prose-pre:rounded-xl prose-pre:bg-card prose-pre:ring-1 prose-pre:ring-border',
+        'prose-pre:bg-card prose-pre:ring-1 prose-pre:ring-border',
         // hr
         'prose-hr:border-border',
         // table - match card border colors

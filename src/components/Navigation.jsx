@@ -124,7 +124,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                   return (
                     <li key={`${link.title}-${link.href ?? link.title}`} className="relative">
                       <div className={clsx(
-                        'relative flex items-center pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
+                        'relative flex items-center pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                         isParentActive
                           ? 'before:bg-primary'
                           : 'before:hidden before:bg-primary hover:before:block'
@@ -185,7 +185,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                                 <Link
                                   href={child.href}
                                   className={clsx(
-                                    'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-4 before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
+                                    'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-4 before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                                     isChildActive
                                       ? 'font-semibold text-primary before:bg-primary'
                                       : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
@@ -211,7 +211,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                     <Link
                       href={link.href}
                       className={clsx(
-                        'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
+                        'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                         isActive
                           ? 'font-semibold text-primary before:bg-primary'
                           : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'

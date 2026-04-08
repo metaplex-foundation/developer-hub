@@ -23,7 +23,7 @@ export function Sections({ sections, activeSectionId, className, props }) {
         )
 
         const classNames = clsx(
-          'flex items-center gap-2 rounded-lg px-2 py-1',
+          'flex items-center gap-2 px-2 py-1',
           'hover:bg-muted hover:ring-1 hover:ring-inset hover:ring-border',
           section.id === activeSectionId
             ? 'font-medium text-foreground'

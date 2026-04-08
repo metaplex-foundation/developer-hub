@@ -11,7 +11,7 @@ const Badge = ({ type, className = '' }) => {
     const upperTypes = new Set(['get', 'post', 'chain']);
 
     return (
-        <span className={`inline-block px-1.5 py-0.5 text-[0.65rem] font-semibold leading-none rounded-full ${colorMap[type]} ring-1 ring-neutral-300 ${className}`}>
+        <span className={`inline-block px-1.5 py-0.5 text-[0.65rem] font-semibold leading-none ${colorMap[type]} ring-1 ring-neutral-300 ${className}`}>
             {upperTypes.has(type) ? type.toUpperCase() : type}
         </span>
     )
