@@ -73,23 +73,6 @@ export const genesis = {
           ],
         },
         {
-          title: 'Bonding Curve',
-          links: [
-            {
-              title: 'Overview',
-              href: '/smart-contracts/genesis/bonding-curve',
-            },
-            {
-              title: 'Swap Integration',
-              href: '/smart-contracts/genesis/bonding-curve-swaps',
-            },
-            {
-              title: 'Launch via API',
-              href: '/smart-contracts/genesis/bonding-curve-launch',
-            },
-          ],
-        },
-        {
           title: 'Launch Types',
           links: [
             {
@@ -179,7 +162,6 @@ export const genesis = {
       sections: {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
-        'Bonding Curve': 'Bonding Curve',
         'Launch Types': 'Launch Types',
         'Integrations': 'Integrations',
         'CLI': 'CLI',
@@ -189,10 +171,6 @@ export const genesis = {
         'Getting Started': 'Getting Started',
         'JavaScript SDK': 'JavaScript SDK',
         'API Client': 'API Client',
-        'Overview': 'Overview',
-        'Swap Integration': 'Swap Integration',
-        'Launch via API': 'Launch via API',
-        'Bonding Curve': 'Bonding Curve',
         'Launch Pool': 'Launch Pool',
         'Presale': 'Presale',
         'Uniform Price Auction': 'Uniform Price Auction',
@@ -213,7 +191,6 @@ export const genesis = {
       sections: {
         'Introduction': '紹介',
         'SDK': 'SDK',
-        'Bonding Curve': 'ボンディングカーブ',
         'Launch Types': 'ローンチタイプ',
         'Integrations': 'インテグレーション',
         'CLI': 'CLI',
@@ -223,10 +200,6 @@ export const genesis = {
         'Getting Started': 'はじめに',
         'JavaScript SDK': 'JavaScript SDK',
         'API Client': 'APIクライアント',
-        'Overview': '概要',
-        'Swap Integration': 'スワップインテグレーション',
-        'Launch via API': 'APIでローンチ',
-        'Bonding Curve': 'ボンディングカーブ',
         'Launch Pool': 'ローンチプール',
         'Presale': 'プレセール',
         'Uniform Price Auction': 'ユニフォームプライスオークション',
@@ -247,7 +220,6 @@ export const genesis = {
       sections: {
         'Introduction': '소개',
         'SDK': 'SDK',
-        'Bonding Curve': '본딩 커브',
         'Launch Types': '런치 유형',
         'Integrations': '통합',
         'CLI': 'CLI',
@@ -257,10 +229,6 @@ export const genesis = {
         'Getting Started': '시작하기',
         'JavaScript SDK': 'JavaScript SDK',
         'API Client': 'API 클라이언트',
-        'Overview': '개요',
-        'Swap Integration': '스왑 통합',
-        'Launch via API': 'API로 런치',
-        'Bonding Curve': '본딩 커브',
         'Launch Pool': '런치 풀',
         'Presale': '프리세일',
         'Uniform Price Auction': '균일가 경매',
@@ -281,7 +249,6 @@ export const genesis = {
       sections: {
         'Introduction': '简介',
         'SDK': 'SDK',
-        'Bonding Curve': '绑定曲线',
         'Launch Types': '发行类型',
         'Integrations': '集成',
         'CLI': 'CLI',
@@ -291,10 +258,6 @@ export const genesis = {
         'Getting Started': '快速入门',
         'JavaScript SDK': 'JavaScript SDK',
         'API Client': 'API客户端',
-        'Overview': '概述',
-        'Swap Integration': '交换集成',
-        'Launch via API': '通过API发行',
-        'Bonding Curve': '绑定曲线',
         'Launch Pool': '发行池',
         'Presale': '预售',
         'Uniform Price Auction': '统一价格拍卖',
