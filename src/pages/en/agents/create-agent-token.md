@@ -40,7 +40,7 @@ faqs:
   - q: Where do creator fees go when launching an agent token?
     a: Creator fees are automatically routed to the agent's Core asset signer PDA — derived from seeds ['mpl-core-execute', <agent_mint>]. You do not need to set creatorFeeWallet manually; passing the agent field is sufficient. The fee wallet can be overridden by setting launch.creatorFeeWallet explicitly.
   - q: Is setToken reversible?
-    a: No. Setting setToken to true permanently associates the launched token with the agent as its primary token. This cannot be undone or reassigned. Only set setToken to true when you are certain this is the token you want permanently linked to the agent.
+    a: No. Each agent can have only ever have one token — the association is permanent\. Setting setToken to true cannot be undone, replaced, or reassigned, and there is no instruction to change or remove it. Do not set setToken to true until you are certain this is the correct, final token for the agent.
   - q: Can I test an agent token launch on devnet first?
     a: Yes. Pass network 'solana-devnet' in the launch input and point your Umi instance at the devnet RPC. The API routes the request to devnet infrastructure. Fund the agent wallet with devnet SOL before sending transactions.
   - q: Can I combine a first buy with creator fees on an agent launch?
@@ -62,7 +62,7 @@ By the end of this guide you will have:
 
 - **One call** — `createAndRegisterLaunch` handles create, sign, send, and register in sequence
 - **Automatic fee routing** — creator fees go to the agent PDA; no manual wallet address needed
-- **Irreversible token association** — `setToken: true` permanently links the token to the agent
+- **One token per agent, forever** — each agent can only ever have one token; once set with `setToken: true` it cannot be changed, replaced, or unset
 - **Applies to** `@metaplex-foundation/genesis` 1.x · Last verified April 2026
 
 ## Quick Start
@@ -140,7 +140,7 @@ console.log('View at:', result.launch.link);
 ```
 
 {% callout type="warning" %}
-`setToken: true` permanently associates the launched token with the agent as its primary token. **This is irreversible.** It cannot be undone or reassigned after the transaction confirms. Only set `setToken: true` when you are certain this is the correct token for the agent.
+**An agent can only ever have one token.** Setting `setToken: true` permanently associates this token with the agent — it cannot be changed, replaced, or unset after the transaction confirms. Do not set `setToken: true` until you are certain this is the correct, final token for the agent.
 {% /callout %}
 
 All protocol parameters — supply splits, virtual reserves, and lock schedules — are set to protocol defaults when `launch: {}` is empty.
@@ -263,6 +263,7 @@ try {
 
 ## Notes
 
+- Each agent can only ever have **one token** — `setToken: true` is permanent and cannot be changed, replaced, or unset; there is no instruction to remove or reassign it
 - `createAndRegisterLaunch` makes two API calls internally — if the create transactions confirm but `registerLaunch` fails, the token exists onchain but is not visible on metaplex.com; use `createLaunch` + `registerLaunch` separately with [manual signing](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow) to handle this case
 - The creator fee wallet can be overridden by setting `launch.creatorFeeWallet` explicitly — it takes precedence over the agent PDA
 - First buy is configured at launch creation and cannot be added after the curve is live
@@ -282,7 +283,7 @@ Creator fees are automatically routed to the agent's Core asset signer PDA — d
 
 ### Is `setToken` reversible?
 
-No. Setting `setToken: true` permanently associates the launched token with the agent as its primary token. This cannot be undone or reassigned after the transaction confirms. If you are unsure, set `setToken: false` and handle the token association separately.
+No. Each agent can only ever have **one token**, and the association is permanent. Setting `setToken: true` cannot be undone, replaced, or reassigned after the transaction confirms — there is no instruction to change or remove it. If you are unsure, set `setToken: false` and do not set the token until you are certain.
 
 ### Can I test an agent token launch on devnet first?
 
