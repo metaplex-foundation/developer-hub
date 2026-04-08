@@ -32,10 +32,11 @@ export function Navigation({ product, navigation, className, hideProductHeader =
           if (link.collapsible === false || link.defaultOpen) {
             toOpen[link.title] = true
           } else if (currentPath) {
+            const isParentActive = link.href && normalizePath(link.href) === currentPath
             const hasActiveChild = link.children.some(
               child => normalizePath(child.href) === currentPath
             )
-            if (hasActiveChild) toOpen[link.title] = true
+            if (isParentActive || hasActiveChild) toOpen[link.title] = true
           }
         }
       })
@@ -129,6 +130,21 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                           >
                             {link.title}
                           </Link>
+                        ) : isCollapsible ? (
+                          <button
+                            onClick={() => toggleSubmenu(link.title)}
+                            className={clsx(
+                              'flex flex-1 items-center justify-between text-left',
+                              hasActiveChild ? 'font-semibold text-primary' : 'text-muted-foreground hover:text-foreground'
+                            )}
+                            aria-expanded={isOpen}
+                          >
+                            {link.title}
+                            <ChevronRightIcon className={clsx(
+                              'h-3 w-3 shrink-0 transition-transform duration-200',
+                              isOpen && 'rotate-90'
+                            )} />
+                          </button>
                         ) : (
                           <span className={clsx(
                             'flex-1',
@@ -137,7 +153,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                             {link.title}
                           </span>
                         )}
-                        {isCollapsible && (
+                        {isCollapsible && link.href && (
                           <button
                             onClick={() => toggleSubmenu(link.title)}
                             className="p-1 text-muted-foreground hover:text-foreground"
