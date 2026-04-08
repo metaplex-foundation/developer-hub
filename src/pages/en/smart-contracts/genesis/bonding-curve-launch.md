@@ -52,7 +52,7 @@ faqs:
     a: registerLaunch writes the launch to the Metaplex database so it appears on metaplex.com. It requires the genesis account to exist onchain — if called before the create transactions confirm, it will fail with an API error because the account cannot be verified yet.
 ---
 
-Use the Genesis SDK and the Metaplex API to create, sign, send, and register a [bonding curve V2](/smart-contracts/genesis/bonding-curve-v2) token launch on Solana. {% .lead %}
+Use the Genesis SDK and the Metaplex API to create, sign, send, and register a [bonding curve](/smart-contracts/genesis/bonding-curve) token launch on Solana. {% .lead %}
 
 {% callout title="What You'll Build" %}
 This guide covers:
@@ -146,7 +146,7 @@ All protocol parameters — supply splits, virtual reserves, fund flows, and loc
 
 ## Creator Fees
 
-A creator fee is an optional per-swap fee charged on every buy and sell on the bonding curve. Fees are **accrued** in the bucket rather than transferred directly on each swap — collect them by calling the permissionless `claimBondingCurveCreatorFeeV2` instruction. After graduation, fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`. See the [Bonding Curve Swap Integration Guide](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees) for the full claiming flow.
+A creator fee is an optional per-swap fee charged on every buy and sell on the bonding curve. Fees are **accrued** in the bucket rather than transferred directly on each swap — collect them by calling the permissionless `claimBondingCurveCreatorFeeV2` instruction. After graduation, fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`. See the [Bonding Curve Swap Integration Guide](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees) for the full claiming flow.
 
 By default, the creator fee wallet is the launching wallet. For current fee rates, see the [Genesis Protocol Fees](/smart-contracts/genesis) page.
 
@@ -173,7 +173,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 Launching on behalf of a Metaplex agent? The agent-specific flow — automatic PDA fee routing, Core execute wrapping, and `setToken` association — is covered in [Create an Agent Token](/agents/create-agent-token).
 {% /callout %}
 
-For how creator fees interact with swap pricing, see [Bonding Curve V2 — Theory of Operation](/smart-contracts/genesis/bonding-curve-v2#fee-structure).
+For how creator fees interact with swap pricing, see [Bonding Curve — Theory of Operation](/smart-contracts/genesis/bonding-curve#fee-structure).
 
 ## First Buy
 

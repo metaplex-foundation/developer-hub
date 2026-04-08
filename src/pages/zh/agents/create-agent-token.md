@@ -145,7 +145,7 @@ console.log('查看链接：', result.launch.link);
 
 当 `launch: {}` 为空时，供应分配、虚拟储备和锁定计划等所有协议参数均设置为协议默认值。
 
-有关本金曲线定价、费用和毕业机制的完整说明，请参阅[本金曲线 V2 — 运作原理](/smart-contracts/genesis/bonding-curve-v2)。
+有关本金曲线定价、费用和毕业机制的完整说明，请参阅[本金曲线 — 运作原理](/smart-contracts/genesis/bonding-curve)。
 
 ## 首次购买 {#first-buy}
 
@@ -263,10 +263,10 @@ try {
 
 ## 注意事项
 
-- `createAndRegisterLaunch` 内部进行两次 API 调用——若 create 交易已确认但 `registerLaunch` 失败，代币会存在于链上，但在 metaplex.com 上不可见；此时请使用 `createLaunch` + `registerLaunch` 配合[手动签名流程](/smart-contracts/genesis/bonding-curve-v2-launch#manual-signing-flow)分开处理
+- `createAndRegisterLaunch` 内部进行两次 API 调用——若 create 交易已确认但 `registerLaunch` 失败，代币会存在于链上，但在 metaplex.com 上不可见；此时请使用 `createLaunch` + `registerLaunch` 配合[手动签名流程](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow)分开处理
 - 通过明确设置 `launch.creatorFeeWallet` 可覆盖创作者费用钱包，该设置优先于代理 PDA
 - 首次购买在发行创建时配置，曲线上线后无法追加
-- 创作者费用累积在桶中，而非按次兑换转账；通过免权限的 `claimBondingCurveCreatorFeeV2`（本金曲线）和 `claimRaydiumCreatorFeeV2`（毕业后 Raydium）指令领取——参见[兑换集成指南](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees)
+- 创作者费用累积在桶中，而非按次兑换转账；通过免权限的 `claimBondingCurveCreatorFeeV2`（本金曲线）和 `claimRaydiumCreatorFeeV2`（毕业后 Raydium）指令领取——参见[兑换集成指南](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)
 - Metaplex API 构建并返回未签名的交易；签名密钥始终由调用方持有
 
 ## 常见问题

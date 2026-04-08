@@ -1,6 +1,6 @@
 ---
-title: Bonding Curve V2 Swap Integration
-metaTitle: Genesis Bonding Curve V2 Swap Integration | Metaplex
+title: Bonding Curve Swap Integration
+metaTitle: Genesis Bonding Curve Swap Integration | Metaplex
 description: How to read bonding curve state, get swap quotes, execute buy and sell transactions, handle slippage, decode swap events, and index lifecycle events using the Genesis SDK.
 keywords:
   - bonding curve
@@ -53,7 +53,7 @@ faqs:
     a: Find the inner instruction on the Genesis program (GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B) with discriminator byte 255, slice off that first byte, and pass the remaining bytes to getBondingCurveSwapEventSerializer().deserialize(). The event contains direction, amounts, fee, and post-swap reserve state.
 ---
 
-Use the Genesis SDK to read [bonding curve V2](/smart-contracts/genesis/bonding-curve-v2) state, compute swap quotes, execute buy and sell transactions onchain, handle slippage, decode swap events, and index the full lifecycle of a bonding curve launch. {% .lead %}
+Use the Genesis SDK to read [bonding curve](/smart-contracts/genesis/bonding-curve) state, compute swap quotes, execute buy and sell transactions onchain, handle slippage, decode swap events, and index the full lifecycle of a bonding curve launch. {% .lead %}
 
 {% callout title="What You'll Build" %}
 This guide covers:
@@ -68,7 +68,7 @@ This guide covers:
 
 ## Summary
 
-Bonding curve V2 swaps use the Genesis SDK to interact with the `BondingCurveBucketV2` onchain account — a constant product AMM that accepts SOL and returns tokens (buy) or accepts tokens and returns SOL (sell). For the underlying pricing mathematics, see [Bonding Curve V2 — Theory of Operation](/smart-contracts/genesis/bonding-curve-v2).
+Bonding curve swaps use the Genesis SDK to interact with the `BondingCurveBucketV2` onchain account — a constant product AMM that accepts SOL and returns tokens (buy) or accepts tokens and returns SOL (sell). For the underlying pricing mathematics, see [Bonding Curve — Theory of Operation](/smart-contracts/genesis/bonding-curve).
 
 - **Quote before sending** — call `getSwapResult` to get the exact fee-adjusted input and output amounts
 - **Slippage protection** — derive `minAmountOut` with `applySlippage` and pass it to the instruction
@@ -222,7 +222,7 @@ The `BondingCurveBucketV2` account contains all fields needed to compute quotes,
 | `swapEndCondition` | `object` | Condition that ends trading when triggered. |
 
 {% callout type="note" %}
-`virtualSol` and `virtualTokens` exist only in pricing mathematics — they are never deposited as real assets onchain. See [Bonding Curve V2 — Theory of Operation](/smart-contracts/genesis/bonding-curve-v2#why-bonding-curves-require-virtual-reserves) for how virtual reserves shape the constant product curve.
+`virtualSol` and `virtualTokens` exist only in pricing mathematics — they are never deposited as real assets onchain. See [Bonding Curve — Theory of Operation](/smart-contracts/genesis/bonding-curve#why-bonding-curves-require-virtual-reserves) for how virtual reserves shape the constant product curve.
 {% /callout %}
 
 For current protocol fee rates, see the [Protocol Fees](/protocol-fees) page.
@@ -729,7 +729,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 - The `BondingCurveSwapEvent` discriminator is always byte `255` — any inner instruction on the Genesis program with this leading byte is a swap event
 - Between `isSoldOut` returning `true` and `isGraduated` returning `true`, the curve is sold out but the Raydium CPMM pool is not yet funded; do not send users to Raydium until `isGraduated` is confirmed
 - Re-fetch the bucket before every swap in production — the price changes with every trade by any user
-- Bonding Curve V2 is distinct from the [Launch Pool](/smart-contracts/genesis/launch-pool) and [Presale](/smart-contracts/genesis/presale) launch types, which use fixed deposit windows and batch price discovery
+- Bonding Curve is distinct from the [Launch Pool](/smart-contracts/genesis/launch-pool) and [Presale](/smart-contracts/genesis/presale) launch types, which use fixed deposit windows and batch price discovery
 
 ## API Reference
 

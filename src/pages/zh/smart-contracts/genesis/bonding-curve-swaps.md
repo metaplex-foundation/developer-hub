@@ -1,7 +1,7 @@
 ---
-title: 联合曲线 V2 兑换集成
-metaTitle: Genesis 联合曲线 V2 兑换集成 | Metaplex
-description: 如何使用 Genesis SDK 读取联合曲线 V2 状态、获取兑换报价、执行买入和卖出交易、处理滑点、解码兑换事件以及索引生命周期事件。
+title: 联合曲线兑换集成
+metaTitle: Genesis 联合曲线兑换集成 | Metaplex
+description: 如何使用 Genesis SDK 读取联合曲线状态、获取兑换报价、执行买入和卖出交易、处理滑点、解码兑换事件以及索引生命周期事件。
 keywords:
   - bonding curve
   - swap
@@ -53,7 +53,7 @@ faqs:
     a: 在 Genesis 程序（GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B）的内部指令中找到判别字节为 255 的条目，截去该首字节，然后将剩余字节传给 getBondingCurveSwapEventSerializer().deserialize()。该事件包含方向、金额、手续费以及兑换后的储备状态。
 ---
 
-使用 Genesis SDK 读取[联合曲线 V2](/smart-contracts/genesis/bonding-curve-v2) 状态、计算兑换报价、在链上执行买入和卖出交易、处理滑点、解码兑换事件，并索引联合曲线发行的完整生命周期。{% .lead %}
+使用 Genesis SDK 读取[联合曲线](/smart-contracts/genesis/bonding-curve) 状态、计算兑换报价、在链上执行买入和卖出交易、处理滑点、解码兑换事件，并索引联合曲线发行的完整生命周期。{% .lead %}
 
 {% callout title="本指南涵盖内容" %}
 本指南涵盖：
@@ -68,7 +68,7 @@ faqs:
 
 ## 摘要
 
-联合曲线 V2 兑换使用 Genesis SDK 与链上 `BondingCurveBucketV2` 账户交互——这是一个恒积 AMM，接受 SOL 并返回代币（买入），或接受代币并返回 SOL（卖出）。有关定价数学基础，请参阅[联合曲线 V2——运作原理](/smart-contracts/genesis/bonding-curve-v2)。
+联合曲线兑换使用 Genesis SDK 与链上 `BondingCurveBucketV2` 账户交互——这是一个恒积 AMM，接受 SOL 并返回代币（买入），或接受代币并返回 SOL（卖出）。有关定价数学基础，请参阅[联合曲线——运作原理](/smart-contracts/genesis/bonding-curve)。
 
 - **发送前先获取报价** — 调用 `getSwapResult` 获取精确的含手续费输入和输出金额
 - **滑点保护** — 使用 `applySlippage` 推导 `minAmountOut` 并将其传给指令
@@ -223,7 +223,7 @@ for (const curve of allCurves) {
 | `swapEndCondition` | `object` | 触发时结束交易的条件。 |
 
 {% callout type="note" %}
-`virtualSol` 和 `virtualTokens` 仅存在于定价数学中——它们从未作为真实资产存入链上。请参阅[联合曲线 V2——运作原理](/smart-contracts/genesis/bonding-curve-v2#why-bonding-curves-require-virtual-reserves)了解虚拟储备如何塑造恒积曲线。
+`virtualSol` 和 `virtualTokens` 仅存在于定价数学中——它们从未作为真实资产存入链上。请参阅[联合曲线——运作原理](/smart-contracts/genesis/bonding-curve#why-bonding-curves-require-virtual-reserves)了解虚拟储备如何塑造恒积曲线。
 {% /callout %}
 
 有关当前协议手续费率，请参阅[协议费用](/protocol-fees)页面。
@@ -730,7 +730,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 - `BondingCurveSwapEvent` 的判别字节始终为 `255`——Genesis 程序上任何以该字节开头的内部指令都是兑换事件
 - 在 `isSoldOut` 返回 `true` 与 `isGraduated` 返回 `true` 之间，曲线已售罄但 Raydium CPMM 池尚未注入资金；在 `isGraduated` 确认之前，请勿将用户引导至 Raydium
 - 在生产环境中，每次兑换前都应重新获取 bucket——价格随每位用户的每次交易而变化
-- 联合曲线 V2 与[发行池](/smart-contracts/genesis/launch-pool)和[预售](/smart-contracts/genesis/presale)发行类型不同，后两者使用固定存款窗口和批量价格发现机制
+- 联合曲线与[发行池](/smart-contracts/genesis/launch-pool)和[预售](/smart-contracts/genesis/presale)发行类型不同，后两者使用固定存款窗口和批量价格发现机制
 
 ## API 参考
 

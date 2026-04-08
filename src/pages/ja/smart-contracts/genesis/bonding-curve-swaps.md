@@ -1,6 +1,6 @@
 ---
-title: ボンディングカーブ V2 スワップ統合
-metaTitle: Genesis ボンディングカーブ V2 スワップ統合 | Metaplex
+title: ボンディングカーブ スワップ統合
+metaTitle: Genesis ボンディングカーブ スワップ統合 | Metaplex
 description: Genesis SDK を使用して、ボンディングカーブの状態の読み取り、スワップ見積もりの取得、売買トランザクションの実行、スリッページの処理、スワップイベントのデコード、ライフサイクルイベントのインデックス作成を行う方法。
 keywords:
   - bonding curve
@@ -53,7 +53,7 @@ faqs:
     a: Genesis プログラム（GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B）上で、識別子バイト 255 を持つ内部命令を見つけ、その最初のバイトを取り除いて、残りのバイトを getBondingCurveSwapEventSerializer().deserialize() に渡してください。イベントには方向、金額、手数料、スワップ後のリザーブ状態が含まれます。
 ---
 
-Genesis SDK を使用して、[ボンディングカーブ V2](/smart-contracts/genesis/bonding-curve-v2) の状態を読み取り、スワップ見積もりを計算し、売買トランザクションをオンチェーンで実行し、スリッページを処理し、スワップイベントをデコードし、ボンディングカーブローンチのライフサイクル全体をインデックス化できます。 {% .lead %}
+Genesis SDK を使用して、[ボンディングカーブ](/smart-contracts/genesis/bonding-curve) の状態を読み取り、スワップ見積もりを計算し、売買トランザクションをオンチェーンで実行し、スリッページを処理し、スワップイベントをデコードし、ボンディングカーブローンチのライフサイクル全体をインデックス化できます。 {% .lead %}
 
 {% callout title="What You'll Build" %}
 このガイドが扱う内容:
@@ -68,7 +68,7 @@ Genesis SDK を使用して、[ボンディングカーブ V2](/smart-contracts/
 
 ## Summary
 
-ボンディングカーブ V2 スワップは Genesis SDK を使用して、`BondingCurveBucketV2` オンチェーンアカウントと連携します。これは SOL を受け取ってトークンを返す（購入）か、トークンを受け取って SOL を返す（売却）定積 AMM です。基盤となる価格計算については、[ボンディングカーブ V2 — 動作原理](/smart-contracts/genesis/bonding-curve-v2) を参照してください。
+ボンディングカーブ スワップは Genesis SDK を使用して、`BondingCurveBucketV2` オンチェーンアカウントと連携します。これは SOL を受け取ってトークンを返す（購入）か、トークンを受け取って SOL を返す（売却）定積 AMM です。基盤となる価格計算については、[ボンディングカーブ — 動作原理](/smart-contracts/genesis/bonding-curve) を参照してください。
 
 - **送信前に見積もりを取得** — `getSwapResult` を呼び出して、手数料調整済みの正確な入出力金額を取得する
 - **スリッページ保護** — `applySlippage` で `minAmountOut` を導出し、命令に渡す
@@ -223,7 +223,7 @@ for (const curve of allCurves) {
 | `swapEndCondition` | `object` | トリガーされると取引を終了させる条件。 |
 
 {% callout type="note" %}
-`virtualSol` と `virtualTokens` は価格計算の中にのみ存在し、実際の資産としてオンチェーンに入金されることはありません。仮想リザーブが定積カーブをどのように形成するかについては、[ボンディングカーブ V2 — 動作原理](/smart-contracts/genesis/bonding-curve-v2#why-bonding-curves-require-virtual-reserves) を参照してください。
+`virtualSol` と `virtualTokens` は価格計算の中にのみ存在し、実際の資産としてオンチェーンに入金されることはありません。仮想リザーブが定積カーブをどのように形成するかについては、[ボンディングカーブ — 動作原理](/smart-contracts/genesis/bonding-curve#why-bonding-curves-require-virtual-reserves) を参照してください。
 {% /callout %}
 
 現在のプロトコル手数料率については、[プロトコル手数料](/protocol-fees) ページを参照してください。
@@ -730,7 +730,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 - `BondingCurveSwapEvent` の識別子は常にバイト `255` です。Genesis プログラム上のこの先頭バイトを持つ内部命令はすべてスワップイベントです
 - `isSoldOut` が `true` を返してから `isGraduated` が `true` を返すまでの間、カーブは売り切れですが Raydium CPMM プールにはまだ資金が供給されていません。`isGraduated` が確認されるまでユーザーを Raydium に誘導しないでください
 - 本番環境では各スワップ前にバケットを再取得してください。価格はすべてのユーザーのトレードごとに変動します
-- ボンディングカーブ V2 は [ローンチプール](/smart-contracts/genesis/launch-pool) および [プレセール](/smart-contracts/genesis/presale) ローンチ種別とは異なります。それらは固定の入金ウィンドウとバッチ価格決定を使用します
+- ボンディングカーブは [ローンチプール](/smart-contracts/genesis/launch-pool) および [プレセール](/smart-contracts/genesis/presale) ローンチ種別とは異なります。それらは固定の入金ウィンドウとバッチ価格決定を使用します
 
 ## API Reference
 

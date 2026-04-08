@@ -145,7 +145,7 @@ console.log('확인 링크:', result.launch.link);
 
 `launch: {}`가 비어 있으면, 공급 분할, 가상 리저브, 잠금 일정 등 모든 프로토콜 매개변수가 프로토콜 기본값으로 설정됩니다.
 
-본딩 커브 가격 책정, 수수료, 졸업 방식에 대한 자세한 설명은 [본딩 커브 V2 — 동작 이론](/smart-contracts/genesis/bonding-curve-v2)을 참조하세요.
+본딩 커브 가격 책정, 수수료, 졸업 방식에 대한 자세한 설명은 [본딩 커브 — 동작 이론](/smart-contracts/genesis/bonding-curve)을 참조하세요.
 
 ## 첫 번째 구매 {#first-buy}
 
@@ -263,10 +263,10 @@ try {
 
 ## 참고 사항
 
-- `createAndRegisterLaunch`는 내부적으로 두 번의 API 호출을 합니다. create 트랜잭션은 확인되었지만 `registerLaunch`가 실패하면 토큰은 온체인에 존재하지만 metaplex.com에는 표시되지 않습니다. 이 경우를 처리하려면 `createLaunch` + `registerLaunch`를 [수동 서명 흐름](/smart-contracts/genesis/bonding-curve-v2-launch#manual-signing-flow)으로 별도 사용하세요
+- `createAndRegisterLaunch`는 내부적으로 두 번의 API 호출을 합니다. create 트랜잭션은 확인되었지만 `registerLaunch`가 실패하면 토큰은 온체인에 존재하지만 metaplex.com에는 표시되지 않습니다. 이 경우를 처리하려면 `createLaunch` + `registerLaunch`를 [수동 서명 흐름](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow)으로 별도 사용하세요
 - `launch.creatorFeeWallet`을 명시적으로 설정하면 크리에이터 수수료 지갑을 재정의할 수 있으며, 에이전트 PDA보다 우선합니다
 - 첫 번째 구매는 launch 생성 시 구성되며 커브가 라이브 상태가 된 후에는 추가할 수 없습니다
-- 크리에이터 수수료는 스왑마다 전송되는 것이 아니라 버킷에 누적됩니다. 권한 없이도 사용할 수 있는 `claimBondingCurveCreatorFeeV2`(본딩 커브) 및 `claimRaydiumCreatorFeeV2`(졸업 후 Raydium) 명령어로 청구하세요 — [스왑 통합 가이드](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees) 참조
+- 크리에이터 수수료는 스왑마다 전송되는 것이 아니라 버킷에 누적됩니다. 권한 없이도 사용할 수 있는 `claimBondingCurveCreatorFeeV2`(본딩 커브) 및 `claimRaydiumCreatorFeeV2`(졸업 후 Raydium) 명령어로 청구하세요 — [스왑 통합 가이드](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees) 참조
 - Metaplex API는 트랜잭션을 구성하여 미서명 상태로 반환합니다. 서명 키는 항상 호출자가 보유합니다
 
 ## 자주 묻는 질문

@@ -145,7 +145,7 @@ console.log('View at:', result.launch.link);
 
 All protocol parameters — supply splits, virtual reserves, and lock schedules — are set to protocol defaults when `launch: {}` is empty.
 
-For a complete explanation of how the bonding curve pricing, fees, and graduation work, see [Bonding Curve V2 — Theory of Operation](/smart-contracts/genesis/bonding-curve-v2).
+For a complete explanation of how the bonding curve pricing, fees, and graduation work, see [Bonding Curve — Theory of Operation](/smart-contracts/genesis/bonding-curve).
 
 ## First Buy
 
@@ -263,10 +263,10 @@ try {
 
 ## Notes
 
-- `createAndRegisterLaunch` makes two API calls internally — if the create transactions confirm but `registerLaunch` fails, the token exists onchain but is not visible on metaplex.com; use `createLaunch` + `registerLaunch` separately with [manual signing](/smart-contracts/genesis/bonding-curve-v2-launch#manual-signing-flow) to handle this case
+- `createAndRegisterLaunch` makes two API calls internally — if the create transactions confirm but `registerLaunch` fails, the token exists onchain but is not visible on metaplex.com; use `createLaunch` + `registerLaunch` separately with [manual signing](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow) to handle this case
 - The creator fee wallet can be overridden by setting `launch.creatorFeeWallet` explicitly — it takes precedence over the agent PDA
 - First buy is configured at launch creation and cannot be added after the curve is live
-- Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions — see the [Swap Integration Guide](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees)
+- Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions — see the [Swap Integration Guide](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)
 - The Metaplex API constructs and returns unsigned transactions; the caller always holds the signing keys
 
 

@@ -1,6 +1,6 @@
 ---
-title: 본딩 커브 V2 스왑 통합
-metaTitle: Genesis 본딩 커브 V2 스왑 통합 | Metaplex
+title: 본딩 커브 스왑 통합
+metaTitle: Genesis 본딩 커브 스왑 통합 | Metaplex
 description: Genesis SDK를 사용하여 본딩 커브 상태 읽기, 스왑 견적 계산, 매수 및 매도 트랜잭션 실행, 슬리피지 처리, 스왑 이벤트 디코딩, 라이프사이클 이벤트 인덱싱하는 방법을 설명합니다.
 keywords:
   - bonding curve
@@ -53,7 +53,7 @@ faqs:
     a: Genesis 프로그램(GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B)에서 판별자 바이트 255를 가진 내부 명령어를 찾고, 그 첫 번째 바이트를 잘라낸 후 나머지 바이트를 getBondingCurveSwapEventSerializer().deserialize()에 전달하세요. 이벤트에는 방향, 금액, 수수료, 스왑 후 예비 상태가 포함됩니다.
 ---
 
-Genesis SDK를 사용하여 [본딩 커브 V2](/smart-contracts/genesis/bonding-curve-v2) 상태를 읽고, 스왑 견적을 계산하고, 온체인에서 매수 및 매도 트랜잭션을 실행하고, 슬리피지를 처리하고, 스왑 이벤트를 디코딩하고, 본딩 커브 런칭의 전체 라이프사이클을 인덱싱하세요. {% .lead %}
+Genesis SDK를 사용하여 [본딩 커브](/smart-contracts/genesis/bonding-curve) 상태를 읽고, 스왑 견적을 계산하고, 온체인에서 매수 및 매도 트랜잭션을 실행하고, 슬리피지를 처리하고, 스왑 이벤트를 디코딩하고, 본딩 커브 런칭의 전체 라이프사이클을 인덱싱하세요. {% .lead %}
 
 {% callout title="빌드할 내용" %}
 이 가이드는 다음을 다룹니다:
@@ -68,7 +68,7 @@ Genesis SDK를 사용하여 [본딩 커브 V2](/smart-contracts/genesis/bonding-
 
 ## 요약
 
-본딩 커브 V2 스왑은 Genesis SDK를 사용하여 `BondingCurveBucketV2` 온체인 계정과 상호작용합니다 — SOL을 받아 토큰을 반환하거나(매수), 토큰을 받아 SOL을 반환하는(매도) 상수 곱 AMM입니다. 기본 가격 산정 수학에 대해서는 [본딩 커브 V2 — 작동 원리](/smart-contracts/genesis/bonding-curve-v2)를 참조하세요.
+본딩 커브 스왑은 Genesis SDK를 사용하여 `BondingCurveBucketV2` 온체인 계정과 상호작용합니다 — SOL을 받아 토큰을 반환하거나(매수), 토큰을 받아 SOL을 반환하는(매도) 상수 곱 AMM입니다. 기본 가격 산정 수학에 대해서는 [본딩 커브 — 작동 원리](/smart-contracts/genesis/bonding-curve)를 참조하세요.
 
 - **전송 전 견적 계산** — `getSwapResult`를 호출하여 수수료가 조정된 정확한 입출력 금액을 확인하세요
 - **슬리피지 보호** — `applySlippage`로 `minAmountOut`을 계산하여 명령어에 전달하세요
@@ -223,7 +223,7 @@ for (const curve of allCurves) {
 | `swapEndCondition` | `object` | 발동 시 거래를 종료하는 조건. |
 
 {% callout type="note" %}
-`virtualSol`과 `virtualTokens`는 가격 산정 수학에만 존재합니다 — 실제 자산으로 온체인에 입금되지 않습니다. 가상 예비금이 상수 곱 커브를 형성하는 방법은 [본딩 커브 V2 — 작동 원리](/smart-contracts/genesis/bonding-curve-v2#why-bonding-curves-require-virtual-reserves)를 참조하세요.
+`virtualSol`과 `virtualTokens`는 가격 산정 수학에만 존재합니다 — 실제 자산으로 온체인에 입금되지 않습니다. 가상 예비금이 상수 곱 커브를 형성하는 방법은 [본딩 커브 — 작동 원리](/smart-contracts/genesis/bonding-curve#why-bonding-curves-require-virtual-reserves)를 참조하세요.
 {% /callout %}
 
 현재 프로토콜 수수료율은 [프로토콜 수수료](/protocol-fees) 페이지를 참조하세요.
@@ -730,7 +730,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 - `BondingCurveSwapEvent` 판별자는 항상 바이트 `255`입니다 — 이 선행 바이트를 가진 Genesis 프로그램의 모든 내부 명령어는 스왑 이벤트입니다
 - `isSoldOut`이 `true`를 반환하고 `isGraduated`가 `true`를 반환하는 사이에 커브는 소진되었지만 Raydium CPMM 풀에 자금이 조달되지 않은 상태입니다; `isGraduated`가 확인될 때까지 사용자를 Raydium으로 안내하지 마세요
 - 프로덕션에서는 매 스왑 전에 버킷을 다시 가져오세요 — 가격은 모든 사용자의 거래마다 변동합니다
-- 본딩 커브 V2는 고정 입금 기간과 일괄 가격 발견을 사용하는 [런치 풀](/smart-contracts/genesis/launch-pool) 및 [프리세일](/smart-contracts/genesis/presale) 런칭 유형과 구별됩니다
+- 본딩 커브는 고정 입금 기간과 일괄 가격 발견을 사용하는 [런치 풀](/smart-contracts/genesis/launch-pool) 및 [프리세일](/smart-contracts/genesis/presale) 런칭 유형과 구별됩니다
 
 ## API 참조
 

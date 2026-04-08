@@ -1,7 +1,7 @@
 ---
-title: Bonding Curve V2 — Theory of Operation
-metaTitle: Genesis Bonding Curve V2 — How It Works | Metaplex
-description: How the Genesis Bonding Curve V2 works — constant product pricing, virtual reserves, fee structure, first buy mechanism, lifecycle phases, and graduation into a Raydium liquidity pool.
+title: Bonding Curve — Theory of Operation
+metaTitle: Genesis Bonding Curve — How It Works | Metaplex
+description: How the Genesis Bonding Curve works — constant product pricing, virtual reserves, fee structure, first buy mechanism, lifecycle phases, and graduation into a Raydium liquidity pool.
 keywords:
   - bonding curve
   - bonding curve v2
@@ -26,7 +26,7 @@ updated: '03-30-2026'
 faqs:
   - q: What is the difference between a bonding curve launch and a launch pool?
     a: A launch pool has a fixed deposit window and fixed price discovery — users deposit during the window and receive tokens proportionally. A bonding curve has no fixed window — users can buy and sell at any time after the swap window opens, with the price rising as more SOL flows in and falling as tokens are sold back. Price is continuous and deterministic, not batch-settled.
-  - q: Why does Genesis Bonding Curve V2 use virtual reserves instead of a standard AMM?
+  - q: Why does Genesis Bonding Curve use virtual reserves instead of a standard AMM?
     a: A standard constant product AMM (x * y = k) is not designed to sell out completely — the price of the last few tokens approaches infinity. Virtual reserves (virtual SOL and virtual tokens added at initialization) set a practical starting price and shape the curve so that all real tokens can be sold through at bounded prices.
   - q: What triggers graduation and what happens to the accumulated SOL?
     a: Graduation fires automatically when all tokens on the curve have been sold — no manual trigger is required. The accumulated real SOL is migrated into a Raydium CPMM pool for ongoing secondary trading.
@@ -38,11 +38,11 @@ faqs:
     a: The system clamps the output to the remaining token balance and uses the reverse formula to recalculate the exact SOL input required. The buyer pays only for the tokens actually available rather than having the transaction fail.
 ---
 
-Genesis Bonding Curve V2 is a constant product automated market maker designed to completely sell out its token supply and graduate into a Raydium CPMM pool. {% .lead %}
+Genesis Bonding Curve is a constant product automated market maker designed to completely sell out its token supply and graduate into a Raydium CPMM pool. {% .lead %}
 
 ## Summary
 
-Genesis Bonding Curve V2 uses a `x × y = k` constant product pricing model with virtual reserves to enable deterministic, continuously-available token launches on Solana.
+Genesis Bonding Curve uses a `x × y = k` constant product pricing model with virtual reserves to enable deterministic, continuously-available token launches on Solana.
 
 - **Constant product AMM** — price rises as SOL flows in and falls as tokens are sold back, following `x × y = k`
 - **Virtual reserves** — SOL and token reserves seeded at initialization to set a practical starting price and allow the curve to fully sell out
@@ -51,7 +51,7 @@ Genesis Bonding Curve V2 uses a `x × y = k` constant product pricing model with
 
 ## Constant Product AMM Pricing
 
-Genesis Bonding Curve V2 uses the same `x × y = k` formula used by Uniswap V2 and Raydium. The price at any moment is determined by the ratio of token reserves to SOL reserves — buying tokens reduces the token supply and raises the price; selling tokens increases the supply and lowers it.
+Genesis Bonding Curve uses the same `x × y = k` formula used by Uniswap V2 and Raydium. The price at any moment is determined by the ratio of token reserves to SOL reserves — buying tokens reduces the token supply and raises the price; selling tokens increases the supply and lowers it.
 
 ### Why Bonding Curves Require Virtual Reserves
 
@@ -60,9 +60,9 @@ A plain `x × y = k` curve has asymptotes at both ends that make it unsuitable f
 - **Bottom asymptote** — with no SOL in the pool at launch, a buyer could drain all tokens for any nonzero SOL amount
 - **Top asymptote** — the price of the last few tokens approaches infinity, making a full sell-out impossible at practical prices
 
-Genesis Bonding Curve V2 solves this by seeding the curve with **virtual reserves** — both virtual SOL and virtual tokens — that exist only in the pricing math. The virtual reserves set a finite starting price and shape the curve so that all real tokens can be sold through at practical, bounded prices.
+Genesis Bonding Curve solves this by seeding the curve with **virtual reserves** — both virtual SOL and virtual tokens — that exist only in the pricing math. The virtual reserves set a finite starting price and shape the curve so that all real tokens can be sold through at practical, bounded prices.
 
-### Reserve Accounting in Genesis Bonding Curve V2
+### Reserve Accounting in Genesis Bonding Curve
 
 The curve maintains two sets of reserves that are combined for the AMM formula:
 
@@ -178,7 +178,7 @@ When configured, the following rules apply:
 
 ## Bonding Curve Lifecycle
 
-A Genesis Bonding Curve V2 launch moves through three sequential phases:
+A Genesis Bonding Curve launch moves through three sequential phases:
 
 ### Phase 1: Created
 
@@ -225,14 +225,14 @@ The bucket includes an extensions block with independently configurable optional
 - Graduation fires automatically on full token exhaustion — no separate instruction is required
 - The protocol swap fee rate is set by Metaplex and is not configurable by creators; see [Protocol Fees](/protocol-fees) for current rates
 - The first buy mechanism is configured at curve creation and cannot be added after the fact
-- Bonding Curve V2 is distinct from the [Launch Pool](/smart-contracts/genesis/launch-pool) and [Presale](/smart-contracts/genesis/presale) launch types — those use fixed deposit windows and batch price discovery
+- Bonding Curve is distinct from the [Launch Pool](/smart-contracts/genesis/launch-pool) and [Presale](/smart-contracts/genesis/presale) launch types — those use fixed deposit windows and batch price discovery
 
 ## FAQ
 
 ### What is the difference between a bonding curve launch and a launch pool?
 A [launch pool](/smart-contracts/genesis/launch-pool) has a fixed deposit window and batch price discovery — users deposit during the window and receive tokens proportionally at a single clearing price. A bonding curve has no fixed window: users can buy and sell at any time after the swap window opens, with the price updating continuously after every trade.
 
-### Why does Genesis Bonding Curve V2 use virtual reserves instead of a standard AMM?
+### Why does Genesis Bonding Curve use virtual reserves instead of a standard AMM?
 A standard `x × y = k` curve approaches infinity at both extremes, making a complete sell-out impossible at practical prices. Virtual reserves (virtual SOL and virtual tokens added at initialization) anchor the curve with a finite starting price and shape it so that all real tokens can be sold through at bounded, predictable prices. See [Why Bonding Curves Require Virtual Reserves](#why-bonding-curves-require-virtual-reserves).
 
 ### What triggers graduation and what happens to the accumulated SOL?
@@ -251,7 +251,7 @@ The system clamps the token output to the remaining balance and uses the reverse
 
 | Term | Definition |
 |------|------------|
-| **Constant product AMM** | An automated market maker using `x × y = k` where the product of reserves is held constant; used by Uniswap V2, Raydium, and Genesis Bonding Curve V2 |
+| **Constant product AMM** | An automated market maker using `x × y = k` where the product of reserves is held constant; used by Uniswap V2, Raydium, and Genesis Bonding Curve |
 | **Virtual reserves** | SOL and token amounts added at curve initialization that exist only in the pricing math, not as deposited assets; they set the starting price and enable a complete sell-out |
 | **Real reserves** | Actual SOL deposited by buyers (`quoteTokenDepositTotal`) and actual tokens remaining in the bucket (`baseTokenBalance`) |
 | **`k` invariant** | The constant `k = totalSol × totalTokens`; ceiling division ensures swaps can only increase `k`, never decrease it |

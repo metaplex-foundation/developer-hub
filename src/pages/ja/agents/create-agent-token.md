@@ -145,7 +145,7 @@ console.log('確認先:', result.launch.link);
 
 `launch: {}`が空の場合、供給の分割、仮想リザーブ、ロックスケジュールなどのすべてのプロトコルパラメーターはプロトコルのデフォルト値に設定されます。
 
-ボンディングカーブの価格設定、手数料、グラデュエーションの仕組みについては、[ボンディングカーブV2 — 動作理論](/smart-contracts/genesis/bonding-curve-v2)を参照してください。
+ボンディングカーブの価格設定、手数料、グラデュエーションの仕組みについては、[ボンディングカーブ — 動作理論](/smart-contracts/genesis/bonding-curve)を参照してください。
 
 ## 初回購入 {#first-buy}
 
@@ -263,10 +263,10 @@ try {
 
 ## 注意事項
 
-- `createAndRegisterLaunch`は内部で2回のAPI呼び出しを行います。createトランザクションが確認されたが`registerLaunch`が失敗した場合、トークンはオンチェーンに存在しますがmetaplex.comには表示されません。このケースを処理するには、`createLaunch` + `registerLaunch`を[手動署名フロー](/smart-contracts/genesis/bonding-curve-v2-launch#manual-signing-flow)で個別に使用してください
+- `createAndRegisterLaunch`は内部で2回のAPI呼び出しを行います。createトランザクションが確認されたが`registerLaunch`が失敗した場合、トークンはオンチェーンに存在しますがmetaplex.comには表示されません。このケースを処理するには、`createLaunch` + `registerLaunch`を[手動署名フロー](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow)で個別に使用してください
 - `launch.creatorFeeWallet`を明示的に設定することでクリエイター手数料ウォレットを上書きできます — エージェントPDAより優先されます
 - 初回購入はlaunch作成時に設定され、カーブがライブになった後に追加することはできません
-- クリエイター手数料はスワップごとに転送されるのではなく、バケットに蓄積されます。パーミッションレスの`claimBondingCurveCreatorFeeV2`（ボンディングカーブ）および`claimRaydiumCreatorFeeV2`（グラデュエーション後のRaydium）インストラクションで請求してください — [スワップ統合ガイド](/smart-contracts/genesis/bonding-curve-v2-swaps#claiming-creator-fees)を参照
+- クリエイター手数料はスワップごとに転送されるのではなく、バケットに蓄積されます。パーミッションレスの`claimBondingCurveCreatorFeeV2`（ボンディングカーブ）および`claimRaydiumCreatorFeeV2`（グラデュエーション後のRaydium）インストラクションで請求してください — [スワップ統合ガイド](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)を参照
 - Metaplex APIはトランザクションを構築して未署名のまま返します。署名キーは常に呼び出し元が保持します
 
 ## よくある質問
