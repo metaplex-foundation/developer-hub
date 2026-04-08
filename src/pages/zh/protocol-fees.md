@@ -44,6 +44,12 @@ Metaplex协议目前包含以下费用：
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
+## Bubblegum v1（旧版）
+
+原始的压缩NFT程序。
+
+{% protocol-fees program="bubblegum" showTitle=false /%}
+
 ## MPL-Hybrid
 
 由交换代币和NFT的个人支付。
@@ -64,4 +70,6 @@ Metaplex基金会持续监控社区对费用的反馈，并可能随时间调整
 
 ### Metaplex协议费用如何使用？
 
-所有协议费用都用于推进Metaplex基金会的目标，这是一个非营利组织，旨在促进Metaplex生态系统的研究、开发和采用。目前，协议费用的50%被转换为$MPLX并贡献给Metaplex DAO金库。剩余的50%由Metaplex基金会保留用于其运营。
+所有协议费用都用于推进Metaplex基金会的目标，这是一个非营利组织，旨在促进Metaplex生态系统的研究、开发和采用。这包括为Metaplex社区提供激励和支持，以持续开发、保护、治理和管理Metaplex协议和Metaplex DAO。
+
+目前，协议费用的50%被转换为$MPLX并贡献给Metaplex DAO金库。剩余的50%由Metaplex基金会保留，以支持Metaplex生态系统的长期可持续发展。
