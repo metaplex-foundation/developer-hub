@@ -119,7 +119,6 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                 if (link.children) {
                   const isOpen = !!openSubmenus[link.title]
                   const isParentActive = link.href ? isLinkActive(link.href) : false
-                  const hasActiveChild = link.children.some(child => isLinkActive(child.href))
                   const isCollapsible = link.collapsible !== false
 
                   return (
