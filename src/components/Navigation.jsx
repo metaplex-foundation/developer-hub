@@ -12,7 +12,19 @@ export function Navigation({ product, navigation, className, hideProductHeader =
   let router = useRouter()
   const { locale } = useLocale()
   const [currentPath, setCurrentPath] = useState('')
-  const [openSubmenus, setOpenSubmenus] = useState({})
+  const [openSubmenus, setOpenSubmenus] = useState(() => {
+    const initial = {}
+    if (navigation) {
+      navigation.forEach(section => {
+        section.links.forEach(link => {
+          if (link.children && (link.collapsible === false || link.defaultOpen)) {
+            initial[link.title] = true
+          }
+        })
+      })
+    }
+    return initial
+  })
 
   // Update currentPath after hydration when router is ready
   useEffect(() => {
@@ -114,7 +126,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                     <li key={`${link.title}-${link.href ?? link.title}`} className="relative">
                       <div className={clsx(
                         'relative flex items-center pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
-                        isParentActive
+                        (isParentActive || hasActiveChild)
                           ? 'before:bg-primary'
                           : 'before:hidden before:bg-primary hover:before:block'
                       )}>
@@ -123,7 +135,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                             href={link.href}
                             className={clsx(
                               'flex-1',
-                              isParentActive
+                              (isParentActive || hasActiveChild)
                                 ? 'font-semibold text-primary'
                                 : 'text-muted-foreground hover:text-foreground'
                             )}
@@ -132,12 +144,14 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                           </Link>
                         ) : isCollapsible ? (
                           <button
+                            type="button"
                             onClick={() => toggleSubmenu(link.title)}
                             className={clsx(
                               'flex flex-1 items-center justify-between text-left',
                               hasActiveChild ? 'font-semibold text-primary' : 'text-muted-foreground hover:text-foreground'
                             )}
                             aria-expanded={isOpen}
+                            aria-controls={`submenu-${link.title}`}
                           >
                             {link.title}
                             <ChevronRightIcon className={clsx(
@@ -155,8 +169,11 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                         )}
                         {isCollapsible && link.href && (
                           <button
+                            type="button"
                             onClick={() => toggleSubmenu(link.title)}
                             className="p-1 text-muted-foreground hover:text-foreground"
+                            aria-expanded={isOpen}
+                            aria-controls={`submenu-${link.title}`}
                             aria-label={isOpen ? 'Collapse submenu' : 'Expand submenu'}
                           >
                             <ChevronRightIcon className={clsx(
@@ -167,7 +184,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                         )}
                       </div>
                       {isOpen && (
-                        <ul role="list" className="ml-3.5 mt-2 space-y-2 lg:space-y-2">
+                        <ul id={`submenu-${link.title}`} role="list" className="ml-3.5 mt-2 space-y-2 lg:space-y-2">
                           {link.children.map(child => {
                             const isChildActive = isLinkActive(child.href)
                             return (

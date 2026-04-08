@@ -50,7 +50,7 @@ Core Collectionの作成後の更新には2つの命令があります。
 - CollectionのupdateAuthorityをsignerとして設定した**Umi** — この値を取得するには[Collectionの取得](/smart-contracts/core/collections/fetch)を参照
 - 更新したいcollectionのアドレス
 
-## CollectionメタデータHP更新
+## Collectionメタデータ更新
 
 `updateCollection`は既存Collectionの`name`および/または`uri`を変更します。変更したいフィールドのみ渡してください。
 
@@ -107,7 +107,7 @@ pub async fn update_collection() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## CollectionプラグインHP更新
+## Collectionプラグイン更新
 
 `updateCollectionPlugin`はCollectionにすでに付与されているプラグインの設定を変更します。以下の例では[Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)のBasis pointsとクリエイター配分を更新しています。
 

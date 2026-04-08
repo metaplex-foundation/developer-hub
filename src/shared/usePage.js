@@ -111,14 +111,18 @@ function getActiveSection(pathname, product, pageProps, originalPathname) {
     const flattenLinks = (links) => links.flatMap(link =>
       link.children ? link.children : [link]
     )
-    const allLinks = activeSection.navigation.flatMap((group) => flattenLinks(group.links))
+    const allLinks = activeSection.navigation
+      .flatMap((group) => flattenLinks(group.links))
+      .filter(link => link.href)
     // Check if links have locale prefix by looking at first link with an href
-    const firstLinkWithHref = allLinks.find(link => link.href)
+    const firstLinkWithHref = allLinks[0]
     const linksHaveLocalePrefix = firstLinkWithHref && firstLinkWithHref.href.match(/^\/(?:ja|ko|zh)\//)
     const linkPathname = linksHaveLocalePrefix ? originalPathname : pathname
     const linkIndex = allLinks.findIndex((link) => link.href === linkPathname)
-    activeSection.previousPage = allLinks[linkIndex - 1]
-    activeSection.nextPage = allLinks[linkIndex + 1]
+    if (linkIndex >= 0) {
+      activeSection.previousPage = allLinks[linkIndex - 1]
+      activeSection.nextPage = allLinks[linkIndex + 1]
+    }
     activeSection.navigationGroup = activeSection.navigation.find((group) =>
       flattenLinks(group.links).find((link) => link.href === linkPathname)
     )
@@ -226,7 +230,7 @@ function localizeProduct(product, locale) {
               children: link.children.map(child => ({
                 ...child,
                 title: (productNav.links && productNav.links[child.title]) || child.title,
-                href: getHref(child.href)
+                href: child.href ? getHref(child.href) : child.href
               }))
             })
           }))
@@ -241,7 +245,7 @@ function localizeProduct(product, locale) {
             ...(link.children && {
               children: link.children.map(child => ({
                 ...child,
-                href: getHref(child.href)
+                href: child.href ? getHref(child.href) : child.href
               }))
             })
           }))
