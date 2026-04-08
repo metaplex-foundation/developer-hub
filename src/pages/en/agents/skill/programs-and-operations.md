@@ -3,13 +3,15 @@ title: Programs & Operations
 metaTitle: Programs & Operations | Metaplex Skill
 description: Detailed breakdown of programs and operations covered by the Metaplex Skill.
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 keywords:
+  - Agent Registry
   - Core
   - Token Metadata
   - Bubblegum
   - Candy Machine
   - Genesis
+  - bonding curve
   - mplx CLI
   - Umi SDK
   - Kit SDK
@@ -20,13 +22,13 @@ about:
 proficiencyLevel: Beginner
 ---
 
-The Metaplex Skill covers five programs across CLI, Umi SDK, and Kit SDK. This page provides a detailed breakdown of what each program supports and when to use it. {% .lead %}
+The Metaplex Skill covers six programs across CLI, Umi SDK, and Kit SDK. This page provides a detailed breakdown of what each program supports and when to use it. {% .lead %}
 
 ## Summary
 
-The Metaplex Skill provides AI agents with knowledge of five Metaplex programs and their available tooling across CLI, Umi SDK, and Kit SDK.
+The Metaplex Skill provides AI agents with knowledge of six Metaplex programs and their available tooling across CLI, Umi SDK, and Kit SDK.
 
-- All five programs (Core, Token Metadata, Bubblegum, Candy Machine, Genesis) support both CLI and Umi SDK
+- All six programs (Agent Registry, Genesis, Core, Token Metadata, Bubblegum, Candy Machine) support both CLI and Umi SDK
 - Kit SDK is available for Token Metadata only
 - The `mplx` CLI handles most operations without writing code
 - Use this page to determine which program and tooling approach fits your task
@@ -35,11 +37,24 @@ The Metaplex Skill provides AI agents with knowledge of five Metaplex programs a
 
 | Program | CLI | Umi SDK | Kit SDK |
 |---------|-----|---------|---------|
+| **Agent Registry** | Yes | Yes | — |
+| **Genesis** | Yes | Yes | — |
 | **Core** | Yes | Yes | — |
 | **Token Metadata** | Yes | Yes | Yes |
 | **Bubblegum** | Yes | Yes | — |
 | **Candy Machine** | Yes | Yes | — |
-| **Genesis** | Yes | Yes | — |
+
+## Agent Registry
+
+The [Agent Registry](/agents) provides on-chain agent identity, wallets, and execution delegation for MPL Core assets.
+
+**CLI** (`mplx agent`): Register agent identity, delegate and revoke execution, fetch agent data, and link a Genesis token to an agent.
+
+**Umi SDK**: Full programmatic access including the Mint Agent API (`mintAndSubmitAgent`) that creates a Core asset and registers identity in a single transaction. Supports `registerIdentityV1` for existing assets, execution delegation, and `setAgentTokenV1` for linking Genesis tokens.
+
+{% callout type="note" %}
+Every Core asset has a built-in wallet (Asset Signer PDA) via Core's Execute hook. The Agent Registry adds discoverable identity records and lets owners delegate an off-chain executive to operate the agent.
+{% /callout %}
 
 ## Core
 
@@ -81,11 +96,11 @@ Deploy NFT drops with configurable minting rules (guards). Guards control who ca
 
 ## Genesis
 
-Token launch protocol with fair distribution and automatic liquidity graduation to Raydium.
+[Genesis](/smart-contracts/genesis) is a token launch protocol with fair distribution and automatic liquidity graduation to Raydium. It supports two launch types: **launchpool** (configurable allocations with a 48-hour deposit window and optional team vesting) and **bonding curve** (instant constant-product AMM where trading starts immediately and auto-graduates to Raydium CPMM on sell-out).
 
-**CLI** (`mplx genesis`): Create and manage token launches.
+**CLI** (`mplx genesis`): Create and manage token launches via launchpool or bonding curve. Supports creator fees, first buy, and agent mode for bonding curve launches.
 
-**Umi SDK**: Full programmatic access for creating and managing token launches.
+**Umi SDK**: Full programmatic access via the Launch API (`createAndRegisterLaunch`). Includes bonding curve swap integration with state fetching, lifecycle helpers, quote calculation with slippage, and swap execution. Also supports agent launch flows where a Genesis token is linked to an Agent Registry identity.
 
 ## CLI Capabilities
 
@@ -93,15 +108,20 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 
 | Task | CLI Support |
 |------|-------------|
+| Register agent identity | Yes |
+| Fetch agent data | Yes |
+| Revoke execution delegation | Yes |
+| Set agent token (Genesis link) | Yes (requires asset-signer mode) |
 | Create fungible token | Yes |
 | Create Core NFT/Collection | Yes |
 | Create TM NFT/pNFT | Yes |
 | Transfer TM NFTs | Yes |
 | Transfer fungible tokens | Yes |
-| Transfer Core NFTs | SDK only |
+| Transfer Core NFTs | Yes |
 | Upload to Irys | Yes |
 | Candy Machine drop | Yes (setup/config/insert — minting requires SDK) |
 | Compressed NFTs (cNFTs) | Yes (batch limit ~100, use SDK for larger) |
+| Execute (asset-signer wallets) | Yes |
 | Check SOL balance / Airdrop | Yes |
 | Query assets by owner/collection | SDK only (DAS API) |
 | Token launch (Genesis) | Yes |
@@ -109,6 +129,10 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 ## Decision Guide
 
 Use the following guidance to choose the right program and tooling for your task.
+
+### Autonomous Agents
+
+Use **[Agent Registry](/agents)** to register on-chain identity and execution delegation for MPL Core assets. The Mint Agent API (`mintAndSubmitAgent`) creates the Core asset and registers identity in a single transaction. For existing assets, use `registerIdentityV1` directly. Agents can optionally link a Genesis token via `setAgentTokenV1`.
 
 ### NFTs: Core vs Token Metadata
 
@@ -131,7 +155,14 @@ Always use **Token Metadata** for fungible tokens.
 
 ### Token Launches
 
-Use **Genesis** for token generation events with fair distribution mechanics and automatic Raydium liquidity graduation.
+Use **[Genesis](/smart-contracts/genesis)** for token generation events with fair distribution and automatic Raydium liquidity graduation. Two launch types are available:
+
+- **Launchpool** (default) — Configurable allocations with a 48-hour deposit window and optional team vesting support.
+- **Bonding curve** — Instant constant-product AMM where trading starts immediately. Supports creator fees, first buy, and agent mode. Auto-graduates to Raydium CPMM on sell-out.
+
+### Asset as Agent / Vault / Wallet (Execute)
+
+Use **Core Execute** when an asset (NFT, agent, vault) needs to hold SOL or tokens, transfer funds, sign transactions, or own other assets. Every Core asset has a signer PDA that can act as an autonomous wallet.
 
 ### CLI vs SDK
 
@@ -145,6 +176,7 @@ Use **Genesis** for token generation events with fair distribution mechanics and
 
 - Compressed NFT (Bubblegum) operations require a DAS-enabled RPC endpoint; standard Solana RPC does not support the Digital Asset Standard API
 - Candy Machine minting requires the SDK — the CLI handles setup, configuration, and item insertion only
-- Core NFT transfers are SDK-only and not available via the CLI
 - Querying assets by owner or collection requires the DAS API (SDK only)
 - Kit SDK support is limited to Token Metadata; all other programs use Umi
+- Setting an agent token (`setAgentTokenV1`) requires asset-signer mode for the Core asset
+- Bonding curve launches auto-graduate to Raydium CPMM when all tokens are sold

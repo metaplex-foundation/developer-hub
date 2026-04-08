@@ -11,13 +11,16 @@ keywords:
   - Metaplex
   - Solana
   - NFT
+  - agent registry
+  - bonding curve
+  - Genesis
 about:
   - Agent Skills
   - AI-assisted development
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 ---
 
 Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base that gives AI coding agents accurate, up-to-date knowledge of Metaplex programs, CLI commands, and SDK patterns. {% .lead %}
@@ -26,9 +29,9 @@ Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base 
 
 The Metaplex Skill gives AI coding agents accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
 
-- Covers five programs: Core, Token Metadata, Bubblegum, Candy Machine, and Genesis
+- Covers six programs: Agent Registry, Genesis, Core, Token Metadata, Bubblegum, and Candy Machine
 - Supports CLI, Umi SDK, and Kit SDK approaches
-- Works with Claude Code, Cursor, Copilot, Windsurf, and other compatible agents
+- Works with Claude Code, Cursor, Copilot, Codex, Windsurf, and other compatible agents
 - Uses progressive disclosure to minimize token usage while providing full coverage
 
 Instead of relying on hallucinated APIs or incorrect flags, your AI agent can reference the Skill to get accurate commands and code on the first try.
@@ -43,22 +46,23 @@ Instead of relying on hallucinated APIs or incorrect flags, your AI agent can re
 
 ## Programs Covered
 
-The Skill covers five Metaplex programs and their full operation sets:
+The Skill covers six Metaplex programs and their full operation sets:
 
 | Program | Purpose | CLI | Umi SDK | Kit SDK |
 |---------|---------|-----|---------|---------|
+| **[Agent Registry](/agents)** | On-chain agent identity, wallets, and execution delegation | Yes | Yes | — |
+| **[Genesis](/smart-contracts/genesis)** | Token launches via launchpool or bonding curve with Raydium graduation | Yes | Yes | — |
 | **[Core](/smart-contracts/core)** | Next-gen NFTs with plugins and royalty enforcement | Yes | Yes | — |
 | **[Token Metadata](/smart-contracts/token-metadata)** | Fungible tokens, NFTs, pNFTs, editions | Yes | Yes | Yes |
 | **[Bubblegum](/smart-contracts/bubblegum-v2)** | Compressed NFTs via Merkle trees | Yes | Yes | — |
 | **[Core Candy Machine](/smart-contracts/core-candy-machine)** | NFT drops with configurable guards | Yes | Yes | — |
-| **[Genesis](/smart-contracts/genesis)** | Token launches with fair distribution | Yes | Yes | — |
 
 ## Operations Supported
 
 The Skill provides reference material for three approaches to Metaplex development:
 
-- **CLI (`mplx`)** — Direct execution of Metaplex operations from the terminal. Asset creation, uploads, Candy Machine deployment, tree creation, transfers, and more.
-- **Umi SDK** — Full programmatic access covering all programs. Fetches by owner/collection/creator, DAS API queries, delegate management, and plugin configuration.
+- **CLI (`mplx`)** — Direct execution of Metaplex operations from the terminal. Agent registration, token launches, bonding curve creation, asset creation, uploads, Candy Machine deployment, tree creation, transfers, and more.
+- **Umi SDK** — Full programmatic access covering all programs. Agent identity and delegation, Genesis launches and bonding curve swaps, fetches by owner/collection/creator, DAS API queries, delegate management, and plugin configuration.
 - **Kit SDK** — Token Metadata operations using `@solana/kit` with minimal dependencies.
 
 ## Compatible Agents
