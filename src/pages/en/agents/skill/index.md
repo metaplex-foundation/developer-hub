@@ -29,7 +29,7 @@ Metaplex Skill is an [Agent Skill](https://agentskills.io) — a knowledge base 
 
 The Metaplex Skill gives AI coding agents accurate knowledge of all Metaplex programs, CLI commands, and SDK patterns.
 
-- Covers six programs: Agent Registry, Genesis, Core, Token Metadata, Bubblegum, and Candy Machine
+- Covers six programs: [Agent Registry](/agents), [Genesis](/smart-contracts/genesis), [Core](/smart-contracts/core), [Token Metadata](/smart-contracts/token-metadata), [Bubblegum](/smart-contracts/bubblegum-v2), and [Candy Machine](/smart-contracts/core-candy-machine)
 - Supports CLI, Umi SDK, and Kit SDK approaches
 - Works with Claude Code, Cursor, Copilot, Codex, Windsurf, and other compatible agents
 - Uses progressive disclosure to minimize token usage while providing full coverage
@@ -80,6 +80,27 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 - **[Install the Skill](/agents/skill/installation)** to get started
 - **[How It Works](/agents/skill/how-it-works)** to understand the architecture
 - **[Programs & Operations](/agents/skill/programs-and-operations)** for detailed coverage
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| Install command | `npx skills add metaplex` |
+| Skill format | [Agent Skills](https://agentskills.io) |
+| CLI package | [`@metaplex-foundation/cli`](https://github.com/metaplex-foundation/cli) (`mplx`) |
+| Programs covered | 6 (Agent Registry, Genesis, Core, Token Metadata, Bubblegum, Candy Machine) |
+| SDK approaches | Umi SDK (all programs), Kit SDK (Token Metadata only) |
+
+## Glossary
+
+| Term | Definition |
+|------|-----------|
+| Agent Skill | A structured knowledge base that gives AI coding agents accurate context for a specific domain |
+| Progressive disclosure | Architecture where the agent reads a lightweight router first, then loads only the reference files needed for the current task |
+| SKILL.md | The router file that maps tasks to specific reference files |
+| `mplx` | The Metaplex CLI tool that provides direct terminal access to all supported programs |
+| Umi SDK | Metaplex's primary TypeScript SDK framework for programmatic access to all programs |
+| Kit SDK | A lightweight alternative SDK using `@solana/kit`, currently supporting Token Metadata only |
 
 ## Notes
 

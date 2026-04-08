@@ -179,6 +179,8 @@ Use **Core Execute** when an asset (NFT, agent, vault) needs to hold SOL or toke
 
 ## Quick Reference
 
+Each program has a corresponding npm package for SDK access; the CLI bundles all programs into a single tool.
+
 | Tool | Package |
 |------|---------|
 | CLI | [`@metaplex-foundation/cli`](https://github.com/metaplex-foundation/cli) (`mplx`) |
