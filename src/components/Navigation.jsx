@@ -126,7 +126,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                     <li key={`${link.title}-${link.href ?? link.title}`} className="relative">
                       <div className={clsx(
                         'relative flex items-center pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2 before:rounded',
-                        (isParentActive || hasActiveChild)
+                        isParentActive
                           ? 'before:bg-primary'
                           : 'before:hidden before:bg-primary hover:before:block'
                       )}>
@@ -135,7 +135,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                             href={link.href}
                             className={clsx(
                               'flex-1',
-                              (isParentActive || hasActiveChild)
+                              isParentActive
                                 ? 'font-semibold text-primary'
                                 : 'text-muted-foreground hover:text-foreground'
                             )}
@@ -146,10 +146,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                           <button
                             type="button"
                             onClick={() => toggleSubmenu(link.title)}
-                            className={clsx(
-                              'flex flex-1 items-center justify-between text-left',
-                              hasActiveChild ? 'font-semibold text-primary' : 'text-muted-foreground hover:text-foreground'
-                            )}
+                            className="flex flex-1 items-center justify-between text-left text-muted-foreground hover:text-foreground"
                             aria-expanded={isOpen}
                             aria-controls={`submenu-${link.title}`}
                           >
@@ -160,10 +157,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                             )} />
                           </button>
                         ) : (
-                          <span className={clsx(
-                            'flex-1',
-                            hasActiveChild ? 'font-semibold text-primary' : 'text-muted-foreground'
-                          )}>
+                          <span className="flex-1 text-muted-foreground">
                             {link.title}
                           </span>
                         )}
