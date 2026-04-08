@@ -71,9 +71,9 @@ There are two ways to launch a token with the Genesis CLI:
 
 ### API Flow (Recommended)
 
-Use `genesis launch create` for an all-in-one flow that calls the Genesis API, builds and signs transactions, and registers your launch on the Metaplex platform — all in a single command. Launches created through the API are compatible with [metaplex.com](https://metaplex.com) and will appear on the platform with a public launch page.
+Use `genesis launch create` for an all-in-one flow that calls the Genesis API, builds and signs transactions, and registers your launch on the Metaplex platform — all in a single command. Two launch types are available: **launchpool** (default, 48h deposit window) and **bonding-curve** (instant trading). Launches created through the API are compatible with [metaplex.com](https://metaplex.com) and will appear on the platform with a public launch page.
 
-```bash {% title="One-command launch" %}
+```bash {% title="Launchpool (default)" %}
 mplx genesis launch create \
   --name "My Token" --symbol "MTK" \
   --image "https://gateway.irys.xyz/abc123" \
@@ -82,6 +82,14 @@ mplx genesis launch create \
   --raiseGoal 250 --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
+
+```bash {% title="Bonding curve (instant)" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
+
+Both launch types support linking to a registered [agent](/agents/mint-agent) with `--agentMint` and `--agentSetToken`.
 
 See [Launch (API)](/dev-tools/cli/genesis/launch) for full details.
 
