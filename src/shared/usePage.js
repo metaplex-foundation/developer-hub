@@ -107,15 +107,24 @@ function getActiveSection(pathname, product, pageProps, originalPathname) {
   // For non-English locales, links are localized with locale prefix, so use originalPathname
   // For English, links don't have /en/ prefix, so use normalized pathname
   if (activeSection && activeSection.navigation) {
-    const allLinks = activeSection.navigation.flatMap((group) => group.links)
-    // Check if links have locale prefix by looking at first link
-    const linksHaveLocalePrefix = allLinks.length > 0 && allLinks[0].href.match(/^\/(?:ja|ko|zh)\//)
+    // Flatten accordion children into leaf links for prev/next navigation
+    const flattenLinks = (links) => links.flatMap(link =>
+      link.children ? link.children : [link]
+    )
+    const allLinks = activeSection.navigation
+      .flatMap((group) => flattenLinks(group.links))
+      .filter(link => link.href)
+    // Check if links have locale prefix by looking at first link with an href
+    const firstLinkWithHref = allLinks[0]
+    const linksHaveLocalePrefix = firstLinkWithHref && firstLinkWithHref.href.match(/^\/(?:ja|ko|zh)\//)
     const linkPathname = linksHaveLocalePrefix ? originalPathname : pathname
     const linkIndex = allLinks.findIndex((link) => link.href === linkPathname)
-    activeSection.previousPage = allLinks[linkIndex - 1]
-    activeSection.nextPage = allLinks[linkIndex + 1]
+    if (linkIndex >= 0) {
+      activeSection.previousPage = allLinks[linkIndex - 1]
+      activeSection.nextPage = allLinks[linkIndex + 1]
+    }
     activeSection.navigationGroup = activeSection.navigation.find((group) =>
-      group.links.find((link) => link.href === linkPathname)
+      flattenLinks(group.links).find((link) => link.href === linkPathname)
     )
   }
 
@@ -216,7 +225,14 @@ function localizeProduct(product, locale) {
           links: navGroup.links.map(link => ({
             ...link,
             title: (productNav.links && productNav.links[link.title]) || link.title,
-            href: getHref(link.href)
+            href: link.href ? getHref(link.href) : link.href,
+            ...(link.children && {
+              children: link.children.map(child => ({
+                ...child,
+                title: (productNav.links && productNav.links[child.title]) || child.title,
+                href: child.href ? getHref(child.href) : child.href
+              }))
+            })
           }))
         }))
       } else if (section.navigation) {
@@ -225,7 +241,13 @@ function localizeProduct(product, locale) {
           ...navGroup,
           links: navGroup.links.map(link => ({
             ...link,
-            href: getHref(link.href)
+            href: link.href ? getHref(link.href) : link.href,
+            ...(link.children && {
+              children: link.children.map(child => ({
+                ...child,
+                href: child.href ? getHref(child.href) : child.href
+              }))
+            })
           }))
         }))
       }
