@@ -107,15 +107,20 @@ function getActiveSection(pathname, product, pageProps, originalPathname) {
   // For non-English locales, links are localized with locale prefix, so use originalPathname
   // For English, links don't have /en/ prefix, so use normalized pathname
   if (activeSection && activeSection.navigation) {
-    const allLinks = activeSection.navigation.flatMap((group) => group.links)
-    // Check if links have locale prefix by looking at first link
-    const linksHaveLocalePrefix = allLinks.length > 0 && allLinks[0].href.match(/^\/(?:ja|ko|zh)\//)
+    // Flatten accordion children into leaf links for prev/next navigation
+    const flattenLinks = (links) => links.flatMap(link =>
+      link.children ? link.children : [link]
+    )
+    const allLinks = activeSection.navigation.flatMap((group) => flattenLinks(group.links))
+    // Check if links have locale prefix by looking at first link with an href
+    const firstLinkWithHref = allLinks.find(link => link.href)
+    const linksHaveLocalePrefix = firstLinkWithHref && firstLinkWithHref.href.match(/^\/(?:ja|ko|zh)\//)
     const linkPathname = linksHaveLocalePrefix ? originalPathname : pathname
     const linkIndex = allLinks.findIndex((link) => link.href === linkPathname)
     activeSection.previousPage = allLinks[linkIndex - 1]
     activeSection.nextPage = allLinks[linkIndex + 1]
     activeSection.navigationGroup = activeSection.navigation.find((group) =>
-      group.links.find((link) => link.href === linkPathname)
+      flattenLinks(group.links).find((link) => link.href === linkPathname)
     )
   }
 
