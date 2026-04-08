@@ -35,6 +35,8 @@ The Metaplex Skill provides AI agents with knowledge of six Metaplex programs an
 
 ## Program Coverage
 
+The following table shows which tooling approaches are available for each program.
+
 | Program | CLI | Umi SDK | Kit SDK |
 |---------|-----|---------|---------|
 | **Agent Registry** | Yes | Yes | — |
@@ -76,7 +78,7 @@ The original Metaplex NFT standard. Supports fungible tokens, NFTs, Programmable
 
 ## Bubblegum (Compressed NFTs)
 
-Create NFTs at massive scale using Merkle trees for state compression. Compressed NFTs cost a fraction of traditional NFTs after the initial tree creation.
+[Bubblegum](/smart-contracts/bubblegum-v2) lets you create NFTs at massive scale using Merkle trees for state compression. Compressed NFTs cost a fraction of traditional NFTs after the initial tree creation.
 
 **CLI** (`mplx bg`): Create Merkle trees, mint cNFTs (batch limit ~100), fetch, update, transfer, and burn.
 
@@ -88,7 +90,7 @@ Compressed NFT operations require a DAS-enabled RPC endpoint. Standard Solana RP
 
 ## Candy Machine
 
-Deploy NFT drops with configurable minting rules (guards). Guards control who can mint, when, at what price, and how many.
+[Core Candy Machine](/smart-contracts/core-candy-machine) deploys NFT drops with configurable minting rules (guards). Guards control who can mint, when, at what price, and how many.
 
 **CLI** (`mplx cm`): Set up Candy Machine configuration, insert items, and deploy. Minting requires the SDK.
 
@@ -174,6 +176,20 @@ Use **Core Execute** when an asset (NFT, agent, vault) needs to hold SOL or toke
 | **CLI** | Default choice — direct execution, no code needed |
 | **Umi SDK** | You need code, or the operation isn't supported by CLI |
 | **Kit SDK** | You specifically use `@solana/kit` and want minimal dependencies (Token Metadata only) |
+
+## Quick Reference
+
+| Tool | Package |
+|------|---------|
+| CLI | [`@metaplex-foundation/cli`](https://github.com/metaplex-foundation/cli) (`mplx`) |
+| Umi SDK | [`@metaplex-foundation/umi`](https://github.com/metaplex-foundation/umi) |
+| Agent Registry SDK | [`@metaplex-foundation/mpl-agent-registry`](https://github.com/metaplex-foundation/mpl-agent-registry) |
+| Core SDK | [`@metaplex-foundation/mpl-core`](https://github.com/metaplex-foundation/mpl-core) |
+| Token Metadata SDK | [`@metaplex-foundation/mpl-token-metadata`](https://github.com/metaplex-foundation/mpl-token-metadata) |
+| Bubblegum SDK | [`@metaplex-foundation/mpl-bubblegum`](https://github.com/metaplex-foundation/mpl-bubblegum) |
+| Candy Machine SDK | [`@metaplex-foundation/mpl-core-candy-machine`](https://github.com/metaplex-foundation/mpl-core-candy-machine) |
+| Genesis SDK | [`@metaplex-foundation/genesis`](https://github.com/metaplex-foundation/genesis) |
+| Kit SDK (TM only) | [`@metaplex-foundation/mpl-token-metadata-kit`](https://github.com/metaplex-foundation/mpl-token-metadata) |
 
 ## Notes
 
