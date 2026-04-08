@@ -3,9 +3,8 @@ import { CpuChipIcon } from '@heroicons/react/24/solid'
 
 export const mplAgent = {
   name: 'Agent Registry',
-  headline: 'Agent Identity Registry',
-  description:
-    'On-chain programs for agent identity and execution delegation on MPL Core assets.',
+  headline: 'On-chain programs for agent identity and execution delegation on MPL Core assets on Solana.',
+  description: 'On-chain programs for agent identity and execution delegation on MPL Core assets on Solana.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/mpl-agent',
   icon: <CpuChipIcon />,

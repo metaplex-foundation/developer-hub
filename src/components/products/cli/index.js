@@ -3,9 +3,8 @@ import { CommandLineIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 export const cli = {
   name: 'CLI',
-  headline: 'MPLX CLI',
-  description:
-    'A CLI for the MPLX ecosystem',
+  headline: 'A command line interface for interacting with Metaplex programs — mint, transfer, and manage assets directly from your terminal.',
+  description: 'A command line interface for interacting with Metaplex programs — mint, transfer, and manage assets directly from your terminal.',
   navigationMenuCatergory: 'Dev Tools',
   path: 'dev-tools/cli',
   icon: <CommandLineIcon />,

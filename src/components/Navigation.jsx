@@ -90,16 +90,17 @@ export function Navigation({ product, navigation, className, hideProductHeader =
             {product.name}
           </Link>
           {product.headline && (
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 pr-4 text-sm text-muted-foreground">
               {product.headline}
             </p>
           )}
+          <div className="-ml-0.5 -mr-8 mt-6 border-b border-border xl:-mr-12" />
         </div>
       )}
       {/* Section tabs (Documentation, Guides, API References) */}
       {sections && sections.length > 1 && (
         <Sections
-          className="mb-8 flex flex-col gap-1"
+          className="mb-8 -ml-0.5 -mr-8 flex flex-col gap-1 border-b border-border pb-8 xl:-mr-12"
           sections={sections}
           activeSectionId={activeSectionId}
         />
@@ -187,7 +188,7 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                                   className={clsx(
                                     'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-4 before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                                     isChildActive
-                                      ? 'font-semibold text-primary before:bg-primary'
+                                      ? 'bg-primary/10 font-semibold text-primary before:bg-primary'
                                       : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
                                   )}
                                 >
@@ -211,14 +212,14 @@ export function Navigation({ product, navigation, className, hideProductHeader =
                     <Link
                       href={link.href}
                       className={clsx(
-                        'block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
+                        'flex w-full items-baseline pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                         isActive
-                          ? 'font-semibold text-primary before:bg-primary'
+                          ? 'bg-primary/10 font-semibold text-primary before:bg-primary'
                           : 'text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
                       )}
                     >
                       {link.method && (
-                        <Badge type={link.method} className="mr-1.5" />
+                        <Badge type={link.method} className="mr-1.5 flex-none" />
                       )}
                       {link.title}{' '}
                       {link.updated && isRecent(link.updated) && (

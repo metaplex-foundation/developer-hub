@@ -68,13 +68,13 @@ export function CopyWithContext({ sections, language, showToggle = true, display
     <div className="flex items-center gap-2">
       {/* Toggle between display modes - styled as segmented control */}
       {showToggle && hasContext && (
-        <div className="flex items-center rounded-md bg-muted p-0.5">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => onDisplayModeChange('main')}
             className={clsx(
-              'rounded px-2.5 py-1 text-xs font-medium transition-all',
+              'text-xs font-medium transition-colors',
               displayMode === 'main'
-                ? 'bg-card text-foreground shadow-sm'
+                ? 'text-foreground'
                 : 'text-muted-foreground hover:text-foreground'
             )}
           >
@@ -83,9 +83,9 @@ export function CopyWithContext({ sections, language, showToggle = true, display
           <button
             onClick={() => onDisplayModeChange('full')}
             className={clsx(
-              'rounded px-2.5 py-1 text-xs font-medium transition-all',
+              'text-xs font-medium transition-colors',
               displayMode === 'full'
-                ? 'bg-card text-foreground shadow-sm'
+                ? 'text-foreground'
                 : 'text-muted-foreground hover:text-foreground'
             )}
           >
@@ -98,10 +98,10 @@ export function CopyWithContext({ sections, language, showToggle = true, display
       <button
         onClick={handleCopy}
         className={clsx(
-          'flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all',
+          'flex items-center gap-1.5 text-xs font-medium transition-colors',
           copied
-            ? 'bg-green-500/20 text-green-400'
-            : 'bg-card text-foreground hover:bg-card/80'
+            ? 'text-green-400'
+            : 'text-muted-foreground hover:text-foreground'
         )}
         title={displayMode === 'full' ? 'Copy with imports and setup' : 'Copy snippet only'}
       >

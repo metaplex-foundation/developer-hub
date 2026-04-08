@@ -9,7 +9,7 @@ export function Prose({ as: Component = 'div', className, ...props }) {
         // headings
         'prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-normal prose-headings:text-foreground lg:prose-headings:scroll-mt-[8.5rem]',
         // lead
-        'prose-lead:text-muted-foreground',
+        'prose-lead:text-base prose-lead:leading-relaxed prose-lead:text-muted-foreground',
         // links
         'prose-a:font-semibold prose-a:text-primary prose-a:underline prose-a:decoration-primary/30 hover:prose-a:decoration-primary/60',
         // pre

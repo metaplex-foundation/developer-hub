@@ -6,9 +6,8 @@ import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const das = {
   name: 'DAS API',
-  headline: 'Fetch Digital Asset Data',
-  description:
-    'A DAS API Client to access Digital Asset data on chain',
+  headline: 'Query NFTs, tokens, and collection data on Solana at scale using the Digital Asset Standard API.',
+  description: 'Query NFTs, tokens, and collection data on Solana at scale using the Digital Asset Standard API.',
   path: 'dev-tools/das-api',
   icon: <TableCellsIcon />,
   github: 'https://github.com/metaplex-foundation/digital-asset-standard-api',

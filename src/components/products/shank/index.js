@@ -5,8 +5,8 @@ import { MapIcon } from '@heroicons/react/24/solid';
 
 export const shank = {
   name: 'Shank',
-  headline: 'IDL Extraction for Solana Programs',
-  description: 'Extract IDLs from Rust Solana program code using attribute macros',
+  headline: 'Extract IDL type definitions from native Rust Solana programs using attribute macros — no Anchor required.',
+  description: 'Extract IDL type definitions from native Rust Solana programs using attribute macros — no Anchor required.',
   path: 'dev-tools/shank',
   icon: <MapIcon />,
   navigationMenuCatergory: 'Dev Tools',

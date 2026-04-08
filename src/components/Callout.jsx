@@ -4,12 +4,14 @@ import { Icon } from '@/components/icons/dual-tone'
 
 const styles = {
   note: {
-    container: 'bg-muted ring-1 ring-border',
+    container: 'border-l-2 border-primary bg-muted/50',
+    icon: 'text-primary',
     title: 'text-primary',
     body: 'text-muted-foreground prose-a:text-primary prose-code:text-foreground',
   },
   warning: {
-    container: 'bg-amber-50 ring-1 ring-amber-200 dark:bg-amber-950/30 dark:ring-amber-900/50',
+    container: 'border-l-2 border-amber-400 bg-amber-50/50 dark:bg-amber-950/20',
+    icon: 'text-amber-500 dark:text-amber-400',
     title: 'text-amber-900 dark:text-amber-400',
     body: 'text-amber-800 prose-a:text-amber-900 prose-code:text-amber-900 dark:text-amber-200 dark:prose-a:text-amber-400 dark:prose-code:text-amber-200',
   },
@@ -24,14 +26,18 @@ export function Callout({ type = 'note', title, children }) {
   let IconComponent = icons[type]
 
   return (
-    <div className={clsx('my-8 flex p-6', styles[type].container)}>
-      <IconComponent className="h-8 w-8 flex-none" />
-      <div className="ml-4 flex-auto">
-        <p className={clsx('m-0 font-display text-xl', styles[type].title)}>
-          {title}
-        </p>
-        <div className={clsx('prose mt-2.5', styles[type].body)}>
-          {children}
+    <div className={clsx('my-6 px-4 py-3', styles[type].container)}>
+      <div className="flex items-start gap-2">
+        <IconComponent className={clsx('mt-0.5 h-4 w-4 flex-none', styles[type].icon)} />
+        <div className="flex-auto">
+          {title && (
+            <p className={clsx('m-0 text-sm font-semibold', styles[type].title)}>
+              {title}
+            </p>
+          )}
+          <div className={clsx('prose text-sm', title && 'mt-1', styles[type].body)}>
+            {children}
+          </div>
         </div>
       </div>
     </div>
