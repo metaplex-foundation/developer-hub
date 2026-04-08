@@ -61,7 +61,7 @@ The Skill covers six Metaplex programs and their full operation sets:
 
 The Skill provides reference material for three approaches to Metaplex development:
 
-- **CLI (`mplx`)** — Direct execution of Metaplex operations from the terminal. Agent registration, token launches, bonding curve creation, asset creation, uploads, Candy Machine deployment, tree creation, transfers, and more.
+- **CLI (`mplx`)** — Direct execution of Metaplex operations from the terminal. Agent registration (`mplx agents`), token launches and bonding curve creation (`mplx genesis`), asset creation, uploads, Candy Machine deployment, tree creation, transfers, and more.
 - **Umi SDK** — Full programmatic access covering all programs. Agent identity and delegation, Genesis launches and bonding curve swaps, fetches by owner/collection/creator, DAS API queries, delegate management, and plugin configuration.
 - **Kit SDK** — Token Metadata operations using `@solana/kit` with minimal dependencies.
 

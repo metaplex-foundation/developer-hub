@@ -48,9 +48,9 @@ The Metaplex Skill provides AI agents with knowledge of six Metaplex programs an
 
 The [Agent Registry](/agents) provides on-chain agent identity, wallets, and execution delegation for MPL Core assets.
 
-**CLI** (`mplx agent`): Register agent identity, delegate and revoke execution, fetch agent data, and link a Genesis token to an agent.
+**CLI** (`mplx agents`): Register agent identity, delegate and revoke execution, fetch agent data, and link a Genesis token to an agent. For the full agent token creation flow, use `mplx genesis launch create --agentMint --agentSetToken` to launch and link in one step.
 
-**Umi SDK**: Full programmatic access including the Mint Agent API (`mintAndSubmitAgent`) that creates a Core asset and registers identity in a single transaction. Supports `registerIdentityV1` for existing assets, execution delegation, and `setAgentTokenV1` for linking Genesis tokens.
+**Umi SDK**: Full programmatic access including the Mint Agent API (`mintAndSubmitAgent`) that creates a Core asset and registers identity in a single transaction. Supports `registerIdentityV1` for existing assets, execution delegation, and the full [agent token creation](/agents/create-agent-token) flow — launching a token via Genesis and linking it with `setAgentTokenV1`.
 
 {% callout type="note" %}
 Every Core asset has a built-in wallet (Asset Signer PDA) via Core's Execute hook. The Agent Registry adds discoverable identity records and lets owners delegate an off-chain executive to operate the agent.
@@ -68,7 +68,7 @@ The next-generation NFT standard on Solana. Core NFTs are significantly cheaper 
 
 The original Metaplex NFT standard. Supports fungible tokens, NFTs, Programmable NFTs (pNFTs), and editions.
 
-**CLI** (`mplx tm`): Create fungible tokens, NFTs, pNFTs, and editions. Transfer and burn assets.
+**CLI** (`mplx tm`): Create NFTs and pNFTs. Transfer and update assets. For fungible tokens, use `mplx toolbox token`.
 
 **Umi SDK**: Full programmatic access to all Token Metadata operations.
 
@@ -108,23 +108,26 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 
 | Task | CLI Support |
 |------|-------------|
-| Register agent identity | Yes |
-| Fetch agent data | Yes |
-| Revoke execution delegation | Yes |
-| Set agent token (Genesis link) | Yes (requires asset-signer mode) |
-| Create fungible token | Yes |
-| Create Core NFT/Collection | Yes |
-| Create TM NFT/pNFT | Yes |
-| Transfer TM NFTs | Yes |
-| Transfer fungible tokens | Yes |
-| Transfer Core NFTs | Yes |
-| Upload to Irys | Yes |
+| Register agent identity | Yes (`mplx agents register`) |
+| Register executive profile | Yes (`mplx agents executive register`) |
+| Delegate / revoke execution | Yes (`mplx agents executive delegate` / `revoke`) |
+| Fetch agent data | Yes (`mplx agents fetch`) |
+| Set agent token (Genesis link) | Yes (`mplx agents set-agent-token`, requires asset-signer mode) |
+| Create fungible token | Yes (`mplx toolbox token create`) |
+| Create Core NFT/Collection | Yes (`mplx core`) |
+| Create TM NFT/pNFT | Yes (`mplx tm create`) |
+| Transfer TM NFTs | Yes (`mplx tm transfer`) |
+| Transfer fungible tokens | Yes (`mplx toolbox token transfer`) |
+| Transfer Core NFTs | Yes (`mplx core asset transfer`) |
+| Upload to storage | Yes (`mplx toolbox storage upload`) |
 | Candy Machine drop | Yes (setup/config/insert — minting requires SDK) |
 | Compressed NFTs (cNFTs) | Yes (batch limit ~100, use SDK for larger) |
-| Execute (asset-signer wallets) | Yes |
-| Check SOL balance / Airdrop | Yes |
+| Execute (asset-signer wallets) | Yes (`mplx core asset execute`) |
+| Check SOL balance / Airdrop | Yes (`mplx toolbox sol`) |
 | Query assets by owner/collection | SDK only (DAS API) |
-| Token launch (Genesis) | Yes |
+| Token launch — launchpool (Genesis) | Yes (`mplx genesis launch create`) |
+| Token launch — bonding curve (Genesis) | Yes (`mplx genesis launch create --launchType bonding-curve`) |
+| Agent token launch (Genesis + link) | Yes (`mplx genesis launch create --agentMint --agentSetToken`) |
 
 ## Decision Guide
 
@@ -132,7 +135,7 @@ Use the following guidance to choose the right program and tooling for your task
 
 ### Autonomous Agents
 
-Use **[Agent Registry](/agents)** to register on-chain identity and execution delegation for MPL Core assets. The Mint Agent API (`mintAndSubmitAgent`) creates the Core asset and registers identity in a single transaction. For existing assets, use `registerIdentityV1` directly. Agents can optionally link a Genesis token via `setAgentTokenV1`.
+Use **[Agent Registry](/agents)** to register on-chain identity and execution delegation for MPL Core assets. The Mint Agent API (`mintAndSubmitAgent`) creates the Core asset and registers identity in a single transaction. For existing assets, use `mplx agents register <asset> --use-ix` (CLI) or `registerIdentityV1` (SDK). Agents can [create and link an agent token](/agents/create-agent-token) by launching via Genesis and linking it with `setAgentTokenV1`.
 
 ### NFTs: Core vs Token Metadata
 
