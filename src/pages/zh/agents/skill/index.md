@@ -83,6 +83,8 @@ Skill 适用于任何支持 [Agent Skills](https://agentskills.io) 格式的 AI 
 
 ## 快速参考
 
+Metaplex Skill 通过单个命令安装，通过 CLI、Umi SDK 和 Kit SDK 提供六个程序的覆盖。
+
 | 项目 | 值 |
 |------|-------|
 | 安装命令 | `npx skills add metaplex` |
@@ -92,6 +94,8 @@ Skill 适用于任何支持 [Agent Skills](https://agentskills.io) 格式的 AI 
 | SDK 方法 | Umi SDK（所有程序）、Kit SDK（仅 Token Metadata） |
 
 ## 术语表
+
+Metaplex Skill 文档中使用的关键术语。
 
 | 术语 | 定义 |
 |------|-----------|

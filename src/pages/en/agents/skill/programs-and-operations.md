@@ -28,7 +28,7 @@ The Metaplex Skill covers six programs across CLI, Umi SDK, and Kit SDK. This pa
 
 The Metaplex Skill provides AI agents with knowledge of six Metaplex programs and their available tooling across CLI, Umi SDK, and Kit SDK.
 
-- All six programs (Agent Registry, Genesis, Core, Token Metadata, Bubblegum, Candy Machine) support both CLI and Umi SDK
+- All six programs ([Agent Registry](/agents), [Genesis](/smart-contracts/genesis), [Core](/core), [Token Metadata](/token-metadata), [Bubblegum](/smart-contracts/bubblegum-v2), [Candy Machine](/smart-contracts/core-candy-machine)) support both CLI and Umi SDK
 - Kit SDK is available for Token Metadata only
 - The `mplx` CLI handles most operations without writing code
 - Use this page to determine which program and tooling approach fits your task
@@ -191,7 +191,7 @@ Each program has a corresponding npm package for SDK access; the CLI bundles all
 | Bubblegum SDK | [`@metaplex-foundation/mpl-bubblegum`](https://github.com/metaplex-foundation/mpl-bubblegum) |
 | Candy Machine SDK | [`@metaplex-foundation/mpl-core-candy-machine`](https://github.com/metaplex-foundation/mpl-core-candy-machine) |
 | Genesis SDK | [`@metaplex-foundation/genesis`](https://github.com/metaplex-foundation/genesis) |
-| Kit SDK (TM only) | [`@metaplex-foundation/mpl-token-metadata-kit`](https://github.com/metaplex-foundation/mpl-token-metadata) |
+| Kit SDK (TM only) | [`@metaplex-foundation/mpl-token-metadata-kit`](https://github.com/metaplex-foundation/mpl-token-metadata/tree/main/clients/js-kit) |
 
 ## Notes
 

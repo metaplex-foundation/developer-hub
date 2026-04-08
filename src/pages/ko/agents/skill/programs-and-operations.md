@@ -28,7 +28,7 @@ Metaplex Skill은 CLI, Umi SDK, Kit SDK에 걸쳐 6개 프로그램을 다룹니
 
 Metaplex Skill은 CLI, Umi SDK, Kit SDK에 걸쳐 6개 Metaplex 프로그램과 사용 가능한 도구에 대한 지식을 AI 에이전트에 제공합니다.
 
-- 6개 프로그램(Agent Registry, Genesis, Core, Token Metadata, Bubblegum, Candy Machine) 모두 CLI와 Umi SDK 지원
+- 6개 프로그램([Agent Registry](/agents), [Genesis](/smart-contracts/genesis), [Core](/core), [Token Metadata](/token-metadata), [Bubblegum](/smart-contracts/bubblegum-v2), [Candy Machine](/smart-contracts/core-candy-machine)) 모두 CLI와 Umi SDK 지원
 - Kit SDK는 Token Metadata만 사용 가능
 - `mplx` CLI는 코드 작성 없이 대부분의 오퍼레이션 처리
 - 이 페이지에서 작업에 맞는 프로그램과 도구 접근 방식 결정
@@ -191,7 +191,7 @@ MPL Core 자산의 온체인 아이덴티티와 실행 위임 등록에는 **[Ag
 | Bubblegum SDK | [`@metaplex-foundation/mpl-bubblegum`](https://github.com/metaplex-foundation/mpl-bubblegum) |
 | Candy Machine SDK | [`@metaplex-foundation/mpl-core-candy-machine`](https://github.com/metaplex-foundation/mpl-core-candy-machine) |
 | Genesis SDK | [`@metaplex-foundation/genesis`](https://github.com/metaplex-foundation/genesis) |
-| Kit SDK (TM만) | [`@metaplex-foundation/mpl-token-metadata-kit`](https://github.com/metaplex-foundation/mpl-token-metadata) |
+| Kit SDK (TM만) | [`@metaplex-foundation/mpl-token-metadata-kit`](https://github.com/metaplex-foundation/mpl-token-metadata/tree/main/clients/js-kit) |
 
 ## 참고사항
 

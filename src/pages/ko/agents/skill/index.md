@@ -83,6 +83,8 @@ Metaplex Skill은 모든 Metaplex 프로그램, CLI 명령 및 SDK 패턴에 대
 
 ## 빠른 참조
 
+Metaplex Skill은 단일 명령으로 설치되며 CLI, Umi SDK, Kit SDK를 통해 6개 프로그램의 커버리지를 제공합니다.
+
 | 항목 | 값 |
 |------|-------|
 | 설치 명령 | `npx skills add metaplex` |
@@ -92,6 +94,8 @@ Metaplex Skill은 모든 Metaplex 프로그램, CLI 명령 및 SDK 패턴에 대
 | SDK 접근 방식 | Umi SDK (전체 프로그램), Kit SDK (Token Metadata만) |
 
 ## 용어집
+
+Metaplex Skill 문서 전체에서 사용되는 주요 용어입니다.
 
 | 용어 | 정의 |
 |------|-----------|

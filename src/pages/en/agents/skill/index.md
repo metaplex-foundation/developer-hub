@@ -83,6 +83,8 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 
 ## Quick Reference
 
+The Metaplex Skill installs via a single command and provides coverage for six programs through CLI, Umi SDK, and Kit SDK.
+
 | Item | Value |
 |------|-------|
 | Install command | `npx skills add metaplex` |
@@ -92,6 +94,8 @@ The Skill works with any AI coding agent that supports the [Agent Skills](https:
 | SDK approaches | Umi SDK (all programs), Kit SDK (Token Metadata only) |
 
 ## Glossary
+
+Key terms used throughout the Metaplex Skill documentation.
 
 | Term | Definition |
 |------|-----------|
