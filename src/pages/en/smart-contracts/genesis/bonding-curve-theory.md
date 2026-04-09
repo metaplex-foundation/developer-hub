@@ -104,7 +104,7 @@ net = gross − protocolFee − creatorFee
 ```
 
 {% callout type="note" %}
-The protocol swap fee is transferred to the Metaplex fee wallet on every swap. Creator fees are **accrued** in the bucket (`creatorFeeAccrued`) rather than transferred immediately — call the permissionless `claimBondingCurveCreatorFeeV2` instruction to collect them. After graduation, creator fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`.
+The protocol swap fee is transferred to the Metaplex fee wallet on every swap. Creator fees are **accrued** in the bucket (`creatorFeeAccrued`) rather than transferred immediately — call the permissionless `claimBondingCurveCreatorFeeV2` instruction to collect them. After graduation, creator fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`. For configuration and full claiming instructions, see [Creator Fees](/smart-contracts/genesis/creator-fees).
 {% /callout %}
 
 For current protocol fee schedules, see the [Protocol Fees](/protocol-fees) page.
@@ -160,7 +160,7 @@ Unlike a [launch pool](/smart-contracts/genesis/launch-pool), a bonding curve ha
 ## Notes
 
 - Virtual reserves exist only in the pricing math — they are never deposited onchain as real assets
-- Creator fees are accrued in the bucket (`creatorFeeAccrued`), not transferred per-swap; collect via the permissionless `claimBondingCurveCreatorFeeV2` instruction; post-graduation Raydium fees are claimed via `claimRaydiumCreatorFeeV2`
+- Creator fees are accrued in the bucket (`creatorFeeAccrued`), not transferred per-swap; see [Creator Fees](/smart-contracts/genesis/creator-fees) for configuration and claiming (`claimBondingCurveCreatorFeeV2` / `claimRaydiumCreatorFeeV2`)
 - Graduation fires automatically on full token exhaustion — no separate instruction is required
 - The protocol swap fee rate is set by Metaplex and is not configurable by creators; see [Protocol Fees](/protocol-fees) for current rates
 - The first buy mechanism is configured at curve creation and cannot be added after the fact
@@ -194,6 +194,6 @@ No. When the first buy mechanism is configured, all fees are waived for that ini
 | **Graduation** | The event triggered automatically when all curve tokens are sold; migrates accumulated SOL into a Raydium CPMM pool |
 | **Raydium CPMM** | The Raydium constant product market maker pool that receives the bonding curve's liquidity at graduation |
 | **First buy** | An optional extension that designates a wallet and SOL amount for a one-time fee-free initial purchase at curve creation |
-| **Creator fee** | An optional per-swap fee configured by the creator; accrued in the bucket and collected via `claimBondingCurveCreatorFeeV2` |
+| **Creator fee** | An optional per-swap fee configured by the creator; accrued in the bucket and collected via `claimBondingCurveCreatorFeeV2`; see [Creator Fees](/smart-contracts/genesis/creator-fees) |
 | **Protocol swap fee** | A per-swap fee set by Metaplex; charged on every buy and sell; not configurable by creators |
 | **Graduation fee** | A one-time fee charged at graduation to cover the cost of initializing the Raydium CPMM pool |

@@ -70,7 +70,7 @@ Bonding curve swaps use the Genesis SDK to interact with the `BondingCurveBucket
 
 ## Quick Start
 
-**Jump to:** [Installation](#installation) · [Setup](#umi-and-genesis-plugin-setup) · [Fetch Curve](#fetching-a-bonding-curve-bucketv2) · [Lifecycle Helpers](#bonding-curve-lifecycle-helpers) · [Quote](#getting-a-swap-quote) · [Slippage](#slippage-protection) · [Execute Swap](#constructing-swap-transactions) · [Creator Fees](#claiming-creator-fees) · [Errors](#error-handling) · [API Reference](#api-reference)
+**Jump to:** [Installation](#installation) · [Setup](#umi-and-genesis-plugin-setup) · [Fetch Curve](#fetching-a-bonding-curve-bucketv2) · [Lifecycle Helpers](#bonding-curve-lifecycle-helpers) · [Quote](#getting-a-swap-quote) · [Slippage](#slippage-protection) · [Execute Swap](#constructing-swap-transactions) · [Creator Fees](/smart-contracts/genesis/creator-fees) · [Errors](#error-handling) · [API Reference](#api-reference)
 
 1. Install the packages and configure a Umi instance with the `genesis()` plugin
 2. Derive `BondingCurveBucketV2Pda` and fetch the account
@@ -412,37 +412,9 @@ await unwrapBuilder.sendAndConfirm(umi);
 
 ## Claiming Creator Fees
 
-Creator fees are accrued in the bucket (`creatorFeeAccrued`) on every swap rather than transferred directly. Claim them via the permissionless `claimBondingCurveCreatorFeeV2` instruction.
+Creator fees are accrued in the bucket (`creatorFeeAccrued`) on every swap rather than transferred directly. Collect them via the permissionless `claimBondingCurveCreatorFeeV2` instruction while the curve is active, and via `claimRaydiumCreatorFeeV2` after graduation.
 
-### During the Active Curve
-
-```typescript {% title="claim-creator-fees.ts" showLineNumbers=true %}
-import { claimBondingCurveCreatorFeeV2 } from '@metaplex-foundation/genesis';
-
-const result = await claimBondingCurveCreatorFeeV2(umi, {
-  genesisAccount,
-  bucketPda,
-}).sendAndConfirm(umi);
-
-console.log('Creator fees claimed:', result.signature);
-```
-
-### After Graduation (Raydium LP Fees)
-
-After graduation, creator fees continue to accrue from Raydium LP trading activity. Claim post-graduation fees via `claimRaydiumCreatorFeeV2`:
-
-```typescript {% title="claim-raydium-creator-fees.ts" showLineNumbers=true %}
-import { claimRaydiumCreatorFeeV2 } from '@metaplex-foundation/genesis';
-
-const result = await claimRaydiumCreatorFeeV2(umi, {
-  genesisAccount,
-  // ... Raydium pool accounts
-}).sendAndConfirm(umi);
-```
-
-{% callout type="note" %}
-Both `claimBondingCurveCreatorFeeV2` and `claimRaydiumCreatorFeeV2` are permissionless — anyone can call them, but fees are sent to the configured creator fee wallet, not the caller.
-{% /callout %}
+For the full claiming flow — including how to check the accrued balance and handle post-graduation Raydium LP fees — see [Creator Fees](/smart-contracts/genesis/creator-fees).
 
 ## Error Handling
 

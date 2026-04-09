@@ -34,7 +34,7 @@ A bonding curve launch gives every user the ability to buy and sell at any time 
 - **Continuous trading** — no fixed deposit window; buy and sell at any time while the curve is active
 - **Deterministic pricing** — price is always calculable from the current reserve state; no batch settlement
 - **Automatic graduation** — when all tokens sell out, accumulated SOL migrates to a Raydium CPMM pool automatically
-- **Optional creator fee** — per-swap fee earned on the curve and in the post-graduation Raydium pool
+- **Optional creator fee** — per-swap fee earned on the curve and in the post-graduation Raydium pool; see [Creator Fees](/smart-contracts/genesis/creator-fees)
 - **Optional first buy** — fee-free initial purchase reserved for the launching wallet at curve creation
 
 ## Lifecycle
@@ -61,6 +61,7 @@ Graduation is triggered automatically by full token exhaustion — there is no t
 | Goal | Guide |
 |------|-------|
 | Launch a token via the API | [Launch via API](/smart-contracts/genesis/bonding-curve-launch) |
+| Configure and claim creator fees | [Creator Fees](/smart-contracts/genesis/creator-fees) |
 | Integrate swaps into an app or protocol | [Swap Integration](/smart-contracts/genesis/bonding-curve-swaps) |
 | Index events and track price onchain | [Indexing & Events](/smart-contracts/genesis/bonding-curve-indexing) |
 | Understand the AMM pricing model | [Theory of Operation](/smart-contracts/genesis/bonding-curve-theory) |
@@ -71,7 +72,7 @@ Graduation is triggered automatically by full token exhaustion — there is no t
 - A bonding curve has no fixed end time — graduation is triggered by supply exhaustion, not a timer
 - Unlike a [launch pool](/smart-contracts/genesis/launch-pool) or [presale](/smart-contracts/genesis/presale), users can sell tokens back to the curve at any time while it is active
 - The protocol swap fee is set by Metaplex and is not configurable by creators; see [Protocol Fees](/protocol-fees) for current rates
-- Creator fees are accrued in the bucket and collected via the permissionless `claimBondingCurveCreatorFeeV2` instruction
+- Creator fees are accrued in the bucket and collected via the permissionless `claimBondingCurveCreatorFeeV2` instruction; see [Creator Fees](/smart-contracts/genesis/creator-fees) for configuration and claiming
 
 ## FAQ
 

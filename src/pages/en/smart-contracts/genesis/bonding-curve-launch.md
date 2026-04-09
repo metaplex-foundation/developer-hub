@@ -75,7 +75,7 @@ This guide covers:
 
 ## Quick Start
 
-**Jump to:** [Installation](#installation) · [Setup](#umi-setup) · [One-Liner Launch](#launching-a-bonding-curve-one-liner-flow) · [Creator Fees](#creator-fees) · [First Buy](#first-buy) · [Manual Signing](#manual-signing-flow) · [Token Metadata](#token-metadata) · [Devnet](#devnet-testing) · [Advanced](#advanced) · [Errors](#common-errors) · [API Reference](#api-reference)
+**Jump to:** [Installation](#installation) · [Setup](#umi-setup) · [One-Liner Launch](#launching-a-bonding-curve-one-liner-flow) · [Creator Fees](/smart-contracts/genesis/creator-fees) · [First Buy](#first-buy) · [Manual Signing](#manual-signing-flow) · [Token Metadata](#token-metadata) · [Devnet](#devnet-testing) · [Advanced](#advanced) · [Errors](#common-errors) · [API Reference](#api-reference)
 
 1. Install the Genesis SDK and configure a Umi instance with your keypair identity
 2. Call `createAndRegisterLaunch` with your `token` metadata and a `launch: {}` object
@@ -146,34 +146,15 @@ All protocol parameters — supply splits, virtual reserves, fund flows, and loc
 
 ## Creator Fees
 
-A creator fee is an optional per-swap fee charged on every buy and sell on the bonding curve. Fees are **accrued** in the bucket rather than transferred directly on each swap — collect them by calling the permissionless `claimBondingCurveCreatorFeeV2` instruction. After graduation, fees continue to accrue from Raydium LP trading and are claimed via `claimRaydiumCreatorFeeV2`. See the [Bonding Curve Swap Integration Guide](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees) for the full claiming flow.
+An optional per-swap fee accrues to a configured wallet on every buy and sell. Set `creatorFeeWallet` in the `launch` object to redirect fees to a specific address; the launching wallet is used by default.
 
-By default, the creator fee wallet is the launching wallet. For current fee rates, see the [Genesis Protocol Fees](/smart-contracts/genesis) page.
-
-### Redirecting Creator Fees to a Specific Wallet
-
-Set `creatorFeeWallet` to send fees to a wallet other than the launching wallet.
-
-```typescript {% title="launch-with-fee-wallet.ts" showLineNumbers=true %}
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  launchType: 'bondingCurve',
-  token: {
-    name: 'My Token',
-    symbol: 'MTK',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {
-    creatorFeeWallet: 'FeeRecipientWalletAddress...',
-  },
-});
+```typescript {% title="launch-with-creator-fee.ts" %}
+launch: {
+  creatorFeeWallet: 'FeeRecipientWalletAddress...',
+},
 ```
 
-{% callout type="note" %}
-Launching on behalf of a Metaplex agent? The agent-specific flow — automatic PDA fee routing, Core execute wrapping, and `setToken` association — is covered in [Create an Agent Token](/agents/create-agent-token).
-{% /callout %}
-
-For how creator fees interact with swap pricing, see [Bonding Curve — Theory of Operation](/smart-contracts/genesis/bonding-curve#fee-structure).
+For full configuration options, how to check the accrued balance, and the claiming instructions (`claimBondingCurveCreatorFeeV2` / `claimRaydiumCreatorFeeV2`), see [Creator Fees](/smart-contracts/genesis/creator-fees).
 
 ## First Buy
 
