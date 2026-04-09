@@ -2,6 +2,7 @@
 title: Minting Compressed NFTs
 metaTitle: Minting Compressed NFTs | Bubblegum
 description: Learn how to mint compressed NFTs on Bubblegum.
+cli: /dev-tools/cli/bubblegum/create-cnft
 ---
 {% callout title="Bubblegum v2" type="note" %}
 This page is specific to Bubblegum v1. For an enhanced feature set, we recommend using Bubblegum v2. If you're working with Bubblegum v2, please consult the [Bubblegum v2](/smart-contracts/bubblegum-v2/mint-cnfts) documentation for further details.

@@ -18,6 +18,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+cli: /dev-tools/cli/core/fetch
 howToSteps:
   - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Configure Umi with your RPC endpoint

@@ -4,6 +4,7 @@ metaTitle: Create a Fungible Token | Tokens
 description: Learn how to create a fungible SPL token with metadata on Solana
 created: '11-25-2025'
 updated: '11-25-2025'
+cli: /dev-tools/cli/toolbox/token-create
 ---
 
 Create a fungible token with metadata on Solana using the Token Metadata program. {% .lead %}
