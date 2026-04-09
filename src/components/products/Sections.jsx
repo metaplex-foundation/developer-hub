@@ -29,7 +29,7 @@ export function Sections({ sections, activeSectionId, className, props }) {
         )
 
         const classNames = clsx(
-          'flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm',
+          'flex items-center gap-2 px-2 py-1.5 text-sm',
           'hover:bg-muted',
           isActive
             ? 'bg-primary/10 font-medium text-primary'

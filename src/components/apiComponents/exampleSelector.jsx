@@ -55,7 +55,7 @@ const ApiExampleSelector = ({
             onChange={handleExampleChange}
             value={selectedExample >= 0 ? selectedExample.toString() : ''}
             className={clsx(
-              'block w-full appearance-none rounded-lg border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
+              'block w-full appearance-none border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
               'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-primary/25',
               '*:text-foreground'
             )}
@@ -94,7 +94,7 @@ const ApiExampleSelector = ({
 
         <button
           onClick={() => handleSetExample(-1)}
-          className="block rounded-lg border border-border bg-card px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
+          className="block border border-border bg-card px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
         >
           Clear
         </button>

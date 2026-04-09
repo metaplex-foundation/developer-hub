@@ -204,7 +204,7 @@ const LanguageRenderer = ({ api, body, setActiveEndpoint, activeEndpoint, noUmi 
               {strToTitleCase(activeLanguage)} Request Example
             </div>
             {noUmi ? (
-              <div className="rounded-lg bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200">
+              <div className="bg-yellow-50 p-4 text-sm text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200">
                 This endpoint is not yet supported in the UMI-based JS SDK.
               </div>
             ) : (
