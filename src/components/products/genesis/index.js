@@ -74,37 +74,39 @@ export const genesis = {
           ],
         },
         {
-          title: 'Bonding Curve',
-          links: [
-            {
-              title: 'Overview',
-              href: '/smart-contracts/genesis/bonding-curve',
-            },
-            {
-              title: 'Theory of Operation',
-              href: '/smart-contracts/genesis/bonding-curve-theory',
-            },
-            {
-              title: 'Advanced Internals',
-              href: '/smart-contracts/genesis/bonding-curve-internals',
-            },
-            {
-              title: 'Swap Integration',
-              href: '/smart-contracts/genesis/bonding-curve-swaps',
-            },
-            {
-              title: 'Indexing & Events',
-              href: '/smart-contracts/genesis/bonding-curve-indexing',
-            },
-            {
-              title: 'Launch via API',
-              href: '/smart-contracts/genesis/bonding-curve-launch',
-            },
-          ],
-        },
-        {
           title: 'Launch Types',
           links: [
+            {
+              title: 'Bonding Curve',
+              href: '/smart-contracts/genesis/bonding-curve',
+              collapsible: true,
+              children: [
+                {
+                  title: 'Overview',
+                  href: '/smart-contracts/genesis/bonding-curve',
+                },
+                {
+                  title: 'Theory of Operation',
+                  href: '/smart-contracts/genesis/bonding-curve-theory',
+                },
+                {
+                  title: 'Advanced Internals',
+                  href: '/smart-contracts/genesis/bonding-curve-internals',
+                },
+                {
+                  title: 'Swap Integration',
+                  href: '/smart-contracts/genesis/bonding-curve-swaps',
+                },
+                {
+                  title: 'Indexing & Events',
+                  href: '/smart-contracts/genesis/bonding-curve-indexing',
+                },
+                {
+                  title: 'Launch via API',
+                  href: '/smart-contracts/genesis/bonding-curve-launch',
+                },
+              ],
+            },
             {
               title: 'Launch Pool',
               href: '/smart-contracts/genesis/launch-pool',
@@ -192,7 +194,6 @@ export const genesis = {
       sections: {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
-        'Bonding Curve': 'Bonding Curve',
         'Launch Types': 'Launch Types',
         'Integrations': 'Integrations',
         'CLI': 'CLI',
@@ -228,7 +229,6 @@ export const genesis = {
       sections: {
         'Introduction': '紹介',
         'SDK': 'SDK',
-        'Bonding Curve': 'ボンディングカーブ',
         'Launch Types': 'ローンチタイプ',
         'Integrations': 'インテグレーション',
         'CLI': 'CLI',
@@ -264,7 +264,6 @@ export const genesis = {
       sections: {
         'Introduction': '소개',
         'SDK': 'SDK',
-        'Bonding Curve': '본딩 커브',
         'Launch Types': '런치 유형',
         'Integrations': '통합',
         'CLI': 'CLI',
@@ -300,7 +299,6 @@ export const genesis = {
       sections: {
         'Introduction': '简介',
         'SDK': 'SDK',
-        'Bonding Curve': '绑定曲线',
         'Launch Types': '发行类型',
         'Integrations': '集成',
         'CLI': 'CLI',
