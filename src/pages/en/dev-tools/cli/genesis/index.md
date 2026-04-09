@@ -40,7 +40,7 @@ The complete CLI reference for Genesis token launches:
 The `mplx genesis` commands let you run a full Genesis token launch from your terminal — creating accounts, configuring buckets, depositing, claiming, and revoking authorities.
 
 - **Tool**: Metaplex CLI (`mplx`) with the `genesis` command group
-- **Bucket types**: Launch pool (proportional), presale (fixed-price), unlocked (treasury)
+- **Bucket types**: Launch pool (proportional), presale (fixed-price), unlocked (treasury), bonding curve (constant-product AMM)
 - **Quote token (manual flow)**: Wrapped SOL by default, any SPL token mint address supported
 - **Quote token (API flow)**: Currently supports SOL or USDC only
 - **Irreversible actions**: `finalize` and `revoke` cannot be undone
@@ -121,6 +121,7 @@ You can check the state of your launch at any point with `genesis fetch` and `ge
 | `genesis bucket add-unlocked` | Add an unlocked (treasury) bucket |
 | `genesis bucket fetch` | Fetch bucket details by type |
 | `genesis bucket index` | List and index buckets for a Genesis account |
+| [`genesis swap`](/dev-tools/cli/genesis/bonding-curve#swap-buy-and-sell) | Buy or sell tokens on a bonding curve |
 | `genesis deposit` | Deposit into a launch pool |
 | `genesis withdraw` | Withdraw from a launch pool |
 | `genesis transition` | Execute end behaviors after deposit period |

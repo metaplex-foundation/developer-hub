@@ -51,7 +51,7 @@ The `genesis launch` commands provide a streamlined way to launch tokens using t
 - **metaplex.com compatible**: Launches created or registered through the API appear on [metaplex.com](https://metaplex.com) with a public launch page
 - **Total supply**: Currently fixed at 1,000,000,000 tokens
 
-**Jump to:** [Launch Create](#launch-create) · [Bonding Curve](#bonding-curve) · [Agent Launches](#agent-launches) · [Launch Register](#launch-register) · [Locked Allocations](#locked-allocations) · [Common Errors](#common-errors) · [FAQ](#faq)
+**Jump to:** [Launch Create](#launch-create) · [Bonding Curve](#bonding-curve) · [Launchpool Examples](#launchpool-examples) · [Agent Launches](#agent-launches) · [Launch Register](#launch-register) · [Locked Allocations](#locked-allocations) · [Common Errors](#common-errors) · [FAQ](#faq)
 
 ## Launch Create
 
@@ -63,8 +63,17 @@ The `mplx genesis launch create` command creates a new token launch via the Gene
 
 Two launch types are available:
 
-- **`launchpool`** (default): 48-hour deposit window, proportional token distribution, configurable allocations. Requires `--tokenAllocation`, `--depositStartTime`, `--raiseGoal`, `--raydiumLiquidityBps`, and `--fundsRecipient`.
 - **`bonding-curve`**: Instant bonding curve (constant product AMM). Trading starts immediately — no deposit window. Auto-graduates to Raydium CPMM when all tokens are sold. Only requires `--name`, `--symbol`, and `--image`.
+- **`launchpool`** (default): 48-hour deposit window, proportional token distribution, configurable allocations. Requires `--tokenAllocation`, `--depositStartTime`, `--raiseGoal`, `--raydiumLiquidityBps`, and `--fundsRecipient`.
+
+### Bonding Curve Example
+
+```bash {% title="Create a bonding curve launch" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" \
+  --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
 
 ### Launchpool Example
 
@@ -102,6 +111,8 @@ mplx genesis launch create \
 | `--twitter <string>` | Project Twitter URL | No | — |
 | `--telegram <string>` | Project Telegram URL | No | — |
 | `--lockedAllocations <path>` | Path to JSON file with locked allocation configs (launchpool only) | No | — |
+| `--creatorWallet <string>` | Override the launch owner wallet for registration (public key) | No | Launching wallet |
+| `--twitterVerificationToken <string>` | Twitter verification token for verified badge on the launch page | No | — |
 | `--quoteMint <string>` | Quote mint (`SOL` or `USDC`) | No | `SOL` |
 | `--network <string>` | Network override: `solana-mainnet` or `solana-devnet` | No | Auto-detected |
 | `--apiUrl <string>` | Genesis API base URL | No | `https://api.metaplex.com` |
@@ -268,6 +279,8 @@ mplx genesis launch register <GENESIS_ACCOUNT> --launchConfig launch.json
 | Flag | Description | Required | Default |
 |------|-------------|----------|---------|
 | `--launchConfig <path>` | Path to JSON file with the launch configuration | Yes | — |
+| `--creatorWallet <string>` | Override the launch owner wallet for registration (public key) | No | Launching wallet |
+| `--twitterVerificationToken <string>` | Twitter verification token for verified badge on the launch page | No | — |
 | `--network <string>` | Network override: `solana-mainnet` or `solana-devnet` | No | Auto-detected |
 | `--apiUrl <string>` | Genesis API base URL | No | `https://api.metaplex.com` |
 
