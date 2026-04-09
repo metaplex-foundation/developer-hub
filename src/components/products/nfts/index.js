@@ -6,6 +6,7 @@ export const nfts = {
   name: 'NFTs',
   headline: 'Non-Fungible Tokens',
   description: 'Create and manage NFTs on Solana using Metaplex Core.',
+  skill: true,
   navigationMenuCatergory: undefined,
   path: 'nfts',
   icon: <PhotoIcon />,
