@@ -3,7 +3,7 @@ title: Genesis - Solana Token Launchpad & Launch Platform
 metaTitle: Genesis — Solana Token Launchpad for Fair Launches & Token Sales | Metaplex
 description: Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
 created: '01-15-2025'
-updated: '04-02-2026'
+updated: '03-04-2026'
 keywords:
   - token launch
   - token launchpad
@@ -37,7 +37,7 @@ faqs:
   - q: What's the difference between Launch Pool and Presale?
     a: Presale has a fixed price set upfront. Launch Pool discovers price organically based on total deposits - more deposits means higher implied price per token.
   - q: What launch types does Genesis support?
-    a: Genesis supports multiple launch types that represent the underlying mechanism — Bonding Curve, Launch Pool (fair launch with proportional distribution and price discovery), Presale (fixed-price token sale).
+    a: Genesis supports multiple launch types that represent the underlying mechanism — Launch Pool (fair launch with proportional distribution and price discovery) and Presale (fixed-price token sale).
 ---
 
 **Genesis** is a Solana token launchpad and smart contract for **Token Generation Events (TGE)**. Run a presale, fair launch, auction, or crowdsale with on-chain coordination for SPL token creation, token distribution, and fund collection. {% .lead %}
@@ -80,7 +80,7 @@ Genesis supports three mechanisms that can be combined:
 
 ## Core Concepts
 
-### Bonding Curve
+### Launch Types
 
 Every Genesis launch has a **type** that represents the underlying mechanism:
 
@@ -154,9 +154,6 @@ Yes. Genesis provides the `revokeV2` instruction to permanently revoke mint and/
 ### What's the difference between Launch Pool and Presale?
 **Presale** has a fixed price set upfront. **Launch Pool** discovers price organically—more deposits means higher implied price per token, with proportional distribution to all participants.
 
-### How does the bonding curve work?
-The bonding curve handles pre-bond price discovery and collects protocol fees and creator revenue on swaps. When the graduating market cap is reached, liquidity automatically migrates to a Raydium pool. See [Protocol Fees](#protocol-fees) for the full fee breakdown.
-
 ### Can I combine multiple launch mechanisms?
 Yes. Genesis uses a bucket system where you can add multiple inflow buckets and configure outflow buckets for treasury or vesting.
 
@@ -171,8 +168,7 @@ Yes. Genesis uses a bucket system where you can add multiple inflow buckets and 
 | **Launch Pool** | Deposit-based distribution where price is discovered at close |
 | **Presale** | Fixed-price sale at a predetermined rate |
 | **Quote Token** | The token users deposit (usually wSOL) |
-| **Bonding Curve** | Pre-bond pricing mechanism that discovers price through swaps and automatically graduates liquidity to Raydium when the market cap target is reached |
-| **Launch Type** | The underlying mechanism of a launch: `BondingCurve`, `launchpool`, `presale`. Set on-chain by a backend crank after creation |
+| **Launch Type** | The underlying mechanism of a launch: `launchpool` or `presale`. Set on-chain by a backend crank after creation |
 | **Base Token** | The token being launched and distributed |
 
 ## Next Steps
