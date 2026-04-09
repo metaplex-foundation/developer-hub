@@ -72,7 +72,7 @@ This guide covers:
 
 - **One-liner path** — `createAndRegisterLaunch` handles the full flow in a single awaited call
 - **Manual path** — `createLaunch` + `signAndSendLaunchTransactions` + `registerLaunch` for custom signing, bundles, or retry logic
-- **Creator fees** — optional per-swap fee earned on the bonding curve and in the post-graduation Raydium pool; configurable per-wallet or derived automatically for agent launches
+- **Creator fees** — optional per-swap fee earned on the bonding curve and in the post-graduation Raydium pool; configurable per-wallet or derived automatically for [agent launches](/agents/create-agent-token)
 - **First buy** — optional fee-free initial purchase reserved for the launching wallet or agent PDA at curve creation
 
 ## Quick Start
@@ -345,7 +345,8 @@ try {
 - `createAndRegisterLaunch` is atomic from the caller's perspective but internally makes two API calls — a failure after the create transactions confirm but before `registerLaunch` means the token exists onchain but is not yet visible on metaplex.com; call `registerLaunch` manually to complete registration
 - The Metaplex API endpoint (`https://api.metaplex.com`) is hosted infrastructure — it constructs and returns unsigned transactions; the caller always holds and controls signing
 - Virtual reserves, supply splits, and lock schedules are set by protocol defaults when `launch: {}` is empty; there is no API to override these per-launch
-- The `agent.setToken` flag is irreversible — once a token is set as an agent's primary token it cannot be changed or reassigned
+- The `agent.setToken` flag is irreversible — once a token is set as an agent's primary token it cannot be changed or reassigned; see [Create an Agent Token](/agents/create-agent-token) for the full agent launch flow
+- Once a curve is live, integrate swaps using the [Bonding Curve Swap Integration](/smart-contracts/genesis/bonding-curve-swaps) guide
 - First buy is configured at launch creation and cannot be added after the curve is live; `firstBuyAmount: 0` or omitting the field disables it entirely
 - Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions
 

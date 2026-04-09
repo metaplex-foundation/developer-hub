@@ -86,7 +86,7 @@ For how creator fees interact with swap pricing and the protocol swap fee, see [
 
 ## Configuring a Creator Fee at Launch
 
-Creator fees are configured in the `launch` object passed to `createAndRegisterLaunch` (or `createLaunch`). The `creatorFeeWallet` field is optional — if omitted, the launching wallet receives all fees by default.
+Creator fees are configured in the `launch` object passed to `createAndRegisterLaunch` (or `createLaunch`). The `creatorFeeWallet` field is optional — if omitted, the launching wallet receives all fees by default. For the full launch flow, see [Launching a Bonding Curve via the Metaplex API](/smart-contracts/genesis/bonding-curve-launch).
 
 ### Redirecting Creator Fees to a Specific Wallet
 
@@ -209,6 +209,7 @@ Like its bonding curve counterpart, `claimRaydiumCreatorFeeV2` is permissionless
 - The first buy mechanism waives all fees (protocol and creator) for the designated initial purchase only; all subsequent swaps pay the normal creator fee
 - Creator fees apply to the SOL side of every swap regardless of direction (buy or sell); they do not compound with the protocol swap fee
 - For current fee rates, see the [Genesis Protocol Fees](/smart-contracts/genesis) page
+- For swap-side context — reading bucket state, computing quotes, and executing trades — see [Bonding Curve Swap Integration](/smart-contracts/genesis/bonding-curve-swaps)
 
 ## FAQ
 

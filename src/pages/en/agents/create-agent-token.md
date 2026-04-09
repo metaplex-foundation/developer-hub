@@ -201,7 +201,7 @@ try {
 - `createAndRegisterLaunch` makes two API calls internally — if the create transactions confirm but `registerLaunch` fails, the token exists onchain but is not visible on metaplex.com; use `createLaunch` + `registerLaunch` separately with [manual signing](/smart-contracts/genesis/bonding-curve-launch#manual-signing-flow) to handle this case
 - The creator fee wallet can be overridden by setting `launch.creatorFeeWallet` explicitly — it takes precedence over the agent PDA
 - First buy is configured at launch creation and cannot be added after the curve is live
-- Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions — see the [Swap Integration Guide](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)
+- Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions — see [Creator Fees](/smart-contracts/genesis/creator-fees) for the full claiming flow
 - The Metaplex API constructs and returns unsigned transactions; the caller always holds the signing keys
 
 

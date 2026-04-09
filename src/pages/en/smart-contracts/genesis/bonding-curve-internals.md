@@ -23,7 +23,7 @@ Reference for Genesis Bonding Curve swap price formulas, reserve exhaustion hand
 
 ## Summary
 
-This page covers implementation-level details for integrators building swap engines, pricing tools, or protocol tooling on top of the Genesis Bonding Curve.
+This page covers implementation-level details for integrators building swap engines, pricing tools, or protocol tooling on top of the Genesis Bonding Curve. For executing swap transactions using the SDK, see [Bonding Curve Swap Integration](/smart-contracts/genesis/bonding-curve-swaps). For indexing events emitted by the program, see [Indexing & Events](/smart-contracts/genesis/bonding-curve-indexing).
 
 - **Swap formulas** — exact `ceil(k / x)` buy and sell calculations
 - **Reverse calculation** — computing required input for a desired output

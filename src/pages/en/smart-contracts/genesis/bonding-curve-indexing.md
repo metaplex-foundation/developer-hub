@@ -44,7 +44,7 @@ The Genesis program emits a `BondingCurveSwapEvent` inner instruction on every c
 
 ## Discovering All Bonding Curves (GPA)
 
-Use the GPA builder to retrieve every `BondingCurveBucketV2` account on the program — useful for dashboards, aggregators, and indexers.
+Use the GPA builder to retrieve every `BondingCurveBucketV2` account on the program — useful for dashboards, aggregators, and indexers. For the full account field reference, see [Advanced Internals](/smart-contracts/genesis/bonding-curve-internals).
 
 ```typescript {% title="discover-all-curves.ts" showLineNumbers=true %}
 import { getBondingCurveBucketV2GpaBuilder } from '@metaplex-foundation/genesis';
@@ -145,7 +145,7 @@ function getPriceFromEvent(event: BondingCurveSwapEvent, bucket: BondingCurveBuc
 
 ## Lifecycle Events
 
-Track the full lifecycle of a bonding curve by listening for Genesis program instructions and inner instruction events.
+Track the full lifecycle of a bonding curve by listening for Genesis program instructions and inner instruction events. For executing swap transactions using the SDK, see [Bonding Curve Swap Integration](/smart-contracts/genesis/bonding-curve-swaps).
 
 | Event | Description | Key Fields |
 |-------|-------------|------------|
