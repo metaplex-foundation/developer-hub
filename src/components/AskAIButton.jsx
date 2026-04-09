@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useClickOutside } from '@/shared/useClickOutside'
 
-const SITE_URL = 'https://www.metaplex.com/docs'
+const SITE_URL_FALLBACK = 'https://www.metaplex.com/docs'
 
 const AI_SERVICES = [
   {
@@ -37,7 +37,9 @@ export function AskAIButton({ pathname }) {
   const [open, setOpen] = useState(false)
   const ref = useClickOutside(() => setOpen(false))
 
-  const pageUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`
+  const pageUrl = typeof window !== 'undefined'
+    ? window.location.origin + window.location.pathname
+    : `${SITE_URL_FALLBACK}${pathname === '/' ? '' : pathname}`
   const prompt = `Explain this Metaplex documentation page: ${pageUrl}`
 
   return (
@@ -45,7 +47,7 @@ export function AskAIButton({ pathname }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus:outline-none"
+        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
         aria-haspopup="true"
         aria-expanded={open}
       >

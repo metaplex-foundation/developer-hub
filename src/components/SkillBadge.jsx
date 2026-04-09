@@ -7,20 +7,22 @@ const SKILL_REPO = 'https://github.com/metaplex-foundation/skill'
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false)
 
-  function handleCopy() {
-    navigator.clipboard.writeText(text).then(() => {
+  async function handleCopy() {
+    if (!navigator?.clipboard) return
+    try {
+      await navigator.clipboard.writeText(text)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    }).catch((err) => {
+    } catch (err) {
       console.error('Failed to copy to clipboard:', err)
-    })
+    }
   }
 
   return (
     <button
       type="button"
       onClick={handleCopy}
-      className="flex-shrink-0 rounded p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus:outline-none"
+      className="flex-shrink-0 rounded p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
       aria-label={copied ? 'Copied' : 'Copy to clipboard'}
     >
       {copied ? (
@@ -58,7 +60,7 @@ export function SkillBadge() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus:outline-none"
+        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
         aria-haspopup="true"
         aria-expanded={open}
       >
