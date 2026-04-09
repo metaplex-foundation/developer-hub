@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { useClickOutside } from '@/shared/useClickOutside'
 
 const SITE_URL = 'https://www.metaplex.com/docs'
 
@@ -34,20 +35,10 @@ const AI_SERVICES = [
 
 export function AskAIButton({ pathname }) {
   const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const ref = useClickOutside(() => setOpen(false))
 
   const pageUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`
   const prompt = `Explain this Metaplex documentation page: ${pageUrl}`
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
 
   return (
     <div ref={ref} className="relative flex-shrink-0">

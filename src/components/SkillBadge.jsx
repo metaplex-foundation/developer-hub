@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { useClickOutside } from '@/shared/useClickOutside'
 
 const SKILL_REPO = 'https://github.com/metaplex-foundation/skill'
 
@@ -10,6 +11,8 @@ function CopyButton({ text }) {
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    }).catch((err) => {
+      console.error('Failed to copy to clipboard:', err)
     })
   }
 
@@ -45,17 +48,7 @@ function CodeRow({ command }) {
 
 export function SkillBadge() {
   const [open, setOpen] = useState(false)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+  const ref = useClickOutside(() => setOpen(false))
 
   const gitClone = `git clone ${SKILL_REPO}`
   const npxAdd = `npx skills add metaplex-foundation/skill`
