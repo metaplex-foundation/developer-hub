@@ -45,7 +45,7 @@ export function CLIBadge({ cliPath }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-1.5 w-72 origin-top-right rounded-md border border-border bg-background p-3 shadow-lg">
+        <div className="absolute right-0 z-50 mt-1.5 w-72 origin-top-right rounded-md border border-border bg-background p-3 shadow-2xl ring-1 ring-white/10 dark:ring-white/10">
           <p className="mb-2 text-xs font-medium text-foreground">Metaplex CLI</p>
           <p className="mb-3 text-xs text-muted-foreground">
             This page includes CLI examples inline where available. For the full
