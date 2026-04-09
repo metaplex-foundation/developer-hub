@@ -4,6 +4,7 @@ metaTitle: How to Transfer Fungible Tokens on Solana | Tokens
 description: Learn how to transfer fungible SPL tokens between wallets on Solana using JavaScript and Umi
 created: '11-25-2025'
 updated: '11-25-2025'
+cli: /dev-tools/cli/toolbox/token-transfer
 ---
 
 Transfer fungible tokens (SPL tokens) between wallets on the Solana blockchain. {% .lead %}

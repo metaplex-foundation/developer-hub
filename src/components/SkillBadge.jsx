@@ -39,11 +39,14 @@ function CopyButton({ text }) {
   )
 }
 
-function CodeRow({ command }) {
+function CodeRow({ label, command }) {
   return (
-    <div className="flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1.5">
-      <code className="min-w-0 flex-1 truncate font-mono text-xs text-foreground">{command}</code>
-      <CopyButton text={command} />
+    <div>
+      {label && <p className="mb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{label}</p>}
+      <div className="flex items-center gap-1.5 rounded-md border border-border bg-muted/50 px-2.5 py-1.5">
+        <code className="min-w-0 flex-1 truncate font-mono text-xs text-foreground">{command}</code>
+        <CopyButton text={command} />
+      </div>
     </div>
   )
 }
@@ -76,7 +79,7 @@ export function SkillBadge() {
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-1.5 w-72 origin-top-right rounded-md border border-border bg-background p-3 shadow-lg">
+        <div className="absolute right-0 z-50 mt-1.5 w-96 origin-top-right rounded-md border border-border bg-background p-3 shadow-2xl ring-1 ring-white/10 dark:ring-white/10">
           <p className="mb-2 text-xs font-medium text-foreground">Metaplex Skill File</p>
           <p className="mb-3 text-xs text-muted-foreground">
             This product is part of the{' '}
@@ -99,9 +102,9 @@ export function SkillBadge() {
             </Link>
             .
           </p>
-          <div className="space-y-1.5">
-            <CodeRow command={npxAdd} />
-            <CodeRow command={gitClone} />
+          <div className="space-y-2.5">
+            <CodeRow label="NPX Install" command={npxAdd} />
+            <CodeRow label="Git Clone Skill Repo" command={gitClone} />
           </div>
         </div>
       )}

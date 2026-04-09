@@ -16,6 +16,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+cli: /dev-tools/cli/core/plugins
 faqs:
   - q: Can I recover the data after removing a plugin?
     a: No. Removing a plugin permanently deletes all its data. Make sure to back up any important data before removal.

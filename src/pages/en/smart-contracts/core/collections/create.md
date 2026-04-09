@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+cli: /dev-tools/cli/core/create-collection
 howToSteps:
   - Install the mpl-core SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Upload collection metadata JSON to get a URI

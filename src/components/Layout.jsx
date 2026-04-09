@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 import { AskAIButton } from '@/components/AskAIButton'
+import { CLIBadge } from '@/components/CLIBadge'
 import { SkillBadge } from '@/components/SkillBadge'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
@@ -166,6 +167,7 @@ export function Layout({ children, page }) {
                     <div className="flex flex-col items-end gap-1.5">
                       <AskAIButton pathname={page.pathname} />
                       {page.product?.skill && <SkillBadge />}
+                      {page.cli && <CLIBadge cliPath={page.cli} />}
                     </div>
                   </div>
                 </header>

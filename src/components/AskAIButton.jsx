@@ -73,7 +73,7 @@ export function AskAIButton({ pathname }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-1.5 w-40 origin-top-right rounded-md border border-border bg-background shadow-lg">
+        <div className="absolute right-0 z-50 mt-1.5 w-40 origin-top-right rounded-md border border-border bg-background shadow-2xl ring-1 ring-white/10 dark:ring-white/10">
           <div className="py-1" role="menu">
             {AI_SERVICES.map((service) => (
               <a
