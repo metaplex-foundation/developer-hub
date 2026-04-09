@@ -5,39 +5,23 @@ import { agentMenuCategory, anchorTokenMenuCategory, nftMenuCategory, tokenMenuC
 import { Card, CardContent } from '../ui/card'
 import { products as allProducts, productCategories } from './index'
 
-const ProductCard = ({ item, locale, learnMoreText }) => {
+const ProductCard = ({ item, locale }) => {
   const href = getLocalizedHref(item.href || `/${item.path}`, locale)
 
   return (
     <Link
       href={href}
-      // className="group relative flex flex-col rounded-lg border border-border bg-transparent p-6 transition-all duration-200 hover:border-foreground"
+      className="flex h-full flex-col"
       {...(item.target && { target: item.target })}
     >
-      <Card className="hover:border-foreground/50 group relative flex flex-col transition-colors duration-200">
+      <Card className="group flex h-full flex-col border-border transition-colors duration-200 hover:border-foreground">
         <CardContent className="p-0">
-          <h3 className="text-sm font-medium text-balance md:text-lg">
+          <h3 className="text-sm font-semibold text-balance md:text-base">
             {item.name}
           </h3>
-          <p className="mt-2 flex-1 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm text-muted-foreground">
             {item.headline || item.description}
           </p>
-          <span className="mt-4 inline-flex items-center text-sm font-medium text-primary">
-            {learnMoreText}
-            <svg
-              className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </span>
         </CardContent>
       </Card>
     </Link>
@@ -46,7 +30,6 @@ const ProductCard = ({ item, locale, learnMoreText }) => {
 
 export function ProductCardGrid({ category }) {
   const { locale } = useLocale()
-  const t = useTranslations('homepage')
 
   // Get items based on category
   let items = []
@@ -93,10 +76,8 @@ export function ProductCardGrid({ category }) {
     return localizedItem
   }
 
-  const learnMoreText = t('learnMore', 'Learn more')
-
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-stretch">
       {items.map((item) => {
         const localizedItem = localizeItem(item)
         return (
@@ -104,7 +85,6 @@ export function ProductCardGrid({ category }) {
             key={item.path || item.href}
             item={localizedItem}
             locale={locale}
-            learnMoreText={learnMoreText}
           />
         )
       })}

@@ -99,7 +99,7 @@ export const Node = memo(function Node({ data }) {
     return (
       <div
         className={clsx(
-          'h-full w-full rounded-md bg-white text-slate-700 shadow dark:bg-slate-700 dark:text-slate-300'
+          'h-full w-full bg-white text-slate-700 shadow dark:bg-slate-700 dark:text-slate-300'
         )}
       >
         <TransparentHandles />
@@ -118,18 +118,12 @@ export const Node = memo(function Node({ data }) {
   return (
     <div
       className={clsx('h-full w-full text-slate-700 dark:text-slate-300', {
-        'rounded-t-md': isFirstSibling,
-        'rounded-b-md': isLastSibling,
-        'rounded-md': !hasParent,
         shadow: !hasParent && theme !== 'transparent',
         'bg-white dark:bg-slate-700': theme !== 'transparent',
       })}
     >
       <div
         className={clsx('h-full w-full border', themes[theme].node, {
-          'rounded-t-md': isFirstSibling,
-          'rounded-b-md': isLastSibling,
-          'rounded-md': !hasParent,
           '-mt-px': !isFirstSibling,
         })}
       >

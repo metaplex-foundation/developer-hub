@@ -3,7 +3,7 @@ import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
-  headline: 'Core Asset launchpad',
+  headline: 'NFT launchpad for MPL Core.',
   description: 'Launch your next MPL Core Asset collection on Solana.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/core-candy-machine',
@@ -322,7 +322,7 @@ export const coreCandyMachine = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Core Asset launchpad',
+      headline: 'NFT launchpad for MPL Core.',
       description: 'Launch your next MPL Core Asset collection on Solana.',
       sections: {
         'Introduction': 'Introduction',

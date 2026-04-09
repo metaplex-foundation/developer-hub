@@ -64,7 +64,7 @@ export function Fence({
     <div className="not-prose">
       {/* Title bar */}
       {title && (
-        <div className="border border-b-0 border-border bg-zinc-800/80 px-4 py-1.5 font-mono text-xs text-zinc-400">
+        <div className="border border-b-0 border-border bg-card px-4 py-2 font-mono text-xs text-muted-foreground">
           {title}
         </div>
       )}
@@ -92,7 +92,7 @@ export function Fence({
               className={clsx(
                 className,
                 'scrollbar relative bg-card',
-                title ? 'rounded-t-none' : ''
+                ''
               )}
               style={style}
             >

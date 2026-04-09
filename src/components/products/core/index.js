@@ -8,7 +8,7 @@ import { StopCircleIcon } from '@heroicons/react/24/solid';
 
 export const core = {
   name: 'Core',
-  headline: 'Next gen NFT standard',
+  headline: 'Next-gen NFT standard with a composable plugin system.',
   description: 'Next generation Solana NFT standard.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/core',
@@ -362,7 +362,7 @@ export const core = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Next gen NFT standard',
+      headline: 'Next-gen NFT standard with a composable plugin system.',
       description: 'Next generation Solana NFT standard.',
       sections: {
         'Introduction': 'Introduction',

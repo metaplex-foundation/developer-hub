@@ -58,7 +58,7 @@ export function WrappedDiagram({
         nodesFocusable={false}
         edgesFocusable={false}
         edgesUpdatable={false}
-        className="rounded-xl bg-slate-50 dark:bg-slate-800"
+        className="bg-slate-50 dark:bg-slate-800"
       >
         <Background
           color="currentColor"
@@ -66,16 +66,16 @@ export function WrappedDiagram({
         />
       </ReactFlow>
       <Panel position="top-right">
-        <div className="flex gap-1 rounded-md bg-white p-1 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-900 dark:ring-white/10">
+        <div className="flex gap-1 bg-white p-1 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-900 dark:ring-white/10">
           <button
             onClick={downloadImage}
-            className="rounded p-1 hover:bg-slate-100 hover:dark:bg-slate-600/40"
+            className="p-1 hover:bg-slate-100 hover:dark:bg-slate-600/40"
           >
             <Icon icon="InboxArrowDown" className="h-5 w-5" />
           </button>
           <button
             onClick={toggleFullscreen}
-            className="rounded p-1 hover:bg-slate-100 hover:dark:bg-slate-600/40"
+            className="p-1 hover:bg-slate-100 hover:dark:bg-slate-600/40"
           >
             <Icon
               icon={fullscreen ? 'ArrowsPointingIn' : 'ArrowsPointingOut'}
