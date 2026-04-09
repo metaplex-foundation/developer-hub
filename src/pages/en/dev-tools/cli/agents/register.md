@@ -51,6 +51,8 @@ The `mplx agents register` command creates an [MPL Core](/core) asset and regist
 
 ## Basic Usage
 
+The default API mode registers an agent with minimal required flags:
+
 ```bash {% title="Register an agent (API mode)" %}
 mplx agents register \
   --name "My Agent" \
@@ -95,7 +97,7 @@ mplx agents register \
 
 ### Direct IX with New Asset
 
-Use `--new` and `--use-ix` to create a new Core asset and send the `registerIdentityV1` instruction directly. The registration document is uploaded to Irys.
+The `--new` and `--use-ix` flags create a new Core asset and send the `registerIdentityV1` instruction directly. The registration document is uploaded to Irys.
 
 ```bash {% title="Direct IX — new asset" %}
 mplx agents register --new --use-ix \
@@ -106,7 +108,7 @@ mplx agents register --new --use-ix \
 
 ### Direct IX with Existing Asset
 
-Pass the asset address as the first argument to register an identity on an existing Core asset.
+The asset address passed as the first argument registers an identity on an existing Core asset.
 
 ```bash {% title="Direct IX — existing asset" %}
 mplx agents register <ASSET_ADDRESS> --use-ix \
@@ -115,7 +117,7 @@ mplx agents register <ASSET_ADDRESS> --use-ix \
 
 ### Interactive Wizard
 
-Use `--wizard` for a step-by-step guided registration. This implies `--use-ix`.
+The `--wizard` flag provides a step-by-step guided registration and automatically enables `--use-ix`.
 
 ```bash {% title="Wizard mode" %}
 mplx agents register --new --wizard

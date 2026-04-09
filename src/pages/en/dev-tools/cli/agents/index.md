@@ -85,7 +85,7 @@ mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="Irreversible" %}
-The agent token can only be set once per identity. This action cannot be undone.
+Each agent identity can only ever have one token, and the agent token can only be set once. This action cannot be undone.
 {% /callout %}
 
 ### Set Up Executive Delegation

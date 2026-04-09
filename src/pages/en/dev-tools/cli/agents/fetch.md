@@ -36,9 +36,17 @@ The `mplx agents fetch` command reads the on-chain [agent identity](/agents) PDA
 
 - **Input**: An MPL Core asset address (from [`agents register`](/dev-tools/cli/agents/register))
 - **Output**: Identity PDA, wallet PDA, registration URI, lifecycle hooks
-- **No flags**: Only requires the asset address as an argument
+- **No required flags**: Only the asset address is required; `--json` is optional
 
-**Jump to:** [Usage](#usage) · [Output](#output) · [Notes](#notes)
+**Jump to:** [Quick Reference](#quick-reference) · [Usage](#usage) · [Output](#output) · [Notes](#notes)
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Command** | `mplx agents fetch <ASSET_ADDRESS>` |
+| **Required argument** | `ASSET_ADDRESS` — the MPL Core asset to look up |
+| **Optional flags** | `--json` — machine-readable output |
 
 ## Usage
 

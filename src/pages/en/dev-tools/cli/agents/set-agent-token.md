@@ -20,13 +20,13 @@ programmingLanguage:
 created: '04-09-2026'
 updated: '04-09-2026'
 howToSteps:
-  - Create a token launch linked to the agent using genesis launch create with --agentMint
-  - Or create a token separately and link it manually with agents set-agent-token
+  - Create a token launch linked to the agent using genesis launch create with --agentMint and --agentSetToken to permanently link the token
+  - Or create a launch without --agentSetToken, then link it manually with agents set-agent-token
 howToTools:
   - Metaplex CLI (mplx)
 faqs:
   - q: Can I change the agent token after setting it?
-    a: No. The agent token can only be set once per identity. This action is irreversible.
+    a: No. Each agent identity can only ever have one token, and it can only be set once. This action is irreversible.
   - q: What is the difference between --agentSetToken and set-agent-token?
     a: They do the same thing. --agentSetToken links the token during launch creation in one step. set-agent-token links it separately after launch, requiring asset-signer mode.
   - q: Why do I need asset-signer mode for set-agent-token?
@@ -45,7 +45,9 @@ An agent token is a [Genesis](/smart-contracts/genesis) token permanently linked
 
 - **One-step** (recommended): `genesis launch create --agentMint <ASSET> --agentSetToken`
 - **Two-step**: Create a launch, then link with `agents set-agent-token`
-- **Irreversible**: The token can only be set once per identity
+- **Irreversible**: Each agent identity can only ever have one token, and it can only be set once
+
+## Quick Start
 
 **Jump to:** [One-Step: Launch with Agent](#one-step-launch-with-agent) · [Two-Step: Manual Linking](#two-step-manual-linking) · [Common Errors](#common-errors) · [FAQ](#faq)
 
@@ -102,7 +104,7 @@ mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="Irreversible" %}
-The agent token can only be set once per identity. Double-check both addresses before running this command.
+Each agent identity can only ever have one token, and it can only be set once. Double-check both addresses before running this command.
 {% /callout %}
 
 ### Output
@@ -139,7 +141,7 @@ mplx agents fetch <ASSET_ADDRESS>
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| Agent token already set | Trying to set the token a second time | Agent token can only be set once — this is irreversible |
+| Agent token already set | Trying to set the token a second time | Each agent identity can only ever have one token — this is irreversible |
 | Agent is not owned by the connected wallet | API hasn't indexed a freshly registered agent | Wait ~30 seconds and retry, or check `agents fetch` — the launch may have succeeded |
 | Not in asset-signer mode | Running `set-agent-token` without configuring the wallet | Set up the asset-signer wallet first (see [prerequisites](#step-1-configure-asset-signer-wallet)) |
 
@@ -153,7 +155,7 @@ mplx agents fetch <ASSET_ADDRESS>
 ## FAQ
 
 **Can I change the agent token after setting it?**
-No. The agent token can only be set once per identity. This action is irreversible.
+No. Each agent identity can only ever have one token, and it can only be set once. This action is irreversible.
 
 **What is the difference between `--agentSetToken` and `set-agent-token`?**
 They do the same thing. `--agentSetToken` links the token during launch creation in one step. `set-agent-token` links it separately after launch, requiring asset-signer mode.

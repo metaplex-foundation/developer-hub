@@ -20,7 +20,7 @@ faqs:
   - q: What is the mplx genesis command?
     a: The mplx genesis command group lets you run a full Genesis token launch from your terminal — creating accounts, configuring buckets, depositing, claiming, and revoking authorities.
   - q: What are the different bucket types in Genesis?
-    a: Genesis has three bucket types — launch pool (proportional distribution based on deposits), presale (fixed-price token sale), and unlocked (team/treasury allocations that can claim directly).
+    a: Genesis has four bucket types — launch pool (proportional distribution based on deposits), presale (fixed-price token sale), unlocked (team/treasury allocations that can claim directly), and bonding curve (constant-product AMM with instant trading).
   - q: Do I need to wrap SOL before depositing?
     a: Yes. If using SOL as the quote token, wrap it first with mplx toolbox sol wrap before depositing into any bucket.
   - q: Can I undo finalization?
@@ -157,7 +157,7 @@ You can check the state of your launch at any point with `genesis fetch` and `ge
 The `mplx genesis` command group lets you run a full Genesis token launch from your terminal — creating accounts, configuring buckets, depositing, claiming, and revoking authorities.
 
 **What are the different bucket types in Genesis?**
-Genesis has three bucket types: **launch pool** (proportional distribution based on deposits), **presale** (fixed-price token sale), and **unlocked** (team/treasury allocations that can claim directly).
+Genesis has four bucket types: **launch pool** (proportional distribution based on deposits), **presale** (fixed-price token sale), **unlocked** (team/treasury allocations that can claim directly), and **bonding curve** (constant-product AMM with instant trading).
 
 **Do I need to wrap SOL before depositing?**
 Yes. If using SOL as the quote token, wrap it first with `mplx toolbox sol wrap <amount>` before depositing into any bucket.

@@ -146,7 +146,7 @@ mplx genesis swap <GENESIS_ACCOUNT> --buyAmount 50000000 --slippage 100
 
 ## Checking Curve Status
 
-Use `--info` to view the current curve state without executing a swap:
+The `--info` flag displays the current curve state without executing a swap:
 
 ```bash {% title="Curve status only" %}
 mplx genesis swap <GENESIS_ACCOUNT> --info
@@ -171,7 +171,7 @@ The info output includes:
 
 ## Inspect Bonding Curve Bucket
 
-Use [`genesis bucket fetch`](/dev-tools/cli/genesis/manage#fetch-bucket) with `--type bonding-curve` to view the full bucket configuration:
+The [`genesis bucket fetch`](/dev-tools/cli/genesis/manage#fetch-bucket) command with `--type bonding-curve` retrieves the full bucket configuration:
 
 ```bash {% title="Fetch bonding curve bucket" %}
 mplx genesis bucket fetch <GENESIS_ACCOUNT> --type bonding-curve
