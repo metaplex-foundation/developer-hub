@@ -45,10 +45,6 @@ Genesis 代币发行的完整 CLI 参考：
 - **报价代币（API 流程）**：目前仅支持 SOL 或 USDC
 - **不可逆操作**：`finalize` 和 `revoke` 无法撤销
 
-## 超出范围
-
-Genesis 智能合约内部实现、SDK/TypeScript 集成、前端开发、代币经济设计、发行后流动性池设置。
-
 **跳转至：** [前置条件](#prerequisites) · [一般流程](#general-flow) · [命令参考](#command-reference) · [常见错误](#common-errors) · [常见问题](#faq) · [术语表](#glossary)
 
 *由 Metaplex Foundation 维护 · 最近验证于 2026 年 2 月 · 需要 Metaplex CLI (mplx)*
@@ -72,9 +68,9 @@ mplx genesis --help
 
 ### API 流程（推荐）
 
-使用 `genesis launch create` 进行一体化流程，该命令调用 Genesis API、构建并签署交易，并在 Metaplex 平台上注册您的发行——全部在一个命令中完成。通过 API 创建的发行与 [metaplex.com](https://metaplex.com) 兼容，并将在平台上显示公开的发行页面。
+使用 `genesis launch create` 进行一体化流程，该命令调用 Genesis API、构建并签署交易，并在 Metaplex 平台上注册您的发行——全部在一个命令中完成。提供两种发行类型：**启动池**（默认，48小时存入窗口）和**联合曲线**（即时交易）。通过 API 创建的发行与 [metaplex.com](https://metaplex.com) 兼容，并将在平台上显示公开的发行页面。
 
-```bash {% title="One-command launch" %}
+```bash {% title="启动池（默认）" %}
 mplx genesis launch create \
   --name "My Token" --symbol "MTK" \
   --image "https://gateway.irys.xyz/abc123" \
@@ -83,6 +79,14 @@ mplx genesis launch create \
   --raiseGoal 250 --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
+
+```bash {% title="联合曲线（即时）" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
+
+两种发行类型都支持通过 `--agentMint` 和 `--agentSetToken` 链接到已注册的[代理](/zh/agents/mint-agent)。
 
 详情请参阅 [Launch (API)](/zh/dev-tools/cli/genesis/launch)。
 
@@ -117,6 +121,7 @@ mplx genesis launch create \
 | `genesis bucket add-presale` | 添加 Presale bucket |
 | `genesis bucket add-unlocked` | 添加 unlocked（国库）bucket |
 | `genesis bucket fetch` | 按类型获取 bucket 详情 |
+| `genesis bucket index` | 列出和索引 Genesis 账户的 bucket |
 | `genesis deposit` | 存入 Launch Pool |
 | `genesis withdraw` | 从 Launch Pool 提取 |
 | `genesis transition` | 在存款期结束后执行 end behavior |

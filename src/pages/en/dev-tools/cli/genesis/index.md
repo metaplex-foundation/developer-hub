@@ -45,10 +45,6 @@ The `mplx genesis` commands let you run a full Genesis token launch from your te
 - **Quote token (API flow)**: Currently supports SOL or USDC only
 - **Irreversible actions**: `finalize` and `revoke` cannot be undone
 
-## Out of Scope
-
-Genesis smart contract internals, SDK/TypeScript integration, frontend development, token economics design, liquidity pool setup after launch.
-
 **Jump to:** [Prerequisites](#prerequisites) · [General Flow](#general-flow) · [Command Reference](#command-reference) · [Common Errors](#common-errors) · [FAQ](#faq) · [Glossary](#glossary)
 
 
@@ -71,9 +67,9 @@ There are two ways to launch a token with the Genesis CLI:
 
 ### API Flow (Recommended)
 
-Use `genesis launch create` for an all-in-one flow that calls the Genesis API, builds and signs transactions, and registers your launch on the Metaplex platform — all in a single command. Launches created through the API are compatible with [metaplex.com](https://metaplex.com) and will appear on the platform with a public launch page.
+Use `genesis launch create` for an all-in-one flow that calls the Genesis API, builds and signs transactions, and registers your launch on the Metaplex platform — all in a single command. Two launch types are available: **launchpool** (default, 48h deposit window) and **bonding-curve** (instant trading). Launches created through the API are compatible with [metaplex.com](https://metaplex.com) and will appear on the platform with a public launch page.
 
-```bash {% title="One-command launch" %}
+```bash {% title="Launchpool (default)" %}
 mplx genesis launch create \
   --name "My Token" --symbol "MTK" \
   --image "https://gateway.irys.xyz/abc123" \
@@ -82,6 +78,14 @@ mplx genesis launch create \
   --raiseGoal 250 --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
+
+```bash {% title="Bonding curve (instant)" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
+
+Both launch types support linking to a registered [agent](/agents/mint-agent) with `--agentMint` and `--agentSetToken`.
 
 See [Launch (API)](/dev-tools/cli/genesis/launch) for full details.
 
@@ -116,6 +120,7 @@ You can check the state of your launch at any point with `genesis fetch` and `ge
 | `genesis bucket add-presale` | Add a presale bucket |
 | `genesis bucket add-unlocked` | Add an unlocked (treasury) bucket |
 | `genesis bucket fetch` | Fetch bucket details by type |
+| `genesis bucket index` | List and index buckets for a Genesis account |
 | `genesis deposit` | Deposit into a launch pool |
 | `genesis withdraw` | Withdraw from a launch pool |
 | `genesis transition` | Execute end behaviors after deposit period |

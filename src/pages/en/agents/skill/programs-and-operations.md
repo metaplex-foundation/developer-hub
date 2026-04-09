@@ -3,7 +3,7 @@ title: Programs & Operations
 metaTitle: Programs & Operations | Metaplex Skill
 description: Detailed breakdown of programs and operations covered by the Metaplex Skill.
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 keywords:
   - Core
   - Token Metadata
@@ -81,11 +81,11 @@ Deploy NFT drops with configurable minting rules (guards). Guards control who ca
 
 ## Genesis
 
-Token launch protocol with fair distribution and automatic liquidity graduation to Raydium.
+Token launch protocol with fair distribution and automatic liquidity graduation to Raydium. Supports two launch types: **launchpool** (48-hour deposit window with proportional distribution) and **bonding curve** (instant trading with automatic Raydium CPMM graduation).
 
-**CLI** (`mplx genesis`): Create and manage token launches.
+**CLI** (`mplx genesis`): Create and manage token launches. The `genesis launch create` command provides an all-in-one API flow for both launchpool and bonding curve launches — including optional [agent integration](/agents/mint-agent) via `--agentMint`.
 
-**Umi SDK**: Full programmatic access for creating and managing token launches.
+**Umi SDK**: Full programmatic access for creating and managing token launches, including bonding curve configuration and agent token linking.
 
 ## CLI Capabilities
 
@@ -98,13 +98,16 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 | Create TM NFT/pNFT | Yes |
 | Transfer TM NFTs | Yes |
 | Transfer fungible tokens | Yes |
-| Transfer Core NFTs | SDK only |
+| Transfer Core NFTs | Yes |
 | Upload to Irys | Yes |
 | Candy Machine drop | Yes (setup/config/insert — minting requires SDK) |
 | Compressed NFTs (cNFTs) | Yes (batch limit ~100, use SDK for larger) |
 | Check SOL balance / Airdrop | Yes |
 | Query assets by owner/collection | SDK only (DAS API) |
-| Token launch (Genesis) | Yes |
+| Token launch (Genesis) | Yes (launchpool and bonding curve) |
+| Agent token launch | Yes (`--agentMint` flag) |
+| Burn Core NFTs | Yes |
+| Update Core NFT metadata | Yes |
 
 ## Decision Guide
 
@@ -145,6 +148,5 @@ Use **Genesis** for token generation events with fair distribution mechanics and
 
 - Compressed NFT (Bubblegum) operations require a DAS-enabled RPC endpoint; standard Solana RPC does not support the Digital Asset Standard API
 - Candy Machine minting requires the SDK — the CLI handles setup, configuration, and item insertion only
-- Core NFT transfers are SDK-only and not available via the CLI
 - Querying assets by owner or collection requires the DAS API (SDK only)
 - Kit SDK support is limited to Token Metadata; all other programs use Umi
