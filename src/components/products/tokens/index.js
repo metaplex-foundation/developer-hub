@@ -6,6 +6,7 @@ export const tokens = {
   name: 'Tokens',
   headline: 'Fungible Tokens',
   description: 'Create and manage fungible tokens on Solana.',
+  skill: true,
   navigationMenuCatergory: undefined,
   path: 'tokens',
   icon: <SparklesIcon />,

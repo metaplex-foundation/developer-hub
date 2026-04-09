@@ -10,6 +10,7 @@ export const core = {
   name: 'Core',
   headline: 'Next-gen NFT standard with a composable plugin system.',
   description: 'Next generation Solana NFT standard.',
+  skill: true,
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/core',
   icon: <StopCircleIcon />,

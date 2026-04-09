@@ -6,6 +6,7 @@ export const agents = {
   name: 'Agents',
   headline: 'AI Agents on Solana',
   description: 'Register agent identity, delegate execution, and give AI agents knowledge of Metaplex programs.',
+  skill: true,
   navigationMenuCatergory: undefined,
   path: 'agents',
   icon: <SparklesIcon />,

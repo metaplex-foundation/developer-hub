@@ -3,6 +3,7 @@ import { Square3Stack3DIcon } from '@heroicons/react/24/solid'
 
 export const coreCandyMachine = {
   name: 'Core Candy Machine',
+  skill: true,
   headline: 'NFT launchpad for MPL Core.',
   description: 'Launch your next MPL Core Asset collection on Solana.',
   navigationMenuCatergory: 'Smart Contracts',

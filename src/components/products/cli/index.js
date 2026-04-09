@@ -5,6 +5,7 @@ export const cli = {
   name: 'CLI',
   headline: 'CLI to mint, transfer, and manage assets.',
   description: 'A command line interface for interacting with Metaplex programs — mint, transfer, and manage assets directly from your terminal.',
+  skill: true,
   navigationMenuCatergory: 'Dev Tools',
   path: 'dev-tools/cli',
   icon: <CommandLineIcon />,
