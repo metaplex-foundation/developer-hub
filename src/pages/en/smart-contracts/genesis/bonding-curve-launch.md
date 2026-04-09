@@ -26,7 +26,7 @@ programmingLanguage:
   - TypeScript
 proficiencyLevel: Intermediate
 created: '04-07-2026'
-updated: '04-07-2026'
+updated: '04-09-2026'
 howToSteps:
   - Install the Genesis SDK and configure a Umi instance
   - Call createLaunch with token metadata and launch options
@@ -404,6 +404,7 @@ Convenience function that orchestrates the full launch flow: create, sign, send,
 | `config` | `GenesisApiConfig \| null` | Optional API config (`baseUrl`, custom `fetch`) |
 | `input` | `CreateBondingCurveLaunchInput` | Launch configuration |
 | `options` | `SignAndSendOptions` | Optional `txSender` override |
+| `registerOptions` | `RegisterOptions` | Optional fields forwarded to `registerLaunch` (e.g. `creatorWallet`, `twitterVerificationToken`) |
 
 Returns `Promise<CreateAndRegisterLaunchResult>`:
 
