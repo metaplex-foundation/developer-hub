@@ -2,7 +2,7 @@
 title: Bonding Curve Swap Integration
 metaTitle: Genesis Bonding Curve Swap Integration | Metaplex
 description: How to read bonding curve state, get swap quotes, execute buy and sell transactions, handle slippage, and claim creator fees using the Genesis SDK.
-updated: '04-08-2026'
+updated: '04-09-2026'
 keywords:
   - bonding curve
   - swap
@@ -42,9 +42,9 @@ faqs:
   - q: Do I need to wrap SOL before calling swapBondingCurveV2?
     a: Yes. The bonding curve uses wrapped SOL (wSOL) as the quote token. The swapBondingCurveV2 instruction does not wrap or unwrap SOL automatically. For buys, create a wSOL ATA, transfer native SOL in, and call syncNative before sending the swap. For sells, close the wSOL ATA after the swap to unwrap back to native SOL.
   - q: What does getSwapResult return and how does it handle fees?
-    a: getSwapResult returns amountIn (what the user actually pays), fee (total fee charged), and amountOut (what the user receives). For buys, the fee is deducted from SOL input before the AMM runs. For sells, the fee is deducted from SOL output after the AMM runs. Pass true as the fourth argument to waive fees for a first buy quote.
+    a: getSwapResult returns amountIn (what the user actually pays), fee (protocol fee), creatorFee (creator fee, if configured), and amountOut (what the user receives). For buys, fees are deducted from SOL input before the AMM runs. For sells, fees are deducted from SOL output after the AMM runs. Pass true as the fourth argument to waive all fees for a first buy quote.
   - q: How do I protect against slippage?
-    a: Use applySlippage(quote.amountOut, slippageBps) to derive a minAmountOut, then pass it to swapBondingCurveV2. The on-chain program rejects the transaction if the actual output falls below minAmountOut. Common values are 50 bps (0.5%) for stable conditions and 200 bps (2%) for volatile launches.
+    a: Use applySlippage(quote.amountOut, slippageBps) to derive a minAmountOutScaled value, then pass it to swapBondingCurveV2 as the minAmountOutScaled field. The on-chain program rejects the transaction if the actual output falls below this value. Common values are 50 bps (0.5%) for stable conditions and 200 bps (2%) for volatile launches.
 ---
 
 Use the Genesis SDK to read [bonding curve](/smart-contracts/genesis/bonding-curve) state, compute swap quotes, execute buy and sell transactions onchain, handle slippage, and claim creator fees. {% .lead %}
@@ -64,7 +64,7 @@ This guide covers:
 Bonding curve swaps use the Genesis SDK to interact with the `BondingCurveBucketV2` onchain account — a constant product AMM that accepts SOL and returns tokens (buy) or accepts tokens and returns SOL (sell). For the underlying pricing mathematics, see [Theory of Operation](/smart-contracts/genesis/bonding-curve-theory).
 
 - **Quote before sending** — call `getSwapResult` to get the exact fee-adjusted input and output amounts
-- **Slippage protection** — derive `minAmountOut` with `applySlippage` and pass it to the instruction
+- **Slippage protection** — derive `minAmountOutScaled` with `applySlippage` and pass it to the instruction
 - **wSOL is manual** — the swap instruction does not wrap or unwrap native SOL; callers must handle the wSOL ATA themselves
 - **Program ID** — `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` on Solana mainnet
 
@@ -75,8 +75,8 @@ Bonding curve swaps use the Genesis SDK to interact with the `BondingCurveBucket
 1. Install the packages and configure a Umi instance with the `genesis()` plugin
 2. Derive `BondingCurveBucketV2Pda` and fetch the account
 3. Check `isSwappable(bucket)` — abort if false
-4. Call `getSwapResult(bucket, amountIn, 'buy')` for a fee-adjusted quote
-5. Apply `applySlippage(quote.amountOut, slippageBps)` to get `minAmountOut`
+4. Call `getSwapResult(bucket, amountIn, SwapDirection.Buy)` for a fee-adjusted quote
+5. Apply `applySlippage(quote.amountOut, slippageBps)` to get `minAmountOutScaled`
 6. Handle wSOL wrapping manually, then send `swapBondingCurveV2` and confirm
 
 ## Prerequisites
@@ -181,6 +181,8 @@ const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 | `virtualTokens` | `bigint` | Virtual token reserve added at initialization (pricing only). |
 | `depositFee` | `number` | Protocol fee rate applied to the SOL side of every swap. |
 | `withdrawFee` | `number` | Protocol fee rate applied to the SOL output side of sells. |
+| `creatorFeeAccrued` | `bigint` | Creator fees accrued since the last claim (lamports). |
+| `creatorFeeClaimed` | `bigint` | Cumulative creator fees claimed to date (lamports). |
 | `swapStartCondition` | `object` | Condition that must be met before trading is allowed. |
 | `swapEndCondition` | `object` | Condition that ends trading when triggered. |
 
@@ -218,24 +220,26 @@ const graduated = await isGraduated(umi, bucket); // async RPC call
 
 ## Getting a Swap Quote
 
-`getSwapResult(bucket, amountIn, direction, isFirstBuy?)` computes the exact fee-adjusted amounts for a swap without sending any transaction.
+`getSwapResult(bucket, amountIn, swapDirection, isFirstBuy?)` computes the exact fee-adjusted amounts for a swap without sending any transaction.
 
-Returns `{ amountIn, fee, amountOut }`:
+Returns `{ amountIn, fee, creatorFee, amountOut }`:
 - `amountIn` — actual input amount after any adjustments
-- `fee` — total fee charged (protocol + creator), in lamports
+- `fee` — protocol fee charged, in lamports
+- `creatorFee` — creator fee charged, in lamports (0 if no creator fee configured)
 - `amountOut` — tokens received (buy) or SOL received (sell)
 
 ### Buy Quote (SOL to Tokens)
 
 ```typescript {% title="buy-quote.ts" showLineNumbers=true %}
-import { getSwapResult } from '@metaplex-foundation/genesis';
+import { getSwapResult, SwapDirection } from '@metaplex-foundation/genesis';
 
 const SOL_IN = 1_000_000_000n; // 1 SOL in lamports
 
-const buyQuote = getSwapResult(bucket, SOL_IN, 'buy');
+const buyQuote = getSwapResult(bucket, SOL_IN, SwapDirection.Buy);
 
 console.log('SOL input:    ', buyQuote.amountIn.toString(), 'lamports');
-console.log('Total fee:    ', buyQuote.fee.toString(), 'lamports');
+console.log('Protocol fee: ', buyQuote.fee.toString(), 'lamports');
+console.log('Creator fee:  ', buyQuote.creatorFee.toString(), 'lamports');
 console.log('Tokens out:   ', buyQuote.amountOut.toString());
 ```
 
@@ -244,10 +248,10 @@ console.log('Tokens out:   ', buyQuote.amountOut.toString());
 ```typescript {% title="sell-quote.ts" showLineNumbers=true %}
 const TOKENS_IN = 500_000_000_000n; // 500 tokens (9 decimals)
 
-const sellQuote = getSwapResult(bucket, TOKENS_IN, 'sell');
+const sellQuote = getSwapResult(bucket, TOKENS_IN, SwapDirection.Sell);
 
 console.log('Tokens input: ', sellQuote.amountIn.toString());
-console.log('Total fee:    ', sellQuote.fee.toString(), 'lamports');
+console.log('Protocol fee: ', sellQuote.fee.toString(), 'lamports');
 console.log('SOL out:      ', sellQuote.amountOut.toString(), 'lamports');
 ```
 
@@ -256,7 +260,7 @@ console.log('SOL out:      ', sellQuote.amountOut.toString(), 'lamports');
 Pass `true` as the fourth argument to quote a first buy with fees waived:
 
 ```typescript {% title="first-buy-quote.ts" showLineNumbers=true %}
-const firstBuyQuote = getSwapResult(bucket, SOL_IN, 'buy', true);
+const firstBuyQuote = getSwapResult(bucket, SOL_IN, SwapDirection.Buy, true);
 console.log('Fee (waived): ', firstBuyQuote.fee.toString()); // 0n
 ```
 
@@ -269,24 +273,24 @@ import {
   getCurrentPriceComponents,
 } from '@metaplex-foundation/genesis';
 
-const tokensPerSol = getCurrentPrice(bucket);
-const lamportsPerToken = getCurrentPriceQuotePerBase(bucket);
-const { totalSol, totalTokens, k } = getCurrentPriceComponents(bucket);
+const tokensPerSol = getCurrentPrice(bucket);          // bigint
+const lamportsPerToken = getCurrentPriceQuotePerBase(bucket); // bigint
+const { baseReserves, quoteReserves } = getCurrentPriceComponents(bucket);
 ```
 
 ## Slippage Protection
 
-`applySlippage(expectedAmountOut, slippageBps)` reduces the expected output by the slippage tolerance. Pass `minAmountOut` to the swap instruction — the onchain program rejects the transaction if the actual output falls below this value.
+`applySlippage(expectedAmountOut, slippageBps)` reduces the expected output by the slippage tolerance. Pass the result as `minAmountOutScaled` to the swap instruction — the onchain program rejects the transaction if the actual output falls below this value.
 
 ```typescript {% title="slippage.ts" showLineNumbers=true %}
-import { getSwapResult, applySlippage } from '@metaplex-foundation/genesis';
+import { getSwapResult, applySlippage, SwapDirection } from '@metaplex-foundation/genesis';
 
-const quote = getSwapResult(bucket, 1_000_000_000n, 'buy');
-const minAmountOut = applySlippage(quote.amountOut, 100); // 1% slippage
+const quote = getSwapResult(bucket, 1_000_000_000n, SwapDirection.Buy);
+const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1% slippage
 ```
 
 {% callout type="warning" %}
-Never send a swap without a `minAmountOut` derived from `applySlippage`. The bonding curve price moves with every trade; without slippage protection a user can receive far fewer tokens than quoted.
+Never send a swap without `minAmountOutScaled` derived from `applySlippage`. The bonding curve price moves with every trade; without slippage protection a user can receive far fewer tokens than quoted.
 {% /callout %}
 
 Common values: 50 bps (0.5%) for stable conditions; 200 bps (2%) during volatile launches.
@@ -305,6 +309,7 @@ import {
   findBondingCurveBucketV2Pda,
   fetchBondingCurveBucketV2,
   isSwappable,
+  SwapDirection,
 } from '@metaplex-foundation/genesis';
 import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey } from '@metaplex-foundation/umi';
@@ -319,23 +324,23 @@ const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 if (!isSwappable(bucket)) throw new Error('Curve is not currently accepting swaps');
 
 const SOL_IN = 1_000_000_000n; // 1 SOL in lamports
-const quote = getSwapResult(bucket, SOL_IN, 'buy');
-const minAmountOut = applySlippage(quote.amountOut, 100);
+const quote = getSwapResult(bucket, SOL_IN, SwapDirection.Buy);
+const minAmountOutScaled = applySlippage(quote.amountOut, 100);
 
-const [userBaseTokenAccount] = findAssociatedTokenPda(umi, { mint: baseMint, owner: umi.identity.publicKey });
-const [userQuoteTokenAccount] = findAssociatedTokenPda(umi, { mint: quoteMint, owner: umi.identity.publicKey });
+const [baseTokenAccount] = findAssociatedTokenPda(umi, { mint: baseMint, owner: umi.identity.publicKey });
+const [quoteTokenAccount] = findAssociatedTokenPda(umi, { mint: quoteMint, owner: umi.identity.publicKey });
 
 // NOTE: Fund the wSOL ATA before this call. See wSOL Wrapping Note below.
 const tx = swapBondingCurveV2(umi, {
   genesisAccount,
-  bucketPda,
+  bucket: bucketPda,
   baseMint,
   quoteMint,
-  userBaseTokenAccount,
-  userQuoteTokenAccount,
-  amountIn: quote.amountIn,
-  minAmountOut,
-  direction: 'buy',
+  baseTokenAccount,
+  quoteTokenAccount,
+  amount: quote.amountIn,
+  minAmountOutScaled,
+  swapDirection: SwapDirection.Buy,
 });
 
 const result = await tx.sendAndConfirm(umi);
@@ -346,19 +351,19 @@ console.log('Buy confirmed:', result.signature);
 
 ```typescript {% title="swap-sell.ts" showLineNumbers=true %}
 const TOKENS_IN = 500_000_000_000n;
-const quote = getSwapResult(bucket, TOKENS_IN, 'sell');
-const minAmountOut = applySlippage(quote.amountOut, 100);
+const quote = getSwapResult(bucket, TOKENS_IN, SwapDirection.Sell);
+const minAmountOutScaled = applySlippage(quote.amountOut, 100);
 
 const tx = swapBondingCurveV2(umi, {
   genesisAccount,
-  bucketPda,
+  bucket: bucketPda,
   baseMint,
   quoteMint,
-  userBaseTokenAccount,
-  userQuoteTokenAccount,
-  amountIn: quote.amountIn,
-  minAmountOut,
-  direction: 'sell',
+  baseTokenAccount,
+  quoteTokenAccount,
+  amount: quote.amountIn,
+  minAmountOutScaled,
+  swapDirection: SwapDirection.Sell,
 });
 
 const result = await tx.sendAndConfirm(umi);
@@ -421,8 +426,8 @@ For the full claiming flow — including how to check the accrued balance and ha
 | Error | Cause | Resolution |
 |-------|-------|------------|
 | `BondingCurveInsufficientFunds` | Not enough tokens (buy) or SOL (sell) remaining | Re-fetch the bucket and re-quote; curve may be nearly sold out |
-| `InsufficientOutputAmount` | Actual output fell below `minAmountOut` | Increase `slippageBps` or retry immediately |
-| `InvalidSwapDirection` | `direction` does not match instruction accounts | Verify `direction` matches the token accounts passed |
+| `InsufficientOutputAmount` | Actual output fell below `minAmountOutScaled` | Increase `slippageBps` or retry immediately |
+| `InvalidSwapDirection` | `swapDirection` value is invalid | Pass `SwapDirection.Buy` or `SwapDirection.Sell` from the `@metaplex-foundation/genesis` import |
 | `BondingCurveNotStarted` | `swapStartCondition` not yet met | Check `bucket.swapStartCondition` and wait |
 | `BondingCurveEnded` | Curve is sold out or graduated | Direct users to the Raydium CPMM pool |
 
@@ -433,14 +438,14 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
     throw new Error('Curve not yet active. Check the start time.');
   }
 
-  const quote = getSwapResult(bucket, amountIn, 'buy');
-  const minAmountOut = applySlippage(quote.amountOut, slippageBps);
+  const quote = getSwapResult(bucket, amountIn, SwapDirection.Buy);
+  const minAmountOutScaled = applySlippage(quote.amountOut, slippageBps);
 
   try {
     return await swapBondingCurveV2(umi, {
-      amountIn: quote.amountIn,
-      minAmountOut,
-      direction: 'buy',
+      amount: quote.amountIn,
+      minAmountOutScaled,
+      swapDirection: SwapDirection.Buy,
       // ... accounts
     }).sendAndConfirm(umi);
   } catch (err: any) {
@@ -468,10 +473,10 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 
 | Function | Async | Returns | Description |
 |----------|-------|---------|-------------|
-| `getSwapResult(bucket, amountIn, direction, isFirstBuy?)` | No | `{ amountIn, fee, amountOut }` | Fee-adjusted swap quote |
-| `getCurrentPrice(bucket)` | No | `number` | Tokens per SOL at current reserve state |
-| `getCurrentPriceQuotePerBase(bucket)` | No | `number` | Lamports per base token unit |
-| `getCurrentPriceComponents(bucket)` | No | `{ totalSol, totalTokens, k }` | Raw AMM reserve components |
+| `getSwapResult(bucket, amountIn, swapDirection, isFirstBuy?)` | No | `{ amountIn, fee, creatorFee, amountOut }` | Fee-adjusted swap quote |
+| `getCurrentPrice(bucket)` | No | `bigint` | Base tokens per SOL unit (integer division) |
+| `getCurrentPriceQuotePerBase(bucket)` | No | `bigint` | Lamports per base token unit (integer division) |
+| `getCurrentPriceComponents(bucket)` | No | `{ baseReserves, quoteReserves }` | Combined virtual + real reserves as bigints |
 
 ### Lifecycle Functions
 
@@ -494,11 +499,11 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 | Account | Writable | Signer | Description |
 |---------|----------|--------|-------------|
 | `genesisAccount` | Yes | No | Genesis coordination PDA |
-| `bucketPda` | Yes | No | `BondingCurveBucketV2` PDA |
+| `bucket` | Yes | No | `BondingCurveBucketV2` PDA |
 | `baseMint` | No | No | SPL token mint |
 | `quoteMint` | No | No | wSOL mint |
-| `userBaseTokenAccount` | Yes | No | User's base token ATA |
-| `userQuoteTokenAccount` | Yes | No | User's wSOL ATA |
+| `baseTokenAccount` | Yes | No | User's base token ATA |
+| `quoteTokenAccount` | Yes | No | User's wSOL ATA |
 | `payer` | Yes | Yes | Transaction fee payer |
 
 ### Account Discovery
@@ -518,7 +523,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 Yes. The bonding curve uses wSOL as its quote token and `swapBondingCurveV2` does not wrap or unwrap native SOL automatically. See [wSOL Wrapping Note](#wsol-wrapping-note).
 
 ### What does getSwapResult return and how does it handle fees?
-`getSwapResult` returns `{ amountIn, fee, amountOut }`. For buys, the fee is deducted from SOL input before the AMM formula runs. For sells, the fee is deducted from the SOL output after the AMM runs. Pass `true` as the fourth argument to simulate the first-buy fee waiver.
+`getSwapResult` returns `{ amountIn, fee, creatorFee, amountOut }`. For buys, fees are deducted from SOL input before the AMM formula runs. For sells, fees are deducted from the SOL output after the AMM runs. Pass `true` as the fourth argument to simulate the first-buy fee waiver (all fees zeroed).
 
 ### How do I protect against slippage?
-Call `applySlippage(quote.amountOut, slippageBps)` to derive `minAmountOut`, then pass it to `swapBondingCurveV2`. The onchain program rejects the transaction if the actual output falls below `minAmountOut`.
+Call `applySlippage(quote.amountOut, slippageBps)` to derive `minAmountOutScaled`, then pass it to `swapBondingCurveV2` as the `minAmountOutScaled` field. The onchain program rejects the transaction if the actual output falls below this value.

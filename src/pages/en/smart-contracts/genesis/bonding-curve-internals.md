@@ -2,7 +2,7 @@
 title: Bonding Curve — Advanced Internals
 metaTitle: Genesis Bonding Curve Advanced Internals | Metaplex
 description: Deep reference for the Genesis Bonding Curve — swap price formulas, reverse calculation, reserve exhaustion clamping, BondingCurveBucketV2 account structure, and extensions.
-updated: '04-08-2026'
+updated: '04-09-2026'
 keywords:
   - bonding curve
   - constant product AMM
@@ -129,6 +129,7 @@ The `BondingCurveBucketV2` account stores all bonding curve state. See the [Gene
 | `depositFee` | `number` | Protocol fee rate on SOL input side of buys. |
 | `withdrawFee` | `number` | Protocol fee rate on SOL output side of sells. |
 | `creatorFeeAccrued` | `bigint` | Total creator fees accrued, not yet claimed. |
+| `creatorFeeClaimed` | `bigint` | Cumulative creator fees claimed to date. |
 
 ### Swap Condition Fields
 
