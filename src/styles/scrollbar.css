@@ -10,6 +10,6 @@
   ::-webkit-scrollbar-thumb {
     background: theme('colors.neutral.400');
     border: 0px none #ffffff;
-    border-radius: 50px;
+    border-radius: 0;
   }
 }

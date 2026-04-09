@@ -6,7 +6,6 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Search } from '@/components/Search'
 // import { ThemeSelector } from '@/components/ThemeSelector'
-import { DiscordIcon } from '@/components/icons/SocialIcons'
 import { getLocalizedHref } from '@/config/languages'
 import { useLocale } from '@/contexts/LocaleContext'
 import NavList from './NavList'
@@ -58,9 +57,8 @@ export function Header({ page }) {
           <Link
             href="https://discord.com/invite/metaplex"
             target="_blank"
-            className="hidden items-center gap-2 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-all duration-200 hover:brightness-110 md:flex"
+            className="hidden items-center whitespace-nowrap rounded-sm bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-900 transition-colors duration-150 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 md:flex"
           >
-            <DiscordIcon className="h-4 w-4 fill-current" />
             Dev Support
           </Link>
           <Search iconOnly />

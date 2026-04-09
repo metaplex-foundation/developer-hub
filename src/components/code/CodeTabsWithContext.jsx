@@ -150,10 +150,10 @@ export function CodeTabsWithContext({
   const activeExample = tabsWithIds[activeTabIndex]
 
   return (
-    <div className="code-tabs not-prose my-6 overflow-hidden rounded-lg border border-border">
+    <div className="code-tabs not-prose my-6 overflow-hidden border border-border">
       {/* Tab buttons with copy button */}
       <div
-        className="flex items-center justify-between gap-2 border-b border-border bg-muted px-4 py-2"
+        className="flex items-center justify-between gap-2 border-b border-border/50 bg-card px-4"
         role="tablist"
         aria-label="Code examples in different languages"
       >
@@ -166,7 +166,7 @@ export function CodeTabsWithContext({
                 key={tab.tabId}
                 onClick={() => handleTabChange(index)}
                 className={clsx(
-                  'relative whitespace-nowrap border-b-2 px-3 py-2 text-sm font-medium transition-colors',
+                  'relative whitespace-nowrap border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
                   isActive
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground hover:text-foreground'

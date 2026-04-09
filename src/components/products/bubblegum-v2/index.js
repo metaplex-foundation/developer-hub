@@ -8,7 +8,7 @@ import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const bubblegumv2 = {
   name: 'Bubblegum v2',
-  headline: 'Improved Compressed NFTs',
+  headline: 'Compressed NFTs at a fraction of regular costs.',
   description: 'NFTs that scale to new orders of magnitude.',
   path: 'smart-contracts/bubblegum-v2',
   navigationMenuCatergory: 'Smart Contracts',

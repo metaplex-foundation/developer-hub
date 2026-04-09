@@ -6,9 +6,8 @@ import { buildProductTranslations } from '@/config/navigation-translations';
 
 export const das = {
   name: 'DAS API',
-  headline: 'Fetch Digital Asset Data',
-  description:
-    'A DAS API Client to access Digital Asset data on chain',
+  headline: 'Query Solana digital assets at scale.',
+  description: 'Query Solana digital assets at scale.',
   path: 'dev-tools/das-api',
   icon: <TableCellsIcon />,
   github: 'https://github.com/metaplex-foundation/digital-asset-standard-api',

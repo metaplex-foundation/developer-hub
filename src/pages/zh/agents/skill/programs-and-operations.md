@@ -3,7 +3,7 @@ title: 程序和操作
 metaTitle: 程序和操作 | Metaplex 技能
 description: Metaplex Skill 覆盖的程序和操作的详细分析。
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 keywords:
   - Core
   - Token Metadata
@@ -81,11 +81,11 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 
 ## Genesis
 
-具有公平分发和自动向 Raydium 流动性毕业的代币发行协议。
+具有公平分发和自动向 Raydium 流动性毕业的代币发行协议。支持两种发行类型：**启动池**（48小时存入窗口与按比例分发）和**联合曲线**（即时交易与 Raydium CPMM 自动毕业）。
 
-**CLI** (`mplx genesis`)：创建和管理代币发行。
+**CLI** (`mplx genesis`)：创建和管理代币发行。`genesis launch create` 命令为启动池和联合曲线提供一体化 API 流程——包括通过 `--agentMint` 进行的可选[代理集成](/agents/mint-agent)。
 
-**Umi SDK**：用于创建和管理代币发行的完整编程访问。
+**Umi SDK**：包括联合曲线配置和代理代币关联在内的完整编程访问，用于创建和管理代币发行。
 
 ## CLI 功能
 
@@ -98,13 +98,16 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 | 创建 TM NFT/pNFT | Yes |
 | 转移 TM NFT | Yes |
 | 转移同质化代币 | Yes |
-| 转移 Core NFT | 仅 SDK |
+| 转移 Core NFT | Yes |
 | 上传到 Irys | Yes |
 | Candy Machine 投放 | Yes（设置/配置/插入——铸造需要 SDK） |
 | 压缩 NFT (cNFT) | Yes（批量限制约 100，更大批量使用 SDK） |
 | 检查 SOL 余额/空投 | Yes |
 | 按所有者/集合查询资产 | 仅 SDK (DAS API) |
-| 代币发行 (Genesis) | Yes |
+| 代币发行 (Genesis) | Yes（启动池和联合曲线） |
+| 代理代币发行 | Yes（`--agentMint` 标志） |
+| 销毁 Core NFT | Yes |
+| 更新 Core NFT 元数据 | Yes |
 
 ## 选择指南
 
@@ -145,6 +148,5 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 
 - 压缩 NFT (Bubblegum) 操作需要支持 DAS 的 RPC 端点；标准 Solana RPC 不支持 Digital Asset Standard API
 - Candy Machine 铸造需要 SDK——CLI 仅处理设置、配置和项目插入
-- Core NFT 转移仅限 SDK，CLI 中不可用
 - 按所有者或集合查询资产需要 DAS API（仅 SDK）
 - Kit SDK 支持仅限于 Token Metadata；所有其他程序使用 Umi

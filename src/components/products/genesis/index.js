@@ -3,7 +3,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 
 export const genesis = {
   name: 'Genesis',
-  headline: 'Token Launch Platform',
+  skill: true,
+  headline: 'Token launches via bonding curves.',
   description:
     'A smart contract for launching tokens on Solana via launch pools and presales.',
   navigationMenuCatergory: 'Smart Contracts',

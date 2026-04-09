@@ -6,8 +6,8 @@ import { PencilSquareIcon } from '@heroicons/react/24/solid'
 
 export const inscription = {
   name: 'Inscription',
-  headline: 'NFT inscribed on Solana',
-  description: 'Inscribe Data to Solana state.',
+  headline: 'Inscribe permanent data into Solana state.',
+  description: 'Inscribe arbitrary data directly into Solana state, linking permanent onchain data to existing NFTs and tokens.',
   path: 'smart-contracts/inscription',
   icon: <PencilSquareIcon />,
   navigationMenuCatergory: 'Smart Contracts',
@@ -66,8 +66,8 @@ export const inscription = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'NFT inscribed on Solana',
-      description: 'Inscribe Data to Solana state.',
+      headline: 'Inscribe permanent data into Solana state.',
+      description: 'Inscribe arbitrary data directly into Solana state, linking permanent onchain data to existing NFTs and tokens.',
       sections: {
         'Introduction': 'Introduction',
         'Features': 'Features',

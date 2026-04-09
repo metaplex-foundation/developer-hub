@@ -3,7 +3,7 @@ title: プログラムとオペレーション
 metaTitle: プログラムとオペレーション | Metaplex スキル
 description: Metaplex Skillがカバーするプログラムとオペレーションの詳細な内訳。
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 keywords:
   - Core
   - Token Metadata
@@ -81,11 +81,11 @@ Solanaの次世代NFT標準。Core NFTはToken Metadata NFTよりも大幅に安
 
 ## Genesis
 
-公平な配布とRaydiumへの自動流動性グラデュエーションを備えたトークンローンチプロトコル。
+公平な配布とRaydiumへの自動流動性グラデュエーションを備えたトークンローンチプロトコル。2つのローンチタイプをサポート：**ローンチプール**（48時間のデポジットウィンドウと比例配分）と**ボンディングカーブ**（即時取引とRaydium CPMM自動グラデュエーション）。
 
-**CLI** (`mplx genesis`)：トークンローンチの作成と管理。
+**CLI** (`mplx genesis`)：トークンローンチの作成と管理。`genesis launch create`コマンドはローンチプールとボンディングカーブの両方に対応したオールインワンAPIフローを提供します — `--agentMint`による[エージェント統合](/agents/mint-agent)もオプションで利用可能。
 
-**Umi SDK**：トークンローンチの作成と管理のための完全なプログラムアクセス。
+**Umi SDK**：ボンディングカーブ設定とエージェントトークンリンクを含む、トークンローンチの作成と管理のための完全なプログラムアクセス。
 
 ## CLI機能
 
@@ -98,13 +98,16 @@ Solanaの次世代NFT標準。Core NFTはToken Metadata NFTよりも大幅に安
 | TM NFT/pNFT作成 | Yes |
 | TM NFT転送 | Yes |
 | ファンジブルトークン転送 | Yes |
-| Core NFT転送 | SDKのみ |
+| Core NFT転送 | Yes |
 | Irysへのアップロード | Yes |
 | Candy Machineドロップ | Yes（セットアップ/設定/挿入 — ミントにはSDKが必要） |
 | 圧縮NFT（cNFT） | Yes（バッチ上限約100、大量の場合はSDKを使用） |
 | SOL残高確認/エアドロップ | Yes |
 | オーナー/コレクションでアセットクエリ | SDKのみ（DAS API） |
-| トークンローンチ（Genesis） | Yes |
+| トークンローンチ（Genesis） | Yes（ローンチプールとボンディングカーブ） |
+| エージェントトークンローンチ | Yes（`--agentMint`フラグ） |
+| Core NFTバーン | Yes |
+| Core NFTメタデータ更新 | Yes |
 
 ## 選択ガイド
 
@@ -145,6 +148,5 @@ Solanaの次世代NFT標準。Core NFTはToken Metadata NFTよりも大幅に安
 
 - 圧縮NFT（Bubblegum）オペレーションにはDAS対応RPCエンドポイントが必要です。標準のSolana RPCはDigital Asset Standard APIをサポートしていません
 - Candy MachineのミントにはSDKが必要です。CLIはセットアップ、設定、アイテム挿入のみを処理
-- Core NFTの転送はSDKのみで、CLIでは利用できません
 - オーナーまたはコレクションによるアセットクエリにはDAS API（SDKのみ）が必要
 - Kit SDKのサポートはToken Metadataに限定されています。他のすべてのプログラムはUmiを使用

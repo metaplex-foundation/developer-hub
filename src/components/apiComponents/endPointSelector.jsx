@@ -28,7 +28,7 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
         type="text"
         name="customEndPoint"
         placeholder="https://"
-        className="block w-full rounded-lg border border-border bg-card px-2 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
+        className="block w-full border border-border bg-card px-2 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
         onChange={handleSelectEndpoint}
         value={activeEndpoint}
       />
