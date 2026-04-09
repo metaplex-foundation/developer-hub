@@ -21,6 +21,8 @@ about:
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Bash
+cli: /dev-tools/cli/agents/set-agent-token
 proficiencyLevel: Intermediate
 created: '04-05-2026'
 updated: '04-07-2026'
@@ -116,28 +118,7 @@ Pass the `agent` field to `createAndRegisterLaunch` with your agent's [Core](/co
 - Sets the creator fee wallet to the agent's Core asset signer PDA (derived from `['mpl-core-execute', <agent_mint>]`)
 - Wraps the launch transactions in Core execute instructions for the agent to execute onchain
 
-```typescript {% title="agent-launch.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
-
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  agent: {
-    mint: agentAssetAddress,  // Core asset address of the registered agent
-    setToken: true,           // permanently associates this token with the agent
-  },
-  launchType: 'bondingCurve',
-  token: {
-    name: 'Agent Token',
-    symbol: 'AGT',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {},
-});
-
-console.log('Token launched!');
-console.log('Mint address:', result.mintAddress);
-console.log('View at:', result.launch.link);
-```
+{% code-tabs-imported from="agents/create_agent_token" frameworks="umi,cli" defaultFramework="umi" /%}
 
 {% callout type="warning" %}
 **An agent can only ever have one token.** Setting `setToken: true` permanently associates this token with the agent — it cannot be changed, replaced, or unset after the transaction confirms. Do not set `setToken: true` until you are certain this is the correct, final token for the agent.
@@ -153,24 +134,7 @@ The first buy reserves the initial swap on the curve for the agent PDA at a spec
 
 Set `firstBuyAmount` to the SOL amount for the fee-free initial purchase. When `agent` is provided, the first buy buyer defaults to the agent PDA automatically.
 
-```typescript {% title="agent-launch-with-first-buy.ts" showLineNumbers=true %}
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  agent: {
-    mint: agentAssetAddress,
-    setToken: true,
-  },
-  launchType: 'bondingCurve',
-  token: {
-    name: 'Agent Token',
-    symbol: 'AGT',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {
-    firstBuyAmount: 0.1, // 0.1 SOL, fee-free
-  },
-});
-```
+{% code-tabs-imported from="agents/create_agent_token_first_buy" frameworks="umi,cli" defaultFramework="umi" /%}
 
 The first buy is executed as part of the launch transaction flow — the curve already has the initial purchase applied once the transactions confirm. When `firstBuyAmount` is omitted or `0`, no first buy is applied and any wallet can make the first swap.
 
@@ -186,45 +150,15 @@ Every launch requires a `token` object with the following fields.
 | `description` | No | Max 250 characters |
 | `externalLinks` | No | Optional `website`, `twitter`, and `telegram` URLs |
 
-```typescript {% title="token-metadata.ts" %}
-token: {
-  name: 'Agent Token',
-  symbol: 'AGT',
-  image: 'https://gateway.irys.xyz/your-image-id',
-  description: 'The official token of my agent',
-  externalLinks: {
-    website: 'https://myagent.com',
-    twitter: '@myagent',
-  },
-},
-```
+{% code-tabs-imported from="agents/create_agent_token_metadata" frameworks="umi,cli" defaultFramework="umi" /%}
 
 The `image` field must point to an Irys gateway URL. Upload your image to [Irys](https://irys.xyz) first and use the returned `https://gateway.irys.xyz/<id>` URL. Other hosts will fail API validation.
 
 ## Devnet Testing
 
-Pass `network: 'solana-devnet'` and point the Umi instance at the devnet RPC endpoint to route the launch through devnet infrastructure.
+Pass `network: 'solana-devnet'` and point the Umi instance at the devnet RPC endpoint to route the launch through devnet infrastructure. For the CLI, the network is determined by your configured RPC endpoint.
 
-```typescript {% title="devnet-agent-launch.ts" showLineNumbers=true %}
-const umi = createUmi('https://api.devnet.solana.com');
-umi.use(keypairIdentity(keypair));
-
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  agent: {
-    mint: agentAssetAddress,
-    setToken: false, // use false when testing to avoid locking in on devnet
-  },
-  launchType: 'bondingCurve',
-  network: 'solana-devnet',
-  token: {
-    name: 'Test Token',
-    symbol: 'TEST',
-    image: 'https://gateway.irys.xyz/test-image',
-  },
-  launch: {},
-});
-```
+{% code-tabs-imported from="agents/create_agent_token_devnet" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ## Error Handling
 
