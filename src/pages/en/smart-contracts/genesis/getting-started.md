@@ -38,10 +38,6 @@ Understand the Genesis token launch flow before building. Whether you're plannin
 If you want to launch a token without writing code, use the [Metaplex token launchpad](https://www.metaplex.com). The guides below are for developers looking to build a custom launchpad platform or host a token sale on their own website.
 {% /callout %}
 
-{% callout title="Memecoin Launches" %}
-For memecoin launches, the SDK provides a streamlined path that skips most of this configuration. Set `launchType: 'memecoin'` with just a deposit start time — allocations, LP, fees, and lock schedules are all hardcoded. See the [API Client memecoin section](/smart-contracts/genesis/sdk/api-client#memecoin-launch--simplified-flow) for details.
-{% /callout %}
-
 {% callout title="Ready to Build?" %}
 Once you understand the flow:
 - **[JavaScript SDK](/smart-contracts/genesis/sdk/javascript)** - Installation and function reference
@@ -262,7 +258,7 @@ Yes. Set `quoteMint` to any SPL token. However, wSOL is standard for SOL-denomin
 | **Genesis Account** | PDA that coordinates the launch and holds tokens |
 | **Inflow Bucket** | Bucket that collects deposits from users |
 | **Outflow Bucket** | Bucket that receives funds via end behaviors |
-| **Launch Type** | Category of a launch (`project` or `memecoin`). Set on-chain retroactively by a backend crank. Queryable via [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) or [REST API](/smart-contracts/genesis/integration-apis) |
+| **Launch Type** | The underlying mechanism of a launch (`launchpool` or `presale`). Set on-chain retroactively by a backend crank. Queryable via [SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) or [REST API](/smart-contracts/genesis/integration-apis) |
 | **Finalize** | Lock configuration and activate the launch |
 | **Time Condition** | Unix timestamp controlling bucket phases |
 | **End Behavior** | Automated action when deposit period ends |

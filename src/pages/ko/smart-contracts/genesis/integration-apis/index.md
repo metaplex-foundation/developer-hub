@@ -119,7 +119,7 @@ interface Launch {
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'project' | 'memecoin' | 'custom';
+  type: 'launchpool' | 'presale';
 }
 
 interface BaseToken {
@@ -211,7 +211,7 @@ serde = { version = "1", features = ["derive"] }
 | **Base Token** | 민트 주소로 식별되는 런치 대상 토큰 |
 | **Launch Page** | 사용자가 런치에 참여할 수 있는 URL |
 | **Mechanic** | 런치에 사용되는 할당 메커니즘 (예: `launchpoolV2`, `presaleV2`, `auction`) |
-| **Launch Type** | 런치의 카테고리: `project`, `memecoin`, `custom` |
+| **Launch Type** | 런치의 기본 메커니즘: `launchpool` 또는 `presale` |
 | **Spotlight** | 플랫폼에서 큐레이팅한 주요 런치를 나타내는 플래그 |
 | **Status** | 런치의 현재 상태: `upcoming`, `live`, `graduated`, `ended` |
 | **Socials** | 토큰과 관련된 소셜 미디어 링크 (X/Twitter, Telegram, Discord) |

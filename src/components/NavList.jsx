@@ -116,6 +116,18 @@ export const agentMenuCategory = [
     },
   },
   {
+    name: 'Mint an Agent',
+    headline: 'Create an onchain AI agent in a single transaction.',
+    description: 'Mint an MPL Core asset and register an Agent Identity PDA in one atomic transaction using the Metaplex API.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/mint-agent',
+    localizedNavigation: {
+      ja: { name: 'エージェントのミント', headline: '1回のトランザクションでオンチェーンAIエージェントを作成します。' },
+      ko: { name: '에이전트 민팅', headline: '단일 트랜잭션으로 온체인 AI 에이전트를 생성합니다.' },
+      zh: { name: '铸造 Agent', headline: '在单笔交易中创建链上 AI Agent。' },
+    },
+  },
+  {
     name: 'Register an Agent',
     headline: 'Register an agent on the Metaplex 014 agent registry.',
     description: 'Register an autonomous agent on the Metaplex 014 agent registry using Metaplex SDKs.',
@@ -137,6 +149,18 @@ export const agentMenuCategory = [
       ja: { name: 'エージェントデータを読み取る', headline: 'Solana上でエージェントIDを読み取り、検証します。' },
       ko: { name: '에이전트 데이터 읽기', headline: 'Solana에서 에이전트 ID를 읽고 검증합니다.' },
       zh: { name: '读取代理数据', headline: '在Solana上读取和验证代理身份。' },
+    },
+  },
+  {
+    name: 'Create an Agent Token',
+    headline: 'Launch a token from an agent\'s onchain wallet.',
+    description: 'Launch a token from an agent\'s onchain wallet using the Metaplex Genesis protocol.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/create-agent-token',
+    localizedNavigation: {
+      ja: { name: 'エージェントトークンの作成', headline: 'エージェントのオンチェーンウォレットからトークンを発行します。' },
+      ko: { name: '에이전트 토큰 생성', headline: '에이전트의 온체인 지갑에서 토큰을 발행합니다.' },
+      zh: { name: '创建代理代币', headline: '从代理的链上钱包发行代币。' },
     },
   },
   {
@@ -235,15 +259,15 @@ const NavList = () => {
   }
 
   return (
-    <div className="hidden cursor-pointer gap-6 lg:flex">
-      {/* <div className="hidden flex-col lg:flex">
+    <div className="hidden cursor-pointer gap-6 nav:flex">
+      {/* <div className="hidden flex-col nav:flex">
         <Link href={getLocalizedHref("/#", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             {t('token', 'Tokens')}
           </div>
         </Link>
       </div>
-      <div className="hidden flex-col lg:flex">
+      <div className="hidden flex-col nav:flex">
         <Link href={getLocalizedHref("/#", locale)}>
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             {t('nfts', 'NFTs')}
@@ -264,7 +288,7 @@ const NavList = () => {
         const path = categoryPaths[item]
         if (path) {
           return (
-            <div className="hidden flex-col lg:flex" key={index}>
+            <div className="hidden flex-col nav:flex" key={index}>
               <Link href={getLocalizedHref(path, locale)}>
                 <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground">
                   {getTranslatedCategory(item)}
@@ -276,7 +300,7 @@ const NavList = () => {
 
         // Fallback to dropdown for any other categories
         return (
-          <div className="hidden flex-col lg:flex" key={index}>
+          <div className="hidden flex-col nav:flex" key={index}>
             <SwitcherPopover menuItem={productCategories[index]}>
               <Popover.Button className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-black dark:text-white">
                 {getTranslatedCategory(item)}
@@ -286,7 +310,7 @@ const NavList = () => {
         )
       })}
 
-      {/* <div className="hidden flex-col lg:flex">
+      {/* <div className="hidden flex-col nav:flex">
         <Link href="/code-viewer">
           <div className="-mx-4 -my-2 rounded-lg px-4 py-2 text-black dark:text-white">
             Playground
