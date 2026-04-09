@@ -6,6 +6,7 @@ import { EllipsisHorizontalCircleIcon } from '@heroicons/react/24/solid';
 
 export const tokenMetadata = {
   name: 'Token Metadata',
+  skill: true,
   headline: 'SPL token creation with onchain metadata.',
   description: 'Attach rich metadata, royalties, and ownership rules to SPL tokens — the foundational NFT standard on Solana.',
   navigationMenuCatergory: 'Smart Contracts',
