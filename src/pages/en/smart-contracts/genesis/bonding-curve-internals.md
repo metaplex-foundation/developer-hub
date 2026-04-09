@@ -144,7 +144,7 @@ The bucket includes an extensions block with independently configurable optional
 | Extension | Description |
 |-----------|-------------|
 | **First Buy** | Designates a buyer and SOL amount for a fee-free initial purchase. Consumed after the first buy completes. |
-| **Creator Fee** | An optional creator fee with a destination wallet address and fee rate. Fees are accrued in the bucket (`creatorFeeAccrued`) rather than transferred per-swap — collect via the permissionless `claimBondingCurveCreatorFeeV2` instruction. Calculated independently from the protocol fee — does not compound with it. The first buy waives both. |
+| **Creator Fee** | An optional creator fee with a destination wallet address and fee rate. Fees are accrued in the bucket (`creatorFeeAccrued`) rather than transferred per-swap. Calculated independently from the protocol fee — does not compound with it. The first buy waives both. See [Creator Fees](/smart-contracts/genesis/creator-fees) for configuration and claiming. |
 
 ## Notes
 
