@@ -6,65 +6,61 @@ description: Metaplex 제품의 온체인 수수료 세부 정보.
 
 Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
-{% totem %}
+## 토큰 런치
 
-{% totem-accordion title="Genesis" %}
+특정 온체인 자산을 런치하기 위한 프로토콜 수수료.
 
-본딩 커브 라이프사이클 전반에 걸친 토큰 런치 플랫폼 수수료.
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
+\* 총 풀 수수료는 0.9%입니다: 0.42%는 유동성 공급자에게, 0.08%는 Raydium에 지급됩니다.
+
+## Genesis
+
+Launch Pool 작업을 위한 토큰 런치 플랫폼 수수료. 입금, 출금 및 졸업에 적용되는 백분율 기반 수수료입니다.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
-{% /totem-accordion %}
+## Core
 
-{% totem-accordion title="Core" %}
-
-민터가 지불합니다 (일반적으로 새로운 드롭을 민팅하는 개별 컬렉터). 프린트 에디션을 생성하는 것을 포함하여 NFT를 "생성"하는 모든 명령이 포함됩니다.
+민터가 지불하며, 일반적으로 새로운 드롭을 민팅하는 개별 컬렉터입니다. 프린트 에디션을 생성하는 것을 포함하여 NFT를 "생성"하는 모든 인스트럭션을 포함합니다.
 
 {% protocol-fees program="core" showTitle=false /%}
 
-{% /totem-accordion %}
+## Bubblegum v2
 
-{% totem-accordion title="Bubblegum v2" %}
-
-개선된 기능과 유연성을 갖춘 압축 NFT.
+향상된 기능과 유연성을 갖춘 압축 NFT.
 
 {% protocol-fees program="bubblegum-v2" showTitle=false /%}
 
-{% /totem-accordion %}
+## Token Metadata
 
-{% totem-accordion title="Token Metadata" %}
-
-민터가 지불합니다 (일반적으로 새로운 드롭을 민팅하는 개별 컬렉터). 또는 크리에이터는 최대 구성 가능성과 낮은 민팅 비용을 위해 Core(차세대 NFT) 또는 Bubblegum(압축 NFT) 사용을 고려할 수 있습니다.
+민터가 지불하며, 일반적으로 새로운 드롭을 민팅하는 개별 컬렉터입니다. 또는 크리에이터는 최대 조합성과 낮은 민트 비용을 위해 Core(차세대 NFT) 또는 Bubblegum(압축 NFT)을 사용하는 것을 고려할 수 있습니다.
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
-{% /totem-accordion %}
+## Bubblegum v1 (레거시)
 
-{% totem-accordion title="Bubblegum v1 (레거시)" %}
-
-오리지널 압축 NFT 프로그램.
+원래의 압축 NFT 프로그램.
 
 {% protocol-fees program="bubblegum" showTitle=false /%}
 
-{% /totem-accordion %}
+## MPL-Hybrid
 
-{% totem-accordion title="MPL-Hybrid" %}
-
-토큰과 NFT를 스왑하는 개인이 지불합니다.
+토큰과 NFT를 교환하는 개인이 지불합니다.
 
 {% protocol-fees program="mpl-hybrid" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Fusion (Trifle)" %}
+## Fusion (Trifle)
 
 결합, 분할 및 제약 편집 작업을 위한 조합 가능한 NFT 수수료.
 
 {% protocol-fees program="fusion" showTitle=false /%}
-
-{% /totem-accordion %}
-
-{% /totem %}
 
 ## FAQ
 

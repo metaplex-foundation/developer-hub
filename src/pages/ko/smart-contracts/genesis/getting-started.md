@@ -172,10 +172,10 @@ Unix 타임스탬프를 사용합니다 (밀리초가 아닌 초 단위).
 
 **진행 사항:** 사용자가 Inflow Bucket에 SOL을 예치합니다.
 
-- **Launch Pool:** 사용자가 SOL을 예치하고, 0% 수수료로 출금 가능
+- **Launch Pool:** 사용자가 SOL을 예치하고, {% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료로 출금 가능
 - **Presale:** 사용자가 고정 가격으로 SOL을 예치하며, 사용자당 예치 상한(각 사용자가 기여할 수 있는 최대 금액)까지 가능
 
-모든 예치에 0% 프로토콜 수수료가 적용됩니다.
+모든 예치에 {% fee product="genesis" config="launchPool" fee="deposit" /%} 프로토콜 수수료가 적용됩니다.
 
 ## 5단계: Transition
 

@@ -60,7 +60,7 @@ faqs:
 Presale は事前に決められた価格でトークンを販売します。価格は設定したトークン割り当てと SOL 上限から計算され、既知のバリュエーションでの暗号資産による資金調達に最適です。
 
 - 固定価格 = SOL 上限 / トークン割り当て
-- ユーザーは入金ウィンドウ中に SOL を入金（0% の手数料が適用）
+- ユーザーは入金ウィンドウ中に SOL を入金（{% fee product="genesis" config="presale" fee="deposit" /%} の手数料が適用）
 - SOL 上限まで先着順
 - オプション：最低/最大入金上限、クールダウン、バックエンド認証
 
@@ -90,7 +90,7 @@ tokens = deposit / price
 
 ### 手数料
 
-Presale deposits have a 0% fee. See the [Protocol Fees](/smart-contracts/genesis#protocol-fees) section for the full bonding curve and post-bond fee breakdown.
+{% protocol-fees program="genesis" config="presale" showTitle=false /%}
 
 ## クイックスタート
 
@@ -403,7 +403,7 @@ if (deposit) {
 
 ## 注意事項
 
-- 入金には 0% のプロトコル手数料が適用されます
+- 入金には {% fee product="genesis" config="presale" fee="deposit" /%} のプロトコル手数料が適用されます
 - ユーザーは入金前に SOL を wSOL にラップする必要があります
 - 同じユーザーからの複数回の入金は 1 つの入金アカウントに累積されます
 - チームが資金にアクセスするには、入金締め切り後に `triggerBehaviorsV2` を実行する必要があります。入金期間終了前には呼び出せません

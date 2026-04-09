@@ -172,10 +172,10 @@ Users deposit SOL → Launch Pool → End Behavior → Unlocked Bucket → Team 
 
 **发生的事情：** 用户向您的 inflow Bucket 存入 SOL。
 
-- **Launch Pool：** 用户存入 SOL，可以支付 0% 费用后提取
+- **Launch Pool：** 用户存入 SOL，可以支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用后提取
 - **Presale：** 用户以固定价格存入 SOL，有每用户存款上限（每个用户可贡献的最大金额）
 
-所有存款都适用 0% 协议费。
+所有存款都适用 {% fee product="genesis" config="launchPool" fee="deposit" /%} 协议费。
 
 ## 第 5 步：Transition
 

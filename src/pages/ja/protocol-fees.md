@@ -6,65 +6,61 @@ description: Metaplexプロダクトのオンチェーン手数料の詳細。
 
 Metaplexプロトコルには現在、以下の手数料が含まれています：
 
-{% totem %}
+## トークンローンチ
 
-{% totem-accordion title="Genesis" %}
+特定のオンチェーン資産をローンチするためのプロトコル手数料。
 
-ボンディングカーブのライフサイクル全体にわたるトークンローンチプラットフォーム手数料。
+### Memecoins
+
+{% protocol-fees program="tokens" showTitle=false config="memecoins" /%}
+
+### Project Tokens
+
+{% protocol-fees program="tokens" showTitle=false config="projectTokens" /%}
+
+\* 合計プール手数料は0.9%です：0.42%が流動性提供者へ、0.08%がRaydiumへ。
+
+## Genesis
+
+ローンチプール操作のためのトークンローンチプラットフォーム手数料。これらは入金、出金、卒業に適用されるパーセンテージベースの手数料です。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Core" %}
+## Core
 
 ミンターが支払います（通常は新しいドロップをミントする個々のコレクターです）。プリントエディションを作成するものなど、NFTを「作成」するすべてのインストラクションが含まれます。
 
 {% protocol-fees program="core" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Bubblegum v2" %}
+## Bubblegum v2
 
 改良された機能と柔軟性を備えた圧縮NFT。
 
 {% protocol-fees program="bubblegum-v2" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Token Metadata" %}
+## Token Metadata
 
 ミンターが支払います（通常は新しいドロップをミントする個々のコレクターです）。または、クリエイターは最大限の構成可能性と低いミントコストを求めてCore（次世代NFT）、またはBubblegum（圧縮NFT）の使用を検討できます。
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Bubblegum v1（レガシー）" %}
+## Bubblegum v1（レガシー）
 
 オリジナルの圧縮NFTプログラム。
 
 {% protocol-fees program="bubblegum" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="MPL-Hybrid" %}
+## MPL-Hybrid
 
 トークンとNFTを交換する個人が支払います。
 
 {% protocol-fees program="mpl-hybrid" showTitle=false /%}
 
-{% /totem-accordion %}
-
-{% totem-accordion title="Fusion (Trifle)" %}
+## Fusion (Trifle)
 
 結合、分割、制約編集操作のためのコンポーザブルNFT手数料。
 
 {% protocol-fees program="fusion" showTitle=false /%}
-
-{% /totem-accordion %}
-
-{% /totem %}
 
 ## よくある質問
 
