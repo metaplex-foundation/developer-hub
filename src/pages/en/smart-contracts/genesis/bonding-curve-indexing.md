@@ -2,7 +2,7 @@
 title: Bonding Curve — Indexing & Events
 metaTitle: Genesis Bonding Curve Indexing and Events | Metaplex
 description: How to index the Genesis Bonding Curve lifecycle — GPA discovery, decoding BondingCurveSwapEvent, tracking price from events, and account discriminators.
-updated: '04-08-2026'
+updated: '04-09-2026'
 keywords:
   - bonding curve
   - indexing
@@ -24,7 +24,7 @@ programmingLanguage:
   - TypeScript
 faqs:
   - q: How do I decode a BondingCurveSwapEvent from a transaction?
-    a: Find the inner instruction on the Genesis program (GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B) with discriminator byte 255, slice off that first byte, and pass the remaining bytes to getBondingCurveSwapEventSerializer().deserialize(). The event contains direction, amounts, fee, and post-swap reserve state.
+    a: Find the inner instruction on the Genesis program (GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B) with discriminator byte 255, slice off that first byte, and pass the remaining bytes to getBondingCurveSwapEventSerializer().deserialize(). The event contains swapDirection, quoteTokenAmount, baseTokenAmount, fee, creatorFee, and post-swap reserve state (baseTokenBalance, quoteTokenDepositTotal, virtualSol, virtualTokens).
   - q: What is the difference between isSoldOut and isGraduated?
     a: isSoldOut is a synchronous check on the bucket's baseTokenBalance — it returns true the moment all tokens are purchased. isGraduated is an async RPC call that checks whether the Raydium CPMM pool has been created and funded. There is a window between sell-out and graduation where isSoldOut is true but isGraduated is false.
 ---
@@ -67,17 +67,21 @@ Every confirmed swap emits a `BondingCurveSwapEvent` as an inner instruction wit
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `direction` | `'buy' \| 'sell'` | Trade direction |
-| `amountIn` | `bigint` | Actual input amount (lamports for buy, base tokens for sell) |
-| `amountOut` | `bigint` | Output amount received |
-| `fee` | `bigint` | Total fee charged in lamports |
-| `baseTokenBalanceAfter` | `bigint` | `baseTokenBalance` after the swap |
-| `quoteTokenDepositTotalAfter` | `bigint` | `quoteTokenDepositTotal` after the swap |
+| `swapDirection` | `SwapDirection` | `SwapDirection.Buy` (SOL in, tokens out) or `SwapDirection.Sell` (tokens in, SOL out) |
+| `quoteTokenAmount` | `bigint` | SOL amount on the swap (input for buys, gross output for sells), in lamports |
+| `baseTokenAmount` | `bigint` | Token amount on the swap (output for buys, input for sells) |
+| `fee` | `bigint` | Protocol fee charged, in lamports |
+| `creatorFee` | `bigint` | Creator fee charged, in lamports (0 if no creator fee configured) |
+| `baseTokenBalance` | `bigint` | `baseTokenBalance` after the swap |
+| `quoteTokenDepositTotal` | `bigint` | `quoteTokenDepositTotal` after the swap |
+| `virtualSol` | `bigint` | Virtual SOL reserve (immutable — useful for price calculation without fetching the account) |
+| `virtualTokens` | `bigint` | Virtual token reserve (immutable — same as above) |
+| `blockTime` | `bigint` | Unix timestamp of the block containing the swap |
 
 ### Decoding from a Confirmed Transaction
 
 ```typescript {% title="decode-swap-event.ts" showLineNumbers=true %}
-import { getBondingCurveSwapEventSerializer } from '@metaplex-foundation/genesis';
+import { getBondingCurveSwapEventSerializer, SwapDirection } from '@metaplex-foundation/genesis';
 
 const GENESIS_PROGRAM_ID = 'GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B';
 const SWAP_EVENT_DISCRIMINATOR = 255;
@@ -103,12 +107,14 @@ async function decodeSwapEvent(signature: string) {
       // Slice off the discriminator byte, then deserialize.
       const [event] = serializer.deserialize(data.slice(1));
 
-      console.log('Direction:            ', event.direction);
-      console.log('Amount in:            ', event.amountIn.toString());
-      console.log('Amount out:           ', event.amountOut.toString());
-      console.log('Fee:                  ', event.fee.toString());
-      console.log('Base balance after:   ', event.baseTokenBalanceAfter.toString());
-      console.log('Quote deposit after:  ', event.quoteTokenDepositTotalAfter.toString());
+      const isBuy = event.swapDirection === SwapDirection.Buy;
+      console.log('Direction:            ', isBuy ? 'buy' : 'sell');
+      console.log('Quote token amount:   ', event.quoteTokenAmount.toString(), 'lamports');
+      console.log('Base token amount:    ', event.baseTokenAmount.toString());
+      console.log('Protocol fee:         ', event.fee.toString(), 'lamports');
+      console.log('Creator fee:          ', event.creatorFee.toString(), 'lamports');
+      console.log('Base balance:         ', event.baseTokenBalance.toString());
+      console.log('Quote deposit total:  ', event.quoteTokenDepositTotal.toString());
 
       return event;
     }
@@ -124,17 +130,17 @@ Derive the current price from the post-swap reserve state included in each `Bond
 
 ```typescript {% title="price-from-event.ts" showLineNumbers=true %}
 function getPriceFromEvent(event: BondingCurveSwapEvent, bucket: BondingCurveBucketV2) {
-  // totalTokens = virtualTokens + baseTokenBalance after swap
-  const totalTokens = bucket.virtualTokens + event.baseTokenBalanceAfter;
-  // totalSol = virtualSol + quoteTokenDepositTotal after swap
-  const totalSol = bucket.virtualSol + event.quoteTokenDepositTotalAfter;
-  // Price: tokens per SOL
-  return Number(totalTokens) / Number(totalSol);
+  // totalTokens = virtualTokens + post-swap baseTokenBalance (included in the event)
+  const totalTokens = bucket.virtualTokens + event.baseTokenBalance;
+  // totalSol = virtualSol + post-swap quoteTokenDepositTotal (included in the event)
+  const totalSol = bucket.virtualSol + event.quoteTokenDepositTotal;
+  // Price: tokens per SOL (lamports per base token unit as bigint)
+  return totalSol > 0n ? totalTokens / totalSol : 0n;
 }
 ```
 
 {% callout type="note" %}
-Cache `virtualSol` and `virtualTokens` from a single initial account fetch — they are set at curve creation and never change. All subsequent price updates can be computed from event data alone.
+`virtualSol` and `virtualTokens` are included in every `BondingCurveSwapEvent` — no separate account fetch is needed to compute price from an event. They are immutable after curve creation.
 {% /callout %}
 
 ## Lifecycle Events
@@ -173,7 +179,7 @@ Derive PDAs in TypeScript with `findGenesisAccountV2Pda` and `findBondingCurveBu
 
 ## Notes
 
-- `virtualSol` and `virtualTokens` are immutable after curve creation — fetch once and cache; no need to re-fetch per event
+- `virtualSol` and `virtualTokens` are included in every `BondingCurveSwapEvent` — no separate account fetch is required to compute price from events; they are immutable after curve creation
 - The `BondingCurveSwapEvent` discriminator is always byte `255` — any inner instruction on the Genesis program with this leading byte is a swap event
 - Between `isSoldOut` returning `true` and `isGraduated` returning `true`, the curve is sold out but the Raydium CPMM pool is not yet funded; do not redirect users to Raydium until `isGraduated` confirms the pool exists
 - `isGraduated` makes an RPC call on every invocation — cache the result in your indexer rather than calling it on every render
@@ -181,7 +187,7 @@ Derive PDAs in TypeScript with `findGenesisAccountV2Pda` and `findBondingCurveBu
 ## FAQ
 
 ### How do I decode a BondingCurveSwapEvent?
-Find inner instructions on the Genesis program (`GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B`) where the first data byte is `255`. Slice off that byte and pass the remainder to `getBondingCurveSwapEventSerializer().deserialize(data.slice(1))`. The returned object contains direction, amounts, fee, and post-swap reserve state.
+Find inner instructions on the Genesis program (`GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B`) where the first data byte is `255`. Slice off that byte and pass the remainder to `getBondingCurveSwapEventSerializer().deserialize(data.slice(1))`. The returned object contains `swapDirection`, `quoteTokenAmount`, `baseTokenAmount`, `fee`, `creatorFee`, and post-swap reserve state (`baseTokenBalance`, `quoteTokenDepositTotal`, `virtualSol`, `virtualTokens`, `blockTime`).
 
 ### What is the difference between isSoldOut and isGraduated?
 `isSoldOut` is a synchronous local check — it returns `true` as soon as `baseTokenBalance` is `0n`. `isGraduated` is an async RPC call that verifies whether the Raydium CPMM pool has been created and funded onchain. There is a window between sell-out and graduation where `isSoldOut` is `true` but `isGraduated` is `false`. Do not redirect users to Raydium until `isGraduated` confirms the pool exists.

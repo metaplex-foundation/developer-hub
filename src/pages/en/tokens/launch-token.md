@@ -2,6 +2,7 @@
 title: Launch a Token on Solana
 metaTitle: Launch a Token on Solana — Genesis Fair Launch Guide | Metaplex
 description: Step-by-step TypeScript guide to launching an SPL token on Solana using Genesis Launch Pools. Fair, on-chain token distribution with transparent price discovery.
+cli: /dev-tools/cli/genesis/launch
 ---
 
 Launch an SPL token on Solana using [Genesis](/smart-contracts/genesis) Launch Pools. This guide walks you through a fair launch where users deposit SOL during a window and receive tokens proportional to their share of total deposits — all handled transparently on-chain. {% .lead %}

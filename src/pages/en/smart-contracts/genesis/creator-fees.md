@@ -137,9 +137,10 @@ import {
   findBondingCurveBucketV2Pda,
   fetchBondingCurveBucketV2,
 } from '@metaplex-foundation/genesis';
-import { publicKey } from '@metaplex-foundation/umi';
+import { isSome, publicKey } from '@metaplex-foundation/umi';
 
 const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT_PUBKEY');
+const baseMint = publicKey('TOKEN_MINT_PUBKEY');
 
 const [bucketPda] = findBondingCurveBucketV2Pda(umi, {
   genesisAccount,
@@ -148,6 +149,12 @@ const [bucketPda] = findBondingCurveBucketV2Pda(umi, {
 
 const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 console.log('Creator fees accrued (lamports):', bucket.creatorFeeAccrued);
+console.log('Creator fees claimed to date (lamports):', bucket.creatorFeeClaimed);
+
+// Read the configured creator fee wallet from the bucket extension
+const creatorFeeExt = bucket.extensions.creatorFee;
+const creatorFeeWallet = isSome(creatorFeeExt) ? creatorFeeExt.value.wallet : null;
+console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configured');
 ```
 
 ## Claiming Creator Fees During the Active Curve
@@ -156,10 +163,18 @@ console.log('Creator fees accrued (lamports):', bucket.creatorFeeAccrued);
 
 ```typescript {% title="claim-creator-fees.ts" showLineNumbers=true %}
 import { claimBondingCurveCreatorFeeV2 } from '@metaplex-foundation/genesis';
+import { isSome } from '@metaplex-foundation/umi';
+
+// Read the creator fee wallet from the bucket extension before claiming.
+const creatorFeeExt = bucket.extensions.creatorFee;
+if (!isSome(creatorFeeExt)) throw new Error('No creator fee configured on this bucket');
+const creatorFeeWallet = creatorFeeExt.value.wallet;
 
 const result = await claimBondingCurveCreatorFeeV2(umi, {
   genesisAccount,
-  bucketPda,
+  bucket: bucketPda,
+  baseMint,
+  creatorFeeWallet,
 }).sendAndConfirm(umi);
 
 console.log('Creator fees claimed:', result.signature);
@@ -171,7 +186,7 @@ console.log('Creator fees claimed:', result.signature);
 
 ## Claiming Creator Fees After Graduation
 
-After the bonding curve [graduates](/smart-contracts/genesis/bonding-curve-theory#phase-3-graduated), liquidity migrates to a Raydium CPMM pool and creator fees continue to accrue from LP trading activity. Collect post-graduation fees with `claimRaydiumCreatorFeeV2`.
+After the bonding curve [graduates](/smart-contracts/genesis/bonding-curve-theory#phase-3-graduated), liquidity migrates to a Raydium CPMM pool and creator fees continue to accrue from LP trading activity. The `RaydiumCpmmBucketV2` account exposes `creatorFeeAccrued` and `creatorFeeClaimed` fields analogous to those on `BondingCurveBucketV2`. Collect post-graduation fees with `claimRaydiumCreatorFeeV2`.
 
 ```typescript {% title="claim-raydium-creator-fees.ts" showLineNumbers=true %}
 import { claimRaydiumCreatorFeeV2 } from '@metaplex-foundation/genesis';
@@ -188,7 +203,7 @@ Like its bonding curve counterpart, `claimRaydiumCreatorFeeV2` is permissionless
 
 ## Notes
 
-- Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly call the claim instructions to receive them
+- Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly call the claim instructions to receive them; `creatorFeeClaimed` tracks the cumulative total claimed to date
 - Both claim instructions are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller
 - `creatorFeeWallet` defaults to the launching wallet if not set; it cannot be changed after the curve is created
 - The first buy mechanism waives all fees (protocol and creator) for the designated initial purchase only; all subsequent swaps pay the normal creator fee

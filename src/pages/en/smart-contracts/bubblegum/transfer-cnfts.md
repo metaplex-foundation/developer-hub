@@ -2,6 +2,7 @@
 title: Transferring Compressed NFTs
 metaTitle: Transferring Compressed NFTs | Bubblegum
 description: Learn how to transfer compressed NFTs on Bubblegum
+cli: /dev-tools/cli/bubblegum/transfer-cnft
 ---
 
 The **Transfer** instruction can be used to transfer a Compressed NFT from one owner to another. To authorize the transfer, either the current owner or the delegate authority — if any — must sign the transaction. The instruction accepts the following parameters:
