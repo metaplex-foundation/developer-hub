@@ -1,6 +1,17 @@
 import Link from 'next/link'
-import { useState } from 'react'
-import { useClickOutside } from '@/shared/useClickOutside'
+import { useEffect, useRef, useState } from 'react'
+
+function useClickOutside(handler) {
+  const ref = useRef(null)
+  useEffect(() => {
+    function onMouseDown(e) {
+      if (ref.current && !ref.current.contains(e.target)) handler()
+    }
+    document.addEventListener('mousedown', onMouseDown)
+    return () => document.removeEventListener('mousedown', onMouseDown)
+  }, [handler])
+  return ref
+}
 
 export function CLIBadge({ cliPath }) {
   const [open, setOpen] = useState(false)
