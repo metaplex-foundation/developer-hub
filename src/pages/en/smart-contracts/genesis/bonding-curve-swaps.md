@@ -24,6 +24,8 @@ about:
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Bash
+cli: /dev-tools/cli/genesis/bonding-curve
 proficiencyLevel: Intermediate
 howToSteps:
   - Install the Genesis SDK and configure a Umi instance
@@ -128,22 +130,7 @@ Three discovery strategies are available depending on what you already know.
 
 ### Fetch from a Known Genesis Account
 
-```typescript {% title="fetch-from-genesis.ts" showLineNumbers=true %}
-import {
-  findBondingCurveBucketV2Pda,
-  fetchBondingCurveBucketV2,
-} from '@metaplex-foundation/genesis';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT_PUBKEY');
-
-const [bucketPda] = findBondingCurveBucketV2Pda(umi, {
-  genesisAccount,
-  bucketIndex: 0,
-});
-
-const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
-```
+{% code-tabs-imported from="genesis/fetch_bonding_curve_bucket" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ### Fetch from a Token Mint
 
@@ -227,29 +214,11 @@ Returns `{ amountIn, fee, amountOut }`:
 
 ### Buy Quote (SOL to Tokens)
 
-```typescript {% title="buy-quote.ts" showLineNumbers=true %}
-import { getSwapResult } from '@metaplex-foundation/genesis';
-
-const SOL_IN = 1_000_000_000n; // 1 SOL in lamports
-
-const buyQuote = getSwapResult(bucket, SOL_IN, 'buy');
-
-console.log('SOL input:    ', buyQuote.amountIn.toString(), 'lamports');
-console.log('Total fee:    ', buyQuote.fee.toString(), 'lamports');
-console.log('Tokens out:   ', buyQuote.amountOut.toString());
-```
+{% code-tabs-imported from="genesis/swap_quote_buy" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ### Sell Quote (Tokens to SOL)
 
-```typescript {% title="sell-quote.ts" showLineNumbers=true %}
-const TOKENS_IN = 500_000_000_000n; // 500 tokens (9 decimals)
-
-const sellQuote = getSwapResult(bucket, TOKENS_IN, 'sell');
-
-console.log('Tokens input: ', sellQuote.amountIn.toString());
-console.log('Total fee:    ', sellQuote.fee.toString(), 'lamports');
-console.log('SOL out:      ', sellQuote.amountOut.toString(), 'lamports');
-```
+{% code-tabs-imported from="genesis/swap_quote_sell" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ### First Buy Fee Waiver
 
@@ -297,74 +266,11 @@ Common values: 50 bps (0.5%) for stable conditions; 200 bps (2%) during volatile
 
 ### Buy Transaction (SOL to Tokens)
 
-```typescript {% title="swap-buy.ts" showLineNumbers=true %}
-import {
-  getSwapResult,
-  applySlippage,
-  swapBondingCurveV2,
-  findBondingCurveBucketV2Pda,
-  fetchBondingCurveBucketV2,
-  isSwappable,
-} from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT_PUBKEY');
-const baseMint = publicKey('TOKEN_MINT_PUBKEY');
-const quoteMint = publicKey('So11111111111111111111111111111111111111112'); // wSOL
-
-const [bucketPda] = findBondingCurveBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
-
-if (!isSwappable(bucket)) throw new Error('Curve is not currently accepting swaps');
-
-const SOL_IN = 1_000_000_000n; // 1 SOL in lamports
-const quote = getSwapResult(bucket, SOL_IN, 'buy');
-const minAmountOut = applySlippage(quote.amountOut, 100);
-
-const [userBaseTokenAccount] = findAssociatedTokenPda(umi, { mint: baseMint, owner: umi.identity.publicKey });
-const [userQuoteTokenAccount] = findAssociatedTokenPda(umi, { mint: quoteMint, owner: umi.identity.publicKey });
-
-// NOTE: Fund the wSOL ATA before this call. See wSOL Wrapping Note below.
-const tx = swapBondingCurveV2(umi, {
-  genesisAccount,
-  bucketPda,
-  baseMint,
-  quoteMint,
-  userBaseTokenAccount,
-  userQuoteTokenAccount,
-  amountIn: quote.amountIn,
-  minAmountOut,
-  direction: 'buy',
-});
-
-const result = await tx.sendAndConfirm(umi);
-console.log('Buy confirmed:', result.signature);
-```
+{% code-tabs-imported from="genesis/swap_buy" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ### Sell Transaction (Tokens to SOL)
 
-```typescript {% title="swap-sell.ts" showLineNumbers=true %}
-const TOKENS_IN = 500_000_000_000n;
-const quote = getSwapResult(bucket, TOKENS_IN, 'sell');
-const minAmountOut = applySlippage(quote.amountOut, 100);
-
-const tx = swapBondingCurveV2(umi, {
-  genesisAccount,
-  bucketPda,
-  baseMint,
-  quoteMint,
-  userBaseTokenAccount,
-  userQuoteTokenAccount,
-  amountIn: quote.amountIn,
-  minAmountOut,
-  direction: 'sell',
-});
-
-const result = await tx.sendAndConfirm(umi);
-// NOTE: Close the wSOL ATA after a sell to unwrap back to native SOL.
-console.log('Sell confirmed:', result.signature);
-```
+{% code-tabs-imported from="genesis/swap_sell" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ### wSOL Wrapping Note
 
