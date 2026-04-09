@@ -111,32 +111,44 @@ No additional flags.
 
 The `mplx genesis bucket fetch` command retrieves details for a specific bucket.
 
-```bash {% title="Fetch bucket details" %}
-mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 0 --type launch-pool
+```bash {% title="Fetch bucket details (auto-detect type)" %}
+mplx genesis bucket fetch <GENESIS_ADDRESS>
 ```
+
+When `--type` is not specified, the command auto-detects the bucket type by trying all known types at the given index.
 
 ### Options
 
 | Flag | Short | Description | Required |
 |------|-------|-------------|----------|
 | `--bucketIndex <integer>` | `-b` | Index of the bucket to fetch (default: 0) | No |
-| `--type <launch-pool\|presale\|unlocked>` | `-t` | Bucket type (default: `launch-pool`) | No |
+| `--type <launch-pool\|presale\|unlocked\|bonding-curve>` | `-t` | Bucket type (auto-detected if not specified) | No |
 
 ### Examples
 
-1. Fetch a launch pool bucket:
-```bash {% title="Fetch launch pool" %}
-mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 0
+1. Auto-detect bucket type:
+```bash {% title="Auto-detect" %}
+mplx genesis bucket fetch <GENESIS_ADDRESS>
 ```
 
-2. Fetch a presale bucket:
+2. Fetch a specific bucket index:
+```bash {% title="Fetch bucket at index 1" %}
+mplx genesis bucket fetch <GENESIS_ADDRESS> -b 1
+```
+
+3. Fetch a presale bucket:
 ```bash {% title="Fetch presale" %}
-mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 0 --type presale
+mplx genesis bucket fetch <GENESIS_ADDRESS> --type presale -b 0
 ```
 
-3. Fetch an unlocked bucket:
+4. Fetch a bonding curve bucket:
+```bash {% title="Fetch bonding curve" %}
+mplx genesis bucket fetch <GENESIS_ADDRESS> --type bonding-curve
+```
+
+5. Fetch an unlocked bucket:
 ```bash {% title="Fetch unlocked" %}
-mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 1 --type unlocked
+mplx genesis bucket fetch <GENESIS_ADDRESS> --type unlocked -b 1
 ```
 
 ## Claim Unlocked
@@ -196,7 +208,7 @@ mplx genesis revoke <GENESIS_ADDRESS> --revokeMint --revokeFreeze
 | No flags specified | Running `revoke` without `--revokeMint` or `--revokeFreeze` | Specify at least one: `--revokeMint` and/or `--revokeFreeze` |
 | Authority already revoked | Revoking an authority that was already revoked | No action needed — the authority is already permanently removed |
 | Claim period not active | Claiming from an unlocked bucket before `claimStart` | Wait until after the claim start timestamp |
-| Invalid bucket type | Using wrong `--type` flag in `bucket fetch` | Use `launch-pool`, `presale`, or `unlocked` |
+| Invalid bucket type | Using wrong `--type` flag in `bucket fetch` | Use `launch-pool`, `presale`, `unlocked`, or `bonding-curve` — or omit `--type` for auto-detection |
 
 ## FAQ
 

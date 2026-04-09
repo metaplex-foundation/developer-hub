@@ -121,6 +121,8 @@ Solanaの次世代NFT標準。Core NFTはToken Metadata NFTよりも大幅に安
 | TM NFT転送 | Yes (`mplx tm transfer`) |
 | ファンジブルトークン転送 | Yes (`mplx toolbox token transfer`) |
 | Core NFT転送 | Yes (`mplx core asset transfer`) |
+| Core NFTバーン | Yes |
+| Core NFTメタデータ更新 | Yes |
 | ストレージへのアップロード | Yes (`mplx toolbox storage upload`) |
 | Candy Machineドロップ | Yes（セットアップ/設定/挿入 — ミントにはSDKが必要） |
 | 圧縮NFT（cNFT） | Yes（バッチ上限約100、大量の場合はSDKを使用） |

@@ -1,31 +1,12 @@
 /* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
 import { ImageResponse } from '@vercel/og'
 
-// Product colors matching the site theme
-const productColors = {
-  core: { bg: '#22c55e', text: '#000000' },
-  'candy-machine': { bg: '#ec4899', text: '#FFFFFF' },
-  'core-candy-machine': { bg: '#ec4899', text: '#FFFFFF' },
-  bubblegum: { bg: '#0ea5e9', text: '#000000' },
-  'bubblegum-v2': { bg: '#0ea5e9', text: '#000000' },
-  umi: { bg: '#8b5cf6', text: '#FFFFFF' },
-  'token-metadata': { bg: '#f59e0b', text: '#000000' },
-  'mpl-hybrid': { bg: '#ef4444', text: '#FFFFFF' },
-  'das-api': { bg: '#14b8a6', text: '#000000' },
-  cli: { bg: '#10b981', text: '#000000' },
-  guides: { bg: '#22c55e', text: '#000000' },
-  default: { bg: '#FFFFFF', text: '#000000' },
-}
-
 export default async function handler(req, res) {
   try {
     // Get params from query (Node.js runtime)
     const title = req.query.title || 'Metaplex Developer Hub'
     const description = req.query.description || 'Build the future of digital assets on Solana'
     const product = req.query.product || ''
-
-    // Get product color scheme
-    const colors = productColors[product.toLowerCase()] || productColors.default
 
     // Format product name for display
     const productDisplay = product
@@ -41,6 +22,12 @@ export default async function handler(req, res) {
     const logoUrl = `${protocol}://${host}/docs/metaplex-logo-white.png`
     const logoData = await fetch(logoUrl).then((r) => r.arrayBuffer())
 
+    // Site design tokens (dark mode)
+    const blue = '#52acff'       // hsl(212 100% 66%) — primary
+    const bg = '#111111'         // hsl(0 0% 6.5%)   — background
+    const border = '#1f1f1f'     // hsl(0 0% 12%)    — border
+    const mutedFg = '#9ea2af'    // hsl(240 5% 64.9%) — muted-foreground
+
     // Create ImageResponse
     const imageResponse = new ImageResponse(
       (
@@ -50,25 +37,25 @@ export default async function handler(req, res) {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: '#171717',
+            backgroundColor: bg,
             padding: 60,
             fontFamily: 'Inter, system-ui, sans-serif',
             position: 'relative',
           }}
         >
-          {/* Gradient accent line at top */}
+          {/* Blue accent bar at top */}
           <div
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
-              height: 4,
-              background: 'linear-gradient(90deg, #cf4fb4, #6186b1, #39ce95)',
+              height: 3,
+              background: blue,
             }}
           />
 
-          {/* Subtle gradient glow in background */}
+          {/* Subtle blue ambient glow */}
           <div
             style={{
               position: 'absolute',
@@ -76,7 +63,7 @@ export default async function handler(req, res) {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'radial-gradient(ellipse at 0% 0%, rgba(207, 79, 180, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, rgba(57, 206, 149, 0.08) 0%, transparent 50%)',
+              background: `radial-gradient(ellipse at 20% 30%, rgba(82, 172, 255, 0.07) 0%, transparent 55%)`,
             }}
           />
 
@@ -88,7 +75,6 @@ export default async function handler(req, res) {
               marginBottom: 48,
             }}
           >
-            {/* Metaplex Logo */}
             <img
               src={logoData}
               width={180}
@@ -106,6 +92,16 @@ export default async function handler(req, res) {
               justifyContent: 'center',
             }}
           >
+            {/* Blue accent rule above title */}
+            <div
+              style={{
+                width: 36,
+                height: 3,
+                background: blue,
+                marginBottom: 24,
+              }}
+            />
+
             {/* Title */}
             <div
               style={{
@@ -126,7 +122,7 @@ export default async function handler(req, res) {
               <div
                 style={{
                   fontSize: 24,
-                  color: '#a3a3a3',
+                  color: mutedFg,
                   lineHeight: 1.5,
                   maxWidth: 900,
                 }}
@@ -144,16 +140,18 @@ export default async function handler(req, res) {
               justifyContent: 'space-between',
               marginTop: 32,
               paddingTop: 24,
-              borderTop: '1px solid #525252',
+              borderTop: `1px solid ${border}`,
             }}
           >
-            {/* Product name */}
+            {/* Product name in blue */}
             {productDisplay ? (
               <div
                 style={{
-                  fontSize: 36,
-                  fontWeight: 600,
-                  color: '#FFFFFF',
+                  fontSize: 20,
+                  fontWeight: 500,
+                  color: blue,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
                 }}
               >
                 {productDisplay}
@@ -166,7 +164,7 @@ export default async function handler(req, res) {
             <div
               style={{
                 fontSize: 18,
-                color: '#737373',
+                color: mutedFg,
               }}
             >
               metaplex.com/docs

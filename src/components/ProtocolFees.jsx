@@ -36,7 +36,7 @@ function FeesTable({ fees, t }) {
   }
 
   return (
-    <div>
+    <div className="not-prose">
       <Table>
         <TableHeader>
           <TableRow>
@@ -67,9 +67,9 @@ function FeesTable({ fees, t }) {
         </TableBody>
       </Table>
       {notesList.length > 0 && (
-        <div className="mt-2 space-y-0.5">
+        <div className="mt-1.5 space-y-0.5">
           {notesList.map((note, idx) => (
-            <p key={idx} className="text-xs text-muted-foreground">
+            <p key={idx} className="text-xs leading-normal text-muted-foreground">
               <sup>{'*'.repeat(idx + 1)}</sup> {note}
             </p>
           ))}
@@ -135,13 +135,17 @@ export function ProtocolFees({ program, showTitle = true, config = null }) {
     if (isNestedStructure) {
       // Nested structure but no config specified - show all configs
       return (
-        <div className="my-6 space-y-6">
+        <div className={showTitle ? 'not-prose my-6 space-y-6' : 'not-prose my-4 space-y-5 px-4'}>
           {Object.entries(product.protocolFees).map(([configName, configFees]) => (
             <div key={configName}>
-              {showTitle && (
+              {showTitle ? (
                 <h3 className="mb-3 text-lg font-semibold text-foreground">
                   {formatFeeType(configName)}
                 </h3>
+              ) : (
+                <p className="mb-2 text-sm font-semibold text-foreground">
+                  {formatFeeType(configName)}
+                </p>
               )}
               <FeesTable fees={Object.entries(configFees)} t={t} />
             </div>
@@ -154,7 +158,7 @@ export function ProtocolFees({ program, showTitle = true, config = null }) {
   const fees = Object.entries(feesObject)
 
   return (
-    <div className="my-6">
+    <div className={showTitle ? 'not-prose my-6' : 'not-prose my-4 px-4'}>
       {showTitle && (
         <h3 className="mb-3 text-lg font-semibold text-foreground">
           {t('title', 'Protocol Fees')}

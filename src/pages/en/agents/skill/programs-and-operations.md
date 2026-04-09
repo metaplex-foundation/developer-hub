@@ -121,6 +121,8 @@ The `mplx` CLI can handle most Metaplex operations directly without writing code
 | Transfer TM NFTs | Yes (`mplx tm transfer`) |
 | Transfer fungible tokens | Yes (`mplx toolbox token transfer`) |
 | Transfer Core NFTs | Yes (`mplx core asset transfer`) |
+| Burn Core NFTs | Yes |
+| Update Core NFT metadata | Yes |
 | Upload to storage | Yes (`mplx toolbox storage upload`) |
 | Candy Machine drop | Yes (setup/config/insert — minting requires SDK) |
 | Compressed NFTs (cNFTs) | Yes (batch limit ~100, use SDK for larger) |

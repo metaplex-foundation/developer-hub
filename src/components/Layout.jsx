@@ -2,6 +2,8 @@ import Hotjar from '@hotjar/browser'
 import clsx from 'clsx'
 import Link from 'next/link'
 
+import { AskAIButton } from '@/components/AskAIButton'
+import { SkillBadge } from '@/components/SkillBadge'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -125,39 +127,47 @@ export function Layout({ children, page }) {
           >
             <article>
               {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
-                <header className="mb-9 space-y-1">
-                  {page.activeSection?.navigationGroup && (
-                    <p className="font-display text-sm font-medium text-primary">
-                      {page.activeSection.navigationGroup.title}
-                    </p>
-                  )}
-                  {page.title && (
-                    <h1 className="font-display text-3xl tracking-tight text-foreground">
-                      {page.method && <Badge type={page.method.toLowerCase()} className="mr-2 align-middle" />}
-                      {page.title}
-                    </h1>
-                  )}
-                  {page.updated && (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Last updated{' '}
-                      {(() => {
-                        // Parse MM-DD-YYYY or YYYY-MM-DD format
-                        const dateStr = page.updated
-                        let date
-                        if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
-                          const [month, day, year] = dateStr.split('-')
-                          date = new Date(year, month - 1, day)
-                        } else {
-                          date = new Date(dateStr)
-                        }
-                        return date.toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })
-                      })()}
-                    </p>
-                  )}
+                <header className="mb-9">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0 flex-1 space-y-1">
+                      {page.activeSection?.navigationGroup && (
+                        <p className="font-display text-sm font-medium text-primary">
+                          {page.activeSection.navigationGroup.title}
+                        </p>
+                      )}
+                      {page.title && (
+                        <h1 className="font-display text-3xl tracking-tight text-foreground">
+                          {page.method && <Badge type={page.method.toLowerCase()} className="mr-2 align-middle" />}
+                          {page.title}
+                        </h1>
+                      )}
+                      {page.updated && (
+                        <p className="text-sm text-slate-500 dark:text-slate-400">
+                          Last updated{' '}
+                          {(() => {
+                            // Parse MM-DD-YYYY or YYYY-MM-DD format
+                            const dateStr = page.updated
+                            let date
+                            if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
+                              const [month, day, year] = dateStr.split('-')
+                              date = new Date(year, month - 1, day)
+                            } else {
+                              date = new Date(dateStr)
+                            }
+                            return date.toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric',
+                            })
+                          })()}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-col items-end gap-1.5">
+                      <AskAIButton pathname={page.pathname} />
+                      {page.product?.skill && <SkillBadge />}
+                    </div>
+                  </div>
                 </header>
               )}
               <Prose className="break-words">{children}</Prose>

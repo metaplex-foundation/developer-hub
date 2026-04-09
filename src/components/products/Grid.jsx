@@ -58,7 +58,7 @@ export function Grid({
           <li key={product.path || product.href}>
             <Link
               href={getLocalizedHref(product.href || product.path, locale)}
-              className="block content-start rounded-lg p-3 hover:bg-neutral-800"
+              className="block content-start p-3 hover:bg-neutral-800"
               onClick={onClick}
               {...(product.target && { target: product.target })}
             >
@@ -77,7 +77,7 @@ export function Grid({
       {tokenMenuItems.map((item) => {
         return (
           <li key={item.href}>
-            <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
+            <Link href={getLocalizedHref(item.href, locale)} className="block content-start p-3 hover:bg-neutral-800" onClick={onClick}>
               <div className="flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {item.name}
@@ -93,7 +93,7 @@ export function Grid({
       {nftMenuItems.map((item) => {
         return (
           <li key={item.href}>
-            <Link href={getLocalizedHref(item.href, locale)} className="block content-start rounded-lg p-3 hover:bg-neutral-800" onClick={onClick}>
+            <Link href={getLocalizedHref(item.href, locale)} className="block content-start p-3 hover:bg-neutral-800" onClick={onClick}>
               <div className="flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {item.name}

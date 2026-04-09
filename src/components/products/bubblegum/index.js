@@ -7,8 +7,9 @@ import { ArchiveBoxIcon } from '@heroicons/react/24/solid';
 
 export const bubblegum = {
   name: 'Bubblegum v1 (legacy)',
-  headline: 'Compressed NFTs',
-  description: 'NFTs that scale.',
+  skill: true,
+  headline: 'Compressed NFTs on Solana. Legacy, use v2.',
+  description: 'The original compressed NFT standard on Solana using state compression. Use Bubblegum v2 for new projects.',
   path: 'smart-contracts/bubblegum',
   navigationMenuCatergory: 'Smart Contracts',
   icon: <ArchiveBoxIcon />,
@@ -119,8 +120,8 @@ export const bubblegum = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Compressed NFTs',
-      description: 'NFTs that scale.',
+      headline: 'Compressed NFTs on Solana. Legacy, use v2.',
+      description: 'The original compressed NFT standard on Solana using state compression. Use Bubblegum v2 for new projects.',
       sections: {
         'Introduction': 'Introduction',
         'SDK': 'SDK',

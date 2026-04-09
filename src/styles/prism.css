@@ -2,7 +2,7 @@ pre[class*='language-'] {
   color: hsl(var(--card-foreground));
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 0.5rem;
+  border-radius: 0;
   padding: 1rem;
 }
 

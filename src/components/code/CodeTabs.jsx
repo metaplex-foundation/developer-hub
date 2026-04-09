@@ -142,10 +142,10 @@ export function CodeTabs({
       const index = tabsWithIds.findIndex(t => t.props.language === lang)
       if (index >= 0) handleTabChange(index)
     }}}>
-      <div className={clsx('code-tabs not-prose my-6 overflow-hidden rounded-lg border border-border', className)}>
+      <div className={clsx('code-tabs not-prose my-6 overflow-hidden border border-border', className)}>
         {/* Tab buttons */}
         <div
-          className="flex items-center gap-2 overflow-x-auto border-b border-border bg-muted px-4"
+          className="flex items-center gap-2 overflow-x-auto border-b border-border/50 bg-card px-4"
           role="tablist"
           aria-label="Code examples in different languages"
         >
@@ -158,7 +158,7 @@ export function CodeTabs({
                 key={tab.tabId}
                 onClick={() => handleTabChange(index)}
                 className={clsx(
-                  'relative whitespace-nowrap border-b-2 px-3 py-2 text-sm font-medium transition-colors',
+                  'relative whitespace-nowrap border-b-2 px-3 py-2.5 text-sm font-medium transition-colors',
                   isActive
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground hover:text-foreground'

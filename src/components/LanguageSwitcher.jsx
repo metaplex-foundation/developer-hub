@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useLocale } from '@/contexts/LocaleContext'
+import { useClickOutside } from '@/shared/useClickOutside'
 
 const languages = [
   { code: 'en', label: 'EN', name: 'English' },
@@ -14,19 +15,7 @@ export function LanguageSwitcher() {
   const { locale } = useLocale()
   const { pathname } = useRouter()
   const [isOpen, setIsOpen] = useState(false)
-  const dropdownRef = useRef(null)
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+  const dropdownRef = useClickOutside(() => setIsOpen(false))
 
   const getLocalizedPath = (targetLocale) => {
     // First, normalize the pathname by removing any locale prefix (/en, /ja, /ko, /zh)

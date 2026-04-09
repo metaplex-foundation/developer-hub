@@ -7,7 +7,7 @@ function useTableOfContents(tableOfContents) {
 
   let getHeadings = useCallback((tableOfContents) => {
     return tableOfContents
-      .flatMap((node) => [node.id, ...node.children.map((child) => child.id)])
+      .flatMap((node) => [node.id])
       .map((id) => {
         let el = document.getElementById(id)
         if (!el) return null
@@ -69,42 +69,22 @@ export function TableOfContent({ tableOfContents }) {
           >
             On this page
           </h2>
-          <ol role="list" className="mt-4 space-y-3 text-sm">
+          <ol role="list" className="mt-4 space-y-1 text-sm">
             {tableOfContents.map((section) => (
-              <li key={section.id}>
+              <li key={section.id} className="relative">
                 <h3>
                   <Link
                     href={`#${section.id}`}
                     className={clsx(
+                      'block w-full py-0.5 pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                       isActive(section)
-                        ? 'text-primary'
-                        : 'font-normal text-muted-foreground hover:text-foreground'
+                        ? 'bg-primary/10 font-medium text-primary before:bg-primary'
+                        : 'font-normal text-muted-foreground before:hidden before:bg-primary hover:text-foreground hover:before:block'
                     )}
                   >
                     {section.title}
                   </Link>
                 </h3>
-                {section.children.length > 0 && (
-                  <ol
-                    role="list"
-                    className="mt-2 space-y-3 pl-5 text-muted-foreground"
-                  >
-                    {section.children.map((subSection) => (
-                      <li key={subSection.id}>
-                        <Link
-                          href={`#${subSection.id}`}
-                          className={
-                            isActive(subSection)
-                              ? 'text-primary'
-                              : 'hover:text-foreground'
-                          }
-                        >
-                          {subSection.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
-                )}
               </li>
             ))}
           </ol>

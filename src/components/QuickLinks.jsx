@@ -12,15 +12,15 @@ export function QuickLinks({ children }) {
 
 export function QuickLink({ title, description, href, target, icon }) {
   return (
-    <div className="group relative rounded-xl border border-border bg-card transition-colors duration-200 hover:border-foreground">
-      <div className="relative overflow-hidden rounded-xl p-6">
+    <div className="group relative border border-border bg-card transition-colors duration-200 hover:border-foreground">
+      <div className="relative overflow-hidden p-6">
         <Icon
           icon={icon}
           className="h-8 w-8 transition-colors duration-200 group-hover:text-primary"
         />
         <h2 className="mt-4 font-display text-base text-card-foreground">
           <Link href={href} target={target}>
-            <span className="absolute -inset-px rounded-xl" />
+            <span className="absolute -inset-px" />
             {title}
           </Link>
         </h2>

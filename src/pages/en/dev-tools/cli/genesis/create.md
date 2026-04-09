@@ -57,6 +57,12 @@ Bucket configuration, deposit/claim flows, token metadata hosting, liquidity poo
 mplx genesis create --name "My Token" --symbol "MTK" --totalSupply 1000000000000000 --decimals 9
 ```
 
+Or use the interactive wizard for guided setup:
+
+```bash {% title="Wizard mode" %}
+mplx genesis create --wizard
+```
+
 ## Options
 
 | Flag | Short | Description | Required |
@@ -69,7 +75,9 @@ mplx genesis create --name "My Token" --symbol "MTK" --totalSupply 1000000000000
 | `--quoteMint <string>` | | Quote token mint address (default: Wrapped SOL) | No |
 | `--fundingMode <new-mint\|transfer>` | | Create a new mint or use an existing one (default: `new-mint`) | No |
 | `--baseMint <string>` | | Base token mint address (required when `fundingMode` is `transfer`) | Conditional |
+| `--wizard` | | Interactive guided setup wizard | No |
 | `--genesisIndex <integer>` | | Genesis index for multiple launches on the same mint (default: 0) | No |
+| `--apiUrl <string>` | | Genesis API base URL (default: `https://api.metaplex.com`) | No |
 
 ## Examples
 
@@ -118,7 +126,7 @@ Save the `Genesis Account` address — you'll use it in every subsequent command
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| Missing required flag | `--name`, `--symbol`, or `--totalSupply` not provided | Add all three required flags |
+| Missing required flag | `--name`, `--symbol`, or `--totalSupply` not provided | Add all three required flags, or use `--wizard` for guided setup |
 | Invalid totalSupply | Non-numeric or zero value | Provide a positive integer in base units |
 | baseMint required | `--fundingMode transfer` without `--baseMint` | Add `--baseMint <address>` when using transfer mode |
 | Insufficient SOL | Not enough SOL for the transaction fee | Fund your wallet with SOL for fees |

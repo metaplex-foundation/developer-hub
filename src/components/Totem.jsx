@@ -12,13 +12,13 @@ export function TotemAccordion({ children, title, defaultOpen = false }) {
     <Disclosure defaultOpen={defaultOpen}>
       {({ open }) => (
         <div>
-          <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 hover:bg-neutral-800">
+          <Disclosure.Button className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-foreground hover:bg-muted/50">
             {title}
             <Icon
               icon="ChevronRight"
               className={clsx(
-                'h-5 w-5 transition',
-                open ? 'rotate-90 transform' : ''
+                'h-4 w-4 flex-none text-muted-foreground transition-transform duration-200',
+                open ? 'rotate-90' : ''
               )}
             />
           </Disclosure.Button>

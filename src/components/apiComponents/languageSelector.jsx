@@ -27,7 +27,7 @@ const LanguageSelector = ({ activeLanguage, setActiveLanguage, noUmi }) => {
           return (
             <button
               key={language.name}
-              className={`-ms-px inline-flex min-w-16 flex-col items-center justify-center gap-1 border border-border bg-card px-10 py-2 text-xs font-medium text-foreground shadow-sm transition-colors first:ms-0 first:rounded-s-lg last:rounded-e-lg hover:bg-muted focus:z-10 focus:bg-primary focus:outline-none focus:ring-1 disabled:pointer-events-none disabled:opacity-50 ${
+              className={`-ms-px inline-flex min-w-16 flex-col items-center justify-center gap-1 border border-border bg-card px-10 py-2 text-xs font-medium text-foreground shadow-sm transition-colors first:ms-0 hover:bg-muted focus:z-10 focus:bg-primary focus:outline-none focus:ring-1 disabled:pointer-events-none disabled:opacity-50 ${
                 activeLanguage === language.name
                   ? 'bg-primary text-primary-foreground hover:bg-primary'
                   : ''

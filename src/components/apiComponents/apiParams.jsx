@@ -5,10 +5,10 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { PluginsIcon } from '../icons/dual-tone/PluginsIcon'
 
-const inputClassName = "block w-full rounded-md border border-border bg-card px-2 py-1 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
+const inputClassName = "block w-full border border-border bg-card px-2 py-1 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:pointer-events-none disabled:opacity-50"
 
 const selectClassName = clsx(
-  'block w-full appearance-none rounded-lg border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
+  'block w-full appearance-none border border-border bg-card px-3 py-1.5 text-sm/6 text-foreground',
   'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-primary/25',
   '*:text-foreground'
 )
@@ -208,7 +208,7 @@ const ParamRenderer = ({ param, subValue, setParam, path = [], value }) => {
 
 const ApiParameterDisplay = ({ params, setParam, body }) => {
   return (
-    <div className="flex w-full flex-col gap-4 rounded-xl border border-border bg-card py-4 pb-0">
+    <div className="flex w-full flex-col gap-4 border border-border bg-card py-4 pb-0">
       <div className="px-3 text-xs font-semibold uppercase text-muted-foreground">
         Body Params
       </div>

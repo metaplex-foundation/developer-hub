@@ -45,10 +45,6 @@ Genesis 토큰 출시를 위한 완전한 CLI 레퍼런스:
 - **Quote token(API 흐름)**: 현재 SOL 또는 USDC만 지원
 - **되돌릴 수 없는 작업**: `finalize`와 `revoke`는 취소할 수 없습니다
 
-## 범위 외
-
-Genesis 스마트 컨트랙트 내부, SDK/TypeScript 통합, 프론트엔드 개발, 토큰 경제 설계, 출시 후 유동성 풀 설정.
-
 **바로가기:** [사전 요구사항](#사전-요구사항) · [일반 흐름](#일반-흐름) · [명령어 레퍼런스](#명령어-레퍼런스) · [일반적인 오류](#일반적인-오류) · [FAQ](#faq) · [용어집](#용어집)
 
 *Metaplex Foundation 관리 · 최종 검증 2026년 2월 · Metaplex CLI(mplx) 필요*
@@ -72,9 +68,9 @@ Genesis CLI로 token을 출시하는 방법은 두 가지가 있습니다:
 
 ### API 흐름 (권장)
 
-`genesis launch create`를 사용하면 Genesis API를 호출하고, 트랜잭션을 빌드하여 서명하고, Metaplex 플랫폼에 출시를 등록하는 올인원 흐름을 단일 명령어로 실행할 수 있습니다. API를 통해 생성된 출시는 [metaplex.com](https://metaplex.com)과 호환되며 공개 출시 페이지와 함께 플랫폼에 표시됩니다.
+`genesis launch create`를 사용하면 Genesis API를 호출하고, 트랜잭션을 빌드하여 서명하고, Metaplex 플랫폼에 출시를 등록하는 올인원 흐름을 단일 명령어로 실행할 수 있습니다. **런치풀** (기본값, 48시간 예치 기간)과 **본딩 커브** (즉시 거래)의 두 가지 출시 유형을 사용할 수 있습니다. API를 통해 생성된 출시는 [metaplex.com](https://metaplex.com)과 호환되며 공개 출시 페이지와 함께 플랫폼에 표시됩니다.
 
-```bash {% title="단일 명령어 출시" %}
+```bash {% title="런치풀 (기본값)" %}
 mplx genesis launch create \
   --name "My Token" --symbol "MTK" \
   --image "https://gateway.irys.xyz/abc123" \
@@ -83,6 +79,14 @@ mplx genesis launch create \
   --raiseGoal 250 --raydiumLiquidityBps 5000 \
   --fundsRecipient <WALLET_ADDRESS>
 ```
+
+```bash {% title="본딩 커브 (즉시)" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
+
+두 가지 출시 유형 모두 `--agentMint`와 `--agentSetToken`으로 등록된 [에이전트](/ko/agents/mint-agent)에 연결할 수 있습니다.
 
 자세한 내용은 [Launch (API)](/ko/dev-tools/cli/genesis/launch)를 참조하세요.
 
@@ -117,6 +121,7 @@ mplx genesis launch create \
 | `genesis bucket add-presale` | Presale bucket 추가 |
 | `genesis bucket add-unlocked` | unlocked(재무) bucket 추가 |
 | `genesis bucket fetch` | 유형별 bucket 세부 정보 조회 |
+| `genesis bucket index` | Genesis 계정의 bucket 목록 및 인덱스 |
 | `genesis deposit` | Launch Pool에 입금 |
 | `genesis withdraw` | Launch Pool에서 출금 |
 | `genesis transition` | 입금 기간 후 종료 동작 실행 |

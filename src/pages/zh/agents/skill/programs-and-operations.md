@@ -121,6 +121,8 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 | 转移 TM NFT | Yes (`mplx tm transfer`) |
 | 转移同质化代币 | Yes (`mplx toolbox token transfer`) |
 | 转移 Core NFT | Yes (`mplx core asset transfer`) |
+| 销毁 Core NFT | Yes |
+| 更新 Core NFT 元数据 | Yes |
 | 上传到存储 | Yes (`mplx toolbox storage upload`) |
 | Candy Machine 投放 | Yes（设置/配置/插入——铸造需要 SDK） |
 | 压缩 NFT (cNFT) | Yes（批量限制约 100，更大批量使用 SDK） |
