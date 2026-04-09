@@ -12,33 +12,66 @@ export const genesis = {
   icon: <SparklesIcon />,
   className: 'accent-pink',
   protocolFees: {
-    launchPool: {
-      deposit: {
-        solana: '2%',
-        payer: 'User',
-        notes: null,
+    bondingCurve: {
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.50%',
       },
-      withdraw: {
-        solana: '2%',
-        payer: 'User',
-        notes: null,
-      },
-      graduation: {
-        solana: '5%',
-        payer: 'Launch Pool',
-        notes: null,
+      creatorRevenue: {
+        label: 'Creator revenue',
+        solana: '0.60%',
       },
     },
-    presale: {
-      deposit: {
-        solana: '2%',
-        payer: 'User',
-        notes: null,
+    postBondTrading: {
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.40%',
       },
-      graduation: {
+      creatorRevenue: {
+        label: 'Creator revenue',
+        solana: '0.60%',
+      },
+      lpFees: {
+        label: 'LP fees',
+        solana: '0.17%',
+      },
+      raydiumFee: {
+        label: 'Raydium fee',
+        solana: '0.08%',
+      },
+    },
+    launchPool: {
+      deposit: {
+        label: 'User deposit fee',
+        solana: '0%',
+      },
+      withdraw: {
+        label: 'User withdraw fee',
+        solana: '2%',
+      },
+      creatorWithdraw: {
+        label: 'Creator withdraw fee',
         solana: '5%',
-        payer: 'Presale',
-        notes: null,
+        notes: 'This fee only applies when creators withdraw liquidity',
+      },
+    },
+    launchPoolTrading: {
+      liquidityRequirement: {
+        label: 'Liquidity requirement',
+        solana: '20%',
+        notes: '1 year lock with quarterly unlock',
+      },
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.50%',
+      },
+      lpFees: {
+        label: 'LP fees',
+        solana: '0.42%',
+      },
+      raydiumFee: {
+        label: 'Raydium fee',
+        solana: '0.08%',
       },
     },
   },
