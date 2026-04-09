@@ -3,7 +3,7 @@ title: How It Works
 metaTitle: How It Works | Metaplex Skill
 description: Understand the progressive disclosure architecture of the Metaplex Skill.
 created: '02-23-2026'
-updated: '03-04-2026'
+updated: '04-08-2026'
 keywords:
   - progressive disclosure
   - agent skill architecture
@@ -56,12 +56,17 @@ These files cover `mplx` CLI commands for each program.
 
 | File | Contents |
 |------|----------|
-| `cli.md` | Shared CLI setup, configuration, toolbox commands |
+| `cli.md` | Agent guidelines, batching rules, JSON output, explorer links |
+| `cli-agent.md` | Agent Registry CLI — identity, delegation, revocation, token linking |
 | `cli-core.md` | Core NFT and collection CLI commands |
 | `cli-token-metadata.md` | Token Metadata NFT/pNFT CLI commands |
 | `cli-bubblegum.md` | Compressed NFT (cNFT) CLI commands |
 | `cli-candy-machine.md` | Candy Machine setup and deployment CLI commands |
-| `cli-genesis.md` | Genesis token launch CLI commands |
+| `cli-genesis.md` | Genesis token launch and bonding curve CLI commands |
+| `cli-toolbox.md` | Fungible token CLI commands |
+| `cli-config.md` | CLI configuration |
+| `cli-initial-setup.md` | CLI setup guide |
+| `cli-troubleshooting.md` | CLI error resolution |
 
 ### SDK References
 
@@ -70,19 +75,22 @@ These files cover Umi and Kit SDK operations for each program.
 | File | Contents |
 |------|----------|
 | `sdk-umi.md` | Umi SDK setup and common patterns |
+| `sdk-agent.md` | Agent Registry operations via Umi — identity, wallets, delegation |
 | `sdk-core.md` | Core NFT operations via Umi |
 | `sdk-token-metadata.md` | Token Metadata operations via Umi |
 | `sdk-bubblegum.md` | Compressed NFT operations via Umi |
-| `sdk-genesis.md` | Genesis token launch operations via Umi |
+| `sdk-genesis.md` | Genesis token launch and bonding curve swap operations via Umi |
+| `sdk-genesis-low-level.md` | Advanced Genesis — custom buckets, presale, vesting |
 | `sdk-token-metadata-kit.md` | Token Metadata operations via Kit SDK |
 
 ### Concepts
 
-These files cover shared knowledge like account structures and program IDs.
+These files cover shared knowledge like account structures, program IDs, and metadata formats.
 
 | File | Contents |
 |------|----------|
 | `concepts.md` | Account structures, PDAs, program IDs |
+| `metadata-json.md` | Off-chain metadata JSON format and schema for NFTs and tokens |
 
 ## Task Router
 
@@ -90,21 +98,28 @@ The task router in `SKILL.md` maps each task type to the files the agent should 
 
 | Task Type | Files Loaded |
 |-----------|-------------|
-| Any CLI operation (shared setup) | `cli.md` |
-| CLI: Core NFTs/Collections | `cli.md` + `cli-core.md` |
-| CLI: Token Metadata NFTs | `cli.md` + `cli-token-metadata.md` |
-| CLI: Compressed NFTs (Bubblegum) | `cli.md` + `cli-bubblegum.md` |
-| CLI: Candy Machine (NFT drops) | `cli.md` + `cli-candy-machine.md` |
-| CLI: Token launch (Genesis) | `cli.md` + `cli-genesis.md` |
-| CLI: Fungible tokens | `cli.md` (toolbox section) |
+| Any CLI operation (agent guidelines, batching, JSON output) | `cli.md` |
+| CLI: Agent Registry (identity, delegation, token linking) | `cli.md` + `cli-agent.md` |
+| CLI: Core NFTs/Collections | `cli.md` + `cli-core.md` + `metadata-json.md` |
+| CLI: Token Metadata NFTs | `cli.md` + `cli-token-metadata.md` + `metadata-json.md` |
+| CLI: Compressed NFTs (Bubblegum) | `cli.md` + `cli-bubblegum.md` + `metadata-json.md` |
+| CLI: Candy Machine (NFT drops) | `cli.md` + `cli-candy-machine.md` + `metadata-json.md` |
+| CLI: Token launch / bonding curve (Genesis) | `cli.md` + `cli-genesis.md` |
+| CLI: Execute / asset-signer wallets / agent vault | `cli.md` + `cli-core.md` |
+| CLI: Fungible tokens | `cli.md` + `cli-toolbox.md` |
 | SDK setup (Umi) | `sdk-umi.md` |
-| SDK: Core NFTs | `sdk-umi.md` + `sdk-core.md` |
-| SDK: Token Metadata | `sdk-umi.md` + `sdk-token-metadata.md` |
-| SDK: Compressed NFTs (Bubblegum) | `sdk-umi.md` + `sdk-bubblegum.md` |
+| SDK: Agent Registry (identity, wallets, delegation) | `sdk-umi.md` + `sdk-agent.md` |
+| SDK: Core NFTs | `sdk-umi.md` + `sdk-core.md` + `metadata-json.md` |
+| SDK: Token Metadata | `sdk-umi.md` + `sdk-token-metadata.md` + `metadata-json.md` |
+| SDK: Compressed NFTs (Bubblegum) | `sdk-umi.md` + `sdk-bubblegum.md` + `metadata-json.md` |
 | SDK: Candy Machine (minting/guards) | `sdk-umi.md` |
-| SDK: Token Metadata with Kit | `sdk-token-metadata-kit.md` |
-| SDK: Token launch (Genesis) | `sdk-umi.md` + `sdk-genesis.md` |
+| SDK: Token Metadata with Kit | `sdk-token-metadata-kit.md` + `metadata-json.md` |
+| SDK: Token launch + bonding curve swaps (Genesis) | `sdk-umi.md` + `sdk-genesis.md` |
+| SDK: Low-level Genesis (custom buckets, presale, vesting) | `sdk-umi.md` + `sdk-genesis-low-level.md` |
+| SDK: Execute / asset-signer PDA / agent vault | `sdk-umi.md` + `sdk-core.md` |
+| Off-chain metadata JSON format/schema | `metadata-json.md` |
 | Account structures, PDAs, concepts | `concepts.md` |
+| CLI errors, localnet issues | `cli-troubleshooting.md` |
 
 ## Notes
 
