@@ -8,7 +8,7 @@ import { StopCircleIcon } from '@heroicons/react/24/solid';
 
 export const core = {
   name: 'Core',
-  headline: 'The next generation Solana NFT standard — lightweight composable assets with a plugin system for custom onchain behaviors.',
+  headline: 'Next-gen NFT standard with a composable plugin system.',
   description: 'Next generation Solana NFT standard.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/core',

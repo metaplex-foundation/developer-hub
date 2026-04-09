@@ -7,7 +7,7 @@ import { CodeBracketSquareIcon } from '@heroicons/react/24/solid'
 
 export const umi = {
   name: 'Umi',
-  headline: 'A lightweight Solana client framework for JavaScript — a unified interface over RPC, wallets, signers, and serialization.',
+  headline: 'JS client for Solana RPC, wallets, and signers.',
   description: 'A lightweight Solana client framework for JavaScript — a unified interface over RPC, wallets, signers, and serialization.',
   navigationMenuCatergory: 'Dev Tools',
   path: 'dev-tools/umi',

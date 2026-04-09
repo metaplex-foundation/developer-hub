@@ -7,7 +7,7 @@ import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid';
 
 export const mplHybrid = {
   name: 'MPL-Hybrid',
-  headline: 'An onchain framework for hybrid assets — swap NFT traits for fungible tokens and back, enabling dynamic asset mechanics.',
+  headline: 'Swap NFT traits for fungible tokens and back.',
   description: 'An onchain framework for hybrid assets — swap NFT traits for fungible tokens and back, enabling dynamic asset mechanics.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/mpl-hybrid',

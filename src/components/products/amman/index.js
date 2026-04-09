@@ -5,7 +5,7 @@ import { ServerIcon } from '@heroicons/react/24/solid'
 
 export const amman = {
   name: 'Amman',
-  headline: 'Spin up local Solana validators, seed accounts, and test programs locally without hitting devnet or mainnet.',
+  headline: 'Local Solana validator and test toolkit.',
   description: 'Spin up local Solana validators, seed accounts, and test programs locally without hitting devnet or mainnet.',
   path: 'dev-tools/amman',
   navigationMenuCatergory: 'Dev Tools',

@@ -3,7 +3,7 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 
 export const genesis = {
   name: 'Genesis',
-  headline: 'Launch tokens on Solana via bonding curves, launch pools, and presales — with automatic graduation to Raydium liquidity.',
+  headline: 'Token launches via bonding curves.',
   description:
     'A smart contract for launching tokens on Solana via launch pools and presales.',
   navigationMenuCatergory: 'Smart Contracts',

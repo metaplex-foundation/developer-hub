@@ -9,8 +9,8 @@ import { productCategories } from './products/index';
 
 const createATokenMenuItem = {
   name: 'Create A Token',
-  headline: 'Create a fungible SPL token with metadata on Solana using Metaplex SDKs.',
-  description: 'Create a fungible SPL token with metadata on Solana using Metaplex SDKs.',
+  headline: 'Create a fungible SPL token with metadata.',
+  description: 'Create a fungible SPL token with metadata.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/create-a-token',
   localizedNavigation: {
@@ -22,8 +22,8 @@ const createATokenMenuItem = {
 
 const mintTokensMenuItem = {
   name: 'Mint Tokens',
-  headline: 'Mint additional fungible tokens to a wallet address using Metaplex SDKs.',
-  description: 'Mint additional fungible tokens to a wallet address using Metaplex SDKs.',
+  headline: 'Mint fungible tokens to a wallet address.',
+  description: 'Mint fungible tokens to a wallet address.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/mint-tokens',
   localizedNavigation: {
@@ -35,8 +35,8 @@ const mintTokensMenuItem = {
 
 const updateATokenMenuItem = {
   name: 'Update A Token',
-  headline: 'Update the metadata of an existing fungible token on Solana using Metaplex SDKs.',
-  description: 'Update the metadata of an existing fungible token on Solana using Metaplex SDKs.',
+  headline: 'Update the metadata of a fungible token.',
+  description: 'Update the metadata of a fungible token.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/update-token',
   localizedNavigation: {
@@ -48,8 +48,8 @@ const updateATokenMenuItem = {
 
 const burnATokenMenuItem = {
   name: 'Burn Tokens',
-  headline: 'Permanently remove fungible tokens from circulation by burning them using Metaplex SDKs.',
-  description: 'Permanently remove fungible tokens from circulation by burning them using Metaplex SDKs.',
+  headline: 'Burn fungible tokens from circulation.',
+  description: 'Burn fungible tokens from circulation.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/burn-tokens',
   localizedNavigation: {
@@ -61,8 +61,8 @@ const burnATokenMenuItem = {
 
 const anchorCreateTokenMenuItem = {
   name: 'Create Token with Anchor',
-  headline: 'Build an SPL token with metadata using Rust, Anchor, and Metaplex Token Metadata CPI.',
-  description: 'Build an SPL token with metadata using Rust, Anchor, and Metaplex Token Metadata CPI.',
+  headline: 'Build an SPL token with Rust and Anchor.',
+  description: 'Build an SPL token with Rust and Anchor.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/anchor/create-token',
   localizedNavigation: {
@@ -74,8 +74,8 @@ const anchorCreateTokenMenuItem = {
 
 const transferATokenMenuItem = {
   name: 'Transfer Tokens',
-  headline: 'Transfer fungible tokens between wallet addresses using Metaplex SDKs.',
-  description: 'Transfer fungible tokens between wallet addresses using Metaplex SDKs.',
+  headline: 'Transfer tokens between wallet addresses.',
+  description: 'Transfer tokens between wallet addresses.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/transfer-a-token',
   localizedNavigation: {
@@ -87,8 +87,8 @@ const transferATokenMenuItem = {
 
 const launchTokenMenuItem = {
   name: 'Launch Token',
-  headline: 'Launch a token generation event or fair launch on Solana using Genesis bonding curves and launch pools.',
-  description: 'Launch a token generation event or fair launch on Solana using Genesis bonding curves and launch pools.',
+  headline: 'Fair launch tokens on Solana with Genesis.',
+  description: 'Fair launch tokens on Solana with Genesis.',
   navigationMenuCatergory: 'Tokens',
   href: '/tokens/launch-token',
   localizedNavigation: {
@@ -105,8 +105,8 @@ export const anchorTokenMenuCategory = [anchorCreateTokenMenuItem]
 export const agentMenuCategory = [
   {
     name: 'Skill',
-    headline: 'Give AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.',
-    description: 'Give AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.',
+    headline: 'Metaplex knowledge base for AI agents.',
+    description: 'Metaplex knowledge base for AI agents.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/skill',
     localizedNavigation: {
@@ -117,8 +117,8 @@ export const agentMenuCategory = [
   },
   {
     name: 'Mint an Agent',
-    headline: 'Mint an MPL Core asset and register an Agent Identity PDA in one atomic transaction using the Metaplex API.',
-    description: 'Mint an MPL Core asset and register an Agent Identity PDA in one atomic transaction using the Metaplex API.',
+    headline: 'Mint an agent and register its Identity PDA.',
+    description: 'Mint an agent and register its Identity PDA.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/mint-agent',
     localizedNavigation: {
@@ -129,8 +129,8 @@ export const agentMenuCategory = [
   },
   {
     name: 'Register an Agent',
-    headline: 'Register an autonomous agent on the Metaplex 014 agent registry using Metaplex SDKs.',
-    description: 'Register an autonomous agent on the Metaplex 014 agent registry using Metaplex SDKs.',
+    headline: 'Register an agent on the Metaplex registry.',
+    description: 'Register an agent on the Metaplex registry.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/register-agent',
     localizedNavigation: {
@@ -141,8 +141,8 @@ export const agentMenuCategory = [
   },
   {
     name: 'Read Agent Data',
-    headline: 'Read and verify agent identity data on Solana using Metaplex SDKs.',
-    description: 'Read and verify agent identity data on Solana using Metaplex SDKs.',
+    headline: 'Read and verify agent identity on Solana.',
+    description: 'Read and verify agent identity on Solana.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/run-agent',
     localizedNavigation: {
@@ -153,8 +153,8 @@ export const agentMenuCategory = [
   },
   {
     name: 'Create an Agent Token',
-    headline: 'Launch a token from an agent\'s onchain wallet using the Metaplex Genesis protocol.',
-    description: 'Launch a token from an agent\'s onchain wallet using the Metaplex Genesis protocol.',
+    headline: 'Launch a token from an agent\'s onchain wallet.',
+    description: 'Launch a token from an agent\'s onchain wallet.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/create-agent-token',
     localizedNavigation: {
@@ -165,8 +165,8 @@ export const agentMenuCategory = [
   },
   {
     name: 'Run an Agent',
-    headline: 'Set up an executive profile and delegate execution permissions to run an agent on Solana.',
-    description: 'Set up an executive profile and delegate execution permissions to run an agent on Solana.',
+    headline: 'Delegate execution to run an agent on Solana.',
+    description: 'Delegate execution to run an agent on Solana.',
     navigationMenuCatergory: 'Agents',
     href: '/agents/run-an-agent',
     localizedNavigation: {
@@ -180,8 +180,8 @@ export const agentMenuCategory = [
 export const nftMenuCategory = [
   {
     name: 'Create A NFT',
-    headline: 'Mint a new NFT on Solana with metadata, attributes, and royalties using Metaplex Core or Token Metadata.',
-    description: 'Mint a new NFT on Solana with metadata, attributes, and royalties using Metaplex Core or Token Metadata.',
+    headline: 'Mint an NFT on Solana with Metaplex Core.',
+    description: 'Mint an NFT on Solana with Metaplex Core.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/create-nft',
     localizedNavigation: {
@@ -192,8 +192,8 @@ export const nftMenuCategory = [
   },
   {
     name: 'Read A NFT',
-    headline: 'Fetch NFT metadata, ownership, and attributes from Solana using the DAS API and Metaplex SDKs.',
-    description: 'Fetch NFT metadata, ownership, and attributes from Solana using the DAS API and Metaplex SDKs.',
+    headline: 'Fetch NFT metadata from Solana via the DAS API.',
+    description: 'Fetch NFT metadata from Solana via the DAS API.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/fetch-nft',
     localizedNavigation: {
@@ -204,8 +204,8 @@ export const nftMenuCategory = [
   },
   {
     name: 'Update A NFT',
-    headline: 'Update the metadata, attributes, or royalties of an existing NFT on Solana using Metaplex SDKs.',
-    description: 'Update the metadata, attributes, or royalties of an existing NFT on Solana using Metaplex SDKs.',
+    headline: 'Update NFT metadata or royalties on Solana.',
+    description: 'Update NFT metadata or royalties on Solana.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/update-nft',
     localizedNavigation: {
@@ -216,8 +216,8 @@ export const nftMenuCategory = [
   },
   {
     name: 'Burn A NFT',
-    headline: 'Permanently destroy an NFT and reclaim its rent by burning it on Solana using Metaplex SDKs.',
-    description: 'Permanently destroy an NFT and reclaim its rent by burning it on Solana using Metaplex SDKs.',
+    headline: 'Burn an NFT and reclaim its rent on Solana.',
+    description: 'Burn an NFT and reclaim its rent on Solana.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/burn-nft',
     localizedNavigation: {
@@ -228,8 +228,8 @@ export const nftMenuCategory = [
   },
   {
     name: 'Transfer A NFT',
-    headline: 'Transfer ownership of an NFT between wallets on Solana using Metaplex SDKs.',
-    description: 'Transfer ownership of an NFT between wallets on Solana using Metaplex SDKs.',
+    headline: 'Transfer an NFT between wallets on Solana.',
+    description: 'Transfer an NFT between wallets on Solana.',
     navigationMenuCatergory: 'NFTs',
     href: '/nfts/transfer-nft',
     localizedNavigation: {
