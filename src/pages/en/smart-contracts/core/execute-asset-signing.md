@@ -16,6 +16,7 @@ proficiencyLevel: Advanced
 programmingLanguage:
   - Rust
   - JavaScript
+cli: /dev-tools/cli/core/execute
 ---
 The MPL Core Execute instruction introduces the concept of **Asset Signers** to
 MPL Core Assets.

@@ -55,6 +55,7 @@ export function usePage(pageProps) {
     faqs: pageProps.markdoc?.frontmatter.faqs ?? null,
     howToSteps: pageProps.markdoc?.frontmatter.howToSteps ?? null,
     howToTools: pageProps.markdoc?.frontmatter.howToTools ?? null,
+    cli: pageProps.markdoc?.frontmatter.cli ?? null,
   }
 }
 

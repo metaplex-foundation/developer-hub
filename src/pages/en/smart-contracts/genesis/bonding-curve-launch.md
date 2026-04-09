@@ -24,6 +24,8 @@ about:
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Bash
+cli: /dev-tools/cli/genesis/launch
 proficiencyLevel: Intermediate
 created: '04-07-2026'
 updated: '04-09-2026'
@@ -123,24 +125,7 @@ The Genesis API functions do not require the `genesis()` plugin — they talk to
 
 `createAndRegisterLaunch` is the simplest path — it creates the launch, signs and sends all transactions, and registers the token on metaplex.com in one awaited call.
 
-```typescript {% title="launch.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
-
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  launchType: 'bondingCurve',
-  token: {
-    name: 'My Token',
-    symbol: 'MTK',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {},
-});
-
-console.log('Token launched!');
-console.log('Mint address:', result.mintAddress);
-console.log('View at:', result.launch.link);
-```
+{% code-tabs-imported from="genesis/api_bonding_curve_launch" frameworks="umi,cli" defaultFramework="umi" /%}
 
 All protocol parameters — supply splits, virtual reserves, fund flows, and lock schedules — are set to protocol defaults when `launch: {}` is empty. The sections below show how to add creator fees and a first buy.
 
@@ -162,20 +147,7 @@ The first buy reserves the initial swap on the curve for the launching wallet at
 
 Set `firstBuyAmount` to the SOL amount for the fee-free initial purchase.
 
-```typescript {% title="launch-with-first-buy.ts" showLineNumbers=true %}
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  launchType: 'bondingCurve',
-  token: {
-    name: 'My Token',
-    symbol: 'MTK',
-    image: 'https://gateway.irys.xyz/your-image-id',
-  },
-  launch: {
-    firstBuyAmount: 0.1, // 0.1 SOL
-  },
-});
-```
+{% code-tabs-imported from="genesis/api_bonding_curve_first_buy" frameworks="umi,cli" defaultFramework="umi" /%}
 
 The API executes the first buy as part of the launch transaction flow — the curve already has the initial purchase applied once the transactions confirm. The buyer defaults to the launching `wallet`, or to the agent PDA when `agent` is provided. Override with `firstBuyWallet` (a `Signer`) to designate a different buyer.
 
@@ -273,24 +245,9 @@ token: {
 
 ## Devnet Testing
 
-Pass `network: 'solana-devnet'` and point the Umi instance at the devnet RPC endpoint to route the launch through devnet infrastructure.
+Pass `network: 'solana-devnet'` and point the Umi instance at the devnet RPC endpoint to route the launch through devnet infrastructure. For the CLI, the network is determined by your configured RPC endpoint.
 
-```typescript {% title="devnet-launch.ts" showLineNumbers=true %}
-const umi = createUmi('https://api.devnet.solana.com');
-umi.use(keypairIdentity(keypair));
-
-const result = await createAndRegisterLaunch(umi, {}, {
-  wallet: umi.identity.publicKey,
-  launchType: 'bondingCurve',
-  network: 'solana-devnet',
-  token: {
-    name: 'Test Token',
-    symbol: 'TEST',
-    image: 'https://gateway.irys.xyz/test-image',
-  },
-  launch: {},
-});
-```
+{% code-tabs-imported from="genesis/api_bonding_curve_devnet" frameworks="umi,cli" defaultFramework="umi" /%}
 
 ## Advanced
 

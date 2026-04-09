@@ -18,6 +18,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+cli: /dev-tools/cli/core/transfer-asset
 howToSteps:
   - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Fetch the Asset to verify ownership and collection membership

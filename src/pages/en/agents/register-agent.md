@@ -11,6 +11,7 @@ keywords:
 programmingLanguage:
   - JavaScript
   - TypeScript
+cli: /dev-tools/cli/agents/register
 about:
   - Agent Registration
   - Solana

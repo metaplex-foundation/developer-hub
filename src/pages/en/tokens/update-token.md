@@ -4,6 +4,7 @@ metaTitle: How to Update Fungible Token Metadata on Solana | Tokens
 description: Learn how to update fungible token metadata on Solana using JavaScript and Umi
 created: '11-28-2025'
 updated: '11-28-2025'
+cli: /dev-tools/cli/toolbox/update-token-metadata
 ---
 
 Update the metadata of your fungible token to change its name, symbol, image, or other properties. {% .lead %}

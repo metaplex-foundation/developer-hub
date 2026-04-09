@@ -2,6 +2,7 @@ import Hotjar from '@hotjar/browser'
 import clsx from 'clsx'
 import Link from 'next/link'
 
+import { CLIBadge } from '@/components/CLIBadge'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Navigation } from '@/components/Navigation'
@@ -158,6 +159,7 @@ export function Layout({ children, page }) {
                       })()}
                     </p>
                   )}
+                  {page.cli && <CLIBadge cliPath={page.cli} />}
                 </header>
               )}
               <Prose className="break-words">{children}</Prose>
