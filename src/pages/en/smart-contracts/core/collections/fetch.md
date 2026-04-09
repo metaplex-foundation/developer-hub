@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+cli: /dev-tools/cli/core/fetch
 ---
 
 `fetchCollection` retrieves a [Core Collection](/smart-contracts/core/collections) account from Solana by its address and deserialises it into a typed object. {% .lead %}

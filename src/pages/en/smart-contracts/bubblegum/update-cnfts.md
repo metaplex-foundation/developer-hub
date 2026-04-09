@@ -2,6 +2,7 @@
 title: Updating Compressed NFTs
 metaTitle: Updating Compressed NFTs | Bubblegum
 description: Learn how to update compressed NFTs on Bubblegum
+cli: /dev-tools/cli/bubblegum/update-cnft
 ---
 
 The **Update** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.

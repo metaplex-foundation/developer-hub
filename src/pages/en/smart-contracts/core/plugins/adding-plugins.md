@@ -16,6 +16,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+cli: /dev-tools/cli/core/plugins
 faqs:
   - q: Can I add multiple plugins in one transaction?
     a: Yes, when creating an Asset. For existing Assets, each addPlugin call is a separate transaction.

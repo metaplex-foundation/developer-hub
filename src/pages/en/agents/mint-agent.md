@@ -19,6 +19,7 @@ about:
 programmingLanguage:
   - JavaScript
   - TypeScript
+cli: /dev-tools/cli/agents/register
 proficiencyLevel: Beginner
 created: '03-27-2026'
 updated: '03-27-2026'

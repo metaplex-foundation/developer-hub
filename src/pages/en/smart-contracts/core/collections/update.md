@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+cli: /dev-tools/cli/core/update-asset
 howToSteps:
   - Configure Umi with the collection's updateAuthority as signer
   - Call updateCollection with the collection address and new name or URI
