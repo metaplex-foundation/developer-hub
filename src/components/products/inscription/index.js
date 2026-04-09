@@ -66,8 +66,8 @@ export const inscription = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'NFT inscribed on Solana',
-      description: 'Inscribe Data to Solana state.',
+      headline: 'Inscribe permanent data into Solana state.',
+      description: 'Inscribe arbitrary data directly into Solana state, linking permanent onchain data to existing NFTs and tokens.',
       sections: {
         'Introduction': 'Introduction',
         'Features': 'Features',

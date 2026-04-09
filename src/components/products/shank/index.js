@@ -40,8 +40,8 @@ export const shank = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'IDL Extraction for Solana Programs',
-      description: 'Extract IDLs from Rust Solana program code using attribute macros',
+      headline: 'IDL generation from Rust Solana programs.',
+      description: 'Extract IDL type definitions from native Rust Solana programs using attribute macros — no Anchor required.',
       sections: {
         'Introduction': 'Introduction',
         'Reference': 'Reference'

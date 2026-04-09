@@ -121,8 +121,8 @@ export const umi = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Client wrapper',
-      description: 'A collection of core programs for your applications.',
+      headline: 'JS client for Solana RPC, wallets, and signers.',
+      description: 'A lightweight Solana client framework for JavaScript — a unified interface over RPC, wallets, signers, and serialization.',
       sections: {
         'Introduction': 'Introduction',
         'Features': 'Features',

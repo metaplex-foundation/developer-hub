@@ -322,7 +322,7 @@ export const coreCandyMachine = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Core Asset launchpad',
+      headline: 'NFT launchpad for MPL Core.',
       description: 'Launch your next MPL Core Asset collection on Solana.',
       sections: {
         'Introduction': 'Introduction',

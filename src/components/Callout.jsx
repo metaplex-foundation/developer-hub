@@ -23,19 +23,20 @@ const icons = {
 }
 
 export function Callout({ type = 'note', title, children }) {
-  let IconComponent = icons[type]
+  const safeType = type in styles ? type : 'note'
+  const IconComponent = icons[safeType]
 
   return (
-    <div className={clsx('my-6 px-4 py-3', styles[type].container)}>
+    <div className={clsx('my-6 px-4 py-3', styles[safeType].container)}>
       <div className="flex items-start gap-2">
-        <IconComponent className={clsx('mt-0.5 h-4 w-4 flex-none', styles[type].icon)} />
+        {IconComponent && <IconComponent className={clsx('mt-0.5 h-4 w-4 flex-none', styles[safeType].icon)} />}
         <div className="flex-auto">
           {title && (
-            <p className={clsx('m-0 text-sm font-semibold', styles[type].title)}>
+            <p className={clsx('m-0 text-sm font-semibold', styles[safeType].title)}>
               {title}
             </p>
           )}
-          <div className={clsx('prose text-sm', title && 'mt-1', styles[type].body)}>
+          <div className={clsx('prose text-sm', title && 'mt-1', styles[safeType].body)}>
             {children}
           </div>
         </div>

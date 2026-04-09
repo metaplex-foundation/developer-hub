@@ -20,7 +20,10 @@ export function Sections({ sections, activeSectionId, className, props }) {
             />
             <span className="leading-tight">{section.title}</span>
             {isExternal && (
-              <ArrowTopRightOnSquareIcon className="h-3 w-3 flex-none opacity-50" />
+              <>
+                <ArrowTopRightOnSquareIcon aria-hidden="true" className="h-3 w-3 flex-none opacity-50" />
+                <span className="sr-only">opens in a new tab</span>
+              </>
             )}
           </>
         )

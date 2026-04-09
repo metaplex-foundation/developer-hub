@@ -224,8 +224,8 @@ export const cli = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'MPLX CLI',
-      description: 'A CLI for the MPLX ecosystem',
+      headline: 'CLI to mint, transfer, and manage assets.',
+      description: 'A command line interface for interacting with Metaplex programs — mint, transfer, and manage assets directly from your terminal.',
       sections: {
         'Introduction': 'Introduction',
         'Configuration': 'Configuration',

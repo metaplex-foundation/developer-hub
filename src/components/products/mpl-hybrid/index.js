@@ -108,8 +108,8 @@ export const mplHybrid = {
   ],
   localizedNavigation: {
     en: {
-      headline: 'Hybrid Assets',
-      description: 'Framework and on-chain protocol for hybrid assets.',
+      headline: 'Swap NFT traits for fungible tokens and back.',
+      description: 'An onchain framework for hybrid assets — swap NFT traits for fungible tokens and back, enabling dynamic asset mechanics.',
       sections: {
         'Introduction': 'Introduction',
         'SDK': 'SDK',
