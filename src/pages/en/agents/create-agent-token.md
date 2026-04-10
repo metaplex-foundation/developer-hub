@@ -129,6 +129,8 @@ The Genesis API functions talk to the hosted Metaplex API over HTTP rather than 
 
 ## Launching an Agent Token
 
+An agent token is the one canonical token for an agent, proving the token's provenance by linking it permanently to the agent that created it.
+
 Pass the `agent` field to `createAndRegisterLaunch` with your agent's [Core](/core) asset address. The SDK automatically:
 
 - Sets the creator fee wallet to the agent's Core asset signer PDA (derived from `['mpl-core-execute', <agent_mint>]`)
