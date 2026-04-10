@@ -2,6 +2,7 @@
 title: Register an Agent
 metaTitle: Register an Agent on Solana | Metaplex 014 Agent Registry
 description: Register an agent identity on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset.
+agentSkill: /agents/register-agent.md
 keywords:
   - register agent
   - agent identity

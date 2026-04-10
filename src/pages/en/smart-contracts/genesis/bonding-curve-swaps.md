@@ -26,6 +26,7 @@ programmingLanguage:
   - TypeScript
   - Bash
 cli: /dev-tools/cli/genesis/bonding-curve
+agentSkill: /smart-contracts/genesis/bonding-curve-swaps.md
 proficiencyLevel: Intermediate
 howToSteps:
   - Install the Genesis SDK and configure a Umi instance

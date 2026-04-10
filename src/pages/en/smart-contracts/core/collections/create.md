@@ -18,6 +18,7 @@ programmingLanguage:
   - TypeScript
   - Rust
 cli: /dev-tools/cli/core/create-collection
+agentSkill: /smart-contracts/core/collections/create.md
 howToSteps:
   - Install the mpl-core SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Upload collection metadata JSON to get a URI

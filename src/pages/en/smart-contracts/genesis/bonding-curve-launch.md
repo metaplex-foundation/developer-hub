@@ -26,6 +26,7 @@ programmingLanguage:
   - TypeScript
   - Bash
 cli: /dev-tools/cli/genesis/launch
+agentSkill: /smart-contracts/genesis/bonding-curve-launch.md
 proficiencyLevel: Intermediate
 created: '04-07-2026'
 updated: '04-09-2026'

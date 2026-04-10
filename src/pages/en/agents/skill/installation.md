@@ -2,6 +2,7 @@
 title: Installation
 metaTitle: Installation | Metaplex Skill
 description: Install the Metaplex Skill in Claude Code, Cursor, Copilot, or any AI coding agent.
+agentSkill: /agents/skill/installation.md
 created: '02-23-2026'
 updated: '03-04-2026'
 keywords:

@@ -166,7 +166,7 @@ export function Layout({ children, page }) {
                     </div>
                     <div className="flex flex-col items-end gap-1.5">
                       <AskAIButton pathname={page.pathname} />
-                      {page.product?.skill && <SkillBadge />}
+                      {page.agentSkill && <SkillBadge href={page.agentSkill} />}
                       {page.cli && <CLIBadge cliPath={page.cli} />}
                     </div>
                   </div>

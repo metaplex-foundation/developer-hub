@@ -25,6 +25,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/genesis/launch-pool.md
 howToSteps:
   - Initialize a Genesis Account with your token
   - Add a Launch Pool bucket with deposit window configuration

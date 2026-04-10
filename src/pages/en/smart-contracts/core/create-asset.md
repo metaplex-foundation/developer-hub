@@ -19,6 +19,7 @@ programmingLanguage:
   - TypeScript
   - Rust
 cli: /dev-tools/cli/core/create-asset
+agentSkill: /smart-contracts/core/create-asset.md
 howToSteps:
   - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Upload metadata JSON to Arweave or IPFS to get a URI

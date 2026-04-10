@@ -16,6 +16,7 @@ about:
   - Token Launch
   - Genesis
 proficiencyLevel: Beginner
+agentSkill: /smart-contracts/genesis/bonding-curve.md
 faqs:
   - q: What is the difference between a bonding curve and a launch pool?
     a: A bonding curve lets users buy and sell continuously from the moment trading opens — price moves with every trade. A launch pool has a fixed deposit window and settles at a single clearing price at the end.

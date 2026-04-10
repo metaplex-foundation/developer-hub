@@ -17,6 +17,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/genesis/integration-apis/create-launch.md
 ---
 
 Build the on-chain transactions for a new Genesis token launch. Returns unsigned transactions that must be signed and sent before calling [Register Launch](/smart-contracts/genesis/integration-apis/register). {% .lead %}
