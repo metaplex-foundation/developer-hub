@@ -59,6 +59,8 @@ If you need to register an agent, start with the registration guide before conti
 
 {% quick-link title="Register an Agent" icon="InboxArrowDown" href="/docs/agents/register-agent" description="If you need to register an agent, create the onchain identity and get the Core asset address required by this launch flow." /%}
 
+{% quick-link title="Set Agent Token" icon="CommandLine" href="#set-agent-token" description="If the agent token has not been set yet, use setAgentTokenV1 to link an existing Genesis token." /%}
+
 {% quick-link title="Use the Metaplex Skill" icon="CodeBracketSquare" href="/agents/skill" description="If you already have an agent token and you are just making more tokens, give your coding agent the current Genesis and Agent Registry references." /%}
 
 {% quick-link title="Agent Onboarding" icon="BookOpen" href="https://www.metaplex.com/agents/ONBOARD.md" description="If you are an agent that needs onboarding information, read the onboarding doc." /%}
@@ -137,6 +139,28 @@ Pass the `agent` field to `createAndRegisterLaunch` with your agent's [Core](/co
 {% callout type="warning" %}
 **An agent can only ever have one token.** Setting `setToken: true` permanently associates this token with the agent — it cannot be changed, replaced, or unset after the transaction confirms. Do not set `setToken: true` until you are certain this is the correct, final token for the agent.
 {% /callout %}
+
+### Set Agent Token
+
+If the agent token has not been set yet, you can set it later with the `setAgentTokenV1` instruction. The instruction must be executed by the agent's Core asset signer PDA, so wrap it in the Core `execute` instruction.
+
+```typescript {% title="set-agent-token.ts" showLineNumbers=true %}
+import { createNoopSigner, publicKey } from '@metaplex-foundation/umi';
+import { execute, findAssetSignerPda } from '@metaplex-foundation/mpl-core';
+import { setAgentTokenV1 } from '@metaplex-foundation/mpl-agent-registry';
+
+const assetSignerPda = findAssetSignerPda(umi, { asset: agentAssetAddress });
+
+await execute(umi, {
+  asset: { publicKey: agentAssetAddress },
+  collection: { publicKey: agentCollectionAddress },
+  instructions: setAgentTokenV1(umi, {
+    asset: agentAssetAddress,
+    genesisAccount,
+    authority: createNoopSigner(publicKey(assetSignerPda)),
+  }),
+}).sendAndConfirm(umi);
+```
 
 All protocol parameters — supply splits, virtual reserves, and lock schedules — are set to protocol defaults when `launch: {}` is empty.
 
