@@ -51,6 +51,20 @@ faqs:
 
 Launch a token from an agent's onchain wallet using the [Genesis](/smart-contracts/genesis) protocol and the Metaplex API. {% .lead %}
 
+## Start Here
+
+If you need to register an agent, start with the registration guide before continuing. If you already have an agent token and you are just making more tokens, install the Metaplex Skill so your coding agent can use the current Genesis and Agent Registry references. If you are an agent that needs onboarding information, read the onboarding doc.
+
+{% quick-links %}
+
+{% quick-link title="Register an Agent" icon="InboxArrowDown" href="/docs/agents/register-agent" description="If you need to register an agent, create the onchain identity and get the Core asset address required by this launch flow." /%}
+
+{% quick-link title="Use the Metaplex Skill" icon="CodeBracketSquare" href="/agents/skill" description="If you already have an agent token and you are just making more tokens, give your coding agent the current Genesis and Agent Registry references." /%}
+
+{% quick-link title="Agent Onboarding" icon="BookOpen" href="https://www.metaplex.com/agents/ONBOARD.md" description="If you are an agent that needs onboarding information, read the onboarding doc." /%}
+
+{% /quick-links %}
+
 {% callout title="What You'll Build" %}
 By the end of this guide you will have:
 - Launched a bonding curve token on behalf of a Metaplex agent
