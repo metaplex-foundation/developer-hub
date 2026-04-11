@@ -28,6 +28,7 @@ faqs:
     a: Yes. JSON and MsgPack schemas are automatically deserialized and indexed. Binary is stored as base64.
   - q: What is LinkedAppData?
     a: LinkedAppData is added to a Collection and allows the Data Authority to write to any Asset in that Collection without adding AppData to each Asset individually.
+agentSkill: /smart-contracts/core.md
 ---
 The **AppData Plugin** provides secure, partitioned data storage on Core Assets. Third-party applications can store and read arbitrary data (JSON, MsgPack, or binary) with exclusive write access controlled by a Data Authority. {% .lead %}
 {% callout title="What You'll Learn" %}

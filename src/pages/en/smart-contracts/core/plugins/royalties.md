@@ -31,6 +31,7 @@ faqs:
     a: Use ruleSet('None'). Any program can transfer the asset and royalties are advisory only.
   - q: Can I change royalties after minting?
     a: Yes. Use updatePlugin for assets or updateCollectionPlugin for collections if you have the authority.
+agentSkill: /smart-contracts/core.md
 ---
 The **Royalties Plugin** enforces creator royalties on secondary sales of Core Assets. It specifies the royalty percentage, creator split, and which programs (marketplaces) are allowed or denied from transferring the asset. {% .lead %}
 {% callout title="What You'll Learn" %}

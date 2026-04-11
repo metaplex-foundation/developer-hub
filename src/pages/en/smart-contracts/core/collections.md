@@ -24,6 +24,7 @@ faqs:
     a: Yes, use the update instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
   - q: What happens if I delete a Collection?
     a: Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
+agentSkill: /smart-contracts/core.md
 ---
 
 ## Summary

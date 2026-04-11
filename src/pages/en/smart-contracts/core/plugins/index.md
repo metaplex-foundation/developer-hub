@@ -18,7 +18,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
-agentSkill: /smart-contracts/core/plugins.md
+agentSkill: /smart-contracts/core.md
 faqs:
   - q: Can I add plugins after an Asset is created?
     a: Yes, except for Permanent plugins. Owner Managed plugins require owner signature; Authority Managed plugins require update authority signature.

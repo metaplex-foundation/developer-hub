@@ -28,6 +28,7 @@ faqs:
     a: Freeze Delegate is built-in and binary (frozen/unfrozen). Oracle allows custom logic - time-based, price-based, or any condition you implement.
   - q: Do I need to write a Solana program for Oracle?
     a: Yes. The Oracle account must be a Solana account with the correct structure. You can use Anchor or native Rust.
+agentSkill: /smart-contracts/core.md
 ---
 The **Oracle Plugin** connects Core Assets to external Oracle accounts for custom validation logic. Reject transfers, burns, or updates based on time, price, ownership, or any custom rule you implement. {% .lead %}
 {% callout title="What You'll Learn" %}

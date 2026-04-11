@@ -31,6 +31,7 @@ faqs:
     a: No. The Asset owner or update authority can still update metadata while frozen. Only transfers and burns are blocked.
   - q: How do I implement escrowless staking?
     a: Add Freeze Delegate with your staking program as authority. When user stakes, freeze the Asset. When user unstakes, thaw the Asset. The NFT never leaves the user's wallet.
+agentSkill: /smart-contracts/core.md
 ---
 The **Freeze Delegate Plugin** allows you to freeze Core Assets, blocking transfers and burns while the asset remains in the owner's wallet. Perfect for escrowless staking, marketplace listings, and game mechanics. {% .lead %}
 {% callout title="What You'll Learn" %}

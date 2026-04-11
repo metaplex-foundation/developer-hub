@@ -27,6 +27,7 @@ faqs:
     a: There's no hard limit, but more delegates increase account size and rent. Keep the list reasonable.
   - q: Does Update Delegate work on Collections?
     a: Yes. Adding Update Delegate to a Collection allows delegates to update collection metadata and collection-level plugins.
+agentSkill: /smart-contracts/core.md
 ---
 The **Update Delegate Plugin** allows you to grant update permissions to additional addresses. Useful when third parties need to modify Asset metadata without being the primary update authority. {% .lead %}
 {% callout title="What You'll Learn" %}

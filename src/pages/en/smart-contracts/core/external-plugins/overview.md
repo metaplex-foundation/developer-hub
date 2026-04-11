@@ -28,6 +28,7 @@ faqs:
     a: Yes. You can add multiple Oracle or AppData plugins to a single Asset, each with different configurations and authorities.
   - q: Are External Plugins indexed by DAS?
     a: Yes. AppData with JSON or MsgPack schemas is automatically indexed by DAS for easy querying.
+agentSkill: /smart-contracts/core.md
 ---
 **External Plugins** connect Core Assets to external programs for advanced functionality. Use Oracle plugins for custom validation logic and AppData plugins for storing arbitrary data that third-party apps can read and write. {% .lead %}
 {% callout title="What You'll Learn" %}

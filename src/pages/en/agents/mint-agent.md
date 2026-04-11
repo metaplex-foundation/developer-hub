@@ -2,7 +2,7 @@
 title: Mint an Agent
 metaTitle: Mint an Agent | Metaplex
 description: Create an onchain AI agent in a single transaction using the Metaplex API and the mpl-agent-registry SDK. The hosted API stores agent metadata and returns an unsigned transaction you sign and submit.
-agentSkill: /agents/mint-agent.md
+agentSkill: /agents.md
 keywords:
   - mint agent
   - agent registration

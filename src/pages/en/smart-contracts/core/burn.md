@@ -20,7 +20,7 @@ programmingLanguage:
   - TypeScript
   - Rust
 cli: /dev-tools/cli/core/burn-asset
-agentSkill: /smart-contracts/core/burn.md
+agentSkill: /smart-contracts/core.md
 howToSteps:
   - Install the SDK with npm install @metaplex-foundation/mpl-core
   - Fetch the Asset to verify ownership

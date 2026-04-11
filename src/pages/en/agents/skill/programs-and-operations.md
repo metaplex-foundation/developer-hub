@@ -2,7 +2,6 @@
 title: Programs & Operations
 metaTitle: Programs & Operations | Metaplex Skill
 description: Detailed breakdown of programs and operations covered by the Metaplex Skill.
-agentSkill: /agents/skill/programs-and-operations.md
 created: '02-23-2026'
 updated: '04-08-2026'
 keywords:

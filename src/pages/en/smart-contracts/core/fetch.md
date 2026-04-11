@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
   - Rust
 cli: /dev-tools/cli/core/fetch
-agentSkill: /smart-contracts/core/fetch.md
+agentSkill: /smart-contracts/core.md
 howToSteps:
   - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Configure Umi with your RPC endpoint

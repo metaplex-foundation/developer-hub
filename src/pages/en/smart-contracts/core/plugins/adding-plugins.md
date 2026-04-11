@@ -26,6 +26,7 @@ faqs:
     a: No. Owner Managed plugins always require the owner's signature to add, regardless of who signs.
   - q: Why can't I add a Permanent plugin?
     a: Permanent plugins can only be added during Asset/Collection creation. They cannot be added to existing accounts.
+agentSkill: /smart-contracts/core.md
 ---
 This guide shows how to **add plugins** to Core Assets and Collections. Plugins add functionality like royalties, freezing, attributes, and delegate permissions. {% .lead %}
 {% callout title="What You'll Learn" %}

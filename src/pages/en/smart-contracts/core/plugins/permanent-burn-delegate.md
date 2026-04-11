@@ -27,6 +27,7 @@ faqs:
     a: The delegate can burn any individual Asset in the Collection, but not all at once. Each burn is a separate transaction.
   - q: Is this safe to use?
     a: Use with caution. The delegate can burn Assets at any time without owner approval. Only assign to trusted programs or addresses.
+agentSkill: /smart-contracts/core.md
 ---
 The **Permanent Burn Delegate Plugin** provides irrevocable burn authority that persists forever. The delegate can burn Assets even when frozen, making it ideal for games and subscription services. {% .lead %}
 {% callout title="What You'll Learn" %}

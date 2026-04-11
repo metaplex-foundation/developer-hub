@@ -27,6 +27,7 @@ faqs:
     a: Yes, if the plugin authority is not set to None. The update authority can modify the number using updatePlugin.
   - q: What's the difference between Edition and Master Edition?
     a: Edition stores the individual number on an Asset. Master Edition stores collection-level data (max supply, edition name/URI) on a Collection.
+agentSkill: /smart-contracts/core.md
 ---
 The **Edition Plugin** stores an edition number on individual Assets. Use it to create numbered prints like "1 of 100" for collectible series and limited editions. {% .lead %}
 {% callout title="What You'll Learn" %}

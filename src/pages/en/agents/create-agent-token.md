@@ -2,7 +2,7 @@
 title: Create an Agent Token
 metaTitle: Create an Agent Token with Metaplex Genesis | Metaplex Agents
 description: How to launch a bonding curve token on behalf of a Metaplex agent using the Genesis SDK — including automatic creator fee routing, first buy, devnet testing, and error handling.
-agentSkill: /agents/create-agent-token.md
+agentSkill: /agents.md
 keywords:
   - agent token
   - token launch

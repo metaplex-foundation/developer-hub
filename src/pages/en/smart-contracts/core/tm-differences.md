@@ -28,6 +28,7 @@ faqs:
     a: No. Core Assets don't use ATAs. Ownership is stored directly in the Asset account.
   - q: How do I verify creators in Core?
     a: Use the Verified Creators plugin. It works similarly to TM's creator array but is opt-in.
+agentSkill: /smart-contracts/core.md
 ---
 Coming from **Token Metadata**? This guide explains what's different in Core, why it's better, and how to translate your TM knowledge to Core concepts. {% .lead %}
 {% callout title="Key Differences" %}

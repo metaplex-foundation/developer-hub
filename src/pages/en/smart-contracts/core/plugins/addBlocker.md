@@ -27,6 +27,7 @@ faqs:
     a: If AddBlocker is active, you cannot add new authority-managed plugins, even new ones released in the future. Plan accordingly.
   - q: Why would I use AddBlocker?
     a: To guarantee that the NFT's authority-managed plugin configuration is final. This provides assurance to collectors that royalties, attributes, and other critical settings cannot be modified.
+agentSkill: /smart-contracts/core.md
 ---
 The **AddBlocker Plugin** prevents any new authority-managed plugins from being added to an Asset or Collection. Lock down your NFT configuration while still allowing owner-managed plugins. {% .lead %}
 {% callout title="What You'll Learn" %}

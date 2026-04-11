@@ -25,6 +25,7 @@ howToTools:
   - Node.js
   - Umi framework
   - mpl-core SDK
+agentSkill: /smart-contracts/core.md
 ---
 Soulbound NFTs are non-fungible tokens that are permanently bound to a specific wallet address and cannot be transferred to another owner. They are useful for representing achievements, credentials, or memberships that should remain tied to a specific identity.  {% .lead %}
 ## Overview

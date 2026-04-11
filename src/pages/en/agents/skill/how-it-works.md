@@ -2,7 +2,6 @@
 title: How It Works
 metaTitle: How It Works | Metaplex Skill
 description: Understand the progressive disclosure architecture of the Metaplex Skill.
-agentSkill: /agents/skill/how-it-works.md
 created: '02-23-2026'
 updated: '04-08-2026'
 keywords:

@@ -15,6 +15,7 @@ about:
 proficiencyLevel: Intermediate
 programmingLanguage:
   - Rust
+agentSkill: /smart-contracts/core.md
 ---
 Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
 ## Installation

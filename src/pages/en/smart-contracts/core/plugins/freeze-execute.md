@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+agentSkill: /smart-contracts/core.md
 ---
 ## Overview
 The Freeze Execute Plugin is an `Owner Managed` plugin that allows freezing the Execute lifecycle event on an Asset. When frozen, the asset cannot execute arbitrary instructions through its Asset Signer PDA, effectively blocking any execute operations until unfrozen.

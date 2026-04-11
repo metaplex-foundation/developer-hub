@@ -17,7 +17,7 @@ programmingLanguage:
   - Rust
   - JavaScript
 cli: /dev-tools/cli/core/execute
-agentSkill: /smart-contracts/core/execute-asset-signing.md
+agentSkill: /smart-contracts/core.md
 ---
 The MPL Core Execute instruction introduces the concept of **Asset Signers** to
 MPL Core Assets.

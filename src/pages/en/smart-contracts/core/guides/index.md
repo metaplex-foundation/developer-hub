@@ -13,6 +13,7 @@ about:
   - Implementation guides
   - Code examples
 proficiencyLevel: Intermediate
+agentSkill: /smart-contracts/core.md
 ---
 The following Guides for MPL Core are currently available:
 {% quick-links %}

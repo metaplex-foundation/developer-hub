@@ -27,6 +27,7 @@ faqs:
     a: No. Frozen Assets block all transfers including delegate transfers. Use Permanent Transfer Delegate with a Permanent Freeze Delegate for complex escrow scenarios.
   - q: Does the owner need to approve each transfer?
     a: No. Once the Transfer Delegate is set, the delegate can transfer without owner approval. However, they can only do it once before authority is revoked.
+agentSkill: /smart-contracts/core.md
 ---
 The **Transfer Delegate Plugin** allows a designated authority to transfer Core Assets on behalf of the owner. Essential for escrowless marketplace sales, game mechanics, and subscription services. {% .lead %}
 {% callout title="What You'll Learn" %}

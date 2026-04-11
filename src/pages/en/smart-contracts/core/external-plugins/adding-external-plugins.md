@@ -24,6 +24,7 @@ faqs:
     a: Yes. The Oracle account must exist before adding an Oracle plugin adapter.
   - q: What's the difference between adding at creation vs adding later?
     a: No functional difference. Adding at creation is more efficient (one transaction). Adding later requires a separate transaction.
+agentSkill: /smart-contracts/core.md
 ---
 This guide shows how to **add External Plugins** (Oracle, AppData) to Core Assets and Collections. Add at creation time or to existing Assets/Collections. {% .lead %}
 {% callout title="What You'll Learn" %}

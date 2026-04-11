@@ -33,6 +33,7 @@ faqs:
     a: There's no hard limit, but larger attribute lists increase rent cost. Keep data concise.
   - q: Can the owner update attributes?
     a: No. The Attributes plugin is Authority Managed, so only the update authority can modify it.
+agentSkill: /smart-contracts/core.md
 ---
 The **Attributes Plugin** stores key-value pairs directly on-chain within Core Assets or Collections. Perfect for game stats, traits, and any data that on-chain programs need to read. {% .lead %}
 {% callout title="What You'll Learn" %}

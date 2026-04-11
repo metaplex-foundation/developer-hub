@@ -23,6 +23,7 @@ faqs:
     a: Yes. Read the AppData using fetchAsset() before removing the plugin if you need to preserve the data.
   - q: What happens to the rent?
     a: The rent from the plugin adapter is recovered and returned to the transaction payer.
+agentSkill: /smart-contracts/core.md
 ---
 This guide shows how to **remove External Plugins** from Core Assets and Collections. Remove Oracle or AppData plugins when they're no longer needed. {% .lead %}
 {% callout title="What You'll Learn" %}

@@ -30,6 +30,7 @@ faqs:
     a: Use transactionBuilder() to combine instructions, but be aware of Solana's transaction size limits (~1232 bytes). For large batches, send multiple transactions.
   - q: Can I use this SDK in React/Next.js?
     a: Yes. The SDK works in both browser and Node.js environments. For React, use wallet adapters from @solana/wallet-adapter-react with Umi's wallet adapter identity.
+agentSkill: /smart-contracts/core.md
 ---
 The **Metaplex Core JavaScript SDK** (`@metaplex-foundation/mpl-core`) provides a complete TypeScript/JavaScript interface for interacting with Core Assets and Collections on Solana. Built on the [Umi framework](/dev-tools/umi), it offers type-safe methods for all Core operations. {% .lead %}
 {% callout title="What You'll Learn" %}

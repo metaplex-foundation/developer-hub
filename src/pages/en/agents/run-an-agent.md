@@ -2,7 +2,7 @@
 title: Run an Agent
 metaTitle: Run an Agent on Solana | Metaplex Agent Registry
 description: Set up an executive profile and delegate execution to run an autonomous agent on Solana.
-agentSkill: /agents/run-an-agent.md
+agentSkill: /agents.md
 keywords:
   - run agent
   - executive profile

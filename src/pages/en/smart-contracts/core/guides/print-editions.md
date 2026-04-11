@@ -25,6 +25,7 @@ howToTools:
   - Node.js
   - Umi framework
   - mpl-core SDK
+agentSkill: /smart-contracts/core.md
 ---
 ## Introduction
 ### What is an Edition?

@@ -2,7 +2,7 @@
 title: What Is an Agent?
 metaTitle: What Is an Agent on Solana? | Metaplex Agent Registry
 description: Autonomous agents on Solana are MPL Core assets with built-in wallets and on-chain identity records. Learn how agent identity, wallets, and execution delegation work.
-agentSkill: /agents/what-is-an-agent.md
+agentSkill: /agents.md
 keywords:
   - Solana agents
   - autonomous agents

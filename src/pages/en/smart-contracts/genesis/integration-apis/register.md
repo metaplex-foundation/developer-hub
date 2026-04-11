@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
-agentSkill: /smart-contracts/genesis/integration-apis/register.md
+agentSkill: /smart-contracts/genesis.md
 ---
 
 Register a Genesis launch after the on-chain transactions from [Create Launch](/smart-contracts/genesis/integration-apis/create-launch) have been confirmed. The endpoint validates the on-chain state, creates the launch listing, and returns a launch page URL. {% .lead %}

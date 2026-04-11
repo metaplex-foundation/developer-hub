@@ -25,6 +25,7 @@ faqs:
     a: No. Regular Burn Delegate cannot burn frozen Assets. Use Permanent Burn Delegate if you need to burn frozen Assets.
   - q: When is Burn Delegate revoked?
     a: When the Asset is transferred to a new owner. The new owner would need to add a new Burn Delegate.
+agentSkill: /smart-contracts/core.md
 ---
 The **Burn Delegate Plugin** allows a designated authority to burn Core Assets on behalf of the owner. Useful for game mechanics, subscription services, and automated asset lifecycle management. {% .lead %}
 {% callout title="What You'll Learn" %}

@@ -24,6 +24,7 @@ howToTools:
   - Anchor framework
   - mpl-core Rust crate
   - Solana CLI
+agentSkill: /smart-contracts/core.md
 ---
 This developer guide demonstrates how to create a staking program for your collection using Anchor leveraging the `Attribute` and `Freeze Delegate` plugins. This approach uses a smart contract for all the logic behind staking like time calculation and management of the state of the asset (staking/unstaking), but the data will not be saved in a PDA, like the standard before Core, but it will be saved on the asset itself. {% .lead %}
 ## Starting off: Understanding the Logic behind the program

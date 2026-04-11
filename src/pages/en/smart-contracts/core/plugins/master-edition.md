@@ -27,6 +27,7 @@ faqs:
     a: For proper print tracking, yes. Master Edition goes on the Collection, Edition goes on each Asset. They work together.
   - q: Can I add Master Edition to an existing Collection?
     a: Yes, unlike the Edition plugin on Assets, Master Edition can be added to existing Collections using addCollectionPlugin.
+agentSkill: /smart-contracts/core.md
 ---
 The **Master Edition Plugin** groups numbered edition Assets under a Collection. Store maximum supply, edition names, and URIs to create print series like "Limited to 100 copies." {% .lead %}
 {% callout title="What You'll Learn" %}

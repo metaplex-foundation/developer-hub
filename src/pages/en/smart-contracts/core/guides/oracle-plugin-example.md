@@ -26,6 +26,7 @@ howToTools:
   - mpl-core SDK
   - Solana CLI
   - Cron scheduler
+agentSkill: /smart-contracts/core.md
 ---
 This developer guide leverages the new Oracle Plugin to **create an NFT collection that can only be traded during US market hours**.
 ## Introduction

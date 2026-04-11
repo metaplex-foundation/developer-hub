@@ -16,6 +16,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+agentSkill: /smart-contracts/core.md
 ---
 Select the language / library you want to use below to get started with the new Metaplex Core Standard.
 {% quick-links %}

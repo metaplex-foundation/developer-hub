@@ -103,6 +103,19 @@ module.exports = {
   			'8xl': '88rem'
   		},
   		colors: {
+  			blue: {
+  				50:  'hsl(228 100% 97% / <alpha-value>)',
+  				100: 'hsl(228 96% 93% / <alpha-value>)',
+  				200: 'hsl(228 96% 86% / <alpha-value>)',
+  				300: 'hsl(228 94% 74% / <alpha-value>)',
+  				400: 'hsl(228 96% 66% / <alpha-value>)',
+  				500: 'hsl(228 100% 57% / <alpha-value>)',
+  				600: 'hsl(228 96% 46% / <alpha-value>)',
+  				700: 'hsl(228 96% 37% / <alpha-value>)',
+  				800: 'hsl(228 90% 29% / <alpha-value>)',
+  				900: 'hsl(228 84% 21% / <alpha-value>)',
+  				950: 'hsl(228 80% 14% / <alpha-value>)',
+  			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
