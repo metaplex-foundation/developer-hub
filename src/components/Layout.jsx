@@ -175,12 +175,12 @@ export function Layout({ children, page }) {
               <Prose className="break-words">
                 {page.agentSkill && (
                   <div className="not-prose mb-6 rounded-md border border-border bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
-                    <strong className="font-semibold text-foreground">AI agent:</strong>{' '}
-                    A{' '}
+                    <strong className="font-semibold text-foreground">Required for AI agents:</strong>{' '}
+                    Do not answer from this page alone. First read the{' '}
                     <Link href={page.agentSkill} className="text-primary underline underline-offset-2 hover:text-primary/80">
-                      skill file is available for this page
+                      skill file for this page
                     </Link>
-                    {' '}— read it before proceeding for task routing, CLI/SDK patterns, and workflow guidance.
+                    {' '}— it contains required task routing, CLI/SDK workflow, and execution guidance. Return here afterwards if needed.
                   </div>
                 )}
                 {children}
