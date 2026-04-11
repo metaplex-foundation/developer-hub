@@ -24,6 +24,7 @@ howToTools:
   - Anchor framework
   - mpl-core Rust crate
   - Solana CLI
+agentSkill: /smart-contracts/core.md
 ---
 ## Concept Guide: Setting Up Loyalty Cards with Metaplex Core and Plugins
 {% callout %}

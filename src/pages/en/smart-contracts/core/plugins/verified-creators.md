@@ -27,6 +27,7 @@ faqs:
     a: Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
   - q: Can I use this for co-creator attribution?
     a: Yes. This is a common use case - multiple creators can all verify their involvement in creating an Asset or Collection.
+agentSkill: /smart-contracts/core.md
 ---
 The **Verified Creators Plugin** stores a list of verified creator signatures on Assets or Collections. Prove creatorship publicly without affecting royalty distribution. {% .lead %}
 {% callout title="What You'll Learn" %}

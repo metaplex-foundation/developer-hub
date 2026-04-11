@@ -25,6 +25,7 @@ howToTools:
   - Anchor framework
   - mpl-core SDK
   - Solana CLI
+agentSkill: /smart-contracts/core.md
 ---
 This developer guide leverages the new Appdata Plugin to **create a ticketing solution that could be used to generate tickets as digital assets and verified by an external source of trust other  than the issuer, like for example a venue manager**.
 ## Introduction

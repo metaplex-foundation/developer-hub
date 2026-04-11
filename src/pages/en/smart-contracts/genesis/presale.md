@@ -24,6 +24,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/genesis.md
 howToSteps:
   - Initialize a Genesis Account with your token allocation
   - Add a Presale bucket with price and cap configuration

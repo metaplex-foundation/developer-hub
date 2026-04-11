@@ -18,6 +18,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/genesis.md
 ---
 
 The Genesis API client provides high-level functions for creating and registering token launches. It handles transaction building, signing, and on-chain registration through a simple interface built on Umi. {% .lead %}

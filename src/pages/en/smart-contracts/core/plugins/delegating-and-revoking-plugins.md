@@ -27,6 +27,7 @@ faqs:
     a: No. Setting authority to None makes the plugin permanently immutable. This cannot be reversed.
   - q: Can a delegate revoke themselves?
     a: Yes. A delegated authority can revoke their own access, which returns control to the default authority type.
+agentSkill: /smart-contracts/core.md
 ---
 This guide shows how to **delegate and revoke plugin authorities** on Core Assets. Transfer control of plugins to other addresses or make plugin data permanently immutable. {% .lead %}
 {% callout title="What You'll Learn" %}

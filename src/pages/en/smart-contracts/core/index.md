@@ -36,6 +36,7 @@ faqs:
     a: All major RPC providers supporting DAS (Digital Asset Standard) index Core assets.
   - q: Can I use Core for gaming assets?
     a: Yes. Core's plugin system makes it ideal for gaming with Attributes for on-chain stats, Freeze Delegate for locking items, and Transfer Delegate for marketplace integration.
+agentSkill: /smart-contracts/core.md
 ---
 Metaplex Core ("Core") is the **next-generation NFT standard** on Solana. It uses a **single-account design** that reduces minting costs by 80%+ compared to alternatives, while providing **enforced royalties**, **collection-level operations**, and a **flexible plugin system** for custom behaviors. {% .lead %}
 {% callout title="What You'll Learn" %}

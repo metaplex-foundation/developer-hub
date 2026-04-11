@@ -17,6 +17,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/core.md
 ---
 {% callout type="note" title="JS Helper Functions" %}
 The following helper functions are for the JS client.

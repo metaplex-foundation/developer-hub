@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 cli: /dev-tools/cli/core/plugins
+agentSkill: /smart-contracts/core.md
 ---
 Many plugins on MPL Core Assets and Collections can be updated after they've been added. The `updatePlugin` function allows you to modify plugin data, such as changing attributes, updating royalties, or modifying freeze states.
 {% totem %}

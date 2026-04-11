@@ -29,6 +29,7 @@ faqs:
     a: Most major Solana marketplaces support Core Assets. Check Ecosystem Support for the current list.
   - q: What happens if off-chain metadata goes offline?
     a: The Asset still exists on-chain with name and URI, but image and off-chain attributes won't load. On-chain attributes (via the Attributes plugin) remain accessible. Use permanent storage like Arweave or pinned IPFS.
+agentSkill: /smart-contracts/core.md
 ---
 This page explains **what a Core Asset is** and how it differs from traditional Solana NFTs. Understand the account structure, collection relationships, and metadata storage. {% .lead %}
 {% callout title="Key Concepts" %}

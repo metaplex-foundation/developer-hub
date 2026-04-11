@@ -25,6 +25,7 @@ about:
   - Genesis protocol
   - Fair distribution
 proficiencyLevel: Beginner
+agentSkill: /smart-contracts/genesis.md
 faqs:
   - q: What is Genesis?
     a: Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana. It provides on-chain infrastructure for presales, launch pools, and auctions.

@@ -16,6 +16,7 @@ proficiencyLevel: Advanced
 programmingLanguage:
   - JavaScript
   - TypeScript
+agentSkill: /smart-contracts/core.md
 ---
 The `Bubblegum` Plugin is a `Authority Managed` plugin that allows you to create Collections that can be used for compressed NFTs. {% .lead %}
 This plugin can only be used on `MPL Core Collections`.

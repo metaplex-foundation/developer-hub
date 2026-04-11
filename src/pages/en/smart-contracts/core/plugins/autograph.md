@@ -27,6 +27,7 @@ faqs:
     a: No. Once the owner enables the Autograph plugin, anyone can add their signature. The owner doesn't need to approve individual autographs.
   - q: What happens to autographs when an Asset is transferred?
     a: Autographs remain on the Asset. They are permanent records of who signed, regardless of ownership changes.
+agentSkill: /smart-contracts/core.md
 ---
 The **Autograph Plugin** allows anyone to add their signature and a message to an Asset or Collection. Perfect for collectible signatures from artists, celebrities, or community members. {% .lead %}
 {% callout title="What You'll Learn" %}

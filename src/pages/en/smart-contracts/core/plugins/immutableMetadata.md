@@ -27,6 +27,7 @@ faqs:
     a: Yes. You can add ImmutableMetadata during create() to ensure the metadata is locked from the start.
   - q: Why would I want immutable metadata?
     a: Immutable metadata provides permanent provenance - collectors know the NFT's name and associated metadata URI can never be changed, preventing rug-pulls.
+agentSkill: /smart-contracts/core.md
 ---
 The **ImmutableMetadata Plugin** permanently locks the name and URI of Assets or Collections. Once added, the metadata cannot be changed by anyone, ensuring permanent provenance. {% .lead %}
 {% callout title="What You'll Learn" %}

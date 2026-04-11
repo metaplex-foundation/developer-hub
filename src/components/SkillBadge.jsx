@@ -51,7 +51,7 @@ function CodeRow({ label, command }) {
   )
 }
 
-export function SkillBadge() {
+export function SkillBadge({ href }) {
   const [open, setOpen] = useState(false)
   const ref = useClickOutside(() => setOpen(false))
 
@@ -59,13 +59,11 @@ export function SkillBadge() {
   const npxAdd = `npx skills add metaplex-foundation/skill`
 
   return (
-    <div ref={ref} className="relative flex-shrink-0">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
-        aria-haspopup="true"
-        aria-expanded={open}
+    <div ref={ref} className="relative flex flex-shrink-0 items-center">
+      <Link
+        href={href}
+        className="inline-flex h-7 items-center gap-1.5 rounded-l-md border border-r-0 border-border bg-background px-2.5 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
+        title="Open the Markdown agent skill file for this page"
       >
         <svg
           viewBox="0 0 24 24"
@@ -76,38 +74,58 @@ export function SkillBadge() {
           <path d="M11.9842 0C11.2889 6.28058 6.28058 11.289 0 11.9842C6.28058 12.6795 11.289 17.6879 11.9842 23.9685C12.6795 17.688 17.6879 12.6795 23.9685 11.9842C17.688 11.289 12.6795 6.28058 11.9842 0Z" />
         </svg>
         Skill file available
-      </button>
+      </Link>
 
-      {open && (
-        <div className="absolute right-0 z-50 mt-1.5 w-96 origin-top-right rounded-md border border-border bg-background p-3 shadow-2xl ring-1 ring-white/10 dark:ring-white/10">
-          <p className="mb-2 text-xs font-medium text-foreground">Metaplex Skill File</p>
-          <p className="mb-3 text-xs text-muted-foreground">
-            This product is part of the{' '}
-            <a
-              href={SKILL_REPO}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-2 hover:text-primary/80"
-            >
-              Metaplex Skill package
-            </a>
-            {' '}— a collection of skill files that give AI coding agents full knowledge of Metaplex programs, SDKs, and CLI tools.
-            {' '}Learn more in the{' '}
-            <Link
-              href="/agents/skill"
-              className="text-primary underline underline-offset-2 hover:text-primary/80"
-              onClick={() => setOpen(false)}
-            >
-              Skill docs
-            </Link>
-            .
-          </p>
-          <div className="space-y-2.5">
-            <CodeRow label="NPX Install" command={npxAdd} />
-            <CodeRow label="Git Clone Skill Repo" command={gitClone} />
+      <div className="relative">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="inline-flex h-7 items-center rounded-r-md border border-border bg-background px-1.5 text-xs font-medium text-muted-foreground shadow-sm transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring"
+          aria-haspopup="true"
+          aria-expanded={open}
+          aria-label="Open skill package install options"
+        >
+          <svg
+            viewBox="0 0 20 20"
+            className="h-3 w-3"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        {open && (
+          <div className="absolute right-0 z-50 mt-1.5 w-96 origin-top-right rounded-md border border-border bg-background p-3 shadow-2xl ring-1 ring-white/10 dark:ring-white/10">
+            <p className="mb-2 text-xs font-medium text-foreground">Metaplex Skill File</p>
+            <p className="mb-3 text-xs text-muted-foreground">
+              This product is part of the{' '}
+              <a
+                href={SKILL_REPO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-2 hover:text-primary/80"
+              >
+                Metaplex Skill package
+              </a>
+              {' '}— a collection of skill files that give AI coding agents full knowledge of Metaplex programs, SDKs, and CLI tools.
+              {' '}Learn more in the{' '}
+              <Link
+                href="/agents/skill"
+                className="text-primary underline underline-offset-2 hover:text-primary/80"
+                onClick={() => setOpen(false)}
+              >
+                Skill docs
+              </Link>
+              .
+            </p>
+            <div className="space-y-2.5">
+              <CodeRow label="NPX Install" command={npxAdd} />
+              <CodeRow label="Git Clone Skill Repo" command={gitClone} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

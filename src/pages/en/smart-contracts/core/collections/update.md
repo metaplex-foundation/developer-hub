@@ -26,6 +26,7 @@ howToTools:
   - Node.js
   - Umi framework
   - mpl-core SDK
+agentSkill: /smart-contracts/core.md
 ---
 
 `updateCollection` and `updateCollectionPlugin` modify an existing [Core Collection's](/smart-contracts/core/collections) metadata and plugin configuration. {% .lead %}

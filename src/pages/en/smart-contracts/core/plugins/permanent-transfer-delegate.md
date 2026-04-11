@@ -25,6 +25,7 @@ faqs:
     a: No. Permanent plugins can only be added at Asset creation time. Use regular Transfer Delegate for existing Assets.
   - q: How does Collection-level Permanent Transfer Delegate work?
     a: The delegate can transfer any individual Asset in the Collection, but not all at once. Each transfer is a separate transaction.
+agentSkill: /smart-contracts/core.md
 ---
 The **Permanent Transfer Delegate Plugin** provides irrevocable transfer authority that persists forever. Unlike regular Transfer Delegate, this authority is never revoked and can transfer Assets repeatedly. {% .lead %}
 {% callout title="What You'll Learn" %}

@@ -19,6 +19,7 @@ programmingLanguage:
   - TypeScript
   - Rust
 cli: /dev-tools/cli/core/update-asset
+agentSkill: /smart-contracts/core.md
 howToSteps:
   - Install SDK with npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi
   - Fetch the Asset to get current state

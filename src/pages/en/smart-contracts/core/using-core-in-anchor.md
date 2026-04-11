@@ -24,6 +24,7 @@ faqs:
     a: Yes. Use fetch_external_plugin() instead of fetch_plugin() with the appropriate key.
   - q: Where can I find all available instructions?
     a: See the mpl-core docs.rs instructions module for the complete API reference.
+agentSkill: /smart-contracts/core.md
 ---
 Build **on-chain programs** that interact with Core Assets using Anchor. This guide covers installation, account deserialization, plugin access, and CPI patterns. {% .lead %}
 {% callout title="What You'll Learn" %}

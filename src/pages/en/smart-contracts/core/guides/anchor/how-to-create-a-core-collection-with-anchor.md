@@ -25,6 +25,7 @@ howToTools:
   - Anchor framework
   - mpl-core Rust crate
   - Solana CLI
+agentSkill: /smart-contracts/core.md
 ---
 This guide will demonstrate the use of the `mpl-core` Rust SDK crate to create a **Core NFT Collection** via CPI using the **Anchor** framework in a **Solana** program.
 {% callout title="What is Core?" %}

@@ -26,6 +26,7 @@ howToTools:
   - Umi framework
   - mpl-core SDK
   - Express or similar backend
+agentSkill: /smart-contracts/core.md
 ---
 This developer guide demonstrates how to create a staking program for your collection using only TypeScript, leveraging the attribute plugin and freeze delegate. **This approach eliminates the need for a smart contract** to track staking time and manage staking/unstaking, making it more accessible for Web2 developer.
 ## Starting off: Understanding the Logic behind the program

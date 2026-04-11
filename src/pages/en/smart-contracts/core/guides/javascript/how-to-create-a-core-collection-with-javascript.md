@@ -28,6 +28,7 @@ howToTools:
   - Umi framework
   - mpl-core SDK
   - Irys or IPFS for storage
+agentSkill: /smart-contracts/core.md
 ---
 This guide will demonstrate the use of the  `@metaplex-foundation/mpl-core` Javascript sdk package to create a **Core Collection** using the Metaplex Core onchain program.
 {% callout title="What is Core?" %}

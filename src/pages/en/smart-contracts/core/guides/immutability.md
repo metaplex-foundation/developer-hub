@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+agentSkill: /smart-contracts/core.md
 ---
 ## What is Immutability?
 In the general context of Digital Assets immutability is often used referring to the metadata of a Token or NFT. In the past this was asked for by communities to make sure that a purchased Asset can not be changed in the future. With the additional functionality MPL Core offers it can make sense to add additional immutability features. This guide aims to provide information about those different options and how they can be used to tailor the immutability of a digital Asset to the needs of a project.

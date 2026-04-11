@@ -2,6 +2,7 @@
 title: Read Agent Data
 metaTitle: Read Agent Data on Solana | Metaplex Agent Registry
 description: Verify agent registration and read agent identity data on Solana.
+agentSkill: /agents.md
 keywords:
   - read agent data
   - agent identity

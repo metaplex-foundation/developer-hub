@@ -56,6 +56,7 @@ export function usePage(pageProps) {
     howToSteps: pageProps.markdoc?.frontmatter.howToSteps ?? null,
     howToTools: pageProps.markdoc?.frontmatter.howToTools ?? null,
     cli: pageProps.markdoc?.frontmatter.cli ?? null,
+    agentSkill: pageProps.markdoc?.frontmatter.agentSkill ?? null,
   }
 }
 
@@ -259,4 +260,3 @@ function localizeProduct(product, locale) {
 
   return localizedProduct
 }
-

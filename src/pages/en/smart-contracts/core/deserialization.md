@@ -17,6 +17,7 @@ programmingLanguage:
   - JavaScript
   - TypeScript
   - Rust
+agentSkill: /smart-contracts/core.md
 ---
 Digital assets on Core are composed of exactly **one onchain account** that contains both the base asset data and the plugin.
 That means that if we want to read that data we need to learn how to deserialize it.

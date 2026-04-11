@@ -28,6 +28,7 @@ faqs:
     a: Permanent plugins cannot be removed after creation, though their settings can still be adjusted. This is by design for use cases that require guaranteed plugin presence.
   - q: Can I remove a plugin from a Collection and its Assets at once?
     a: No. Collection plugins and Asset plugins are managed separately. However, removing a Collection plugin can affect Assets that inherit from it (e.g., Assets without their own Royalties plugin will no longer have royalties enforced).
+agentSkill: /smart-contracts/core.md
 ---
 This guide shows how to **remove plugins** from Core Assets and Collections. Removing a plugin deletes its data and functionality. {% .lead %}
 {% callout title="What You'll Learn" %}

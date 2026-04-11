@@ -25,6 +25,7 @@ faqs:
     a: No. When Permanent Freeze Delegate is on a Collection, freezing affects all Assets at once. Use Asset-level Permanent Freeze Delegate for individual control.
   - q: Can a permanently frozen Asset be burned?
     a: Only if there's also a Permanent Burn Delegate. Regular Burn Delegate cannot burn frozen Assets, but Permanent Burn Delegate uses forceApprove.
+agentSkill: /smart-contracts/core.md
 ---
 The **Permanent Freeze Delegate Plugin** provides irrevocable freeze authority that persists across transfers. Use it for soulbound tokens, collection-wide freezing, and permanent lock mechanisms. {% .lead %}
 {% callout title="What You'll Learn" %}

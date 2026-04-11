@@ -13,6 +13,7 @@ about:
   - JSON format
   - Off-chain data
 proficiencyLevel: Beginner
+agentSkill: /smart-contracts/core.md
 ---
 The off-chain JSON metadata for Metaplex Core assets is similar to the Metaplex Token Metadata standard. However, since more data can be stored on-chain in the asset itself using plugins, some of the data like attributes can in addition be stored on chain.
 ## Schema Examples

@@ -19,6 +19,7 @@ about:
   - Launch lifecycle
   - Token distribution
 proficiencyLevel: Beginner
+agentSkill: /smart-contracts/genesis.md
 faqs:
   - q: What does initializing a Genesis Account create?
     a: It creates a new SPL token with metadata, a master coordination account, and holds the total token supply in escrow for distribution.
