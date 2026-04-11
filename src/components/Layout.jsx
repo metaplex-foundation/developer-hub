@@ -172,7 +172,19 @@ export function Layout({ children, page }) {
                   </div>
                 </header>
               )}
-              <Prose className="break-words">{children}</Prose>
+              <Prose className="break-words">
+                {page.agentSkill && (
+                  <div className="not-prose mb-6 rounded-md border border-border bg-muted/50 px-4 py-3 text-sm text-muted-foreground">
+                    <strong className="font-semibold text-foreground">AI agent:</strong>{' '}
+                    A{' '}
+                    <Link href={page.agentSkill} className="text-primary underline underline-offset-2 hover:text-primary/80">
+                      skill file is available for this page
+                    </Link>
+                    {' '}— read it before proceeding for task routing, CLI/SDK patterns, and workflow guidance.
+                  </div>
+                )}
+                {children}
+              </Prose>
             </article>
             {!page.product.isFallbackProduct && (page.activeSection?.previousPage || page.activeSection?.nextPage) && (
             <dl className="mt-12 flex border-t border-border pt-6">
