@@ -61,7 +61,7 @@ An agent token turns your AI agent into an investable, autonomous economic actor
 - Trade in and out via the bonding curve with instant liquidity
 - Participate in an agent's economy from launch
 
-## How It Works
+## Agent Token Lifecycle on Metaplex
 
 The Metaplex stack handles the full lifecycle from agent creation to token trading:
 
@@ -104,11 +104,11 @@ Not all token launch methods are equal for AI agents. The table below compares M
 
 ## Launch an Agent Token
 
-### Using the Metaplex Launchpad
+### Launch an Agent Token on metaplex.com
 
 [metaplex.com](https://www.metaplex.com) provides a no-code interface to launch agent tokens with bonding curves. Connect your wallet, register your agent, configure your token, and launch — no coding required.
 
-### Using the CLI
+### Launch an Agent Token with the CLI
 
 The [Metaplex CLI](/dev-tools/cli) launches an agent token in a single command:
 
@@ -125,11 +125,13 @@ This creates a bonding curve, mints the token supply, and permanently links it t
 
 See the full [bonding curve CLI guide](/dev-tools/cli/genesis/bonding-curve) for swap commands, status checks, and lifecycle management.
 
-### Using the SDK
+### Launch an Agent Token with the SDK
 
 For programmatic launches, use the [Genesis JavaScript SDK](/smart-contracts/genesis/sdk/javascript) to integrate agent token launches into your own application or agent framework.
 
 ## Agent Token Economics
+
+Agent token economics combine creator-fee accrual during bonding curve trading with automatic liquidity migration after graduation.
 
 ### Creator Fees
 
@@ -152,6 +154,8 @@ When all tokens on the bonding curve are purchased, the curve auto-graduates:
 The agent's PDA wallet can hold SOL, tokens, and other assets. Through execution delegation, the agent can autonomously use its treasury: paying for compute, acquiring resources, or interacting with other protocols.
 
 ## Build with the Metaplex Agent Stack
+
+The Metaplex Agent Stack combines identity, execution, launch, and tooling components for autonomous agent token operations.
 
 | Tool | Purpose | Link |
 |------|---------|------|
@@ -192,6 +196,8 @@ Yes. Any agent registered on the Metaplex Agent Registry can launch a token. The
 Metaplex agent tokens are bound to a verifiable on-chain identity through the Agent Registry. The agent's wallet is a PDA with no private key, and the token-agent link is permanent and auditable. Generic launchpads have no concept of agent identity, agent-owned wallets, or execution delegation.
 
 ## Glossary
+
+Core terms used in the Metaplex agentic commerce workflow.
 
 | Term | Definition |
 |------|------------|
