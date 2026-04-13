@@ -104,6 +104,8 @@ Not all token launch methods are equal for AI agents. The table below compares M
 
 ## Launch an Agent Token
 
+Agent token launches on Metaplex are available through no-code, CLI, and SDK workflows.
+
 ### Launch an Agent Token on metaplex.com
 
 [metaplex.com](https://www.metaplex.com) provides a no-code interface to launch agent tokens with bonding curves. Connect your wallet, register your agent, configure your token, and launch — no coding required.
