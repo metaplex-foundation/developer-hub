@@ -50,7 +50,7 @@ export const agents = {
             },
             {
               title: 'Read Agent Data',
-              href: '/agents/run-agent',
+              href: '/agents/read-agent-data',
             },
             {
               title: 'Create an Agent Token',
