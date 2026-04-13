@@ -53,6 +53,10 @@ export const agents = {
               href: '/agents/run-agent',
             },
             {
+              title: 'Agentic Commerce',
+              href: '/agents/agentic-commerce',
+            },
+            {
               title: 'Create an Agent Token',
               href: '/agents/create-agent-token',
             },
@@ -110,6 +114,11 @@ export const agents = {
         ja: 'エージェントデータの読み取り',
         ko: '에이전트 데이터 읽기',
         zh: '读取 Agent 数据',
+      },
+      'Agentic Commerce': {
+        ja: 'エージェントコマース',
+        ko: '에이전트 커머스',
+        zh: 'Agent 商业',
       },
       'Run an Agent': {
         ja: 'エージェントの実行',

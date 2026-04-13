@@ -152,6 +152,18 @@ export const agentMenuCategory = [
     },
   },
   {
+    name: 'Agentic Commerce',
+    headline: 'Raise funds for your AI agent with a bonding curve token launch.',
+    description: 'Raise funds for your AI agent with a bonding curve token launch.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/agentic-commerce',
+    localizedNavigation: {
+      ja: { name: 'エージェントコマース', headline: 'ボンディングカーブトークンローンチでAIエージェントの資金を調達します。' },
+      ko: { name: '에이전트 커머스', headline: '본딩 커브 토큰 런칭으로 AI 에이전트 자금을 조달합니다.' },
+      zh: { name: 'Agent 商业', headline: '通过联合曲线代币发行为 AI Agent 筹集资金。' },
+    },
+  },
+  {
     name: 'Create an Agent Token',
     headline: 'Launch a token from an agent\'s onchain wallet.',
     description: 'Launch a token from an agent\'s onchain wallet.',
