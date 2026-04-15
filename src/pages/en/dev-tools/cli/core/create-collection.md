@@ -22,6 +22,8 @@ Create a single Collection by providing an image file and a JSON metadata file. 
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
+Need a starting metadata file? Run `mplx core collection template [output]` to scaffold a `metadata.json` inside a `collection/` folder and pass it to `--offchain`.
+
 ### 3. Interactive Wizard
 Create a Collection using the interactive wizard which guides you through the entire process, including file uploads and metadata creation.
 

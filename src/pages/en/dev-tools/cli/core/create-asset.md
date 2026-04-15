@@ -22,6 +22,8 @@ Create a single Asset by providing an image file and a JSON metadata file. The c
 mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
+Need a starting metadata file? Run `mplx core asset template [output]` to scaffold a `metadata.json` inside an `asset/` folder and pass it to `--offchain`.
+
 ### 3. Interactive Wizard
 Create an Asset using the interactive wizard which guides you through the entire process, including file uploads and metadata creation.
 
