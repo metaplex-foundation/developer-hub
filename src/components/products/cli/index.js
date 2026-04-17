@@ -125,32 +125,56 @@ export const cli = {
           title: 'Toolbox',
           links: [
             {
-              title: 'Token Creation',
-              href: '/dev-tools/cli/toolbox/token-create',
+              title: 'Token',
+              children: [
+                { title: 'Create', href: '/dev-tools/cli/toolbox/token-create' },
+                { title: 'Mint', href: '/dev-tools/cli/toolbox/token-mint' },
+                { title: 'Transfer', href: '/dev-tools/cli/toolbox/token-transfer' },
+                { title: 'Add Metadata', href: '/dev-tools/cli/toolbox/add-metadata-to-token' },
+                { title: 'Update Metadata', href: '/dev-tools/cli/toolbox/update-token-metadata' },
+              ],
             },
             {
-              title: 'Add Metadata to Token',
-              href: '/dev-tools/cli/toolbox/add-metadata-to-token',
+              title: 'SOL',
+              children: [
+                { title: 'Airdrop', href: '/dev-tools/cli/toolbox/sol-airdrop' },
+                { title: 'Balance', href: '/dev-tools/cli/toolbox/sol-balance' },
+                { title: 'Transfer', href: '/dev-tools/cli/toolbox/sol-transfer' },
+                { title: 'Wrap', href: '/dev-tools/cli/toolbox/sol-wrap' },
+                { title: 'Unwrap', href: '/dev-tools/cli/toolbox/sol-unwrap' },
+              ],
             },
             {
-              title: 'Update Token Metadata',
-              href: '/dev-tools/cli/toolbox/update-token-metadata',
+              title: 'Storage',
+              children: [
+                { title: 'Upload', href: '/dev-tools/cli/toolbox/storage-upload' },
+                { title: 'Balance', href: '/dev-tools/cli/toolbox/storage-balance' },
+                { title: 'Fund', href: '/dev-tools/cli/toolbox/storage-fund' },
+                { title: 'Withdraw', href: '/dev-tools/cli/toolbox/storage-withdraw' },
+              ],
             },
             {
-              title: 'Token Transfer',
-              href: '/dev-tools/cli/toolbox/token-transfer',
+              title: 'Address Lookup Tables',
+              children: [
+                { title: 'Create', href: '/dev-tools/cli/toolbox/lut-create' },
+                { title: 'Fetch', href: '/dev-tools/cli/toolbox/lut-fetch' },
+                { title: 'Deactivate', href: '/dev-tools/cli/toolbox/lut-deactivate' },
+                { title: 'Close', href: '/dev-tools/cli/toolbox/lut-close' },
+              ],
             },
             {
-              title: 'SOL Airdrop',
-              href: '/dev-tools/cli/toolbox/sol-airdrop',
+              title: 'Scaffolding',
+              children: [
+                { title: 'Program Template', href: '/dev-tools/cli/toolbox/scaffolding-program' },
+                { title: 'Website Template', href: '/dev-tools/cli/toolbox/scaffolding-website' },
+              ],
             },
             {
-              title: 'SOL Balance',
-              href: '/dev-tools/cli/toolbox/sol-balance',
-            },
-            {
-              title: 'SOL Transfer',
-              href: '/dev-tools/cli/toolbox/sol-transfer',
+              title: 'Utilities',
+              children: [
+                { title: 'Rent', href: '/dev-tools/cli/toolbox/rent' },
+                { title: 'Transaction', href: '/dev-tools/cli/toolbox/transaction' },
+              ],
             },
           ],
         },
