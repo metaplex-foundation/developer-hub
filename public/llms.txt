@@ -63,7 +63,13 @@
 ## Genesis (Token Launch)
 
 - [API Client](https://metaplex.com/docs/smart-contracts/genesis/sdk/api-client): Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
+- [Bonding Curve](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve): Overview of the Genesis Bonding Curve — a constant product AMM that sells out its token supply and graduates into a Raydium CPMM pool.
+- [Bonding Curve — Advanced Internals](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-internals): Deep reference for the Genesis Bonding Curve — swap price formulas, reverse calculation, reserve exhaustion clamping, BondingCurveBucketV2 account structure, and extensions.
+- [Bonding Curve — Indexing & Events](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-indexing): How to index the Genesis Bonding Curve lifecycle — GPA discovery, decoding BondingCurveSwapEvent, tracking price from events, and account discriminators.
+- [Bonding Curve — Theory of Operation](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-theory): How the Genesis Bonding Curve works — constant product pricing, virtual reserves, fee structure, first buy mechanism, and lifecycle phases.
+- [Bonding Curve Swap Integration](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-swaps): How to read bonding curve state, get swap quotes, execute buy and sell transactions, handle slippage, and claim creator fees using the Genesis SDK.
 - [Create Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
+- [Creator Fees on the Genesis Bonding Curve](https://metaplex.com/docs/smart-contracts/genesis/creator-fees): How to configure a creator fee on a Genesis bonding curve launch and claim accrued fees during the active curve and after graduation to a Raydium CPMM pool.
 - [Fetch Bucket State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-bucket-state): Fetch real-time bucket state from the blockchain using the Genesis JavaScript SDK. Includes deposit totals, counts, and time conditions.
 - [Fetch Deposit State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-deposit-state): Fetch user deposit state from the blockchain using the Genesis JavaScript SDK. Check deposit amounts and claim status.
 - [Genesis - Solana Token Launchpad & Launch Platform](https://metaplex.com/docs/smart-contracts/genesis): Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
@@ -74,6 +80,7 @@
 - [Integration APIs](https://metaplex.com/docs/smart-contracts/genesis/integration-apis): Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 - [JavaScript SDK](https://metaplex.com/docs/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
 - [Launch Pool](https://metaplex.com/docs/smart-contracts/genesis/launch-pool): Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
+- [Launching a Bonding Curve via the Metaplex API](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-launch): How to create, sign, send, and register a bonding curve token launch using the Genesis SDK and the Metaplex API — including creator fees, first buy, agent launches, and error handling.
 - [List Launches](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
 - [Presale](https://metaplex.com/docs/smart-contracts/genesis/presale): Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
 - [Register Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
@@ -99,10 +106,12 @@
 - [Bubblegum Plugin](https://metaplex.com/docs/smart-contracts/core/plugins/bubblegum): Learn how to use the Bubblegum Plugin to create Collections that can be used for compressed NFTs.
 - [Burn Delegate](https://metaplex.com/docs/smart-contracts/core/plugins/burn-delegate): Allow a delegate to burn Core NFT Assets. Use the Burn Delegate plugin for game mechanics, subscription expirations, and automated asset destruction.
 - [Burning Assets](https://metaplex.com/docs/smart-contracts/core/burn): Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
+- [Core Collections](https://metaplex.com/docs/smart-contracts/core/collections): An overview of Core Collections on Solana — how they group Assets, store shared metadata, and apply collection-level plugins.
 - [Create a Staking Program in Anchor](https://metaplex.com/docs/smart-contracts/core/guides/anchor/anchor-staking-example): This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking program using the Metaplex Core digital asset standard!
 - [Create a US Market Trading Experience Using the Oracle External Plugin](https://metaplex.com/docs/smart-contracts/core/guides/oracle-plugin-example): This guide shows how to limit your Core Collection trades and sales during open US market hours.
 - [Create an Event Ticketing Platform leveraging the Appdata Plugin](https://metaplex.com/docs/smart-contracts/core/guides/onchain-ticketing-with-appdata): This guide shows how to create a ticketing platform leveraging the Appdata Plugin.
 - [Create Core Staking Using Javascript](https://metaplex.com/docs/smart-contracts/core/guides/javascript/web2-typescript-staking-example): This guide will show you how to leverage the FreezeDelegate and Attribute plugin to create a staking platform using web2 practices with a backend server.
+- [Creating a Core Collection](https://metaplex.com/docs/smart-contracts/core/collections/create): How to create a Core Collection on Solana — with and without plugins — using the mpl-core SDK and Umi.
 - [Creating Assets](https://metaplex.com/docs/smart-contracts/core/create-asset): Learn how to create Core NFT Assets on Solana using JavaScript or Rust. Includes uploading metadata, minting into collections, and adding plugins.
 - [Deserialization](https://metaplex.com/docs/smart-contracts/core/deserialization): Learn about the deserialization of Asset accounts, Collection accounts and plugins using the Metaplex Core packages.
 - [Differences between Core and Token Metadata](https://metaplex.com/docs/smart-contracts/core/tm-differences): Compare Metaplex Core and Token Metadata NFT standards. Learn what changed, what's new, and how to migrate your mental model from TM to Core.
@@ -111,6 +120,7 @@
 - [Execute Asset Signing](https://metaplex.com/docs/smart-contracts/core/execute-asset-signing): Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
 - [External Plugins](https://metaplex.com/docs/smart-contracts/core/external-plugins/overview): Extend Core NFTs with external programs using Oracle and AppData plugins. Add custom validation logic and store arbitrary data on Assets.
 - [FAQ](https://metaplex.com/docs/smart-contracts/core/faq): Frequently asked questions about the Metaplex Core protocol.
+- [Fetching a Core Collection](https://metaplex.com/docs/smart-contracts/core/collections/fetch): How to fetch a Core Collection account from Solana by address using the mpl-core SDK and Umi.
 - [Fetching Assets](https://metaplex.com/docs/smart-contracts/core/fetch): Learn how to fetch Core NFT Assets and Collections on Solana. Retrieve single assets, query by owner or collection, and use the DAS API for fast indexed queries.
 - [Freeze Delegate](https://metaplex.com/docs/smart-contracts/core/plugins/freeze-delegate): Learn how to freeze Core NFT Assets to block transfers and burns. Use the Freeze Delegate plugin for escrowless staking, marketplace listings, and game item locking.
 - [Freeze Execute](https://metaplex.com/docs/smart-contracts/core/plugins/freeze-execute): Learn about the MPL Core Asset Freeze Execute Plugin. The 'Freeze Execute' plugin can freeze the Execute lifecycle event, preventing the asset from executing arbitrary instructions.
@@ -121,7 +131,6 @@
 - [JavaScript SDK](https://metaplex.com/docs/smart-contracts/core/sdk/javascript): Complete reference for the Metaplex Core JavaScript SDK. Covers Umi setup, creating assets, transfers, burns, updates, collections, plugins, and fetching data.
 - [JSON Schema](https://metaplex.com/docs/smart-contracts/core/json-schema): Understand the structure and requirements of the off-chain JSON schema for Metaplex Core assets.
 - [Loyalty Card Concept Guide](https://metaplex.com/docs/smart-contracts/core/guides/loyalty-card-concept-guide): This guide describes how to build a Loyalty Card program on Solana using MPL Core NFT Assets and the MPL Core plugin system.
-- [Managing Collections](https://metaplex.com/docs/smart-contracts/core/collections): Learn how to create and manage Core Collections on Solana. Group NFT Assets together, set collection-level royalties, and manage collection metadata.
 - [Master Edition Plugin](https://metaplex.com/docs/smart-contracts/core/plugins/master-edition): Group edition Assets under a Collection with the Master Edition plugin. Store max supply and edition metadata for prints and limited runs.
 - [MPL Core Asset](https://metaplex.com/docs/smart-contracts/core/what-is-an-asset): Learn what a Core Asset is on Solana. Understand the single-account NFT model, account structure, collection membership, and off-chain metadata.
 - [MPL-Core Rust SDK](https://metaplex.com/docs/smart-contracts/core/sdk/rust): Learn how to set up your project to run the MPL-Core Rust SDK.
@@ -137,6 +146,7 @@
 - [Transfer Delegate Plugin](https://metaplex.com/docs/smart-contracts/core/plugins/transfer-delegate): Allow a delegate to transfer Core NFT Assets. Use the Transfer Delegate plugin for escrowless sales, game mechanics, and marketplace listings.
 - [Transferring Assets](https://metaplex.com/docs/smart-contracts/core/transfer): Learn how to transfer Core NFT Assets between wallets on Solana. Send NFTs to other users, handle collection transfers, and use transfer delegates.
 - [Update Delegate Plugin](https://metaplex.com/docs/smart-contracts/core/plugins/update-delegate): Delegate update authority to third parties for Core NFT Assets and Collections. Allow others to modify metadata without transferring ownership.
+- [Updating a Core Collection](https://metaplex.com/docs/smart-contracts/core/collections/update): How to update Core Collection metadata and plugins on Solana using the updateCollection and updateCollectionPlugin instructions via the mpl-core SDK.
 - [Updating Assets](https://metaplex.com/docs/smart-contracts/core/update): Learn how to update Core NFT Asset metadata on Solana. Change name, URI, collection membership, and make assets immutable using the Metaplex Core SDK.
 - [Using Metaplex Core in Anchor](https://metaplex.com/docs/smart-contracts/core/using-core-in-anchor): Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
 - [Verified Creator Plugin](https://metaplex.com/docs/smart-contracts/core/plugins/verified-creators): Add verified creator signatures to Core NFT Assets and Collections. Prove creatorship without affecting royalty distribution.
@@ -406,10 +416,13 @@
 ## Dev Tools
 
 - [Overview](https://metaplex.com/docs/dev-tools/amman): Provides a high-level overview of Amman local validator.
+- [Overview](https://metaplex.com/docs/dev-tools/cli/agents): Overview of agents CLI commands for registering and managing on-chain agent identities using the Metaplex CLI (mplx).
 - [Overview](https://metaplex.com/docs/dev-tools/cli/genesis): Overview of Genesis CLI commands for launching tokens using the Metaplex CLI (mplx).
 - [Solana Developer Tools](https://metaplex.com/docs/dev-tools): Developer tools for building on Solana. CLI tools, TypeScript SDKs, APIs, and utilities for NFTs, tokens, and digital assets.
 - [Add Metadata to Token](https://metaplex.com/docs/dev-tools/cli/toolbox/add-metadata-to-token): Add metadata to an existing token that doesn't have a metadata account
+- [Agent Token](https://metaplex.com/docs/dev-tools/cli/agents/set-agent-token): Create a token for a registered agent and link it to the agent identity using the Metaplex CLI.
 - [Asset-Signer Wallets](https://metaplex.com/docs/dev-tools/cli/config/asset-signer-wallets): Use an MPL Core Asset's signer PDA as your active CLI wallet. All commands automatically wrap in execute — transfer SOL, tokens, and assets from a PDA without custom scripts.
+- [Bonding Curve](https://metaplex.com/docs/dev-tools/cli/genesis/bonding-curve): Create a bonding curve token launch, buy and sell tokens, check curve status, and inspect the bonding curve bucket using the Metaplex CLI.
 - [Bubblegum Overview](https://metaplex.com/docs/dev-tools/cli/bubblegum): Create and manage compressed NFTs using the Bubblegum V2 program
 - [Burn Asset](https://metaplex.com/docs/dev-tools/cli/core/burn-asset): Burn MPL Core Assets using the Metaplex CLI
 - [Burn Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/burn-cnft): Permanently destroy a compressed NFT
@@ -424,7 +437,9 @@
 - [Create Token](https://metaplex.com/docs/dev-tools/cli/toolbox/token-create): Create a new fungible token on Solana
 - [Create Tree](https://metaplex.com/docs/dev-tools/cli/bubblegum/create-tree): Create a Merkle tree for compressed NFTs
 - [Execute](https://metaplex.com/docs/dev-tools/cli/core/execute): Inspect an MPL Core Asset's signer PDA address and SOL balance, and understand how execute wraps transactions for PDA wallets in the Metaplex CLI.
+- [Executive Delegation](https://metaplex.com/docs/dev-tools/cli/agents/executive): Register executive profiles and manage execution delegation for agents using the Metaplex CLI.
 - [Explorer Configuration](https://metaplex.com/docs/dev-tools/cli/config/explorer): Set your preferred blockchain explorer
+- [Fetch Agent](https://metaplex.com/docs/dev-tools/cli/agents/fetch): Fetch and display agent identity data for a registered MPL Core asset using the Metaplex CLI.
 - [Fetch Asset or Collection](https://metaplex.com/docs/dev-tools/cli/core/fetch): Fetch MPL Core Assets or Collections by their mint address
 - [Fetch Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/fetch-cnft): Retrieve compressed NFT data and merkle proof
 - [Fetch Information](https://metaplex.com/docs/dev-tools/cli/cm/fetch): Fetch and display MPL Core Candy Machine information using the MPLX CLI. View configuration, guard settings, item status, and deployment details.
@@ -433,13 +448,14 @@
 - [Insert Items](https://metaplex.com/docs/dev-tools/cli/cm/insert): Insert uploaded assets into your MPL Core Candy Machine using the MPLX CLI.
 - [Installation](https://metaplex.com/docs/dev-tools/cli/installation): Install and set up the Metaplex CLI
 - [Introduction](https://metaplex.com/docs/dev-tools/cli): Welcome to the Metaplex CLI
-- [Launch (API)](https://metaplex.com/docs/dev-tools/cli/genesis/launch): Create and register token launches via the Genesis API using the Metaplex CLI (mplx).
+- [Launch (API)](https://metaplex.com/docs/dev-tools/cli/genesis/launch): Create and register token launches via the Genesis API using the Metaplex CLI (mplx) — launchpool and bonding curve, with optional agent integration.
 - [Launch Pool](https://metaplex.com/docs/dev-tools/cli/genesis/launch-pool): Create a launch pool bucket, deposit, withdraw, transition, and claim tokens using the Metaplex CLI.
 - [List Trees](https://metaplex.com/docs/dev-tools/cli/bubblegum/list-trees): View all saved Bubblegum Merkle trees
 - [Manage](https://metaplex.com/docs/dev-tools/cli/genesis/manage): Finalize, fetch, manage unlocked buckets, and revoke authorities for a Genesis account using the Metaplex CLI.
 - [Plugins](https://metaplex.com/docs/dev-tools/cli/core/plugins): Manage MPL Core Asset and Collection plugins
 - [Premade Configurations](https://metaplex.com/docs/dev-tools/amman/pre-made-configs): A set of premade configurations from Metaplex Amman local validator toolkit.
 - [Presale](https://metaplex.com/docs/dev-tools/cli/genesis/presale): Create a presale bucket, deposit, and claim tokens from a Genesis presale using the Metaplex CLI.
+- [Register Agent](https://metaplex.com/docs/dev-tools/cli/agents/register): Register an agent identity on an MPL Core asset using the Metaplex CLI.
 - [RPCs](https://metaplex.com/docs/dev-tools/cli/config/rpcs): Manage RPC endpoints in your configuration
 - [Shank](https://metaplex.com/docs/dev-tools/shank): Extract IDLs from Rust Solana program code using attribute macros
 - [Shank Macros Reference](https://metaplex.com/docs/dev-tools/shank/macros): Complete reference for Shank derive macros and attributes used in Solana programs
@@ -449,7 +465,7 @@
 - [Token Transfer](https://metaplex.com/docs/dev-tools/cli/toolbox/token-transfer): Transfer tokens to a destination address
 - [Transfer Asset](https://metaplex.com/docs/dev-tools/cli/core/transfer-asset): Transfer ownership of an MPL Core Asset to a new wallet using the Metaplex CLI mplx core asset transfer command.
 - [Transfer Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/transfer-cnft): Transfer a compressed NFT to a new owner
-- [Update Asset](https://metaplex.com/docs/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata and properties
+- [Update Asset](https://metaplex.com/docs/dev-tools/cli/core/update-asset): Update MPL Core Asset metadata, name, URI, image, or collection membership using the Metaplex CLI mplx core asset update command.
 - [Update Compressed NFT](https://metaplex.com/docs/dev-tools/cli/bubblegum/update-cnft): Update the metadata of a compressed NFT
 - [Update Token Metadata](https://metaplex.com/docs/dev-tools/cli/toolbox/update-token-metadata): Update the metadata of an existing token
 - [Upload Assets](https://metaplex.com/docs/dev-tools/cli/cm/upload): Upload candy machine assets to decentralized storage using the MPLX CLI. Intelligent caching, progress tracking, and comprehensive validation.
@@ -500,6 +516,7 @@
 - [Constraint Types](https://metaplex.com/docs/smart-contracts/fusion/constraint-types): The different options for Trifle composition rules.
 - [Create a Claimable SPL Token Airdrop](https://metaplex.com/docs/solana/general/spl-token-claim-airdrop-using-gumdrop): Learn how to create an SPL token airdrop where users claim their allocation using Gumdrop.
 - [Create a Fungible Token](https://metaplex.com/docs/tokens/create-a-token): Learn how to create a fungible SPL token with metadata on Solana
+- [Create an Agent Token](https://metaplex.com/docs/agents/create-agent-token): How to launch a bonding curve token on behalf of a Metaplex agent using the Genesis SDK — including automatic creator fee routing, first buy, devnet testing, and error handling.
 - [Create an NFT](https://metaplex.com/docs/nfts/create-nft): Learn how to create an NFT using Metaplex Core on Solana
 - [Create deterministic metadata with Turbo](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
 - [Create or Update Rule Sets](https://metaplex.com/docs/smart-contracts/token-auth-rules/create-or-update): How to Create and Update Rule Sets
@@ -539,6 +556,7 @@
 - [Metaplex Rust SDKs](https://metaplex.com/docs/solana/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
 - [Metaplex Skill](https://metaplex.com/docs/agents/skill): An Agent Skill that gives AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.
 - [Metaplex Solana NextJs Tailwind Template](https://metaplex.com/docs/solana/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
+- [Mint an Agent](https://metaplex.com/docs/agents/mint-agent): Create an onchain AI agent in a single transaction using the Metaplex API and the mpl-agent-registry SDK. The hosted API stores agent metadata and returns an unsigned transaction you sign and submit.
 - [MPL Agent Registry](https://metaplex.com/docs/smart-contracts/mpl-agent): On-chain programs for registering agent identity and delegating execution on Solana using MPL Core assets.
 - [MPL-Hybrid Javascript SDK](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk/javascript): Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
 - [MPL-Hybrid SDKs](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk): View the available SDKs for the MPL-Hybrid Metaplex program.
@@ -551,7 +569,7 @@
 - [Programs & Operations](https://metaplex.com/docs/agents/skill/programs-and-operations): Detailed breakdown of programs and operations covered by the Metaplex Skill.
 - [Public Key](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/pubkey-match): The Public Key primitive rule
 - [Quick Start](https://metaplex.com/docs/smart-contracts/hydra/quick-start): Provides a high-level overview over the non-Umi Hydra SDK.
-- [Read Agent Data](https://metaplex.com/docs/agents/run-agent): Verify agent registration and read agent identity data on Solana.
+- [Read Agent Data](https://metaplex.com/docs/agents/read-agent-data): Verify agent registration and read agent identity data on Solana.
 - [Read Token Data](https://metaplex.com/docs/tokens/read-token): Learn how to fetch fungible token data from the Solana blockchain
 - [Register an Agent](https://metaplex.com/docs/agents/register-agent): Register an agent identity on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset.
 - [RPCs, DAS, and RPC Providers](https://metaplex.com/docs/solana/rpcs-and-das): Learn about RPCs on the Solana blockchain, how DAS by Metaplex aids in storing and reading data, and find RPC providers for your project.

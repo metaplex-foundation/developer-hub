@@ -100,5 +100,3 @@ Returns:
 - Frozen assets cannot be transferred — they must be thawed first using the freeze/thaw [plugin](/core/plugins)
 - The collection account is fetched automatically; no manual `--collection` flag is required for assets in a collection
 - This command applies to [MPL Core Assets](/core) only — for Token Metadata NFTs, use a different transfer instruction
-
-*Maintained by Metaplex Foundation · Last verified March 2026 · Applies to MPLX CLI 0.x*

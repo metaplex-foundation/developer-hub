@@ -229,12 +229,7 @@ without the tree delegate's signature.
 - **7-8/10**: Only partial attribution
 - **<7/10**: No authority signals
 
-**Example (9.5/10):**
-```markdown
-*Maintained by Metaplex Foundation · Last verified February 2026 · Applies to MPL-Bubblegum 5.x*
-```
-
-**To reach 10/10, add:**
+**Example (10/10):**
 ```markdown
 [View source on GitHub](https://github.com/metaplex-foundation/mpl-bubblegum)
 ```
