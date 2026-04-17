@@ -30,7 +30,7 @@ faqs:
   - q: Why use a bonding curve instead of a presale or fair launch?
     a: Bonding curves start trading immediately with no deposit window, provide continuous price discovery, and auto-graduate to a Raydium liquidity pool when fully filled. This gives agent tokens instant liquidity and a clear path to open-market trading.
   - q: What happens to the funds raised?
-    a: Creator fees accrue in the bonding curve bucket during trading and are claimable by the creator wallet. After graduation to Raydium, the agent token trades on the open market with full liquidity.
+    a: Creator fees accrue in the bonding curve bucket during trading and are claimable by the creator wallet. After graduation to Raydium, the creator continues earning post-graduation creator fees from the liquidity pool, and the agent token trades on the open market with full liquidity.
   - q: Can any AI agent launch a token on Metaplex?
     a: Yes. Any agent registered on the Metaplex Agent Registry can launch a token. The agent needs an MPL Core asset with a registered identity and an executive profile for autonomous operation.
 ---
@@ -170,6 +170,8 @@ The Metaplex Agent Stack combines identity, execution, launch, and tooling compo
 
 ## Notes
 
+These notes cover critical constraints and lifecycle details for agent token launches on Metaplex.
+
 - Agent tokens use the [Genesis](/smart-contracts/genesis) bonding curve mechanism — the same infrastructure used for all token launches on Metaplex
 - The `set-agent-token` binding is irreversible. Once set, the agent is permanently associated with that token
 - Bonding curves use a constant-product formula; price rises as tokens are bought and falls as they are sold
@@ -178,6 +180,8 @@ The Metaplex Agent Stack combines identity, execution, launch, and tooling compo
 - The agent's PDA wallet has no private key — it can only be controlled through Core's Execute lifecycle hook
 
 ## FAQ
+
+Common implementation and design questions about agentic commerce on Metaplex.
 
 ### What is agentic commerce?
 Agentic commerce is the economy around autonomous AI agents that hold their own wallets, launch tokens, and transact on-chain. On Metaplex, agents raise funds by launching tokens through Genesis bonding curves.
@@ -189,7 +193,7 @@ An agent [registers on-chain](/agents/register-agent) with the Metaplex Agent Re
 Bonding curves start trading immediately with no deposit window, provide continuous price discovery, and auto-graduate to a Raydium liquidity pool when fully filled. This gives agent tokens instant liquidity and a clear path to open-market trading.
 
 ### What happens to the funds raised?
-Creator fees accrue in the bonding curve bucket during trading and are claimable by the creator wallet. After graduation to Raydium, the agent token trades on the open market with full liquidity.
+Creator fees accrue in the bonding curve bucket during trading and are claimable by the creator wallet. After graduation to Raydium, the creator continues earning post-graduation creator fees from the liquidity pool, and the agent token trades on the open market with full liquidity.
 
 ### Can any AI agent launch a token on Metaplex?
 Yes. Any agent registered on the Metaplex Agent Registry can launch a token. The agent needs an [MPL Core asset](/smart-contracts/core) with a [registered identity](/agents/register-agent) and an [executive profile](/agents/run-an-agent) for autonomous operation.
