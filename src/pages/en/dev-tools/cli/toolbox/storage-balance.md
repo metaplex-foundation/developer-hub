@@ -1,20 +1,53 @@
 ---
+# Remember to also update the date in src/components/products/guides/index.js
 title: Storage Balance
 metaTitle: Storage Balance | Metaplex CLI
 description: Show the current balance of your storage provider account.
+keywords:
+  - mplx CLI
+  - storage balance
+  - Irys
+  - Arweave
+  - storage provider
+about:
+  - Metaplex CLI
+  - Storage Providers
+proficiencyLevel: Beginner
+created: '04-20-2026'
+updated: '04-20-2026'
 ---
 
-The `mplx toolbox storage balance` command prints the current balance held with the configured storage provider.
+## Summary
+
+The `mplx toolbox storage balance` command prints the current prepaid balance held with the configured storage provider.
+
+- Reads the balance from the active storage provider (e.g. Irys).
+- Takes no arguments and no flags.
+- Outputs a JSON object containing `basisPoints` (lamports) and the SOL-denominated amount.
+- Separate from your wallet SOL balance — only reflects storage credit.
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| Command | `mplx toolbox storage balance` |
+| Arguments | None |
+| Flags | None |
+| Output format | JSON |
+| Top up | [`toolbox storage fund`](/dev-tools/cli/toolbox/storage-fund) |
+| Withdraw | [`toolbox storage withdraw`](/dev-tools/cli/toolbox/storage-withdraw) |
 
 ## Basic Usage
+
+Run the command with no arguments.
 
 ```bash
 mplx toolbox storage balance
 ```
 
-This command takes no arguments.
-
 ## Examples
+
+The command has a single invocation form.
 
 ```bash
 mplx toolbox storage balance
@@ -22,7 +55,7 @@ mplx toolbox storage balance
 
 ## Output
 
-Prints the balance as JSON, including `basisPoints` (lamports) and the SOL-denominated amount.
+The command prints the balance as JSON, including `basisPoints` (lamports) and the SOL-denominated amount.
 
 ## Notes
 

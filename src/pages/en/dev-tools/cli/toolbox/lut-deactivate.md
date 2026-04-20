@@ -1,33 +1,74 @@
 ---
+# Remember to also update the date in src/components/products/guides/index.js
 title: Deactivate Address Lookup Table
 metaTitle: Deactivate Address Lookup Table | Metaplex CLI
 description: Deactivate an Address Lookup Table (LUT) as the first step before closing it.
+keywords:
+  - mplx CLI
+  - Address Lookup Table
+  - LUT
+  - deactivate LUT
+  - Solana
+about:
+  - Metaplex CLI
+  - Address Lookup Tables
+  - Solana
+proficiencyLevel: Intermediate
+created: '04-20-2026'
+updated: '04-20-2026'
 ---
 
-The `mplx toolbox lut deactivate` command deactivates an Address Lookup Table. Deactivation is required before a LUT can be closed and its rent reclaimed.
+## Summary
+
+The `mplx toolbox lut deactivate` command deactivates an Address Lookup Table so it can later be closed and its rent reclaimed.
+
+- Prevents new addresses from being added to the LUT.
+- Required before `toolbox lut close` can reclaim rent.
+- Waits ~512 slots (~5 minutes on mainnet) before closure is possible.
+- Only the LUT authority can deactivate the table.
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| Command | `mplx toolbox lut deactivate <address>` |
+| Required arg | `address` — public key of the LUT |
+| Optional flag | `--authority <pubkey>` |
+| Cooldown | 512 slots before the LUT can be closed |
+| Next step | [`toolbox lut close`](/dev-tools/cli/toolbox/lut-close) |
 
 ## Basic Usage
 
+Deactivate a LUT by passing its address as the sole positional argument.
+
 ```bash
-mplx toolbox lut deactivate <lutAddress>
+mplx toolbox lut deactivate <address>
 ```
 
 ## Arguments
 
-- `address` *(required)*: The address of the LUT to deactivate.
+The command takes a single positional argument identifying the LUT.
+
+- `address` *(required)*: Public key of the LUT to deactivate.
 
 ## Flags
 
-- `--authority <pubkey>`: Authority public key. Defaults to the current identity.
+Optional flags override the default authority.
+
+- `--authority <pubkey>`: Authority public key for the LUT. Defaults to the current identity.
 
 ## Examples
 
+These examples show the default and custom-authority deactivation flows.
+
 ```bash
-mplx toolbox lut deactivate <lutAddress>
-mplx toolbox lut deactivate <lutAddress> --authority <pubkey>
+mplx toolbox lut deactivate <address>
+mplx toolbox lut deactivate <address> --authority <authority-pubkey>
 ```
 
 ## Output
+
+On success the command prints the deactivated LUT address and the transaction signature.
 
 ```
 --------------------------------
