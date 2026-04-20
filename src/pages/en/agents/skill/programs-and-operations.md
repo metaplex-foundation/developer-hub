@@ -139,7 +139,7 @@ Use the following guidance to choose the right program and tooling for your task
 
 ### Autonomous Agents
 
-Use **[Agent Registry](/agents)** to register on-chain identity and execution delegation for MPL Core assets. The Mint Agent API (`mintAndSubmitAgent`) creates the Core asset and registers identity in a single transaction. For existing assets, use `mplx agents register <asset> --use-ix` (CLI) or `registerIdentityV1` (SDK). Agents can [create and link an agent token](/agents/create-agent-token) by launching via Genesis and linking it with `setAgentTokenV1`.
+Use **[Agent Registry](/agents)** to register on-chain identity and execution delegation for MPL Core assets. The Mint Agent API (`mintAndSubmitAgent`) creates the Core asset and registers identity in a single transaction. For existing assets, use `mplx agents register <AGENT_MINT> --use-ix` (CLI) or `registerIdentityV1` (SDK). Agents can [create and link an agent token](/agents/create-agent-token) by launching via Genesis and linking it with `setAgentTokenV1`.
 
 ### NFTs: Core vs Token Metadata
 

@@ -209,7 +209,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken
 ```
 
@@ -230,14 +230,14 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentMint <AGENT_MINT> --agentSetToken
 
 # 3. (オプション) agent にトークンがリンクされたことを確認
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 {% callout title="RPC 伝播遅延" type="note" %}
-ステップ 2 で「Agent is not owned by the connected wallet」エラーが発生した場合、API バックエンドが新しく登録された agent をまだインデックスしていません。オンチェーンのトークン作成は成功している可能性があります — `mplx agents fetch <ASSET>` で確認してください。agent に既にトークンが設定されている場合、プラットフォーム登録のみ失敗しています。`mplx genesis launch register` で完了してください。両方のステップをスクリプト化する場合、agent 登録とローンチコマンドの間に約 30 秒の遅延を追加してください。
+ステップ 2 で「Agent is not owned by the connected wallet」エラーが発生した場合、API バックエンドが新しく登録された agent をまだインデックスしていません。オンチェーンのトークン作成は成功している可能性があります — `mplx agents fetch <AGENT_MINT>` で確認してください。agent に既にトークンが設定されている場合、プラットフォーム登録のみ失敗しています。`mplx genesis launch register` で完了してください。両方のステップをスクリプト化する場合、agent 登録とローンチコマンドの間に約 30 秒の遅延を追加してください。
 {% /callout %}
 
 ### 出力
@@ -335,7 +335,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> --launchConfig launch.json
   },
   "launchType": "bondingCurve",
   "agent": {
-    "mint": "<AGENT_CORE_ASSET_ADDRESS>",
+    "mint": "<AGENT_MINT>",
     "setToken": true
   },
   "launch": {},

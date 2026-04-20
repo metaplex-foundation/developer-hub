@@ -44,14 +44,14 @@ howToTools:
 
 | 項目 | 値 |
 |------|-------|
-| **コマンド** | `mplx agents fetch <ASSET_ADDRESS>` |
+| **コマンド** | `mplx agents fetch <AGENT_MINT>` |
 | **必須引数** | `ASSET_ADDRESS` — 検索するMPL Coreアセット |
 | **オプションフラグ** | `--json` — 機械可読形式の出力 |
 
 ## 使い方
 
 ```bash {% title="エージェントIDを取得する" %}
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 ## 出力
@@ -59,10 +59,10 @@ mplx agents fetch <ASSET_ADDRESS>
 ```text {% title="期待される出力（登録済みエージェント）" %}
 {
   registered: true,
-  asset: '<asset_address>',
+  agentMint: '<agent_mint_address>',
   owner: '<owner_address>',
   identityPda: '<identity_pda_address>',
-  wallet: '<asset_signer_pda_address>',
+  agentWallet: '<asset_signer_pda_address>',
   registrationUri: 'https://...',
   lifecycleChecks: { ... }
 }

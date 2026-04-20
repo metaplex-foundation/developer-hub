@@ -76,7 +76,7 @@ mplx agents executive register
 `agents executive delegate` 명령어는 등록된 에이전트를 실행자 프로필에 연결하여, 실행자가 에이전트를 대신하여 트랜잭션에 서명할 수 있게 합니다. 에셋 소유자만 실행을 위임할 수 있습니다.
 
 ```bash {% title="실행 위임" %}
-mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 ### 옵션
@@ -93,7 +93,7 @@ mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 
 ```text {% title="예상 출력" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Executive Profile: <profile_pda_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -105,11 +105,11 @@ mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 `agents executive revoke` 명령어는 실행 위임을 제거하고, 위임 레코드를 닫아 렌트를 환불합니다. 에셋 소유자 또는 실행자 권한을 가진 사람 모두 철회할 수 있습니다.
 
 ```bash {% title="위임 철회 (소유자로서)" %}
-mplx agents executive revoke <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive revoke <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 ```bash {% title="자신의 위임 철회 (실행자로서)" %}
-mplx agents executive revoke <AGENT_ASSET>
+mplx agents executive revoke <AGENT_MINT>
 ```
 
 ### 옵션
@@ -123,7 +123,7 @@ mplx agents executive revoke <AGENT_ASSET>
 
 ```text {% title="예상 출력" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Executive Wallet: <executive_wallet_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>

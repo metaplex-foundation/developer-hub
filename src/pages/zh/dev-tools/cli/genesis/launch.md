@@ -209,7 +209,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken
 ```
 
@@ -230,14 +230,14 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentMint <AGENT_MINT> --agentSetToken
 
 # 3.（可选）验证 agent 已链接代币
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 {% callout title="RPC 传播延迟" type="note" %}
-如果步骤 2 报错"Agent is not owned by the connected wallet"，说明 API 后端尚未索引到新注册的 agent。链上代币创建可能已经成功——请使用 `mplx agents fetch <ASSET>` 检查。如果 agent 已显示代币已设置，则仅平台注册失败；请使用 `mplx genesis launch register` 完成注册。在脚本中执行这两个步骤时，建议在 agent 注册和发行命令之间添加约 30 秒的延迟。
+如果步骤 2 报错"Agent is not owned by the connected wallet"，说明 API 后端尚未索引到新注册的 agent。链上代币创建可能已经成功——请使用 `mplx agents fetch <AGENT_MINT>` 检查。如果 agent 已显示代币已设置，则仅平台注册失败；请使用 `mplx genesis launch register` 完成注册。在脚本中执行这两个步骤时，建议在 agent 注册和发行命令之间添加约 30 秒的延迟。
 {% /callout %}
 
 ### 输出
@@ -335,7 +335,7 @@ Launch 配置 JSON 文件使用与 `launch create` 输入相同的格式。
   },
   "launchType": "bondingCurve",
   "agent": {
-    "mint": "<AGENT_CORE_ASSET_ADDRESS>",
+    "mint": "<AGENT_MINT>",
     "setToken": true
   },
   "launch": {},

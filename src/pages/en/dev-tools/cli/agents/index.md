@@ -81,7 +81,7 @@ For advanced workflows (existing assets, custom documents, interactive wizard), 
 After registering an agent and creating a Genesis token launch, link them with `set-agent-token`. This permanently associates the token with the agent identity.
 
 ```bash {% title="Link Genesis token to agent" %}
-mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="Irreversible" %}
@@ -99,12 +99,12 @@ mplx agents executive register
 
 2. **Delegate** an agent to the executive (run by the asset owner):
 ```bash {% title="Delegate execution" %}
-mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 3. **Revoke** a delegation (run by either the owner or executive):
 ```bash {% title="Revoke delegation" %}
-mplx agents executive revoke <AGENT_ASSET>
+mplx agents executive revoke <AGENT_MINT>
 ```
 
 See [Executive Delegation](/dev-tools/cli/agents/executive) for full details.

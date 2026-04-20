@@ -81,7 +81,7 @@ mplx agents register \
 エージェントを登録してGenesisトークンのローンチを作成したら、`set-agent-token` でリンクします。これによりトークンがエージェントIDに永続的に関連付けられます。
 
 ```bash {% title="GenesisトークンをエージェントにリンクSolana" %}
-mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="取り消し不可" %}
@@ -99,12 +99,12 @@ mplx agents executive register
 
 2. **委任**: エージェントをエグゼクティブに委任する（アセットオーナーが実行）：
 ```bash {% title="実行を委任する" %}
-mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 3. **取り消し**: 委任を取り消す（オーナーまたはエグゼクティブが実行）：
 ```bash {% title="委任を取り消す" %}
-mplx agents executive revoke <AGENT_ASSET>
+mplx agents executive revoke <AGENT_MINT>
 ```
 
 詳細は[エグゼクティブ委任](/dev-tools/cli/agents/executive)を参照してください。

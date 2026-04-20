@@ -111,7 +111,7 @@ mplx agents register --new --use-ix \
 The asset address passed as the first argument registers an identity on an existing Core asset.
 
 ```bash {% title="Direct IX — existing asset" %}
-mplx agents register <ASSET_ADDRESS> --use-ix \
+mplx agents register <AGENT_MINT> --use-ix \
   --from-file "./agent-doc.json"
 ```
 
@@ -158,13 +158,13 @@ mplx agents register \
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Asset: <asset_address>
+  Agent Mint: <agent_mint_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
 --------------------------------
 ```
 
-Save the `Asset` address — you'll use it in `agents fetch`, `agents set-agent-token`, and `agents executive delegate`.
+Save the `Agent Mint` address — you'll use it in `agents fetch`, `agents set-agent-token`, and `agents executive delegate`.
 
 ## Common Errors
 

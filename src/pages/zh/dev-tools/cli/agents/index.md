@@ -81,7 +81,7 @@ mplx agents register \
 注册 Agent 并创建 Genesis 代币发行后，使用 `set-agent-token` 将它们关联。这将永久把代币与 Agent 身份绑定。
 
 ```bash {% title="Link Genesis token to agent" %}
-mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="不可撤销" %}
@@ -99,12 +99,12 @@ mplx agents executive register
 
 2. **委托** Agent 给执行者（由资产所有者执行）：
 ```bash {% title="Delegate execution" %}
-mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 3. **撤销**委托（由所有者或执行者执行）：
 ```bash {% title="Revoke delegation" %}
-mplx agents executive revoke <AGENT_ASSET>
+mplx agents executive revoke <AGENT_MINT>
 ```
 
 详见 [执行委托](/dev-tools/cli/agents/executive)。

@@ -220,7 +220,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken
 ```
 
@@ -235,20 +235,20 @@ mplx genesis launch create --launchType bonding-curve \
 mplx agents register --name "My Agent" \
   --description "An autonomous trading agent" \
   --image "./avatar.png"
-# Note the asset address from the output (e.g. 7BQj...)
+# Note the agentMint address from the output (e.g. 7BQj...)
 
 # 2. Launch a bonding curve token linked to the agent
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentMint <AGENT_MINT> --agentSetToken
 
 # 3. (Optional) Verify the agent has a token linked
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 {% callout title="RPC propagation delay" type="note" %}
-If step 2 fails with "Agent is not owned by the connected wallet", the API backend hasn't indexed the new agent yet. The on-chain token creation may still have succeeded — check with `mplx agents fetch <ASSET>`. If the agent already shows a token set, only the platform registration failed; complete it with `mplx genesis launch register`. When scripting both steps, add a ~30 second delay between agent registration and the launch command.
+If step 2 fails with "Agent is not owned by the connected wallet", the API backend hasn't indexed the new agent yet. The on-chain token creation may still have succeeded — check with `mplx agents fetch <AGENT_MINT>`. If the agent already shows a token set, only the platform registration failed; complete it with `mplx genesis launch register`. When scripting both steps, add a ~30 second delay between agent registration and the launch command.
 {% /callout %}
 
 ### Output
@@ -348,7 +348,7 @@ The launch config JSON file uses the same format as the `launch create` input.
   },
   "launchType": "bondingCurve",
   "agent": {
-    "mint": "<AGENT_CORE_ASSET_ADDRESS>",
+    "mint": "<AGENT_MINT>",
     "setToken": true
   },
   "launch": {},

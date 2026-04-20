@@ -139,7 +139,7 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 
 ### 自主代理
 
-使用 **[Agent Registry](/agents)** 为 MPL Core 资产注册链上身份和执行委托。Mint Agent API（`mintAndSubmitAgent`）在单个交易中创建 Core 资产并注册身份。对于现有资产，使用 `mplx agents register <asset> --use-ix`（CLI）或 `registerIdentityV1`（SDK）。代理可以通过 Genesis 发行并使用 `setAgentTokenV1` 链接来[创建和链接代理代币](/agents/create-agent-token)。
+使用 **[Agent Registry](/agents)** 为 MPL Core 资产注册链上身份和执行委托。Mint Agent API（`mintAndSubmitAgent`）在单个交易中创建 Core 资产并注册身份。对于现有资产，使用 `mplx agents register <AGENT_MINT> --use-ix`（CLI）或 `registerIdentityV1`（SDK）。代理可以通过 Genesis 发行并使用 `setAgentTokenV1` 链接来[创建和链接代理代币](/agents/create-agent-token)。
 
 ### NFT: Core vs Token Metadata
 

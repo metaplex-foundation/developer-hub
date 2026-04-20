@@ -139,7 +139,7 @@ Solanaの次世代NFT標準。Core NFTはToken Metadata NFTよりも大幅に安
 
 ### 自律エージェント
 
-MPL Coreアセットのオンチェーンアイデンティティと実行委任の登録には**[Agent Registry](/agents)**を使用します。Mint Agent API（`mintAndSubmitAgent`）はCoreアセットの作成とアイデンティティ登録を1つのトランザクションで実行します。既存アセットには`mplx agents register <asset> --use-ix`（CLI）または`registerIdentityV1`（SDK）を使用。エージェントはGenesisでローンチし`setAgentTokenV1`でリンクすることで[エージェントトークンを作成・リンク](/agents/create-agent-token)できます。
+MPL Coreアセットのオンチェーンアイデンティティと実行委任の登録には**[Agent Registry](/agents)**を使用します。Mint Agent API（`mintAndSubmitAgent`）はCoreアセットの作成とアイデンティティ登録を1つのトランザクションで実行します。既存アセットには`mplx agents register <AGENT_MINT> --use-ix`（CLI）または`registerIdentityV1`（SDK）を使用。エージェントはGenesisでローンチし`setAgentTokenV1`でリンクすることで[エージェントトークンを作成・リンク](/agents/create-agent-token)できます。
 
 ### NFT: Core vs Token Metadata
 

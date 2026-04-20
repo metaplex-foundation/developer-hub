@@ -44,14 +44,14 @@ howToTools:
 
 | 项目 | 值 |
 |------|-------|
-| **命令** | `mplx agents fetch <ASSET_ADDRESS>` |
+| **命令** | `mplx agents fetch <AGENT_MINT>` |
 | **必填参数** | `ASSET_ADDRESS` — 要查询的 MPL Core 资产 |
 | **可选标志** | `--json` — 机器可读输出 |
 
 ## 用法
 
 ```bash {% title="Fetch agent identity" %}
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 ## 输出
@@ -59,10 +59,10 @@ mplx agents fetch <ASSET_ADDRESS>
 ```text {% title="Expected output (registered agent)" %}
 {
   registered: true,
-  asset: '<asset_address>',
+  agentMint: '<agent_mint_address>',
   owner: '<owner_address>',
   identityPda: '<identity_pda_address>',
-  wallet: '<asset_signer_pda_address>',
+  agentWallet: '<asset_signer_pda_address>',
   registrationUri: 'https://...',
   lifecycleChecks: { ... }
 }

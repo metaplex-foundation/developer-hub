@@ -60,7 +60,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken
 ```
 
@@ -75,7 +75,7 @@ mplx genesis launch create \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
@@ -92,15 +92,15 @@ If you created a token launch without `--agentSetToken`, you can link it afterwa
 
 ### Step 1: Configure Asset-Signer Wallet
 
-```bash {% title="Set up asset-signer wallet" %}
-mplx config wallets add --name my-agent --type asset-signer --asset <AGENT_ASSET>
+```bash {% title="Set up agent wallet" %}
+mplx config wallets add my-agent --agent <AGENT_MINT>
 mplx config wallets set my-agent
 ```
 
 ### Step 2: Link the Token
 
 ```bash {% title="Link Genesis token to agent" %}
-mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="Irreversible" %}
@@ -111,7 +111,7 @@ Each agent identity can only ever have one token, and it can only be set once. D
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Genesis Account: <genesis_account_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -131,10 +131,10 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentMint <AGENT_MINT> --agentSetToken
 
 # 3. Verify the agent has a token linked
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 ## Common Errors

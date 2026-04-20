@@ -60,7 +60,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken
 ```
 
@@ -75,7 +75,7 @@ mplx genesis launch create \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentMint <AGENT_MINT> \
   --agentSetToken \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
@@ -93,14 +93,14 @@ mplx genesis launch create \
 ### ステップ1：Asset-Signerウォレットの設定
 
 ```bash {% title="asset-signerウォレットをセットアップする" %}
-mplx config wallets add --name my-agent --type asset-signer --asset <AGENT_ASSET>
+mplx config wallets add --name my-agent --agent <AGENT_MINT>
 mplx config wallets set my-agent
 ```
 
 ### ステップ2：トークンのリンク
 
 ```bash {% title="GenesisトークンをエージェントにリンクSolana" %}
-mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="取り消し不可" %}
@@ -111,7 +111,7 @@ mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 
 ```text {% title="期待される出力" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Genesis Account: <genesis_account_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -131,10 +131,10 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentMint <AGENT_MINT> --agentSetToken
 
 # 3. エージェントにトークンがリンクされているか確認する
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_MINT>
 ```
 
 ## よくあるエラー

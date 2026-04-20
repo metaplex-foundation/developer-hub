@@ -76,7 +76,7 @@ mplx agents executive register
 `agents executive delegate` コマンドは、登録済みエージェントをエグゼクティブプロファイルにリンクし、エグゼクティブがエージェントに代わってトランザクションに署名できるようにします。実行を委任できるのはアセットオーナーのみです。
 
 ```bash {% title="実行を委任する" %}
-mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 ### オプション
@@ -93,7 +93,7 @@ mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 
 ```text {% title="期待される出力" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Executive Profile: <profile_pda_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -105,11 +105,11 @@ mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 `agents executive revoke` コマンドは実行委任を削除し、委任レコードをクローズしてレントを返金します。アセットオーナーとエグゼクティブオーソリティのどちらでも取り消せます。
 
 ```bash {% title="委任を取り消す（オーナーとして）" %}
-mplx agents executive revoke <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
+mplx agents executive revoke <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 ```
 
 ```bash {% title="自分の委任を取り消す（エグゼクティブとして）" %}
-mplx agents executive revoke <AGENT_ASSET>
+mplx agents executive revoke <AGENT_MINT>
 ```
 
 ### オプション
@@ -123,7 +123,7 @@ mplx agents executive revoke <AGENT_ASSET>
 
 ```text {% title="期待される出力" %}
 --------------------------------
-  Agent Asset: <agent_asset_address>
+  Agent Mint: <agent_mint_address>
   Executive Wallet: <executive_wallet_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
