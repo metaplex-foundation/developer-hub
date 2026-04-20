@@ -30,6 +30,8 @@ The `mplx toolbox lut close` command closes a previously deactivated Address Loo
 
 ## Quick Reference
 
+The table below summarizes the command's syntax, preconditions, and defaults.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox lut close <address>` |

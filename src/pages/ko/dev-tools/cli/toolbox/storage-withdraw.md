@@ -28,11 +28,13 @@ updated: '04-20-2026'
 
 ## 빠른 참조
 
+아래 표는 명령어의 입력값과 관련 명령어를 요약합니다.
+
 | 항목 | 값 |
 |------|-------|
-| 명령어 | `mplx toolbox storage withdraw [amount] [--all]` |
-| 선택적 인수 | `amount` — SOL 금액 (`--all`이 설정되지 않은 경우 필수) |
-| 선택적 플래그 | `--all` — 전체 잔액 출금 |
+| 명령어 | `mplx toolbox storage withdraw {<amount> \| --all}` |
+| 입력 | `amount`(SOL) 또는 `--all` 중 정확히 하나 — 상호 배타적 |
+| 기본 수신자 | CLI 지불자로 구성된 지갑 |
 | 제공자 | 활성 스토리지 제공자 (예: Irys) |
 | 역연산 | [`toolbox storage fund`](/dev-tools/cli/toolbox/storage-fund) |
 

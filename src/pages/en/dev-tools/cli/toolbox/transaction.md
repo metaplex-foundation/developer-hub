@@ -23,10 +23,12 @@ The `mplx toolbox transaction` command signs and sends arbitrary base64-encoded 
 
 - Accepts one or more base64-encoded instructions via `--instruction` (repeatable).
 - Reads instructions line-by-line from stdin when `--stdin` is used.
-- Automatically wraps instructions in an MPL Core `execute` call when an asset-signer wallet is active.
+- Automatically wraps instructions in an MPL Core `execute` call when an [asset-signer wallet](/dev-tools/cli/config/asset-signer-wallets) is active.
 - `--instruction` and `--stdin` are mutually exclusive.
 
 ## Quick Reference
+
+The table below summarizes the command's flags and wrapping behavior.
 
 | Item | Value |
 |------|-------|

@@ -28,6 +28,8 @@ The `mplx toolbox storage fund` command deposits SOL into your storage provider 
 
 ## Quick Reference
 
+The table below summarizes the command's inputs and related commands.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox storage fund <amount>` |

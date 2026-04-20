@@ -28,6 +28,8 @@ The `mplx toolbox template program` command clones a Metaplex-maintained program
 
 ## Quick Reference
 
+The table below summarizes the command's arguments, prerequisites, and side effects.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox template program [template]` |

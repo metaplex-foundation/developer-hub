@@ -28,6 +28,8 @@ The `mplx toolbox sol unwrap` command unwraps the entire wSOL balance by closing
 
 ## Quick Reference
 
+The table below summarizes the command's shape and key constants.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox sol unwrap` |

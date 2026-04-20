@@ -30,6 +30,8 @@ programmingLanguage:
 
 ## 快速参考
 
+下表总结了该命令的输入和单位语义。
+
 | 项目 | 值 |
 |------|-------|
 | 命令 | `mplx toolbox token mint <mint> <amount>` |

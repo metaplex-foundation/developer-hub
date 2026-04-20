@@ -28,6 +28,8 @@ The `mplx toolbox rent` command returns the rent-exempt balance required for a S
 
 ## Quick Reference
 
+The table below summarizes the command's inputs, flags, and common account sizes.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox rent <bytes>` |

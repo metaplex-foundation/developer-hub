@@ -29,6 +29,8 @@ The `mplx toolbox lut create` command creates a new Solana Address Lookup Table 
 
 ## Quick Reference
 
+The table below summarizes the command's syntax and defaults.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox lut create [addresses]` |

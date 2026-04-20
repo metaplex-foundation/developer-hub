@@ -20,7 +20,7 @@ updated: '04-20-2026'
 
 ## 摘要
 
-`mplx toolbox lut fetch` 命令从网络读取地址查找表，并打印其权限持有者和包含的地址。
+`mplx toolbox lut fetch` 命令从网络读取[地址查找表](/dev-tools/umi/toolbox/address-lookup-table)，并打印其权限持有者和包含的地址。
 
 - 解析 LUT 账户并列出其中的每一个地址。
 - 打印权限持有者，或对于被冻结的 LUT 显示 `None`。
@@ -28,6 +28,8 @@ updated: '04-20-2026'
 - 通过 `--json` 支持机器可读的 JSON 输出。
 
 ## 快速参考
+
+下表总结了该命令的语法和输出模式。
 
 | 项目 | 值 |
 |------|-------|

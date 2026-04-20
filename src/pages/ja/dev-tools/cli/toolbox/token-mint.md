@@ -30,6 +30,8 @@ programmingLanguage:
 
 ## クイックリファレンス
 
+以下の表は、コマンドの入力および単位のセマンティクスをまとめたものです。
+
 | 項目 | 値 |
 |------|-------|
 | コマンド | `mplx toolbox token mint <mint> <amount>` |

@@ -28,11 +28,13 @@ updated: '04-20-2026'
 
 ## クイックリファレンス
 
+以下の表は、コマンドの入力および関連コマンドをまとめたものです。
+
 | 項目 | 値 |
 |------|-------|
-| コマンド | `mplx toolbox storage withdraw [amount] [--all]` |
-| オプション引数 | `amount` — SOLの量（`--all`が設定されていない場合は必須） |
-| オプションフラグ | `--all` — 残高全体を引き出します |
+| コマンド | `mplx toolbox storage withdraw {<amount> \| --all}` |
+| 入力 | `amount`（SOL）または`--all`のいずれか1つ — 相互排他 |
+| デフォルトの受取人 | CLIペイヤーとして設定されたウォレット |
 | プロバイダ | アクティブなストレージプロバイダ（例: Irys） |
 | 逆操作 | [`toolbox storage fund`](/dev-tools/cli/toolbox/storage-fund) |
 

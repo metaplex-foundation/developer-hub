@@ -28,11 +28,13 @@ updated: '04-20-2026'
 
 ## 快速参考
 
+下表总结了该命令的输入和相关命令。
+
 | 项目 | 值 |
 |------|-------|
-| 命令 | `mplx toolbox storage withdraw [amount] [--all]` |
-| 可选参数 | `amount` — SOL 数量（若未设置 `--all` 则必需） |
-| 可选标志 | `--all` — 提取全部余额 |
+| 命令 | `mplx toolbox storage withdraw {<amount> \| --all}` |
+| 输入 | `amount`（SOL）或 `--all` 二者之一 — 互斥 |
+| 默认接收方 | 配置为 CLI 付款人的钱包 |
 | 提供商 | 当前激活的存储提供商（例如 Irys） |
 | 反向操作 | [`toolbox storage fund`](/dev-tools/cli/toolbox/storage-fund) |
 

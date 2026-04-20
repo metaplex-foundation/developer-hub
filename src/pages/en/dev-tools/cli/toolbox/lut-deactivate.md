@@ -29,6 +29,8 @@ The `mplx toolbox lut deactivate` command deactivates an Address Lookup Table so
 
 ## Quick Reference
 
+The table below summarizes the command's syntax, cooldown, and next step.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox lut deactivate <address>` |

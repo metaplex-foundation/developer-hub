@@ -20,7 +20,7 @@ updated: '04-20-2026'
 
 ## Summary
 
-The `mplx toolbox lut fetch` command reads an Address Lookup Table from the network and prints its authority and contained addresses.
+The `mplx toolbox lut fetch` command reads an [Address Lookup Table](/dev-tools/umi/toolbox/address-lookup-table) from the network and prints its authority and contained addresses.
 
 - Resolves the LUT account and lists every address it holds.
 - Prints the authority, or `None` for frozen LUTs.
@@ -28,6 +28,8 @@ The `mplx toolbox lut fetch` command reads an Address Lookup Table from the netw
 - Supports machine-readable JSON output via `--json`.
 
 ## Quick Reference
+
+The table below summarizes the command's syntax and output modes.
 
 | Item | Value |
 |------|-------|

@@ -28,11 +28,13 @@ The `mplx toolbox storage withdraw` command withdraws SOL from your storage prov
 
 ## Quick Reference
 
+The table below summarizes the command's inputs and related commands.
+
 | Item | Value |
 |------|-------|
-| Command | `mplx toolbox storage withdraw [amount] [--all]` |
-| Optional arg | `amount` — SOL amount (required if `--all` is not set) |
-| Optional flag | `--all` — withdraw the entire balance |
+| Command | `mplx toolbox storage withdraw {<amount> \| --all}` |
+| Input | Exactly one of `amount` (SOL) or `--all` — mutually exclusive |
+| Default recipient | Wallet configured as the CLI payer |
 | Provider | Active storage provider (e.g. Irys) |
 | Inverse | [`toolbox storage fund`](/dev-tools/cli/toolbox/storage-fund) |
 

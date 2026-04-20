@@ -29,6 +29,8 @@ The `mplx toolbox template website` command clones a Metaplex-maintained website
 
 ## Quick Reference
 
+The table below summarizes the command's flags, prerequisites, and side effects.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox template website [--template <key>]` |

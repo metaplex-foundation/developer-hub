@@ -29,6 +29,8 @@ updated: '04-20-2026'
 
 ## 快速参考
 
+下表总结了该命令的语法和默认值。
+
 | 项目 | 值 |
 |------|-------|
 | 命令 | `mplx toolbox lut create [addresses]` |

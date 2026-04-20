@@ -30,6 +30,8 @@ The `mplx toolbox token mint` command mints additional units of an existing SPL 
 
 ## Quick Reference
 
+The table below summarizes the command's inputs and unit semantics.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox token mint <mint> <amount>` |

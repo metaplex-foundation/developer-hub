@@ -23,10 +23,12 @@ updated: '04-20-2026'
 
 - `--instruction`을 통해 하나 이상의 base64 인코딩 명령을 받습니다(반복 가능).
 - `--stdin`이 사용되면 stdin에서 명령을 한 줄씩 읽습니다.
-- asset-signer 지갑이 활성화된 경우 명령을 MPL Core `execute` 호출로 자동 래핑합니다.
+- [asset-signer 지갑](/dev-tools/cli/config/asset-signer-wallets)이 활성화된 경우 명령을 MPL Core `execute` 호출로 자동 래핑합니다.
 - `--instruction`과 `--stdin`은 상호 배타적입니다.
 
 ## 빠른 참조
+
+아래 표는 명령어의 플래그와 래핑 동작을 요약합니다.
 
 | 항목 | 값 |
 |------|-------|

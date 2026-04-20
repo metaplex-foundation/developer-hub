@@ -20,7 +20,7 @@ updated: '04-20-2026'
 
 ## 요약
 
-`mplx toolbox lut fetch` 명령어는 네트워크에서 주소 조회 테이블을 읽고 authority와 포함된 주소를 출력합니다.
+`mplx toolbox lut fetch` 명령어는 네트워크에서 [주소 조회 테이블](/dev-tools/umi/toolbox/address-lookup-table)을 읽고 authority와 포함된 주소를 출력합니다.
 
 - LUT 계정을 해석하고 보유한 모든 주소를 나열합니다.
 - authority를 출력하며, 고정된 LUT의 경우 `None`을 출력합니다.
@@ -28,6 +28,8 @@ updated: '04-20-2026'
 - `--json`을 통해 기계가 읽을 수 있는 JSON 출력을 지원합니다.
 
 ## 빠른 참조
+
+아래 표는 명령어의 구문과 출력 모드를 요약합니다.
 
 | 항목 | 값 |
 |------|-------|

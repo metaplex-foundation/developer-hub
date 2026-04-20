@@ -28,6 +28,8 @@ The `mplx toolbox sol wrap` command wraps native SOL into wSOL by transferring S
 
 ## Quick Reference
 
+The table below summarizes the command's inputs and key constants.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox sol wrap <amount>` |

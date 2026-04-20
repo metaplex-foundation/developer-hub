@@ -28,6 +28,8 @@ The `mplx toolbox storage balance` command prints the current prepaid balance he
 
 ## Quick Reference
 
+The table below summarizes the command's shape and output format.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox storage balance` |

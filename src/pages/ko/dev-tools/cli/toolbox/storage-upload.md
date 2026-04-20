@@ -29,6 +29,8 @@ updated: '04-20-2026'
 
 ## 빠른 참조
 
+아래 표는 명령어의 입력값, 플래그, 부작용을 요약합니다.
+
 | 항목 | 값 |
 |------|-------|
 | 명령어 | `mplx toolbox storage upload <path> [--directory]` |

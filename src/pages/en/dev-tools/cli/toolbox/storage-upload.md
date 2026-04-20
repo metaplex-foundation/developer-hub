@@ -29,6 +29,8 @@ The `mplx toolbox storage upload` command uploads a single file or a whole direc
 
 ## Quick Reference
 
+The table below summarizes the command's inputs, flags, and side effects.
+
 | Item | Value |
 |------|-------|
 | Command | `mplx toolbox storage upload <path> [--directory]` |

@@ -29,6 +29,8 @@ updated: '04-20-2026'
 
 ## 빠른 참조
 
+아래 표는 명령어의 플래그, 전제 조건, 부작용을 요약합니다.
+
 | 항목 | 값 |
 |------|-------|
 | 명령어 | `mplx toolbox template website [--template <key>]` |

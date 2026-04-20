@@ -23,10 +23,12 @@ updated: '04-20-2026'
 
 - 通过 `--instruction`（可重复）接受一个或多个 base64 编码的指令。
 - 使用 `--stdin` 时会逐行从标准输入读取指令。
-- 当激活的是 asset-signer 钱包时，会自动将指令包装在 MPL Core 的 `execute` 调用中。
+- 当激活的是 [asset-signer 钱包](/dev-tools/cli/config/asset-signer-wallets)时，会自动将指令包装在 MPL Core 的 `execute` 调用中。
 - `--instruction` 和 `--stdin` 互斥。
 
 ## 快速参考
+
+下表总结了该命令的标志和封装行为。
 
 | 项目 | 值 |
 |------|-------|
