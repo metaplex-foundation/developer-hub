@@ -19,7 +19,6 @@
     "@docsearch/react": "^3.8.0",
     "@headlessui/react": "2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@hotjar/browser": "^1.0.9",
     "@markdoc/markdoc": "0.3.0",
     "@markdoc/next.js": "0.2.3",
     "@radix-ui/react-accordion": "^1.2.12",

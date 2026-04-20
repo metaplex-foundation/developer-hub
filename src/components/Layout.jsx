@@ -1,4 +1,3 @@
-import Hotjar from '@hotjar/browser'
 import clsx from 'clsx'
 import Link from 'next/link'
 
@@ -27,16 +26,6 @@ export function Layout({ children, page }) {
   const t = useTranslations('homepage')
   useLightense()
   useAccentClass(page.product)
-  if (
-    process.env.NEXT_PUBLIC_HOTJAR_ID &&
-    process.env.NEXT_PUBLIC_HOTJAR_VERSION
-  ) {
-    Hotjar.init(
-      process.env.NEXT_PUBLIC_HOTJAR_ID,
-      process.env.NEXT_PUBLIC_HOTJAR_VERSION
-    )
-  }
-
   const getCategoryName = (category) => {
     const categoryKeys = {
       'Tokens': 'tokens',
