@@ -52,7 +52,7 @@ An agent token turns your AI agent into an investable, autonomous economic actor
 
 **For agent builders:**
 - Raise funds without giving up ownership of the agent itself
-- Earn ongoing creator fees from bonding curve trading
+- Earn creator fees from both bonding curve trading and post-graduation trading
 - Build a community of token holders aligned with the agent's success
 - Give the agent a treasury it controls autonomously through its PDA wallet
 
@@ -85,10 +85,9 @@ Not all token launch methods are equal for AI agents. The table below compares M
 | **Instant trading** | Bonding curve starts immediately | Depends on platform | Requires manual LP setup | N/A |
 | **Price discovery** | Automatic via constant-product curve | Varies | Manual pricing | N/A |
 | **Liquidity graduation** | Auto-migrates to Raydium CPMM | Platform-dependent | Must manage LP manually | N/A |
-| **Creator fees** | Built-in, configurable per launch | Platform takes cut | No built-in mechanism | Platform fees |
+| **Creator fees** | Built-in, configurable, directed to any wallet | Fixed, platform-determined | No built-in mechanism | Platform-determined |
 | **Token-agent link** | Permanent on-chain binding | No binding | No binding | No binding |
 | **Autonomous operation** | Executive delegation via Core | Not supported | Not supported | Not supported |
-| **Open-source contracts** | Fully auditable on-chain | Often closed-source | Varies | N/A |
 
 ### Why Metaplex Stands Out
 
@@ -137,11 +136,12 @@ Agent token economics combine creator-fee accrual during bonding curve trading w
 
 ### Creator Fees
 
-Every bonding curve launch supports configurable creator fees. A percentage of each swap is directed to a creator wallet during the bonding curve phase:
+Every bonding curve launch supports configurable creator fees. A percentage of each swap is directed to a creator wallet — any wallet of the creator's choosing — during the bonding curve phase:
 
 - Fees accrue in the bonding curve bucket
 - The creator wallet claims accumulated fees
 - Fee percentage is set at launch and visible on-chain
+- Creator fees continue accruing from post-graduation trading on the Raydium pool
 
 ### Graduation
 
@@ -150,6 +150,7 @@ When all tokens on the bonding curve are purchased, the curve auto-graduates:
 1. Liquidity migrates to a Raydium CPMM pool
 2. Trading continues on the open market
 3. The token is fully tradeable on any Solana DEX aggregator
+4. The creator wallet continues to earn creator fees from post-graduation trading
 
 ### Agent Treasury
 
@@ -172,11 +173,11 @@ The Metaplex Agent Stack combines identity, execution, launch, and tooling compo
 
 These notes cover critical constraints and lifecycle details for agent token launches on Metaplex.
 
-- Agent tokens use the [Genesis](/smart-contracts/genesis) bonding curve mechanism — the same infrastructure used for all token launches on Metaplex
+- The full agent token flow is built around [Genesis](/smart-contracts/genesis) bonding curves. Genesis launchpools are also supported for token launches, but the end-to-end agent-token binding workflow is designed around bonding curves
 - The `set-agent-token` binding is irreversible. Once set, the agent is permanently associated with that token
 - Bonding curves use a constant-product formula; price rises as tokens are bought and falls as they are sold
 - After graduation, Metaplex has no control over the token — it trades freely on Raydium and DEX aggregators
-- Creator fees are configured at launch time and cannot be changed after the bonding curve is created
+- Creator fees are configured at launch time and cannot be changed after the bonding curve is created. The creator-fee recipient can be any wallet of your choosing
 - The agent's PDA wallet has no private key — it can only be controlled through Core's Execute lifecycle hook
 
 ## FAQ
