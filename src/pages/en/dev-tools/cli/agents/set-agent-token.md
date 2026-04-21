@@ -20,7 +20,7 @@ programmingLanguage:
 created: '04-09-2026'
 updated: '04-09-2026'
 howToSteps:
-  - Create a token launch linked to the agent using genesis launch create with --agentMint and --agentSetToken to permanently link the token
+  - Create a token launch linked to the agent using genesis launch create with --agentAsset and --agentSetToken to permanently link the token
   - Or create a launch without --agentSetToken, then link it manually with agents set-agent-token
 howToTools:
   - Metaplex CLI (mplx)
@@ -35,7 +35,7 @@ faqs:
 
 {% callout title="What You'll Do" %}
 Create a token for a registered agent and link it to the agent identity:
-- **One-step**: Create a bonding curve launch linked to the agent with `--agentMint` and `--agentSetToken`
+- **One-step**: Create a bonding curve launch linked to the agent with `--agentAsset` and `--agentSetToken`
 - **Two-step**: Create a token launch separately, then link it with `agents set-agent-token`
 {% /callout %}
 
@@ -43,7 +43,7 @@ Create a token for a registered agent and link it to the agent identity:
 
 An agent token is a [Genesis](/smart-contracts/genesis) token permanently linked to a registered [agent identity](/agents). There are two ways to create and link an agent token — a one-step flow during launch creation, or a two-step manual flow.
 
-- **One-step** (recommended): `genesis launch create --agentMint <ASSET> --agentSetToken`
+- **One-step** (recommended): `genesis launch create --agentAsset <ASSET> --agentSetToken`
 - **Two-step**: Create a launch, then link with `agents set-agent-token`
 - **Irreversible**: Each agent identity can only ever have one token, and it can only be set once
 
@@ -53,14 +53,14 @@ An agent token is a [Genesis](/smart-contracts/genesis) token permanently linked
 
 ## One-Step: Launch with Agent
 
-The simplest way to create an agent token is to pass `--agentMint` when creating the launch. This auto-derives the creator fee wallet from the agent's [Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets) and optionally links the token in the same transaction.
+The simplest way to create an agent token is to pass `--agentAsset` when creating the launch. This auto-derives the creator fee wallet from the agent's [Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets) and optionally links the token in the same transaction.
 
 ```bash {% title="Create bonding curve with agent token" %}
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken
 ```
 
@@ -75,7 +75,7 @@ mplx genesis launch create \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
@@ -93,14 +93,14 @@ If you created a token launch without `--agentSetToken`, you can link it afterwa
 ### Step 1: Configure Asset-Signer Wallet
 
 ```bash {% title="Set up agent wallet" %}
-mplx config wallets add my-agent --agent <AGENT_MINT>
+mplx config wallets add my-agent --agent <AGENT_ASSET>
 mplx config wallets set my-agent
 ```
 
 ### Step 2: Link the Token
 
 ```bash {% title="Link Genesis token to agent" %}
-mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="Irreversible" %}
@@ -111,7 +111,7 @@ Each agent identity can only ever have one token, and it can only be set once. D
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Genesis Account: <genesis_account_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -131,10 +131,10 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> --agentSetToken
+  --agentAsset <AGENT_ASSET> --agentSetToken
 
 # 3. Verify the agent has a token linked
-mplx agents fetch <AGENT_MINT>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## Common Errors
@@ -147,10 +147,10 @@ mplx agents fetch <AGENT_MINT>
 
 ## Notes
 
-- The one-step flow (`--agentMint --agentSetToken`) is recommended — it handles everything in a single transaction
+- The one-step flow (`--agentAsset --agentSetToken`) is recommended — it handles everything in a single transaction
 - The two-step flow requires asset-signer mode because the `set-agent-token` instruction uses the Asset Signer PDA as authority
 - The Genesis account must already exist before running `set-agent-token`
-- When using `--agentMint`, the creator fee wallet is auto-derived from the agent's Asset Signer PDA
+- When using `--agentAsset`, the creator fee wallet is auto-derived from the agent's Asset Signer PDA
 
 ## FAQ
 

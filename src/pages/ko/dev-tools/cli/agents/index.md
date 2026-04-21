@@ -81,7 +81,7 @@ mplx agents register \
 에이전트를 등록하고 Genesis 토큰 런칭을 생성한 후, `set-agent-token`으로 연결하세요. 이렇게 하면 토큰과 에이전트 ID가 영구적으로 연결됩니다.
 
 ```bash {% title="에이전트에 Genesis 토큰 연결" %}
-mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="되돌릴 수 없음" %}
@@ -99,12 +99,12 @@ mplx agents executive register
 
 2. **에이전트를 실행자에게 위임** (에셋 소유자가 실행):
 ```bash {% title="실행 위임" %}
-mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 ```
 
 3. **위임 철회** (소유자 또는 실행자가 실행):
 ```bash {% title="위임 철회" %}
-mplx agents executive revoke <AGENT_MINT>
+mplx agents executive revoke <AGENT_ASSET>
 ```
 
 전체 세부 사항은 [실행 위임](/dev-tools/cli/agents/executive)을 참조하세요.

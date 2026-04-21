@@ -5,5 +5,5 @@ mplx genesis launch create --launchType bonding-curve \
   --description "The official token of my agent" \
   --website "https://myagent.com" \
   --twitter "@myagent" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken

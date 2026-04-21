@@ -76,7 +76,7 @@ mplx agents executive register
 `agents executive delegate` 命令将已注册 Agent 关联到执行者配置文件，允许执行者代表 Agent 签署交易。只有资产所有者才能委托执行。
 
 ```bash {% title="Delegate execution" %}
-mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 ```
 
 ### 选项
@@ -93,7 +93,7 @@ mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Executive Profile: <profile_pda_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -105,11 +105,11 @@ mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
 `agents executive revoke` 命令移除执行委托，关闭委托记录并退还租金。资产所有者或执行者授权方均可撤销。
 
 ```bash {% title="Revoke delegation (as owner)" %}
-mplx agents executive revoke <AGENT_MINT> --executive <EXECUTIVE_WALLET>
+mplx agents executive revoke <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 ```
 
 ```bash {% title="Revoke own delegation (as executive)" %}
-mplx agents executive revoke <AGENT_MINT>
+mplx agents executive revoke <AGENT_ASSET>
 ```
 
 ### 选项
@@ -123,7 +123,7 @@ mplx agents executive revoke <AGENT_MINT>
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Executive Wallet: <executive_wallet_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>

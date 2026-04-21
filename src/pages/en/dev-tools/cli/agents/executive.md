@@ -76,7 +76,7 @@ No flags or arguments required — the profile is derived from the current signe
 The `agents executive delegate` command links a registered agent to an executive profile, allowing the executive to sign transactions on behalf of the agent. Only the asset owner can delegate execution.
 
 ```bash {% title="Delegate execution" %}
-mplx agents executive delegate <AGENT_MINT> --executive <EXECUTIVE_WALLET>
+mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 ```
 
 ### Options
@@ -93,7 +93,7 @@ The executive must have already registered their profile with `mplx agents execu
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Executive Profile: <profile_pda_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -105,11 +105,11 @@ The executive must have already registered their profile with `mplx agents execu
 The `agents executive revoke` command removes an execution delegation, closing the delegation record and refunding rent. Either the asset owner or the executive authority can revoke.
 
 ```bash {% title="Revoke delegation (as owner)" %}
-mplx agents executive revoke <AGENT_MINT> --executive <EXECUTIVE_WALLET>
+mplx agents executive revoke <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 ```
 
 ```bash {% title="Revoke own delegation (as executive)" %}
-mplx agents executive revoke <AGENT_MINT>
+mplx agents executive revoke <AGENT_ASSET>
 ```
 
 ### Options
@@ -123,7 +123,7 @@ mplx agents executive revoke <AGENT_MINT>
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Executive Wallet: <executive_wallet_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>

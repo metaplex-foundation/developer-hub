@@ -29,14 +29,14 @@ faqs:
   - q: What is the difference between launchpool and bonding-curve?
     a: Launchpool has a 48-hour deposit window where users deposit SOL and receive tokens proportionally. Bonding curve starts trading immediately with a constant product AMM — price rises as SOL flows in, and the curve auto-graduates to Raydium CPMM when all tokens are sold.
   - q: Can I link an agent to a token launch?
-    a: Yes. Pass --agentMint with the agent's Core asset address. This auto-derives the creator fee wallet from the agent's PDA. Add --agentSetToken to permanently link the token to the agent (irreversible).
+    a: Yes. Pass --agentAsset with the agent's Core asset address. This auto-derives the creator fee wallet from the agent's PDA. Add --agentSetToken to permanently link the token to the agent (irreversible).
 ---
 
 {% callout title="What You'll Do" %}
 Use the Genesis API to create and register token launches in a single command:
 - Create a **launchpool** (48h deposit window, proportional distribution)
 - Create a **bonding curve** (instant trading, auto-graduates to Raydium)
-- Optionally link a launch to an [agent](/agents/mint-agent) with `--agentMint`
+- Optionally link a launch to an [agent](/agents/mint-agent) with `--agentAsset`
 - Register an existing genesis account with `genesis launch register`
 {% /callout %}
 
@@ -47,7 +47,7 @@ The `genesis launch` commands provide a streamlined way to launch tokens using t
 - **`genesis launch create`**: All-in-one command — builds transactions via the API, signs and sends them, and registers the launch
 - **`genesis launch register`**: Registers an existing genesis account on the Metaplex platform to get a public launch page
 - **Two launch types**: `launchpool` (default, 48h deposit, configurable allocations) and `bonding-curve` (instant bonding curve, no deposit window)
-- **Agent support**: Link a launch to a registered agent with `--agentMint` and optionally `--agentSetToken`
+- **Agent support**: Link a launch to a registered agent with `--agentAsset` and optionally `--agentSetToken`
 - **metaplex.com compatible**: Launches created or registered through the API appear on [metaplex.com](https://metaplex.com) with a public launch page
 - **Total supply**: Currently fixed at 1,000,000,000 tokens
 
@@ -104,8 +104,8 @@ mplx genesis launch create \
 | `--fundsRecipient <string>` | Wallet receiving unlocked portion of raised funds | Launchpool only | — |
 | `--creatorFeeWallet <string>` | Wallet to receive creator fees (always enabled, fees accrue and are claimed after graduation) | No (bonding-curve only) | Launching wallet |
 | `--firstBuyAmount <number>` | SOL amount for fee-free initial purchase at launch | No (bonding-curve only) | — |
-| `--agentMint <string>` | Agent's Core asset address — auto-derives creator fee wallet from agent PDA | No | — |
-| `--agentSetToken` | Permanently link the launched token to the agent (**irreversible**). Requires `--agentMint` | No | `false` |
+| `--agentAsset <string>` | Agent's Core asset address — auto-derives creator fee wallet from agent PDA | No | — |
+| `--agentSetToken` | Permanently link the launched token to the agent (**irreversible**). Requires `--agentAsset` | No | `false` |
 | `--description <string>` | Token description (max 250 characters) | No | — |
 | `--website <string>` | Project website URL | No | — |
 | `--twitter <string>` | Project Twitter URL | No | — |
@@ -209,9 +209,9 @@ The first buy amount is in SOL (e.g. `0.1` = 0.1 SOL). No protocol or creator fe
 
 ## Agent Launches
 
-Link a token launch to a registered [agent](/agents/mint-agent) by passing `--agentMint`. This works with both launchpool and bonding curve launch types.
+Link a token launch to a registered [agent](/agents/mint-agent) by passing `--agentAsset`. This works with both launchpool and bonding curve launch types.
 
-When `--agentMint` is provided:
+When `--agentAsset` is provided:
 - The **creator fee wallet** is auto-derived from the agent's Core asset signer PDA
 - For bonding curves, the **first buy buyer** defaults to the agent PDA (if `--firstBuyAmount` is set)
 
@@ -220,7 +220,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken
 ```
 
@@ -235,20 +235,20 @@ mplx genesis launch create --launchType bonding-curve \
 mplx agents register --name "My Agent" \
   --description "An autonomous trading agent" \
   --image "./avatar.png"
-# Note the agentMint address from the output (e.g. 7BQj...)
+# Note the agentAsset address from the output (e.g. 7BQj...)
 
 # 2. Launch a bonding curve token linked to the agent
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> --agentSetToken
+  --agentAsset <AGENT_ASSET> --agentSetToken
 
 # 3. (Optional) Verify the agent has a token linked
-mplx agents fetch <AGENT_MINT>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 {% callout title="RPC propagation delay" type="note" %}
-If step 2 fails with "Agent is not owned by the connected wallet", the API backend hasn't indexed the new agent yet. The on-chain token creation may still have succeeded — check with `mplx agents fetch <AGENT_MINT>`. If the agent already shows a token set, only the platform registration failed; complete it with `mplx genesis launch register`. When scripting both steps, add a ~30 second delay between agent registration and the launch command.
+If step 2 fails with "Agent is not owned by the connected wallet", the API backend hasn't indexed the new agent yet. The on-chain token creation may still have succeeded — check with `mplx agents fetch <AGENT_ASSET>`. If the agent already shows a token set, only the platform registration failed; complete it with `mplx genesis launch register`. When scripting both steps, add a ~30 second delay between agent registration and the launch command.
 {% /callout %}
 
 ### Output
@@ -348,7 +348,7 @@ The launch config JSON file uses the same format as the `launch create` input.
   },
   "launchType": "bondingCurve",
   "agent": {
-    "mint": "<AGENT_MINT>",
+    "mint": "<AGENT_ASSET>",
     "setToken": true
   },
   "launch": {},
@@ -436,7 +436,7 @@ The `genesis launch create` command is an all-in-one flow that calls the Genesis
 Launchpool has a 48-hour deposit window where users deposit SOL and receive tokens proportionally. Bonding curve starts trading immediately with a constant product AMM — price rises as SOL flows in, and the curve auto-graduates to Raydium CPMM when all tokens are sold.
 
 **Can I link an agent to a token launch?**
-Yes. Pass `--agentMint` with the agent's Core asset address. This auto-derives the creator fee wallet from the agent's PDA. Add `--agentSetToken` to permanently link the token to the agent (irreversible). Works with both launchpool and bonding curve.
+Yes. Pass `--agentAsset` with the agent's Core asset address. This auto-derives the creator fee wallet from the agent's PDA. Add `--agentSetToken` to permanently link the token to the agent (irreversible). Works with both launchpool and bonding curve.
 
 **When should I use `genesis launch register`?**
 Use `genesis launch register` when you've already created a genesis account using the low-level CLI commands (`genesis create`, `bucket add-launch-pool`, etc.) and want to register it on the Metaplex platform to get a public launch page.

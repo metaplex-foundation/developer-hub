@@ -20,7 +20,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "mplx genesis launch create --launchType bonding-curve \\\n  --name \"Agent Token\" \\\n  --symbol \"AGT\" \\\n  --image \"https://gateway.irys.xyz/your-image-id\" \\\n  --agentMint <AGENT_CORE_ASSET_ADDRESS> \\\n  --agentSetToken \\\n  --firstBuyAmount 0.1\n"
+  "full": "mplx genesis launch create --launchType bonding-curve \\\n  --name \"Agent Token\" \\\n  --symbol \"AGT\" \\\n  --image \"https://gateway.irys.xyz/your-image-id\" \\\n  --agentAsset <AGENT_CORE_ASSET_ADDRESS> \\\n  --agentSetToken \\\n  --firstBuyAmount 0.1\n"
 }
 
 export const metadata = {

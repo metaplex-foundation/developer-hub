@@ -3,4 +3,4 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Test Token" \
   --symbol "TEST" \
   --image "https://gateway.irys.xyz/test-image" \
-  --agentMint <AGENT_MINT>
+  --agentAsset <AGENT_ASSET>

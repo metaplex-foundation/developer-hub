@@ -111,7 +111,7 @@ mplx agents register --new --use-ix \
 첫 번째 인수로 전달된 에셋 주소에 기존 Core 에셋에 ID를 등록합니다.
 
 ```bash {% title="직접 IX — 기존 에셋" %}
-mplx agents register <AGENT_MINT> --use-ix \
+mplx agents register <AGENT_ASSET> --use-ix \
   --from-file "./agent-doc.json"
 ```
 
@@ -158,7 +158,7 @@ mplx agents register \
 
 ```text {% title="예상 출력" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
 --------------------------------

@@ -50,7 +50,7 @@ Metaplex Skill 为 AI 代理提供关于六个 Metaplex 程序及其在 CLI、Um
 
 [Agent Registry](/agents) 为 MPL Core 资产提供链上代理身份、钱包和执行委托。
 
-**CLI** (`mplx agents`)：注册代理身份、委托和撤销执行、获取代理数据、将 Genesis 代币链接到代理。完整的代理代币创建流程请使用 `mplx genesis launch create --agentMint --agentSetToken` 一步完成发行和链接。
+**CLI** (`mplx agents`)：注册代理身份、委托和撤销执行、获取代理数据、将 Genesis 代币链接到代理。完整的代理代币创建流程请使用 `mplx genesis launch create --agentAsset --agentSetToken` 一步完成发行和链接。
 
 **Umi SDK**：完整的编程访问，包括 Mint Agent API（`mintAndSubmitAgent`），在单个交易中创建 Core 资产并注册身份。支持现有资产的 `registerIdentityV1`、执行委托，以及完整的[代理代币创建](/agents/create-agent-token)流程——通过 Genesis 发行代币并使用 `setAgentTokenV1` 链接。
 
@@ -131,7 +131,7 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 | 按所有者/集合查询资产 | 仅 SDK (DAS API) |
 | 代币发行 — launchpool (Genesis) | Yes (`mplx genesis launch create`) |
 | 代币发行 — bonding curve (Genesis) | Yes (`mplx genesis launch create --launchType bonding-curve`) |
-| 代理代币发行 (Genesis + 链接) | Yes (`mplx genesis launch create --agentMint --agentSetToken`) |
+| 代理代币发行 (Genesis + 链接) | Yes (`mplx genesis launch create --agentAsset --agentSetToken`) |
 
 ## 选择指南
 
@@ -139,7 +139,7 @@ Solana 上的下一代 NFT 标准。Core NFT 比 Token Metadata NFT 便宜得多
 
 ### 自主代理
 
-使用 **[Agent Registry](/agents)** 为 MPL Core 资产注册链上身份和执行委托。Mint Agent API（`mintAndSubmitAgent`）在单个交易中创建 Core 资产并注册身份。对于现有资产，使用 `mplx agents register <AGENT_MINT> --use-ix`（CLI）或 `registerIdentityV1`（SDK）。代理可以通过 Genesis 发行并使用 `setAgentTokenV1` 链接来[创建和链接代理代币](/agents/create-agent-token)。
+使用 **[Agent Registry](/agents)** 为 MPL Core 资产注册链上身份和执行委托。Mint Agent API（`mintAndSubmitAgent`）在单个交易中创建 Core 资产并注册身份。对于现有资产，使用 `mplx agents register <AGENT_ASSET> --use-ix`（CLI）或 `registerIdentityV1`（SDK）。代理可以通过 Genesis 发行并使用 `setAgentTokenV1` 链接来[创建和链接代理代币](/agents/create-agent-token)。
 
 ### NFT: Core vs Token Metadata
 

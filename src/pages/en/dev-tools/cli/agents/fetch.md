@@ -44,14 +44,14 @@ The `mplx agents fetch` command reads the on-chain [agent identity](/agents) PDA
 
 | Item | Value |
 |------|-------|
-| **Command** | `mplx agents fetch <AGENT_MINT>` |
-| **Required argument** | `AGENT_MINT` — the agent's Core asset address |
+| **Command** | `mplx agents fetch <AGENT_ASSET>` |
+| **Required argument** | `AGENT_ASSET` — the agent's Core asset address |
 | **Optional flags** | `--json` — machine-readable output |
 
 ## Usage
 
 ```bash {% title="Fetch agent identity" %}
-mplx agents fetch <AGENT_MINT>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## Output
@@ -59,7 +59,7 @@ mplx agents fetch <AGENT_MINT>
 ```text {% title="Expected output (registered agent)" %}
 {
   registered: true,
-  agentMint: '<agent_mint_address>',
+  agentAsset: '<agent_asset_address>',
   owner: '<owner_address>',
   identityPda: '<identity_pda_address>',
   agentWallet: '<asset_signer_pda_address>',

@@ -38,7 +38,7 @@ faqs:
   - q: 에이전트 토큰이란 무엇인가요?
     a: 에이전트 토큰은 Metaplex Genesis 프로토콜을 사용하여 에이전트의 온체인 지갑에서 발행되는 토큰입니다. createAndRegisterLaunch에 agent 필드를 전달하면, SDK가 크리에이터 수수료를 에이전트의 Core asset 서명자 PDA로 자동 라우팅하고, 에이전트가 온체인에서 실행할 수 있도록 launch 트랜잭션을 Core execute 명령어로 래핑합니다.
   - q: 에이전트 토큰 발행 시 크리에이터 수수료는 어디로 가나요?
-    a: 크리에이터 수수료는 에이전트의 Core asset 서명자 PDA(시드 ['mpl-core-execute', <agent_mint>]에서 파생)로 자동 라우팅됩니다. creatorFeeWallet을 수동으로 설정할 필요 없이 agent 필드를 전달하는 것만으로 충분합니다. launch.creatorFeeWallet을 명시적으로 설정하여 수수료 지갑을 재정의할 수 있습니다.
+    a: 크리에이터 수수료는 에이전트의 Core asset 서명자 PDA(시드 ['mpl-core-execute', <agent_asset>]에서 파생)로 자동 라우팅됩니다. creatorFeeWallet을 수동으로 설정할 필요 없이 agent 필드를 전달하는 것만으로 충분합니다. launch.creatorFeeWallet을 명시적으로 설정하여 수수료 지갑을 재정의할 수 있습니다.
   - q: setToken은 되돌릴 수 있나요?
     a: 아닙니다. setToken을 true로 설정하면 발행된 토큰이 에이전트의 기본 토큰으로 영구적으로 연결됩니다. 트랜잭션이 확인된 후에는 되돌리거나 재할당할 수 없습니다. 이 토큰을 에이전트에 영구적으로 연결하려는 것이 확실한 경우에만 setToken을 true로 설정하세요.
   - q: devnet에서 에이전트 토큰 발행을 먼저 테스트할 수 있나요?
@@ -113,7 +113,7 @@ Genesis API 함수는 명령어를 직접 제출하는 대신 HTTP를 통해 호
 
 `createAndRegisterLaunch`에 에이전트의 [Core](/core) asset 주소를 지정한 `agent` 필드를 전달하세요. SDK가 자동으로 다음을 수행합니다.
 
-- 크리에이터 수수료 지갑을 에이전트의 Core asset 서명자 PDA(`['mpl-core-execute', <agent_mint>]`에서 파생)로 설정
+- 크리에이터 수수료 지갑을 에이전트의 Core asset 서명자 PDA(`['mpl-core-execute', <agent_asset>]`에서 파생)로 설정
 - 에이전트가 온체인에서 실행할 수 있도록 launch 트랜잭션을 Core execute 명령어로 래핑
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
@@ -277,7 +277,7 @@ try {
 
 ### 에이전트 토큰 발행 시 크리에이터 수수료는 어디로 가나요?
 
-크리에이터 수수료는 에이전트의 Core asset 서명자 PDA(시드 `['mpl-core-execute', <agent_mint>]`에서 파생)로 자동 라우팅됩니다. `creatorFeeWallet`을 수동으로 설정할 필요 없이 `agent` 필드를 전달하는 것만으로 충분합니다. `launch.creatorFeeWallet`을 명시적으로 설정하면 수수료 지갑을 재정의할 수 있습니다.
+크리에이터 수수료는 에이전트의 Core asset 서명자 PDA(시드 `['mpl-core-execute', <agent_asset>]`에서 파생)로 자동 라우팅됩니다. `creatorFeeWallet`을 수동으로 설정할 필요 없이 `agent` 필드를 전달하는 것만으로 충분합니다. `launch.creatorFeeWallet`을 명시적으로 설정하면 수수료 지갑을 재정의할 수 있습니다.
 
 ### `setToken`은 되돌릴 수 있나요?
 

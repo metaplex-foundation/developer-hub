@@ -40,7 +40,7 @@ faqs:
   - q: What is an Agent Token?
     a: An Agent Token is a token launched from an agent's onchain wallet using the Metaplex Genesis protocol. When you pass the agent field to createAndRegisterLaunch, the SDK automatically routes creator fees to the agent's Core asset signer PDA and wraps the launch transactions in Core execute instructions so the agent executes them onchain.
   - q: Where do creator fees go when launching an agent token?
-    a: Creator fees are automatically routed to the agent's Core asset signer PDA — derived from seeds ['mpl-core-execute', <agent_mint>]. You do not need to set creatorFeeWallet manually; passing the agent field is sufficient. The fee wallet can be overridden by setting launch.creatorFeeWallet explicitly.
+    a: Creator fees are automatically routed to the agent's Core asset signer PDA — derived from seeds ['mpl-core-execute', <agent_asset>]. You do not need to set creatorFeeWallet manually; passing the agent field is sufficient. The fee wallet can be overridden by setting launch.creatorFeeWallet explicitly.
   - q: Is setToken reversible?
     a: No. Each agent can have only ever have one token — the association is permanent\. Setting setToken to true cannot be undone, replaced, or reassigned, and there is no instruction to change or remove it. Do not set setToken to true until you are certain this is the correct, final token for the agent.
   - q: Can I test an agent token launch on devnet first?
@@ -133,7 +133,7 @@ An agent token is the one canonical token for an agent, proving the token's prov
 
 Pass the `agent` field to `createAndRegisterLaunch` with your agent's [Core](/core) asset address. The SDK automatically:
 
-- Sets the creator fee wallet to the agent's Core asset signer PDA (derived from `['mpl-core-execute', <agent_mint>]`)
+- Sets the creator fee wallet to the agent's Core asset signer PDA (derived from `['mpl-core-execute', <agent_asset>]`)
 - Wraps the launch transactions in Core execute instructions for the agent to execute onchain
 
 {% code-tabs-imported from="agents/create_agent_token" frameworks="umi,cli" defaultFramework="umi" /%}
@@ -253,7 +253,7 @@ An Agent Token is a token launched from an agent's onchain wallet using the [Gen
 
 ### Where do creator fees go when launching an agent token?
 
-Creator fees are automatically routed to the agent's Core asset signer PDA — derived from seeds `['mpl-core-execute', <agent_mint>]`. You do not need to set `creatorFeeWallet` manually; passing the `agent` field is sufficient. The fee wallet can still be overridden by setting `launch.creatorFeeWallet` explicitly.
+Creator fees are automatically routed to the agent's Core asset signer PDA — derived from seeds `['mpl-core-execute', <agent_asset>]`. You do not need to set `creatorFeeWallet` manually; passing the `agent` field is sufficient. The fee wallet can still be overridden by setting `launch.creatorFeeWallet` explicitly.
 
 ### Is `setToken` reversible?
 

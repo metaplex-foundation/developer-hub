@@ -20,7 +20,7 @@ programmingLanguage:
 created: '04-09-2026'
 updated: '04-09-2026'
 howToSteps:
-  - Create a token launch linked to the agent using genesis launch create with --agentMint and --agentSetToken to permanently link the token
+  - Create a token launch linked to the agent using genesis launch create with --agentAsset and --agentSetToken to permanently link the token
   - Or create a launch without --agentSetToken, then link it manually with agents set-agent-token
 howToTools:
   - Metaplex CLI (mplx)
@@ -35,7 +35,7 @@ faqs:
 
 {% callout title="実行内容" %}
 登録済みエージェントのトークンを作成してエージェントIDにリンクします：
-- **1ステップ**: `--agentMint` と `--agentSetToken` を使ってエージェントにリンクされたボンディングカーブのローンチを作成する
+- **1ステップ**: `--agentAsset` と `--agentSetToken` を使ってエージェントにリンクされたボンディングカーブのローンチを作成する
 - **2ステップ**: 個別にトークンローンチを作成し、その後 `agents set-agent-token` でリンクする
 {% /callout %}
 
@@ -43,7 +43,7 @@ faqs:
 
 エージェントトークンは、登録済み[エージェントID](/agents)に永続的にリンクされた[Genesis](/smart-contracts/genesis)トークンです。エージェントトークンを作成してリンクする方法は2つあります — ローンチ作成時の1ステップフロー、または2ステップの手動フローです。
 
-- **1ステップ**（推奨）: `genesis launch create --agentMint <ASSET> --agentSetToken`
+- **1ステップ**（推奨）: `genesis launch create --agentAsset <ASSET> --agentSetToken`
 - **2ステップ**: ローンチを作成してから `agents set-agent-token` でリンクする
 - **取り消し不可**: 各エージェントIDが持てるトークンは1つのみで、一度しか設定できない
 
@@ -53,14 +53,14 @@ faqs:
 
 ## 1ステップ：エージェントでローンチ
 
-エージェントトークンを作成する最もシンプルな方法は、ローンチ作成時に `--agentMint` を渡すことです。これはエージェントの[Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets)からクリエイター手数料ウォレットを自動導出し、オプションで同じトランザクションでトークンをリンクします。
+エージェントトークンを作成する最もシンプルな方法は、ローンチ作成時に `--agentAsset` を渡すことです。これはエージェントの[Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets)からクリエイター手数料ウォレットを自動導出し、オプションで同じトランザクションでトークンをリンクします。
 
 ```bash {% title="エージェントトークンでボンディングカーブを作成する" %}
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken
 ```
 
@@ -75,7 +75,7 @@ mplx genesis launch create \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
@@ -93,14 +93,14 @@ mplx genesis launch create \
 ### ステップ1：Asset-Signerウォレットの設定
 
 ```bash {% title="asset-signerウォレットをセットアップする" %}
-mplx config wallets add --name my-agent --agent <AGENT_MINT>
+mplx config wallets add --name my-agent --agent <AGENT_ASSET>
 mplx config wallets set my-agent
 ```
 
 ### ステップ2：トークンのリンク
 
 ```bash {% title="GenesisトークンをエージェントにリンクSolana" %}
-mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
+mplx agents set-agent-token <AGENT_ASSET> <GENESIS_ACCOUNT>
 ```
 
 {% callout type="warning" title="取り消し不可" %}
@@ -111,7 +111,7 @@ mplx agents set-agent-token <AGENT_MINT> <GENESIS_ACCOUNT>
 
 ```text {% title="期待される出力" %}
 --------------------------------
-  Agent Mint: <agent_mint_address>
+  Agent Asset: <agent_asset_address>
   Genesis Account: <genesis_account_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
@@ -131,10 +131,10 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_MINT> --agentSetToken
+  --agentAsset <AGENT_ASSET> --agentSetToken
 
 # 3. エージェントにトークンがリンクされているか確認する
-mplx agents fetch <AGENT_MINT>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## よくあるエラー
@@ -147,10 +147,10 @@ mplx agents fetch <AGENT_MINT>
 
 ## Notes
 
-- 1ステップフロー（`--agentMint --agentSetToken`）が推奨です — 1つのトランザクションですべて処理します
+- 1ステップフロー（`--agentAsset --agentSetToken`）が推奨です — 1つのトランザクションですべて処理します
 - 2ステップフローでは `set-agent-token` インストラクションがオーソリティとしてAsset Signer PDAを使用するため、asset-signerモードが必要です
 - `set-agent-token` を実行する前に、Genesisアカウントがすでに存在している必要があります
-- `--agentMint` を使用すると、クリエイター手数料ウォレットはエージェントのAsset Signer PDAから自動的に派生されます
+- `--agentAsset` を使用すると、クリエイター手数料ウォレットはエージェントのAsset Signer PDAから自動的に派生されます
 
 ## FAQ
 
