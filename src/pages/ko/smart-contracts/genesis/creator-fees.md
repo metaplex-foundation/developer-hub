@@ -39,11 +39,11 @@ faqs:
   - q: 창작자 수수료는 매 스왑마다 전송되나요?
     a: 아니요. 창작자 수수료는 각 스왑에서 버킷(creatorFeeAccrued)에 누적되지만 즉시 전송되지는 않습니다. 활성 커브 중에는 claimBondingCurveCreatorFeeV2를 호출하고, 졸업 후에는 claimRaydiumCreatorFeeV2를 호출하여 수수료를 수집하세요.
   - q: 누구든지 claimBondingCurveCreatorFeeV2를 호출할 수 있나요?
-    a: 네. claimBondingCurveCreatorFeeV2와 claimRaydiumCreatorFeeV2는 모두 권한 없이 호출 가능합니다 — 어떤 지갑도 청구를 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송되며 호출자에게는 전송되지 않습니다.
+    a: 네. 3개의 권한 없는 수수료 명령어는 활성 커브와 졸업 후 단계 모두에 걸쳐 있습니다 — collectRaydiumCpmmFeesWithCreatorFeeV2와 claimBondingCurveCreatorFeeV2(활성 커브), 그리고 claimRaydiumCreatorFeeV2(졸업 후). 어떤 지갑도 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송되며 호출자에게는 전송되지 않습니다.
   - q: 첫 번째 구매는 창작자 수수료를 납부하나요?
     a: 아니요. 첫 번째 구매가 구성되어 있으면 프로토콜 스왑 수수료와 창작자 수수료 모두 초기 구매에서 면제됩니다. 이후 모든 스왑에는 일반 창작자 수수료가 적용됩니다.
   - q: 누적된 창작자 수수료를 확인하는 방법은 무엇인가요?
-    a: Genesis SDK의 fetchBondingCurveBucketV2를 사용하여 버킷 계정에서 creatorFeeAccrued 필드를 읽으세요.
+    a: 활성 커브 중에는 fetchBondingCurveBucketV2를 사용하여 BondingCurveBucketV2에서 creatorFeeAccrued 필드를 읽으세요. 졸업 후에는 fetchRaydiumCpmmBucketV2를 사용하여 RaydiumCpmmBucketV2에서 creatorFeeAccrued를 읽으세요. 누적 창작자 수수료 확인 섹션을 참조하세요.
   - q: 런칭 후 창작자 수수료 지갑을 변경할 수 있나요?
     a: 아니요. 창작자 수수료 지갑은 커브 생성 시 설정되며 커브가 라이브된 후에는 변경할 수 없습니다.
 ---
@@ -71,6 +71,18 @@ faqs:
 
 ## 빠른 시작
 
+이 섹션에서는 활성 커브와 졸업 후 단계 모두에서 창작자 수수료를 구성하고 청구하는 최소 단계를 설명합니다.
+
+### 빠른 참조
+
+| 명령어 | 사용 시기 | 필요한 계정 | 출력 / 효과 |
+|---|---|---|---|
+| `createAndRegisterLaunch`(`creatorFeeWallet` 설정) | 커브 생성 시 | 창작자 지갑, 런칭 서명자 | 버킷에 수수료 지갑 구성 |
+| `fetchBondingCurveBucketV2`(`creatorFeeAccrued` 읽기) | 활성 커브 중 아무 때나 | 버킷 PDA | 현재 누적 수수료 잔액(lamports) |
+| `claimBondingCurveCreatorFeeV2` | 활성 커브 — 누적 수수료 수집 | Genesis 계정, 버킷 PDA, 베이스 민트, 창작자 수수료 지갑 | 누적 SOL이 창작자 지갑으로 전송 |
+| `collectRaydiumCpmmFeesWithCreatorFeeV2` | 졸업 후 — LP 수수료 수확 | Genesis 계정, Raydium 풀 PDA, Raydium 버킷 PDA | LP 수수료가 Raydium 풀에서 Genesis 버킷으로 이동 |
+| `claimRaydiumCreatorFeeV2` | 졸업 후 — 버킷 잔액 청구 | Genesis 계정, Raydium 버킷 PDA, 베이스/쿼트 민트, 창작자 수수료 지갑 | 버킷 잔액이 창작자 지갑으로 전송 |
+
 **바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#에이전트-런칭-자동-pda-라우팅) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인](#누적-창작자-수수료-확인) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [졸업 후 청구](#졸업-후-창작자-수수료-청구)
 
 1. `createAndRegisterLaunch`를 호출할 때 `launch` 객체에서 `creatorFeeWallet`을 설정합니다
@@ -79,6 +91,8 @@ faqs:
 4. 졸업 후 `claimRaydiumCreatorFeeV2`를 호출하여 Raydium LP 수수료를 수집합니다
 
 ## 사전 요구 사항
+
+Genesis SDK, 구성된 Umi 인스턴스 및 충전된 Solana 지갑이 필요합니다.
 
 - `@metaplex-foundation/genesis` SDK 설치
 - 키페어 ID로 구성된 Umi 인스턴스 — [Metaplex API를 통한 본딩 커브 런칭](/smart-contracts/genesis/bonding-curve-launch#umi-설정)을 참조하세요
@@ -203,6 +217,8 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ## 참고 사항
 
+다음 주의사항은 수수료 타이밍, 권한 없는 청구, 2단계 졸업 후 흐름 및 첫 번째 구매 수수료 면제에 대해 설명합니다.
+
 - 창작자 수수료는 각 스왑에서 버킷(`creatorFeeAccrued`)에 누적되며 즉시 전송되지 않습니다 — 수수료를 받으려면 청구 명령어를 명시적으로 호출해야 합니다; `creatorFeeClaimed`는 현재까지 청구된 누적 합계를 추적합니다
 - 두 청구 명령어 모두 권한 없이 호출 가능합니다: 어떤 지갑도 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송됩니다
 - `creatorFeeWallet`은 설정하지 않으면 런칭 지갑으로 기본 설정됩니다; 커브가 생성된 후에는 변경할 수 없습니다
@@ -223,7 +239,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 누구든지 `claimBondingCurveCreatorFeeV2`를 호출할 수 있나요?
 
-네. `claimBondingCurveCreatorFeeV2`와 `claimRaydiumCreatorFeeV2`는 모두 권한 없이 호출 가능합니다 — 어떤 지갑도 청구를 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송되며 호출자에게는 전송되지 않습니다.
+네. 3개의 권한 없는 수수료 명령어는 활성 커브와 졸업 후 단계 모두에 걸쳐 있습니다 — `collectRaydiumCpmmFeesWithCreatorFeeV2`와 `claimBondingCurveCreatorFeeV2`(활성 커브), 그리고 `claimRaydiumCreatorFeeV2`(졸업 후). 어떤 지갑도 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송되며 호출자에게는 전송되지 않습니다.
 
 ### 첫 번째 구매는 창작자 수수료를 납부하나요?
 
@@ -231,7 +247,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 누적된 창작자 수수료를 확인하는 방법은 무엇인가요?
 
-`fetchBondingCurveBucketV2`를 사용하여 버킷 계정에서 `creatorFeeAccrued` 필드를 읽으세요. [누적 창작자 수수료 확인](#누적-창작자-수수료-확인)을 참조하세요.
+활성 커브 중에는 `fetchBondingCurveBucketV2`를 사용하여 `BondingCurveBucketV2`에서 `creatorFeeAccrued` 필드를 읽으세요. 졸업 후에는 `fetchRaydiumCpmmBucketV2`를 사용하여 `RaydiumCpmmBucketV2`에서 `creatorFeeAccrued`를 읽으세요. [누적 창작자 수수료 확인](#누적-창작자-수수료-확인)을 참조하세요.
 
 ### 런칭 후 창작자 수수료 지갑을 변경할 수 있나요?
 

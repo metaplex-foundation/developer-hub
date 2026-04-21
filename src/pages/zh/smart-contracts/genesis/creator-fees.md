@@ -39,11 +39,11 @@ faqs:
   - q: 创作者费是在每次兑换时转账的吗？
     a: 不是。创作者费在每次兑换时累积到 bucket 中（creatorFeeAccrued），不会立即转账。在活跃曲线期间调用 claimBondingCurveCreatorFeeV2 认领，毕业后调用 claimRaydiumCreatorFeeV2 认领。
   - q: 任何人都可以调用 claimBondingCurveCreatorFeeV2 吗？
-    a: 是的。claimBondingCurveCreatorFeeV2 和 claimRaydiumCreatorFeeV2 都是无需许可的——任何钱包都可以触发认领，但 SOL 始终发送到配置的创作者费钱包，而非调用方。
+    a: 是的。三条无需许可的费用指令横跨活跃曲线和毕业后两个阶段——collectRaydiumCpmmFeesWithCreatorFeeV2 和 claimBondingCurveCreatorFeeV2（活跃曲线）以及 claimRaydiumCreatorFeeV2（毕业后）。任何钱包都可以触发，但 SOL 始终发送到配置的创作者费钱包，而非调用方。
   - q: 首次购买需要支付创作者费吗？
     a: 不需要。配置首次购买时，协议兑换费和创作者费均对该一次性初始购买豁免。之后所有兑换正常支付创作者费。
   - q: 如何检查已累积了多少创作者费？
-    a: 使用 Genesis SDK 的 fetchBondingCurveBucketV2 从 bucket 账户读取 creatorFeeAccrued 字段。
+    a: 活跃曲线期间，使用 fetchBondingCurveBucketV2 从 BondingCurveBucketV2 读取 creatorFeeAccrued 字段。毕业后，使用 fetchRaydiumCpmmBucketV2 从 RaydiumCpmmBucketV2 读取 creatorFeeAccrued。请参阅检查累积的创作者费和检查累积的 Raydium 创作者费部分。
   - q: 发行后可以更改创作者费钱包吗？
     a: 不可以。创作者费钱包在曲线创建时设定，曲线上线后无法更改。
 ---
@@ -71,6 +71,18 @@ faqs:
 
 ## 快速开始
 
+本节介绍在活跃曲线和毕业后两个阶段配置和认领创作者费的最少步骤。
+
+### 快速参考
+
+| 指令 | 使用时机 | 必需账户 | 输出 / 效果 |
+|---|---|---|---|
+| `createAndRegisterLaunch`（设置 `creatorFeeWallet`） | 曲线创建时 | 创作者钱包、发行签名者 | 在 bucket 上配置费用钱包 |
+| `fetchBondingCurveBucketV2`（读取 `creatorFeeAccrued`） | 活跃曲线期间任何时候 | Bucket PDA | 当前累积费用余额（lamports） |
+| `claimBondingCurveCreatorFeeV2` | 活跃曲线——收取累积费用 | Genesis 账户、bucket PDA、base mint、创作者费钱包 | 累积 SOL 转移到创作者钱包 |
+| `collectRaydiumCpmmFeesWithCreatorFeeV2` | 毕业后——收割 LP 费用 | Genesis 账户、Raydium 池 PDA、Raydium bucket PDA | LP 费用从 Raydium 池移至 Genesis bucket |
+| `claimRaydiumCreatorFeeV2` | 毕业后——认领 bucket 余额 | Genesis 账户、Raydium bucket PDA、base/quote mint、创作者费钱包 | Bucket 余额转移到创作者钱包 |
+
 **跳转至：** [发行时配置](#configuring-a-creator-fee-at-launch) · [重定向到钱包](#redirecting-creator-fees-to-a-specific-wallet) · [Agent PDA](#agent-launches-automatic-pda-routing) · [与首次购买组合](#combining-creator-fees-with-a-first-buy) · [检查累积费用](#checking-accrued-creator-fees) · [活跃曲线期间认领](#claiming-creator-fees-during-the-active-curve) · [毕业后认领](#claiming-creator-fees-after-graduation)
 
 1. 调用 `createAndRegisterLaunch` 时在 `launch` 对象中设置 `creatorFeeWallet`
@@ -79,6 +91,8 @@ faqs:
 4. 毕业后调用 `claimRaydiumCreatorFeeV2` 收取 Raydium LP 费用
 
 ## 前置条件
+
+您需要 Genesis SDK、已配置的 Umi 实例和已充值的 Solana 钱包。
 
 - 已安装 `@metaplex-foundation/genesis` SDK
 - 配置了密钥对身份的 Umi 实例——详见[通过 Metaplex API 发行联合曲线](/smart-contracts/genesis/bonding-curve-launch#umi-setup)
@@ -203,6 +217,8 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ## 注意事项
 
+以下注意事项涵盖费用时机、无需许可的认领、两步毕业后流程以及首次购买费用豁免。
+
 - 创作者费在每次兑换时累积到 bucket（`creatorFeeAccrued`），不会立即转账——需显式调用认领指令才能收取；`creatorFeeClaimed` 追踪迄今累积认领的总额
 - 两个认领指令均无需许可：任何钱包都可以触发，但 SOL 始终流向配置的创作者费钱包，而非调用方
 - `creatorFeeWallet` 未设置时默认为发行钱包；曲线创建后无法更改
@@ -223,7 +239,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 任何人都可以调用 `claimBondingCurveCreatorFeeV2` 吗？
 
-是的。`claimBondingCurveCreatorFeeV2` 和 `claimRaydiumCreatorFeeV2` 都是无需许可的——任何钱包都可以触发认领，但 SOL 始终发送到配置的创作者费钱包，而非调用方。
+是的。三条无需许可的费用指令横跨活跃曲线和毕业后两个阶段——`collectRaydiumCpmmFeesWithCreatorFeeV2` 和 `claimBondingCurveCreatorFeeV2`（活跃曲线）以及 `claimRaydiumCreatorFeeV2`（毕业后）。任何钱包都可以触发，但 SOL 始终发送到配置的创作者费钱包，而非调用方。
 
 ### 首次购买需要支付创作者费吗？
 
@@ -231,7 +247,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 如何检查已累积了多少创作者费？
 
-使用 `fetchBondingCurveBucketV2` 从 bucket 账户读取 `creatorFeeAccrued` 字段。详见[检查累积的创作者费](#checking-accrued-creator-fees)。
+活跃曲线期间，使用 `fetchBondingCurveBucketV2` 从 `BondingCurveBucketV2` 读取 `creatorFeeAccrued` 字段。毕业后，使用 `fetchRaydiumCpmmBucketV2` 从 `RaydiumCpmmBucketV2` 读取 `creatorFeeAccrued`。详见[检查累积的创作者费](#checking-accrued-creator-fees)。
 
 ### 发行后可以更改创作者费钱包吗？
 

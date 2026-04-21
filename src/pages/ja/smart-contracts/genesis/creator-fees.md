@@ -39,11 +39,11 @@ faqs:
   - q: クリエイター手数料はスワップごとに転送されますか？
     a: いいえ。クリエイター手数料は各スワップでバケット（creatorFeeAccrued）に蓄積されますが、すぐには転送されません。アクティブなカーブ中はclaimBondingCurveCreatorFeeV2で、グラデュエーション後はclaimRaydiumCreatorFeeV2で請求します。
   - q: 誰でもclaimBondingCurveCreatorFeeV2を呼び出せますか？
-    a: はい。claimBondingCurveCreatorFeeV2とclaimRaydiumCreatorFeeV2はどちらもパーミッションレスです — どのウォレットでも請求をトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。
+    a: はい。3つのパーミッションレスな手数料インストラクションはアクティブカーブとグラデュエーション後の両方のフェーズにまたがります — collectRaydiumCpmmFeesWithCreatorFeeV2とclaimBondingCurveCreatorFeeV2（アクティブカーブ）、およびclaimRaydiumCreatorFeeV2（グラデュエーション後）。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。
   - q: ファーストバイはクリエイター手数料を支払いますか？
     a: いいえ。ファーストバイが設定されている場合、プロトコルスワップ手数料とクリエイター手数料の両方が、その1回の初回購入に対して免除されます。その後のすべてのスワップは通常のクリエイター手数料を支払います。
   - q: 蓄積したクリエイター手数料を確認するにはどうすればよいですか？
-    a: Genesis SDKのfetchBondingCurveBucketV2を使用して、バケットアカウントからcreatorFeeAccruedフィールドを読み取ります。
+    a: アクティブカーブ中はfetchBondingCurveBucketV2を使用してBondingCurveBucketV2からcreatorFeeAccruedフィールドを読み取ります。グラデュエーション後はfetchRaydiumCpmmBucketV2を使用してRaydiumCpmmBucketV2からcreatorFeeAccruedを読み取ります。蓄積したクリエイター手数料の確認セクションを参照してください。
   - q: ローンチ後にクリエイター手数料ウォレットを変更できますか？
     a: いいえ。クリエイター手数料ウォレットはカーブ作成時に設定され、カーブがライブになった後は変更できません。
 ---
@@ -71,6 +71,18 @@ faqs:
 
 ## クイックスタート
 
+このセクションでは、アクティブカーブとグラデュエーション後の両フェーズでクリエイター手数料を設定および請求するための最小限の手順を説明します。
+
+### クイックリファレンス
+
+| インストラクション | 使用タイミング | 必要なアカウント | 出力 / 効果 |
+|---|---|---|---|
+| `createAndRegisterLaunch`（`creatorFeeWallet` 設定） | カーブ作成時 | クリエイターウォレット、ローンチ署名者 | バケットに手数料ウォレットが設定される |
+| `fetchBondingCurveBucketV2`（`creatorFeeAccrued` 読み取り） | アクティブカーブ中いつでも | バケットPDA | 現在の蓄積手数料残高（lamports） |
+| `claimBondingCurveCreatorFeeV2` | アクティブカーブ — 蓄積手数料の回収 | Genesisアカウント、バケットPDA、ベースミント、クリエイター手数料ウォレット | 蓄積SOLがクリエイターウォレットに転送 |
+| `collectRaydiumCpmmFeesWithCreatorFeeV2` | グラデュエーション後 — LP手数料のハーベスト | Genesisアカウント、RaydiumプールPDA、Raydiumバケット PDA | LP手数料がRaydiumプールからGenesisバケットに移動 |
+| `claimRaydiumCreatorFeeV2` | グラデュエーション後 — バケット残高の請求 | Genesisアカウント、RaydiumバケットPDA、ベース/クォートミント、クリエイター手数料ウォレット | バケット残高がクリエイターウォレットに転送 |
+
 **ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pda ルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認](#蓄積したクリエイター手数料の確認) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [グラデュエーション後の請求](#グラデュエーション後のクリエイター手数料の請求)
 
 1. `createAndRegisterLaunch` を呼び出すときに `launch` オブジェクトに `creatorFeeWallet` を設定する
@@ -79,6 +91,8 @@ faqs:
 4. グラデュエーション後、`claimRaydiumCreatorFeeV2` を呼び出してRaydium LP手数料を回収する
 
 ## 前提条件
+
+Genesis SDK、設定済みのUmiインスタンス、および入金済みのSolanaウォレットが必要です。
 
 - `@metaplex-foundation/genesis` SDKインストール済み
 - キーペアIDで設定されたUmiインスタンス — [Metaplex APIを通じたボンディングカーブのローンチ](/smart-contracts/genesis/bonding-curve-launch#umiセットアップ)を参照
@@ -203,6 +217,8 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ## Notes
 
+以下の注意事項は、手数料のタイミング、パーミッションレスな請求、2ステップのグラデュエーション後フロー、およびファーストバイの手数料免除について説明します。
+
 - クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません — 受け取るには明示的に請求インストラクションを呼び出す必要があります。`creatorFeeClaimed` は累計の請求済み合計を追跡します
 - 両方の請求インストラクションはパーミッションレスです。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません
 - `creatorFeeWallet` は設定されていない場合デフォルトでローンチウォレットになります。カーブ作成後は変更できません
@@ -223,7 +239,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 誰でも `claimBondingCurveCreatorFeeV2` を呼び出せますか？
 
-はい。`claimBondingCurveCreatorFeeV2` と `claimRaydiumCreatorFeeV2` はどちらもパーミッションレスです — どのウォレットでも請求をトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。
+はい。3つのパーミッションレスな手数料インストラクションはアクティブカーブとグラデュエーション後の両方のフェーズにまたがります — `collectRaydiumCpmmFeesWithCreatorFeeV2` と `claimBondingCurveCreatorFeeV2`（アクティブカーブ）、および `claimRaydiumCreatorFeeV2`（グラデュエーション後）。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。
 
 ### ファーストバイはクリエイター手数料を支払いますか？
 
@@ -231,7 +247,7 @@ const result = await claimRaydiumCreatorFeeV2(umi, {
 
 ### 蓄積したクリエイター手数料を確認するにはどうすればよいですか？
 
-`fetchBondingCurveBucketV2` を使用してバケットアカウントから `creatorFeeAccrued` フィールドを読み取ります。[蓄積したクリエイター手数料の確認](#蓄積したクリエイター手数料の確認)を参照してください。
+アクティブカーブ中は `fetchBondingCurveBucketV2` を使用して `BondingCurveBucketV2` から `creatorFeeAccrued` フィールドを読み取ります。グラデュエーション後は `fetchRaydiumCpmmBucketV2` を使用して `RaydiumCpmmBucketV2` から `creatorFeeAccrued` を読み取ります。[蓄積したクリエイター手数料の確認](#蓄積したクリエイター手数料の確認)を参照してください。
 
 ### ローンチ後にクリエイター手数料ウォレットを変更できますか？
 
