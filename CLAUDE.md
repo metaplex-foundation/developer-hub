@@ -161,4 +161,3 @@ Requirements that are **conditional on page type**:
 - Markdoc processes `.md` files in pages directory
 - Product configurations control navigation and theming
 - Environment variables for Algolia DocSearch and analytics
-- Hotjar integration for user analytics
