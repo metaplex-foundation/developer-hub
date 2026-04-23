@@ -38,7 +38,7 @@ faqs:
   - q: エージェントトークンとは何ですか？
     a: エージェントトークンは、Metaplex Genesisプロトコルを使用してエージェントのオンチェーンウォレットから発行されるトークンです。createAndRegisterLaunchにagentフィールドを渡すと、SDKはクリエイター手数料をエージェントのCore assetシグナーPDAに自動的にルーティングし、エージェントがオンチェーンで実行できるようにlaunchトランザクションをCore executeインストラクションでラップします。
   - q: エージェントトークンを発行する際、クリエイター手数料はどこに送られますか？
-    a: クリエイター手数料はエージェントのCore assetシグナーPDA（シード['mpl-core-execute', <agent_mint>]から導出）に自動的にルーティングされます。creatorFeeWalletを手動で設定する必要はなく、agentフィールドを渡すだけで十分です。launch.creatorFeeWalletを明示的に設定することで、手数料ウォレットを上書きすることもできます。
+    a: クリエイター手数料はエージェントのCore assetシグナーPDA（シード['mpl-core-execute', <agent_asset>]から導出）に自動的にルーティングされます。creatorFeeWalletを手動で設定する必要はなく、agentフィールドを渡すだけで十分です。launch.creatorFeeWalletを明示的に設定することで、手数料ウォレットを上書きすることもできます。
   - q: setTokenは取り消しできますか？
     a: いいえ。setTokenをtrueに設定すると、発行されたトークンがエージェントのプライマリトークンとして永久に関連付けられます。これはトランザクションが確認された後、元に戻したり再割り当てしたりすることはできません。このトークンをエージェントに恒久的にリンクしてよいと確信できる場合にのみ、setTokenをtrueに設定してください。
   - q: エージェントトークンの発行をdevnetで先にテストできますか？
@@ -113,7 +113,7 @@ Genesis API関数は、インストラクションを直接送信するのでは
 
 `createAndRegisterLaunch`にエージェントの[Core](/core) assetアドレスを指定した`agent`フィールドを渡します。SDKは自動的に以下を行います。
 
-- クリエイター手数料ウォレットをエージェントのCore assetシグナーPDA（`['mpl-core-execute', <agent_mint>]`から導出）に設定する
+- クリエイター手数料ウォレットをエージェントのCore assetシグナーPDA（`['mpl-core-execute', <agent_asset>]`から導出）に設定する
 - エージェントがオンチェーンで実行できるようにlaunchトランザクションをCore executeインストラクションでラップする
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
@@ -277,7 +277,7 @@ try {
 
 ### エージェントトークンを発行する際、クリエイター手数料はどこに送られますか？
 
-クリエイター手数料はエージェントのCore assetシグナーPDA（シード`['mpl-core-execute', <agent_mint>]`から導出）に自動的にルーティングされます。`creatorFeeWallet`を手動で設定する必要はなく、`agent`フィールドを渡すだけで十分です。`launch.creatorFeeWallet`を明示的に設定することで、手数料ウォレットを上書きすることもできます。
+クリエイター手数料はエージェントのCore assetシグナーPDA（シード`['mpl-core-execute', <agent_asset>]`から導出）に自動的にルーティングされます。`creatorFeeWallet`を手動で設定する必要はなく、`agent`フィールドを渡すだけで十分です。`launch.creatorFeeWallet`を明示的に設定することで、手数料ウォレットを上書きすることもできます。
 
 ### `setToken`は取り消しできますか？
 

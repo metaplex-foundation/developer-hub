@@ -44,14 +44,14 @@ howToTools:
 
 | 항목 | 값 |
 |------|-----|
-| **명령어** | `mplx agents fetch <ASSET_ADDRESS>` |
+| **명령어** | `mplx agents fetch <AGENT_ASSET>` |
 | **필수 인수** | `ASSET_ADDRESS` — 조회할 MPL Core 에셋 |
 | **선택적 플래그** | `--json` — 기계 판독 가능한 출력 |
 
 ## 사용법
 
 ```bash {% title="에이전트 ID 조회" %}
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## 출력
@@ -59,10 +59,10 @@ mplx agents fetch <ASSET_ADDRESS>
 ```text {% title="예상 출력 (등록된 에이전트)" %}
 {
   registered: true,
-  asset: '<asset_address>',
+  agentAsset: '<agent_asset_address>',
   owner: '<owner_address>',
   identityPda: '<identity_pda_address>',
-  wallet: '<asset_signer_pda_address>',
+  agentWallet: '<asset_signer_pda_address>',
   registrationUri: 'https://...',
   lifecycleChecks: { ... }
 }

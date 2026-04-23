@@ -111,7 +111,7 @@ mplx agents register --new --use-ix \
 最初の引数として渡されたアセットアドレスで、既存のCoreアセットにIDを登録します。
 
 ```bash {% title="直接IX — 既存のアセット" %}
-mplx agents register <ASSET_ADDRESS> --use-ix \
+mplx agents register <AGENT_ASSET> --use-ix \
   --from-file "./agent-doc.json"
 ```
 
@@ -158,7 +158,7 @@ mplx agents register \
 
 ```text {% title="期待される出力" %}
 --------------------------------
-  Asset: <asset_address>
+  Agent Asset: <agent_asset_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
 --------------------------------

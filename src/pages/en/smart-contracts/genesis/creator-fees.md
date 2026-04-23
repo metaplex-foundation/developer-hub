@@ -1,15 +1,20 @@
 ---
 title: Creator Fees on the Genesis Bonding Curve
 metaTitle: Genesis Bonding Curve Creator Fees — Configure and Claim | Metaplex
-description: How to configure a creator fee on a Genesis bonding curve launch and claim accrued fees during the active curve and after graduation to a Raydium CPMM pool.
+description: How to configure a creator fee on a Genesis bonding curve launch, claim accrued fees during the active curve, and collect and claim post-graduation fees from a Raydium CPMM pool.
 keywords:
   - creator fee
   - bonding curve
   - genesis
   - claimBondingCurveCreatorFeeV2
   - claimRaydiumCreatorFeeV2
+  - collectRaydiumCpmmFeesWithCreatorFeeV2
+  - deriveRaydiumPDAsV2
+  - findRaydiumCpmmBucketV2Pda
+  - fetchRaydiumCpmmBucketV2
   - creatorFeeWallet
   - creatorFeeAccrued
+  - RaydiumCpmmBucketV2
   - Raydium CPMM
   - token launch
   - Solana
@@ -23,12 +28,13 @@ programmingLanguage:
   - TypeScript
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-09-2026'
+updated: '04-13-2026'
 howToSteps:
   - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
   - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
   - Call claimBondingCurveCreatorFeeV2 to collect accrued fees during the active curve
-  - After graduation, call claimRaydiumCreatorFeeV2 to collect fees from the Raydium CPMM pool
+  - After graduation, call collectRaydiumCpmmFeesWithCreatorFeeV2 to harvest LP fees from the Raydium pool into the Genesis bucket
+  - Call claimRaydiumCreatorFeeV2 to transfer the accumulated bucket balance to the creator wallet
 howToTools:
   - Node.js
   - Umi framework
@@ -37,13 +43,15 @@ faqs:
   - q: What is the default creator fee wallet if creatorFeeWallet is not set?
     a: The default is the launching wallet — the wallet that signed the createLaunch call. Set creatorFeeWallet explicitly in the launch object to redirect fees to any other address.
   - q: Are creator fees transferred on every swap?
-    a: No. Creator fees are accrued in the bucket (creatorFeeAccrued) on each swap but are not transferred immediately. Call claimBondingCurveCreatorFeeV2 to collect them during the active curve, and claimRaydiumCreatorFeeV2 after graduation.
-  - q: Can anyone call claimBondingCurveCreatorFeeV2?
-    a: Yes. Both claimBondingCurveCreatorFeeV2 and claimRaydiumCreatorFeeV2 are permissionless — any wallet can trigger the claim, but the SOL is always sent to the configured creator fee wallet, not the caller.
+    a: No. Creator fees are accrued in the bucket (creatorFeeAccrued) on each swap but are not transferred immediately. Call claimBondingCurveCreatorFeeV2 to collect them during the active curve, and collectRaydiumCpmmFeesWithCreatorFeeV2 followed by claimRaydiumCreatorFeeV2 after graduation.
+  - q: Can anyone call claimBondingCurveCreatorFeeV2 or claimRaydiumCreatorFeeV2?
+    a: Yes. Both instructions are permissionless — any wallet can trigger them, but the SOL is always sent to the configured creator fee wallet, not the caller. collectRaydiumCpmmFeesWithCreatorFeeV2 is also permissionless.
+  - q: What is the difference between collectRaydiumCpmmFeesWithCreatorFeeV2 and claimRaydiumCreatorFeeV2?
+    a: collectRaydiumCpmmFeesWithCreatorFeeV2 harvests accumulated LP trading fees from the Raydium CPMM pool into the Genesis RaydiumCpmmBucketV2 bucket. claimRaydiumCreatorFeeV2 transfers the balance already in the bucket to the creator fee wallet. Both steps are required to fully collect post-graduation fees.
   - q: Does the first buy pay creator fees?
     a: No. When a first buy is configured, all fees — both the protocol swap fee and creator fee — are waived for that one initial purchase. All subsequent swaps pay the normal creator fee.
   - q: How do I check how much creator fee has accrued?
-    a: Read the creatorFeeAccrued field from the bucket account using fetchBondingCurveBucketV2 from the Genesis SDK.
+    a: During the active curve, read the creatorFeeAccrued field from BondingCurveBucketV2 using fetchBondingCurveBucketV2. After graduation, read the same field from RaydiumCpmmBucketV2 using fetchRaydiumCpmmBucketV2.
   - q: Can I change the creator fee wallet after launch?
     a: No. The creator fee wallet is set at curve creation and cannot be changed after the curve is live.
 ---
@@ -65,18 +73,19 @@ A creator fee is an optional per-swap fee on the Genesis Bonding Curve, applied 
 - **Configuration** — set `creatorFeeWallet` in the `launch` object at curve creation; defaults to the launching wallet if omitted
 - **Accrual** — `creatorFeeAccrued` increments on every swap; fees are not transferred per-swap
 - **Active curve claiming** — `claimBondingCurveCreatorFeeV2` collects accrued fees while the curve is live
-- **Post-graduation claiming** — `claimRaydiumCreatorFeeV2` collects fees from the Raydium CPMM pool after the curve graduates
+- **Post-graduation claiming** — two-step: `collectRaydiumCpmmFeesWithCreatorFeeV2` harvests LP fees from the Raydium pool into the Genesis bucket, then `claimRaydiumCreatorFeeV2` transfers the bucket balance to the creator wallet
 
 For how creator fees interact with swap pricing and the protocol swap fee, see [Theory of Operation — Fee Structure](/smart-contracts/genesis/bonding-curve-theory#fee-structure).
 
 ## Quick Start
 
-**Jump to:** [Configure at Launch](#configuring-a-creator-fee-at-launch) · [Redirect to Wallet](#redirecting-creator-fees-to-a-specific-wallet) · [Agent PDA](#agent-launches-automatic-pda-routing) · [Combine with First Buy](#combining-creator-fees-with-a-first-buy) · [Check Accrued](#checking-accrued-creator-fees) · [Claim During Curve](#claiming-creator-fees-during-the-active-curve) · [Claim After Graduation](#claiming-creator-fees-after-graduation)
+**Jump to:** [Configure at Launch](#configuring-a-creator-fee-at-launch) · [Redirect to Wallet](#redirecting-creator-fees-to-a-specific-wallet) · [Agent PDA](#agent-launches-automatic-pda-routing) · [Combine with First Buy](#combining-creator-fees-with-a-first-buy) · [Check Accrued (Curve)](#checking-accrued-creator-fees) · [Claim During Curve](#claiming-creator-fees-during-the-active-curve) · [Check Raydium Fees](#checking-accrued-raydium-creator-fees) · [Collect from Raydium](#step-1--collect-fees-from-the-raydium-cpmm-pool) · [Claim After Graduation](#step-2--claim-fees-to-the-creator-wallet)
 
 1. Set `creatorFeeWallet` in the `launch` object when calling `createAndRegisterLaunch`
 2. After launch, read `bucket.creatorFeeAccrued` to monitor accumulated fees
 3. Call `claimBondingCurveCreatorFeeV2` to collect fees while the curve is active
-4. After graduation, call `claimRaydiumCreatorFeeV2` to collect Raydium LP fees
+4. After graduation, call `collectRaydiumCpmmFeesWithCreatorFeeV2` to harvest LP fees from the Raydium pool
+5. Call `claimRaydiumCreatorFeeV2` to transfer the bucket balance to the creator wallet
 
 ## Prerequisites
 
@@ -186,25 +195,192 @@ console.log('Creator fees claimed:', result.signature);
 
 ## Claiming Creator Fees After Graduation
 
-After the bonding curve [graduates](/smart-contracts/genesis/bonding-curve-theory#phase-3-graduated), liquidity migrates to a Raydium CPMM pool and creator fees continue to accrue from LP trading activity. The `RaydiumCpmmBucketV2` account exposes `creatorFeeAccrued` and `creatorFeeClaimed` fields analogous to those on `BondingCurveBucketV2`. Collect post-graduation fees with `claimRaydiumCreatorFeeV2`.
+After the bonding curve [graduates](/smart-contracts/genesis/bonding-curve-theory#phase-3-graduated), liquidity migrates to a Raydium CPMM pool and creator fees continue to accrue from LP trading activity. Post-graduation fee collection is a **two-step process**: first collect accumulated LP trading fees from the Raydium pool into the Genesis `RaydiumCpmmBucketV2` bucket, then claim the bucket balance to the creator wallet.
 
-```typescript {% title="claim-raydium-creator-fees.ts" showLineNumbers=true %}
-import { claimRaydiumCreatorFeeV2 } from '@metaplex-foundation/genesis';
+### Checking Accrued Raydium Creator Fees
 
-const result = await claimRaydiumCreatorFeeV2(umi, {
+The `RaydiumCpmmBucketV2` account exposes `creatorFeeAccrued` and `creatorFeeClaimed` fields analogous to those on `BondingCurveBucketV2`. Derive and fetch it using `findRaydiumCpmmBucketV2Pda` and `fetchRaydiumCpmmBucketV2`.
+
+```typescript {% title="check-raydium-fees.ts" showLineNumbers=true %}
+import {
+  findRaydiumCpmmBucketV2Pda,
+  fetchRaydiumCpmmBucketV2,
+} from '@metaplex-foundation/genesis';
+import { isSome, publicKey } from '@metaplex-foundation/umi';
+
+const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT_PUBKEY');
+
+const [raydiumBucketPda] = findRaydiumCpmmBucketV2Pda(umi, {
   genesisAccount,
-  // ... Raydium pool accounts
-}).sendAndConfirm(umi);
+  bucketIndex: 0,
+});
+
+const raydiumBucket = await fetchRaydiumCpmmBucketV2(umi, raydiumBucketPda);
+const claimable = raydiumBucket.creatorFeeAccrued - raydiumBucket.creatorFeeClaimed;
+console.log('Claimable Raydium creator fees (lamports):', claimable);
+
+const creatorFeeExt = raydiumBucket.extensions.creatorFee;
+const creatorFeeWallet = isSome(creatorFeeExt) ? creatorFeeExt.value.wallet : null;
+console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configured');
 ```
 
 {% callout type="note" %}
-Like its bonding curve counterpart, `claimRaydiumCreatorFeeV2` is permissionless — any wallet can trigger the claim, but the SOL is always sent to the configured creator fee wallet.
+`raydiumBucket.creatorFeeAccrued` only reflects fees that have already been collected from the Raydium pool into the bucket. The Raydium pool itself may hold additional uncollected LP fees — run `collectRaydiumCpmmFeesWithCreatorFeeV2` to move those into the bucket before reading the final claimable balance.
 {% /callout %}
+
+### Step 1 — Collect Fees from the Raydium CPMM Pool
+
+`collectRaydiumCpmmFeesWithCreatorFeeV2` harvests accumulated LP trading fees from the Raydium CPMM pool and credits them to the `RaydiumCpmmBucketV2` bucket signer's token account, updating `creatorFeeAccrued`. This step must run before claiming — there is nothing to claim until fees have been collected from Raydium.
+
+Use `deriveRaydiumPDAsV2` to compute all required Raydium pool accounts from the base mint and bucket address. Pass `creatorFee: true` to select the creator-fee AMM config.
+
+```typescript {% title="collect-raydium-fees.ts" showLineNumbers=true %}
+import {
+  collectRaydiumCpmmFeesWithCreatorFeeV2,
+  deriveRaydiumPDAsV2,
+  findRaydiumCpmmBucketV2Pda,
+} from '@metaplex-foundation/genesis';
+import { publicKey } from '@metaplex-foundation/umi';
+
+const baseMint = publicKey('TOKEN_MINT_PUBKEY');
+const quoteMint = publicKey('So11111111111111111111111111111111111111112'); // wSOL
+
+const [raydiumBucketPda] = findRaydiumCpmmBucketV2Pda(umi, {
+  genesisAccount,
+  bucketIndex: 0,
+});
+
+const pdas = deriveRaydiumPDAsV2(umi, baseMint, raydiumBucketPda, {
+  quoteMint,
+  env: 'mainnet', // or 'devnet'
+  creatorFee: true,
+});
+
+await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
+  baseMint,
+  quoteMint,
+  genesisAccount,
+  poolState: pdas.poolState,
+  raydiumCpmmBucket: raydiumBucketPda,
+  ammConfig: pdas.ammConfig,
+  poolAuthority: pdas.poolAuthority,
+  baseVault: pdas.baseVault,
+  quoteVault: pdas.quoteVault,
+  raydiumProgram: pdas.raydiumProgram,
+}).sendAndConfirm(umi);
+
+console.log('Raydium LP fees collected into Genesis bucket');
+```
+
+{% callout type="note" %}
+`collectRaydiumCpmmFeesWithCreatorFeeV2` is permissionless — any wallet can call it. The collected fees flow into the Genesis bucket signer's token account and are reflected in `creatorFeeAccrued` on the next bucket fetch.
+{% /callout %}
+
+### Step 2 — Claim Fees to the Creator Wallet
+
+`claimRaydiumCreatorFeeV2` transfers the balance accumulated in the `RaydiumCpmmBucketV2` bucket to the configured creator fee wallet. Run this after collecting, or any time the bucket already holds an unclaimed balance from a previous collect.
+
+```typescript {% title="claim-raydium-creator-fees.ts" showLineNumbers=true %}
+import {
+  claimRaydiumCreatorFeeV2,
+  fetchRaydiumCpmmBucketV2,
+  findRaydiumCpmmBucketV2Pda,
+} from '@metaplex-foundation/genesis';
+import { isSome, publicKey } from '@metaplex-foundation/umi';
+
+const [raydiumBucketPda] = findRaydiumCpmmBucketV2Pda(umi, {
+  genesisAccount,
+  bucketIndex: 0,
+});
+
+// Re-fetch after collecting to get the updated creatorFeeAccrued.
+const raydiumBucket = await fetchRaydiumCpmmBucketV2(umi, raydiumBucketPda);
+
+const creatorFeeExt = raydiumBucket.extensions.creatorFee;
+if (!isSome(creatorFeeExt)) throw new Error('No creator fee configured on this Raydium bucket');
+const creatorFeeWallet = creatorFeeExt.value.wallet;
+
+await claimRaydiumCreatorFeeV2(umi, {
+  genesisAccount: raydiumBucket.bucket.genesis,
+  bucket: raydiumBucketPda,
+  baseMint: raydiumBucket.bucket.baseMint,
+  quoteMint: raydiumBucket.bucket.quoteMint,
+  creatorFeeWallet,
+}).sendAndConfirm(umi);
+
+console.log('Raydium creator fees claimed to:', creatorFeeWallet.toString());
+```
+
+{% callout type="note" %}
+`claimRaydiumCreatorFeeV2` is permissionless — any wallet can trigger the claim, but the SOL (as wSOL) is always sent to the configured creator fee wallet, not the caller.
+{% /callout %}
+
+### Combined Collect-and-Claim Flow
+
+Collect and claim in a single transaction by chaining the two builders. If the pool has no uncollected fees and the bucket balance is zero, skip both instructions to avoid a no-op transaction.
+
+```typescript {% title="collect-and-claim-raydium.ts" showLineNumbers=true %}
+import {
+  collectRaydiumCpmmFeesWithCreatorFeeV2,
+  claimRaydiumCreatorFeeV2,
+  deriveRaydiumPDAsV2,
+  fetchRaydiumCpmmBucketV2,
+  findRaydiumCpmmBucketV2Pda,
+} from '@metaplex-foundation/genesis';
+import { isSome, publicKey, transactionBuilder } from '@metaplex-foundation/umi';
+
+const baseMint = publicKey('TOKEN_MINT_PUBKEY');
+const quoteMint = publicKey('So11111111111111111111111111111111111111112');
+const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT_PUBKEY');
+
+const [raydiumBucketPda] = findRaydiumCpmmBucketV2Pda(umi, {
+  genesisAccount,
+  bucketIndex: 0,
+});
+
+const raydiumBucket = await fetchRaydiumCpmmBucketV2(umi, raydiumBucketPda);
+
+const creatorFeeExt = raydiumBucket.extensions.creatorFee;
+if (!isSome(creatorFeeExt)) throw new Error('No creator fee configured');
+const creatorFeeWallet = creatorFeeExt.value.wallet;
+
+const pdas = deriveRaydiumPDAsV2(umi, baseMint, raydiumBucketPda, {
+  quoteMint,
+  env: 'mainnet', // or 'devnet'
+  creatorFee: true,
+});
+
+await transactionBuilder()
+  .add(collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
+    baseMint,
+    quoteMint,
+    genesisAccount,
+    poolState: pdas.poolState,
+    raydiumCpmmBucket: raydiumBucketPda,
+    ammConfig: pdas.ammConfig,
+    poolAuthority: pdas.poolAuthority,
+    baseVault: pdas.baseVault,
+    quoteVault: pdas.quoteVault,
+    raydiumProgram: pdas.raydiumProgram,
+  }))
+  .add(claimRaydiumCreatorFeeV2(umi, {
+    genesisAccount,
+    bucket: raydiumBucketPda,
+    baseMint,
+    quoteMint,
+    creatorFeeWallet,
+  }))
+  .sendAndConfirm(umi);
+
+console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.toString());
+```
 
 ## Notes
 
 - Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly call the claim instructions to receive them; `creatorFeeClaimed` tracks the cumulative total claimed to date
-- Both claim instructions are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller
+- Both `claimBondingCurveCreatorFeeV2` and `claimRaydiumCreatorFeeV2` are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller; `collectRaydiumCpmmFeesWithCreatorFeeV2` is also permissionless
+- Post-graduation fees require two steps in order: `collectRaydiumCpmmFeesWithCreatorFeeV2` (harvest from Raydium pool → Genesis bucket), then `claimRaydiumCreatorFeeV2` (bucket → creator wallet); both can be combined in a single transaction
+- `creatorFeeAccrued` and `creatorFeeClaimed` exist on both `BondingCurveBucketV2` (active curve) and `RaydiumCpmmBucketV2` (post-graduation); use `fetchBondingCurveBucketV2` and `fetchRaydiumCpmmBucketV2` respectively
 - `creatorFeeWallet` defaults to the launching wallet if not set; it cannot be changed after the curve is created
 - The first buy mechanism waives all fees (protocol and creator) for the designated initial purchase only; all subsequent swaps pay the normal creator fee
 - Creator fees apply to the SOL side of every swap regardless of direction (buy or sell); they do not compound with the protocol swap fee
@@ -219,11 +395,19 @@ The default creator fee wallet is the launching wallet — the wallet that signe
 
 ### Are creator fees transferred on every swap?
 
-No. Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap but are not transferred immediately. Call `claimBondingCurveCreatorFeeV2` to collect them during the active curve, and `claimRaydiumCreatorFeeV2` after graduation.
+No. Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap but are not transferred immediately. Call `claimBondingCurveCreatorFeeV2` to collect them during the active curve. After graduation, call `collectRaydiumCpmmFeesWithCreatorFeeV2` to harvest LP fees from the Raydium pool, then `claimRaydiumCreatorFeeV2` to transfer them to the creator wallet.
 
-### Can anyone call `claimBondingCurveCreatorFeeV2`?
+### Can anyone call `claimBondingCurveCreatorFeeV2` or `claimRaydiumCreatorFeeV2`?
 
-Yes. Both `claimBondingCurveCreatorFeeV2` and `claimRaydiumCreatorFeeV2` are permissionless — any wallet can trigger the claim, but the SOL is always sent to the configured creator fee wallet, not the caller.
+Yes. All three post-graduation instructions — `collectRaydiumCpmmFeesWithCreatorFeeV2`, `claimBondingCurveCreatorFeeV2`, and `claimRaydiumCreatorFeeV2` — are permissionless. Any wallet can trigger them, but the SOL is always sent to the configured creator fee wallet, not the caller.
+
+### What is the difference between `collectRaydiumCpmmFeesWithCreatorFeeV2` and `claimRaydiumCreatorFeeV2`?
+
+`collectRaydiumCpmmFeesWithCreatorFeeV2` pulls accumulated LP trading fees from the Raydium CPMM pool into the Genesis `RaydiumCpmmBucketV2` bucket — this updates `creatorFeeAccrued` on the bucket. `claimRaydiumCreatorFeeV2` then transfers that bucket balance to the creator fee wallet. You must run collect before claim; without a collect, there is no bucket balance to claim.
+
+### Why is my `creatorFeeAccrued` on the Raydium bucket zero even though the pool is active?
+
+`creatorFeeAccrued` on `RaydiumCpmmBucketV2` only reflects fees that have been collected from Raydium into the Genesis bucket via `collectRaydiumCpmmFeesWithCreatorFeeV2`. LP trading fees accumulate inside the Raydium pool state first — they do not appear in the Genesis bucket until you run the collect instruction.
 
 ### Does the first buy pay creator fees?
 

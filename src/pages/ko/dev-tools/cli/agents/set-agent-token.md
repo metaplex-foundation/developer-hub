@@ -20,7 +20,7 @@ programmingLanguage:
 created: '04-09-2026'
 updated: '04-09-2026'
 howToSteps:
-  - Create a token launch linked to the agent using genesis launch create with --agentMint and --agentSetToken to permanently link the token
+  - Create a token launch linked to the agent using genesis launch create with --agentAsset and --agentSetToken to permanently link the token
   - Or create a launch without --agentSetToken, then link it manually with agents set-agent-token
 howToTools:
   - Metaplex CLI (mplx)
@@ -35,7 +35,7 @@ faqs:
 
 {% callout title="수행할 작업" %}
 등록된 에이전트의 토큰을 생성하고 에이전트 ID에 연결합니다:
-- **단일 단계**: `--agentMint` 및 `--agentSetToken`을 사용하여 에이전트에 연결된 본딩 커브 런칭 생성
+- **단일 단계**: `--agentAsset` 및 `--agentSetToken`을 사용하여 에이전트에 연결된 본딩 커브 런칭 생성
 - **2단계**: 토큰 런칭을 별도로 생성한 후 `agents set-agent-token`으로 연결
 {% /callout %}
 
@@ -43,7 +43,7 @@ faqs:
 
 에이전트 토큰은 등록된 [에이전트 ID](/agents)에 영구적으로 연결된 [Genesis](/smart-contracts/genesis) 토큰입니다. 에이전트 토큰을 생성하고 연결하는 두 가지 방법이 있습니다 — 런칭 생성 시 단일 단계 흐름 또는 2단계 수동 흐름.
 
-- **단일 단계** (권장): `genesis launch create --agentMint <ASSET> --agentSetToken`
+- **단일 단계** (권장): `genesis launch create --agentAsset <ASSET> --agentSetToken`
 - **2단계**: 런칭을 생성한 후 `agents set-agent-token`으로 연결
 - **되돌릴 수 없음**: 각 에이전트 ID는 하나의 토큰만 가질 수 있으며, 한 번만 설정할 수 있습니다
 
@@ -53,14 +53,14 @@ faqs:
 
 ## 단일 단계: 에이전트와 함께 런칭
 
-에이전트 토큰을 생성하는 가장 간단한 방법은 런칭 생성 시 `--agentMint`를 전달하는 것입니다. 이렇게 하면 에이전트의 [Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets)에서 창작자 수수료 지갑을 자동으로 파생하고, 선택적으로 동일한 트랜잭션에서 토큰을 연결합니다.
+에이전트 토큰을 생성하는 가장 간단한 방법은 런칭 생성 시 `--agentAsset`를 전달하는 것입니다. 이렇게 하면 에이전트의 [Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets)에서 창작자 수수료 지갑을 자동으로 파생하고, 선택적으로 동일한 트랜잭션에서 토큰을 연결합니다.
 
 ```bash {% title="에이전트 토큰이 포함된 본딩 커브 생성" %}
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken
 ```
 
@@ -75,7 +75,7 @@ mplx genesis launch create \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken \
   --tokenAllocation 500000000 \
   --depositStartTime 2025-03-01T00:00:00Z \
@@ -93,7 +93,7 @@ mplx genesis launch create \
 ### 1단계: Asset-Signer 지갑 구성
 
 ```bash {% title="asset-signer 지갑 설정" %}
-mplx config wallets add --name my-agent --type asset-signer --asset <AGENT_ASSET>
+mplx config wallets add --name my-agent --agent <AGENT_ASSET>
 mplx config wallets set my-agent
 ```
 
@@ -131,10 +131,10 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentAsset <AGENT_ASSET> --agentSetToken
 
 # 3. 에이전트에 토큰이 연결되어 있는지 확인
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## 일반적인 오류
@@ -147,10 +147,10 @@ mplx agents fetch <ASSET_ADDRESS>
 
 ## 참고 사항
 
-- 단일 단계 흐름(`--agentMint --agentSetToken`)이 권장됩니다 — 단일 트랜잭션으로 모든 것을 처리합니다
+- 단일 단계 흐름(`--agentAsset --agentSetToken`)이 권장됩니다 — 단일 트랜잭션으로 모든 것을 처리합니다
 - 2단계 흐름은 `set-agent-token` 명령어가 Asset Signer PDA를 권한으로 사용하기 때문에 asset-signer 모드가 필요합니다
 - `set-agent-token`을 실행하기 전에 Genesis 계정이 이미 존재해야 합니다
-- `--agentMint`를 사용할 때 창작자 수수료 지갑은 에이전트의 Asset Signer PDA에서 자동으로 파생됩니다
+- `--agentAsset`를 사용할 때 창작자 수수료 지갑은 에이전트의 Asset Signer PDA에서 자동으로 파생됩니다
 
 ## FAQ
 
