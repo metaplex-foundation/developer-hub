@@ -17,11 +17,11 @@ faqs:
   - q: What's the difference between a Collection and an Asset?
     a: A Collection is a container that groups Assets together. It has its own metadata but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
   - q: Can I add an existing Asset to a Collection?
-    a: Yes. Use the update instruction with newCollection and newUpdateAuthority set to the Collection type. You can also use the CLI with mplx core asset update --collection.
+    a: "Yes. Use the update instruction with newCollection: collectionId and newUpdateAuthority: updateAuthority('Collection', [collectionId]). You can also use the CLI with mplx core asset update --collection."
   - q: Do I need a Collection for my NFTs?
     a: No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
   - q: Can I remove an Asset from a Collection?
-    a: Yes. Use the update instruction and set newUpdateAuthority to Address type to detach the Asset. You can also use the CLI with mplx core asset update --remove-collection.
+    a: "Yes. Use the update instruction with newUpdateAuthority: updateAuthority('Address', [yourWallet]) to detach the Asset. You can also use the CLI with mplx core asset update --remove-collection."
   - q: What happens if I delete a Collection?
     a: Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
 ---
