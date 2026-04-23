@@ -1,45 +1,58 @@
 ---
 title: Creator Fees on the Genesis Bonding Curve
 metaTitle: Genesis Bonding Curve Creator Fees — Configure and Claim | Metaplex
-description: How to configure a creator fee on a Genesis bonding curve launch and claim accrued fees during the active curve and after graduation to a Raydium CPMM pool.
+description: How to configure a creator fee on a Genesis bonding curve launch and claim accrued fees via the Metaplex API, the Genesis SDK, or the low-level on-chain instructions.
 keywords:
   - creator fee
+  - creator rewards
   - bonding curve
   - genesis
+  - claimCreatorRewards
+  - v1/creator-rewards/claim
   - claimBondingCurveCreatorFeeV2
   - claimRaydiumCreatorFeeV2
   - creatorFeeWallet
   - creatorFeeAccrued
+  - payer
   - Raydium CPMM
   - token launch
   - Solana
 about:
   - Creator Fees
+  - Creator Rewards
   - Bonding Curve
   - Genesis
   - Solana
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-09-2026'
+updated: '04-23-2026'
 howToSteps:
   - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
   - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
-  - Call claimBondingCurveCreatorFeeV2 to collect accrued fees during the active curve
-  - After graduation, call claimRaydiumCreatorFeeV2 to collect fees from the Raydium CPMM pool
+  - Call claimCreatorRewards (API or SDK) to claim across all buckets in a single call
+  - Optionally fall back to claimBondingCurveCreatorFeeV2 or claimRaydiumCreatorFeeV2 for per-bucket on-chain control
 howToTools:
   - Node.js
   - Umi framework
   - Genesis SDK
+  - Metaplex API
 faqs:
   - q: What is the default creator fee wallet if creatorFeeWallet is not set?
     a: The default is the launching wallet — the wallet that signed the createLaunch call. Set creatorFeeWallet explicitly in the launch object to redirect fees to any other address.
   - q: Are creator fees transferred on every swap?
-    a: No. Creator fees are accrued in the bucket (creatorFeeAccrued) on each swap but are not transferred immediately. Call claimBondingCurveCreatorFeeV2 to collect them during the active curve, and claimRaydiumCreatorFeeV2 after graduation.
+    a: No. Creator fees are accrued in the bucket (creatorFeeAccrued) on each swap but are not transferred immediately. Call claimCreatorRewards via the API or SDK to collect them across all buckets at once, or call the per-bucket instructions (claimBondingCurveCreatorFeeV2 during the active curve, claimRaydiumCreatorFeeV2 after graduation) for on-chain control.
+  - q: Should I use the API or the on-chain claim instructions?
+    a: Use the API (claimCreatorRewards) for everyday claiming — it aggregates every bonding-curve and Raydium bucket the wallet is entitled to into one call and returns ready-to-sign transactions. Use the per-bucket on-chain instructions (claimBondingCurveCreatorFeeV2, claimRaydiumCreatorFeeV2) when you need to target a specific bucket, craft the transaction yourself, or run without network access to the Metaplex API.
   - q: Can anyone call claimBondingCurveCreatorFeeV2?
     a: Yes. Both claimBondingCurveCreatorFeeV2 and claimRaydiumCreatorFeeV2 are permissionless — any wallet can trigger the claim, but the SOL is always sent to the configured creator fee wallet, not the caller.
+  - q: What happens when there are no rewards to claim?
+    a: The claimCreatorRewards endpoint returns HTTP 400 with `{"error":{"message":"No rewards available to claim"}}`. The SDK surfaces this as a GenesisApiError. Treat this as a non-exceptional outcome — check err.message (or statusCode === 400) and branch on it rather than letting the error propagate.
+  - q: What is the optional payer field for?
+    a: The payer covers transaction fees and any rent on the returned claim transactions. It defaults to the wallet being claimed for. Set it to a different address when the creator fee wallet does not hold SOL (for example, an agent PDA or a cold wallet). The payer must sign the returned transactions; the creator fee recipient still receives the claimed SOL.
   - q: Does the first buy pay creator fees?
     a: No. When a first buy is configured, all fees — both the protocol swap fee and creator fee — are waived for that one initial purchase. All subsequent swaps pay the normal creator fee.
   - q: How do I check how much creator fee has accrued?
@@ -60,23 +73,23 @@ Creator fees are an optional per-swap fee on the [Genesis Bonding Curve](/smart-
 
 ## Summary
 
-A creator fee is an optional per-swap fee on the Genesis Bonding Curve, applied to the SOL side of every buy and sell. Fees accrue in the bucket account (`creatorFeeAccrued`) rather than being transferred immediately — collect them via two permissionless instructions.
+A creator fee is an optional per-swap fee on the Genesis Bonding Curve, applied to the SOL side of every buy and sell. Fees accrue in the bucket account (`creatorFeeAccrued`) rather than being transferred immediately — claim them in one call via the Metaplex API (recommended) or per-bucket with the on-chain instructions.
 
 - **Configuration** — set `creatorFeeWallet` in the `launch` object at curve creation; defaults to the launching wallet if omitted
 - **Accrual** — `creatorFeeAccrued` increments on every swap; fees are not transferred per-swap
-- **Active curve claiming** — `claimBondingCurveCreatorFeeV2` collects accrued fees while the curve is live
-- **Post-graduation claiming** — `claimRaydiumCreatorFeeV2` collects fees from the Raydium CPMM pool after the curve graduates
+- **Recommended claim path** — `POST /v1/creator-rewards/claim` (or `claimCreatorRewards` in the SDK) aggregates every bonding-curve and Raydium bucket for the wallet and returns ready-to-sign transactions
+- **Per-bucket claiming** — `claimBondingCurveCreatorFeeV2` collects during the active curve; `claimRaydiumCreatorFeeV2` collects from the Raydium CPMM pool after graduation
 
 For how creator fees interact with swap pricing and the protocol swap fee, see [Theory of Operation — Fee Structure](/smart-contracts/genesis/bonding-curve-theory#fee-structure).
 
 ## Quick Start
 
-**Jump to:** [Configure at Launch](#configuring-a-creator-fee-at-launch) · [Redirect to Wallet](#redirecting-creator-fees-to-a-specific-wallet) · [Agent PDA](#agent-launches-automatic-pda-routing) · [Combine with First Buy](#combining-creator-fees-with-a-first-buy) · [Check Accrued](#checking-accrued-creator-fees) · [Claim During Curve](#claiming-creator-fees-during-the-active-curve) · [Claim After Graduation](#claiming-creator-fees-after-graduation)
+**Jump to:** [Configure at Launch](#configuring-a-creator-fee-at-launch) · [Redirect to Wallet](#redirecting-creator-fees-to-a-specific-wallet) · [Agent PDA](#agent-launches-automatic-pda-routing) · [Combine with First Buy](#combining-creator-fees-with-a-first-buy) · [Check Accrued](#checking-accrued-creator-fees) · [Claim via API](#claiming-via-the-metaplex-api-recommended) · [No-Rewards Case](#handling-the-no-rewards-case) · [Claim During Curve](#claiming-creator-fees-during-the-active-curve) · [Claim After Graduation](#claiming-creator-fees-after-graduation)
 
 1. Set `creatorFeeWallet` in the `launch` object when calling `createAndRegisterLaunch`
 2. After launch, read `bucket.creatorFeeAccrued` to monitor accumulated fees
-3. Call `claimBondingCurveCreatorFeeV2` to collect fees while the curve is active
-4. After graduation, call `claimRaydiumCreatorFeeV2` to collect Raydium LP fees
+3. Call `claimCreatorRewards` via the API or SDK to claim across every bucket in a single call
+4. Optionally fall back to `claimBondingCurveCreatorFeeV2` / `claimRaydiumCreatorFeeV2` for per-bucket on-chain control
 
 ## Prerequisites
 
@@ -157,6 +170,30 @@ const creatorFeeWallet = isSome(creatorFeeExt) ? creatorFeeExt.value.wallet : nu
 console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configured');
 ```
 
+## Claiming via the Metaplex API (Recommended)
+
+`POST /v1/creator-rewards/claim` claims every unclaimed bonding-curve and Raydium reward the wallet is entitled to in a single call. The endpoint returns base64-encoded Solana transactions that the wallet (or a designated `payer`) signs and submits. The JavaScript SDK exposes the same call as `claimCreatorRewards` from `@metaplex-foundation/genesis`.
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl" defaultFramework="umi" /%}
+
+| Field | Type | Required | Notes |
+|-------|------|----------|-------|
+| `wallet` | `PublicKey \| string` | Yes | The creator fee wallet to claim for. |
+| `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'`. |
+| `payer` | `PublicKey \| string` | No | Wallet that covers fees and rent on the returned transactions. Defaults to `wallet`. Use this when the creator fee wallet does not hold SOL — for example, an agent PDA or a cold wallet. |
+
+The SDK returns deserialized Umi `Transaction`s plus the blockhash they were built against. Always confirm each transaction against the returned blockhash — do not substitute a freshly-fetched one, or confirmation will race. See the full HTTP schema at [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards).
+
+### Handling the No-Rewards Case
+
+The endpoint returns HTTP `400` with `{ "error": { "message": "No rewards available to claim" } }` when the wallet has nothing to claim — it does **not** return a success response with an empty `transactions` array. The SDK surfaces this as a `GenesisApiError`, so callers must catch it and branch on `err.message` (or `err.statusCode === 400`) rather than letting the error propagate.
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" /%}
+
+{% callout type="note" %}
+The API path above is the recommended integration for every production claim flow. The per-bucket on-chain instructions below remain available for advanced cases — targeting a specific bucket, building transactions entirely client-side, or running without network access to the Metaplex API.
+{% /callout %}
+
 ## Claiming Creator Fees During the Active Curve
 
 `claimBondingCurveCreatorFeeV2` transfers all accrued creator fees from the bucket to the configured creator fee wallet. Call it at any time while the curve is active.
@@ -203,8 +240,9 @@ Like its bonding curve counterpart, `claimRaydiumCreatorFeeV2` is permissionless
 
 ## Notes
 
-- Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly call the claim instructions to receive them; `creatorFeeClaimed` tracks the cumulative total claimed to date
-- Both claim instructions are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller
+- Creator fees accrue in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly claim them via the API/SDK or the per-bucket instructions; `creatorFeeClaimed` tracks the cumulative total claimed to date
+- `claimCreatorRewards` (API/SDK) aggregates every eligible bonding-curve and Raydium bucket for a wallet into a single call; when there is nothing to claim it returns HTTP `400` with `"No rewards available to claim"` rather than an empty transactions array
+- The on-chain claim instructions are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller
 - `creatorFeeWallet` defaults to the launching wallet if not set; it cannot be changed after the curve is created
 - The first buy mechanism waives all fees (protocol and creator) for the designated initial purchase only; all subsequent swaps pay the normal creator fee
 - Creator fees apply to the SOL side of every swap regardless of direction (buy or sell); they do not compound with the protocol swap fee
@@ -219,7 +257,19 @@ The default creator fee wallet is the launching wallet — the wallet that signe
 
 ### Are creator fees transferred on every swap?
 
-No. Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap but are not transferred immediately. Call `claimBondingCurveCreatorFeeV2` to collect them during the active curve, and `claimRaydiumCreatorFeeV2` after graduation.
+No. Creator fees are accrued in the bucket (`creatorFeeAccrued`) on each swap but are not transferred immediately. Call `claimCreatorRewards` via the [API or SDK](#claiming-via-the-metaplex-api-recommended) to collect across every bucket in one call, or use the per-bucket on-chain instructions (`claimBondingCurveCreatorFeeV2` during the active curve, `claimRaydiumCreatorFeeV2` after graduation) for lower-level control.
+
+### Should I use the API or the on-chain claim instructions?
+
+Use the API (`claimCreatorRewards`) for everyday claiming — it aggregates every bonding-curve and Raydium bucket the wallet is entitled to into one call and returns ready-to-sign transactions. Use the per-bucket on-chain instructions when you need to target a specific bucket, craft the transaction yourself, or run without network access to the Metaplex API.
+
+### What happens when there are no rewards to claim?
+
+The `claimCreatorRewards` endpoint returns HTTP `400` with `{"error":{"message":"No rewards available to claim"}}`. The SDK surfaces this as a `GenesisApiError`. Treat this as a non-exceptional outcome — check `err.message` (or `err.statusCode === 400`) and branch on it rather than letting the error propagate. See [Handling the No-Rewards Case](#handling-the-no-rewards-case).
+
+### What is the optional `payer` field for?
+
+The `payer` covers transaction fees and any rent on the returned claim transactions. It defaults to the wallet being claimed for. Set it to a different address when the creator fee wallet does not hold SOL (for example, an agent PDA or a cold wallet). The payer must sign the returned transactions; the creator fee recipient still receives the claimed SOL.
 
 ### Can anyone call `claimBondingCurveCreatorFeeV2`?
 

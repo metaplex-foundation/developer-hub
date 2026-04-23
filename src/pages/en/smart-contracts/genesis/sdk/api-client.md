@@ -3,17 +3,20 @@ title: API Client
 metaTitle: API Client | Genesis SDK | Metaplex
 description: Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '04-23-2026'
 keywords:
   - Genesis API client
   - token launch SDK
   - createLaunch
   - registerLaunch
   - createAndRegisterLaunch
+  - claimCreatorRewards
+  - creator rewards
 about:
   - SDK API client
   - Token launch creation
   - Launch registration
+  - Creator rewards claiming
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
@@ -46,6 +49,15 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 // For server-side or scripts, load a keypair
 umi.use(keypairIdentity(myKeypair));
 ```
+
+## Function Overview
+
+| Function | Purpose |
+|----------|---------|
+| [`createAndRegisterLaunch`](#easy-mode-createandregisterlaunch) | One-call token launch — create, sign, send, and register |
+| [`createLaunch`](#full-control-createlaunch--registerlaunch) | Build unsigned launch transactions for custom signing flows |
+| [`registerLaunch`](#full-control-createlaunch--registerlaunch) | Register a launch after its create transactions confirm on-chain |
+| [`claimCreatorRewards`](#claim-creator-rewards) | Claim accrued creator rewards across every bucket for a wallet |
 
 ## Three Integration Modes
 
@@ -105,6 +117,35 @@ For complete control over the transaction lifecycle. You call `createLaunch` to 
 {% callout type="warning" %}
 Transactions must be confirmed on-chain before calling `registerLaunch`. The register endpoint validates that the genesis account exists and matches the expected configuration.
 {% /callout %}
+
+---
+
+## Claim Creator Rewards
+
+`claimCreatorRewards` calls `POST /v1/creator-rewards/claim` and returns the base64-encoded claim transactions for every eligible bonding-curve and Raydium bucket, already deserialized into Umi `Transaction`s. Sign and send each one using the Umi identity. For the end-to-end claim flow — including the creator fee configuration, accrual checks, and the lower-level per-bucket instructions — see [Creator Fees on the Genesis Bonding Curve](/smart-contracts/genesis/creator-fees).
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
+
+### ClaimCreatorRewardsInput
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `wallet` | `PublicKey \| string` | Yes | The creator fee wallet to claim for. |
+| `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'`. Must match the API base URL — `https://api.metaplex.com` |
+| `payer` | `PublicKey \| string` | No | Wallet that covers fees and rent on the returned transactions. Defaults to `wallet`. Use this when the creator fee wallet does not hold SOL (for example, an agent PDA). The payer must sign the returned transactions; the creator fee wallet still receives the claimed SOL. |
+
+### ClaimCreatorRewardsResponse
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `transactions` | `Transaction[]` | Deserialized Umi transactions, one per bucket being claimed. Sign each with the payer identity and send. |
+| `blockhash` | `BlockhashWithExpiryBlockHeight` | The blockhash the transactions were built against. Use it to confirm — do not substitute a freshly-fetched blockhash. |
+
+{% callout type="warning" title="No-rewards is a typed error, not an empty array" %}
+When the wallet has nothing to claim, the API returns HTTP `400` with `{"error":{"message":"No rewards available to claim"}}` and the SDK throws `GenesisApiError`. Callers must catch the error and branch on `err.message` (or `err.statusCode === 400`) — they cannot rely on `result.transactions.length === 0`. See [Handling the No-Rewards Case](/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case).
+{% /callout %}
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" filename="errorHandling" /%}
 
 ---
 
