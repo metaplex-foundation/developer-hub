@@ -7,7 +7,7 @@ const EndPointSelector = ({ setActiveEndpoint, activeEndpoint }) => {
     if (savedEndpoint) {
       setActiveEndpoint(savedEndpoint)
     }
-  }, [])
+  }, [setActiveEndpoint])
 
   const handleSelectEndpoint = (e) => {
     const newEndpoint = e.target.value
