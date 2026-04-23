@@ -17,6 +17,8 @@ const collectionId = publicKey('22222222222222222222222222222222')
 const asset = await fetchAsset(umi, assetId)
 const collection = await fetchCollection(umi, collectionId)
 
+// Assumes the asset is standalone. If it already belongs to a collection,
+// pass the current collection as `collection` or the instruction will fail.
 await update(umi, {
   asset,
   newCollection: collection.publicKey,

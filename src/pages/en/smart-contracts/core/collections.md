@@ -112,7 +112,7 @@ A Collection is a container that groups Assets together. It has its own metadata
 
 ### Can I add an existing Asset to a Collection?
 
-Yes. Use the `update` instruction with `newCollection` and `newUpdateAuthority` set to the Collection type. See [Add an Asset to a Collection](/smart-contracts/core/update#add-an-asset-to-a-collection) for SDK code, or use the CLI: `mplx core asset update <assetId> --collection <collectionId>`.
+Yes. Use the `update` instruction with `newCollection: collectionId` and `newUpdateAuthority: updateAuthority('Collection', [collectionId])`. See [Add an Asset to a Collection](/smart-contracts/core/update#add-an-asset-to-a-collection) for SDK code, or use the CLI: `mplx core asset update <assetId> --collection <collectionId>`.
 
 ### Do I need a Collection for my NFTs?
 

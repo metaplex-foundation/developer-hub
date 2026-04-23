@@ -231,7 +231,12 @@ without the tree delegate's signature.
 
 **Example (10/10):**
 ```markdown
+Maintained by Metaplex Foundation
+Last verified: 2026-04-17
+Compatibility: mpl-bubblegum 5.x, `@metaplex-foundation/umi` 1.x
+
 [View source on GitHub](https://github.com/metaplex-foundation/mpl-bubblegum)
+Program: `BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY`
 ```
 
 ---

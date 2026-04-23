@@ -161,7 +161,7 @@ Use `--json` for structured output:
 | Item | Value |
 |------|-------|
 | Update command | `mplx core asset update` |
-| Alias (collection) | `mplx core collection add` |
+| Add-to-collection alias | `mplx core collection add` (covers the add-to-collection case only; does not apply to move, remove, or metadata-only updates) |
 | Applies to | [MPL Core Assets](/core) only — not Token Metadata NFTs |
 | Source | [GitHub — metaplex-foundation/cli](https://github.com/metaplex-foundation/cli) |
 
