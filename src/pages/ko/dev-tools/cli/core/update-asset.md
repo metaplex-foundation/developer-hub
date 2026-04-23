@@ -41,6 +41,8 @@ mplx core asset update <assetId> [options]
 
 ## Update Options
 
+다음 플래그는 `mplx core asset update` 명령어가 자산에서 수정하는 내용을 제어합니다.
+
 | Flag | Description |
 |------|-------------|
 | `--name <string>` | 자산의 새 이름 (`--offchain`과 함께 사용 불가) |
@@ -51,6 +53,8 @@ mplx core asset update <assetId> [options]
 | `--remove-collection` | 현재 컬렉션에서 자산 제거 (`--collection`과 함께 사용 불가) |
 
 ## Global Flags
+
+이 플래그는 모든 `mplx core` 명령어에 적용되며 CLI 런타임을 구성합니다.
 
 | Flag | Description |
 |------|-------------|
@@ -157,6 +161,8 @@ Output:
 ```
 
 ## Quick Reference
+
+`mplx core asset update`의 명령어 세부정보, 범위 및 소스 위치를 한눈에 확인합니다.
 
 | Item | Value |
 |------|-------|

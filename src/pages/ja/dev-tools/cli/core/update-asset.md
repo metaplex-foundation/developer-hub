@@ -41,6 +41,8 @@ mplx core asset update <assetId> [options]
 
 ## Update Options
 
+以下のフラグは、`mplx core asset update` コマンドがアセットに対して変更する内容を制御します。
+
 | Flag | Description |
 |------|-------------|
 | `--name <string>` | アセットの新しい名前（`--offchain` と併用不可） |
@@ -51,6 +53,8 @@ mplx core asset update <assetId> [options]
 | `--remove-collection` | 現在のコレクションからアセットを削除（`--collection` と併用不可） |
 
 ## Global Flags
+
+これらのフラグはすべての `mplx core` コマンドに適用され、CLI ランタイムを設定します。
 
 | Flag | Description |
 |------|-------------|
@@ -157,6 +161,8 @@ Output:
 ```
 
 ## Quick Reference
+
+`mplx core asset update` のコマンド詳細、適用範囲、ソース場所を一目で確認できます。
 
 | Item | Value |
 |------|-------|

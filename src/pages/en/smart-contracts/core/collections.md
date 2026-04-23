@@ -35,7 +35,7 @@ A **Core Collection** is a Solana account that groups related [Core Assets](/sma
 - Collection-level plugins (e.g. [Royalties](/smart-contracts/core/plugins/royalties)) propagate to all member Assets unless overridden at the Asset level
 - Creating a Collection costs ~0.0015 SOL in rent
 
-**Jump to a task:** [Create Collection](/smart-contracts/core/collections/create) · [Fetch Collection](/smart-contracts/core/collections/fetch) · [Update Collection](/smart-contracts/core/collections/update) · [Add/Remove/Move Assets](#managing-collection-membership)
+**Jump to a task:** [Create Collection](/smart-contracts/core/collections/create) · [Fetch Collection](/smart-contracts/core/collections/fetch) · [Update Collection](/smart-contracts/core/collections/update) · [Add/Move/Remove Assets](#managing-collection-membership)
 
 ## What are Collections?
 

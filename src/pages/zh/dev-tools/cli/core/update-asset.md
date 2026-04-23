@@ -41,6 +41,8 @@ mplx core asset update <assetId> [options]
 
 ## Update Options
 
+以下标志控制 `mplx core asset update` 命令对资产所做的修改。
+
 | Flag | Description |
 |------|-------------|
 | `--name <string>` | 资产的新名称（不能与 `--offchain` 一起使用） |
@@ -51,6 +53,8 @@ mplx core asset update <assetId> [options]
 | `--remove-collection` | 从当前集合中移除资产（不能与 `--collection` 一起使用） |
 
 ## Global Flags
+
+这些标志适用于所有 `mplx core` 命令，用于配置 CLI 运行时。
 
 | Flag | Description |
 |------|-------------|
@@ -157,6 +161,8 @@ Output:
 ```
 
 ## Quick Reference
+
+一目了然的 `mplx core asset update` 命令详情、范围和源位置。
 
 | Item | Value |
 |------|-------|

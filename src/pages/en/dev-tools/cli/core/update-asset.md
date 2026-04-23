@@ -41,6 +41,8 @@ You must provide at least one update flag. Multiple flags can be combined in a s
 
 ## Update Options
 
+The following flags control what the `mplx core asset update` command modifies on the asset.
+
 | Flag | Description |
 |------|-------------|
 | `--name <string>` | New name for the asset (cannot be used with `--offchain`) |
@@ -51,6 +53,8 @@ You must provide at least one update flag. Multiple flags can be combined in a s
 | `--remove-collection` | Remove the asset from its current collection (cannot be used with `--collection`) |
 
 ## Global Flags
+
+These flags apply to every `mplx core` command and configure the CLI runtime.
 
 | Flag | Description |
 |------|-------------|
@@ -157,6 +161,8 @@ Use `--json` for structured output:
 ```
 
 ## Quick Reference
+
+At-a-glance command details, scope, and source location for `mplx core asset update`.
 
 | Item | Value |
 |------|-------|
