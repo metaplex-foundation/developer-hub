@@ -17,11 +17,11 @@ faqs:
   - q: What's the difference between a Collection and an Asset?
     a: A Collection is a container that groups Assets together. It has its own metadata but cannot be owned or transferred like an Asset. Assets are the actual NFTs that users own.
   - q: Can I add an existing Asset to a Collection?
-    a: Yes, use the update instruction with the newCollection parameter. The Asset's update authority must have permission to add it to the target Collection.
+    a: "Yes. Use the update instruction with newCollection: collectionId and newUpdateAuthority: updateAuthority('Collection', [collectionId]). You can also use the CLI with mplx core asset update --collection."
   - q: Do I need a Collection for my NFTs?
     a: No. Assets can exist standalone without a Collection. However, Collections enable collection-level royalties, easier discoverability, and batch operations.
   - q: Can I remove an Asset from a Collection?
-    a: Yes, use the update instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
+    a: "Yes. Use the update instruction with newUpdateAuthority: updateAuthority('Address', [yourWallet]) to detach the Asset. You can also use the CLI with mplx core asset update --remove-collection."
   - q: What happens if I delete a Collection?
     a: Collections cannot be deleted while they contain Assets. Remove all Assets first, then the Collection account can be closed.
 ---
@@ -35,7 +35,7 @@ A **Core Collection** is a Solana account that groups related [Core Assets](/sma
 - Collection-level plugins (e.g. [Royalties](/smart-contracts/core/plugins/royalties)) propagate to all member Assets unless overridden at the Asset level
 - Creating a Collection costs ~0.0015 SOL in rent
 
-**Jump to a task:** [Create Collection](/smart-contracts/core/collections/create) · [Fetch Collection](/smart-contracts/core/collections/fetch) · [Update Collection](/smart-contracts/core/collections/update)
+**Jump to a task:** [Create Collection](/smart-contracts/core/collections/create) · [Fetch Collection](/smart-contracts/core/collections/fetch) · [Update Collection](/smart-contracts/core/collections/update) · [Add/Move/Remove Assets](#managing-collection-membership)
 
 ## What are Collections?
 
@@ -54,6 +54,20 @@ The data stored and accessible from the Collection account is as follows:
 
 {% callout type="note" %}
 Core Collections only group Core Assets. To work with Token Metadata NFTs use [mpl-token-metadata](https://developers.metaplex.com/token-metadata). For compressed NFTs use [Bubblegum](/smart-contracts/bubblegum).
+{% /callout %}
+
+## Managing Collection Membership
+
+Assets can be added to, moved between, or removed from Collections after creation using the `update` instruction on the Asset. These operations change the Asset's [update authority](/smart-contracts/core/update) — adding sets it to the Collection, removing reverts it to a wallet address.
+
+| Operation | Description | Guide |
+|-----------|-------------|-------|
+| Add an Asset to a Collection | Assign a standalone Asset to this Collection | [SDK](/smart-contracts/core/update#add-an-asset-to-a-collection) · [CLI](/dev-tools/cli/core/update-asset#add-an-asset-to-a-collection) |
+| Move an Asset to another Collection | Transfer an Asset from one Collection to another | [SDK](/smart-contracts/core/update#change-the-collection-of-a-core-asset) · [CLI](/dev-tools/cli/core/update-asset#move-an-asset-to-a-different-collection) |
+| Remove an Asset from a Collection | Detach an Asset so it becomes standalone again | [SDK](/smart-contracts/core/update#remove-an-asset-from-a-collection) · [CLI](/dev-tools/cli/core/update-asset#remove-an-asset-from-a-collection) |
+
+{% callout type="note" %}
+You must be the update authority of the Collection (and the Asset, if it's standalone) to change membership. Moving between Collections requires authority on both the source and target Collection.
 {% /callout %}
 
 ## Notes
@@ -80,6 +94,7 @@ Core Collections only group Core Assets. To work with Token Metadata NFTs use [m
 | Fetch a Collection | [Fetch Collection](/smart-contracts/core/collections/fetch) | `fetchCollection` |
 | Update Collection metadata | [Update Collection](/smart-contracts/core/collections/update) | `updateCollection` |
 | Update a Collection plugin | [Update Collection](/smart-contracts/core/collections/update) | `updateCollectionPlugin` |
+| Add/Move/Remove Assets | [Updating Assets](/smart-contracts/core/update#add-an-asset-to-a-collection) | `update` (on the Asset) |
 
 ### Cost Breakdown
 
@@ -97,7 +112,7 @@ A Collection is a container that groups Assets together. It has its own metadata
 
 ### Can I add an existing Asset to a Collection?
 
-Yes, use the `update` instruction with the `newCollection` parameter. The Asset's update authority must have permission to add it to the target Collection.
+Yes. Use the `update` instruction with `newCollection: collectionId` and `newUpdateAuthority: updateAuthority('Collection', [collectionId])`. See [Add an Asset to a Collection](/smart-contracts/core/update#add-an-asset-to-a-collection) for SDK code, or use the CLI: `mplx core asset update <assetId> --collection <collectionId>`.
 
 ### Do I need a Collection for my NFTs?
 
@@ -105,7 +120,7 @@ No. Assets can exist standalone without a Collection. However, Collections enabl
 
 ### Can I remove an Asset from a Collection?
 
-Yes, use the `update` instruction to change the Asset's collection. You need the appropriate authority on both the Asset and Collection.
+Yes. Use the `update` instruction and set `newUpdateAuthority` to `updateAuthority('Address', [yourWallet])` to detach the Asset. See [Remove an Asset from a Collection](/smart-contracts/core/update#remove-an-asset-from-a-collection) for SDK code, or use the CLI: `mplx core asset update <assetId> --remove-collection`.
 
 ### What happens if I delete a Collection?
 

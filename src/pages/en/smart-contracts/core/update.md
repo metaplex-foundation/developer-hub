@@ -2,13 +2,16 @@
 title: Updating Assets
 metaTitle: Updating Assets | Metaplex Core
 description: Learn how to update Core NFT Asset metadata on Solana. Change name, URI, collection membership, and make assets immutable using the Metaplex Core SDK.
-updated: '01-31-2026'
+updated: '04-17-2026'
 keywords:
   - update NFT
   - change metadata
   - NFT metadata
   - mpl-core update
   - immutable NFT
+  - add to collection
+  - remove from collection
+  - change collection
 about:
   - NFT metadata
   - Update authority
@@ -39,24 +42,28 @@ faqs:
     a: Yes, if they have been assigned as an Update Delegate via the Update Delegate plugin.
   - q: Does updating cost SOL?
     a: Updates are free unless the new data is larger than the current account size. The transaction fee (~0.000005 SOL) still applies.
+  - q: Can I add a standalone Asset to a Collection after creation?
+    a: Yes. Use the update instruction with newCollection and set newUpdateAuthority to the Collection type. You need authority on both the Asset and the target Collection.
+  - q: Can I remove an Asset from a Collection?
+    a: Yes. Use the update instruction and set newUpdateAuthority to an Address type (your wallet). This detaches the Asset and makes it standalone again.
 ---
 This guide shows how to **update Core Asset metadata** on Solana using the Metaplex Core SDK. Modify the name, URI, or collection membership of Assets you control. {% .lead %}
 {% callout title="What You'll Learn" %}
 - Update Asset name and metadata URI
-- Move an Asset to a different Collection
+- Add a standalone Asset to a Collection
+- Move an Asset between Collections or remove it from a Collection
 - Make an Asset immutable (permanent)
-- Understand update authority requirements
 {% /callout %}
 ## Summary
 Update a Core Asset's metadata using the `update` instruction. Only the update authority (or an authorized delegate) can modify an Asset.
 - Change `name` and `uri` to update metadata
-- Use `newCollection` to move Assets between Collections
+- Use `newCollection` and `newUpdateAuthority` to add, move, or remove Assets from Collections
 - Set `updateAuthority` to `None` to make immutable
 - Updates are free (no rent cost) unless changing account size
 ## Out of Scope
 Updating Token Metadata NFTs (use mpl-token-metadata), plugin modifications (see [Plugins](/smart-contracts/core/plugins)), and ownership transfers (see [Transferring Assets](/smart-contracts/core/transfer)).
 ## Quick Start
-**Jump to:** [Update Asset](#updating-a-core-asset) · [Change Collection](#change-the-collection-of-a-core-asset) · [Make Immutable](#making-a-core-asset-data-immutable)
+**Jump to:** [Update Asset](#updating-a-core-asset) · [Add to Collection](#add-an-asset-to-a-collection) · [Change Collection](#change-the-collection-of-a-core-asset) · [Remove from Collection](#remove-an-asset-from-a-collection) · [Make Immutable](#making-a-core-asset-data-immutable)
 1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Fetch the Asset to get current state
 3. Call `update(umi, { asset, name, uri })` with new values
@@ -90,37 +97,33 @@ A full detailed look at the on chain instruction it can be viewed here. [Github]
 ## Updating a Core Asset
 Here is how you can use our SDKs to update an MPL Core Asset.
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
+## Add an Asset to a Collection
+
+The `update` instruction can add a standalone Asset to a [Collection](/smart-contracts/core/collections) by setting `newCollection` to the target Collection address and `newUpdateAuthority` to the `Collection` type. The caller must be the update authority of both the Asset and the target Collection.
+
+{% code-tabs-imported from="core/add-to-collection" frameworks="umi,cli" /%}
+
+{% callout type="note" %}
+You can also add an Asset to a Collection using the [Metaplex CLI](/dev-tools/cli/core/update-asset#add-an-asset-to-a-collection): `mplx core collection add <collectionId> <assetId>`
+{% /callout %}
+
 ## Change the Collection of a Core Asset
-Here is how you can use our SDKs to change the collection of a Core Asset.
-{% dialect-switcher title="Change the collection of a Core Asset" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import { publicKey } from "@metaplex-foundation/umi";
-import {
-  update,
-  fetchAsset,
-  fetchCollection,
-  collectionAddress,
-  updateAuthority
-} from "@metaplex-foundation/mpl-core";
-const assetId = publicKey("11111111111111111111111111111111");
-const asset = await fetchAsset(umi, assetId);
-const collectionId = collectionAddress(asset)
-if (!collectionId) {
-  console.log("Collection not found");
-  return;
-}
-const collection = await fetchCollection(umi, collectionId);
-const newCollectionId = publicKey("22222222222222222222222222222222")
-const updateTx = await update(umi, {
-  asset,
-  collection,
-  newCollection: newCollectionId,
-  newUpdateAuthority: updateAuthority('Collection', [newCollectionId]),
-}).sendAndConfirm(umi);
-```
-{% /dialect %}
-{% /dialect-switcher %}
+The `update` instruction can move an Asset from one Collection to another.
+{% code-tabs-imported from="core/change-collection" frameworks="umi,cli" /%}
+## Remove an Asset from a Collection
+
+The `update` instruction can remove an Asset from its current [Collection](/smart-contracts/core/collections) by changing the `newUpdateAuthority` from `Collection` to `Address`. This makes the Asset standalone again, with your wallet as its direct update authority.
+
+{% code-tabs-imported from="core/remove-from-collection" frameworks="umi,cli" /%}
+
+{% callout type="note" %}
+After removal, the Asset's update authority becomes the address you specified (typically your wallet). The Asset is no longer subject to any collection-level plugins.
+{% /callout %}
+
+{% callout type="note" %}
+You can also manage collection membership using the [Metaplex CLI](/dev-tools/cli/core/update-asset#manage-collection-membership): `mplx core asset update <assetId> --remove-collection`
+{% /callout %}
+
 ## Making a Core Asset Data Immutable
 Here is how you can use our SDKs to make a Core Asset fully immutable. Be aware that there are different levels of immutability described in the [immutability Guide](/smart-contracts/core/guides/immutability).
 {% callout type="warning" title="Important" %}
@@ -187,7 +190,9 @@ The Asset's update authority is set to `None`. This cannot be reversed.
 - Fetch the Asset before updating to ensure you have the current state
 - Only the update authority (or delegate) can update an Asset
 - Making an Asset immutable is **permanent and irreversible**
-- Changing Collections may affect inherited plugins (royalties, etc.)
+- Adding, moving, or removing Collection membership changes which plugins (royalties, etc.) apply to the Asset
+- Removing an Asset from a Collection changes its update authority from the Collection to a wallet address
+- Adding an Asset to a Collection changes its update authority from a wallet address to the Collection
 - Updates don't change the Asset's owner
 ## Quick Reference
 ### Update Parameters
@@ -218,6 +223,10 @@ Update changes the Asset's metadata (name, URI). Transfer changes ownership. The
 Yes, if they have been assigned as an Update Delegate via the [Update Delegate plugin](/smart-contracts/core/plugins/update-delegate).
 ### Does updating cost SOL?
 Updates are free unless the new data is larger than the current account size (rare). The transaction fee (~0.000005 SOL) still applies.
+### Can I add a standalone Asset to a Collection after creation?
+Yes. Use the `update` instruction with `newCollection` and set `newUpdateAuthority` to the `Collection` type. You need authority on both the Asset and the target Collection. See [Add an Asset to a Collection](#add-an-asset-to-a-collection).
+### Can I remove an Asset from a Collection?
+Yes. Use the `update` instruction and set `newUpdateAuthority` to `updateAuthority('Address', [yourWallet])`. This detaches the Asset from the Collection and makes it standalone again. See [Remove an Asset from a Collection](#remove-an-asset-from-a-collection).
 ## Glossary
 | Term | Definition |
 |------|------------|

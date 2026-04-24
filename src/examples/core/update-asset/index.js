@@ -36,7 +36,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Update an NFT using the Metaplex CLI\n\n# Update name and URI\nmplx core asset update <assetId> --name \"Updated NFT\" --uri \"https://example.com/new-metadata.json\"\n\n# Update with new image\nmplx core asset update <assetId> --image \"./new-image.png\"\n\n# Update with JSON metadata file\nmplx core asset update <assetId> --json \"./metadata.json\"\n\n# Update with both JSON and image\nmplx core asset update <assetId> --json \"./metadata.json\" --image \"./new-image.png\"\n"
+  "full": "# Update name and URI\nmplx core asset update <assetId> --name \"Updated Asset\" --uri \"https://example.com/metadata.json\"\n\n# Update with a JSON metadata file\nmplx core asset update <assetId> --offchain ./asset/metadata.json\n\n# Update with a new image\nmplx core asset update <assetId> --image ./asset/image.jpg\n\n# Update with JSON metadata and image\nmplx core asset update <assetId> --offchain ./asset/metadata.json --image ./asset/image.jpg\n"
 }
 
 export const metadata = {
