@@ -85,7 +85,7 @@ mplx genesis launch create --launchType bonding-curve \
   --image "https://gateway.irys.xyz/abc123"
 ```
 
-Both launch types support linking to a registered [agent](/agents/mint-agent) with `--agentMint` and `--agentSetToken`.
+Both launch types support linking to a registered [agent](/agents/mint-agent) with `--agentAsset` and `--agentSetToken`.
 
 See [Launch (API)](/dev-tools/cli/genesis/launch) for full details.
 

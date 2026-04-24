@@ -86,7 +86,7 @@ mplx genesis launch create --launchType bonding-curve \
   --image "https://gateway.irys.xyz/abc123"
 ```
 
-두 가지 출시 유형 모두 `--agentMint`와 `--agentSetToken`으로 등록된 [에이전트](/ko/agents/mint-agent)에 연결할 수 있습니다.
+두 가지 출시 유형 모두 `--agentAsset`와 `--agentSetToken`으로 등록된 [에이전트](/ko/agents/mint-agent)에 연결할 수 있습니다.
 
 자세한 내용은 [Launch (API)](/ko/dev-tools/cli/genesis/launch)를 참조하세요.
 

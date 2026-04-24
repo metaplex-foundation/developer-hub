@@ -88,7 +88,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentAsset <AGENT_CORE_ASSET_ADDRESS> \
   --agentSetToken
 ```
 

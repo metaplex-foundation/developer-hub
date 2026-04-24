@@ -29,14 +29,14 @@ faqs:
   - q: launchpool 和 bonding-curve 有什么区别？
     a: Launchpool 有 48 小时的存款窗口，用户存入 SOL 并按比例获得代币。Bonding curve 立即开始交易，使用恒定乘积 AMM——价格随着 SOL 流入而上升，当所有代币售出时，曲线自动迁移到 Raydium CPMM。
   - q: 我可以将 agent 链接到代币发行吗？
-    a: 可以。传入 --agentMint 和 agent 的 Core 资产地址。这会自动从 agent 的 PDA 派生创建者费用钱包。添加 --agentSetToken 可永久将代币链接到 agent（不可逆）。
+    a: 可以。传入 --agentAsset 和 agent 的 Core 资产地址。这会自动从 agent 的 PDA 派生创建者费用钱包。添加 --agentSetToken 可永久将代币链接到 agent（不可逆）。
 ---
 
 {% callout title="你将完成的操作" %}
 使用 Genesis API 在单条命令中创建和注册代币发行：
 - 创建 **launchpool**（48 小时存款窗口，按比例分配）
 - 创建 **bonding curve**（即时交易，自动迁移到 Raydium）
-- 可选通过 `--agentMint` 将发行链接到 [agent](/zh/agents/mint-agent)
+- 可选通过 `--agentAsset` 将发行链接到 [agent](/zh/agents/mint-agent)
 - 使用 `genesis launch register` 注册现有的 genesis 账户
 {% /callout %}
 
@@ -47,7 +47,7 @@ faqs:
 - **`genesis launch create`**：一体化命令——通过 API 构建交易、签名并发送，然后注册发行
 - **`genesis launch register`**：在 Metaplex 平台上注册现有的 genesis 账户以获取公开发行页面
 - **两种发行类型**：`launchpool`（默认，48 小时存款，可配置分配）和 `bonding-curve`（即时 bonding curve，无存款窗口）
-- **Agent 支持**：通过 `--agentMint` 和可选的 `--agentSetToken` 将发行链接到已注册的 agent
+- **Agent 支持**：通过 `--agentAsset` 和可选的 `--agentSetToken` 将发行链接到已注册的 agent
 - **兼容 metaplex.com**：通过 API 创建或注册的发行会显示在 [metaplex.com](https://metaplex.com) 上，并带有公开发行页面
 - **总供应量**：目前固定为 1,000,000,000 个代币
 
@@ -95,8 +95,8 @@ mplx genesis launch create \
 | `--fundsRecipient <string>` | 接收已募集资金的未锁定部分的钱包 | 仅 Launchpool | — |
 | `--creatorFeeWallet <string>` | 接收创建者费用的钱包（始终启用，费用在交易期间累积，毕业后领取） | 否（仅 bonding-curve） | 发起钱包 |
 | `--firstBuyAmount <number>` | 发行时免费首次购买的 SOL 金额 | 否（仅 bonding-curve） | — |
-| `--agentMint <string>` | Agent 的 Core 资产地址——自动从 agent PDA 派生创建者费用钱包 | 否 | — |
-| `--agentSetToken` | 永久将发行的代币链接到 agent（**不可逆**）。需要 `--agentMint` | 否 | `false` |
+| `--agentAsset <string>` | Agent 的 Core 资产地址——自动从 agent PDA 派生创建者费用钱包 | 否 | — |
+| `--agentSetToken` | 永久将发行的代币链接到 agent（**不可逆**）。需要 `--agentAsset` | 否 | `false` |
 | `--description <string>` | 代币描述（最多 250 个字符） | 否 | — |
 | `--website <string>` | 项目网站 URL | 否 | — |
 | `--twitter <string>` | 项目 Twitter URL | 否 | — |
@@ -198,9 +198,9 @@ mplx genesis launch create --launchType bonding-curve \
 
 ## Agent 发行
 
-通过传入 `--agentMint` 将代币发行链接到已注册的 [agent](/zh/agents/mint-agent)。这适用于 launchpool 和 bonding curve 两种发行类型。
+通过传入 `--agentAsset` 将代币发行链接到已注册的 [agent](/zh/agents/mint-agent)。这适用于 launchpool 和 bonding curve 两种发行类型。
 
-当提供 `--agentMint` 时：
+当提供 `--agentAsset` 时：
 - **创建者费用钱包**自动从 agent 的 Core 资产签名者 PDA 派生
 - 对于 bonding curve，**首次购买的买家**默认为 agent PDA（如果设置了 `--firstBuyAmount`）
 
@@ -209,7 +209,7 @@ mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" \
   --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <AGENT_CORE_ASSET_ADDRESS> \
+  --agentAsset <AGENT_ASSET> \
   --agentSetToken
 ```
 
@@ -230,14 +230,14 @@ mplx agents register --name "My Agent" \
 mplx genesis launch create --launchType bonding-curve \
   --name "Agent Token" --symbol "AGT" \
   --image "https://gateway.irys.xyz/abc123" \
-  --agentMint <ASSET_ADDRESS> --agentSetToken
+  --agentAsset <AGENT_ASSET> --agentSetToken
 
 # 3.（可选）验证 agent 已链接代币
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 {% callout title="RPC 传播延迟" type="note" %}
-如果步骤 2 报错"Agent is not owned by the connected wallet"，说明 API 后端尚未索引到新注册的 agent。链上代币创建可能已经成功——请使用 `mplx agents fetch <ASSET>` 检查。如果 agent 已显示代币已设置，则仅平台注册失败；请使用 `mplx genesis launch register` 完成注册。在脚本中执行这两个步骤时，建议在 agent 注册和发行命令之间添加约 30 秒的延迟。
+如果步骤 2 报错"Agent is not owned by the connected wallet"，说明 API 后端尚未索引到新注册的 agent。链上代币创建可能已经成功——请使用 `mplx agents fetch <AGENT_ASSET>` 检查。如果 agent 已显示代币已设置，则仅平台注册失败；请使用 `mplx genesis launch register` 完成注册。在脚本中执行这两个步骤时，建议在 agent 注册和发行命令之间添加约 30 秒的延迟。
 {% /callout %}
 
 ### 输出
@@ -335,7 +335,7 @@ Launch 配置 JSON 文件使用与 `launch create` 输入相同的格式。
   },
   "launchType": "bondingCurve",
   "agent": {
-    "mint": "<AGENT_CORE_ASSET_ADDRESS>",
+    "mint": "<AGENT_ASSET>",
     "setToken": true
   },
   "launch": {},
@@ -423,7 +423,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 Launchpool 有 48 小时的存款窗口，用户存入 SOL 并按比例获得代币。Bonding curve 立即开始交易，使用恒定乘积 AMM——价格随着 SOL 流入而上升，当所有代币售出时，曲线自动迁移到 Raydium CPMM。
 
 **我可以将 agent 链接到代币发行吗？**
-可以。传入 `--agentMint` 和 agent 的 Core 资产地址。这会自动从 agent 的 PDA 派生创建者费用钱包。添加 `--agentSetToken` 可永久将代币链接到 agent（不可逆）。适用于 launchpool 和 bonding curve 两种类型。
+可以。传入 `--agentAsset` 和 agent 的 Core 资产地址。这会自动从 agent 的 PDA 派生创建者费用钱包。添加 `--agentSetToken` 可永久将代币链接到 agent（不可逆）。适用于 launchpool 和 bonding curve 两种类型。
 
 **什么时候应该使用 `genesis launch register`？**
 当你已经使用底层 CLI 命令（`genesis create`、`bucket add-launch-pool` 等）创建了 genesis 账户，并希望在 Metaplex 平台上注册以获取公开发行页面时使用。

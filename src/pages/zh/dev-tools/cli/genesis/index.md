@@ -86,7 +86,7 @@ mplx genesis launch create --launchType bonding-curve \
   --image "https://gateway.irys.xyz/abc123"
 ```
 
-两种发行类型都支持通过 `--agentMint` 和 `--agentSetToken` 链接到已注册的[代理](/zh/agents/mint-agent)。
+两种发行类型都支持通过 `--agentAsset` 和 `--agentSetToken` 链接到已注册的[代理](/zh/agents/mint-agent)。
 
 详情请参阅 [Launch (API)](/zh/dev-tools/cli/genesis/launch)。
 

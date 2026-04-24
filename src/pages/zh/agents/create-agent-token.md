@@ -38,7 +38,7 @@ faqs:
   - q: 什么是代理代币？
     a: 代理代币是使用 Metaplex Genesis 协议从代理的链上钱包发行的代币。将 agent 字段传入 createAndRegisterLaunch 时，SDK 会自动将创作者费用路由至代理的 Core asset 签名者 PDA，并将发行交易包装在 Core execute 指令中，以便代理在链上执行。
   - q: 发行代理代币时，创作者费用会流向哪里？
-    a: 创作者费用会自动路由至代理的 Core asset 签名者 PDA（由种子 ['mpl-core-execute', <agent_mint>] 派生）。无需手动设置 creatorFeeWallet，传入 agent 字段即可。通过明确设置 launch.creatorFeeWallet 仍可覆盖默认的费用钱包。
+    a: 创作者费用会自动路由至代理的 Core asset 签名者 PDA（由种子 ['mpl-core-execute', <agent_asset>] 派生）。无需手动设置 creatorFeeWallet，传入 agent 字段即可。通过明确设置 launch.creatorFeeWallet 仍可覆盖默认的费用钱包。
   - q: setToken 可以撤销吗？
     a: 不可以。将 setToken 设置为 true 会将已发行的代币永久关联为代理的主要代币。交易确认后，此操作无法撤销或重新分配。只有在确定要将该代币永久关联到代理时，才应将 setToken 设为 true。
   - q: 能否先在 devnet 上测试代理代币发行？
@@ -113,7 +113,7 @@ Genesis API 函数通过 HTTP 与托管的 Metaplex API 通信，而非直接提
 
 将包含代理 [Core](/core) asset 地址的 `agent` 字段传入 `createAndRegisterLaunch`。SDK 会自动：
 
-- 将创作者费用钱包设置为代理的 Core asset 签名者 PDA（由 `['mpl-core-execute', <agent_mint>]` 派生）
+- 将创作者费用钱包设置为代理的 Core asset 签名者 PDA（由 `['mpl-core-execute', <agent_asset>]` 派生）
 - 将发行交易包装在 Core execute 指令中，以便代理在链上执行
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
@@ -277,7 +277,7 @@ try {
 
 ### 发行代理代币时，创作者费用会流向哪里？
 
-创作者费用会自动路由至代理的 Core asset 签名者 PDA（由种子 `['mpl-core-execute', <agent_mint>]` 派生）。无需手动设置 `creatorFeeWallet`，传入 `agent` 字段即可。通过明确设置 `launch.creatorFeeWallet` 仍可覆盖默认费用钱包。
+创作者费用会自动路由至代理的 Core asset 签名者 PDA（由种子 `['mpl-core-execute', <agent_asset>]` 派生）。无需手动设置 `creatorFeeWallet`，传入 `agent` 字段即可。通过明确设置 `launch.creatorFeeWallet` 仍可覆盖默认费用钱包。
 
 ### `setToken` 可以撤销吗？
 

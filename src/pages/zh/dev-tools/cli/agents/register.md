@@ -111,7 +111,7 @@ mplx agents register --new --use-ix \
 将资产地址作为第一个参数传入，可在现有 Core 资产上注册身份。
 
 ```bash {% title="Direct IX — existing asset" %}
-mplx agents register <ASSET_ADDRESS> --use-ix \
+mplx agents register <AGENT_ASSET> --use-ix \
   --from-file "./agent-doc.json"
 ```
 
@@ -158,7 +158,7 @@ mplx agents register \
 
 ```text {% title="Expected output" %}
 --------------------------------
-  Asset: <asset_address>
+  Agent Asset: <agent_asset_address>
   Signature: <transaction_signature>
   Explorer: <explorer_url>
 --------------------------------

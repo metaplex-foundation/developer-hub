@@ -44,14 +44,14 @@ The `mplx agents fetch` command reads the on-chain [agent identity](/agents) PDA
 
 | Item | Value |
 |------|-------|
-| **Command** | `mplx agents fetch <ASSET_ADDRESS>` |
-| **Required argument** | `ASSET_ADDRESS` — the MPL Core asset to look up |
+| **Command** | `mplx agents fetch <AGENT_ASSET>` |
+| **Required argument** | `AGENT_ASSET` — the agent's Core asset address |
 | **Optional flags** | `--json` — machine-readable output |
 
 ## Usage
 
 ```bash {% title="Fetch agent identity" %}
-mplx agents fetch <ASSET_ADDRESS>
+mplx agents fetch <AGENT_ASSET>
 ```
 
 ## Output
@@ -59,10 +59,10 @@ mplx agents fetch <ASSET_ADDRESS>
 ```text {% title="Expected output (registered agent)" %}
 {
   registered: true,
-  asset: '<asset_address>',
+  agentAsset: '<agent_asset_address>',
   owner: '<owner_address>',
   identityPda: '<identity_pda_address>',
-  wallet: '<asset_signer_pda_address>',
+  agentWallet: '<asset_signer_pda_address>',
   registrationUri: 'https://...',
   lifecycleChecks: { ... }
 }
@@ -76,6 +76,6 @@ No agent identity found for this asset. The asset may not be registered.
 
 ## Notes
 
-- The `wallet` field is the Asset Signer PDA — the agent's built-in wallet used for signing transactions and holding funds
+- The `agentWallet` field is the Asset Signer PDA — the agent's built-in wallet used for signing transactions and holding funds
 - The `registrationUri` points to the JSON document uploaded during registration containing the agent's name, description, services, and trust models
 - Use `--json` for machine-readable output
