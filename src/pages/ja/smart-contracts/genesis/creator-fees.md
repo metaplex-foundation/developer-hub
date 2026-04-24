@@ -1,11 +1,14 @@
 ---
 title: Genesis ボンディングカーブのクリエイター手数料
 metaTitle: Genesis ボンディングカーブのクリエイター手数料 — 設定と請求 | Metaplex
-description: Genesis ボンディングカーブのローンチでクリエイター手数料を設定し、アクティブなカーブ中に蓄積した手数料を請求し、Raydium CPMMプールからグラデュエーション後の手数料を収集・請求する方法。
+description: Genesis ボンディングカーブのローンチでクリエイター手数料を設定し、Metaplex API、Genesis SDK、または低レベルのオンチェーン命令を介して蓄積した手数料を請求する方法 — グラデュエーション後のRaydium手数料のための2ステップの収集＋請求フローを含む。
 keywords:
   - creator fee
+  - creator rewards
   - bonding curve
   - genesis
+  - claimCreatorRewards
+  - v1/creator-rewards/claim
   - claimBondingCurveCreatorFeeV2
   - claimRaydiumCreatorFeeV2
   - collectRaydiumCpmmFeesWithCreatorFeeV2
@@ -14,40 +17,50 @@ keywords:
   - fetchRaydiumCpmmBucketV2
   - creatorFeeWallet
   - creatorFeeAccrued
+  - payer
   - RaydiumCpmmBucketV2
   - Raydium CPMM
   - token launch
   - Solana
 about:
   - Creator Fees
+  - Creator Rewards
   - Bonding Curve
   - Genesis
   - Solana
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-13-2026'
+updated: '04-24-2026'
 howToSteps:
   - createAndRegisterLaunch の呼び出し時にローンチオブジェクトで creatorFeeWallet を設定します
   - ローンチ後、fetchBondingCurveBucketV2 を使用してバケットアカウントの creatorFeeAccrued を監視します
-  - アクティブカーブ期間中に claimBondingCurveCreatorFeeV2 を呼び出して発生した手数料を請求します
-  - 卒業後、collectRaydiumCpmmFeesWithCreatorFeeV2 を呼び出して Raydium プールの LP 手数料を Genesis バケットに収集します
-  - claimRaydiumCreatorFeeV2 を呼び出してバケットの累積残高をクリエイターウォレットに転送します
+  - claimCreatorRewards（API または SDK）を呼び出して、すべてのバケットから 1 回の呼び出しで請求します
+  - アクティブカーブ期間中の手動制御には、claimBondingCurveCreatorFeeV2 を呼び出して発生した手数料を請求します
+  - 卒業後の手動請求には、collectRaydiumCpmmFeesWithCreatorFeeV2 を呼び出して Raydium プールの LP 手数料を Genesis バケットに収集し、その後 claimRaydiumCreatorFeeV2 を呼び出してバケット残高をクリエイターウォレットに転送します
 howToTools:
   - Node.js
   - Umi framework
   - Genesis SDK
+  - Metaplex API
 faqs:
   - q: creatorFeeWalletが設定されていない場合、デフォルトのクリエイター手数料ウォレットは何ですか？
     a: デフォルトはローンチウォレット — createLaunch呼び出しに署名したウォレットです。launchオブジェクトにcreatorFeeWalletを明示的に設定して、手数料を他のアドレスにリダイレクトします。
   - q: クリエイター手数料はスワップごとに転送されますか？
-    a: いいえ。クリエイター手数料は各スワップでバケット（creatorFeeAccrued）に蓄積されますが、すぐには転送されません。アクティブなカーブ中はclaimBondingCurveCreatorFeeV2で請求します。グラデュエーション後はcollectRaydiumCpmmFeesWithCreatorFeeV2でRaydiumプールからLP手数料を収集し、その後claimRaydiumCreatorFeeV2でクリエイターウォレットに転送します。
+    a: いいえ。クリエイター手数料は各スワップでバケット（creatorFeeAccrued）に蓄積されますが、すぐには転送されません。APIまたはSDK経由でclaimCreatorRewardsを呼び出してすべてのバケットからまとめて回収するか、オンチェーン命令（アクティブなカーブ中はclaimBondingCurveCreatorFeeV2、グラデュエーション後はcollectRaydiumCpmmFeesWithCreatorFeeV2の後にclaimRaydiumCreatorFeeV2）で低レベルの制御を行います。
+  - q: APIとオンチェーン請求命令のどちらを使用すべきですか？
+    a: 通常の請求にはAPI（claimCreatorRewards）を使用します — ウォレットが対象とするすべてのボンディングカーブとRaydiumバケットを1回の呼び出しに集約し、署名準備済みのトランザクションを返します。特定のバケットを対象にする、トランザクションを自分で構築する、Metaplex APIへのネットワークアクセスなしで実行する場合は、バケットごとのオンチェーン命令（claimBondingCurveCreatorFeeV2、collectRaydiumCpmmFeesWithCreatorFeeV2、claimRaydiumCreatorFeeV2）を使用します。
   - q: 誰でもclaimBondingCurveCreatorFeeV2やclaimRaydiumCreatorFeeV2を呼び出せますか？
     a: はい。3つのパーミッションレスな手数料インストラクションはアクティブカーブとグラデュエーション後の両方のフェーズにまたがります — collectRaydiumCpmmFeesWithCreatorFeeV2とclaimBondingCurveCreatorFeeV2（アクティブカーブ）、およびclaimRaydiumCreatorFeeV2（グラデュエーション後）。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。
   - q: collectRaydiumCpmmFeesWithCreatorFeeV2とclaimRaydiumCreatorFeeV2の違いは何ですか？
     a: collectRaydiumCpmmFeesWithCreatorFeeV2はRaydium CPMMプールから蓄積されたLP取引手数料をGenesisのRaydiumCpmmBucketV2バケットに収集します。claimRaydiumCreatorFeeV2はバケットにある残高をクリエイター手数料ウォレットに転送します。グラデュエーション後の手数料を完全に回収するには両方のステップが必要です。
+  - q: 請求できる報酬がない場合はどうなりますか？
+    a: claimCreatorRewardsエンドポイントはHTTP 400と`{"error":{"message":"No rewards available to claim"}}`を返します。SDKはこれをGenesisApiErrorとして表面化します。これを例外的な結果ではなく — err.message（またはstatusCode === 400）をチェックしてエラーを伝播させずに分岐します。
+  - q: オプションのpayerフィールドは何のためですか？
+    a: payerは返された請求トランザクションのトランザクション手数料とレントを負担します。請求対象のウォレットがデフォルトです。クリエイター手数料ウォレットがSOLを保持していない場合（例 — エージェントPDAやコールドウォレット）に別のアドレスに設定します。payerは返されたトランザクションに署名する必要がありますが、クリエイター手数料の受取人は引き続き請求されたSOLを受け取ります。
   - q: ファーストバイはクリエイター手数料を支払いますか？
     a: いいえ。ファーストバイが設定されている場合、プロトコルスワップ手数料とクリエイター手数料の両方が、その1回の初回購入に対して免除されます。その後のすべてのスワップは通常のクリエイター手数料を支払います。
   - q: 蓄積したクリエイター手数料を確認するにはどうすればよいですか？
@@ -68,18 +81,19 @@ faqs:
 
 ## Summary
 
-クリエイター手数料は、Genesis ボンディングカーブのオプションのスワップごとの手数料で、毎回の購入と売却のSOL側に適用されます。手数料はすぐには転送されず、バケットアカウント（`creatorFeeAccrued`）に蓄積されます。2つのパーミッションレスインストラクションで回収します。
+クリエイター手数料は、Genesis ボンディングカーブのオプションのスワップごとの手数料で、毎回の購入と売却のSOL側に適用されます。手数料はすぐには転送されず、バケットアカウント（`creatorFeeAccrued`）に蓄積されます — Metaplex API（推奨）で1回の呼び出しで請求するか、オンチェーン命令でバケットごとに請求します。
 
 - **設定** — カーブ作成時に `launch` オブジェクトに `creatorFeeWallet` を設定する。省略するとデフォルトでローンチウォレットになる
 - **蓄積** — `creatorFeeAccrued` はスワップごとに増加する。手数料はスワップごとに転送されない
-- **アクティブカーブ中の請求** — `claimBondingCurveCreatorFeeV2` でカーブがライブ中に蓄積した手数料を回収する
-- **グラデュエーション後の請求** — 2ステップ: `collectRaydiumCpmmFeesWithCreatorFeeV2` でRaydiumプールからLP手数料をGenesisバケットに収集し、その後 `claimRaydiumCreatorFeeV2` でバケット残高をクリエイターウォレットに転送する
+- **推奨される請求パス** — `POST /v1/creator-rewards/claim`（またはSDKの `claimCreatorRewards`）はウォレットのすべてのボンディングカーブとRaydiumバケットを集約し、署名準備済みのトランザクションを返す
+- **アクティブカーブ中の請求（手動）** — `claimBondingCurveCreatorFeeV2` でカーブがライブ中に蓄積した手数料を回収する
+- **グラデュエーション後の請求（手動）** — 2ステップ: `collectRaydiumCpmmFeesWithCreatorFeeV2` でRaydiumプールからLP手数料をGenesisバケットに収集し、その後 `claimRaydiumCreatorFeeV2` でバケット残高をクリエイターウォレットに転送する
 
 スワップ価格設定とプロトコルスワップ手数料とのクリエイター手数料の相互作用については、[動作理論 — 手数料構造](/smart-contracts/genesis/bonding-curve-theory#fee-structure)を参照してください。
 
 ## クイックスタート
 
-このセクションでは、アクティブカーブとグラデュエーション後の両フェーズでクリエイター手数料を設定および請求するための最小限の手順を説明します。
+このセクションでは、Metaplex API（推奨）または、アクティブカーブとグラデュエーション後のRaydiumフェーズをカバーする低レベルのオンチェーン命令でクリエイター手数料を設定および請求するための最小限の手順を説明します。
 
 ### クイックリファレンス
 
@@ -88,18 +102,19 @@ faqs:
 | インストラクション | 使用タイミング | 必要なアカウント | 出力 / 効果 |
 |---|---|---|---|
 | `createAndRegisterLaunch`（`creatorFeeWallet` 設定） | カーブ作成時 | クリエイターウォレット、ローンチ署名者 | バケットに手数料ウォレットが設定される |
+| `claimCreatorRewards`（API / SDK） | いつでも — 推奨パス | クリエイター手数料ウォレット（オプションのpayer） | 1回の呼び出しで対象のすべてのバケットを請求する署名済みトランザクション |
 | `fetchBondingCurveBucketV2`（`creatorFeeAccrued` 読み取り） | アクティブカーブ中いつでも | バケットPDA | 現在の蓄積手数料残高（lamports） |
 | `claimBondingCurveCreatorFeeV2` | アクティブカーブ — 蓄積手数料の回収 | Genesisアカウント、バケットPDA、ベースミント、クリエイター手数料ウォレット | 蓄積SOLがクリエイターウォレットに転送 |
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | グラデュエーション後 — LP手数料のハーベスト | Genesisアカウント、RaydiumプールPDA、RaydiumバケットPDA | LP手数料がRaydiumプールからGenesisバケットに移動 |
 | `claimRaydiumCreatorFeeV2` | グラデュエーション後 — バケット残高の請求 | Genesisアカウント、RaydiumバケットPDA、ベース/クォートミント、クリエイター手数料ウォレット | バケット残高がクリエイターウォレットに転送 |
 
-**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pdaルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#ステップ1--raydium-cpmmプールからの手数料収集) · [グラデュエーション後の請求](#ステップ2--クリエイターウォレットへの手数料請求)
+**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pdaルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [API経由で請求](#metaplex-api経由で請求推奨) · [報酬なしのケース](#報酬なしのケースの処理) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#ステップ1--raydium-cpmmプールからの手数料収集) · [グラデュエーション後の請求](#ステップ2--クリエイターウォレットへの手数料請求)
 
 1. `createAndRegisterLaunch` を呼び出すときに `launch` オブジェクトに `creatorFeeWallet` を設定する
 2. ローンチ後、`bucket.creatorFeeAccrued` を監視して蓄積手数料を追跡する
-3. `claimBondingCurveCreatorFeeV2` を呼び出してカーブがアクティブな間に手数料を回収する
-4. グラデュエーション後、`collectRaydiumCpmmFeesWithCreatorFeeV2` を呼び出してRaydiumプールからLP手数料を収集する
-5. `claimRaydiumCreatorFeeV2` を呼び出してバケット残高をクリエイターウォレットに転送する
+3. APIまたはSDK経由で `claimCreatorRewards` を呼び出して、すべてのバケットからまとめて1回の呼び出しで請求する
+4. アクティブカーブ期間中の手動制御には、`claimBondingCurveCreatorFeeV2` を呼び出して蓄積手数料を回収する
+5. グラデュエーション後の手動請求には、`collectRaydiumCpmmFeesWithCreatorFeeV2` を呼び出してRaydiumプールからLP手数料を収集し、その後 `claimRaydiumCreatorFeeV2` でバケット残高をクリエイターウォレットに転送する
 
 ## 前提条件
 
@@ -181,6 +196,30 @@ const creatorFeeExt = bucket.extensions.creatorFee;
 const creatorFeeWallet = isSome(creatorFeeExt) ? creatorFeeExt.value.wallet : null;
 console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configured');
 ```
+
+## Metaplex API経由で請求（推奨）
+
+`POST /v1/creator-rewards/claim` は、ウォレットが対象とするすべての未請求のボンディングカーブとRaydium報酬を1回の呼び出しで請求します。エンドポイントは、ウォレット（または指定された `payer`）が署名して送信するbase64エンコードされたSolanaトランザクションを返します。JavaScript SDKは同じ呼び出しを `@metaplex-foundation/genesis` の `claimCreatorRewards` として公開します。
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl" defaultFramework="umi" /%}
+
+| フィールド | 型 | 必須 | 備考 |
+|-------|------|----------|-------|
+| `wallet` | `PublicKey \| string` | はい | 請求するクリエイター手数料ウォレット。 |
+| `network` | `SvmNetwork` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'`。 |
+| `payer` | `PublicKey \| string` | いいえ | 返されたトランザクションの手数料とレントを負担するウォレット。デフォルトは `wallet`。クリエイター手数料ウォレットがSOLを保持していない場合（例：エージェントPDAやコールドウォレット）に使用します。 |
+
+SDKは、デシリアライズされたUmi `Transaction` と、それらが構築されたブロックハッシュを返します。常に返されたブロックハッシュに対して各トランザクションを確認してください — 新たに取得したものに置き換えないでください。確認競合が発生します。完全なHTTPスキーマは[Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)を参照してください。
+
+### 報酬なしのケースの処理
+
+ウォレットに請求するものがない場合、エンドポイントはHTTP `400` と `{ "error": { "message": "No rewards available to claim" } }` を返します — 空の `transactions` 配列を含む成功レスポンスは返**されません**。SDKはこれを `GenesisApiError` として表面化するため、呼び出し元はエラーをキャッチして `err.message`（または `err.statusCode === 400`）で分岐する必要があります。エラーをそのまま伝播させてはいけません。
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" /%}
+
+{% callout type="note" %}
+上記のAPIパスは、すべての本番請求フローで推奨される統合です。下記のバケットごとのオンチェーン命令は、特定のバケットを対象とする、トランザクションを完全にクライアントサイドで構築する、Metaplex APIへのネットワークアクセスなしで実行するなど、高度なケースで引き続き利用できます。
+{% /callout %}
 
 ## アクティブなカーブ中のクリエイター手数料の請求
 
@@ -393,11 +432,12 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## Notes
 
-以下の注意事項は、手数料のタイミング、パーミッションレスな請求、2ステップのグラデュエーション後フロー、およびファーストバイの手数料免除について説明します。
+以下の注意事項は、手数料のタイミング、推奨されるAPI請求パス、パーミッションレスなオンチェーン請求、2ステップのグラデュエーション後フロー、およびファーストバイの手数料免除について説明します。
 
-- クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません — 受け取るには明示的に請求インストラクションを呼び出す必要があります。`creatorFeeClaimed` は累計の請求済み合計を追跡します
-- `claimBondingCurveCreatorFeeV2` と `claimRaydiumCreatorFeeV2` はともにパーミッションレスです。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません。`collectRaydiumCpmmFeesWithCreatorFeeV2` もパーミッションレスです
-- グラデュエーション後の手数料には順序通り2つのステップが必要です：`collectRaydiumCpmmFeesWithCreatorFeeV2`（Raydiumプール → Genesisバケットへの収集）、次に `claimRaydiumCreatorFeeV2`（バケット → クリエイターウォレット）。両方を1つのトランザクションにまとめることができます
+- クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません — API/SDKまたはオンチェーンインストラクションで明示的に請求する必要があります。`creatorFeeClaimed` は累計の請求済み合計を追跡します
+- `claimCreatorRewards`（API/SDK）は、ウォレットの対象となるすべてのボンディングカーブとRaydiumバケットを1回の呼び出しに集約します。請求するものがない場合、空のトランザクション配列ではなくHTTP `400` と `"No rewards available to claim"` を返します
+- オンチェーン請求インストラクション（`claimBondingCurveCreatorFeeV2`、`collectRaydiumCpmmFeesWithCreatorFeeV2`、`claimRaydiumCreatorFeeV2`）はパーミッションレスです。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません
+- グラデュエーション後の手数料には順序通り2つのステップが必要です：`collectRaydiumCpmmFeesWithCreatorFeeV2`（Raydiumプール → Genesisバケットへの収集）、次に `claimRaydiumCreatorFeeV2`（バケット → クリエイターウォレット）。両方を1つのトランザクションにまとめることができ、APIパスは両方をまとめて処理します
 - `creatorFeeAccrued` と `creatorFeeClaimed` は `BondingCurveBucketV2`（アクティブカーブ）と `RaydiumCpmmBucketV2`（グラデュエーション後）の両方に存在します。それぞれ `fetchBondingCurveBucketV2` と `fetchRaydiumCpmmBucketV2` を使用します
 - `creatorFeeWallet` は設定されていない場合デフォルトでローンチウォレットになります。カーブ作成後は変更できません
 - ファーストバイの仕組みは、指定された初回購入のみすべての手数料（プロトコルとクリエイター）を免除します。その後のすべてのスワップは通常のクリエイター手数料を支払います
@@ -413,7 +453,19 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### クリエイター手数料はスワップごとに転送されますか？
 
-いいえ。クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません。アクティブなカーブ中は `claimBondingCurveCreatorFeeV2` で請求します。グラデュエーション後は `collectRaydiumCpmmFeesWithCreatorFeeV2` でRaydiumプールからLP手数料を収集し、その後 `claimRaydiumCreatorFeeV2` でクリエイターウォレットに転送します。
+いいえ。クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません。[APIまたはSDK](#metaplex-api経由で請求推奨)経由で `claimCreatorRewards` を呼び出してすべてのバケットを1回で回収するか、より低レベルの制御のためにオンチェーン命令（アクティブなカーブ中は `claimBondingCurveCreatorFeeV2`、グラデュエーション後は `collectRaydiumCpmmFeesWithCreatorFeeV2` の後に `claimRaydiumCreatorFeeV2`）を使用します。
+
+### APIとオンチェーン請求命令のどちらを使用すべきですか？
+
+通常の請求にはAPI（`claimCreatorRewards`）を使用します — ウォレットが対象とするすべてのボンディングカーブとRaydiumバケットを1回の呼び出しに集約し、署名準備済みのトランザクションを返します。特定のバケットを対象にする、トランザクションを自分で構築する、Metaplex APIへのネットワークアクセスなしで実行する場合は、バケットごとのオンチェーン命令（`claimBondingCurveCreatorFeeV2`、`collectRaydiumCpmmFeesWithCreatorFeeV2`、`claimRaydiumCreatorFeeV2`）を使用します。
+
+### 請求できる報酬がない場合はどうなりますか？
+
+`claimCreatorRewards` エンドポイントはHTTP `400` と `{"error":{"message":"No rewards available to claim"}}` を返します。SDKはこれを `GenesisApiError` として表面化します。これを例外的な結果ではなく — `err.message`（または `err.statusCode === 400`）をチェックしてエラーを伝播させずに分岐します。[報酬なしのケースの処理](#報酬なしのケースの処理)を参照してください。
+
+### オプションの `payer` フィールドは何のためですか？
+
+`payer` は返された請求トランザクションのトランザクション手数料とレントを負担します。請求対象のウォレットがデフォルトです。クリエイター手数料ウォレットがSOLを保持していない場合（例 — エージェントPDAやコールドウォレット）に別のアドレスに設定します。`payer` は返されたトランザクションに署名する必要がありますが、クリエイター手数料の受取人は引き続き請求されたSOLを受け取ります。
 
 ### 誰でも `claimBondingCurveCreatorFeeV2` や `claimRaydiumCreatorFeeV2` を呼び出せますか？
 
