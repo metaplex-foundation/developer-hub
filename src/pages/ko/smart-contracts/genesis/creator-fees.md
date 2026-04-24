@@ -30,11 +30,11 @@ proficiencyLevel: Intermediate
 created: '04-09-2026'
 updated: '04-13-2026'
 howToSteps:
-  - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
-  - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
-  - Call claimBondingCurveCreatorFeeV2 to collect accrued fees during the active curve
-  - After graduation, call collectRaydiumCpmmFeesWithCreatorFeeV2 to harvest LP fees from the Raydium pool into the Genesis bucket
-  - Call claimRaydiumCreatorFeeV2 to transfer the accumulated bucket balance to the creator wallet
+  - createAndRegisterLaunch 호출 시 런치 객체에 creatorFeeWallet을 설정합니다
+  - 런치 후 fetchBondingCurveBucketV2를 사용하여 버킷 계정의 creatorFeeAccrued를 모니터링합니다
+  - 활성 커브 기간 중 claimBondingCurveCreatorFeeV2를 호출하여 발생한 수수료를 수령합니다
+  - 졸업 후 collectRaydiumCpmmFeesWithCreatorFeeV2를 호출하여 Raydium 풀의 LP 수수료를 Genesis 버킷으로 수확합니다
+  - claimRaydiumCreatorFeeV2를 호출하여 축적된 버킷 잔액을 크리에이터 지갑으로 전송합니다
 howToTools:
   - Node.js
   - Umi framework
@@ -82,6 +82,8 @@ faqs:
 이 섹션에서는 활성 커브와 졸업 후 단계 모두에서 창작자 수수료를 구성하고 청구하는 최소 단계를 설명합니다.
 
 ### 빠른 참조
+
+이 표는 각 수수료 명령어를 호출하는 시기, 필요한 계정, 그리고 창작자 수수료 수명 주기에 미치는 영향을 요약합니다.
 
 | 명령어 | 사용 시기 | 필요한 계정 | 출력 / 효과 |
 |---|---|---|---|

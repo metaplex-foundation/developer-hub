@@ -83,6 +83,8 @@ This section gives the minimum steps to configure and claim creator fees across 
 
 ### Quick Reference
 
+This table summarizes when to call each fee instruction, the accounts it requires, and its effect on the creator fee lifecycle.
+
 | Instruction | When to Use | Required Accounts | Output / Effect |
 |---|---|---|---|
 | `createAndRegisterLaunch` (set `creatorFeeWallet`) | Curve creation | Creator wallet, launch signer | Fee wallet configured on the bucket |

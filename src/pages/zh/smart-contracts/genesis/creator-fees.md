@@ -30,11 +30,11 @@ proficiencyLevel: Intermediate
 created: '04-09-2026'
 updated: '04-13-2026'
 howToSteps:
-  - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
-  - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
-  - Call claimBondingCurveCreatorFeeV2 to collect accrued fees during the active curve
-  - After graduation, call collectRaydiumCpmmFeesWithCreatorFeeV2 to harvest LP fees from the Raydium pool into the Genesis bucket
-  - Call claimRaydiumCreatorFeeV2 to transfer the accumulated bucket balance to the creator wallet
+  - 调用 createAndRegisterLaunch 时在启动对象中设置 creatorFeeWallet
+  - 启动后使用 fetchBondingCurveBucketV2 监控桶账户中的 creatorFeeAccrued
+  - 在活跃曲线期间调用 claimBondingCurveCreatorFeeV2 领取已累积的手续费
+  - 毕业后调用 collectRaydiumCpmmFeesWithCreatorFeeV2 将 Raydium 池中的 LP 手续费收割到 Genesis 桶中
+  - 调用 claimRaydiumCreatorFeeV2 将桶中累积的余额转入创作者钱包
 howToTools:
   - Node.js
   - Umi framework
@@ -82,6 +82,8 @@ faqs:
 本节介绍在活跃曲线和毕业后两个阶段配置和认领创作者费的最少步骤。
 
 ### 快速参考
+
+下表汇总了每条费用指令的调用时机、所需账户及其对创作者费生命周期的影响。
 
 | 指令 | 使用时机 | 必需账户 | 输出 / 效果 |
 |---|---|---|---|

@@ -30,11 +30,11 @@ proficiencyLevel: Intermediate
 created: '04-09-2026'
 updated: '04-13-2026'
 howToSteps:
-  - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
-  - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
-  - Call claimBondingCurveCreatorFeeV2 to collect accrued fees during the active curve
-  - After graduation, call collectRaydiumCpmmFeesWithCreatorFeeV2 to harvest LP fees from the Raydium pool into the Genesis bucket
-  - Call claimRaydiumCreatorFeeV2 to transfer the accumulated bucket balance to the creator wallet
+  - createAndRegisterLaunch の呼び出し時にローンチオブジェクトで creatorFeeWallet を設定します
+  - ローンチ後、fetchBondingCurveBucketV2 を使用してバケットアカウントの creatorFeeAccrued を監視します
+  - アクティブカーブ期間中に claimBondingCurveCreatorFeeV2 を呼び出して発生した手数料を請求します
+  - 卒業後、collectRaydiumCpmmFeesWithCreatorFeeV2 を呼び出して Raydium プールの LP 手数料を Genesis バケットに収集します
+  - claimRaydiumCreatorFeeV2 を呼び出してバケットの累積残高をクリエイターウォレットに転送します
 howToTools:
   - Node.js
   - Umi framework
@@ -82,6 +82,8 @@ faqs:
 このセクションでは、アクティブカーブとグラデュエーション後の両フェーズでクリエイター手数料を設定および請求するための最小限の手順を説明します。
 
 ### クイックリファレンス
+
+この表は、各手数料インストラクションを呼び出すタイミング、必要なアカウント、およびクリエイター手数料ライフサイクルへの影響をまとめたものです。
 
 | インストラクション | 使用タイミング | 必要なアカウント | 出力 / 効果 |
 |---|---|---|---|
