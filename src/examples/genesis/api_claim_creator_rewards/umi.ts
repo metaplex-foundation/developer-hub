@@ -23,7 +23,6 @@ const result = await claimCreatorRewards(umi, {}, {
 for (const tx of result.transactions) {
   const signed = await umi.identity.signTransaction(tx)
   const signature = await umi.rpc.sendTransaction(signed, {
-    commitment: 'confirmed',
     preflightCommitment: 'confirmed',
   })
   await umi.rpc.confirmTransaction(signature, {

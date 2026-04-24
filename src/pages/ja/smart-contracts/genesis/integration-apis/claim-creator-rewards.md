@@ -27,8 +27,17 @@ programmingLanguage:
 ウォレットが対象とするすべてのGenesisボンディングカーブとRaydium CPMMバケットの蓄積したクリエイター報酬を、1回の呼び出しで請求します。エンドポイントは、ウォレット（または指定された`payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションのリストを返します。{% .lead %}
 
 {% callout type="note" title="SDKラッパーが利用可能" %}
-ほとんどのインテグレーターは、Genesis JavaScript SDKの[`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用するべきです — トランザクションのデシリアライズ、エラー解析を処理し、署名のために[Umi アイデンティティ](dev-tools/umi/getting-started#connecting-a-wallet)に直接プラグインします。SDKに依存できない場合のみ、このエンドポイントを直接呼び出してください。
+ほとんどのインテグレーターは、Genesis JavaScript SDKの[`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用するべきです — トランザクションのデシリアライズ、エラー解析を処理し、署名のために[Umi アイデンティティ](/dev-tools/umi/getting-started#connecting-a-wallet)に直接プラグインします。SDKに依存できない場合のみ、このエンドポイントを直接呼び出してください。
 {% /callout %}
+
+## Summary
+
+`POST /v1/creator-rewards/claim` は、1回の呼び出しでウォレットのすべてのボンディングカーブとRaydium CPMMバケットから蓄積したクリエイター報酬を請求するために必要なSolanaトランザクションを返します。
+
+- **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。バケットごとに1つのトランザクションが返されます
+- **署名** — レスポンスはウォレット（または任意の `payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションです
+- **エラー** — 蓄積がない場合はHTTP `400` `"No rewards available to claim"` を返します。呼び出し元は空の配列ではなくエラーで分岐する必要があります
+- **SDK ラッパー** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) はデシリアライズ、型付きエラー、Umi 署名を処理します
 
 ## エンドポイント
 

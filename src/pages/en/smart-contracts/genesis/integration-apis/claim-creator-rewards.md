@@ -27,8 +27,17 @@ programmingLanguage:
 Claim accrued creator rewards for a wallet across every Genesis bonding-curve and Raydium CPMM bucket the wallet is entitled to, in a single call. The endpoint returns a list of base64-encoded Solana transactions that the wallet (or a designated payer) must sign and submit. {% .lead %}
 
 {% callout type="note" title="SDK wrapper available" %}
-Most integrators should use [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) from the Genesis JavaScript SDK — it deserializes the transactions, handles error parsing, and plugs directly into a [Umi identity](dev-tools/umi/getting-started#connecting-a-wallet) for signing. Call this endpoint directly only if you cannot depend on the SDK.
+Most integrators should use [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) from the Genesis JavaScript SDK — it deserializes the transactions, handles error parsing, and plugs directly into a [Umi identity](/dev-tools/umi/getting-started#connecting-a-wallet) for signing. Call this endpoint directly only if you cannot depend on the SDK.
 {% /callout %}
+
+## Summary
+
+`POST /v1/creator-rewards/claim` returns the Solana transactions needed to claim a wallet's accrued creator rewards across every bonding-curve and Raydium CPMM bucket in a single call.
+
+- **Aggregation** — one request claims across all eligible buckets; one transaction is returned per bucket
+- **Signing** — response is base64-encoded Solana transactions the wallet (or optional `payer`) must sign and submit
+- **Errors** — HTTP `400` `"No rewards available to claim"` when nothing has accrued; callers must branch on the error, not an empty array
+- **SDK wrapper** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) handles deserialization, typed errors, and Umi signing
 
 ## Endpoint
 

@@ -20,7 +20,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Network is determined by your configured RPC endpoint.\nmplx genesis launch create --launchType bonding-curve \\\n  --name \"Test Token\" \\\n  --symbol \"TEST\" \\\n  --image \"https://gateway.irys.xyz/test-image\" \\\n  --agentAsset <AGENT_CORE_ASSET_ADDRESS>\n"
+  "full": "# Network is determined by your configured RPC endpoint.\nmplx genesis launch create --launchType bonding-curve \\\n  --name \"Test Token\" \\\n  --symbol \"TEST\" \\\n  --image \"https://gateway.irys.xyz/test-image\" \\\n  --agentAsset <AGENT_ASSET>\n"
 }
 
 export const metadata = {

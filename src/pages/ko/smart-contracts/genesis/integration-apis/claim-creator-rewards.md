@@ -27,8 +27,17 @@ programmingLanguage:
 지갑이 자격이 있는 모든 Genesis 본딩 커브와 Raydium CPMM 버킷의 누적된 창작자 보상을 단일 호출로 청구합니다. 엔드포인트는 지갑(또는 지정된 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션 목록을 반환합니다. {% .lead %}
 
 {% callout type="note" title="SDK 래퍼 사용 가능" %}
-대부분의 통합자는 Genesis JavaScript SDK의 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용해야 합니다 — 트랜잭션을 역직렬화하고 오류 파싱을 처리하며, 서명을 위해 [Umi 신원](dev-tools/umi/getting-started#connecting-a-wallet)에 직접 연결됩니다. SDK에 의존할 수 없는 경우에만 이 엔드포인트를 직접 호출하세요.
+대부분의 통합자는 Genesis JavaScript SDK의 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용해야 합니다 — 트랜잭션을 역직렬화하고 오류 파싱을 처리하며, 서명을 위해 [Umi 신원](/dev-tools/umi/getting-started#connecting-a-wallet)에 직접 연결됩니다. SDK에 의존할 수 없는 경우에만 이 엔드포인트를 직접 호출하세요.
 {% /callout %}
+
+## Summary
+
+`POST /v1/creator-rewards/claim`은 한 번의 호출로 지갑의 모든 본딩 커브 및 Raydium CPMM 버킷에서 누적된 창작자 보상을 청구하는 데 필요한 Solana 트랜잭션을 반환합니다.
+
+- **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 버킷당 하나의 트랜잭션이 반환됩니다
+- **서명** — 응답은 지갑(또는 선택적 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션입니다
+- **오류** — 누적된 것이 없으면 HTTP `400` `"No rewards available to claim"`를 반환합니다; 호출자는 빈 배열이 아니라 오류로 분기해야 합니다
+- **SDK 래퍼** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)는 역직렬화, 타입화된 오류, Umi 서명을 처리합니다
 
 ## 엔드포인트
 
