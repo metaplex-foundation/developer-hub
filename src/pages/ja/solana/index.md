@@ -14,7 +14,6 @@ about:
 proficiencyLevel: Beginner
 ---
 
-![Metaplex Solana Guides Banner](/assets/banners/touch-screen.jpg)
 
 このセクションのガイドは、**新しいSolana開発者が開発の旅路を始めることを支援するように設計されており**、実行可能な段階的な手順と実例を提供します。これらのガイドは、Solanaエコシステムに開発者を段階的に導入する構造化された学習パスを通じて、主要な概念の教育に焦点を当てています。ブロックチェーンの基礎やSolanaのユニークな機能から、プログラム開発や最適化技術などの高度なトピックまで、あらゆることをカバーしています。
 
