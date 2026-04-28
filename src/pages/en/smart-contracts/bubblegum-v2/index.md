@@ -61,6 +61,22 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% /quick-links %}
 
+## Ecosystem Compatibility
+
+{% callout type="warning" title="Adoption in progress" %}
+Bubblegum V2 is a new standard and ecosystem adoption is ongoing. Wallets and marketplaces that support Bubblegum V1 cNFTs may not yet fully support V2. Verify compatibility with your target platforms before launching user-facing features that depend on wallet display or marketplace trading.
+
+If you need broad wallet and marketplace support today, consider using [MPL-Core](/smart-contracts/core) instead — Core assets are widely supported across the Solana ecosystem.
+{% /callout %}
+
+| Platform | Type | Read / Display | Transfer / Trade |
+|----------|------|---------------|-----------------|
+| Solflare | Wallet | ✅ Supported | ❌ Not yet supported |
+| Phantom | Wallet | ✅ Supported | ❌ Not yet supported |
+| Backpack | Wallet | ✅ Supported | ❌ Not yet supported |
+| Magic Eden | Marketplace | ❌ Not yet supported | ❌ Not yet supported |
+| Tensor | Marketplace | ❌ Not yet supported | ❌ Not yet supported |
+
 ## What's New in Bubblegum V2
 
 Bubblegum V2 builds on the foundation of the original Bubblegum program while introducing several powerful new features:
