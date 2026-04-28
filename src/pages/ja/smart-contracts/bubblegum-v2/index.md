@@ -63,6 +63,22 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% /quick-links %}
 
+## エコシステムの互換性
+
+{% callout type="warning" title="導入進行中" %}
+Bubblegum V2は新しい標準であり、エコシステムへの導入は現在進行中です。Bubblegum V1 cNFTをサポートするウォレットやマーケットプレイスが、V2を完全にサポートしていない場合があります。ウォレット表示やマーケットプレイス取引に依存するユーザー向け機能をリリースする前に、対応プラットフォームとの互換性を確認してください。
+
+今すぐ幅広いウォレットとマーケットプレイスのサポートが必要な場合は、[MPL-Core](/smart-contracts/core)の使用をご検討ください — CoreアセットはSolanaエコシステム全体で広くサポートされています。
+{% /callout %}
+
+| プラットフォーム | 種別 | 読み取り / 表示 | 送信 / 取引 |
+|----------------|------|---------------|------------|
+| Solflare | ウォレット | ✅ サポート済み | ❌ 未対応 |
+| Phantom | ウォレット | ✅ サポート済み | ❌ 未対応 |
+| Backpack | ウォレット | ✅ サポート済み | ❌ 未対応 |
+| Magic Eden | マーケットプレイス | ❌ 未対応 | ❌ 未対応 |
+| Tensor | マーケットプレイス | ❌ 未対応 | ❌ 未対応 |
+
 ## Bubblegum V2の新機能
 
 Bubblegum V2は、オリジナルのBubblegumプログラムの基盤の上に構築され、いくつかの強力な新機能を導入しています：
