@@ -1,24 +1,28 @@
 ---
 title: Update Delegate Plugin
 metaTitle: Update Delegate Plugin | Metaplex Core
-description: Delegate update authority to third parties for Core NFT Assets and Collections. Allow others to modify metadata without transferring ownership.
-updated: '01-31-2026'
+description: Delegate update authority to third parties for Core NFT Assets and Collections. Allow others to modify metadata, manage collection membership, and add/remove plugins without transferring ownership.
+updated: '04-28-2026'
 keywords:
   - update delegate
   - delegate update authority
   - metadata permissions
   - third-party updates
+  - add to collection delegate
+  - remove from collection delegate
 about:
   - Update delegation
   - Metadata permissions
   - Authority management
+  - Collection membership management
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Rust
 faqs:
   - q: What can additional delegates do?
-    a: Almost everything the update authority can do - update metadata, add/remove plugins, etc. They cannot change the root update authority, modify the additional delegates list, or change the Update Delegate plugin authority.
+    a: Almost everything the update authority can do - update metadata, add/remove plugins, and manage collection membership. They cannot change the root update authority, modify the additional delegates list, or change the Update Delegate plugin authority.
   - q: Can additional delegates add more delegates?
     a: No. Only the root update authority (or plugin authority) can add or remove additional delegates.
   - q: How do I remove myself as an additional delegate?
@@ -27,6 +31,10 @@ faqs:
     a: There's no hard limit, but more delegates increase account size and rent. Keep the list reasonable.
   - q: Does Update Delegate work on Collections?
     a: Yes. Adding Update Delegate to a Collection allows delegates to update collection metadata and collection-level plugins.
+  - q: Can a Collection Update Delegate add or remove Assets from a Collection?
+    a: Yes. A delegate listed in the Collection's UpdateDelegate plugin can remove any Asset from the Collection, and can add Assets they have authority over (as the Asset's update authority, or via the Asset's UpdateDelegate plugin).
+  - q: Does the Collection UpdateDelegate need authority over individual Assets to remove them?
+    a: No. Collection-level delegate authority is sufficient to remove any Asset from the Collection. Asset-level authority is only required when adding an Asset.
 ---
 The **Update Delegate Plugin** allows you to grant update permissions to additional addresses. Useful when third parties need to modify Asset metadata without being the primary update authority. {% .lead %}
 {% callout title="What You'll Learn" %}
@@ -34,17 +42,19 @@ The **Update Delegate Plugin** allows you to grant update permissions to additio
 - Grant update permissions to additional addresses
 - Understand what additional delegates can and cannot do
 - Update and manage the delegates list
+- Add and remove Assets from Collections as a delegate
 {% /callout %}
 ## Summary
-The **Update Delegate** is an Authority Managed plugin that allows the update authority to grant update permissions to other addresses. Additional delegates can modify most Asset data but cannot change core authority settings.
+The **Update Delegate** is an Authority Managed plugin that allows the update authority to grant update permissions to other addresses. Additional delegates can modify most Asset data — including collection membership — but cannot change core authority settings.
 - Grant update permissions to third parties
 - Add multiple additional delegates
 - Works with both Assets and Collections
+- Delegates with Collection authority can add/remove Assets from Collections
 - Delegates cannot modify the root update authority
 ## Out of Scope
 Permanent update delegation, owner-level permissions (this is authority managed), and Token Metadata update authority (different system).
 ## Quick Start
-**Jump to:** [Add to Asset](#adding-the-update-delegate-plugin-to-an-asset) · [Update Delegates](#updating-the-update-delegate-plugin) · [Collection](#updating-update-delegate-plugin-on-collection)
+**Jump to:** [Add to Asset](#adding-the-update-delegate-plugin-to-an-asset) · [Update Delegates](#updating-the-update-delegate-plugin) · [Collection](#updating-update-delegate-plugin-on-collection) · [Collection Membership](#managing-collection-membership-as-an-update-delegate)
 1. Add the Update Delegate plugin with the delegate address
 2. Optionally add additional delegates
 3. Delegates can now update Asset metadata
@@ -249,6 +259,159 @@ pub async fn update_collection_update_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
+## Managing Collection Membership as an Update Delegate
+
+The `UpdateDelegate` plugin on a **Collection** grants authority to add and remove Assets from that Collection without the root update authority's signature. This is the primary pattern for programs and services that manage collection membership autonomously — for example, a game server that assigns Assets to guilds, or a launchpad that mints directly into a collection.
+
+- **Remove** any Asset from the Collection — Collection `UpdateDelegate` alone is sufficient.
+- **Add** an Asset to the Collection — Collection `UpdateDelegate` plus authority over the Asset (as its update authority, or via the Asset's own `UpdateDelegate` plugin).
+
+{% callout type="note" %}
+It is the **Collection's** `UpdateDelegate` plugin that controls membership, not the Asset's. A delegate on the Asset alone cannot add or remove it from a Collection — collection-side authority is required.
+{% /callout %}
+
+### Adding an Asset to a Collection as a Collection Update Delegate
+
+The signer must be listed in the Collection's `UpdateDelegate` `additionalDelegates` array, and must also hold authority over the Asset — either as the Asset's update authority (e.g. the program created the Asset) or as a delegate listed in the Asset's `UpdateDelegate` plugin.
+
+{% dialect-switcher title="Add Asset to Collection as a Collection Update Delegate" %}
+{% dialect title="JavaScript" id="js" %}
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  update,
+  fetchAsset,
+  updateAuthority,
+} from '@metaplex-foundation/mpl-core'
+
+const assetId = publicKey('11111111111111111111111111111111')
+const collectionId = publicKey('22222222222222222222222222222222')
+
+const asset = await fetchAsset(umi, assetId)
+
+// umi.identity must be in the Collection's UpdateDelegate additionalDelegates
+// AND hold the Asset's update authority (or be in the Asset's UpdateDelegate additionalDelegates)
+await update(umi, {
+  asset,
+  newCollection: collectionId,
+  newUpdateAuthority: updateAuthority('Collection', [collectionId]),
+}).sendAndConfirm(umi)
+```
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+```rust
+use mpl_core::{instructions::UpdateV2Builder, types::UpdateAuthority};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn add_to_collection_as_collection_delegate() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+    // Signer must be in the Collection's UpdateDelegate additionalDelegates
+    // AND hold the Asset's update authority (or be in its UpdateDelegate additionalDelegates)
+    let delegate = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+
+    let update_ix = UpdateV2Builder::new()
+        .asset(asset)
+        .new_collection(Some(collection))
+        .payer(delegate.pubkey())
+        .authority(Some(delegate.pubkey()))
+        .new_update_authority(UpdateAuthority::Collection(collection))
+        .instruction();
+
+    let signers = vec![&delegate];
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+    let tx = Transaction::new_signed_with_payer(
+        &[update_ix],
+        Some(&delegate.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+    let res = rpc_client.send_and_confirm_transaction(&tx).await.unwrap();
+    println!("Signature: {:?}", res)
+}
+```
+{% /dialect %}
+{% /dialect-switcher %}
+
+### Removing an Asset from a Collection as a Collection Update Delegate
+
+The signer only needs to be listed in the Collection's `UpdateDelegate` `additionalDelegates` array. Asset-level authority is not required to remove an Asset.
+
+Fetch the asset and its current collection, then call `update`. The `authority` parameter identifies the Collection delegate explicitly.
+
+{% dialect-switcher title="Remove Asset from Collection as a Collection Update Delegate" %}
+{% dialect title="JavaScript" id="js" %}
+```ts
+import { publicKey } from '@metaplex-foundation/umi'
+import {
+  update,
+  fetchAsset,
+  fetchCollection,
+  collectionAddress,
+  updateAuthority,
+} from '@metaplex-foundation/mpl-core'
+
+const assetId = publicKey('11111111111111111111111111111111')
+
+const asset = await fetchAsset(umi, assetId)
+
+const currentCollectionId = collectionAddress(asset)
+if (!currentCollectionId) {
+  throw new Error('Asset does not belong to a collection')
+}
+const collection = await fetchCollection(umi, currentCollectionId)
+
+// collectionDelegate only needs to be in the Collection's UpdateDelegate additionalDelegates
+const collectionDelegate = umi.identity // replace with your delegate signer if different
+await update(umi, {
+  asset,
+  collection,
+  newUpdateAuthority: updateAuthority('Address', [umi.identity.publicKey]),
+  authority: collectionDelegate,
+}).sendAndConfirm(umi)
+```
+{% /dialect %}
+{% dialect title="Rust" id="rust" %}
+```rust
+use mpl_core::{instructions::UpdateV2Builder, types::UpdateAuthority};
+use solana_client::nonblocking::rpc_client;
+use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
+use std::str::FromStr;
+
+pub async fn remove_from_collection_as_collection_delegate() {
+    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
+    // Signer only needs to be in the Collection's UpdateDelegate additionalDelegates
+    let delegate = Keypair::new();
+    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
+    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
+    let new_authority = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+
+    let update_ix = UpdateV2Builder::new()
+        .asset(asset)
+        .collection(Some(collection))
+        .payer(delegate.pubkey())
+        .authority(Some(delegate.pubkey()))
+        .new_update_authority(UpdateAuthority::Address(new_authority))
+        .instruction();
+
+    let signers = vec![&delegate];
+    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
+    let tx = Transaction::new_signed_with_payer(
+        &[update_ix],
+        Some(&delegate.pubkey()),
+        &signers,
+        last_blockhash,
+    );
+    let res = rpc_client.send_and_confirm_transaction(&tx).await.unwrap();
+    println!("Signature: {:?}", res)
+}
+```
+{% /dialect %}
+{% /dialect-switcher %}
+
 ## Common Errors
 ### `Authority mismatch`
 Only the update authority (or existing plugin authority) can add/modify the Update Delegate plugin.
@@ -256,12 +419,14 @@ Only the update authority (or existing plugin authority) can add/modify the Upda
 Additional delegates cannot change the root update authority or modify the additional delegates list (except removing themselves).
 ## Notes
 - Authority Managed: update authority can add without owner signature
-- Additional delegates have almost full update permissions
+- Additional delegates have almost full update permissions over the Asset or Collection they are delegated on
+- A Collection `UpdateDelegate` can remove any Asset from the Collection, and add Assets it also has authority over
 - Delegates cannot change the root update authority
 - Delegates cannot modify the additional delegates list (except remove themselves)
 - Works on both Assets and Collections
 ## Quick Reference
-### Additional Delegate Permissions
+### Asset Update Delegate Permissions
+
 | Action | Allowed? |
 |--------|----------|
 | Update name/URI | ✅ |
@@ -271,6 +436,17 @@ Additional delegates cannot change the root update authority or modify the addit
 | Change root update authority | ❌ |
 | Modify additional delegates | ❌ (except self-removal) |
 | Change plugin authority | ❌ |
+
+### Collection Update Delegate Permissions
+
+| Action | Allowed? |
+|--------|----------|
+| Remove any Asset from the Collection | ✅ |
+| Add an Asset (you have authority over) to the Collection | ✅ |
+| Update Collection metadata | ✅ |
+| Update Collection plugins | ✅ |
+| Change the Collection's root update authority | ❌ |
+| Modify the Collection's additional delegates | ❌ (except self-removal) |
 ## FAQ
 ### What can additional delegates do?
 Almost everything the update authority can do: update metadata, add/remove plugins, etc. They cannot change the root update authority, modify the additional delegates list, or change the Update Delegate plugin authority.
@@ -282,6 +458,10 @@ Additional delegates can remove themselves from the list by updating the plugin 
 There's no hard limit, but more delegates increase account size and rent. Keep the list reasonable.
 ### Does Update Delegate work on Collections?
 Yes. Adding Update Delegate to a Collection allows delegates to update collection metadata and collection-level plugins.
+### Can a Collection Update Delegate add or remove Assets from a Collection?
+Yes. A delegate listed in the Collection's `UpdateDelegate` plugin can remove any Asset from the Collection, and can add Assets they have authority over — either as the Asset's update authority (e.g. the delegate created the Asset) or as a delegate listed in the Asset's own `UpdateDelegate` plugin. See [Managing Collection Membership as an Update Delegate](#managing-collection-membership-as-an-update-delegate).
+### Does the Collection UpdateDelegate need authority over individual Assets to remove them?
+No. Collection-level delegate authority is sufficient to remove any Asset from the Collection. Asset-level authority is only required when adding an Asset (since the Asset must also accept the change).
 ## Related Plugins
 - [Attributes](/smart-contracts/core/plugins/attribute) - Store on-chain data that delegates can update
 - [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - Make metadata unchangeable (overrides delegates)
