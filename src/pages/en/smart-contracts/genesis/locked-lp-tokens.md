@@ -31,7 +31,7 @@ faqs:
   - q: How can I verify that LP tokens are locked onchain?
     a: Fetch the RaydiumCpmmBucketV2 account using the Genesis SDK and check that extensions.lpLockSchedule has both startCondition.__kind and cliffCondition.__kind set to Never. The lpTokenBalance field shows the exact number of LP tokens held.
   - q: What is the difference between burning LP tokens and program-locking them?
-    a: Burning sends tokens to an inaccessible address and removes them from circulation. Program-locking transfers them to a PDA with vesting set to never — the tokens still exist onchain and can be verified, but no wallet can withdraw them. The end result is the same — the liquidity is locked.
+    a: Burning destroys tokens via an SPL token burn instruction, permanently removing them from circulation. Program-locking transfers them to a PDA with vesting set to never — the tokens still exist onchain and can be verified, but no wallet can withdraw them. Both approaches make the liquidity permanent.
 ---
 
 LP tokens created during [bonding curve graduation](/smart-contracts/genesis/bonding-curve#lifecycle) are program-locked in a Genesis-owned bucket. No wallet can withdraw them. {% .lead %}
@@ -44,8 +44,6 @@ When a Genesis bonding curve sells out and graduates into a [Raydium CPMM](/smar
 - **Program-locked** — the `lpLockSchedule.startCondition` and `cliffCondition` are both `Never`, so no instruction or authority can release them
 - **Verifiable onchain** — fetch the `RaydiumCpmmBucketV2` account to confirm the lock schedule and token balance
 - **Happens automatically** — locking occurs as part of the graduation process with no manual step
-
-*Maintained by Metaplex · Last verified April 2026 · [Genesis](https://github.com/metaplex-foundation/mpl-genesis)*
 
 ## How LP Token Locking Works
 
@@ -186,7 +184,7 @@ The `duration`, `period`, and `cliffAmountBps` fields are present in the `ClaimS
 
 ### Are LP tokens burned or locked during graduation?
 
-LP tokens are program-locked, not burned. They are transferred to an [associated token account](/core/accounts#associated-token-accounts) owned by a Genesis bucket signer PDA. The bucket's `lpLockSchedule` has both its `startCondition` and `cliffCondition` set to `Never`, meaning no wallet can claim them.
+LP tokens are program-locked, not burned. They are transferred to an [associated token account](/solana/understanding-solana-accounts#associated-token-accounts-atas) owned by a Genesis bucket signer PDA. The bucket's `lpLockSchedule` has both its `startCondition` and `cliffCondition` set to `Never`, meaning no wallet can claim them.
 
 ### Can anyone withdraw the locked LP tokens?
 
@@ -198,7 +196,7 @@ Fetch the `RaydiumCpmmBucketV2` account using the Genesis SDK and check that `ex
 
 ### What is the difference between burning LP tokens and program-locking them?
 
-Burning sends tokens to an inaccessible address and removes them from circulation. Program-locking transfers them to a PDA with vesting set to `Never` — the tokens still exist onchain and can be verified, but no wallet can withdraw them. The end result is the same: the liquidity is locked.
+Burning destroys tokens via an SPL token burn instruction, permanently removing them from circulation. Program-locking transfers them to a PDA with vesting set to `Never` — the tokens still exist onchain and can be verified, but no wallet can withdraw them. Both approaches make the liquidity permanent.
 
 ## Glossary
 
