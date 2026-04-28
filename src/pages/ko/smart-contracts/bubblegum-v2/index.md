@@ -63,6 +63,22 @@ Please note that certain Bubblegum V2 instructions will require protocol fees. P
 
 {% /quick-links %}
 
+## 에코시스템 호환성
+
+{% callout type="warning" title="도입 진행 중" %}
+Bubblegum V2는 새로운 표준이며 에코시스템 도입이 진행 중입니다. Bubblegum V1 cNFT를 지원하는 지갑과 마켓플레이스는 V2를 아직 완전히 지원하지 않을 수 있습니다. 지갑 표시 또는 마켓플레이스 거래에 의존하는 사용자 기능을 출시하기 전에 대상 플랫폼과의 호환성을 확인하세요.
+
+현재 광범위한 지갑 및 마켓플레이스 지원이 필요하다면 [MPL-Core](/smart-contracts/core) 사용을 고려하세요 — Core 에셋은 Solana 에코시스템 전반에 걸쳐 광범위하게 지원됩니다.
+{% /callout %}
+
+| 플랫폼 | 유형 | 읽기 / 표시 | 전송 / 거래 |
+|--------|------|------------|------------|
+| Solflare | 지갑 | ✅ 지원됨 | ❌ 미지원 |
+| Phantom | 지갑 | ✅ 지원됨 | ❌ 미지원 |
+| Backpack | 지갑 | ✅ 지원됨 | ❌ 미지원 |
+| Magic Eden | 마켓플레이스 | ❌ 미지원 | ❌ 미지원 |
+| Tensor | 마켓플레이스 | ❌ 미지원 | ❌ 미지원 |
+
 ## Bubblegum V2의 새로운 기능
 
 Bubblegum V2는 원본 Bubblegum 프로그램의 기반 위에 구축되면서 여러 강력한 새 기능을 도입합니다:

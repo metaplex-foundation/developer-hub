@@ -61,6 +61,22 @@ Bubblegum V2是Metaplex协议程序的最新迭代，用于在Solana上创建和
 
 {% /quick-links %}
 
+## 生态系统兼容性
+
+{% callout type="warning" title="正在推广中" %}
+Bubblegum V2 是一个新标准，生态系统的采用仍在进行中。支持 Bubblegum V1 cNFT 的钱包和市场可能尚未完全支持 V2。在推出依赖钱包展示或市场交易的用户功能之前，请验证与目标平台的兼容性。
+
+如果您现在需要广泛的钱包和市场支持，请考虑改用 [MPL-Core](/smart-contracts/core) — Core 资产在整个 Solana 生态系统中得到广泛支持。
+{% /callout %}
+
+| 平台 | 类型 | 读取 / 展示 | 转账 / 交易 |
+|------|------|------------|------------|
+| Solflare | 钱包 | ✅ 支持 | ❌ 暂不支持 |
+| Phantom | 钱包 | ✅ 支持 | ❌ 暂不支持 |
+| Backpack | 钱包 | ✅ 支持 | ❌ 暂不支持 |
+| Magic Eden | 市场 | ❌ 暂不支持 | ❌ 暂不支持 |
+| Tensor | 市场 | ❌ 暂不支持 | ❌ 暂不支持 |
+
 ## Bubblegum V2的新功能
 
 Bubblegum V2在原始Bubblegum程序的基础上构建，同时引入了几个强大的新功能：
