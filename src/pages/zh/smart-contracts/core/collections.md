@@ -56,6 +56,22 @@ Collection 账户存储和可访问的数据如下：
 Core Collection 仅对 Core Asset 进行分组。Token Metadata NFT 请使用 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)，压缩 NFT 请使用 [Bubblegum](/smart-contracts/bubblegum)。
 {% /callout %}
 
+## 管理合集成员资格
+
+Asset 创建后可以使用 `update` 指令将其添加到 Collection、在 Collection 之间移动或从 Collection 中移除。这些操作会更改 Asset 的 [update authority](/smart-contracts/core/update)。添加后设置为 Collection，移除后恢复为钱包地址。
+
+| 操作 | 描述 | 指南 |
+|-----------|-------------|-------|
+| 将 Asset 添加到 Collection | 将独立 Asset 分配到此 Collection | [SDK](/smart-contracts/core/update#add-an-asset-to-a-collection) · [CLI](/dev-tools/cli/core/update-asset#add-an-asset-to-a-collection) |
+| 将 Asset 移动到其他 Collection | 将 Asset 从一个 Collection 转移到另一个 Collection | [SDK](/smart-contracts/core/update#change-the-collection-of-a-core-asset) · [CLI](/dev-tools/cli/core/update-asset#move-an-asset-to-a-different-collection) |
+| 从 Collection 中移除 Asset | 分离 Asset 使其再次成为独立 Asset | [SDK](/smart-contracts/core/update#remove-an-asset-from-a-collection) · [CLI](/dev-tools/cli/core/update-asset#remove-an-asset-from-a-collection) |
+
+{% callout type="note" %}
+更改成员资格需要具有 Collection 的 update authority（如果 Asset 是独立的，还需要 Asset 的权限）。在 Collection 之间移动需要对源 Collection 和目标 Collection 都拥有权限。
+
+**Collection** 上注册的 [Update Delegate](/smart-contracts/core/plugins/update-delegate) 也可以执行这些操作，无需根 update authority 的签名。可以从 Collection 中移除任何 Asset，以及添加其有权限的 Asset。
+{% /callout %}
+
 ## Notes
 
 - Asset 可以在没有 Collection 的情况下独立存在 — Collection 不是必需的

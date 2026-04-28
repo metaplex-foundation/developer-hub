@@ -274,67 +274,7 @@ It is the **Collection's** `UpdateDelegate` plugin that controls membership, not
 
 The signer must be listed in the Collection's `UpdateDelegate` `additionalDelegates` array, and must also hold authority over the Asset — either as the Asset's update authority (e.g. the program created the Asset) or as a delegate listed in the Asset's `UpdateDelegate` plugin.
 
-{% dialect-switcher title="Add Asset to Collection as a Collection Update Delegate" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import { publicKey } from '@metaplex-foundation/umi'
-import {
-  update,
-  fetchAsset,
-  updateAuthority,
-} from '@metaplex-foundation/mpl-core'
-
-const assetId = publicKey('11111111111111111111111111111111')
-const collectionId = publicKey('22222222222222222222222222222222')
-
-const asset = await fetchAsset(umi, assetId)
-
-// umi.identity must be in the Collection's UpdateDelegate additionalDelegates
-// AND hold the Asset's update authority (or be in the Asset's UpdateDelegate additionalDelegates)
-await update(umi, {
-  asset,
-  newCollection: collectionId,
-  newUpdateAuthority: updateAuthority('Collection', [collectionId]),
-}).sendAndConfirm(umi)
-```
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
-```rust
-use mpl_core::{instructions::UpdateV2Builder, types::UpdateAuthority};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-use std::str::FromStr;
-
-pub async fn add_to_collection_as_collection_delegate() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-    // Signer must be in the Collection's UpdateDelegate additionalDelegates
-    // AND hold the Asset's update authority (or be in its UpdateDelegate additionalDelegates)
-    let delegate = Keypair::new();
-    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-
-    let update_ix = UpdateV2Builder::new()
-        .asset(asset)
-        .new_collection(Some(collection))
-        .payer(delegate.pubkey())
-        .authority(Some(delegate.pubkey()))
-        .new_update_authority(UpdateAuthority::Collection(collection))
-        .instruction();
-
-    let signers = vec![&delegate];
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-    let tx = Transaction::new_signed_with_payer(
-        &[update_ix],
-        Some(&delegate.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-    let res = rpc_client.send_and_confirm_transaction(&tx).await.unwrap();
-    println!("Signature: {:?}", res)
-}
-```
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="core/add-to-collection-as-delegate" frameworks="umi,shank" /%}
 
 ### Removing an Asset from a Collection as a Collection Update Delegate
 
@@ -342,75 +282,7 @@ The signer only needs to be listed in the Collection's `UpdateDelegate` `additio
 
 Fetch the asset and its current collection, then call `update`. The `authority` parameter identifies the Collection delegate explicitly.
 
-{% dialect-switcher title="Remove Asset from Collection as a Collection Update Delegate" %}
-{% dialect title="JavaScript" id="js" %}
-```ts
-import { publicKey } from '@metaplex-foundation/umi'
-import {
-  update,
-  fetchAsset,
-  fetchCollection,
-  collectionAddress,
-  updateAuthority,
-} from '@metaplex-foundation/mpl-core'
-
-const assetId = publicKey('11111111111111111111111111111111')
-
-const asset = await fetchAsset(umi, assetId)
-
-const currentCollectionId = collectionAddress(asset)
-if (!currentCollectionId) {
-  throw new Error('Asset does not belong to a collection')
-}
-const collection = await fetchCollection(umi, currentCollectionId)
-
-// collectionDelegate only needs to be in the Collection's UpdateDelegate additionalDelegates
-const collectionDelegate = umi.identity // replace with your delegate signer if different
-await update(umi, {
-  asset,
-  collection,
-  newUpdateAuthority: updateAuthority('Address', [umi.identity.publicKey]),
-  authority: collectionDelegate,
-}).sendAndConfirm(umi)
-```
-{% /dialect %}
-{% dialect title="Rust" id="rust" %}
-```rust
-use mpl_core::{instructions::UpdateV2Builder, types::UpdateAuthority};
-use solana_client::nonblocking::rpc_client;
-use solana_sdk::{pubkey::Pubkey, signature::Keypair, signer::Signer, transaction::Transaction};
-use std::str::FromStr;
-
-pub async fn remove_from_collection_as_collection_delegate() {
-    let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
-    // Signer only needs to be in the Collection's UpdateDelegate additionalDelegates
-    let delegate = Keypair::new();
-    let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-    let new_authority = Pubkey::from_str("33333333333333333333333333333333").unwrap();
-
-    let update_ix = UpdateV2Builder::new()
-        .asset(asset)
-        .collection(Some(collection))
-        .payer(delegate.pubkey())
-        .authority(Some(delegate.pubkey()))
-        .new_update_authority(UpdateAuthority::Address(new_authority))
-        .instruction();
-
-    let signers = vec![&delegate];
-    let last_blockhash = rpc_client.get_latest_blockhash().await.unwrap();
-    let tx = Transaction::new_signed_with_payer(
-        &[update_ix],
-        Some(&delegate.pubkey()),
-        &signers,
-        last_blockhash,
-    );
-    let res = rpc_client.send_and_confirm_transaction(&tx).await.unwrap();
-    println!("Signature: {:?}", res)
-}
-```
-{% /dialect %}
-{% /dialect-switcher %}
+{% code-tabs-imported from="core/remove-from-collection-as-delegate" frameworks="umi,shank" /%}
 
 ## Common Errors
 ### `Authority mismatch`

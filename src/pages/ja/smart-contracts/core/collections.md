@@ -56,6 +56,22 @@ Collectionアカウントに保存されるデータは次のとおりです：
 Core CollectionはCore Assetのみをグループ化します。Token Metadata NFTには[mpl-token-metadata](https://developers.metaplex.com/token-metadata)を、圧縮NFTには[Bubblegum](/smart-contracts/bubblegum)を使用してください。
 {% /callout %}
 
+## コレクションメンバーシップの管理
+
+Assetは作成後に`update`命令を使って、Collectionへの追加・移動・削除ができます。これらの操作はAssetの[update authority](/smart-contracts/core/update)を変更します。追加するとCollectionに設定され、削除するとウォレットアドレスに戻ります。
+
+| 操作 | 説明 | ガイド |
+|-----------|-------------|-------|
+| AssetをCollectionに追加 | スタンドアローンのAssetをCollectionに割り当てる | [SDK](/smart-contracts/core/update#add-an-asset-to-a-collection) · [CLI](/dev-tools/cli/core/update-asset#add-an-asset-to-a-collection) |
+| Assetを別のCollectionに移動 | AssetをあるCollectionから別のCollectionに移す | [SDK](/smart-contracts/core/update#change-the-collection-of-a-core-asset) · [CLI](/dev-tools/cli/core/update-asset#move-an-asset-to-a-different-collection) |
+| CollectionからAssetを削除 | Assetを切り離してスタンドアローンに戻す | [SDK](/smart-contracts/core/update#remove-an-asset-from-a-collection) · [CLI](/dev-tools/cli/core/update-asset#remove-an-asset-from-a-collection) |
+
+{% callout type="note" %}
+メンバーシップを変更するにはCollectionのupdate authority（スタンドアローンの場合はAssetも）である必要があります。Collection間の移動には移動元と移動先両方のCollectionの権限が必要です。
+
+**Collection**に登録された[Update Delegate](/smart-contracts/core/plugins/update-delegate)も、ルートupdate authorityの署名なしにこれらの操作を実行できます。CollectionからのAsset削除、および権限を持つAssetの追加が可能です。
+{% /callout %}
+
 ## Notes
 
 - AssetはCollectionなしで単独で存在できます — Collectionは必須ではありません
