@@ -17,15 +17,15 @@ export const agents = {
       ...documentationSection('agents'),
       isFallbackSection: false,
       isPageFromSection: ({ pathname }) => {
-        return pathname.startsWith('/agents/') && pathname !== '/agents'
+        return pathname.startsWith('/agents/')
       },
       navigation: [
         {
           title: 'Introduction',
           links: [
             {
-              title: 'Overview',
-              href: '/agents',
+              title: 'Agent Onboarding',
+              href: '/agents/agent-onboarding',
             },
             {
               title: 'What Is an Agent?',
@@ -89,7 +89,11 @@ export const agents = {
       },
     },
     linkKeys: {
-      'Overview': 'links.overview',
+      'Agent Onboarding': {
+        ja: 'エージェントオンボーディング',
+        ko: '에이전트 온보딩',
+        zh: 'Agent 入门指南',
+      },
       'What Is an Agent?': {
         ja: 'エージェントとは？',
         ko: '에이전트란?',

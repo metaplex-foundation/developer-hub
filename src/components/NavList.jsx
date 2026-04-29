@@ -104,6 +104,18 @@ export const anchorTokenMenuCategory = [anchorCreateTokenMenuItem]
 
 export const agentMenuCategory = [
   {
+    name: 'Agent Onboarding',
+    headline: 'Onboarding guide for AI agents integrating with Metaplex programs.',
+    description: 'Onboarding guide for AI agents integrating with Metaplex programs.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/agent-onboarding',
+    localizedNavigation: {
+      ja: { name: 'エージェントオンボーディング', headline: 'MetaplexプログラムとAIエージェントの統合ガイド。' },
+      ko: { name: '에이전트 온보딩', headline: 'Metaplex 프로그램과 AI 에이전트 통합 가이드。' },
+      zh: { name: 'Agent 入门指南', headline: 'AI Agent 集成 Metaplex 程序的入门指南。' },
+    },
+  },
+  {
     name: 'Skill',
     headline: 'Metaplex knowledge base for AI agents.',
     description: 'Metaplex knowledge base for AI agents.',
