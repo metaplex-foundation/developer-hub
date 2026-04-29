@@ -129,6 +129,10 @@ export function getLocalizedHref(path, locale) {
     return normalizedPath
   }
 
-  // For other locales, prefix with /{locale}
+  // For other locales, prefix with /{locale} — skip if already prefixed
+  if (normalizedPath.startsWith(`/${locale}/`) || normalizedPath === `/${locale}`) {
+    return normalizedPath
+  }
+
   return `/${locale}${normalizedPath}`
 }
