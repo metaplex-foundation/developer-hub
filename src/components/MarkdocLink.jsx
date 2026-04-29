@@ -1,10 +1,14 @@
+import { getLocalizedHref } from '@/config/languages'
+import { useLocale } from '@/contexts/LocaleContext'
 import Link from 'next/link'
 
 export function MarkdocLink({ href, children, ...props }) {
+  const { locale } = useLocale()
+
   // Use Next.js Link for internal paths so basePath is auto-prepended
   if (href && (href.startsWith('/') || href.startsWith('#'))) {
     return (
-      <Link href={href} {...props}>
+      <Link href={getLocalizedHref(href, locale)} {...props}>
         {children}
       </Link>
     )
