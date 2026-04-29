@@ -56,6 +56,22 @@ Collection 계정에 저장되는 데이터는 다음과 같습니다:
 Core Collection은 Core Asset만 그룹화합니다. Token Metadata NFT에는 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)를, 압축 NFT에는 [Bubblegum](/smart-contracts/bubblegum)을 사용하세요.
 {% /callout %}
 
+## 컬렉션 멤버십 관리
+
+Asset은 생성 후 `update` 명령어를 사용해 Collection에 추가, 이동, 또는 제거할 수 있습니다. 이러한 작업은 Asset의 [update authority](/smart-contracts/core/update)를 변경합니다. 추가하면 Collection으로 설정되고, 제거하면 지갑 주소로 돌아옵니다.
+
+| 작업 | 설명 | 가이드 |
+|-----------|-------------|-------|
+| Collection에 Asset 추가 | 독립 Asset을 Collection에 할당 | [SDK](/smart-contracts/core/update#add-an-asset-to-a-collection) · [CLI](/dev-tools/cli/core/update-asset#add-an-asset-to-a-collection) |
+| Asset을 다른 Collection으로 이동 | Asset을 한 Collection에서 다른 Collection으로 이전 | [SDK](/smart-contracts/core/update#change-the-collection-of-a-core-asset) · [CLI](/dev-tools/cli/core/update-asset#move-an-asset-to-a-different-collection) |
+| Collection에서 Asset 제거 | Asset을 분리하여 독립 상태로 복원 | [SDK](/smart-contracts/core/update#remove-an-asset-from-a-collection) · [CLI](/dev-tools/cli/core/update-asset#remove-an-asset-from-a-collection) |
+
+{% callout type="note" %}
+멤버십을 변경하려면 Collection의 update authority(독립 상태인 경우 Asset도 포함)여야 합니다. Collection 간 이동에는 소스와 대상 Collection 모두에 대한 권한이 필요합니다.
+
+**Collection**에 등록된 [Update Delegate](/smart-contracts/core/plugins/update-delegate)도 루트 update authority의 서명 없이 이러한 작업을 수행할 수 있습니다. Collection에서 Asset 제거 및 권한을 가진 Asset 추가가 가능합니다.
+{% /callout %}
+
 ## Notes
 
 - Asset은 Collection 없이 독립적으로 존재할 수 있습니다 — Collection은 필수가 아닙니다

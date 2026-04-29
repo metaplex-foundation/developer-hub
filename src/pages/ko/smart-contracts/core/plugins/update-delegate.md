@@ -1,24 +1,28 @@
 ---
 title: Update Delegate 플러그인
 metaTitle: Update Delegate 플러그인 | Metaplex Core
-description: Core NFT Asset 및 Collection에 대한 업데이트 권한을 제3자에게 위임합니다. 소유권을 이전하지 않고 다른 사람이 메타데이터를 수정할 수 있게 합니다.
-updated: '01-31-2026'
+description: Core NFT Asset 및 Collection에 대한 업데이트 권한을 제3자에게 위임합니다. 소유권을 이전하지 않고 메타데이터 수정 및 컬렉션 멤버십 관리가 가능합니다.
+updated: '04-28-2026'
 keywords:
   - update delegate
   - delegate update authority
   - metadata permissions
   - third-party updates
+  - add to collection delegate
+  - remove from collection delegate
 about:
   - Update delegation
   - Metadata permissions
   - Authority management
+  - Collection membership management
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Rust
 faqs:
   - q: 추가 위임자는 무엇을 할 수 있나요?
-    a: 업데이트 권한이 할 수 있는 거의 모든 것 - 메타데이터 업데이트, 플러그인 추가/제거 등. 루트 업데이트 권한 변경, 추가 위임자 목록 수정, Update Delegate 플러그인 권한 변경은 할 수 없습니다.
+    a: 업데이트 권한이 할 수 있는 거의 모든 것 - 메타데이터 업데이트, 플러그인 추가/제거, 컬렉션 멤버십 관리 등. 루트 업데이트 권한 변경, 추가 위임자 목록 수정, Update Delegate 플러그인 권한 변경은 할 수 없습니다.
   - q: 추가 위임자가 더 많은 위임자를 추가할 수 있나요?
     a: 아니요. 루트 업데이트 권한(또는 플러그인 권한)만 추가 위임자를 추가하거나 제거할 수 있습니다.
   - q: 추가 위임자에서 자신을 제거하려면 어떻게 하나요?
@@ -27,24 +31,30 @@ faqs:
     a: 하드 제한은 없지만 위임자가 많을수록 계정 크기와 렌트가 증가합니다. 목록을 적절하게 유지하세요.
   - q: Update Delegate가 Collection에서 작동하나요?
     a: 네. Collection에 Update Delegate를 추가하면 위임자가 Collection 메타데이터와 Collection 수준 플러그인을 업데이트할 수 있습니다.
+  - q: Collection Update Delegate가 Collection에 Asset을 추가/제거할 수 있나요?
+    a: 네. Collection의 UpdateDelegate 플러그인에 등록된 위임자는 Collection에서 Asset을 제거할 수 있으며, 권한을 가진 Asset(업데이트 권한 보유 또는 Asset의 UpdateDelegate 플러그인 경유)을 Collection에 추가할 수 있습니다.
+  - q: Collection에서 Asset을 제거하기 위해 Collection Update Delegate가 Asset 권한이 필요한가요?
+    a: 아니요. Collection 수준의 위임자 권한만으로 Collection에서 Asset을 제거할 수 있습니다. Asset 수준 권한은 Asset을 추가할 때만 필요합니다.
 ---
-**Update Delegate 플러그인**을 사용하면 추가 주소에 업데이트 권한을 부여할 수 있습니다. 제3자가 기본 업데이트 권한이 아니면서 Asset 메타데이터를 수정해야 할 때 유용합니다. {% .lead %}
+**Update Delegate 플러그인**을 사용하면 추가 주소에 업데이트 권한을 부여할 수 있습니다. 제3자가 기본 업데이트 권한이 아니면서 Asset 메타데이터를 수정하거나 컬렉션 멤버십을 관리해야 할 때 유용합니다. {% .lead %}
 {% callout title="학습 내용" %}
 - Asset 및 Collection에 Update Delegate 플러그인 추가
 - 추가 주소에 업데이트 권한 부여
 - 추가 위임자가 할 수 있는 것과 없는 것 이해
 - 위임자 목록 업데이트 및 관리
+- 위임자로서 Collection에 Asset 추가 및 제거
 {% /callout %}
 ## 요약
 **Update Delegate**는 업데이트 권한이 다른 주소에 업데이트 권한을 부여할 수 있게 하는 권한 관리 플러그인입니다. 추가 위임자는 대부분의 Asset 데이터를 수정할 수 있지만 핵심 권한 설정은 변경할 수 없습니다.
 - 제3자에게 업데이트 권한 부여
 - 여러 추가 위임자 추가
 - Asset 및 Collection 모두에서 작동
+- Collection 권한을 가진 위임자는 컬렉션 멤버십을 관리할 수 있음
 - 위임자는 루트 업데이트 권한을 수정할 수 없음
 ## 범위 외
 영구 업데이트 위임, 소유자 수준 권한 (이것은 권한 관리임), Token Metadata 업데이트 권한 (다른 시스템)은 범위 외입니다.
 ## 빠른 시작
-**바로가기:** [Asset에 추가](#asset에-update-delegate-플러그인-추가) · [위임자 업데이트](#update-delegate-플러그인-업데이트) · [Collection](#collection에서-update-delegate-플러그인-업데이트)
+**바로가기:** [Asset에 추가](#asset에-update-delegate-플러그인-추가) · [위임자 업데이트](#update-delegate-플러그인-업데이트) · [Collection](#collection에서-update-delegate-플러그인-업데이트) · [컬렉션 멤버십](#update-delegate를-사용한-collection-멤버십-관리)
 1. 위임자 주소로 Update Delegate 플러그인 추가
 2. 선택적으로 추가 위임자 추가
 3. 이제 위임자가 Asset 메타데이터를 업데이트할 수 있음
@@ -249,6 +259,29 @@ pub async fn update_collection_update_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
+## Update Delegate를 사용한 Collection 멤버십 관리
+
+**Collection**의 `UpdateDelegate` 플러그인은 루트 업데이트 권한의 서명 없이 Collection에 Asset을 추가하고 제거할 수 있는 권한을 부여합니다. 게임 서버가 Asset을 길드에 할당하거나 런치패드가 Collection에 직접 민팅하는 프로그램과 서비스의 주요 패턴입니다.
+
+- **제거** — Collection에서 Asset을 제거하려면 Collection `UpdateDelegate`만 있으면 됩니다.
+- **추가** — Asset을 Collection에 추가하려면 Collection `UpdateDelegate` 외에도 Asset에 대한 권한(업데이트 권한으로서, 또는 Asset의 `UpdateDelegate` 플러그인 경유)이 필요합니다.
+
+{% callout type="note" %}
+멤버십을 제어하는 것은 Asset의 UpdateDelegate가 아닌 **Collection**의 `UpdateDelegate` 플러그인입니다. Asset의 위임자만으로는 Collection에 추가하거나 제거할 수 없으며 Collection 측 권한이 필요합니다.
+{% /callout %}
+
+### Collection Update Delegate로서 Collection에 Asset 추가
+
+서명자는 Collection의 `UpdateDelegate` `additionalDelegates` 배열에 등록되어 있어야 하며, Asset에 대한 권한(Asset의 업데이트 권한 또는 Asset의 `UpdateDelegate` 플러그인 위임자)도 가지고 있어야 합니다.
+
+{% code-tabs-imported from="core/add-to-collection-as-delegate" frameworks="umi,shank" /%}
+
+### Collection Update Delegate로서 Collection에서 Asset 제거
+
+서명자는 Collection의 `UpdateDelegate` `additionalDelegates` 배열에 등록되어 있기만 하면 됩니다. Asset을 제거하기 위해 Asset 수준 권한은 필요하지 않습니다.
+
+{% code-tabs-imported from="core/remove-from-collection-as-delegate" frameworks="umi,shank" /%}
+
 ## 일반적인 오류
 ### `Authority mismatch`
 업데이트 권한(또는 기존 플러그인 권한)만 Update Delegate 플러그인을 추가/수정할 수 있습니다.
@@ -257,11 +290,13 @@ pub async fn update_collection_update_delegate_plugin() {
 ## 참고 사항
 - 권한 관리: 업데이트 권한이 소유자 서명 없이 추가 가능
 - 추가 위임자는 거의 모든 업데이트 권한을 가짐
+- Collection `UpdateDelegate`는 Collection에서 Asset을 제거하고 권한을 가진 Asset을 추가할 수 있음
 - 위임자는 루트 업데이트 권한을 변경할 수 없음
 - 위임자는 추가 위임자 목록을 수정할 수 없음 (자신을 제거하는 것은 예외)
 - Asset 및 Collection 모두에서 작동
 ## 빠른 참조
-### 추가 위임자 권한
+### Asset Update Delegate 권한
+
 | 작업 | 허용됨? |
 |--------|----------|
 | 이름/URI 업데이트 | ✅ |
@@ -271,6 +306,18 @@ pub async fn update_collection_update_delegate_plugin() {
 | 루트 업데이트 권한 변경 | ❌ |
 | 추가 위임자 수정 | ❌ (자기 제거 제외) |
 | 플러그인 권한 변경 | ❌ |
+
+### Collection Update Delegate 권한
+
+| 작업 | 허용됨? |
+|--------|----------|
+| Collection에서 Asset 제거 | ✅ |
+| 권한을 가진 Asset을 Collection에 추가 | ✅ |
+| Collection 메타데이터 업데이트 | ✅ |
+| Collection 플러그인 업데이트 | ✅ |
+| Collection 루트 업데이트 권한 변경 | ❌ |
+| Collection 추가 위임자 수정 | ❌ (자기 제거 제외) |
+
 ## FAQ
 ### 추가 위임자는 무엇을 할 수 있나요?
 업데이트 권한이 할 수 있는 거의 모든 것: 메타데이터 업데이트, 플러그인 추가/제거 등. 루트 업데이트 권한 변경, 추가 위임자 목록 수정, Update Delegate 플러그인 권한 변경은 할 수 없습니다.
@@ -282,6 +329,10 @@ pub async fn update_collection_update_delegate_plugin() {
 하드 제한은 없지만 위임자가 많을수록 계정 크기와 렌트가 증가합니다. 목록을 적절하게 유지하세요.
 ### Update Delegate가 Collection에서 작동하나요?
 네. Collection에 Update Delegate를 추가하면 위임자가 Collection 메타데이터와 Collection 수준 플러그인을 업데이트할 수 있습니다.
+### Collection Update Delegate가 Collection에 Asset을 추가/제거할 수 있나요?
+네. Collection의 UpdateDelegate 플러그인에 등록된 위임자는 Collection에서 Asset을 제거할 수 있으며, 권한을 가진 Asset을 Collection에 추가할 수 있습니다. [Update Delegate를 사용한 Collection 멤버십 관리](#update-delegate를-사용한-collection-멤버십-관리)를 참조하세요.
+### Collection에서 Asset을 제거하기 위해 Collection Update Delegate가 Asset 권한이 필요한가요?
+아니요. Collection 수준의 위임자 권한만으로 Collection에서 Asset을 제거할 수 있습니다. Asset 수준 권한은 Asset을 추가할 때만 필요합니다.
 ## 관련 플러그인
 - [Attributes](/smart-contracts/core/plugins/attribute) - 위임자가 업데이트할 수 있는 온체인 데이터 저장
 - [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - 메타데이터를 변경 불가능하게 만듦 (위임자 재정의)

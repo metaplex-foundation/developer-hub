@@ -1,24 +1,28 @@
 ---
 title: Update Delegate 插件
 metaTitle: Update Delegate 插件 | Metaplex Core
-description: 将 Core NFT Asset 和 Collection 的更新权限委托给第三方。允许其他人在不转移所有权的情况下修改元数据。
-updated: '01-31-2026'
+description: 将 Core NFT Asset 和 Collection 的更新权限委托给第三方。允许其他人在不转移所有权的情况下修改元数据并管理合集成员资格。
+updated: '04-28-2026'
 keywords:
   - update delegate
   - delegate update authority
   - metadata permissions
   - third-party updates
+  - add to collection delegate
+  - remove from collection delegate
 about:
   - Update delegation
   - Metadata permissions
   - Authority management
+  - Collection membership management
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
   - TypeScript
+  - Rust
 faqs:
   - q: 附加委托方可以做什么？
-    a: 几乎所有更新权限可以做的事情 - 更新元数据、添加/删除插件等。他们不能更改根更新权限、修改附加委托方列表或更改 Update Delegate 插件权限。
+    a: 几乎所有更新权限可以做的事情 - 更新元数据、添加/删除插件、管理合集成员资格等。他们不能更改根更新权限、修改附加委托方列表或更改 Update Delegate 插件权限。
   - q: 附加委托方可以添加更多委托方吗？
     a: 不可以。只有根更新权限（或插件权限）可以添加或删除附加委托方。
   - q: 如何将自己从附加委托方中移除？
@@ -27,24 +31,30 @@ faqs:
     a: 没有硬性限制，但更多委托方会增加账户大小和租金。请保持列表合理。
   - q: Update Delegate 在 Collection 上有效吗？
     a: 是的。向 Collection 添加 Update Delegate 允许委托方更新 Collection 元数据和 Collection 级别的插件。
+  - q: Collection Update Delegate 可以向 Collection 添加或移除 Asset 吗？
+    a: 可以。注册在 Collection 的 UpdateDelegate 插件中的委托方可以从 Collection 中移除任何 Asset，并可以将其有权限的 Asset（作为 Asset 的更新权限，或通过 Asset 的 UpdateDelegate 插件）添加到 Collection 中。
+  - q: 从 Collection 中移除 Asset 时，Collection Update Delegate 需要 Asset 的权限吗？
+    a: 不需要。仅凭 Collection 级别的委托方权限即可从 Collection 中移除 Asset。只有在添加 Asset 时才需要 Asset 级别的权限。
 ---
-**Update Delegate 插件**允许您向附加地址授予更新权限。当第三方需要修改 Asset 元数据而不是主要更新权限时很有用。 {% .lead %}
+**Update Delegate 插件**允许您向附加地址授予更新权限。当第三方需要修改 Asset 元数据或管理合集成员资格而不持有主要更新权限时很有用。 {% .lead %}
 {% callout title="您将学到" %}
 - 向 Asset 和 Collection 添加 Update Delegate 插件
 - 向附加地址授予更新权限
 - 了解附加委托方可以和不可以做什么
 - 更新和管理委托方列表
+- 作为委托方向 Collection 添加和移除 Asset
 {% /callout %}
 ## 摘要
 **Update Delegate** 是一个权限管理插件，允许更新权限向其他地址授予更新权限。附加委托方可以修改大多数 Asset 数据，但不能更改核心权限设置。
 - 向第三方授予更新权限
 - 添加多个附加委托方
 - 适用于 Asset 和 Collection
+- 具有 Collection 权限的委托方可以管理合集成员资格
 - 委托方不能修改根更新权限
 ## 范围外
 永久更新委托、所有者级别权限（这是权限管理的）和 Token Metadata 更新权限（不同系统）不在范围内。
 ## 快速开始
-**跳转到：** [添加到 Asset](#向-asset-添加-update-delegate-插件) · [更新委托方](#更新-update-delegate-插件) · [Collection](#更新-collection-上的-update-delegate-插件)
+**跳转到：** [添加到 Asset](#向-asset-添加-update-delegate-插件) · [更新委托方](#更新-update-delegate-插件) · [Collection](#更新-collection-上的-update-delegate-插件) · [合集成员资格](#使用-update-delegate-管理-collection-成员资格)
 1. 使用委托地址添加 Update Delegate 插件
 2. 可选添加附加委托方
 3. 委托方现在可以更新 Asset 元数据
@@ -249,6 +259,29 @@ pub async fn update_collection_update_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
+## 使用 Update Delegate 管理 Collection 成员资格
+
+**Collection** 的 `UpdateDelegate` 插件授予无需根更新权限签名即可向 Collection 添加和移除 Asset 的权限。这是游戏服务器将 Asset 分配到公会、或发行平台直接向 Collection 铸造等程序和服务的主要模式。
+
+- **移除** — 仅需 Collection `UpdateDelegate` 即可从 Collection 中移除 Asset。
+- **添加** — 向 Collection 添加 Asset 需要 Collection `UpdateDelegate` 以及对 Asset 的权限（作为其更新权限，或通过 Asset 的 `UpdateDelegate` 插件）。
+
+{% callout type="note" %}
+控制成员资格的是 **Collection** 的 `UpdateDelegate` 插件，而非 Asset 的。仅拥有 Asset 上的委托方权限无法添加或移除 Collection 成员，需要 Collection 侧的权限。
+{% /callout %}
+
+### 作为 Collection Update Delegate 向 Collection 添加 Asset
+
+签名者必须在 Collection 的 `UpdateDelegate` `additionalDelegates` 数组中注册，并且还需要对 Asset 的权限（作为 Asset 的更新权限，或作为 Asset `UpdateDelegate` 插件中的委托方）。
+
+{% code-tabs-imported from="core/add-to-collection-as-delegate" frameworks="umi,shank" /%}
+
+### 作为 Collection Update Delegate 从 Collection 中移除 Asset
+
+签名者只需在 Collection 的 `UpdateDelegate` `additionalDelegates` 数组中注册即可。移除 Asset 不需要 Asset 级别的权限。
+
+{% code-tabs-imported from="core/remove-from-collection-as-delegate" frameworks="umi,shank" /%}
+
 ## 常见错误
 ### `Authority mismatch`
 只有更新权限（或现有插件权限）可以添加/修改 Update Delegate 插件。
@@ -257,11 +290,13 @@ pub async fn update_collection_update_delegate_plugin() {
 ## 注意事项
 - 权限管理：更新权限可以在没有所有者签名的情况下添加
 - 附加委托方拥有几乎完整的更新权限
+- Collection `UpdateDelegate` 可以从 Collection 中移除 Asset，并可添加其有权限的 Asset
 - 委托方不能更改根更新权限
 - 委托方不能修改附加委托方列表（除了移除自己）
 - 适用于 Asset 和 Collection
 ## 快速参考
-### 附加委托方权限
+### Asset Update Delegate 权限
+
 | 操作 | 允许？ |
 |--------|----------|
 | 更新名称/URI | ✅ |
@@ -271,6 +306,18 @@ pub async fn update_collection_update_delegate_plugin() {
 | 更改根更新权限 | ❌ |
 | 修改附加委托方 | ❌（除了自我移除） |
 | 更改插件权限 | ❌ |
+
+### Collection Update Delegate 权限
+
+| 操作 | 允许？ |
+|--------|----------|
+| 从 Collection 中移除任何 Asset | ✅ |
+| 将有权限的 Asset 添加到 Collection | ✅ |
+| 更新 Collection 元数据 | ✅ |
+| 更新 Collection 插件 | ✅ |
+| 更改 Collection 的根更新权限 | ❌ |
+| 修改 Collection 的附加委托方 | ❌（除了自我移除） |
+
 ## 常见问题
 ### 附加委托方可以做什么？
 几乎所有更新权限可以做的事情：更新元数据、添加/删除插件等。他们不能更改根更新权限、修改附加委托方列表或更改 Update Delegate 插件权限。
@@ -282,6 +329,10 @@ pub async fn update_collection_update_delegate_plugin() {
 没有硬性限制，但更多委托方会增加账户大小和租金。请保持列表合理。
 ### Update Delegate 在 Collection 上有效吗？
 是的。向 Collection 添加 Update Delegate 允许委托方更新 Collection 元数据和 Collection 级别的插件。
+### Collection Update Delegate 可以向 Collection 添加或移除 Asset 吗？
+可以。注册在 Collection 的 UpdateDelegate 插件中的委托方可以从 Collection 中移除任何 Asset，并可以将其有权限的 Asset 添加到 Collection 中。请参阅[使用 Update Delegate 管理 Collection 成员资格](#使用-update-delegate-管理-collection-成员资格)。
+### 从 Collection 中移除 Asset 时，Collection Update Delegate 需要 Asset 的权限吗？
+不需要。仅凭 Collection 级别的委托方权限即可从 Collection 中移除 Asset。只有在添加 Asset 时才需要 Asset 级别的权限。
 ## 相关插件
 - [Attributes](/smart-contracts/core/plugins/attribute) - 存储委托方可以更新的链上数据
 - [ImmutableMetadata](/smart-contracts/core/plugins/immutableMetadata) - 使元数据不可更改（覆盖委托方）

@@ -68,6 +68,8 @@ Assets can be added to, moved between, or removed from Collections after creatio
 
 {% callout type="note" %}
 You must be the update authority of the Collection (and the Asset, if it's standalone) to change membership. Moving between Collections requires authority on both the source and target Collection.
+
+An [Update Delegate](/smart-contracts/core/plugins/update-delegate) listed on the **Collection** can also perform these operations — removing any Asset from the Collection, and adding Assets it has authority over — without the root update authority's signature.
 {% /callout %}
 
 ## Notes
