@@ -26,7 +26,7 @@ programmingLanguage:
 faqs:
   - q: グラデュエーション時に LP トークンはバーンされますか、それともロックされますか？
     a: LP トークンはバーンされず、プログラムロックされます。Genesis バケット署名者 PDA が所有する関連トークンアカウントに転送されます。バケットの lpLockSchedule は startCondition と cliffCondition の両方が Never に設定されており、どのウォレットも請求できません。
-  - q: ロックされた LP トークンを引き出すことは誰かにできますか？
+  - q: Genesis プログラムからロックされた LP トークンを引き出せるウォレットはありますか？
     a: いいえ。RaydiumCpmmBucketV2 アカウントの lpLockSchedule は startCondition と cliffCondition の両方が Never に設定されています。これらをリリースできる命令や権限は存在しません。
   - q: LP トークンがオンチェーンでロックされていることをどのように検証できますか？
     a: Genesis SDK を使用して RaydiumCpmmBucketV2 アカウントを取得し、extensions.lpLockSchedule の startCondition.__kind と cliffCondition.__kind の両方が Never に設定されていることを確認してください。lpTokenBalance フィールドには保有されている LP トークンの正確な数が表示されます。
@@ -186,7 +186,7 @@ LP トークンロックに関連する `RaydiumCpmmBucketV2` アカウントの
 
 LP トークンはバーンされず、プログラムロックされます。Genesis バケット署名者 PDA が所有する[関連トークンアカウント](/ja/solana/understanding-solana-accounts#associated-token-accounts-atas)に転送されます。バケットの `lpLockSchedule` は `startCondition` と `cliffCondition` の両方が `Never` に設定されており、どのウォレットも請求できません。
 
-### ロックされた LP トークンを引き出すことは誰かにできますか？
+### Genesis プログラムからロックされた LP トークンを引き出せるウォレットはありますか？
 
 いいえ。`RaydiumCpmmBucketV2` アカウントの `lpLockSchedule` は `startCondition` と `cliffCondition` の両方が `Never` に設定されています。これらをリリースできる命令や権限は存在しません。
 

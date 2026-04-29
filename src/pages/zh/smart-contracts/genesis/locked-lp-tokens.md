@@ -26,7 +26,7 @@ programmingLanguage:
 faqs:
   - q: 毕业时 LP 代币是被销毁还是被锁定？
     a: LP 代币是被程序锁定的，而不是被销毁。它们被转移到由 Genesis bucket 签名者 PDA 拥有的关联代币账户。bucket 的 lpLockSchedule 的 startCondition 和 cliffCondition 都设置为 Never，意味着没有钱包可以领取它们。
-  - q: 任何人都可以提取被锁定的 LP 代币吗？
+  - q: 是否有任何钱包可以从 Genesis 程序中提取被锁定的 LP 代币？
     a: 不能。RaydiumCpmmBucketV2 账户上的 lpLockSchedule 的 startCondition 和 cliffCondition 都设置为 Never。没有任何指令或权限可以释放它们。
   - q: 如何在链上验证 LP 代币已被锁定？
     a: 使用 Genesis SDK 获取 RaydiumCpmmBucketV2 账户，并检查 extensions.lpLockSchedule 的 startCondition.__kind 和 cliffCondition.__kind 都设置为 Never。lpTokenBalance 字段显示持有的 LP 代币的确切数量。
@@ -186,7 +186,7 @@ Bucket signer ATA (holds LP tokens): <ATA address>
 
 LP 代币是被程序锁定的，而不是被销毁。它们被转移到由 Genesis bucket 签名者 PDA 拥有的[关联代币账户](/zh/solana/understanding-solana-accounts#associated-token-accounts-atas)。bucket 的 `lpLockSchedule` 的 `startCondition` 和 `cliffCondition` 都设置为 `Never`，意味着没有钱包可以领取它们。
 
-### 任何人都可以提取被锁定的 LP 代币吗？
+### 是否有任何钱包可以从 Genesis 程序中提取被锁定的 LP 代币？
 
 不能。`RaydiumCpmmBucketV2` 账户上的 `lpLockSchedule` 的 `startCondition` 和 `cliffCondition` 都设置为 `Never`。没有任何指令或权限可以释放它们。
 

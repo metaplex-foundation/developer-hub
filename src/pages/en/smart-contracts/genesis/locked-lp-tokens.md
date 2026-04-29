@@ -26,7 +26,7 @@ programmingLanguage:
 faqs:
   - q: Are LP tokens burned or locked during graduation?
     a: LP tokens are program-locked, not burned. They are transferred to an associated token account owned by a Genesis bucket signer PDA. The bucket's lpLockSchedule has both its startCondition and cliffCondition set to Never, meaning no wallet can claim them.
-  - q: Can anyone withdraw the locked LP tokens?
+  - q: Can any wallet withdraw the locked LP tokens from the Genesis program?
     a: No. The lpLockSchedule on the RaydiumCpmmBucketV2 account has its startCondition and cliffCondition set to Never. There is no instruction or authority that can release them.
   - q: How can I verify that LP tokens are locked onchain?
     a: Fetch the RaydiumCpmmBucketV2 account using the Genesis SDK and check that extensions.lpLockSchedule has both startCondition.__kind and cliffCondition.__kind set to Never. The lpTokenBalance field shows the exact number of LP tokens held.
@@ -186,7 +186,7 @@ The `duration`, `period`, and `cliffAmountBps` fields are present in the `ClaimS
 
 LP tokens are program-locked, not burned. They are transferred to an [associated token account](/solana/understanding-solana-accounts#associated-token-accounts-atas) owned by a Genesis bucket signer PDA. The bucket's `lpLockSchedule` has both its `startCondition` and `cliffCondition` set to `Never`, meaning no wallet can claim them.
 
-### Can anyone withdraw the locked LP tokens?
+### Can any wallet withdraw the locked LP tokens from the Genesis program?
 
 No. The `lpLockSchedule` on the `RaydiumCpmmBucketV2` account has both its `startCondition` and `cliffCondition` set to `Never`. There is no instruction or authority that can release them.
 
