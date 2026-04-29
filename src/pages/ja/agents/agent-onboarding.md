@@ -35,9 +35,9 @@ Metaplexエージェントオンボーディングガイドは、Solana上のMet
 
 {% quick-link title="オンボーディングガイドを読む" icon="BookOpen" href="https://www.metaplex.com/agents/ONBOARD.md" description="エージェントオンボーディングの完全なドキュメント — エージェントである場合またはエージェントをデプロイする場合はこちらを開いてください。" /%}
 
-{% quick-link title="エージェントを登録する" icon="InboxArrowDown" href="/agents/register-agent" description="Coreアセットをミントし、MetaplexエージェントレジストリへのステップバイステップガイD。" /%}
+{% quick-link title="エージェントを登録する" icon="InboxArrowDown" href="/ja/agents/register-agent" description="Coreアセットをミントし、MetaplexエージェントレジストリへのステップバイステップガイD。" /%}
 
-{% quick-link title="Metaplex Skill" icon="CodeBracketSquare" href="/agents/skill" description="コーディングエージェントにMetaplexプログラムの最新情報を提供します。" /%}
+{% quick-link title="Metaplex Skill" icon="CodeBracketSquare" href="/ja/agents/skill" description="コーディングエージェントにMetaplexプログラムの最新情報を提供します。" /%}
 
 {% /quick-links %}
 
@@ -47,15 +47,15 @@ Metaplexエージェントオンボーディングガイドは、Solana上のMet
 
 **インストールとRPCセットアップ** — MetaplexCLIをインストールし、RPCエンドポイントを設定します。Devnetにはデフォルトのエンドポイントがあります。mainnetには専用のRPC URLが必要です。
 
-**ウォレットの作成と入金** — メインウォレットを生成し、[Core](/core)アセット登録と継続的なトランザクション手数料をカバーするために少なくとも0.2 SOLを入金します。
+**ウォレットの作成と入金** — メインウォレットを生成し、[Core](/ja/core)アセット登録と継続的なトランザクション手数料をカバーするために少なくとも0.2 SOLを入金します。
 
-**エージェント登録** — EIP-8004エージェント標準に準拠したメタデータを持つ、エージェントのオンチェーンアイデンティティとして機能する[Core](/core)アセットをミントします。これによりエージェントのCoreアセットアドレスが生成されます — すべてのダウンストリーム操作に必要です。
+**エージェント登録** — EIP-8004エージェント標準に準拠したメタデータを持つ、エージェントのオンチェーンアイデンティティとして機能する[Core](/ja/core)アセットをミントします。これによりエージェントのCoreアセットアドレスが生成されます — すべてのダウンストリーム操作に必要です。
 
 **ウォレットの有効化** — エージェントが自律的にトランザクションを送信するために使用する運用ウォレットであるAsset Signer PDAに入金して有効化します。
 
 **委任（オプション）** — エージェントに代わってトランザクションを送信する別のexecutorウォレットを認可します。
 
-**トークン発行（オプション）** — LaunchPool（48時間のデポジットウィンドウ、最小250 SOLまたは25,000 USDCの調達）またはBonding Curve（即時取引、最小なし）を使用して[Genesis](/smart-contracts/genesis)でトークンを作成します。
+**トークン発行（オプション）** — LaunchPool（48時間のデポジットウィンドウ、最小250 SOLまたは25,000 USDCの調達）またはBonding Curve（即時取引、最小なし）を使用して[Genesis](/ja/smart-contracts/genesis)でトークンを作成します。
 
 ## オンボーディングガイドを読むべき対象者
 
@@ -66,6 +66,6 @@ Metaplexエージェントオンボーディングガイドは、Solana上のMet
 ## Notes
 
 - mainnet登録には専用のRPCエンドポイントが必要です — デフォルトのdevnet RPCはmainnetでは利用できません
-- 登録によって生成されたCoreアセットアドレスは[エージェントトークンの作成](/agents/create-agent-token)、[エージェントコマース](/agents/agentic-commerce)などのエージェントワークフローに必要です
+- 登録によって生成されたCoreアセットアドレスは[エージェントトークンの作成](/ja/agents/create-agent-token)、[エージェントコマース](/ja/agents/agentic-commerce)などのエージェントワークフローに必要です
 - LaunchPoolの調達には最低250 SOLまたは25,000 USDCと48時間のデポジットウィンドウが必要です。Bonding Curveの発行には最小値がなく、即時取引が開始されます
 - すべてのコマンドはエージェントPDAを通じてルーティングされます — メインウォレットが署名して手数料を支払いますが、実行はエージェントのオンチェーンアイデンティティに帰属します
