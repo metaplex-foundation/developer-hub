@@ -35,7 +35,7 @@ Metaplexエージェントオンボーディングガイドは、Solana上のMet
 
 {% quick-link title="オンボーディングガイドを読む" icon="BookOpen" href="https://www.metaplex.com/agents/ONBOARD.md" description="エージェントオンボーディングの完全なドキュメント — エージェントである場合またはエージェントをデプロイする場合はこちらを開いてください。" /%}
 
-{% quick-link title="エージェントを登録する" icon="InboxArrowDown" href="/ja/agents/register-agent" description="Coreアセットをミントし、MetaplexエージェントレジストリへのステップバイステップガイD。" /%}
+{% quick-link title="エージェントを登録する" icon="InboxArrowDown" href="/ja/agents/register-agent" description="Coreアセットをミントし、Metaplexエージェントレジストリへのステップバイステップガイド。" /%}
 
 {% quick-link title="Metaplex Skill" icon="CodeBracketSquare" href="/ja/agents/skill" description="コーディングエージェントにMetaplexプログラムの最新情報を提供します。" /%}
 
