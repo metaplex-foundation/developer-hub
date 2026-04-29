@@ -1,5 +1,3 @@
-import { getLocalizedHref } from '@/config/languages'
-import { useLocale } from '@/contexts/LocaleContext'
 import Link from 'next/link'
 
 import { Icon } from '@/components/icons'
@@ -13,10 +11,6 @@ export function QuickLinks({ children }) {
 }
 
 export function QuickLink({ title, description, href, target, icon }) {
-  const { locale } = useLocale()
-  const isExternal = href && href.startsWith('http')
-  const resolvedHref = isExternal ? href : getLocalizedHref(href, locale)
-
   return (
     <div className="group relative border border-border bg-card transition-colors duration-200 hover:border-foreground">
       <div className="relative overflow-hidden p-6">
@@ -25,7 +19,7 @@ export function QuickLink({ title, description, href, target, icon }) {
           className="h-8 w-8 transition-colors duration-200 group-hover:text-primary"
         />
         <h2 className="mt-4 font-display text-base text-card-foreground">
-          <Link href={resolvedHref} target={target}>
+          <Link href={href} target={target}>
             <span className="absolute -inset-px" />
             {title}
           </Link>
