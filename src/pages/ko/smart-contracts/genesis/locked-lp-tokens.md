@@ -26,7 +26,7 @@ programmingLanguage:
 faqs:
   - q: 졸업 중에 LP 토큰은 소각되나요, 잠기나요?
     a: LP 토큰은 소각되지 않고 프로그램 잠금됩니다. Genesis 버킷 서명자 PDA가 소유한 연관 토큰 계정으로 전송됩니다. 버킷의 lpLockSchedule은 startCondition과 cliffCondition이 모두 Never로 설정되어 있어 어떤 지갑도 청구할 수 없습니다.
-  - q: 잠긴 LP 토큰을 누군가 인출할 수 있나요?
+  - q: Genesis 프로그램에서 잠긴 LP 토큰을 인출할 수 있는 지갑이 있나요?
     a: 아니요. RaydiumCpmmBucketV2 계정의 lpLockSchedule은 startCondition과 cliffCondition이 모두 Never로 설정되어 있습니다. 이를 해제할 수 있는 명령어나 권한은 없습니다.
   - q: LP 토큰이 온체인에서 잠겨 있는지 어떻게 확인할 수 있나요?
     a: Genesis SDK를 사용하여 RaydiumCpmmBucketV2 계정을 가져오고 extensions.lpLockSchedule의 startCondition.__kind와 cliffCondition.__kind가 모두 Never로 설정되어 있는지 확인하세요. lpTokenBalance 필드는 보유 중인 LP 토큰의 정확한 수를 보여줍니다.
@@ -186,7 +186,7 @@ LP 토큰 잠금과 관련된 `RaydiumCpmmBucketV2` 계정의 주요 필드:
 
 LP 토큰은 소각되지 않고 프로그램 잠금됩니다. Genesis 버킷 서명자 PDA가 소유한 [연관 토큰 계정](/ko/solana/understanding-solana-accounts#associated-token-accounts-atas)으로 전송됩니다. 버킷의 `lpLockSchedule`은 `startCondition`과 `cliffCondition`이 모두 `Never`로 설정되어 있어 어떤 지갑도 청구할 수 없습니다.
 
-### 잠긴 LP 토큰을 누군가 인출할 수 있나요?
+### Genesis 프로그램에서 잠긴 LP 토큰을 인출할 수 있는 지갑이 있나요?
 
 아니요. `RaydiumCpmmBucketV2` 계정의 `lpLockSchedule`은 `startCondition`과 `cliffCondition`이 모두 `Never`로 설정되어 있습니다. 이를 해제할 수 있는 명령어나 권한은 없습니다.
 
