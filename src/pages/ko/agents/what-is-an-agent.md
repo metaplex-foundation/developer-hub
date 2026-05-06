@@ -15,10 +15,10 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-12-2026'
-updated: '03-12-2026'
+updated: '05-04-2026'
 ---
 
-Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-agent)가 관리하는 내장 지갑과 온체인 신원 기록을 가진 [MPL Core](/smart-contracts/core) 자산입니다. {% .lead %}
+Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-agent)가 관리하는 내장 지갑과 온체인 신원 기록을 가진 [MPL Core](/smart-contracts/core) 자산입니다. 에이전트는 [자체 토큰을 발행하여 자본을 조달](/agents/agent-finance)하고 [생산적인 온체인 작업으로 수익을 얻을](/agents/agent-commerce) 수 있습니다. {% .lead %}
 
 ## 요약
 
@@ -45,7 +45,9 @@ Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-
 
 - **[스킬](/agents/skill)** — AI 코딩 에이전트에 Metaplex 프로그램의 완전한 지식 제공
 - **[에이전트 등록](/agents/register-agent)** — MPL Core 자산에 신원 기록 바인딩
-- **[에이전트 데이터 읽기](/agents/run-agent)** — 등록 확인 및 온체인 에이전트 신원 검사
+- **[에이전트 데이터 읽기](/agents/read-agent-data)** — 등록 확인 및 온체인 에이전트 신원 검사
 - **[에이전트 실행](/agents/run-an-agent)** — 이그제큐티브 프로필 설정 및 실행 위임
+- **[에이전트 파이낸스](/agents/agent-finance)** — 에이전트 자체의 온체인 토큰을 통한 자본화
+- **[에이전트 커머스](/agents/agent-commerce)** — 에이전트가 수익을 얻고 자율적으로 거래
 
 *Metaplex 관리 · 2026년 3월 검증 완료*

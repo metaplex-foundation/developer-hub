@@ -15,10 +15,10 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-12-2026'
-updated: '03-12-2026'
+updated: '05-04-2026'
 ---
 
-Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-contracts/mpl-agent)によって管理される内蔵ウォレットとオンチェーンIDレコードを持つ[MPL Core](/smart-contracts/core)アセットです。{% .lead %}
+Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-contracts/mpl-agent)によって管理される内蔵ウォレットとオンチェーンIDレコードを持つ[MPL Core](/smart-contracts/core)アセットです。エージェントは[独自のトークンを発行して資金を調達](/agents/agent-finance)し、[生産的なオンチェーン作業から収益を得る](/agents/agent-commerce)ことができます。{% .lead %}
 
 ## 概要
 
@@ -45,7 +45,9 @@ Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-co
 
 - **[スキル](/agents/skill)** — AIコーディングエージェントにMetaplexプログラムの完全な知識を付与
 - **[エージェントを登録](/agents/register-agent)** — MPL CoreアセットにIDレコードを紐付け
-- **[エージェントデータを読み取る](/agents/run-agent)** — 登録を確認し、オンチェーンでエージェントIDを検査
+- **[エージェントデータを読み取る](/agents/read-agent-data)** — 登録を確認し、オンチェーンでエージェントIDを検査
 - **[エージェントを実行](/agents/run-an-agent)** — エグゼクティブプロファイルを設定し、実行を委任
+- **[エージェントファイナンス](/agents/agent-finance)** — エージェント独自のオンチェーントークンを通じて資金を調達
+- **[エージェントコマース](/agents/agent-commerce)** — エージェントが収益を得て自律的に取引
 
 *Metaplexが管理 · 2026年3月検証済み*

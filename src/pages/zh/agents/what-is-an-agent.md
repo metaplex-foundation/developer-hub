@@ -15,10 +15,10 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-12-2026'
-updated: '03-12-2026'
+updated: '05-04-2026'
 ---
 
-Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-agent) 管理的、具有内置钱包和链上身份记录的 [MPL Core](/smart-contracts/core) 资产。{% .lead %}
+Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-agent) 管理的、具有内置钱包和链上身份记录的 [MPL Core](/smart-contracts/core) 资产。代理可以[发行自己的代币以筹集资本](/agents/agent-finance)，并[通过有生产力的链上工作获得收入](/agents/agent-commerce)。{% .lead %}
 
 ## 概述
 
@@ -45,7 +45,9 @@ Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-a
 
 - **[技能](/agents/skill)** — 为 AI 编码代理提供 Metaplex 程序的完整知识
 - **[注册代理](/agents/register-agent)** — 将身份记录绑定到 MPL Core 资产
-- **[读取代理数据](/agents/run-agent)** — 验证注册并检查链上代理身份
+- **[读取代理数据](/agents/read-agent-data)** — 验证注册并检查链上代理身份
 - **[运行代理](/agents/run-an-agent)** — 设置执行者配置文件并委托执行
+- **[Agent 金融](/agents/agent-finance)** — 通过 Agent 自身的链上代币进行资本化
+- **[Agent 商业](/agents/agent-commerce)** — 让 Agent 获得收入并自主交易
 
 *由 Metaplex 维护 · 2026 年 3 月验证*

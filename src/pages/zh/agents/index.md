@@ -16,7 +16,9 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '05-04-2026'
 ---
+
+Metaplex Agent Kit 为自主 AI Agent 提供可验证的链上身份、无私钥暴露的钱包，以及参与链上经济的基础组件。Agent 可以[发行自己的代币以筹集资本](/agents/agent-finance)，并[通过有生产力的链上工作获得收入](/agents/agent-commerce)。 {% .lead %}
 
 {% product-card-grid category="Agents" /%}
