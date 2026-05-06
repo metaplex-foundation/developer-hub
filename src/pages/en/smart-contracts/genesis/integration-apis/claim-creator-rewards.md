@@ -63,7 +63,7 @@ Set `payer` to a different wallet when the creator fee wallet does not hold SOL 
 
 ## Example Request
 
-{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl" defaultFramework="umi" /%}
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl,cli" defaultFramework="umi" /%}
 
 ## Success Response
 
