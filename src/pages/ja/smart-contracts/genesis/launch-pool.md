@@ -233,7 +233,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-入金手数料の例：ユーザーが 10 SOL を入金すると、ユーザーの入金アカウントには 9.8 SOL がクレジットされます。
+各入金では、{% fee product="genesis" config="launchPool" fee="deposit" /%} のユーザー入金手数料を差し引いた後の SOL が入金アカウントの残高に反映されます。
 
 ## セットアップガイド
 
@@ -426,7 +426,7 @@ if (deposit) {
 
 ## 注意事項
 
-- {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料が入金と引き出しの両方に適用されます
+- Launch Pool のユーザー入金・出金手数料は上記の [手数料](#手数料) を参照してください。
 - 同じユーザーからの複数の入金は1つの入金アカウントに蓄積されます
 - ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
 - End Behavior を処理するには、入金終了後に `triggerBehaviorsV2` を実行する必要があります

@@ -233,7 +233,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-예치 수수료 예시: 사용자가 10 SOL을 예치하면 9.8 SOL이 사용자의 예치 계정에 적립됩니다.
+예치 시 {% fee product="genesis" config="launchPool" fee="deposit" /%} 사용자 예치 수수료를 제외한 금액만 예치 계정 잔액에 반영됩니다.
 
 ## 설정 가이드
 
@@ -426,7 +426,7 @@ if (deposit) {
 
 ## 참고 사항
 
-- {% fee product="genesis" config="launchPool" fee="deposit" /%} 프로토콜 수수료가 예치와 출금 모두에 적용됩니다
+- Launch Pool 사용자 예치·출금 수수료는 위 [수수료](#수수료)를 참고하세요.
 - 같은 사용자의 여러 예치금은 하나의 예치 계정에 누적됩니다
 - 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다
 - End behavior를 처리하려면 예치 종료 후 `triggerBehaviorsV2`가 실행되어야 합니다

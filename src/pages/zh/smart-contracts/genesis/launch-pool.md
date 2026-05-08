@@ -233,7 +233,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-存款费用示例：用户存入 10 SOL，实际记入用户存款账户的是 9.8 SOL。
+每笔存款：扣除 {% fee product="genesis" config="launchPool" fee="deposit" /%} 用户存款费后的 SOL 净额才会记入存款账户余额。
 
 ## 设置指南
 
@@ -426,7 +426,7 @@ if (deposit) {
 
 ## 注意事项
 
-- {% fee product="genesis" config="launchPool" fee="deposit" /%} 协议费用适用于存款和提款
+- Launch Pool 的用户存款费与提款费见上文 [费用](#费用)。
 - 同一用户的多次存款会累积在一个存款账户中
 - 如果用户提取全部余额，存款 PDA 将被关闭
 - 存款结束后必须执行 `triggerBehaviorsV2` 以处理结束行为

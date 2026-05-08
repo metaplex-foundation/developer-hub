@@ -173,9 +173,7 @@ Unix タイムスタンプ（ミリ秒ではなく秒）を使用してくださ
 **何が起こるか：** ユーザーが Inflow bucket に SOL を入金します。
 
 - **Launch Pool：** ユーザーが SOL を入金し、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料で引き出し可能
-- **Presale：** ユーザーが固定価格で SOL を入金（ユーザーごとの入金上限（各ユーザーが貢献できる最大額）あり）
-
-すべての入金には {% fee product="genesis" config="launchPool" fee="deposit" /%} のプロトコル手数料が適用されます。
+- **Presale：** ユーザーが固定価格で SOL を入金（ユーザーごとの入金上限（各ユーザーが貢献できる最大額）あり）。プレセールの手数料は [Presale](/ja/smart-contracts/genesis/presale) を参照してください。
 
 ## ステップ 5：トランジション
 
