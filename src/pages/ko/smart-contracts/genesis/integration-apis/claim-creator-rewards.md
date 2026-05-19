@@ -63,7 +63,7 @@ POST /v1/creator-rewards/claim
 
 ## 요청 예시
 
-{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl" defaultFramework="umi" /%}
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi,curl,cli" defaultFramework="umi" /%}
 
 ## 성공 응답
 

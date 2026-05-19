@@ -15,6 +15,14 @@ const umiSections = {
   "full": "// [IMPORTS]\nimport { claimCreatorRewards } from '@metaplex-foundation/genesis'\nimport { base58 } from '@metaplex-foundation/umi/serializers'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { keypairIdentity } from '@metaplex-foundation/umi'\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com')\nconst keypair = umi.eddsa.createKeypairFromSecretKey(mySecretKeyBytes)\numi.use(keypairIdentity(keypair))\n// [/SETUP]\n\n// [MAIN]\nconst result = await claimCreatorRewards(umi, {}, {\n  wallet: umi.identity.publicKey,\n  network: 'solana-mainnet',\n  // payer is optional — defaults to `wallet` on the server.\n  // Set it to have a different wallet cover rent and transaction fees.\n  // payer: umi.identity.publicKey,\n})\n\nfor (const tx of result.transactions) {\n  const signed = await umi.identity.signTransaction(tx)\n  const signature = await umi.rpc.sendTransaction(signed, {\n    preflightCommitment: 'confirmed',\n  })\n  await umi.rpc.confirmTransaction(signature, {\n    strategy: { type: 'blockhash', ...result.blockhash },\n    commitment: 'confirmed',\n  })\n  console.log('Claimed:', base58.deserialize(signature)[0])\n}\n// [/MAIN]\n\n// [OUTPUT]\n// Claimed: 5uGGYEMmjP2HpyFCvLPNpVDSQEBtUE3LR6ZQFqhJxQSh5FbKacSyN8nQmAJowuFs6BTCdwzoFyyJz8Y2hQx8kPxo\n// Claimed: 3TAroVovEap1ZEAJYq3WiDZoMK3GU3soCdrhvZJNg6b9EANqvWrVcDGNffm7mD8wvtpR7ynWQBcbrmz8AK6nrhfy\n// [/OUTPUT]\n"
 }
 
+const cliSections = {
+  "imports": "",
+  "setup": "",
+  "main": "",
+  "output": "",
+  "full": "# Claim creator rewards across all your bonding-curve and Raydium buckets.\n# Defaults the wallet to the configured signer; network is auto-detected from RPC.\nmplx genesis claim-creator-rewards\n\n# Claim on behalf of a different creator fee wallet (you still pay fees).\nmplx genesis claim-creator-rewards --wallet <CREATOR_FEE_WALLET>\n\n# Force devnet and a specific API base URL.\nmplx genesis claim-creator-rewards --network solana-devnet --apiUrl https://api.metaplex.dev\n"
+}
+
 const curlSections = {
   "imports": "",
   "setup": "",
@@ -35,6 +43,13 @@ export const examples = {
     language: 'typescript',
     code: umiSections.full,
     sections: umiSections,
+  },
+
+  cli: {
+    framework: 'CLI',
+    language: 'bash',
+    code: cliSections.full,
+    sections: cliSections,
   },
 
   curl: {
