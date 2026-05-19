@@ -18,7 +18,7 @@ created: '03-12-2026'
 updated: '03-12-2026'
 ---
 
-Autonomous agents on Solana are [MPL Core](/smart-contracts/core) assets with built-in wallets and on-chain identity records managed by the [Metaplex Agent Registry](/smart-contracts/mpl-agent). {% .lead %}
+Autonomous agents on Solana are [MPL Core](/smart-contracts/core) assets with built-in wallets and on-chain identity records managed by the [Metaplex Agent Registry](/smart-contracts/mpl-agent). They can [launch their own token to raise capital](/agents/agent-finance) and [earn revenue from productive onchain work](/agents/agent-commerce). {% .lead %}
 
 ## Summary
 
@@ -45,7 +45,9 @@ The owner retains full control. They choose which executive to delegate to, and 
 
 - **[Skill](/agents/skill)** — Give AI coding agents full knowledge of Metaplex programs
 - **[Register an Agent](/agents/register-agent)** — Bind an identity record to an MPL Core asset
-- **[Read Agent Data](/agents/run-agent)** — Verify registration and inspect agent identity on-chain
+- **[Read Agent Data](/agents/read-agent-data)** — Verify registration and inspect agent identity on-chain
 - **[Run an Agent](/agents/run-an-agent)** — Set up an executive profile and delegate execution
+- **[Agent Finance](/agents/agent-finance)** — Capitalize the agent through its own onchain token
+- **[Agent Commerce](/agents/agent-commerce)** — Let the agent earn revenue and transact autonomously
 
 *Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026*

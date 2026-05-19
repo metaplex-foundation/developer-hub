@@ -5,7 +5,7 @@ import { buildProductTranslations } from '@/config/navigation-translations'
 export const agents = {
   name: 'Agents',
   headline: 'AI Agents on Solana',
-  description: 'Register agent identity, delegate execution, and give AI agents knowledge of Metaplex programs.',
+  description: 'Give AI agents an onchain identity and wallet so they can launch tokens, earn revenue, and transact autonomously.',
   skill: true,
   navigationMenuCatergory: undefined,
   path: 'agents',
@@ -53,8 +53,12 @@ export const agents = {
               href: '/agents/read-agent-data',
             },
             {
-              title: 'Agentic Commerce',
-              href: '/agents/agentic-commerce',
+              title: 'Agent Finance',
+              href: '/agents/agent-finance',
+            },
+            {
+              title: 'Agent Commerce',
+              href: '/agents/agent-commerce',
             },
             {
               title: 'Create an Agent Token',
@@ -76,9 +80,9 @@ export const agents = {
       zh: 'Solana 上的 AI Agent',
     },
     descriptionTranslations: {
-      ja: 'エージェントのアイデンティティを登録し、実行を委任し、AIエージェントにMetaplexプログラムの知識を提供します。',
-      ko: '에이전트 신원을 등록하고, 실행을 위임하며, AI 에이전트에 Metaplex 프로그램에 대한 지식을 부여합니다.',
-      zh: '注册 Agent 身份、委托执行，并为 AI Agent 提供 Metaplex 程序的知识。',
+      ja: 'AIエージェントにオンチェーンのアイデンティティとウォレットを提供し、トークンの発行、収益の獲得、自律的な取引を可能にします。',
+      ko: 'AI 에이전트에 온체인 신원과 지갑을 제공하여 토큰을 발행하고, 수익을 얻고, 자율적으로 거래할 수 있도록 합니다.',
+      zh: '为 AI Agent 提供链上身份和钱包，使其能够发行代币、赚取收入并自主交易。',
     },
     sectionKeys: {
       'Introduction': 'sections.introduction',
@@ -119,7 +123,12 @@ export const agents = {
         ko: '에이전트 데이터 읽기',
         zh: '读取 Agent 数据',
       },
-      'Agentic Commerce': {
+      'Agent Finance': {
+        ja: 'エージェントファイナンス',
+        ko: '에이전트 파이낸스',
+        zh: 'Agent 金融',
+      },
+      'Agent Commerce': {
         ja: 'エージェントコマース',
         ko: '에이전트 커머스',
         zh: 'Agent 商业',

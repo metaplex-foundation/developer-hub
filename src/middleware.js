@@ -55,6 +55,11 @@ const standaloneRedirects = {
   '/ja/agents/run-agent': '/ja/agents/read-agent-data',
   '/ko/agents/run-agent': '/ko/agents/read-agent-data',
   '/zh/agents/run-agent': '/zh/agents/read-agent-data',
+  // Agents: agentic-commerce split into agent-finance and agent-commerce; old URL points to agent-finance (was about funding/capitalization)
+  '/agents/agentic-commerce': '/agents/agent-finance',
+  '/ja/agents/agentic-commerce': '/ja/agents/agent-finance',
+  '/ko/agents/agentic-commerce': '/ko/agents/agent-finance',
+  '/zh/agents/agentic-commerce': '/zh/agents/agent-finance',
   // Skill moved from dev-tools to agents
   '/dev-tools/skill': '/agents/skill',
   '/dev-tools/skill/installation': '/agents/skill/installation',

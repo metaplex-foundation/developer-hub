@@ -16,7 +16,9 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '05-04-2026'
 ---
+
+Metaplex Agent Kit은 자율 AI 에이전트에 검증 가능한 온체인 신원, 개인 키 노출이 없는 지갑, 그리고 온체인 경제에 참여하기 위한 프리미티브를 제공합니다. 에이전트는 [자체 토큰을 발행하여 자본을 조달](/agents/agent-finance)하고 [생산적인 온체인 작업으로 수익을 얻을](/agents/agent-commerce) 수 있습니다. {% .lead %}
 
 {% product-card-grid category="Agents" /%}
