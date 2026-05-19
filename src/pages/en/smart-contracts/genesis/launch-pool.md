@@ -233,7 +233,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 {% protocol-fees program="genesis" config="launchPool" showTitle=false /%}
 
-Deposit Fee Example: A user deposit of 10 SOL results in 9.8 SOL credited to the user's deposit account.
+Each deposit increases your credited balance by the SOL left after the user deposit fee ({% fee product="genesis" config="launchPool" fee="deposit" /%}) is withheld from the deposit.
 
 ## Setup Guide
 
@@ -426,7 +426,7 @@ if (deposit) {
 
 ## Notes
 
-- The {% fee product="genesis" config="launchPool" fee="deposit" /%} protocol fee applies to both deposits and withdrawals
+- User deposit and withdraw fees for Launch Pool are shown in [Fees](#fees) above.
 - Multiple deposits from the same user accumulate in one deposit account
 - If a user withdraws their entire balance, the deposit PDA closes
 - `triggerBehaviorsV2` must be executed after deposits close for end behaviors to process

@@ -47,7 +47,7 @@ export const genesis = {
       },
       withdraw: {
         label: 'User withdraw fee',
-        solana: '2%',
+        solana: '0%',
       },
       creatorWithdraw: {
         label: 'Creator withdraw fee',
