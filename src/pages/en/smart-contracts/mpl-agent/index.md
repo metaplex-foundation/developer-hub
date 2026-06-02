@@ -14,7 +14,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '02-25-2026'
-updated: '03-12-2026'
+updated: '06-02-2026'
 ---
 
 The **MPL Agent Registry** provides on-chain programs for registering agent identity and delegating execution permissions on Solana using MPL Core assets. {% .lead %}
@@ -61,6 +61,9 @@ Once an agent has an identity, the **Agent Tools** program lets asset owners del
 1. An executive registers a profile via `RegisterExecutiveV1`
 2. The asset owner calls `DelegateExecutionV1` to grant the executive permission to execute on behalf of the agent asset
 3. A delegation record PDA is created linking the executive profile to the asset
+4. The asset owner calls `RevokeExecutionV1` to close the delegation record when the executive should no longer operate the agent
+
+An active execution delegate has broad operational authority over the agent's Asset Signer PDA. Revocation stops future Execute calls through the AgentIdentity path but does not unwind state created by previous executions in other programs. See the [Security model](/smart-contracts/mpl-agent/tools#security-model) on the Agent Tools reference.
 
 ## SDK
 
