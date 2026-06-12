@@ -1,13 +1,14 @@
 ---
 title: Agent Tools
 metaTitle: Agent Tools Program | MPL Agent Registry | Metaplex
-description: Technical reference for the MPL Agent Tools program — executive profiles, execution delegation, accounts, and PDA derivation.
+description: Technical reference for the MPL Agent Tools program — executive profiles, execution delegation, revocation, accounts, and PDA derivation.
 keywords:
   - Agent Tools program
   - executive profile
   - execution delegation
   - RegisterExecutiveV1
   - DelegateExecutionV1
+  - RevokeExecutionV1
 programmingLanguage:
   - JavaScript
   - TypeScript
@@ -17,19 +18,21 @@ about:
   - Metaplex
 proficiencyLevel: Advanced
 created: '03-11-2026'
-updated: '03-12-2026'
+updated: '06-02-2026'
 ---
 
-The Agent Tools program manages executive delegation for agent assets, allowing asset owners to delegate execution permissions to executive profiles. {% .lead %}
+The Agent Tools program manages executive delegation for agent assets, allowing asset owners to delegate execution permissions to executive profiles and revoke them. {% .lead %}
 
 ## Summary
 
-The Agent Tools program (`TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S`) provides two instructions for managing execution delegation: `RegisterExecutiveV1` creates an executive profile, and `DelegateExecutionV1` grants that profile permission to execute on behalf of an agent asset.
+The Agent Tools program (`TLREGni9ZEyGC3vnPZtqUh95xQ8oPqJSvNjvB7FGK8S`) provides three instructions for managing execution delegation: `RegisterExecutiveV1` creates an executive profile, `DelegateExecutionV1` grants that profile permission to execute on behalf of an agent asset, and `RevokeExecutionV1` closes that delegation.
 
-- **Two instructions** — `RegisterExecutiveV1` (one-time profile setup) and `DelegateExecutionV1` (per-asset delegation)
+- **Three instructions** — `RegisterExecutiveV1` (one-time profile setup), `DelegateExecutionV1` (per-asset delegation), and `RevokeExecutionV1` (per-asset revocation)
 - **ExecutiveProfileV1** — 40-byte PDA derived from `["executive_profile", <authority>]`, one per wallet
 - **ExecutionDelegateRecordV1** — 104-byte PDA linking an executive profile to a specific agent asset
 - **Owner-only delegation** — only the asset owner can create delegation records; the program validates ownership on-chain
+- **Owner or executive revocation** — either the asset owner or the executive authority on the record can sign `RevokeExecutionV1`; an executive can step down without owner involvement
+- **Arbitrary execution authority** — an active execution delegate may cause the agent's Asset Signer PDA to sign any instruction passed through Core's Execute hook; see [Security model](#security-model)
 
 ## Program ID
 
@@ -42,12 +45,13 @@ The same program address is deployed on both Mainnet and Devnet.
 
 ## Overview
 
-The tools program provides two instructions:
+The tools program provides three instructions:
 
 1. **RegisterExecutiveV1** — Create an executive profile that can act as an executor for agent assets
 2. **DelegateExecutionV1** — Grant an executive profile permission to execute on behalf of an agent asset
+3. **RevokeExecutionV1** — Close a delegation record, ending that executive's ability to trigger future executions for the agent asset
 
-An executive profile is registered once per authority. Delegation is per asset — an asset owner creates a delegation record linking their agent asset to a specific executive profile.
+An executive profile is registered once per authority. Delegation is per asset — an asset owner creates a delegation record linking their agent asset to a specific executive profile, and may revoke that record at any time.
 
 ## Instruction: RegisterExecutiveV1
 
@@ -97,6 +101,36 @@ Seven accounts are required, including the executive profile, the agent asset, i
 5. Derives a PDA from seeds `["execution_delegate_record", <executive_profile>, <agent_asset>]`
 6. Creates and initializes the `ExecutionDelegateRecordV1` account (104 bytes)
 
+## Instruction: RevokeExecutionV1
+
+Closes an `ExecutionDelegateRecordV1`, ending the executive's ability to trigger future Execute calls for the agent asset through the AgentIdentity path. Either the asset owner or the executive authority recorded on the delegation can revoke.
+
+### Accounts
+
+Six accounts are required. The delegation record PDA is closed and its rent is refunded to `destination`.
+
+| Account | Writable | Signer | Optional | Description |
+|---------|----------|--------|----------|-------------|
+| `executionDelegateRecord` | Yes | No | No | The delegation record PDA to close |
+| `agentAsset` | No | No | No | The MPL Core asset whose delegation is being closed (must match the record) |
+| `destination` | Yes | No | No | Receives reclaimed rent from the closed delegation record |
+| `payer` | Yes | Yes | No | Pays for transaction fees (defaults to `umi.payer`) |
+| `authority` | No | Yes | Yes | Must be the asset owner or the executive authority on the record (defaults to `payer`) |
+| `systemProgram` | No | No | No | System program |
+
+### What It Does
+
+1. Validates the delegation record is initialized and owned by the Agent Tools program
+2. Reads the executive profile, executive authority, and agent asset from the record
+3. Validates the passed `agentAsset` matches the record and is a valid MPL Core asset
+4. Validates the PDA derivation of the delegation record
+5. Validates the signer is **either the asset owner or the executive authority** recorded on the delegation
+6. Closes the `ExecutionDelegateRecordV1` account and refunds rent to `destination`
+
+### What It Does Not Do
+
+`RevokeExecutionV1` only revokes future execution through the AgentIdentity path. It does **not** unwind downstream state created by previous valid executions. See [Security model](#security-model) for the full lifecycle semantics.
+
 ## PDA Derivation
 
 Both account types are PDAs derived from deterministic seeds. Use the SDK helpers to compute them.
@@ -145,9 +179,50 @@ Links an executive profile to an agent asset, recording who is authorized to exe
 | 40 | `authority` | `Pubkey` | 32 | The executive authority |
 | 72 | `agentAsset` | `Pubkey` | 32 | The agent asset address |
 
+## Security Model
+
+An active execution delegate has broad operational authority over whatever accounts the agent's [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) controls. Lifecycle semantics around delegation, revocation, and asset transfer are described below.
+
+### Execution Authority Is Arbitrary
+
+An authorized execution delegate may cause the agent's Asset Signer PDA to sign **any instruction** passed through Core's Execute hook. This includes SOL and SPL Token transfers, CPI calls, SPL Token `Approve`, account-authority changes, and protocol interactions.
+
+This is intentional. Execution delegation is not a narrow "method call" permission — it is broad operational authority over the agent's wallet and any accounts the Asset Signer controls. The Agent Tools program does not parse, introspect, gate, or restrict the instructions that an executive forwards through Execute.
+
+### Revocation Scope
+
+`RevokeExecutionV1` closes the `ExecutionDelegateRecordV1`, preventing that executive from triggering **future** Execute calls through the AgentIdentity path. Either the asset owner or the executive authority on the record may sign the revocation — an executive can step down from operating an agent without owner involvement, and the owner can revoke an executive without executive cooperation.
+
+Revocation does not modify, reverse, or clean up durable downstream state created by previous valid executions.
+
+Examples of downstream state that may survive revocation:
+
+- SPL Token approvals (`Approve` granted to a third-party delegate)
+- Token account authority changes
+- Escrow positions and protocol deposits
+- Open positions in lending, AMM, or perpetuals programs
+- Permissions or configuration stored in other programs
+- Any other state created by arbitrary CPI
+
+Cleaning up downstream state requires separate instructions to those programs — for example, calling SPL Token's `Revoke` on a token account whose delegate was set during a previous execution.
+
+### Delegates Are Agent Runtime Configuration
+
+Execution delegates are part of the agent's operational state, not ephemeral approvals tied to the current owner wallet. A hosted provider, service operator, or agent container hot wallet is commonly authorized as an executive so the agent can continue operating as the asset moves between owners (for example, between wallets the same operator controls). Asset transfer does **not** automatically invalidate `ExecutionDelegateRecordV1` accounts.
+
+{% callout type="warning" title="Recipients of an agent asset" %}
+When you receive an agent asset from another party, treat existing execution delegates as part of the agent's received runtime configuration. Before funding the agent's Asset Signer PDA, enumerate active delegation records and revoke any executives you do not intend to authorize.
+{% /callout %}
+
+### Funding the Asset Signer PDA
+
+The agent's Asset Signer PDA is commonly used as the agent's treasury or operational account. If an active execution delegate exists, that delegate may move assets controlled by the Asset Signer PDA. Before funding the Asset Signer PDA — especially after receiving or transferring an agent asset — confirm which executives are authorized and whether they are trusted.
+
+See the [Clean Up an SPL Approval](/agents/run-an-agent#example-clean-up-an-spl-approval) example on the Run an Agent guide for a worked cleanup of downstream state.
+
 ## Errors
 
-The program returns these errors when validation fails during registration or delegation.
+The program returns these errors when validation fails during registration, delegation, or revocation.
 
 | Code | Name | Description |
 |------|------|-------------|
@@ -163,5 +238,16 @@ The program returns these errors when validation fails during registration or de
 | 9 | `AgentIdentityNotRegistered` | Asset does not have a registered identity |
 | 10 | `AssetOwnerMustBeTheOneToDelegateExecution` | Only the asset owner can delegate execution |
 | 11 | `InvalidExecutiveProfileDerivation` | Executive profile PDA derivation mismatch |
+| 12 | `ExecutionDelegateRecordMustBeInitialized` | Delegation record does not exist or has already been closed |
+| 13 | `UnauthorizedRevoke` | Authority is neither the asset owner nor the executive authority on the record |
+| 14 | `ExecutiveProfileMustBeInitialized` | Executive profile account is not initialized |
 
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
+## Notes
+
+- `RevokeExecutionV1` is an on-chain action on the Agent Tools program. It stops future Execute calls through the AgentIdentity path but does not unwind downstream state in other programs.
+- Either the asset owner or the executive authority on the record can sign `RevokeExecutionV1`. `DelegateExecutionV1` remains owner-only.
+- Asset transfer does not close `ExecutionDelegateRecordV1` accounts. Recipients should review and revoke executives according to their trust assumptions.
+- Asset owners always retain the direct Core Execute path documented in [Execute Asset Signing](/smart-contracts/core/execute-asset-signing). Cleaning up downstream state (for example, an SPL `Approve`) can be done by the owner without an executive.
+- The [Freeze Execute](/smart-contracts/core/plugins/freeze-execute) plugin can freeze the Execute lifecycle event entirely as an additional safeguard; it operates at the Core layer and is independent of the Agent Tools delegation record.
+
+*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified June 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*
