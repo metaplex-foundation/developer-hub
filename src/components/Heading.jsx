@@ -43,7 +43,7 @@ function AnchorLink({ id, label }) {
       onClick={handleClick}
       aria-label={`Copy link to section: ${label}`}
       title={copied ? 'Link copied!' : 'Copy link to this section'}
-      className="not-prose absolute -ml-6 mt-1 flex w-6 items-center justify-center text-muted-foreground no-underline opacity-0 transition-opacity duration-150 hover:text-primary focus:opacity-100 focus:outline-none group-hover:opacity-100"
+      className="section-anchor not-prose absolute -ml-5 mt-1 flex w-6 items-center justify-center text-muted-foreground no-underline opacity-0 transition-opacity duration-150 hover:text-primary focus:opacity-100 focus:outline-none group-hover:opacity-100 sm:-ml-6"
     >
       {copied ? (
         <svg

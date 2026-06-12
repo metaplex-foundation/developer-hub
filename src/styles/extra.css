@@ -38,3 +38,13 @@ html {
 select::-ms-expand {
   display: none;
 }
+
+/*
+ * Section heading anchors: on touch devices there is no hover, so keep the
+ * copy-link icon persistently visible (at low opacity) as a tap target.
+ */
+@media (hover: none) {
+  .section-anchor {
+    opacity: 0.5;
+  }
+}
