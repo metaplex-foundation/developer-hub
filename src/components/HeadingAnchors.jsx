@@ -148,7 +148,14 @@ export function HeadingAnchors() {
     // whose id we just created, scroll to it now that the id exists. (Headings
     // that already had ids were handled natively by the browser.)
     if (window.location.hash) {
-      const targetId = decodeURIComponent(window.location.hash.slice(1))
+      const rawHash = window.location.hash.slice(1)
+      let targetId
+      try {
+        targetId = decodeURIComponent(rawHash)
+      } catch {
+        // Malformed percent-encoding — fall back to the raw hash.
+        targetId = rawHash
+      }
       if (assignedIds.has(targetId)) {
         document.getElementById(targetId)?.scrollIntoView()
       }
