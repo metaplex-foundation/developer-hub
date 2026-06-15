@@ -38,3 +38,48 @@ html {
 select::-ms-expand {
   display: none;
 }
+
+/* Hover-revealed permalink anchors injected into Markdoc headings
+   (see src/components/HeadingAnchors.jsx). */
+.heading-anchor {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  color: currentColor;
+  opacity: 0;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+  cursor: pointer;
+}
+
+.heading-anchor svg {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+.prose :is(h2, h3, h4, h5, h6):hover > .heading-anchor {
+  opacity: 0.4;
+}
+
+.heading-anchor:hover,
+.heading-anchor:focus-visible,
+.heading-anchor.copied {
+  opacity: 0.85 !important;
+}
+
+/* Touch devices have no hover, so keep anchors faintly visible there. */
+@media (hover: none) {
+  .heading-anchor {
+    opacity: 0.35;
+  }
+}
+
+.heading-anchor.copied::after {
+  content: 'Copied!';
+  margin-left: 0.4em;
+  font-size: 0.6em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
