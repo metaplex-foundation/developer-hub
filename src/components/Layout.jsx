@@ -8,6 +8,7 @@ import { CLIBadge } from '@/components/CLIBadge'
 import { SkillBadge } from '@/components/SkillBadge'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { HeadingAnchors } from '@/components/HeadingAnchors'
 import { Navigation } from '@/components/Navigation'
 import { Prose } from '@/components/Prose'
 import { TableOfContent } from '@/components/TableOfContent'
@@ -70,6 +71,7 @@ export function Layout({ children, page }) {
   return (
     <div className="min-h-screen bg-background">
       <Header page={page} />
+      <HeadingAnchors />
 
       {isHomePage && (
         <>
