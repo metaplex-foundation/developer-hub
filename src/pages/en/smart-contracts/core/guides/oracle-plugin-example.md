@@ -110,7 +110,7 @@ pub struct Oracle {
     pub vault_bump: u8,
 }
 impl Space for Oracle {
-    const INIT_SPACE: usize = 8 + 5 + 1;
+    const INIT_SPACE: usize = 8 + 5 + 1+1;
 }
 ```
 Let's discuss some of the choices made in creating this struct:
