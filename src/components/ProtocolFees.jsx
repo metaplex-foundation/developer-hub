@@ -19,6 +19,10 @@ function formatFeeType(key) {
     .trim()
 }
 
+function getFeeConfigTitle(product, configName) {
+  return product.protocolFeeTitles?.[configName] || formatFeeType(configName)
+}
+
 function FeesTable({ fees, t }) {
   // Collect unique notes in order of first appearance
   const notesList = []
@@ -140,11 +144,11 @@ export function ProtocolFees({ program, showTitle = true, config = null }) {
             <div key={configName}>
               {showTitle ? (
                 <h3 className="mb-3 text-lg font-semibold text-foreground">
-                  {formatFeeType(configName)}
+                  {getFeeConfigTitle(product, configName)}
                 </h3>
               ) : (
                 <p className="mb-2 text-sm font-semibold text-foreground">
-                  {formatFeeType(configName)}
+                  {getFeeConfigTitle(product, configName)}
                 </p>
               )}
               <FeesTable fees={Object.entries(configFees)} t={t} />

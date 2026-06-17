@@ -11,6 +11,10 @@ export const genesis = {
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
   className: 'accent-pink',
+  protocolFeeTitles: {
+    postBondTrading: 'Bonding Curve CPMM',
+    launchPoolTrading: 'Launch Pool CPMM',
+  },
   protocolFees: {
     bondingCurve: {
       protocolFee: {
@@ -33,11 +37,11 @@ export const genesis = {
       },
       lpFees: {
         label: 'LP fees',
-        solana: '0.17%',
+        solana: '0.21%',
       },
       raydiumFee: {
         label: 'Raydium fee',
-        solana: '0.08%',
+        solana: '0.04%',
       },
     },
     launchPool: {
@@ -63,7 +67,7 @@ export const genesis = {
       },
       protocolFee: {
         label: 'Protocol fee',
-        solana: '0.50%',
+        solana: '0.40%',
       },
       lpFees: {
         label: 'LP fees',
@@ -71,7 +75,7 @@ export const genesis = {
       },
       raydiumFee: {
         label: 'Raydium fee',
-        solana: '0.08%',
+        solana: '0.04%',
       },
     },
   },
