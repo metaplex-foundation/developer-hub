@@ -13,6 +13,9 @@ The DAS API supports the following methods:
 - [`getAssetSignatures`](/dev-tools/das-api/methods/get-asset-signatures): Returns the transaction signatures for compressed assets.
 - [`getAssetsByAuthority`](/dev-tools/das-api/methods/get-assets-by-authority): Returns the list of assets given an authority address.
 - [`getAssetsByCreator`](/dev-tools/das-api/methods/get-assets-by-creator): Return the list of assets given a creator address.
-- [`getAssetsByGroup`](/dev-tools/das-api/methods/get-assets-by-group): Return the list of assets given a group (key, value) pair. For example this can be used to get all assets in a collection.
+- [`getAssetsByGroup`](/dev-tools/das-api/methods/get-assets-by-group): Return the list of assets given a group (key, value) pair. Use `"collection"` for collections or `"group"` for mpl-core GroupV1 accounts.
+- [`getGrouping`](/dev-tools/das-api/methods/get-grouping): Return grouping metadata for a group key/value pair, including name and member count.
 - [`getAssetsByOwner`](/dev-tools/das-api/methods/get-assets-by-owner): Return the list of assets given an owner address.
+- [`getNftEditions`](/dev-tools/das-api/methods/get-nft-editions): Return all printable editions for a master edition NFT mint.
+- [`getTokenAccounts`](/dev-tools/das-api/methods/get-token-accounts): Return a list of token accounts by owner or mint.
 - [`searchAssets`](/dev-tools/das-api/methods/search-assets): Return the list of assets given a search criteria.

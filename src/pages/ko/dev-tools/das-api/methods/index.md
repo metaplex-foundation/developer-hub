@@ -13,6 +13,9 @@ DAS API는 다음 메서드를 지원합니다:
 - [`getAssetSignatures`](/ko/dev-tools/das-api/methods/get-asset-signatures): 압축된 자산에 대한 트랜잭션 서명을 반환합니다.
 - [`getAssetsByAuthority`](/ko/dev-tools/das-api/methods/get-assets-by-authority): 권한 주소가 지정된 자산 목록을 반환합니다.
 - [`getAssetsByCreator`](/ko/dev-tools/das-api/methods/get-assets-by-creator): 생성자 주소가 지정된 자산 목록을 반환합니다.
-- [`getAssetsByGroup`](/ko/dev-tools/das-api/methods/get-assets-by-group): 그룹(키, 값) 쌍이 지정된 자산 목록을 반환합니다. 예를 들어 컬렉션의 모든 자산을 가져오는 데 사용할 수 있습니다.
+- [`getAssetsByGroup`](/ko/dev-tools/das-api/methods/get-assets-by-group): 그룹(키, 값) 쌍이 지정된 자산 목록을 반환합니다. 컬렉션에는 `"collection"`, mpl-core GroupV1에는 `"group"`을 사용합니다.
+- [`getGrouping`](/ko/dev-tools/das-api/methods/get-grouping): 그룹(키, 값) 쌍의 그룹 메타데이터(이름 및 멤버 수)를 반환합니다.
 - [`getAssetsByOwner`](/ko/dev-tools/das-api/methods/get-assets-by-owner): 소유자 주소가 지정된 자산 목록을 반환합니다.
+- [`getNftEditions`](/ko/dev-tools/das-api/methods/get-nft-editions): 마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션을 반환합니다.
+- [`getTokenAccounts`](/ko/dev-tools/das-api/methods/get-token-accounts): 소유자 또는 민트별 토큰 계정 목록을 반환합니다.
 - [`searchAssets`](/ko/dev-tools/das-api/methods/search-assets): 검색 기준이 지정된 자산 목록을 반환합니다.
