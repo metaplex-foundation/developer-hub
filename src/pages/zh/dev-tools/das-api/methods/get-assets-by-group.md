@@ -5,13 +5,17 @@ description: 根据组（键、值）对返回资产列表
 tableOfContents: false
 ---
 
-根据组（键、值）对返回资产列表。例如，这可用于获取集合中的所有资产。
+根据组（键、值）对返回资产列表。
+
+Token Metadata 和 mpl-core 合集使用 `groupKey: "collection"`。要获取 [mpl-core GroupV1](/zh/smart-contracts/core) 账户的成员（合集、资产和嵌套分组），请使用 `groupKey: "group"`。
+
+若要在不列出每个资产的情况下获取分组名称和成员数量，请使用 [`getGrouping`](/zh/dev-tools/das-api/methods/get-grouping)。
 
 ## 参数
 
 | 名称               | 必需 | 描述                                |
 | ------------------ | :------: | ------------------------------------------ |
-| `groupKey`         |    ✅    | 组的键（例如 `"collection"`）。  |
+| `groupKey`         |    ✅    | 组的键（例如 `"collection"` 或 mpl-core 分组的 `"group"`）。  |
 | `groupValue`       |    ✅    | 组的值。  |
 | `sortBy`           |          | 排序条件。指定为对象 `{ sortBy: <value>, sortDirection: <value> }`，其中 `sortBy` 是 `["created", "updated", "recentAction", "id", "none"]` 之一，`sortDirection` 是 `["asc", "desc"]` 之一     |
 | `limit`            |          | 要检索的最大资产数量。  |

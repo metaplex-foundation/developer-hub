@@ -13,6 +13,9 @@ DAS APIは以下のメソッドをサポートしています：
 - [`getAssetSignatures`](/ja/dev-tools/das-api/methods/get-asset-signatures): 圧縮アセットのトランザクション署名を返します。
 - [`getAssetsByAuthority`](/ja/dev-tools/das-api/methods/get-assets-by-authority): オーソリティアドレスを指定してアセットのリストを返します。
 - [`getAssetsByCreator`](/ja/dev-tools/das-api/methods/get-assets-by-creator): クリエイターアドレスを指定してアセットのリストを返します。
-- [`getAssetsByGroup`](/ja/dev-tools/das-api/methods/get-assets-by-group): グループ（キー、値）ペアを指定してアセットのリストを返します。例えば、コレクション内のすべてのアセットを取得するために使用できます。
+- [`getAssetsByGroup`](/ja/dev-tools/das-api/methods/get-assets-by-group): グループ（キー、値）ペアを指定してアセットのリストを返します。コレクションには `"collection"`、mpl-core GroupV1 には `"group"` を使用します。
+- [`getGrouping`](/ja/dev-tools/das-api/methods/get-grouping): グループ（キー、値）ペアのグループメタデータ（名前とメンバー数）を返します。
 - [`getAssetsByOwner`](/ja/dev-tools/das-api/methods/get-assets-by-owner): オーナーアドレスを指定してアセットのリストを返します。
+- [`getNftEditions`](/ja/dev-tools/das-api/methods/get-nft-editions): マスターエディションNFTミントのすべての印刷可能なエディションを返します。
+- [`getTokenAccounts`](/ja/dev-tools/das-api/methods/get-token-accounts): 所有者またはミントでトークンアカウントのリストを返します。
 - [`searchAssets`](/ja/dev-tools/das-api/methods/search-assets): 検索条件を指定してアセットのリストを返します。
