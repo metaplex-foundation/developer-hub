@@ -3,7 +3,7 @@ title: Minting Compressed NFTs
 metaTitle: Minting Compressed NFTs - Bubblegum V2 - Metaplex
 description: Learn how to mint compressed NFTs on Bubblegum V2. Covers minting with and without collections, MPL-Core collection setup, and retrieving the asset ID from mint transactions.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - mint compressed NFT
   - mint cNFT
@@ -29,6 +29,8 @@ faqs:
     a: Only if the tree is set to public. For private trees, only the tree creator or tree delegate can mint.
   - q: What metadata fields are required for minting?
     a: The MetadataArgsV2 requires name, uri, sellerFeeBasisPoints, collection (or none), and creators array.
+  - q: Can a cNFT inherit royalties from its MPL-Core collection?
+    a: Yes. When minting to a collection with the Royalties plugin, omit sellerFeeBasisPoints (or pass the SELLER_FEE_BASIS_POINTS_INHERIT sentinel). The leaf stores 65535 (0xffff) and resolves royalties from the collection at display time.
 ---
 
 ## Summary
@@ -39,6 +41,7 @@ faqs:
 - Mint directly into an MPL-Core collection with the BubblegumV2 plugin
 - Retrieve the asset ID and leaf schema from the mint transaction
 - Configure metadata including name, URI, creators, and royalties
+- Inherit seller fee basis points from an MPL-Core collection's Royalties plugin
 
 In [the previous page](/smart-contracts/bubblegum-v2/create-trees), we saw that we need a Bubblegum Tree to mint Compressed NFTs, and we saw how to create one. Now, let's see how to mint compressed NFTs from a given Bubblegum Tree. {% .lead %}
 
@@ -142,6 +145,26 @@ await createCollection(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Inheriting royalties from the collection
+
+When minting to an MPL-Core collection, you can store a **sentinel** seller fee basis points value on the leaf (`65535`, exported as `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`) instead of copying the collection's royalty percentage into every cNFT. Marketplaces and indexers resolve the effective royalty from the collection's [Royalties plugin](/smart-contracts/core/plugins/royalties) at display time, while the on-chain leaf keeps the sentinel for hashing.
+
+The JavaScript SDK's `mintV2` helper defaults to this behavior when `coreCollection` is provided and `metadata.sellerFeeBasisPoints` is omitted.
+
+**Requirements:**
+
+- The MPL-Core collection must have both the `BubblegumV2` and `Royalties` plugins.
+- `metadata.creators` must be an **empty array** when using inherited seller fees. Creator splits come from the collection's Royalties plugin instead of leaf-level creators.
+- Inherited seller fees are only valid for cNFTs in a collection. Collectionless mints must use an explicit value between `0` and `10000`.
+
+{% code-tabs-imported from="bubblegum/mint-inherit-royalties" frameworks="umi" /%}
+
+You can still pass an explicit `sellerFeeBasisPoints` to override the collection default for a single mint.
+
+{% callout type="note" title="Collection removal" %}
+A cNFT with inherited seller fees cannot be removed from its collection until the seller fee is updated to an explicit value. See [Managing Collections](/smart-contracts/bubblegum-v2/collections#inherited-royalties) and [Updating Compressed NFTs](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties).
+{% /callout %}
+
 ### Get Asset ID and Leaf Schema from mint transaction {% #get-leaf-schema-from-mint-transaction %}
 
 You can retrieve the leaf and determine the asset ID from the `mintV2` transaction using the `parseLeafFromMintV2Transaction` helper. This function parses the Transaction, therefore you have to make sure that it has been finalized before calling `parseLeafFromMintV2Transaction`.
@@ -175,6 +198,7 @@ const assetId = leaf.id;
 
 - The Bubblegum Tree must be created before minting. See [Creating Trees](/smart-contracts/bubblegum-v2/create-trees).
 - For collection mints, the MPL-Core collection must have the `BubblegumV2` plugin enabled.
+- To inherit royalties from a collection, the collection must also have the `Royalties` plugin and the leaf's `creators` array must be empty.
 - The collection authority must sign the transaction when minting to a collection, regardless of whether the tree is public or private.
 - Use `parseLeafFromMintV2Transaction` only after the transaction is **finalized**, not just confirmed.
 
@@ -194,7 +218,11 @@ Only if the tree was created with `public: true`. For private trees, only the Tr
 
 ### What metadata fields are required for minting?
 
-The `MetadataArgsV2` struct requires: `name` (string), `uri` (string pointing to JSON metadata), `sellerFeeBasisPoints` (0-10000), `collection` (public key or none), and `creators` (array of creator objects).
+The `MetadataArgsV2` struct requires: `name` (string), `uri` (string pointing to JSON metadata), `sellerFeeBasisPoints` (0-10000, or omit when minting to a collection to inherit from its Royalties plugin), `collection` (public key or none), and `creators` (array of creator objects; must be empty when inheriting royalties).
+
+### Can a cNFT inherit royalties from its MPL-Core collection?
+
+Yes. When minting with `coreCollection`, omit `metadata.sellerFeeBasisPoints` and leave `metadata.creators` empty. The SDK stores `SELLER_FEE_BASIS_POINTS_INHERIT` (`65535`) on the leaf. The collection must have the `Royalties` plugin. See [Inheriting royalties from the collection](#inheriting-royalties-from-the-collection).
 
 ## Glossary
 
@@ -202,6 +230,7 @@ The `MetadataArgsV2` struct requires: `name` (string), `uri` (string pointing to
 |------|------------|
 | **mintV2** | The Bubblegum V2 instruction for minting compressed NFTs, replacing the V1 mint instructions |
 | **MetadataArgsV2** | The metadata structure passed to mintV2, containing name, URI, royalties, collection, and creators |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` (`0xffff`) stored on-chain to indicate royalties are inherited from the MPL-Core collection |
 | **Collection Authority** | The signer authorized to manage the MPL-Core collection — required when minting to a collection |
 | **BubblegumV2 Plugin** | An MPL-Core collection plugin that enables Bubblegum V2 features (freeze, soulbound, royalties) |
 | **Asset ID** | A PDA derived from the merkle tree address and leaf index, uniquely identifying a compressed NFT |

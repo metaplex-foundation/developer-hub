@@ -3,7 +3,7 @@ title: NFTデータのハッシュ化
 metaTitle: NFTデータのハッシュ化 - Bubblegum V2
 description: BubblegumでNFTデータがどのようにハッシュ化されるかについて詳しく学びます。
 created: '2025-01-15'
-updated: '2026-02-24'
+updated: '06-19-2026'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -40,7 +40,8 @@ pub struct MetadataArgsV2 {
     pub symbol: String,
     /// アセットを表すJSONを指すURI
     pub uri: String,
-    /// 二次販売で作成者に行くロイヤリティベーシスポイント（0-10000）
+    /// 二次販売で作成者に行くロイヤリティベーシスポイント（0-10000）、
+    /// または MPL-Core コレクションの Royalties プラグインから継承する場合は u16::MAX（65535）。
     pub seller_fee_basis_points: u16,
     /// 不変、一度変更されると、このメタデータのすべての販売は二次とみなされる。
     pub primary_sale_happened: bool,
@@ -54,6 +55,8 @@ pub struct MetadataArgsV2 {
     pub collection: Option<Pubkey>,
 }
 ```
+
+`seller_fee_basis_points` が `65535`（`0xffff`、`SELLER_FEE_BASIS_POINTS_INHERIT`）の場合、リーフにはリテラルなロイヤリティ率ではなくセンチネルが保存されます。データハッシュはコレクションの解決済みベーシスポイントではなく、このセンチネル値から計算されます。インデクサーと JavaScript SDK の `getAssetWithProof` ヘルパーは、オンチェーンセンチネル（`currentMetadata`）と解決済み表示値（`metadata`）の両方を公開する場合があります。[コレクションからロイヤリティを継承する](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)を参照してください。
 
 cNFTのメタデータは、図に示され以下に説明されているように複数回ハッシュ化されます：
 
@@ -282,6 +285,7 @@ impl LeafSchema {
 | Term | Definition |
 |------|------------|
 | **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | MPL-Core コレクションからロイヤリティが継承される場合に `seller_fee_basis_points` に保存されるセンチネル `65535` |
 | **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
 | **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
 | **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |

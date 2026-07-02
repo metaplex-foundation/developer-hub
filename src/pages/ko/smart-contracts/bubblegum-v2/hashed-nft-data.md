@@ -3,7 +3,7 @@ title: NFT 데이터 해싱
 metaTitle: NFT 데이터 해싱 - Bubblegum V2
 description: Bubblegum에서 NFT 데이터가 해싱되는 방식에 대해 자세히 알아보세요.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -281,7 +281,8 @@ pub struct MetadataArgsV2 {
     pub symbol: String,
     /// 자산을 나타내는 JSON을 가리키는 URI
     pub uri: String,
-    /// 2차 판매에서 창작자에게 지불되는 로열티 베이시스 포인트 (0-10000)
+    /// 2차 판매에서 창작자에게 지불되는 로열티 베이시스 포인트 (0-10000),
+    /// 또는 MPL-Core 컬렉션의 Royalties 플러그인에서 상속하려면 u16::MAX(65535).
     pub seller_fee_basis_points: u16,
     /// 불변, 한 번 뒤집히면 이 메타데이터의 모든 판매가 2차 판매로 간주됩니다.
     pub primary_sale_happened: bool,
@@ -295,6 +296,8 @@ pub struct MetadataArgsV2 {
     pub collection: Option<Pubkey>,
 }
 ```
+
+`seller_fee_basis_points`가 `65535`(`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`)이면 리프에는 리터럴 로열티 비율 대신 센티널이 저장됩니다. 데이터 해시는 컬렉션의 해석된 basis points가 아니라 이 센티널 값에서 계산됩니다. 인덱서와 JavaScript SDK의 `getAssetWithProof` 헬퍼는 온체인 센티널(`currentMetadata`)과 해석된 표시 값(`metadata`)을 모두 노출할 수 있습니다. [컬렉션에서 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)을 참조하세요.
 
 cNFT의 메타데이터는 아래 다이어그램에 표시되고 설명된 대로 여러 번 해싱됩니다:
 
@@ -523,6 +526,7 @@ impl LeafSchema {
 | Term | Definition |
 |------|------------|
 | **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | MPL-Core 컬렉션에서 로열티가 상속될 때 `seller_fee_basis_points`에 저장되는 센티널 `65535` |
 | **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
 | **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
 | **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |

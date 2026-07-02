@@ -3,7 +3,7 @@ title: Hashing NFT Data
 metaTitle: Hashing NFT Data - Bubblegum V2 - Metaplex
 description: Learn how compressed NFT data is hashed into merkle tree leaves in Bubblegum V2. Covers MetadataArgsV2, data hash, creator hash, collection hash, and LeafSchemaV2.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -40,7 +40,8 @@ pub struct MetadataArgsV2 {
     pub symbol: String,
     /// URI pointing to JSON representing the asset
     pub uri: String,
-    /// Royalty basis points that goes to creators in secondary sales (0-10000)
+    /// Royalty basis points that goes to creators in secondary sales (0-10000),
+    /// or u16::MAX (65535) to inherit from an MPL-Core collection's Royalties plugin.
     pub seller_fee_basis_points: u16,
     /// Immutable, once flipped, all sales of this metadata are considered secondary.
     pub primary_sale_happened: bool,
@@ -54,6 +55,8 @@ pub struct MetadataArgsV2 {
     pub collection: Option<Pubkey>,
 }
 ```
+
+When `seller_fee_basis_points` is `65535` (`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`), the leaf stores a sentinel instead of a literal royalty percentage. The data hash is computed from this sentinel value, not from the collection's resolved basis points. Indexers and the JavaScript SDK's `getAssetWithProof` helper may expose both the on-chain sentinel (`currentMetadata`) and a resolved display value (`metadata`). See [Inheriting royalties from the collection](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection).
 
 The cNFT's metadata is hashed multiple times as shown in the diagram and described below:
 
@@ -283,6 +286,7 @@ Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn
 | Term | Definition |
 |------|------------|
 | **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel `65535` stored in `seller_fee_basis_points` when royalties are inherited from the MPL-Core collection |
 | **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
 | **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
 | **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |

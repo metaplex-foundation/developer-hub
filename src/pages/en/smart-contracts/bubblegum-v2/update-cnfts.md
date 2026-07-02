@@ -3,7 +3,7 @@ title: Updating Compressed NFTs
 metaTitle: Updating Compressed NFTs - Bubblegum V2 - Metaplex
 description: Learn how to update compressed NFT metadata using Bubblegum V2. Covers update authority for collection-based and tree-based cNFTs.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - update compressed NFT
   - update cNFT
@@ -24,6 +24,8 @@ faqs:
     a: You can update the name, URI, seller fee basis points, and other metadata fields defined in UpdateArgsArgs. Use some('newValue') for fields you want to change.
   - q: Do I need to pass the collection when updating?
     a: Yes, if the cNFT belongs to a collection. Pass the coreCollection parameter with the collection's public key. The collection authority must sign the transaction.
+  - q: How do I update a cNFT that inherits royalties from its collection?
+    a: Pass currentMetadata from getAssetWithProof (which preserves the on-chain sentinel) and use updateArgs.sellerFeeBasisPoints to set an explicit value when needed.
 ---
 
 ## Summary
@@ -34,6 +36,7 @@ faqs:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
+- Use `currentMetadata` from `getAssetWithProof` for leaf verification (especially when seller fees are inherited)
 
 The **updateMetadataV2** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.
 
@@ -90,7 +93,7 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.metadata,
+  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
   updateArgs,
   // Optional param. If your authority is a different signer type 
   // than the current umi identity assign that signer here.
@@ -100,6 +103,23 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+{% callout type="note" title="Use currentMetadata, not metadata" %}
+For V2 cNFTs, `getAssetWithProof` returns two royalty-related shapes:
+
+- **`metadata`** — display-friendly values. For inherited royalties, `sellerFeeBasisPoints` may show the resolved collection percentage.
+- **`currentMetadata`** — the canonical on-chain metadata used for leaf hashing and update instructions. For inherited royalties, this keeps the `SELLER_FEE_BASIS_POINTS_INHERIT` sentinel (`65535`).
+
+Always pass `currentMetadata` to `updateMetadataV2`, `setCollectionV2`, and other write instructions that verify the existing leaf.
+{% /callout %}
+
+## Inherited royalties {% #inherited-royalties %}
+
+You can switch a cNFT **to** inherited royalties by setting `updateArgs.sellerFeeBasisPoints` to `some(SELLER_FEE_BASIS_POINTS_INHERIT)`. The collection must have the `Royalties` plugin and the updated metadata must have an empty `creators` array.
+
+To switch **from** inherited royalties back to an explicit percentage — for example before [removing the cNFT from its collection](/smart-contracts/bubblegum-v2/collections#inherited-royalties) — pass the desired basis points:
+
+{% code-tabs-imported from="bubblegum/update-inherit-royalties" frameworks="umi" /%}
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -108,8 +128,9 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
+- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates. Do not substitute `metadata` when `currentMetadata` is present.
 - Use `some()` for fields to update; omit fields you wish to leave unchanged.
+- Inherited seller fees require an empty leaf-level `creators` array and a collection with the `Royalties` plugin.
 
 ## FAQ
 
@@ -125,6 +146,10 @@ You can update the name, URI, seller fee basis points, and other metadata fields
 
 Yes, if the cNFT belongs to a collection. Pass the `coreCollection` parameter with the collection's public key. The collection authority must sign the transaction.
 
+### How do I update a cNFT that inherits royalties from its collection?
+
+Pass `currentMetadata` from `getAssetWithProof` to preserve the on-chain sentinel for verification. Use `updateArgs.sellerFeeBasisPoints` with `some(SELLER_FEE_BASIS_POINTS_INHERIT)` to switch to inherited royalties, or an explicit number to switch away from them.
+
 ## Glossary
 
 | Term | Definition |
@@ -133,4 +158,5 @@ Yes, if the cNFT belongs to a collection. Pass the `coreCollection` parameter wi
 | **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
 | **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
 | **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | The existing metadata of the cNFT, fetched via getAssetWithProof and required for verification |
+| **currentMetadata** | The canonical on-chain metadata from `getAssetWithProof`, required for leaf verification on write instructions |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` indicating royalties are inherited from the MPL-Core collection |

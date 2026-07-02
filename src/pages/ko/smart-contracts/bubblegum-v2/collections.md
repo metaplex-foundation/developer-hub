@@ -3,7 +3,7 @@ title: 컬렉션 관리
 metaTitle: 컬렉션 관리 - Bubblegum V2
 description: Bubblegum에서 컬렉션을 설정, 확인 및 확인 해제하는 방법을 알아보세요.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - NFT collection
   - verify collection
@@ -26,6 +26,8 @@ faqs:
     a: 예. coreCollection(현재)과 newCoreCollection(새로운) 매개변수 모두와 함께 setCollectionV2를 사용하세요. 두 컬렉션 권한이 모두 서명해야 합니다.
   - q: BubblegumV2 플러그인이란 무엇인가요?
     a: 컬렉션에서 동결/해동, 소울바운드 cNFT, 로열티 강제와 같은 Bubblegum V2 기능을 활성화하는 MPL-Core 컬렉션 플러그인입니다.
+  - q: 로열티를 상속하는 cNFT를 컬렉션에서 제거할 수 있나요?
+    a: 아니요. 먼저 sellerFeeBasisPoints를 명시적인 값으로 업데이트한 다음 setCollectionV2로 컬렉션을 제거하세요.
 ---
 
 ## Summary
@@ -119,15 +121,38 @@ const signature = await setCollectionV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## 상속된 로열티 {% #inherited-royalties %}
+
+[컬렉션에서 seller fee basis points를 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)하여 민팅된 cNFT는 리프에 센티널 값 `65535`를 저장합니다. 이는 컬렉션 관리에 영향을 줍니다:
+
+- **컬렉션 제거** — 리프가 여전히 상속 센티널을 사용하는 동안 `setCollectionV2`는 작업을 거부합니다. 먼저 [`updateMetadataV2`](/ko/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)를 통해 cNFT의 `sellerFeeBasisPoints`를 명시적인 값으로 업데이트하세요.
+- **다른 컬렉션으로 이동** — 대상 컬렉션에 `Royalties` 플러그인이 있으면 허용됩니다. cNFT는 상속 센티널을 유지하고 새 컬렉션에서 로열티를 해석합니다.
+- **로열티가 없는 컬렉션으로 이동** — `CollectionMustHaveRoyaltiesPlugin`으로 거부됩니다.
+
 ## Notes
 
 - The MPL-Core collection must have the `BubblegumV2` plugin enabled before cNFTs can be added to it.
 - Unlike Bubblegum V1 (which uses Token Metadata collections with a "verified" boolean), V2 uses MPL-Core collections without verification flags.
 - When changing between collections, both the old and new collection authorities must sign the transaction.
+- 상속된 seller fee를 사용하는 cNFT는 리프에서 로열티가 명시적인 값으로 설정될 때까지 컬렉션에서 제거할 수 없습니다.
 
 ## FAQ
 
-#
+### 민팅 후 cNFT를 컬렉션에 추가하려면 어떻게 해야 하나요?
+
+컬렉션의 공개 키로 `newCoreCollection` 매개변수를 설정하여 `setCollectionV2` 명령을 사용하세요. 컬렉션 권한이 서명해야 합니다.
+
+### cNFT의 컬렉션을 변경할 수 있나요?
+
+예. `coreCollection`(현재)과 `newCoreCollection`(새로운) 모두와 함께 `setCollectionV2`를 사용하세요. 권한이 다른 계정인 경우 두 컬렉션 권한이 모두 서명해야 합니다.
+
+### BubblegumV2 플러그인이란 무엇인가요?
+
+동결/해동, 소울바운드 cNFT, 로열티 강제, 컬렉션 수준의 영구 위임자 등 Bubblegum V2 기능을 활성화하는 MPL-Core 컬렉션 플러그인입니다.
+
+### 로열티를 상속하는 cNFT를 컬렉션에서 제거할 수 있나요?
+
+아니요. 프로그램은 `CannotRemoveFromCollectionWithInheritedSellerFee`를 반환합니다. 먼저 `updateMetadataV2`로 `sellerFeeBasisPoints`를 명시적인 값으로 설정한 다음 `setCollectionV2`를 호출하여 컬렉션을 제거하세요.
 
 ## Glossary
 

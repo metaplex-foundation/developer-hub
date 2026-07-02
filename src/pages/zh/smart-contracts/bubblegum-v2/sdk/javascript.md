@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK - Bubblegum V2 - Metaplex
 description: Metaplex Bubblegum V2 JavaScript SDK 完整参考文档，涵盖 Umi 设置、创建树、铸造、转移、销毁、更新、委托、冻结以及获取压缩 NFT。
 created: '01-15-2025'
-updated: '02-25-2026'
+updated: '06-19-2026'
 keywords:
   - mpl-bubblegum JavaScript
   - Bubblegum V2 TypeScript SDK
@@ -197,6 +197,14 @@ await mintV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+### 从集合继承版税
+
+当设置了 `coreCollection` 时，如果省略 `metadata.sellerFeeBasisPoints`，SDK 的 `mintV2` 辅助函数默认使用继承版税。叶子上存储 `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）。集合必须具有 `Royalties` 插件，且 `metadata.creators` 必须为空。
+
+{% code-tabs-imported from="bubblegum/mint-inherit-royalties" frameworks="umi" /%}
+
+有关集合设置和约束，请参阅[铸造压缩 NFT — 继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
+
 ### 铸造后获取资产 ID
 
 铸造确认后，使用 `parseLeafFromMintV2Transaction` 获取叶子模式（包括资产 ID）。
@@ -276,12 +284,14 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.metadata,
+  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
   updateArgs,
   // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
+
+对于继承版税的 cNFT，请优先使用 `currentMetadata` 而非 `metadata` — 请参阅下方的 [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata)。
 
 ## 委托压缩 NFT
 
@@ -484,6 +494,19 @@ await unverifyCreatorV2(umi, {
 
 DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 了解可用方法的完整说明。
 
+### getAssetWithProof：metadata 与 currentMetadata {% #getassetwithproof-metadata-vs-currentmetadata %}
+
+`getAssetWithProof` 将 `getAsset` 和 `getAssetProof` 合并为写入指令所需的参数形态。对于 V2 cNFT，它还返回：
+
+| Field | Purpose |
+|-------|---------|
+| `metadata` | 便于显示的元数据。当版税被继承时，`sellerFeeBasisPoints` 可能显示 DAS 响应中已解析的集合百分比。 |
+| `currentMetadata` | 用于叶子验证的规范链上元数据。当版税被继承时，保留 `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）。请将其传给 `updateMetadataV2`、`setCollectionV2` 等指令。 |
+
+如果 DAS 响应仍包含原始哨兵，可传入可选的 `resolveCollectionSellerFeeBasisPoints` 回调，在保留 `currentMetadata` 中哨兵的同时解析显示版税。
+
+{% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
+
 ### 获取单个 cNFT
 
 ```ts {% title="fetch-asset.ts" %}
@@ -606,7 +629,8 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 | `setNonTransferableV2` | 使 cNFT 永久灵魂绑定（不可逆） |
 | `verifyCreatorV2` | 在创建者条目上设置 verified 标志 |
 | `unverifyCreatorV2` | 从创建者条目中移除 verified 标志 |
-| `getAssetWithProof` | 获取写入指令所需的所有证明参数 |
+| `getAssetWithProof` | 获取证明参数并区分显示用元数据与链上 `currentMetadata` |
+| `SELLER_FEE_BASIS_POINTS_INHERIT` | 从 MPL-Core 集合继承版税的哨兵常量（`65535`） |
 | `findLeafAssetIdPda` | 从树地址和叶子索引推导 cNFT 资产 ID |
 | `parseLeafFromMintV2Transaction` | 从铸造交易中提取叶子模式（包括资产 ID） |
 

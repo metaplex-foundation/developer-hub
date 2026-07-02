@@ -3,7 +3,7 @@ title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegum에 대한 자주 묻는 질문.
 created: '2025-01-15'
-updated: '2026-02-24'
+updated: '06-19-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -35,6 +35,8 @@ faqs:
     a: 압축 해제는 Bubblegum V1 자산에서만 사용할 수 있습니다. V2는 압축 해제를 지원하지 않습니다.
   - q: 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요?
     a: 최대값은 2^maxDepth입니다. 깊이 30의 트리는 10억 개 이상의 cNFT를 보유할 수 있지만, 트리가 클수록 렌트 비용이 더 많이 듭니다.
+  - q: cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요?
+    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 표시 시 컬렉션에서 로열티가 해석됩니다. 쓰기 명령에는 getAssetWithProof의 currentMetadata를 사용하세요.
 ---
 
 ## Summary
@@ -45,6 +47,7 @@ faqs:
 - `truncateCanopy` 또는 주소 조회 테이블로 "트랜잭션이 너무 큽니다" 오류 해결하기
 - 트리를 생성하기 전에 트리 비용과 용량 이해하기
 - Bubblegum V2는 V1 트리 또는 압축 해제와 하위 호환되지 않음
+- cNFT는 MPL-Core 컬렉션의 Royalties 플러그인에서 seller fee basis points를 상속할 수 있음
 
 ## Bubblegum V2란 무엇인가요?
 
@@ -148,3 +151,32 @@ await transferV2(umi, {
    다른 접근 방식은 [버전화된 트랜잭션과 주소 조회 테이블](/ko/dev-tools/umi/toolbox/address-lookup-table)을 구현하는 것입니다. 이 방법은 트랜잭션 크기를 더 효과적으로 관리하는 데 도움이 될 수 있습니다.
 
 이러한 기술을 적용하면 트랜잭션 크기 제한을 극복하고 작업을 성공적으로 실행할 수 있습니다.
+
+## 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요? {% #tree-capacity %}
+
+cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊이 20은 약 100만 개, 깊이 24는 약 1,600만 개, 깊이 30은 10억 개 이상의 cNFT를 보유할 수 있습니다. 모든 옵션은 [트리 용량 표](/ko/smart-contracts/bubblegum-v2/create-trees)를 참조하세요.
+
+## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
+
+예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나(`SELLER_FEE_BASIS_POINTS_INHERIT`, `65535` 전달) 할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장되고, 마켓플레이스와 인덱서는 표시 시 컬렉션에서 실효 로열티를 해석합니다.
+
+**요구 사항:**
+
+- 컬렉션에는 `BubblegumV2`와 `Royalties` 플러그인이 모두 있어야 합니다.
+- 상속된 seller fee를 사용할 때 `metadata.creators`는 빈 배열이어야 합니다.
+
+**흔한 실수 — `metadata` vs `currentMetadata`:**
+
+`getAssetWithProof`는 상속된 cNFT에 대해 로열티 관련 두 가지 형태를 반환할 수 있습니다:
+
+- **`metadata`** — 표시용 값. `sellerFeeBasisPoints`가 해석된 컬렉션 비율을 표시할 수 있습니다.
+- **`currentMetadata`** — 리프 검증용 정규 온체인 메타데이터. 상속 센티널(`65535`)을 유지합니다.
+
+`updateMetadataV2`, `setCollectionV2` 등 쓰기 명령에는 항상 `currentMetadata`를 전달하세요. Bubblegum Umi 라이브러리를 사용하면 올바른 메타데이터가 자동으로 전달됩니다.
+
+**컬렉션 관리:**
+
+- 상속된 seller fee를 사용하는 cNFT는 명시적인 `sellerFeeBasisPoints`로 업데이트할 때까지 컬렉션에서 **제거할 수 없습니다**.
+- 대상에 `Royalties` 플러그인이 있으면 다른 컬렉션으로 이동할 수 있습니다.
+
+전체 예제는 [민팅 — 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [cNFT 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), [컬렉션 관리](/ko/smart-contracts/bubblegum-v2/collections#inherited-royalties)를 참조하세요.
