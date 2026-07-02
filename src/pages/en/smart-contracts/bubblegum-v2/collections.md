@@ -3,7 +3,7 @@ title: Managing Collections
 metaTitle: Managing Collections - Bubblegum V2 - Metaplex
 description: Learn how to set, change, and remove MPL-Core collections on compressed NFTs using Bubblegum V2. Covers the setCollectionV2 instruction.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - NFT collection
   - verify collection
@@ -26,6 +26,8 @@ faqs:
     a: Yes. Use setCollectionV2 with both coreCollection (current) and newCoreCollection (new) parameters. Both collection authorities must sign.
   - q: What is the BubblegumV2 plugin?
     a: It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, and royalty enforcement on the collection.
+  - q: Can I remove a cNFT from a collection when it inherits royalties?
+    a: No. Update sellerFeeBasisPoints to an explicit value first, then remove the collection with setCollectionV2.
 ---
 
 ## Summary
@@ -118,12 +120,20 @@ const signature = await setCollectionV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## Inherited royalties {% #inherited-royalties %}
+
+cNFTs minted with [inherited seller fee basis points](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection) store the sentinel value `65535` on the leaf. This affects collection management:
+
+- **Removing a collection** — `setCollectionV2` rejects the operation while the leaf still uses the inherit sentinel. Update the cNFT to an explicit `sellerFeeBasisPoints` first via [`updateMetadataV2`](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties).
+- **Moving to another collection** — Allowed when the destination collection has the `Royalties` plugin. The cNFT keeps the inherit sentinel and resolves royalties from the new collection.
+- **Moving to a collection without royalties** — Rejected with `CollectionMustHaveRoyaltiesPlugin`.
 
 ## Notes
 
 - The MPL-Core collection must have the `BubblegumV2` plugin enabled before cNFTs can be added to it.
 - Unlike Bubblegum V1 (which uses Token Metadata collections with a "verified" boolean), V2 uses MPL-Core collections without verification flags.
 - When changing between collections, both the old and new collection authorities must sign the transaction.
+- cNFTs with inherited seller fees cannot be removed from a collection until royalties are set to an explicit value on the leaf.
 
 ## FAQ
 
@@ -138,6 +148,10 @@ Yes. Use `setCollectionV2` with both `coreCollection` (current) and `newCoreColl
 ### What is the BubblegumV2 plugin?
 
 It is an MPL-Core collection plugin that enables Bubblegum V2 features like freeze/thaw, soulbound cNFTs, royalty enforcement, and permanent delegates on the collection level.
+
+### Can I remove a cNFT from a collection when it inherits royalties?
+
+No. The program returns `CannotRemoveFromCollectionWithInheritedSellerFee`. Use `updateMetadataV2` to set an explicit `sellerFeeBasisPoints` value first, then call `setCollectionV2` to remove the collection.
 
 ## Glossary
 
