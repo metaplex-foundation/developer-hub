@@ -53,7 +53,7 @@ Collection 账户存储和可访问的数据如下：
 | currentSize | 当前合集中的 Asset 数量 |
 
 {% callout type="note" %}
-Core Collection 仅对 Core Asset 进行分组。Token Metadata NFT 请使用 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)，压缩 NFT 请使用 [Bubblegum](/smart-contracts/bubblegum)。
+Core Collection 仅对 Core Asset 进行分组。若要在更高层级分类中组织多个合集或独立资产，请参阅 [Core Groups](/zh/smart-contracts/core/groups)。Token Metadata NFT 请使用 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)，压缩 NFT 请使用 [Bubblegum](/zh/smart-contracts/bubblegum)。
 {% /callout %}
 
 ## 管理合集成员资格

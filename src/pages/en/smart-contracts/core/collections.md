@@ -53,7 +53,7 @@ The data stored and accessible from the Collection account is as follows:
 | currentSize | The number of Assets currently in the collection |
 
 {% callout type="note" %}
-Core Collections only group Core Assets. To work with Token Metadata NFTs use [mpl-token-metadata](https://developers.metaplex.com/token-metadata). For compressed NFTs use [Bubblegum](/smart-contracts/bubblegum).
+Core Collections only group Core Assets. To organize multiple collections or standalone assets under a higher-level taxonomy, see [Core Groups](/smart-contracts/core/groups). To work with Token Metadata NFTs use [mpl-token-metadata](https://developers.metaplex.com/token-metadata). For compressed NFTs use [Bubblegum](/smart-contracts/bubblegum).
 {% /callout %}
 
 ## Managing Collection Membership
