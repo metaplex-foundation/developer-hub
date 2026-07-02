@@ -53,7 +53,7 @@ Collectionアカウントに保存されるデータは次のとおりです：
 | currentSize | 現在コレクション内にあるAsset数 |
 
 {% callout type="note" %}
-Core CollectionはCore Assetのみをグループ化します。Token Metadata NFTには[mpl-token-metadata](https://developers.metaplex.com/token-metadata)を、圧縮NFTには[Bubblegum](/smart-contracts/bubblegum)を使用してください。
+Core CollectionはCore Assetのみをグループ化します。複数のコレクションやスタンドアロンアセットを上位の分類で整理するには [Core Groups](/ja/smart-contracts/core/groups) を参照してください。Token Metadata NFTには[mpl-token-metadata](https://developers.metaplex.com/token-metadata)を、圧縮NFTには[Bubblegum](/ja/smart-contracts/bubblegum)を使用してください。
 {% /callout %}
 
 ## コレクションメンバーシップの管理
