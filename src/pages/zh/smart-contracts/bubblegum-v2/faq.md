@@ -3,7 +3,7 @@ title: 常见问题
 metaTitle: 常见问题 - Bubblegum V2
 description: 关于Bubblegum的常见问题。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -35,6 +35,8 @@ faqs:
     a: 解压缩仅适用于Bubblegum V1资产。V2不支持解压缩。
   - q: 一棵树可以存储多少个cNFT？
     a: 最大值为2^maxDepth。深度为30的树可以容纳超过10亿个cNFT，但树越大租金成本越高。
+  - q: cNFT可以从MPL-Core集合继承版税吗？
+    a: 可以。铸造到具有Royalties插件的集合时，省略sellerFeeBasisPoints。叶子上存储继承哨兵（65535），并在显示时从集合解析版税。写入指令请使用getAssetWithProof的currentMetadata。
 ---
 
 ## Summary
@@ -45,6 +47,7 @@ faqs:
 - 使用`truncateCanopy`或地址查找表解决"交易过大"错误
 - 创建树之前了解树的成本和容量
 - Bubblegum V2与V1树或解压缩不向后兼容
+- cNFT可以从MPL-Core集合的Royalties插件继承seller fee basis points
 
 ## 什么是Bubblegum V2？
 
@@ -154,3 +157,32 @@ await transferV2(umi, {
    另一种方法是实现[版本化交易和地址查找表](/zh/dev-tools/umi/toolbox/address-lookup-table)。此方法可以帮助更有效地管理交易大小。
 
 通过应用这些技术，您可以克服交易大小限制并成功执行您的操作。
+
+## 一棵树可以存储多少个cNFT？ {% #tree-capacity %}
+
+cNFT 的最大数量是 `2^maxDepth`。深度 14 的树可容纳 16,384 个，深度 20 约 100 万个，深度 24 约 1,600 万个，深度 30 超过 10 亿个。所有选项请参阅[树容量表](/zh/smart-contracts/bubblegum-v2/create-trees)。
+
+## cNFT 可以从 MPL-Core 集合继承版税吗？ {% #inherited-royalties %}
+
+可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上存储该哨兵值，而市场和索引器在显示时从集合解析有效版税。
+
+**要求:**
+
+- 集合必须同时具有 `BubblegumV2` 和 `Royalties` 插件。
+- 使用继承 seller fee 时，`metadata.creators` 必须是空数组。
+
+**常见陷阱 — `metadata` 与 `currentMetadata`:**
+
+`getAssetWithProof` 可能为继承版税的 cNFT 返回两种与版税相关的形态：
+
+- **`metadata`** — 便于显示的值；`sellerFeeBasisPoints` 可能显示已解析的集合百分比。
+- **`currentMetadata`** — 用于叶子验证的规范链上元数据；保留继承哨兵（`65535`）。
+
+请始终将 `currentMetadata` 传给 `updateMetadataV2`、`setCollectionV2` 等写入指令。如果使用 Bubblegum Umi 库，它会自动传入正确的元数据。
+
+**集合管理:**
+
+- 具有继承 seller fee 的 cNFT 在更新为明确的 `sellerFeeBasisPoints` 之前**无法**从集合中移除。
+- 当目标集合具有 `Royalties` 插件时，允许移动到另一个集合。
+
+完整示例请参阅[铸造 — 继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[更新 cNFT](/zh/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)和[管理集合](/zh/smart-contracts/bubblegum-v2/collections#inherited-royalties)。

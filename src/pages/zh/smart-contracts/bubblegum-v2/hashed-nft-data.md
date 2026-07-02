@@ -3,7 +3,7 @@ title: 哈希NFT数据
 metaTitle: 哈希NFT数据 - Bubblegum V2
 description: 了解更多关于Bubblegum上NFT数据如何被哈希的信息。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -281,7 +281,8 @@ pub struct MetadataArgsV2 {
     pub symbol: String,
     /// 指向代表资产的JSON的URI
     pub uri: String,
-    /// 二级销售中给予创作者的版税基点（0-10000）
+    /// 二级销售中给予创作者的版税基点（0-10000），
+    /// 或 u16::MAX（65535）以从 MPL-Core 集合的 Royalties 插件继承。
     pub seller_fee_basis_points: u16,
     /// 不可变，一旦翻转，此元数据的所有销售都被视为二级销售
     pub primary_sale_happened: bool,
@@ -295,6 +296,8 @@ pub struct MetadataArgsV2 {
     pub collection: Option<Pubkey>,
 }
 ```
+
+当 `seller_fee_basis_points` 为 `65535`（`0xffff`，`SELLER_FEE_BASIS_POINTS_INHERIT`）时，叶子上存储的是哨兵值而非字面版税百分比。数据哈希根据该哨兵值计算，而非根据集合的已解析 basis points。索引器和 JavaScript SDK 的 `getAssetWithProof` 辅助函数可能同时暴露链上哨兵（`currentMetadata`）和已解析的显示值（`metadata`）。请参阅[从集合继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
 
 cNFT的元数据被多次哈希，如图表所示并在下面描述：
 
@@ -523,6 +526,7 @@ impl LeafSchema {
 | Term | Definition |
 |------|------------|
 | **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | 从 MPL-Core 集合继承版税时存储在 `seller_fee_basis_points` 中的哨兵值 `65535` |
 | **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
 | **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
 | **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |
