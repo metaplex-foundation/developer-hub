@@ -2,6 +2,7 @@
 title: Core Groups
 metaTitle: Core Groups Overview | Metaplex Core
 description: An overview of mpl-core GroupV1 accounts — how they group collections, assets, and nested groups for taxonomy.
+created: '07-02-2026'
 updated: '07-02-2026'
 keywords:
   - mpl-core groups
@@ -39,6 +40,8 @@ faqs:
 
 ## Collections vs Groups
 
+Collections and groups solve different problems: collections manage member NFTs, while groups provide higher-level taxonomy across collections, assets, and child groups.
+
 | | **Collection** | **Group** |
 | --- | --- | --- |
 | Purpose | Shared metadata and plugins for a series of NFTs | Taxonomy / directory over collections, assets, and groups |
@@ -67,15 +70,9 @@ On-chain limits (from mpl-core):
 - **256** entries max per vector (`collections`, `groups`, `parentGroups`, `assets`)
 - **8** parent groups max per group (`MAX_GROUP_NESTING_DEPTH`)
 
-{% callout type="note" %}
-Groups do not traverse collection membership automatically. Adding a collection to a group does not add that collection’s NFTs to `group.assets`. To work with NFTs in a grouped collection, operate on the collection and its assets separately.
-{% /callout %}
-
 ## Groups plugin
 
 When a collection or asset is added to a group, mpl-core ensures a **Groups** authority-managed plugin exists on that member. The plugin stores the parent group public keys.
-
-The Groups plugin also blocks burning a **group member itself** (the collection account or a directly grouped asset) while it still belongs to at least one group. Burning an asset inside a grouped collection does not remove the collection from the group.
 
 ## Creating groups
 
@@ -124,9 +121,26 @@ To list all groups for an update authority, use `getGroupV1GpaBuilder` (a GPA qu
 
 {% code-tabs-imported from="core/fetch-groups-by-authority" frameworks="umi" /%}
 
+## Notes
+
+- Groups do not traverse collection membership automatically. Adding a collection to a group does not add that collection’s NFTs to `group.assets`. To work with NFTs in a grouped collection, operate on the collection and its assets separately
+- The Groups plugin blocks burning a **group member itself** (the collection account or a directly grouped asset) while it still belongs to at least one group. Burning an asset inside a grouped collection does not remove the collection from the group
+
+## Glossary
+
+| Term | Definition |
+| --- | --- |
+| **GroupV1** | A Core account that organizes collections, assets, and child groups into a higher-level taxonomy |
+| **Groups plugin** | An authority-managed plugin on a member that stores parent group public keys |
+| **Direct member** | A collection, asset, or child group explicitly listed in a group’s on-chain vectors |
+
 ## Quick reference
 
+The tables below list the mpl-core program ID and SDK helpers for common group operations.
+
 ### Program ID
+
+The mpl-core program ID is the same on mainnet and devnet.
 
 | Network | Address |
 | --- | --- |
@@ -134,6 +148,8 @@ To list all groups for an update authority, use `getGroupV1GpaBuilder` (a GPA qu
 | Devnet | `CoREENxT6tW1HoK8ypY1SxRMZTcVPm7R94rH4PZNhX7d` |
 
 ### SDK helpers
+
+Use these SDK functions for create, fetch, update, and membership operations.
 
 | Task | Function |
 | --- | --- |
@@ -145,3 +161,29 @@ To list all groups for an update authority, use `getGroupV1GpaBuilder` (a GPA qu
 | Add asset | `addAssetsToGroup` |
 | Nest group | `addGroupsToGroup` |
 | Close | `closeGroup` |
+
+## FAQ
+
+### What is the difference between a Collection and a Group?
+
+A Collection groups Core Assets under shared metadata and collection-level plugins. A Group is a taxonomy container that can reference collections, standalone assets, and other groups. Collections answer “which series does this NFT belong to?” Groups answer “which higher-level set does this collection or asset belong to?”
+
+### Can a collection belong to multiple groups?
+
+Yes. When a collection is added to a group, mpl-core writes the parent group address into the collection’s Groups plugin. A collection can list multiple parent groups, up to the on-chain vector limit.
+
+### Can groups be nested?
+
+Yes. A group can contain child groups and also list parent groups. Parent/child links are kept in sync on both accounts. A group may belong to up to 8 parent groups.
+
+### Do assets inside a grouped collection automatically belong to the group?
+
+No. Group membership is stored on direct members only. Putting a collection in a group adds the collection to `group.collections` and writes the Groups plugin on the collection. NFTs minted into that collection are not automatically added to `group.assets`.
+
+### Can a standalone asset be a direct member of a group?
+
+Yes. Use `addAssetsToGroup` to add an asset directly to `group.assets` without a collection. Collection-managed assets can also be added explicitly when the correct authority signs.
+
+### Who can modify group membership?
+
+The group update authority signs add/remove instructions. For collection-managed assets, the collection update authority (or an authorized delegate) can add or remove those assets on the group’s behalf.
