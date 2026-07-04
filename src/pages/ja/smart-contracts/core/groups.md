@@ -128,6 +128,8 @@ update authority 別にグループを一覧するには `getGroupV1GpaBuilder`�
 
 ## Glossary
 
+以下の用語は、このページで使用する Core Groups の概念を定義します。
+
 | 用語 | 定義 |
 | --- | --- |
 | **GroupV1** | コレクション、アセット、子グループを上位分類にまとめる Core アカウント |

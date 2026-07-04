@@ -128,6 +128,8 @@ To list all groups for an update authority, use `getGroupV1GpaBuilder` (a GPA qu
 
 ## Glossary
 
+The terms below define the Core Groups concepts used on this page.
+
 | Term | Definition |
 | --- | --- |
 | **GroupV1** | A Core account that organizes collections, assets, and child groups into a higher-level taxonomy |

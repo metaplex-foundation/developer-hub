@@ -128,6 +128,8 @@ update authority별 그룹 목록은 `getGroupV1GpaBuilder`(GPA 쿼리)로 조�
 
 ## Glossary
 
+아래 용어는 이 페이지에서 사용하는 Core Groups 개념을 정의합니다.
+
 | 용어 | 정의 |
 | --- | --- |
 | **GroupV1** | 컬렉션, 에셋, 자식 그룹을 상위 분류로 묶는 Core 계정 |
