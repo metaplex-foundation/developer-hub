@@ -1,13 +1,7 @@
 const getTokenAccounts = {
-  description: 'Returns the token accounts for a given set of addresses',
+  description: 'Get a list of token accounts by owner or mint',
   method: 'getTokenAccounts',
   params: [
-    {
-      name: 'mintAddress',
-      type: 'string',
-      description: 'Public key of the mint to retrieve',
-      placeholder: 'Public key of the mint',
-    },
     {
       name: 'ownerAddress',
       type: 'string',
@@ -15,9 +9,15 @@ const getTokenAccounts = {
       placeholder: 'Owner public key',
     },
     {
+      name: 'mintAddress',
+      type: 'string',
+      description: 'Public key of the mint to retrieve token accounts for',
+      placeholder: 'Public key of the mint',
+    },
+    {
       name: 'limit',
       type: 'number',
-      description: 'Number of assets to return',
+      description: 'Maximum number of token accounts to return',
     },
     {
       name: 'page',
@@ -32,21 +32,41 @@ const getTokenAccounts = {
     {
       name: 'before',
       type: 'string',
-      description: 'Retrieve assets before the specified ID',
+      description: 'Retrieve token accounts before the specified ID',
     },
     {
       name: 'after',
       type: 'string',
-      description: 'Retrieve assets after the specified ID',
+      description: 'Retrieve token accounts after the specified ID',
     },
     {
       name: 'options',
       type: 'object',
-      description: 'Display options',
+      description: 'Display options. Also accepted as displayOptions.',
       value: {
         showZeroBalance: {
           type: 'boolean',
-          description: 'Show zero balance accounts',
+          description: 'Include zero-balance accounts in results',
+          value: ['false', 'true'],
+        },
+        showFungible: {
+          type: 'boolean',
+          description: 'Accepted by the API; reserved for future use on this method',
+          value: ['false', 'true'],
+        },
+        showCollectionMetadata: {
+          type: 'boolean',
+          description: 'Accepted by the API; reserved for future use on this method',
+          value: ['false', 'true'],
+        },
+        showUnverifiedCollections: {
+          type: 'boolean',
+          description: 'Accepted by the API; reserved for future use on this method',
+          value: ['false', 'true'],
+        },
+        showInscription: {
+          type: 'boolean',
+          description: 'Accepted by the API; reserved for future use on this method',
           value: ['false', 'true'],
         },
       },
@@ -54,84 +74,62 @@ const getTokenAccounts = {
   ],
   examples: [
     {
-      name: 'Get USDC Token Accounts',
-      description: 'Get all USDC token accounts',
+      name: 'Get Token Accounts By Owner',
+      description: 'Get token accounts owned by a wallet',
       chain: 'solanaDevnet',
       body: {
         params: {
-          mintAddress: '4zMMC9srt5Ri5X14GAgXhaHii3GnPAEERYPJgZJDncDU',
+          ownerAddress: 'CeviT1DTQLuicEB7yLeFkkAGmam5GnJssbGb7CML4Tgx',
+          limit: 10,
+        },
+      },
+    },
+    {
+      name: 'Get Token Accounts By Mint',
+      description: 'Get all token accounts for a mint',
+      chain: 'solanaDevnet',
+      body: {
+        params: {
+          mintAddress: 'wKocBVvHQoVaiwWoCs9JYSVye4YZRrv5Cucf7fDqnz1',
+          limit: 10,
         },
       },
     },
     {
       name: 'Get USDC Token Accounts',
-      description: 'Get all USDC token accounts',
+      description: 'Get all USDC token accounts on mainnet',
       chain: 'solanaMainnet',
       body: {
         params: {
           mintAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+          limit: 10,
         },
       },
     },
   ],
   exampleResponse: {
-    "jsonrpc": "2.0",
-    "result": {
-      "total": 50,
-      "limit": 10,
-      "page": 1,
-      "items": [
+    jsonrpc: '2.0',
+    result: {
+      total: 1,
+      limit: 10,
+      token_accounts: [
         {
-          "interface": "FungibleToken",
-          "id": "TokenAccount123456789abcdef",
-          "content": {
-            "$schema": "https://schema.metaplex.com/nft1.0.json",
-            "json_uri": "https://arweave.net/token-metadata-uri",
-            "files": [
-              {
-                "uri": "https://arweave.net/token-image",
-                "mime": "image/png"
-              }
-            ],
-            "metadata": {
-              "name": "Example Token",
-              "symbol": "EXAMPLE",
-              "description": "An example fungible token"
-            }
-          },
-          "authorities": [
-            {
-              "address": "TokenAuthority123",
-              "scopes": ["full"]
-            }
-          ],
-          "compression": {
-            "eligible": false,
-            "compressed": false
-          },
-          "ownership": {
-            "frozen": false,
-            "delegated": false,
-            "delegate": null,
-            "ownership_model": "single",
-            "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
-          },
-          "supply": {
-            "amount": "1000000000",
-            "decimals": 6
-          },
-          "token_info": {
-            "balance": 1000000000,
-            "supply": 1000000000000,
-            "decimals": 6,
-            "token_program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
-            "mint": "So11111111111111111111111111111111111111112"
-          }
-        }
-      ]
+          address: 'jKLTJu7nE1zLmC2J2xjVVBm4G7vJcKGCGQX36Jrsba2',
+          mint: 'wKocBVvHQoVaiwWoCs9JYSVye4YZRrv5Cucf7fDqnz1',
+          amount: 1000000000000,
+          owner: 'CeviT1DTQLuicEB7yLeFkkAGmam5GnJssbGb7CML4Tgx',
+          frozen: false,
+          delegate: null,
+          delegated_amount: 0,
+          close_authority: null,
+          extensions: null,
+        },
+      ],
+      cursor: null,
+      errors: [],
     },
-    "id": "1"
+    id: 0,
   },
 }
-  
-  export default getTokenAccounts
+
+export default getTokenAccounts

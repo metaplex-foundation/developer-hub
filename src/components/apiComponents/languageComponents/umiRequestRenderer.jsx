@@ -208,6 +208,37 @@ const UmiRequestRenderer = ({
         if (params.sortDirection) signatureParams.push(`  sortDirection: '${params.sortDirection}'`);
         return `{\n${signatureParams.join(',\n')}\n}`;
       }
+      case 'getNftEditions': {
+        const editionParams = [];
+        if (params.mintAddress) {
+          editionParams.push(`  mintAddress: publicKey('${params.mintAddress}')`);
+        }
+        if (params.limit) editionParams.push(`  limit: ${params.limit}`);
+        if (params.page) editionParams.push(`  page: ${params.page}`);
+        if (params.before) editionParams.push(`  before: '${params.before}'`);
+        if (params.after) editionParams.push(`  after: '${params.after}'`);
+        if (params.cursor) editionParams.push(`  cursor: '${params.cursor}'`);
+        return `{\n${editionParams.join(',\n')}\n}`;
+      }
+      case 'getTokenAccounts': {
+        const tokenAccountParams = [];
+        if (params.ownerAddress) {
+          tokenAccountParams.push(`  ownerAddress: publicKey('${params.ownerAddress}')`);
+        }
+        if (params.mintAddress) {
+          tokenAccountParams.push(`  mintAddress: publicKey('${params.mintAddress}')`);
+        }
+        if (params.limit) tokenAccountParams.push(`  limit: ${params.limit}`);
+        if (params.page) tokenAccountParams.push(`  page: ${params.page}`);
+        if (params.before) tokenAccountParams.push(`  before: '${params.before}'`);
+        if (params.after) tokenAccountParams.push(`  after: '${params.after}'`);
+        if (params.cursor) tokenAccountParams.push(`  cursor: '${params.cursor}'`);
+        if (params.options) {
+          const displayOptions = convertDisplayOptions(params.options);
+          if (displayOptions) tokenAccountParams.push(`  options: ${displayOptions}`);
+        }
+        return `{\n${tokenAccountParams.join(',\n')}\n}`;
+      }
       default: {
         console.warn(`UmiRequestRenderer: Unsupported method: ${method}`);
         return JSON.stringify(params);

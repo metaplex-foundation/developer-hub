@@ -15,4 +15,6 @@ DAS APIは以下のメソッドをサポートしています：
 - [`getAssetsByCreator`](/ja/dev-tools/das-api/methods/get-assets-by-creator): クリエイターアドレスを指定してアセットのリストを返します。
 - [`getAssetsByGroup`](/ja/dev-tools/das-api/methods/get-assets-by-group): グループ（キー、値）ペアを指定してアセットのリストを返します。例えば、コレクション内のすべてのアセットを取得するために使用できます。
 - [`getAssetsByOwner`](/ja/dev-tools/das-api/methods/get-assets-by-owner): オーナーアドレスを指定してアセットのリストを返します。
+- [`getNftEditions`](/ja/dev-tools/das-api/methods/get-nft-editions): マスターエディションNFTミントのすべての印刷可能なエディションを返します。
+- [`getTokenAccounts`](/ja/dev-tools/das-api/methods/get-token-accounts): 所有者またはミントでトークンアカウントのリストを返します。
 - [`searchAssets`](/ja/dev-tools/das-api/methods/search-assets): 検索条件を指定してアセットのリストを返します。

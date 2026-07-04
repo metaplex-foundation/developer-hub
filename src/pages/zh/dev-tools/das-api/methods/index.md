@@ -15,4 +15,6 @@ DAS API 支持以下方法：
 - [`getAssetsByCreator`](/zh/dev-tools/das-api/methods/get-assets-by-creator): 根据创建者地址返回资产列表。
 - [`getAssetsByGroup`](/zh/dev-tools/das-api/methods/get-assets-by-group): 根据组（键、值）对返回资产列表。例如，这可用于获取集合中的所有资产。
 - [`getAssetsByOwner`](/zh/dev-tools/das-api/methods/get-assets-by-owner): 根据所有者地址返回资产列表。
+- [`getNftEditions`](/zh/dev-tools/das-api/methods/get-nft-editions): 返回主版 NFT 铸币的所有可打印版本。
+- [`getTokenAccounts`](/zh/dev-tools/das-api/methods/get-token-accounts): 按所有者或铸币返回代币账户列表。
 - [`searchAssets`](/zh/dev-tools/das-api/methods/search-assets): 根据搜索条件返回资产列表。

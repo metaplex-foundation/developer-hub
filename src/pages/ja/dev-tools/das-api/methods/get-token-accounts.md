@@ -7,6 +7,8 @@ tableOfContents: false
 
 所有者アドレス、ミントアドレス、または両方でフィルタリングされたトークンアカウントのリストを返します。ウォレットに関連付けられたすべてのトークンアカウント、または特定のトークンを保持するすべてのアカウントを見つけるのに便利です。
 
+`ownerAddress` または `mintAddress` の少なくとも一方が必要です。
+
 ## パラメータ
 
 | 名前           | 必須 | 説明                                          |
@@ -18,7 +20,12 @@ tableOfContents: false
 | `limit`        |         | 返すトークンアカウントの最大数。          |
 | `before`       |         | このカーソルより前のアカウントを返す。                  |
 | `after`        |         | このカーソルより後のアカウントを返す。                   |
-| `options`      |         | 追加の[表示オプション](/ja/dev-tools/das-api/display-options)。              |
+| `options`      |         | クエリの表示オプション。`displayOptions` としても受け付けます。 |
+| `options.showZeroBalance` | | 残高ゼロのアカウントを結果に含めるかどうか。 |
+| `options.showFungible` | | APIで受け付けられますが、このメソッドでは将来用に予約されています。 |
+| `options.showCollectionMetadata` | | APIで受け付けられますが、このメソッドでは将来用に予約されています。 |
+| `options.showUnverifiedCollections` | | APIで受け付けられますが、このメソッドでは将来用に予約されています。 |
+| `options.showInscription` | | APIで受け付けられますが、このメソッドでは将来用に予約されています。 |
 
 ## レスポンス
 
@@ -35,8 +42,11 @@ tableOfContents: false
   - `close_authority` - クローズ権限アドレス(存在する場合)
   - `extensions` - トークン拡張データ
 - `errors` - 処理中に発生したエラーの配列
-- ページネーションフィールド: `cursor`, `page`, `limit`, `before`, `after`, `total`
+- `total` - 現在のページで返されたトークンアカウント数
+- ページネーションフィールド: `cursor`, `page`, `limit`, `before`, `after`
+
+一致するアカウントがない所有者またはミントの場合、エラーではなく空の `token_accounts` 配列が返されます。
 
 ## プレイグラウンド
 
-{% apiRenderer method="getTokenAccounts" noUmi=true /%}
+{% apiRenderer method="getTokenAccounts" /%}
