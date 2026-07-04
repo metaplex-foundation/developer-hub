@@ -45,6 +45,9 @@ mplx core asset create --wizard
 - `--plugins`: 使用交互式插件选择
 - `--pluginsFile <path>`: 包含插件数据的 JSON 文件路径
 
+### 虚荣地址
+- `--mint-keypair <path>`: 用于资产地址的密钥对 JSON 文件路径，而不是随机生成。参见[生成虚荣公钥](/zh/solana/grind-vanity-public-key)。
+
 ## 示例
 
 1. 使用交互式向导创建资产：
@@ -70,6 +73,14 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 5. 使用文件和集合创建资产：
 ```bash
 mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
+```
+
+6. 使用虚荣地址创建资产：
+```bash
+mplx core asset create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-asset.json
 ```
 
 ## 输出

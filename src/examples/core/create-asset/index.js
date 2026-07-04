@@ -36,7 +36,7 @@ const cliSections = {
   "setup": "",
   "main": "",
   "output": "",
-  "full": "# Create an NFT using the Metaplex CLI\n\n# Interactive wizard mode (recommended)\nmplx core asset create --wizard\n\n# Simple creation with name and URI\nmplx core asset create --name \"My NFT\" --uri \"https://example.com/metadata.json\"\n\n# Create with files (image + metadata)\nmplx core asset create --files --image \"./my-nft.png\" --json \"./metadata.json\"\n"
+  "full": "# Create an NFT using the Metaplex CLI\n\n# Interactive wizard mode (recommended)\nmplx core asset create --wizard\n\n# Simple creation with name and URI\nmplx core asset create --name \"My NFT\" --uri \"https://example.com/metadata.json\"\n\n# Create with files (image + metadata)\nmplx core asset create --files --image \"./my-nft.png\" --offchain \"./metadata.json\"\n\n# Create with a vanity asset address\nmplx core asset create \\\n  --name \"My NFT\" \\\n  --uri \"https://example.com/metadata.json\" \\\n  --mint-keypair ./vanity-asset.json\n"
 }
 
 export const metadata = {
