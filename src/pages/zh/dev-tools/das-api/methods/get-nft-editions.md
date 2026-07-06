@@ -4,7 +4,7 @@ metaTitle: 获取 NFT 版本 | DAS API
 description: 获取主版 NFT 铸币的所有可打印版本
 ---
 
-返回主版 NFT 铸币的所有可打印版本——包括版本号、地址和供应信息。您也可以传入版本地址来检索相应的主版及其同级版本。
+返回主版 NFT 铸币的所有可打印版本，包括版本号、地址和供应信息。
 
 ## 参数
 
@@ -26,9 +26,13 @@ description: 获取主版 NFT 铸币的所有可打印版本
   - `edition_number` - 版本号（1、2、3 等）
   - `mint_address` - 版本的铸币地址
 - `master_edition_address` - 主版账户的地址
-- `supply` - 当前已铸造的版本数量
+- `supply` - 此主版已铸造的版本总数
 - `max_supply` - 可铸造的最大版本数量（无限制时为 null）
+- `total` - 当前页返回的版本数量。整体铸造数量请使用 `supply`。
+- 分页字段：`cursor`、`page`、`limit`、`before`、`after`
+
+如果铸币没有主版账户，RPC 将返回错误。
 
 ## 测试场
 
-{% apiRenderer method="getNftEditions" noUmi=true /%}
+{% apiRenderer method="getNftEditions" /%}
