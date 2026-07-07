@@ -11,11 +11,15 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Local and preview deployments do not have the metaplex.com/docs rewrite,
-      // so make the bare domain load the docs app at its configured basePath.
       {
         source: '/',
         destination: '/docs',
+        basePath: false,
+        permanent: false,
+      },
+      {
+        source: '/:path((?!docs(?:/|$)|_next/|api/|.*\\..*).*)',
+        destination: '/docs/:path',
         basePath: false,
         permanent: false,
       },
