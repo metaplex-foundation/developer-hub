@@ -290,7 +290,7 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-For cNFTs with inherited royalties, prefer `currentMetadata` over `metadata` — see [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata) below.
+For cNFTs with inherited royalties, prefer `currentMetadata` over `metadata`: write instructions verify the existing leaf hash, so they need the on-chain `SELLER_FEE_BASIS_POINTS_INHERIT` sentinel (`65535`) rather than the resolved collection percentage that `metadata` may show for display. See [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata) below.
 
 ## Delegate a Compressed NFT
 
