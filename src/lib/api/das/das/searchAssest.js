@@ -121,6 +121,24 @@ const searchAssets = {
       description: 'Indicates whether the asset is burnt or not.',
     },
     {
+      name: 'isAgent',
+      type: 'boolean',
+      description:
+        'Filter by registered agent status (true = has AgentIdentity plugin). MPL Core only. Alias: is_agent.',
+    },
+    {
+      name: 'agentToken',
+      type: 'string',
+      description:
+        'Filter by canonical agent token mint from the AgentIdentityV2 PDA. Alias: agent_token.',
+    },
+    {
+      name: 'assetSigner',
+      type: 'string',
+      description:
+        'Filter by Core Asset Signer PDA address. Alias: asset_signer.',
+    },
+    {
       name: 'sortBy',
       type: 'object',
       description: 'Sorting criteria',

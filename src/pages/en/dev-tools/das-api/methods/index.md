@@ -17,4 +17,4 @@ The DAS API supports the following methods:
 - [`getAssetsByOwner`](/dev-tools/das-api/methods/get-assets-by-owner): Return the list of assets given an owner address.
 - [`getNftEditions`](/dev-tools/das-api/methods/get-nft-editions): Return all printable editions for a master edition NFT mint.
 - [`getTokenAccounts`](/dev-tools/das-api/methods/get-token-accounts): Return a list of token accounts by owner or mint.
-- [`searchAssets`](/dev-tools/das-api/methods/search-assets): Return the list of assets given a search criteria.
+- [`searchAssets`](/dev-tools/das-api/methods/search-assets): Return the list of assets given a search criteria. Supports agent filters (`isAgent`, `agentToken`, `assetSigner`) — see [Read Agent Data](/agents/read-agent-data#read-agent-data-via-das-api).
