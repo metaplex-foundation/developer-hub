@@ -63,7 +63,7 @@ faqs:
 - **単一呼び出し** — `createAndRegisterLaunch`が作成、署名、送信、登録を順番に処理する
 - **自動手数料ルーティング** — クリエイター手数料はエージェントPDAに送られ、ウォレットアドレスの手動設定は不要
 - **取り消し不可能なトークン関連付け** — `setToken: true`はトークンをエージェントに永久にリンクする
-- **対応バージョン** `@metaplex-foundation/genesis` 1.x · 最終確認：2026年4月
+- **対応バージョン** `@metaplex-foundation/genesis` 1.x
 
 ## クイックスタート
 
@@ -268,6 +268,7 @@ try {
 - 初回購入はlaunch作成時に設定され、カーブがライブになった後に追加することはできません
 - クリエイター手数料はスワップごとに転送されるのではなく、バケットに蓄積されます。パーミッションレスの`claimBondingCurveCreatorFeeV2`（ボンディングカーブ）および`claimRaydiumCreatorFeeV2`（グラデュエーション後のRaydium）インストラクションで請求してください — [スワップ統合ガイド](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)を参照
 - Metaplex APIはトランザクションを構築して未署名のまま返します。署名キーは常に呼び出し元が保持します
+- 発行後、DAS経由でエージェントの正規トークンミントをクエリできます — [エージェントデータの読み取り](/agents/read-agent-data#read-agent-data-via-das-api)を参照
 
 ## よくある質問
 

@@ -6,8 +6,8 @@ description: Metaplex DAS APIクライアントの呼び出し可能なAPIメソ
 
 DAS APIは以下のメソッドをサポートしています：
 
-- [`getAsset`](/ja/dev-tools/das-api/methods/get-asset): メタデータとオーナーを含む圧縮/標準アセットの情報を返します。
-- [`getAssets`](/ja/dev-tools/das-api/methods/get-assets): メタデータとオーナーを含む複数の圧縮/標準アセットの情報を返します。
+- [`getAsset`](/ja/dev-tools/das-api/methods/get-asset): メタデータとオーナーを含む圧縮/標準アセットの情報を返します。`MplCoreAsset`レスポンスにはエージェントフィールド（`is_agent`、`asset_signer`、`agent_token`）が含まれる場合があります。
+- [`getAssets`](/ja/dev-tools/das-api/methods/get-assets): メタデータとオーナーを含む複数の圧縮/標準アセットの情報を返します。各アイテムに`getAsset`と同じエージェントフィールド。
 - [`getAssetProof`](/ja/dev-tools/das-api/methods/get-asset-proof): 圧縮アセットのマークルツリー証明情報を返します。
 - [`getAssetProofs`](/ja/dev-tools/das-api/methods/get-asset-proofs): 複数の圧縮アセットのマークルツリー証明情報を返します。
 - [`getAssetSignatures`](/ja/dev-tools/das-api/methods/get-asset-signatures): 圧縮アセットのトランザクション署名を返します。
@@ -17,4 +17,4 @@ DAS APIは以下のメソッドをサポートしています：
 - [`getAssetsByOwner`](/ja/dev-tools/das-api/methods/get-assets-by-owner): オーナーアドレスを指定してアセットのリストを返します。
 - [`getNftEditions`](/ja/dev-tools/das-api/methods/get-nft-editions): マスターエディションNFTミントのすべての印刷可能なエディションを返します。
 - [`getTokenAccounts`](/ja/dev-tools/das-api/methods/get-token-accounts): 所有者またはミントでトークンアカウントのリストを返します。
-- [`searchAssets`](/ja/dev-tools/das-api/methods/search-assets): 検索条件を指定してアセットのリストを返します。
+- [`searchAssets`](/ja/dev-tools/das-api/methods/search-assets): 検索条件を指定してアセットのリストを返します。エージェントフィルター（`isAgent`、`agentToken`、`assetSigner`）をサポート — [エージェントデータの読み取り](/ja/agents/read-agent-data#read-agent-data-via-das-api)を参照。

@@ -11,6 +11,10 @@ Metaplex 数字资产标准（DAS）API 代表了一个用于与 Solana 上数�
 
 API 定义了一组 RPC 实现的方法，以提供资产数据。在大多数情况下，数据使用 Metaplex 数字资产 RPC 基础设施进行索引。
 
+## 代理注册表字段
+
+DAS 在 `MplCoreAsset` 行上索引代理元数据。响应字段 `is_agent`、`asset_signer` 和 `agent_token` 由 [`getAsset`](/zh/dev-tools/das-api/methods/get-asset) 和 [`getAssets`](/zh/dev-tools/das-api/methods/get-assets) 返回。[`searchAssets`](/zh/dev-tools/das-api/methods/search-assets) 新增过滤器 `isAgent`、`agentToken` 和 `assetSigner`。使用示例请参阅[读取代理数据](/zh/agents/read-agent-data#read-agent-data-via-das-api)。
+
 ## Core 扩展
 除了通用 DAS SDK 之外，还为 [MPL Core](/zh/smart-contracts/core) 创建了一个扩展，可以直接返回正确的类型以便进一步与 MPL Core SDK 一起使用。它还自动派生资产中从集合继承的插件，并提供 [DAS 到 Core 类型转换](/zh/dev-tools/das-api/core-extension/convert-das-asset-to-core)的功能。
 

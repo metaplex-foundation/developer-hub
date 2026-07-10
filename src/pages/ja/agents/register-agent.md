@@ -206,5 +206,3 @@ await registerIdentityV1(umi, {
 - `agentRegistrationUri`は永続的にホストされたJSON（例：Arweave）を指す必要があります。URIにアクセスできなくなっても、オンチェーンIDは存在し続けますが、クライアントはエージェントのメタデータを取得できなくなります。
 - `collection`パラメータはオプションですが推奨されます。登録時のコレクションレベルの権限チェックを有効にします。
 - Transfer、Update、Executeのライフサイクルフックは自動的にアタッチされます。これらのフックにより、IDプラグインがアセットに対する操作の承認または拒否に参加できます。
-
-*Metaplexが管理 · 2026年3月検証済み · [GitHubでソースを見る](https://github.com/metaplex-foundation/mpl-agent)*
