@@ -124,19 +124,19 @@ const searchAssets = {
       name: 'isAgent',
       type: 'boolean',
       description:
-        'Filter by registered agent status (true = has AgentIdentity plugin). MPL Core only. Alias: is_agent.',
+        'Filter by registered agent status (true = MplCoreAsset with AgentIdentity plugin; false = not a registered agent). Alias: is_agent.',
     },
     {
       name: 'agentToken',
       type: 'string',
       description:
-        'Filter by canonical agent token mint from the AgentIdentityV2 PDA. Alias: agent_token.',
+        'Filter by canonical agent token mint from the AgentIdentityV2 PDA on MplCoreAsset rows. Alias: agent_token.',
     },
     {
       name: 'assetSigner',
       type: 'string',
       description:
-        'Filter by Core Asset Signer PDA address. Alias: asset_signer.',
+        'Filter by Core Asset Signer PDA address on MplCoreAsset rows. Alias: asset_signer.',
     },
     {
       name: 'sortBy',

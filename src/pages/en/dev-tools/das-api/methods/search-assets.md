@@ -30,9 +30,9 @@ Return the list of assets given a search criteria.
 | `royaltyTarget`     |          | The target address for royalties.  |
 | `royaltyAmount`     |          | The royalties amount.  |
 | `burnt`             |          | Indicates whether the asset is burnt or not.  |
-| `isAgent`           |          | Filter by registered agent status (`true` = has `AgentIdentity` plugin, `false` = plain Core asset). MPL Core only. Accepts snake_case alias `is_agent`. |
-| `agentToken`        |          | Filter by canonical agent token mint address. Returns agents whose `AgentIdentityV2` PDA has this mint set. Accepts snake_case alias `agent_token`. |
-| `assetSigner`       |          | Filter by Core Asset Signer PDA address. Accepts snake_case alias `asset_signer`. |
+| `isAgent`           |          | Filter by registered agent status (`true` = `MplCoreAsset` with `AgentIdentity` plugin; `false` = not a registered agent). Accepts snake_case alias `is_agent`. |
+| `agentToken`        |          | Filter by canonical agent token mint address. Matches `MplCoreAsset` rows whose `AgentIdentityV2` PDA has this mint set. Accepts snake_case alias `agent_token`. |
+| `assetSigner`       |          | Filter by Core Asset Signer PDA address on `MplCoreAsset` rows. Accepts snake_case alias `asset_signer`. |
 | `sortBy`            |          | Sorting criteria. This is specified as an object `{ sortBy: <value>, sortDirection: <value> }`, where `sortBy` is one of `["created", "updated", "recentAction", "id", "none"]` and `sortDirection` is one of `["asc", "desc"]`.     |
 | `limit`             |          | The maximum number of assets to retrieve.  |
 | `page`              |          | The index of the "page" to retrieve.       |
