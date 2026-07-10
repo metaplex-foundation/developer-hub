@@ -7,7 +7,7 @@ description: Callable API Methods for the Metaplex DAS API client.
 The DAS API supports the following methods:
 
 - [`getAsset`](/dev-tools/das-api/methods/get-asset): Returns the information of a compressed/standard asset including metadata and owner. `MplCoreAsset` responses may include agent fields (`is_agent`, `asset_signer`, `agent_token`).
-- [`getAssets`](/dev-tools/das-api/methods/get-assets): Returns the information of multiple compressed/standard assets including metadata and owner. Same agent fields as `getAsset` per item.
+- [`getAssets`](/dev-tools/das-api/methods/get-assets): Returns the information of multiple compressed/standard assets including metadata and owner. Each item uses the same asset shape as `getAsset`; agent fields appear only on `MplCoreAsset` rows.
 - [`getAssetProof`](/dev-tools/das-api/methods/get-asset-proof): Returns the merkle tree proof information for a compressed asset.
 - [`getAssetProofs`](/dev-tools/das-api/methods/get-asset-proofs): Returns the merkle tree proof information for multiple compressed assets.
 - [`getAssetSignatures`](/dev-tools/das-api/methods/get-asset-signatures): Returns the transaction signatures for compressed assets.

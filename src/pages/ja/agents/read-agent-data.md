@@ -24,8 +24,8 @@ proficiencyLevel: Beginner
 created: '02-25-2026'
 updated: '07-08-2026'
 faqs:
-  - q: agentTokenはいつDASレスポンスに含まれますか？
-    a: agentTokenフィールドは、エージェントのAgentIdentityV2 PDAにsetAgentTokenV1でトークンミントが設定されている場合にのみ含まれます。トークンがリンクされていない登録済みエージェントはこのフィールドを省略します。AgentIdentityV1 PDAにはトークンミントがなく、agentTokenは決して設定されません。
+  - q: agent_tokenはいつDASレスポンスに含まれますか？
+    a: agent_tokenフィールドは、エージェントのAgentIdentityV2 PDAにsetAgentTokenV1でトークンミントが設定されている場合にのみ含まれます。トークンがリンクされていない登録済みエージェントはこのフィールドを省略します。AgentIdentityV1 PDAにはトークンミントがなく、agent_tokenは決して設定されません。searchAssetsリクエストでは同じ値をagentTokenフィルタで指定します。
   - q: assetSignerはエージェントのウォレットと同じですか？
     a: はい。assetSignerはCore Asset Signer PDAであり、SDKのfindAssetSignerPdaが返すのと同じアドレスです。DASはMplCoreAsset行にasset_signerを返します。エージェントはこのPDAをオンチェーンウォレットとして使用します。
   - q: isAgentで非Coreアセットをフィルタできますか？
@@ -38,13 +38,15 @@ faqs:
 
 ## サマリー
 
-直接オンチェーンで読み取る場合はAgent Registry SDKを使用します（ID PDA、登録ドキュメント、ウォレットPDA）。インデクサーがすでにエージェントフィールドを解析済みの場合はDAS APIを使用します。
+エージェントIDは[Agent Registry](/smart-contracts/mpl-agent) SDKでオンチェーンから読み取るか、インデックス済みフィールドは[DAS API](/dev-tools/das-api)経由で読み取ります。
 
-- **オンチェーン（SDK）** — 登録の確認、`AgentIdentity`プラグインの検査、ERC-8004ドキュメントの取得、Asset Signer PDAの派生
+- **オンチェーン（SDK）** — 登録の確認、[`AgentIdentity`](/smart-contracts/mpl-agent/identity)プラグインの検査、ERC-8004ドキュメントの取得、[Asset Signer](/smart-contracts/core/execute-asset-signing) PDAの派生
 - **インデックス済み（DAS）** — [`getAsset`](/dev-tools/das-api/methods/get-asset)から`is_agent`、`asset_signer`、`agent_token`を読み取る。[`searchAssets`](/dev-tools/das-api/methods/search-assets)でエージェントを検出
 - **同じウォレットアドレス** — `findAssetSignerPda`とDASの`asset_signer`は同じPDAを返す
 
 ## クイックスタート
+
+このページでは、SDKによる登録確認、登録ドキュメント、ウォレットPDA、およびDASでインデックス済みのエージェントフィールドを扱います。
 
 **ジャンプ先：** [登録を確認](#check-registration) · [登録ドキュメント](#read-the-registration-document) · [エージェントのウォレット](#fetch-the-agents-wallet) · [DAS経由で読み取り](#read-agent-data-via-das-api)
 
@@ -130,7 +132,7 @@ DASは2つのオンチェーンソースからエージェントメタデータ�
 
 | フィールド | 型 | 含まれる対象 | ソース |
 |-------|------|------------|--------|
-| `is_agent` | `boolean` | `MplCoreAsset` | アセットに`AgentIdentity`外部プラグインがある場合に`true` |
+| `is_agent` | `boolean` | Coreインターフェース行（アセット、コレクション、グループ） | `AgentIdentity`がある`MplCoreAsset`のみ`true`；コレクション/グループは`false` |
 | `asset_signer` | `string` (pubkey) | `MplCoreAsset`のみ | 上記の[`findAssetSignerPda`](#fetch-the-agents-wallet)と同じPDA |
 | `agent_token` | `string` (pubkey) | 設定時の`MplCoreAsset` | [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token)で書き込まれる`AgentIdentityV2` PDAミント |
 
@@ -217,6 +219,8 @@ DASは取り込み中に2つのオンチェーンソースからエージェン�
 
 ## クイックリファレンス
 
+この表は、エージェント関連のDASフィルタ、応答フィールド、プログラムIDをまとめています。
+
 | 項目 | 値 |
 |------|-------|
 | Agent Registryプログラム | `1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p` |
@@ -246,6 +250,8 @@ DASは取り込み中に2つのオンチェーンソースからエージェン�
 エージェントトークンのインデックス作成は[Metaplex DASインデクサー](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)に含まれています。サードパーティのプロバイダーは、エージェントレジストリトランスフォーマーとデータベースマイグレーションを含む互換性のあるインデクサーバージョンを実行する必要があります。
 
 ## 用語集
+
+以下の用語は、エージェントのDAS応答と上記のSDK読み取りパスで使用されます。
 
 | 用語 | 定義 |
 |------|------------|

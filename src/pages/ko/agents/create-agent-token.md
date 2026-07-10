@@ -268,7 +268,7 @@ try {
 - 첫 번째 구매는 launch 생성 시 구성되며 커브가 라이브 상태가 된 후에는 추가할 수 없습니다
 - 크리에이터 수수료는 스왑마다 전송되는 것이 아니라 버킷에 누적됩니다. 권한 없이도 사용할 수 있는 `claimBondingCurveCreatorFeeV2`(본딩 커브) 및 `claimRaydiumCreatorFeeV2`(졸업 후 Raydium) 명령어로 청구하세요 — [스왑 통합 가이드](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees) 참조
 - Metaplex API는 트랜잭션을 구성하여 미서명 상태로 반환합니다. 서명 키는 항상 호출자가 보유합니다
-- 발행 후 DAS를 통해 에이전트의 정규 토큰 민트를 조회할 수 있습니다 — [에이전트 데이터 읽기](/agents/read-agent-data#read-agent-data-via-das-api) 참조
+- 발행 후 `setToken: true` 또는 `setAgentTokenV1`으로 민트가 연결된 경우 DAS를 통해 에이전트의 정규 토큰 민트를 조회할 수 있습니다 — [에이전트 데이터 읽기](/agents/read-agent-data#read-agent-data-via-das-api) 참조
 
 ## 자주 묻는 질문
 

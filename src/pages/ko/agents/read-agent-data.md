@@ -38,13 +38,15 @@ faqs:
 
 ## 요약
 
-Agent Registry SDK로 온체인에서 직접 읽거나(신원 PDA, 등록 문서, 지갑 PDA), 인덱서가 이미 에이전트 필드를 파싱한 경우 DAS API를 사용합니다.
+에이전트 신원은 [Agent Registry](/smart-contracts/mpl-agent) SDK로 온체인에서 읽거나, 인덱싱된 필드는 [DAS API](/dev-tools/das-api)를 통해 읽습니다.
 
-- **온체인(SDK)** — 등록 확인, `AgentIdentity` 플러그인 검사, ERC-8004 문서 가져오기, Asset Signer PDA 파생
+- **온체인(SDK)** — 등록 확인, [`AgentIdentity`](/smart-contracts/mpl-agent/identity) 플러그인 검사, ERC-8004 문서 가져오기, [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA 파생
 - **인덱싱(DAS)** — [`getAsset`](/dev-tools/das-api/methods/get-asset)에서 `is_agent`, `asset_signer`, `agent_token` 읽기; [`searchAssets`](/dev-tools/das-api/methods/search-assets)로 에이전트 검색
 - **동일한 지갑 주소** — `findAssetSignerPda`와 DAS `asset_signer`는 동일한 PDA를 반환합니다
 
 ## 빠른 시작
+
+이 페이지는 SDK 등록 확인, 등록 문서, 지갑 PDA, DAS 인덱싱 에이전트 필드를 다룹니다.
 
 **이동:** [등록 확인](#check-registration) · [등록 문서](#read-the-registration-document) · [에이전트 지갑](#fetch-the-agents-wallet) · [DAS를 통한 읽기](#read-agent-data-via-das-api)
 
@@ -217,6 +219,8 @@ DAS는 수집 중 두 가지 온체인 소스에서 에이전트 필드를 채�
 
 ## 빠른 참조
 
+이 표는 에이전트 관련 DAS 필터, 응답 필드, 프로그램 ID를 정리합니다.
+
 | 항목 | 값 |
 |------|-----|
 | Agent Registry 프로그램 | `1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p` |
@@ -246,6 +250,8 @@ DAS는 수집 중 두 가지 온체인 소스에서 에이전트 필드를 채�
 에이전트 토큰 인덱싱은 [Metaplex DAS 인덱서](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure)와 함께 제공됩니다. 서드파티 제공업체는 에이전트 레지스트리 트랜스포머와 데이터베이스 마이그레이션을 포함하는 호환 인덱서 버전을 실행해야 합니다.
 
 ## 용어집
+
+다음 용어는 에이전트 DAS 응답과 위 SDK 읽기 경로에서 사용됩니다.
 
 | 용어 | 정의 |
 |------|------|

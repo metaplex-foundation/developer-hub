@@ -34,17 +34,19 @@ faqs:
     a: 代理代币索引随 Metaplex DAS 索引器（digital-asset-rpc-infrastructure）一起发布。第三方 DAS 提供商必须运行包含 agent registry transformer 和数据库迁移的兼容索引器版本，这些字段才会出现在响应中。
 ---
 
-在[注册](/agents/register-agent)后读取并验证代理身份——可直接通过 SDK 在链上读取，也可通过已索引的 [DAS API](/dev-tools/das-api) 读取。{% .lead %}
+在[注册](/zh/agents/register-agent)后读取并验证代理身份——可直接通过 SDK 在链上读取，也可通过已索引的 [DAS API](/zh/dev-tools/das-api) 读取。{% .lead %}
 
 ## Summary
 
-使用 Agent Registry SDK 进行直接链上读取（身份 PDA、注册文档、钱包 PDA），或在索引器已解析代理字段时使用 DAS API。
+代理身份可通过 [Agent Registry](/zh/smart-contracts/mpl-agent) SDK 在链上读取，或通过 [DAS API](/zh/dev-tools/das-api) 读取已索引字段。
 
-- **链上（SDK）** — 检查注册、检查 `AgentIdentity` 插件、获取 ERC-8004 文档、派生 Asset Signer PDA
-- **已索引（DAS）** — 从 [`getAsset`](/dev-tools/das-api/methods/get-asset) 读取 `is_agent`、`asset_signer` 和 `agent_token`；通过 [`searchAssets`](/dev-tools/das-api/methods/search-assets) 发现代理
+- **链上（SDK）** — 检查注册、检查 [`AgentIdentity`](/zh/smart-contracts/mpl-agent/identity) 插件、获取 ERC-8004 文档、派生 [Asset Signer](/zh/smart-contracts/core/execute-asset-signing) PDA
+- **已索引（DAS）** — 从 [`getAsset`](/zh/dev-tools/das-api/methods/get-asset) 读取 `is_agent`、`asset_signer` 和 `agent_token`；通过 [`searchAssets`](/zh/dev-tools/das-api/methods/search-assets) 发现代理
 - **相同钱包地址** — `findAssetSignerPda` 与 DAS 的 `asset_signer` 返回相同的 PDA
 
 ## Quick Start
+
+本页涵盖 SDK 注册检查、注册文档、钱包 PDA 以及 DAS 已索引的代理字段。
 
 **跳转到：** [检查注册](#check-registration) · [注册文档](#read-the-registration-document) · [代理钱包](#fetch-the-agents-wallet) · [通过 DAS 读取](#read-agent-data-via-das-api)
 
@@ -106,7 +108,7 @@ faqs:
 }
 ```
 
-完整字段参考请参阅[注册代理](/agents/register-agent#agent-registration-document)。
+完整字段参考请参阅[注册代理](/zh/agents/register-agent#agent-registration-document)。
 
 ## 获取代理钱包 {#fetch-the-agents-wallet}
 
@@ -114,15 +116,15 @@ faqs:
 
 {% code-tabs-imported from="agents/read_agent_fetch_asset_signer" frameworks="umi" defaultFramework="umi" /%}
 
-地址是确定性的，因此任何人都可以从资产的公钥派生它来发送资金或检查余额。只有资产本身才能通过委托的[执行者](/agents/run-an-agent)经由 Core 的 [Execute](/smart-contracts/core/execute-asset-signing) 指令为此钱包签名。
+地址是确定性的，因此任何人都可以从资产的公钥派生它来发送资金或检查余额。只有资产本身才能通过委托的[执行者](/zh/agents/run-an-agent)经由 Core 的 [Execute](/zh/smart-contracts/core/execute-asset-signing) 指令为此钱包签名。
 
-有关账户布局、PDA 派生详情和错误代码，请参阅 [MPL Agent Registry](/smart-contracts/mpl-agent) 智能合约文档。
+有关账户布局、PDA 派生详情和错误代码，请参阅 [MPL Agent Registry](/zh/smart-contracts/mpl-agent) 智能合约文档。
 
 ## 通过 DAS API 读取代理数据 {#read-agent-data-via-das-api}
 
-[DAS API](/dev-tools/das-api) 在 MPL Core 资产上索引代理字段——注册状态、钱包 PDA 和规范代币 mint——因此您无需自行解析 Core 账户即可读取这些字段。
+[DAS API](/zh/dev-tools/das-api) 在 MPL Core 资产上索引代理字段——注册状态、钱包 PDA 和规范代币 mint——因此您无需自行解析 Core 账户即可读取这些字段。
 
-**前提条件：** 一个[支持 DAS 的 RPC 端点](/solana/rpcs-and-das)，以及在 [Umi](/umi) 实例上安装 `@metaplex-foundation/digital-asset-standard-api`。
+**前提条件：** 一个[支持 DAS 的 RPC 端点](/zh/solana/rpcs-and-das)，以及在 [Umi](/umi) 实例上安装 `@metaplex-foundation/digital-asset-standard-api`。
 
 ### DAS 代理响应字段
 
@@ -132,7 +134,7 @@ DAS 从两个链上来源派生代理元数据，并将其作为顶层响应字�
 |------|------|--------|------|
 | `is_agent` | `boolean` | `MplCoreAsset` | 当资产具有 `AgentIdentity` 外部插件时为 `true` |
 | `asset_signer` | `string` (pubkey) | 仅 `MplCoreAsset` | 与上方 [`findAssetSignerPda`](#fetch-the-agents-wallet) 相同的 PDA |
-| `agent_token` | `string` (pubkey) | 已设置时的 `MplCoreAsset` | `AgentIdentityV2` PDA mint，由 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 写入 |
+| `agent_token` | `string` (pubkey) | 已设置时的 `MplCoreAsset` | `AgentIdentityV2` PDA mint，由 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 写入 |
 
 {% callout type="note" %}
 只有 **`MplCoreAsset`** 行可以是代理（`is_agent: true`）。集合和组在 DAS 响应中可能包含 `is_agent: false`，但代理注册仅适用于单个 Core 资产。非 Core 资产（Token Metadata NFT、压缩 NFT、同质化代币）会省略全部三个字段。
@@ -155,7 +157,7 @@ DAS 从两个链上来源派生代理元数据，并将其作为顶层响应字�
 }
 ```
 
-执行 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 后，DAS 会包含 `agent_token`：
+执行 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 后，DAS 会包含 `agent_token`：
 
 ```json {% title="getAsset response (registered with token)" %}
 {
@@ -171,13 +173,13 @@ JSON-RPC 响应使用 snake_case（`is_agent`、`agent_token`、`asset_signer`�
 
 ### 通过 DAS 获取单个代理
 
-当您已知 Core 资产地址时，使用 [`getAsset`](/dev-tools/das-api/methods/get-asset)。
+当您已知 Core 资产地址时，使用 [`getAsset`](/zh/dev-tools/das-api/methods/get-asset)。
 
 {% code-tabs-imported from="agents/read_agent_das_get" frameworks="umi,curl" defaultFramework="umi" /%}
 
 ### 搜索已注册代理
 
-使用 `isAgent: true` 调用 [`searchAssets`](/dev-tools/das-api/methods/search-assets) 以列出已注册代理。结合 `interface: "MplCoreAsset"` 可排除集合和组。
+使用 `isAgent: true` 调用 [`searchAssets`](/zh/dev-tools/das-api/methods/search-assets) 以列出已注册代理。结合 `interface: "MplCoreAsset"` 可排除集合和组。
 
 {% code-tabs-imported from="agents/read_agent_das_search" frameworks="umi,curl" defaultFramework="umi" /%}
 
@@ -206,16 +208,18 @@ DAS 在摄取期间从两个链上来源填充代理字段。**MPL Core 资产**
 
 ## Notes
 
-- Asset Signer 是一个 PDA——不存在私钥。它可以从任何来源接收资金，但只有资产本身才能通过 Core 的 [Execute](/smart-contracts/core/execute-asset-signing) 指令签署发出的交易。
+- Asset Signer 是一个 PDA——不存在私钥。它可以从任何来源接收资金，但只有资产本身才能通过 Core 的 [Execute](/zh/smart-contracts/core/execute-asset-signing) 指令签署发出的交易。
 - `safeFetchAgentIdentityV1` 对未注册资产返回 `null` 而不是抛出异常，使其可以安全地用于无需 try/catch 的存在性检查。
 - `findAssetSignerPda` 与 DAS 的 `asset_signer` 在每个网络上都返回相同的确定性地址。
-- 通过 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 设置后，`agent_token` 是**永久性**的——没有指令可以清除或重新分配它。
+- 通过 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 设置后，`agent_token` 是**永久性**的——没有指令可以清除或重新分配它。
 - DAS 的 `asset_signer` 在 **`MplCoreAsset`** 行上返回，不仅限于已注册代理；使用 `is_agent` 区分代理与普通 Core NFT。
-- 已注册但未关联代币的代理会省略 `agent_token`——在 [`createAndRegisterLaunch`](/agents/create-agent-token) 或手动 `setAgentTokenV1` 之前属于预期行为。
+- 已注册但未关联代币的代理会省略 `agent_token`——在 [`createAndRegisterLaunch`](/zh/agents/create-agent-token) 或手动 `setAgentTokenV1` 之前属于预期行为。
 - Agent Registry 更新永远不会创建新的资产行；Core 资产必须先被索引。
-- 提供商支持情况各异——请确认您的 [DAS 提供商](/solana/rpcs-and-das) 运行支持 agent registry 的索引器。
+- 提供商支持情况各异——请确认您的 [DAS 提供商](/zh/solana/rpcs-and-das) 运行支持 agent registry 的索引器。
 
 ## Quick Reference
+
+下表汇总代理相关的 DAS 过滤器、响应字段与程序 ID。
 
 | 项目 | 值 |
 |------|-----|
@@ -231,11 +235,11 @@ DAS 在摄取期间从两个链上来源填充代理字段。**MPL Core 资产**
 
 ### `agentToken` 何时会出现在 DAS 响应中？
 
-仅当代理的 `AgentIdentityV2` PDA 已通过 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 设置代币 mint 时，响应中才会包含 `agent_token`。已注册但未关联代币的代理会省略该字段。`AgentIdentityV1` PDA 不携带代币 mint，永远不会填充 `agent_token`。
+仅当代理的 `AgentIdentityV2` PDA 已通过 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 设置代币 mint 时，响应中才会包含 `agent_token`。已注册但未关联代币的代理会省略该字段。`AgentIdentityV1` PDA 不携带代币 mint，永远不会填充 `agent_token`。
 
 ### `assetSigner` 与代理钱包是同一个地址吗？
 
-是的。DAS 的 `asset_signer` 是 Core [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA——与 [`findAssetSignerPda`](#fetch-the-agents-wallet) 返回的地址相同。它在 `MplCoreAsset` 行上返回；对于已注册代理，它充当链上钱包。
+是的。DAS 的 `asset_signer` 是 Core [Asset Signer](/zh/smart-contracts/core/execute-asset-signing) PDA——与 [`findAssetSignerPda`](#fetch-the-agents-wallet) 返回的地址相同。它在 `MplCoreAsset` 行上返回；对于已注册代理，它充当链上钱包。
 
 ### 能否用 `isAgent` 过滤非 Core 资产？
 
@@ -247,11 +251,13 @@ DAS 在摄取期间从两个链上来源填充代理字段。**MPL Core 资产**
 
 ## Glossary
 
+以下术语出现在代理 DAS 响应与上文 SDK 读取路径中。
+
 | 术语 | 定义 |
 |------|------|
-| **`AgentIdentity` 插件** | [注册](/agents/register-agent) 期间设置在 Core 资产上的外部插件；携带链下注册 URI |
+| **`AgentIdentity` 插件** | [注册](/zh/agents/register-agent) 期间设置在 Core 资产上的外部插件；携带链下注册 URI |
 | **`is_agent`** | DAS 布尔值，表示 Core 资产具有 `AgentIdentity` 外部插件 |
-| **`agent_token`** | 从 `AgentIdentityV2` PDA 索引的规范代币 mint 公钥；通过 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 一次性设置 |
+| **`agent_token`** | 从 `AgentIdentityV2` PDA 索引的规范代币 mint 公钥；通过 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 一次性设置 |
 | **`asset_signer`** | 充当代理链上钱包的 Core execute PDA；由 `['mpl-core-execute', <asset>]` 派生 |
 | **`AgentIdentityV2`** | 存储关联代币 mint 的 Agent Registry PDA；独立于 Core 资产账户更新 |
 | **`Agent Registry transformer`** | DAS 摄取处理器，将 Agent Registry PDA 更新中的 `agent_token` 写入现有 Core 资产行 |

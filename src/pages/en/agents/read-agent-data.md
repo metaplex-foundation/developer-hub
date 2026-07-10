@@ -27,7 +27,7 @@ faqs:
   - q: When does agentToken appear in a DAS response?
     a: The agentToken field is present only when the agent's AgentIdentityV2 PDA has a token mint set via setAgentTokenV1. Registered agents without a linked token omit the field. AgentIdentityV1 PDAs do not carry a token mint and never populate agentToken.
   - q: Is assetSigner the same as the agent wallet?
-    a: Yes. assetSigner is the Core Asset Signer PDA — the same address returned by findAssetSignerPda in the SDK. DAS returns asset_signer on MplCoreAsset rows; agents use that PDA as their onchain wallet.
+    a: Yes. assetSigner is the Core Asset Signer PDA — the same address returned by findAssetSignerPda in the SDK. DAS returns asset_signer on MplCoreAsset rows; agents use that PDA as their on-chain wallet.
   - q: Can I filter non-Core assets with isAgent?
     a: No. isAgent, agentToken, and assetSigner apply only to MplCoreAsset rows. Token Metadata NFTs and other interfaces omit these fields entirely from DAS responses.
   - q: Do all DAS providers support agent token fields?
@@ -38,13 +38,15 @@ Read and verify agent identity after [registration](/agents/register-agent) — 
 
 ## Summary
 
-Use the Agent Registry SDK for direct on-chain reads (identity PDA, registration document, wallet PDA), or use the DAS API when an indexer has already parsed agent fields for you.
+Agent identity is read on-chain with the [Agent Registry](/smart-contracts/mpl-agent) SDK or from indexed fields via the [DAS API](/dev-tools/das-api).
 
-- **On-chain (SDK)** — check registration, inspect the `AgentIdentity` plugin, fetch the ERC-8004 document, derive the Asset Signer PDA
+- **On-chain (SDK)** — check registration, inspect the [`AgentIdentity`](/smart-contracts/mpl-agent/identity) plugin, fetch the ERC-8004 document, derive the [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA
 - **Indexed (DAS)** — read `is_agent`, `asset_signer`, and `agent_token` from [`getAsset`](/dev-tools/das-api/methods/get-asset); discover agents with [`searchAssets`](/dev-tools/das-api/methods/search-assets)
 - **Same wallet address** — `findAssetSignerPda` and DAS `asset_signer` return the same PDA
 
 ## Quick Start
+
+This page covers SDK registration checks, registration documents, wallet PDAs, and DAS-indexed agent fields.
 
 **Jump to:** [Check Registration](#check-registration) · [Registration Document](#read-the-registration-document) · [Agent Wallet](#fetch-the-agents-wallet) · [Read via DAS](#read-agent-data-via-das-api)
 
@@ -126,7 +128,7 @@ The [DAS API](/dev-tools/das-api) indexes agent fields on MPL Core assets — re
 
 ### DAS Agent Response Fields
 
-DAS derives agent metadata from two onchain sources and surfaces them as top-level response fields.
+DAS derives agent metadata from two on-chain sources and surfaces them as top-level response fields.
 
 | Field | Type | Present on | Source |
 |-------|------|------------|--------|
@@ -195,7 +197,7 @@ The `assetSigner` filter finds the Core asset whose execute PDA matches a given 
 
 ### How DAS Indexing Works
 
-DAS populates agent fields from two onchain sources during ingestion. **MPL Core asset** account updates set `is_agent` (when an `AgentIdentity` plugin is present) and derive `asset_signer` for `MplCoreAsset` rows. **Agent Registry** PDA updates set `agent_token` on existing `MplCoreAsset` rows when an `AgentIdentityV2` mint is present.
+DAS populates agent fields from two on-chain sources during ingestion. **MPL Core asset** account updates set `is_agent` (when an `AgentIdentity` plugin is present) and derive `asset_signer` for `MplCoreAsset` rows. **Agent Registry** PDA updates set `agent_token` on existing `MplCoreAsset` rows when an `AgentIdentityV2` mint is present.
 
 | Event | Field updated | Notes |
 |-------|---------------|-------|
@@ -217,6 +219,8 @@ DAS populates agent fields from two onchain sources during ingestion. **MPL Core
 
 ## Quick Reference
 
+This table lists agent-related DAS filters, response fields, and program IDs.
+
 | Item | Value |
 |------|-------|
 | Agent Registry program | `1DREGFgysWYxLnRnKQnwrxnJQeSMk2HmGaC6whw2B2p` |
@@ -235,7 +239,7 @@ DAS populates agent fields from two onchain sources during ingestion. **MPL Core
 
 ### Is `assetSigner` the same as the agent wallet?
 
-Yes. DAS `asset_signer` is the Core [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA — the same address as [`findAssetSignerPda`](#fetch-the-agents-wallet). It is returned on `MplCoreAsset` rows; for registered agents it acts as the onchain wallet.
+Yes. DAS `asset_signer` is the Core [Asset Signer](/smart-contracts/core/execute-asset-signing) PDA — the same address as [`findAssetSignerPda`](#fetch-the-agents-wallet). It is returned on `MplCoreAsset` rows; for registered agents it acts as the on-chain wallet.
 
 ### Can I filter non-Core assets with `isAgent`?
 
@@ -246,6 +250,8 @@ No. `is_agent`, `agent_token`, and `asset_signer` apply only to **`MplCoreAsset`
 Agent token indexing ships with the [Metaplex DAS indexer](https://github.com/metaplex-foundation/digital-asset-rpc-infrastructure). Third-party providers must run a compatible indexer version with the agent registry transformer and database migration.
 
 ## Glossary
+
+These terms appear in agent DAS responses and the SDK read paths above.
 
 | Term | Definition |
 |------|------------|

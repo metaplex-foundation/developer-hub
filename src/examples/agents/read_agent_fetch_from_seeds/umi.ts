@@ -13,6 +13,7 @@ const assetPublicKey = publicKey('AGENT_CORE_ASSET_ADDRESS')
 // [/SETUP]
 
 // [MAIN]
+// Throws if the identity account does not exist — use safeFetchAgentIdentityV1 for unregistered assets.
 const identity = await fetchAgentIdentityV1FromSeeds(umi, {
   asset: assetPublicKey,
 })

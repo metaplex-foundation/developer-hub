@@ -243,7 +243,7 @@ try {
 - First buy is configured at launch creation and cannot be added after the curve is live
 - Creator fees are accrued in the bucket, not transferred per-swap; claim via the permissionless `claimBondingCurveCreatorFeeV2` (bonding curve) and `claimRaydiumCreatorFeeV2` (post-graduation Raydium) instructions — see [Creator Fees](/smart-contracts/genesis/creator-fees) for the full claiming flow
 - The Metaplex API constructs and returns unsigned transactions; the caller always holds the signing keys
-- After launch, query the agent's canonical token mint via DAS — see [Read Agent Data](/agents/read-agent-data#read-agent-data-via-das-api)
+- After launch, query the agent's canonical token mint via DAS when `setToken: true` or `setAgentTokenV1` linked the mint — see [Read Agent Data](/agents/read-agent-data#read-agent-data-via-das-api)
 
 
 ## FAQ

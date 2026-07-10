@@ -10,9 +10,9 @@
 const umiSections = {
   "imports": "import {\n  fetchAgentIdentityV1FromSeeds,\n  mplAgentIdentity,\n} from '@metaplex-foundation/mpl-agent-registry'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { publicKey } from '@metaplex-foundation/umi'",
   "setup": "const umi = createUmi('https://api.mainnet-beta.solana.com').use(mplAgentIdentity())\nconst assetPublicKey = publicKey('AGENT_CORE_ASSET_ADDRESS')",
-  "main": "const identity = await fetchAgentIdentityV1FromSeeds(umi, {\n  asset: assetPublicKey,\n})\n\nconsole.log('Identity:', identity)",
+  "main": "// Throws if the identity account does not exist — use safeFetchAgentIdentityV1 for unregistered assets.\nconst identity = await fetchAgentIdentityV1FromSeeds(umi, {\n  asset: assetPublicKey,\n})\n\nconsole.log('Identity:', identity)",
   "output": "// Identity: { ... }",
-  "full": "// [IMPORTS]\nimport {\n  fetchAgentIdentityV1FromSeeds,\n  mplAgentIdentity,\n} from '@metaplex-foundation/mpl-agent-registry'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { publicKey } from '@metaplex-foundation/umi'\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com').use(mplAgentIdentity())\nconst assetPublicKey = publicKey('AGENT_CORE_ASSET_ADDRESS')\n// [/SETUP]\n\n// [MAIN]\nconst identity = await fetchAgentIdentityV1FromSeeds(umi, {\n  asset: assetPublicKey,\n})\n\nconsole.log('Identity:', identity)\n// [/MAIN]\n\n// [OUTPUT]\n// Identity: { ... }\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport {\n  fetchAgentIdentityV1FromSeeds,\n  mplAgentIdentity,\n} from '@metaplex-foundation/mpl-agent-registry'\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults'\nimport { publicKey } from '@metaplex-foundation/umi'\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com').use(mplAgentIdentity())\nconst assetPublicKey = publicKey('AGENT_CORE_ASSET_ADDRESS')\n// [/SETUP]\n\n// [MAIN]\n// Throws if the identity account does not exist — use safeFetchAgentIdentityV1 for unregistered assets.\nconst identity = await fetchAgentIdentityV1FromSeeds(umi, {\n  asset: assetPublicKey,\n})\n\nconsole.log('Identity:', identity)\n// [/MAIN]\n\n// [OUTPUT]\n// Identity: { ... }\n// [/OUTPUT]\n"
 }
 
 export const metadata = {

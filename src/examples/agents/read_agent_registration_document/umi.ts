@@ -15,13 +15,16 @@ const agentIdentity = assetData.agentIdentities?.[0]
 
 if (agentIdentity?.uri) {
   const response = await fetch(agentIdentity.uri)
+  if (!response.ok) {
+    throw new Error(`Registration document fetch failed: HTTP ${response.status}`)
+  }
   const registration = await response.json()
 
   console.log(registration.name)
   console.log(registration.description)
   console.log(registration.active)
 
-  for (const service of registration.services) {
+  for (const service of registration.services ?? []) {
     console.log(service.name)
     console.log(service.endpoint)
     console.log(service.version)
