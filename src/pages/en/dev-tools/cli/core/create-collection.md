@@ -46,6 +46,9 @@ mplx core collection create --wizard
 - `--plugins`: Use interactive plugin selection
 - `--pluginsFile <path>`: Path to a JSON file with plugin data
 
+### Vanity Addresses
+- `--mint-keypair <path>`: Path to a keypair JSON file to use as the collection address instead of generating a random one. See [Grind a vanity public key](/solana/grind-vanity-public-key).
+
 ## Examples
 
 1. Create a collection using the interactive wizard:
@@ -61,6 +64,14 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 3. Create a collection from files:
 ```bash
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
+```
+
+4. Create a collection with a vanity address:
+```bash
+mplx core collection create \
+  --name "My Collection" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-collection.json
 ```
 
 ## JSON Output

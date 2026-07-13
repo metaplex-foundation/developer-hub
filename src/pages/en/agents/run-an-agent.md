@@ -324,5 +324,3 @@ Either the asset owner or the executive authority recorded on the delegation. Th
 Call SPL Token's `Revoke` instruction on the affected token account through Core's [Execute path](/smart-contracts/core/execute-asset-signing). The asset owner can drive this directly without an active executive, because Core Execute validates the owner as a signer. See [Example: Clean Up an SPL Approval](#example-clean-up-an-spl-approval) for the worked code.
 
 See the [Agent Tools](/smart-contracts/mpl-agent/tools) smart contract reference for account layouts, PDA derivation details, error codes, and the full lifecycle and security model.
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified June 2026 · [View source on GitHub](https://github.com/metaplex-foundation/mpl-agent)*

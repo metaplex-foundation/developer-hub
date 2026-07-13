@@ -30,6 +30,9 @@ tableOfContents: false
 | `royaltyTarget`     |          | 로열티의 대상 주소입니다.  |
 | `royaltyAmount`     |          | 로열티 금액입니다.  |
 | `burnt`             |          | 자산이 소각되었는지 여부를 나타냅니다.  |
+| `isAgent`           |          | 등록된 에이전트 상태로 필터링(`true` = `AgentIdentity` 플러그인을 가진 `MplCoreAsset`; `false` = 등록된 에이전트 아님). snake_case 별칭 `is_agent` 허용. |
+| `agentToken`        |          | 정규 에이전트 토큰 민트 주소로 필터링. `AgentIdentityV2` PDA에 이 민트가 설정된 `MplCoreAsset` 행과 일치. snake_case 별칭 `agent_token` 허용. |
+| `assetSigner`       |          | `MplCoreAsset` 행의 Core Asset Signer PDA 주소로 필터링. snake_case 별칭 `asset_signer` 허용. |
 | `sortBy`            |          | 정렬 기준입니다. 이는 `{ sortBy: <값>, sortDirection: <값> }` 객체로 지정되며, 여기서 `sortBy`는 `["created", "updated", "recentAction", "id", "none"]` 중 하나이고 `sortDirection`은 `["asc", "desc"]` 중 하나입니다.     |
 | `limit`             |          | 검색할 최대 자산 수입니다.  |
 | `page`              |          | 검색할 "페이지"의 인덱스입니다.       |
@@ -37,6 +40,8 @@ tableOfContents: false
 | `after`             |          | 지정된 ID 이후의 자산을 검색합니다.    |
 | `jsonUri`           |          | JSON URI의 값입니다.  |
 | `options`           |          | 표시 옵션 객체입니다. 자세한 내용은 [표시 옵션](/ko/dev-tools/das-api/display-options)을 참조하세요. |
+
+`isAgent`, `agentToken`, `assetSigner` 사용 예제는 [에이전트 데이터 읽기](/ko/agents/read-agent-data#read-agent-data-via-das-api)를 참조하세요.
 
 ## Playground
 

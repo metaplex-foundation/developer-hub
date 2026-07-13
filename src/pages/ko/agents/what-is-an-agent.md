@@ -49,5 +49,3 @@ Solana의 자율 에이전트는 [Metaplex Agent Registry](/smart-contracts/mpl-
 - **[에이전트 실행](/agents/run-an-agent)** — 이그제큐티브 프로필 설정 및 실행 위임
 - **[에이전트 파이낸스](/agents/agent-finance)** — 에이전트 자체의 온체인 토큰을 통한 자본화
 - **[에이전트 커머스](/agents/agent-commerce)** — 에이전트가 수익을 얻고 자율적으로 거래
-
-*Metaplex 관리 · 2026년 3월 검증 완료*

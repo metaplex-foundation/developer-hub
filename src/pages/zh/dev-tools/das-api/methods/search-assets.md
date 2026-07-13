@@ -30,6 +30,9 @@ tableOfContents: false
 | `royaltyTarget`     |          | 版税的目标地址。  |
 | `royaltyAmount`     |          | 版税金额。  |
 | `burnt`             |          | 指示资产是否已销毁。  |
+| `isAgent`           |          | 按已注册代理状态过滤（`true` = 具有 `AgentIdentity` 插件的 `MplCoreAsset`；`false` = 非已注册代理）。接受 snake_case 别名 `is_agent`。 |
+| `agentToken`        |          | 按规范代理代币铸币地址过滤。匹配 `AgentIdentityV2` PDA 设置了此铸币的 `MplCoreAsset` 行。接受 snake_case 别名 `agent_token`。 |
+| `assetSigner`       |          | 按 `MplCoreAsset` 行上的 Core Asset Signer PDA 地址过滤。接受 snake_case 别名 `asset_signer`。 |
 | `sortBy`            |          | 排序条件。指定为对象 `{ sortBy: <value>, sortDirection: <value> }`，其中 `sortBy` 是 `["created", "updated", "recentAction", "id", "none"]` 之一，`sortDirection` 是 `["asc", "desc"]` 之一。     |
 | `limit`             |          | 要检索的最大资产数量。  |
 | `page`              |          | 要检索的"页面"索引。       |
@@ -37,6 +40,8 @@ tableOfContents: false
 | `after`             |          | 检索指定 ID 之后的资产。    |
 | `jsonUri`           |          | JSON URI 的值。  |
 | `options`           |          | 显示选项对象。详见[显示选项](/zh/dev-tools/das-api/display-options)。 |
+
+`isAgent`、`agentToken` 和 `assetSigner` 的使用示例请参阅[读取代理数据](/zh/agents/read-agent-data#read-agent-data-via-das-api)。
 
 ## 测试场
 

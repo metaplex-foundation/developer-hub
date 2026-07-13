@@ -44,6 +44,9 @@ mplx core collection create --wizard
 - `--plugins`: インタラクティブなプラグイン選択を使用
 - `--pluginsFile <path>`: プラグインデータを含むJSONファイルへのパス
 
+### バニティアドレス
+- `--mint-keypair <path>`: ランダム生成の代わりにコレクションアドレスとして使用するキーペアJSONファイルのパス。[バニティ公開鍵の生成](/ja/solana/grind-vanity-public-key)を参照。
+
 ## 例
 
 1. インタラクティブウィザードを使用してコレクションを作成：
@@ -59,6 +62,14 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 3. ファイルからコレクションを作成：
 ```bash
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
+```
+
+4. バニティアドレスでコレクションを作成:
+```bash
+mplx core collection create \
+  --name "My Collection" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-collection.json
 ```
 
 ## 出力

@@ -90,6 +90,8 @@ An **Asset** is a single on-chain account representing an NFT. Unlike Token Meta
 See: [What is an Asset?](/smart-contracts/core/what-is-an-asset)
 ### Collections
 A **Collection** is a Core account that groups related Assets. Collections can have their own plugins that apply to all member Assets. Collection-level royalties, for example, apply to every Asset in the collection unless overridden.
+
+**Groups** (`GroupV1`) are a separate taxonomy layer that can organize collections, standalone assets, and nested groups. See [Core Groups](/smart-contracts/core/groups) for when to use groups vs collections.
 See: [Collections](/smart-contracts/core/collections)
 ### Plugins
 **Plugins** are modular extensions that add behavior to Assets or Collections. They hook into lifecycle events (create, transfer, burn) to enforce rules or store data.
