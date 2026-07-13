@@ -132,7 +132,7 @@ DAS는 두 가지 온체인 소스에서 에이전트 메타데이터를 파생�
 
 | 필드 | 타입 | 포함 대상 | 소스 |
 |------|------|-----------|------|
-| `is_agent` | `boolean` | `MplCoreAsset` | 자산에 `AgentIdentity` 외부 플러그인이 있을 때 `true` |
+| `is_agent` | `boolean` | Core 인터페이스 행(자산, 컬렉션, 그룹) | `AgentIdentity`가 있는 `MplCoreAsset`만 `true`; 컬렉션/그룹은 `false` 가능 |
 | `asset_signer` | `string` (pubkey) | `MplCoreAsset`만 | 위 [`findAssetSignerPda`](#fetch-the-agents-wallet)와 동일한 PDA |
 | `agent_token` | `string` (pubkey) | 설정된 경우 `MplCoreAsset` | [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token)으로 기록된 `AgentIdentityV2` PDA 민트 |
 

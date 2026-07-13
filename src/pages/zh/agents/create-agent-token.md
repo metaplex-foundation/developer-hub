@@ -268,7 +268,7 @@ try {
 - 首次购买在发行创建时配置，曲线上线后无法追加
 - 创作者费用累积在桶中，而非按次兑换转账；通过免权限的 `claimBondingCurveCreatorFeeV2`（本金曲线）和 `claimRaydiumCreatorFeeV2`（毕业后 Raydium）指令领取——参见[兑换集成指南](/smart-contracts/genesis/bonding-curve-swaps#claiming-creator-fees)
 - Metaplex API 构建并返回未签名的交易；签名密钥始终由调用方持有
-- 发行后，当 `setToken: true` 或 `setAgentTokenV1` 已关联 mint 时，可通过 DAS 查询代理的标准代币 mint 地址 — 请参阅[读取代理数据](/agents/read-agent-data#read-agent-data-via-das-api)
+- 发行后，当 `setToken: true` 或 `setAgentTokenV1` 已关联 mint 时，可通过 DAS 查询代理的标准代币 mint 地址 — 请参阅[读取代理数据](/zh/agents/read-agent-data#read-agent-data-via-das-api)
 
 ## 常见问题
 
