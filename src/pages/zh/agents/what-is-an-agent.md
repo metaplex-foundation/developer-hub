@@ -49,5 +49,3 @@ Solana 上的自主代理是由 [Metaplex Agent Registry](/smart-contracts/mpl-a
 - **[运行代理](/agents/run-an-agent)** — 设置执行者配置文件并委托执行
 - **[Agent 金融](/agents/agent-finance)** — 通过 Agent 自身的链上代币进行资本化
 - **[Agent 商业](/agents/agent-commerce)** — 让 Agent 获得收入并自主交易
-
-*由 Metaplex 维护 · 2026 年 3 月验证*

@@ -30,6 +30,9 @@ tableOfContents: false
 | `royaltyTarget`     |          | ロイヤリティのターゲットアドレス。  |
 | `royaltyAmount`     |          | ロイヤリティ金額。  |
 | `burnt`             |          | アセットが焼却されているかを示します。  |
+| `isAgent`           |          | 登録済みエージェントステータスでフィルタリング（`true` = `AgentIdentity`プラグインを持つ`MplCoreAsset`；`false` = 登録済みエージェントではない）。snake_caseエイリアス`is_agent`を受け付けます。 |
+| `agentToken`        |          | 正規エージェントトークンミントアドレスでフィルタリング。`AgentIdentityV2` PDAにこのミントが設定されている`MplCoreAsset`行に一致します。snake_caseエイリアス`agent_token`を受け付けます。 |
+| `assetSigner`       |          | `MplCoreAsset`行のCore Asset Signer PDAアドレスでフィルタリング。snake_caseエイリアス`asset_signer`を受け付けます。 |
 | `sortBy`            |          | ソート条件。これは`{ sortBy: <value>, sortDirection: <value> }`のオブジェクトとして指定され、`sortBy`は`["created", "updated", "recentAction", "id", "none"]`のいずれか、`sortDirection`は`["asc", "desc"]`のいずれかです。     |
 | `limit`             |          | 取得するアセットの最大数。  |
 | `page`              |          | 取得する「ページ」のインデックス。       |
@@ -37,6 +40,8 @@ tableOfContents: false
 | `after`             |          | 指定されたIDより後のアセットを取得。    |
 | `jsonUri`           |          | JSON URIの値。  |
 | `options`           |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/dev-tools/das-api/display-options)を参照してください。 |
+
+`isAgent`、`agentToken`、`assetSigner`の使用例については、[エージェントデータの読み取り](/ja/agents/read-agent-data#read-agent-data-via-das-api)を参照してください。
 
 ## Playground
 

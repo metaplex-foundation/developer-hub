@@ -206,5 +206,3 @@ await registerIdentityV1(umi, {
 - `agentRegistrationUri` 应指向永久托管的 JSON（例如 Arweave）。如果 URI 变得不可访问，链上身份仍然存在，但客户端将无法获取代理的元数据。
 - `collection` 参数是可选的但建议使用——它在注册时启用集合级别的权限检查。
 - Transfer、Update 和 Execute 的生命周期钩子会自动附加。这些钩子允许身份插件参与批准或拒绝对资产的操作。
-
-*由 Metaplex 维护 · 2026 年 3 月验证 · [在 GitHub 上查看源码](https://github.com/metaplex-foundation/mpl-agent)*

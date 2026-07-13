@@ -133,6 +133,11 @@ export const agents = {
         ko: '에이전트 커머스',
         zh: 'Agent 商业',
       },
+      'Create an Agent Token': {
+        ja: 'エージェントトークンの作成',
+        ko: '에이전트 토큰 생성',
+        zh: '创建 Agent 代币',
+      },
       'Run an Agent': {
         ja: 'エージェントの実行',
         ko: '에이전트 실행',

@@ -212,5 +212,3 @@ await delegateExecutionV1(umi, {
 - 소유자는 다른 이그제큐티브 프로필로 새 위임 레코드를 생성하여 이그제큐티브를 전환할 수 있습니다.
 
 계정 레이아웃, PDA 파생 세부사항 및 오류 코드에 대해서는 [Agent Tools](/smart-contracts/mpl-agent/tools) 스마트 컨트랙트 레퍼런스를 참조하세요.
-
-*Metaplex 관리 · 2026년 3월 검증 완료 · [GitHub에서 소스 보기](https://github.com/metaplex-foundation/mpl-agent)*
