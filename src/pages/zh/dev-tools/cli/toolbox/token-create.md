@@ -30,6 +30,7 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 - `--description <string>`: 代币及其用途的描述
 - `--image <path>`: 代币图片文件路径（PNG、JPG 或 GIF）
 - `--speed-run`: 启用极速模式以测量执行时间
+- `--mint-keypair <path>`: 用于代币铸造地址的密钥对 JSON 文件路径（虚荣地址）。参见[生成虚荣公钥](/zh/solana/grind-vanity-public-key)。
 
 ## 示例
 
@@ -47,6 +48,15 @@ mplx toolbox token create \
   --image ./token-image.png \
   --decimals 2 \
   --mint-amount 1000000
+```
+
+### 使用虚荣铸造地址创建代币
+```bash
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-mint.json
 ```
 
 ### 使用向导创建代币

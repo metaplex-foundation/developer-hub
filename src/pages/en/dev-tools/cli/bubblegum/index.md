@@ -21,7 +21,24 @@ Compressed NFTs are stored in Merkle trees rather than individual on-chain accou
 - Proof size required for operations
 
 ### Collections
-Bubblegum V2 uses [Metaplex Core collections](/smart-contracts/core/collections) (not Token Metadata collections). Create a Core collection first:
+Bubblegum V2 uses [Metaplex Core collections](/smart-contracts/core/collections). Create a Core collection with the Bubblegum V2 plugin:
+
+```bash
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json"
+```
+
+You can also use a vanity collection address with `--mint-keypair`:
+
+```bash
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --mint-keypair ./vanity-collection.json
+```
+
+Or create a Core collection manually and add plugins separately:
 
 ```bash
 mplx core collection create --wizard

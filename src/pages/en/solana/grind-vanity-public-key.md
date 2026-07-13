@@ -209,27 +209,54 @@ solana balance
 
 ## Using Vanity Addresses with Metaplex
 
-### Token Creation
+After grinding a keypair, pass it to mint and create commands with `--mint-keypair`. Your configured wallet (`--keypair` or `mplx config wallets set`) still pays transaction fees and acts as the update authority. The vanity keypair only determines the mint or asset address.
+
+### Fungible Token
 
 ```bash
-# Create a token with a vanity mint address
-# First, grind the keypair
-solana-keygen grind --starts-with COOL:1
+solana-keygen grind --starts-with COOL:1 --output-directory ./vanity-keys/
 
-# Use with MPLX CLI (specify as mint keypair)
-mplx toolbox token-create --name "Cool Token" --symbol "COOL"
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-keys/COOL....json
 ```
 
-### NFT Collection
-
-When creating collections with the MPLX CLI, you can use a vanity address for your collection:
+### Core Asset
 
 ```bash
-# Grind collection address
-solana-keygen grind --starts-with ART:1
+mplx core asset create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-asset.json
+```
 
-# Use in collection creation
-mplx core create-collection --keypair ./ARTxyz....json
+### Core Collection
+
+```bash
+mplx core collection create \
+  --name "My Collection" \
+  --uri "https://example.com/collection.json" \
+  --mint-keypair ./vanity-collection.json
+```
+
+### Token Metadata NFT
+
+```bash
+mplx tm create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-mint.json
+```
+
+### Bubblegum Collection
+
+```bash
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --mint-keypair ./vanity-collection.json
 ```
 
 ## Next Steps

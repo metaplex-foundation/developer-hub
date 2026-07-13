@@ -44,6 +44,9 @@ mplx core collection create --wizard
 - `--plugins`: 대화형 플러그인 선택 사용
 - `--pluginsFile <path>`: 플러그인 데이터가 포함된 JSON 파일 경로
 
+### 바니티 주소
+- `--mint-keypair <path>`: 무작위 생성 대신 컬렉션 주소로 사용할 키페어 JSON 파일 경로. [바니티 공개키 생성](/ko/solana/grind-vanity-public-key) 참조.
+
 ## 예시
 
 1. 대화형 마법사를 사용하여 컬렉션 생성:
@@ -59,6 +62,14 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 3. 파일에서 컬렉션 생성:
 ```bash
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
+```
+
+4. 바니티 주소로 컬렉션 생성:
+```bash
+mplx core collection create \
+  --name "My Collection" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-collection.json
 ```
 
 ## 출력
