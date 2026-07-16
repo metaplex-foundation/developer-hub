@@ -17,6 +17,7 @@ programmingLanguage:
   - Rust
 ---
 Metaplex는 MPL-Core 프로그램과 상호 작용하는 데 사용할 수 있는 Rust 라이브러리를 제공합니다. Rust 라이브러리는 rust 스크립트/빌드뿐만 아니라 CPI 명령을 통한 온체인 프로그램에서도 사용할 수 있습니다.
+Anchor 프로그램 통합은 [Anchor에서 Core 사용](/ko/smart-contracts/core/using-core-in-anchor)에서 `anchor`, `anchor-0-32` 기능 플래그 및 Rust 툴체인 요구 사항을 참조하세요.
 ## 설치
 MPL-Core Rust SDK는 스크립트/데스크톱/모바일 애플리케이션과 Solana 온체인 프로그램 모두에서 사용할 수 있습니다.
 ```rust

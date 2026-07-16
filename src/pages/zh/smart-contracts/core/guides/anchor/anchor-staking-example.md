@@ -60,8 +60,10 @@ _Stake 和 Unstake 函数都以不同方式使用了前面介绍的 Plugin_。
 在编写智能合约之前，让我们看看我们需要什么 crate 以及它们的哪些函数来确保我们的智能合约正常工作！
 在本示例中，我们主要使用启用了 [anchor](/zh/smart-contracts/core/using-core-in-anchor) 功能的 mpl_core crate：
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+有关旧版 `anchor-lang 0.31.x` 配置和Rust工具链要求，请参阅[在Anchor中使用Core](/zh/smart-contracts/core/using-core-in-anchor)。
 该 crate 中的不同函数如下：
 ```rust
 use mpl_core::{

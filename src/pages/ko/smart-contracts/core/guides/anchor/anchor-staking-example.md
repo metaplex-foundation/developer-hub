@@ -60,8 +60,10 @@ _Stake와 Unstake 함수 모두 앞서 소개한 Plugin을 다르게 활용합�
 스마트 컨트랙트를 작성하기 전에, 스마트 컨트랙트가 작동하는 데 필요한 크레이트와 그 함수들을 살펴보겠습니다!
 이 예제에서는 주로 [anchor](/ko/smart-contracts/core/using-core-in-anchor) 기능이 활성화된 mpl_core 크레이트를 사용합니다:
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+레거시 `anchor-lang 0.31.x` 설정 및 Rust 툴체인 요구 사항은 [Anchor에서 Core 사용](/ko/smart-contracts/core/using-core-in-anchor)을 참조하세요.
 그리고 해당 크레이트의 다양한 함수들은 다음과 같습니다:
 ```rust
 use mpl_core::{
