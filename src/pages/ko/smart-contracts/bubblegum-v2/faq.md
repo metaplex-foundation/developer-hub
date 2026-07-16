@@ -36,7 +36,7 @@ faqs:
   - q: 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요?
     a: 최대값은 2^maxDepth입니다. 깊이 30의 트리는 10억 개 이상의 cNFT를 보유할 수 있지만, 트리가 클수록 렌트 비용이 더 많이 듭니다.
   - q: cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요?
-    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 표시 시 컬렉션에서 로열티가 해석됩니다. 쓰기 명령에는 getAssetWithProof의 currentMetadata를 사용하세요.
+    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 DAS는 royalty.basis_points_inherited에 컬렉션 비율을 노출합니다. 쓰기 명령에는 getAssetWithProof.metadata(리프 값)를 사용하세요.
 ---
 
 ## Summary
@@ -158,25 +158,23 @@ cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊�
 
 ## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
 
-예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나(`SELLER_FEE_BASIS_POINTS_INHERIT`, `65535` 전달) 할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장되고, 마켓플레이스와 인덱서는 표시 시 컬렉션에서 실효 로열티를 해석합니다.
+예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 `royalty.basis_points`에 센티널을 반환하고, 표시용으로 `royalty.basis_points_inherited` / `creators_inherited`에 컬렉션 비율을 노출합니다.
 
 **요구 사항:**
 
 - 컬렉션에는 `BubblegumV2`와 `Royalties` 플러그인이 모두 있어야 합니다.
 - 상속된 seller fee를 사용할 때 `metadata.creators`는 빈 배열이어야 합니다.
 
-**흔한 실수 — `metadata` vs `currentMetadata`:**
+**`getAssetWithProof` 사용:**
 
-`getAssetWithProof`는 상속된 cNFT에 대해 로열티 관련 두 가지 형태를 반환할 수 있습니다:
+- **`metadata`** — 해싱 및 쓰기 명령용 리프 정규 값(상속 시 `sellerFeeBasisPoints`는 `65535`).
+- **`rpcAsset`** — 표시 / 지급 UI에는 `royalty.basis_points_inherited`와 `creators_inherited`를 사용하세요.
 
-- **`metadata`** — 표시용 값. `sellerFeeBasisPoints`가 해석된 컬렉션 비율을 표시할 수 있습니다.
-- **`currentMetadata`** — 리프 검증용 정규 온체인 메타데이터. 상속 센티널(`65535`)을 유지합니다.
-
-`updateMetadataV2`, `setCollectionV2` 등 쓰기 명령에는 항상 `currentMetadata`를 전달하세요. Bubblegum Umi 라이브러리를 사용하면 올바른 메타데이터가 자동으로 전달됩니다.
+`updateMetadataV2`를 호출할 때는 리프 메타데이터를 명령의 `currentMetadata` 인자(기존 리프 상태에 대한 IDL 이름)로 전달하세요.
 
 **컬렉션 관리:**
 
 - 상속된 seller fee를 사용하는 cNFT는 명시적인 `sellerFeeBasisPoints`로 업데이트할 때까지 컬렉션에서 **제거할 수 없습니다**.
 - 대상에 `Royalties` 플러그인이 있으면 다른 컬렉션으로 이동할 수 있습니다.
 
-전체 예제는 [민팅 — 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [cNFT 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), [컬렉션 관리](/ko/smart-contracts/bubblegum-v2/collections#inherited-royalties)를 참조하세요.
+DAS를 읽는 클라이언트는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하고, 전체 예제는 [민팅 — 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [cNFT 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), [컬렉션 관리](/ko/smart-contracts/bubblegum-v2/collections#inherited-royalties)를 참조하세요.

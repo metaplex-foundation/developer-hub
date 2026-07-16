@@ -39,7 +39,7 @@ faqs:
   - q: このSDKをBubblegum V1ツリーで使用できますか？
     a: いいえ。このSDKはBubblegum V2を対象としておりLeafSchemaV2を使用します。V1ツリーにはレガシーBubblegum SDKを使用してください。
   - q: getAssetWithProofとは何で、なぜ必要なのですか？
-    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーター（プルーフ、ルート、リーフインデックス、ノンス、メタデータ）を1回の呼び出しで取得するヘルパーです。ほぼすべての書き込み命令にこれが必要です。
+    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーター（プルーフ、ルート、リーフインデックス、ノンス、メタデータ）を1回の呼び出しで取得するヘルパーです。継承ロイヤリティの場合、metadata.sellerFeeBasisPointsはオンチェーンリーフセンチネル（65535）であり、解決済みのコレクション料率はrpcAsset.royalty.basis_points_inheritedにあります。
 ---
 
 **Bubblegum V2 JavaScript SDK**（`@metaplex-foundation/mpl-bubblegum`）は、Solanaで[圧縮NFT](/ja/smart-contracts/bubblegum-v2)を作成・管理するための推奨TypeScript/JavaScriptライブラリです。[Umiフレームワーク](/ja/dev-tools/umi)をベースに構築されており、すべてのBubblegum V2操作に対してタイプセーフな関数を提供し、[DAS API](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)プラグインが自動的に含まれています。 {% .lead %}
@@ -284,14 +284,25 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  // 既存リーフメタデータの命令引数名（V2のcollectionは公開鍵）。
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('YourCollectionAddressHere')),
+  },
   updateArgs,
   // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-継承されたロイヤリティを持つcNFTでは、`metadata` より `currentMetadata` を優先してください — 下記の [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata) を参照してください。
+`getAssetWithProof.metadata` は常にリーフを反映します（ロイヤリティ継承時は `65535` を含む）。表示には `rpcAsset.royalty.basis_points_inherited` と `rpcAsset.creators_inherited` を読んでください。
 
 ## 圧縮NFTの委任
 
@@ -494,16 +505,18 @@ await unverifyCreatorV2(umi, {
 
 DAS APIプラグインは`mplBubblegum()`によって自動的に登録されます。利用可能なメソッドの詳細については[cNFTのフェッチ](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)を参照してください。
 
-### getAssetWithProof: metadata と currentMetadata {% #getassetwithproof-metadata-vs-currentmetadata %}
+### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
 
-`getAssetWithProof` は `getAsset` と `getAssetProof` を書き込み命令が期待するパラメータ形状に結合します。V2 cNFTでは次も返します：
+`getAssetWithProof` は `getAsset` と `getAssetProof` を書き込み命令が期待するパラメータ形状に結合します。
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | 表示用メタデータ。ロイヤリティが継承されている場合、`sellerFeeBasisPoints` はDASレスポンスから解決されたコレクションのパーセンテージを示すことがあります。 |
-| `currentMetadata` | リーフ検証用の正規オンチェーンメタデータ。ロイヤリティが継承されている場合、`SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）を保持します。`updateMetadataV2`、`setCollectionV2` などの命令に渡してください。 |
+| `metadata` | ハッシュと書き込み命令用のリーフ正規メタデータ。ロイヤリティが継承されている場合、`sellerFeeBasisPoints` は `65535`、`creators` はリーフのクリエイター一覧（通常は空）です。 |
+| `rpcAsset` | 完全なDASレスポンス。コレクションから解決された表示値は `royalty.basis_points_inherited`、`royalty.percent_inherited`、`creators_inherited` にあります。 |
 
-DASレスポンスにまだ生のセンチネルが含まれている場合、オプションの `resolveCollectionSellerFeeBasisPoints` コールバックを渡して、表示用ロイヤリティを解決しながら `currentMetadata` のセンチネルを保持できます。
+`updateMetadataV2` は既存リーフ引数名を引き続き `currentMetadata`（IDL）とします。V2 の `collection` を公開鍵にして、`assetWithProof.metadata` のリーフフィールドからその `MetadataArgsV2` を構築してください。
+
+DASを直接読むクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
 
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
@@ -629,7 +642,7 @@ RPCプロバイダーがMetaplex DAS APIをサポートしていない可能性�
 | `setNonTransferableV2` | cNFTを永続的にソウルバウンドにする（不可逆） |
 | `verifyCreatorV2` | クリエイターエントリにverifiedフラグを設定する |
 | `unverifyCreatorV2` | クリエイターエントリからverifiedフラグを削除する |
-| `getAssetWithProof` | 書き込み命令用のプルーフパラメーターを取得し、表示用メタデータとオンチェーン `currentMetadata` を区別する |
+| `getAssetWithProof` | プルーフパラメーターを取得；`metadata` はリーフ正規値、表示用の継承値は `rpcAsset` 上 |
 | `SELLER_FEE_BASIS_POINTS_INHERIT` | MPL-Coreコレクションから継承されたロイヤリティのセンチネル定数（`65535`） |
 | `findLeafAssetIdPda` | ツリーアドレスとリーフインデックスからcNFTアセットIDを導出する |
 | `parseLeafFromMintV2Transaction` | ミントトランザクションからリーフスキーマ（アセットIDを含む）を抽出する |

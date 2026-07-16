@@ -7,6 +7,8 @@ tableOfContents: false
 
 메타데이터 및 소유자를 포함한 압축된/표준 자산의 정보를 반환합니다.
 
+MPL-Core 컬렉션에서 판매자 수수료를 상속하는 Bubblegum V2 cNFT의 경우, 리프 값은 `royalty.basis_points` / `creators`에 유지되고, 컬렉션에서 해석된 표시 값은 `royalty.basis_points_inherited`, `royalty.percent_inherited`, `creators_inherited`에 있습니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하세요.
+
 ## 매개변수
 
 | 이름            | 필수 | 설명                                |

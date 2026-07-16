@@ -36,7 +36,7 @@ faqs:
   - q: 一棵树可以存储多少个cNFT？
     a: 最大值为2^maxDepth。深度为30的树可以容纳超过10亿个cNFT，但树越大租金成本越高。
   - q: cNFT可以从MPL-Core集合继承版税吗？
-    a: 可以。铸造到具有Royalties插件的集合时，省略sellerFeeBasisPoints。叶子上存储继承哨兵（65535），并在显示时从集合解析版税。写入指令请使用getAssetWithProof的currentMetadata。
+    a: 可以。铸造到具有Royalties插件的集合时，省略sellerFeeBasisPoints。叶子上存储继承哨兵（65535），DAS在royalty.basis_points_inherited上暴露集合费率。写入指令请使用getAssetWithProof.metadata（叶子值）。
 ---
 
 ## Summary
@@ -164,25 +164,23 @@ cNFT 的最大数量是 `2^maxDepth`。深度 14 的树可容纳 16,384 个，�
 
 ## cNFT 可以从 MPL-Core 集合继承版税吗？ {% #inherited-royalties %}
 
-可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上存储该哨兵值，而市场和索引器在显示时从集合解析有效版税。
+可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上链存储该哨兵值。DAS 在 `royalty.basis_points` 上返回该哨兵，并在 `royalty.basis_points_inherited` / `creators_inherited` 上暴露集合费率供展示。
 
 **要求:**
 
 - 集合必须同时具有 `BubblegumV2` 和 `Royalties` 插件。
 - 使用继承 seller fee 时，`metadata.creators` 必须是空数组。
 
-**常见陷阱 — `metadata` 与 `currentMetadata`:**
+**使用 `getAssetWithProof`:**
 
-`getAssetWithProof` 可能为继承版税的 cNFT 返回两种与版税相关的形态：
+- **`metadata`** — 用于哈希和写入指令的叶子规范值（继承时 `sellerFeeBasisPoints` 为 `65535`）。
+- **`rpcAsset`** — 展示 / 分账 UI 请使用 `royalty.basis_points_inherited` 与 `creators_inherited`。
 
-- **`metadata`** — 便于显示的值；`sellerFeeBasisPoints` 可能显示已解析的集合百分比。
-- **`currentMetadata`** — 用于叶子验证的规范链上元数据；保留继承哨兵（`65535`）。
-
-请始终将 `currentMetadata` 传给 `updateMetadataV2`、`setCollectionV2` 等写入指令。如果使用 Bubblegum Umi 库，它会自动传入正确的元数据。
+调用 `updateMetadataV2` 时，将叶子元数据作为指令的 `currentMetadata` 参数传入（IDL 中表示现有叶子状态的名称）。
 
 **集合管理:**
 
 - 具有继承 seller fee 的 cNFT 在更新为明确的 `sellerFeeBasisPoints` 之前**无法**从集合中移除。
 - 当目标集合具有 `Royalties` 插件时，允许移动到另一个集合。
 
-完整示例请参阅[铸造 — 继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[更新 cNFT](/zh/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)和[管理集合](/zh/smart-contracts/bubblegum-v2/collections#inherited-royalties)。
+读取 DAS 的客户端请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)；完整示例请参阅[铸造 — 继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[更新 cNFT](/zh/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)和[管理集合](/zh/smart-contracts/bubblegum-v2/collections#inherited-royalties)。

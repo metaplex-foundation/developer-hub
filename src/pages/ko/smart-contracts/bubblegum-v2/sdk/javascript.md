@@ -39,7 +39,7 @@ faqs:
   - q: 이 SDK를 Bubblegum V1 트리와 함께 사용할 수 있나요?
     a: 아니요. 이 SDK는 LeafSchemaV2를 사용하는 Bubblegum V2를 대상으로 합니다. V1 트리에는 레거시 Bubblegum SDK를 사용하세요.
   - q: getAssetWithProof는 무엇이고 왜 필요한가요?
-    a: getAssetWithProof는 DAS API에서 리프 변경 명령에 필요한 모든 파라미터(증명, 루트, 리프 인덱스, 논스, 메타데이터)를 한 번의 호출로 가져오는 헬퍼입니다. 거의 모든 쓰기 명령에 이것이 필요합니다.
+    a: getAssetWithProof는 DAS API에서 리프 변경 명령에 필요한 모든 파라미터(증명, 루트, 리프 인덱스, 논스, 메타데이터)를 한 번의 호출로 가져오는 헬퍼입니다. 상속 로열티의 경우 metadata.sellerFeeBasisPoints는 온체인 리프 센티널(65535)이며, 해석된 컬렉션 비율은 rpcAsset.royalty.basis_points_inherited에 있습니다.
 ---
 
 **Bubblegum V2 JavaScript SDK**(`@metaplex-foundation/mpl-bubblegum`)는 Solana에서 [압축 NFT](/ko/smart-contracts/bubblegum-v2)를 생성하고 관리하기 위한 권장 TypeScript/JavaScript 라이브러리입니다. [Umi 프레임워크](/ko/dev-tools/umi)를 기반으로 구축되었으며, 모든 Bubblegum V2 작업에 대한 타입 안전 함수를 제공하고 [DAS API](/ko/smart-contracts/bubblegum-v2/fetch-cnfts) 플러그인이 자동으로 포함됩니다. {% .lead %}
@@ -284,14 +284,25 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  // 기존 리프 메타데이터의 명령 인자 이름(V2 collection은 pubkey).
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('YourCollectionAddressHere')),
+  },
   updateArgs,
   // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-상속된 로열티를 사용하는 cNFT의 경우 `metadata`보다 `currentMetadata`를 우선하세요 — 아래 [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata)를 참조하세요.
+`getAssetWithProof.metadata`는 항상 리프를 미러링합니다(상속 로열티 시 `65535` 포함). 표시용으로는 `rpcAsset.royalty.basis_points_inherited`와 `rpcAsset.creators_inherited`를 읽으세요.
 
 ## 압축 NFT 위임 {% #delegate-a-compressed-nft %}
 
@@ -494,16 +505,18 @@ await unverifyCreatorV2(umi, {
 
 DAS API 플러그인은 `mplBubblegum()`에 의해 자동으로 등록됩니다. 사용 가능한 메서드의 전체 설명은 [cNFT 가져오기](/ko/smart-contracts/bubblegum-v2/fetch-cnfts)를 참조하세요.
 
-### getAssetWithProof: metadata vs currentMetadata {% #getassetwithproof-metadata-vs-currentmetadata %}
+### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
 
-`getAssetWithProof`는 `getAsset`과 `getAssetProof`를 쓰기 명령이 예상하는 파라미터 형태로 결합합니다. V2 cNFT의 경우 다음도 반환합니다:
+`getAssetWithProof`는 `getAsset`과 `getAssetProof`를 쓰기 명령이 예상하는 파라미터 형태로 결합합니다.
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | 표시용 메타데이터. 로열티가 상속된 경우 `sellerFeeBasisPoints`가 DAS 응답에서 해석된 컬렉션 비율을 표시할 수 있습니다. |
-| `currentMetadata` | 리프 검증용 정규 온체인 메타데이터. 로열티가 상속된 경우 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 유지합니다. `updateMetadataV2`, `setCollectionV2` 등에 전달하세요. |
+| `metadata` | 해싱 및 쓰기 명령용 리프 정규 메타데이터. 로열티가 상속된 경우 `sellerFeeBasisPoints`는 `65535`이고 `creators`는 리프 크리에이터 목록(보통 비어 있음)입니다. |
+| `rpcAsset` | 전체 DAS 응답. 컬렉션에서 해석된 표시 값은 `royalty.basis_points_inherited`, `royalty.percent_inherited`, `creators_inherited`에 있습니다. |
 
-DAS 응답에 여전히 원시 센티널이 포함된 경우 선택적 `resolveCollectionSellerFeeBasisPoints` 콜백을 전달하여 표시용 로열티를 해석하면서 `currentMetadata`의 센티널을 유지할 수 있습니다.
+`updateMetadataV2`는 기존 리프 인자 이름을 여전히 `currentMetadata`(IDL)로 둡니다. V2 `collection`을 pubkey로 하여 `assetWithProof.metadata` 리프 필드에서 해당 `MetadataArgsV2`를 구성하세요.
+
+DAS를 직접 읽는 클라이언트는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 따르세요.
 
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
@@ -629,7 +642,7 @@ RPC 제공자가 Metaplex DAS API를 지원하지 않을 수 있습니다. [호�
 | `setNonTransferableV2` | cNFT를 영구적으로 소울바운드로 만들기 (되돌릴 수 없음) |
 | `verifyCreatorV2` | 크리에이터 항목에 verified 플래그 설정 |
 | `unverifyCreatorV2` | 크리에이터 항목에서 verified 플래그 제거 |
-| `getAssetWithProof` | 쓰기 명령용 증명 파라미터를 가져오고 표시용 메타데이터와 온체인 `currentMetadata`를 구분 |
+| `getAssetWithProof` | 증명 파라미터 가져오기; `metadata`는 리프 정규 값, 표시용 상속 값은 `rpcAsset`에 있음 |
 | `SELLER_FEE_BASIS_POINTS_INHERIT` | MPL-Core 컬렉션에서 상속된 로열티의 센티널 상수(`65535`) |
 | `findLeafAssetIdPda` | 트리 주소와 리프 인덱스에서 cNFT 에셋 ID 도출 |
 | `parseLeafFromMintV2Transaction` | 민트 트랜잭션에서 리프 스키마 (에셋 ID 포함) 추출 |

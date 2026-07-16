@@ -25,7 +25,7 @@ faqs:
   - q: Do I need to pass the collection when updating?
     a: Yes, if the cNFT belongs to a collection. Pass the coreCollection parameter with the collection's public key. The collection authority must sign the transaction.
   - q: How do I update a cNFT that inherits royalties from its collection?
-    a: Pass currentMetadata from getAssetWithProof (which preserves the on-chain sentinel) and use updateArgs.sellerFeeBasisPoints to set an explicit value when needed.
+    a: Pass leaf metadata from getAssetWithProof as updateMetadataV2's currentMetadata arg (IDL name for existing leaf state). sellerFeeBasisPoints is the on-chain sentinel when royalties are inherited.
 ---
 
 ## Summary
@@ -36,7 +36,7 @@ faqs:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-- Use `currentMetadata` from `getAssetWithProof` for leaf verification (especially when seller fees are inherited)
+- Use leaf metadata from `getAssetWithProof` as `updateMetadataV2`'s `currentMetadata` arg (IDL name for existing leaf state)
 
 The **updateMetadataV2** instruction can be used to modify the metadata of a Compressed NFT. The Merkle root is updated to reflect the propagated hash of the data, and RPC providers who conform to the [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api) will update their index of the cNFTs.
 
@@ -93,7 +93,17 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('22222222222222222222222222222222')),
+  },
   updateArgs,
   // Optional param. If your authority is a different signer type 
   // than the current umi identity assign that signer here.
@@ -103,13 +113,12 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% callout type="note" title="Use currentMetadata, not metadata" %}
-For V2 cNFTs, `getAssetWithProof` returns two royalty-related shapes:
+{% callout type="note" title="Leaf metadata for write instructions" %}
+`getAssetWithProof.metadata` is always leaf-canonical — including `sellerFeeBasisPoints: 65535` when royalties are inherited. Collection-resolved display values are on `rpcAsset.royalty.basis_points_inherited` and `rpcAsset.creators_inherited`.
 
-- **`metadata`** — display-friendly values. For inherited royalties, `sellerFeeBasisPoints` may show the resolved collection percentage.
-- **`currentMetadata`** — the canonical on-chain metadata used for leaf hashing and update instructions. For inherited royalties, this keeps the `SELLER_FEE_BASIS_POINTS_INHERIT` sentinel (`65535`).
+`updateMetadataV2`'s `currentMetadata` argument is the IDL name for existing leaf metadata (V2 shape: `collection` is a pubkey). Build it from `assetWithProof.metadata`.
 
-Always pass `currentMetadata` to `updateMetadataV2`, `setCollectionV2`, and other write instructions that verify the existing leaf.
+For guidance on DAS response fields when reading assets, see [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 {% /callout %}
 
 ## Inherited royalties {% #inherited-royalties %}
@@ -128,7 +137,7 @@ To switch **from** inherited royalties back to an explicit percentage — for ex
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates. Do not substitute `metadata` when `currentMetadata` is present.
+- Pass leaf metadata from `getAssetWithProof` as `updateMetadataV2`'s `currentMetadata` arg so the program can verify the current leaf before applying updates.
 - Use `some()` for fields to update; omit fields you wish to leave unchanged.
 - Inherited seller fees require an empty leaf-level `creators` array and a collection with the `Royalties` plugin.
 
@@ -148,7 +157,7 @@ Yes, if the cNFT belongs to a collection. Pass the `coreCollection` parameter wi
 
 ### How do I update a cNFT that inherits royalties from its collection?
 
-Pass `currentMetadata` from `getAssetWithProof` to preserve the on-chain sentinel for verification. Use `updateArgs.sellerFeeBasisPoints` with `some(SELLER_FEE_BASIS_POINTS_INHERIT)` to switch to inherited royalties, or an explicit number to switch away from them.
+Pass leaf metadata from `getAssetWithProof` as `updateMetadataV2`'s `currentMetadata` arg so the on-chain sentinel is used for verification. Use `updateArgs.sellerFeeBasisPoints` with `some(SELLER_FEE_BASIS_POINTS_INHERIT)` to switch to inherited royalties, or an explicit number to switch away from them.
 
 ## Glossary
 
@@ -158,5 +167,5 @@ Pass `currentMetadata` from `getAssetWithProof` to preserve the on-chain sentine
 | **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
 | **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
 | **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | The canonical on-chain metadata from `getAssetWithProof`, required for leaf verification on write instructions |
+| **currentMetadata** | IDL argument on `updateMetadataV2` for existing leaf metadata; build it from `getAssetWithProof.metadata` |
 | **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` indicating royalties are inherited from the MPL-Core collection |

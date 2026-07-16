@@ -36,7 +36,7 @@ faqs:
   - q: 1つのツリーにcNFTをいくつ保存できますか？
     a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
   - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
-    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、表示時にコレクションからロイヤリティが解決されます。書き込み命令にはgetAssetWithProofのcurrentMetadataを使用してください。
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_points_inheritedにコレクション料率を公開します。書き込み命令にはgetAssetWithProof.metadata（リーフ値）を使用してください。
 ---
 
 ## Summary
@@ -158,25 +158,23 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 
 ## cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？ {% #inherited-royalties %}
 
-はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存され、マーケットプレイスとインデクサーは表示時にコレクションから実効ロイヤリティを解決します。
+はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは `royalty.basis_points` にセンチネルを返し、表示用に `royalty.basis_points_inherited` / `creators_inherited` でコレクション料率を公開します。
 
 **要件:**
 
 - コレクションには `BubblegumV2` と `Royalties` の両方のプラグインが必要です。
 - 継承されたセラーフィーを使用する場合、`metadata.creators` は空の配列である必要があります。
 
-**よくある落とし穴 — `metadata` と `currentMetadata`:**
+**`getAssetWithProof` の使用:**
 
-`getAssetWithProof` は、継承されたcNFTについてロイヤリティ関連の2つの形状を返す場合があります：
+- **`metadata`** — ハッシュと書き込み命令用のリーフ正規値（継承時は `sellerFeeBasisPoints` が `65535`）。
+- **`rpcAsset`** — 表示 / 支払いUIには `royalty.basis_points_inherited` と `creators_inherited` を使用してください。
 
-- **`metadata`** — 表示用の値。`sellerFeeBasisPoints` は解決されたコレクションのパーセンテージを示すことがあります。
-- **`currentMetadata`** — リーフ検証用の正規オンチェーンメタデータ。継承センチネル（`65535`）を保持します。
-
-`updateMetadataV2` や `setCollectionV2` などの書き込み命令には、常に `currentMetadata` を渡してください。Bubblegum Umiライブラリを使用している場合、正しいメタデータが自動的に渡されます。
+`updateMetadataV2` を呼び出すときは、リーフメタデータを命令の `currentMetadata` 引数（既存リーフ状態のIDL名）として渡してください。
 
 **コレクション管理:**
 
 - 継承されたセラーフィーを持つcNFTは、明示的な `sellerFeeBasisPoints` に更新するまでコレクションから**削除できません**。
 - 移行先に `Royalties` プラグインがある場合、別のコレクションへの移動は許可されます。
 
-詳細な例については、[ミント — ロイヤリティの継承](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[cNFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)、[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections#inherited-royalties)を参照してください。
+DASを読むクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照し、詳細な例については[ミント — ロイヤリティの継承](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[cNFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)、[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections#inherited-royalties)を参照してください。

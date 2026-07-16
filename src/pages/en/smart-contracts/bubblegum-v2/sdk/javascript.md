@@ -39,7 +39,7 @@ faqs:
   - q: Can I use this SDK with Bubblegum V1 trees?
     a: No. This SDK targets Bubblegum V2 and uses LeafSchemaV2. Use the legacy Bubblegum SDK for V1 trees.
   - q: What is getAssetWithProof and why do I need it?
-    a: getAssetWithProof is a helper that fetches all parameters needed for leaf-mutating instructions (proof, root, leaf index, nonce, metadata) from the DAS API in one call. For V2 cNFTs it also returns currentMetadata with the on-chain seller fee sentinel when royalties are inherited from the collection.
+    a: getAssetWithProof is a helper that fetches all parameters needed for leaf-mutating instructions (proof, root, leaf index, nonce, metadata) from the DAS API in one call. For inherited royalties, metadata.sellerFeeBasisPoints is the on-chain leaf sentinel (65535); resolved collection rates are on rpcAsset.royalty.basis_points_inherited.
 ---
 
 The **Bubblegum V2 JavaScript SDK** (`@metaplex-foundation/mpl-bubblegum`) is the recommended TypeScript/JavaScript library for creating and managing [compressed NFTs](/smart-contracts/bubblegum-v2) on Solana. Built on the [Umi framework](/dev-tools/umi), it provides type-safe functions for all Bubblegum V2 operations and includes the [DAS API](/smart-contracts/bubblegum-v2/fetch-cnfts) plugin automatically. {% .lead %}
@@ -283,14 +283,24 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  // Instruction arg name for existing leaf metadata (V2 collection is a pubkey).
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('YourCollectionAddressHere')),
+  },
   updateArgs,
-  // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-For cNFTs with inherited royalties, prefer `currentMetadata` over `metadata`: write instructions verify the existing leaf hash, so they need the on-chain `SELLER_FEE_BASIS_POINTS_INHERIT` sentinel (`65535`) rather than the resolved collection percentage that `metadata` may show for display. See [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata) below.
+`getAssetWithProof.metadata` always mirrors the leaf (including `65535` when royalties are inherited). For display, read `rpcAsset.royalty.basis_points_inherited` and `rpcAsset.creators_inherited`.
 
 ## Delegate a Compressed NFT
 
@@ -493,16 +503,18 @@ await unverifyCreatorV2(umi, {
 
 The DAS API plugin is automatically registered by `mplBubblegum()`. See [Fetch cNFTs](/smart-contracts/bubblegum-v2/fetch-cnfts) for the full breakdown of available methods.
 
-### getAssetWithProof: metadata vs currentMetadata {% #getassetwithproof-metadata-vs-currentmetadata %}
+### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
 
-`getAssetWithProof` combines `getAsset` and `getAssetProof` into the parameter shape expected by write instructions. For V2 cNFTs it also returns:
+`getAssetWithProof` combines `getAsset` and `getAssetProof` into the parameter shape expected by write instructions.
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | Display-friendly metadata. When royalties are inherited, `sellerFeeBasisPoints` may show the resolved collection percentage from the DAS response. |
-| `currentMetadata` | Canonical on-chain metadata for leaf verification. When royalties are inherited, this keeps `SELLER_FEE_BASIS_POINTS_INHERIT` (`65535`). Pass this to `updateMetadataV2`, `setCollectionV2`, and similar instructions. |
+| `metadata` | Leaf-canonical metadata for hashing and write instructions. When royalties are inherited, `sellerFeeBasisPoints` is `65535` and `creators` is the leaf creator list (usually empty). |
+| `rpcAsset` | Full DAS response. Collection-resolved display values live on `royalty.basis_points_inherited`, `royalty.percent_inherited`, and `creators_inherited`. |
 
-If the DAS response still contains the raw sentinel, you can pass an optional `resolveCollectionSellerFeeBasisPoints` callback to resolve display royalties while preserving the sentinel in `currentMetadata`.
+`updateMetadataV2` still names its existing-leaf argument `currentMetadata` (IDL). Build that `MetadataArgsV2` from `assetWithProof.metadata` leaf fields, with V2 `collection` as a pubkey.
+
+Clients reading DAS directly should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
@@ -628,7 +640,7 @@ Your RPC provider may not support the Metaplex DAS API. Switch to a [compatible 
 | `setNonTransferableV2` | Make a cNFT permanently soulbound (irreversible) |
 | `verifyCreatorV2` | Set verified flag on a creator entry |
 | `unverifyCreatorV2` | Remove verified flag from a creator entry |
-| `getAssetWithProof` | Fetch proof parameters and distinguish display metadata from on-chain `currentMetadata` |
+| `getAssetWithProof` | Fetch proof parameters; `metadata` is leaf-canonical, display inheritance is on `rpcAsset` |
 | `SELLER_FEE_BASIS_POINTS_INHERIT` | Sentinel constant (`65535`) for royalties inherited from an MPL-Core collection |
 | `findLeafAssetIdPda` | Derive a cNFT asset ID from tree address and leaf index |
 | `parseLeafFromMintV2Transaction` | Extract leaf schema (including asset ID) from a mint transaction |

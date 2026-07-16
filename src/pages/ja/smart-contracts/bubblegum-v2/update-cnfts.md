@@ -25,7 +25,7 @@ faqs:
   - q: 更新時にコレクションを渡す必要がありますか？
     a: はい、cNFTがコレクションに属している場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。コレクション権限がトランザクションに署名する必要があります。
   - q: コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
-    a: getAssetWithProofからcurrentMetadata（オンチェーンセンチネルを保持）を渡し、必要に応じてupdateArgs.sellerFeeBasisPointsで明示的な値を設定します。
+    a: getAssetWithProofのリーフメタデータをupdateMetadataV2のcurrentMetadata引数（既存リーフ状態のIDL名）として渡します。ロイヤリティが継承されている場合、sellerFeeBasisPointsはオンチェーンセンチネルです。
 ---
 
 ## Summary
@@ -36,7 +36,7 @@ faqs:
 - コレクション権限はコレクションに属するcNFTを更新する
 - ツリー権限はコレクションに属さないcNFTを更新する
 - 変更はマークルツリーに反映され、DAS APIプロバイダーによってインデックス化されます
-- リーフ検証には `getAssetWithProof` の `currentMetadata` を使用する（特にセラーフィーが継承されている場合）
+- `getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数（既存リーフ状態のIDL名）として使用する
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
 
@@ -93,7 +93,17 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('22222222222222222222222222222222')),
+  },
   updateArgs,
   // オプションパラメータ。権限が現在のumiアイデンティティと
   // 異なる署名者型の場合、ここでその署名者を割り当てます。
@@ -103,13 +113,12 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-{% callout type="note" title="metadataではなくcurrentMetadataを使用" %}
-V2 cNFTでは、`getAssetWithProof` はロイヤリティ関連の2つの形状を返します：
+{% callout type="note" title="書き込み命令用のリーフメタデータ" %}
+`getAssetWithProof.metadata` は常にリーフ正規値です — ロイヤリティが継承されている場合は `sellerFeeBasisPoints: 65535` を含みます。コレクションから解決された表示値は `rpcAsset.royalty.basis_points_inherited` と `rpcAsset.creators_inherited` にあります。
 
-- **`metadata`** — 表示用の値。継承されたロイヤリティの場合、`sellerFeeBasisPoints` は解決されたコレクションのパーセンテージを示すことがあります。
-- **`currentMetadata`** — リーフハッシュ化と更新命令に使用される正規のオンチェーンメタデータ。継承されたロイヤリティの場合、`SELLER_FEE_BASIS_POINTS_INHERIT` センチネル（`65535`）を保持します。
+`updateMetadataV2` の `currentMetadata` 引数は既存リーフメタデータのIDL名です（V2形状: `collection` は公開鍵）。`assetWithProof.metadata` から構築してください。
 
-`updateMetadataV2`、`setCollectionV2`、および既存リーフを検証するその他の書き込み命令には、常に `currentMetadata` を渡してください。
+アセット読み取り時のDASレスポンスフィールドについては、[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
 {% /callout %}
 
 ## 継承されたロイヤリティ {% #inherited-royalties %}
@@ -127,7 +136,7 @@ V2 cNFTでは、`getAssetWithProof` はロイヤリティ関連の2つの形状�
 ## Notes
 
 - 更新権限は、cNFTがコレクションに属しているかどうかによって異なります。コレクションcNFTはコレクション権限を使用し、スタンドアロンcNFTはツリー権限を使用します。
-- 更新を適用する前にプログラムが現在のリーフを検証できるよう、`getAssetWithProof`からの`currentMetadata`を渡す必要があります。`currentMetadata`が存在する場合は`metadata`で代用しないでください。
+- プログラムが更新を適用する前に現在のリーフを検証できるよう、`getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数として渡してください。
 - 更新したいフィールドには`some()`を使用し、変更しないフィールドは省略します。
 - 継承されたセラーフィーには、リーフレベルの空の`creators`配列と`Royalties`プラグインを持つコレクションが必要です。
 
@@ -147,7 +156,7 @@ cNFTがコレクションに属している場合、更新できるのはコレ�
 
 ### コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
 
-検証のためにオンチェーンセンチネルを保持するため、`getAssetWithProof`から`currentMetadata`を渡します。継承ロイヤリティに切り替えるには`updateArgs.sellerFeeBasisPoints`に`some(SELLER_FEE_BASIS_POINTS_INHERIT)`を、切り替えるには明示的な数値を使用します。
+検証にオンチェーンセンチネルが使われるよう、`getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数として渡します。継承ロイヤリティに切り替えるには`updateArgs.sellerFeeBasisPoints`に`some(SELLER_FEE_BASIS_POINTS_INHERIT)`を、切り替えるには明示的な数値を使用します。
 
 ## Glossary
 
@@ -157,5 +166,5 @@ cNFTがコレクションに属している場合、更新できるのはコレ�
 | **コレクション権限** | MPL-Coreコレクションの更新権限。そのコレクション内のcNFTを更新する権限がある |
 | **ツリー権限** | コレクションに属さないcNFTを更新する権限を持つツリー作成者またはデリゲート |
 | **UpdateArgsArgs** | どのメタデータフィールドをOptionラッパーを使用して更新するかを定義するTypeScript型 |
-| **currentMetadata** | 書き込み命令でのリーフ検証に必要な、`getAssetWithProof`からの正規オンチェーンメタデータ |
+| **currentMetadata** | 既存リーフメタデータに対する `updateMetadataV2` のIDL引数；`getAssetWithProof.metadata` から構築する |
 | **SELLER_FEE_BASIS_POINTS_INHERIT** | MPL-Coreコレクションからロイヤリティが継承されることを示すセンチネル値 `65535` |

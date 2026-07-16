@@ -30,7 +30,7 @@ faqs:
   - q: ミントに必要なメタデータフィールドは何ですか？
     a: MetadataArgsV2にはname、uri、sellerFeeBasisPoints、collection（またはnone）、creatorsの配列が必要です。
   - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
-    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略（またはSELLER_FEE_BASIS_POINTS_INHERITセンチネルを渡す）できます。リーフには65535（0xffff）が保存され、表示時にコレクションからロイヤリティが解決されます。
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略（またはSELLER_FEE_BASIS_POINTS_INHERITセンチネルを渡す）できます。リーフには65535（0xffff）が保存され、DASはroyalty.basis_points_inheritedにコレクション料率を公開します。
 ---
 
 ## Summary
@@ -151,7 +151,9 @@ await createCollection(umi, {
 
 ## コレクションからロイヤリティを継承する
 
-MPL-Coreコレクションにミントする場合、コレクションのロイヤリティ率をすべてのcNFTにコピーする代わりに、リーフに**センチネル**のセラーフィーベーシスポイント値（`65535`、`SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff` としてエクスポート）を保存できます。マーケットプレイスとインデクサーは表示時にコレクションの[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)から実効ロイヤリティを解決し、オンチェーンのリーフはハッシュ化のためにセンチネルを保持します。
+MPL-Coreコレクションにミントする場合、コレクションのロイヤリティ率をすべてのcNFTにコピーする代わりに、リーフに**センチネル**のセラーフィーベーシスポイント値（`65535`、`SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff` としてエクスポート）を保存できます。DASは `royalty.basis_points` にセンチネルを、`royalty.basis_points_inherited` / `creators_inherited` にコレクション料率を返し、オンチェーンのリーフはハッシュ化のためにセンチネルを保持します。
+
+DASレスポンスを**読む**クライアント（ウォレット、マーケットプレイス、インデクサー、アプリ）は[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
 
 JavaScript SDKの `mintV2` ヘルパーは、`coreCollection` が指定され `metadata.sellerFeeBasisPoints` が省略された場合、この動作をデフォルトとします。
 

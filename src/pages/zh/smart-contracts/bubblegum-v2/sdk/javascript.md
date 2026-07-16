@@ -39,7 +39,7 @@ faqs:
   - q: 我可以将此 SDK 用于 Bubblegum V1 树吗？
     a: 不可以。此 SDK 针对 Bubblegum V2，使用 LeafSchemaV2。V1 树请使用旧版 Bubblegum SDK。
   - q: getAssetWithProof 是什么，为什么需要它？
-    a: getAssetWithProof 是一个辅助函数，可以从 DAS API 一次调用中获取叶子变更指令所需的所有参数（证明、根、叶子索引、随机数、元数据）。几乎所有写入指令都需要它。
+    a: getAssetWithProof 是一个辅助函数，可以从 DAS API 一次调用中获取叶子变更指令所需的所有参数（证明、根、叶子索引、随机数、元数据）。对于继承版税，metadata.sellerFeeBasisPoints 是链上叶子哨兵（65535）；已解析的集合费率位于 rpcAsset.royalty.basis_points_inherited。
 ---
 
 **Bubblegum V2 JavaScript SDK**（`@metaplex-foundation/mpl-bubblegum`）是在 Solana 上创建和管理[压缩 NFT](/zh/smart-contracts/bubblegum-v2) 的推荐 TypeScript/JavaScript 库。基于 [Umi 框架](/zh/dev-tools/umi)构建，它为所有 Bubblegum V2 操作提供类型安全的函数，并自动包含 [DAS API](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 插件。 {% .lead %}
@@ -284,14 +284,25 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.currentMetadata ?? assetWithProof.metadata,
+  // 现有叶子元数据的指令参数名（V2 collection 为公钥）。
+  currentMetadata: {
+    name: assetWithProof.metadata.name,
+    symbol: assetWithProof.metadata.symbol,
+    uri: assetWithProof.metadata.uri,
+    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
+    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
+    isMutable: assetWithProof.metadata.isMutable,
+    tokenStandard: assetWithProof.metadata.tokenStandard,
+    creators: assetWithProof.metadata.creators,
+    collection: some(publicKey('YourCollectionAddressHere')),
+  },
   updateArgs,
   // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-对于继承版税的 cNFT，请优先使用 `currentMetadata` 而非 `metadata` — 请参阅下方的 [getAssetWithProof](#getassetwithproof-metadata-vs-currentmetadata)。
+`getAssetWithProof.metadata` 始终镜像叶子（继承版税时包括 `65535`）。展示时请读取 `rpcAsset.royalty.basis_points_inherited` 与 `rpcAsset.creators_inherited`。
 
 ## 委托压缩 NFT
 
@@ -494,16 +505,18 @@ await unverifyCreatorV2(umi, {
 
 DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 了解可用方法的完整说明。
 
-### getAssetWithProof：metadata 与 currentMetadata {% #getassetwithproof-metadata-vs-currentmetadata %}
+### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
 
-`getAssetWithProof` 将 `getAsset` 和 `getAssetProof` 合并为写入指令所需的参数形态。对于 V2 cNFT，它还返回：
+`getAssetWithProof` 将 `getAsset` 和 `getAssetProof` 合并为写入指令所需的参数形态。
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | 便于显示的元数据。当版税被继承时，`sellerFeeBasisPoints` 可能显示 DAS 响应中已解析的集合百分比。 |
-| `currentMetadata` | 用于叶子验证的规范链上元数据。当版税被继承时，保留 `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）。请将其传给 `updateMetadataV2`、`setCollectionV2` 等指令。 |
+| `metadata` | 用于哈希和写入指令的叶子规范元数据。继承版税时，`sellerFeeBasisPoints` 为 `65535`，`creators` 为叶子创作者列表（通常为空）。 |
+| `rpcAsset` | 完整 DAS 响应。集合解析后的展示值位于 `royalty.basis_points_inherited`、`royalty.percent_inherited` 与 `creators_inherited`。 |
 
-如果 DAS 响应仍包含原始哨兵，可传入可选的 `resolveCollectionSellerFeeBasisPoints` 回调，在保留 `currentMetadata` 中哨兵的同时解析显示版税。
+`updateMetadataV2` 仍将其现有叶子参数命名为 `currentMetadata`（IDL）。请从 `assetWithProof.metadata` 的叶子字段构建该 `MetadataArgsV2`，并将 V2 `collection` 设为公钥。
+
+直接读取 DAS 的客户端应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
@@ -629,7 +642,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 | `setNonTransferableV2` | 使 cNFT 永久灵魂绑定（不可逆） |
 | `verifyCreatorV2` | 在创建者条目上设置 verified 标志 |
 | `unverifyCreatorV2` | 从创建者条目中移除 verified 标志 |
-| `getAssetWithProof` | 获取证明参数并区分显示用元数据与链上 `currentMetadata` |
+| `getAssetWithProof` | 获取证明参数；`metadata` 为叶子规范值，展示用继承值位于 `rpcAsset` |
 | `SELLER_FEE_BASIS_POINTS_INHERIT` | 从 MPL-Core 集合继承版税的哨兵常量（`65535`） |
 | `findLeafAssetIdPda` | 从树地址和叶子索引推导 cNFT 资产 ID |
 | `parseLeafFromMintV2Transaction` | 从铸造交易中提取叶子模式（包括资产 ID） |

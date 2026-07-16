@@ -58,6 +58,10 @@ export const bubblegumv2 = {
               href: '/smart-contracts/bubblegum-v2/mint-cnfts',
             },
             { title: 'Fetching cNFTs', href: '/smart-contracts/bubblegum-v2/fetch-cnfts' },
+            {
+              title: 'Reading Inherited Royalties',
+              href: '/smart-contracts/bubblegum-v2/reading-inherited-royalties',
+            },
             { title: 'Transferring cNFTs', href: '/smart-contracts/bubblegum-v2/transfer-cnfts' },
             { title: 'Freeze and Thaw cNFTs', href: '/smart-contracts/bubblegum-v2/freeze-cnfts' },
             { title: 'Updating cNFTs', href: '/smart-contracts/bubblegum-v2/update-cnfts' },
@@ -151,6 +155,11 @@ export const bubblegumv2 = {
         ja: 'cNFTの取得',
         ko: 'cNFT 가져오기',
         zh: '获取cNFT'
+      },
+      'Reading Inherited Royalties': {
+        ja: '継承ロイヤリティの読み取り',
+        ko: '상속 로열티 읽기',
+        zh: '读取继承版税'
       },
       'Transferring cNFTs': {
         ja: 'cNFTの転送',

@@ -30,7 +30,7 @@ faqs:
   - q: 铸造需要哪些元数据字段？
     a: MetadataArgsV2需要name、uri、sellerFeeBasisPoints、collection（或none）以及creators数组。
   - q: cNFT可以从MPL-Core集合继承版税吗？
-    a: 可以。铸造到具有Royalties插件的集合时，可省略sellerFeeBasisPoints（或传入SELLER_FEE_BASIS_POINTS_INHERIT哨兵）。叶子上存储65535（0xffff），并在显示时从集合解析版税。
+    a: 可以。铸造到具有Royalties插件的集合时，可省略sellerFeeBasisPoints（或传入SELLER_FEE_BASIS_POINTS_INHERIT哨兵）。叶子上存储65535（0xffff）；DAS在royalty.basis_points_inherited上暴露集合费率。
 ---
 
 ## Summary
@@ -147,7 +147,9 @@ await createCollection(umi, {
 
 ## 从集合继承版税
 
-铸造到 MPL-Core 集合时，可以在叶子上存储**哨兵** seller fee basis points 值（`65535`，导出为 `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`），而不是将集合的版税百分比复制到每个 cNFT。市场和索引器在显示时从集合的 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties) 解析有效版税，而链上叶子为哈希保留哨兵值。
+铸造到 MPL-Core 集合时，可以在叶子上存储**哨兵** seller fee basis points 值（`65535`，导出为 `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`），而不是将集合的版税百分比复制到每个 cNFT。DAS 在 `royalty.basis_points` 上返回哨兵，在 `royalty.basis_points_inherited` / `creators_inherited` 上返回集合费率，而链上叶子为哈希保留哨兵值。
+
+**读取** DAS 响应的客户端（钱包、市场、索引器与应用）应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
 当提供了 `coreCollection` 且省略 `metadata.sellerFeeBasisPoints` 时，JavaScript SDK 的 `mintV2` 辅助函数默认使用此行为。
 

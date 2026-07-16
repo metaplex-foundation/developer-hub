@@ -13,20 +13,16 @@ const assetId = publicKey('YOUR_ASSET_ID')
 // [MAIN]
 const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,
-  resolveCollectionSellerFeeBasisPoints: async (collection) => {
-    // Optional: resolve display royalties from the collection's Royalties plugin.
-    return 500
-  },
 })
 
-// Display value (may be resolved from the collection)
+// Leaf / hashing value (65535 when inherited)
 console.log(assetWithProof.metadata.sellerFeeBasisPoints)
 
-// On-chain value used for write instructions (65535 when inherited)
-console.log(assetWithProof.currentMetadata?.sellerFeeBasisPoints)
+// Display / payout value from DAS *_inherited fields
+console.log(assetWithProof.rpcAsset.royalty?.basis_points_inherited)
 // [/MAIN]
 
 // [OUTPUT]
-// 500
 // 65535
+// 500
 // [/OUTPUT]

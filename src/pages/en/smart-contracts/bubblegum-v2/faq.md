@@ -36,7 +36,7 @@ faqs:
   - q: How many cNFTs can I store in one tree?
     a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
   - q: Can a cNFT inherit royalties from its MPL-Core collection?
-    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535) and resolves royalties from the collection at display time. Use currentMetadata from getAssetWithProof for write instructions.
+    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535) and DAS exposes the collection rate on royalty.basis_points_inherited. Use getAssetWithProof.metadata (leaf values) for write instructions.
 ---
 
 ## Summary
@@ -197,25 +197,23 @@ The maximum number of cNFTs is `2^maxDepth`. A depth-14 tree holds 16,384 cNFTs,
 
 ## Can a cNFT inherit royalties from its MPL-Core collection? {% #inherited-royalties %}
 
-Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain while marketplaces and indexers resolve the effective royalty from the collection at display time.
+Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain. DAS returns it on `royalty.basis_points` and exposes the collection rate on `royalty.basis_points_inherited` / `creators_inherited` for display.
 
 **Requirements:**
 
 - The collection must have both the `BubblegumV2` and `Royalties` plugins.
 - `metadata.creators` must be an empty array when using inherited seller fees.
 
-**Common gotcha — `metadata` vs `currentMetadata`:** 
+**Using `getAssetWithProof`:**
 
-`getAssetWithProof` may return two royalty-related shapes for inherited cNFTs:
+- **`metadata`** — leaf-canonical values for hashing and write instructions (`sellerFeeBasisPoints` is `65535` when inherited).
+- **`rpcAsset`** — use `royalty.basis_points_inherited` and `creators_inherited` for display / payout UI.
 
-- **`metadata`** — display-friendly values; `sellerFeeBasisPoints` may show the resolved collection percentage.
-- **`currentMetadata`** — the canonical on-chain metadata for leaf verification; keeps the inherit sentinel (`65535`).
-
-Always pass `currentMetadata` to write instructions such as `updateMetadataV2` and `setCollectionV2`. If you are using the Bubblegum Umi library it will automatically pass the correct metadata for you.
+When calling `updateMetadataV2`, pass leaf metadata as the instruction's `currentMetadata` argument (IDL name for existing leaf state).
 
 **Collection management:**
 
 - A cNFT with inherited seller fees **cannot be removed** from its collection until you update to an explicit `sellerFeeBasisPoints`.
 - Moving to another collection is allowed when the destination has the `Royalties` plugin.
 
-See [Minting — Inheriting royalties](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [Updating cNFTs](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), and [Managing Collections](/smart-contracts/bubblegum-v2/collections#inherited-royalties) for full examples.
+See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties) for clients reading DAS, [Minting — Inheriting royalties](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [Updating cNFTs](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), and [Managing Collections](/smart-contracts/bubblegum-v2/collections#inherited-royalties) for full examples.
