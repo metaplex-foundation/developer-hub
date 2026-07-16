@@ -17,6 +17,7 @@ programmingLanguage:
   - Rust
 ---
 Metaplex提供了一个Rust库，可用于与MPL-Core程序交互。Rust库可用于Rust脚本/构建以及通过CPI指令的链上程序。
+Anchor程序集成请参阅[在Anchor中使用Core](/zh/smart-contracts/core/using-core-in-anchor)了解`anchor`、`anchor-0-32`功能标志和Rust工具链要求。
 ## 安装
 MPL-Core Rust SDK可用于脚本/桌面/移动应用程序以及Solana链上程序。
 ```rust

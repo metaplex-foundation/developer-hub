@@ -2,7 +2,7 @@
 title: Using Metaplex Core in Anchor
 metaTitle: Using Metaplex Core in Anchor | Metaplex Core
 description: Integrate Metaplex Core into Anchor programs. Learn CPI calls, account deserialization, and plugin access for on-chain NFT operations.
-updated: '01-31-2026'
+updated: '07-15-2026'
 keywords:
   - Core Anchor
   - mpl-core CPI
@@ -17,7 +17,11 @@ programmingLanguage:
   - Rust
 faqs:
   - q: Do I need the anchor feature flag?
-    a: Yes, for direct deserialization in Accounts structs. Without it, use from_bytes() manually.
+    a: Yes, for direct deserialization in Accounts structs. Without it, use from_bytes() manually. Always set default-features = false when enabling anchor.
+  - q: Which Anchor version should I use?
+    a: For anchor-lang 0.32.x, use default-features = false with features = ["anchor", "anchor-0-32"]. For anchor-lang 0.31.x, use features = ["anchor"] only.
+  - q: What Rust version is required?
+    a: mpl-core requires Rust 1.89.0 or newer. Pin it in rust-toolchain.toml in your Anchor project.
   - q: How do I check if a plugin exists?
     a: Use fetch_plugin() which returns Option - it won't throw an error if the plugin doesn't exist.
   - q: Can I access external plugins (Oracle, AppData)?
@@ -34,7 +38,9 @@ Build **on-chain programs** that interact with Core Assets using Anchor. This gu
 {% /callout %}
 ## Summary
 The `mpl-core` Rust crate provides everything needed to interact with Core from Anchor programs. Enable the `anchor` feature flag for native Anchor account deserialization.
-- Add `mpl-core` with `features = ["anchor"]`
+- Add `mpl-core` with `default-features = false` and the appropriate Anchor features
+- Use `features = ["anchor", "anchor-0-32"]` with `anchor-lang 0.32.x`
+- Use `features = ["anchor"]` with `anchor-lang 0.31.x`
 - Deserialize Assets/Collections in Accounts structs
 - Use `fetch_plugin()` to read plugin data
 - CPI builders simplify instruction calls
@@ -42,26 +48,45 @@ The `mpl-core` Rust crate provides everything needed to interact with Core from 
 Client-side JavaScript SDK (see [JavaScript SDK](/smart-contracts/core/sdk/javascript)), standalone Rust clients (see [Rust SDK](/smart-contracts/core/sdk/rust)), and creating Core Assets from clients.
 ## Quick Start
 **Jump to:** [Installation](#installation) · [Account Deserialization](#accounts-deserialization) · [Plugin Access](#deserializing-plugins) · [CPI Examples](#the-cpi-instruction-builders)
-1. Add `mpl-core = { version = "x.x.x", features = ["anchor"] }` to Cargo.toml
-2. Deserialize Assets with `Account<'info, BaseAssetV1>`
-3. Access plugins with `fetch_plugin::<BaseAssetV1, PluginType>()`
-4. Make CPI calls with `CreateV2CpiBuilder`, `TransferV1CpiBuilder`, etc.
+1. Add `mpl-core` with `default-features = false` and Anchor features to `Cargo.toml`
+2. Pin Rust `1.89.0` or newer in `rust-toolchain.toml`
+3. Deserialize Assets with `Account<'info, BaseAssetV1>`
+4. Access plugins with `fetch_plugin::<BaseAssetV1, PluginType>()`
+5. Make CPI calls with `CreateV2CpiBuilder`, `TransferV1CpiBuilder`, etc.
 ## Installation
-To start using Core in an Anchor project, first ensure that you have added the latest version of the crate to your project by running:
-```rust
-cargo add mpl-core
-```
-Alternatively, you can manually specify the version in your cargo.toml file:
-```rust
-[dependencies]
-mpl-core = "x.x.x"
-```
-### Feature Flag
-With the Core crate you can enable the anchor feature flag in the mpl-core crate to access Anchor-specific features by modifying the dependency entry in your `cargo.toml`:
+Add `mpl-core` to your Anchor program's `Cargo.toml`. The default `borsh-v1` feature is incompatible with Anchor integration, so always disable default features when enabling `anchor`.
+### Feature Flags
+| Feature | Description |
+|---------|-------------|
+| `anchor` | Enables Anchor account deserialization using `anchor-lang 0.31.1` and Solana 2.x types |
+| `anchor-0-32` | Opt-in support for `anchor-lang 0.32.x`; requires `anchor` |
+| `serde` | Optional serde support for off-chain tooling |
+#### Anchor 0.32.x (recommended)
+Use this when your program depends on `anchor-lang 0.32.x`:
 ```rust
 [dependencies]
-mpl-core = { version = "x.x.x", features = [ "anchor" ] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+#### Anchor 0.31.x (legacy)
+Use this when your program depends on `anchor-lang 0.31.x`:
+```rust
+[dependencies]
+anchor-lang = "0.31.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor"] }
+```
+{% callout title="Important" %}
+- `anchor-0-32` alone is not enough — it must be combined with `anchor`.
+- `default-features = false` is required. Without it, the default `borsh-v1` feature conflicts with Anchor integration.
+- The Anchor path uses Solana 2.x types for `Pubkey`, `AccountInfo`, and related Anchor traits.
+{% /callout %}
+### Rust Toolchain
+`mpl-core` requires **Rust 1.89.0** or newer. Add a `rust-toolchain.toml` file to your Anchor workspace:
+```toml
+[toolchain]
+channel = "1.89.0"
+```
+If your build fails with an `edition2024` error from transitive dependencies such as `base64ct`, upgrade to Rust 1.89.0 or newer.
 ### Core Rust SDK Modules
 The Core Rust SDK is organized into several modules:
 - `accounts`: represents the program's accounts.
@@ -163,7 +188,10 @@ The plugin you're trying to fetch doesn't exist on the Asset. Check with `fetch_
 ### `InvalidAuthority`
 The signer doesn't have permission for this operation. Verify the correct authority is signing.
 ## Notes
-- Always enable `features = ["anchor"]` for native deserialization
+- Always set `default-features = false` when enabling Anchor features
+- Use `features = ["anchor", "anchor-0-32"]` with `anchor-lang 0.32.x`
+- Use `features = ["anchor"]` with `anchor-lang 0.31.x`
+- Pin Rust `1.89.0` or newer in `rust-toolchain.toml`
 - Use `fetch_plugin()` for built-in plugins, `fetch_external_plugin()` for external
 - CPI builders abstract away account ordering complexity
 - Check [docs.rs/mpl-core](https://docs.rs/mpl-core/) for complete API reference
@@ -188,7 +216,11 @@ The signer doesn't have permission for this operation. Verify the correct author
 | Plugin Registry | `PluginRegistryV1` |
 ## FAQ
 ### Do I need the anchor feature flag?
-Yes, for direct deserialization in Accounts structs. Without it, use `from_bytes()` manually.
+Yes, for direct deserialization in Accounts structs. Without it, use `from_bytes()` manually. Always set `default-features = false` when enabling `anchor`.
+### Which Anchor version should I use?
+For `anchor-lang 0.32.x`, use `default-features = false` with `features = ["anchor", "anchor-0-32"]`. For `anchor-lang 0.31.x`, use `features = ["anchor"]` only.
+### What Rust version is required?
+`mpl-core` requires Rust **1.89.0** or newer. Pin it in `rust-toolchain.toml` in your Anchor project.
 ### How do I check if a plugin exists?
 Use `fetch_plugin()` which returns `Option` - it won't throw an error if the plugin doesn't exist.
 ### Can I access external plugins (Oracle, AppData)?
@@ -203,6 +235,7 @@ See the [mpl-core docs.rs instructions module](https://docs.rs/mpl-core/latest/m
 | **BaseAssetV1** | Core Asset account struct for deserialization |
 | **fetch_plugin()** | Function to read plugin data from accounts |
 | **anchor feature** | Cargo feature enabling Anchor-native deserialization |
+| **anchor-0-32 feature** | Opt-in Cargo feature for `anchor-lang 0.32.x` support |
 ## Related Pages
 - [Anchor Staking Example](/smart-contracts/core/guides/anchor/anchor-staking-example) - Complete staking program
 - [Create Asset with Anchor](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - Step-by-step guide

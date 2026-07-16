@@ -69,8 +69,10 @@ console.log("\nThis are all the ticket-related data: ", ticketData.attributes);
 ### 依存関係とインポート
 この例では、主にanchor機能を有効にした`mpl_core`クレートを使用します：
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+フィーチャーフラグの詳細とRustツールチェーン要件については、[AnchorでCoreを使用](/ja/smart-contracts/core/using-core-in-anchor)を参照してください。
 使用される依存関係は以下の通りです：
 ```rust
 use anchor_lang::prelude::*;

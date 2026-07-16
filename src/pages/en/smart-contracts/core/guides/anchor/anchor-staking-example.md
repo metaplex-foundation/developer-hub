@@ -60,8 +60,10 @@ Now that we understand the logic behind our smart contract, **it’s time to div
 Before writing our smart contracts, let's look at what crate we need and what function from them to make sure our smart contract works!
 In this example, we primarily use the mpl_core crate with the [anchor](/smart-contracts/core/using-core-in-anchor) feature enabled:
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] } 
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+See [Using Core in Anchor](/smart-contracts/core/using-core-in-anchor) for legacy `anchor-lang 0.31.x` setup and Rust toolchain requirements.
 And the different functions from that crate are as follow:
 ```rust
 use mpl_core::{

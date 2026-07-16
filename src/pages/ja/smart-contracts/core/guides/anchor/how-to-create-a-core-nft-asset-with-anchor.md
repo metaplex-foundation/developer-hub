@@ -36,7 +36,8 @@ SolanaのTokenプログラムのような既存のアセットプログラムと
 {% /callout %}
 ## 前提条件
 - 任意のコードエディタ（**Rust Analyzer Plugin**を使用した**Visual Studio Code**を推奨）
-- Anchor **0.30.1**以上
+- Anchor **0.32.1**以上
+- Rust **1.89.0**以上（[AnchorでCoreを使用](/ja/smart-contracts/core/using-core-in-anchor)を参照）
 ## 初期セットアップ
 このガイドでは**Anchor**を使用し、必要なすべてのマクロが`lib.rs`ファイルにあるモノファイルアプローチを採用しています：
 - `declare_id`: プログラムのオンチェーンアドレスを指定
@@ -50,14 +51,13 @@ SolanaのTokenプログラムのような既存のアセットプログラムと
 anchor init create-core-asset-example
 ```
 ### 必要なクレート
-このガイドでは、`anchor`機能を有効にした`mpl_core`クレートを使用します。インストールするには、まず`create-core-asset-example`ディレクトリに移動します：
+このガイドでは、Anchor機能が有効な`mpl_core`クレートを使用します。プログラムの`Cargo.toml`に依存関係を手動で追加してください:
+```toml
+[dependencies]
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
-cd create-core-asset-example
-```
-次に、以下のコマンドを実行します：
-```
-cargo add mpl-core --features anchor
-```
+フィーチャーフラグの詳細とRustツールチェーン要件については、[AnchorでCoreを使用](/ja/smart-contracts/core/using-core-in-anchor)を参照してください。
 ## プログラム
 ### インポートとテンプレート
 ここでは、このガイドに必要なすべてのインポートを定義し、`lib.rs`ファイルにAccount構造体と命令のテンプレートを作成します。
