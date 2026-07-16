@@ -237,6 +237,7 @@ const redirectRules = {
     '/api/v1/das/get-assets-by-authority': '/dev-tools/das-api/methods/get-assets-by-authority',
     '/api/v1/das/get-assets-by-creator': '/dev-tools/das-api/methods/get-assets-by-creator',
     '/api/v1/das/get-assets-by-group': '/dev-tools/das-api/methods/get-assets-by-group',
+    '/api/v1/das/get-grouping': '/dev-tools/das-api/methods/get-grouping',
     '/api/v1/das/get-signatures-for-asset': '/dev-tools/das-api/methods/get-asset-signatures',
     '/api/v1/das/search-assets': '/dev-tools/das-api/methods/search-assets',
   },

@@ -208,6 +208,16 @@ const UmiRequestRenderer = ({
         if (params.sortDirection) signatureParams.push(`  sortDirection: '${params.sortDirection}'`);
         return `{\n${signatureParams.join(',\n')}\n}`;
       }
+      case 'getGrouping': {
+        const groupingParams = [];
+        if (params.groupKey) {
+          groupingParams.push(`  groupKey: '${params.groupKey}'`);
+        }
+        if (params.groupValue) {
+          groupingParams.push(`  groupValue: '${params.groupValue}'`);
+        }
+        return `{\n${groupingParams.join(',\n')}\n}`;
+      }
       case 'getNftEditions': {
         const editionParams = [];
         if (params.mintAddress) {
