@@ -24,6 +24,8 @@ When you mix Core with other standards (for example Token Metadata), fetch with 
 
 ## Convert to Asset Example {% #convert-to-asset-example %}
 
+`das.dasAssetsToCoreAssets` converts filtered `MplCoreAsset` DAS items into Core `AssetResult` values.
+
 1. Fetch with the standard DAS package.
 2. Filter to Core assets.
 3. Convert to Core asset types.
@@ -32,13 +34,19 @@ When you mix Core with other standards (for example Token Metadata), fetch with 
 
 ## Convert to Collection Example {% #convert-to-collection-example %}
 
+`das.dasAssetToCoreCollection` converts a single `MplCoreCollection` DAS item into a Core `CollectionResult`.
+
 {% code-tabs-imported from="das-api/core-extension/convert-to-collection" frameworks="umi" /%}
 
 ## Convert to Group Example {% #convert-to-group-example %}
 
+`das.dasAssetToCoreGroup` converts a single `MplCoreGroup` DAS item into a Core `GroupResult`.
+
 {% code-tabs-imported from="das-api/core-extension/convert-to-group" frameworks="umi" /%}
 
 ## Notes
+
+Conversion helpers validate the DAS `interface` and throw when the Core type does not match.
 
 - Conversion helpers throw if the DAS `interface` does not match the expected Core type.
 - `GroupResult` membership vectors may be empty depending on the indexer — use [`fetchGroupV1`](/smart-contracts/core/groups) for authoritative membership.

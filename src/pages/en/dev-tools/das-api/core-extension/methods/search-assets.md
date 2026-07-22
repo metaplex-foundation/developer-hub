@@ -16,11 +16,11 @@ about:
 
 ## Summary
 
-`das.searchAssets` returns Core assets matching search criteria and maps them to `AssetResult` (Core asset type plus DAS `content`).
+`das.searchAssets` returns Core [assets](/smart-contracts/core/what-is-an-asset) matching search criteria and maps them to [`AssetResult`](/dev-tools/das-api/core-extension/methods/get-asset) (Core asset type plus DAS `content`).
 
 - Defaults to `interface: "MplCoreAsset"` and `burnt: false`
 - Derives collection plugins unless `skipDerivePlugins: true`
-- Supports agent filters (`isAgent`, `agentToken`, `assetSigner`) when using DAS ≥ 2.1.0
+- Supports [agent](/agents/) filters (`isAgent`, `agentToken`, `assetSigner`) when using DAS ≥ 2.1.0
 
 ## Code example
 
@@ -31,6 +31,8 @@ In this example two filters are applied:
 {% code-tabs-imported from="das-api/core-extension/search-assets" frameworks="umi" /%}
 
 ### Discover registered agents
+
+`das.searchAssets({ isAgent: true })` finds Core assets with a registered [agent](/agents/) identity and may populate `is_agent`, `agent_token`, and `asset_signer` when indexed.
 
 {% code-tabs-imported from="das-api/core-extension/search-assets-agents" frameworks="umi" /%}
 

@@ -4,7 +4,13 @@ metaTitle: Search Core Collections | DAS API Core Extension
 description: Return the list of MPL Core Collections given a search criteria
 ---
 
-Return the list of Core collections given a search criteria.
+## Summary
+
+`das.searchCollections` returns [MPL Core](/smart-contracts/core) collections that match DAS search filters as `CollectionResult` values.
+
+- Filters to `MplCoreCollection` automatically
+- Accepts the same search criteria as Core asset search where applicable
+- Includes a convenience helper for listing by update authority
 
 ## Code example
 
@@ -20,7 +26,7 @@ Additional possible Parameters can be found [below](#parameters).
 
 ## By update authority {% #by-update-authority %}
 
-`das.getCollectionsByUpdateAuthority` is a convenience wrapper around collection search for a given update authority. It returns `CollectionResult` values.
+[`das.getCollectionsByUpdateAuthority`](#by-update-authority) is a convenience wrapper around collection search for a given update authority. It returns [`CollectionResult`](/dev-tools/das-api/core-extension/methods/get-collection) values.
 
 {% code-tabs-imported from="das-api/core-extension/get-collections-by-update-authority" frameworks="umi" /%}
 
