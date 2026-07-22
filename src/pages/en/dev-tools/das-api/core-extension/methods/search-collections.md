@@ -4,7 +4,7 @@ metaTitle: Search Core Collections | DAS API Core Extension
 description: Return the list of MPL Core Collections given a search criteria
 ---
 
-Return the list of Core assets given a search criteria.
+Return the list of Core collections given a search criteria.
 
 ## Code example
 
@@ -12,24 +12,24 @@ In this example two filters are applied:
 1. The Public Key of the Owner
 2. The Metadata uri `jsonUri`
 
-Like this only the NFTs with the given URI owned by that wallet are returned.
+Like this only the Core collections with the given URI owned by that wallet are returned.
 
 Additional possible Parameters can be found [below](#parameters).
 
-```js
-import { publicKey } from '@metaplex-foundation/umi';
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
+{% code-tabs-imported from="das-api/core-extension/search-collections" frameworks="umi" /%}
 
-const umi = createUmi('<ENDPOINT>').use(dasApi());
+## By update authority {% #by-update-authority %}
 
-const asset = await das.searchAssets(umi, {
-    owner: publicKey('AUtnbwWJQfYZjJ5Mc6go9UancufcAuyqUZzR1jSe4esx'),
-    jsonUri: 'https://arweave.net/TkklLLQKiO9t9_JPmt-eH_S-VBLMcRjFcgyvIrENBzA',
-});
+`das.getCollectionsByUpdateAuthority` is a convenience wrapper around collection search for a given update authority. It returns `CollectionResult` values.
 
-console.log(asset);
-```
+{% code-tabs-imported from="das-api/core-extension/get-collections-by-update-authority" frameworks="umi" /%}
+
+| Name                | Required | Description |
+| ------------------- | :------: | ----------- |
+| `updateAuthority`   |    ✅    | Collection update authority public key. |
+| `limit` / `page`    |          | Pagination controls. |
+| `displayOptions`    |          | Only `showCollectionMetadata` is supported for Core. |
+| `skipDerivePlugins` |          | Accepted for API consistency; collections are not plugin-derived. |
 
 ## Example Response
 ```json
