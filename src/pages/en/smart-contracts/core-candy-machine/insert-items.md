@@ -79,7 +79,7 @@ await addConfigLines(umi, {
 }).sendAndConfirm(umi)
 ```
 
-To simply append items to the end of the currently loaded items, you may using the `candyMachine.itemsLoaded` property as the index like so.
+To simply append items to the end of the currently loaded items, you may use the `candyMachine.itemsLoaded` property as the index like so.
 
 ```ts
 await addConfigLines(umi, {

@@ -88,7 +88,7 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 ## Transferring a Core Asset in a Collection
 If you are transferring an Asset which has a collection you will need to pass the collection address in.
-[How to tell if an asset is in a Collection?]()
+[How to tell if an asset is in a Collection?](#how-do-i-know-if-an-asset-is-in-a-collection)
 {% dialect-switcher title="Transfer an Asset that is part of a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -98,7 +98,7 @@ const asset = publicKey('11111111111111111111111111111111')
 await transferV1(umi, {
   asset: asset.publicKey,
   newOwner: newOwner.publicKey,
-  collection: colleciton.publicKey,
+  collection: collection.publicKey,
 }).sendAndConfirm(umi)
 ```
 {% /dialect %}

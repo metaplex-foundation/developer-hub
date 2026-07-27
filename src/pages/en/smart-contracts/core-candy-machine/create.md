@@ -285,7 +285,7 @@ By storing the Assets name and URI prefix into the Core Candy Machine the data r
 
 For example if all your Assets had the same naming structure of `Example Asset #1` through to `Example Asset #1000` this would normally require you to store the string `Example Asset #` 1000 times, taking up 15,000 bytes.
 
-By storing the prefix of the name in the the Core Candy Machine and letting the Core Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
+By storing the prefix of the name in the Core Candy Machine and letting the Core Candy Machine append the index number created to the string you save these 15,000 bytes in rent cost.
 
 This also applies to the URI prefix.
 

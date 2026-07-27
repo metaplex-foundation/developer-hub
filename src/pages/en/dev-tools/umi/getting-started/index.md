@@ -83,7 +83,7 @@ In this section, we'll cover the essential steps to get started with Umi:
 
 Solana has different clusters (e.g., Mainnet-beta, Devnet, Testnet, ...) that serve various purposes, each with dedicated API nodes to handle RPC requests.
 
-Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument.
+Connecting Umi to a cluster of choice is as simple as creating an umi instance since the RPC endpoint is passed as the first argument.
 
 **Note**: If you're connecting to **Mainnet**, it's recommended to use a dedicated RPC endpoint from a Solana RPC provider instead of the public endpoint (`https://api.mainnet-beta.solana.com`) due to its limitations.
 
