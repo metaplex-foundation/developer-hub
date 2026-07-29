@@ -14,6 +14,11 @@ export const tokenMetadata = {
   icon: <EllipsisHorizontalCircleIcon />,
   github: 'https://github.com/metaplex-foundation/mpl-token-metadata',
   className: 'accent-green',
+  legacy: true,
+  replacement: {
+    name: 'Core',
+    href: '/smart-contracts/core',
+  },
   protocolFees: {
     create: {
       solana: '0.01 SOL',
