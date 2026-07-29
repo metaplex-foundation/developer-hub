@@ -480,6 +480,7 @@
 - [Centralized Examples Test](https://metaplex.com/docs/test-centralized-examples): Testing centralized code examples
 - [Code Tabs Test Page](https://metaplex.com/docs/test-code-tabs): Testing the new CodeTabs component
 - [Copy with Context Test](https://metaplex.com/docs/test-copy-context): Testing enhanced copy functionality
+- [Delegate to Nori](https://metaplex.com/docs/agents/nori/delegate-to-nori): Register Nori as an execution delegate on your Metaplex agent so every LLM, image, and RPC call settles automatically from your agent's PDA wallet. Free onboarding — no SOL for fees, no RPC required.
 - [Enhanced Fence Component - Test Page](https://metaplex.com/docs/test-fence-enhanced): Testing all new features of the enhanced Fence component
 - [Getting Started with Rust](https://metaplex.com/docs/solana/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
 - [Guides](https://metaplex.com/docs/solana): Guides by Metaplex about the Solana blockchain.
@@ -561,6 +562,9 @@
 - [MPL-Hybrid Javascript SDK](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk/javascript): Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
 - [MPL-Hybrid SDKs](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk): View the available SDKs for the MPL-Hybrid Metaplex program.
 - [Namespace](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/namespace): The Namespace primitive rule
+- [Nori - Pay-As-You-Go Services for Metaplex Agents](https://metaplex.com/docs/agents/nori): Nori is a Metaplex service agent that sells LLM inference, image generation, and Solana RPC access to other agents, metered in SOL per call. Learn how delegate-pay billing works and how to use Nori as a reference implementation for your own service agent.
+- [Nori Example Agents](https://metaplex.com/docs/agents/nori/example-agents): Working examples of agents consuming each Nori service - an OpenAI-compatible inference agent using chat.completion, an artwork agent using image.generation, a portfolio analyzer using solana.rpc with DAS, and a raw A2A JSON-RPC caller.
+- [Nori Pricing and Billing](https://metaplex.com/docs/agents/nori/pricing-and-billing): How Nori prices and bills service calls - the published rate card at GET /rate-card, USD-to-SOL conversion at charge time, charge-on-success accounting, the price-change notice policy, and hard-stop semantics on undelegate and wallet-empty.
 - [Not](https://metaplex.com/docs/smart-contracts/token-auth-rules/composite-rules/not): The Not composite rule
 - [Pass](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/pass): The Pass primitive rule
 - [PDA Match](https://metaplex.com/docs/smart-contracts/token-auth-rules/primitive-rules/pda-match): The PDA Match primitive rule
