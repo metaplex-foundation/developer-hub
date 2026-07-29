@@ -4,13 +4,11 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import { agentMenuCategory, anchorTokenMenuCategory, nftMenuCategory, tokenMenuCategory } from '../NavList'
 import { Card, CardContent } from '../ui/card'
-import { StatusChip } from './Grid'
 import { products as allProducts, productCategories } from './index'
 import { getStatusLabels } from './statusLabels'
 
 const ProductCard = ({ item, locale }) => {
   const href = getLocalizedHref(item.href || `/${item.path}`, locale)
-  const statusLabels = getStatusLabels(locale)
 
   return (
     <Link
@@ -22,7 +20,6 @@ const ProductCard = ({ item, locale }) => {
         <CardContent className="p-0">
           <h3 className="text-sm font-semibold text-balance md:text-base">
             {item.name}
-            {item.legacy && <StatusChip label={statusLabels.legacy} />}
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
             {item.headline || item.description}

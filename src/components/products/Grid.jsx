@@ -5,14 +5,6 @@ import { nftMenuCategory, tokenMenuCategory } from '../NavList';
 import { products as allProducts } from './index';
 import { getStatusLabels } from './statusLabels';
 
-export function StatusChip({ label }) {
-  return (
-    <span className="ml-1.5 inline-block rounded bg-slate-200 px-1.5 py-0.5 align-middle text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:bg-slate-700/60 dark:text-slate-400">
-      {label}
-    </span>
-  )
-}
-
 export function Grid({
   onClick,
   withoutFallback,
@@ -74,7 +66,6 @@ export function Grid({
               <div className="flex flex-1 flex-col justify-center text-left">
                 <div className="text-sm font-medium leading-none text-slate-800 dark:text-white">
                   {localizedProduct.name}
-                  {product.legacy && <StatusChip label={statusLabels.legacy} />}
                 </div>
                 <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
                   {localizedProduct.headline || localizedProduct.description}
