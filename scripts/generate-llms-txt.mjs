@@ -283,9 +283,21 @@ function main() {
 
       const title = frontmatter.title || frontmatter.metaTitle.split('|')[0].trim()
 
-      // Skip legacy documentation for cleaner output
+      // Skip deprecated program and tool docs for cleaner output
+      // (formerly under /legacy-documentation)
+      const deprecatedPaths = [
+        '/smart-contracts/auction-house',
+        '/smart-contracts/fixed-price-sale',
+        '/smart-contracts/gumdrop',
+        '/smart-contracts/token-entangler',
+        '/dev-tools/solita',
+        '/dev-tools/beet',
+        '/dev-tools/cusper',
+        '/dev-tools/rust-bin',
+        '/dev-tools/mobile-sdks',
+      ]
       const urlPath = filePathToUrlPath(filePath)
-      if (urlPath.startsWith('/legacy-documentation')) {
+      if (deprecatedPaths.some((p) => urlPath === p || urlPath.startsWith(`${p}/`))) {
         continue
       }
 

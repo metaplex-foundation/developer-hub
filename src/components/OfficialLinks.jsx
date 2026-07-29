@@ -52,9 +52,9 @@ const programs = [
   { name: 'Inscriptions', programId: '1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo', github: 'https://github.com/metaplex-foundation/mpl-inscription', docs: '/smart-contracts/inscription' },
   { name: 'MPL System Extras', programId: 'SysExL2WDyJi9aRZrXorrjHJut3JwHQ7R9bTyctbNNG', github: 'https://github.com/metaplex-foundation/mpl-toolbox', docs: '/dev-tools/umi/toolbox' },
   { name: 'MPL Token Extras', programId: 'TokExjvjJmhKaRBShsBAsbSvEWMA1AgUNK7ps4SAc2p', github: 'https://github.com/metaplex-foundation/mpl-toolbox', docs: '/dev-tools/umi/toolbox' },
-  { name: 'Auction House', programId: 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house', docs: '/legacy-documentation/auction-house' },
-  { name: 'Auctioneer', programId: 'neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer', docs: '/legacy-documentation/auction-house/auctioneer' },
-  { name: 'Gumdrop', programId: 'gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a', github: 'https://github.com/metaplex-foundation/gumdrop', docs: '/legacy-documentation/gumdrop' },
+  { name: 'Auction House', programId: 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house', docs: '/smart-contracts/auction-house' },
+  { name: 'Auctioneer', programId: 'neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer', docs: '/smart-contracts/auction-house/auctioneer' },
+  { name: 'Gumdrop', programId: 'gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a', github: 'https://github.com/metaplex-foundation/gumdrop', docs: '/smart-contracts/gumdrop' },
 ]
 
 const tokensAndNfts = [
