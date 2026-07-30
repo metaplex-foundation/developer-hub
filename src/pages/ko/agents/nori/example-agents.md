@@ -29,7 +29,7 @@ faqs:
   - q: 내 에이전트가 Nori를 통해 getAssetsByOwner 같은 DAS 메서드를 사용할 수 있나요?
     a: 예. solana.rpc 서비스는 DAS를 지원하는 업스트림 프로바이더로의 투명한 JSON-RPC 패스스루이므로, DAS 메서드(getAsset, getAssetsByOwner 등)가 표준 Solana RPC 메서드와 완전히 동일하게 작동합니다 — 같은 엔드포인트, 같은 호출당 가격입니다.
   - q: 이 예제들은 위임 없이도 작동하나요?
-    a: 예, x402 폴백 레일을 통해 작동합니다 — 각 첫 호출은 직접 실행되는 대신 결제 요구사항과 함께 HTTP 402를 반환합니다. 예제들은 결제 왕복을 제거해 주는 위임을 전제로 합니다; 1회 설정은 Nori에 위임하기를 참조하세요.
+    a: 예, x402 폴백 레일을 통해 작동합니다 — 첫 호출은 요청을 한 번 실행한 뒤 결제 요구사항과 함께 HTTP 402를 반환하며, 결제 후 재시도하면 캐시된 결과를 받습니다. 예제들은 결제 왕복을 제거해 주는 위임을 전제로 합니다; 1회 설정은 Nori에 위임하기를 참조하세요.
   - q: chat.completion을 통해 어떤 모델을 요청할 수 있나요?
     a: 요금표에 있는 모든 모델을 <provider>/<model> 형식으로 요청할 수 있습니다 — 예를 들어 anthropic/claude-sonnet-4-6, openai/gpt-5.4, google/gemini-2.5-flash. GET /v1/models가 실시간 디렉토리를 나열하고, GET /rate-card에 토큰당 가격이 있습니다.
 ---
@@ -202,7 +202,7 @@ Nori 서비스를 이용한 개발에 대한 일반적인 질문.
 예. `solana.rpc` 서비스는 DAS를 지원하는 업스트림 프로바이더로의 투명한 JSON-RPC 패스스루이므로, DAS 메서드(`getAsset`, `getAssetsByOwner` 등)가 표준 Solana RPC 메서드와 완전히 동일하게 작동합니다 — 같은 엔드포인트, 같은 호출당 가격입니다.
 
 ### 이 예제들은 위임 없이도 작동하나요?
-예, x402 폴백 레일을 통해 작동합니다 — 각 첫 호출은 직접 실행되는 대신 결제 요구사항과 함께 HTTP 402를 반환합니다. 예제들은 결제 왕복을 제거해 주는 위임을 전제로 합니다; 1회 설정은 [Nori에 위임하기](/agents/nori/delegate-to-nori)를 참조하세요.
+예, x402 폴백 레일을 통해 작동합니다 — 첫 호출은 요청을 한 번 실행한 뒤 결제 요구사항과 함께 HTTP 402를 반환하며, 결제 후 재시도하면 캐시된 결과를 받습니다. 예제들은 결제 왕복을 제거해 주는 위임을 전제로 합니다; 1회 설정은 [Nori에 위임하기](/agents/nori/delegate-to-nori)를 참조하세요.
 
 ### chat.completion을 통해 어떤 모델을 요청할 수 있나요?
 요금표에 있는 모든 모델을 `<provider>/<model>` 형식으로 요청할 수 있습니다 — 예를 들어 `anthropic/claude-sonnet-4-6`, `openai/gpt-5.4`, `google/gemini-2.5-flash`. `GET /v1/models`가 실시간 디렉토리를 나열하고, [`GET /rate-card`](/agents/nori/pricing-and-billing)에 토큰당 가격이 있습니다.

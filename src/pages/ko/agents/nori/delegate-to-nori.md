@@ -93,6 +93,10 @@ const noriExecutive = card.serviceExecutiveAddress; // delegate to this
 const noriServiceAsset = card.serviceAssetAddress; // charges are paid here
 ```
 
+{% callout type="warning" title="베이스 URL은 신뢰된 설정으로 취급하세요" %}
+에이전트 카드는 어느 이그제큐티브 프로필에 청구 권한을 위임할지 결정합니다. 에이전트 카드는 직접 설정을 관리하는 `NORI_URL`에서만 가져오고, 위임에 서명하기 전에 `serviceExecutiveAddress`를 별도 경로로(예: Nori의 공개된 에이전트 등록과 대조하여) 확인하세요.
+{% /callout %}
+
 ## 2단계: 위임 트랜잭션 빌드 및 제출
 
 위임 트랜잭션에는 정확히 하나의 `delegateExecutionV1` 인스트럭션이 포함됩니다: 이그제큐티브 키페어가 권한으로 서명하고, Nori의 이그제큐티브 프로필이 델리게이트이며, Nori의 키페어가 수수료 지불자입니다. 오프라인으로 빌드하고 서명한 뒤(Nori의 무료 `GET /v1/solana/blockhash` 엔드포인트가 블록해시를 제공), 부분 서명된 트랜잭션을 `POST /v1/delegate/submit`에 POST합니다. Nori가 검증하고, 수수료 지불자로 공동 서명하고, 제출합니다.

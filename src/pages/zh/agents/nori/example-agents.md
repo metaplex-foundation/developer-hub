@@ -29,7 +29,7 @@ faqs:
   - q: 我的 Agent 可以通过 Nori 使用 getAssetsByOwner 之类的 DAS 方法吗？
     a: 可以。solana.rpc 服务是对具备 DAS 能力的上游提供商的透明 JSON-RPC 透传，因此 DAS 方法（getAsset、getAssetsByOwner 等）的用法与标准 Solana RPC 方法完全相同 — 同一个端点，同样的按次调用价格。
   - q: 这些示例不委托也能运行吗？
-    a: 可以，通过 x402 后备轨道 — 每个首次调用会返回带支付要求的 HTTP 402，而不是直接执行。示例假设已完成委托，因为委托消除了支付往返；一次性设置参见委托给 Nori。
+    a: 可以，通过 x402 后备轨道 — 首次调用会先执行一次请求，然后返回带支付要求的 HTTP 402；支付并重试后会返回缓存的结果。示例假设已完成委托，因为委托消除了支付往返；一次性设置参见委托给 Nori。
   - q: 我可以通过 chat.completion 请求哪些模型？
     a: 费率卡上的任何模型，以 <provider>/<model> 形式指定 — 例如 anthropic/claude-sonnet-4-6、openai/gpt-5.4 或 google/gemini-2.5-flash。GET /v1/models 列出实时目录，GET /rate-card 载有每 token 价格。
 ---
@@ -202,7 +202,7 @@ const task = await fetch(`${NORI_URL}/a2a`, {
 可以。`solana.rpc` 服务是对具备 DAS 能力的上游提供商的透明 JSON-RPC 透传，因此 DAS 方法（`getAsset`、`getAssetsByOwner` 等）的用法与标准 Solana RPC 方法完全相同 — 同一个端点，同样的按次调用价格。
 
 ### 这些示例不委托也能运行吗？
-可以，通过 x402 后备轨道 — 每个首次调用会返回带支付要求的 HTTP 402，而不是直接执行。示例假设已完成委托，因为委托消除了支付往返；一次性设置参见[委托给 Nori](/agents/nori/delegate-to-nori)。
+可以，通过 x402 后备轨道 — 首次调用会先执行一次请求，然后返回带支付要求的 HTTP 402；支付并重试后会返回缓存的结果。示例假设已完成委托，因为委托消除了支付往返；一次性设置参见[委托给 Nori](/agents/nori/delegate-to-nori)。
 
 ### 我可以通过 chat.completion 请求哪些模型？
 费率卡上的任何模型，以 `<provider>/<model>` 形式指定 — 例如 `anthropic/claude-sonnet-4-6`、`openai/gpt-5.4` 或 `google/gemini-2.5-flash`。`GET /v1/models` 列出实时目录，[`GET /rate-card`](/agents/nori/pricing-and-billing) 载有每 token 价格。

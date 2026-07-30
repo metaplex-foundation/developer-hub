@@ -93,6 +93,10 @@ const noriExecutive = card.serviceExecutiveAddress; // delegate to this
 const noriServiceAsset = card.serviceAssetAddress; // charges are paid here
 ```
 
+{% callout type="warning" title="将基础 URL 视为受信任的配置" %}
+Agent 卡片决定了你将计费权限委托给哪个执行者配置文件。只从由你自己管理配置的 `NORI_URL` 获取 Agent 卡片，并在签署委托前通过带外方式核验 `serviceExecutiveAddress`（例如与 Nori 公开的 Agent 注册信息进行比对）。
+{% /callout %}
+
 ## 步骤 2 — 构建并提交委托交易
 
 委托交易恰好包含一条 `delegateExecutionV1` 指令：您的执行者密钥对作为权限签名，Nori 的执行者配置文件是委托方，Nori 的密钥对是费用支付方。您离线构建并签名它（Nori 免费的 `GET /v1/solana/blockhash` 端点提供 blockhash），然后将部分签名的交易 POST 到 `POST /v1/delegate/submit`。Nori 验证它，作为费用支付方共同签署，并提交它。

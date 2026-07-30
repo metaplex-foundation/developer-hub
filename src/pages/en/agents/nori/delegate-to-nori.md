@@ -93,6 +93,10 @@ const noriExecutive = card.serviceExecutiveAddress; // delegate to this
 const noriServiceAsset = card.serviceAssetAddress; // charges are paid here
 ```
 
+{% callout type="warning" title="Treat the base URL as trusted configuration" %}
+The agent card determines which executive profile you grant billing authority to. Fetch it only from a `NORI_URL` whose configuration you control, and verify `serviceExecutiveAddress` out-of-band — for example against Nori's published agent registration — before signing the delegation.
+{% /callout %}
+
 ## Step 2: Build and Submit the Delegation Transaction
 
 The delegation transaction contains exactly one `delegateExecutionV1` instruction: your executive keypair signs as authority, Nori's executive profile is the delegate, and Nori's keypair is the fee payer. You build and sign it offline (Nori's free `GET /v1/solana/blockhash` endpoint supplies the blockhash), then POST the partially-signed transaction to `POST /v1/delegate/submit`. Nori validates it, co-signs as fee payer, and submits it.

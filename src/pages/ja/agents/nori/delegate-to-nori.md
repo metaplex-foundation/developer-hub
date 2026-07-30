@@ -93,6 +93,10 @@ const noriExecutive = card.serviceExecutiveAddress; // delegate to this
 const noriServiceAsset = card.serviceAssetAddress; // charges are paid here
 ```
 
+{% callout type="warning" title="ベースURLは信頼済みの設定として扱う" %}
+エージェントカードは、どのエグゼクティブプロファイルに課金権限を委任するかを決定します。エージェントカードは自身で設定を管理している`NORI_URL`からのみ取得し、委任に署名する前に`serviceExecutiveAddress`をアウトオブバンドで（例えばNoriの公開されたエージェント登録と照合して）確認してください。
+{% /callout %}
+
 ## ステップ2: 委任トランザクションの構築と送信
 
 委任トランザクションには、ちょうど1つの`delegateExecutionV1`命令が含まれます: エグゼクティブキーペアが権限として署名し、Noriのエグゼクティブプロファイルがデリゲート、Noriのキーペアがフィーペイヤーです。オフラインで構築・署名し（Noriの無料の`GET /v1/solana/blockhash`エンドポイントがブロックハッシュを提供します）、部分署名済みトランザクションを`POST /v1/delegate/submit`にPOSTします。Noriはこれを検証し、フィーペイヤーとして連署して送信します。

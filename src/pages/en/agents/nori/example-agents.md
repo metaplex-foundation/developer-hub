@@ -29,7 +29,7 @@ faqs:
   - q: Can my agent use DAS methods like getAssetsByOwner through Nori?
     a: Yes. The solana.rpc service is a transparent JSON-RPC pass-through to a DAS-capable upstream provider, so DAS methods (getAsset, getAssetsByOwner, and others) work exactly like standard Solana RPC methods — same endpoint, same per-call price.
   - q: Do these examples work without delegation?
-    a: Yes, over the x402 fallback rail — each first call returns HTTP 402 with payment requirements instead of executing directly. The examples assume delegation because it removes the payment round-trip; see Delegate to Nori for the one-time setup.
+    a: Yes, over the x402 fallback rail — the first call runs the request once and returns HTTP 402 with payment requirements; paying and retrying returns the cached result. The examples assume delegation because it removes the payment round-trip; see Delegate to Nori for the one-time setup.
   - q: Which models can I request through chat.completion?
     a: Any model on the rate card, addressed as <provider>/<model> — for example anthropic/claude-sonnet-4-6, openai/gpt-5.4, or google/gemini-2.5-flash. GET /v1/models lists the live directory, and GET /rate-card carries the per-token prices.
 ---
@@ -202,7 +202,7 @@ Any OpenAI-compatible client works — the Vercel AI SDK via `createOpenAICompat
 Yes. The `solana.rpc` service is a transparent JSON-RPC pass-through to a DAS-capable upstream provider, so DAS methods (`getAsset`, `getAssetsByOwner`, and others) work exactly like standard Solana RPC methods — same endpoint, same per-call price.
 
 ### Do these examples work without delegation?
-Yes, over the x402 fallback rail — each first call returns HTTP 402 with payment requirements instead of executing directly. The examples assume delegation because it removes the payment round-trip; see [Delegate to Nori](/agents/nori/delegate-to-nori) for the one-time setup.
+Yes, over the x402 fallback rail — the first call runs the request once and returns HTTP 402 with payment requirements; paying and retrying returns the cached result. The examples assume delegation because it removes the payment round-trip; see [Delegate to Nori](/agents/nori/delegate-to-nori) for the one-time setup.
 
 ### Which models can I request through chat.completion?
 Any model on the rate card, addressed as `<provider>/<model>` — for example `anthropic/claude-sonnet-4-6`, `openai/gpt-5.4`, or `google/gemini-2.5-flash`. `GET /v1/models` lists the live directory, and [`GET /rate-card`](/agents/nori/pricing-and-billing) carries the per-token prices.
