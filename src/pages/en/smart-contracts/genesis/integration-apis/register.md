@@ -38,6 +38,7 @@ POST /v1/launches/register
 | `genesisAccount` | `string` | Yes | The genesis account public key (from Create Launch response) |
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `launch` | `object` | Yes | The same launch configuration used in Create Launch |
+| `twitterVerificationToken` | `string` | No | Token from [Verify Twitter](/smart-contracts/genesis/integration-apis/verify-twitter). When supplied, the launch's Twitter link is marked verified if the token's username matches `launch.externalLinks.twitter`. |
 
 The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
 

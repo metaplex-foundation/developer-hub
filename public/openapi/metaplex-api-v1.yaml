@@ -1,0 +1,1048 @@
+openapi: 3.1.0
+info:
+  title: Metaplex Public API
+  version: 1.0.0
+  summary: Public REST API for Metaplex Genesis launches and the Agent Registry.
+  description: |
+    The Metaplex public API serves Genesis token-launch data and the Metaplex
+    Agent Registry. It is public, unauthenticated, and rate limited.
+
+    ## Response envelopes
+
+    The API predates a single response convention, so two envelopes are in use:
+
+    - **Launch read endpoints** (`/launches*`, `/tokens/*`, `/creator-rewards/claim`)
+      wrap responses as `{ "data": ... }` and errors as
+      `{ "error": { "message": "..." } }`.
+    - **Agent endpoints, launch write endpoints, and `/twitter/verify`** use a
+      `success` discriminator: `{ "success": true, ... }` or
+      `{ "success": false, "error": "..." }`.
+    - `GET /agents/{address}/agent-card.json` returns raw A2A AgentCard JSON
+      with no envelope.
+
+    ## Transaction-building endpoints
+
+    `POST` endpoints that build transactions never hold user keys and never
+    submit transactions. They return base64-serialized transactions plus the
+    blockhash they were built against; the caller signs and submits.
+  contact:
+    url: https://www.metaplex.com/docs
+  x-source-note: >
+    Hand-authored draft derived from the route handlers and zod schemas in the
+    metaplex app (app/api/v1/**). Update alongside changes to those routes.
+
+servers:
+  - url: https://api.metaplex.com/v1
+
+# Public API — no authentication.
+security: []
+
+tags:
+  - name: Launches
+    description: Genesis launch data and launch creation.
+  - name: Agents
+    description: Metaplex Agent Registry — browse agents, AgentCards, and agent wallet transactions.
+  - name: Verification
+    description: Social account verification.
+
+paths:
+  /launches:
+    get:
+      tags: [Launches]
+      operationId: listLaunches
+      summary: List launches
+      description: >
+        List Genesis launches with optional filters. Results are sorted by
+        `lastActivityAt` descending. Not paginated.
+      parameters:
+        - $ref: '#/components/parameters/NetworkQuery'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [upcoming, live, graduated]
+          description: Filter by launch status.
+        - name: spotlight
+          in: query
+          schema:
+            type: string
+            enum: ['true', 'false']
+          description: Filter by spotlight flag.
+      responses:
+        '200':
+          description: Matching launches.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LaunchData'
+        '400':
+          $ref: '#/components/responses/GenesisBadRequest'
+        '500':
+          $ref: '#/components/responses/GenesisServerError'
+
+  /launches/{genesisAddress}:
+    get:
+      tags: [Launches]
+      operationId: getLaunch
+      summary: Get launch by genesis address
+      parameters:
+        - name: genesisAddress
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pubkey'
+          description: The genesis account public key.
+        - $ref: '#/components/parameters/NetworkQuery'
+      responses:
+        '200':
+          description: The launch.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    $ref: '#/components/schemas/LaunchData'
+        '404':
+          $ref: '#/components/responses/GenesisNotFound'
+        '500':
+          $ref: '#/components/responses/GenesisServerError'
+
+  /tokens/{mintAddress}:
+    get:
+      tags: [Launches]
+      operationId: getLaunchesByToken
+      summary: Get launches by token mint
+      description: All launches associated with a token mint.
+      parameters:
+        - name: mintAddress
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Pubkey'
+        - $ref: '#/components/parameters/NetworkQuery'
+      responses:
+        '200':
+          description: Launches for the token.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LaunchData'
+        '404':
+          $ref: '#/components/responses/GenesisNotFound'
+        '500':
+          $ref: '#/components/responses/GenesisServerError'
+
+  /launches/create:
+    post:
+      tags: [Launches]
+      operationId: createLaunch
+      summary: Build launch creation transactions
+      description: >
+        Builds the on-chain transactions for a new Genesis launch from a full
+        launch configuration. Sign and submit the returned transactions, then
+        call `POST /launches/register` to list the launch. The SDK's
+        `buildCreateLaunchPayload` helper produces the `launch` payload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [wallet, launch]
+              properties:
+                wallet:
+                  $ref: '#/components/schemas/Pubkey'
+                launch:
+                  $ref: '#/components/schemas/LaunchConfig'
+      responses:
+        '200':
+          description: Transactions to sign and submit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, transactions, blockhash, mintAddress, genesisAccount]
+                properties:
+                  success:
+                    const: true
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SerializedTransaction'
+                  blockhash:
+                    $ref: '#/components/schemas/Blockhash'
+                  mintAddress:
+                    $ref: '#/components/schemas/Pubkey'
+                  genesisAccount:
+                    $ref: '#/components/schemas/Pubkey'
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /launches/register:
+    post:
+      tags: [Launches]
+      operationId: registerLaunch
+      summary: Register a confirmed launch
+      description: >
+        Registers a confirmed on-chain launch for listing. The API verifies the
+        on-chain genesis account state against the supplied configuration
+        before creating the listing. Idempotent — re-registering an existing
+        launch returns `existing: true`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [genesisAccount, launch]
+              properties:
+                genesisAccount:
+                  $ref: '#/components/schemas/Pubkey'
+                network:
+                  $ref: '#/components/schemas/Network'
+                launch:
+                  $ref: '#/components/schemas/LaunchConfig'
+                twitterVerificationToken:
+                  type: string
+                  description: >
+                    Token from `POST /twitter/verify`. When supplied and its
+                    username matches the launch's Twitter link, the link is
+                    marked verified.
+      responses:
+        '200':
+          description: The registered launch.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, launch, token]
+                properties:
+                  success:
+                    const: true
+                  existing:
+                    type: boolean
+                    description: True when the launch was already registered.
+                  launch:
+                    type: object
+                    required: [id, link]
+                    properties:
+                      id:
+                        type: string
+                      link:
+                        type: string
+                        format: uri
+                  token:
+                    type: object
+                    required: [id, mintAddress]
+                    properties:
+                      id:
+                        type: string
+                      mintAddress:
+                        $ref: '#/components/schemas/Pubkey'
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /creator-rewards/claim:
+    post:
+      tags: [Launches]
+      operationId: claimCreatorRewards
+      summary: Build creator rewards claim transactions
+      description: >
+        Builds transactions that claim accrued creator fees for a creator fee
+        wallet. Returns one transaction per bucket being claimed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [wallet]
+              properties:
+                wallet:
+                  $ref: '#/components/schemas/Pubkey'
+                network:
+                  $ref: '#/components/schemas/Network'
+                payer:
+                  allOf:
+                    - $ref: '#/components/schemas/Pubkey'
+                  description: >
+                    Covers transaction fees and rent. Defaults to `wallet`.
+      responses:
+        '200':
+          description: Transactions to sign and submit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: object
+                    required: [transactions, blockhash]
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/SerializedTransaction'
+                      blockhash:
+                        $ref: '#/components/schemas/Blockhash'
+        '400':
+          $ref: '#/components/responses/GenesisBadRequest'
+        '500':
+          $ref: '#/components/responses/GenesisServerError'
+
+  /twitter/verify:
+    post:
+      tags: [Verification]
+      operationId: verifyTwitter
+      summary: Verify Twitter account ownership
+      description: >
+        Exchanges a Twitter (X) OAuth 2.0 user access token for a verification
+        token consumed by `POST /launches/register`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [accessToken]
+              properties:
+                accessToken:
+                  type: string
+                  minLength: 1
+                  description: Twitter OAuth 2.0 user access token (`users.read` scope).
+      responses:
+        '200':
+          description: Verified username and token.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, username, token]
+                properties:
+                  success:
+                    const: true
+                  username:
+                    type: string
+                  token:
+                    type: string
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '401':
+          description: The X API rejected the access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessEnvelopeError'
+        '502':
+          description: The X API responded without a username.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessEnvelopeError'
+
+  /agents:
+    get:
+      tags: [Agents]
+      operationId: listAgents
+      summary: List agents
+      description: >
+        Browse and search registered agents. Always paginated; results come
+        from the indexed database.
+      parameters:
+        - $ref: '#/components/parameters/NetworkQuery'
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 24
+        - name: query
+          in: query
+          schema:
+            type: string
+          description: Free-text search over agent names.
+        - name: sort
+          in: query
+          schema:
+            type: string
+            enum: [latest, oldest]
+            default: latest
+          description: Sort by registration time.
+        - name: activeOnly
+          in: query
+          schema:
+            type: boolean
+        - name: hasAgentToken
+          in: query
+          schema:
+            type: boolean
+        - name: hasServices
+          in: query
+          schema:
+            type: boolean
+        - name: spotlight
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A page of agents.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, data]
+                properties:
+                  success:
+                    const: true
+                  data:
+                    type: object
+                    required: [agents, total, page, pageSize, totalPages]
+                    properties:
+                      agents:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/AgentRecord'
+                      total:
+                        type: integer
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      totalPages:
+                        type: integer
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /agents/{address}:
+    get:
+      tags: [Agents]
+      operationId: getAgent
+      summary: Get agent
+      description: >
+        Fetch a single agent by Core asset address: identity, EIP-8004
+        registration metadata, launched tokens, and primary agent token.
+      parameters:
+        - $ref: '#/components/parameters/AgentAddress'
+        - $ref: '#/components/parameters/NetworkQuery'
+      responses:
+        '200':
+          description: The agent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentDetail'
+        '404':
+          $ref: '#/components/responses/AgentNotFound'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /agents/{address}/agent-card.json:
+    get:
+      tags: [Agents]
+      operationId: getAgentCard
+      summary: Get hosted A2A AgentCard
+      description: >
+        Serves the hosted A2A AgentCard (spec §4.4) for the agent. Raw
+        AgentCard JSON, no envelope. Supports conditional GET via ETag.
+      parameters:
+        - $ref: '#/components/parameters/AgentAddress'
+        - $ref: '#/components/parameters/NetworkQuery'
+        - name: If-None-Match
+          in: header
+          schema:
+            type: string
+          description: Previously returned ETag.
+      responses:
+        '200':
+          description: The AgentCard.
+          headers:
+            ETag:
+              schema:
+                type: string
+            Cache-Control:
+              schema:
+                type: string
+                example: public, max-age=60, stale-while-revalidate=600
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/A2ACard'
+        '304':
+          description: Card unchanged since the supplied ETag.
+        '404':
+          description: Agent not found or no hosted card.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Not Found
+
+  /agents/mint:
+    post:
+      tags: [Agents]
+      operationId: mintAgent
+      summary: Build agent mint transaction
+      description: >
+        Builds and partially signs a transaction that mints an MPL Core asset
+        for the agent and registers its identity. The caller co-signs as payer
+        and submits. The agent metadata and hosted AgentCard are stored when
+        this endpoint is called.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [wallet, network, name, uri, agentMetadata]
+              properties:
+                wallet:
+                  $ref: '#/components/schemas/Pubkey'
+                network:
+                  $ref: '#/components/schemas/Network'
+                collectionAddress:
+                  $ref: '#/components/schemas/Pubkey'
+                name:
+                  type: string
+                uri:
+                  type: string
+                  format: uri
+                  description: URI of the asset's off-chain JSON metadata.
+                agentMetadata:
+                  $ref: '#/components/schemas/AgentMetadataJson'
+                a2aCard:
+                  allOf:
+                    - $ref: '#/components/schemas/A2ACard'
+                  description: >
+                    Optional pre-built AgentCard; synthesized from
+                    `agentMetadata` when omitted.
+      responses:
+        '200':
+          description: Partially signed transaction and the new asset address.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, tx, blockhash, assetAddress]
+                properties:
+                  success:
+                    const: true
+                  tx:
+                    $ref: '#/components/schemas/SerializedTransaction'
+                  blockhash:
+                    $ref: '#/components/schemas/Blockhash'
+                  assetAddress:
+                    $ref: '#/components/schemas/Pubkey'
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /agents/{address}/fund:
+    post:
+      tags: [Agents]
+      operationId: fundAgent
+      summary: Build agent funding transaction
+      description: >
+        Builds a SOL transfer to the agent's signer PDA wallet with a required
+        on-chain memo. Anyone can fund any agent.
+      parameters:
+        - $ref: '#/components/parameters/AgentAddress'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sender, amount, memo]
+              properties:
+                sender:
+                  $ref: '#/components/schemas/Pubkey'
+                amount:
+                  type: number
+                  exclusiveMinimum: 0
+                  description: Amount in SOL.
+                memo:
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                network:
+                  $ref: '#/components/schemas/Network'
+      responses:
+        '200':
+          $ref: '#/components/responses/TxBuildSuccess'
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '404':
+          $ref: '#/components/responses/AgentNotFound'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+  /agents/{address}/withdraw:
+    post:
+      tags: [Agents]
+      operationId: withdrawFromAgent
+      summary: Build agent withdrawal transaction
+      description: >
+        Builds an execute-wrapped SOL transfer from the agent's signer PDA
+        wallet back to the agent owner. Ownership is verified at build time
+        and enforced on-chain; funds can only go to the owner (`sender`).
+      parameters:
+        - $ref: '#/components/parameters/AgentAddress'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [sender, amount]
+              properties:
+                sender:
+                  allOf:
+                    - $ref: '#/components/schemas/Pubkey'
+                  description: The agent owner's wallet. Receives the SOL and signs.
+                amount:
+                  type: number
+                  exclusiveMinimum: 0
+                  description: Amount in SOL.
+                network:
+                  $ref: '#/components/schemas/Network'
+      responses:
+        '200':
+          $ref: '#/components/responses/TxBuildSuccess'
+        '400':
+          $ref: '#/components/responses/SuccessEnvelopeBadRequest'
+        '403':
+          description: Sender does not own the agent's Core asset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessEnvelopeError'
+        '404':
+          $ref: '#/components/responses/AgentNotFound'
+        '500':
+          $ref: '#/components/responses/SuccessEnvelopeServerError'
+
+components:
+  parameters:
+    NetworkQuery:
+      name: network
+      in: query
+      schema:
+        $ref: '#/components/schemas/Network'
+      description: Network to query. Defaults to solana-mainnet.
+    AgentAddress:
+      name: address
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/Pubkey'
+      description: The agent's Core asset mint address.
+
+  responses:
+    GenesisBadRequest:
+      description: Invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenesisError'
+    GenesisNotFound:
+      description: Not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenesisError'
+    GenesisServerError:
+      description: Server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenesisError'
+    SuccessEnvelopeBadRequest:
+      description: Invalid input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessEnvelopeError'
+    SuccessEnvelopeServerError:
+      description: Server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessEnvelopeError'
+    AgentNotFound:
+      description: Agent not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessEnvelopeError'
+    TxBuildSuccess:
+      description: Transaction to sign and submit.
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [success, tx, blockhash]
+            properties:
+              success:
+                const: true
+              tx:
+                $ref: '#/components/schemas/SerializedTransaction'
+              blockhash:
+                $ref: '#/components/schemas/Blockhash'
+
+  schemas:
+    Pubkey:
+      type: string
+      description: Base58-encoded Solana public key.
+      examples: ['7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN']
+
+    Network:
+      type: string
+      enum: [solana-mainnet, solana-devnet]
+      default: solana-mainnet
+
+    SerializedTransaction:
+      type: string
+      contentEncoding: base64
+      description: Base64-encoded serialized Solana transaction.
+
+    Blockhash:
+      type: object
+      required: [blockhash, lastValidBlockHeight]
+      properties:
+        blockhash:
+          type: string
+        lastValidBlockHeight:
+          type: integer
+      description: >
+        Blockhash the transaction was built against. Use it with
+        confirmTransaction; do not replace it with a fresh blockhash.
+
+    GenesisError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message]
+          properties:
+            message:
+              type: string
+
+    SuccessEnvelopeError:
+      type: object
+      required: [success, error]
+      properties:
+        success:
+          const: false
+        error:
+          type: string
+        details:
+          type: array
+          description: Validation issues, when applicable.
+          items: {}
+
+    Launch:
+      type: object
+      required: [launchPage, mechanic, genesisAddress, spotlight, startTime, endTime, status, lastActivityAt, type]
+      properties:
+        launchPage:
+          type: string
+          format: uri
+        mechanic:
+          type: string
+          description: Allocation mechanism, e.g. launchpoolV2 or presaleV2.
+        genesisAddress:
+          $ref: '#/components/schemas/Pubkey'
+        spotlight:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [upcoming, live, graduated, ended]
+        heroUrl:
+          type: [string, 'null']
+        graduatedAt:
+          type: [string, 'null']
+          format: date-time
+        lastActivityAt:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum: [launchpool, presale]
+
+    BaseToken:
+      type: object
+      required: [address, name, symbol, image, description]
+      properties:
+        address:
+          $ref: '#/components/schemas/Pubkey'
+        name:
+          type: string
+        symbol:
+          type: string
+        image:
+          type: string
+        description:
+          type: string
+
+    Socials:
+      type: object
+      properties:
+        x:
+          type: string
+          format: uri
+        telegram:
+          type: string
+          format: uri
+        discord:
+          type: string
+          format: uri
+
+    LaunchData:
+      type: object
+      required: [launch, baseToken, website, socials]
+      properties:
+        launch:
+          $ref: '#/components/schemas/Launch'
+        baseToken:
+          $ref: '#/components/schemas/BaseToken'
+        website:
+          type: string
+        socials:
+          $ref: '#/components/schemas/Socials'
+
+    LaunchConfig:
+      type: object
+      description: >
+        Full launch configuration. The SDK's buildCreateLaunchPayload converts
+        a simplified CreateLaunchInput into this shape; see the Create Launch
+        documentation for allocation types.
+      required: [name, symbol, image, type, allocations, publicKey]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 32
+        symbol:
+          type: string
+          minLength: 1
+          maxLength: 10
+        image:
+          type: string
+          format: uri
+        description:
+          type: string
+          maxLength: 250
+        decimals:
+          type: integer
+          default: 6
+        supply:
+          type: number
+          default: 1000000000
+        network:
+          $ref: '#/components/schemas/Network'
+        quoteMint:
+          $ref: '#/components/schemas/Pubkey'
+        type:
+          type: string
+          enum: [launchpool, presale]
+        finalize:
+          type: boolean
+          default: true
+        allocations:
+          type: array
+          items:
+            type: object
+            required: [type]
+            properties:
+              type:
+                type: string
+                enum: [launchpoolV2, raydiumV2, unlockedV2, lockedV2, presaleV2]
+            additionalProperties: true
+        externalLinks:
+          type: object
+          properties:
+            website:
+              type: string
+            twitter:
+              type: string
+            telegram:
+              type: string
+          additionalProperties: true
+        publicKey:
+          $ref: '#/components/schemas/Pubkey'
+      additionalProperties: true
+
+    AgentMetadataJson:
+      type: object
+      description: EIP-8004 agent registration JSON.
+      required: [name, description]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        active:
+          type: boolean
+        services:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        registrations:
+          type: array
+          items:
+            type: object
+            properties:
+              agentId:
+                type: string
+              agentRegistry:
+                type: string
+            additionalProperties: true
+      additionalProperties: true
+
+    A2ACard:
+      type: object
+      description: A2A AgentCard (spec §4.4).
+      required: [name, description]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      additionalProperties: true
+
+    AgentRecord:
+      type: object
+      description: Indexed agent registry record.
+      required: [mintAddress, network, name, description, walletAddress, isActive, createdAt, updatedAt]
+      properties:
+        mintAddress:
+          $ref: '#/components/schemas/Pubkey'
+        network:
+          $ref: '#/components/schemas/Network'
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: [string, 'null']
+        walletAddress:
+          allOf:
+            - $ref: '#/components/schemas/Pubkey'
+          description: The agent's signer PDA wallet, derived from the Core asset.
+        authority:
+          type: [string, 'null']
+        agentToken:
+          type: [string, 'null']
+          description: Primary token mint, set via the setAgentToken instruction.
+        agentMetadataUri:
+          type: [string, 'null']
+        metadata:
+          oneOf:
+            - $ref: '#/components/schemas/AgentMetadataJson'
+            - type: 'null'
+        a2aCard:
+          oneOf:
+            - $ref: '#/components/schemas/A2ACard'
+            - type: 'null'
+        isActive:
+          type: boolean
+        registrationSignature:
+          type: [string, 'null']
+        indexedAt:
+          type: [string, 'null']
+          format: date-time
+        spotlightedAt:
+          type: [string, 'null']
+          format: date-time
+        verifiedAt:
+          type: [string, 'null']
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AgentDetail:
+      type: object
+      description: >
+        Agent identity merged with its EIP-8004 registration fields, launched
+        tokens, and primary token. Additional registration fields may appear
+        alongside the documented ones.
+      required: [success, address, name, description, walletAddress, owner, tokens]
+      properties:
+        success:
+          const: true
+        address:
+          $ref: '#/components/schemas/Pubkey'
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        walletAddress:
+          $ref: '#/components/schemas/Pubkey'
+        owner:
+          $ref: '#/components/schemas/Pubkey'
+        authority:
+          $ref: '#/components/schemas/Pubkey'
+        agentMetadataUri:
+          type: string
+        agentToken:
+          $ref: '#/components/schemas/Pubkey'
+        a2aCard:
+          oneOf:
+            - $ref: '#/components/schemas/A2ACard'
+            - type: 'null'
+        verifiedAt:
+          type: [string, 'null']
+          format: date-time
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseToken'
+        agentTokenInfo:
+          $ref: '#/components/schemas/BaseToken'
+      additionalProperties: true

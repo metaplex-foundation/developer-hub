@@ -70,12 +70,16 @@ No authentication is required. The API is public with rate limits.
 | `GET` | [`/launches?spotlight=true`](/smart-contracts/genesis/integration-apis/get-spotlight) | Get featured spotlight launches |
 | `POST` | [`/launches/create`](/smart-contracts/genesis/integration-apis/create-launch) | Build on-chain transactions for a new launch |
 | `POST` | [`/launches/register`](/smart-contracts/genesis/integration-apis/register) | Register a confirmed launch for listing |
+| `POST` | [`/twitter/verify`](/smart-contracts/genesis/integration-apis/verify-twitter) | Verify Twitter account ownership for launch registration |
+| `POST` | [`/creator-rewards/claim`](/smart-contracts/genesis/integration-apis/claim-creator-rewards) | Build a creator rewards claim transaction |
 | `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | Fetch bucket state from on-chain |
 | `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | Fetch deposit state from on-chain |
 
 {% callout type="note" %}
 The `POST` endpoints (`/launches/create` and `/launches/register`) are used together to create new token launches. For most use cases, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) provides a simpler interface that wraps both endpoints.
 {% /callout %}
+
+The same API also serves the Metaplex [Agent API](/agents/api) — endpoints for browsing the agent registry, fetching A2A AgentCards, and building agent mint, fund, and withdraw transactions. A machine-readable [OpenAPI specification](/openapi/metaplex-api-v1.yaml) covering both endpoint groups is available.
 
 ## Error Codes
 
