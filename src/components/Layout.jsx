@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 import { AskAIButton } from '@/components/AskAIButton'
 import { CLIBadge } from '@/components/CLIBadge'
+import { DeprecationBanner } from '@/components/DeprecationBanner'
 import { SkillBadge } from '@/components/SkillBadge'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
@@ -128,6 +129,7 @@ export function Layout({ children, page }) {
             )}
           >
             <article>
+              {!isCodeViewer && <DeprecationBanner product={page.product} />}
               {!isCodeViewer && (page.title || page.activeSection?.navigationGroup) && (
                 <header className="mb-9">
                   <div className="flex items-start justify-between gap-4">

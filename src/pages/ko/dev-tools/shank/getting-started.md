@@ -170,7 +170,7 @@ Shank는 Solana 프로그램 코드에 주석을 달기 위한 다섯 가지 필
 Shank는 다른 Metaplex 도구들과 원활하게 통합됩니다:
 
 - **[Kinobi](/ko/dev-tools/umi/kinobi)**: IDL 생성 및 클라이언트 생성을 위해 Shank JS 라이브러리 사용
-- **[Solita](/ko/legacy-documentation/developer-tools/solita)**: Shank에서 추출한 IDL로부터 TypeScript SDK 생성
+- **[Solita](/ko/dev-tools/solita)**: Shank에서 추출한 IDL로부터 TypeScript SDK 생성
 
 ## CLI 사용법
 

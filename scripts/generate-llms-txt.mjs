@@ -194,7 +194,7 @@ function generateLlmsTxt(categories) {
     '| **Genesis** | Token launch platform (launch pools, presales, auctions) | Active, recommended |',
     '| **Core** | Digital asset standard (NFTs, gaming assets, memberships) | Active, recommended |',
     '| **Core Candy Machine** | Minting Core Assets with guards and rules | Active, recommended |',
-    '| **Candy Machine** | Minting Token Metadata NFTs | Active, legacy |',
+    '| **Candy Machine** | Minting Token Metadata NFTs | Deprecated — use Core Candy Machine |',
     '| **Token Metadata** | Legacy NFT metadata standard | Maintained, legacy |',
     '| **Bubblegum** | Compressed NFTs using Merkle trees | Active |',
     '| **UMI** | JavaScript framework for Solana clients | Active |',
@@ -214,7 +214,8 @@ function generateLlmsTxt(categories) {
     '',
     '- **Core** is actively developed and recommended for all new projects.',
     '- **Token Metadata** is maintained for backward compatibility but considered legacy.',
-    '- **Candy Machine v3** (for Token Metadata) is stable; **Core Candy Machine** is recommended for new launches.',
+    '- **Candy Machine v3** (for Token Metadata) is deprecated; **Core Candy Machine** is recommended for new launches.',
+    '- **Sugar**, **Hydra**, **Fusion**, and **Token Auth Rules** are deprecated and no longer actively maintained.',
     '- Documentation reflects current best practices as of 2025.',
     '',
     '---',
@@ -282,9 +283,21 @@ function main() {
 
       const title = frontmatter.title || frontmatter.metaTitle.split('|')[0].trim()
 
-      // Skip legacy documentation for cleaner output
+      // Skip deprecated program and tool docs for cleaner output
+      // (formerly under /legacy-documentation)
+      const deprecatedPaths = [
+        '/smart-contracts/auction-house',
+        '/smart-contracts/fixed-price-sale',
+        '/smart-contracts/gumdrop',
+        '/smart-contracts/token-entangler',
+        '/dev-tools/solita',
+        '/dev-tools/beet',
+        '/dev-tools/cusper',
+        '/dev-tools/rust-bin',
+        '/dev-tools/mobile-sdks',
+      ]
       const urlPath = filePathToUrlPath(filePath)
-      if (urlPath.startsWith('/legacy-documentation')) {
+      if (deprecatedPaths.some((p) => urlPath === p || urlPath.startsWith(`${p}/`))) {
         continue
       }
 

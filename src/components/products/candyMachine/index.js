@@ -15,6 +15,10 @@ export const candyMachine = {
   github: 'https://github.com/metaplex-foundation/mpl-candy-machine',
   className: 'accent-pink',
   deprecated: true,
+  replacement: {
+    name: 'Core Candy Machine',
+    href: '/smart-contracts/core-candy-machine',
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/candy-machine'),

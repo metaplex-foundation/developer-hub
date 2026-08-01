@@ -73,6 +73,38 @@ const standaloneRedirects = {
   '/zh/smart-contracts/genesis/api': '/zh/smart-contracts/genesis/integration-apis',
 }
 
+// Legacy documentation migration: programs moved under /smart-contracts,
+// tools under /dev-tools. Sub-paths are preserved and locale prefixes
+// (/ja, /ko, /zh) are handled generically in legacyDocRedirect().
+const legacyDocMigrations = {
+  '/auction-house': '/smart-contracts/auction-house',
+  '/fixed-price-sale': '/smart-contracts/fixed-price-sale',
+  '/gumdrop': '/smart-contracts/gumdrop',
+  '/token-entangler': '/smart-contracts/token-entangler',
+  '/developer-tools/solita': '/dev-tools/solita',
+  '/developer-tools/beet': '/dev-tools/beet',
+  '/developer-tools/cusper': '/dev-tools/cusper',
+  '/developer-tools/rust-bin': '/dev-tools/rust-bin',
+  '/developer-tools/shank': '/dev-tools/shank',
+  '/mobile-sdks': '/dev-tools/mobile-sdks',
+}
+
+function legacyDocRedirect(pathname) {
+  const match = pathname.match(/^\/(?:(ja|ko|zh)\/)?legacy-documentation(\/.*)?$/)
+  if (!match) return null
+  const localePrefix = match[1] ? `/${match[1]}` : ''
+  const rest = match[2] || ''
+  // The old index page has no direct equivalent; deprecated programs are
+  // listed in the Smart Contracts category.
+  if (rest === '' || rest === '/') return `${localePrefix}/smart-contracts`
+  for (const [oldPath, newPath] of Object.entries(legacyDocMigrations)) {
+    if (rest === oldPath || rest.startsWith(`${oldPath}/`)) {
+      return `${localePrefix}${newPath}${rest.slice(oldPath.length)}`
+    }
+  }
+  return null
+}
+
 const redirectRules = {
   // Tokens guide URL restructure
   '/tokens': {
@@ -171,9 +203,6 @@ const redirectRules = {
     '/getting-started/js': '/zh/smart-contracts/core-candy-machine/sdk/javascript',
     '/getting-started/rust': '/zh/smart-contracts/core-candy-machine/sdk/rust',
   },
-  '/zh/legacy-documentation': {
-    '/developer-tools/shank': '/zh/dev-tools/shank',
-  },
   // Legacy redirects - old paths (a) redirect to old destinations (b)
   // The smart contract redirects will then redirect (b) to new paths (c)
   '/bubblegum': {
@@ -241,16 +270,6 @@ const redirectRules = {
     '/api/v1/das/get-signatures-for-asset': '/dev-tools/das-api/methods/get-asset-signatures',
     '/api/v1/das/search-assets': '/dev-tools/das-api/methods/search-assets',
   },
-  // Legacy documentation redirects
-  '/legacy-documentation': {
-    '/developer-tools/shank': '/dev-tools/shank',
-  },
-  '/ja/legacy-documentation': {
-    '/developer-tools/shank': '/ja/dev-tools/shank',
-  },
-  '/ko/legacy-documentation': {
-    '/developer-tools/shank': '/ko/dev-tools/shank',
-  },
 }
 
 /**
@@ -277,6 +296,12 @@ export function middleware(request) {
   // Handle standalone page redirects first
   if (standaloneRedirects[pathname]) {
     return redirectTo(request, standaloneRedirects[pathname])
+  }
+
+  // Handle legacy-documentation migration redirects (locale-aware)
+  const legacyDocDestination = legacyDocRedirect(pathname)
+  if (legacyDocDestination) {
+    return redirectTo(request, legacyDocDestination)
   }
 
   // Handle legacy redirects FIRST (specific sub-path redirects)
