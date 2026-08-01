@@ -6,12 +6,6 @@ description: Metaplex의 더 이상 사용되지 않는 Token Entangler 프로�
 
 # 개요
 
-{% callout type="warning" %}
-
-이 프로그램은 더 이상 사용되지 않는 것으로 표시되어 있으며 Metaplex Foundation 팀에서 더 이상 적극적으로 유지 관리하지 않습니다. 새로운 기능, 보안 수정 및 하위 호환성이 보장되지 않습니다. 주의해서 사용하시기 바랍니다.
-
-{% /callout %}
-
 ## 소개
 
 Metaplex의 Token Entangler 프로그램은 양자 역학에서 바로 가져온 것입니다! 두 개의 NFT를 함께 얽히게 하여 한 번에 하나만 존재할 수 있도록 합니다(그리고 항상 얽힌 NFT와 교환할 수 있습니다). 이것은 러그풀된 모든 NFT를 새로운 비-러그 세트로 교체하여 프로젝트를 **'복구'**하는 데 유용할 수 있습니다. 이것이 Token Entangler 생성의 이유이기도 합니다: Degen Ape Academy의 잘못된 민트 이후 Exiled Apes 커뮤니티를 돕기 위해서입니다. Exiled Apes 웹사이트에서 백스토리에 대해 자세히 알아볼 수 있습니다.

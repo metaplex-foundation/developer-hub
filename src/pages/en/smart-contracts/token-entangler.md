@@ -6,12 +6,6 @@ description: Documentation on the deprecated Token Entangler program by Metaplex
 
 # Overview
 
-{% callout type="warning" %}
-
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
-
-{% /callout %}
-
 ## Introduction
 
 Metaplex's Token Entangler program is pulled straight out of quantum mechanics! It enables you to entangle two NFTs together and make it so only one can exist in the wild at a time (and can always be exchanged with the entangled NFT). This could be useful to **'de-rug'** projects by replacing all the rugged NFTs with a new non-rug set. That's also the reason for Token Entanglers creation: To help the Exiled Apes community after the Degen Ape Academy’s erroneous mint. You can find more about the back story on the exiled apes website.

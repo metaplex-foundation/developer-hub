@@ -5,12 +5,6 @@ description: Gives an overview of the Auction House program
 ---
 
 
-{% callout type="warning" %}
-
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
-
-{% /callout %}
-
 ## Introduction
 
 Auction House is a program that allows users to exchange assets within the Solana blockchain.

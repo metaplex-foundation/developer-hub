@@ -5,12 +5,6 @@ description: Auction House 프로그램에 대한 개요를 제공합니다
 ---
 
 
-{% callout type="warning" %}
-
-이 프로그램은 더 이상 사용되지 않는 것으로 표시되어 있으며 Metaplex Foundation 팀에서 더 이상 적극적으로 유지 관리하지 않습니다. 새로운 기능, 보안 수정 및 하위 호환성이 보장되지 않습니다. 주의해서 사용하시기 바랍니다.
-
-{% /callout %}
-
 ## 소개
 
 Auction House는 사용자가 Solana 블록체인 내에서 자산을 교환할 수 있도록 하는 프로그램입니다.
