@@ -33,7 +33,7 @@ The Metaplex API is the public REST API at `api.metaplex.com`. It serves Genesis
 - Build agent mint, fund, and withdraw transactions
 - Public REST API at `https://api.metaplex.com/v1` — no authentication required
 - Supports Solana mainnet (default) and devnet via `network` query parameter
-- Machine-readable [OpenAPI 3.1 specification](/openapi/metaplex-api-v1.yaml)
+- Machine-readable [OpenAPI 3.1 specification](https://api.metaplex.com/v1/openapi.yaml)
 
 ## Base URL
 
@@ -131,7 +131,7 @@ Two envelope conventions are in use, reflecting the API's evolution:
 { "success": false, "error": "Agent not found" }
 ```
 
-The exception is [`/agents/{address}/agent-card.json`](/api/get-agent-card), which returns raw AgentCard JSON with no envelope so A2A clients can consume it directly. Each endpoint page documents its exact shape, as does the [OpenAPI specification](/openapi/metaplex-api-v1.yaml).
+The exception is [`/agents/{address}/agent-card.json`](/api/get-agent-card), which returns raw AgentCard JSON with no envelope so A2A clients can consume it directly. Each endpoint page documents its exact shape, as does the [OpenAPI specification](https://api.metaplex.com/v1/openapi.yaml).
 
 ## Notes
 
