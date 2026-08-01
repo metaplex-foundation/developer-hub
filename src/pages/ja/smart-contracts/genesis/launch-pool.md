@@ -467,4 +467,4 @@ Launch Pool は入金に基づいて自然に価格を発見し、比例配分�
 - [Presale](/ja/smart-contracts/genesis/presale) - 固定価格トークン販売
 - [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) - 入札ベースのトークンオファリング
 - [トークンをローンチする](/ja/tokens/launch-token) - エンドツーエンドのトークンローンチガイド
-- [Integration APIs](/ja/smart-contracts/genesis/integration-apis) - API 経由でローンチとトークンセールデータを照会
+- [Integration APIs](/ja/api) - API 経由でローンチとトークンセールデータを照会

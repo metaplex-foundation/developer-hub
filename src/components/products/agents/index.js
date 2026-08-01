@@ -74,38 +74,8 @@ export const agents = {
           title: 'API Reference',
           links: [
             {
-              title: 'Overview',
-              href: '/agents/api',
-            },
-            {
-              title: 'List Agents',
-              href: '/agents/api/list-agents',
-              method: 'get',
-            },
-            {
-              title: 'Get Agent',
-              href: '/agents/api/get-agent',
-              method: 'get',
-            },
-            {
-              title: 'Get Agent Card',
-              href: '/agents/api/get-agent-card',
-              method: 'get',
-            },
-            {
-              title: 'Mint Agent',
-              href: '/agents/api/mint-agent',
-              method: 'post',
-            },
-            {
-              title: 'Fund Agent',
-              href: '/agents/api/fund-agent',
-              method: 'post',
-            },
-            {
-              title: 'Withdraw from Agent',
-              href: '/agents/api/withdraw-agent',
-              method: 'post',
+              title: 'Metaplex API Reference',
+              href: '/api',
             },
           ],
         },
@@ -187,40 +157,10 @@ export const agents = {
         ko: '에이전트 실행',
         zh: '运行 Agent',
       },
-      'Overview': {
-        ja: '概要',
-        ko: '개요',
-        zh: '概览',
-      },
-      'List Agents': {
-        ja: 'エージェント一覧',
-        ko: '에이전트 목록',
-        zh: '列出 Agent',
-      },
-      'Get Agent': {
-        ja: 'エージェントの取得',
-        ko: '에이전트 조회',
-        zh: '获取 Agent',
-      },
-      'Get Agent Card': {
-        ja: 'エージェントカードの取得',
-        ko: '에이전트 카드 조회',
-        zh: '获取 Agent 卡片',
-      },
-      'Mint Agent': {
-        ja: 'エージェントのミント',
-        ko: '에이전트 민팅',
-        zh: '铸造 Agent',
-      },
-      'Fund Agent': {
-        ja: 'エージェントへの入金',
-        ko: '에이전트 자금 입금',
-        zh: '为 Agent 注资',
-      },
-      'Withdraw from Agent': {
-        ja: 'エージェントからの出金',
-        ko: '에이전트 자금 출금',
-        zh: '从 Agent 提款',
+      'Metaplex API Reference': {
+        ja: 'Metaplex APIリファレンス',
+        ko: 'Metaplex API 레퍼런스',
+        zh: 'Metaplex API 参考',
       },
     },
   }),

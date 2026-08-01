@@ -209,7 +209,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。 |
 | `payer` | `PublicKey \| string` | 否 | 承担返回交易的费用和租金的钱包。默认为 `wallet`。当创作者费钱包不持有 SOL 时使用——例如 agent PDA 或冷钱包。 |
 
-SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)。
+SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/api/claim-creator-rewards)。
 
 ### 处理无奖励情况
 

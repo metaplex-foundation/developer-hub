@@ -431,4 +431,4 @@ main().catch(console.error);
 - [Genesis 개요](/ko/smart-contracts/genesis) - 솔라나 토큰 런치패드에 대해 더 알아보기
 - [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 공정한 출시 문서
 - [프리세일](/ko/smart-contracts/genesis/presale) - 고정 가격으로 토큰 프리세일 실행
-- [Integration APIs](/ko/smart-contracts/genesis/integration-apis) - API를 통해 출시 및 토큰 세일 데이터 쿼리
+- [Integration APIs](/ko/api) - API를 통해 출시 및 토큰 세일 데이터 쿼리

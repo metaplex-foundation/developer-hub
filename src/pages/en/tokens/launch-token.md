@@ -436,4 +436,4 @@ main().catch(console.error);
 - [Genesis Overview](/smart-contracts/genesis) - Learn more about the Solana token launchpad
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed fair launch documentation
 - [Presale](/smart-contracts/genesis/presale) - Run a token presale at a fixed price
-- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API
+- [Integration APIs](/api) - Query launch and token sale data via API

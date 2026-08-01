@@ -209,7 +209,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'`。 |
 | `payer` | `PublicKey \| string` | いいえ | 返されたトランザクションの手数料とレントを負担するウォレット。デフォルトは `wallet`。クリエイター手数料ウォレットがSOLを保持していない場合（例：エージェントPDAやコールドウォレット）に使用します。 |
 
-SDKは、デシリアライズされたUmi `Transaction` と、それらが構築されたブロックハッシュを返します。常に返されたブロックハッシュに対して各トランザクションを確認してください — 新たに取得したものに置き換えないでください。確認競合が発生します。完全なHTTPスキーマは[Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)を参照してください。
+SDKは、デシリアライズされたUmi `Transaction` と、それらが構築されたブロックハッシュを返します。常に返されたブロックハッシュに対して各トランザクションを確認してください — 新たに取得したものに置き換えないでください。確認競合が発生します。完全なHTTPスキーマは[Claim Creator Rewards (API)](/api/claim-creator-rewards)を参照してください。
 
 ### 報酬なしのケースの処理
 

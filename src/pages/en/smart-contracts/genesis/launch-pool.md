@@ -467,4 +467,4 @@ Launch Pool discovers price organically based on deposits with proportional dist
 - [Presale](/smart-contracts/genesis/presale) - Fixed-price token sale
 - [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) - Bid-based token offering
 - [Launch a Token](/tokens/launch-token) - End-to-end token launch guide
-- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API
+- [Integration APIs](/api) - Query launch and token sale data via API

@@ -1,0 +1,227 @@
+---
+title: Integration APIs
+metaTitle: Genesis - Integration APIs | ローンチデータ | Metaplex
+description: HTTP REST エンドポイントとオンチェーン SDK メソッドを通じて Genesis ローンチデータにアクセスします。認証不要のパブリック API です。
+created: '01-15-2025'
+updated: '02-26-2026'
+keywords:
+  - Genesis API
+  - integration API
+  - launch data
+  - token queries
+  - on-chain state
+about:
+  - API integration
+  - Data aggregation
+  - Launch information
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+  - Rust
+---
+
+Genesis Integration APIs により、アグリゲーターやアプリケーションが Genesis トークンローンチのデータをクエリできます。REST エンドポイントを通じてメタデータにアクセスしたり、SDK でリアルタイムのオンチェーン状態を取得したりできます。 {% .lead %}
+
+## Summary
+
+Genesis 統合 API は、Solana 上の Genesis トークンローンチのデータへの読み取り専用アクセスを提供します。
+
+- Genesis アドレス、トークンミント、またはすべてのアクティブなローンチを検索可能
+- `https://api.metaplex.com/v1` の公開 REST API — 認証不要
+- ローンチメタデータ、トークン情報、ウェブサイト、ソーシャルリンクを返却
+- Solana メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
+
+## ベース URL
+
+```
+https://api.metaplex.com/v1
+```
+
+## ネットワーク選択
+
+デフォルトでは、API は Solana メインネットのデータを返します。devnet のローンチをクエリするには、`network` クエリパラメータを追加します：
+
+```
+?network=solana-devnet
+```
+
+**例：**
+
+```bash
+# Mainnet (default)
+curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN
+
+# Devnet
+curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN?network=solana-devnet"
+```
+
+## 認証
+
+認証は不要です。API はレート制限付きで公開されています。
+
+## 利用可能なエンドポイント
+
+| メソッド | エンドポイント | 説明 |
+|--------|----------|-------------|
+| `GET` | [`/launches/{genesis_pubkey}`](/api/get-launch) | Genesis アドレスでローンチデータを取得 |
+| `GET` | [`/tokens/{mint}`](/api/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
+| `GET` | [`/launches`](/api/list-launches) | フィルタ付きでローンチ一覧を取得 |
+| `GET` | [`/launches?spotlight=true`](/api/get-spotlight) | 注目のスポットライトローンチを取得 |
+| `POST` | [`/launches/create`](/api/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
+| `POST` | [`/launches/register`](/api/register) | 確認済みローンチをリスティング用に登録 |
+| `POST` | [`/twitter/verify`](/api/verify-twitter) | ローンチ登録用のTwitterアカウント所有権を認証 |
+| `POST` | [`/creator-rewards/claim`](/api/claim-creator-rewards) | クリエイター報酬請求トランザクションを構築 |
+| `GET` | [`/agents`](/api/list-agents) | 登録済みエージェントの一覧・検索（ページネーション付き） |
+| `GET` | [`/agents/{address}`](/api/get-agent) | 単一エージェントの詳細を取得 |
+| `GET` | [`/agents/{address}/agent-card.json`](/api/get-agent-card) | ホストされたA2A AgentCardを取得 |
+| `POST` | [`/agents/mint`](/api/mint-agent) | エージェントのミント＋登録トランザクションを構築 |
+| `POST` | [`/agents/{address}/fund`](/api/fund-agent) | エージェントウォレットへのSOL送金を構築 |
+| `POST` | [`/agents/{address}/withdraw`](/api/withdraw-agent) | エージェントウォレットからの出金を構築（オーナーのみ） |
+| `CHAIN` | [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) | オンチェーンからバケット状態を取得 |
+| `CHAIN` | [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) | オンチェーンからデポジット状態を取得 |
+
+{% callout type="note" %}
+`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供しており、利用を推奨します。
+{% /callout %}
+
+## エラーコード
+
+| コード | 説明 |
+| --- | --- |
+| `400` | 不正なリクエスト - 無効なパラメータ |
+| `404` | ローンチまたはトークンが見つからない |
+| `429` | レート制限超過 |
+| `500` | 内部サーバーエラー |
+
+エラーレスポンスの形式：
+
+```json
+{
+  "error": {
+    "message": "Launch not found"
+  }
+}
+```
+
+## 共有型
+
+### TypeScript
+
+```ts
+interface Launch {
+  launchPage: string;
+  mechanic: string;
+  genesisAddress: string;
+  spotlight: boolean;
+  startTime: string;
+  endTime: string;
+  status: 'upcoming' | 'live' | 'graduated' | 'ended';
+  heroUrl: string | null;
+  graduatedAt: string | null;
+  lastActivityAt: string;
+  type: 'launchpool' | 'presale';
+}
+
+interface BaseToken {
+  address: string;
+  name: string;
+  symbol: string;
+  image: string;
+  description: string;
+}
+
+interface Socials {
+  x?: string;
+  telegram?: string;
+  discord?: string;
+}
+
+interface ErrorResponse {
+  error: {
+    message: string;
+  };
+}
+```
+
+### Rust
+
+```rust
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Launch {
+    pub launch_page: String,
+    pub mechanic: String,
+    pub genesis_address: String,
+    pub spotlight: bool,
+    pub start_time: String,
+    pub end_time: String,
+    pub status: String,
+    pub hero_url: Option<String>,
+    pub graduated_at: Option<String>,
+    pub last_activity_at: String,
+    #[serde(rename = "type")]
+    pub launch_type: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BaseToken {
+    pub address: String,
+    pub name: String,
+    pub symbol: String,
+    pub image: String,
+    pub description: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Socials {
+    pub x: Option<String>,
+    pub telegram: Option<String>,
+    pub discord: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ApiError {
+    pub message: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ErrorResponse {
+    pub error: ApiError,
+}
+```
+
+{% callout type="note" %}
+`Cargo.toml` に以下の依存関係を追加してください：
+```toml
+[dependencies]
+reqwest = { version = "0.12", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+```
+{% /callout %}
+
+## Notes
+
+- API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
+- すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
+- デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
+- `POST` エンドポイントは、ほとんどのユースケースで [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)を使用してください。
+
+## Glossary
+
+| 用語 | 定義 |
+|------|------------|
+| **Genesis Address** | 特定のローンチキャンペーンを一意に識別する PDA（Program Derived Address） |
+| **Base Token** | ミントアドレスで識別される、ローンチされるトークン |
+| **Launch Page** | ユーザーがローンチに参加できる URL |
+| **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`auction`） |
+| **Launch Type** | ローンチの基盤メカニズム：`launchpool` または `presale` |
+| **Spotlight** | プラットフォームが厳選した注目ローンチを示すフラグ |
+| **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
+| **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |
+| **LaunchData** | `launch`、`baseToken`、`website`、`socials` を含むレスポンスラッパー |
+| **TokenData** | トークンクエリ用のレスポンスラッパー。`launches` 配列と `baseToken`、`website`、`socials` を含む |

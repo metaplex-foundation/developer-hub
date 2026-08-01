@@ -81,7 +81,7 @@ Genesis は組み合わせ可能な3つのメカニズムに対応していま�
 | **Launch Pool** (`launchpool`) | 預入期間を通じて比例配分と価格発見を行う | フェアローンチ、コミュニティトークン、クラウドセール |
 | **Presale** (`presale`) | 事前に決定されたレートでの固定価格トークンセール | トークンセール、既知のバリュエーション |
 
-ローンチタイプは、作成後にバックエンドクランクによって[Genesis Account](#genesis-account)にオンチェーンで記録されます。トレーダーやアグリゲーターは、[JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）または[Integration APIs](/smart-contracts/genesis/integration-apis)（REST応答の`type`フィールド）を通じてプログラム的にタイプを照会できます。
+ローンチタイプは、作成後にバックエンドクランクによって[Genesis Account](#genesis-account)にオンチェーンで記録されます。トレーダーやアグリゲーターは、[JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）または[Integration APIs](/api)（REST応答の`type`フィールド）を通じてプログラム的にタイプを照会できます。
 
 ### Genesis Account
 

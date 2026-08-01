@@ -389,7 +389,7 @@ enum LaunchType {
 }
 ```
 
-[Integration APIs](/ko/smart-contracts/genesis/integration-apis)에서는 문자열(`'launchpool'`)로 반환되지만, 온체인 SDK에서는 위의 숫자 열거형을 사용합니다.
+[Integration APIs](/ko/api)에서는 문자열(`'launchpool'`)로 반환되지만, 온체인 SDK에서는 위의 숫자 열거형을 사용합니다.
 
 ### GenesisAccountV2
 
@@ -472,7 +472,7 @@ Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜�
 `fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
 
 ### 토큰의 런칭 타입을 어떻게 조회하나요?
-토큰의 민트 주소를 사용하여 `fetchGenesisAccountV2FromSeeds()`로 `GenesisAccountV2` 계정을 조회합니다. `launchType` 필드는 `0`(미초기화) 또는 `3`(LaunchPoolV1)을 반환합니다. 특정 타입의 모든 런칭을 조회하려면 [GPA 빌더](#gpa-빌더--런칭-타입으로-조회)를 사용하세요. 또는 [Integration APIs](/ko/smart-contracts/genesis/integration-apis)가 REST 응답에서 문자열로 런칭 타입을 반환합니다.
+토큰의 민트 주소를 사용하여 `fetchGenesisAccountV2FromSeeds()`로 `GenesisAccountV2` 계정을 조회합니다. `launchType` 필드는 `0`(미초기화) 또는 `3`(LaunchPoolV1)을 반환합니다. 특정 타입의 모든 런칭을 조회하려면 [GPA 빌더](#gpa-빌더--런칭-타입으로-조회)를 사용하세요. 또는 [Integration APIs](/ko/api)가 REST 응답에서 문자열로 런칭 타입을 반환합니다.
 
 ### 트랜잭션 오류를 어떻게 처리하나요?
 `sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.
