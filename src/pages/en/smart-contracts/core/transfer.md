@@ -96,8 +96,8 @@ import { publicKey } from '@metaplex-foundation/umi'
 import { transferV1 } from '@metaplex-foundation/mpl-core'
 
 const asset = publicKey('11111111111111111111111111111111')
-const collection = publicKey('22222222222222222222222222222222')
-const newOwner = publicKey('33333333333333333333333333333333')
+const collection = publicKey('22222222222222222222222222222222222222222222')
+const newOwner = publicKey('33333333333333333333333333333333333333333333')
 
 await transferV1(umi, {
   asset,
@@ -116,8 +116,8 @@ pub async fn transfer_asset_in_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-    let new_owner = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+    let collection = Pubkey::from_str("22222222222222222222222222222222222222222222").unwrap();
+    let new_owner = Pubkey::from_str("33333333333333333333333333333333333333333333").unwrap();
     let transfer_asset_in_collection_ix = TransferV1Builder::new()
         .asset(asset)
         .collection(Some(collection))

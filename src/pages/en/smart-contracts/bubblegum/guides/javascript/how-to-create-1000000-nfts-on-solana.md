@@ -92,7 +92,7 @@ createCnft()
 
 ## Setting up Umi
 
-This example sets up Umi with `generateSigner(umi)`. If you wish to try this example with React you'll need to setup Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the wallet setup this guide will use fileStorage keys and wallet adapter.
+This example sets up Umi with `generateSigner(umi)`. If you wish to try this example with React, you'll need to set up Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the wallet setup, this guide will use fileStorage keys and a wallet adapter.
 
 ### Generating a New Wallet
 
