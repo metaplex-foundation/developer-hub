@@ -94,11 +94,15 @@ If you are transferring an Asset which has a collection you will need to pass th
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { transferV1 } from '@metaplex-foundation/mpl-core'
+
 const asset = publicKey('11111111111111111111111111111111')
+const collection = publicKey('22222222222222222222222222222222')
+const newOwner = publicKey('33333333333333333333333333333333')
+
 await transferV1(umi, {
-  asset: asset.publicKey,
-  newOwner: newOwner.publicKey,
-  collection: collection.publicKey,
+  asset,
+  newOwner,
+  collection,
 }).sendAndConfirm(umi)
 ```
 {% /dialect %}
