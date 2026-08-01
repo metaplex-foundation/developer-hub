@@ -63,6 +63,31 @@ Documentation follows a consistent pattern:
 - **Guides section** - Tutorials and how-tos
 - **References section** - API documentation (often external links)
 
+### Metaplex API Reference (`/api`)
+
+The pages under `src/pages/{locale}/api/` document the public REST API served
+at `api.metaplex.com/v1`. That API is implemented in the **genesis-app repo**
+(a sibling repo — this site only documents it):
+
+- The machine-readable contract is the OpenAPI 3.1 spec served at
+  `https://api.metaplex.com/v1/openapi.yaml`, whose source of truth is
+  `app/api/v1/openapi.yaml/spec.yaml` in genesis-app. **Do not add a copy of
+  the spec to this repo** — link to the canonical URL.
+- When endpoints change in genesis-app, the pages to update here are: the
+  matching endpoint page in `src/pages/en/api/`, the endpoint tables in
+  `src/pages/{en,ja,ko,zh}/api/index.md`, and the nav in
+  `src/components/products/api/index.js`. genesis-app's contributor docs
+  instruct API authors to file a ticket for this update (they may not have
+  this repo cloned), so incoming docs tickets should reference the
+  genesis-app PR with the route change.
+- The two SDK chain-method pages (`fetch-bucket-state`, `fetch-deposit-state`)
+  intentionally live under `smart-contracts/genesis/`, not `/api` — they are
+  SDK calls, not REST endpoints.
+- `/api/*` URLs work because `src/middleware.js` rewrites root paths to
+  `/en/*` for everything except `/api/og` (the OG-image Next API route). If
+  you add another real API route under `src/pages/api/`, you must extend that
+  skip list.
+
 ### Page System
 
 Pages use a custom `usePage` hook that processes:
