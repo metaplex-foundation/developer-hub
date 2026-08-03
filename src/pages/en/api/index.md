@@ -33,7 +33,7 @@ The Metaplex API is the public REST API at `api.metaplex.com`. It serves Genesis
 - Build agent mint, fund, and withdraw transactions
 - Public REST API at `https://api.metaplex.com/v1` — no authentication required
 - Supports Solana mainnet (default) and devnet via `network` query parameter
-- Machine-readable [OpenAPI 3.1 specification](https://api.metaplex.com/v1/openapi.yaml)
+- Machine-readable OpenAPI 3.1 specification: [JSON](https://api.metaplex.com/v1/openapi.json) / [YAML](https://api.metaplex.com/v1/openapi.yaml), discoverable via the [RFC 9727 API catalog](https://api.metaplex.com/.well-known/api-catalog)
 
 ## Base URL
 
@@ -131,7 +131,20 @@ Two envelope conventions are in use, reflecting the API's evolution:
 { "success": false, "error": "Agent not found" }
 ```
 
-The exception is [`/agents/{address}/agent-card.json`](/api/get-agent-card), which returns raw AgentCard JSON with no envelope so A2A clients can consume it directly. Each endpoint page documents its exact shape, as does the [OpenAPI specification](https://api.metaplex.com/v1/openapi.yaml).
+The exception is [`/agents/{address}/agent-card.json`](/api/get-agent-card), which returns raw AgentCard JSON with no envelope so A2A clients can consume it directly. Each endpoint page documents its exact shape, as does the [OpenAPI specification](https://api.metaplex.com/v1/openapi.json).
+
+## Machine-Readable Specification
+
+The full API contract is published as an OpenAPI 3.1 document, generated directly from the API's request validators (so it cannot drift from the implementation):
+
+| Format | URL |
+|--------|-----|
+| JSON (canonical) | `https://api.metaplex.com/v1/openapi.json` |
+| YAML | `https://api.metaplex.com/v1/openapi.yaml` |
+| Current-version aliases | `https://api.metaplex.com/openapi.json` / `openapi.yaml` |
+| RFC 9727 API catalog | `https://api.metaplex.com/.well-known/api-catalog` |
+
+Import the spec into Postman, Swagger UI, code generators, or agent frameworks to get typed clients and callable tools for every endpoint.
 
 ## Notes
 

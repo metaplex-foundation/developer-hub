@@ -45,6 +45,7 @@
 
 - **New to Metaplex?** Start here: https://metaplex.com/docs/
 - **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis
+- **Calling the public REST API?** Reference: https://metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)
 - **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core
 - **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine
 - **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi
@@ -60,6 +61,24 @@
 - Documentation reflects current best practices as of 2025.
 
 ---
+
+## Metaplex API (REST)
+
+- [Metaplex API](https://metaplex.com/docs/api): The Metaplex public REST API at api.metaplex.com — Genesis launch data, launch creation, the agent registry, and agent wallet transactions. No authentication required.
+- [Claim Creator Rewards](https://metaplex.com/docs/api/claim-creator-rewards): Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
+- [Create Launch](https://metaplex.com/docs/api/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
+- [Fund Agent](https://metaplex.com/docs/api/fund-agent): Build a SOL transfer transaction that funds a registered agent's wallet, with an on-chain memo.
+- [Get Agent](https://metaplex.com/docs/api/get-agent): Fetch a single registered agent by Core asset address, including its EIP-8004 registration data, created tokens, and primary agent token.
+- [Get Agent Card](https://metaplex.com/docs/api/get-agent-card): Fetch the hosted A2A AgentCard for a registered agent. Standards-compliant AgentCard JSON with ETag caching.
+- [Get Launch](https://metaplex.com/docs/api/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
+- [Get Launches by Token](https://metaplex.com/docs/api/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
+- [Get Spotlight](https://metaplex.com/docs/api/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
+- [List Agents](https://metaplex.com/docs/api/list-agents): Browse and search registered AI agents. Returns paginated agent records with metadata, filters, and sorting.
+- [List Launches](https://metaplex.com/docs/api/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
+- [Mint Agent](https://metaplex.com/docs/api/mint-agent): Build a partially signed transaction that mints an agent Core asset and registers its on-chain identity.
+- [Register Launch](https://metaplex.com/docs/api/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
+- [Verify Twitter](https://metaplex.com/docs/api/verify-twitter): Exchange a Twitter OAuth access token for a verification token that proves ownership of a Twitter account when registering a launch.
+- [Withdraw from Agent](https://metaplex.com/docs/api/withdraw-agent): Build a transaction that withdraws SOL from an agent's wallet back to its owner. Owner-only.
 
 ## Genesis (Token Launch)
 
@@ -496,7 +515,6 @@
 - [Enhanced Fence Component - Test Page](https://metaplex.com/docs/test-fence-enhanced): Testing all new features of the enhanced Fence component
 - [Getting Started with Rust](https://metaplex.com/docs/solana/rust/getting-started-with-rust): A quick overview on how to get started with Rust in the Solana ecosystem.
 - [Guides](https://metaplex.com/docs/solana): Guides by Metaplex about the Solana blockchain.
-- [Metaplex API](https://metaplex.com/docs/api): The Metaplex public REST API at api.metaplex.com — Genesis launch data, launch creation, the agent registry, and agent wallet transactions. No authentication required.
 - [Mint Fungible Tokens](https://metaplex.com/docs/tokens/mint-tokens): Learn how to mint additional fungible SPL tokens to a wallet on Solana using JavaScript and Umi
 - [Official Links](https://metaplex.com/docs/official-links): Official Links for Metaplex
 - [Overview](https://metaplex.com/docs/smart-contracts/fusion): Provides a high-level overview of composable NFTs using Fusion.
@@ -527,7 +545,6 @@
 - [Any](https://metaplex.com/docs/smart-contracts/token-auth-rules/composite-rules/any): The Any composite rule
 - [API References](https://metaplex.com/docs/smart-contracts/token-auth-rules/references): References and code snippets for Metaplex's Token Auth Rules product.
 - [Burn an NFT](https://metaplex.com/docs/nfts/burn-nft): Learn how to burn NFTs using Metaplex Core on Solana
-- [Claim Creator Rewards](https://metaplex.com/docs/api/claim-creator-rewards): Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
 - [Clear Inscription Data](https://metaplex.com/docs/smart-contracts/inscription/clear): Learn how to clear Inscription data
 - [Close Inscriptions](https://metaplex.com/docs/smart-contracts/inscription/close): Learn how to close Inscription accounts
 - [Compute Units and Priority Fees](https://metaplex.com/docs/solana/compute-units-and-priority-fees): Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
@@ -537,7 +554,6 @@
 - [Create an Agent Token](https://metaplex.com/docs/agents/create-agent-token): How to launch a bonding curve token on behalf of a Metaplex agent using the Genesis SDK — including automatic creator fee routing, first buy, devnet testing, and error handling.
 - [Create an NFT](https://metaplex.com/docs/nfts/create-nft): Learn how to create an NFT using Metaplex Core on Solana
 - [Create deterministic metadata with Turbo](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/create-deterministic-metadata-with-turbo): Learn how to create deterministic metadata leveraging the Turbo SDK for Arweave-based uploads.
-- [Create Launch](https://metaplex.com/docs/api/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 - [Create or Update Rule Sets](https://metaplex.com/docs/smart-contracts/token-auth-rules/create-or-update): How to Create and Update Rule Sets
 - [Create your First Hybrid Collection](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/create-your-first-hybrid-collection): Learn how to create an hybrid collection, fully end-to-end!.
 - [Creating an MPL 404 Hybrid Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/create-escrow): Learn to create the MPL 404 Hybrid Escrow account that makes 404 swaps possible.
@@ -546,13 +562,7 @@
 - [Fetch an NFT](https://metaplex.com/docs/nfts/fetch-nft): Learn how to fetch NFTs using Metaplex Core on Solana
 - [Fetching an MPL 404 Hybrid Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/fetch-escrow): Learn to fetch an MPL 404 Hybrid Escrow configuration.
 - [Fetching Inscription Data](https://metaplex.com/docs/smart-contracts/inscription/fetch): Learn how to fetch the various onchain accounts of your inscriptions
-- [Fund Agent](https://metaplex.com/docs/api/fund-agent): Build a SOL transfer transaction that funds a registered agent's wallet, with an on-chain memo.
 - [Funding the MPL Hybrid 404 Escrow](https://metaplex.com/docs/smart-contracts/mpl-hybrid/funding-escrow): Learn to fund the MPL 404 Hybrid Escrow account with SPL Tokens that makes 404 swaps possible.
-- [Get Agent](https://metaplex.com/docs/api/get-agent): Fetch a single registered agent by Core asset address, including its EIP-8004 registration data, created tokens, and primary agent token.
-- [Get Agent Card](https://metaplex.com/docs/api/get-agent-card): Fetch the hosted A2A AgentCard for a registered agent. Standards-compliant AgentCard JSON with ETag caching.
-- [Get Launch](https://metaplex.com/docs/api/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
-- [Get Launches by Token](https://metaplex.com/docs/api/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
-- [Get Spotlight](https://metaplex.com/docs/api/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/fusion/getting-started): How to use Metaplex Fusion.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/inscription/getting-started): Get started with Metaplex Inscriptions.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/mpl-agent/getting-started): Install the MPL Agent Registry SDK and register your first agent identity on Solana.
@@ -577,13 +587,10 @@
 - [Installation](https://metaplex.com/docs/agents/skill/installation): Install the Metaplex Skill in Claude Code, Cursor, Copilot, or any AI coding agent.
 - [Japanese 日本語](https://metaplex.com/docs/solana/translated/japanese): A selection of guides translated into Japanese.
 - [Launch a Token on Solana](https://metaplex.com/docs/tokens/launch-token): Step-by-step TypeScript guide to launching an SPL token on Solana using Genesis Launch Pools. Fair, on-chain token distribution with transparent price discovery.
-- [List Agents](https://metaplex.com/docs/api/list-agents): Browse and search registered AI agents. Returns paginated agent records with metadata, filters, and sorting.
-- [List Launches](https://metaplex.com/docs/api/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
 - [Metaplex MPL-404 Hybrid Solana NextJs Tailwind Template](https://metaplex.com/docs/smart-contracts/mpl-hybrid/guides/mpl-404-hybrid-ui-template): A web UI template for Metaplex MPL-404 Hybrid using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
 - [Metaplex Rust SDKs](https://metaplex.com/docs/solana/rust/metaplex-rust-sdks): A quick overview on Metaplex Rust SDKs.
 - [Metaplex Skill](https://metaplex.com/docs/agents/skill): An Agent Skill that gives AI coding agents full knowledge of Metaplex programs, CLI commands, and SDK patterns.
 - [Metaplex Solana NextJs Tailwind Template](https://metaplex.com/docs/solana/templates/metaplex-nextjs-tailwind-template): A web UI template using Nextjs, Tailwind, Metaplex Umi, Solana WalletAdapter and Zustand.
-- [Mint Agent](https://metaplex.com/docs/api/mint-agent): Build a partially signed transaction that mints an agent Core asset and registers its on-chain identity.
 - [Mint an Agent](https://metaplex.com/docs/agents/mint-agent): Create an onchain AI agent in a single transaction using the Metaplex API and the mpl-agent-registry SDK. The hosted API stores agent metadata and returns an unsigned transaction you sign and submit.
 - [MPL Agent Registry](https://metaplex.com/docs/smart-contracts/mpl-agent): On-chain programs for registering agent identity and delegating execution on Solana using MPL Core assets.
 - [MPL-Hybrid Javascript SDK](https://metaplex.com/docs/smart-contracts/mpl-hybrid/sdk/javascript): Learn how to set up your project to run the MPL-Hybrid Javascript SDK.
@@ -600,7 +607,6 @@
 - [Read Agent Data](https://metaplex.com/docs/agents/read-agent-data): Verify agent registration, read identity and registration documents on-chain, or read indexed agent fields via the DAS API.
 - [Read Token Data](https://metaplex.com/docs/tokens/read-token): Learn how to fetch fungible token data from the Solana blockchain
 - [Register an Agent](https://metaplex.com/docs/agents/register-agent): Register an agent identity on the Metaplex 014 agent registry by binding an identity record to an MPL Core asset.
-- [Register Launch](https://metaplex.com/docs/api/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 - [RPCs, DAS, and RPC Providers](https://metaplex.com/docs/solana/rpcs-and-das): Learn about RPCs on the Solana blockchain, how DAS by Metaplex aids in storing and reading data, and find RPC providers for your project.
 - [Run an Agent](https://metaplex.com/docs/agents/run-an-agent): Set up an executive profile, delegate execution, and understand the security model for running an autonomous agent on Solana.
 - [Setup a Local Validator](https://metaplex.com/docs/solana/setup-a-local-validator): Learn how to setup a local development environment and use a local validator
@@ -626,10 +632,8 @@
 - [Using Solana Explorers](https://metaplex.com/docs/solana/using-solana-explorers): Learn how to use Solana Explorer, SolanaFM, and CLI tools to inspect transactions, accounts, and debug issues during development.
 - [Validating with a Rule Set](https://metaplex.com/docs/smart-contracts/token-auth-rules/validate): How to run validation using a Rule Set
 - [Validators and Staking](https://metaplex.com/docs/solana/validators): An overview of Solana Validators and staking mechanics.
-- [Verify Twitter](https://metaplex.com/docs/api/verify-twitter): Exchange a Twitter OAuth access token for a verification token that proves ownership of a Twitter account when registering a launch.
 - [What Is an Agent?](https://metaplex.com/docs/agents/what-is-an-agent): Autonomous agents on Solana are MPL Core assets with built-in wallets and on-chain identity records. Learn how agent identity, wallets, and execution delegation work.
 - [Where Do I Start With Solana?](https://metaplex.com/docs/solana/where-do-i-start): An overview of the Solana ecosystem frameworks and where to research.
-- [Withdraw from Agent](https://metaplex.com/docs/api/withdraw-agent): Build a transaction that withdraws SOL from an agent's wallet back to its owner. Owner-only.
 - [Working with Devnet](https://metaplex.com/docs/solana/working-with-devnet-and-testnet): Learn how to use Solana devnet and local validators for development. Understand when to use each environment and how to transition to mainnet.
 - [Write Inscription Data](https://metaplex.com/docs/smart-contracts/inscription/write): Learn how to write Data to your Inscription
 
