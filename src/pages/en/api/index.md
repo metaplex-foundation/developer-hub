@@ -23,7 +23,7 @@ programmingLanguage:
   - Rust
 ---
 
-The Metaplex API is the public REST API at `api.metaplex.com`. It serves Genesis launch data, builds launch-creation transactions, and exposes the Metaplex Agent Registry — browsing agents, serving A2A AgentCards, and building agent wallet transactions. {% .lead %}
+The Metaplex API is the public REST API at `api.metaplex.com`. It serves Genesis launch data, builds launch-creation transactions, and exposes the Metaplex Agent Registry — browsing agents, serving A2A AgentCards, and building agent wallet transactions. It is the same API that powers the [metaplex.com](https://www.metaplex.com) launch platform — the endpoints documented here are what the site itself runs on. {% .lead %}
 
 ## Summary
 
@@ -34,6 +34,7 @@ The Metaplex API provides public HTTP access to Genesis launch data, launch crea
 - Browse and search the agent registry; fetch per-agent A2A AgentCards
 - Build agent mint, fund, and withdraw transactions
 - Public REST API at `https://api.metaplex.com/v1` — no authentication required
+- Powers the [metaplex.com](https://www.metaplex.com) launch platform — integrators consume the same endpoints the platform uses
 - Supports Solana mainnet (default) and devnet via `network` query parameter
 - Machine-readable OpenAPI 3.1 specification: [YAML](https://api.metaplex.com/v1/openapi.yaml) (canonical) / [JSON](https://api.metaplex.com/v1/openapi.json), discoverable via the [RFC 9727 API catalog](https://api.metaplex.com/.well-known/api-catalog)
 

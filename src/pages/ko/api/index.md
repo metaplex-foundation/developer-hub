@@ -23,7 +23,7 @@ programmingLanguage:
   - Rust
 ---
 
-Metaplex API는 `api.metaplex.com`의 공개 REST API입니다. Genesis 런칭 데이터를 제공하고, 런칭 생성 트랜잭션을 빌드하며, Metaplex Agent Registry를 노출합니다 — 에이전트 탐색, A2A AgentCard 제공, 에이전트 지갑 트랜잭션 빌드가 가능합니다. {% .lead %}
+Metaplex API는 `api.metaplex.com`의 공개 REST API입니다. Genesis 런칭 데이터를 제공하고, 런칭 생성 트랜잭션을 빌드하며, Metaplex Agent Registry를 노출합니다 — 에이전트 탐색, A2A AgentCard 제공, 에이전트 지갑 트랜잭션 빌드가 가능합니다. [metaplex.com](https://www.metaplex.com) 런칭 플랫폼을 구동하는 것도 바로 이 API이며, 여기에 문서화된 엔드포인트는 사이트 자체가 사용하는 것과 동일합니다. {% .lead %}
 
 ## Summary
 
@@ -34,6 +34,7 @@ Metaplex API는 Genesis 런칭 데이터, 런칭 생성, 에이전트 레지스�
 - 에이전트 레지스트리 탐색 및 검색, 에이전트별 A2A AgentCard 조회
 - 에이전트 민팅, 자금 지원(fund), 출금(withdraw) 트랜잭션 빌드
 - `https://api.metaplex.com/v1`의 공개 REST API — 인증 불필요
+- [metaplex.com](https://www.metaplex.com) 런칭 플랫폼을 구동하는 API — 통합 개발자는 플랫폼과 동일한 엔드포인트를 사용
 - `network` 쿼리 파라미터를 통해 Solana 메인넷(기본값) 및 데브넷 지원
 - 기계 판독 가능한 OpenAPI 3.1 명세: [YAML](https://api.metaplex.com/v1/openapi.yaml)(표준) / [JSON](https://api.metaplex.com/v1/openapi.json), [RFC 9727 API 카탈로그](https://api.metaplex.com/.well-known/api-catalog)를 통해 검색 가능
 

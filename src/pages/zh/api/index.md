@@ -23,7 +23,7 @@ programmingLanguage:
   - Rust
 ---
 
-Metaplex API 是位于 `api.metaplex.com` 的公开 REST API。它提供 Genesis 发行数据、构建发行创建交易，并对外提供 Metaplex Agent 注册表 — 浏览 Agent、提供 A2A AgentCard 以及构建 Agent 钱包交易。 {% .lead %}
+Metaplex API 是位于 `api.metaplex.com` 的公开 REST API。它提供 Genesis 发行数据、构建发行创建交易，并对外提供 Metaplex Agent 注册表 — 浏览 Agent、提供 A2A AgentCard 以及构建 Agent 钱包交易。为 [metaplex.com](https://www.metaplex.com) 发行平台提供支持的也是同一个 API — 此处记录的端点正是网站自身所使用的。 {% .lead %}
 
 ## Summary
 
@@ -34,6 +34,7 @@ Metaplex API 提供对 Genesis 发行数据、发行创建和 Agent 注册表的
 - 浏览和搜索 Agent 注册表；获取每个 Agent 的 A2A AgentCard
 - 构建 Agent 铸造、注资和提款交易
 - `https://api.metaplex.com/v1` 的公开 REST API — 无需认证
+- 为 [metaplex.com](https://www.metaplex.com) 发行平台提供支持 — 集成方使用的端点与平台本身相同
 - 通过 `network` 查询参数支持 Solana 主网（默认）和开发网
 - 机器可读的 OpenAPI 3.1 规范：[YAML](https://api.metaplex.com/v1/openapi.yaml)（规范版本）/ [JSON](https://api.metaplex.com/v1/openapi.json)，可通过 [RFC 9727 API 目录](https://api.metaplex.com/.well-known/api-catalog)发现
 

@@ -23,7 +23,7 @@ programmingLanguage:
   - Rust
 ---
 
-Metaplex API は `api.metaplex.com` のパブリック REST API です。Genesis ローンチデータの提供、ローンチ作成トランザクションの構築に加え、Metaplex Agent Registry — エージェントの閲覧、A2A AgentCard の提供、エージェントウォレットトランザクションの構築 — を公開しています。 {% .lead %}
+Metaplex API は `api.metaplex.com` のパブリック REST API です。Genesis ローンチデータの提供、ローンチ作成トランザクションの構築に加え、Metaplex Agent Registry — エージェントの閲覧、A2A AgentCard の提供、エージェントウォレットトランザクションの構築 — を公開しています。[metaplex.com](https://www.metaplex.com) のローンチプラットフォームを支えているのも同じ API であり、ここに記載されているエンドポイントはサイト自体が使用しているものです。 {% .lead %}
 
 ## Summary
 
@@ -34,6 +34,7 @@ Metaplex API は、Genesis ローンチデータ、ローンチ作成、エー�
 - エージェントレジストリの閲覧・検索、エージェントごとの A2A AgentCard の取得
 - エージェントのミント、資金供給、引き出しトランザクションの構築
 - `https://api.metaplex.com/v1` のパブリック REST API — 認証不要
+- [metaplex.com](https://www.metaplex.com) のローンチプラットフォームを支える API — インテグレーターはプラットフォームと同じエンドポイントを利用
 - Solana メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
 - 機械可読な OpenAPI 3.1 仕様：[YAML](https://api.metaplex.com/v1/openapi.yaml)（正規版）/ [JSON](https://api.metaplex.com/v1/openapi.json)、[RFC 9727 API カタログ](https://api.metaplex.com/.well-known/api-catalog)から発見可能
 
