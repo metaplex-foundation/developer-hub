@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/creator-rewards/claim`](/zh/api/claim-creator-rewards) | 构建创作者奖励领取交易 |
 
 {% callout type="note" %}
-`POST` 端点（`/launches/create` 和 `/launches/register`）配合使用以创建新的代币发行。对于大多数用例，[SDK API 客户端](/smart-contracts/genesis/sdk/api-client)提供了更简洁的接口，它封装了这两个端点。实时链上发行状态可通过 SDK 链方法 [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) 和 [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) 直接读取。
+`POST` 端点（`/launches/create` 和 `/launches/register`）配合使用以创建新的代币发行。对于大多数用例，[SDK API 客户端](/zh/smart-contracts/genesis/sdk/api-client)提供了更简洁的接口，它封装了这两个端点。实时链上发行状态可通过 SDK 链方法 [`fetchBucketState`](/zh/smart-contracts/genesis/integration-apis/fetch-bucket-state) 和 [`fetchDepositState`](/zh/smart-contracts/genesis/integration-apis/fetch-deposit-state) 直接读取。
 {% /callout %}
 
 ## Agent 端点
@@ -94,7 +94,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/agents/{address}/fund`](/zh/api/fund-agent) | 构建向 Agent 钱包转入 SOL 的交易 |
 | `POST` | [`/agents/{address}/withdraw`](/zh/api/withdraw-agent) | 构建从 Agent 钱包提款的交易（仅限所有者） |
 
-有关铸造 Agent 的引导式演练，请参阅[铸造 Agent](/agents/mint-agent)。
+有关铸造 Agent 的引导式演练，请参阅[铸造 Agent](/zh/agents/mint-agent)。
 
 ## 交易构建端点
 
@@ -154,7 +154,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 - API 有速率限制。如果收到 `429` 响应，请降低请求频率。
 - 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。
 - 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
-- 对于 `POST` 端点，建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
+- 对于 `POST` 端点，建议使用 [SDK API 客户端](/zh/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
 
 ## 共享类型 {% #shared-types %}
 

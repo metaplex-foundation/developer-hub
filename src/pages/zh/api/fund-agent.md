@@ -96,4 +96,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 转账目标是 Agent 的**钱包 PDA**，而非 Core 资产地址 — API 会为您解析。
 - 要将资金转出，Agent 所有者需使用[提款](/zh/api/withdraw-agent)。
-- 有关 Agent 钱包背后的概念，请参阅 [Agent 金融](/agents/agent-finance)。
+- 有关 Agent 钱包背后的概念，请参阅 [Agent 金融](/zh/agents/agent-finance)。

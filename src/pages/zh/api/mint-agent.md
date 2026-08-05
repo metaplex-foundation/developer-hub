@@ -23,7 +23,7 @@ programmingLanguage:
 
 ## Summary
 
-这是[铸造 Agent](/agents/mint-agent) 指南背后的端点。
+这是[铸造 Agent](/zh/agents/mint-agent) 指南背后的端点。
 
 - 在单笔交易中创建 Core 资产并调用 `registerIdentity`
 - 资产密钥对在服务端生成并预先签名，因此响应包含最终的 `assetAddress`
@@ -124,4 +124,4 @@ await umi.rpc.sendTransaction(signed);
 - Metaplex 注册表条目（`solana:101:metaplex`）会自动添加到 `agentMetadata.registrations` 的最前面。
 - 一个托管的 A2A 服务条目会被插入到 `services[]` 中，以便 EIP-8004 消费者可以发现 [AgentCard 端点](/zh/api/get-agent-card)；如果您已经自行编写了一个，此操作不产生任何变化。
 - 调用此端点时会存储 Agent 记录，但只有在已签名的交易被确认并索引后，它才会出现在[列出 Agent](/zh/api/list-agents) 中。
-- 有关使用 SDK 的引导式演练，请参阅[铸造 Agent](/agents/mint-agent)。
+- 有关使用 SDK 的引导式演练，请参阅[铸造 Agent](/zh/agents/mint-agent)。

@@ -1,6 +1,6 @@
 ---
 title: ローンチ登録
-metaTitle: Genesis - ローンチ登録 | REST API | Metaplex
+metaTitle: Metaplex API - ローンチ登録 | REST API | Metaplex
 description: オンチェーントランザクションの確認後に Genesis ローンチを登録します。オンチェーン状態を検証し、ローンチリスティングを作成します。
 method: POST
 created: '01-15-2025'
@@ -22,7 +22,7 @@ programmingLanguage:
 [ローンチ作成](/ja/api/create-launch)からのオンチェーントランザクションが確認された後、Genesis ローンチを登録します。このエンドポイントはオンチェーン状態を検証し、ローンチリスティングを作成して、ローンチページの URL を返します。 {% .lead %}
 
 {% callout type="warning" title="SDK の使用を推奨" %}
-ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。
+ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/ja/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。
 {% /callout %}
 
 ## エンドポイント
@@ -127,8 +127,8 @@ curl -X POST https://api.metaplex.com/v1/launches/register \
 
 ## 推奨：SDK の使用
 
-このエンドポイントを直接呼び出す代わりに、[`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) を使用することを推奨します。この関数はトランザクションの作成、署名、送信、登録のフロー全体を1回の呼び出しで処理します：
+このエンドポイントを直接呼び出す代わりに、[`createAndRegisterLaunch`](/ja/smart-contracts/genesis/sdk/api-client) を使用することを推奨します。この関数はトランザクションの作成、署名、送信、登録のフロー全体を1回の呼び出しで処理します：
 
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
-SDK の全ドキュメント（3つの統合モードを含む）については、[API クライアント](/smart-contracts/genesis/sdk/api-client)を参照してください。
+SDK の全ドキュメント（3つの統合モードを含む）については、[API クライアント](/ja/smart-contracts/genesis/sdk/api-client)を参照してください。

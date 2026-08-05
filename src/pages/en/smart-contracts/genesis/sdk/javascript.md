@@ -393,7 +393,7 @@ enum LaunchType {
 }
 ```
 
-The [Metaplex API](/api) return this as a string (`'launchpool'`), while the on-chain SDK uses the numeric enum above.
+The [Metaplex API](/api) returns this as a string (`'launchpool'`), while the on-chain SDK uses the numeric enum above.
 
 ### GenesisAccountV2
 
@@ -476,7 +476,7 @@ Yes. The SDK works in both Node.js and browser environments. For browsers, use a
 `fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
 
 ### How do I retrieve the launch type for a token?
-Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder--query-by-launch-type). Alternatively, the [Metaplex API](/api) return the launch type as a string in REST responses.
+Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder-query-by-launch-type). Alternatively, the [Metaplex API](/api) returns the launch type as a string in REST responses.
 
 ### How do I handle transaction errors?
 Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.

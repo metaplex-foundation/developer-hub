@@ -1,6 +1,6 @@
 ---
 title: クリエイター報酬の請求
-metaTitle: Genesis - クリエイター報酬の請求 | REST API | Metaplex
+metaTitle: Metaplex API - クリエイター報酬の請求 | REST API | Metaplex
 description: 1回のAPI呼び出しでウォレットのすべてのGenesisボンディングカーブとRaydiumバケットからクリエイター報酬を請求します。署名準備済みのSolanaトランザクションを返します。
 method: POST
 created: '04-23-2026'
@@ -27,7 +27,7 @@ programmingLanguage:
 ウォレットが対象とするすべてのGenesisボンディングカーブとRaydium CPMMバケットの蓄積したクリエイター報酬を、1回の呼び出しで請求します。エンドポイントは、ウォレット（または指定された`payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションのリストを返します。{% .lead %}
 
 {% callout type="note" title="SDKラッパーが利用可能" %}
-ほとんどのインテグレーターは、Genesis JavaScript SDKの[`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用するべきです — トランザクションのデシリアライズ、エラー解析を処理し、署名のために[Umi アイデンティティ](/dev-tools/umi/getting-started#connecting-a-wallet)に直接プラグインします。SDKに依存できない場合のみ、このエンドポイントを直接呼び出してください。
+ほとんどのインテグレーターは、Genesis JavaScript SDKの[`claimCreatorRewards`](/ja/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用するべきです — トランザクションのデシリアライズ、エラー解析を処理し、署名のために[Umi アイデンティティ](/ja/dev-tools/umi/getting-started#connecting-a-wallet)に直接プラグインします。SDKに依存できない場合のみ、このエンドポイントを直接呼び出してください。
 {% /callout %}
 
 ## Summary
@@ -37,7 +37,7 @@ programmingLanguage:
 - **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。バケットごとに1つのトランザクションが返されます
 - **署名** — レスポンスはウォレット（または任意の `payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションです
 - **エラー** — 蓄積がない場合はHTTP `400` `"No rewards available to claim"` を返します。呼び出し元は空の配列ではなくエラーで分岐する必要があります
-- **SDK ラッパー** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) はデシリアライズ、型付きエラー、Umi 署名を処理します
+- **SDK ラッパー** — [`claimCreatorRewards`](/ja/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) はデシリアライズ、型付きエラー、Umi 署名を処理します
 
 ## エンドポイント
 
@@ -105,20 +105,20 @@ APIは請求されるバケットごとに1つのトランザクションを返�
 | `✖ Invalid wallet address` | `400` | `wallet`が有効なbase58 Solana公開鍵ではありません。 |
 
 {% callout type="warning" title="報酬なしは空配列ではなく400" %}
-ウォレットに請求するものがないとき、エンドポイントはHTTP `400`とメッセージ`No rewards available to claim`を返します — `transactions: []`を含む`200`は返**されません**。呼び出し元はエラーをキャッチする（または`response.status`と`body.error.message`を確認する）必要があり、これを失敗ではなく「やることなし」のケースとして処理する必要があります。SDKはこれを型付きの`GenesisApiError`として表面化します。[エラー処理](/smart-contracts/genesis/creator-fees#報酬なしのケースの処理)を参照してください。
+ウォレットに請求するものがないとき、エンドポイントはHTTP `400`とメッセージ`No rewards available to claim`を返します — `transactions: []`を含む`200`は返**されません**。呼び出し元はエラーをキャッチする（または`response.status`と`body.error.message`を確認する）必要があり、これを失敗ではなく「やることなし」のケースとして処理する必要があります。SDKはこれを型付きの`GenesisApiError`として表面化します。[エラー処理](/ja/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)を参照してください。
 {% /callout %}
 
 ## 注意事項
 
 - エンドポイントはバケットレベルで冪等です — 成功した請求の直後に再度呼び出すと、新しい手数料が蓄積されるまで`No rewards available to claim`が返されます。
 - 返されたトランザクションは`data.blockhash`のブロックハッシュを使用します。確認に~60〜90秒以上かかると、ブロックハッシュは期限切れになり、新しい一連のトランザクションを取得するために呼び出しを繰り返す必要があります。
-- クリエイター報酬はすべてのスワップ（ボンディングカーブ）とLP取引活動（Raydium CPMM）から蓄積されます — このエンドポイントは両方を集約します。基礎となる蓄積メカニクスとバケットごとのフェッチヘルパーについては、[Genesis ボンディングカーブのクリエイター手数料](/smart-contracts/genesis/creator-fees)を参照してください。
+- クリエイター報酬はすべてのスワップ（ボンディングカーブ）とLP取引活動（Raydium CPMM）から蓄積されます — このエンドポイントは両方を集約します。基礎となる蓄積メカニクスとバケットごとのフェッチヘルパーについては、[Genesis ボンディングカーブのクリエイター手数料](/ja/smart-contracts/genesis/creator-fees)を参照してください。
 - クリエイター手数料ウォレットはバケット作成時に`creatorFeeWallet`を介して設定され、カーブがライブになった後は変更できません。
 
 ## 推奨：SDKを使用
 
-このエンドポイントを直接呼び出す代わりに、`@metaplex-foundation/genesis`の[`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用してください：
+このエンドポイントを直接呼び出す代わりに、`@metaplex-foundation/genesis`の[`claimCreatorRewards`](/ja/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)を使用してください：
 
 {% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
 
-完全なSDK表面については[API クライアント](/smart-contracts/genesis/sdk/api-client)ページ、エンドツーエンドの請求ガイドについては[クリエイター手数料](/smart-contracts/genesis/creator-fees)を参照してください。
+完全なSDK表面については[API クライアント](/ja/smart-contracts/genesis/sdk/api-client)ページ、エンドツーエンドの請求ガイドについては[クリエイター手数料](/ja/smart-contracts/genesis/creator-fees)を参照してください。

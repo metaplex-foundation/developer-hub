@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | グラデュエーション後 — LP手数料のハーベスト | Genesisアカウント、RaydiumプールPDA、RaydiumバケットPDA | LP手数料がRaydiumプールからGenesisバケットに移動 |
 | `claimRaydiumCreatorFeeV2` | グラデュエーション後 — バケット残高の請求 | Genesisアカウント、RaydiumバケットPDA、ベース/クォートミント、クリエイター手数料ウォレット | バケット残高がクリエイターウォレットに転送 |
 
-**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pdaルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [API経由で請求](#metaplex-api経由で請求推奨) · [報酬なしのケース](#報酬なしのケースの処理) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#ステップ1--raydium-cpmmプールからの手数料収集) · [グラデュエーション後の請求](#ステップ2--クリエイターウォレットへの手数料請求)
+**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pdaルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [API経由で請求](#metaplex-api経由で請求推奨) · [報酬なしのケース](#handling-the-no-rewards-case) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#ステップ1--raydium-cpmmプールからの手数料収集) · [グラデュエーション後の請求](#ステップ2--クリエイターウォレットへの手数料請求)
 
 1. `createAndRegisterLaunch` を呼び出すときに `launch` オブジェクトに `creatorFeeWallet` を設定する
 2. ローンチ後、`bucket.creatorFeeAccrued` を監視して蓄積手数料を追跡する
@@ -211,7 +211,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 
 SDKは、デシリアライズされたUmi `Transaction` と、それらが構築されたブロックハッシュを返します。常に返されたブロックハッシュに対して各トランザクションを確認してください — 新たに取得したものに置き換えないでください。確認競合が発生します。完全なHTTPスキーマは[Claim Creator Rewards (API)](/ja/api/claim-creator-rewards)を参照してください。
 
-### 報酬なしのケースの処理
+### 報酬なしのケースの処理 {% #handling-the-no-rewards-case %}
 
 ウォレットに請求するものがない場合、エンドポイントはHTTP `400` と `{ "error": { "message": "No rewards available to claim" } }` を返します — 空の `transactions` 配列を含む成功レスポンスは返**されません**。SDKはこれを `GenesisApiError` として表面化するため、呼び出し元はエラーをキャッチして `err.message`（または `err.statusCode === 400`）で分岐する必要があります。エラーをそのまま伝播させてはいけません。
 
@@ -461,7 +461,7 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### 請求できる報酬がない場合はどうなりますか？
 
-`claimCreatorRewards` エンドポイントはHTTP `400` と `{"error":{"message":"No rewards available to claim"}}` を返します。SDKはこれを `GenesisApiError` として表面化します。これを例外的な結果ではなく — `err.message`（または `err.statusCode === 400`）をチェックしてエラーを伝播させずに分岐します。[報酬なしのケースの処理](#報酬なしのケースの処理)を参照してください。
+`claimCreatorRewards` エンドポイントはHTTP `400` と `{"error":{"message":"No rewards available to claim"}}` を返します。SDKはこれを `GenesisApiError` として表面化します。これを例外的な結果ではなく — `err.message`（または `err.statusCode === 400`）をチェックしてエラーを伝播させずに分岐します。[報酬なしのケースの処理](#handling-the-no-rewards-case)を参照してください。
 
 ### オプションの `payer` フィールドは何のためですか？
 

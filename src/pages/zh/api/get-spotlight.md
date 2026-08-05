@@ -1,6 +1,6 @@
 ---
 title: 获取聚焦发行
-metaTitle: Genesis - 获取聚焦发行 | REST API | Metaplex
+metaTitle: Metaplex API - 获取聚焦发行 | REST API | Metaplex
 description: "获取 Genesis 精选聚焦发行。返回平台策划的精选发行。"
 method: GET
 created: '01-15-2025'

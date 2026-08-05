@@ -1,6 +1,6 @@
 ---
 title: ローンチ作成
-metaTitle: Genesis - ローンチ作成 | REST API | Metaplex
+metaTitle: Metaplex API - ローンチ作成 | REST API | Metaplex
 description: 新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。署名・送信可能な未署名トランザクションを返します。
 method: POST
 created: '02-19-2026'
@@ -22,7 +22,7 @@ programmingLanguage:
 新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。[ローンチ登録](/ja/api/register)を呼び出す前に、署名して送信する必要がある未署名トランザクションを返します。 {% .lead %}
 
 {% callout type="warning" title="SDK の使用を推奨" %}
-ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。
+ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/ja/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。
 {% /callout %}
 
 {% callout type="note" %}
@@ -73,7 +73,7 @@ POST /v1/launches/create
 - **`presaleV2`** — 固定価格プレセール
 
 {% callout type="note" %}
-SDK の `buildCreateLaunchPayload` 関数は、簡略化された `CreateLaunchInput` をこの完全なペイロード形式に変換します。詳細は [API クライアント](/smart-contracts/genesis/sdk/api-client)のドキュメントを参照してください。
+SDK の `buildCreateLaunchPayload` 関数は、簡略化された `CreateLaunchInput` をこの完全なペイロード形式に変換します。詳細は [API クライアント](/ja/smart-contracts/genesis/sdk/api-client)のドキュメントを参照してください。
 {% /callout %}
 
 ## リクエスト例 — Launch Pool タイプ
@@ -150,8 +150,8 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
 
 ## 推奨：SDK の使用
 
-このエンドポイントを直接呼び出す代わりに、[`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) を使用することを推奨します。この関数はトランザクションの作成、署名、送信、登録のフロー全体を1回の呼び出しで処理します：
+このエンドポイントを直接呼び出す代わりに、[`createAndRegisterLaunch`](/ja/smart-contracts/genesis/sdk/api-client) を使用することを推奨します。この関数はトランザクションの作成、署名、送信、登録のフロー全体を1回の呼び出しで処理します：
 
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
-SDK の全ドキュメント（3つの統合モードを含む）については、[API クライアント](/smart-contracts/genesis/sdk/api-client)を参照してください。
+SDK の全ドキュメント（3つの統合モードを含む）については、[API クライアント](/ja/smart-contracts/genesis/sdk/api-client)を参照してください。

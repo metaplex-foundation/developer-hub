@@ -95,5 +95,5 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 ## Notes
 
 - 送金先は Core アセットアドレスではなく、エージェントの**ウォレット PDA** です — API が自動的に解決します。
-- 資金を引き出すには、エージェントのオーナーが [Withdraw](/ja/api/withdraw-agent) を使用します。
-- エージェントウォレットの背後にある概念については、[エージェントファイナンス](/agents/agent-finance)をご参照ください。
+- 資金を引き出すには、エージェントのオーナーが [エージェントからの出金](/ja/api/withdraw-agent) を使用します。
+- エージェントウォレットの背後にある概念については、[エージェントファイナンス](/ja/agents/agent-finance)をご参照ください。

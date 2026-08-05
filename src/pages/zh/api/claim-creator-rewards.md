@@ -1,6 +1,6 @@
 ---
 title: 认领创作者奖励
-metaTitle: Genesis - 认领创作者奖励 | REST API | Metaplex
+metaTitle: Metaplex API - 认领创作者奖励 | REST API | Metaplex
 description: 通过单次 API 调用，跨钱包的所有 Genesis 联合曲线和 Raydium bucket 认领累积的创作者奖励。返回准备好签名的 Solana 交易。
 method: POST
 created: '04-23-2026'
@@ -27,7 +27,7 @@ programmingLanguage:
 通过单次调用，跨钱包有资格获得的每个 Genesis 联合曲线和 Raydium CPMM bucket 认领累积的创作者奖励。该端点返回钱包（或指定的 `payer`）必须签名并提交的 base64 编码 Solana 交易列表。{% .lead %}
 
 {% callout type="note" title="可用 SDK 包装器" %}
-大多数集成方应使用 Genesis JavaScript SDK 中的 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) — 它处理交易反序列化、错误解析，并直接接入 [Umi 身份](/dev-tools/umi/getting-started#connecting-a-wallet)进行签名。仅在无法依赖 SDK 时才直接调用此端点。
+大多数集成方应使用 Genesis JavaScript SDK 中的 [`claimCreatorRewards`](/zh/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) — 它处理交易反序列化、错误解析，并直接接入 [Umi 身份](/zh/dev-tools/umi/getting-started#connecting-a-wallet)进行签名。仅在无法依赖 SDK 时才直接调用此端点。
 {% /callout %}
 
 ## Summary
@@ -37,7 +37,7 @@ programmingLanguage:
 - **聚合** — 一次请求即可跨所有符合条件的 bucket 认领；每个 bucket 返回一个交易
 - **签名** — 响应是钱包（或可选的 `payer`）必须签名并提交的 base64 编码的 Solana 交易
 - **错误** — 当没有累积时返回 HTTP `400` `"No rewards available to claim"`；调用方必须基于错误分支，而不是空数组
-- **SDK 包装器** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) 处理反序列化、类型化错误和 Umi 签名
+- **SDK 包装器** — [`claimCreatorRewards`](/zh/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) 处理反序列化、类型化错误和 Umi 签名
 
 ## 端点
 
@@ -105,20 +105,20 @@ API 为每个被认领的 bucket 返回一个交易——通常是两个（联�
 | `✖ Invalid wallet address` | `400` | `wallet` 不是有效的 base58 Solana 公钥。 |
 
 {% callout type="warning" title="无奖励是 400，而非空数组" %}
-当钱包没有可认领内容时，端点返回 HTTP `400` 和消息 `No rewards available to claim`——它**不会**返回带 `transactions: []` 的 `200`。调用方必须捕获错误（或检查 `response.status` 和 `body.error.message`），并将此情况视为"无事可做"，而非失败。SDK 将其呈现为类型化的 `GenesisApiError`；请参阅[错误处理](/smart-contracts/genesis/creator-fees#处理无奖励情况)。
+当钱包没有可认领内容时，端点返回 HTTP `400` 和消息 `No rewards available to claim`——它**不会**返回带 `transactions: []` 的 `200`。调用方必须捕获错误（或检查 `response.status` 和 `body.error.message`），并将此情况视为"无事可做"，而非失败。SDK 将其呈现为类型化的 `GenesisApiError`；请参阅[错误处理](/zh/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)。
 {% /callout %}
 
 ## 注意事项
 
 - 端点在 bucket 级别是幂等的——成功认领后立即再次调用，将返回 `No rewards available to claim`，直到累积新费用为止。
 - 返回的交易使用 `data.blockhash` 中的区块哈希。如果确认时间超过 ~60–90 秒，区块哈希将过期，必须重新调用以获取一组新的交易。
-- 创作者奖励在每次兑换（联合曲线）和 LP 交易活动（Raydium CPMM）中累积——此端点聚合两者。有关基础累积机制和按 bucket 的获取助手，请参阅 [Genesis 联合曲线创作者费](/smart-contracts/genesis/creator-fees)。
+- 创作者奖励在每次兑换（联合曲线）和 LP 交易活动（Raydium CPMM）中累积——此端点聚合两者。有关基础累积机制和按 bucket 的获取助手，请参阅 [Genesis 联合曲线创作者费](/zh/smart-contracts/genesis/creator-fees)。
 - 创作者费钱包在 bucket 创建时通过 `creatorFeeWallet` 设置，曲线上线后无法更改。
 
 ## 推荐：使用 SDK
 
-不要直接调用此端点，而是使用 `@metaplex-foundation/genesis` 中的 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)：
+不要直接调用此端点，而是使用 `@metaplex-foundation/genesis` 中的 [`claimCreatorRewards`](/zh/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)：
 
 {% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
 
-完整的 SDK 表面请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client)页面，端到端认领指南请参阅[创作者费](/smart-contracts/genesis/creator-fees)。
+完整的 SDK 表面请参阅 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client)页面，端到端认领指南请参阅[创作者费](/zh/smart-contracts/genesis/creator-fees)。

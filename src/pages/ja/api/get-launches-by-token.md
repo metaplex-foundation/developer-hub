@@ -1,6 +1,6 @@
 ---
 title: トークン別ローンチの取得
-metaTitle: Genesis - トークン別ローンチの取得 | REST API | Metaplex
+metaTitle: Metaplex API - トークン別ローンチの取得 | REST API | Metaplex
 description: トークンミントアドレスに関連するすべてのローンチを取得します。ローンチ情報、トークンメタデータ、ソーシャルリンクを返します。
 method: GET
 created: '01-15-2025'

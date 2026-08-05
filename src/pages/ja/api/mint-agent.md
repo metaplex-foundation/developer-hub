@@ -23,7 +23,7 @@ programmingLanguage:
 
 ## Summary
 
-これは[エージェントのミント](/agents/mint-agent)ガイドの背後にあるエンドポイントです。
+これは[エージェントのミント](/ja/agents/mint-agent)ガイドの背後にあるエンドポイントです。
 
 - Core アセットの作成と `registerIdentity` の呼び出しを単一のトランザクションで実行
 - アセットのキーペアはサーバー側で生成・事前署名されるため、レスポンスには最終的な `assetAddress` が含まれます
@@ -123,5 +123,5 @@ await umi.rpc.sendTransaction(signed);
 
 - Metaplex レジストリエントリ（`solana:101:metaplex`）は `agentMetadata.registrations` の先頭に自動的に追加されます。
 - EIP-8004 のコンシューマーが [AgentCard エンドポイント](/ja/api/get-agent-card)を発見できるよう、ホストされた A2A サービスエントリが `services[]` に挿入されます。既に自分で作成済みの場合は何も行われません。
-- エージェントレコードはこのエンドポイントの呼び出し時に保存されますが、署名済みトランザクションが確認されインデックスされるまで [List Agents](/ja/api/list-agents) には表示されません。
-- SDK を使ったガイド付きのウォークスルーは[エージェントのミント](/agents/mint-agent)をご参照ください。
+- エージェントレコードはこのエンドポイントの呼び出し時に保存されますが、署名済みトランザクションが確認されインデックスされるまで [エージェント一覧](/ja/api/list-agents) には表示されません。
+- SDK を使ったガイド付きのウォークスルーは[エージェントのミント](/ja/agents/mint-agent)をご参照ください。

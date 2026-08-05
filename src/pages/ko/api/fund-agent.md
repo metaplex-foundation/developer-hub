@@ -95,5 +95,5 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 ## Notes
 
 - 전송 대상은 Core 애셋 주소가 아닌 에이전트의 **지갑 PDA**입니다. API가 자동으로 확인해 줍니다.
-- 자금을 다시 빼내려면 에이전트 소유자가 [Withdraw](/ko/api/withdraw-agent)를 사용합니다.
-- 에이전트 지갑의 개념에 대해서는 [에이전트 파이낸스](/agents/agent-finance)를 참조하세요.
+- 자금을 다시 빼내려면 에이전트 소유자가 [에이전트 출금](/ko/api/withdraw-agent)를 사용합니다.
+- 에이전트 지갑의 개념에 대해서는 [에이전트 파이낸스](/ko/agents/agent-finance)를 참조하세요.

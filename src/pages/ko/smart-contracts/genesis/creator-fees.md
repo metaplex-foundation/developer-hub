@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 졸업 후 — LP 수수료 수확 | Genesis 계정, Raydium 풀 PDA, Raydium 버킷 PDA | LP 수수료가 Raydium 풀에서 Genesis 버킷으로 이동 |
 | `claimRaydiumCreatorFeeV2` | 졸업 후 — 버킷 잔액 청구 | Genesis 계정, Raydium 버킷 PDA, 베이스/쿼트 민트, 창작자 수수료 지갑 | 버킷 잔액이 창작자 지갑으로 전송 |
 
-**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#에이전트-런칭--자동-pda-라우팅) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#보상-없음-사례-처리) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#단계-1--raydium-cpmm-풀에서-수수료-수집) · [졸업 후 청구](#단계-2--창작자-지갑으로-수수료-청구)
+**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#에이전트-런칭--자동-pda-라우팅) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#handling-the-no-rewards-case) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#단계-1--raydium-cpmm-풀에서-수수료-수집) · [졸업 후 청구](#단계-2--창작자-지갑으로-수수료-청구)
 
 1. `createAndRegisterLaunch`를 호출할 때 `launch` 객체에서 `creatorFeeWallet`을 설정합니다
 2. 런칭 후 `bucket.creatorFeeAccrued`를 읽어 누적된 수수료를 모니터링합니다
@@ -209,9 +209,9 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 아니요 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'`. |
 | `payer` | `PublicKey \| string` | 아니요 | 반환된 트랜잭션의 수수료와 임대료를 부담하는 지갑. 기본값은 `wallet`. 창작자 수수료 지갑이 SOL을 보유하고 있지 않을 때 사용 — 예: 에이전트 PDA 또는 콜드 지갑. |
 
-SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 것으로 대체하지 마세요. 그렇지 않으면 확인이 경합합니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/ko/api/claim-creator-rewards)를 참조하세요.
+SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 블록해시로 대체하지 마세요 — 트랜잭션 확인 과정에서 경쟁 상태(race condition)가 발생할 수 있습니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/ko/api/claim-creator-rewards)를 참조하세요.
 
-### 보상 없음 사례 처리
+### 보상 없음 사례 처리 {% #handling-the-no-rewards-case %}
 
 지갑에 청구할 것이 없을 때 엔드포인트는 HTTP `400`과 `{ "error": { "message": "No rewards available to claim" } }`를 반환합니다 — 빈 `transactions` 배열로 성공 응답을 반환하지 **않습니다**. SDK는 이를 `GenesisApiError`로 표면화하므로 호출자는 오류를 잡고 `err.message`(또는 `err.statusCode === 400`)로 분기해야 합니다. 오류를 그대로 전파시키지 마세요.
 
@@ -461,7 +461,7 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### 청구할 보상이 없는 경우 어떻게 되나요?
 
-`claimCreatorRewards` 엔드포인트는 HTTP `400`과 `{"error":{"message":"No rewards available to claim"}}`를 반환합니다. SDK는 이를 `GenesisApiError`로 표면화합니다. 이를 예외적인 결과가 아니라 — `err.message`(또는 `err.statusCode === 400`)를 확인하고 오류를 전파시키지 말고 분기하세요. [보상 없음 사례 처리](#보상-없음-사례-처리)를 참조하세요.
+`claimCreatorRewards` 엔드포인트는 HTTP `400`과 `{"error":{"message":"No rewards available to claim"}}`를 반환합니다. SDK는 이를 `GenesisApiError`로 표면화합니다. 이를 예외적인 결과가 아니라 — `err.message`(또는 `err.statusCode === 400`)를 확인하고 오류를 전파시키지 말고 분기하세요. [보상 없음 사례 처리](#handling-the-no-rewards-case)를 참조하세요.
 
 ### 선택적인 `payer` 필드는 무엇을 위한 것인가요?
 

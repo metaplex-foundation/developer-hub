@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/creator-rewards/claim`](/ja/api/claim-creator-rewards) | クリエイター報酬請求トランザクションを構築 |
 
 {% callout type="note" %}
-`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。リアルタイムのオンチェーンローンチ状態は、SDK チェーンメソッドの [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) と [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) で直接読み取れます。
+`POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/ja/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。リアルタイムのオンチェーンローンチ状態は、SDK チェーンメソッドの [`fetchBucketState`](/ja/smart-contracts/genesis/integration-apis/fetch-bucket-state) と [`fetchDepositState`](/ja/smart-contracts/genesis/integration-apis/fetch-deposit-state) で直接読み取れます。
 {% /callout %}
 
 ## エージェントエンドポイント
@@ -94,7 +94,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/agents/{address}/fund`](/ja/api/fund-agent) | エージェントウォレットへの SOL 送金を構築 |
 | `POST` | [`/agents/{address}/withdraw`](/ja/api/withdraw-agent) | エージェントウォレットからの引き出しを構築（オーナーのみ） |
 
-ガイド付きのウォークスルーでエージェントをミントするには、[エージェントのミント](/agents/mint-agent)をご参照ください。
+ガイド付きのウォークスルーでエージェントをミントするには、[エージェントのミント](/ja/agents/mint-agent)をご参照ください。
 
 ## トランザクション構築エンドポイント
 
@@ -154,7 +154,7 @@ API の完全なコントラクトは OpenAPI 3.1 ドキュメントとして公
 - API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
 - すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
 - デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
-- `POST` エンドポイントについては、`/launches/create` と `/launches/register` の両方をラップする [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)の使用を推奨します。
+- `POST` エンドポイントについては、`/launches/create` と `/launches/register` の両方をラップする [SDK API クライアント](/ja/smart-contracts/genesis/sdk/api-client)の使用を推奨します。
 
 ## 共有型 {% #shared-types %}
 

@@ -1,6 +1,6 @@
 ---
 title: 按代币获取发行
-metaTitle: Genesis - 按代币获取发行 | REST API | Metaplex
+metaTitle: Metaplex API - 按代币获取发行 | REST API | Metaplex
 description: 获取与代币铸造地址关联的所有发行。返回发行信息、代币元数据和社交链接。
 method: GET
 created: '01-15-2025'

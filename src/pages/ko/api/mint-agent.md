@@ -23,7 +23,7 @@ programmingLanguage:
 
 ## Summary
 
-이 엔드포인트는 [에이전트 민팅하기](/agents/mint-agent) 가이드의 기반이 되는 엔드포인트입니다.
+이 엔드포인트는 [에이전트 민팅하기](/ko/agents/mint-agent) 가이드의 기반이 되는 엔드포인트입니다.
 
 - 단일 트랜잭션에서 Core 애셋을 생성하고 `registerIdentity`를 호출
 - 애셋 키페어는 서버 측에서 생성되어 사전 서명되므로 응답에 최종 `assetAddress`가 포함됨
@@ -123,5 +123,5 @@ await umi.rpc.sendTransaction(signed);
 
 - Metaplex 레지스트리 항목(`solana:101:metaplex`)이 `agentMetadata.registrations`의 맨 앞에 자동으로 추가됩니다.
 - EIP-8004 소비자가 [AgentCard 엔드포인트](/ko/api/get-agent-card)를 발견할 수 있도록 호스팅된 A2A 서비스 항목이 `services[]`에 삽입됩니다. 이미 직접 작성한 경우에는 아무 작업도 수행하지 않습니다.
-- 에이전트 레코드는 이 엔드포인트를 호출할 때 저장되지만, 서명된 트랜잭션이 확인되고 인덱싱된 후에야 [List Agents](/ko/api/list-agents)에 나타납니다.
-- SDK를 사용한 단계별 안내는 [에이전트 민팅하기](/agents/mint-agent)를 참조하세요.
+- 에이전트 레코드는 이 엔드포인트를 호출할 때 저장되지만, 서명된 트랜잭션이 확인되고 인덱싱된 후에야 [에이전트 목록](/ko/api/list-agents)에 나타납니다.
+- SDK를 사용한 단계별 안내는 [에이전트 민팅하기](/ko/agents/mint-agent)를 참조하세요.

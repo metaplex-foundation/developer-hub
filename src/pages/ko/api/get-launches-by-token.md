@@ -1,6 +1,6 @@
 ---
 title: 토큰별 런칭 조회
-metaTitle: Genesis - 토큰별 런칭 조회 | REST API | Metaplex
+metaTitle: Metaplex API - 토큰별 런칭 조회 | REST API | Metaplex
 description: 토큰 민트 주소와 관련된 모든 런칭을 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'

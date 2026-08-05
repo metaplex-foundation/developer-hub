@@ -1,6 +1,6 @@
 ---
 title: 获取发行
-metaTitle: Genesis - 获取发行 | REST API | Metaplex
+metaTitle: Metaplex API - 获取发行 | REST API | Metaplex
 description: 通过Genesis地址获取发行数据。返回发行信息、代币元数据和社交链接。
 method: GET
 created: '01-15-2025'

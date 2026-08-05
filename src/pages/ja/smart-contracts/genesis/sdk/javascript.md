@@ -326,7 +326,7 @@ if (account2.data.launchType === LaunchType.LaunchPoolV1) {
 
 **Genesisアカウントのフィールド:** `authority`, `baseMint`, `quoteMint`, `totalSupplyBaseToken`, `totalAllocatedSupplyBaseToken`, `totalProceedsQuoteToken`, `fundingMode`, `launchType`, `bucketCount`, `finalized`
 
-### GPAビルダー — ローンチタイプで照会
+### GPAビルダー — ローンチタイプで照会 {% #gpa-builder-query-by-launch-type %}
 
 `getGenesisAccountV2GpaBuilder()`を使用して、オンチェーンフィールドでフィルタリングされた全Genesisアカウントを照会します。SolanaのバイトレベルフィルターによるgetProgramAccounts RPCメソッドを使用して効率的な検索を行います。
 
@@ -476,7 +476,7 @@ UmiはMetaplexのSolana向けJavaScriptフレームワークです。トラン�
 `fetch`はアカウントが存在しない場合にエラーをスローします。`safeFetch`は代わりに`null`を返すため、アカウントの存在確認に便利です。
 
 ### トークンのローンチタイプを取得するにはどうすればいいですか？
-トークンのミントアドレスを使用して`fetchGenesisAccountV2FromSeeds()`で`GenesisAccountV2`アカウントを取得します。`launchType`フィールドは`0`（未初期化）または`3`（LaunchPoolV1）を返します。特定のタイプの全ローンチを照会するには、[GPAビルダー](#gpaビルダー--ローンチタイプで照会)を使用します。または、[Metaplex API](/ja/api)がREST応答で文字列としてローンチタイプを返します。
+トークンのミントアドレスを使用して`fetchGenesisAccountV2FromSeeds()`で`GenesisAccountV2`アカウントを取得します。`launchType`フィールドは`0`（未初期化）または`3`（LaunchPoolV1）を返します。特定のタイプの全ローンチを照会するには、[GPAビルダー](#gpa-builder-query-by-launch-type)を使用します。または、[Metaplex API](/ja/api)がREST応答で文字列としてローンチタイプを返します。
 
 ### トランザクションエラーはどのように処理しますか？
 `sendAndConfirm`の呼び出しを try/catch ブロックで囲みます。エラーメッセージで具体的な失敗理由を確認してください。

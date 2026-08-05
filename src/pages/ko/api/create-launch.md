@@ -1,6 +1,6 @@
 ---
 title: 런칭 생성
-metaTitle: Genesis - 런칭 생성 | REST API | Metaplex
+metaTitle: Metaplex API - 런칭 생성 | REST API | Metaplex
 description: 새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. 서명 및 전송 준비가 된 미서명 트랜잭션을 반환합니다.
 method: POST
 created: '02-19-2026'
@@ -22,7 +22,7 @@ programmingLanguage:
 새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. [런칭 등록](/ko/api/register)을 호출하기 전에 서명하여 전송해야 하는 미서명 트랜잭션을 반환합니다. {% .lead %}
 
 {% callout type="warning" title="SDK 사용을 권장합니다" %}
-대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.
+대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/ko/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.
 {% /callout %}
 
 {% callout type="note" %}
@@ -73,7 +73,7 @@ POST /v1/launches/create
 - **`presaleV2`** — 고정가 사전 판매
 
 {% callout type="note" %}
-SDK의 `buildCreateLaunchPayload` 함수는 간소화된 `CreateLaunchInput`을 이 전체 페이로드 형식으로 변환하는 것을 처리합니다. [API 클라이언트](/smart-contracts/genesis/sdk/api-client) 문서를 참조하세요.
+SDK의 `buildCreateLaunchPayload` 함수는 간소화된 `CreateLaunchInput`을 이 전체 페이로드 형식으로 변환하는 것을 처리합니다. [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client) 문서를 참조하세요.
 {% /callout %}
 
 ## 요청 예시 — Launch Pool Type
@@ -150,8 +150,8 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
 
 ## 권장: SDK 사용
 
-이 엔드포인트를 직접 호출하는 대신, 트랜잭션 생성, 서명, 전송, 등록의 전체 흐름을 한 번의 호출로 처리하는 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용하세요:
+이 엔드포인트를 직접 호출하는 대신, 트랜잭션 생성, 서명, 전송, 등록의 전체 흐름을 한 번의 호출로 처리하는 [`createAndRegisterLaunch`](/ko/smart-contracts/genesis/sdk/api-client)를 사용하세요:
 
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
-전체 SDK 문서와 세 가지 통합 모드에 대한 자세한 내용은 [API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 참조하세요.
+전체 SDK 문서와 세 가지 통합 모드에 대한 자세한 내용은 [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)를 참조하세요.

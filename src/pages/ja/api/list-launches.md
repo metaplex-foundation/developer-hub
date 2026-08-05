@@ -1,6 +1,6 @@
 ---
 title: ローンチ一覧
-metaTitle: Genesis - ローンチ一覧 | REST API | Metaplex
+metaTitle: Metaplex API - ローンチ一覧 | REST API | Metaplex
 description: アクティブおよび今後の Genesis ローンチリスティングを取得します。メタデータ付きのリストを返します。
 method: GET
 created: '01-15-2025'

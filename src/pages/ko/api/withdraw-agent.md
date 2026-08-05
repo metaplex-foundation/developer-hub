@@ -95,4 +95,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 빌드 시점의 소유권 확인은 편의를 위한 것입니다. `execute` 명령어가 어떤 경우에도 온체인에서 소유권을 강제하므로, 위조된 요청으로는 자금을 이동할 수 없습니다.
 - 출금 대상은 항상 `sender`(소유자)입니다. 자금을 제3자에게 보낼 수 없습니다.
-- 자금을 추가하려면 [Fund Agent](/ko/api/fund-agent)를 참조하세요.
+- 자금을 추가하려면 [에이전트 자금 지원](/ko/api/fund-agent)를 참조하세요.

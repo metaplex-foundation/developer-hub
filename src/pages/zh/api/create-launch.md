@@ -1,6 +1,6 @@
 ---
 title: 创建发行
-metaTitle: Genesis - 创建发行 | REST API | Metaplex
+metaTitle: Metaplex API - 创建发行 | REST API | Metaplex
 description: 为新的 Genesis 代币发行构建链上交易。返回可供签名和发送的未签名交易。
 method: POST
 created: '02-19-2026'
@@ -22,7 +22,7 @@ programmingLanguage:
 为新的 Genesis 代币发行构建链上交易。返回未签名交易，需在调用[注册发行](/zh/api/register)之前完成签名和发送。{% .lead %}
 
 {% callout type="warning" title="建议使用 SDK" %}
-大多数集成方应使用 SDK 中的 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)，它在一次调用中处理创建交易、签名、发送和注册发行的全部流程。只有在需要不依赖 SDK 直接进行 HTTP 访问时才需要使用此端点。
+大多数集成方应使用 SDK 中的 [`createAndRegisterLaunch`](/zh/smart-contracts/genesis/sdk/api-client)，它在一次调用中处理创建交易、签名、发送和注册发行的全部流程。只有在需要不依赖 SDK 直接进行 HTTP 访问时才需要使用此端点。
 {% /callout %}
 
 {% callout type="note" %}
@@ -73,7 +73,7 @@ POST /v1/launches/create
 - **`presaleV2`** — 固定价格预售
 
 {% callout type="note" %}
-SDK 的 `buildCreateLaunchPayload` 函数负责将简化的 `CreateLaunchInput` 转换为此完整载荷格式。请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client)文档。
+SDK 的 `buildCreateLaunchPayload` 函数负责将简化的 `CreateLaunchInput` 转换为此完整载荷格式。请参阅 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client)文档。
 {% /callout %}
 
 ## 请求示例 — Launch Pool 类型
@@ -150,8 +150,8 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
 
 ## 推荐：使用 SDK
 
-我们建议使用 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) 而非直接调用此端点，该函数在一次调用中处理整个流程——创建交易、签名、发送和注册：
+我们建议使用 [`createAndRegisterLaunch`](/zh/smart-contracts/genesis/sdk/api-client) 而非直接调用此端点，该函数在一次调用中处理整个流程——创建交易、签名、发送和注册：
 
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
-请参阅 [API 客户端](/smart-contracts/genesis/sdk/api-client)获取完整的 SDK 文档，包括全部三种集成模式。
+请参阅 [API 客户端](/zh/smart-contracts/genesis/sdk/api-client)获取完整的 SDK 文档，包括全部三种集成模式。

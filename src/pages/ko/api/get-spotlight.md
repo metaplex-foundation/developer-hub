@@ -1,6 +1,6 @@
 ---
 title: 스포트라이트 조회
-metaTitle: Genesis - 스포트라이트 런칭 조회 | REST API | Metaplex
+metaTitle: Metaplex API - 스포트라이트 런칭 조회 | REST API | Metaplex
 description: "Genesis의 주요 스포트라이트 런칭을 조회합니다. 플랫폼에서 큐레이팅된 런칭을 반환합니다."
 method: GET
 created: '01-15-2025'

@@ -1,6 +1,6 @@
 ---
 title: ローンチの取得
-metaTitle: Genesis - ローンチの取得 | REST API | Metaplex
+metaTitle: Metaplex API - ローンチの取得 | REST API | Metaplex
 description: Genesisアドレスによるローンチデータの取得。ローンチ情報、トークンメタデータ、ソーシャルリンクを返します。
 method: GET
 created: '01-15-2025'

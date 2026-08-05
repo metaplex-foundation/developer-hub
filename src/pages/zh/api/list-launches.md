@@ -1,6 +1,6 @@
 ---
 title: 发行列表
-metaTitle: Genesis - 发行列表 | REST API | Metaplex
+metaTitle: Metaplex API - 发行列表 | REST API | Metaplex
 description: "获取活跃和即将到来的 Genesis 发行列表。返回带有元数据的列表。"
 method: GET
 created: '01-15-2025'

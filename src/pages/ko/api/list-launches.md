@@ -1,6 +1,6 @@
 ---
 title: 런치 목록
-metaTitle: Genesis - 런치 목록 | REST API | Metaplex
+metaTitle: Metaplex API - 런치 목록 | REST API | Metaplex
 description: "활성 및 예정된 Genesis 런칭 리스팅을 조회합니다. 메타데이터가 포함된 목록을 반환합니다."
 method: GET
 created: '01-15-2025'

@@ -95,4 +95,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 構築時の所有権チェックは利便性のためのものです。`execute` インストラクションはいずれにせよオンチェーンで所有権を強制するため、偽造されたリクエストで資金を移動させることはできません。
 - 引き出し先は常に `sender`（オーナー）です — 資金を第三者にリダイレクトすることはできません。
-- 資金を追加するには [Fund Agent](/ja/api/fund-agent) をご参照ください。
+- 資金を追加するには [エージェントへの資金供給](/ja/api/fund-agent) をご参照ください。

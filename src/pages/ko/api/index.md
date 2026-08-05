@@ -80,7 +80,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/creator-rewards/claim`](/ko/api/claim-creator-rewards) | 크리에이터 보상 청구 트랜잭션 빌드 |
 
 {% callout type="note" %}
-`POST` 엔드포인트(`/launches/create` 및 `/launches/register`)는 새 토큰 런칭을 생성하기 위해 함께 사용됩니다. 대부분의 사용 사례에서는 두 엔드포인트를 래핑하는 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)가 더 간단한 인터페이스를 제공합니다. 실시간 온체인 런칭 상태는 SDK 체인 메서드 [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) 및 [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state)로 직접 읽을 수 있습니다.
+`POST` 엔드포인트(`/launches/create` 및 `/launches/register`)는 새 토큰 런칭을 생성하기 위해 함께 사용됩니다. 대부분의 사용 사례에서는 두 엔드포인트를 래핑하는 [SDK API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)가 더 간단한 인터페이스를 제공합니다. 실시간 온체인 런칭 상태는 SDK 체인 메서드 [`fetchBucketState`](/ko/smart-contracts/genesis/integration-apis/fetch-bucket-state) 및 [`fetchDepositState`](/ko/smart-contracts/genesis/integration-apis/fetch-deposit-state)로 직접 읽을 수 있습니다.
 {% /callout %}
 
 ## 에이전트 엔드포인트
@@ -94,7 +94,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 | `POST` | [`/agents/{address}/fund`](/ko/api/fund-agent) | 에이전트 지갑으로의 SOL 전송 빌드 |
 | `POST` | [`/agents/{address}/withdraw`](/ko/api/withdraw-agent) | 에이전트 지갑에서 출금 빌드 (소유자 전용) |
 
-단계별 안내와 함께 에이전트를 민팅하려면 [에이전트 민팅하기](/agents/mint-agent)를 참조하세요.
+단계별 안내와 함께 에이전트를 민팅하려면 [에이전트 민팅하기](/ko/agents/mint-agent)를 참조하세요.
 
 ## 트랜잭션 빌드 엔드포인트
 
@@ -154,7 +154,7 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 - API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
 - 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다.
 - 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
-- `POST` 엔드포인트의 경우 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
+- `POST` 엔드포인트의 경우 [SDK API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
 
 ## 공유 타입 {% #shared-types %}
 

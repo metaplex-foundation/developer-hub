@@ -1,6 +1,6 @@
 ---
 title: 런칭 조회
-metaTitle: Genesis - 런칭 조회 | REST API | Metaplex
+metaTitle: Metaplex API - 런칭 조회 | REST API | Metaplex
 description: Genesis 주소로 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'

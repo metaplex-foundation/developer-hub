@@ -1,6 +1,6 @@
 ---
 title: 런칭 등록
-metaTitle: Genesis - 런칭 등록 | REST API | Metaplex
+metaTitle: Metaplex API - 런칭 등록 | REST API | Metaplex
 description: 온체인 트랜잭션이 확인된 후 Genesis 런칭을 등록합니다. 온체인 상태를 검증하고 런칭 목록을 생성합니다.
 method: POST
 created: '01-15-2025'
@@ -22,7 +22,7 @@ programmingLanguage:
 [런칭 생성](/ko/api/create-launch)의 온체인 트랜잭션이 확인된 후 Genesis 런칭을 등록합니다. 이 엔드포인트는 온체인 상태를 검증하고, 런칭 목록을 생성하며, 런칭 페이지 URL을 반환합니다. {% .lead %}
 
 {% callout type="warning" title="SDK 사용을 권장합니다" %}
-대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.
+대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/ko/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.
 {% /callout %}
 
 ## 엔드포인트
@@ -127,8 +127,8 @@ curl -X POST https://api.metaplex.com/v1/launches/register \
 
 ## 권장: SDK 사용
 
-이 엔드포인트를 직접 호출하는 대신, 트랜잭션 생성, 서명, 전송, 등록의 전체 흐름을 한 번의 호출로 처리하는 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용하세요:
+이 엔드포인트를 직접 호출하는 대신, 트랜잭션 생성, 서명, 전송, 등록의 전체 흐름을 한 번의 호출로 처리하는 [`createAndRegisterLaunch`](/ko/smart-contracts/genesis/sdk/api-client)를 사용하세요:
 
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
-전체 SDK 문서와 세 가지 통합 모드에 대한 자세한 내용은 [API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 참조하세요.
+전체 SDK 문서와 세 가지 통합 모드에 대한 자세한 내용은 [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)를 참조하세요.

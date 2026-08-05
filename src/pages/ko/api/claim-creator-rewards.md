@@ -1,6 +1,6 @@
 ---
 title: 창작자 보상 청구
-metaTitle: Genesis - 창작자 보상 청구 | REST API | Metaplex
+metaTitle: Metaplex API - 창작자 보상 청구 | REST API | Metaplex
 description: 단일 API 호출로 지갑의 모든 Genesis 본딩 커브 및 Raydium 버킷에서 누적된 창작자 보상을 청구합니다. 서명할 준비가 된 Solana 트랜잭션을 반환합니다.
 method: POST
 created: '04-23-2026'
@@ -27,7 +27,7 @@ programmingLanguage:
 지갑이 자격이 있는 모든 Genesis 본딩 커브와 Raydium CPMM 버킷의 누적된 창작자 보상을 단일 호출로 청구합니다. 엔드포인트는 지갑(또는 지정된 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션 목록을 반환합니다. {% .lead %}
 
 {% callout type="note" title="SDK 래퍼 사용 가능" %}
-대부분의 통합자는 Genesis JavaScript SDK의 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용해야 합니다 — 트랜잭션을 역직렬화하고 오류 파싱을 처리하며, 서명을 위해 [Umi 신원](/dev-tools/umi/getting-started#connecting-a-wallet)에 직접 연결됩니다. SDK에 의존할 수 없는 경우에만 이 엔드포인트를 직접 호출하세요.
+대부분의 통합자는 Genesis JavaScript SDK의 [`claimCreatorRewards`](/ko/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용해야 합니다 — 트랜잭션을 역직렬화하고 오류 파싱을 처리하며, 서명을 위해 [Umi 신원](/ko/dev-tools/umi/getting-started#connecting-a-wallet)에 직접 연결됩니다. SDK에 의존할 수 없는 경우에만 이 엔드포인트를 직접 호출하세요.
 {% /callout %}
 
 ## Summary
@@ -37,7 +37,7 @@ programmingLanguage:
 - **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 버킷당 하나의 트랜잭션이 반환됩니다
 - **서명** — 응답은 지갑(또는 선택적 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션입니다
 - **오류** — 누적된 것이 없으면 HTTP `400` `"No rewards available to claim"`를 반환합니다; 호출자는 빈 배열이 아니라 오류로 분기해야 합니다
-- **SDK 래퍼** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)는 역직렬화, 타입화된 오류, Umi 서명을 처리합니다
+- **SDK 래퍼** — [`claimCreatorRewards`](/ko/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)는 역직렬화, 타입화된 오류, Umi 서명을 처리합니다
 
 ## 엔드포인트
 
@@ -105,20 +105,20 @@ API는 청구되는 버킷마다 하나의 트랜잭션을 반환합니다 — �
 | `✖ Invalid wallet address` | `400` | `wallet`이 유효한 base58 Solana 공개 키가 아닙니다. |
 
 {% callout type="warning" title="보상 없음은 빈 배열이 아닌 400" %}
-지갑에 청구할 것이 없을 때 엔드포인트는 HTTP `400`과 `No rewards available to claim` 메시지를 반환합니다 — `transactions: []`를 포함한 `200`을 반환하지 **않습니다**. 호출자는 오류를 잡거나(또는 `response.status`와 `body.error.message`를 검사하고) 이를 실패가 아닌 "할 일 없음" 사례로 처리해야 합니다. SDK는 이를 타입화된 `GenesisApiError`로 표면화합니다; [오류 처리](/smart-contracts/genesis/creator-fees#보상-없음-사례-처리)를 참조하세요.
+지갑에 청구할 것이 없을 때 엔드포인트는 HTTP `400`과 `No rewards available to claim` 메시지를 반환합니다 — `transactions: []`를 포함한 `200`을 반환하지 **않습니다**. 호출자는 오류를 잡거나(또는 `response.status`와 `body.error.message`를 검사하고) 이를 실패가 아닌 "할 일 없음" 사례로 처리해야 합니다. SDK는 이를 타입화된 `GenesisApiError`로 표면화합니다; [오류 처리](/ko/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)를 참조하세요.
 {% /callout %}
 
 ## 참고 사항
 
 - 엔드포인트는 버킷 수준에서 멱등적입니다 — 성공적인 청구 직후에 다시 호출하면 새 수수료가 누적될 때까지 `No rewards available to claim`을 반환합니다.
 - 반환된 트랜잭션은 `data.blockhash`의 블록해시를 사용합니다. 확인이 ~60–90초 이상 걸리면 블록해시가 만료되며, 새로운 트랜잭션 세트를 얻기 위해 호출을 반복해야 합니다.
-- 창작자 보상은 매 스왑(본딩 커브)과 LP 거래 활동(Raydium CPMM)에서 누적됩니다 — 이 엔드포인트는 둘 다 집계합니다. 기본 누적 메커니즘과 버킷별 페치 헬퍼는 [Genesis 본딩 커브의 창작자 수수료](/smart-contracts/genesis/creator-fees)를 참조하세요.
+- 창작자 보상은 매 스왑(본딩 커브)과 LP 거래 활동(Raydium CPMM)에서 누적됩니다 — 이 엔드포인트는 둘 다 집계합니다. 기본 누적 메커니즘과 버킷별 페치 헬퍼는 [Genesis 본딩 커브의 창작자 수수료](/ko/smart-contracts/genesis/creator-fees)를 참조하세요.
 - 창작자 수수료 지갑은 버킷 생성 시 `creatorFeeWallet`을 통해 설정되며, 커브가 활성화된 후에는 변경할 수 없습니다.
 
 ## 권장: SDK 사용
 
-이 엔드포인트를 직접 호출하는 대신 `@metaplex-foundation/genesis`의 [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용하세요:
+이 엔드포인트를 직접 호출하는 대신 `@metaplex-foundation/genesis`의 [`claimCreatorRewards`](/ko/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)를 사용하세요:
 
 {% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
 
-전체 SDK 표면에 대해서는 [API 클라이언트](/smart-contracts/genesis/sdk/api-client) 페이지를, 엔드투엔드 청구 가이드에 대해서는 [창작자 수수료](/smart-contracts/genesis/creator-fees)를 참조하세요.
+전체 SDK 표면에 대해서는 [API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client) 페이지를, 엔드투엔드 청구 가이드에 대해서는 [창작자 수수료](/ko/smart-contracts/genesis/creator-fees)를 참조하세요.

@@ -1,6 +1,6 @@
 ---
 title: スポットライトの取得
-metaTitle: Genesis - スポットライトローンチの取得 | REST API | Metaplex
+metaTitle: Metaplex API - スポットライトローンチの取得 | REST API | Metaplex
 description: Genesis の注目スポットライトローンチを取得します。プラットフォームが厳選したローンチを返します。
 method: GET
 created: '01-15-2025'
