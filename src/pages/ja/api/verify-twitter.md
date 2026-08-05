@@ -1,6 +1,6 @@
 ---
-title: Verify Twitter
-metaTitle: Metaplex API - Verify Twitter | REST API | Metaplex
+title: Twitter 検証
+metaTitle: Metaplex API - Twitter 検証 | REST API | Metaplex
 description: Twitter OAuth アクセストークンを、ローンチ登録時に Twitter アカウントの所有権を証明する検証トークンと交換します。
 method: POST
 created: '08-01-2026'
@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-Twitter（X）の OAuth アクセストークンを、Twitter アカウントの所有権を証明する短期有効の検証トークンと交換します。このトークンを[ローンチの登録](/api/register)に渡すと、ローンチの Twitter リンクが検証済みとしてマークされます。 {% .lead %}
+Twitter（X）の OAuth アクセストークンを、Twitter アカウントの所有権を証明する短期有効の検証トークンと交換します。このトークンを[ローンチの登録](/ja/api/register)に渡すと、ローンチの Twitter リンクが検証済みとしてマークされます。 {% .lead %}
 
 ## Summary
 
@@ -66,7 +66,7 @@ curl -X POST "https://api.metaplex.com/v1/twitter/verify" \
 }
 ```
 
-[ローンチの登録](/api/register)を呼び出す際に、`token` を `twitterVerificationToken` として渡します。API はトークンのユーザー名を `launch.externalLinks.twitter` のハンドルと比較し、一致した場合にリンクを検証済みとしてマークします。
+[ローンチの登録](/ja/api/register)を呼び出す際に、`token` を `twitterVerificationToken` として渡します。API はトークンのユーザー名を `launch.externalLinks.twitter` のハンドルと比較し、一致した場合にリンクを検証済みとしてマークします。
 
 ## エラー
 

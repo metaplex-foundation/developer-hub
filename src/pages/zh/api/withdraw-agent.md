@@ -80,7 +80,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-所有者对交易进行反序列化、签名并提交 — 请参阅[签名和提交](/api/mint-agent#signing-and-submitting)。
+所有者对交易进行反序列化、签名并提交 — 请参阅[签名和提交](/zh/api/mint-agent#signing-and-submitting)。
 
 ## 错误
 
@@ -95,4 +95,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 构建时的所有权检查只是一种便利；`execute` 指令无论如何都会在链上强制验证所有权，因此伪造的请求无法转移资金。
 - 提款目标始终是 `sender`（所有者）— 资金无法被重定向到第三方。
-- 要添加资金，请参阅[为 Agent 注资](/api/fund-agent)。
+- 要添加资金，请参阅[为 Agent 注资](/zh/api/fund-agent)。

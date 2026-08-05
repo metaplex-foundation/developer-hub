@@ -82,7 +82,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-发送方对交易进行反序列化、签名并提交 — 请参阅[签名和提交](/api/mint-agent#signing-and-submitting)。
+发送方对交易进行反序列化、签名并提交 — 请参阅[签名和提交](/zh/api/mint-agent#signing-and-submitting)。
 
 ## 错误
 
@@ -95,5 +95,5 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 ## Notes
 
 - 转账目标是 Agent 的**钱包 PDA**，而非 Core 资产地址 — API 会为您解析。
-- 要将资金转出，Agent 所有者需使用[提款](/api/withdraw-agent)。
+- 要将资金转出，Agent 所有者需使用[提款](/zh/api/withdraw-agent)。
 - 有关 Agent 钱包背后的概念，请参阅 [Agent 金融](/agents/agent-finance)。

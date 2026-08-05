@@ -89,7 +89,7 @@ Every Genesis launch has a **type** that represents the underlying mechanism:
 | **Launch Pool** (`launchpool`) | Proportional distribution with price discovery via a deposit window | Fair launches, community tokens, crowdsales |
 | **Presale** (`presale`) | Fixed-price token sale at a predetermined rate | Token sales, known valuation |
 
-The launch type is recorded on-chain in the [Genesis Account](#genesis-account) by a backend crank after creation. Traders and aggregators can query the type programmatically via the [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) (`fetchGenesisAccountV2`) or the [Integration APIs](/api) (`type` field in REST responses).
+The launch type is recorded on-chain in the [Genesis Account](#genesis-account) by a backend crank after creation. Traders and aggregators can query the type programmatically via the [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account) (`fetchGenesisAccountV2`) or the [Metaplex API](/api) (`type` field in REST responses).
 
 ### Genesis Account
 

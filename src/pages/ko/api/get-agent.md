@@ -1,6 +1,6 @@
 ---
-title: Get Agent
-metaTitle: Metaplex API - Get Agent | REST API | Metaplex
+title: 에이전트 조회
+metaTitle: Metaplex API - 에이전트 조회 | REST API | Metaplex
 description: Core 애셋 주소로 등록된 단일 에이전트를 조회합니다. EIP-8004 등록 데이터, 생성한 토큰, 기본 에이전트 토큰을 포함합니다.
 method: GET
 created: '08-01-2026'
@@ -51,13 +51,13 @@ GET /agents/{address}
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `address` | `string` | Yes | 에이전트의 Core 애셋 민트 주소 (base58) |
+| `address` | `string` | 예 | 에이전트의 Core 애셋 민트 주소 (base58) |
 
 ## 쿼리 파라미터
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `network` | `string` | No | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
 
 ## 요청 예시
 

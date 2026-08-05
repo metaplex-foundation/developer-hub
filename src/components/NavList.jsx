@@ -310,6 +310,13 @@ const NavList = () => {
           </div>
         </Link>
       </div> */}
+      <div className="hidden flex-col nav:flex">
+        <Link href={getLocalizedHref('/api', locale)}>
+          <div className="-mx-3 -my-2 whitespace-nowrap rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground">
+            {t('api', 'API')}
+          </div>
+        </Link>
+      </div>
       {productCategories.map((item, index) => {
         // Map categories to their index page paths
         const categoryPaths = {

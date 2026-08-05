@@ -1,6 +1,6 @@
 ---
-title: Mint Agent
-metaTitle: Metaplex API - Mint Agent | REST API | Metaplex
+title: エージェントのミント
+metaTitle: Metaplex API - エージェントのミント | REST API | Metaplex
 description: エージェントの Core アセットをミントし、オンチェーンアイデンティティを登録する部分署名済みトランザクションを構築します。
 method: POST
 created: '08-01-2026'
@@ -27,7 +27,7 @@ programmingLanguage:
 
 - Core アセットの作成と `registerIdentity` の呼び出しを単一のトランザクションで実行
 - アセットのキーペアはサーバー側で生成・事前署名されるため、レスポンスには最終的な `assetAddress` が含まれます
-- EIP-8004 メタデータとホストされた [A2A AgentCard](/api/get-agent-card)（自作のもの、またはメタデータから合成されたもの）を保存
+- EIP-8004 メタデータとホストされた [A2A AgentCard](/ja/api/get-agent-card)（自作のもの、またはメタデータから合成されたもの）を保存
 - 呼び出し元のウォレットが支払者として署名し、トランザクションを送信します
 
 ## Quick Reference
@@ -91,7 +91,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/mint" \
 }
 ```
 
-## 署名と送信
+## 署名と送信 {% #signing-and-submitting %}
 
 返されたトランザクションにはアセットキーペアによる署名が既に付与されています。ウォレットが支払者として共同署名し、送信します：
 
@@ -122,6 +122,6 @@ await umi.rpc.sendTransaction(signed);
 ## Notes
 
 - Metaplex レジストリエントリ（`solana:101:metaplex`）は `agentMetadata.registrations` の先頭に自動的に追加されます。
-- EIP-8004 のコンシューマーが [AgentCard エンドポイント](/api/get-agent-card)を発見できるよう、ホストされた A2A サービスエントリが `services[]` に挿入されます。既に自分で作成済みの場合は何も行われません。
-- エージェントレコードはこのエンドポイントの呼び出し時に保存されますが、署名済みトランザクションが確認されインデックスされるまで [List Agents](/api/list-agents) には表示されません。
+- EIP-8004 のコンシューマーが [AgentCard エンドポイント](/ja/api/get-agent-card)を発見できるよう、ホストされた A2A サービスエントリが `services[]` に挿入されます。既に自分で作成済みの場合は何も行われません。
+- エージェントレコードはこのエンドポイントの呼び出し時に保存されますが、署名済みトランザクションが確認されインデックスされるまで [List Agents](/ja/api/list-agents) には表示されません。
 - SDK を使ったガイド付きのウォークスルーは[エージェントのミント](/agents/mint-agent)をご参照ください。

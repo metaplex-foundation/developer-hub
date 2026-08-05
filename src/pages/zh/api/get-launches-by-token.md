@@ -1,6 +1,6 @@
 ---
-title: Get Launches by Token
-metaTitle: Genesis - Get Launches by Token | REST API | Metaplex
+title: 按代币获取发行
+metaTitle: Genesis - 按代币获取发行 | REST API | Metaplex
 description: 获取与代币铸造地址关联的所有发行。返回发行信息、代币元数据和社交链接。
 method: GET
 created: '01-15-2025'
@@ -99,7 +99,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
 
 ## 响应类型
 
-请参阅[共享类型](/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
+请参阅[共享类型](/zh/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
 
 ### TypeScript
 

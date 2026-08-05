@@ -1,6 +1,6 @@
 ---
-title: Verify Twitter
-metaTitle: Metaplex API - Verify Twitter | REST API | Metaplex
+title: Twitter 인증
+metaTitle: Metaplex API - Twitter 인증 | REST API | Metaplex
 description: Twitter OAuth 액세스 토큰을 런칭 등록 시 Twitter 계정 소유권을 증명하는 인증 토큰으로 교환합니다.
 method: POST
 created: '08-01-2026'
@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-Twitter(X) OAuth 액세스 토큰을 Twitter 계정 소유권을 증명하는 단기 유효 인증 토큰으로 교환합니다. 이 토큰을 [Register Launch](/api/register)에 전달하면 런칭의 Twitter 링크가 인증됨으로 표시됩니다. {% .lead %}
+Twitter(X) OAuth 액세스 토큰을 Twitter 계정 소유권을 증명하는 단기 유효 인증 토큰으로 교환합니다. 이 토큰을 [Register Launch](/ko/api/register)에 전달하면 런칭의 Twitter 링크가 인증됨으로 표시됩니다. {% .lead %}
 
 ## Summary
 
@@ -46,7 +46,7 @@ POST /twitter/verify
 
 | 필드 | 타입 | 필수 | 설명 |
 |-------|------|----------|-------------|
-| `accessToken` | `string` | Yes | 애플리케이션이 획득한 Twitter OAuth 2.0 사용자 액세스 토큰 (`users.read` 권한이 부여되어 있어야 함) |
+| `accessToken` | `string` | 예 | 애플리케이션이 획득한 Twitter OAuth 2.0 사용자 액세스 토큰 (`users.read` 권한이 부여되어 있어야 함) |
 
 ## 요청 예시
 
@@ -66,7 +66,7 @@ curl -X POST "https://api.metaplex.com/v1/twitter/verify" \
 }
 ```
 
-[Register Launch](/api/register)를 호출할 때 `token`을 `twitterVerificationToken`으로 전달하세요. API는 토큰의 사용자 이름을 `launch.externalLinks.twitter`의 핸들과 비교하여 일치하면 링크를 인증됨으로 표시합니다.
+[Register Launch](/ko/api/register)를 호출할 때 `token`을 `twitterVerificationToken`으로 전달하세요. API는 토큰의 사용자 이름을 `launch.externalLinks.twitter`의 핸들과 비교하여 일치하면 링크를 인증됨으로 표시합니다.
 
 ## 오류
 

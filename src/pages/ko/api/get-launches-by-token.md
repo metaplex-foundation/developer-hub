@@ -1,6 +1,6 @@
 ---
-title: Get Launches by Token
-metaTitle: Genesis - Get Launches by Token | REST API | Metaplex
+title: 토큰별 런칭 조회
+metaTitle: Genesis - 토큰별 런칭 조회 | REST API | Metaplex
 description: 토큰 민트 주소와 관련된 모든 런칭을 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'
@@ -51,8 +51,8 @@ GET /tokens/{mint}
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `mint` | `string` | Yes | 토큰 민트 공개 키 |
-| `network` | `string` | No | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
+| `mint` | `string` | 예 | 토큰 민트 공개 키 |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
 
 ## 요청 예시
 
@@ -99,7 +99,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
 
 ## 응답 타입
 
-`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/api#shared-types)을 참조하세요.
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/ko/api#shared-types)을 참조하세요.
 
 ### TypeScript
 

@@ -1,6 +1,6 @@
 ---
-title: List Agents
-metaTitle: Metaplex API - List Agents | REST API | Metaplex
+title: 에이전트 목록
+metaTitle: Metaplex API - 에이전트 목록 | REST API | Metaplex
 description: 등록된 AI 에이전트를 탐색하고 검색합니다. 메타데이터, 필터, 정렬 기능이 있는 페이지네이션된 에이전트 레코드를 반환합니다.
 method: GET
 created: '08-01-2026'
@@ -51,15 +51,15 @@ GET /agents
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `network` | `string` | No | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
-| `page` | `number` | No | 페이지 번호, `1`부터 시작. 기본값: `1`. |
-| `pageSize` | `number` | No | 페이지당 결과 수, `1`–`100`. 기본값: `24`. |
-| `query` | `string` | No | 에이전트 이름에 대한 자유 텍스트 검색. |
-| `sort` | `string` | No | 등록 시점 기준 `latest`(기본값) 또는 `oldest`. |
-| `activeOnly` | `boolean` | No | EIP-8004 메타데이터에서 활성으로 표시된 에이전트만. |
-| `hasAgentToken` | `boolean` | No | 기본 에이전트 토큰이 설정된 에이전트만. |
-| `hasServices` | `boolean` | No | 서비스 엔드포인트를 공개한 에이전트만. |
-| `spotlight` | `boolean` | No | 디스커버 페이지에서 스포트라이트된 에이전트만. |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
+| `page` | `number` | 아니요 | 페이지 번호, `1`부터 시작. 기본값: `1`. |
+| `pageSize` | `number` | 아니요 | 페이지당 결과 수, `1`–`100`. 기본값: `24`. |
+| `query` | `string` | 아니요 | 에이전트 이름에 대한 자유 텍스트 검색. |
+| `sort` | `string` | 아니요 | 등록 시점 기준 `latest`(기본값) 또는 `oldest`. |
+| `activeOnly` | `boolean` | 아니요 | EIP-8004 메타데이터에서 활성으로 표시된 에이전트만. |
+| `hasAgentToken` | `boolean` | 아니요 | 기본 에이전트 토큰이 설정된 에이전트만. |
+| `hasServices` | `boolean` | 아니요 | 서비스 엔드포인트를 공개한 에이전트만. |
+| `spotlight` | `boolean` | 아니요 | 디스커버 페이지에서 스포트라이트된 에이전트만. |
 
 ## 요청 예시
 
@@ -172,12 +172,17 @@ let response = reqwest::get(
 .json::<serde_json::Value>()
 .await?;
 
-let agents = &response["data"]["agents"];
-println!("{} agents on this page", agents.as_array().unwrap().len());
+if response["success"].as_bool() == Some(true) {
+    if let Some(agents) = response["data"]["agents"].as_array() {
+        println!("{} agents on this page", agents.len());
+    }
+} else {
+    eprintln!("API error: {}", response["error"]);
+}
 ```
 
 ## Notes
 
 - 결과는 실시간 온체인 스캔이 아닌 인덱싱된 데이터베이스에서 가져옵니다. 새로 민팅된 에이전트는 등록 트랜잭션이 인덱싱된 후에 나타납니다.
 - 불리언 필터는 `true`/`false` 문자열 값을 허용합니다.
-- 응답은 `success` 엔벨로프를 사용합니다. 자세한 내용은 [Agent API 개요](/api)를 참조하세요.
+- 응답은 `success` 엔벨로프를 사용합니다. 자세한 내용은 [Agent API 개요](/ko/api)를 참조하세요.

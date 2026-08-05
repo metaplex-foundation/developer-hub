@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-在[创建发行](/api/create-launch)的链上交易确认后注册 Genesis 发行。该端点验证链上状态、创建发行列表并返回发行页面 URL。{% .lead %}
+在[创建发行](/zh/api/create-launch)的链上交易确认后注册 Genesis 发行。该端点验证链上状态、创建发行列表并返回发行页面 URL。{% .lead %}
 
 {% callout type="warning" title="建议使用 SDK" %}
 大多数集成方应使用 SDK 中的 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)，它在一次调用中处理创建交易、签名、发送和注册发行的全部流程。只有在需要不依赖 SDK 直接进行 HTTP 访问时才需要使用此端点。

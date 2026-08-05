@@ -1,6 +1,6 @@
 ---
-title: Get Launch
-metaTitle: Genesis - Get Launch | REST API | Metaplex
+title: ローンチの取得
+metaTitle: Genesis - ローンチの取得 | REST API | Metaplex
 description: Genesisアドレスによるローンチデータの取得。ローンチ情報、トークンメタデータ、ソーシャルリンクを返します。
 method: GET
 created: '01-15-2025'
@@ -97,7 +97,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 
 ## レスポンス型
 
-[共有型](/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
+[共有型](/ja/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
 
 ### TypeScript
 
@@ -157,6 +157,6 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 ## Notes
 
-- Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、[トークンによるローンチ取得](/api/get-launches-by-token)エンドポイントを使用してください。
+- Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、[トークンによるローンチ取得](/ja/api/get-launches-by-token)エンドポイントを使用してください。
 - Genesis アドレスが見つからない場合や有効なローンチがない場合は `404` を返します。
 - `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

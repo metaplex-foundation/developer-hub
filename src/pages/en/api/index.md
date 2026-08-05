@@ -27,13 +27,15 @@ The Metaplex API is the public REST API at `api.metaplex.com`. It serves Genesis
 
 ## Summary
 
+The Metaplex API provides public HTTP access to Genesis launch data, launch creation, and the agent registry — no SDK or authentication required.
+
 - Query launches by genesis address, token mint, or browse all active launches
 - Create and register new Genesis launches
 - Browse and search the agent registry; fetch per-agent A2A AgentCards
 - Build agent mint, fund, and withdraw transactions
 - Public REST API at `https://api.metaplex.com/v1` — no authentication required
 - Supports Solana mainnet (default) and devnet via `network` query parameter
-- Machine-readable OpenAPI 3.1 specification: [JSON](https://api.metaplex.com/v1/openapi.json) / [YAML](https://api.metaplex.com/v1/openapi.yaml), discoverable via the [RFC 9727 API catalog](https://api.metaplex.com/.well-known/api-catalog)
+- Machine-readable OpenAPI 3.1 specification: [YAML](https://api.metaplex.com/v1/openapi.yaml) (canonical) / [JSON](https://api.metaplex.com/v1/openapi.json), discoverable via the [RFC 9727 API catalog](https://api.metaplex.com/.well-known/api-catalog)
 
 ## Base URL
 
@@ -139,8 +141,8 @@ The full API contract is published as an OpenAPI 3.1 document, generated directl
 
 | Format | URL |
 |--------|-----|
-| JSON (canonical) | `https://api.metaplex.com/v1/openapi.json` |
-| YAML | `https://api.metaplex.com/v1/openapi.yaml` |
+| YAML (canonical) | `https://api.metaplex.com/v1/openapi.yaml` |
+| JSON | `https://api.metaplex.com/v1/openapi.json` |
 | Current-version aliases | `https://api.metaplex.com/openapi.json` / `openapi.yaml` |
 | RFC 9727 API catalog | `https://api.metaplex.com/.well-known/api-catalog` |
 

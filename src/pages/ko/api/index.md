@@ -1,6 +1,6 @@
 ---
 title: Metaplex API
-metaTitle: Metaplex API - Public REST API Reference | Metaplex
+metaTitle: Metaplex API - 공개 REST API 레퍼런스 | Metaplex
 description: api.metaplex.com의 Metaplex 공개 REST API — Genesis 런칭 데이터, 런칭 생성, 에이전트 레지스트리, 에이전트 지갑 트랜잭션을 제공합니다. 인증이 필요 없습니다.
 created: '01-15-2025'
 updated: '08-01-2026'
@@ -27,13 +27,15 @@ Metaplex API는 `api.metaplex.com`의 공개 REST API입니다. Genesis 런칭 �
 
 ## Summary
 
+Metaplex API는 Genesis 런칭 데이터, 런칭 생성, 에이전트 레지스트리에 대한 공개 HTTP 액세스를 제공합니다 — SDK나 인증이 필요 없습니다.
+
 - Genesis 주소, 토큰 민트로 런칭을 조회하거나 모든 활성 런칭 탐색
 - 새 Genesis 런칭 생성 및 등록
 - 에이전트 레지스트리 탐색 및 검색, 에이전트별 A2A AgentCard 조회
 - 에이전트 민팅, 자금 지원(fund), 출금(withdraw) 트랜잭션 빌드
 - `https://api.metaplex.com/v1`의 공개 REST API — 인증 불필요
 - `network` 쿼리 파라미터를 통해 Solana 메인넷(기본값) 및 데브넷 지원
-- 기계 판독 가능한 OpenAPI 3.1 명세: [JSON](https://api.metaplex.com/v1/openapi.json) / [YAML](https://api.metaplex.com/v1/openapi.yaml), [RFC 9727 API 카탈로그](https://api.metaplex.com/.well-known/api-catalog)를 통해 검색 가능
+- 기계 판독 가능한 OpenAPI 3.1 명세: [YAML](https://api.metaplex.com/v1/openapi.yaml)(표준) / [JSON](https://api.metaplex.com/v1/openapi.json), [RFC 9727 API 카탈로그](https://api.metaplex.com/.well-known/api-catalog)를 통해 검색 가능
 
 ## 기본 URL
 
@@ -67,14 +69,14 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | 메서드 | 엔드포인트 | 설명 |
 |--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/api/get-launch) | Genesis 주소로 런칭 데이터 조회 |
-| `GET` | [`/tokens/{mint}`](/api/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
-| `GET` | [`/launches`](/api/list-launches) | 필터를 사용하여 런칭 목록 조회 |
-| `GET` | [`/launches?spotlight=true`](/api/get-spotlight) | 추천 스포트라이트 런칭 조회 |
-| `POST` | [`/launches/create`](/api/create-launch) | 새 런칭을 위한 온체인 트랜잭션 빌드 |
-| `POST` | [`/launches/register`](/api/register) | 확인된 런칭을 목록에 등록 |
-| `POST` | [`/twitter/verify`](/api/verify-twitter) | 런칭 등록을 위한 Twitter 계정 소유권 인증 |
-| `POST` | [`/creator-rewards/claim`](/api/claim-creator-rewards) | 크리에이터 보상 청구 트랜잭션 빌드 |
+| `GET` | [`/launches/{genesis_pubkey}`](/ko/api/get-launch) | Genesis 주소로 런칭 데이터 조회 |
+| `GET` | [`/tokens/{mint}`](/ko/api/get-launches-by-token) | 토큰 민트의 모든 런칭 조회 |
+| `GET` | [`/launches`](/ko/api/list-launches) | 필터를 사용하여 런칭 목록 조회 |
+| `GET` | [`/launches?spotlight=true`](/ko/api/get-spotlight) | 추천 스포트라이트 런칭 조회 |
+| `POST` | [`/launches/create`](/ko/api/create-launch) | 새 런칭을 위한 온체인 트랜잭션 빌드 |
+| `POST` | [`/launches/register`](/ko/api/register) | 확인된 런칭을 목록에 등록 |
+| `POST` | [`/twitter/verify`](/ko/api/verify-twitter) | 런칭 등록을 위한 Twitter 계정 소유권 인증 |
+| `POST` | [`/creator-rewards/claim`](/ko/api/claim-creator-rewards) | 크리에이터 보상 청구 트랜잭션 빌드 |
 
 {% callout type="note" %}
 `POST` 엔드포인트(`/launches/create` 및 `/launches/register`)는 새 토큰 런칭을 생성하기 위해 함께 사용됩니다. 대부분의 사용 사례에서는 두 엔드포인트를 래핑하는 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)가 더 간단한 인터페이스를 제공합니다. 실시간 온체인 런칭 상태는 SDK 체인 메서드 [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) 및 [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state)로 직접 읽을 수 있습니다.
@@ -84,12 +86,12 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | 메서드 | 엔드포인트 | 설명 |
 |--------|----------|-------------|
-| `GET` | [`/agents`](/api/list-agents) | 등록된 에이전트 목록 및 검색 (페이지네이션) |
-| `GET` | [`/agents/{address}`](/api/get-agent) | 토큰 및 메타데이터를 포함한 단일 에이전트 조회 |
-| `GET` | [`/agents/{address}/agent-card.json`](/api/get-agent-card) | 호스팅된 A2A AgentCard 조회 |
-| `POST` | [`/agents/mint`](/api/mint-agent) | 에이전트 민팅 + 등록 트랜잭션 빌드 |
-| `POST` | [`/agents/{address}/fund`](/api/fund-agent) | 에이전트 지갑으로의 SOL 전송 빌드 |
-| `POST` | [`/agents/{address}/withdraw`](/api/withdraw-agent) | 에이전트 지갑에서 출금 빌드 (소유자 전용) |
+| `GET` | [`/agents`](/ko/api/list-agents) | 등록된 에이전트 목록 및 검색 (페이지네이션) |
+| `GET` | [`/agents/{address}`](/ko/api/get-agent) | 토큰 및 메타데이터를 포함한 단일 에이전트 조회 |
+| `GET` | [`/agents/{address}/agent-card.json`](/ko/api/get-agent-card) | 호스팅된 A2A AgentCard 조회 |
+| `POST` | [`/agents/mint`](/ko/api/mint-agent) | 에이전트 민팅 + 등록 트랜잭션 빌드 |
+| `POST` | [`/agents/{address}/fund`](/ko/api/fund-agent) | 에이전트 지갑으로의 SOL 전송 빌드 |
+| `POST` | [`/agents/{address}/withdraw`](/ko/api/withdraw-agent) | 에이전트 지갑에서 출금 빌드 (소유자 전용) |
 
 단계별 안내와 함께 에이전트를 민팅하려면 [에이전트 민팅하기](/agents/mint-agent)를 참조하세요.
 
@@ -131,7 +133,7 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 { "success": false, "error": "Agent not found" }
 ```
 
-예외는 [`/agents/{address}/agent-card.json`](/api/get-agent-card)입니다. A2A 클라이언트가 직접 사용할 수 있도록 엔벨로프 없이 원시 AgentCard JSON을 반환합니다. 각 엔드포인트 페이지와 [OpenAPI 명세](https://api.metaplex.com/v1/openapi.json)에 정확한 형태가 문서화되어 있습니다.
+예외는 [`/agents/{address}/agent-card.json`](/ko/api/get-agent-card)입니다. A2A 클라이언트가 직접 사용할 수 있도록 엔벨로프 없이 원시 AgentCard JSON을 반환합니다. 각 엔드포인트 페이지와 [OpenAPI 명세](https://api.metaplex.com/v1/openapi.json)에 정확한 형태가 문서화되어 있습니다.
 
 ## 기계 판독 가능한 명세
 
@@ -139,8 +141,8 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 
 | 형식 | URL |
 |--------|-----|
-| JSON (표준) | `https://api.metaplex.com/v1/openapi.json` |
-| YAML | `https://api.metaplex.com/v1/openapi.yaml` |
+| YAML (표준) | `https://api.metaplex.com/v1/openapi.yaml` |
+| JSON | `https://api.metaplex.com/v1/openapi.json` |
 | 현재 버전 별칭 | `https://api.metaplex.com/openapi.json` / `openapi.yaml` |
 | RFC 9727 API 카탈로그 | `https://api.metaplex.com/.well-known/api-catalog` |
 
@@ -153,7 +155,7 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 - 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
 - `POST` 엔드포인트의 경우 [SDK API 클라이언트](/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
 
-## 공유 타입
+## 공유 타입 {% #shared-types %}
 
 ### TypeScript
 

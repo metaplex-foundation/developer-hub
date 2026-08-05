@@ -1,6 +1,6 @@
 ---
-title: Get Agent Card
-metaTitle: Metaplex API - Get A2A AgentCard | REST API | Metaplex
+title: AgentCard 조회
+metaTitle: Metaplex API - A2A AgentCard 조회 | REST API | Metaplex
 description: 등록된 에이전트의 호스팅된 A2A AgentCard를 조회합니다. ETag 캐싱을 지원하는 표준 준수 AgentCard JSON입니다.
 method: GET
 created: '08-01-2026'
@@ -49,13 +49,13 @@ GET /agents/{address}/agent-card.json
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `address` | `string` | Yes | 에이전트의 Core 애셋 민트 주소 (base58) |
+| `address` | `string` | 예 | 에이전트의 Core 애셋 민트 주소 (base58) |
 
 ## 쿼리 파라미터
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `network` | `string` | No | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
 
 ## 요청 예시
 

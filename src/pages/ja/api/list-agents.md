@@ -1,6 +1,6 @@
 ---
-title: List Agents
-metaTitle: Metaplex API - List Agents | REST API | Metaplex
+title: エージェント一覧
+metaTitle: Metaplex API - エージェント一覧 | REST API | Metaplex
 description: 登録済み AI エージェントの閲覧と検索。メタデータ、フィルタ、ソート付きのページネーションされたエージェントレコードを返します。
 method: GET
 created: '08-01-2026'
@@ -172,12 +172,17 @@ let response = reqwest::get(
 .json::<serde_json::Value>()
 .await?;
 
-let agents = &response["data"]["agents"];
-println!("{} agents on this page", agents.as_array().unwrap().len());
+if response["success"].as_bool() == Some(true) {
+    if let Some(agents) = response["data"]["agents"].as_array() {
+        println!("{} agents on this page", agents.len());
+    }
+} else {
+    eprintln!("API error: {}", response["error"]);
+}
 ```
 
 ## Notes
 
 - 結果はライブのオンチェーンスキャンではなく、インデックス済みデータベースから取得されます。新しくミントされたエージェントは、登録トランザクションがインデックスされた後に表示されます。
 - ブール型フィルタは `true`/`false` の文字列値を受け付けます。
-- レスポンスは `success` エンベロープを使用します。詳細は [Agent API 概要](/api)をご参照ください。
+- レスポンスは `success` エンベロープを使用します。詳細は [Agent API 概要](/ja/api)をご参照ください。

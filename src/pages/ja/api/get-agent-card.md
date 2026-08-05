@@ -1,6 +1,6 @@
 ---
-title: Get Agent Card
-metaTitle: Metaplex API - Get A2A AgentCard | REST API | Metaplex
+title: AgentCard の取得
+metaTitle: Metaplex API - A2A AgentCard の取得 | REST API | Metaplex
 description: 登録済みエージェントのホストされた A2A AgentCard を取得します。ETag キャッシュ付きの標準準拠 AgentCard JSON です。
 method: GET
 created: '08-01-2026'

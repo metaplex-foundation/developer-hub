@@ -1,6 +1,6 @@
 ---
-title: Get Spotlight
-metaTitle: Genesis - Get Spotlight | REST API | Metaplex
+title: 获取聚焦发行
+metaTitle: Genesis - 获取聚焦发行 | REST API | Metaplex
 description: "获取 Genesis 精选聚焦发行。返回平台策划的精选发行。"
 method: GET
 created: '01-15-2025'
@@ -99,7 +99,7 @@ curl "https://api.metaplex.com/v1/launches?spotlight=true"
 
 ## 响应类型
 
-请参阅[共享类型](/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
+请参阅[共享类型](/zh/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
 
 ### TypeScript
 

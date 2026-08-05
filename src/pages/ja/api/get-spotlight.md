@@ -1,6 +1,6 @@
 ---
-title: Get Spotlight
-metaTitle: Genesis - Get Spotlight | REST API | Metaplex
+title: スポットライトの取得
+metaTitle: Genesis - スポットライトローンチの取得 | REST API | Metaplex
 description: Genesis の注目スポットライトローンチを取得します。プラットフォームが厳選したローンチを返します。
 method: GET
 created: '01-15-2025'
@@ -99,7 +99,7 @@ curl "https://api.metaplex.com/v1/launches?spotlight=true"
 
 ## レスポンス型
 
-[共有型](/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
+[共有型](/ja/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
 
 ### TypeScript
 

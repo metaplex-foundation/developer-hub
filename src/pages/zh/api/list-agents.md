@@ -172,12 +172,17 @@ let response = reqwest::get(
 .json::<serde_json::Value>()
 .await?;
 
-let agents = &response["data"]["agents"];
-println!("{} agents on this page", agents.as_array().unwrap().len());
+if response["success"].as_bool() == Some(true) {
+    if let Some(agents) = response["data"]["agents"].as_array() {
+        println!("{} agents on this page", agents.len());
+    }
+} else {
+    eprintln!("API error: {}", response["error"]);
+}
 ```
 
 ## Notes
 
 - 结果来自索引数据库，而非实时链上扫描；新铸造的 Agent 在其注册交易被索引后才会出现。
 - 布尔过滤器接受 `true`/`false` 字符串值。
-- 响应使用 `success` 信封格式 — 详见 [Agent API 概览](/api)。
+- 响应使用 `success` 信封格式 — 详见 [Agent API 概览](/zh/api)。

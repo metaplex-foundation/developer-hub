@@ -89,7 +89,7 @@ Genesis는 조합할 수 있는 세 가지 메커니즘을 지원합니다:
 | **Launch Pool** (`launchpool`) | 예치 기간을 통한 가격 발견과 비례 배분 | 공정한 출시, 커뮤니티 토큰, 크라우드세일 |
 | **Presale** (`presale`) | 사전에 정해진 비율의 고정 가격 토큰 판매 | 토큰 세일, 알려진 밸류에이션 |
 
-런칭 타입은 생성 후 백엔드 크랭크에 의해 [Genesis Account](#genesis-account)에 온체인으로 기록됩니다. 트레이더와 애그리게이터는 [JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript#genesis-account)(`fetchGenesisAccountV2`) 또는 [Integration APIs](/ko/api)(REST 응답의 `type` 필드)를 통해 프로그래밍 방식으로 타입을 조회할 수 있습니다.
+런칭 타입은 생성 후 백엔드 크랭크에 의해 [Genesis Account](#genesis-account)에 온체인으로 기록됩니다. 트레이더와 애그리게이터는 [JavaScript SDK](/ko/smart-contracts/genesis/sdk/javascript#genesis-account)(`fetchGenesisAccountV2`) 또는 [Metaplex API](/ko/api)(REST 응답의 `type` 필드)를 통해 프로그래밍 방식으로 타입을 조회할 수 있습니다.
 
 ### Genesis Account
 

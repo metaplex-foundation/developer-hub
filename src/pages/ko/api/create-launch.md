@@ -19,14 +19,14 @@ programmingLanguage:
   - TypeScript
 ---
 
-새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. [런칭 등록](/api/register)을 호출하기 전에 서명하여 전송해야 하는 미서명 트랜잭션을 반환합니다. {% .lead %}
+새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. [런칭 등록](/ko/api/register)을 호출하기 전에 서명하여 전송해야 하는 미서명 트랜잭션을 반환합니다. {% .lead %}
 
 {% callout type="warning" title="SDK 사용을 권장합니다" %}
 대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.
 {% /callout %}
 
 {% callout type="note" %}
-Genesis 프로그램의 전체 기능을 [metaplex.com](https://www.metaplex.com)에서 아직 지원하지 않으므로, Create API(또는 SDK)를 사용하여 런칭을 프로그래밍 방식으로 생성하는 것을 권장합니다. API를 통해 생성된 메인넷 런칭은 [등록](/api/register) 후 metaplex.com에 표시됩니다.
+Genesis 프로그램의 전체 기능을 [metaplex.com](https://www.metaplex.com)에서 아직 지원하지 않으므로, Create API(또는 SDK)를 사용하여 런칭을 프로그래밍 방식으로 생성하는 것을 권장합니다. API를 통해 생성된 메인넷 런칭은 [등록](/ko/api/register) 후 metaplex.com에 표시됩니다.
 {% /callout %}
 
 ## 엔드포인트

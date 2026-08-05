@@ -1,6 +1,6 @@
 ---
-title: Get Launches by Token
-metaTitle: Genesis - Get Launches by Token | REST API | Metaplex
+title: トークン別ローンチの取得
+metaTitle: Genesis - トークン別ローンチの取得 | REST API | Metaplex
 description: トークンミントアドレスに関連するすべてのローンチを取得します。ローンチ情報、トークンメタデータ、ソーシャルリンクを返します。
 method: GET
 created: '01-15-2025'
@@ -99,7 +99,7 @@ curl https://api.metaplex.com/v1/tokens/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyT
 
 ## レスポンス型
 
-[共有型](/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
+[共有型](/ja/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
 
 ### TypeScript
 

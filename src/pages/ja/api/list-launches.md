@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
 
 ## レスポンス型
 
-[共有型](/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
+[共有型](/ja/api#shared-types)で `Launch`、`BaseToken`、`Socials` の定義を参照してください。
 
 ### TypeScript
 

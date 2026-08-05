@@ -209,7 +209,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 아니요 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'`. |
 | `payer` | `PublicKey \| string` | 아니요 | 반환된 트랜잭션의 수수료와 임대료를 부담하는 지갑. 기본값은 `wallet`. 창작자 수수료 지갑이 SOL을 보유하고 있지 않을 때 사용 — 예: 에이전트 PDA 또는 콜드 지갑. |
 
-SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 것으로 대체하지 마세요. 그렇지 않으면 확인이 경합합니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/api/claim-creator-rewards)를 참조하세요.
+SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 것으로 대체하지 마세요. 그렇지 않으면 확인이 경합합니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/ko/api/claim-creator-rewards)를 참조하세요.
 
 ### 보상 없음 사례 처리
 

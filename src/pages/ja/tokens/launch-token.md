@@ -435,4 +435,4 @@ main().catch(console.error);
 - [Genesis 概要](/ja/smart-contracts/genesis) - Solana トークンローンチパッドについて詳しく学ぶ
 - [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチの詳細ドキュメント
 - [プレセール](/ja/smart-contracts/genesis/presale) - 固定価格でのトークンプレセールを実行
-- [Integration APIs](/ja/api) - API でトークンセールデータをクエリ
+- [Metaplex API](/ja/api) - API でトークンセールデータをクエリ

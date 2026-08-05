@@ -2,7 +2,8 @@
 title: 绑定曲线 — 协议参数
 metaTitle: Genesis 绑定曲线协议参数 | Metaplex
 description: Genesis 绑定曲线的具体协议参数 — 代币供应量默认值、虚拟储备金、费用计划和毕业目标。
-updated: '04-20-2026'
+created: '08-03-2026'
+updated: '08-05-2026'
 keywords:
   - bonding curve
   - protocol parameters
@@ -20,15 +21,15 @@ about:
 proficiencyLevel: Intermediate
 faqs:
   - q: Genesis 绑定曲线代币的起始价格是多少？
-    a: 起始价格（每 SOL 兑换的代币数）= virtualTokens / virtualSol。使用协议默认值时，无论曲线何时开放，起始价格都是固定的。
+    a: 起始价格（每 SOL 兑换的代币数）= (virtualTokens / 10^decimals) / (virtualSol / 10^9)。virtualTokens 以原始单位计价，virtualSol 以 lamports 计价，因此在以每 SOL 兑换代币数报价之前必须先转换两者。使用协议默认值时，无论曲线何时开放，起始价格都是固定的。
   - q: 曲线毕业时会筹集多少 SOL？
-    a: 毕业时累积的真实 SOL 等于 (k / virtualTokens) − virtualSol，其中 k = virtualSol × (virtualTokens + baseTokenAllocation)。实际上这等于协议参数表中列出的毕业目标 SOL。
+    a: 毕业时累积的真实 lamports 等于 (k / virtualTokens) − virtualSol，其中 k = virtualSol × (virtualTokens + baseTokenAllocation)；除以 10^9 即可换算为 SOL。实际上这等于协议参数表中列出的毕业目标 SOL。
   - q: 创作者可以更改虚拟储备金或代币供应量吗？
     a: 不可以。虚拟储备金、代币供应量和小数位数由协议默认值设定，无法通过 API 按发行覆盖。
   - q: 创作者费包含在 0.50% 的协议费中吗？
     a: 不包含。创作者费是独立且额外的。两者均针对每次交换的总 SOL 金额独立计算，不复合。每次交换的最大总费用为协议费 + 创作者费。
   - q: 毕业后绑定曲线费用还适用吗？
-    a: 不适用。毕业后，交易转移到 Raydium CPMM 池。改为适用毕业后交易费用计划 — 0.40% 协议费、0.60% 创作者收益、0.17% LP 费用和 0.08% Raydium 费用。
+    a: 不适用。毕业后，交易转移到 Raydium CPMM 池。改为适用毕业后交易费用计划 — 0.40% 协议费、0.60% 创作者收益、0.21% LP 费用和 0.04% Raydium 费用。
 ---
 
 Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建的每个发行的固定数值。 {% .lead %}
@@ -45,6 +46,8 @@ Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建�
 有关使用这些参数的 AMM 定价模型，请参阅[工作原理](/smart-contracts/genesis/bonding-curve-theory)。有关原始交换公式，请参阅[高级内部机制](/smart-contracts/genesis/bonding-curve-internals)。
 
 ## 协议参数
+
+每个 Genesis 绑定曲线发行都使用以下固定的协议值创建。
 
 | 参数 | 值 | 备注 |
 |-----------|-------|-------|
@@ -63,6 +66,8 @@ Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建�
 
 ## 费用计划
 
+代币生命周期内适用两种不同的费用计划：绑定曲线活跃期间的计划，以及毕业到 Raydium 之后的计划。
+
 ### 绑定曲线（活跃阶段）
 
 费用适用于每次交换的 **SOL 侧**。两种费用均针对总 SOL 金额独立计算，不复合。净流入或流出的 SOL = 总额 − 协议费 − 创作者费。
@@ -76,7 +81,7 @@ Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建�
 创作者费是可选的。如果未配置 `creatorFeeWallet`，则不收取创作者费。配置后，0.60% 是协议定义的上限。使用首次购买机制时，首次购买免除两种费用。请参阅[创作者费用](/smart-contracts/genesis/creator-fees)。
 {% /callout %}
 
-### 毕业后（Raydium CPMM 池）
+### 毕业后（Raydium CPMM 池） {% #post-graduation-raydium-cpmm-pool %}
 
 曲线毕业后，交易转移到 Raydium CPMM 池。适用不同的费用计划：
 
@@ -84,8 +89,8 @@ Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建�
 |-----|------|-----------|
 | **协议费** | 0.40% | Metaplex |
 | **创作者收益** | 0.60% | 创作者费用钱包 — 通过 `claimRaydiumCreatorFeeV2` 领取 |
-| **LP 费用** | 0.17% | 流动性提供者 |
-| **Raydium 费用** | 0.08% | Raydium 协议 |
+| **LP 费用** | 0.21% | 流动性提供者 |
+| **Raydium 费用** | 0.04% | Raydium 协议 |
 
 ## 价格与毕业计算
 
@@ -93,24 +98,30 @@ Genesis 绑定曲线的具体协议参数 — 定义通过 Metaplex API 创建�
 
 ### 起始价格
 
+起始价格是虚拟储备金的比率，从链上单位（原始代币单位和 lamports）换算为人类可读单位（代币和 SOL）。
+
 ```
-startingPrice (tokens per SOL) = virtualTokens / virtualSol
+startingPrice (tokens per SOL) = (virtualTokens / 10^decimals) / (virtualSol / 10^9)
 ```
 
-这是买家在第一笔交换时（任何真实 SOL 进入池之前）看到的价格。
+`virtualTokens` 以原始单位存储，`virtualSol` 以 lamports 存储，因此在以每 SOL 兑换代币数报价之前，需分别除以 `10^decimals`（协议默认值下为 10^6）和 `10^9`。这是买家在第一笔交换时（任何真实 SOL 进入池之前）看到的价格。
 
 ### 毕业时的市值
 
 毕业时 `baseTokenBalance = 0`，所有真实代币均已售出。累积的真实 SOL 等于毕业目标。毕业时的完全稀释市值：
 
 ```
-graduationSOL = (k / virtualTokens) − virtualSol
+graduationLamports = (k / virtualTokens) − virtualSol
   where k = virtualSol × (virtualTokens + baseTokenAllocation)
+graduationSOL = graduationLamports / 10^9
 
-fdvAtGraduation (SOL) = graduationSOL × (virtualTokens / virtualSol)
+priceAtGraduation (lamports per raw unit) = k / virtualTokens^2
+fdvAtGraduation (SOL) = totalSupply (raw units) × priceAtGraduation / 10^9
 ```
 
 ### 恒定乘积不变量
+
+不变量 `k` 在曲线创建时固定，并在曲线活跃期间保持不变。
 
 ```
 k = virtualSol × (virtualTokens + baseTokenAllocation)
@@ -135,8 +146,8 @@ k = virtualSol × (virtualTokens + baseTokenAllocation)
 | 协议交换费 | `0.50%` |
 | 创作者费（上限） | `0.60%` |
 | 毕业后协议费 | `0.40%` |
-| 毕业后 LP 费用 | `0.17%` |
-| 毕业后 Raydium 费用 | `0.08%` |
+| 毕业后 LP 费用 | `0.21%` |
+| 毕业后 Raydium 费用 | `0.04%` |
 | `virtualSol` | `[TBD]` |
 | `virtualTokens` | `[TBD]` |
 | 毕业目标 | `[TBD] SOL` |
@@ -147,11 +158,11 @@ k = virtualSol × (virtualTokens + baseTokenAllocation)
 
 ### Genesis 绑定曲线代币的起始价格是多少？
 
-以每 SOL 兑换代币数表示的起始价格 = `virtualTokens / virtualSol`。这完全由协议默认值决定 — 创作者无法设置自定义起始价格。
+以每 SOL 兑换代币数表示的起始价格 = `(virtualTokens / 10^decimals) / (virtualSol / 10^9)` — `virtualTokens` 以原始单位计价，`virtualSol` 以 lamports 计价，报价前需先转换。它完全由协议默认值决定 — 创作者无法设置自定义起始价格。
 
 ### 曲线毕业时会筹集多少 SOL？
 
-售罄时累积的真实 SOL 等于上方协议参数表中列出的毕业目标。这直接由恒定乘积公式得出：`graduationSOL = (k / virtualTokens) − virtualSol`。
+售罄时累积的真实 SOL 等于上方协议参数表中列出的毕业目标。这直接由恒定乘积公式得出：`graduationLamports = (k / virtualTokens) − virtualSol`，除以 `10^9` 即为 SOL。
 
 ### 创作者可以更改虚拟储备金或代币供应量吗？
 

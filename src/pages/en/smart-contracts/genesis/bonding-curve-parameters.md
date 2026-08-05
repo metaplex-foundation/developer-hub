@@ -2,7 +2,8 @@
 title: Bonding Curve — Protocol Parameters
 metaTitle: Genesis Bonding Curve Protocol Parameters | Metaplex
 description: Concrete protocol parameters for the Genesis Bonding Curve — token supply defaults, virtual reserves, fee schedule, and graduation target.
-updated: '04-20-2026'
+created: '08-03-2026'
+updated: '08-05-2026'
 keywords:
   - bonding curve
   - protocol parameters
@@ -20,15 +21,15 @@ about:
 proficiencyLevel: Intermediate
 faqs:
   - q: What is the starting price of a Genesis Bonding Curve token?
-    a: Starting price (in tokens per SOL) = virtualTokens / virtualSol. With the protocol defaults, this gives a fixed starting price regardless of when the curve opens.
+    a: Starting price (in tokens per SOL) = (virtualTokens / 10^decimals) / (virtualSol / 10^9). virtualTokens is denominated in raw units and virtualSol in lamports, so both must be converted before quoting a tokens-per-SOL price. With the protocol defaults, this gives a fixed starting price regardless of when the curve opens.
   - q: How much SOL is raised by the time the curve graduates?
-    a: The real SOL accumulated at graduation equals (k / virtualTokens) − virtualSol, where k = virtualSol × (virtualTokens + baseTokenAllocation). In practice this equals the graduation target SOL listed in the Protocol Parameters table.
+    a: The real lamports accumulated at graduation equal (k / virtualTokens) − virtualSol, where k = virtualSol × (virtualTokens + baseTokenAllocation); divide by 10^9 to express the result in SOL. In practice this equals the graduation target SOL listed in the Protocol Parameters table.
   - q: Can creators change the virtual reserves or token supply?
     a: No. Virtual reserves, token supply, and decimals are set by protocol defaults and cannot be overridden per-launch via the API.
   - q: Is the creator fee included in the 0.50% protocol fee?
     a: No. The creator fee is separate and additive. Both are calculated independently on the gross SOL amount of each swap and do not compound. Maximum total fee per swap is protocol fee + creator fee.
   - q: Do the bonding curve fees apply after graduation?
-    a: No. After graduation, trading moves to the Raydium CPMM pool. The post-bond trading fee schedule applies instead — 0.40% protocol fee, 0.60% creator revenue, 0.17% LP fees, and 0.08% Raydium fee.
+    a: No. After graduation, trading moves to the Raydium CPMM pool. The post-bond trading fee schedule applies instead — 0.40% protocol fee, 0.60% creator revenue, 0.21% LP fees, and 0.04% Raydium fee.
 ---
 
 Concrete protocol parameters for the Genesis Bonding Curve — the fixed numbers that define every launch created via the Metaplex API. {% .lead %}
@@ -46,6 +47,8 @@ For the AMM pricing model that uses these parameters, see [Theory of Operation](
 
 ## Protocol Parameters
 
+Every Genesis Bonding Curve launch is created with the following fixed protocol values.
+
 | Parameter | Value | Notes |
 |-----------|-------|-------|
 | **Program ID** | `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` | Solana mainnet |
@@ -62,6 +65,8 @@ For the AMM pricing model that uses these parameters, see [Theory of Operation](
 {% /callout %}
 
 ## Fee Schedule
+
+Two distinct fee schedules apply over a token's life: one while the bonding curve is active, and a different one after graduation to Raydium.
 
 ### Bonding Curve (Active Phase)
 
@@ -84,8 +89,8 @@ After the curve graduates, trading moves to the Raydium CPMM pool. A different f
 |-----|------|-----------|
 | **Protocol fee** | 0.40% | Metaplex |
 | **Creator revenue** | 0.60% | Creator fee wallet — claimed via `claimRaydiumCreatorFeeV2` |
-| **LP fees** | 0.17% | Liquidity providers |
-| **Raydium fee** | 0.08% | Raydium protocol |
+| **LP fees** | 0.21% | Liquidity providers |
+| **Raydium fee** | 0.04% | Raydium protocol |
 
 ## Price and Graduation Calculations
 
@@ -93,24 +98,30 @@ With the protocol defaults, the following values are fully determined at curve c
 
 ### Starting Price
 
+The starting price is the ratio of the virtual reserves, converted from on-chain units (raw token units and lamports) to human units (tokens and SOL).
+
 ```
-startingPrice (tokens per SOL) = virtualTokens / virtualSol
+startingPrice (tokens per SOL) = (virtualTokens / 10^decimals) / (virtualSol / 10^9)
 ```
 
-This is the price a buyer sees on the very first swap (before any real SOL enters the pool).
+`virtualTokens` is stored in raw units and `virtualSol` in lamports, so divide by `10^decimals` (10^6 with protocol defaults) and `10^9` respectively before quoting a tokens-per-SOL price. This is the price a buyer sees on the very first swap (before any real SOL enters the pool).
 
 ### Market Cap at Graduation
 
 At graduation, `baseTokenBalance = 0` and all real tokens have been sold. The real SOL accumulated equals the graduation target. The fully-diluted market cap at graduation:
 
 ```
-graduationSOL = (k / virtualTokens) − virtualSol
+graduationLamports = (k / virtualTokens) − virtualSol
   where k = virtualSol × (virtualTokens + baseTokenAllocation)
+graduationSOL = graduationLamports / 10^9
 
-fdvAtGraduation (SOL) = graduationSOL × (virtualTokens / virtualSol)
+priceAtGraduation (lamports per raw unit) = k / virtualTokens^2
+fdvAtGraduation (SOL) = totalSupply (raw units) × priceAtGraduation / 10^9
 ```
 
 ### Constant Product Invariant
+
+The invariant `k` is fixed at curve creation and never changes while the curve is active.
 
 ```
 k = virtualSol × (virtualTokens + baseTokenAllocation)
@@ -135,8 +146,8 @@ k = virtualSol × (virtualTokens + baseTokenAllocation)
 | Protocol swap fee | `0.50%` |
 | Creator fee (max) | `0.60%` |
 | Post-grad protocol fee | `0.40%` |
-| Post-grad LP fees | `0.17%` |
-| Post-grad Raydium fee | `0.08%` |
+| Post-grad LP fees | `0.21%` |
+| Post-grad Raydium fee | `0.04%` |
 | `virtualSol` | `[TBD]` |
 | `virtualTokens` | `[TBD]` |
 | Graduation target | `[TBD] SOL` |
@@ -147,11 +158,11 @@ k = virtualSol × (virtualTokens + baseTokenAllocation)
 
 ### What is the starting price of a Genesis Bonding Curve token?
 
-Starting price in tokens per SOL = `virtualTokens / virtualSol`. This is determined entirely by the protocol defaults — creators cannot set a custom starting price.
+Starting price in tokens per SOL = `(virtualTokens / 10^decimals) / (virtualSol / 10^9)` — `virtualTokens` is in raw units and `virtualSol` in lamports, so both are converted before quoting the price. It is determined entirely by the protocol defaults — creators cannot set a custom starting price.
 
 ### How much SOL is raised by the time the curve graduates?
 
-The real SOL accumulated at sell-out equals the graduation target listed in the Protocol Parameters table above. This follows directly from the constant product formula: `graduationSOL = (k / virtualTokens) − virtualSol`.
+The real SOL accumulated at sell-out equals the graduation target listed in the Protocol Parameters table above. This follows directly from the constant product formula: `graduationLamports = (k / virtualTokens) − virtualSol`, divided by `10^9` to express it in SOL.
 
 ### Can creators change the virtual reserves or token supply?
 

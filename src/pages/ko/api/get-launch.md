@@ -1,6 +1,6 @@
 ---
-title: Get Launch
-metaTitle: Genesis - Get Launch | REST API | Metaplex
+title: 런칭 조회
+metaTitle: Genesis - 런칭 조회 | REST API | Metaplex
 description: Genesis 주소로 런칭 데이터를 조회합니다. 런칭 정보, 토큰 메타데이터, 소셜 링크를 반환합니다.
 method: GET
 created: '01-15-2025'
@@ -51,8 +51,8 @@ GET /launches/{genesis_pubkey}
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `genesis_pubkey` | `string` | Yes | genesis 계정 공개 키 |
-| `network` | `string` | No | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
+| `genesis_pubkey` | `string` | 예 | genesis 계정 공개 키 |
+| `network` | `string` | 아니요 | 조회할 네트워크. 기본값: `solana-mainnet`. 데브넷의 경우 `solana-devnet`을 사용하세요. |
 
 ## 요청 예시
 
@@ -97,7 +97,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
 
 ## 응답 타입
 
-`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/api#shared-types)을 참조하세요.
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/ko/api#shared-types)을 참조하세요.
 
 ### TypeScript
 
@@ -157,6 +157,6 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 ## Notes
 
-- Genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/api/get-launches-by-token) 엔드포인트를 사용하세요.
+- Genesis 공개 키를 찾으려면 인덱싱 또는 `getProgramAccounts`가 필요합니다. 토큰 민트만 있는 경우 [토큰별 런치 조회](/ko/api/get-launches-by-token) 엔드포인트를 사용하세요.
 - Genesis 주소를 찾을 수 없거나 유효한 런치가 없는 경우 `404`를 반환합니다.
 - `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool` 또는 `presale`)을 나타냅니다.

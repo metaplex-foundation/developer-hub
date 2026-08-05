@@ -1,6 +1,6 @@
 ---
-title: Withdraw from Agent
-metaTitle: Metaplex API - Withdraw from Agent Wallet | REST API | Metaplex
+title: エージェントからの出金
+metaTitle: Metaplex API - エージェントウォレットからの出金 | REST API | Metaplex
 description: エージェントのウォレットからオーナーに SOL を引き出すトランザクションを構築します。オーナー限定。
 method: POST
 created: '08-01-2026'
@@ -80,7 +80,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-オーナーはトランザクションをデシリアライズし、署名して送信します — [署名と送信](/api/mint-agent#signing-and-submitting)をご参照ください。
+オーナーはトランザクションをデシリアライズし、署名して送信します — [署名と送信](/ja/api/mint-agent#signing-and-submitting)をご参照ください。
 
 ## エラー
 
@@ -95,4 +95,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 構築時の所有権チェックは利便性のためのものです。`execute` インストラクションはいずれにせよオンチェーンで所有権を強制するため、偽造されたリクエストで資金を移動させることはできません。
 - 引き出し先は常に `sender`（オーナー）です — 資金を第三者にリダイレクトすることはできません。
-- 資金を追加するには [Fund Agent](/api/fund-agent) をご参照ください。
+- 資金を追加するには [Fund Agent](/ja/api/fund-agent) をご参照ください。

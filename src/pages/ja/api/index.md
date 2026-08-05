@@ -27,13 +27,15 @@ Metaplex API は `api.metaplex.com` のパブリック REST API です。Genesis
 
 ## Summary
 
+Metaplex API は、Genesis ローンチデータ、ローンチ作成、エージェントレジストリへのパブリックな HTTP アクセスを提供します — SDK も認証も不要です。
+
 - Genesis アドレスまたはトークンミントでローンチをクエリ、あるいはすべてのアクティブなローンチを閲覧
 - 新しい Genesis ローンチの作成と登録
 - エージェントレジストリの閲覧・検索、エージェントごとの A2A AgentCard の取得
 - エージェントのミント、資金供給、引き出しトランザクションの構築
 - `https://api.metaplex.com/v1` のパブリック REST API — 認証不要
 - Solana メインネット（デフォルト）およびデブネットを `network` クエリパラメータでサポート
-- 機械可読な OpenAPI 3.1 仕様：[JSON](https://api.metaplex.com/v1/openapi.json) / [YAML](https://api.metaplex.com/v1/openapi.yaml)、[RFC 9727 API カタログ](https://api.metaplex.com/.well-known/api-catalog)から発見可能
+- 機械可読な OpenAPI 3.1 仕様：[YAML](https://api.metaplex.com/v1/openapi.yaml)（正規版）/ [JSON](https://api.metaplex.com/v1/openapi.json)、[RFC 9727 API カタログ](https://api.metaplex.com/.well-known/api-catalog)から発見可能
 
 ## ベース URL
 
@@ -67,14 +69,14 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | メソッド | エンドポイント | 説明 |
 |--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/api/get-launch) | Genesis アドレスでローンチデータを取得 |
-| `GET` | [`/tokens/{mint}`](/api/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
-| `GET` | [`/launches`](/api/list-launches) | フィルタ付きでローンチ一覧を取得 |
-| `GET` | [`/launches?spotlight=true`](/api/get-spotlight) | 注目のスポットライトローンチを取得 |
-| `POST` | [`/launches/create`](/api/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
-| `POST` | [`/launches/register`](/api/register) | 確認済みローンチをリスティング用に登録 |
-| `POST` | [`/twitter/verify`](/api/verify-twitter) | ローンチ登録用の Twitter アカウント所有権を検証 |
-| `POST` | [`/creator-rewards/claim`](/api/claim-creator-rewards) | クリエイター報酬請求トランザクションを構築 |
+| `GET` | [`/launches/{genesis_pubkey}`](/ja/api/get-launch) | Genesis アドレスでローンチデータを取得 |
+| `GET` | [`/tokens/{mint}`](/ja/api/get-launches-by-token) | トークンミントに対する全ローンチを取得 |
+| `GET` | [`/launches`](/ja/api/list-launches) | フィルタ付きでローンチ一覧を取得 |
+| `GET` | [`/launches?spotlight=true`](/ja/api/get-spotlight) | 注目のスポットライトローンチを取得 |
+| `POST` | [`/launches/create`](/ja/api/create-launch) | 新しいローンチのオンチェーントランザクションを構築 |
+| `POST` | [`/launches/register`](/ja/api/register) | 確認済みローンチをリスティング用に登録 |
+| `POST` | [`/twitter/verify`](/ja/api/verify-twitter) | ローンチ登録用の Twitter アカウント所有権を検証 |
+| `POST` | [`/creator-rewards/claim`](/ja/api/claim-creator-rewards) | クリエイター報酬請求トランザクションを構築 |
 
 {% callout type="note" %}
 `POST` エンドポイント（`/launches/create` と `/launches/register`）は新しいトークンローンチを作成するために組み合わせて使用します。ほとんどのユースケースでは、[SDK API クライアント](/smart-contracts/genesis/sdk/api-client)が両方のエンドポイントをラップしたシンプルなインターフェースを提供します。リアルタイムのオンチェーンローンチ状態は、SDK チェーンメソッドの [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) と [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) で直接読み取れます。
@@ -84,12 +86,12 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | メソッド | エンドポイント | 説明 |
 |--------|----------|-------------|
-| `GET` | [`/agents`](/api/list-agents) | 登録済みエージェントの一覧・検索（ページネーション付き） |
-| `GET` | [`/agents/{address}`](/api/get-agent) | 単一エージェントをトークンとメタデータ付きで取得 |
-| `GET` | [`/agents/{address}/agent-card.json`](/api/get-agent-card) | ホストされた A2A AgentCard を取得 |
-| `POST` | [`/agents/mint`](/api/mint-agent) | エージェントのミント＋登録トランザクションを構築 |
-| `POST` | [`/agents/{address}/fund`](/api/fund-agent) | エージェントウォレットへの SOL 送金を構築 |
-| `POST` | [`/agents/{address}/withdraw`](/api/withdraw-agent) | エージェントウォレットからの引き出しを構築（オーナーのみ） |
+| `GET` | [`/agents`](/ja/api/list-agents) | 登録済みエージェントの一覧・検索（ページネーション付き） |
+| `GET` | [`/agents/{address}`](/ja/api/get-agent) | 単一エージェントをトークンとメタデータ付きで取得 |
+| `GET` | [`/agents/{address}/agent-card.json`](/ja/api/get-agent-card) | ホストされた A2A AgentCard を取得 |
+| `POST` | [`/agents/mint`](/ja/api/mint-agent) | エージェントのミント＋登録トランザクションを構築 |
+| `POST` | [`/agents/{address}/fund`](/ja/api/fund-agent) | エージェントウォレットへの SOL 送金を構築 |
+| `POST` | [`/agents/{address}/withdraw`](/ja/api/withdraw-agent) | エージェントウォレットからの引き出しを構築（オーナーのみ） |
 
 ガイド付きのウォークスルーでエージェントをミントするには、[エージェントのミント](/agents/mint-agent)をご参照ください。
 
@@ -131,7 +133,7 @@ API の進化を反映して、2つのエンベロープ規約が使われてい
 { "success": false, "error": "Agent not found" }
 ```
 
-例外は [`/agents/{address}/agent-card.json`](/api/get-agent-card) で、A2A クライアントが直接利用できるよう、エンベロープなしの生の AgentCard JSON を返します。正確なレスポンス形式は各エンドポイントページと [OpenAPI 仕様](https://api.metaplex.com/v1/openapi.json)に記載されています。
+例外は [`/agents/{address}/agent-card.json`](/ja/api/get-agent-card) で、A2A クライアントが直接利用できるよう、エンベロープなしの生の AgentCard JSON を返します。正確なレスポンス形式は各エンドポイントページと [OpenAPI 仕様](https://api.metaplex.com/v1/openapi.json)に記載されています。
 
 ## 機械可読仕様
 
@@ -139,8 +141,8 @@ API の完全なコントラクトは OpenAPI 3.1 ドキュメントとして公
 
 | フォーマット | URL |
 |--------|-----|
-| JSON（正規版） | `https://api.metaplex.com/v1/openapi.json` |
-| YAML | `https://api.metaplex.com/v1/openapi.yaml` |
+| YAML（正規版） | `https://api.metaplex.com/v1/openapi.yaml` |
+| JSON | `https://api.metaplex.com/v1/openapi.json` |
 | 現行バージョンのエイリアス | `https://api.metaplex.com/openapi.json` / `openapi.yaml` |
 | RFC 9727 API カタログ | `https://api.metaplex.com/.well-known/api-catalog` |
 
@@ -153,7 +155,7 @@ API の完全なコントラクトは OpenAPI 3.1 ドキュメントとして公
 - デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
 - `POST` エンドポイントについては、`/launches/create` と `/launches/register` の両方をラップする [SDK API クライアント](/smart-contracts/genesis/sdk/api-client)の使用を推奨します。
 
-## 共有型
+## 共有型 {% #shared-types %}
 
 ### TypeScript
 

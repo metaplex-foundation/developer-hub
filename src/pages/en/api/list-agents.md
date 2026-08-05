@@ -172,8 +172,13 @@ let response = reqwest::get(
 .json::<serde_json::Value>()
 .await?;
 
-let agents = &response["data"]["agents"];
-println!("{} agents on this page", agents.as_array().unwrap().len());
+if response["success"].as_bool() == Some(true) {
+    if let Some(agents) = response["data"]["agents"].as_array() {
+        println!("{} agents on this page", agents.len());
+    }
+} else {
+    eprintln!("API error: {}", response["error"]);
+}
 ```
 
 ## Notes

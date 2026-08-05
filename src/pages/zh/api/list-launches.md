@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
 
 ## 响应类型
 
-请参阅[共享类型](/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
+请参阅[共享类型](/zh/api#shared-types)了解 `Launch`、`BaseToken` 和 `Socials` 的定义。
 
 ### TypeScript
 

@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches?status=live"
 
 ## 응답 타입
 
-`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/api#shared-types)을 참조하세요.
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/ko/api#shared-types)을 참조하세요.
 
 ### TypeScript
 

@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-[런칭 생성](/api/create-launch)의 온체인 트랜잭션이 확인된 후 Genesis 런칭을 등록합니다. 이 엔드포인트는 온체인 상태를 검증하고, 런칭 목록을 생성하며, 런칭 페이지 URL을 반환합니다. {% .lead %}
+[런칭 생성](/ko/api/create-launch)의 온체인 트랜잭션이 확인된 후 Genesis 런칭을 등록합니다. 이 엔드포인트는 온체인 상태를 검증하고, 런칭 목록을 생성하며, 런칭 페이지 URL을 반환합니다. {% .lead %}
 
 {% callout type="warning" title="SDK 사용을 권장합니다" %}
 대부분의 통합자는 SDK의 [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client)를 사용해야 합니다. 이 함수는 트랜잭션 생성, 서명, 전송, 런칭 등록을 한 번의 호출로 처리합니다. 이 엔드포인트는 SDK 없이 직접 HTTP 접근이 필요한 경우에만 사용하세요.

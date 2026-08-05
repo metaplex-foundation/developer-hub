@@ -27,13 +27,15 @@ Metaplex API 是位于 `api.metaplex.com` 的公开 REST API。它提供 Genesis
 
 ## Summary
 
+Metaplex API 提供对 Genesis 发行数据、发行创建和 Agent 注册表的公开 HTTP 访问 — 无需 SDK，也无需认证。
+
 - 通过 Genesis 地址、代币铸造地址查询发行，或浏览所有活跃发行
 - 创建并注册新的 Genesis 发行
 - 浏览和搜索 Agent 注册表；获取每个 Agent 的 A2A AgentCard
 - 构建 Agent 铸造、注资和提款交易
 - `https://api.metaplex.com/v1` 的公开 REST API — 无需认证
 - 通过 `network` 查询参数支持 Solana 主网（默认）和开发网
-- 机器可读的 OpenAPI 3.1 规范：[JSON](https://api.metaplex.com/v1/openapi.json) / [YAML](https://api.metaplex.com/v1/openapi.yaml)，可通过 [RFC 9727 API 目录](https://api.metaplex.com/.well-known/api-catalog)发现
+- 机器可读的 OpenAPI 3.1 规范：[YAML](https://api.metaplex.com/v1/openapi.yaml)（规范版本）/ [JSON](https://api.metaplex.com/v1/openapi.json)，可通过 [RFC 9727 API 目录](https://api.metaplex.com/.well-known/api-catalog)发现
 
 ## 基础 URL
 
@@ -67,14 +69,14 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | 方法 | 端点 | 描述 |
 |--------|----------|-------------|
-| `GET` | [`/launches/{genesis_pubkey}`](/api/get-launch) | 通过 Genesis 地址获取发行数据 |
-| `GET` | [`/tokens/{mint}`](/api/get-launches-by-token) | 获取代币铸造的所有发行 |
-| `GET` | [`/launches`](/api/list-launches) | 使用可选过滤器获取发行列表 |
-| `GET` | [`/launches?spotlight=true`](/api/get-spotlight) | 获取精选推荐发行 |
-| `POST` | [`/launches/create`](/api/create-launch) | 为新发行构建链上交易 |
-| `POST` | [`/launches/register`](/api/register) | 注册已确认的发行以进行展示 |
-| `POST` | [`/twitter/verify`](/api/verify-twitter) | 验证 Twitter 账户所有权（用于发行注册） |
-| `POST` | [`/creator-rewards/claim`](/api/claim-creator-rewards) | 构建创作者奖励领取交易 |
+| `GET` | [`/launches/{genesis_pubkey}`](/zh/api/get-launch) | 通过 Genesis 地址获取发行数据 |
+| `GET` | [`/tokens/{mint}`](/zh/api/get-launches-by-token) | 获取代币铸造的所有发行 |
+| `GET` | [`/launches`](/zh/api/list-launches) | 使用可选过滤器获取发行列表 |
+| `GET` | [`/launches?spotlight=true`](/zh/api/get-spotlight) | 获取精选推荐发行 |
+| `POST` | [`/launches/create`](/zh/api/create-launch) | 为新发行构建链上交易 |
+| `POST` | [`/launches/register`](/zh/api/register) | 注册已确认的发行以进行展示 |
+| `POST` | [`/twitter/verify`](/zh/api/verify-twitter) | 验证 Twitter 账户所有权（用于发行注册） |
+| `POST` | [`/creator-rewards/claim`](/zh/api/claim-creator-rewards) | 构建创作者奖励领取交易 |
 
 {% callout type="note" %}
 `POST` 端点（`/launches/create` 和 `/launches/register`）配合使用以创建新的代币发行。对于大多数用例，[SDK API 客户端](/smart-contracts/genesis/sdk/api-client)提供了更简洁的接口，它封装了这两个端点。实时链上发行状态可通过 SDK 链方法 [`fetchBucketState`](/smart-contracts/genesis/integration-apis/fetch-bucket-state) 和 [`fetchDepositState`](/smart-contracts/genesis/integration-apis/fetch-deposit-state) 直接读取。
@@ -84,12 +86,12 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | 方法 | 端点 | 描述 |
 |--------|----------|-------------|
-| `GET` | [`/agents`](/api/list-agents) | 列出并搜索已注册的 Agent（分页） |
-| `GET` | [`/agents/{address}`](/api/get-agent) | 获取单个 Agent 及其代币和元数据 |
-| `GET` | [`/agents/{address}/agent-card.json`](/api/get-agent-card) | 获取托管的 A2A AgentCard |
-| `POST` | [`/agents/mint`](/api/mint-agent) | 构建 Agent 铸造 + 注册交易 |
-| `POST` | [`/agents/{address}/fund`](/api/fund-agent) | 构建向 Agent 钱包转入 SOL 的交易 |
-| `POST` | [`/agents/{address}/withdraw`](/api/withdraw-agent) | 构建从 Agent 钱包提款的交易（仅限所有者） |
+| `GET` | [`/agents`](/zh/api/list-agents) | 列出并搜索已注册的 Agent（分页） |
+| `GET` | [`/agents/{address}`](/zh/api/get-agent) | 获取单个 Agent 及其代币和元数据 |
+| `GET` | [`/agents/{address}/agent-card.json`](/zh/api/get-agent-card) | 获取托管的 A2A AgentCard |
+| `POST` | [`/agents/mint`](/zh/api/mint-agent) | 构建 Agent 铸造 + 注册交易 |
+| `POST` | [`/agents/{address}/fund`](/zh/api/fund-agent) | 构建向 Agent 钱包转入 SOL 的交易 |
+| `POST` | [`/agents/{address}/withdraw`](/zh/api/withdraw-agent) | 构建从 Agent 钱包提款的交易（仅限所有者） |
 
 有关铸造 Agent 的引导式演练，请参阅[铸造 Agent](/agents/mint-agent)。
 
@@ -131,7 +133,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 { "success": false, "error": "Agent not found" }
 ```
 
-例外是 [`/agents/{address}/agent-card.json`](/api/get-agent-card)，它返回不带信封的原始 AgentCard JSON，以便 A2A 客户端可以直接使用。每个端点页面都记录了其确切的响应结构，[OpenAPI 规范](https://api.metaplex.com/v1/openapi.json)中也有记录。
+例外是 [`/agents/{address}/agent-card.json`](/zh/api/get-agent-card)，它返回不带信封的原始 AgentCard JSON，以便 A2A 客户端可以直接使用。每个端点页面都记录了其确切的响应结构，[OpenAPI 规范](https://api.metaplex.com/v1/openapi.json)中也有记录。
 
 ## 机器可读规范
 
@@ -139,8 +141,8 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 | 格式 | URL |
 |--------|-----|
-| JSON（规范版本） | `https://api.metaplex.com/v1/openapi.json` |
-| YAML | `https://api.metaplex.com/v1/openapi.yaml` |
+| YAML（规范版本） | `https://api.metaplex.com/v1/openapi.yaml` |
+| JSON | `https://api.metaplex.com/v1/openapi.json` |
 | 当前版本别名 | `https://api.metaplex.com/openapi.json` / `openapi.yaml` |
 | RFC 9727 API 目录 | `https://api.metaplex.com/.well-known/api-catalog` |
 
@@ -153,7 +155,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 - 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
 - 对于 `POST` 端点，建议使用 [SDK API 客户端](/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
 
-## 共享类型
+## 共享类型 {% #shared-types %}
 
 ### TypeScript
 

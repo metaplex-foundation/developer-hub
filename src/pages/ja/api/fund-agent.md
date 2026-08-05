@@ -1,6 +1,6 @@
 ---
-title: Fund Agent
-metaTitle: Metaplex API - Fund Agent Wallet | REST API | Metaplex
+title: エージェントへの資金供給
+metaTitle: Metaplex API - エージェントウォレットへの資金供給 | REST API | Metaplex
 description: 登録済みエージェントのウォレットに資金を供給する、オンチェーンメモ付きの SOL 送金トランザクションを構築します。
 method: POST
 created: '08-01-2026'
@@ -82,7 +82,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-送信者はトランザクションをデシリアライズし、署名して送信します — [署名と送信](/api/mint-agent#signing-and-submitting)をご参照ください。
+送信者はトランザクションをデシリアライズし、署名して送信します — [署名と送信](/ja/api/mint-agent#signing-and-submitting)をご参照ください。
 
 ## エラー
 
@@ -95,5 +95,5 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 ## Notes
 
 - 送金先は Core アセットアドレスではなく、エージェントの**ウォレット PDA** です — API が自動的に解決します。
-- 資金を引き出すには、エージェントのオーナーが [Withdraw](/api/withdraw-agent) を使用します。
+- 資金を引き出すには、エージェントのオーナーが [Withdraw](/ja/api/withdraw-agent) を使用します。
 - エージェントウォレットの背後にある概念については、[エージェントファイナンス](/agents/agent-finance)をご参照ください。

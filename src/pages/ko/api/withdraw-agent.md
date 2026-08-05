@@ -1,6 +1,6 @@
 ---
-title: Withdraw from Agent
-metaTitle: Metaplex API - Withdraw from Agent Wallet | REST API | Metaplex
+title: 에이전트 출금
+metaTitle: Metaplex API - 에이전트 지갑 출금 | REST API | Metaplex
 description: 에이전트 지갑에서 소유자에게 SOL을 출금하는 트랜잭션을 빌드합니다. 소유자 전용입니다.
 method: POST
 created: '08-01-2026'
@@ -46,15 +46,15 @@ POST /agents/{address}/withdraw
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `address` | `string` | Yes | 에이전트의 Core 애셋 민트 주소 (base58) |
+| `address` | `string` | 예 | 에이전트의 Core 애셋 민트 주소 (base58) |
 
 ## 요청 본문
 
 | 필드 | 타입 | 필수 | 설명 |
 |-------|------|----------|-------------|
-| `sender` | `string` | Yes | 에이전트 소유자의 지갑 (base58). SOL을 수령하고 트랜잭션에 서명합니다. |
-| `amount` | `number` | Yes | SOL 단위 금액. 양수여야 합니다. |
-| `network` | `string` | No | `solana-mainnet`(기본값) 또는 `solana-devnet` |
+| `sender` | `string` | 예 | 에이전트 소유자의 지갑 (base58). SOL을 수령하고 트랜잭션에 서명합니다. |
+| `amount` | `number` | 예 | SOL 단위 금액. 양수여야 합니다. |
+| `network` | `string` | 아니요 | `solana-mainnet`(기본값) 또는 `solana-devnet` |
 
 ## 요청 예시
 
@@ -80,7 +80,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-소유자가 트랜잭션을 역직렬화하고 서명한 후 제출합니다. [서명 및 제출](/api/mint-agent#signing-and-submitting)을 참조하세요.
+소유자가 트랜잭션을 역직렬화하고 서명한 후 제출합니다. [서명 및 제출](/ko/api/mint-agent#signing-and-submitting)을 참조하세요.
 
 ## 오류
 
@@ -95,4 +95,4 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 
 - 빌드 시점의 소유권 확인은 편의를 위한 것입니다. `execute` 명령어가 어떤 경우에도 온체인에서 소유권을 강제하므로, 위조된 요청으로는 자금을 이동할 수 없습니다.
 - 출금 대상은 항상 `sender`(소유자)입니다. 자금을 제3자에게 보낼 수 없습니다.
-- 자금을 추가하려면 [Fund Agent](/api/fund-agent)를 참조하세요.
+- 자금을 추가하려면 [Fund Agent](/ko/api/fund-agent)를 참조하세요.

@@ -1,6 +1,6 @@
 ---
-title: Get Agent
-metaTitle: Metaplex API - Get Agent | REST API | Metaplex
+title: エージェントの取得
+metaTitle: Metaplex API - エージェントの取得 | REST API | Metaplex
 description: Core アセットアドレスで登録済みエージェントを1件取得します。EIP-8004 登録データ、作成したトークン、プライマリエージェントトークンを含みます。
 method: GET
 created: '08-01-2026'

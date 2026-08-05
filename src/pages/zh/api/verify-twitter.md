@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-将 Twitter（X）OAuth 访问令牌兑换为短期有效的验证令牌，用于证明 Twitter 账户的所有权。将该令牌传给[注册发行](/api/register)，即可将发行的 Twitter 链接标记为已验证。 {% .lead %}
+将 Twitter（X）OAuth 访问令牌兑换为短期有效的验证令牌，用于证明 Twitter 账户的所有权。将该令牌传给[注册发行](/zh/api/register)，即可将发行的 Twitter 链接标记为已验证。 {% .lead %}
 
 ## Summary
 
@@ -66,7 +66,7 @@ curl -X POST "https://api.metaplex.com/v1/twitter/verify" \
 }
 ```
 
-调用[注册发行](/api/register)时，将 `token` 作为 `twitterVerificationToken` 传入。API 会将令牌中的用户名与 `launch.externalLinks.twitter` 中的账号名进行比对，匹配时将该链接标记为已验证。
+调用[注册发行](/zh/api/register)时，将 `token` 作为 `twitterVerificationToken` 传入。API 会将令牌中的用户名与 `launch.externalLinks.twitter` 中的账号名进行比对，匹配时将该链接标记为已验证。
 
 ## 错误
 

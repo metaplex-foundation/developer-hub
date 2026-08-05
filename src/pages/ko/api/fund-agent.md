@@ -1,6 +1,6 @@
 ---
-title: Fund Agent
-metaTitle: Metaplex API - Fund Agent Wallet | REST API | Metaplex
+title: 에이전트 자금 지원
+metaTitle: Metaplex API - 에이전트 지갑 자금 지원 | REST API | Metaplex
 description: 등록된 에이전트의 지갑에 자금을 보내는 SOL 전송 트랜잭션을 온체인 메모와 함께 빌드합니다.
 method: POST
 created: '08-01-2026'
@@ -46,16 +46,16 @@ POST /agents/{address}/fund
 
 | 파라미터 | 타입 | 필수 | 설명 |
 |-----------|------|----------|-------------|
-| `address` | `string` | Yes | 에이전트의 Core 애셋 민트 주소 (base58) |
+| `address` | `string` | 예 | 에이전트의 Core 애셋 민트 주소 (base58) |
 
 ## 요청 본문
 
 | 필드 | 타입 | 필수 | 설명 |
 |-------|------|----------|-------------|
-| `sender` | `string` | Yes | SOL을 보내는 지갑 (base58). 트랜잭션에 서명합니다. |
-| `amount` | `number` | Yes | SOL 단위 금액. 양수여야 합니다. |
-| `memo` | `string` | Yes | 온체인에 기록되는 메모, 1–256자. |
-| `network` | `string` | No | `solana-mainnet`(기본값) 또는 `solana-devnet` |
+| `sender` | `string` | 예 | SOL을 보내는 지갑 (base58). 트랜잭션에 서명합니다. |
+| `amount` | `number` | 예 | SOL 단위 금액. 양수여야 합니다. |
+| `memo` | `string` | 예 | 온체인에 기록되는 메모, 1–256자. |
+| `network` | `string` | 아니요 | `solana-mainnet`(기본값) 또는 `solana-devnet` |
 
 ## 요청 예시
 
@@ -82,7 +82,7 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 }
 ```
 
-송신자가 트랜잭션을 역직렬화하고 서명한 후 제출합니다. [서명 및 제출](/api/mint-agent#signing-and-submitting)을 참조하세요.
+송신자가 트랜잭션을 역직렬화하고 서명한 후 제출합니다. [서명 및 제출](/ko/api/mint-agent#signing-and-submitting)을 참조하세요.
 
 ## 오류
 
@@ -95,5 +95,5 @@ curl -X POST "https://api.metaplex.com/v1/agents/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68
 ## Notes
 
 - 전송 대상은 Core 애셋 주소가 아닌 에이전트의 **지갑 PDA**입니다. API가 자동으로 확인해 줍니다.
-- 자금을 다시 빼내려면 에이전트 소유자가 [Withdraw](/api/withdraw-agent)를 사용합니다.
+- 자금을 다시 빼내려면 에이전트 소유자가 [Withdraw](/ko/api/withdraw-agent)를 사용합니다.
 - 에이전트 지갑의 개념에 대해서는 [에이전트 파이낸스](/agents/agent-finance)를 참조하세요.

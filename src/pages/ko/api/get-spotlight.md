@@ -1,6 +1,6 @@
 ---
-title: Get Spotlight
-metaTitle: Genesis - Get Spotlight | REST API | Metaplex
+title: 스포트라이트 조회
+metaTitle: Genesis - 스포트라이트 런칭 조회 | REST API | Metaplex
 description: "Genesis의 주요 스포트라이트 런칭을 조회합니다. 플랫폼에서 큐레이팅된 런칭을 반환합니다."
 method: GET
 created: '01-15-2025'
@@ -99,7 +99,7 @@ curl "https://api.metaplex.com/v1/launches?spotlight=true"
 
 ## 응답 타입
 
-`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/api#shared-types)을 참조하세요.
+`Launch`, `BaseToken`, `Socials` 정의는 [공유 타입](/ko/api#shared-types)을 참조하세요.
 
 ### TypeScript
 

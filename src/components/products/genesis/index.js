@@ -127,6 +127,10 @@ export const genesis = {
                   href: '/smart-contracts/genesis/bonding-curve-theory',
                 },
                 {
+                  title: 'Protocol Parameters',
+                  href: '/smart-contracts/genesis/bonding-curve-parameters',
+                },
+                {
                   title: 'Advanced Internals',
                   href: '/smart-contracts/genesis/bonding-curve-internals',
                 },

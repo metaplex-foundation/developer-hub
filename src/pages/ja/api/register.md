@@ -19,7 +19,7 @@ programmingLanguage:
   - TypeScript
 ---
 
-[ローンチ作成](/api/create-launch)からのオンチェーントランザクションが確認された後、Genesis ローンチを登録します。このエンドポイントはオンチェーン状態を検証し、ローンチリスティングを作成して、ローンチページの URL を返します。 {% .lead %}
+[ローンチ作成](/ja/api/create-launch)からのオンチェーントランザクションが確認された後、Genesis ローンチを登録します。このエンドポイントはオンチェーン状態を検証し、ローンチリスティングを作成して、ローンチページの URL を返します。 {% .lead %}
 
 {% callout type="warning" title="SDK の使用を推奨" %}
 ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。

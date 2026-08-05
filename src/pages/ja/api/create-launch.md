@@ -19,14 +19,14 @@ programmingLanguage:
   - TypeScript
 ---
 
-新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。[ローンチ登録](/api/register)を呼び出す前に、署名して送信する必要がある未署名トランザクションを返します。 {% .lead %}
+新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。[ローンチ登録](/ja/api/register)を呼び出す前に、署名して送信する必要がある未署名トランザクションを返します。 {% .lead %}
 
 {% callout type="warning" title="SDK の使用を推奨" %}
 ほとんどのインテグレーターには、SDK の [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) の使用を推奨します。この関数はトランザクションの作成、署名、送信、ローンチの登録を1回の呼び出しで処理します。このエンドポイントは、SDK を使用せずに直接 HTTP アクセスが必要な場合にのみ使用してください。
 {% /callout %}
 
 {% callout type="note" %}
-Genesis プログラムの全機能セットは [metaplex.com](https://www.metaplex.com) ではまだサポートされていないため、Create API（または SDK）を使用してプログラムでローンチを構築することを推奨します。API を通じて作成されたメインネットのローンチは、[登録](/api/register)後に metaplex.com に表示されます。
+Genesis プログラムの全機能セットは [metaplex.com](https://www.metaplex.com) ではまだサポートされていないため、Create API（または SDK）を使用してプログラムでローンチを構築することを推奨します。API を通じて作成されたメインネットのローンチは、[登録](/ja/api/register)後に metaplex.com に表示されます。
 {% /callout %}
 
 ## エンドポイント
