@@ -11,7 +11,7 @@ keywords:
   - getAsset
   - basis_points_raw
   - creators_raw
-  - sfbp_inherited
+  - inherited
   - Bubblegum V2
 about:
   - Compressed NFTs
@@ -27,7 +27,7 @@ faqs:
   - q: 为什么继承版税的 cNFT 上 creators_raw 为空？
     a: 当 SFBP 被继承时，叶子上的 creators 必须为空。请使用 creators 获取集合版税收款方。
   - q: 对于非继承版税的 cNFT，我需要改什么吗？
-    a: 不需要。未使用继承时，_raw 字段与 sfbp_inherited 会被省略，主要的 royalty 与 creators 字段行为与之前相同。
+    a: 不需要。未使用继承时，_raw 字段与 inherited 会被省略，主要的 royalty 与 creators 字段行为与之前相同。
 ---
 
 ## 摘要
@@ -36,7 +36,7 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 
 - 使用**主字段**（`royalty.basis_points`、`creators`）进行版税 UI 与分账展示
 - 使用 **`_raw` 字段**（`royalty.basis_points_raw`、`creators_raw`）进行证明、哈希和写入指令
-- 非继承资产保持不变 — `_raw` / `sfbp_inherited` 会被省略
+- 非继承资产保持不变 — `_raw` / `inherited` 会被省略
 
 本页面向任何**读取** `getAsset` / DAS 响应的客户端 — 钱包、市场、索引器、分析工具与应用。关于铸造与更新继承版税的 cNFT，请参阅[铸造](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)与[更新](/zh/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)。
 
@@ -47,7 +47,7 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 - 它是位于带有 `Royalties` 插件的 MPL-Core 集合中的 Bubblegum V2 资产，并且
 - 叶子上的卖家费用为继承哨兵 `65535`（`0xffff`）
 
-当可以将集合版税解析到主字段时，DAS 会以 `royalty.sfbp_inherited: true` 和 `royalty.basis_points_raw: 65535` 表明这一点。
+当可以将集合版税解析到主字段时，DAS 会以 `royalty.inherited: true` 和 `royalty.basis_points_raw: 65535` 表明这一点。
 
 ## 字段对照表
 
@@ -56,7 +56,7 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 | 展示费率 / 版税 UI | `royalty.basis_points`、`royalty.percent` |
 | 展示收款方 / 分账比例 | `creators` |
 | 哈希、默克尔证明、写入指令 | `royalty.basis_points_raw`、`creators_raw` |
-| 检测继承模式 | `royalty.sfbp_inherited`（或 `basis_points_raw === 65535`） |
+| 检测继承模式 | `royalty.inherited`（或 `basis_points_raw === 65535`） |
 
 ### 示例 DAS 响应（继承）
 
@@ -67,7 +67,7 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
   "percent": 0.075,
   "basis_points": 750,
   "basis_points_raw": 65535,
-  "sfbp_inherited": true,
+  "inherited": true,
   "primary_sale_happened": false,
   "locked": false
 },
@@ -95,10 +95,10 @@ const INHERIT = 0xffff // 65535
 function isInheritedRoyalty(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): boolean {
   return (
-    royalty.sfbp_inherited === true ||
+    royalty.inherited === true ||
     royalty.basis_points_raw === INHERIT
   )
 }
@@ -106,10 +106,10 @@ function isInheritedRoyalty(royalty: {
 function leafBasisPoints(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): number {
   if (royalty.basis_points_raw != null) return royalty.basis_points_raw
-  if (royalty.sfbp_inherited) return INHERIT
+  if (royalty.inherited) return INHERIT
   return royalty.basis_points
 }
 

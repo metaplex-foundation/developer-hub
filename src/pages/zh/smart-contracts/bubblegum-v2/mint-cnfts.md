@@ -147,7 +147,7 @@ await createCollection(umi, {
 
 ## 从集合继承版税
 
-铸造到 MPL-Core 集合时，可以在叶子上存储**哨兵** seller fee basis points 值（`65535`，导出为 `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`），而不是将集合的版税百分比复制到每个 cNFT。DAS 将集合解析后的费率放在 `royalty.basis_points` / `creators` 上供展示，并将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上（同时 `royalty.sfbp_inherited: true`），而链上叶子为哈希保留哨兵值。
+铸造到 MPL-Core 集合时，可以在叶子上存储**哨兵** seller fee basis points 值（`65535`，导出为 `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`），而不是将集合的版税百分比复制到每个 cNFT。DAS 将集合解析后的费率放在 `royalty.basis_points` / `creators` 上供展示，并将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上（同时 `royalty.inherited: true`），而链上叶子为哈希保留哨兵值。
 
 **读取** DAS 响应的客户端（钱包、市场、索引器与应用）应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 

@@ -158,7 +158,7 @@ cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊�
 
 ## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
 
-예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다(`royalty.sfbp_inherited: true`).
+예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다(`royalty.inherited: true`).
 
 **요구 사항:**
 

@@ -197,7 +197,7 @@ The maximum number of cNFTs is `2^maxDepth`. A depth-14 tree holds 16,384 cNFTs,
 
 ## Can a cNFT inherit royalties from its MPL-Core collection? {% #inherited-royalties %}
 
-Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display, and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.sfbp_inherited: true`).
+Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display, and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.inherited: true`).
 
 **Requirements:**
 

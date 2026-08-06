@@ -11,7 +11,7 @@ keywords:
   - getAsset
   - basis_points_raw
   - creators_raw
-  - sfbp_inherited
+  - inherited
   - Bubblegum V2
 about:
   - Compressed NFTs
@@ -27,7 +27,7 @@ faqs:
   - q: 継承されたcNFTでcreators_rawが空なのはなぜですか？
     a: SFBPが継承される場合、リーフのcreatorsは空でなければなりません。コレクションのロイヤリティ受取人にはcreatorsを使用してください。
   - q: 継承していないcNFTについて変更は必要ですか？
-    a: いいえ。継承を使用しない場合、_rawフィールドとsfbp_inheritedは省略され、主なroyaltyとcreatorsフィールドは従来どおり動作します。
+    a: いいえ。継承を使用しない場合、_rawフィールドとinheritedは省略され、主なroyaltyとcreatorsフィールドは従来どおり動作します。
 ---
 
 ## 概要
@@ -36,7 +36,7 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
 
 - **主フィールド**（`royalty.basis_points`、`creators`）はロイヤリティUIと支払い表示に使用
 - **`_raw` フィールド**（`royalty.basis_points_raw`、`creators_raw`）は証明、ハッシュ、書き込み命令に使用
-- 非継承アセットは変更なし — `_raw` / `sfbp_inherited` は省略されます
+- 非継承アセットは変更なし — `_raw` / `inherited` は省略されます
 
 このページは、`getAsset` / DASレスポンスを**読む**すべてのクライアント（ウォレット、マーケットプレイス、インデクサー、分析、アプリ）向けです。継承ロイヤリティのcNFTのミントと更新については、[ミント](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)および[更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)を参照してください。
 
@@ -47,7 +47,7 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
 - `Royalties` プラグインを持つMPL-Coreコレクション内のBubblegum V2アセットであり、かつ
 - リーフの販売者手数料が継承センチネル `65535`（`0xffff`）である
 
-コレクションロイヤリティを主フィールドに解決できる場合、DASは `royalty.sfbp_inherited: true` と `royalty.basis_points_raw: 65535` でこれを示します。
+コレクションロイヤリティを主フィールドに解決できる場合、DASは `royalty.inherited: true` と `royalty.basis_points_raw: 65535` でこれを示します。
 
 ## フィールド対応表
 
@@ -56,7 +56,7 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
 | 表示料率 / ロイヤリティUI | `royalty.basis_points`、`royalty.percent` |
 | 受取人表示 / 支払い分割 | `creators` |
 | ハッシュ、マークル証明、書き込み命令 | `royalty.basis_points_raw`、`creators_raw` |
-| 継承モードの検出 | `royalty.sfbp_inherited`（または `basis_points_raw === 65535`） |
+| 継承モードの検出 | `royalty.inherited`（または `basis_points_raw === 65535`） |
 
 ### 例: DASレスポンス（継承）
 
@@ -67,7 +67,7 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
   "percent": 0.075,
   "basis_points": 750,
   "basis_points_raw": 65535,
-  "sfbp_inherited": true,
+  "inherited": true,
   "primary_sale_happened": false,
   "locked": false
 },
@@ -95,10 +95,10 @@ const INHERIT = 0xffff // 65535
 function isInheritedRoyalty(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): boolean {
   return (
-    royalty.sfbp_inherited === true ||
+    royalty.inherited === true ||
     royalty.basis_points_raw === INHERIT
   )
 }
@@ -106,10 +106,10 @@ function isInheritedRoyalty(royalty: {
 function leafBasisPoints(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): number {
   if (royalty.basis_points_raw != null) return royalty.basis_points_raw
-  if (royalty.sfbp_inherited) return INHERIT
+  if (royalty.inherited) return INHERIT
   return royalty.basis_points
 }
 

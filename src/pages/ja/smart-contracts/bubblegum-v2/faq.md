@@ -158,7 +158,7 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 
 ## cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？ {% #inherited-royalties %}
 
-はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます（`royalty.sfbp_inherited: true`）。
+はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます（`royalty.inherited: true`）。
 
 **要件:**
 

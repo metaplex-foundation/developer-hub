@@ -147,7 +147,7 @@ await createCollection(umi, {
 
 ## Inheriting royalties from the collection
 
-When minting to an MPL-Core collection, you can store a **sentinel** seller fee basis points value on the leaf (`65535`, exported as `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`) instead of copying the collection's royalty percentage into every cNFT. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.sfbp_inherited: true`), while the on-chain leaf keeps the sentinel for hashing.
+When minting to an MPL-Core collection, you can store a **sentinel** seller fee basis points value on the leaf (`65535`, exported as `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`) instead of copying the collection's royalty percentage into every cNFT. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.inherited: true`), while the on-chain leaf keeps the sentinel for hashing.
 
 Clients that **read** DAS responses (wallets, marketplaces, indexers, and apps) should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 

@@ -11,7 +11,7 @@ keywords:
   - getAsset
   - basis_points_raw
   - creators_raw
-  - sfbp_inherited
+  - inherited
   - Bubblegum V2
 about:
   - Compressed NFTs
@@ -27,7 +27,7 @@ faqs:
   - q: Why is creators_raw empty on an inherited cNFT?
     a: Leaf creators must be empty when SFBP is inherited. Use creators for collection royalty payees.
   - q: Do I need to change anything for non-inherited cNFTs?
-    a: No. When inheritance is not used, the _raw fields and sfbp_inherited are omitted and the main royalty and creators fields behave as before.
+    a: No. When inheritance is not used, the _raw fields and inherited are omitted and the main royalty and creators fields behave as before.
 ---
 
 ## Summary
@@ -36,7 +36,7 @@ Bubblegum V2 can store seller fees as an **inherit sentinel** (`65535`) on the l
 
 - Use **main fields** (`royalty.basis_points`, `creators`) for royalty UI and payout display
 - Use **`_raw` fields** (`royalty.basis_points_raw`, `creators_raw`) for proofs, hashing, and write instructions
-- Non-inherited assets are unchanged — `_raw` / `sfbp_inherited` are omitted
+- Non-inherited assets are unchanged — `_raw` / `inherited` are omitted
 
 This page is for **any client that reads** `getAsset` / DAS responses — wallets, marketplaces, indexers, analytics, and apps. For minting and updating inherited cNFTs, see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection) and [Updating](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties).
 
@@ -47,7 +47,7 @@ A cNFT is using inherited royalties when:
 - It is a Bubblegum V2 asset in an MPL-Core collection with the `Royalties` plugin, and
 - The leaf seller fee is the inherit sentinel `65535` (`0xffff`)
 
-DAS signals this with `royalty.sfbp_inherited: true` and `royalty.basis_points_raw: 65535` when the collection royalty can be resolved onto the main fields.
+DAS signals this with `royalty.inherited: true` and `royalty.basis_points_raw: 65535` when the collection royalty can be resolved onto the main fields.
 
 ## Field map
 
@@ -56,7 +56,7 @@ DAS signals this with `royalty.sfbp_inherited: true` and `royalty.basis_points_r
 | Display rate / royalty UI | `royalty.basis_points`, `royalty.percent` |
 | Display payees / payout splits | `creators` |
 | Hashing, merkle proofs, write instructions | `royalty.basis_points_raw`, `creators_raw` |
-| Detect inherit mode | `royalty.sfbp_inherited` (or `basis_points_raw === 65535`) |
+| Detect inherit mode | `royalty.inherited` (or `basis_points_raw === 65535`) |
 
 ### Example DAS response (inherited)
 
@@ -67,7 +67,7 @@ DAS signals this with `royalty.sfbp_inherited: true` and `royalty.basis_points_r
   "percent": 0.075,
   "basis_points": 750,
   "basis_points_raw": 65535,
-  "sfbp_inherited": true,
+  "inherited": true,
   "primary_sale_happened": false,
   "locked": false
 },
@@ -95,10 +95,10 @@ const INHERIT = 0xffff // 65535
 function isInheritedRoyalty(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): boolean {
   return (
-    royalty.sfbp_inherited === true ||
+    royalty.inherited === true ||
     royalty.basis_points_raw === INHERIT
   )
 }
@@ -106,10 +106,10 @@ function isInheritedRoyalty(royalty: {
 function leafBasisPoints(royalty: {
   basis_points: number
   basis_points_raw?: number | null
-  sfbp_inherited?: boolean | null
+  inherited?: boolean | null
 }): number {
   if (royalty.basis_points_raw != null) return royalty.basis_points_raw
-  if (royalty.sfbp_inherited) return INHERIT
+  if (royalty.inherited) return INHERIT
   return royalty.basis_points
 }
 

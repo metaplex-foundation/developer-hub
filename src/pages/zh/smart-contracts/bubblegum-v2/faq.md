@@ -164,7 +164,7 @@ cNFT 的最大数量是 `2^maxDepth`。深度 14 的树可容纳 16,384 个，�
 
 ## cNFT 可以从 MPL-Core 集合继承版税吗？ {% #inherited-royalties %}
 
-可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上链存储该哨兵值。DAS 将集合解析后的费率放在 `royalty.basis_points` / `creators` 上供展示，并将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上（同时 `royalty.sfbp_inherited: true`）。
+可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上链存储该哨兵值。DAS 将集合解析后的费率放在 `royalty.basis_points` / `creators` 上供展示，并将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上（同时 `royalty.inherited: true`）。
 
 **要求:**
 
