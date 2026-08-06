@@ -18,8 +18,8 @@ const assetWithProof = await getAssetWithProof(umi, assetId, {
 // Leaf / hashing value (65535 when inherited)
 console.log(assetWithProof.metadata.sellerFeeBasisPoints)
 
-// Display / payout value from DAS *_inherited fields
-console.log(assetWithProof.rpcAsset.royalty?.basis_points_inherited)
+// Display / payout value from DAS main fields
+console.log(assetWithProof.rpcAsset.royalty?.basis_points)
 // [/MAIN]
 
 // [OUTPUT]

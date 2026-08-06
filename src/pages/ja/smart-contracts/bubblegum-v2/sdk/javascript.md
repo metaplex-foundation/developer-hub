@@ -39,7 +39,7 @@ faqs:
   - q: このSDKをBubblegum V1ツリーで使用できますか？
     a: いいえ。このSDKはBubblegum V2を対象としておりLeafSchemaV2を使用します。V1ツリーにはレガシーBubblegum SDKを使用してください。
   - q: getAssetWithProofとは何で、なぜ必要なのですか？
-    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーター（プルーフ、ルート、リーフインデックス、ノンス、メタデータ）を1回の呼び出しで取得するヘルパーです。継承ロイヤリティの場合、metadata.sellerFeeBasisPointsはオンチェーンリーフセンチネル（65535）であり、解決済みのコレクション料率はrpcAsset.royalty.basis_points_inheritedにあります。
+    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーター（プルーフ、ルート、リーフインデックス、ノンス、メタデータ）を1回の呼び出しで取得するヘルパーです。継承ロイヤリティの場合、metadata.sellerFeeBasisPointsはオンチェーンリーフセンチネル（65535）であり、解決済みのコレクション料率はrpcAsset.royalty.basis_pointsにあります。
 ---
 
 **Bubblegum V2 JavaScript SDK**（`@metaplex-foundation/mpl-bubblegum`）は、Solanaで[圧縮NFT](/ja/smart-contracts/bubblegum-v2)を作成・管理するための推奨TypeScript/JavaScriptライブラリです。[Umiフレームワーク](/ja/dev-tools/umi)をベースに構築されており、すべてのBubblegum V2操作に対してタイプセーフな関数を提供し、[DAS API](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)プラグインが自動的に含まれています。 {% .lead %}
@@ -302,7 +302,7 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-`getAssetWithProof.metadata` は常にリーフを反映します（ロイヤリティ継承時は `65535` を含む）。表示には `rpcAsset.royalty.basis_points_inherited` と `rpcAsset.creators_inherited` を読んでください。
+`getAssetWithProof.metadata` は常にリーフを反映します（ロイヤリティ継承時は `65535` を含む）。表示には `rpcAsset.royalty.basis_points` と `rpcAsset.creators` を読んでください。
 
 ## 圧縮NFTの委任
 
@@ -511,8 +511,8 @@ DAS APIプラグインは`mplBubblegum()`によって自動的に登録されま
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | ハッシュと書き込み命令用のリーフ正規メタデータ。ロイヤリティが継承されている場合、`sellerFeeBasisPoints` は `65535`、`creators` はリーフのクリエイター一覧（通常は空）です。 |
-| `rpcAsset` | 完全なDASレスポンス。コレクションから解決された表示値は `royalty.basis_points_inherited`、`royalty.percent_inherited`、`creators_inherited` にあります。 |
+| `metadata` | ハッシュと書き込み命令用のリーフ正規メタデータ（`basis_points_raw` / `creators_raw` から構成）。ロイヤリティが継承されている場合、`sellerFeeBasisPoints` は `65535`、`creators` はリーフのクリエイターリスト（通常は空）です。 |
+| `rpcAsset` | 完全なDASレスポンス。コレクションから解決された表示値は `royalty.basis_points`、`royalty.percent`、`creators` にあり、リーフ値は `royalty.basis_points_raw` と `creators_raw` にあります。 |
 
 `updateMetadataV2` は既存リーフ引数名を引き続き `currentMetadata`（IDL）とします。V2 の `collection` を公開鍵にして、`assetWithProof.metadata` のリーフフィールドからその `MetadataArgsV2` を構築してください。
 

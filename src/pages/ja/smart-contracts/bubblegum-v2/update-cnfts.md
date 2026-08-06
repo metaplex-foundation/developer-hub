@@ -114,7 +114,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="書き込み命令用のリーフメタデータ" %}
-`getAssetWithProof.metadata` は常にリーフ正規値です — ロイヤリティが継承されている場合は `sellerFeeBasisPoints: 65535` を含みます。コレクションから解決された表示値は `rpcAsset.royalty.basis_points_inherited` と `rpcAsset.creators_inherited` にあります。
+`getAssetWithProof.metadata` は常にリーフ正規値です — ロイヤリティが継承されている場合は `sellerFeeBasisPoints: 65535` を含みます。コレクションから解決された表示値は `rpcAsset.royalty.basis_points` と `rpcAsset.creators` にあります。
 
 `updateMetadataV2` の `currentMetadata` 引数は既存リーフメタデータのIDL名です（V2形状: `collection` は公開鍵）。`assetWithProof.metadata` から構築してください。
 

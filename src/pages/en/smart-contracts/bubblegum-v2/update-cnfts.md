@@ -114,7 +114,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="Leaf metadata for write instructions" %}
-`getAssetWithProof.metadata` is always leaf-canonical — including `sellerFeeBasisPoints: 65535` when royalties are inherited. Collection-resolved display values are on `rpcAsset.royalty.basis_points_inherited` and `rpcAsset.creators_inherited`.
+`getAssetWithProof.metadata` is always leaf-canonical — including `sellerFeeBasisPoints: 65535` when royalties are inherited. Collection-resolved display values are on `rpcAsset.royalty.basis_points` and `rpcAsset.creators`.
 
 `updateMetadataV2`'s `currentMetadata` argument is the IDL name for existing leaf metadata (V2 shape: `collection` is a pubkey). Build it from `assetWithProof.metadata`.
 

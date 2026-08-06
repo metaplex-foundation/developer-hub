@@ -39,7 +39,7 @@ faqs:
   - q: Can I use this SDK with Bubblegum V1 trees?
     a: No. This SDK targets Bubblegum V2 and uses LeafSchemaV2. Use the legacy Bubblegum SDK for V1 trees.
   - q: What is getAssetWithProof and why do I need it?
-    a: getAssetWithProof is a helper that fetches all parameters needed for leaf-mutating instructions (proof, root, leaf index, nonce, metadata) from the DAS API in one call. For inherited royalties, metadata.sellerFeeBasisPoints is the on-chain leaf sentinel (65535); resolved collection rates are on rpcAsset.royalty.basis_points_inherited.
+    a: getAssetWithProof is a helper that fetches all parameters needed for leaf-mutating instructions (proof, root, leaf index, nonce, metadata) from the DAS API in one call. For inherited royalties, metadata.sellerFeeBasisPoints is the on-chain leaf sentinel (65535); resolved collection rates are on rpcAsset.royalty.basis_points.
 ---
 
 The **Bubblegum V2 JavaScript SDK** (`@metaplex-foundation/mpl-bubblegum`) is the recommended TypeScript/JavaScript library for creating and managing [compressed NFTs](/smart-contracts/bubblegum-v2) on Solana. Built on the [Umi framework](/dev-tools/umi), it provides type-safe functions for all Bubblegum V2 operations and includes the [DAS API](/smart-contracts/bubblegum-v2/fetch-cnfts) plugin automatically. {% .lead %}
@@ -300,7 +300,7 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-`getAssetWithProof.metadata` always mirrors the leaf (including `65535` when royalties are inherited). For display, read `rpcAsset.royalty.basis_points_inherited` and `rpcAsset.creators_inherited`.
+`getAssetWithProof.metadata` always mirrors the leaf (including `65535` when royalties are inherited). For display, read `rpcAsset.royalty.basis_points` and `rpcAsset.creators`.
 
 ## Delegate a Compressed NFT
 
@@ -509,8 +509,8 @@ The DAS API plugin is automatically registered by `mplBubblegum()`. See [Fetch c
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | Leaf-canonical metadata for hashing and write instructions. When royalties are inherited, `sellerFeeBasisPoints` is `65535` and `creators` is the leaf creator list (usually empty). |
-| `rpcAsset` | Full DAS response. Collection-resolved display values live on `royalty.basis_points_inherited`, `royalty.percent_inherited`, and `creators_inherited`. |
+| `metadata` | Leaf-canonical metadata for hashing and write instructions (from `basis_points_raw` / `creators_raw`). When royalties are inherited, `sellerFeeBasisPoints` is `65535` and `creators` is the leaf creator list (usually empty). |
+| `rpcAsset` | Full DAS response. Collection-resolved display values live on `royalty.basis_points`, `royalty.percent`, and `creators`; leaf values are on `royalty.basis_points_raw` and `creators_raw`. |
 
 `updateMetadataV2` still names its existing-leaf argument `currentMetadata` (IDL). Build that `MetadataArgsV2` from `assetWithProof.metadata` leaf fields, with V2 `collection` as a pubkey.
 

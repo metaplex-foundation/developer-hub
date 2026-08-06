@@ -36,7 +36,7 @@ faqs:
   - q: 1つのツリーにcNFTをいくつ保存できますか？
     a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
   - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
-    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_points_inheritedにコレクション料率を公開します。書き込み命令にはgetAssetWithProof.metadata（リーフ値）を使用してください。
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_pointsにコレクション料率を、royalty.basis_points_rawにセンチネルを置きます。書き込み命令にはgetAssetWithProof.metadata（リーフ値）を使用してください。
 ---
 
 ## Summary
@@ -158,7 +158,7 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 
 ## cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？ {% #inherited-royalties %}
 
-はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは `royalty.basis_points` にセンチネルを返し、表示用に `royalty.basis_points_inherited` / `creators_inherited` でコレクション料率を公開します。
+はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます（`royalty.sfbp_inherited: true`）。
 
 **要件:**
 
@@ -168,7 +168,7 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 **`getAssetWithProof` の使用:**
 
 - **`metadata`** — ハッシュと書き込み命令用のリーフ正規値（継承時は `sellerFeeBasisPoints` が `65535`）。
-- **`rpcAsset`** — 表示 / 支払いUIには `royalty.basis_points_inherited` と `creators_inherited` を使用してください。
+- **`rpcAsset`** — 表示 / 支払いUIには `royalty.basis_points` と `creators` を使用してください。
 
 `updateMetadataV2` を呼び出すときは、リーフメタデータを命令の `currentMetadata` 引数（既存リーフ状態のIDL名）として渡してください。
 

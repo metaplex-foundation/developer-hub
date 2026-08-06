@@ -7,7 +7,7 @@ tableOfContents: false
 
 Returns the information of a compressed/standard asset including metadata and owner.
 
-For Bubblegum V2 cNFTs that inherit seller fees from an MPL-Core collection, leaf values stay on `royalty.basis_points` / `creators`, and collection-resolved display values are on `royalty.basis_points_inherited`, `royalty.percent_inherited`, and `creators_inherited`. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
+For Bubblegum V2 cNFTs that inherit seller fees from an MPL-Core collection, collection-resolved display values are on `royalty.basis_points` / `creators`, and leaf values are on `royalty.basis_points_raw` / `creators_raw` (with `royalty.sfbp_inherited: true`). See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
 ## Parameters
 

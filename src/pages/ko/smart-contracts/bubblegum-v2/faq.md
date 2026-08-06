@@ -36,7 +36,7 @@ faqs:
   - q: 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요?
     a: 최대값은 2^maxDepth입니다. 깊이 30의 트리는 10억 개 이상의 cNFT를 보유할 수 있지만, 트리가 클수록 렌트 비용이 더 많이 듭니다.
   - q: cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요?
-    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 DAS는 royalty.basis_points_inherited에 컬렉션 비율을 노출합니다. 쓰기 명령에는 getAssetWithProof.metadata(리프 값)를 사용하세요.
+    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 DAS는 royalty.basis_points에 컬렉션 비율을, royalty.basis_points_raw에 센티널을 둡니다. 쓰기 명령에는 getAssetWithProof.metadata(리프 값)를 사용하세요.
 ---
 
 ## Summary
@@ -158,17 +158,17 @@ cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊�
 
 ## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
 
-예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 `royalty.basis_points`에 센티널을 반환하고, 표시용으로 `royalty.basis_points_inherited` / `creators_inherited`에 컬렉션 비율을 노출합니다.
+예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다(`royalty.sfbp_inherited: true`).
 
 **요구 사항:**
 
-- 컬렉션에는 `BubblegumV2`와 `Royalties` 플러그인이 모두 있어야 합니다.
-- 상속된 seller fee를 사용할 때 `metadata.creators`는 빈 배열이어야 합니다.
+- 컬렉션에 `BubblegumV2`와 `Royalties` 플러그인이 모두 있어야 합니다.
+- 상속 seller fee를 사용할 때 `metadata.creators`는 빈 배열이어야 합니다.
 
 **`getAssetWithProof` 사용:**
 
-- **`metadata`** — 해싱 및 쓰기 명령용 리프 정규 값(상속 시 `sellerFeeBasisPoints`는 `65535`).
-- **`rpcAsset`** — 표시 / 지급 UI에는 `royalty.basis_points_inherited`와 `creators_inherited`를 사용하세요.
+- **`metadata`** — 해싱 및 쓰기 명령을 위한 리프 정규 값(상속 시 `sellerFeeBasisPoints`는 `65535`).
+- **`rpcAsset`** — 표시 / 지급 UI에는 `royalty.basis_points`와 `creators`를 사용하세요.
 
 `updateMetadataV2`를 호출할 때는 리프 메타데이터를 명령의 `currentMetadata` 인자(기존 리프 상태에 대한 IDL 이름)로 전달하세요.
 

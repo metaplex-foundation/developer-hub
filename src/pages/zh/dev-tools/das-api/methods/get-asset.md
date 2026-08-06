@@ -7,7 +7,7 @@ tableOfContents: false
 
 返回压缩/标准资产的信息，包括元数据和所有者。
 
-对于从 MPL-Core 集合继承卖家费用的 Bubblegum V2 cNFT，叶子值保留在 `royalty.basis_points` / `creators` 上，集合解析后的展示值位于 `royalty.basis_points_inherited`、`royalty.percent_inherited` 与 `creators_inherited`。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
+对于从 MPL-Core 集合继承卖家费用的 Bubblegum V2 cNFT，集合解析后的展示值位于 `royalty.basis_points` / `creators`，叶子值位于 `royalty.basis_points_raw` / `creators_raw`（同时 `royalty.sfbp_inherited: true`）。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
 ## 参数
 

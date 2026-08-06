@@ -56,7 +56,7 @@ pub struct MetadataArgsV2 {
 }
 ```
 
-`seller_fee_basis_points` が `65535`（`0xffff`、`SELLER_FEE_BASIS_POINTS_INHERIT`）の場合、リーフにはリテラルなロイヤリティ率ではなくセンチネルが保存されます。データハッシュはコレクションの解決済みベーシスポイントではなく、このセンチネル値から計算されます。DASは `royalty.basis_points` にリーフセンチネルを、`royalty.basis_points_inherited` にコレクション料率を公開します。JavaScript SDKの `getAssetWithProof` ヘルパーはリーフセンチネルを `metadata.sellerFeeBasisPoints` に置きます。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)および[コレクションからロイヤリティを継承する](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)を参照してください。
+`seller_fee_basis_points` が `65535`（`0xffff`、`SELLER_FEE_BASIS_POINTS_INHERIT`）の場合、リーフにはリテラルなロイヤリティ率ではなくセンチネルが保存されます。データハッシュはコレクションの解決済みベーシスポイントではなく、このセンチネル値から計算されます。DASは `royalty.basis_points` にコレクション料率を、`royalty.basis_points_raw` にリーフセンチネルを置きます。JavaScript SDKの `getAssetWithProof` ヘルパーはリーフセンチネルを `metadata.sellerFeeBasisPoints` に置きます。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)および[コレクションからロイヤリティを継承する](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)を参照してください。
 
 cNFTのメタデータは、図に示され以下に説明されているように複数回ハッシュ化されます：
 

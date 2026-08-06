@@ -297,7 +297,7 @@ pub struct MetadataArgsV2 {
 }
 ```
 
-`seller_fee_basis_points`가 `65535`(`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`)이면 리프에는 리터럴 로열티 비율 대신 센티널이 저장됩니다. 데이터 해시는 컬렉션의 해석된 basis points가 아니라 이 센티널 값에서 계산됩니다. DAS는 `royalty.basis_points`에 리프 센티널을, `royalty.basis_points_inherited`에 컬렉션 비율을 노출합니다. JavaScript SDK의 `getAssetWithProof` 헬퍼는 리프 센티널을 `metadata.sellerFeeBasisPoints`에 둡니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties) 및 [컬렉션에서 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)을 참조하세요.
+`seller_fee_basis_points`가 `65535`(`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`)이면 리프에는 리터럴 로열티 비율 대신 센티널이 저장됩니다. 데이터 해시는 컬렉션의 해석된 basis points가 아니라 이 센티널 값에서 계산됩니다. DAS는 `royalty.basis_points`에 컬렉션 비율을, `royalty.basis_points_raw`에 리프 센티널을 둡니다. JavaScript SDK의 `getAssetWithProof` 헬퍼는 리프 센티널을 `metadata.sellerFeeBasisPoints`에 둡니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties) 및 [컬렉션에서 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)을 참조하세요.
 
 cNFT의 메타데이터는 아래 다이어그램에 표시되고 설명된 대로 여러 번 해싱됩니다:
 

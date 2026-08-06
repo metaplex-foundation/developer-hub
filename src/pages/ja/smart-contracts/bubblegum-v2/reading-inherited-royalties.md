@@ -3,14 +3,15 @@ title: 継承ロイヤリティの読み取り
 metaTitle: 継承ロイヤリティの読み取り - Bubblegum V2 - Metaplex
 description: ウォレット、マーケットプレイス、インデクサー、その他のクライアントが、MPL-Coreコレクションから販売者手数料を継承するBubblegum V2 cNFTのDAS getAssetレスポンスをどのように読むべきかを説明します。
 created: '07-16-2026'
-updated: '07-16-2026'
+updated: '08-06-2026'
 keywords:
   - inherited royalties
   - seller fee basis points
   - DAS API
   - getAsset
-  - basis_points_inherited
-  - creators_inherited
+  - basis_points_raw
+  - creators_raw
+  - sfbp_inherited
   - Bubblegum V2
 about:
   - Compressed NFTs
@@ -21,76 +22,70 @@ programmingLanguage:
   - JavaScript
   - TypeScript
 faqs:
-  - q: royalty.basis_pointsが65535と表示されるのはなぜですか？
-    a: オンチェーンの継承センチネルです。ユーザー向けのコレクション料率にはroyalty.basis_points_inheritedを使用してください。
-  - q: 継承されたcNFTでcreatorsが空なのはなぜですか？
-    a: SFBPが継承される場合、リーフのcreatorsは空でなければなりません。コレクションのロイヤリティ受取人にはcreators_inheritedを使用してください。
+  - q: royalty.basis_points_rawが65535と表示されるのはなぜですか？
+    a: リーフハッシュに使われるオンチェーン継承センチネルです。royalty.basis_pointsにはすでに表示用のコレクション料率が入っています。
+  - q: 継承されたcNFTでcreators_rawが空なのはなぜですか？
+    a: SFBPが継承される場合、リーフのcreatorsは空でなければなりません。コレクションのロイヤリティ受取人にはcreatorsを使用してください。
   - q: 継承していないcNFTについて変更は必要ですか？
-    a: いいえ。継承を使用しない場合、*_inheritedフィールドは省略され、主なroyaltyとcreatorsフィールドは従来どおり動作します。
+    a: いいえ。継承を使用しない場合、_rawフィールドとsfbp_inheritedは省略され、主なroyaltyとcreatorsフィールドは従来どおり動作します。
 ---
 
 ## 概要
 
-Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**（`65535`）として保存し、MPL-CoreコレクションのRoyaltiesプラグインから実効料率を解決できます。DASはハッシュ用に主フィールドへリーフ値を保持し、表示用に `*_inherited` フィールドを追加します。
+Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**（`65535`）として保存し、MPL-CoreコレクションのRoyaltiesプラグインから実効料率を解決できます。DASは**コレクションから解決された値を主フィールドに置き**（表示用）、リーフ値は `_raw` フィールドに公開します（ハッシュ用）。
 
-- **リーフフィールド**は証明、ハッシュ、書き込み命令に使用
-- **`*_inherited` フィールド**はロイヤリティUIと支払い表示に使用
-- 非継承アセットは変更なし — `*_inherited` は省略されます
+- **主フィールド**（`royalty.basis_points`、`creators`）はロイヤリティUIと支払い表示に使用
+- **`_raw` フィールド**（`royalty.basis_points_raw`、`creators_raw`）は証明、ハッシュ、書き込み命令に使用
+- 非継承アセットは変更なし — `_raw` / `sfbp_inherited` は省略されます
 
 このページは、`getAsset` / DASレスポンスを**読む**すべてのクライアント（ウォレット、マーケットプレイス、インデクサー、分析、アプリ）向けです。継承ロイヤリティのcNFTのミントと更新については、[ミント](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)および[更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)を参照してください。
 
-## 適用タイミング
+## 適用条件
 
-次の条件を満たす場合、cNFTは継承ロイヤリティを使用しています:
+次の条件を満たすとき、cNFTは継承ロイヤリティを使用しています。
 
 - `Royalties` プラグインを持つMPL-Coreコレクション内のBubblegum V2アセットであり、かつ
 - リーフの販売者手数料が継承センチネル `65535`（`0xffff`）である
 
-DASはコレクションロイヤリティを解決できる場合、`royalty.basis_points` を `65535` に設定し、継承フィールドを埋めます。
+コレクションロイヤリティを主フィールドに解決できる場合、DASは `royalty.sfbp_inherited: true` と `royalty.basis_points_raw: 65535` でこれを示します。
 
-## フィールドマップ
+## フィールド対応表
 
 | 用途 | フィールド |
 |------|------------|
-| ハッシュ、マークル証明、書き込み命令 | `royalty.basis_points`、`royalty.percent`、`creators` |
-| 表示料率 / ロイヤリティUI | `royalty.basis_points_inherited`、`royalty.percent_inherited` |
-| 受取人表示 / 支払い分割 | `creators_inherited` |
+| 表示料率 / ロイヤリティUI | `royalty.basis_points`、`royalty.percent` |
+| 受取人表示 / 支払い分割 | `creators` |
+| ハッシュ、マークル証明、書き込み命令 | `royalty.basis_points_raw`、`creators_raw` |
+| 継承モードの検出 | `royalty.sfbp_inherited`（または `basis_points_raw === 65535`） |
 
-### リーフ（正規 / ハッシュ）
+### 例: DASレスポンス（継承）
 
 ```json
 "royalty": {
   "royalty_model": "creators",
   "target": null,
-  "percent": 6.5535,
-  "basis_points": 65535,
-  "basis_points_inherited": 750,
-  "percent_inherited": 0.075,
+  "percent": 0.075,
+  "basis_points": 750,
+  "basis_points_raw": 65535,
+  "sfbp_inherited": true,
   "primary_sale_happened": false,
   "locked": false
 },
-"creators": [],
-"creators_inherited": [
+"creators": [
   {
     "address": "CJkzXwVwqiaSvMuRb3obrZHdrPFjCMBJBDrjspn72tDv",
     "share": 100,
     "verified": true
   }
-]
+],
+"creators_raw": []
 ```
 
-- `basis_points: 65535` は **655.35% のロイヤリティではありません** — リーフデータハッシュで使われるオンチェーンセンチネルです。
-- 継承SFBPでは `creators: []` が想定されます。継承フィールドがある場合、空のcreators配列を「ロイヤリティ受取人がいない」と解釈しないでください。
+- `basis_points: 750` はユーザーに見せるコレクション料率（7.5%）です。
+- `basis_points_raw: 65535` はリーフデータハッシュに使われるオンチェーンセンチネルであり — **655.35%のロイヤリティではありません**。
+- `creators` はコレクション Royalties プラグインの受取人、`creators_raw: []` はハッシュ用のリーフ creators 配列です。
 
-### 表示（コレクションから解決）
-
-| フィールド | 例 | 意味 |
-|------------|-----|------|
-| `royalty.basis_points_inherited` | `750` | ベーシスポイント単位のコレクション料率（7.5%） |
-| `royalty.percent_inherited` | `0.075` | 同じ料率の小数表現 |
-| `creators_inherited` | `[{ address, share, verified }]` | コレクション Royalties プラグインのクリエイター |
-
-コレクションを解決できない場合、`basis_points` が `65535` のまま `*_inherited` が省略されることがあります。
+コレクションを解決できない場合、`basis_points` はフォールバックすることがあり、`basis_points_raw` は `65535` のままです。
 
 ## 検出と表示ヘルパー
 
@@ -99,30 +94,34 @@ const INHERIT = 0xffff // 65535
 
 function isInheritedRoyalty(royalty: {
   basis_points: number
-  basis_points_inherited?: number | null
+  basis_points_raw?: number | null
+  sfbp_inherited?: boolean | null
 }): boolean {
   return (
-    royalty.basis_points === INHERIT ||
-    royalty.basis_points_inherited != null
+    royalty.sfbp_inherited === true ||
+    royalty.basis_points_raw === INHERIT
   )
 }
 
-function displayBasisPoints(royalty: {
+function leafBasisPoints(royalty: {
   basis_points: number
-  basis_points_inherited?: number | null
+  basis_points_raw?: number | null
+  sfbp_inherited?: boolean | null
 }): number {
-  return royalty.basis_points_inherited ?? royalty.basis_points
+  if (royalty.basis_points_raw != null) return royalty.basis_points_raw
+  if (royalty.sfbp_inherited) return INHERIT
+  return royalty.basis_points
 }
 
-function displayCreators(asset: {
+function leafCreators(asset: {
   creators: Array<{ address: string; share: number; verified: boolean }>
-  creators_inherited?: Array<{
+  creators_raw?: Array<{
     address: string
     share: number
     verified: boolean
   }> | null
 }) {
-  return asset.creators_inherited ?? asset.creators
+  return asset.creators_raw ?? asset.creators
 }
 ```
 
@@ -132,31 +131,34 @@ function displayCreators(asset: {
 import {
   SELLER_FEE_BASIS_POINTS_INHERIT,
   isInheritedSfbpRoyalty,
+  getRawSellerFeeBasisPoints,
   getResolvedSellerFeeBasisPoints,
 } from '@metaplex-foundation/digital-asset-standard-api'
 
 const royalty = asset.royalty
 if (isInheritedSfbpRoyalty(royalty)) {
-  const rate = getResolvedSellerFeeBasisPoints(royalty) // e.g. 750
-  const payees = asset.creators_inherited ?? asset.creators
+  const rate = getResolvedSellerFeeBasisPoints(royalty) // e.g. 750 (display)
+  const leaf = getRawSellerFeeBasisPoints(royalty) // 65535
+  const payees = asset.creators // collection payees
+  const leafCreators = asset.creators_raw ?? []
 }
 ```
 
 ## やってはいけないこと
 
-- ユーザー向けロイヤリティ料率として `65535` や `6.5535%` を**表示しないでください**。
-- 継承使用時に、空の `creators` をロイヤリティ受取人なしと**仮定しないでください**。
-- リーフハッシュの再計算や Bubblegum 書き込み命令の構築時に、`basis_points_inherited` や `creators_inherited` を**使わないでください** — リーフの `basis_points` とリーフの `creators` が必要です。
+- `65535` や `6.5535%` をユーザー向けロイヤリティ料率として**表示しないでください** — その値は `basis_points_raw` にあります。
+- 空の `creators_raw` がロイヤリティ受取人がいないことを意味すると**仮定しないでください**；表示用の受取人は `creators` にあります。
+- リーフハッシュの再計算や Bubblegum 書き込み命令の構築時に、主フィールドの `basis_points` / `creators` を**使わないでください** — `basis_points_raw` と `creators_raw` を使ってください。
 
-## Bubblegum SDK に関する注意
+## Bubblegum SDK の注意
 
-`getAssetWithProof` は書き込み命令が正しくハッシュされるよう、DASの**リーフ**フィールドから `metadata` を構築します。`getAssetWithProof` 後にUI料率が必要な場合は、`rpcAsset.royalty.basis_points_inherited` と `rpcAsset.creators_inherited` を読んでください。[JavaScript SDK](/ja/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)を参照してください。
+`getAssetWithProof` は書き込み命令が正しくハッシュされるよう、DASの**リーフ**フィールド（`basis_points_raw`、`creators_raw`）から `metadata` を構築します。`getAssetWithProof` 後にUI料率が必要な場合は、`rpcAsset.royalty.basis_points` と `rpcAsset.creators` を読んでください。[JavaScript SDK](/ja/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)を参照してください。
 
 ## 関連
 
 - [圧縮NFTの取得](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)
 - [ミント — ロイヤリティの継承](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)
 - [cNFTの更新 — 継承ロイヤリティ](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)
-- [NFTデータのハッシュ化](/ja/smart-contracts/bubblegum-v2/hashed-nft-data)
+- [NFTデータのハッシュ](/ja/smart-contracts/bubblegum-v2/hashed-nft-data)
 - [DAS getAsset](/ja/dev-tools/das-api/methods/get-asset)
 - [FAQ — 継承ロイヤリティ](/ja/smart-contracts/bubblegum-v2/faq#inherited-royalties)

@@ -209,7 +209,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
-- For Bubblegum V2 cNFTs that inherit seller fees from a collection, DAS keeps the leaf sentinel on `royalty.basis_points` and exposes the collection rate on `*_inherited` fields. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
+- For Bubblegum V2 cNFTs that inherit seller fees from a collection, DAS puts the collection rate on `royalty.basis_points` / `creators` and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw`. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
 ## FAQ
 

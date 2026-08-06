@@ -114,7 +114,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="쓰기 명령용 리프 메타데이터" %}
-`getAssetWithProof.metadata`는 항상 리프 정규 값입니다 — 로열티가 상속된 경우 `sellerFeeBasisPoints: 65535` 포함. 컬렉션에서 해석된 표시 값은 `rpcAsset.royalty.basis_points_inherited`와 `rpcAsset.creators_inherited`에 있습니다.
+`getAssetWithProof.metadata`는 항상 리프 정규 값입니다 — 로열티가 상속된 경우 `sellerFeeBasisPoints: 65535` 포함. 컬렉션에서 해석된 표시 값은 `rpcAsset.royalty.basis_points`와 `rpcAsset.creators`에 있습니다.
 
 `updateMetadataV2`의 `currentMetadata` 인자는 기존 리프 메타데이터의 IDL 이름입니다(V2 형태: `collection`은 pubkey). `assetWithProof.metadata`에서 구성하세요.
 

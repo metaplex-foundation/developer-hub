@@ -36,7 +36,7 @@ faqs:
   - q: How many cNFTs can I store in one tree?
     a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
   - q: Can a cNFT inherit royalties from its MPL-Core collection?
-    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535) and DAS exposes the collection rate on royalty.basis_points_inherited. Use getAssetWithProof.metadata (leaf values) for write instructions.
+    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535); DAS puts the collection rate on royalty.basis_points and the sentinel on royalty.basis_points_raw. Use getAssetWithProof.metadata (leaf values) for write instructions.
 ---
 
 ## Summary
@@ -197,7 +197,7 @@ The maximum number of cNFTs is `2^maxDepth`. A depth-14 tree holds 16,384 cNFTs,
 
 ## Can a cNFT inherit royalties from its MPL-Core collection? {% #inherited-royalties %}
 
-Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain. DAS returns it on `royalty.basis_points` and exposes the collection rate on `royalty.basis_points_inherited` / `creators_inherited` for display.
+Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, you can omit `metadata.sellerFeeBasisPoints` (or pass `SELLER_FEE_BASIS_POINTS_INHERIT`, `65535`). The leaf stores that sentinel on-chain. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display, and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.sfbp_inherited: true`).
 
 **Requirements:**
 
@@ -207,7 +207,7 @@ Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, y
 **Using `getAssetWithProof`:**
 
 - **`metadata`** — leaf-canonical values for hashing and write instructions (`sellerFeeBasisPoints` is `65535` when inherited).
-- **`rpcAsset`** — use `royalty.basis_points_inherited` and `creators_inherited` for display / payout UI.
+- **`rpcAsset`** — use `royalty.basis_points` and `creators` for display / payout UI.
 
 When calling `updateMetadataV2`, pass leaf metadata as the instruction's `currentMetadata` argument (IDL name for existing leaf state).
 

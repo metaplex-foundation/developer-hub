@@ -30,7 +30,7 @@ faqs:
   - q: What metadata fields are required for minting?
     a: The MetadataArgsV2 requires name, uri, sellerFeeBasisPoints, collection (or none), and creators array.
   - q: Can a cNFT inherit royalties from its MPL-Core collection?
-    a: Yes. When minting to a collection with the Royalties plugin, omit sellerFeeBasisPoints (or pass the SELLER_FEE_BASIS_POINTS_INHERIT sentinel). The leaf stores 65535 (0xffff); DAS exposes the collection rate on royalty.basis_points_inherited.
+    a: Yes. When minting to a collection with the Royalties plugin, omit sellerFeeBasisPoints (or pass the SELLER_FEE_BASIS_POINTS_INHERIT sentinel). The leaf stores 65535 (0xffff); DAS puts the collection rate on royalty.basis_points and the sentinel on royalty.basis_points_raw.
 ---
 
 ## Summary
@@ -147,7 +147,7 @@ await createCollection(umi, {
 
 ## Inheriting royalties from the collection
 
-When minting to an MPL-Core collection, you can store a **sentinel** seller fee basis points value on the leaf (`65535`, exported as `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`) instead of copying the collection's royalty percentage into every cNFT. DAS returns the sentinel on `royalty.basis_points` and the collection rate on `royalty.basis_points_inherited` / `creators_inherited`, while the on-chain leaf keeps the sentinel for hashing.
+When minting to an MPL-Core collection, you can store a **sentinel** seller fee basis points value on the leaf (`65535`, exported as `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`) instead of copying the collection's royalty percentage into every cNFT. DAS puts the collection-resolved rate on `royalty.basis_points` / `creators` for display and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw` (with `royalty.sfbp_inherited: true`), while the on-chain leaf keeps the sentinel for hashing.
 
 Clients that **read** DAS responses (wallets, marketplaces, indexers, and apps) should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 

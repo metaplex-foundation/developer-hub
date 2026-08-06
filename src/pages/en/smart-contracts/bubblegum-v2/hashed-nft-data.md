@@ -56,7 +56,7 @@ pub struct MetadataArgsV2 {
 }
 ```
 
-When `seller_fee_basis_points` is `65535` (`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`), the leaf stores a sentinel instead of a literal royalty percentage. The data hash is computed from this sentinel value, not from the collection's resolved basis points. DAS exposes the leaf sentinel on `royalty.basis_points` and the collection rate on `royalty.basis_points_inherited`. The JavaScript SDK's `getAssetWithProof` helper puts the leaf sentinel on `metadata.sellerFeeBasisPoints`. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties) and [Inheriting royalties from the collection](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection).
+When `seller_fee_basis_points` is `65535` (`0xffff`, `SELLER_FEE_BASIS_POINTS_INHERIT`), the leaf stores a sentinel instead of a literal royalty percentage. The data hash is computed from this sentinel value, not from the collection's resolved basis points. DAS puts the collection rate on `royalty.basis_points` and the leaf sentinel on `royalty.basis_points_raw`. The JavaScript SDK's `getAssetWithProof` helper puts the leaf sentinel on `metadata.sellerFeeBasisPoints`. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties) and [Inheriting royalties from the collection](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection).
 
 The cNFT's metadata is hashed multiple times as shown in the diagram and described below:
 

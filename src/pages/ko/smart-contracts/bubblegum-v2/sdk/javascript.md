@@ -39,7 +39,7 @@ faqs:
   - q: 이 SDK를 Bubblegum V1 트리와 함께 사용할 수 있나요?
     a: 아니요. 이 SDK는 LeafSchemaV2를 사용하는 Bubblegum V2를 대상으로 합니다. V1 트리에는 레거시 Bubblegum SDK를 사용하세요.
   - q: getAssetWithProof는 무엇이고 왜 필요한가요?
-    a: getAssetWithProof는 DAS API에서 리프 변경 명령에 필요한 모든 파라미터(증명, 루트, 리프 인덱스, 논스, 메타데이터)를 한 번의 호출로 가져오는 헬퍼입니다. 상속 로열티의 경우 metadata.sellerFeeBasisPoints는 온체인 리프 센티널(65535)이며, 해석된 컬렉션 비율은 rpcAsset.royalty.basis_points_inherited에 있습니다.
+    a: getAssetWithProof는 DAS API에서 리프 변경 명령에 필요한 모든 파라미터(증명, 루트, 리프 인덱스, 논스, 메타데이터)를 한 번의 호출로 가져오는 헬퍼입니다. 상속 로열티의 경우 metadata.sellerFeeBasisPoints는 온체인 리프 센티널(65535)이며, 해석된 컬렉션 비율은 rpcAsset.royalty.basis_points에 있습니다.
 ---
 
 **Bubblegum V2 JavaScript SDK**(`@metaplex-foundation/mpl-bubblegum`)는 Solana에서 [압축 NFT](/ko/smart-contracts/bubblegum-v2)를 생성하고 관리하기 위한 권장 TypeScript/JavaScript 라이브러리입니다. [Umi 프레임워크](/ko/dev-tools/umi)를 기반으로 구축되었으며, 모든 Bubblegum V2 작업에 대한 타입 안전 함수를 제공하고 [DAS API](/ko/smart-contracts/bubblegum-v2/fetch-cnfts) 플러그인이 자동으로 포함됩니다. {% .lead %}
@@ -302,7 +302,7 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-`getAssetWithProof.metadata`는 항상 리프를 미러링합니다(상속 로열티 시 `65535` 포함). 표시용으로는 `rpcAsset.royalty.basis_points_inherited`와 `rpcAsset.creators_inherited`를 읽으세요.
+`getAssetWithProof.metadata`는 항상 리프를 미러링합니다(상속 로열티 시 `65535` 포함). 표시용으로는 `rpcAsset.royalty.basis_points`와 `rpcAsset.creators`를 읽으세요.
 
 ## 압축 NFT 위임 {% #delegate-a-compressed-nft %}
 
@@ -511,8 +511,8 @@ DAS API 플러그인은 `mplBubblegum()`에 의해 자동으로 등록됩니다.
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | 해싱 및 쓰기 명령용 리프 정규 메타데이터. 로열티가 상속된 경우 `sellerFeeBasisPoints`는 `65535`이고 `creators`는 리프 크리에이터 목록(보통 비어 있음)입니다. |
-| `rpcAsset` | 전체 DAS 응답. 컬렉션에서 해석된 표시 값은 `royalty.basis_points_inherited`, `royalty.percent_inherited`, `creators_inherited`에 있습니다. |
+| `metadata` | 해싱 및 쓰기 명령용 리프 정규 메타데이터(`basis_points_raw` / `creators_raw`에서 구성). 로열티가 상속된 경우 `sellerFeeBasisPoints`는 `65535`이고 `creators`는 리프 크리에이터 목록(보통 비어 있음)입니다. |
+| `rpcAsset` | 전체 DAS 응답. 컬렉션에서 해석된 표시 값은 `royalty.basis_points`, `royalty.percent`, `creators`에 있고, 리프 값은 `royalty.basis_points_raw`와 `creators_raw`에 있습니다. |
 
 `updateMetadataV2`는 기존 리프 인자 이름을 여전히 `currentMetadata`(IDL)로 둡니다. V2 `collection`을 pubkey로 하여 `assetWithProof.metadata` 리프 필드에서 해당 `MetadataArgsV2`를 구성하세요.
 

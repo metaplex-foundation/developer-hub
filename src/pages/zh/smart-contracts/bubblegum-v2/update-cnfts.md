@@ -114,7 +114,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="写入指令使用叶子元数据" %}
-`getAssetWithProof.metadata` 始终是叶子规范值 — 继承版税时包括 `sellerFeeBasisPoints: 65535`。集合解析后的展示值位于 `rpcAsset.royalty.basis_points_inherited` 与 `rpcAsset.creators_inherited`。
+`getAssetWithProof.metadata` 始终是叶子规范值 — 继承版税时包括 `sellerFeeBasisPoints: 65535`。集合解析后的展示值位于 `rpcAsset.royalty.basis_points` 与 `rpcAsset.creators`。
 
 `updateMetadataV2` 的 `currentMetadata` 参数是现有叶子元数据的 IDL 名称（V2 形态：`collection` 为公钥）。请从 `assetWithProof.metadata` 构建它。
 

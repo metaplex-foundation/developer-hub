@@ -30,7 +30,7 @@ faqs:
   - q: 민팅에 필요한 메타데이터 필드는 무엇인가요?
     a: MetadataArgsV2에는 name, uri, sellerFeeBasisPoints, collection(또는 none), 그리고 creators 배열이 필요합니다.
   - q: cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요?
-    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하거나(또는 SELLER_FEE_BASIS_POINTS_INHERIT 센티널을 전달) 할 수 있습니다. 리프에는 65535(0xffff)가 저장되며 DAS는 royalty.basis_points_inherited에 컬렉션 비율을 노출합니다.
+    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하거나(또는 SELLER_FEE_BASIS_POINTS_INHERIT 센티널을 전달) 할 수 있습니다. 리프에는 65535(0xffff)가 저장되며 DAS는 royalty.basis_points에 컬렉션 비율을, royalty.basis_points_raw에 센티널을 둡니다.
 ---
 
 ## Summary
@@ -147,7 +147,7 @@ await createCollection(umi, {
 
 ## 컬렉션에서 로열티 상속
 
-MPL-Core 컬렉션에 민팅할 때 컬렉션의 로열티 비율을 모든 cNFT에 복사하는 대신 리프에 **센티널** seller fee basis points 값(`65535`, `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`로 내보냄)을 저장할 수 있습니다. DAS는 `royalty.basis_points`에 센티널을, `royalty.basis_points_inherited` / `creators_inherited`에 컬렉션 비율을 반환하며, 온체인 리프는 해싱을 위해 센티널을 유지합니다.
+MPL-Core 컬렉션에 민팅할 때 컬렉션의 로열티 비율을 모든 cNFT에 복사하는 대신 리프에 **센티널** seller fee basis points 값(`65535`, `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`로 내보냄)을 저장할 수 있습니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 두며(`royalty.sfbp_inherited: true`), 온체인 리프는 해싱을 위해 센티널을 유지합니다.
 
 DAS 응답을 **읽는** 클라이언트(지갑, 마켓플레이스, 인덱서, 앱)는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 따르세요.
 
