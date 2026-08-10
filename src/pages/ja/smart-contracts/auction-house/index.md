@@ -5,12 +5,6 @@ description: Auction Houseプログラムの概要を説明します
 ---
 
 
-{% callout type="warning" %}
-
-このプログラムは非推奨とマークされており、Metaplex Foundationチームによって積極的にメンテナンスされていないことにご注意ください。新機能、セキュリティ修正、下位互換性は保証されません。ご使用の際は十分ご注意ください。
-
-{% /callout %}
-
 ## はじめに
 
 Auction Houseは、Solanaブロックチェーン内でアセットを交換できるプログラムです。
