@@ -151,6 +151,10 @@ await createCollection(umi, {
 
 **读取** DAS 响应的客户端（钱包、市场、索引器与应用）应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
+{% callout type="warning" title="市场 / 索引器兼容性" %}
+在市场的 DAS 提供商支持继承 SFBP 解析之前，它可能会看到 `creators: []` 与 `basis_points: 65535` 并跳过版税支付。详见[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)上的警告。为更强保证，请使用集合 Royalties 插件的允许/拒绝列表，使销售经过版税合规场所。
+{% /callout %}
+
 当提供了 `coreCollection` 且省略 `metadata.sellerFeeBasisPoints` 时，JavaScript SDK 的 `mintV2` 辅助函数默认使用此行为。
 
 **要求:**

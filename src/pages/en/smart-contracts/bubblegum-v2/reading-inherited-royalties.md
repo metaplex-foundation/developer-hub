@@ -150,9 +150,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - Do **not** assume empty `creators_raw` means no royalty recipients; display payees are on `creators`.
 - Do **not** use main `basis_points` / `creators` when recomputing leaf hashes or building Bubblegum write instructions — use `basis_points_raw` and `creators_raw`.
 
+{% callout type="warning" title="Outdated DAS / marketplaces" %}
+Inherited royalties require a DAS indexer that resolves collection rates onto the main fields. On an **outdated** DAS endpoint, `getAsset` still returns the leaf as-is: `royalty.basis_points` ≈ `65535`, `creators: []`, and no `basis_points_raw` / `inherited` / `creators_raw`.
+
+Marketplaces that only read those DAS asset fields for payouts may treat the asset as having **no royalty recipients** (or an invalid rate) and **pay creators nothing**. Prefer marketplaces that:
+
+- Use an upgraded DAS that returns `inherited` / `_raw` and collection-resolved `creators` / `basis_points`, or
+- Read the MPL-Core collection **Royalties** plugin directly for payouts
+
+Royalty *enforcement* (who may transfer) is separate: configure the collection Royalties plugin `ruleSet` (`ProgramAllowList` / `ProgramDenyList`). Bubblegum does not escrow royalty payments on transfer.
+{% /callout %}
+
 ## Bubblegum SDK note
 
-`getAssetWithProof` builds `metadata` from DAS **leaf** fields (`basis_points_raw`, `creators_raw`) so write instructions hash correctly. For UI rates after `getAssetWithProof`, read `rpcAsset.royalty.basis_points` and `rpcAsset.creators`. See the [JavaScript SDK](/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties).
+`getAssetWithProof` keeps **reading compatible**: `metadata` mirrors DAS main fields (`basis_points`, `creators`), so `metadata.sellerFeeBasisPoints` is the resolved collection rate when inherited. `currentMetadata` is leaf-canonical for writes (sentinel when inherited). Optional siblings `sellerFeeBasisPointsRaw` / `creatorsRaw` and `inherited` mirror DAS `_raw` / inherit detection. Spread `...assetWithProof` into write instructions — use `currentMetadata` for leaf args, not display `metadata`. See the [JavaScript SDK](/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties).
 
 ## Related
 

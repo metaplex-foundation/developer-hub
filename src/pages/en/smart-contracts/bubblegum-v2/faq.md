@@ -36,7 +36,7 @@ faqs:
   - q: How many cNFTs can I store in one tree?
     a: The maximum is 2^maxDepth. A depth-30 tree can hold over 1 billion cNFTs, though larger trees cost more in rent.
   - q: Can a cNFT inherit royalties from its MPL-Core collection?
-    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535); DAS puts the collection rate on royalty.basis_points and the sentinel on royalty.basis_points_raw. Use getAssetWithProof.metadata (leaf values) for write instructions.
+    a: Yes. Omit sellerFeeBasisPoints when minting to a collection with the Royalties plugin. The leaf stores the inherit sentinel (65535); DAS puts the collection rate on royalty.basis_points and the sentinel on royalty.basis_points_raw. Spread getAssetWithProof into writes so currentMetadata (leaf-canonical) is used.
 ---
 
 ## Summary
@@ -206,10 +206,13 @@ Yes. When minting into an MPL-Core collection that has the `Royalties` plugin, y
 
 **Using `getAssetWithProof`:**
 
-- **`metadata`** — leaf-canonical values for hashing and write instructions (`sellerFeeBasisPoints` is `65535` when inherited).
-- **`rpcAsset`** — use `royalty.basis_points` and `creators` for display / payout UI.
+- **`metadata`** — mirrors DAS main / display fields (`sellerFeeBasisPoints` is the collection-resolved rate when inherited).
+- **`currentMetadata`** — leaf-canonical `MetadataArgsV2Args` for write instructions (sentinel when inherited).
+- **`sellerFeeBasisPointsRaw` / `creatorsRaw`** — optional leaf siblings; set when inherited / DAS provides `_raw`.
+- **`inherited`** — sugar for inherit detection.
+- **`rpcAsset`** — full DAS response (`royalty.basis_points` / `creators` for display).
 
-When calling `updateMetadataV2`, pass leaf metadata as the instruction's `currentMetadata` argument (IDL name for existing leaf state).
+When calling `updateMetadataV2`, spread `...assetWithProof` so `currentMetadata` is the leaf state. For instructions that take a leaf `metadata` arg, pass `assetWithProof.currentMetadata`.
 
 **Collection management:**
 

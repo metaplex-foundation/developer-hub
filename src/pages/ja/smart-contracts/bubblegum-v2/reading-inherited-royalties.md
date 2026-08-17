@@ -150,9 +150,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 空の `creators_raw` がロイヤリティ受取人がいないことを意味すると**仮定しないでください**；表示用の受取人は `creators` にあります。
 - リーフハッシュの再計算や Bubblegum 書き込み命令の構築時に、主フィールドの `basis_points` / `creators` を**使わないでください** — `basis_points_raw` と `creators_raw` を使ってください。
 
+{% callout type="warning" title="古い DAS / マーケットプレイス" %}
+継承ロイヤリティには、コレクション料率を主フィールドに解決する DAS インデクサーが必要です。**古い** DAS エンドポイントでは、`getAsset` はリーフをそのまま返します：`royalty.basis_points` ≈ `65535`、`creators: []`、および `basis_points_raw` / `inherited` / `creators_raw` なし。
+
+これらの DAS アセットフィールドだけを支払い分割に使うマーケットプレイスは、アセットを**ロイヤリティ受取人なし**（または無効な料率）とみなし、**クリエイターに何も支払わない**可能性があります。次のいずれかを優先してください：
+
+- `inherited` / `_raw` とコレクション解決済みの `creators` / `basis_points` を返すアップグレード済み DAS、または
+- 支払い分割のために MPL-Core コレクションの **Royalties** プラグインを直接読むこと
+
+ロイヤリティの*強制*（誰が転送できるか）は別です：コレクション Royalties プラグインの `ruleSet`（`ProgramAllowList` / `ProgramDenyList`）を設定してください。Bubblegum は転送時にロイヤリティ支払いをエスクローしません。
+{% /callout %}
+
 ## Bubblegum SDK の注意
 
-`getAssetWithProof` は書き込み命令が正しくハッシュされるよう、DASの**リーフ**フィールド（`basis_points_raw`、`creators_raw`）から `metadata` を構築します。`getAssetWithProof` 後にUI料率が必要な場合は、`rpcAsset.royalty.basis_points` と `rpcAsset.creators` を読んでください。[JavaScript SDK](/ja/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)を参照してください。
+`getAssetWithProof` は**読み取り互換**を維持します：`metadata` は DAS の主フィールドを反映します（継承時は解決済みコレクション料率）。`currentMetadata` は書き込み用のリーフ正規値です。任意の兄弟フィールド `sellerFeeBasisPointsRaw` / `creatorsRaw` と `inherited` は DAS の `_raw` / 継承検出をミラーします。書き込みでは `...assetWithProof` を展開し、リーフ引数には `currentMetadata` を使い、表示用 `metadata` は渡さないでください。[JavaScript SDK](/ja/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)を参照してください。
 
 ## 関連
 

@@ -39,7 +39,7 @@ faqs:
   - q: Can I use this SDK with Bubblegum V1 trees?
     a: No. This SDK targets Bubblegum V2 and uses LeafSchemaV2. Use the legacy Bubblegum SDK for V1 trees.
   - q: What is getAssetWithProof and why do I need it?
-    a: getAssetWithProof is a helper that fetches all parameters needed for leaf-mutating instructions (proof, root, leaf index, nonce, metadata) from the DAS API in one call. For inherited royalties, metadata.sellerFeeBasisPoints is the on-chain leaf sentinel (65535); resolved collection rates are on rpcAsset.royalty.basis_points.
+    a: getAssetWithProof fetches all parameters needed for leaf-mutating instructions from the DAS API in one call. For inherited royalties, metadata holds the collection-resolved rate; currentMetadata is leaf-canonical (65535 sentinel); optional sellerFeeBasisPointsRaw / inherited mirror DAS. Spread ...assetWithProof into writes so currentMetadata is used.
 ---
 
 The **Bubblegum V2 JavaScript SDK** (`@metaplex-foundation/mpl-bubblegum`) is the recommended TypeScript/JavaScript library for creating and managing [compressed NFTs](/smart-contracts/bubblegum-v2) on Solana. Built on the [Umi framework](/dev-tools/umi), it provides type-safe functions for all Bubblegum V2 operations and includes the [DAS API](/smart-contracts/bubblegum-v2/fetch-cnfts) plugin automatically. {% .lead %}
@@ -280,27 +280,16 @@ const updateArgs: UpdateArgsArgs = {
   uri: some('https://example.com/updated.json'),
 }
 
+// Spread includes currentMetadata (leaf-canonical). Do not pass metadata here.
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  // Instruction arg name for existing leaf metadata (V2 collection is a pubkey).
-  currentMetadata: {
-    name: assetWithProof.metadata.name,
-    symbol: assetWithProof.metadata.symbol,
-    uri: assetWithProof.metadata.uri,
-    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
-    isMutable: assetWithProof.metadata.isMutable,
-    tokenStandard: assetWithProof.metadata.tokenStandard,
-    creators: assetWithProof.metadata.creators,
-    collection: some(publicKey('YourCollectionAddressHere')),
-  },
   updateArgs,
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-`getAssetWithProof.metadata` always mirrors the leaf (including `65535` when royalties are inherited). For display, read `rpcAsset.royalty.basis_points` and `rpcAsset.creators`.
+`getAssetWithProof.metadata` mirrors DAS main fields (resolved when inherited) and keeps type `MetadataArgs`. `currentMetadata` is leaf-canonical `MetadataArgsV2Args` for write instructions (sentinel `65535` when inherited). Optional siblings `sellerFeeBasisPointsRaw` / `creatorsRaw` and `inherited` mirror DAS `_raw` / inherit detection. Spread `...assetWithProof` into writes — do not pass `metadata` as `currentMetadata` or as the leaf `metadata` arg on other instructions.
 
 ## Delegate a Compressed NFT
 
@@ -349,21 +338,14 @@ await delegate(umi, {
 import {
   getAssetWithProof,
   setCollectionV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, publicKey } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  ...assetWithProof.metadata,
-  collection: collection?.key ?? null,
-}
 
 await setCollectionV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   newCollectionAuthority: newCollectionUpdateAuthority,
   newCoreCollection: publicKey('NewCollectionAddressHere'),
 }).sendAndConfirm(umi)
@@ -376,12 +358,13 @@ import { getAssetWithProof, setCollectionV2 } from '@metaplex-foundation/mpl-bub
 import { unwrapOption } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
+const collection = unwrapOption(assetWithProof.currentMetadata.collection)
 
 await setCollectionV2(umi, {
   ...assetWithProof,
+  metadata: assetWithProof.currentMetadata,
   authority: collectionAuthoritySigner,
-  coreCollection: collection!.key,
+  coreCollection: collection!,
 }).sendAndConfirm(umi)
 ```
 
@@ -450,24 +433,13 @@ await setNonTransferableV2(umi, {
 import {
   getAssetWithProof,
   verifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collectionOption = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: collectionOption ? collectionOption.key : none(),
-  creators: assetWithProof.metadata.creators,
-}
 
 await verifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity, // the creator being verified must sign
 }).sendAndConfirm(umi)
 ```
@@ -478,23 +450,13 @@ await verifyCreatorV2(umi, {
 import {
   getAssetWithProof,
   unverifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
 
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)?.key ?? none(),
-  creators: assetWithProof.metadata.creators,
-}
-
 await unverifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity,
 }).sendAndConfirm(umi)
 ```
@@ -509,10 +471,13 @@ The DAS API plugin is automatically registered by `mplBubblegum()`. See [Fetch c
 
 | Field | Purpose |
 |-------|---------|
-| `metadata` | Leaf-canonical metadata for hashing and write instructions (from `basis_points_raw` / `creators_raw`). When royalties are inherited, `sellerFeeBasisPoints` is `65535` and `creators` is the leaf creator list (usually empty). |
-| `rpcAsset` | Full DAS response. Collection-resolved display values live on `royalty.basis_points`, `royalty.percent`, and `creators`; leaf values are on `royalty.basis_points_raw` and `creators_raw`. |
+| `metadata` | Mirrors DAS main fields (`MetadataArgs`): `sellerFeeBasisPoints` / `creators` from `royalty.basis_points` / `creators` (resolved when inherited). Use for reading / UI. |
+| `currentMetadata` | Leaf-canonical `MetadataArgsV2Args` for write instructions and hashing (sentinel `65535` when inherited). Included when you spread `...assetWithProof`. |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | Optional DAS-aligned leaf siblings (`basis_points_raw` / `creators_raw`). Set when DAS provides `_raw` / inherited SFBP; omitted otherwise (same as DAS). |
+| `inherited` | Sugar for inherit detection (`rpcAsset.royalty.inherited` / sentinel). |
+| `rpcAsset` | Full DAS response. Same main / `_raw` split as above. |
 
-`updateMetadataV2` still names its existing-leaf argument `currentMetadata` (IDL). Build that `MetadataArgsV2` from `assetWithProof.metadata` leaf fields, with V2 `collection` as a pubkey.
+`updateMetadataV2` names its existing-leaf argument `currentMetadata` (IDL). Spreading `...assetWithProof` supplies it. Instructions that take a leaf `metadata` arg (`setCollectionV2`, `verifyCreatorV2`, …) should use `assetWithProof.currentMetadata`. Do not pass display `metadata` into those args.
 
 Clients reading DAS directly should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
@@ -640,7 +605,7 @@ Your RPC provider may not support the Metaplex DAS API. Switch to a [compatible 
 | `setNonTransferableV2` | Make a cNFT permanently soulbound (irreversible) |
 | `verifyCreatorV2` | Set verified flag on a creator entry |
 | `unverifyCreatorV2` | Remove verified flag from a creator entry |
-| `getAssetWithProof` | Fetch proof parameters; `metadata` is leaf-canonical, display inheritance is on `rpcAsset` |
+| `getAssetWithProof` | Fetch proof parameters; `metadata` for display, `currentMetadata` for writes; optional `_raw` siblings + `inherited` |
 | `SELLER_FEE_BASIS_POINTS_INHERIT` | Sentinel constant (`65535`) for royalties inherited from an MPL-Core collection |
 | `findLeafAssetIdPda` | Derive a cNFT asset ID from tree address and leaf index |
 | `parseLeafFromMintV2Transaction` | Extract leaf schema (including asset ID) from a mint transaction |

@@ -15,14 +15,34 @@ const assetWithProof = await getAssetWithProof(umi, assetId, {
   truncateCanopy: true,
 })
 
-// Leaf / hashing value (65535 when inherited)
-console.log(assetWithProof.metadata.sellerFeeBasisPoints)
+// Reading: metadata mirrors DAS main / resolved fields
+console.log(assetWithProof.metadata.sellerFeeBasisPoints) // e.g. 500 when inherited
+console.log(assetWithProof.metadata.creators) // collection payees when inherited
+console.log(assetWithProof.inherited) // true
 
-// Display / payout value from DAS main fields
-console.log(assetWithProof.rpcAsset.royalty?.basis_points)
+// Writes / hashing: currentMetadata is leaf-canonical (V2)
+console.log(assetWithProof.currentMetadata.sellerFeeBasisPoints) // 65535 when inherited
+console.log(assetWithProof.currentMetadata.creators) // usually []
+
+// Optional DAS-aligned _raw siblings (same leaf values)
+console.log(assetWithProof.sellerFeeBasisPointsRaw) // 65535 when inherited
+console.log(assetWithProof.creatorsRaw) // usually []
+
+// Explicit DAS raw + flag
+console.log(assetWithProof.rpcAsset.royalty?.basis_points_raw) // 65535
+console.log(assetWithProof.rpcAsset.creators_raw) // []
+console.log(assetWithProof.rpcAsset.royalty?.inherited) // true
 // [/MAIN]
 
 // [OUTPUT]
-// 65535
 // 500
+// [{ address: '...', share: 100, verified: true }]
+// true
+// 65535
+// []
+// 65535
+// []
+// 65535
+// []
+// true
 // [/OUTPUT]

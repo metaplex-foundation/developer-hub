@@ -25,7 +25,7 @@ faqs:
   - q: 更新时需要传递集合吗？
     a: 是的，如果cNFT属于集合。请传递带有集合公钥的coreCollection参数。集合权限必须签署交易。
   - q: 如何更新从集合继承版税的cNFT？
-    a: 将getAssetWithProof的叶子元数据作为updateMetadataV2的currentMetadata参数传入（IDL中表示现有叶子状态的名称）。继承版税时sellerFeeBasisPoints为链上哨兵。
+    a: 向 updateMetadataV2 展开 ...assetWithProof（currentMetadata 为叶子规范值，继承时为 65535）。展示用解析费率在 metadata 上；不要把 metadata 当作 currentMetadata 传入。
 ---
 
 ## Summary
@@ -36,7 +36,7 @@ faqs:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
-- 将 `getAssetWithProof` 的叶子元数据作为 `updateMetadataV2` 的 `currentMetadata` 参数传入（IDL 中表示现有叶子状态的名称）
+- 向 `updateMetadataV2` 展开 `...assetWithProof`，使用 `getAssetWithProof.currentMetadata`（叶子规范值）
 
 **updateMetadataV2**指令可用于修改压缩NFT的元数据。默克尔根会更新以反映数据的传播哈希，符合[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)的RPC提供商将更新其cNFT索引。
 
@@ -93,17 +93,6 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: {
-    name: assetWithProof.metadata.name,
-    symbol: assetWithProof.metadata.symbol,
-    uri: assetWithProof.metadata.uri,
-    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
-    isMutable: assetWithProof.metadata.isMutable,
-    tokenStandard: assetWithProof.metadata.tokenStandard,
-    creators: assetWithProof.metadata.creators,
-    collection: some(publicKey('22222222222222222222222222222222')),
-  },
   updateArgs,
   // 可选参数。如果您的权限是与当前umi身份不同的签名者类型，
   // 在此处分配该签名者。
@@ -114,9 +103,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="写入指令使用叶子元数据" %}
-`getAssetWithProof.metadata` 始终是叶子规范值 — 继承版税时包括 `sellerFeeBasisPoints: 65535`。集合解析后的展示值位于 `rpcAsset.royalty.basis_points` 与 `rpcAsset.creators`。
-
-`updateMetadataV2` 的 `currentMetadata` 参数是现有叶子元数据的 IDL 名称（V2 形态：`collection` 为公钥）。请从 `assetWithProof.metadata` 构建它。
+`getAssetWithProof` 同时返回 `metadata`（DAS 展示 / 解析费率）和 `currentMetadata`（叶子规范 `MetadataArgsV2Args`，继承时为 `65535`）。写入时展开 `...assetWithProof`，不要把展示用 `metadata` 当作 `currentMetadata`。UI 使用 `metadata` / `rpcAsset`；用 `inherited` 检测继承。
 
 读取资产时关于 DAS 响应字段的说明，请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 {% /callout %}
@@ -136,7 +123,7 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- 将 `getAssetWithProof` 的叶子元数据作为 `updateMetadataV2` 的 `currentMetadata` 参数传入，以便程序在应用更新前验证当前叶子。
+- 向 `updateMetadataV2` 展开 `...assetWithProof`，以便程序用叶子规范的 `currentMetadata` 验证。
 - Use `some()` for fields you want to update and omit fields you want to keep unchanged.
 - Inherited seller fees require an empty leaf-level `creators` array and a collection with the `Royalties` plugin.
 
@@ -156,7 +143,7 @@ await updateMetadataV2(umi, {
 
 ### 如何更新从集合继承版税的 cNFT？
 
-将 `getAssetWithProof` 的叶子元数据作为 `updateMetadataV2` 的 `currentMetadata` 参数传入，以便使用链上哨兵进行验证。使用 `updateArgs.sellerFeeBasisPoints` 的 `some(SELLER_FEE_BASIS_POINTS_INHERIT)` 切换为继承版税，或使用明确数字切换离开继承版税。
+向 `updateMetadataV2` 展开 `...assetWithProof`，继承时 `currentMetadata` 会带上链上哨兵。使用 `updateArgs.sellerFeeBasisPoints` 的 `some(SELLER_FEE_BASIS_POINTS_INHERIT)` 切换为继承版税，或使用明确数字离开继承。
 
 ## Glossary
 
@@ -166,5 +153,5 @@ await updateMetadataV2(umi, {
 | **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
 | **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
 | **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | `updateMetadataV2` 上表示现有叶子元数据的 IDL 参数；请从 `getAssetWithProof.metadata` 构建 |
+| **currentMetadata** | `updateMetadataV2` 上表示现有叶子元数据的 IDL 参数；展开 `...assetWithProof` 时由 `getAssetWithProof.currentMetadata` 提供 |
 | **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` indicating royalties are inherited from the MPL-Core collection |

@@ -27,19 +27,9 @@ const updateArgs: UpdateArgsArgs = {
   sellerFeeBasisPoints: some(550), // explicit 5.5%
 }
 
+// Spread includes currentMetadata (leaf-canonical). Do not pass metadata here.
 await updateMetadataV2(umi, {
   ...assetWithProof,
-  currentMetadata: {
-    name: assetWithProof.metadata.name,
-    symbol: assetWithProof.metadata.symbol,
-    uri: assetWithProof.metadata.uri,
-    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
-    isMutable: assetWithProof.metadata.isMutable,
-    tokenStandard: assetWithProof.metadata.tokenStandard,
-    creators: assetWithProof.metadata.creators,
-    collection: some(collectionPublicKey),
-  },
   updateArgs,
   coreCollection: collectionPublicKey,
 }).sendAndConfirm(umi)

@@ -151,6 +151,10 @@ MPL-Core 컬렉션에 민팅할 때 컬렉션의 로열티 비율을 모든 cNFT
 
 DAS 응답을 **읽는** 클라이언트(지갑, 마켓플레이스, 인덱서, 앱)는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 따르세요.
 
+{% callout type="warning" title="마켓플레이스 / 인덱서 호환성" %}
+마켓플레이스의 DAS 제공자가 상속 SFBP 해석을 지원하기 전까지는 `creators: []`와 `basis_points: 65535`를 보고 로열티 지급을 건너뛸 수 있습니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)의 경고를 참조하세요. 더 강한 보장을 위해 컬렉션 Royalties 플러그인 허용/거부 목록을 사용해 로열티 준수 경로로 판매하세요.
+{% /callout %}
+
 JavaScript SDK의 `mintV2` 헬퍼는 `coreCollection`이 제공되고 `metadata.sellerFeeBasisPoints`가 생략되면 이 동작을 기본값으로 사용합니다.
 
 **요구 사항:**

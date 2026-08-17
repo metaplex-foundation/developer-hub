@@ -59,26 +59,14 @@ The **setCollectionV2** instruction can be used to set the collection of a cNFT.
 import {
   getAssetWithProof,
   setCollectionV2,
-  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum';
-import {
-  unwrapOption,
-  none,
-} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-
-const collection = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  ...assetWithProof.metadata,
-  collection: collection?.key ?? null,
-};
 
 const signature = await setCollectionV2(umi, {
   ...assetWithProof,
   newCollectionAuthority: newCollectionUpdateAuthority,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   newCoreCollection: newCoreCollection.publicKey,
 }).sendAndConfirm(umi);
 ```
@@ -98,21 +86,18 @@ The **setCollectionV2** instruction can also be used to remove the collection fr
 import {
   getAssetWithProof,
   setCollectionV2,
-  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
-import {
-  unwrapOption,
-  none,
-} from '@metaplex-foundation/umi';
+import { unwrapOption } from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
-const collection = unwrapOption(assetWithProof.metadata.collection)
+const collection = unwrapOption(assetWithProof.currentMetadata.collection)
 
 const signature = await setCollectionV2(umi, {
   ...assetWithProof,
+  metadata: assetWithProof.currentMetadata,
   authority: collectionAuthoritySigner,
-  coreCollection: collection!.key
+  coreCollection: collection!,
 }).sendAndConfirm(umi);
 ```
 

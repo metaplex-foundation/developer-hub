@@ -25,7 +25,7 @@ faqs:
   - q: 更新時にコレクションを渡す必要がありますか？
     a: はい、cNFTがコレクションに属している場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。コレクション権限がトランザクションに署名する必要があります。
   - q: コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
-    a: getAssetWithProofのリーフメタデータをupdateMetadataV2のcurrentMetadata引数（既存リーフ状態のIDL名）として渡します。ロイヤリティが継承されている場合、sellerFeeBasisPointsはオンチェーンセンチネルです。
+    a: updateMetadataV2 に ...assetWithProof を展開してください（currentMetadata はリーフ正規で、継承時は 65535）。表示用の解決料率は metadata 側です。metadata を currentMetadata として渡さないでください。
 ---
 
 ## Summary
@@ -36,7 +36,7 @@ faqs:
 - コレクション権限はコレクションに属するcNFTを更新する
 - ツリー権限はコレクションに属さないcNFTを更新する
 - 変更はマークルツリーに反映され、DAS APIプロバイダーによってインデックス化されます
-- `getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数（既存リーフ状態のIDL名）として使用する
+- `updateMetadataV2` に `...assetWithProof` を展開し、`getAssetWithProof.currentMetadata`（リーフ正規）を使う
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
 
@@ -93,17 +93,6 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: {
-    name: assetWithProof.metadata.name,
-    symbol: assetWithProof.metadata.symbol,
-    uri: assetWithProof.metadata.uri,
-    sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-    primarySaleHappened: assetWithProof.metadata.primarySaleHappened,
-    isMutable: assetWithProof.metadata.isMutable,
-    tokenStandard: assetWithProof.metadata.tokenStandard,
-    creators: assetWithProof.metadata.creators,
-    collection: some(publicKey('22222222222222222222222222222222')),
-  },
   updateArgs,
   // オプションパラメータ。権限が現在のumiアイデンティティと
   // 異なる署名者型の場合、ここでその署名者を割り当てます。
@@ -114,9 +103,7 @@ await updateMetadataV2(umi, {
 ```
 
 {% callout type="note" title="書き込み命令用のリーフメタデータ" %}
-`getAssetWithProof.metadata` は常にリーフ正規値です — ロイヤリティが継承されている場合は `sellerFeeBasisPoints: 65535` を含みます。コレクションから解決された表示値は `rpcAsset.royalty.basis_points` と `rpcAsset.creators` にあります。
-
-`updateMetadataV2` の `currentMetadata` 引数は既存リーフメタデータのIDL名です（V2形状: `collection` は公開鍵）。`assetWithProof.metadata` から構築してください。
+`getAssetWithProof` は `metadata`（DAS 表示 / 解決料率）と `currentMetadata`（リーフ正規の `MetadataArgsV2Args`、継承時は `65535`）の両方を返します。書き込みでは `...assetWithProof` を展開し、表示用 `metadata` を `currentMetadata` として渡さないでください。UI には `metadata` / `rpcAsset`、継承検出には `inherited` を使います。
 
 アセット読み取り時のDASレスポンスフィールドについては、[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
 {% /callout %}
@@ -136,7 +123,7 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - 更新権限は、cNFTがコレクションに属しているかどうかによって異なります。コレクションcNFTはコレクション権限を使用し、スタンドアロンcNFTはツリー権限を使用します。
-- プログラムが更新を適用する前に現在のリーフを検証できるよう、`getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数として渡してください。
+- `updateMetadataV2` に `...assetWithProof` を展開し、リーフ正規の `currentMetadata` で検証できるようにしてください。
 - 更新したいフィールドには`some()`を使用し、変更しないフィールドは省略します。
 - 継承されたセラーフィーには、リーフレベルの空の`creators`配列と`Royalties`プラグインを持つコレクションが必要です。
 
@@ -156,7 +143,7 @@ cNFTがコレクションに属している場合、更新できるのはコレ�
 
 ### コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
 
-検証にオンチェーンセンチネルが使われるよう、`getAssetWithProof` のリーフメタデータを `updateMetadataV2` の `currentMetadata` 引数として渡します。継承ロイヤリティに切り替えるには`updateArgs.sellerFeeBasisPoints`に`some(SELLER_FEE_BASIS_POINTS_INHERIT)`を、切り替えるには明示的な数値を使用します。
+`updateMetadataV2` に `...assetWithProof` を展開すると、継承時は `currentMetadata` にオンチェーンセンチネルが入ります。継承ロイヤリティに切り替えるには `updateArgs.sellerFeeBasisPoints` に `some(SELLER_FEE_BASIS_POINTS_INHERIT)` を、離れるには明示的な数値を使います。
 
 ## Glossary
 
@@ -166,5 +153,5 @@ cNFTがコレクションに属している場合、更新できるのはコレ�
 | **コレクション権限** | MPL-Coreコレクションの更新権限。そのコレクション内のcNFTを更新する権限がある |
 | **ツリー権限** | コレクションに属さないcNFTを更新する権限を持つツリー作成者またはデリゲート |
 | **UpdateArgsArgs** | どのメタデータフィールドをOptionラッパーを使用して更新するかを定義するTypeScript型 |
-| **currentMetadata** | 既存リーフメタデータに対する `updateMetadataV2` のIDL引数；`getAssetWithProof.metadata` から構築する |
+| **currentMetadata** | 既存リーフメタデータに対する `updateMetadataV2` のIDL引数；`...assetWithProof` 展開時に `getAssetWithProof.currentMetadata` が供給される |
 | **SELLER_FEE_BASIS_POINTS_INHERIT** | MPL-Coreコレクションからロイヤリティが継承されることを示すセンチネル値 `65535` |

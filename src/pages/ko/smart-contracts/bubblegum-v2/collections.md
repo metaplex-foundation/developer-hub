@@ -69,12 +69,7 @@ import {
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
-const collection = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  ...assetWithProof.metadata,
-  collection: collection?.key ?? null,
-};
+const metadata = assetWithProof.currentMetadata
 
 const signature = await setCollectionV2(umi, {
   ...assetWithProof,
@@ -108,12 +103,13 @@ import {
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
 
-const collection = unwrapOption(assetWithProof.metadata.collection)
+const collection = unwrapOption(assetWithProof.currentMetadata.collection)
 
 const signature = await setCollectionV2(umi, {
   ...assetWithProof,
+  metadata: assetWithProof.currentMetadata,
   authority: collectionAuthoritySigner,
-  coreCollection: collection!.key
+  coreCollection: collection!,
 }).sendAndConfirm(umi);
 ```
 

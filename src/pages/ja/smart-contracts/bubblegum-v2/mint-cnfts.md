@@ -155,6 +155,10 @@ MPL-Coreコレクションにミントする場合、コレクションのロイ
 
 DASレスポンスを**読む**クライアント（ウォレット、マーケットプレイス、インデクサー、アプリ）は[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
 
+{% callout type="warning" title="マーケットプレイス / インデクサー互換性" %}
+マーケットプレイスの DAS プロバイダーが継承 SFBP 解決をサポートするまで、`creators: []` と `basis_points: 65535` を見てロイヤリティ支払いをスキップする可能性があります。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)の警告を参照してください。より強い保証のため、コレクション Royalties プラグインの許可/拒否リストを使い、ロイヤリティ準拠の会場経由で販売してください。
+{% /callout %}
+
 JavaScript SDKの `mintV2` ヘルパーは、`coreCollection` が指定され `metadata.sellerFeeBasisPoints` が省略された場合、この動作をデフォルトとします。
 
 **要件:**

@@ -297,7 +297,7 @@ pub struct MetadataArgsV2 {
 }
 ```
 
-当 `seller_fee_basis_points` 为 `65535`（`0xffff`，`SELLER_FEE_BASIS_POINTS_INHERIT`）时，叶子上存储的是哨兵值而非字面版税百分比。数据哈希根据该哨兵值计算，而非根据集合的已解析 basis points。DAS 将集合费率放在 `royalty.basis_points` 上，将叶子哨兵放在 `royalty.basis_points_raw` 上。JavaScript SDK 的 `getAssetWithProof` 辅助函数将叶子哨兵放在 `metadata.sellerFeeBasisPoints` 上。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)和[从集合继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
+当 `seller_fee_basis_points` 为 `65535`（`0xffff`，`SELLER_FEE_BASIS_POINTS_INHERIT`）时，叶子上存储的是哨兵值而非字面版税百分比。数据哈希根据该哨兵值计算，而非根据集合的已解析 basis points。DAS 将集合费率放在 `royalty.basis_points` 上，将叶子哨兵放在 `royalty.basis_points_raw` 上。JavaScript SDK 的 `getAssetWithProof` 辅助函数将解析后的费率放在 `metadata.sellerFeeBasisPoints` 上，并将叶子哨兵放在 `currentMetadata.sellerFeeBasisPoints`（以及可选 sibling `sellerFeeBasisPointsRaw`，`inherited: true`）上。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)和[从集合继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
 
 cNFT的元数据被多次哈希，如图表所示并在下面描述：
 

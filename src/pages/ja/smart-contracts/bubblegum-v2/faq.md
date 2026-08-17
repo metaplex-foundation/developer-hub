@@ -36,7 +36,7 @@ faqs:
   - q: 1つのツリーにcNFTをいくつ保存できますか？
     a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
   - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
-    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_pointsにコレクション料率を、royalty.basis_points_rawにセンチネルを置きます。書き込み命令にはgetAssetWithProof.metadata（リーフ値）を使用してください。
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_pointsにコレクション料率を、royalty.basis_points_rawにセンチネルを置きます。書き込みでは getAssetWithProof を展開し currentMetadata（リーフ正規）を使います。
 ---
 
 ## Summary
@@ -167,10 +167,13 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 
 **`getAssetWithProof` の使用:**
 
-- **`metadata`** — ハッシュと書き込み命令用のリーフ正規値（継承時は `sellerFeeBasisPoints` が `65535`）。
-- **`rpcAsset`** — 表示 / 支払いUIには `royalty.basis_points` と `creators` を使用してください。
+- **`metadata`** — DAS の主/表示フィールドをミラー（継承時の `sellerFeeBasisPoints` はコレクション解決料率）。
+- **`currentMetadata`** — 書き込み用のリーフ正規 `MetadataArgsV2Args`（継承時はセンチネル）。
+- **`sellerFeeBasisPointsRaw` / `creatorsRaw`** — 任意のリーフ兄弟；継承 / DAS が `_raw` を返すときのみ。
+- **`inherited`** — 継承検出のシュガー。
+- **`rpcAsset`** — 完全な DAS レスポンス（表示は `royalty.basis_points` / `creators`）。
 
-`updateMetadataV2` を呼び出すときは、リーフメタデータを命令の `currentMetadata` 引数（既存リーフ状態のIDL名）として渡してください。
+`updateMetadataV2` では `...assetWithProof` を展開して `currentMetadata` を渡します。リーフ `metadata` 引数を取る命令では `assetWithProof.currentMetadata` を使います。
 
 **コレクション管理:**
 

@@ -150,9 +150,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 빈 `creators_raw`가 로열티 수취인이 없음을 의미한다고 **가정하지 마세요**; 표시용 수취인은 `creators`에 있습니다.
 - 리프 해시를 다시 계산하거나 Bubblegum 쓰기 명령을 구성할 때 주 필드의 `basis_points` / `creators`를 **사용하지 마세요** — `basis_points_raw`와 `creators_raw`를 사용하세요.
 
+{% callout type="warning" title="구식 DAS / 마켓플레이스" %}
+상속 로열티에는 컬렉션 비율을 주 필드로 해석하는 DAS 인덱서가 필요합니다. **구식** DAS 엔드포인트에서는 `getAsset`가 리프를 그대로 반환합니다: `royalty.basis_points` ≈ `65535`, `creators: []`, 그리고 `basis_points_raw` / `inherited` / `creators_raw` 없음.
+
+이러한 DAS 자산 필드만으로 정산을 하는 마켓플레이스는 자산을 **로열티 수취인 없음**(또는 잘못된 비율)으로 보고 **크리에이터에게 아무 것도 지급하지 않을** 수 있습니다. 다음을 우선하세요:
+
+- `inherited` / `_raw`와 컬렉션에서 해석된 `creators` / `basis_points`를 반환하는 업그레이드된 DAS, 또는
+- 정산을 위해 MPL-Core 컬렉션 **Royalties** 플러그인을 직접 읽기
+
+로열티 *강제*(누가 전송할 수 있는지)는 별개입니다: 컬렉션 Royalties 플러그인 `ruleSet`(`ProgramAllowList` / `ProgramDenyList`)를 구성하세요. Bubblegum은 전송 시 로열티 지급을 에스크로하지 않습니다.
+{% /callout %}
+
 ## Bubblegum SDK 참고
 
-`getAssetWithProof`는 쓰기 명령이 올바르게 해시되도록 DAS의 **리프** 필드(`basis_points_raw`, `creators_raw`)에서 `metadata`를 구성합니다. `getAssetWithProof` 이후 UI 비율이 필요하면 `rpcAsset.royalty.basis_points`와 `rpcAsset.creators`를 읽으세요. [JavaScript SDK](/ko/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)를 참조하세요.
+`getAssetWithProof`는 **읽기 호환**을 유지합니다: `metadata`는 DAS 주 필드를 미러링합니다(상속 시 해석된 컬렉션 비율). `currentMetadata`는 쓰기용 리프 정규 값입니다. 선택적 형제 필드 `sellerFeeBasisPointsRaw` / `creatorsRaw`와 `inherited`는 DAS `_raw` / 상속 감지를 미러링합니다. 쓰기 시 `...assetWithProof`를 전개하고 리프 인자에는 `currentMetadata`를 사용하세요. 표시용 `metadata`는 전달하지 마세요. [JavaScript SDK](/ko/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)를 참조하세요.
 
 ## 관련
 

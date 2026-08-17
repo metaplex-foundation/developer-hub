@@ -151,6 +151,10 @@ When minting to an MPL-Core collection, you can store a **sentinel** seller fee 
 
 Clients that **read** DAS responses (wallets, marketplaces, indexers, and apps) should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
+{% callout type="warning" title="Marketplace / indexer compatibility" %}
+Until a marketplace's DAS provider supports inherited SFBP resolution, it may see `creators: []` and `basis_points: 65535` and skip royalty payouts. See the warning on [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties). For stronger guarantees, use collection Royalties plugin allow/deny lists so sales go through royalty-compliant venues.
+{% /callout %}
+
 The JavaScript SDK's `mintV2` helper defaults to this behavior when `coreCollection` is provided and `metadata.sellerFeeBasisPoints` is omitted.
 
 **Requirements:**

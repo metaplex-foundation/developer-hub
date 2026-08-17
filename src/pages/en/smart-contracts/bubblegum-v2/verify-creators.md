@@ -54,27 +54,12 @@ Additionally, more parameters must be provided to verify the integrity of the Co
 import {
   getAssetWithProof,
   verifyCreatorV2,
-  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum';
-import {
-  unwrapOption,
-  none,
-} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-const collectionOption = unwrapOption(assetWithProof.metadata.collection);
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: collectionOption
-    ? collectionOption.key
-    : none(),
-  creators: assetWithProof.metadata.creators,
-};
 await verifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity, // Or a different signer than the umi identity
 }).sendAndConfirm(umi);
 ```
@@ -95,26 +80,12 @@ Similarly to the **verifyCreatorV2** instruction, the **unverifyCreatorV2** inst
 import {
   getAssetWithProof,
   unverifyCreatorV2,
-  MetadataArgsV2Args
 } from '@metaplex-foundation/mpl-bubblegum'
-import {
-  unwrapOption,
-  none,
-} from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)
-    ? unwrapOption(assetWithProof.metadata.collection)!.key
-    : none(),
-  creators: assetWithProof.metadata.creators,
-};
 await unverifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity, // Or a different signer than the umi identity
 }).sendAndConfirm(umi);
 ```

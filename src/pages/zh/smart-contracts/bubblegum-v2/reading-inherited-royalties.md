@@ -150,9 +150,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - **不要**假设空的 `creators_raw` 表示没有版税收款方；展示用收款方位于 `creators`。
 - 在重新计算叶子哈希或构建 Bubblegum 写入指令时，**不要**使用主字段的 `basis_points` / `creators` — 请使用 `basis_points_raw` 与 `creators_raw`。
 
+{% callout type="warning" title="过时的 DAS / 市场" %}
+继承版税需要能将集合费率解析到主字段的 DAS 索引器。在**过时**的 DAS 端点上，`getAsset` 仍会原样返回叶子：`royalty.basis_points` ≈ `65535`、`creators: []`，且没有 `basis_points_raw` / `inherited` / `creators_raw`。
+
+仅依赖这些 DAS 资产字段做分成的市场可能会把资产视为**没有版税收款方**（或费率无效），从而**不向创作者支付任何费用**。请优先选择：
+
+- 已升级、返回 `inherited` / `_raw` 以及集合解析后的 `creators` / `basis_points` 的 DAS，或
+- 直接读取 MPL-Core 集合 **Royalties** 插件进行分成
+
+版税*强制执行*（谁可以转移）是另一回事：配置集合 Royalties 插件的 `ruleSet`（`ProgramAllowList` / `ProgramDenyList`）。Bubblegum 不会在转移时托管版税支付。
+{% /callout %}
+
 ## Bubblegum SDK 说明
 
-`getAssetWithProof` 从 DAS 的**叶子**字段（`basis_points_raw`、`creators_raw`）构建 `metadata`，以便写入指令正确哈希。在 `getAssetWithProof` 之后如需展示费率，请读取 `rpcAsset.royalty.basis_points` 与 `rpcAsset.creators`。详见 [JavaScript SDK](/zh/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)。
+`getAssetWithProof` 保持**读取兼容**：`metadata` 镜像 DAS 主字段（继承时为解析后的集合费率）。`currentMetadata` 是写入用的叶子规范值。可选同伴字段 `sellerFeeBasisPointsRaw` / `creatorsRaw` 与 `inherited` 镜像 DAS `_raw` / 继承检测。写入时展开 `...assetWithProof`，叶子参数使用 `currentMetadata`，不要传入展示用 `metadata`。详见 [JavaScript SDK](/zh/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)。
 
 ## 相关内容
 
