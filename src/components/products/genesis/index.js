@@ -157,6 +157,10 @@ export const genesis = {
               href: '/smart-contracts/genesis/launch-pool',
             },
             {
+              title: 'Project Vesting',
+              href: '/smart-contracts/genesis/project-vesting',
+            },
+            {
               title: 'Presale',
               href: '/smart-contracts/genesis/presale',
             },
@@ -261,6 +265,7 @@ export const genesis = {
         'Creator Fees': 'Creator Fees',
         'Bonding Curve': 'Bonding Curve',
         'Launch Pool': 'Launch Pool',
+        'Project Vesting': 'Project Vesting',
         'Presale': 'Presale',
         'Uniform Price Auction': 'Uniform Price Auction',
         'Get Launch': 'Get Launch',

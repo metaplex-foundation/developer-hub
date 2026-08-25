@@ -86,6 +86,7 @@
 - [List Launches](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
 - [Locked LP Tokens](https://metaplex.com/docs/smart-contracts/genesis/locked-lp-tokens): When a Genesis bonding curve graduates, LP tokens from the Raydium CPMM pool are program-locked in a Genesis bucket with vesting set to never. Learn how to verify the lock onchain.
 - [Presale](https://metaplex.com/docs/smart-contracts/genesis/presale): Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
+- [Project Vesting](https://metaplex.com/docs/smart-contracts/genesis/project-vesting): Create on-chain project token vesting schedules with Genesis ClaimScheduleBucketV2, including cliffs, periodic unlocks, claims, pauses, cancellation, and recipient transfers.
 - [Register Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 - [Uniform Price Auction](https://metaplex.com/docs/smart-contracts/genesis/uniform-price-auction): Token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token sale mechanism for institutional and large-scale fundraising.
 
