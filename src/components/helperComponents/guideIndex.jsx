@@ -291,11 +291,14 @@ const tokenMetadataGuides = {
     },
     {
       name: {
-        en: 'Spl Token Claim Airdrop Using Gumdrop',
-        jp: 'Gumdropを使用したSPLトークンクレームエアドロップ',
-        kr: 'Gumdrop을 사용한 SPL 토큰 클레임 에어드롭'
+        en: 'Create a Claimable Token Airdrop with MPL-Distro',
+        jp: 'MPL-Distroを使用したクレームベースのトークンエアドロップ',
+        ja: 'MPL-Distroを使用したクレームベースのトークンエアドロップ',
+        kr: 'MPL-Distro를 사용한 클레임 기반 토큰 에어드롭',
+        ko: 'MPL-Distro를 사용한 클레임 기반 토큰 에어드롭',
+        zh: '使用 MPL-Distro 创建可领取的代币空投'
       },
-      path: '/solana/general/spl-token-claim-airdrop-using-gumdrop',
+      path: '/smart-contracts/mpl-distro/production-delivery',
       tags: [GuideTags.nfts, GuideTags.airdrop, GuideTags.tokens],
     },
     {

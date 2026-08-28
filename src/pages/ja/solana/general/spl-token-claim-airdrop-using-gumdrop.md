@@ -28,6 +28,10 @@ howToTools:
   - Solana CLI
 ---
 
+{% callout type="warning" title="新規配布には MPL-Distro を使う" %}
+この Gumdrop ガイドは既存の連携向けに残しています。新しいウォレットおよびレガシー NFT トークンクレームは [MPL-Distro 本番デリバリー](/ja/smart-contracts/mpl-distro/production-delivery) を使ってください。
+{% /callout %}
+
 ## 概要
 
 Gumdropは、請求可能なエアドロップの作成を可能にするSolanaプログラムです。トークンをウォレットに直接送信する直接エアドロップとは異なり、Gumdropはユーザーが能動的に自分の配当を請求しなければならない請求メカニズムを作成します。このアプローチにはいくつかの利点があります：

@@ -80,6 +80,17 @@ export const cli = {
               ],
             },
             {
+              title: 'MPL-Distro',
+              href: '/dev-tools/cli/distro',
+              children: [
+                { title: 'Overview', href: '/dev-tools/cli/distro' },
+                { title: 'Create', href: '/dev-tools/cli/distro/create' },
+                { title: 'Deposit', href: '/dev-tools/cli/distro/deposit' },
+                { title: 'Fetch', href: '/dev-tools/cli/distro/fetch' },
+                { title: 'Withdraw', href: '/dev-tools/cli/distro/withdraw' },
+              ],
+            },
+            {
               title: 'Core',
               children: [
                 { title: 'Create Asset', href: '/dev-tools/cli/core/create-asset' },
@@ -194,6 +205,8 @@ export const cli = {
       links: {
         'Agents': 'Agents',
         'Genesis': 'Genesis',
+        'MPL-Distro': 'MPL-Distro',
+        'Deposit': 'Deposit',
         'Core': 'Core',
         'Candy Machine': 'Candy Machine',
         'Bubblegum': 'Bubblegum',
@@ -260,6 +273,8 @@ export const cli = {
       links: {
         'Agents': 'エージェント',
         'Genesis': 'Genesis',
+        'MPL-Distro': 'MPL-Distro',
+        'Deposit': 'デポジット',
         'Core': 'Core',
         'Candy Machine': 'Candy Machine',
         'Bubblegum': 'Bubblegum',
@@ -327,6 +342,8 @@ export const cli = {
       links: {
         'Agents': '에이전트',
         'Genesis': 'Genesis',
+        'MPL-Distro': 'MPL-Distro',
+        'Deposit': '입금',
         'Core': 'Core',
         'Candy Machine': 'Candy Machine',
         'Bubblegum': 'Bubblegum',
@@ -394,6 +411,8 @@ export const cli = {
       links: {
         'Agents': '代理',
         'Genesis': 'Genesis',
+        'MPL-Distro': 'MPL-Distro',
+        'Deposit': '存入',
         'Core': 'Core',
         'Candy Machine': 'Candy Machine',
         'Bubblegum': 'Bubblegum',

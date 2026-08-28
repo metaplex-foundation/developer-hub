@@ -107,6 +107,7 @@ function filePathToUrlPath(filePath) {
 function categorizePages(pages) {
   const categories = {
     'Genesis (Token Launch)': [],
+    'MPL-Distro (Token Distribution)': [],
     'Core (NFT Standard)': [],
     'Candy Machine': [],
     'Core Candy Machine': [],
@@ -124,6 +125,8 @@ function categorizePages(pages) {
 
     if (urlPath.startsWith('/smart-contracts/genesis')) {
       categories['Genesis (Token Launch)'].push(page)
+    } else if (urlPath.startsWith('/smart-contracts/mpl-distro')) {
+      categories['MPL-Distro (Token Distribution)'].push(page)
     } else if (urlPath.startsWith('/smart-contracts/core/') || urlPath === '/smart-contracts/core') {
       if (!urlPath.includes('candy-machine')) {
         categories['Core (NFT Standard)'].push(page)
@@ -175,12 +178,14 @@ function generateLlmsTxt(categories) {
     '- **Candy Machine**: A minting and distribution program for launching NFT collections with configurable rules (allowlists, payment, limits).',
     '- **Bubblegum**: A compression system for creating large-scale NFT collections at reduced cost using Merkle trees.',
     '- **Genesis**: A token launch platform for launching tokens on Solana via launch pools, presales, and uniform price auctions.',
+    '- **MPL-Distro**: A standalone program for distributing an existing SPL token mint to wallet addresses or legacy NFT mints through Merkle claims.',
     '- **UMI**: A Solana framework for building JavaScript clients, used by all Metaplex SDKs.',
     '- **DAS API**: Digital Asset Standard API for querying indexed NFT data from RPC providers.',
     '',
     '## Important Distinctions',
     '',
     '- **Genesis** is for launching **tokens** (fungible). **Candy Machine** is for launching **NFTs** (non-fungible).',
+    '- **MPL-Distro** distributes fixed allocations of an existing token. **Genesis** runs token launches and scheduled project vesting. **Gumdrop** is deprecated.',
     '- Metaplex Core is **not** the same as Token Metadata. Core is the newer, recommended standard.',
     '- Core Assets are **not** SPL Tokens. They use a single-account design, not the SPL Token program.',
     '- Bubblegum creates compressed NFTs that are fully compatible with Core plugins.',
@@ -192,6 +197,7 @@ function generateLlmsTxt(categories) {
     '| Protocol | Purpose | Status |',
     '|----------|---------|--------|',
     '| **Genesis** | Token launch platform (launch pools, presales, auctions) | Active, recommended |',
+    '| **MPL-Distro** | Merkle claims and airdrops for existing SPL tokens | Active |',
     '| **Core** | Digital asset standard (NFTs, gaming assets, memberships) | Active, recommended |',
     '| **Core Candy Machine** | Minting Core Assets with guards and rules | Active, recommended |',
     '| **Candy Machine** | Minting Token Metadata NFTs | Deprecated — use Core Candy Machine |',
@@ -204,6 +210,7 @@ function generateLlmsTxt(categories) {
     '',
     '- **New to Metaplex?** Start here: https://metaplex.com/docs/',
     '- **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis',
+    '- **Distributing an existing token allocation?** Use MPL-Distro: https://metaplex.com/docs/smart-contracts/mpl-distro',
     '- **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core',
     '- **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine',
     '- **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi',
@@ -216,7 +223,7 @@ function generateLlmsTxt(categories) {
     '- **Token Metadata** is maintained for backward compatibility but considered legacy.',
     '- **Candy Machine v3** (for Token Metadata) is deprecated; **Core Candy Machine** is recommended for new launches.',
     '- **Sugar**, **Hydra**, **Fusion**, and **Token Auth Rules** are deprecated and no longer actively maintained.',
-    '- Documentation reflects current best practices as of 2025.',
+    '- Documentation reflects current best practices as of 2026.',
     '',
     '---',
     '',

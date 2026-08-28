@@ -20,6 +20,7 @@ import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { mobileSdks } from './mobileSdks';
 import { mplAgent } from './mpl-agent';
+import { mplDistro } from './mpl-distro';
 import { mplHybrid } from './mpl-hybrid';
 import { nfts } from './nfts';
 import { rustBin } from './rustBin';
@@ -55,6 +56,7 @@ export const products = [
   coreCandyMachine,
   candyMachine,
   mplHybrid,
+  mplDistro,
   tokenAuthRules,
   fusion,
   genesis,

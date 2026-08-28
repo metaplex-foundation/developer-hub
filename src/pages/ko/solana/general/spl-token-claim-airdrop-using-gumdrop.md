@@ -28,6 +28,10 @@ howToTools:
   - Solana CLI
 ---
 
+{% callout type="warning" title="새 배포에는 MPL-Distro를 사용" %}
+이 Gumdrop 가이드는 기존 연동을 위해 유지됩니다. 새로운 지갑 및 레거시 NFT 토큰 클레임은 [MPL-Distro 프로덕션 전달](/ko/smart-contracts/mpl-distro/production-delivery)을 사용하세요.
+{% /callout %}
+
 ## 개요
 
 Gumdrop은 청구 가능한 에어드롭을 생성할 수 있는 Solana 프로그램입니다. 토큰을 지갑에 직접 보내는 직접 에어드롭과 달리, Gumdrop은 사용자가 적극적으로 할당량을 청구해야 하는 청구 메커니즘을 생성합니다. 이 접근 방식에는 여러 가지 이점이 있습니다:
