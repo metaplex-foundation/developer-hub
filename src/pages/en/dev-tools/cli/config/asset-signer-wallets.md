@@ -28,8 +28,10 @@ faqs:
     a: Large account creation (Merkle trees, candy machines) and native SOL wrapping fail due to Solana CPI size limits. Create this infrastructure with a normal wallet first, then switch to the asset-signer wallet for subsequent operations.
   - q: How do I check what address the PDA resolves to?
     a: Run `mplx core asset execute info <assetId>`. This shows the deterministic signer PDA address and its current SOL balance.
+  - q: What happens if I burn the Asset while the PDA still holds funds?
+    a: execute fails after the Asset is burned, so SOL, tokens, and nested assets in the PDA are stranded. Transfer them out first.
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '08-28-2026'
 ---
 
 ## Summary
@@ -223,6 +225,10 @@ Large account creation (Merkle trees, candy machines) and native SOL wrapping fa
 
 Run [`mplx core asset execute info <assetId>`](/dev-tools/cli/core/execute). This shows the deterministic signer PDA address and its current SOL balance.
 
+### What happens if I burn the Asset while the PDA still holds funds?
+
+[`execute`](/smart-contracts/core/execute-asset-signing) fails after the Asset is burned, so SOL, tokens, and nested assets in the PDA are stranded. Transfer them out first.
+
 ## Notes
 
 - Asset-signer wallets require the asset owner's wallet to be saved in your [wallet configuration](/dev-tools/cli/config/wallets) — add the owner wallet first
@@ -230,3 +236,4 @@ Run [`mplx core asset execute info <assetId>`](/dev-tools/cli/core/execute). Thi
 - When you switch away from an asset-signer wallet, commands revert to normal keypair signing
 - The `-k` flag always takes precedence over the active wallet, including asset-signer wallets
 - Raw instructions via `mplx toolbox raw` are wrapped in `execute()` like any other command when an asset-signer wallet is active
+- Burning the Asset permanently disables `execute`. Empty the signer PDA first or remaining SOL, tokens, and nested assets are stranded

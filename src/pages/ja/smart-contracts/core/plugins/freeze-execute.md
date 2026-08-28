@@ -2,7 +2,7 @@
 title: Freeze Execute
 metaTitle: Freeze Executeプラグイン | Core
 description: MPL Core Asset Freeze Executeプラグインについて学びます。'Freeze Execute'プラグインは、Executeライフサイクルイベントをフリーズし、アセットが任意の命令を実行することを防ぎます。
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - freeze execute
   - block execute
@@ -330,9 +330,10 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - **Authority制約**: authorityが他の人にデリゲートされている場合、元のオーナーはauthorityが取り消されるまでフリーズを解除できません
 - フリーズ中はプラグインを削除できません
 - フリーズ中はauthorityを再割り当てできません
-- プラグインは[Execute命令](/smart-contracts/core/execute-asset-signing)システムと連携します
+- プラグインは[Execute命令](/ja/smart-contracts/core/execute-asset-signing)システムと連携します
+- Assetを[バーン](/ja/smart-contracts/core/burn)する**前に**、フリーズを解除して`execute`で引き出してください。バーンすると`execute`が無効になり、Asset Signer PDAに残った残高は取り残されます
 ## ユースケース例: Backed NFT
-Freeze Executeプラグインの一般的なユースケースは、NFTが基礎資産（SOLやトークンなど）の所有権を表し、execute命令を通じて引き出し可能な「backed NFT」を作成することです。プラグインにより、これらのexecute操作を一時的にフリーズできます。
+Freeze Executeプラグインの一般的なユースケースは、NFTが基礎資産（SOLやトークンなど）の所有権を表し、execute命令を通じて引き出し可能な「backed NFT」を作成することです。プラグインにより、これらのexecute操作を一時的にフリーズできます。Assetをバーンする前に、`execute`でそれらの基礎資産を引き出してください — バーンすると`execute`が無効になり、Asset Signer PDAに残った残高は取り残されます。
 {% dialect-switcher title="Backed NFTの例" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

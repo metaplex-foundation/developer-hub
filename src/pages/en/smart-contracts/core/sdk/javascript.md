@@ -2,7 +2,7 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Complete reference for the Metaplex Core JavaScript SDK. Covers Umi setup, creating assets, transfers, burns, updates, collections, plugins, and fetching data.
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - mpl-core JavaScript
   - Core TypeScript SDK
@@ -122,6 +122,9 @@ Use `transfer()` to send an Asset to another wallet:
 ### Burn an Asset
 Use `burn()` to permanently destroy an Asset and reclaim rent:
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+{% callout type="warning" title="Withdraw Asset Signer balances first" %}
+Burning the Asset makes [`execute`](/smart-contracts/core/execute-asset-signing) fail. SOL, tokens, or other assets still held by the Asset Signer PDA become stranded.
+{% /callout %}
 ### Update an Asset
 Use `update()` to modify Asset metadata:
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
@@ -267,6 +270,7 @@ console.log('Plugins:', Object.keys(asset))
 - Collection-level plugins override asset-level plugins of the same type
 - Use `commitment: 'finalized'` when creating assets that you immediately fetch
 - Transaction builders are immutable - each method returns a new builder
+- Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) before `burn()` — remaining balances cannot be moved afterward
 ## Quick Reference
 ### Minimum Dependencies
 ```json {% title="package.json" %}

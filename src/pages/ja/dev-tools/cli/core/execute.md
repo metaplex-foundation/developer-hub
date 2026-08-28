@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '03-20-2026'
+updated: '08-28-2026'
 ---
 
 ## 概要
@@ -135,3 +135,4 @@ mplx core asset execute info <assetId>
 - 表示される残高はSOL残高のみです — トークン残高を確認するには、[アセット署名者ウォレット](/dev-tools/cli/config/asset-signer-wallets)をアクティブにして`mplx toolbox sol balance`を使用してください
 - これは読み取り専用コマンドです — オンチェーンの状態を作成または変更しません
 - Solana CPIの制約により、一部の操作は`execute`でラップできません — [CPI制限事項](/dev-tools/cli/config/asset-signer-wallets#cpi-limitations)を参照
+- Assetをバーンすると`execute`は永久に無効になります。先にサイナーPDAを空にしないと、残りのSOL、トークン、入れ子のアセットは取り残されます — [Execute Asset Signing](/ja/smart-contracts/core/execute-asset-signing)を参照

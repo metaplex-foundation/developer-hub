@@ -2,7 +2,7 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Metaplex Core JavaScript SDKの完全リファレンス。Umiのセットアップ、Assetの作成、転送、バーン、更新、Collection、プラグイン、データの取得について解説します。
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - mpl-core JavaScript
   - Core TypeScript SDK
@@ -122,6 +122,9 @@ const umi = createUmi('https://api.devnet.solana.com')
 ### Assetのバーン
 `burn()`を使用してAssetを永久に破棄しrentを回収：
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+{% callout type="warning" title="先にAsset Signerの残高を引き出す" %}
+Assetをバーンすると[`execute`](/ja/smart-contracts/core/execute-asset-signing)は失敗します。Asset Signer PDAに残っているSOL、トークン、その他のアセットは取り残されます。
+{% /callout %}
 ### Assetの更新
 `update()`を使用してAssetのメタデータを変更：
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
@@ -267,6 +270,7 @@ console.log('プラグイン:', Object.keys(asset))
 - Collectionレベルのプラグインは同じタイプのAssetレベルプラグインを上書きする
 - 作成後すぐに取得するAssetには`commitment: 'finalized'`を使用
 - トランザクションビルダーは不変 - 各メソッドは新しいビルダーを返す
+- `burn()`の前に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — 残りの残高はその後移動できません
 ## クイックリファレンス
 ### 最小限の依存関係
 ```json {% title="package.json" %}
