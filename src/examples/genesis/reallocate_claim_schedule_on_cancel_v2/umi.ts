@@ -4,13 +4,15 @@ import {
   setClaimScheduleBucketV2Behaviors,
   triggerBehaviorsV2,
 } from '@metaplex-foundation/genesis'
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox'
+import { findAssociatedTokenPda, mplToolbox } from '@metaplex-foundation/mpl-toolbox'
 import { keypairIdentity, publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
 // [SETUP]
-const umi = createUmi('https://api.mainnet-beta.solana.com').use(genesis())
+const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
+  .use(genesis())
 
 // umi.use(keypairIdentity(yourKeypair))
 

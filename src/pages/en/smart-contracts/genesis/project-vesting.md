@@ -43,7 +43,7 @@ faqs:
     a: No. Each bucket has one recipient. Create one ClaimScheduleBucketV2 for each recipient or allocation that needs independent accounting or policy controls.
 ---
 
-Genesis project vesting uses a `ClaimScheduleBucketV2` to release one token allocation to one recipient according to an on-chain cliff and periodic linear schedule. {% .lead %}
+[Genesis](/smart-contracts/genesis) project vesting uses a `ClaimScheduleBucketV2` to release one token allocation to one recipient according to an on-chain cliff and periodic linear schedule. {% .lead %}
 
 {% callout title="What You'll Build" %}
 This guide creates a one-year project token vesting allocation with a 10% cliff, monthly linear unlocks, and optional authority controls.
