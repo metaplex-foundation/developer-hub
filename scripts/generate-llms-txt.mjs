@@ -106,6 +106,7 @@ function filePathToUrlPath(filePath) {
  */
 function categorizePages(pages) {
   const categories = {
+    'Metaplex API (REST)': [],
     'Genesis (Token Launch)': [],
     'Core (NFT Standard)': [],
     'Candy Machine': [],
@@ -122,7 +123,9 @@ function categorizePages(pages) {
   for (const page of pages) {
     const urlPath = page.urlPath
 
-    if (urlPath.startsWith('/smart-contracts/genesis')) {
+    if (urlPath === '/api' || urlPath.startsWith('/api/')) {
+      categories['Metaplex API (REST)'].push(page)
+    } else if (urlPath.startsWith('/smart-contracts/genesis')) {
       categories['Genesis (Token Launch)'].push(page)
     } else if (urlPath.startsWith('/smart-contracts/core/') || urlPath === '/smart-contracts/core') {
       if (!urlPath.includes('candy-machine')) {
@@ -204,6 +207,7 @@ function generateLlmsTxt(categories) {
     '',
     '- **New to Metaplex?** Start here: https://metaplex.com/docs/',
     '- **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis',
+    '- **Calling the public REST API?** Reference: https://metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)',
     '- **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core',
     '- **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine',
     '- **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi',

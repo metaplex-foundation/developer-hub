@@ -45,6 +45,7 @@
 
 - **New to Metaplex?** Start here: https://metaplex.com/docs/
 - **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis
+- **Calling the public REST API?** Reference: https://metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)
 - **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core
 - **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine
 - **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi
@@ -61,32 +62,43 @@
 
 ---
 
+## Metaplex API (REST)
+
+- [Metaplex API](https://metaplex.com/docs/api): The Metaplex public REST API at api.metaplex.com — Genesis launch data, launch creation, the agent registry, and agent wallet transactions. No authentication required.
+- [Claim Creator Rewards](https://metaplex.com/docs/api/claim-creator-rewards): Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
+- [Create Launch](https://metaplex.com/docs/api/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
+- [Fund Agent](https://metaplex.com/docs/api/fund-agent): Build a SOL transfer transaction that funds a registered agent's wallet, with an on-chain memo.
+- [Get Agent](https://metaplex.com/docs/api/get-agent): Fetch a single registered agent by Core asset address, including its EIP-8004 registration data, created tokens, and primary agent token.
+- [Get Agent Card](https://metaplex.com/docs/api/get-agent-card): Fetch the hosted A2A AgentCard for a registered agent. Standards-compliant AgentCard JSON with ETag caching.
+- [Get Launch](https://metaplex.com/docs/api/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
+- [Get Launches by Token](https://metaplex.com/docs/api/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
+- [Get Spotlight](https://metaplex.com/docs/api/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
+- [List Agents](https://metaplex.com/docs/api/list-agents): Browse and search registered AI agents. Returns paginated agent records with metadata, filters, and sorting.
+- [List Launches](https://metaplex.com/docs/api/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
+- [Mint Agent](https://metaplex.com/docs/api/mint-agent): Build a partially signed transaction that mints an agent Core asset and registers its on-chain identity.
+- [Register Launch](https://metaplex.com/docs/api/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
+- [Verify Twitter](https://metaplex.com/docs/api/verify-twitter): Exchange a Twitter OAuth access token for a verification token that proves ownership of a Twitter account when registering a launch.
+- [Withdraw from Agent](https://metaplex.com/docs/api/withdraw-agent): Build a transaction that withdraws SOL from an agent's wallet back to its owner. Owner-only.
+
 ## Genesis (Token Launch)
 
 - [API Client](https://metaplex.com/docs/smart-contracts/genesis/sdk/api-client): Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
 - [Bonding Curve](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve): Overview of the Genesis Bonding Curve — a constant product AMM that sells out its token supply and graduates into a Raydium CPMM pool.
 - [Bonding Curve — Advanced Internals](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-internals): Deep reference for the Genesis Bonding Curve — swap price formulas, reverse calculation, reserve exhaustion clamping, BondingCurveBucketV2 account structure, and extensions.
 - [Bonding Curve — Indexing & Events](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-indexing): How to index the Genesis Bonding Curve lifecycle — GPA discovery, decoding BondingCurveSwapEvent, tracking price from events, and account discriminators.
+- [Bonding Curve — Protocol Parameters](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-parameters): Concrete protocol parameters for the Genesis Bonding Curve — token supply defaults, virtual reserves, fee schedule, and graduation target.
 - [Bonding Curve — Theory of Operation](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-theory): How the Genesis Bonding Curve works — constant product pricing, virtual reserves, fee structure, first buy mechanism, and lifecycle phases.
 - [Bonding Curve Swap Integration](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-swaps): How to read bonding curve state, get swap quotes, execute buy and sell transactions, handle slippage, and claim creator fees using the Genesis SDK.
-- [Claim Creator Rewards](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/claim-creator-rewards): Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
-- [Create Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/create-launch): Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 - [Creator Fees on the Genesis Bonding Curve](https://metaplex.com/docs/smart-contracts/genesis/creator-fees): How to configure a creator fee on a Genesis bonding curve launch and claim accrued fees via the Metaplex API, the Genesis SDK, or the low-level on-chain instructions — including the two-step collect + claim flow for post-graduation Raydium fees.
 - [Fetch Bucket State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-bucket-state): Fetch real-time bucket state from the blockchain using the Genesis JavaScript SDK. Includes deposit totals, counts, and time conditions.
 - [Fetch Deposit State](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/fetch-deposit-state): Fetch user deposit state from the blockchain using the Genesis JavaScript SDK. Check deposit amounts and claim status.
 - [Genesis - Solana Token Launchpad & Launch Platform](https://metaplex.com/docs/smart-contracts/genesis): Genesis is an on-chain Solana token launchpad for fair launches, presales, and auctions. Create and distribute SPL tokens with transparent, automated token generation events.
-- [Get Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-launch): Get launch data by genesis address. Returns launch info, token metadata, and social links.
-- [Get Launches by Token](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-launches-by-token): Get all launches associated with a token mint address. Returns launch info, token metadata, and social links.
-- [Get Spotlight](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/get-spotlight): Get featured spotlight launches from Genesis. Returns curated launches highlighted by the platform.
 - [Getting Started](https://metaplex.com/docs/smart-contracts/genesis/getting-started): Learn how to launch an SPL token on Solana step by step. Plan your presale, fair launch, or token sale using the Genesis token launchpad.
-- [Integration APIs](https://metaplex.com/docs/smart-contracts/genesis/integration-apis): Access Genesis launch data through HTTP REST endpoints and on-chain SDK methods. Public API with no authentication required.
 - [JavaScript SDK](https://metaplex.com/docs/smart-contracts/genesis/sdk/javascript): API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
 - [Launch Pool](https://metaplex.com/docs/smart-contracts/genesis/launch-pool): Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 - [Launching a Bonding Curve via the Metaplex API](https://metaplex.com/docs/smart-contracts/genesis/bonding-curve-launch): How to create, sign, send, and register a bonding curve token launch using the Genesis SDK and the Metaplex API — including creator fees, first buy, agent launches, and error handling.
-- [List Launches](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/list-launches): Get active and upcoming Genesis launch listings. Returns a list of launches with metadata.
 - [Locked LP Tokens](https://metaplex.com/docs/smart-contracts/genesis/locked-lp-tokens): When a Genesis bonding curve graduates, LP tokens from the Raydium CPMM pool are program-locked in a Genesis bucket with vesting set to never. Learn how to verify the lock onchain.
 - [Presale](https://metaplex.com/docs/smart-contracts/genesis/presale): Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
-- [Register Launch](https://metaplex.com/docs/smart-contracts/genesis/integration-apis/register): Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 - [Uniform Price Auction](https://metaplex.com/docs/smart-contracts/genesis/uniform-price-auction): Token auction on Solana with uniform clearing price. Competitive bidding for SPL token launches — an on-chain token sale mechanism for institutional and large-scale fundraising.
 
 ## Core (NFT Standard)

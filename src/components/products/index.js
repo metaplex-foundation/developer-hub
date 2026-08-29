@@ -1,5 +1,6 @@
 import { agents } from './agents';
 import { amman } from './amman';
+import { api } from './api';
 import { auctionHouse } from './auctionHouse';
 import { beet } from './beet';
 import { bubblegum } from './bubblegum';
@@ -66,6 +67,7 @@ export const products = [
   gumdrop,
   tokenEntangler,
   das,
+  api,
   umi,
   cli,
   shank,

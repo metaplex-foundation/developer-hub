@@ -70,6 +70,15 @@ export const agents = {
             },
           ],
         },
+        {
+          title: 'API Reference',
+          links: [
+            {
+              title: 'Metaplex API Reference',
+              href: '/api',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -90,6 +99,11 @@ export const agents = {
         ja: 'はじめに',
         ko: '시작하기',
         zh: '快速入门',
+      },
+      'API Reference': {
+        ja: 'APIリファレンス',
+        ko: 'API 레퍼런스',
+        zh: 'API 参考',
       },
     },
     linkKeys: {
@@ -142,6 +156,11 @@ export const agents = {
         ja: 'エージェントの実行',
         ko: '에이전트 실행',
         zh: '运行 Agent',
+      },
+      'Metaplex API Reference': {
+        ja: 'Metaplex APIリファレンス',
+        ko: 'Metaplex API 레퍼런스',
+        zh: 'Metaplex API 参考',
       },
     },
   }),
