@@ -70,6 +70,27 @@ export const agents = {
             },
           ],
         },
+        {
+          title: 'Nori',
+          links: [
+            {
+              title: 'Nori Overview',
+              href: '/agents/nori',
+            },
+            {
+              title: 'Delegate to Nori',
+              href: '/agents/nori/delegate-to-nori',
+            },
+            {
+              title: 'Pricing and Billing',
+              href: '/agents/nori/pricing-and-billing',
+            },
+            {
+              title: 'Example Agents',
+              href: '/agents/nori/example-agents',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -90,6 +111,11 @@ export const agents = {
         ja: 'はじめに',
         ko: '시작하기',
         zh: '快速入门',
+      },
+      'Nori': {
+        ja: 'Nori',
+        ko: 'Nori',
+        zh: 'Nori',
       },
     },
     linkKeys: {
@@ -142,6 +168,26 @@ export const agents = {
         ja: 'エージェントの実行',
         ko: '에이전트 실행',
         zh: '运行 Agent',
+      },
+      'Nori Overview': {
+        ja: 'Nori 概要',
+        ko: 'Nori 개요',
+        zh: 'Nori 概述',
+      },
+      'Delegate to Nori': {
+        ja: 'Nori への委任',
+        ko: 'Nori에 위임하기',
+        zh: '委托给 Nori',
+      },
+      'Pricing and Billing': {
+        ja: '料金と請求',
+        ko: '가격 및 청구',
+        zh: '定价与计费',
+      },
+      'Example Agents': {
+        ja: 'エージェントの例',
+        ko: '에이전트 예시',
+        zh: 'Agent 示例',
       },
     },
   }),
