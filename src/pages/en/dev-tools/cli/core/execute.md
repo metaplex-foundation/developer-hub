@@ -134,7 +134,7 @@ The typical workflow is:
 
 - The signer PDA is deterministic — the same asset always produces the same PDA address
 - The PDA can hold SOL, SPL tokens, and even own other [MPL Core Assets](/core)
-- The asset account itself cannot hold SOL: any lamports above its rent-exempt minimum are treated as Core protocol fees and swept by the Metaplex fee collector.
+- The asset account itself is not a SOL wallet: it keeps only its rent-exempt minimum, and any lamports above that are treated as Core protocol fees and swept by the Metaplex fee collector.
 - Only the asset owner (or authorized delegate) can invoke the `execute` instruction for a given asset's PDA
 - The command verifies the asset exists on-chain before deriving the PDA; a non-existent asset will produce an error
 - The balance shown is the SOL balance only — use `mplx toolbox sol balance` with an [asset-signer wallet](/dev-tools/cli/config/asset-signer-wallets) active to check token balances

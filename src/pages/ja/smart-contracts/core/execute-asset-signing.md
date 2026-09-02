@@ -210,7 +210,7 @@ const res = await execute(umi, {
 console.log({ res })
 ```
 ## 注意事項
-- `execute`命令にはAsset所有者が支払うプロトコル手数料がかかります。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
+- `execute`命令にはトランザクションの支払者が支払うプロトコル手数料がかかります。支払者は通常Asset所有者ですが、`assetSignerPda`自体が支払うこともできます。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
 - Assetアカウントのレント免除最低額を超えるすべてのラマポートはプロトコル手数料として扱われ、回収されます。SOLやトークンは`assetSignerPda`に保持し、Assetアカウントには絶対に保持しないでください。
 - `assetSignerPda`はシステム所有のアカウントです。Solanaランタイムは、0バイトアカウントのレント免除最低額（890,880ラマポート）未満のゼロでない残高を残すトランザクションを拒否するため、送金はアカウントを空にするか、少なくともその額を残す必要があります。PDAが部分的な送金を行う場合は、この準備金を確保しておいてください。
 - 特別な`Execute`プラグインやデリゲートを使用しない限り、`execute`を呼び出せるのは現在のAsset所有者のみです。execute操作を一時的にブロックするには[Freeze Executeプラグイン](/smart-contracts/core/plugins/freeze-execute)を使用してください。

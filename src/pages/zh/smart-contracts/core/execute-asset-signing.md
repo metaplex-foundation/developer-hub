@@ -210,7 +210,7 @@ const res = await execute(umi, {
 console.log({ res })
 ```
 ## 注意事项
-- `execute`指令会收取由Asset所有者支付的协议费用。当前金额请参阅[协议费用](/protocol-fees)页面。该费用会转入Asset账户，随后由Metaplex费用收集器清扫。
+- `execute`指令会收取由交易付款人支付的协议费用。付款人通常是Asset所有者，但也可以是`assetSignerPda`本身。当前金额请参阅[协议费用](/protocol-fees)页面。该费用会转入Asset账户，随后由Metaplex费用收集器清扫。
 - Asset账户中超过免租金最低余额的每一个lamport都会被视为协议费用并被收取。请将SOL和代币保存在`assetSignerPda`中，切勿保存在Asset账户中。
 - `assetSignerPda`是系统所有的账户。Solana运行时会拒绝任何使其剩余非零余额低于0字节账户免租金最低余额（890,880 lamports）的交易，因此转出必须要么清空账户，要么至少保留该金额。如果PDA会进行部分转账，请保持这笔储备金。
 - 除非使用特殊的`Execute`插件或委托，否则只有当前Asset所有者可以调用`execute`。使用[Freeze Execute插件](/smart-contracts/core/plugins/freeze-execute)可以临时阻止execute操作。
