@@ -10,17 +10,7 @@ Returns the information of all MPL Core assets with the given authority includin
 
 Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the Authority that you want to fetch NFTs by.
 
-```js
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-import { das }  from '@metaplex-foundation/mpl-core-das';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-
-const assets = await das.getAssetsByAuthority(umi, {authority:  publicKey('<PublicKey>')});
-console.log(assets);
-```
+{% code-tabs-imported from="das-api/core-extension/get-assets-by-authority" frameworks="umi" /%}
 
 ## Example Response
 This example has only one object in the array. For Public Keys who have the authority over more than one Core asset the Array will include more entries.

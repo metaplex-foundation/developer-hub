@@ -10,18 +10,7 @@ Returns the information of a MPL Core Collections including their metadata, owne
 
 Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the MPL Core Collection you want to fetch.
 
-```js
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-import { das }  from '@metaplex-foundation/mpl-core-das';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-const collectionId = publicKey('<PublicKey>');
-
-const collection = await das.getCollection(umi, collectionId);
-console.log(collection);
-```
+{% code-tabs-imported from="das-api/core-extension/get-collection" frameworks="umi" /%}
 
 ## Example Response
 

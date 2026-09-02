@@ -1,45 +1,53 @@
 ---
-title: Convert from standard DAS Asset to Core Asset or Collection type
+title: Convert from standard DAS Asset to Core Asset, Collection, or Group
 metaTitle: Convert standard DAS to Core Type | DAS API Core Extension
-description: Converts DAS Assets to Core Asset or Collection 
+description: Convert DAS API assets to MPL Core Asset, Collection, or Group types.
+created: '07-22-2026'
+updated: '07-22-2026'
+keywords:
+  - dasAssetsToCoreAssets
+  - dasAssetToCoreCollection
+  - dasAssetToCoreGroup
+  - das to core conversion
+about:
+  - DAS API
+  - MPL Core
 ---
 
-If you are working with not only Core assets but other assets like Token Metadata, too, it might be useful to directly access the conversion helpers along side the other DAS asset types when fetching using `@metaplex-foundation/digital-asset-standard-api`.
+## Summary
 
-## Convert to Asset Example
+When you mix Core with other standards (for example Token Metadata), fetch with `@metaplex-foundation/digital-asset-standard-api` then convert Core items with `mpl-core-das` helpers.
 
-The following Example shows
-1. How to fetch DAS Assets with the standard DAS API Package.
-2. Filter the Assets to only have Core Assets
-3. Cast all the Standard Assets to Core Assets
+- `das.dasAssetsToCoreAssets` — `MplCoreAsset` → `AssetResult`
+- `das.dasAssetToCoreCollection` — `MplCoreCollection` → `CollectionResult`
+- `das.dasAssetToCoreGroup` — `MplCoreGroup` → `GroupResult`
 
-```js
-// ... standard setup for @metaplex-foundation/digital-asset-standard-api
+## Convert to Asset Example {% #convert-to-asset-example %}
 
-const dasAssets = await umi.rpc.getAssetsByOwner({ owner: publicKey('<pubkey>') });
+`das.dasAssetsToCoreAssets` converts filtered `MplCoreAsset` DAS items into Core `AssetResult` values.
 
-// filter out only core assets
-const dasCoreAssets = assets.items.filter((a) => a.interface === 'MplCoreAsset')
+1. Fetch with the standard DAS package.
+2. Filter to Core assets.
+3. Convert to Core asset types.
 
-// convert them to AssetV1 type (actually AssetResult type which will also have the content field populated from DAS)
-const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
-```
+{% code-tabs-imported from="das-api/core-extension/convert-to-asset" frameworks="umi" /%}
 
-## Convert to Collection Example
+## Convert to Collection Example {% #convert-to-collection-example %}
 
-The following Example shows
-1. How to fetch DAS Collections with the standard DAS API Package.
-2. Filter the Assets to only have Core Assets
-3. Cast all the Standard Assets to Core Assets
+`das.dasAssetToCoreCollection` converts a single `MplCoreCollection` DAS item into a Core `CollectionResult`.
 
-```js
-// ... standard setup for @metaplex-foundation/digital-asset-standard-api
+{% code-tabs-imported from="das-api/core-extension/convert-to-collection" frameworks="umi" /%}
 
-const dasAssets = await umi.rpc.getAssetsByOwner({ owner: publicKey('<pubkey>') });
+## Convert to Group Example {% #convert-to-group-example %}
 
-// filter out only core assets
-const dasCoreAssets = assets.items.filter((a) => a.interface === 'MplCoreCollection')
+`das.dasAssetToCoreGroup` converts a single `MplCoreGroup` DAS item into a Core `GroupResult`.
 
-// convert them to AssetV1 type (actually AssetResult type which will also have the content field populated from DAS)
-const coreAssets = await das.dasAssetsToCoreAssets(umi, dasCoreAssets)
-```
+{% code-tabs-imported from="das-api/core-extension/convert-to-group" frameworks="umi" /%}
+
+## Notes
+
+Conversion helpers validate the DAS `interface` and throw when the Core type does not match.
+
+- Conversion helpers throw if the DAS `interface` does not match the expected Core type.
+- `GroupResult` membership vectors may be empty depending on the indexer — use [`fetchGroupV1`](/smart-contracts/core/groups) for authoritative membership.
+- Prefer the dedicated Core fetch helpers (`das.getAsset`, `das.getCollection`, `das.getGroup`) when you only work with Core.

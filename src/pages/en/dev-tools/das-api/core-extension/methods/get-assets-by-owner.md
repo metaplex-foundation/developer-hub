@@ -10,18 +10,7 @@ Returns the information of all MPL Core assets owned by a given public key inclu
 
 Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the owner.
 
-```js
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-import { das }  from '@metaplex-foundation/mpl-core-das';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-const owner = publicKey('<PublicKey>');
-
-const assets = await das.getAssetsByCollection(umi, { owner });
-console.log(assets);
-```
+{% code-tabs-imported from="das-api/core-extension/get-assets-by-owner" frameworks="umi" /%}
 
 ## Example Response
 This example has only one object in the array. For Public Keys owning more than one Core asset the Array will include more entries.
