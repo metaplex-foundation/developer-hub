@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '03-20-2026'
+updated: '09-01-2026'
 ---
 
 ## Summary
@@ -90,6 +90,10 @@ Returns:
 
 A common workflow is to inspect the PDA, then fund it:
 
+{% callout type="warning" title="Send funds to the Asset Signer, not the asset address" %}
+The Asset Signer PDA and the agent's Core asset are two different addresses. Make sure to always fund the Asset Signer PDA.
+{% /callout %}
+
 ```bash {% title="Inspect and fund the PDA" %}
 # 1. Get the PDA address
 mplx core asset execute info <assetId>
@@ -130,6 +134,7 @@ The typical workflow is:
 
 - The signer PDA is deterministic — the same asset always produces the same PDA address
 - The PDA can hold SOL, SPL tokens, and even own other [MPL Core Assets](/core)
+- The asset account itself cannot hold SOL: any lamports above its rent-exempt minimum are treated as Core protocol fees and swept by the Metaplex fee collector.
 - Only the asset owner (or authorized delegate) can invoke the `execute` instruction for a given asset's PDA
 - The command verifies the asset exists on-chain before deriving the PDA; a non-existent asset will produce an error
 - The balance shown is the SOL balance only — use `mplx toolbox sol balance` with an [asset-signer wallet](/dev-tools/cli/config/asset-signer-wallets) active to check token balances

@@ -3,7 +3,7 @@ title: Burning Assets
 metaTitle: Burning Assets | Metaplex Core
 description: Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
 created: '06-15-2024'
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -66,7 +66,10 @@ Token Metadata burning (use mpl-token-metadata), compressed NFT burning (use Bub
 - **Umi** configured with a signer that owns the Asset (or is its Burn Delegate)
 - **Asset address** of the Asset to burn
 - **Collection address** (if the Asset is in a Collection)
-Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+Assets can be burnt using the `burn` instruction. This returns the Asset account's rent deposit to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+{% callout type="warning" title="Only rent is refunded" %}
+`burn` refunds the rent-exempt balance for the account's data size minus the 1-byte floor. The account is kept open to prevent address reopen attacks. Any lamports above rent, such as not-yet-collected protocol fees, stay in the closed account until swept by the Metaplex fee collector.
+{% /callout %}
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
 **Instruction Accounts List**
@@ -164,6 +167,7 @@ const collectionId = collectionAddress(asset)
 ## Notes
 - Burning is **permanent and irreversible** - the Asset cannot be recovered
 - Rent is returned to the owner (amount varies based on asset size and plugins)
+- Only rent is refunded. Any lamports above the rent-exempt minimum are not returned to the owner
 - The remaining SOL prevents the account address from being reused
 - Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
 - Frozen Assets must be unfrozen before burning
@@ -186,6 +190,7 @@ const collectionId = collectionAddress(asset)
 |------|--------|
 | Returned to payer | Base + plugin storage rent |
 | Remaining in account | ~0.0009 SOL |
+| Lamports above rent | Not refunded|
 ## FAQ
 ### Can I recover the ~0.0009 SOL left in the account?
 No. This small amount is intentionally left to mark the account as "burned" and prevent its address from being reused for a new Asset.

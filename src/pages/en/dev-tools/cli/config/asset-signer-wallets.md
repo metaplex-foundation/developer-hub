@@ -29,7 +29,7 @@ faqs:
   - q: How do I check what address the PDA resolves to?
     a: Run `mplx core asset execute info <assetId>`. This shows the deterministic signer PDA address and its current SOL balance.
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '09-01-2026'
 ---
 
 ## Summary
@@ -53,7 +53,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. Check the PDA info
 mplx core asset execute info <assetId>
 
-# 4. Fund the PDA
+# 4. Fund the PDA (use the Signer PDA address from step 3, never the asset address)
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. Switch to the asset-signer wallet

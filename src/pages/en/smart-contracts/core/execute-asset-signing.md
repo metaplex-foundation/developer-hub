@@ -2,7 +2,7 @@
 title: Execute Asset Signing
 metaTitle: Execute and Asset Signer | Core
 description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -36,6 +36,9 @@ instructions sent to it to sign the CPI instructions with the `assetSignerPda`.
 This allows the `assetSignerPda` account to effectively own and execute account
 instructions on behalf of the current asset owner.
 You can think of the `assetSignerPda` as a wallet attached to a Core Asset.
+{% callout type="warning" title="Fund the Asset Signer PDA, not the Asset address" %}
+The `assetSignerPda` is a different address from the Asset account. Only the `assetSignerPda` can hold SOL and tokens on behalf of the Asset. The Asset account itself must never be used as a wallet.
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -224,3 +227,8 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## Notes
+- The `execute` instruction charges a protocol fee paid by the Asset owner. See the [Protocol Fees](/protocol-fees) page for the current amount. The fee is transferred into the Asset account and later swept by the Metaplex fee collector.
+- Every lamport above the rent-exempt minimum on the Asset account is treated as a protocol fee and will be collected. Hold SOL and tokens in the `assetSignerPda`, never in the Asset account.
+- The `assetSignerPda` is a system-owned account. It must keep at least the rent-exempt minimum for a zero-byte account (890,880 lamports) for transfers out of it to succeed.
+- Only the current Asset owner can invoke `execute` unless special `Execute` plugins or delegates are used. Use the [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute) to block execute operations temporarily.

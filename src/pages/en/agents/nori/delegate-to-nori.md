@@ -18,7 +18,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '07-08-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 programmingLanguage:
   - TypeScript
 howToSteps:
@@ -209,7 +209,7 @@ On the first paid call for an asset, Nori checks onchain that it is still a regi
 
 ## Funding the Agent PDA Wallet
 
-Charges draw from your agent's Asset Signer PDA, so it needs a SOL balance before the first paid call. The PDA must also stay above the system rent-exempt minimum (890,880 lamports for a 0-byte account) — the Metaplex agent template seeds it with 0.002 SOL at delegation time so small sub-rent charges never fail. Transfer SOL to the PDA from any wallet; if the balance runs dry, calls fall back to HTTP 402 challenges until you top up (see [hard-stop semantics](/agents/nori/pricing-and-billing#hard-stop-semantics)).
+Charges draw from your agent's Asset Signer PDA, so it needs a SOL balance before the first paid call. The PDA must also stay above the system rent-exempt minimum (890,880 lamports for a 0-byte account) — the Metaplex agent template seeds it with 0.002 SOL at delegation time so small sub-rent charges never fail. Transfer SOL to the PDA from any wallet; if the balance runs dry, calls fall back to HTTP 402 challenges until you top up (see [hard-stop semantics](/agents/nori/pricing-and-billing#hard-stop-semantics)). Send SOL to the Asset Signer PDA address only, never to the agent's asset address.
 
 ## Revoking Delegation from Nori
 

@@ -2,7 +2,7 @@
 title: Overview
 metaTitle: Metaplex Core | Next-Gen NFT Standard for Solana
 description: Metaplex Core is the next-generation NFT standard on Solana with single-account design, enforced royalties, and a flexible plugin system. Lower costs, lower compute, better performance.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -143,3 +143,4 @@ Yes. Core's plugin system makes it ideal for gaming: use Attributes for on-chain
 | **Delegate** | An account authorized to perform specific actions on an Asset without owning it |
 | **CPI** | Cross-Program Invocation - calling the Core program from another Solana program |
 | **URI** | The off-chain metadata URL pointing to a JSON file with name, image, and attributes |
+| **Asset Signer PDA** | A separate address derived from an Asset that acts as the Asset's wallet |
