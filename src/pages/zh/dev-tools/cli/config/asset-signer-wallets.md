@@ -31,7 +31,7 @@ faqs:
   - q: 如果 PDA 仍持有资金时销毁 Asset 会怎样？
     a: Asset 销毁后 execute 会失败，因此 PDA 中的 SOL、代币和嵌套资产会滞留。请先转出。
 created: '03-19-2026'
-updated: '08-28-2026'
+updated: '09-01-2026'
 ---
 
 ## 概述
@@ -55,7 +55,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. 查看PDA信息
 mplx core asset execute info <assetId>
 
-# 4. 为PDA注资
+# 4. 为PDA注资（使用步骤3中的Signer PDA地址，切勿使用资产地址）
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. 切换到资产签名者钱包

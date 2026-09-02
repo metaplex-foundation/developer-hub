@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '08-28-2026'
+updated: '09-01-2026'
 ---
 
 ## 概要
@@ -90,6 +90,10 @@ mplx core asset execute info <assetId> --json
 
 PDAを検査してから資金を送金する一般的なワークフロー：
 
+{% callout type="warning" title="資金はアセットアドレスではなくAsset Signerに送金してください" %}
+Asset Signer PDAとCoreアセットは異なる2つのアドレスです。必ずAsset Signer PDAに資金を送金してください。
+{% /callout %}
+
 ```bash {% title="Inspect and fund the PDA" %}
 # 1. PDAアドレスを取得
 mplx core asset execute info <assetId>
@@ -130,6 +134,7 @@ mplx core asset execute info <assetId>
 
 - サイナーPDAは決定論的です — 同じアセットは常に同じPDAアドレスを生成します
 - PDAはSOL、SPLトークンを保持し、他の[MPL Coreアセット](/core)を所有することもできます
+- アセットアカウント自体はSOLのウォレットではありません。アカウントに残るのはレント免除最低額のみで、それを超えるラマポートはCoreプロトコル手数料として扱われ、Metaplexの手数料コレクターによって回収されます。
 - アセットの所有者（または承認されたデリゲート）のみが、そのアセットのPDAに対して`execute`インストラクションを呼び出すことができます
 - コマンドはPDAを導出する前にアセットがオンチェーンに存在することを検証します。存在しないアセットはエラーになります
 - 表示される残高はSOL残高のみです — トークン残高を確認するには、[アセット署名者ウォレット](/dev-tools/cli/config/asset-signer-wallets)をアクティブにして`mplx toolbox sol balance`を使用してください

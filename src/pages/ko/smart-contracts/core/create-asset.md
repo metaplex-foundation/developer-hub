@@ -2,7 +2,7 @@
 title: Asset 생성
 metaTitle: Asset 생성 | Metaplex Core
 description: JavaScript 또는 Rust를 사용하여 Solana에서 Core NFT Asset을 생성하는 방법을 배웁니다. 메타데이터 업로드, 컬렉션에 민팅, 플러그인 추가를 포함합니다.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -64,7 +64,7 @@ Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), �
 4. [core.metaplex.com](https://core.metaplex.com)에서 확인
 ## 전제 조건
 - 서명자와 RPC 연결로 구성된 **Umi**
-- 트랜잭션 수수료용 **SOL** (자산당 약 0.003 SOL)
+- 렌트 및 수수료용 **SOL** (자산당 약 0.003 SOL)
 - 업로드 준비된 **메타데이터 JSON** (이름, 이미지, 속성)
 ## 생성 프로세스
 1. **오프체인 데이터 업로드.** 이름, 설명, 이미지 URL, 속성이 포함된 JSON 파일을 저장합니다. 파일은 공개 **URI**를 통해 접근 가능해야 합니다.

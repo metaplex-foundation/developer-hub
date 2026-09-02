@@ -18,7 +18,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '07-08-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 programmingLanguage:
   - TypeScript
 howToSteps:
@@ -209,7 +209,7 @@ const completion = await fetch(`${NORI_URL}/v1/chat/completions`, {
 
 ## エージェントPDAウォレットへの入金
 
-課金はエージェントのAsset Signer PDAから引き落とされるため、最初の有料呼び出しの前にSOL残高が必要です。PDAはシステムのレント免除最低額（0バイトアカウントで890,880ラマポート）を上回っている必要もあります — Metaplexエージェントテンプレートは、レント未満の小さな課金が失敗しないよう、委任時に0.002 SOLをシードします。任意のウォレットからPDAにSOLを送金してください。残高が尽きると、補充するまで呼び出しはHTTP 402チャレンジにフォールバックします（[ハードストップのセマンティクス](/agents/nori/pricing-and-billing#ハードストップのセマンティクス)を参照）。
+課金はエージェントのAsset Signer PDAから引き落とされるため、最初の有料呼び出しの前にSOL残高が必要です。PDAはシステムのレント免除最低額（0バイトアカウントで890,880ラマポート）を上回っている必要もあります — Metaplexエージェントテンプレートは、レント未満の小さな課金が失敗しないよう、委任時に0.002 SOLをシードします。任意のウォレットからPDAにSOLを送金してください。残高が尽きると、補充するまで呼び出しはHTTP 402チャレンジにフォールバックします（[ハードストップのセマンティクス](/agents/nori/pricing-and-billing#ハードストップのセマンティクス)を参照）。SOLは必ずAsset Signer PDAのアドレスに送金してください。エージェントのアセットアドレスには絶対に送金しないでください。
 
 ## Noriへの委任の取り消し
 

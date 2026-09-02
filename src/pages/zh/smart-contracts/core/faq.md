@@ -2,7 +2,7 @@
 title: 常见问题
 metaTitle: 常见问题 | Core
 description: 关于 Metaplex Core 协议的常见问题。
-updated: '08-28-2026'
+updated: '09-01-2026'
 keywords:
   - Core FAQ
   - Metaplex Core questions
@@ -16,7 +16,9 @@ faqs:
   - q: 为什么 Core 同时有链上和链下数据？
     a: 将所有内容存储在链上会很昂贵（租金成本）且不灵活。拆分数据允许链上保证，同时链下提供灵活的元数据。使用 Inscriptions 可以实现完全链上数据。
   - q: 使用 Core 有任何费用吗？
-    a: Core 每个 Asset 铸造收取 0.0015 SOL。详情请参阅协议费用页面。
+    a: Core 每个 Asset 铸造收取 0.0015 SOL，每次 execute 调用收取一笔小额费用。详情请参阅协议费用页面。
+  - q: 我可以在 Core Asset 账户上存放 SOL 吗？
+    a: 不可以。Core Asset 账户中超过免租金最低余额的每一个 lamport 都会被视为协议费用，并由 Metaplex 费用收集器清扫。请使用 Asset Signer PDA（从 Asset 派生的独立地址）作为 Asset 的钱包。
   - q: 如何创建灵魂绑定 Asset？
     a: 使用 Permanent Freeze Delegate 插件或 Oracle 插件。详情请参阅灵魂绑定 Asset 指南。
   - q: 如何将 Asset 设置为不可变？
@@ -34,7 +36,9 @@ Core Asset 和 Collection 账户都包含链上数据，但两者也包含一个
 - 链上数据不太灵活。一旦使用某种字节结构创建了账户状态，就不能轻易更改，否则可能会导致反序列化问题。因此，如果我们必须将所有内容存储在链上，标准将更难以随着生态系统的需求而发展。
 因此，将数据拆分为链上和链下数据允许用户获得两全其美的效果，其中链上数据可以被程序用于**为用户创建保证和期望**，链下数据可以用于**提供标准化但灵活的信息**。但不用担心，如果您希望数据完全在链上，Metaplex 也为此目的提供了 [Inscriptions](/zh/smart-contracts/inscription)。
 ## 使用 Core 有任何费用吗？
-Core 目前向调用者收取非常小的费用，每个 Asset 铸造 0.0015 SOL。更多详情可以在[协议费用](/protocol-fees)页面找到。
+Core 目前向调用者收取非常小的费用，每个 Asset 铸造 0.0015 SOL，此外每次 `execute` 调用会向 Asset 所有者收取一笔小额费用。更多详情可以在[协议费用](/protocol-fees)页面找到。
+## 我可以在 Core Asset 账户上存放 SOL 吗？
+不可以。Core 程序将 Asset 账户中超过免租金最低余额的每一个 lamport 都视为协议费用，Metaplex 费用收集器只清扫超过该最低余额的部分，免租金余额本身会留在账户中。发送到 Asset 地址的 SOL 会被收取且无法找回。要为 Asset 提供钱包，请将资金发送到其 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)，这是从 Asset 派生并通过 `execute` 指令控制的独立地址。
 ## 如何创建灵魂绑定 Asset？
 Core 标准允许您创建灵魂绑定 Asset。要实现这一点，可以使用 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 插件或 [Oracle 插件](/smart-contracts/core/external-plugins/oracle)。
 要了解更多，请查看[灵魂绑定 Asset 指南](/smart-contracts/core/guides/create-soulbound-nft-asset)！

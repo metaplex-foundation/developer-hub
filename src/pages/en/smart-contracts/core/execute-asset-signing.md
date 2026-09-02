@@ -2,7 +2,7 @@
 title: Execute Asset Signing
 metaTitle: Execute and Asset Signer | Core
 description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
-updated: '08-28-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -48,6 +48,9 @@ instructions sent to it to sign the CPI instructions with the `assetSignerPda`.
 This allows the `assetSignerPda` account to effectively own and execute account
 instructions on behalf of the current asset owner.
 You can think of the `assetSignerPda` as a wallet attached to a Core Asset.
+{% callout type="warning" title="Fund the Asset Signer PDA, not the Asset address" %}
+The `assetSignerPda` is a different address from the Asset account. Only the `assetSignerPda` can hold SOL and tokens on behalf of the Asset. The Asset account itself must never be used as a wallet.
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -252,6 +255,9 @@ console.log({ res })
 - The [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute) can block `execute` until it is unfrozen
 - Burning the Asset is irreversible for Asset Signer funds: empty the PDA first
 - The `assetSignerPda` is deterministic from the Asset address and does not change if the Asset is transferred
+- The `execute` instruction charges a protocol fee paid by the `payer` account passed to the instruction, which is normally the Asset owner but can also be the `assetSignerPda` itself. This is separate from the Solana transaction fee, which the PDA cannot pay. See the [Protocol Fees](/protocol-fees) page for the current amount. The fee is transferred into the Asset account and later swept by the Metaplex fee collector.
+- Every lamport above the rent-exempt minimum on the Asset account is treated as a protocol fee and will be collected. Hold SOL and tokens in the `assetSignerPda`, never in the Asset account.
+- The `assetSignerPda` is a system-owned account. The Solana runtime rejects any transaction that leaves it with a non-zero balance below the rent-exempt minimum for a zero-byte account, so a transfer out must either empty the account or leave at least that minimum behind. If the PDA is also the `payer` for `execute`, the protocol fee is deducted from it in the same instruction, so include the fee when working out what remains. Query `getMinimumBalanceForRentExemption(0)` on the target cluster for the current minimum instead of hard-coding a value.
 ## FAQ
 ### What happens to funds in the Asset Signer PDA if I burn the Asset?
 They are stranded. `execute` requires a live Core Asset, so after burn the PDA can still hold SOL, tokens, and nested Assets but nothing can sign to move them.

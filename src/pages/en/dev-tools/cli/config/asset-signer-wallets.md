@@ -31,7 +31,7 @@ faqs:
   - q: What happens if I burn the Asset while the PDA still holds funds?
     a: execute fails after the Asset is burned, so SOL, tokens, and nested assets in the PDA are stranded. Transfer them out first.
 created: '03-19-2026'
-updated: '08-28-2026'
+updated: '09-01-2026'
 ---
 
 ## Summary
@@ -55,7 +55,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. Check the PDA info
 mplx core asset execute info <assetId>
 
-# 4. Fund the PDA
+# 4. Fund the PDA (use the Signer PDA address from step 3, never the asset address)
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. Switch to the asset-signer wallet

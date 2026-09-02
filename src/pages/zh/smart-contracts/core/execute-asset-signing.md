@@ -2,7 +2,7 @@
 title: Execute和Asset签名
 metaTitle: Execute和Asset签名 | Core
 description: 了解MPL Core Asset如何使用Execute指令来签署指令和交易。
-updated: '08-28-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -39,6 +39,9 @@ MPL Core Asset能够签署并向区块链提交交易/CPI。这有效地为Core 
 Asset现在可以访问`assetSignerPda`账户/地址，这允许MPL Core程序上的`execute`指令传递发送给它的额外指令，以使用`assetSignerPda`签署CPI指令。
 这允许`assetSignerPda`账户代表当前资产所有者有效地拥有和执行账户指令。
 您可以将`assetSignerPda`视为附加到Core Asset的钱包。
+{% callout type="warning" title="为Asset Signer PDA注资，而不是Asset地址" %}
+`assetSignerPda`与Asset账户是不同的地址。只有`assetSignerPda`可以代表Asset持有SOL和代币。绝不能将Asset账户本身用作钱包。
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -234,6 +237,9 @@ console.log({ res })
 - [Freeze Execute 插件](/zh/smart-contracts/core/plugins/freeze-execute) 可以在解冻之前阻止 `execute`
 - 销毁 Asset 对 Asset Signer 资金不可逆：请先清空 PDA
 - `assetSignerPda` 由 Asset 地址确定性推导，转移 Asset 不会改变它
+- `execute`指令会收取由传入指令的`payer`账户支付的协议费用。`payer`通常是Asset所有者，但也可以是`assetSignerPda`本身。这与Solana交易手续费是两回事，交易手续费无法由PDA支付。当前金额请参阅[协议费用](/protocol-fees)页面。该费用会转入Asset账户，随后由Metaplex费用收集器清扫。
+- Asset账户中超过免租金最低余额的每一个lamport都会被视为协议费用并被收取。请将SOL和代币保存在`assetSignerPda`中，切勿保存在Asset账户中。
+- `assetSignerPda`是系统所有的账户。Solana运行时会拒绝任何使其剩余非零余额低于0字节账户免租金最低余额的交易，因此转出必须要么清空账户，要么至少保留该最低余额。如果PDA同时是`execute`的`payer`，协议费用会在同一指令中从PDA扣除，因此计算剩余余额时请把该费用算进去。请在目标集群上查询`getMinimumBalanceForRentExemption(0)`获取当前最低余额，而不要写死数值。
 ## FAQ
 ### 销毁 Asset 后，Asset Signer PDA 中的资金会怎样？
 会滞留且无法找回。`execute` 需要有效的 Core Asset，因此销毁后 PDA 仍可持有 SOL、代币和嵌套 Asset，但没有任何签名能把它们转出。

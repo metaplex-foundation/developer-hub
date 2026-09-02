@@ -31,7 +31,7 @@ faqs:
   - q: PDAに資金が残っている状態でAssetをバーンするとどうなりますか？
     a: Assetをバーンするとexecuteは失敗するため、PDA内のSOL、トークン、入れ子のアセットは取り残されます。先に転送してください。
 created: '03-19-2026'
-updated: '08-28-2026'
+updated: '09-01-2026'
 ---
 
 ## 概要
@@ -55,7 +55,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. PDA情報を確認
 mplx core asset execute info <assetId>
 
-# 4. PDAに資金を送金
+# 4. PDAに資金を送金（ステップ3のSigner PDAアドレスを使用し、アセットアドレスには絶対に送金しないでください）
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. アセット署名者ウォレットに切り替え

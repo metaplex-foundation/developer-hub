@@ -20,6 +20,8 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 민터가 지불합니다 (일반적으로 새로운 드롭을 민팅하는 개별 컬렉터). 프린트 에디션을 생성하는 것을 포함하여 NFT를 "생성"하는 모든 명령이 포함됩니다.
 
+Core 프로토콜 수수료는 별도의 수수료 계정으로 이체되는 것이 아니라 Asset 계정 자체에 예치됩니다. Metaplex 수수료 수집기는 주기적으로 `collect` 명령을 호출하여 Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports를 프로토콜 수수료 수령자에게 회수합니다. 따라서 Core Asset 주소로 전송된 SOL은 프로토콜 수수료로 취급되어 회수됩니다. Core Asset 계정에 SOL을 보관하지 마세요. Asset의 지갑으로는 Asset에서 파생된 별도의 주소인 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)를 사용하세요.
+
 {% protocol-fees program="core" showTitle=false /%}
 
 {% /totem-accordion %}

@@ -2,7 +2,7 @@
 title: 创建 Asset
 metaTitle: 创建 Asset | Metaplex Core
 description: 了解如何使用 JavaScript 或 Rust 在 Solana 上创建 Core NFT Asset。包括上传元数据、铸造到收藏和添加插件。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -64,7 +64,7 @@ Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegu
 4. 在 [core.metaplex.com](https://core.metaplex.com) 验证
 ## 前提条件
 - 配置了签名者和 RPC 连接的 **Umi**
-- 用于交易费用的 **SOL**（每个资产约 0.003 SOL）
+- 用于租金和费用的 **SOL**（每个资产约 0.003 SOL）
 - 准备上传的 **元数据 JSON**（名称、图像、属性）
 ## 创建流程
 1. **上传链下数据。** 存储包含名称、描述、图像 URL 和属性的 JSON 文件。文件必须通过公共 **URI** 可访问。

@@ -22,7 +22,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 faqs:
   - q: DAS 응답에서 agentToken은 언제 나타나나요?
     a: agentToken 필드는 에이전트의 AgentIdentityV2 PDA에 setAgentTokenV1을 통해 토큰 민트가 설정된 경우에만 포함됩니다. 연결된 토큰이 없는 등록된 에이전트는 이 필드를 생략합니다. AgentIdentityV1 PDA는 토큰 민트를 보유하지 않으며 agentToken을 채우지 않습니다.
@@ -118,6 +118,10 @@ PDA를 수동으로 파생하지 않고 자산의 공개 키에서 직접 신원
 
 주소는 결정론적이므로 누구나 자산의 공개 키에서 주소를 파생하여 자금을 보내거나 잔액을 확인할 수 있습니다. 이 지갑에 대해 서명할 수 있는 것은 위임된 [이그제큐티브](/agents/run-an-agent)를 통한 Core의 [Execute](/smart-contracts/core/execute-asset-signing) 명령에 의한 자산 자체뿐입니다.
 
+{% callout type="warning" title="자산 주소가 아닌 Asset Signer로 자금을 보내세요" %}
+Asset Signer PDA와 에이전트의 Core 자산은 서로 다른 두 주소입니다. 항상 Asset Signer PDA에 자금을 보내야 합니다.
+{% /callout %}
+
 계정 레이아웃, PDA 파생 세부사항 및 오류 코드에 대해서는 [MPL Agent Registry](/smart-contracts/mpl-agent) 스마트 컨트랙트 문서를 참조하세요.
 
 ## DAS API를 통해 에이전트 데이터 읽기 {#read-agent-data-via-das-api}
@@ -209,6 +213,7 @@ DAS는 수집 중 두 가지 온체인 소스에서 에이전트 필드를 채�
 ## 참고사항
 
 - Asset Signer는 PDA입니다 — 개인 키가 존재하지 않습니다. 모든 소스에서 자금을 받을 수 있지만, Core의 [Execute](/smart-contracts/core/execute-asset-signing) 명령을 통해서만 자산 자체가 발신 트랜잭션에 서명할 수 있습니다.
+- Core 자산 계정 자체는 지갑이 아닙니다.
 - `safeFetchAgentIdentityV1`은 미등록 자산에 대해 throw 대신 `null`을 반환하여 try/catch 없이 존재 여부를 안전하게 확인할 수 있습니다.
 - `findAssetSignerPda`와 DAS `asset_signer`는 모든 네트워크에서 동일한 결정론적 주소를 반환합니다.
 - [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token)으로 설정된 `agent_token`은 **영구적**입니다 — 이를 지우거나 재할당하는 명령은 없습니다.

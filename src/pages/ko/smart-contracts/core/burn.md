@@ -3,7 +3,7 @@ title: Asset 소각
 metaTitle: Asset 소각 | Metaplex Core
 description: Solana에서 Core NFT Asset을 소각하는 방법을 배웁니다. Metaplex Core SDK를 사용하여 Asset을 영구적으로 파괴하고 렌트를 회수합니다.
 created: '06-15-2024'
-updated: '08-28-2026'
+updated: '09-01-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -74,7 +74,10 @@ Token Metadata 소각(mpl-token-metadata 사용), 압축 NFT 소각(Bubblegum �
 - Asset을 소유한(또는 Burn Delegate인) 서명자로 구성된 **Umi**
 - 소각할 Asset의 **Asset 주소**
 - **Collection 주소** (Asset이 Collection 내에 있는 경우)
-Asset은 `burn` 명령어를 사용하여 소각할 수 있습니다. 이렇게 하면 렌트 면제 수수료가 소유자에게 반환됩니다. 계정이 다시 열리는 것을 방지하기 위해 매우 소액의 SOL(0.00089784)만 계정에 남습니다.
+Asset은 `burn` 명령어를 사용하여 소각할 수 있습니다. 이렇게 하면 Asset 계정의 렌트 예치금이 트랜잭션 지불자에게 반환됩니다. 계정이 다시 열리는 것을 방지하기 위해 1바이트 렌트 면제 최소 금액(0.00089784 SOL)만 계정에 남으며, 그 이상의 lamports도 계정에 그대로 남습니다.
+{% callout type="warning" title="렌트만 환불됩니다" %}
+`burn`은 계정 데이터 크기에 대한 렌트 면제 잔액에서 1바이트 하한을 뺀 금액을 지불자에게 환불합니다. 주소 재오픈 공격을 방지하기 위해 계정은 삭제되지 않고 1바이트 초기화되지 않은 계정으로 크기가 조정됩니다. 아직 회수되지 않은 프로토콜 수수료 등 렌트를 초과하는 lamports는 Metaplex 수수료 수집기가 회수할 때까지 해당 1바이트 초기화되지 않은 계정에 남아 있습니다.
+{% /callout %}
 {% totem %}
 {% totem-accordion title="기술적 명령어 세부사항" %}
 **명령어 계정 목록**
@@ -171,7 +174,8 @@ const collectionId = collectionAddress(asset)
 ```
 ## 참고사항
 - 소각은 **영구적이며 되돌릴 수 없음** - Asset을 복구할 수 없음
-- 렌트는 소유자에게 반환됨 (금액은 자산 크기와 플러그인에 따라 다름)
+- 렌트는 지불자에게 반환됨 (금액은 자산 크기와 플러그인에 따라 다름)
+- 렌트만 환불됨. 렌트 면제 최소 금액을 초과하는 lamports는 소유자에게 반환되지 않음
 - 남은 SOL은 계정 주소의 재사용을 방지함
 - Burn Delegate는 소유자를 대신하여 소각 가능 (Burn Delegate 플러그인을 통해)
 - 동결된 Asset은 소각 전에 해제해야 함
@@ -195,6 +199,7 @@ const collectionId = collectionAddress(asset)
 |------|--------|
 | 지불자에게 반환 | 기본 + 플러그인 스토리지 렌트 |
 | 계정에 남음 | ~0.0009 SOL |
+| 렌트 초과 lamports | 환불되지 않음 |
 ## FAQ
 ### 계정에 남아있는 ~0.0009 SOL을 회수할 수 있나요?
 아니요. 이 소액은 계정을 "소각됨"으로 표시하고 해당 주소가 새 Asset에 재사용되는 것을 방지하기 위해 의도적으로 남겨집니다.

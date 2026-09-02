@@ -20,6 +20,8 @@ Metaplexプロトコルには現在、以下の手数料が含まれています
 
 ミンターが支払います（通常は新しいドロップをミントする個々のコレクターです）。プリントエディションを作成するものなど、NFTを「作成」するすべてのインストラクションが含まれます。
 
+Coreのプロトコル手数料は、別の手数料アカウントに送金されるのではなく、Assetアカウント自体に預け入れられます。Metaplexの手数料コレクターは定期的に`collect`命令を呼び出し、Assetアカウントのレント免除最低額を超えるすべてのラマポートをプロトコル手数料の受取先に回収します。そのため、Core Assetのアドレスに送金されたSOLはプロトコル手数料として扱われ、回収されます。Core AssetアカウントにSOLを保管しないでください。Assetのウォレットとしては、Assetから派生した別のアドレスである[Asset Signer PDA](/smart-contracts/core/execute-asset-signing)を使用してください。
+
 {% protocol-fees program="core" showTitle=false /%}
 
 {% /totem-accordion %}

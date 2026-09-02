@@ -2,7 +2,7 @@
 title: FAQ
 metaTitle: FAQ | Core
 description: Frequently asked questions about the Metaplex Core protocol.
-updated: '08-28-2026'
+updated: '09-01-2026'
 keywords:
   - Core FAQ
   - Metaplex Core questions
@@ -16,7 +16,9 @@ faqs:
   - q: Why does Core have both onchain and off-chain data?
     a: Storing everything onchain would be expensive (rent costs) and inflexible. Splitting data allows onchain guarantees while off-chain provides flexible metadata. Use Inscriptions for fully on-chain data.
   - q: Are there any costs to using Core?
-    a: Core charges 0.0015 SOL per Asset mint. See the Protocol Fees page for details.
+    a: Core charges 0.0015 SOL per Asset mint and a small fee per execute call. See the Protocol Fees page for details.
+  - q: Can I store SOL on a Core Asset account?
+    a: No. Every lamport above the rent-exempt minimum on a Core Asset account is treated as a protocol fee and swept by the Metaplex fee collector. Use the Asset Signer PDA, a separate address derived from the Asset, as the Asset's wallet.
   - q: How to create a Soulbound Asset?
     a: Use the Permanent Freeze Delegate plugin or the Oracle Plugin. See the Soulbound Assets Guide for implementation details.
   - q: How to set an Asset to be Immutable?
@@ -34,7 +36,9 @@ The Core Asset and Collection accounts both contain onchain data, yet both also 
 - onchain data is less flexible. Once an account state is created using a certain byte structure it cannot easily be changed without potentially causing deserialization issues. Therefore, if we had to store everything onchain, the standard would be a lot harder to evolve with the demands of the ecosystem.
 Therefore, splitting the data into onchain and off-chain data allows users to get the best of both worlds where onchain data can be used by the program **to create guarantees and expectations for its users** and off-chain data can be used **to provide standardized yet flexible information**. But don't worry, if you want data entirely on chain Metaplex also offers [Inscriptions](/smart-contracts/inscription) for this purpose.
 ## Are there any costs to using Core?
-Core currently charges a very small fee of 0.0015 SOL per Asset mint to the caller. More details can be found on the [Protocol Fees](/protocol-fees) page.
+Core currently charges a very small fee of 0.0015 SOL per Asset mint to the caller, plus a small fee on each `execute` call paid by the Asset owner. More details can be found on the [Protocol Fees](/protocol-fees) page.
+## Can I store SOL on a Core Asset account?
+No. The Core program treats every lamport above the rent-exempt minimum on an Asset account as a protocol fee, and the Metaplex fee collector sweeps only the amount above that minimum, leaving the rent-exempt balance in the account. SOL sent to an Asset address will be collected and cannot be recovered. To give an Asset a wallet, send funds to its [Asset Signer PDA](/smart-contracts/core/execute-asset-signing), which is a separate address derived from the Asset and controlled through the `execute` instruction.
 ## How to create a Soulbound Asset?
 The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) can be used.
 To learn more check out the [Soulbound Assets Guide](/smart-contracts/core/guides/create-soulbound-nft-asset)!

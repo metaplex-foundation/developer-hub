@@ -18,7 +18,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '07-08-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 programmingLanguage:
   - TypeScript
 howToSteps:
@@ -209,7 +209,7 @@ const completion = await fetch(`${NORI_URL}/v1/chat/completions`, {
 
 ## 에이전트 PDA 지갑 충전
 
-요금은 에이전트의 Asset Signer PDA에서 인출되므로, 첫 유료 호출 전에 SOL 잔액이 필요합니다. PDA는 또한 시스템 렌트 면제 최소 금액(0바이트 계정 기준 890,880 lamports) 이상을 유지해야 합니다 — Metaplex 에이전트 템플릿은 렌트 미만의 소액 청구가 절대 실패하지 않도록 위임 시점에 0.002 SOL을 시드합니다. 아무 지갑에서나 PDA로 SOL을 이체하세요; 잔액이 소진되면 충전할 때까지 호출이 HTTP 402 챌린지로 폴백됩니다([하드 스톱 시맨틱스](/agents/nori/pricing-and-billing#하드-스톱-시맨틱스) 참조).
+요금은 에이전트의 Asset Signer PDA에서 인출되므로, 첫 유료 호출 전에 SOL 잔액이 필요합니다. PDA는 또한 시스템 렌트 면제 최소 금액(0바이트 계정 기준 890,880 lamports) 이상을 유지해야 합니다 — Metaplex 에이전트 템플릿은 렌트 미만의 소액 청구가 절대 실패하지 않도록 위임 시점에 0.002 SOL을 시드합니다. 아무 지갑에서나 PDA로 SOL을 이체하세요; 잔액이 소진되면 충전할 때까지 호출이 HTTP 402 챌린지로 폴백됩니다([하드 스톱 시맨틱스](/agents/nori/pricing-and-billing#하드-스톱-시맨틱스) 참조). SOL은 반드시 Asset Signer PDA 주소로만 보내고, 에이전트의 자산 주소로는 절대 보내지 마세요.
 
 ## Nori 위임 취소
 

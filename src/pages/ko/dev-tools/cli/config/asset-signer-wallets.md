@@ -31,7 +31,7 @@ faqs:
   - q: PDA에 자금이 남은 상태에서 Asset을 소각하면 어떻게 되나요?
     a: Asset을 소각하면 execute가 실패하므로 PDA의 SOL, 토큰, 중첩 자산은 묶입니다. 먼저 전송하세요.
 created: '03-19-2026'
-updated: '08-28-2026'
+updated: '09-01-2026'
 ---
 
 ## 요약
@@ -55,7 +55,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. PDA 정보 확인
 mplx core asset execute info <assetId>
 
-# 4. PDA에 자금 전송
+# 4. PDA에 자금 전송 (3단계의 Signer PDA 주소를 사용하고, 자산 주소로는 절대 보내지 마세요)
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. 에셋 서명자 지갑으로 전환

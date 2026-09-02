@@ -2,7 +2,7 @@
 title: Creating Assets
 metaTitle: Creating Assets | Metaplex Core
 description: Learn how to create Core NFT Assets on Solana using JavaScript or Rust. Includes uploading metadata, minting into collections, and adding plugins.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -65,7 +65,7 @@ Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), f
 4. Verify on [core.metaplex.com](https://core.metaplex.com)
 ## Prerequisites
 - **Umi** configured with a signer and RPC connection
-- **SOL** for transaction fees (~0.003 SOL per asset)
+- **SOL** for rent and fees (~0.003 SOL per asset)
 - **Metadata JSON** ready to upload (name, image, attributes)
 ## The Creation Process
 1. **Upload off-chain data.** Store a JSON file containing name, description, image URL, and attributes. The file must be accessible via a public **URI**.
