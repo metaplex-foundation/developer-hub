@@ -33,7 +33,7 @@ const umi = createUmi("exampleDasProvider.com").use(dasApi());
 如果您打算在 [Metaplex Core](/zh/smart-contracts/core) 资产上使用 DAS，您需要安装额外的 `@metaplex-foundation/mpl-core-das` 包：
 {% /callout %}
 
-## MPL Core 的 DAS
+## MPL Core 的 DAS {% #das-for-mpl-core %}
 
 [MPL Core](/zh/smart-contracts/core) 的 [DAS 扩展](/zh/dev-tools/das-api/core-extension)可以直接返回正确的类型，以便进一步与 MPL SDK 一起使用。它还自动派生资产中从集合继承的插件，并提供 [DAS 到 Core 类型转换的功能](/zh/dev-tools/das-api/core-extension/convert-das-asset-to-core)。
 
