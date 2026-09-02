@@ -237,9 +237,9 @@ console.log({ res })
 - [Freeze Executeプラグイン](/ja/smart-contracts/core/plugins/freeze-execute)は、解除されるまで`execute`をブロックできます
 - AssetのバーンはAsset Signerの資金に対して不可逆です。先にPDAを空にしてください
 - `assetSignerPda`はAssetアドレスから決定論的に導出され、Assetが転送されても変わりません
-- `execute`命令にはトランザクションの支払者が支払うプロトコル手数料がかかります。支払者は通常Asset所有者ですが、`assetSignerPda`自体が支払うこともできます。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
+- `execute`命令には、命令に渡される`payer`アカウントが支払うプロトコル手数料がかかります。`payer`は通常Asset所有者ですが、`assetSignerPda`自体を指定することもできます。これはSolanaのトランザクション手数料とは別のもので、トランザクション手数料はPDAでは支払えません。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
 - Assetアカウントのレント免除最低額を超えるすべてのラマポートはプロトコル手数料として扱われ、回収されます。SOLやトークンは`assetSignerPda`に保持し、Assetアカウントには絶対に保持しないでください。
-- `assetSignerPda`はシステム所有のアカウントです。Solanaランタイムは、0バイトアカウントのレント免除最低額（890,880ラマポート）未満のゼロでない残高を残すトランザクションを拒否するため、送金はアカウントを空にするか、少なくともその額を残す必要があります。PDAが部分的な送金を行う場合は、この準備金を確保しておいてください。
+- `assetSignerPda`はシステム所有のアカウントです。Solanaランタイムは、0バイトアカウントのレント免除最低額未満のゼロでない残高を残すトランザクションを拒否するため、送金はアカウントを空にするか、少なくともその最低額を残す必要があります。PDAが`execute`の`payer`でもある場合、同じ命令内でプロトコル手数料もPDAから差し引かれるため、残高の計算にはその手数料も含めてください。最低額は値を固定せず、対象クラスターで`getMinimumBalanceForRentExemption(0)`を照会して取得してください。
 ## FAQ
 ### Assetをバーンすると、Asset Signer PDAの資金はどうなりますか？
 取り残されます。`execute`には有効なCore Assetが必要なため、バーン後もPDAはSOL、トークン、入れ子のAssetを保持できますが、移動するために署名できるものはありません。

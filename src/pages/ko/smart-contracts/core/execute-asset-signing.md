@@ -237,9 +237,9 @@ console.log({ res })
 - [Freeze Execute 플러그인](/ko/smart-contracts/core/plugins/freeze-execute)은 해제될 때까지 `execute`를 차단할 수 있습니다
 - Asset 소각은 Asset Signer 자금에 대해 되돌릴 수 없습니다. 먼저 PDA를 비우세요
 - `assetSignerPda`는 Asset 주소에서 결정론적으로 파생되며 Asset이 전송되어도 변하지 않습니다
-- `execute` 명령에는 트랜잭션 지불자가 지불하는 프로토콜 수수료가 부과됩니다. 지불자는 보통 Asset 소유자이지만 `assetSignerPda` 자체가 지불할 수도 있습니다. 현재 금액은 [Protocol Fees](/protocol-fees) 페이지를 참조하세요. 이 수수료는 Asset 계정으로 이체되며 이후 Metaplex 수수료 수집기에 의해 회수됩니다.
+- `execute` 명령에는 명령에 전달되는 `payer` 계정이 지불하는 프로토콜 수수료가 부과됩니다. `payer`는 보통 Asset 소유자이지만 `assetSignerPda` 자체일 수도 있습니다. 이는 Solana 트랜잭션 수수료와는 별개이며, 트랜잭션 수수료는 PDA가 지불할 수 없습니다. 현재 금액은 [Protocol Fees](/protocol-fees) 페이지를 참조하세요. 이 수수료는 Asset 계정으로 이체되며 이후 Metaplex 수수료 수집기에 의해 회수됩니다.
 - Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports는 프로토콜 수수료로 취급되어 회수됩니다. SOL과 토큰은 `assetSignerPda`에 보관하고, Asset 계정에는 절대 보관하지 마세요.
-- `assetSignerPda`는 시스템 소유 계정입니다. Solana 런타임은 0바이트 계정의 렌트 면제 최소 금액(890,880 lamports) 미만의 0이 아닌 잔액을 남기는 트랜잭션을 거부하므로, 이체는 계정을 비우거나 최소 그 금액을 남겨야 합니다. PDA가 부분 이체를 수행한다면 이 예비금을 유지하세요.
+- `assetSignerPda`는 시스템 소유 계정입니다. Solana 런타임은 0바이트 계정의 렌트 면제 최소 금액 미만의 0이 아닌 잔액을 남기는 트랜잭션을 거부하므로, 이체는 계정을 비우거나 최소 그 금액을 남겨야 합니다. PDA가 `execute`의 `payer`이기도 하다면 같은 명령에서 프로토콜 수수료도 PDA에서 차감되므로, 남는 잔액을 계산할 때 그 수수료를 포함하세요. 최소 금액은 값을 고정하지 말고 대상 클러스터에서 `getMinimumBalanceForRentExemption(0)`을 조회하여 확인하세요.
 ## FAQ
 ### Asset을 소각하면 Asset Signer PDA의 자금은 어떻게 되나요?
 묶여 회수할 수 없습니다. `execute`에는 유효한 Core Asset이 필요하므로, 소각 후에도 PDA는 SOL, 토큰, 중첩 Asset을 보유할 수 있지만 이동하도록 서명할 수 있는 것은 없습니다.
