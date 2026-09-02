@@ -40,6 +40,14 @@ Metaplex协议目前包含以下费用：
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-Distro" %}
+
+Merkle 领取成功时，由领取交易的支付方支付。
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1（旧版）" %}
 
 原始压缩NFT程序。

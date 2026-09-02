@@ -40,6 +40,14 @@ Metaplexプロトコルには現在、以下の手数料が含まれています
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-Distro" %}
+
+Merkle クレームが成功したとき、クレームトランザクションの支払者が支払います。
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1（レガシー）" %}
 
 オリジナルの圧縮NFTプログラム。

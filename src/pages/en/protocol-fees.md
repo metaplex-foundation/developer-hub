@@ -40,6 +40,14 @@ Paid by the minter, which is typically individual collectors minting new drops. 
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-Distro" %}
+
+Paid by the claim transaction payer when a Merkle claim succeeds.
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1 (Legacy)" %}
 
 The original compressed NFT program.

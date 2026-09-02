@@ -40,6 +40,14 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-Distro" %}
+
+Merkle 클레임이 성공할 때 클레임 트랜잭션 지불자가 냅니다.
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1 (레거시)" %}
 
 오리지널 압축 NFT 프로그램.

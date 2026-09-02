@@ -4,6 +4,10 @@ metaTitle: Gumdrop | 개발자 허브
 description: 높은 초기 임대 비용 없이 손쉬운 토큰 에어드랍 및 프린트 에디션 에어드랍
 ---
 
+{% callout type="warning" title="Gumdrop은 지원 중단됨" %}
+새로운 지갑 또는 레거시 NFT 토큰 배포에는 [MPL-Distro](/ko/smart-contracts/mpl-distro)를 사용하세요. 클레임 기반 에어드롭은 [프로덕션 전달](/ko/smart-contracts/mpl-distro/production-delivery)부터 시작하세요. Gumdrop은 기존 연동만을 위해 문서화되어 있습니다.
+{% /callout %}
+
 Gumdrop 프로그램은 높은 초기 임대 비용 없이 손쉬운 토큰 에어드랍 및 프린트 에디션 에어드랍을 가능하게 합니다.
 원래 [Uniswap](https://github.com/Uniswap/merkle-distributor)에서 토큰 에어드랍을 위해 개척하고
 [Saber](https://github.com/saber-hq/merkle-distributor)에서 Solana로 포팅한 것을 확장하여 마스터 카피의 에디션 프린팅을 허용합니다.
