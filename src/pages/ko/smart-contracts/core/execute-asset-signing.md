@@ -2,7 +2,7 @@
 title: Execute 및 Asset 서명
 metaTitle: Execute 및 Asset 서명 | Core
 description: MPL Core Asset이 Execute 명령을 사용하여 명령과 트랜잭션에 서명하는 방법을 알아봅니다.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -27,6 +27,9 @@ MPL Core Asset은 블록체인에 트랜잭션/CPI를 서명하고 제출할 수
 Asset은 이제 `assetSignerPda` 계정/주소에 액세스할 수 있으며, 이를 통해 MPL Core 프로그램의 `execute` 명령이 전송된 추가 명령을 통과시켜 `assetSignerPda`로 CPI 명령에 서명할 수 있습니다.
 이를 통해 `assetSignerPda` 계정은 현재 자산 소유자를 대신하여 계정 명령을 효과적으로 소유하고 실행할 수 있습니다.
 `assetSignerPda`를 Core Asset에 연결된 지갑으로 생각할 수 있습니다.
+{% callout type="warning" title="Asset 주소가 아닌 Asset Signer PDA에 자금을 보내세요" %}
+`assetSignerPda`는 Asset 계정과 다른 주소입니다. Asset을 대신하여 SOL과 토큰을 보유할 수 있는 것은 `assetSignerPda`뿐입니다. Asset 계정 자체를 지갑으로 사용해서는 안 됩니다.
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -206,3 +209,8 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## 참고사항
+- `execute` 명령에는 Asset 소유자가 지불하는 프로토콜 수수료가 부과됩니다. 현재 금액은 [Protocol Fees](/protocol-fees) 페이지를 참조하세요. 이 수수료는 Asset 계정으로 이체되며 이후 Metaplex 수수료 수집기에 의해 회수됩니다.
+- Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports는 프로토콜 수수료로 취급되어 회수됩니다. SOL과 토큰은 `assetSignerPda`에 보관하고, Asset 계정에는 절대 보관하지 마세요.
+- `assetSignerPda`는 시스템 소유 계정입니다. 여기서 이체가 성공하려면 0바이트 계정의 렌트 면제 최소 금액(890,880 lamports) 이상을 유지해야 합니다.
+- 특별한 `Execute` 플러그인이나 델리게이트를 사용하지 않는 한 현재 Asset 소유자만 `execute`를 호출할 수 있습니다. execute 작업을 일시적으로 차단하려면 [Freeze Execute 플러그인](/smart-contracts/core/plugins/freeze-execute)을 사용하세요.

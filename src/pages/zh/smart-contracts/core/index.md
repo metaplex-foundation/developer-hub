@@ -2,7 +2,7 @@
 title: 概述
 metaTitle: Metaplex Core | Solana 下一代 NFT 标准
 description: Metaplex Core 是 Solana 上的下一代 NFT 标准，具有单账户设计、强制版税和灵活的插件系统。更低成本、更低计算、更高性能。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -143,3 +143,4 @@ Core Asset 和 Token Metadata NFT 是不同的标准。没有自动迁移。新�
 | **Delegate** | 被授权对 Asset 执行特定操作而无需拥有它的账户 |
 | **CPI** | Cross-Program Invocation - 从另一个 Solana 程序调用 Core 程序 |
 | **URI** | 指向包含名称、图像和属性的 JSON 文件的链下元数据 URL |
+| **Asset Signer PDA** | 从 Asset 派生的、充当 Asset 钱包的独立地址 |

@@ -29,7 +29,7 @@ faqs:
   - q: PDA가 해결하는 주소를 어떻게 확인하나요?
     a: "`mplx core asset execute info <assetId>`를 실행하세요. 이것은 결정론적 서명자 PDA 주소와 현재 SOL 잔액을 보여줍니다."
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '09-01-2026'
 ---
 
 ## 요약
@@ -53,7 +53,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. PDA 정보 확인
 mplx core asset execute info <assetId>
 
-# 4. PDA에 자금 전송
+# 4. PDA에 자금 전송 (3단계의 Signer PDA 주소를 사용하고, 자산 주소로는 절대 보내지 마세요)
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. 에셋 서명자 지갑으로 전환

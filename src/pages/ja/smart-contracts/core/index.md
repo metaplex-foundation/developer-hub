@@ -2,7 +2,7 @@
 title: 概要
 metaTitle: Metaplex Core | Solana向け次世代NFT標準
 description: Metaplex Coreは、シングルアカウント設計、強制ロイヤリティ、柔軟なプラグインシステムを備えたSolana上の次世代NFT標準です。低コスト、低コンピュート、高パフォーマンス。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -143,3 +143,4 @@ DAS（Digital Asset Standard）をサポートするすべての主要RPCプロ�
 | **Delegate** | 所有せずにAssetに対して特定のアクションを実行する権限を持つアカウント |
 | **CPI** | Cross-Program Invocation - 別のSolanaプログラムからCoreプログラムを呼び出すこと |
 | **URI** | 名前、画像、属性を含むJSONファイルを指すオフチェーンメタデータURL |
+| **Asset Signer PDA** | Assetから派生した、Assetのウォレットとして機能する別のアドレス |

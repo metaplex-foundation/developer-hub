@@ -2,7 +2,7 @@
 title: FAQ
 metaTitle: FAQ | Core
 description: Metaplex Core 프로토콜에 대한 자주 묻는 질문입니다.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Core FAQ
   - Metaplex Core questions
@@ -16,7 +16,9 @@ faqs:
   - q: Core에 온체인과 오프체인 데이터가 모두 있는 이유는 무엇인가요?
     a: 모든 것을 온체인에 저장하면 비용이 많이 들고(렌트 비용) 유연성이 떨어집니다. 데이터를 분할하면 온체인 보장과 오프체인 유연한 메타데이터를 모두 달성할 수 있습니다. 완전히 온체인 데이터가 필요하면 Inscriptions를 사용하세요.
   - q: Core 사용에 비용이 드나요?
-    a: Core는 Asset 민팅당 0.0015 SOL의 수수료가 있습니다. 자세한 내용은 Protocol Fees 페이지를 참조하세요.
+    a: Core는 Asset 민팅당 0.0015 SOL의 수수료와 execute 호출당 소액의 수수료가 있습니다. 자세한 내용은 Protocol Fees 페이지를 참조하세요.
+  - q: Core Asset 계정에 SOL을 보관할 수 있나요?
+    a: 아니요. Core Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports는 프로토콜 수수료로 취급되어 Metaplex 수수료 수집기에 의해 회수됩니다. Asset의 지갑으로는 Asset에서 파생된 별도의 주소인 Asset Signer PDA를 사용하세요.
   - q: Soulbound Asset을 만들려면 어떻게 하나요?
     a: Permanent Freeze Delegate 플러그인 또는 Oracle 플러그인을 사용합니다. 구현 세부 사항은 Soulbound Assets 가이드를 참조하세요.
   - q: Asset을 불변으로 만들려면 어떻게 하나요?
@@ -32,7 +34,9 @@ Core Asset과 Collection 계정은 모두 온체인 데이터를 포함하지만
 - 온체인 데이터는 유연성이 떨어집니다. 특정 바이트 구조를 사용하여 계정 상태가 생성되면 역직렬화 문제를 일으킬 수 있으므로 쉽게 변경할 수 없습니다. 따라서 모든 것을 온체인에 저장해야 한다면 표준은 생태계의 요구에 맞게 발전하기가 훨씬 어려워집니다.
 따라서 데이터를 온체인과 오프체인으로 분할하면 사용자는 두 가지 장점을 모두 얻을 수 있습니다. 온체인 데이터는 프로그램이 **사용자에 대한 보장과 기대를 생성**하는 데 사용할 수 있고, 오프체인 데이터는 **표준화되어 있지만 유연한 정보를 제공**하는 데 사용할 수 있습니다. 하지만 걱정하지 마세요. 완전히 온체인 데이터가 필요하다면 Metaplex는 이 목적을 위해 [Inscriptions](/ko/smart-contracts/inscription)도 제공합니다.
 ## Core 사용에 비용이 드나요?
-Core는 현재 호출자에게 Asset 민팅당 0.0015 SOL이라는 매우 작은 수수료를 부과합니다. 자세한 내용은 [Protocol Fees](/protocol-fees) 페이지에서 확인할 수 있습니다.
+Core는 현재 호출자에게 Asset 민팅당 0.0015 SOL이라는 매우 작은 수수료를 부과하며, 추가로 각 `execute` 호출마다 Asset 소유자가 지불하는 소액의 수수료가 있습니다. 자세한 내용은 [Protocol Fees](/protocol-fees) 페이지에서 확인할 수 있습니다.
+## Core Asset 계정에 SOL을 보관할 수 있나요?
+아니요. Core 프로그램은 Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports를 프로토콜 수수료로 취급하며, Metaplex 수수료 수집기가 해당 잔액을 회수합니다. Asset 주소로 전송된 SOL은 회수되며 되찾을 수 없습니다. Asset에 지갑을 부여하려면 Asset에서 파생된 별도의 주소이며 `execute` 명령을 통해 제어되는 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)로 자금을 보내세요.
 ## Soulbound Asset을 만들려면 어떻게 하나요?
 Core Standard를 사용하면 Soulbound Asset을 만들 수 있습니다. 이를 달성하려면 [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) 플러그인 또는 [Oracle 플러그인](/ko/smart-contracts/core/external-plugins/oracle)을 사용할 수 있습니다.
 자세한 내용은 [Soulbound Assets 가이드](/ko/smart-contracts/core/guides/create-soulbound-nft-asset)를 확인하세요!

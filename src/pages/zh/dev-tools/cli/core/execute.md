@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '03-20-2026'
+updated: '09-01-2026'
 ---
 
 ## 概述
@@ -90,6 +90,10 @@ mplx core asset execute info <assetId> --json
 
 检查PDA然后为其注资的常见工作流程：
 
+{% callout type="warning" title="将资金发送到Asset Signer，而不是资产地址" %}
+Asset Signer PDA和代理的Core资产是两个不同的地址。请务必始终为Asset Signer PDA注资。
+{% /callout %}
+
 ```bash {% title="Inspect and fund the PDA" %}
 # 1. 获取PDA地址
 mplx core asset execute info <assetId>
@@ -130,6 +134,7 @@ mplx core asset execute info <assetId>
 
 - 签名者PDA是确定性的——相同的资产始终生成相同的PDA地址
 - PDA可以持有SOL、SPL代币，甚至拥有其他[MPL Core资产](/core)
+- 资产账户本身不能持有SOL：任何超过其免租金最低余额的lamports都会被视为Core协议费用，并由Metaplex费用收集器清扫。
 - 只有资产所有者（或授权的委托人）才能为给定资产的PDA调用`execute`指令
 - 命令在派生PDA之前会验证资产在链上是否存在；不存在的资产将产生错误
 - 显示的余额仅为SOL余额——要检查代币余额，请激活[资产签名者钱包](/dev-tools/cli/config/asset-signer-wallets)并使用`mplx toolbox sol balance`

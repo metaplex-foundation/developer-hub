@@ -29,7 +29,7 @@ faqs:
   - q: 如何查看PDA解析到的地址？
     a: 运行`mplx core asset execute info <assetId>`。这将显示确定性签名者PDA地址及其当前SOL余额。
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '09-01-2026'
 ---
 
 ## 概述
@@ -53,7 +53,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. 查看PDA信息
 mplx core asset execute info <assetId>
 
-# 4. 为PDA注资
+# 4. 为PDA注资（使用步骤3中的Signer PDA地址，切勿使用资产地址）
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. 切换到资产签名者钱包

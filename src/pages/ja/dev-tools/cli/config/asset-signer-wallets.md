@@ -29,7 +29,7 @@ faqs:
   - q: PDAが解決するアドレスを確認するにはどうすればよいですか？
     a: "`mplx core asset execute info <assetId>`を実行します。これにより、決定論的なサイナーPDAアドレスとその現在のSOL残高が表示されます。"
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '09-01-2026'
 ---
 
 ## 概要
@@ -53,7 +53,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. PDA情報を確認
 mplx core asset execute info <assetId>
 
-# 4. PDAに資金を送金
+# 4. PDAに資金を送金（ステップ3のSigner PDAアドレスを使用し、アセットアドレスには絶対に送金しないでください）
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. アセット署名者ウォレットに切り替え

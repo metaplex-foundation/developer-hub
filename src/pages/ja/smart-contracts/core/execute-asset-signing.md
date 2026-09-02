@@ -2,7 +2,7 @@
 title: Execute Asset Signing
 metaTitle: ExecuteとAsset Signer | Core
 description: MPL Core AssetsがExecute命令を使用して命令やトランザクションに署名する方法を学びます。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -27,6 +27,9 @@ MPL Core Assetsは、ブロックチェーンにトランザクション/CPIを�
 Assetsは`assetSignerPda`アカウント/アドレスにアクセスできるようになり、MPL Coreプログラムの`execute`命令が、送信された追加の命令を`assetSignerPda`でCPI命令に署名して通過させることができます。
 これにより、`assetSignerPda`アカウントは、現在のアセット所有者に代わってアカウント命令を効果的に所有および実行できます。
 `assetSignerPda`は、Core Assetに接続されたウォレットと考えることができます。
+{% callout type="warning" title="AssetアドレスではなくAsset Signer PDAに資金を送金してください" %}
+`assetSignerPda`はAssetアカウントとは異なるアドレスです。Assetに代わってSOLやトークンを保持できるのは`assetSignerPda`のみです。Assetアカウント自体をウォレットとして使用してはいけません。
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -206,3 +209,8 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## 注意事項
+- `execute`命令にはAsset所有者が支払うプロトコル手数料がかかります。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
+- Assetアカウントのレント免除最低額を超えるすべてのラマポートはプロトコル手数料として扱われ、回収されます。SOLやトークンは`assetSignerPda`に保持し、Assetアカウントには絶対に保持しないでください。
+- `assetSignerPda`はシステム所有のアカウントです。そこからの送金を成功させるには、0バイトアカウントのレント免除最低額（890,880ラマポート）以上を維持する必要があります。
+- 特別な`Execute`プラグインやデリゲートを使用しない限り、`execute`を呼び出せるのは現在のAsset所有者のみです。execute操作を一時的にブロックするには[Freeze Executeプラグイン](/smart-contracts/core/plugins/freeze-execute)を使用してください。

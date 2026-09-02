@@ -2,7 +2,7 @@
 title: Execute和Asset签名
 metaTitle: Execute和Asset签名 | Core
 description: 了解MPL Core Asset如何使用Execute指令来签署指令和交易。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -27,6 +27,9 @@ MPL Core Asset能够签署并向区块链提交交易/CPI。这有效地为Core 
 Asset现在可以访问`assetSignerPda`账户/地址，这允许MPL Core程序上的`execute`指令传递发送给它的额外指令，以使用`assetSignerPda`签署CPI指令。
 这允许`assetSignerPda`账户代表当前资产所有者有效地拥有和执行账户指令。
 您可以将`assetSignerPda`视为附加到Core Asset的钱包。
+{% callout type="warning" title="为Asset Signer PDA注资，而不是Asset地址" %}
+`assetSignerPda`与Asset账户是不同的地址。只有`assetSignerPda`可以代表Asset持有SOL和代币。绝不能将Asset账户本身用作钱包。
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -206,3 +209,8 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## 注意事项
+- `execute`指令会收取由Asset所有者支付的协议费用。当前金额请参阅[协议费用](/protocol-fees)页面。该费用会转入Asset账户，随后由Metaplex费用收集器清扫。
+- Asset账户中超过免租金最低余额的每一个lamport都会被视为协议费用并被收取。请将SOL和代币保存在`assetSignerPda`中，切勿保存在Asset账户中。
+- `assetSignerPda`是系统所有的账户。要使从中转出的交易成功，它必须至少保持0字节账户的免租金最低余额（890,880 lamports）。
+- 除非使用特殊的`Execute`插件或委托，否则只有当前Asset所有者可以调用`execute`。使用[Freeze Execute插件](/smart-contracts/core/plugins/freeze-execute)可以临时阻止execute操作。

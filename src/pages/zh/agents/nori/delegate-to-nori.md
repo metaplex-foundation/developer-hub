@@ -18,7 +18,7 @@ about:
   - Metaplex
 proficiencyLevel: Intermediate
 created: '07-08-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 programmingLanguage:
   - TypeScript
 howToSteps:
@@ -209,7 +209,7 @@ const completion = await fetch(`${NORI_URL}/v1/chat/completions`, {
 
 ## 为 Agent PDA 钱包充值
 
-扣费从您 Agent 的 Asset Signer PDA 扣取，因此在首次付费调用之前它需要有 SOL 余额。PDA 还必须保持在系统免租金最低余额之上（0 字节账户为 890,880 lamports）— Metaplex Agent 模板在委托时会为其预置 0.002 SOL，以确保低于租金的小额扣费永不失败。从任意钱包向 PDA 转入 SOL 即可；如果余额耗尽，调用会回退为 HTTP 402 质询，直到您充值（参见[硬停止语义](/agents/nori/pricing-and-billing#硬停止语义)）。
+扣费从您 Agent 的 Asset Signer PDA 扣取，因此在首次付费调用之前它需要有 SOL 余额。PDA 还必须保持在系统免租金最低余额之上（0 字节账户为 890,880 lamports）— Metaplex Agent 模板在委托时会为其预置 0.002 SOL，以确保低于租金的小额扣费永不失败。从任意钱包向 PDA 转入 SOL 即可；如果余额耗尽，调用会回退为 HTTP 402 质询，直到您充值（参见[硬停止语义](/agents/nori/pricing-and-billing#硬停止语义)）。SOL 只能发送到 Asset Signer PDA 地址，切勿发送到 Agent 的资产地址。
 
 ## 从 Nori 撤销委托
 
