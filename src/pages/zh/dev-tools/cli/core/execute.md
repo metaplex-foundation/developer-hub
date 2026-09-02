@@ -140,3 +140,4 @@ mplx core asset execute info <assetId>
 - 显示的余额仅为SOL余额——要检查代币余额，请激活[资产签名者钱包](/dev-tools/cli/config/asset-signer-wallets)并使用`mplx toolbox sol balance`
 - 这是一个只读命令——不会创建或修改任何链上状态
 - 由于Solana CPI约束，某些操作无法包装在`execute`中——参见[CPI限制](/dev-tools/cli/config/asset-signer-wallets#cpi-limitations)
+- 销毁 Asset 会永久禁用 `execute`。请先清空签名者 PDA，否则剩余的 SOL、代币和嵌套资产会滞留 — 参见 [Execute Asset Signing](/zh/smart-contracts/core/execute-asset-signing)

@@ -28,6 +28,10 @@ howToTools:
   - Solana CLI
 ---
 
+{% callout type="warning" title="新分发请使用 MPL-Distro" %}
+本 Gumdrop 指南仅为现有集成保留。新的钱包和旧版 NFT 代币领取应使用 [MPL-Distro 生产交付](/zh/smart-contracts/mpl-distro/production-delivery)。
+{% /callout %}
+
 ## 概述
 
 Gumdrop 是一个 Solana 程序，可以创建可领取的空投。与直接向钱包发送代币的空投不同，Gumdrop 创建了一种领取机制，用户必须主动领取其分配。这种方法有几个好处：

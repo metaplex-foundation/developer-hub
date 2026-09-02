@@ -14,6 +14,8 @@ description: MetaplexのToken Metadata製品のハウツーガイド。
 
 {% quick-link title="アカウントサイズ削減" icon="Lightbulb" href="/ja/smart-contracts/token-metadata/guides/account-size-reduction" description="TMアカウントサイズ削減について詳しく学ぶ" /%}
 
+{% quick-link title="MPL-Distro でクレームベースのエアドロップを作成" icon="CodeBracketSquare" href="/ja/smart-contracts/mpl-distro/production-delivery" description="Merkle 証明を永続化し、クレームページまたは API を運用し、MPL-Distro で未クレームトークンを回収します。" /%}
+
 {% quick-link title="トークンクレーマースマートコントラクト" icon="CodeBracketSquare" href="/ja/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract" description="マークル木を活用してAnchorを使用してSolanaでトークンクレーマースマートコントラクトを作成する方法を学びましょう！" /%}
 
 {% /quick-links %}

@@ -27,6 +27,8 @@ faqs:
     a: Coreはより安価（約80%コスト削減）で、必要なアカウント数が少なく（1対3+）、Compute Unitの使用量が少なく、散在したデリゲートの代わりに柔軟なプラグインシステムを持っています。
   - q: CoreはEditionsをサポートしていますか？
     a: はい、EditionとMaster Editionプラグインを使用します。詳細はPrint Editionsガイドをご覧ください。
+  - q: Assetをバーンすると、Asset Signer PDAの資金はどうなりますか？
+    a: バーン後はexecuteが失敗するため、Asset Signer PDAに残ったSOL、トークン、入れ子のアセットは取り残されます。先に引き出してください。Execute Asset Signingを参照してください。
 ---
 ## なぜCore AssetとCollectionアカウントにはオンチェーンとオフチェーンの両方のデータがあるのですか？
 Core AssetとCollectionアカウントは両方ともオンチェーンデータを含んでいますが、追加データを提供するオフチェーンJSONファイルを指す`URI`属性も含んでいます。なぜでしょうか？すべてをオンチェーンに保存できないのでしょうか？実は、データをオンチェーンに保存することにはいくつかの問題があります：
@@ -46,3 +48,5 @@ Coreには複数レベルの「不変性」があります。詳細と実装方�
 Coreは特にNFT向けに設計された全く新しい標準であるため、いくつかの顕著な違いがあります。例えば、Coreはより安価で、必要なCompute Unitが少なく、開発者の視点から作業しやすいはずです。詳細は[違い](/ja/smart-contracts/core/tm-differences)ページをご覧ください。
 ## CoreはEditionsをサポートしていますか？
 はい！[Edition](/ja/smart-contracts/core/plugins/edition)と[Master Edition](/ja/smart-contracts/core/plugins/master-edition)プラグインを使用します。詳細は[「Editionsを印刷する方法」ガイド](/ja/smart-contracts/core/guides/print-editions)で確認できます。
+## Assetをバーンすると、Asset Signer PDAの資金はどうなりますか？
+[`execute`](/ja/smart-contracts/core/execute-asset-signing)はバーン後に失敗するため、Asset Signer PDAに残ったSOL、トークン、入れ子のアセットは取り残されます。先に引き出してください。

@@ -27,6 +27,8 @@ faqs:
     a: Core는 더 저렴하고(약 80% 비용 절감), 필요한 계정 수가 적고(1개 대 3개+), Compute Unit 사용량이 적으며, 분산된 위임자 대신 유연한 플러그인 시스템을 가지고 있습니다.
   - q: Core는 Editions를 지원하나요?
     a: 네, Edition과 Master Edition 플러그인을 사용합니다. 자세한 내용은 Print Editions 가이드를 참조하세요.
+  - q: Asset을 소각하면 Asset Signer PDA의 자금은 어떻게 되나요?
+    a: 소각 후 execute가 실패하므로 Asset Signer PDA에 남은 SOL, 토큰, 중첩 자산은 묶입니다. 먼저 인출하세요. Execute Asset Signing을 참조하세요.
 ---
 ## Core Asset과 Collection 계정에 온체인과 오프체인 데이터가 모두 있는 이유는 무엇인가요?
 Core Asset과 Collection 계정은 모두 온체인 데이터를 포함하지만, 추가 데이터를 제공하는 오프체인 JSON 파일을 가리키는 `URI` 속성도 포함합니다. 왜 그럴까요? 모든 것을 온체인에 저장할 수 없나요? 실제로 데이터를 온체인에 저장하는 데는 몇 가지 문제가 있습니다:
@@ -46,3 +48,5 @@ Core에는 여러 수준의 "불변성"이 있습니다. 자세한 정보와 구
 Core는 특히 NFT를 위해 설계된 완전히 새로운 표준이므로 몇 가지 주목할 만한 차이점이 있습니다. 예를 들어 Core는 더 저렴하고, 필요한 Compute Unit이 적으며, 개발자 관점에서 작업하기 더 쉬워야 합니다. 자세한 내용은 [차이점](/ko/smart-contracts/core/tm-differences) 페이지를 참조하세요.
 ## Core는 Editions를 지원하나요?
 네! [Edition](/ko/smart-contracts/core/plugins/edition)과 [Master Edition](/ko/smart-contracts/core/plugins/master-edition) 플러그인을 사용합니다. 자세한 정보는 ["Editions 인쇄 방법" 가이드](/ko/smart-contracts/core/guides/print-editions)에서 확인할 수 있습니다.
+## Asset을 소각하면 Asset Signer PDA의 자금은 어떻게 되나요?
+[`execute`](/ko/smart-contracts/core/execute-asset-signing)는 소각 후 실패하므로 Asset Signer PDA에 남은 SOL, 토큰, 중첩 자산은 묶입니다. 먼저 인출하세요.

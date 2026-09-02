@@ -27,6 +27,8 @@ faqs:
     a: Core is cheaper (~80% lower costs), requires fewer accounts (1 vs 3+), uses less compute units, and has a flexible plugin system instead of scattered delegates.
   - q: Does Core Support Editions?
     a: Yes, using the Edition and Master Edition plugins. See the Print Editions guide for details.
+  - q: What happens to funds in the Asset Signer PDA if I burn the Asset?
+    a: execute fails after burn, so SOL, tokens, and nested assets left in the Asset Signer PDA are stranded. Withdraw them first. See Execute Asset Signing.
 ---
 ## Why does the Core Asset and Collection accounts have both onchain and off-chain data?
 The Core Asset and Collection accounts both contain onchain data, yet both also include a `URI` attribute that points to an off-chain JSON file which provides additional data. Why is that? Can't we just store everything onchain? Well, there are several issues with storing data onchain:
@@ -46,3 +48,5 @@ There are multiple levels of "immutability" in Core. You can find more informati
 Core is an entirely new standard designed specifically for NFTs, hence there are several notable differences. For example Core is cheaper, requires less Compute Units and should be easier to work with from a developer perspective. Have a look at the [differences](/smart-contracts/core/tm-differences) page for details.
 ## Does Core Support Editions?
 Yes! Using the [Edition](/smart-contracts/core/plugins/edition) and [Master Edition](/smart-contracts/core/plugins/master-edition) Plugins. You can find more information in the ["How to print Editions" Guide](/smart-contracts/core/guides/print-editions).
+## What happens to funds in the Asset Signer PDA if I burn the Asset?
+[`execute`](/smart-contracts/core/execute-asset-signing) fails after burn, so SOL, tokens, and nested assets left in the Asset Signer PDA are stranded. Withdraw them first.

@@ -6,6 +6,10 @@ description: Burn MPL Core Assets using the Metaplex CLI
 
 The `mplx core asset burn` command allows you to permanently destroy MPL Core Assets and reclaim rent fees. You can burn a single asset or multiple assets at once using a JSON list file.
 
+{% callout type="warning" title="Withdraw Asset Signer balances before burning" %}
+Burning a Core Asset makes [`execute`](/smart-contracts/core/execute-asset-signing) fail. SOL, tokens, or other assets still held by the Asset Signer PDA become stranded with no recovery path. Transfer them out first — inspect the PDA with [`mplx core asset execute info`](/dev-tools/cli/core/execute).
+{% /callout %}
+
 ## Basic Usage
 
 ### Burn Single Asset
@@ -77,6 +81,7 @@ mplx core asset burn --list ./assets-to-burn.json
 ## Notes
 
 - **Warning**: Burning is permanent and cannot be reversed
+- Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) before burning — `execute` fails afterward and remaining SOL, tokens, or nested assets are stranded
 - You must be the owner of the asset to burn it
 - When you burn an asset, most of the rent SOL is returned to the owner
 - A small amount (~0.00089784 SOL) remains to prevent account reuse

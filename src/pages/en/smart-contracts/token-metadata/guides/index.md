@@ -14,6 +14,8 @@ The following guides for MPL Token Metadata are currently available:
 
 {% quick-link title="Account Size Reduction" icon="Lightbulb" href="/smart-contracts/token-metadata/guides/account-size-reduction" description="Learn more about the TM Account Size Reduction" /%}
 
+{% quick-link title="Create a claim based airdrop using MPL-Distro" icon="CodeBracketSquare" href="/smart-contracts/mpl-distro/production-delivery" description="Persist Merkle proofs, run a claim page or API, and recover unclaimed tokens with MPL-Distro." /%}
+
 {% quick-link title="Token Claimer Smart Contract" icon="CodeBracketSquare" href="/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract" description="Learn how to create a Token Claimer Smart Contract on Solana leveraging Merkle Trees and using Anchor!" /%}
 
 {% /quick-links %}

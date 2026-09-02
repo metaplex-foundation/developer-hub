@@ -28,6 +28,8 @@ faqs:
     a: 大型账户创建（Merkle树、Candy Machine）和原生SOL包装由于Solana CPI大小限制而失败。先用普通钱包创建此基础设施，然后切换到资产签名者钱包进行后续操作。
   - q: 如何查看PDA解析到的地址？
     a: 运行`mplx core asset execute info <assetId>`。这将显示确定性签名者PDA地址及其当前SOL余额。
+  - q: 如果 PDA 仍持有资金时销毁 Asset 会怎样？
+    a: Asset 销毁后 execute 会失败，因此 PDA 中的 SOL、代币和嵌套资产会滞留。请先转出。
 created: '03-19-2026'
 updated: '09-01-2026'
 ---
@@ -223,6 +225,10 @@ CLI将返回错误，要求您先添加所有者钱包。在注册资产签名�
 
 运行[`mplx core asset execute info <assetId>`](/dev-tools/cli/core/execute)。这将显示确定性签名者PDA地址及其当前SOL余额。
 
+### 如果 PDA 仍持有资金时销毁 Asset 会怎样？
+
+[`execute`](/zh/smart-contracts/core/execute-asset-signing) 在 Asset 销毁后会失败，因此 PDA 中的 SOL、代币和嵌套资产会滞留。请先转出。
+
 ## 注意事项
 
 - 资产签名者钱包要求资产所有者的钱包已保存在您的[钱包配置](/dev-tools/cli/config/wallets)中——请先添加所有者钱包
@@ -230,3 +236,4 @@ CLI将返回错误，要求您先添加所有者钱包。在注册资产签名�
 - 从资产签名者钱包切换后，命令将恢复为普通密钥对签名
 - `-k`标志始终优先于活动钱包，包括资产签名者钱包
 - 通过`mplx toolbox raw`的原始指令在资产签名者钱包处于活动状态时与其他命令一样包装在`execute()`中
+- 销毁 Asset 会永久禁用 `execute`。请先清空签名者 PDA，否则剩余的 SOL、代币和嵌套资产会滞留

@@ -14,6 +14,8 @@ description: Metaplex의 Token Metadata 제품에 대한 사용법 가이드.
 
 {% quick-link title="계정 크기 감소" icon="Lightbulb" href="/ko/smart-contracts/token-metadata/guides/account-size-reduction" description="TM 계정 크기 감소에 대해 자세히 알아보기" /%}
 
+{% quick-link title="MPL-Distro로 클레임 기반 에어드롭 만들기" icon="CodeBracketSquare" href="/ko/smart-contracts/mpl-distro/production-delivery" description="Merkle 증명을 유지하고, 클레임 페이지 또는 API를 운영하며, MPL-Distro로 미클레임 토큰을 회수합니다." /%}
+
 {% quick-link title="토큰 클레이머 스마트 컨트랙트" icon="CodeBracketSquare" href="/ko/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract" description="머클 트리를 활용하고 Anchor를 사용하여 Solana에서 토큰 클레이머 스마트 컨트랙트를 만드는 방법을 배우세요!" /%}
 
 {% /quick-links %}

@@ -42,6 +42,14 @@ Coreのプロトコル手数料は、別の手数料アカウントに送金さ�
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-Distro" %}
+
+Merkle クレームが成功したとき、クレームトランザクションの支払者が支払います。
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1（レガシー）" %}
 
 オリジナルの圧縮NFTプログラム。
