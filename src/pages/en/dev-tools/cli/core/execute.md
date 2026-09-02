@@ -91,7 +91,7 @@ Returns:
 A common workflow is to inspect the PDA, then fund it:
 
 {% callout type="warning" title="Send funds to the Asset Signer, not the asset address" %}
-The Asset Signer PDA and the agent's Core asset are two different addresses. Make sure to always fund the Asset Signer PDA.
+The Asset Signer PDA and the Core Asset are two different addresses. Make sure to always fund the Asset Signer PDA.
 {% /callout %}
 
 ```bash {% title="Inspect and fund the PDA" %}

@@ -36,7 +36,7 @@ Core AssetとCollectionアカウントは両方ともオンチェーンデータ
 ## Coreの使用にコストはかかりますか？
 Coreは現在、呼び出し元に対してAssetミントあたり0.0015 SOLという非常に小さな手数料に加えて、`execute`の呼び出しごとにAsset所有者が支払う少額の手数料を請求しています。詳細は[Protocol Fees](/protocol-fees)ページで確認できます。
 ## Core AssetアカウントにSOLを保管できますか？
-いいえ。Coreプログラムは、Assetアカウントのレント免除最低額を超えるすべてのラマポートをプロトコル手数料として扱い、Metaplexの手数料コレクターがその残高を回収します。Assetアドレスに送金されたSOLは回収され、取り戻すことはできません。Assetにウォレットを持たせるには、Assetから派生した別のアドレスであり`execute`命令を通じて制御される[Asset Signer PDA](/smart-contracts/core/execute-asset-signing)に資金を送金してください。
+いいえ。Coreプログラムは、Assetアカウントのレント免除最低額を超えるすべてのラマポートをプロトコル手数料として扱い、Metaplexの手数料コレクターはその最低額を超える分だけを回収し、レント免除残高はアカウントに残ります。Assetアドレスに送金されたSOLは回収され、取り戻すことはできません。Assetにウォレットを持たせるには、Assetから派生した別のアドレスであり`execute`命令を通じて制御される[Asset Signer PDA](/smart-contracts/core/execute-asset-signing)に資金を送金してください。
 ## Soulbound Assetを作成するには？
 Core Standardでは、Soulbound Assetを作成できます。これを実現するには、[Permanent Freeze Delegate](/ja/smart-contracts/core/plugins/permanent-freeze-delegate)プラグインまたは[Oracleプラグイン](/ja/smart-contracts/core/external-plugins/oracle)を使用できます。
 詳しくは[Soulbound Assetsガイド](/ja/smart-contracts/core/guides/create-soulbound-nft-asset)をご覧ください！

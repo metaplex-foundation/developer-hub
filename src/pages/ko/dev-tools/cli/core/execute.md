@@ -91,7 +91,7 @@ mplx core asset execute info <assetId> --json
 PDA를 검사한 후 자금을 전송하는 일반적인 워크플로우:
 
 {% callout type="warning" title="에셋 주소가 아닌 Asset Signer로 자금을 보내세요" %}
-Asset Signer PDA와 에이전트의 Core 에셋은 서로 다른 두 주소입니다. 항상 Asset Signer PDA에 자금을 보내야 합니다.
+Asset Signer PDA와 Core 에셋은 서로 다른 두 주소입니다. 항상 Asset Signer PDA에 자금을 보내야 합니다.
 {% /callout %}
 
 ```bash {% title="Inspect and fund the PDA" %}

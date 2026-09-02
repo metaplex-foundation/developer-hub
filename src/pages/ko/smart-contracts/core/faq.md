@@ -36,7 +36,7 @@ Core Asset과 Collection 계정은 모두 온체인 데이터를 포함하지만
 ## Core 사용에 비용이 드나요?
 Core는 현재 호출자에게 Asset 민팅당 0.0015 SOL이라는 매우 작은 수수료를 부과하며, 추가로 각 `execute` 호출마다 Asset 소유자가 지불하는 소액의 수수료가 있습니다. 자세한 내용은 [Protocol Fees](/protocol-fees) 페이지에서 확인할 수 있습니다.
 ## Core Asset 계정에 SOL을 보관할 수 있나요?
-아니요. Core 프로그램은 Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports를 프로토콜 수수료로 취급하며, Metaplex 수수료 수집기가 해당 잔액을 회수합니다. Asset 주소로 전송된 SOL은 회수되며 되찾을 수 없습니다. Asset에 지갑을 부여하려면 Asset에서 파생된 별도의 주소이며 `execute` 명령을 통해 제어되는 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)로 자금을 보내세요.
+아니요. Core 프로그램은 Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports를 프로토콜 수수료로 취급하며, Metaplex 수수료 수집기는 그 최소 금액을 초과하는 부분만 회수하며, 렌트 면제 잔액은 계정에 남습니다. Asset 주소로 전송된 SOL은 회수되며 되찾을 수 없습니다. Asset에 지갑을 부여하려면 Asset에서 파생된 별도의 주소이며 `execute` 명령을 통해 제어되는 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)로 자금을 보내세요.
 ## Soulbound Asset을 만들려면 어떻게 하나요?
 Core Standard를 사용하면 Soulbound Asset을 만들 수 있습니다. 이를 달성하려면 [Permanent Freeze Delegate](/ko/smart-contracts/core/plugins/permanent-freeze-delegate) 플러그인 또는 [Oracle 플러그인](/ko/smart-contracts/core/external-plugins/oracle)을 사용할 수 있습니다.
 자세한 내용은 [Soulbound Assets 가이드](/ko/smart-contracts/core/guides/create-soulbound-nft-asset)를 확인하세요!

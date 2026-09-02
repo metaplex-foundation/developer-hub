@@ -230,5 +230,5 @@ console.log({ res })
 ## Notes
 - The `execute` instruction charges a protocol fee paid by the Asset owner. See the [Protocol Fees](/protocol-fees) page for the current amount. The fee is transferred into the Asset account and later swept by the Metaplex fee collector.
 - Every lamport above the rent-exempt minimum on the Asset account is treated as a protocol fee and will be collected. Hold SOL and tokens in the `assetSignerPda`, never in the Asset account.
-- The `assetSignerPda` is a system-owned account. It must keep at least the rent-exempt minimum for a zero-byte account (890,880 lamports) for transfers out of it to succeed.
+- The `assetSignerPda` is a system-owned account. The Solana runtime rejects any transaction that leaves it with a non-zero balance below the zero-byte rent-exempt minimum (890,880 lamports), so a transfer out must either empty the account or leave at least that amount behind. Keep that reserve funded if the PDA will make partial transfers.
 - Only the current Asset owner can invoke `execute` unless special `Execute` plugins or delegates are used. Use the [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute) to block execute operations temporarily.

@@ -91,7 +91,7 @@ mplx core asset execute info <assetId> --json
 检查PDA然后为其注资的常见工作流程：
 
 {% callout type="warning" title="将资金发送到Asset Signer，而不是资产地址" %}
-Asset Signer PDA和代理的Core资产是两个不同的地址。请务必始终为Asset Signer PDA注资。
+Asset Signer PDA和Core资产是两个不同的地址。请务必始终为Asset Signer PDA注资。
 {% /callout %}
 
 ```bash {% title="Inspect and fund the PDA" %}

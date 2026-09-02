@@ -36,7 +36,7 @@ Core Asset 和 Collection 账户都包含链上数据，但两者也包含一个
 ## 使用 Core 有任何费用吗？
 Core 目前向调用者收取非常小的费用，每个 Asset 铸造 0.0015 SOL，此外每次 `execute` 调用会向 Asset 所有者收取一笔小额费用。更多详情可以在[协议费用](/protocol-fees)页面找到。
 ## 我可以在 Core Asset 账户上存放 SOL 吗？
-不可以。Core 程序将 Asset 账户中超过免租金最低余额的每一个 lamport 都视为协议费用，并由 Metaplex 费用收集器清扫该余额。发送到 Asset 地址的 SOL 会被收取且无法找回。要为 Asset 提供钱包，请将资金发送到其 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)，这是从 Asset 派生并通过 `execute` 指令控制的独立地址。
+不可以。Core 程序将 Asset 账户中超过免租金最低余额的每一个 lamport 都视为协议费用，Metaplex 费用收集器只清扫超过该最低余额的部分，免租金余额本身会留在账户中。发送到 Asset 地址的 SOL 会被收取且无法找回。要为 Asset 提供钱包，请将资金发送到其 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)，这是从 Asset 派生并通过 `execute` 指令控制的独立地址。
 ## 如何创建灵魂绑定 Asset？
 Core 标准允许您创建灵魂绑定 Asset。要实现这一点，可以使用 [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) 插件或 [Oracle 插件](/smart-contracts/core/external-plugins/oracle)。
 要了解更多，请查看[灵魂绑定 Asset 指南](/smart-contracts/core/guides/create-soulbound-nft-asset)！

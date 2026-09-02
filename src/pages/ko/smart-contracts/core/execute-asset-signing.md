@@ -212,5 +212,5 @@ console.log({ res })
 ## 참고사항
 - `execute` 명령에는 Asset 소유자가 지불하는 프로토콜 수수료가 부과됩니다. 현재 금액은 [Protocol Fees](/protocol-fees) 페이지를 참조하세요. 이 수수료는 Asset 계정으로 이체되며 이후 Metaplex 수수료 수집기에 의해 회수됩니다.
 - Asset 계정의 렌트 면제 최소 금액을 초과하는 모든 lamports는 프로토콜 수수료로 취급되어 회수됩니다. SOL과 토큰은 `assetSignerPda`에 보관하고, Asset 계정에는 절대 보관하지 마세요.
-- `assetSignerPda`는 시스템 소유 계정입니다. 여기서 이체가 성공하려면 0바이트 계정의 렌트 면제 최소 금액(890,880 lamports) 이상을 유지해야 합니다.
+- `assetSignerPda`는 시스템 소유 계정입니다. Solana 런타임은 0바이트 계정의 렌트 면제 최소 금액(890,880 lamports) 미만의 0이 아닌 잔액을 남기는 트랜잭션을 거부하므로, 이체는 계정을 비우거나 최소 그 금액을 남겨야 합니다. PDA가 부분 이체를 수행한다면 이 예비금을 유지하세요.
 - 특별한 `Execute` 플러그인이나 델리게이트를 사용하지 않는 한 현재 Asset 소유자만 `execute`를 호출할 수 있습니다. execute 작업을 일시적으로 차단하려면 [Freeze Execute 플러그인](/smart-contracts/core/plugins/freeze-execute)을 사용하세요.

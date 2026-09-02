@@ -36,7 +36,7 @@ Therefore, splitting the data into onchain and off-chain data allows users to ge
 ## Are there any costs to using Core?
 Core currently charges a very small fee of 0.0015 SOL per Asset mint to the caller, plus a small fee on each `execute` call paid by the Asset owner. More details can be found on the [Protocol Fees](/protocol-fees) page.
 ## Can I store SOL on a Core Asset account?
-No. The Core program treats every lamport above the rent-exempt minimum on an Asset account as a protocol fee, and the Metaplex fee collector sweeps that balance. SOL sent to an Asset address will be collected and cannot be recovered. To give an Asset a wallet, send funds to its [Asset Signer PDA](/smart-contracts/core/execute-asset-signing), which is a separate address derived from the Asset and controlled through the `execute` instruction.
+No. The Core program treats every lamport above the rent-exempt minimum on an Asset account as a protocol fee, and the Metaplex fee collector sweeps only the amount above that minimum, leaving the rent-exempt balance in the account. SOL sent to an Asset address will be collected and cannot be recovered. To give an Asset a wallet, send funds to its [Asset Signer PDA](/smart-contracts/core/execute-asset-signing), which is a separate address derived from the Asset and controlled through the `execute` instruction.
 ## How to create a Soulbound Asset?
 The Core Standard allows you to create Soulbound Assets. To achieve this either the [Permanent Freeze Delegate](/smart-contracts/core/plugins/permanent-freeze-delegate) plugin or the [Oracle Plugin](/smart-contracts/core/external-plugins/oracle) can be used.
 To learn more check out the [Soulbound Assets Guide](/smart-contracts/core/guides/create-soulbound-nft-asset)!

@@ -65,9 +65,9 @@ Token Metadata 销毁（使用 mpl-token-metadata）、压缩 NFT 销毁（使�
 - 配置了拥有 Asset（或是其 Burn Delegate）的签名者的 **Umi**
 - 要销毁的 Asset 的 **Asset 地址**
 - **Collection 地址**（如果 Asset 在 Collection 中）
-可以使用 `burn` 指令销毁 Asset。这会将 Asset 账户的租金押金返还给所有者。只有很少量的 SOL（0.00089784）会留在账户中以防止其被重新打开。
+可以使用 `burn` 指令销毁 Asset。这会将 Asset 账户的租金押金返还给交易付款人。只有 1 字节的免租金最低余额（0.00089784 SOL）会留在账户中以防止其被重新打开；超出该数额的 lamports 也会留在账户中。
 {% callout type="warning" title="仅退还租金" %}
-`burn` 退还账户数据大小对应的免租金余额减去 1 字节的下限。账户保持打开状态以防止地址重开攻击。任何超过租金的 lamports（例如尚未收取的协议费用）会留在已关闭的账户中，直到被 Metaplex 费用收集器清扫。
+`burn` 将账户数据大小对应的免租金余额减去 1 字节下限后的金额退还给付款人。为防止地址重开攻击，账户不会被删除，而是被调整为 1 字节的未初始化账户。任何超过租金的 lamports（例如尚未收取的协议费用）会留在该 1 字节未初始化账户中，直到被 Metaplex 费用收集器清扫。
 {% /callout %}
 {% totem %}
 {% totem-accordion title="技术指令详情" %}
@@ -165,7 +165,7 @@ const collectionId = collectionAddress(asset)
 ```
 ## 注意事项
 - 销毁是**永久且不可逆的** - Asset 无法恢复
-- 租金返还给所有者（金额取决于资产大小和插件）
+- 租金返还给付款人（金额取决于资产大小和插件）
 - 仅退还租金。任何超过免租金最低余额的 lamports 不会返还给所有者
 - 剩余的 SOL 防止账户地址被重用
 - Burn Delegate 可以代表所有者销毁（通过 Burn Delegate 插件）

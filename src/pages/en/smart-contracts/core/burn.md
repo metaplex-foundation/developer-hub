@@ -66,9 +66,9 @@ Token Metadata burning (use mpl-token-metadata), compressed NFT burning (use Bub
 - **Umi** configured with a signer that owns the Asset (or is its Burn Delegate)
 - **Asset address** of the Asset to burn
 - **Collection address** (if the Asset is in a Collection)
-Assets can be burnt using the `burn` instruction. This returns the Asset account's rent deposit to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+Assets can be burnt using the `burn` instruction. This refunds the Asset account's rent deposit to the transaction payer. Only the one-byte rent-exempt minimum (0.00089784 SOL) stays in the account to prevent it from being reopened; any lamports above that remain there too.
 {% callout type="warning" title="Only rent is refunded" %}
-`burn` refunds the rent-exempt balance for the account's data size minus the 1-byte floor. The account is kept open to prevent address reopen attacks. Any lamports above rent, such as not-yet-collected protocol fees, stay in the closed account until swept by the Metaplex fee collector.
+`burn` refunds the rent-exempt balance for the account's data size minus the 1-byte floor to the payer. The account is resized to a 1-byte uninitialized account rather than deleted, to prevent address reopen attacks. Any lamports above rent, such as not-yet-collected protocol fees, stay in that 1-byte uninitialized account until swept by the Metaplex fee collector.
 {% /callout %}
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
@@ -166,7 +166,7 @@ const collectionId = collectionAddress(asset)
 ```
 ## Notes
 - Burning is **permanent and irreversible** - the Asset cannot be recovered
-- Rent is returned to the owner (amount varies based on asset size and plugins)
+- Rent is returned to the payer (amount varies based on asset size and plugins)
 - Only rent is refunded. Any lamports above the rent-exempt minimum are not returned to the owner
 - The remaining SOL prevents the account address from being reused
 - Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
