@@ -3,7 +3,7 @@ title: 销毁 Asset
 metaTitle: 销毁 Asset | Metaplex Core
 description: 了解如何在 Solana 上销毁 Core NFT Asset。使用 Metaplex Core SDK 永久销毁 Asset 并回收租金。
 created: '06-15-2024'
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -22,6 +22,7 @@ programmingLanguage:
 howToSteps:
   - 使用 npm install @metaplex-foundation/mpl-core 安装 SDK
   - 获取 Asset 以验证所有权
+  - 如果 Asset Signer PDA 持有 SOL、代币或嵌套 Asset，先将其清空
   - 作为所有者调用 burn(umi, { asset })
   - 租金会自动返还到您的钱包
 howToTools:
@@ -39,6 +40,8 @@ faqs:
     a: 会。Collection 的 currentSize 会减少。numMinted 计数器保持不变。
   - q: 我可以一次销毁多个 Asset 吗？
     a: 单个指令不行。您可以在一个交易中批量处理多个销毁指令，但有大小限制。
+  - q: 销毁时 Asset Signer PDA 中的 SOL 和代币会怎样？
+    a: 销毁会禁用 execute。请先清空 Asset Signer PDA，否则这些余额会滞留且无法找回。
 ---
 本指南展示如何使用 Metaplex Core SDK 在 Solana 上**销毁 Core Asset**。永久销毁 Asset 并回收大部分租金押金。 {% .lead %}
 {% callout title="您将学到" %}
@@ -46,6 +49,10 @@ faqs:
 - 处理 Collection 中 Asset 的销毁
 - 理解 Burn Delegate 权限
 - 了解销毁后账户会发生什么
+- 销毁前清空 Asset Signer PDA
+{% /callout %}
+{% callout type="warning" title="销毁前先提取 Asset Signer 余额" %}
+销毁 Core Asset 会使 [`execute`](/zh/smart-contracts/core/execute-asset-signing) 失败。Asset Signer PDA 中剩余的 SOL、代币或其他资产将滞留且无法找回。请先转出。
 {% /callout %}
 ## 摘要
 销毁 Core Asset 以永久销毁它并回收租金。只有所有者（或 Burn Delegate）可以销毁 Asset。
@@ -53,14 +60,16 @@ faqs:
 - 大部分租金（约 0.0028 SOL）返还给付款人
 - 少量（约 0.0009 SOL）保留以防止账户重用
 - 销毁是**永久且不可逆的**
+- 先清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 销毁后 `execute` 无法再转移这些资金
 ## 范围外
 Token Metadata 销毁（使用 mpl-token-metadata）、压缩 NFT 销毁（使用 Bubblegum）、Collection 销毁（Collection 有自己的销毁流程）。
 ## 快速开始
 **跳转至：** [销毁 Asset](#code-example) · [Collection 内销毁](#burning-an-asset-that-is-part-of-a-collection)
 1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. 获取 Asset 以验证所有权
-3. 作为所有者调用 `burn(umi, { asset })`
-4. 租金会自动返还到您的钱包
+3. 如果 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) 持有资金，用 `execute` 将其转出
+4. 作为所有者调用 `burn(umi, { asset })`
+5. 租金会自动返还到您的钱包
 ## 前提条件
 - 配置了拥有 Asset（或是其 Burn Delegate）的签名者的 **Umi**
 - 要销毁的 Asset 的 **Asset 地址**
@@ -166,6 +175,7 @@ const collectionId = collectionAddress(asset)
 - 剩余的 SOL 防止账户地址被重用
 - Burn Delegate 可以代表所有者销毁（通过 Burn Delegate 插件）
 - 冻结的 Asset 必须在销毁前解冻
+- 销毁前清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 之后 `execute` 会失败，剩余余额将滞留
 ## 快速参考
 ### 销毁参数
 | 参数 | 必需 | 描述 |
@@ -196,6 +206,8 @@ const collectionId = collectionAddress(asset)
 会。当 Asset 被销毁时，Collection 的 `currentSize` 会减少。`numMinted` 计数器保持不变（它跟踪历史铸造总数）。
 ### 我可以一次销毁多个 Asset 吗？
 单个指令不行。您可以在一个交易中批量处理多个销毁指令（受交易大小限制）。
+### 销毁时 Asset Signer PDA 中的 SOL 和代币会怎样？
+销毁会禁用 [`execute`](/zh/smart-contracts/core/execute-asset-signing)。请先清空 Asset Signer PDA，否则这些余额会滞留且无法找回。
 ## 术语表
 | 术语 | 定义 |
 |------|------------|
@@ -204,3 +216,4 @@ const collectionId = collectionAddress(asset)
 | **租金** | 在 Solana 上保持账户活跃所需存入的 SOL |
 | **冻结** | 销毁和转移被阻止的 Asset 状态 |
 | **Collection** | Asset 可能属于的组账户 |
+| **Asset Signer PDA** | 附加到 Asset、通过 execute 签名的钱包。销毁会使剩余余额滞留。 |

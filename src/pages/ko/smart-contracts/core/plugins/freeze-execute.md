@@ -2,7 +2,7 @@
 title: Freeze Execute
 metaTitle: Freeze Execute 플러그인 | Core
 description: MPL Core Asset Freeze Execute 플러그인에 대해 알아보세요. 'Freeze Execute' 플러그인은 Execute 라이프사이클 이벤트를 동결하여 자산이 임의의 명령을 실행하지 못하도록 방지할 수 있습니다.
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - freeze execute
   - block execute
@@ -330,9 +330,10 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - **권한 제약**: 권한이 다른 사람에게 위임된 경우 원래 소유자는 권한이 취소될 때까지 동결을 해제할 수 없습니다
 - 동결된 상태에서는 플러그인을 제거할 수 없습니다
 - 동결된 상태에서는 권한을 재할당할 수 없습니다
-- 이 플러그인은 [Execute 명령](/smart-contracts/core/execute-asset-signing) 시스템과 함께 작동합니다
+- 이 플러그인은 [Execute 명령](/ko/smart-contracts/core/execute-asset-signing) 시스템과 함께 작동합니다
+- Asset을 [소각](/ko/smart-contracts/core/burn)하기 **전에** 동결을 해제하고 `execute`로 인출하세요. 소각하면 `execute`가 비활성화되고 Asset Signer PDA의 남은 잔액이 묶입니다
 ## 사용 사례 예시: 담보 NFT
-Freeze Execute 플러그인의 일반적인 사용 사례는 Execute 명령을 통해 인출할 수 있는 기초 자산(SOL 또는 토큰)의 소유권을 나타내는 "담보 NFT"를 만드는 것입니다. 이 플러그인을 사용하면 이러한 실행 작업을 일시적으로 동결할 수 있습니다.
+Freeze Execute 플러그인의 일반적인 사용 사례는 Execute 명령을 통해 인출할 수 있는 기초 자산(SOL 또는 토큰)의 소유권을 나타내는 "담보 NFT"를 만드는 것입니다. 이 플러그인을 사용하면 이러한 실행 작업을 일시적으로 동결할 수 있습니다. Asset을 소각하기 전에 `execute`로 해당 기초 자산을 인출하세요 — 소각하면 `execute`가 비활성화되고 Asset Signer PDA의 남은 잔액이 묶입니다.
 {% dialect-switcher title="담보 NFT 예시" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

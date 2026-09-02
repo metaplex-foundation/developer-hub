@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '03-20-2026'
+updated: '08-28-2026'
 ---
 
 ## Summary
@@ -135,3 +135,4 @@ The typical workflow is:
 - The balance shown is the SOL balance only — use `mplx toolbox sol balance` with an [asset-signer wallet](/dev-tools/cli/config/asset-signer-wallets) active to check token balances
 - This is a read-only command — it does not create or modify any on-chain state
 - Some operations cannot be wrapped in `execute` due to Solana CPI constraints — see [CPI Limitations](/dev-tools/cli/config/asset-signer-wallets#cpi-limitations)
+- Burning the Asset permanently disables `execute`. Empty the signer PDA first or remaining SOL, tokens, and nested assets are stranded — see [Execute Asset Signing](/smart-contracts/core/execute-asset-signing)

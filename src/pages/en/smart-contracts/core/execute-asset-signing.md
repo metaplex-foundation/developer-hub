@@ -2,7 +2,7 @@
 title: Execute Asset Signing
 metaTitle: Execute and Asset Signer | Core
 description: Learn how MPL Core Assets can use the Execute instruction and sign instructions and transactions.
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -17,6 +17,13 @@ programmingLanguage:
   - Rust
   - JavaScript
 cli: /dev-tools/cli/core/execute
+faqs:
+  - q: What happens to funds in the Asset Signer PDA if I burn the Asset?
+    a: They are stranded. execute requires a live Core Asset, so after burn the PDA can still hold SOL, tokens, and nested Assets but nothing can sign to move them.
+  - q: Can I recover stranded Asset Signer funds after a burn?
+    a: No. There is no instruction that can sign as the assetSignerPda without the original Asset account.
+  - q: Does transferring the Asset strand the Asset Signer wallet?
+    a: No. Transfer changes which owner can call execute. The PDA stays attached to the Asset address. Burning, not transferring, is what disables execute.
 ---
 The MPL Core Execute instruction introduces the concept of **Asset Signers** to
 MPL Core Assets.
@@ -29,6 +36,11 @@ unlocks the ability for MPL Core Assets
 MPL Core Assets have the ability to sign and submit transactions/CPIs to the
 blockchain. This effectively gives the Core Asset it's own wallet in the form of
 an `assetSigner`.
+
+{% callout type="warning" title="Withdraw Asset Signer balances before burning" %}
+[Burning](/smart-contracts/core/burn) a Core Asset makes the `execute` instruction fail. The program can no longer load the Asset, so it cannot sign as the `assetSignerPda`. Any SOL, tokens, or other assets still held by that PDA become stranded with no recovery path.
+{% /callout %}
+
 ## Asset Signer PDA
 Assets are now able to access the `assetSignerPda` account/address which allows
 the `execute` instruction on the MPL Core program to pass through additional
@@ -74,6 +86,17 @@ The Freeze Execute Plugin is particularly useful for:
 - **Escrowless protocols**: Temporarily lock execute functionality during protocol operations
 - **Security measures**: Add an additional layer of protection for assets that can execute complex operations
 When the Freeze Execute Plugin is active and set to `frozen: true`, any attempts to use the execute instruction will be blocked until the plugin is updated to `frozen: false`.
+## Burning an Asset with Asset Signer balances
+Burning a Core Asset permanently disables `execute`, so any SOL, tokens, or nested Core Assets left in the `assetSignerPda` cannot be moved.
+
+The `execute` instruction requires a live Core Asset account owned by the MPL Core program. After you [burn](/smart-contracts/core/burn) the Asset, that account is no longer a valid Asset. The `assetSignerPda` address still exists and can still hold funds — there is just no remaining instruction that can spend them.
+
+Move everything out of the PDA with `execute` **before** burning:
+
+1. Derive the PDA with `findAssetSignerPda` or [`mplx core asset execute info`](/dev-tools/cli/core/execute)
+2. Transfer SOL, SPL tokens, and any Core Assets the PDA owns
+3. Confirm the PDA is empty
+4. Burn the Asset
 ## Examples
 ### Transferring SOL From the Asset Signer
 In the following example we transfer SOL that had been sent to the
@@ -224,3 +247,15 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## Notes
+- Only the current Asset owner can invoke `execute` (the owner must sign the outer transaction)
+- The [Freeze Execute Plugin](/smart-contracts/core/plugins/freeze-execute) can block `execute` until it is unfrozen
+- Burning the Asset is irreversible for Asset Signer funds: empty the PDA first
+- The `assetSignerPda` is deterministic from the Asset address and does not change if the Asset is transferred
+## FAQ
+### What happens to funds in the Asset Signer PDA if I burn the Asset?
+They are stranded. `execute` requires a live Core Asset, so after burn the PDA can still hold SOL, tokens, and nested Assets but nothing can sign to move them.
+### Can I recover stranded Asset Signer funds after a burn?
+No. There is no instruction that can sign as the `assetSignerPda` without the original Asset account.
+### Does transferring the Asset strand the Asset Signer wallet?
+No. Transfer changes which owner can call `execute`. The PDA stays attached to the Asset address. Burning, not transferring, is what disables `execute`.

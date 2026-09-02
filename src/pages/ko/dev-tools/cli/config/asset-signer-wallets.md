@@ -28,8 +28,10 @@ faqs:
     a: 대규모 계정 생성(Merkle 트리, Candy Machine)과 네이티브 SOL 래핑은 Solana CPI 크기 제한으로 인해 실패합니다. 먼저 일반 지갑으로 이 인프라를 생성한 다음, 후속 작업에서 에셋 서명자 지갑으로 전환하세요.
   - q: PDA가 해결하는 주소를 어떻게 확인하나요?
     a: "`mplx core asset execute info <assetId>`를 실행하세요. 이것은 결정론적 서명자 PDA 주소와 현재 SOL 잔액을 보여줍니다."
+  - q: PDA에 자금이 남은 상태에서 Asset을 소각하면 어떻게 되나요?
+    a: Asset을 소각하면 execute가 실패하므로 PDA의 SOL, 토큰, 중첩 자산은 묶입니다. 먼저 전송하세요.
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '08-28-2026'
 ---
 
 ## 요약
@@ -227,6 +229,10 @@ CLI가 먼저 소유자 지갑을 추가하라는 오류를 반환합니다. 에
 
 [`mplx core asset execute info <assetId>`](/dev-tools/cli/core/execute)를 실행하세요. 이것은 결정론적 서명자 PDA 주소와 현재 SOL 잔액을 보여줍니다.
 
+### PDA에 자금이 남은 상태에서 Asset을 소각하면 어떻게 되나요?
+
+[`execute`](/ko/smart-contracts/core/execute-asset-signing)는 Asset 소각 후 실패하므로 PDA의 SOL, 토큰, 중첩 자산은 묶입니다. 먼저 전송하세요.
+
 ## 참고 사항
 
 - 에셋 서명자 지갑은 에셋 소유자의 지갑이 [지갑 설정](/dev-tools/cli/config/wallets)에 저장되어 있어야 합니다 — 먼저 소유자 지갑을 추가하세요
@@ -234,3 +240,4 @@ CLI가 먼저 소유자 지갑을 추가하라는 오류를 반환합니다. 에
 - 에셋 서명자 지갑에서 전환하면 명령어가 일반 키페어 서명으로 되돌아갑니다
 - `-k` 플래그는 에셋 서명자 지갑을 포함한 활성 지갑보다 항상 우선합니다
 - `mplx toolbox raw`를 통한 원시 인스트럭션은 에셋 서명자 지갑이 활성화되면 다른 명령어와 마찬가지로 `execute()`로 래핑됩니다
+- Asset을 소각하면 `execute`가 영구적으로 비활성화됩니다. 먼저 서명자 PDA를 비우지 않으면 남은 SOL, 토큰, 중첩 자산이 묶입니다

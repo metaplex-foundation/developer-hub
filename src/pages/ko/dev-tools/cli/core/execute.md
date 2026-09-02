@@ -16,7 +16,7 @@ about:
   - Metaplex CLI
 proficiencyLevel: Intermediate
 created: '03-19-2026'
-updated: '03-20-2026'
+updated: '08-28-2026'
 ---
 
 ## 요약
@@ -135,3 +135,4 @@ mplx core asset execute info <assetId>
 - 표시되는 잔액은 SOL 잔액만입니다 — 토큰 잔액을 확인하려면 [에셋 서명자 지갑](/dev-tools/cli/config/asset-signer-wallets)을 활성화하고 `mplx toolbox sol balance`를 사용하세요
 - 이것은 읽기 전용 명령어입니다 — 온체인 상태를 생성하거나 수정하지 않습니다
 - Solana CPI 제약으로 인해 일부 작업은 `execute`로 래핑할 수 없습니다 — [CPI 제한 사항](/dev-tools/cli/config/asset-signer-wallets#cpi-limitations) 참조
+- Asset을 소각하면 `execute`가 영구적으로 비활성화됩니다. 먼저 서명자 PDA를 비우지 않으면 남은 SOL, 토큰, 중첩 자산이 묶입니다 — [Execute Asset Signing](/ko/smart-contracts/core/execute-asset-signing) 참조

@@ -2,7 +2,7 @@
 title: Execute 및 Asset 서명
 metaTitle: Execute 및 Asset 서명 | Core
 description: MPL Core Asset이 Execute 명령을 사용하여 명령과 트랜잭션에 서명하는 방법을 알아봅니다.
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -16,6 +16,13 @@ proficiencyLevel: Advanced
 programmingLanguage:
   - Rust
   - JavaScript
+faqs:
+  - q: Asset을 소각하면 Asset Signer PDA의 자금은 어떻게 되나요?
+    a: 묶여 회수할 수 없습니다. execute에는 유효한 Core Asset이 필요하므로, 소각 후에도 PDA는 SOL, 토큰, 중첩 Asset을 보유할 수 있지만 이동하도록 서명할 수 있는 것은 없습니다.
+  - q: 소각 후 묶인 Asset Signer 자금을 회수할 수 있나요?
+    a: 아니요. 원래 Asset 계정 없이 assetSignerPda로 서명할 수 있는 명령은 없습니다.
+  - q: Asset을 전송하면 Asset Signer 지갑이 묶이나요?
+    a: 아니요. 전송은 execute를 호출할 수 있는 소유자만 바꿉니다. PDA는 Asset 주소에 연결된 채로 유지됩니다. execute를 비활성화하는 것은 전송이 아니라 소각입니다.
 ---
 MPL Core Execute 명령은 MPL Core Asset에 **Asset Signer** 개념을 도입합니다.
 이러한 **Asset Signer**는 Asset 자체를 대신하여 서명자 역할을 수행하며, MPL Core Asset이 다음을 수행할 수 있게 합니다:
@@ -23,6 +30,11 @@ MPL Core Execute 명령은 MPL Core Asset에 **Asset Signer** 개념을 도입�
 - 다른 계정의 authority가 되기
 - 트랜잭션/명령/CPI 서명이 필요한 `assetSignerPda`에 할당된 기타 작업 및 검증 수행
 MPL Core Asset은 블록체인에 트랜잭션/CPI를 서명하고 제출할 수 있습니다. 이는 Core Asset에 `assetSigner` 형태의 자체 지갑을 효과적으로 제공합니다.
+
+{% callout type="warning" title="소각 전에 Asset Signer 잔액을 인출하세요" %}
+Core Asset을 [소각](/ko/smart-contracts/core/burn)하면 `execute` 명령이 실패합니다. 프로그램이 Asset을 더 이상 로드할 수 없어 `assetSignerPda`로 서명할 수 없습니다. 해당 PDA에 남아 있는 SOL, 토큰, 기타 자산은 회수 경로 없이 묶입니다.
+{% /callout %}
+
 ## Asset Signer PDA
 Asset은 이제 `assetSignerPda` 계정/주소에 액세스할 수 있으며, 이를 통해 MPL Core 프로그램의 `execute` 명령이 전송된 추가 명령을 통과시켜 `assetSignerPda`로 CPI 명령에 서명할 수 있습니다.
 이를 통해 `assetSignerPda` 계정은 현재 자산 소유자를 대신하여 계정 명령을 효과적으로 소유하고 실행할 수 있습니다.
@@ -61,6 +73,17 @@ Freeze Execute 플러그인은 특히 다음에 유용합니다:
 - **에스크로 없는 프로토콜**: 프로토콜 작업 중 execute 기능을 일시적으로 잠금
 - **보안 조치**: 복잡한 작업을 실행할 수 있는 자산에 추가 보호 계층 추가
 Freeze Execute 플러그인이 활성화되어 `frozen: true`로 설정되면 플러그인이 `frozen: false`로 업데이트될 때까지 execute 명령 사용 시도가 차단됩니다.
+## Asset Signer 잔액이 있는 상태에서 Asset 소각
+Core Asset을 소각하면 `execute`가 영구적으로 비활성화되므로 `assetSignerPda`에 남은 SOL, 토큰, 중첩 Core Asset을 이동할 수 없습니다.
+
+`execute` 명령에는 MPL Core 프로그램이 소유한 유효한 Core Asset 계정이 필요합니다. Asset을 [소각](/ko/smart-contracts/core/burn)하면 해당 계정은 더 이상 유효한 Asset이 아닙니다. `assetSignerPda` 주소 자체는 존재하고 자금을 보유할 수 있지만, 이를 사용할 명령은 더 이상 없습니다.
+
+소각하기 **전에** `execute`로 PDA에서 모두 꺼내세요:
+
+1. `findAssetSignerPda` 또는 [`mplx core asset execute info`](/ko/dev-tools/cli/core/execute)로 PDA를 파생합니다
+2. PDA가 소유한 SOL, SPL 토큰, Core Asset을 전송합니다
+3. PDA가 비어 있는지 확인합니다
+4. Asset을 소각합니다
 ## 예제
 ### Asset Signer에서 SOL 전송
 다음 예제에서는 `assetSignerPda`로 전송된 SOL을 원하는 대상으로 전송합니다.
@@ -206,3 +229,15 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## 참고사항
+- 현재 Asset 소유자만 `execute`를 호출할 수 있습니다 (소유자가 바깥 트랜잭션에 서명해야 함)
+- [Freeze Execute 플러그인](/ko/smart-contracts/core/plugins/freeze-execute)은 해제될 때까지 `execute`를 차단할 수 있습니다
+- Asset 소각은 Asset Signer 자금에 대해 되돌릴 수 없습니다. 먼저 PDA를 비우세요
+- `assetSignerPda`는 Asset 주소에서 결정론적으로 파생되며 Asset이 전송되어도 변하지 않습니다
+## FAQ
+### Asset을 소각하면 Asset Signer PDA의 자금은 어떻게 되나요?
+묶여 회수할 수 없습니다. `execute`에는 유효한 Core Asset이 필요하므로, 소각 후에도 PDA는 SOL, 토큰, 중첩 Asset을 보유할 수 있지만 이동하도록 서명할 수 있는 것은 없습니다.
+### 소각 후 묶인 Asset Signer 자금을 회수할 수 있나요?
+아니요. 원래 Asset 계정 없이 `assetSignerPda`로 서명할 수 있는 명령은 없습니다.
+### Asset을 전송하면 Asset Signer 지갑이 묶이나요?
+아니요. 전송은 `execute`를 호출할 수 있는 소유자만 바꿉니다. PDA는 Asset 주소에 연결된 채로 유지됩니다. `execute`를 비활성화하는 것은 전송이 아니라 소각입니다.

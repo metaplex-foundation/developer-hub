@@ -2,7 +2,7 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Metaplex Core JavaScript SDK 完整参考。涵盖 Umi 设置、创建 Asset、转移、销毁、更新、Collection、插件和数据获取。
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - mpl-core JavaScript
   - Core TypeScript SDK
@@ -122,6 +122,9 @@ const umi = createUmi('https://api.devnet.solana.com')
 ### 销毁 Asset
 使用 `burn()` 永久销毁 Asset 并回收租金：
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+{% callout type="warning" title="先提取 Asset Signer 余额" %}
+销毁 Asset 会使 [`execute`](/zh/smart-contracts/core/execute-asset-signing) 失败。Asset Signer PDA 中剩余的 SOL、代币或其他资产将滞留。
+{% /callout %}
 ### 更新 Asset
 使用 `update()` 修改 Asset 元数据：
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
@@ -267,6 +270,7 @@ console.log('插件:', Object.keys(asset))
 - Collection 级插件会覆盖相同类型的 Asset 级插件
 - 创建后立即获取 Asset 时使用 `commitment: 'finalized'`
 - 交易构建器是不可变的 - 每个方法返回新的构建器
+- 在 `burn()` 之前清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 剩余余额之后无法再转移
 ## 快速参考
 ### 最小依赖
 ```json {% title="package.json" %}

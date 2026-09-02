@@ -2,7 +2,7 @@
 title: 常见问题
 metaTitle: 常见问题 | Core
 description: 关于 Metaplex Core 协议的常见问题。
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - Core FAQ
   - Metaplex Core questions
@@ -25,6 +25,8 @@ faqs:
     a: Core 更便宜（成本降低约 80%），需要更少的账户（1 个 vs 3+ 个），使用更少的计算单元，并且有灵活的插件系统，而不是分散的代理。
   - q: Core 支持版本吗？
     a: 是的，使用 Edition 和 Master Edition 插件。详情请参阅打印版本指南。
+  - q: 销毁 Asset 后，Asset Signer PDA 中的资金会怎样？
+    a: 销毁后 execute 会失败，因此留在 Asset Signer PDA 中的 SOL、代币和嵌套资产会滞留。请先提取。参见 Execute Asset Signing。
 ---
 ## 为什么 Core Asset 和 Collection 账户同时有链上和链下数据？
 Core Asset 和 Collection 账户都包含链上数据，但两者也包含一个 `URI` 属性，指向提供额外数据的链下 JSON 文件。为什么是这样？我们不能把所有东西都存储在链上吗？好吧，将数据存储在链上存在几个问题：
@@ -42,3 +44,5 @@ Core 中有多个"不可变性"级别。您可以在[此指南](/smart-contracts
 Core 是一个专为 NFT 设计的全新标准，因此有几个显著的区别。例如，Core 更便宜，需要更少的计算单元，从开发者的角度来看应该更容易使用。有关详情，请查看[差异](/smart-contracts/core/tm-differences)页面。
 ## Core 支持版本吗？
 是的！使用 [Edition](/smart-contracts/core/plugins/edition) 和 [Master Edition](/smart-contracts/core/plugins/master-edition) 插件。您可以在["如何打印版本"指南](/smart-contracts/core/guides/print-editions)中找到更多信息。
+## 销毁 Asset 后，Asset Signer PDA 中的资金会怎样？
+[`execute`](/zh/smart-contracts/core/execute-asset-signing) 在销毁后会失败，因此留在 Asset Signer PDA 中的 SOL、代币和嵌套资产会滞留。请先提取。

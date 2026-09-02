@@ -3,7 +3,7 @@ title: Assetのバーン
 metaTitle: Assetのバーン | Metaplex Core
 description: SolanaでCore NFT Assetをバーンする方法を学びます。Metaplex Core SDKを使用してAssetを永久に破棄し、レントを回収します。
 created: '06-15-2024'
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -22,6 +22,7 @@ programmingLanguage:
 howToSteps:
   - npm install @metaplex-foundation/mpl-coreでSDKをインストール
   - Assetを取得して所有権を確認
+  - Asset Signer PDAにSOL、トークン、入れ子のAssetがある場合は空にする
   - 所有者としてburn(umi, { asset })を呼び出す
   - レントは自動的にウォレットに返却される
 howToTools:
@@ -39,6 +40,8 @@ faqs:
     a: はい。コレクションのcurrentSizeが減少します。numMintedカウンターは変更されません。
   - q: 複数のAssetを一度にバーンできますか？
     a: 単一の命令ではできません。サイズ制限内で1つのトランザクションに複数のバーン命令をバッチ処理できます。
+  - q: バーンするとAsset Signer PDA内のSOLとトークンはどうなりますか？
+    a: バーンするとexecuteが無効になります。先にAsset Signer PDAを空にしないと、それらの残高は回収できないまま取り残されます。
 ---
 このガイドでは、Metaplex Core SDKを使用してSolana上で**Core Assetをバーン**する方法を説明します。Assetを永久に破棄し、レント保証金のほとんどを回収します。 {% .lead %}
 {% callout title="学習内容" %}
@@ -46,6 +49,10 @@ faqs:
 - Collection内のAssetのバーンを処理する
 - Burn Delegate権限を理解する
 - バーン後にアカウントがどうなるかを知る
+- バーン前にAsset Signer PDAを空にする
+{% /callout %}
+{% callout type="warning" title="バーン前にAsset Signerの残高を引き出す" %}
+Core Assetをバーンすると[`execute`](/ja/smart-contracts/core/execute-asset-signing)は失敗します。Asset Signer PDAに残っているSOL、トークン、その他のアセットは回収できないまま取り残されます。先に転送してください。
 {% /callout %}
 ## 概要
 Core Assetをバーンして永久に破棄し、レントを回収します。所有者（またはBurn Delegate）のみがAssetをバーンできます。
@@ -53,14 +60,16 @@ Core Assetをバーンして永久に破棄し、レントを回収します。�
 - ほとんどのレント（約0.0028 SOL）が支払者に返却される
 - 少額（約0.0009 SOL）がアカウント再利用防止のために残る
 - バーンは**永久的で取り消し不可能**
+- 先に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — バーン後は`execute`でそれらの資金を移動できません
 ## 対象外
 Token Metadataのバーン（mpl-token-metadataを使用）、圧縮NFTのバーン（Bubblegumを使用）、Collectionのバーン（Collectionには独自のバーンプロセスがあります）。
 ## クイックスタート
 **ジャンプ先：** [Assetをバーン](#code-example) · [Collection内でバーン](#burning-an-asset-that-is-part-of-a-collection)
 1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Assetを取得して所有権を確認
-3. 所有者として`burn(umi, { asset })`を呼び出す
-4. レントは自動的にウォレットに返却される
+3. [Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)に資金がある場合は、`execute`で転送する
+4. 所有者として`burn(umi, { asset })`を呼び出す
+5. レントは自動的にウォレットに返却される
 ## 前提条件
 - Assetを所有する（またはBurn Delegateである）署名者で構成された**Umi**
 - バーンするAssetの**Assetアドレス**
@@ -166,6 +175,7 @@ const collectionId = collectionAddress(asset)
 - 残りのSOLはアカウントアドレスの再利用を防ぎます
 - Burn Delegateは所有者に代わってバーンできます（Burn Delegateプラグイン経由）
 - フリーズされたAssetはバーン前に解除する必要があります
+- バーン前に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — その後`execute`は失敗し、残りの残高は取り残されます
 ## クイックリファレンス
 ### バーンパラメータ
 | パラメータ | 必須 | 説明 |
@@ -196,6 +206,8 @@ const collectionId = collectionAddress(asset)
 はい。Assetがバーンされると、Collectionの`currentSize`が減少します。`numMinted`カウンターは変更されません（これまでにミントされた総数を追跡します）。
 ### 複数のAssetを一度にバーンできますか？
 単一の命令ではできません。1つのトランザクションに複数のバーン命令をバッチ処理できます（トランザクションサイズ制限内で）。
+### バーンするとAsset Signer PDA内のSOLとトークンはどうなりますか？
+バーンすると[`execute`](/ja/smart-contracts/core/execute-asset-signing)が無効になります。先にAsset Signer PDAを空にしないと、それらの残高は回収できないまま取り残されます。
 ## 用語集
 | 用語 | 定義 |
 |------|------------|
@@ -204,3 +216,4 @@ const collectionId = collectionAddress(asset)
 | **レント** | Solana上でアカウントを維持するために預けるSOL |
 | **フリーズ** | バーンと転送がブロックされるAssetの状態 |
 | **Collection** | Assetが属する可能性のあるグループアカウント |
+| **Asset Signer PDA** | Assetに接続され、execute経由で署名するウォレット。バーンすると残りの残高は取り残されます。 |
