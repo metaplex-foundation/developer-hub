@@ -53,7 +53,7 @@ faqs:
 - 메타데이터 JSON을 Arweave/IPFS에 업로드하고 URI 획득
 - name, URI, 선택적 플러그인으로 `create()` 호출
 - 컬렉션의 경우: `collection` 파라미터 전달
-- 기본 자산당 약 0.003 SOL 비용 (0.0015 SOL Core 프로토콜 수수료 포함). 긴 이름, URI, 플러그인은 렌트를 추가함
+- 기본 자산당 약 0.003 SOL 비용. 긴 이름, URI, 플러그인은 렌트를 추가함
 ## 범위 외
 Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), 대체 가능 토큰 (SPL Token 사용), NFT 마이그레이션.
 ## 빠른 시작

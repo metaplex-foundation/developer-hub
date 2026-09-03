@@ -57,7 +57,7 @@ faqs:
 ## 摘要
 销毁 Core Asset 以永久销毁它并回收租金。只有所有者（或 Burn Delegate）可以销毁 Asset。
 - 调用 `burn(umi, { asset })` 销毁 Asset
-- 账户租金返还给销毁交易的付款人；账户中持有的协议费用（创建费用以及尚未收取的 execute 费用）不予退还
+- 账户租金返还给销毁交易的付款人
 - 少量（约 0.0009 SOL）保留以防止账户重用
 - 销毁是**永久且不可逆的**
 - 先清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 销毁后 `execute` 无法再转移这些资金

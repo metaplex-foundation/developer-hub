@@ -58,7 +58,7 @@ Rust SDK 사용([Rust SDK](/ko/smart-contracts/core/sdk/rust) 참조), Token Met
 ## 사전 요구사항
 - **Node.js 18+** 또는 ES 모듈을 지원하는 최신 브라우저
 - RPC와 signer가 구성된 **Umi 프레임워크**
-- 렌트 및 수수료를 위한 **SOL**(기본 Asset당 약 0.003 SOL, 0.0015 SOL 프로토콜 수수료 포함. 렌트는 Asset 크기에 따라 다름)
+- 렌트 및 수수료를 위한 **SOL**(기본 Asset당 약 0.003 SOL. 렌트는 Asset 크기에 따라 다름)
 {% quick-links %}
 {% quick-link title="API 레퍼런스" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="SDK의 전체 TypeDoc API 문서." /%}
 {% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="npmjs.com의 패키지 및 버전 기록." /%}

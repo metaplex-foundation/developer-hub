@@ -54,7 +54,7 @@ Create a **Core Asset** by uploading metadata JSON to decentralized storage, the
 - Upload metadata JSON to Arweave/IPFS, get a URI
 - Call `create()` with name, URI, and optional plugins
 - For collections: pass the `collection` parameter
-- Costs ~0.003 SOL for a base asset, including the 0.0015 SOL Core protocol fee; longer names, URIs, and plugins add rent
+- Costs ~0.003 SOL for a base asset; longer names, URIs, and plugins add rent
 ## Out of Scope
 Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), fungible tokens (use SPL Token), and NFT migration.
 ## Quick Start

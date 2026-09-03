@@ -31,7 +31,7 @@ faqs:
   - q: 플러그인이란 무엇인가요?
     a: 플러그인은 Core Asset 또는 Collection에 동작을 추가하는 모듈식 확장입니다. 예로는 Freeze Delegate, Attributes, Royalties가 있습니다.
   - q: Core Asset을 민팅하는 데 비용이 얼마나 드나요?
-    a: 기본 자산당 약 0.003 SOL(0.0015 SOL Core 프로토콜 수수료 포함)이며, Token Metadata의 약 0.022 SOL과 비교됩니다. 이로써 Core는 민팅이 약 80% 저렴합니다.
+    a: 기본 자산당 약 0.003 SOL이며, Token Metadata의 약 0.022 SOL과 비교됩니다. 이로써 Core는 민팅이 약 80% 저렴합니다.
   - q: 어떤 RPC 제공자가 Core를 지원하나요?
     a: DAS(Digital Asset Standard)를 지원하는 모든 주요 RPC 제공자가 Core 자산을 인덱싱합니다.
   - q: 게임 자산에 Core를 사용할 수 있나요?
@@ -47,7 +47,7 @@ Metaplex Core("Core")는 Solana의 **차세대 NFT 표준**입니다. **단일 �
 {% /callout %}
 ## 요약
 **Metaplex Core**는 대부분의 새 프로젝트에서 Token Metadata를 대체하는 Solana NFT 표준입니다. 가장 낮은 민팅 비용, 강제 로열티, 사용자 정의 기능을 위한 플러그인 아키텍처를 제공합니다.
-- 단일 계정 설계: 민팅당 약 0.003 SOL, 0.0015 SOL 프로토콜 수수료 포함 (Token Metadata의 0.022 SOL 대비)
+- 단일 계정 설계: 민팅당 약 0.003 SOL (Token Metadata의 0.022 SOL 대비)
 - 기본적으로 강제 로열티, 허용/거부 목록 제어 포함
 - 스테이킹, 속성, 위임, 사용자 정의 동작을 위한 플러그인 시스템
 - 컬렉션 레벨 작업: 모든 자산을 한 번에 동결, 로열티 업데이트 또는 수정
@@ -70,7 +70,7 @@ Metaplex Core는 Solana에서 새 프로젝트에 권장되는 NFT 표준입니�
 ### 비용 효율성
 | 표준 | 민팅 비용 | 컴퓨팅 유닛 |
 |----------|-----------|---------------|
-| **Metaplex Core** | ~0.003 SOL (0.0015 SOL 프로토콜 수수료 포함) | ~17,000 CU |
+| **Metaplex Core** | ~0.003 SOL | ~17,000 CU |
 | Token Metadata | ~0.022 SOL | ~205,000 CU |
 | Token Extensions | ~0.0046 SOL | ~85,000 CU |
 ### 주요 장점
@@ -127,7 +127,7 @@ Core Asset과 Token Metadata NFT는 별도의 표준입니다. 자동 마이그�
 ### 플러그인이란 무엇인가요?
 플러그인은 Core Asset 또는 Collection에 동작을 추가하는 모듈식 확장입니다. 예로는 Freeze Delegate(동결 허용), Attributes(온체인 데이터), Royalties(크리에이터 지불)가 있습니다.
 ### Core Asset을 민팅하는 데 비용이 얼마나 드나요?
-기본 자산당 약 0.003 SOL(0.0015 SOL Core 프로토콜 수수료 포함)이며, Token Metadata의 약 0.022 SOL과 비교됩니다. 이로써 Core는 민팅이 약 80% 저렴합니다. 자세한 내용은 [Token Metadata와의 차이점](/ko/smart-contracts/core/tm-differences)을 참조하세요.
+기본 자산당 약 0.003 SOL이며, Token Metadata의 약 0.022 SOL과 비교됩니다. 이로써 Core는 민팅이 약 80% 저렴합니다. 자세한 내용은 [Token Metadata와의 차이점](/ko/smart-contracts/core/tm-differences)을 참조하세요.
 ### 어떤 RPC 제공자가 Core를 지원하나요?
 DAS(Digital Asset Standard)를 지원하는 모든 주요 RPC 제공자가 Core 자산을 인덱싱합니다. 현재 목록은 [RPC 제공자](/solana/rpcs-and-das)를 참조하세요.
 ### 게임 자산에 Core를 사용할 수 있나요?

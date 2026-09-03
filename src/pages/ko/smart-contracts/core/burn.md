@@ -57,7 +57,7 @@ Core Asset을 소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-si
 ## 요약
 Core Asset을 소각하여 영구적으로 파괴하고 렌트를 회수합니다. 소유자(또는 Burn Delegate)만 Asset을 소각할 수 있습니다.
 - `burn(umi, { asset })`을 호출하여 Asset 파괴
-- 계정의 렌트는 소각 트랜잭션의 지불자에게 반환되지만, 계정에 보관된 프로토콜 수수료(생성 수수료 및 아직 회수되지 않은 execute 수수료)는 환불되지 않음
+- 계정의 렌트는 소각 트랜잭션의 지불자에게 반환됨
 - 소액(~0.0009 SOL)이 계정 재사용 방지를 위해 남음
 - 소각은 **영구적이며 되돌릴 수 없음**
 - 먼저 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 소각 후에는 `execute`로 해당 자금을 이동할 수 없습니다

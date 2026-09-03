@@ -58,7 +58,7 @@ Rust SDK 用法（参见 [Rust SDK](/zh/smart-contracts/core/sdk/rust)）、Toke
 ## 前提条件
 - **Node.js 18+** 或支持 ES 模块的现代浏览器
 - 配置了 RPC 和 signer 的 **Umi 框架**
-- 用于租金和费用的 **SOL**（每个基础 Asset 约 0.003 SOL，含 0.0015 SOL 协议费用；租金随 Asset 大小而变化）
+- 用于租金和费用的 **SOL**（每个基础 Asset 约 0.003 SOL；租金随 Asset 大小而变化）
 {% quick-links %}
 {% quick-link title="API 参考" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="SDK 的完整 TypeDoc API 文档。" /%}
 {% quick-link title="NPM 包" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="npmjs.com 上的包和版本历史。" /%}

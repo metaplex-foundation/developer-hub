@@ -53,7 +53,7 @@ faqs:
 - メタデータJSONをArweave/IPFSにアップロードし、URIを取得
 - name、URI、オプションのプラグインで`create()`を呼び出す
 - コレクションの場合：`collection`パラメータを渡す
-- ベースアセットあたり約0.003 SOLのコスト（0.0015 SOLのCoreプロトコル手数料を含む）。名前やURIが長い場合やプラグインを追加する場合はレントが増加
+- ベースアセットあたり約0.003 SOLのコスト。名前やURIが長い場合やプラグインを追加する場合はレントが増加
 ## 対象外
 Token Metadata NFT（mpl-token-metadataを使用）、圧縮NFT（Bubblegumを使用）、ファンジブルトークン（SPL Tokenを使用）、NFT移行。
 ## クイックスタート
