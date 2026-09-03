@@ -53,7 +53,7 @@ faqs:
 - 메타데이터 JSON을 Arweave/IPFS에 업로드하고 URI 획득
 - name, URI, 선택적 플러그인으로 `create()` 호출
 - 컬렉션의 경우: `collection` 파라미터 전달
-- 자산당 약 0.003 SOL 비용 (0.0015 SOL Core 프로토콜 수수료 포함)
+- 기본 자산당 약 0.003 SOL 비용 (0.0015 SOL Core 프로토콜 수수료 포함). 긴 이름, URI, 플러그인은 렌트를 추가함
 ## 범위 외
 Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), 대체 가능 토큰 (SPL Token 사용), NFT 마이그레이션.
 ## 빠른 시작
@@ -136,7 +136,7 @@ const assetSigner = generateSigner(umi) // 고유해야 함
 ### `Collection not found`
 컬렉션 주소가 존재하지 않거나 유효한 Core Collection이 아닙니다. 주소를 확인하고 먼저 Collection을 생성했는지 확인하세요.
 ### `Insufficient funds`
-지불자 지갑에 렌트와 프로토콜 수수료용으로 약 0.003 SOL이 필요합니다. 다음으로 자금 추가:
+지불자 지갑에는 기본 자산의 렌트와 프로토콜 수수료용으로 약 0.003 SOL에 더해, 더 큰 자산과 트랜잭션 수수료를 위한 여유분이 필요합니다. 다음으로 자금 추가:
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```

@@ -57,7 +57,7 @@ Core Assetをバーンすると[`execute`](/ja/smart-contracts/core/execute-asse
 ## 概要
 Core Assetをバーンして永久に破棄し、レントを回収します。所有者（またはBurn Delegate）のみがAssetをバーンできます。
 - `burn(umi, { asset })`を呼び出してAssetを破棄
-- アカウントのレントは支払者に返却されるが、作成時に支払った0.0015 SOLのプロトコル手数料は返金されない
+- アカウントのレントはバーン取引の支払者に返却されるが、アカウントに保持されているプロトコル手数料（作成手数料および未回収のexecute手数料）は返金されない
 - 少額（約0.0009 SOL）がアカウント再利用防止のために残る
 - バーンは**永久的で取り消し不可能**
 - 先に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — バーン後は`execute`でそれらの資金を移動できません

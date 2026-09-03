@@ -32,7 +32,7 @@ faqs:
 来自 **Token Metadata**？本指南解释 Core 的不同之处、为什么更好，以及如何将您的 TM 知识转化为 Core 概念。 {% .lead %}
 {% callout title="主要区别" %}
 - **单账户** vs 3 个以上账户（mint、metadata、token account）
-- **成本降低 80%**: 每次铸造约 0.003 SOL（含 0.0015 SOL 协议费用） vs 0.022 SOL
+- **成本降低 80% 以上**: 每次铸造约 0.003 SOL（含 0.0015 SOL 协议费用） vs 0.022 SOL
 - 用**插件**代替委托和冻结权限
 - 具有收藏级操作的**一等公民 Collection**
 - **不需要 Associated Token Account**

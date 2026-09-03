@@ -32,7 +32,7 @@ faqs:
 **Token Metadata**から来ましたか？このガイドでは、Coreの違い、なぜ優れているか、TMの知識をCoreの概念に変換する方法を説明します。 {% .lead %}
 {% callout title="主な違い" %}
 - **シングルアカウント** vs 3以上のアカウント（mint、metadata、token account）
-- **80%低コスト**: ミントあたり約0.003 SOL（0.0015 SOLのプロトコル手数料を含む） vs 0.022 SOL
+- **80%以上の低コスト**: ミントあたり約0.003 SOL（0.0015 SOLのプロトコル手数料を含む） vs 0.022 SOL
 - デリゲートとフリーズ権限の代わりに**プラグイン**
 - コレクションレベルの操作を持つ**ファーストクラスのCollection**
 - **Associated Token Account不要**

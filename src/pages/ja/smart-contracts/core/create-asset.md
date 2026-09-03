@@ -53,7 +53,7 @@ faqs:
 - メタデータJSONをArweave/IPFSにアップロードし、URIを取得
 - name、URI、オプションのプラグインで`create()`を呼び出す
 - コレクションの場合：`collection`パラメータを渡す
-- アセットあたり約0.003 SOLのコスト（0.0015 SOLのCoreプロトコル手数料を含む）
+- ベースアセットあたり約0.003 SOLのコスト（0.0015 SOLのCoreプロトコル手数料を含む）。名前やURIが長い場合やプラグインを追加する場合はレントが増加
 ## 対象外
 Token Metadata NFT（mpl-token-metadataを使用）、圧縮NFT（Bubblegumを使用）、ファンジブルトークン（SPL Tokenを使用）、NFT移行。
 ## クイックスタート
@@ -136,7 +136,7 @@ const assetSigner = generateSigner(umi) // 一意である必要があります
 ### `Collection not found`
 コレクションアドレスが存在しないか、有効なCore Collectionではありません。アドレスを確認し、最初にCollectionを作成したことを確認してください。
 ### `Insufficient funds`
-支払者ウォレットにはレントとプロトコル手数料用に約0.003 SOLが必要です。以下で資金を追加：
+支払者ウォレットには、ベースアセットのレントとプロトコル手数料用に約0.003 SOLに加えて、より大きなアセットやトランザクション手数料のための余裕分が必要です。以下で資金を追加：
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```

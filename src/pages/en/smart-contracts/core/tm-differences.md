@@ -32,7 +32,7 @@ faqs:
 Coming from **Token Metadata**? This guide explains what's different in Core, why it's better, and how to translate your TM knowledge to Core concepts. {% .lead %}
 {% callout title="Key Differences" %}
 - **Single account** vs 3+ accounts (mint, metadata, token account)
-- **80% lower costs**: ~0.003 SOL (including the 0.0015 SOL protocol fee) vs 0.022 SOL per mint
+- **Over 80% lower costs**: ~0.003 SOL (including the 0.0015 SOL protocol fee) vs 0.022 SOL per mint
 - **Plugins** instead of delegates and freeze authorities
 - **Collections are first-class** with collection-level operations
 - **No Associated Token Accounts** needed

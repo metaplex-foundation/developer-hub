@@ -58,7 +58,7 @@ Burning a Core Asset makes [`execute`](/smart-contracts/core/execute-asset-signi
 ## Summary
 Burn a Core Asset to permanently destroy it and recover rent. Only the owner (or Burn Delegate) can burn an Asset.
 - Call `burn(umi, { asset })` to destroy the Asset
-- The account's rent is returned to the payer; the 0.0015 SOL protocol fee paid at creation is not refunded
+- The account's rent is returned to the burn transaction's payer; any protocol fees held in the account (the create fee and any uncollected execute fees) are not refunded
 - A small amount (~0.0009 SOL) remains to prevent account reuse
 - Burning is **permanent and irreversible**
 - Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) first — `execute` cannot move those funds after burn

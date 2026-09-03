@@ -58,7 +58,7 @@ Rust SDK usage (see [Rust SDK](/smart-contracts/core/sdk/rust)), Token Metadata 
 ## Prerequisites
 - **Node.js 18+** or modern browser with ES modules
 - **Umi framework** configured with RPC and signer
-- **SOL** for rent and fees (~0.003 SOL per asset, including the 0.0015 SOL protocol fee)
+- **SOL** for rent and fees (~0.003 SOL per base asset, including the 0.0015 SOL protocol fee; rent varies with asset size)
 {% quick-links %}
 {% quick-link title="API Reference" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="Full TypeDoc API documentation for the SDK." /%}
 {% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="Package on npmjs.com with version history." /%}

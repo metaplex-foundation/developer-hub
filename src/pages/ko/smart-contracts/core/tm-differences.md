@@ -32,7 +32,7 @@ faqs:
 **Token Metadata**에서 오셨나요? 이 가이드는 Core의 차이점, 왜 더 좋은지, TM 지식을 Core 개념으로 변환하는 방법을 설명합니다. {% .lead %}
 {% callout title="주요 차이점" %}
 - **단일 계정** vs 3개 이상의 계정 (mint, metadata, token account)
-- **80% 저렴한 비용**: 민트당 약 0.003 SOL (0.0015 SOL 프로토콜 수수료 포함) vs 0.022 SOL
+- **80% 이상 저렴한 비용**: 민트당 약 0.003 SOL (0.0015 SOL 프로토콜 수수료 포함) vs 0.022 SOL
 - 위임자와 동결 권한 대신 **플러그인**
 - 컬렉션 수준 작업을 갖춘 **퍼스트 클래스 Collection**
 - **Associated Token Account 불필요**
