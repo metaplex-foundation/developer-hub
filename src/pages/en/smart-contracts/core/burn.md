@@ -3,7 +3,7 @@ title: Burning Assets
 metaTitle: Burning Assets | Metaplex Core
 description: Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
 created: '06-15-2024'
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -58,7 +58,7 @@ Burning a Core Asset makes [`execute`](/smart-contracts/core/execute-asset-signi
 ## Summary
 Burn a Core Asset to permanently destroy it and recover rent. Only the owner (or Burn Delegate) can burn an Asset.
 - Call `burn(umi, { asset })` to destroy the Asset
-- Most rent (~0.0028 SOL) is returned to the payer
+- The account's rent is returned to the payer; the 0.0015 SOL protocol fee paid at creation is not refunded
 - A small amount (~0.0009 SOL) remains to prevent account reuse
 - Burning is **permanent and irreversible**
 - Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) first — `execute` cannot move those funds after burn

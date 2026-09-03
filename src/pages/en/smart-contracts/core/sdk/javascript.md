@@ -2,7 +2,7 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Complete reference for the Metaplex Core JavaScript SDK. Covers Umi setup, creating assets, transfers, burns, updates, collections, plugins, and fetching data.
-updated: '08-28-2026'
+updated: '09-03-2026'
 keywords:
   - mpl-core JavaScript
   - Core TypeScript SDK
@@ -58,7 +58,7 @@ Rust SDK usage (see [Rust SDK](/smart-contracts/core/sdk/rust)), Token Metadata 
 ## Prerequisites
 - **Node.js 18+** or modern browser with ES modules
 - **Umi framework** configured with RPC and signer
-- **SOL** for transaction fees (~0.003 SOL per asset)
+- **SOL** for rent and fees (~0.003 SOL per asset, including the 0.0015 SOL protocol fee)
 {% quick-links %}
 {% quick-link title="API Reference" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="Full TypeDoc API documentation for the SDK." /%}
 {% quick-link title="NPM Package" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="Package on npmjs.com with version history." /%}

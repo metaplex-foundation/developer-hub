@@ -2,7 +2,7 @@
 title: Core와 Token Metadata의 차이점
 metaTitle: Core vs Token Metadata | Metaplex Core
 description: Metaplex Core와 Token Metadata NFT 표준을 비교합니다. 무엇이 변경되었는지, 무엇이 새로운지, TM에서 Core로 멘탈 모델을 마이그레이션하는 방법을 배웁니다.
-updated: '01-31-2026'
+updated: '09-03-2026'
 keywords:
   - Core vs Token Metadata
   - NFT standard comparison
@@ -32,7 +32,7 @@ faqs:
 **Token Metadata**에서 오셨나요? 이 가이드는 Core의 차이점, 왜 더 좋은지, TM 지식을 Core 개념으로 변환하는 방법을 설명합니다. {% .lead %}
 {% callout title="주요 차이점" %}
 - **단일 계정** vs 3개 이상의 계정 (mint, metadata, token account)
-- **80% 저렴한 비용**: 민트당 약 0.0037 SOL vs 0.022 SOL
+- **80% 저렴한 비용**: 민트당 약 0.003 SOL (0.0015 SOL 프로토콜 수수료 포함) vs 0.022 SOL
 - 위임자와 동결 권한 대신 **플러그인**
 - 컬렉션 수준 작업을 갖춘 **퍼스트 클래스 Collection**
 - **Associated Token Account 불필요**
@@ -42,7 +42,7 @@ Core는 Token Metadata의 다중 계정 모델을 단일 계정 설계로 대체
 | 기능 | Token Metadata | Core |
 |---------|---------------|------|
 | NFT당 계정 수 | 3개 이상 (mint, metadata, ATA) | 1 |
-| 민트 비용 | ~0.022 SOL | ~0.0037 SOL |
+| 민트 비용 | ~0.022 SOL | ~0.003 SOL (0.0015 SOL 프로토콜 수수료 포함) |
 | 동결 메커니즘 | 위임자 + 동결 권한 | Freeze Delegate 플러그인 |
 | 로열티 | 자산별 업데이트 | 유연함: 컬렉션 또는 자산 수준 |
 | 온체인 속성 | ❌ | ✅ Attributes 플러그인 |
@@ -55,7 +55,7 @@ pNFT 관련 기능과 대체 가능 토큰 처리 (SPL Token 사용).
 2. 위임자가 아닌 플러그인
 3. 컬렉션 수준 작업이 네이티브
 ## 차이점 개요
-- **전례 없는 비용 효율성**: Metaplex Core는 사용 가능한 대안 중 가장 낮은 민팅 비용을 제공합니다. 예를 들어, Token Metadata로 0.022 SOL이 드는 NFT를 Core로 0.0037 SOL에 민팅할 수 있습니다.
+- **전례 없는 비용 효율성**: Metaplex Core는 사용 가능한 대안 중 가장 낮은 민팅 비용을 제공합니다. 예를 들어, Token Metadata로 0.022 SOL이 드는 NFT를 Core로 약 0.003 SOL(0.0015 SOL 프로토콜 수수료 포함)에 민팅할 수 있습니다.
 - **개선된 개발자 경험**: 대부분의 디지털 자산은 전체 대체 가능 토큰 프로그램을 유지하는 데 필요한 데이터를 상속받지만, Core는 NFT에 최적화되어 모든 주요 데이터를 단일 Solana 계정에 저장할 수 있습니다. 이로 인해 개발자의 복잡성이 크게 줄어들고, Solana 전체의 네트워크 성능 향상에도 기여합니다.
 - **강화된 컬렉션 관리**: 컬렉션에 대한 퍼스트 클래스 지원으로 개발자와 크리에이터는 로열티와 플러그인과 같은 컬렉션 수준 구성을 쉽게 관리할 수 있으며, 개별 NFT에 대해 고유하게 재정의할 수 있습니다. 이는 단일 트랜잭션으로 수행할 수 있어 컬렉션 관리 비용과 Solana 트랜잭션 수수료를 줄입니다.
 - **고급 플러그인 지원**: 내장 스테이킹부터 자산 기반 포인트 시스템까지, Metaplex Core의 플러그인 아키텍처는 광범위한 유틸리티와 커스터마이징의 가능성을 열어줍니다. 플러그인을 통해 개발자는 생성, 전송, 소각과 같은 모든 자산 라이프사이클 이벤트에 후킹하여 커스텀 동작을 추가할 수 있습니다.

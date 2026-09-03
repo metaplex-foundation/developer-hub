@@ -3,7 +3,7 @@ title: Assetのバーン
 metaTitle: Assetのバーン | Metaplex Core
 description: SolanaでCore NFT Assetをバーンする方法を学びます。Metaplex Core SDKを使用してAssetを永久に破棄し、レントを回収します。
 created: '06-15-2024'
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -57,7 +57,7 @@ Core Assetをバーンすると[`execute`](/ja/smart-contracts/core/execute-asse
 ## 概要
 Core Assetをバーンして永久に破棄し、レントを回収します。所有者（またはBurn Delegate）のみがAssetをバーンできます。
 - `burn(umi, { asset })`を呼び出してAssetを破棄
-- ほとんどのレント（約0.0028 SOL）が支払者に返却される
+- アカウントのレントは支払者に返却されるが、作成時に支払った0.0015 SOLのプロトコル手数料は返金されない
 - 少額（約0.0009 SOL）がアカウント再利用防止のために残る
 - バーンは**永久的で取り消し不可能**
 - 先に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — バーン後は`execute`でそれらの資金を移動できません

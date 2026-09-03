@@ -2,7 +2,7 @@
 title: Assetの作成
 metaTitle: Assetの作成 | Metaplex Core
 description: JavaScriptまたはRustを使用してSolanaでCore NFT Assetを作成する方法を学びます。メタデータのアップロード、コレクションへのミント、プラグインの追加を含みます。
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -53,7 +53,7 @@ faqs:
 - メタデータJSONをArweave/IPFSにアップロードし、URIを取得
 - name、URI、オプションのプラグインで`create()`を呼び出す
 - コレクションの場合：`collection`パラメータを渡す
-- アセットあたり約0.0029 SOLのコスト
+- アセットあたり約0.003 SOLのコスト（0.0015 SOLのCoreプロトコル手数料を含む）
 ## 対象外
 Token Metadata NFT（mpl-token-metadataを使用）、圧縮NFT（Bubblegumを使用）、ファンジブルトークン（SPL Tokenを使用）、NFT移行。
 ## クイックスタート
@@ -136,7 +136,7 @@ const assetSigner = generateSigner(umi) // 一意である必要があります
 ### `Collection not found`
 コレクションアドレスが存在しないか、有効なCore Collectionではありません。アドレスを確認し、最初にCollectionを作成したことを確認してください。
 ### `Insufficient funds`
-支払者ウォレットにはレント用に約0.003 SOLが必要です。以下で資金を追加：
+支払者ウォレットにはレントとプロトコル手数料用に約0.003 SOLが必要です。以下で資金を追加：
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
@@ -161,7 +161,8 @@ await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(
 ### コスト内訳
 | 項目 | コスト |
 |------|------|
-| Assetアカウントレント | 約0.0029 SOL |
+| Assetアカウントレント（名前、URI、プラグインによって変動） | 約0.0015 SOL |
+| Coreプロトコル手数料（`create`） | 0.0015 SOL |
 | トランザクション手数料 | 約0.000005 SOL |
 | **合計** | **約0.003 SOL** |
 ## FAQ

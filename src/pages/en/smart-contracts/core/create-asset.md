@@ -2,7 +2,7 @@
 title: Creating Assets
 metaTitle: Creating Assets | Metaplex Core
 description: Learn how to create Core NFT Assets on Solana using JavaScript or Rust. Includes uploading metadata, minting into collections, and adding plugins.
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -54,7 +54,7 @@ Create a **Core Asset** by uploading metadata JSON to decentralized storage, the
 - Upload metadata JSON to Arweave/IPFS, get a URI
 - Call `create()` with name, URI, and optional plugins
 - For collections: pass the `collection` parameter
-- Costs ~0.0029 SOL per asset
+- Costs ~0.003 SOL per asset, including the 0.0015 SOL Core protocol fee
 ## Out of Scope
 Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), fungible tokens (use SPL Token), and NFT migration.
 ## Quick Start
@@ -137,7 +137,7 @@ const assetSigner = generateSigner(umi) // Must be unique
 ### `Collection not found`
 The collection address doesn't exist or isn't a valid Core Collection. Verify the address and that you've created the Collection first.
 ### `Insufficient funds`
-Your payer wallet needs ~0.003 SOL for rent. Fund it with:
+Your payer wallet needs ~0.003 SOL for rent and the protocol fee. Fund it with:
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
@@ -162,7 +162,8 @@ await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(
 ### Cost Breakdown
 | Item | Cost |
 |------|------|
-| Asset account rent | ~0.0029 SOL |
+| Asset account rent (varies with name, URI, and plugins) | ~0.0015 SOL |
+| Core protocol fee (`create`) | 0.0015 SOL |
 | Transaction fee | ~0.000005 SOL |
 | **Total** | **~0.003 SOL** |
 ## FAQ

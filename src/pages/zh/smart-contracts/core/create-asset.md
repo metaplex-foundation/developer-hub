@@ -2,7 +2,7 @@
 title: 创建 Asset
 metaTitle: 创建 Asset | Metaplex Core
 description: 了解如何使用 JavaScript 或 Rust 在 Solana 上创建 Core NFT Asset。包括上传元数据、铸造到收藏和添加插件。
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -53,7 +53,7 @@ faqs:
 - 将元数据 JSON 上传到 Arweave/IPFS，获取 URI
 - 使用 name、URI 和可选插件调用 `create()`
 - 对于收藏：传递 `collection` 参数
-- 每个资产成本约 0.0029 SOL
+- 每个资产成本约 0.003 SOL（含 0.0015 SOL Core 协议费用）
 ## 范围外
 Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegum）、同质化代币（使用 SPL Token）和 NFT 迁移。
 ## 快速开始
@@ -136,7 +136,7 @@ const assetSigner = generateSigner(umi) // 必须唯一
 ### `Collection not found`
 收藏地址不存在或不是有效的 Core Collection。验证地址并确保您已先创建 Collection。
 ### `Insufficient funds`
-您的付款钱包需要约 0.003 SOL 用于租金。使用以下命令添加资金：
+您的付款钱包需要约 0.003 SOL 用于租金和协议费用。使用以下命令添加资金：
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
@@ -161,7 +161,8 @@ await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(
 ### 成本明细
 | 项目 | 成本 |
 |------|------|
-| Asset 账户租金 | ~0.0029 SOL |
+| Asset 账户租金（随名称、URI 和插件而变化） | ~0.0015 SOL |
+| Core 协议费用（`create`） | 0.0015 SOL |
 | 交易费用 | ~0.000005 SOL |
 | **总计** | **~0.003 SOL** |
 ## FAQ

@@ -2,7 +2,7 @@
 title: 概要
 metaTitle: Metaplex Core | Solana向け次世代NFT標準
 description: Metaplex Coreは、シングルアカウント設計、強制ロイヤリティ、柔軟なプラグインシステムを備えたSolana上の次世代NFT標準です。低コスト、低コンピュート、高パフォーマンス。
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -31,7 +31,7 @@ faqs:
   - q: プラグインとは何ですか？
     a: プラグインは、Core AssetまたはCollectionに動作を追加するモジュラー拡張機能です。例としてFreeze Delegate、Attributes、Royaltiesがあります。
   - q: Core Assetのミントにはいくらかかりますか？
-    a: アセットあたり約0.0029 SOLで、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。
+    a: ベースアセットあたり約0.003 SOL（0.0015 SOLのCoreプロトコル手数料を含む）で、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。
   - q: どのRPCプロバイダーがCoreをサポートしていますか？
     a: DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。
   - q: ゲームアセットにCoreを使用できますか？
@@ -47,7 +47,7 @@ Metaplex Core（「Core」）は、Solana上の**次世代NFT標準**です。**
 {% /callout %}
 ## 概要
 **Metaplex Core**は、ほとんどの新規プロジェクトでToken Metadataに代わるSolana NFT標準です。最低のミントコスト、強制ロイヤリティ、およびカスタム機能のためのプラグインアーキテクチャを提供します。
-- シングルアカウント設計：ミントあたり約0.0029 SOL（Token Metadataの0.022 SOLに対して）
+- シングルアカウント設計：ミントあたり約0.003 SOL、0.0015 SOLのプロトコル手数料を含む（Token Metadataの0.022 SOLに対して）
 - デフォルトで強制ロイヤリティ、許可リスト/拒否リスト制御付き
 - ステーキング、属性、デリゲート、カスタム動作のためのプラグインシステム
 - コレクションレベル操作：すべてのアセットを一度にフリーズ、ロイヤリティ更新、または変更
@@ -70,7 +70,7 @@ Metaplex Coreは、Solanaでの新規プロジェクトに推奨されるNFT標�
 ### コスト効率
 | 標準 | ミントコスト | コンピュートユニット |
 |----------|-----------|---------------|
-| **Metaplex Core** | 約0.0029 SOL | 約17,000 CU |
+| **Metaplex Core** | 約0.003 SOL（0.0015 SOLのプロトコル手数料を含む） | 約17,000 CU |
 | Token Metadata | 約0.022 SOL | 約205,000 CU |
 | Token Extensions | 約0.0046 SOL | 約85,000 CU |
 ### 主な利点
@@ -127,7 +127,7 @@ Core AssetとToken Metadata NFTは別々の標準です。自動移行はあり�
 ### プラグインとは何ですか？
 プラグインは、Core AssetまたはCollectionに動作を追加するモジュラー拡張機能です。例としてFreeze Delegate（フリーズ許可）、Attributes（オンチェーンデータ）、Royalties（クリエイター支払い）があります。
 ### Core Assetのミントにはいくらかかりますか？
-ベースアセットあたり約0.0029 SOLで、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。詳細については[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)をご覧ください。
+ベースアセットあたり約0.003 SOL（0.0015 SOLのCoreプロトコル手数料を含む）で、Token Metadataの約0.022 SOLと比較できます。これによりCoreはミントが約80%安くなります。詳細については[Token Metadataとの違い](/ja/smart-contracts/core/tm-differences)をご覧ください。
 ### どのRPCプロバイダーがCoreをサポートしていますか？
 DAS（Digital Asset Standard）をサポートするすべての主要RPCプロバイダーがCore assetをインデックスしています。現在のリストについては[RPCプロバイダー](/ja/solana/rpcs-and-das)をご覧ください。
 ### ゲームアセットにCoreを使用できますか？
