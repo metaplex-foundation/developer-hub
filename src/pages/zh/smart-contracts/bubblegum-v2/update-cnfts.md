@@ -3,7 +3,7 @@ title: 更新压缩NFT
 metaTitle: 更新压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum上更新压缩NFT。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - update compressed NFT
   - update cNFT
@@ -24,6 +24,8 @@ faqs:
     a: 您可以更新UpdateArgsArgs中定义的名称、URI、卖家费用基准点及其他元数据字段。对于要更改的字段使用some('newValue')。
   - q: 更新时需要传递集合吗？
     a: 是的，如果cNFT属于集合。请传递带有集合公钥的coreCollection参数。集合权限必须签署交易。
+  - q: 如何更新从集合继承版税的cNFT？
+    a: 向 updateMetadataV2 展开 ...assetWithProof（currentMetadata 为叶子规范值，继承时为 65535）。展示用解析费率在 metadata 上；不要把 metadata 当作 currentMetadata 传入。
 ---
 
 ## Summary
@@ -34,6 +36,7 @@ faqs:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
+- 向 `updateMetadataV2` 展开 `...assetWithProof`，使用 `getAssetWithProof.currentMetadata`（叶子规范值）
 
 **updateMetadataV2**指令可用于修改压缩NFT的元数据。默克尔根会更新以反映数据的传播哈希，符合[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)的RPC提供商将更新其cNFT索引。
 
@@ -90,7 +93,6 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.metadata,
   updateArgs,
   // 可选参数。如果您的权限是与当前umi身份不同的签名者类型，
   // 在此处分配该签名者。
@@ -100,6 +102,20 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+{% callout type="note" title="写入指令使用叶子元数据" %}
+`getAssetWithProof` 同时返回 `metadata`（DAS 展示 / 解析费率）和 `currentMetadata`（叶子规范 `MetadataArgsV2Args`，继承时为 `65535`）。写入时展开 `...assetWithProof`，不要把展示用 `metadata` 当作 `currentMetadata`。UI 使用 `metadata` / `rpcAsset`；用 `inherited` 检测继承。
+
+读取资产时关于 DAS 响应字段的说明，请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
+{% /callout %}
+
+## 继承版税 {% #inherited-royalties %}
+
+通过将 `updateArgs.sellerFeeBasisPoints` 设为 `some(SELLER_FEE_BASIS_POINTS_INHERIT)`，可将 cNFT **切换为**继承版税。集合必须具有 `Royalties` 插件，且更新后的元数据 `creators` 数组必须为空。
+
+要从继承版税**切换回**明确百分比 — 例如在[从集合中移除 cNFT](/zh/smart-contracts/bubblegum-v2/collections#inherited-royalties)之前 — 请传入所需的 basis points：
+
+{% code-tabs-imported from="bubblegum/update-inherit-royalties" frameworks="umi" /%}
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -107,12 +123,27 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
+- 向 `updateMetadataV2` 展开 `...assetWithProof`，以便程序用叶子规范的 `currentMetadata` 验证。
 - Use `some()` for fields you want to update and omit fields you want to keep unchanged.
+- Inherited seller fees require an empty leaf-level `creators` array and a collection with the `Royalties` plugin.
 
 ## FAQ
 
-#
+### 谁可以更新压缩 NFT 的元数据？
+
+如果 cNFT 属于集合，只有集合权限可以更新。如果不属于集合，树权限（树创建者或委托人）可以更新。
+
+### 可以在 cNFT 上更新哪些字段？
+
+你可以更新 `UpdateArgsArgs` 中定义的名称、URI、seller fee basis points 及其他元数据字段。对要更改的字段使用 `some('newValue')`。
+
+### 更新时需要传递集合吗？
+
+是的，如果 cNFT 属于集合。请传递带有集合公钥的 `coreCollection` 参数。集合权限必须签署交易。
+
+### 如何更新从集合继承版税的 cNFT？
+
+向 `updateMetadataV2` 展开 `...assetWithProof`，继承时 `currentMetadata` 会带上链上哨兵。使用 `updateArgs.sellerFeeBasisPoints` 的 `some(SELLER_FEE_BASIS_POINTS_INHERIT)` 切换为继承版税，或使用明确数字离开继承。
 
 ## Glossary
 
@@ -122,4 +153,5 @@ await updateMetadataV2(umi, {
 | **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
 | **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
 | **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | The existing metadata of the cNFT, fetched via getAssetWithProof and required for verification |
+| **currentMetadata** | `updateMetadataV2` 上表示现有叶子元数据的 IDL 参数；展开 `...assetWithProof` 时由 `getAssetWithProof.currentMetadata` 提供 |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` indicating royalties are inherited from the MPL-Core collection |

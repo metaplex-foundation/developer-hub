@@ -208,6 +208,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - 并非所有RPC提供商都支持DAS API。请查看[RPC提供商](/zh/rpc-providers)页面获取兼容选项。
 - 安装`mplBubblegum`时会自动包含DAS API插件，无需单独安装。
 - 通过`getAssetProof`获取的证明在树被修改后可能会过期。在执行写入操作前始终获取最新证明。
+- 对于从集合继承卖家费用的 Bubblegum V2 cNFT，DAS 将集合费率放在 `royalty.basis_points` / `creators` 上，将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
 ## Glossary
 

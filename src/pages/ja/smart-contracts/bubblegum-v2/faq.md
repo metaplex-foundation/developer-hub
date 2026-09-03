@@ -3,7 +3,7 @@ title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegumに関するよくある質問。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -35,6 +35,8 @@ faqs:
     a: 解凍はBubblegum V1アセットのみで利用できます。V2は解凍をサポートしていません。
   - q: 1つのツリーにcNFTをいくつ保存できますか？
     a: 最大数は2^maxDepthです。深度30のツリーは10億を超えるcNFTを保持できますが、大きなツリーほどレントのコストが高くなります。
+  - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略します。リーフには継承センチネル（65535）が保存され、DASはroyalty.basis_pointsにコレクション料率を、royalty.basis_points_rawにセンチネルを置きます。書き込みでは getAssetWithProof を展開し currentMetadata（リーフ正規）を使います。
 ---
 
 ## Summary
@@ -45,6 +47,7 @@ faqs:
 - `truncateCanopy`またはアドレスルックアップテーブルで「トランザクションが大きすぎる」エラーを解決する
 - ツリーを作成する前にツリーのコストと容量を理解する
 - Bubblegum V2はV1ツリーや圧縮解除との後方互換性はない
+- cNFTはMPL-CoreコレクションのRoyaltiesプラグインからセラーフィーベーシスポイントを継承できる
 
 ## Bubblegum V2とは何ですか？
 
@@ -87,7 +90,7 @@ Bubblegum UmiライブラリはPATHの説明に適合する`getAssetWithProof`�
 キャノピーサイズによっては、`getAssetWithProof`ヘルパーの`truncateCanopy: true`パラメータを使用することが意味がある場合があります。これによりツリー設定を取得し、不要な証明を切り捨てます。これはトランザクションサイズが大きくなりすぎる場合に役立ちます。
 
 ```ts
-import { getAssetWithProof, transfer } from '@metaplex-foundation/mpl-bubblegum'
+import { getAssetWithProof, transferV2 } from '@metaplex-foundation/mpl-bubblegum'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, 
 // {  truncateCanopy: true } // 証明を剪定するためのオプション 
@@ -97,6 +100,84 @@ await transferV2(umi, {
   leafOwner: leafOwnerA, // 署名者として。
   newLeafOwner: leafOwnerB.publicKey,
 }).sendAndConfirm(umi);
+```
+
+{% totem-accordion title="ヘルパー関数なしでパラメータを取得" %}
+
+完成度のために、提供されたヘルパー関数を使用せずに同じ結果を得る方法は次のとおりです。
+
+```ts
+import { publicKeyBytes } from '@metaplex-foundation/umi'
+import { transferV2 } from '@metaplex-foundation/mpl-bubblegum'
+
+const rpcAsset = await umi.rpc.getAsset(assetId)
+const rpcAssetProof = await umi.rpc.getAssetProof(assetId)
 
 await transferV2(umi, {
-  ...assetWithProof,
+  leafOwner: leafOwnerA,
+  newLeafOwner: leafOwnerB.publicKey,
+  merkleTree: rpcAssetProof.tree_id,
+  root: publicKeyBytes(rpcAssetProof.root),
+  dataHash: publicKeyBytes(rpcAsset.compression.data_hash),
+  creatorHash: publicKeyBytes(rpcAsset.compression.creator_hash),
+  nonce: rpcAsset.compression.leaf_id,
+  index: rpcAssetProof.node_index - 2 ** rpcAssetProof.proof.length,
+  proof: rpcAssetProof.proof,
+}).sendAndConfirm(umi)
+```
+
+{% /totem-accordion %}
+
+{% /totem %}
+{% /dialect %}
+{% /dialect-switcher %}
+
+## 「トランザクションが大きすぎる」エラーを解決する方法 {% #transaction-size %}
+
+転送やバーンなどのリーフ置換操作を行う際、「トランザクションが大きすぎる」エラーが発生することがあります。解決するには次の方法を検討してください：
+
+1. `truncateCanopy` オプションを使用する：
+   `getAssetWithProof` 関数に `{ truncateCanopy: true }` を渡します：
+
+   ```ts
+   const assetWithProof = await getAssetWithProof(umi, assetId, 
+    { truncateCanopy: true }
+   );
+   ```
+
+   このオプションはマークルツリー設定を取得し、キャノピーに基づいて不要な証明を削除して `assetWithProof` を最適化します。追加のRPC呼び出しが発生しますが、トランザクションサイズを大幅に削減します。
+
+2. バージョン管理トランザクションとアドレスルックアップテーブルを使用する：
+   別のアプローチとして、[バージョン管理トランザクションとアドレスルックアップテーブル](/ja/dev-tools/umi/toolbox/address-lookup-table)を実装できます。
+
+これらの手法を適用することで、トランザクションサイズ制限を克服し、操作を正常に実行できます。
+
+## 1つのツリーにcNFTをいくつ保存できますか？ {% #tree-capacity %}
+
+cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深度20は約100万個、深度24は約1,600万個、深度30は10億を超えるcNFTを保持できます。すべてのオプションについては[ツリー容量表](/ja/smart-contracts/bubblegum-v2/create-trees)を参照してください。
+
+## cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？ {% #inherited-royalties %}
+
+はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます（`royalty.inherited: true`）。
+
+**要件:**
+
+- コレクションには `BubblegumV2` と `Royalties` の両方のプラグインが必要です。
+- 継承されたセラーフィーを使用する場合、`metadata.creators` は空の配列である必要があります。
+
+**`getAssetWithProof` の使用:**
+
+- **`metadata`** — DAS の主/表示フィールドをミラー（継承時の `sellerFeeBasisPoints` はコレクション解決料率）。
+- **`currentMetadata`** — 書き込み用のリーフ正規 `MetadataArgsV2Args`（継承時はセンチネル）。
+- **`sellerFeeBasisPointsRaw` / `creatorsRaw`** — 任意のリーフ兄弟；継承 / DAS が `_raw` を返すときのみ。
+- **`inherited`** — 継承検出のシュガー。
+- **`rpcAsset`** — 完全な DAS レスポンス（表示は `royalty.basis_points` / `creators`）。
+
+`updateMetadataV2` では `...assetWithProof` を展開して `currentMetadata` を渡します。リーフ `metadata` 引数を取る命令では `assetWithProof.currentMetadata` を使います。
+
+**コレクション管理:**
+
+- 継承されたセラーフィーを持つcNFTは、明示的な `sellerFeeBasisPoints` に更新するまでコレクションから**削除できません**。
+- 移行先に `Royalties` プラグインがある場合、別のコレクションへの移動は許可されます。
+
+DASを読むクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照し、詳細な例については[ミント — ロイヤリティの継承](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)、[cNFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)、[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections#inherited-royalties)を参照してください。
