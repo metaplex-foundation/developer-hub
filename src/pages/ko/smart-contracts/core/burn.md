@@ -3,7 +3,7 @@ title: Asset 소각
 metaTitle: Asset 소각 | Metaplex Core
 description: Solana에서 Core NFT Asset을 소각하는 방법을 배웁니다. Metaplex Core SDK를 사용하여 Asset을 영구적으로 파괴하고 렌트를 회수합니다.
 created: '06-15-2024'
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -57,7 +57,7 @@ Core Asset을 소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-si
 ## 요약
 Core Asset을 소각하여 영구적으로 파괴하고 렌트를 회수합니다. 소유자(또는 Burn Delegate)만 Asset을 소각할 수 있습니다.
 - `burn(umi, { asset })`을 호출하여 Asset 파괴
-- 대부분의 렌트(~0.0028 SOL)가 지불자에게 반환됨
+- 계정의 렌트는 소각 트랜잭션의 지불자에게 반환됨
 - 소액(~0.0009 SOL)이 계정 재사용 방지를 위해 남음
 - 소각은 **영구적이며 되돌릴 수 없음**
 - 먼저 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 소각 후에는 `execute`로 해당 자금을 이동할 수 없습니다

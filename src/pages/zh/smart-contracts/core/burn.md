@@ -3,7 +3,7 @@ title: 销毁 Asset
 metaTitle: 销毁 Asset | Metaplex Core
 description: 了解如何在 Solana 上销毁 Core NFT Asset。使用 Metaplex Core SDK 永久销毁 Asset 并回收租金。
 created: '06-15-2024'
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -57,7 +57,7 @@ faqs:
 ## 摘要
 销毁 Core Asset 以永久销毁它并回收租金。只有所有者（或 Burn Delegate）可以销毁 Asset。
 - 调用 `burn(umi, { asset })` 销毁 Asset
-- 大部分租金（约 0.0028 SOL）返还给付款人
+- 账户租金返还给销毁交易的付款人
 - 少量（约 0.0009 SOL）保留以防止账户重用
 - 销毁是**永久且不可逆的**
 - 先清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 销毁后 `execute` 无法再转移这些资金

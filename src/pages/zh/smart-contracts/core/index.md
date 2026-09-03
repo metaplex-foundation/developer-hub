@@ -2,7 +2,7 @@
 title: 概述
 metaTitle: Metaplex Core | Solana 下一代 NFT 标准
 description: Metaplex Core 是 Solana 上的下一代 NFT 标准，具有单账户设计、强制版税和灵活的插件系统。更低成本、更低计算、更高性能。
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -31,7 +31,7 @@ faqs:
   - q: 什么是插件？
     a: 插件是为 Core Asset 或 Collection 添加行为的模块化扩展。例如 Freeze Delegate、Attributes 和 Royalties。
   - q: 铸造 Core Asset 需要多少费用？
-    a: 每个资产约 0.0029 SOL，而 Token Metadata 约为 0.022 SOL。这使 Core 的铸造成本降低约 80%。
+    a: 每个基础资产约 0.003 SOL，而 Token Metadata 约为 0.022 SOL。这使 Core 的铸造成本降低约 80%。
   - q: 哪些 RPC 提供商支持 Core？
     a: 所有支持 DAS（Digital Asset Standard）的主要 RPC 提供商都会索引 Core 资产。
   - q: 我可以将 Core 用于游戏资产吗？
@@ -47,7 +47,7 @@ Metaplex Core（"Core"）是 Solana 上的**下一代 NFT 标准**。它采用**
 {% /callout %}
 ## 摘要
 **Metaplex Core** 是一个 Solana NFT 标准，可替代大多数新项目中的 Token Metadata。它提供最低的铸造成本、强制版税以及用于自定义功能的插件架构。
-- 单账户设计：每次铸造约 0.0029 SOL（Token Metadata 为 0.022 SOL）
+- 单账户设计：每次铸造约 0.003 SOL（Token Metadata 为 0.022 SOL）
 - 默认强制版税，带白名单/黑名单控制
 - 用于质押、属性、委托和自定义行为的插件系统
 - 收藏级操作：一次性冻结、更新版税或修改所有资产
@@ -70,7 +70,7 @@ Metaplex Core 是 Solana 上新项目推荐的 NFT 标准。与 Token Metadata �
 ### 成本效率
 | 标准 | 铸造成本 | 计算单元 |
 |----------|-----------|---------------|
-| **Metaplex Core** | ~0.0029 SOL | ~17,000 CU |
+| **Metaplex Core** | ~0.003 SOL | ~17,000 CU |
 | Token Metadata | ~0.022 SOL | ~205,000 CU |
 | Token Extensions | ~0.0046 SOL | ~85,000 CU |
 ### 主要优势
@@ -127,7 +127,7 @@ Core Asset 和 Token Metadata NFT 是不同的标准。没有自动迁移。新�
 ### 什么是插件？
 插件是为 Core Asset 或 Collection 添加行为的模块化扩展。例如 Freeze Delegate（允许冻结）、Attributes（链上数据）和 Royalties（创作者支付）。
 ### 铸造 Core Asset 需要多少费用？
-每个基础资产约 0.0029 SOL，而 Token Metadata 约为 0.022 SOL。这使 Core 的铸造成本降低约 80%。更多详情请参阅[与 Token Metadata 的区别](/zh/smart-contracts/core/tm-differences)。
+每个基础资产约 0.003 SOL，而 Token Metadata 约为 0.022 SOL。这使 Core 的铸造成本降低约 80%。更多详情请参阅[与 Token Metadata 的区别](/zh/smart-contracts/core/tm-differences)。
 ### 哪些 RPC 提供商支持 Core？
 所有支持 DAS（Digital Asset Standard）的主要 RPC 提供商都会索引 Core 资产。当前列表请参阅 [RPC 提供商](/solana/rpcs-and-das)。
 ### 我可以将 Core 用于游戏资产吗？

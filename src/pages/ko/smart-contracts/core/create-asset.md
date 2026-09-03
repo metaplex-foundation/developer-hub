@@ -2,7 +2,7 @@
 title: Asset 생성
 metaTitle: Asset 생성 | Metaplex Core
 description: JavaScript 또는 Rust를 사용하여 Solana에서 Core NFT Asset을 생성하는 방법을 배웁니다. 메타데이터 업로드, 컬렉션에 민팅, 플러그인 추가를 포함합니다.
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - create NFT
   - mint NFT
@@ -53,7 +53,7 @@ faqs:
 - 메타데이터 JSON을 Arweave/IPFS에 업로드하고 URI 획득
 - name, URI, 선택적 플러그인으로 `create()` 호출
 - 컬렉션의 경우: `collection` 파라미터 전달
-- 자산당 약 0.0029 SOL 비용
+- 기본 자산당 약 0.003 SOL 비용. 긴 이름, URI, 플러그인은 렌트를 추가함
 ## 범위 외
 Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), 대체 가능 토큰 (SPL Token 사용), NFT 마이그레이션.
 ## 빠른 시작
@@ -64,7 +64,7 @@ Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), �
 4. [core.metaplex.com](https://core.metaplex.com)에서 확인
 ## 전제 조건
 - 서명자와 RPC 연결로 구성된 **Umi**
-- 렌트 및 수수료용 **SOL** (자산당 약 0.003 SOL)
+- 렌트 및 수수료용 **SOL** (기본 자산당 약 0.003 SOL에 더해, 더 큰 자산과 트랜잭션 수수료를 위한 여유분)
 - 업로드 준비된 **메타데이터 JSON** (이름, 이미지, 속성)
 ## 생성 프로세스
 1. **오프체인 데이터 업로드.** 이름, 설명, 이미지 URL, 속성이 포함된 JSON 파일을 저장합니다. 파일은 공개 **URI**를 통해 접근 가능해야 합니다.
@@ -136,7 +136,7 @@ const assetSigner = generateSigner(umi) // 고유해야 함
 ### `Collection not found`
 컬렉션 주소가 존재하지 않거나 유효한 Core Collection이 아닙니다. 주소를 확인하고 먼저 Collection을 생성했는지 확인하세요.
 ### `Insufficient funds`
-지불자 지갑에 렌트용으로 약 0.003 SOL이 필요합니다. 다음으로 자금 추가:
+지불자 지갑에는 기본 자산의 렌트와 프로토콜 수수료용으로 약 0.003 SOL에 더해, 더 큰 자산과 트랜잭션 수수료를 위한 여유분이 필요합니다. 다음으로 자금 추가:
 ```bash
 solana airdrop 1 <WALLET_ADDRESS> --url devnet
 ```
@@ -161,7 +161,8 @@ await create(umi, { asset, name: 'My NFT', uri: 'https://...' }).sendAndConfirm(
 ### 비용 내역
 | 항목 | 비용 |
 |------|------|
-| Asset 계정 렌트 | ~0.0029 SOL |
+| Asset 계정 렌트 (이름, URI, 플러그인에 따라 다름) | ~0.0015 SOL |
+| Core 프로토콜 수수료 (`create`) | 0.0015 SOL |
 | 트랜잭션 수수료 | ~0.000005 SOL |
 | **합계** | **~0.003 SOL** |
 ## FAQ

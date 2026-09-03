@@ -2,7 +2,7 @@
 title: Overview
 metaTitle: Metaplex Core | Next-Gen NFT Standard for Solana
 description: Metaplex Core is the next-generation NFT standard on Solana with single-account design, enforced royalties, and a flexible plugin system. Lower costs, lower compute, better performance.
-updated: '09-01-2026'
+updated: '09-03-2026'
 keywords:
   - Metaplex Core
   - Solana NFT
@@ -31,7 +31,7 @@ faqs:
   - q: What are plugins?
     a: Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate, Attributes, and Royalties.
   - q: How much does it cost to mint a Core Asset?
-    a: Approximately 0.0029 SOL per asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
+    a: Approximately 0.003 SOL per base asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting.
   - q: Which RPC providers support Core?
     a: All major RPC providers supporting DAS (Digital Asset Standard) index Core assets.
   - q: Can I use Core for gaming assets?
@@ -47,7 +47,7 @@ This overview covers:
 {% /callout %}
 ## Summary
 **Metaplex Core** is a Solana NFT standard that replaces Token Metadata for most new projects. It offers the lowest minting costs, enforced royalties, and a plugin architecture for custom functionality.
-- Single-account design: ~0.0029 SOL per mint (vs 0.022 SOL for Token Metadata)
+- Single-account design: ~0.003 SOL per mint (vs 0.022 SOL for Token Metadata)
 - Enforced royalties by default with allowlist/denylist controls
 - Plugin system for staking, attributes, delegates, and custom behaviors
 - Collection-level operations: freeze, update royalties, or modify all assets at once
@@ -70,7 +70,7 @@ Metaplex Core is the recommended NFT standard for new projects on Solana. Compar
 ### Cost Efficiency
 | Standard | Mint Cost | Compute Units |
 |----------|-----------|---------------|
-| **Metaplex Core** | ~0.0029 SOL | ~17,000 CU |
+| **Metaplex Core** | ~0.003 SOL | ~17,000 CU |
 | Token Metadata | ~0.022 SOL | ~205,000 CU |
 | Token Extensions | ~0.0046 SOL | ~85,000 CU |
 ### Key Advantages
@@ -127,7 +127,7 @@ Yes. Core has a [Royalties plugin](/smart-contracts/core/plugins/royalties) that
 ### What are plugins?
 Plugins are modular extensions that add behavior to Core Assets or Collections. Examples include Freeze Delegate (allow freezing), Attributes (on-chain data), and Royalties (creator payments).
 ### How much does it cost to mint a Core Asset?
-Approximately 0.0029 SOL per base asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting. See [Differences from Token Metadata](/smart-contracts/core/tm-differences) for more details.
+Approximately 0.003 SOL per base asset, compared to ~0.022 SOL for Token Metadata. This makes Core ~80% cheaper for minting. See [Differences from Token Metadata](/smart-contracts/core/tm-differences) for more details.
 ### Which RPC providers support Core?
 All major RPC providers supporting DAS (Digital Asset Standard) index Core assets. See [RPC Providers](/solana/rpcs-and-das) for a current list.
 ### Can I use Core for gaming assets?
