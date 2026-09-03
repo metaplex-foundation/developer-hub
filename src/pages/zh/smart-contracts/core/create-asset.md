@@ -64,7 +64,7 @@ Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegu
 4. 在 [core.metaplex.com](https://core.metaplex.com) 验证
 ## 前提条件
 - 配置了签名者和 RPC 连接的 **Umi**
-- 用于租金和费用的 **SOL**（每个资产约 0.003 SOL）
+- 用于租金和费用的 **SOL**（每个基础资产约 0.003 SOL，并为更大的资产和交易手续费预留余量）
 - 准备上传的 **元数据 JSON**（名称、图像、属性）
 ## 创建流程
 1. **上传链下数据。** 存储包含名称、描述、图像 URL 和属性的 JSON 文件。文件必须通过公共 **URI** 可访问。

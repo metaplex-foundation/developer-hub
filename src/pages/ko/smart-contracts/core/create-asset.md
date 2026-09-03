@@ -64,7 +64,7 @@ Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), �
 4. [core.metaplex.com](https://core.metaplex.com)에서 확인
 ## 전제 조건
 - 서명자와 RPC 연결로 구성된 **Umi**
-- 렌트 및 수수료용 **SOL** (자산당 약 0.003 SOL)
+- 렌트 및 수수료용 **SOL** (기본 자산당 약 0.003 SOL에 더해, 더 큰 자산과 트랜잭션 수수료를 위한 여유분)
 - 업로드 준비된 **메타데이터 JSON** (이름, 이미지, 속성)
 ## 생성 프로세스
 1. **오프체인 데이터 업로드.** 이름, 설명, 이미지 URL, 속성이 포함된 JSON 파일을 저장합니다. 파일은 공개 **URI**를 통해 접근 가능해야 합니다.

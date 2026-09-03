@@ -65,7 +65,7 @@ Token Metadata NFTs (use mpl-token-metadata), compressed NFTs (use Bubblegum), f
 4. Verify on [core.metaplex.com](https://core.metaplex.com)
 ## Prerequisites
 - **Umi** configured with a signer and RPC connection
-- **SOL** for rent and fees (~0.003 SOL per asset)
+- **SOL** for rent and fees (~0.003 SOL for a base asset, plus headroom for larger assets and transaction fees)
 - **Metadata JSON** ready to upload (name, image, attributes)
 ## The Creation Process
 1. **Upload off-chain data.** Store a JSON file containing name, description, image URL, and attributes. The file must be accessible via a public **URI**.
