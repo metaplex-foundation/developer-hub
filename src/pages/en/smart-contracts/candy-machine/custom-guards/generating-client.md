@@ -63,7 +63,7 @@ If you need to run these seperately for what ever reason you are able to do so.
 
 ### Create Guard File
 
-Once a sucessful generation of the intial client is made navigate to `/clients/js/src`.
+The generated client is located in `/clients/js/src`; navigate there after generation.
 
 The first step would be to add you new guard into the `/clients/js/src/defaultGuards` folder.
 

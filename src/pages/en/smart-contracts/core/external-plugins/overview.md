@@ -50,7 +50,7 @@ Built-in plugins (see [Plugins Overview](/smart-contracts/core/plugins)), creati
 2. Create/deploy the external account (Oracle) or configure data authority (AppData)
 3. Add the plugin adapter to your Asset or Collection
 ## What are External Plugins?
-External Plugins are [Authority Managed](/smart-contracts/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
+External Plugins are [Authority Managed](/smart-contracts/core/plugins#authority-managed-plugins), consisting of 2 parts, the **Adapter**, and the **Plugin**. A **Plugin Adapter** is assigned to the Assets/Collection and allows data and validations to be passed from an External Plugin. The External Plugin provides data and validations for the **Plugin Adapter**.
 ## Lifecycle Checks
 Each External Plugin comes with the ability to assign lifecycle checks to Lifecycle Events influencing the behavior of the lifecycle event that is trying to take place. The lifecycle checks available are:
 - Create

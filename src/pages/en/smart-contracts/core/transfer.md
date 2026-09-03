@@ -88,17 +88,21 @@ A full detailed look at the on chain instruction it can be viewed on [Github](ht
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
 ## Transferring a Core Asset in a Collection
 If you are transferring an Asset which has a collection you will need to pass the collection address in.
-[How to tell if an asset is in a Collection?]()
+[How to tell if an asset is in a Collection?](#how-do-i-know-if-an-asset-is-in-a-collection)
 {% dialect-switcher title="Transfer an Asset that is part of a Collection" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
 import { publicKey } from '@metaplex-foundation/umi'
 import { transferV1 } from '@metaplex-foundation/mpl-core'
+
 const asset = publicKey('11111111111111111111111111111111')
+const collection = publicKey('22222222222222222222222222222222222222222222')
+const newOwner = publicKey('33333333333333333333333333333333333333333333')
+
 await transferV1(umi, {
-  asset: asset.publicKey,
-  newOwner: newOwner.publicKey,
-  collection: colleciton.publicKey,
+  asset,
+  newOwner,
+  collection,
 }).sendAndConfirm(umi)
 ```
 {% /dialect %}
@@ -112,8 +116,8 @@ pub async fn transfer_asset_in_collection() {
     let rpc_client = rpc_client::RpcClient::new("https://api.devnet.solana.com".to_string());
     let authority = Keypair::new();
     let asset = Pubkey::from_str("11111111111111111111111111111111").unwrap();
-    let collection = Pubkey::from_str("22222222222222222222222222222222").unwrap();
-    let new_owner = Pubkey::from_str("33333333333333333333333333333333").unwrap();
+    let collection = Pubkey::from_str("22222222222222222222222222222222222222222222").unwrap();
+    let new_owner = Pubkey::from_str("33333333333333333333333333333333333333333333").unwrap();
     let transfer_asset_in_collection_ix = TransferV1Builder::new()
         .asset(asset)
         .collection(Some(collection))
