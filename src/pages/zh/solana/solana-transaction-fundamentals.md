@@ -4,7 +4,7 @@ metaTitle: Solana Transaction Fundamentals | How Transactions Work
 description: Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
 # remember to update dates also in /components/products/guides/index.js
 created: '02-04-2026'
-updated: null
+updated: '09-03-2026'
 ---
 
 A comprehensive guide to understanding how Solana transactions work from structure to confirmation. {% .lead %}
@@ -57,6 +57,12 @@ A Solana transaction consists of several components:
 | **Recent Blockhash** | A recent block hash (valid for ~60-90 seconds) |
 | **Instructions** | The operations to perform |
 | **Account Keys** | All accounts involved in the transaction |
+
+### See a real transaction
+
+The flow below fetches a mainnet transaction with `getTransaction` and shows the raw structure from the diagram above: `signatures`, `message.header`, `accountKeys`, `recentBlockhash` and `instructions` (the example is a 2022 Token Metadata call). Paste any signature into the first node and press **Refresh** to inspect your own transaction.
+
+{% video src="https://plgrnd.io/embed?theme=dark&ref=metaplex-docs#flow=N4IgbiBcDMA0IDsD2ATApgZygbVASxShAGMBGEeAFwE8AHNIgYQHkBZVgUQDkAVCkWkgx5KeJAiigAHlAAM8alAC0pAKyyAvvBQBDSjskhKaKZSIAFHRmMACHQmo2AtjrwIEaSjcoAnexh1iUXEbYQBzBD0AVx80GzdKJG8ACzieDgANHhtkdAA6Gx4AJQBBLgBlEsYeAElmLhsANRqOAHUbADNPYlSMeK8wPB0bMM8ePwQAoLEEAG4UuIApcvqbEMpUmx88MOSvPD6NuNidABs7SMSnakhQncuYzFhnTADRvNSddB9nwOIkKIISgAaTQ1Awz1ixDQQIAQqckMQANbJKzJZ5uaw+KLTcQYPIgDRafCESBGchUOgMMnpLL8QTCYISSDSOQKORaEC6fSGYymIgALwAVrCAI4ALR8HVU5QAbChxcCihhykVWgAOABGABkpABODo8NAAMQ6wJQRWgyUY0AA7gBFPAlWElShOe3lcq2jpSKQ+EoAJmoRWSkT1yBK9u1SAAqkKnOYAwAWTXmRbGgAirVIrXFCEa1EaYT15UJxJABCIHjMlPoRC4HB4rWYRWB9KEIhmhhkkHkIEUkD1mm0egMLMQnltSB8SKIrBKNS4Db4RNgJKIYApRipRGKZUq1TqXAA+s02u3GV3xz2k7I+wPb5zuWPgKv12SUFuaHWyRmauVzG1EoAE0L07cRuygAB2dV72UWVhy5UdeRMMwyTLNcK1JLkA34b9qRAP8AKA0D4AZcDmVZSAYLgyAAwQp9kPHPk0JADD3y5aA8J3X9-0AkCwKZSDqNg9kYEfEceWY1CiHYrCiGIXDawIlh2G4PgyI7ITrygUhSDvMSA3URipNAFiiEABMJQgRLx7BQGxNQRZFvDwJwGCJABdeA0BQUYsEgXB5LJKRqCUHzRmPY9KFIJQWKUbZdkoJRNyUcIHliJRTjQDoaxADAAR8aEiGi-h8piaEAAk7Ky4qYrihK9jwnQfFGVjNyalrPCqhAUBqskUrS6IMqynLCUwytgtC8K0Ei6slGrKcZ3inY9mSmKFunJFMuy3KysKgjq1KgrKuqg7PHmydNuWxKOtajcv2a1rut6giUo2paRrMcsJpAEKwt8mbjxS3x-ECJlFnyhBrtWz8lDcWgoiSz6jvK16tz2k6er68A6omKZwch6Hcv0TrWM-W6utOohYfhxHttG77sL+6bIoGmyiaUFAAzhhAEaRnaUf2+7Bcxl77tS9mGuJx7PGppSjBlyhnuxrmeb5+mvvGpmpoB1mYscxEkR4Vy0A5lBoDVunkfgDG0ZFtBlbRpQDeRY23KJimya4qhFcd6mLdp-mGY8jQgA" embed=true /%}
 
 ## Instructions
 

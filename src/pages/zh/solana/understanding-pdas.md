@@ -4,7 +4,7 @@ title: 理解 Solana 程序派生地址（PDA）
 metaTitle: 理解 Solana 程序派生地址 | 指南
 description: 了解 Solana 程序派生地址（PDA）及其用例。
 created: '04-19-2024'
-updated: '04-19-2025'
+updated: '09-03-2026'
 keywords:
   - Program Derived Addresses
   - PDA
@@ -48,6 +48,18 @@ PDA 是使用程序 ID 和一组种子值的组合派生的。派生过程涉及
 1. **选择程序 ID**：正在派生 PDA 的程序的公钥。
 2. **选择种子**：一个或多个种子值，与程序 ID 一起，将根据组合值通过算法确定性地生成 PDA。
 3. **计算 PDA**：使用 `Pubkey::find_program_address` 函数派生 PDA。此函数确保派生的地址有效且不会与任何常规（非 PDA）地址冲突。
+
+### 动手试试：Token Metadata PDA
+
+每个代币的元数据账户都是 Token Metadata 程序的 PDA，由三个种子派生：字符串 `"metadata"`、程序 ID `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s` 和 mint。下面的流程在浏览器中执行 `find_program_address`。把第三个输入中的 mint 换成任意 mint，元数据地址会随之更新——这正是 `findMetadataPda(umi, { mint })` 的返回值。
+
+{% video src="https://plgrnd.io/embed?theme=dark&ref=metaplex-docs#flow=N4IgbiBcDMA0IDsD2ATApgZygbVASxShAGMBGEeAFwE8AHNIgYQHkBZVgUQDkAVCkWkgx5KeJAiigAHlAAM8alAC0AJgAssgL7wUAQ0q7JISmimUirNAdoAbUwAIeSANZoE9ywb0H7ABQAiAIIAOgihGGhoKBj2ALz22MEgALZWut66SbD2lC5u9qle+rr2tABOSADmZbrJ9gTZyXgIlAC6oeVVNXXxua7uhenFpRXVtaGhHCgiOQAWaAXNlPYAFJSzeGUojhwAGjz2yOgAlPa6CNsA7vrEs3MLgxlnxMRIAK4tZygoZZgxb7RvGgAHSODYxPAxUy6YiUGzUeyXWb6ewAM2aKE8QwMvj0KzeTWywEWn00p1eyVobxMGGBIE02nwhEgxnIVDoDBZPD2fHggmEonERhkkHkIEUou0IAyRhMZiIj2K9MZIAIREoKn4NHoRG5+34-JEYgkkGkcgUUAAnFodErTcZTOYWYMAI4AIykUgAqmgti6VAAOYgAK1IACU3YEAOrOACaAEVktBqG6AF7Bt0ANl0AbdlAArKQA1JSFgGbAmeroFqObqeQahEahfaRWKJUWbdK7aA5U6QBxfMGAGJR775wJvVEugDK05daFYKhdXFIUlTKd0tEYAYA4mpLhwdzvnAAtS7UHj+SikCDlyss2hs4y1lkBQINgXG4VQNQqNtWzsZVNO9VWZaUn21TkQH8ABJadfAAGUCWMPybE0zUgTNM3-SANClICe0dIh8ykaAAwAaVoNRZjAFAkGSHhGAQRgykCBBqDUL1KFYLj8zKeMACEUAEzNaCkFRyNIL08DUfMoxdZUK1AogUE1dkdRZWD4KQlC+UbQV0JAEUsJw0h80A7sHXlFkVHzfNFPvEg1OfDSQBYdhuF5AR9K-FsoBMi1ICUUhSAsgxZSIlksSeGFXg+ZZ0h+P5VlRJAynuewvWnfxGBJShTnObZ1gWYhznEPBSpsew3QJWg6QZVp4CiSpMBwRypGoJRmrQAB9HqNSUXslDKPBKlmSglEfSbRm6GCUCUOxUXMeAMHeMpiCgjV+FWt51rQAAJQq7HVFRBsdYbRvGrVdDKFq+0fa7bqsQ6LmOh9SGmrpajmha0CW+klLVFkOq6lAWr668zrMC6xomqaIiiABiWRfv+la1o29Unx2vaXpQN7WShiaRthx67qIB6qBuu68YJ+HIhQZHUfMFUgaMzruoh06hpJ8bJo+hHGY+xblpAHHMZZLb0d2jbac27nzt50WDCe+6IOp56jqg+mkeFv6WcBsCQc5-roCJmG+Z1xnTpF7aMc26tpdxrWq3NpWyasCn1dVuWvaUQXEZt-WAfajmwd6nqpsBXQLYmlAPuaKkJttp2JYEbH7d997Jr0WOPb7eP86z8ClET6lmZD5TgbD8HI4+mrKVjpRVNLhAk4r1PtYzmWDpd7OG9oPOqdVlTnJVmm++lU6y+T4PNFaTQgA" embed=true /%}
+
+```javascript
+import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+const [metadataPda, bump] = findMetadataPda(umi, { mint })
+```
 
 ## Rust 示例
 以下是在用 Rust 编写的 Solana 程序中派生 PDA 的示例：

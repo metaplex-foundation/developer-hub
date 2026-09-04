@@ -4,7 +4,7 @@ title: Solana Program Derived Addresses (PDAs) の理解
 metaTitle: Solana Program Derived Addresses の理解 | ガイド
 description: Solana Program Derived Addresses（PDAs）とその使用事例について学びます。
 created: '04-19-2024'
-updated: '04-19-2025'
+updated: '09-03-2026'
 keywords:
   - Program Derived Addresses
   - PDA
@@ -48,6 +48,18 @@ PDAは、プログラムIDとシード値のセットの組み合わせを使用
 1. **プログラムIDの選択**: PDAが導出されるプログラムのパブリックキー。
 2. **シードの選択**: プログラムIDと組み合わせて、結合された値に基づいて決定論的にPDAをアルゴリズム的に生成する1つ以上のシード値。
 3. **PDAの計算**: `Pubkey::find_program_address`関数を使用してPDAを導出します。この関数は、導出されたアドレスが有効であり、通常の（非PDA）アドレスと衝突しないことを保証します。
+
+### 実際に試す: Token Metadata の PDA
+
+すべてのトークンのメタデータアカウントは Token Metadata プログラムの PDA で、3 つのシード（文字列 `"metadata"`、プログラム ID `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`、mint）から導出されます。下のフローはブラウザ内で `find_program_address` を実行します。3 番目の入力の mint を任意の mint に置き換えると、メタデータアドレスが更新されます。これは `findMetadataPda(umi, { mint })` が返す値そのものです。
+
+{% video src="https://plgrnd.io/embed?theme=dark&ref=metaplex-docs#flow=N4IgbiBcDMA0IDsD2ATApgZygbVASxShAGMBGEeAFwE8AHNIgYQHkBZVgUQDkAVCkWkgx5KeJAiigAHlAAM8alAC0AJgAssgL7wUAQ0q7JISmimUirNAdoAbUwAIeSANZoE9ywb0H7ABQAiAIIAOgihGGhoKBj2ALz22MEgALZWut66SbD2lC5u9qle+rr2tABOSADmZbrJ9gTZyXgIlAC6oeVVNXXxua7uhenFpRXVtaGhHCgiOQAWaAXNlPYAFJSzeGUojhwAGjz2yOgAlPa6CNsA7vrEs3MLgxlnxMRIAK4tZygoZZgxb7RvGgAHSODYxPAxUy6YiUGzUeyXWb6ewAM2aKE8QwMvj0KzeTWywEWn00p1eyVobxMGGBIE02nwhEgxnIVDoDBZPD2fHggmEonERhkkHkIEUou0IAyRhMZiIj2K9MZIAIREoKn4NHoRG5+34-JEYgkkGkcgUUAAnFodErTcZTOYWYMAI4AIykUgAqmgti6VAAOYgAK1IACU3YEAOrOACaAEVktBqG6AF7Bt0ANl0AbdlAArKQA1JSFgGbAmeroFqObqeQahEahfaRWKJUWbdK7aA5U6QBxfMGAGJR775wJvVEugDK05daFYKhdXFIUlTKd0tEYAYA4mpLhwdzvnAAtS7UHj+SikCDlyss2hs4y1lkBQINgXG4VQNQqNtWzsZVNO9VWZaUn21TkQH8ABJadfAAGUCWMPybE0zUgTNM3-SANClICe0dIh8ykaAAwAaVoNRZjAFAkGSHhGAQRgykCBBqDUL1KFYLj8zKeMACEUAEzNaCkFRyNIL08DUfMoxdZUK1AogUE1dkdRZWD4KQlC+UbQV0JAEUsJw0h80A7sHXlFkVHzfNFPvEg1OfDSQBYdhuF5AR9K-FsoBMi1ICUUhSAsgxZSIlksSeGFXg+ZZ0h+P5VlRJAynuewvWnfxGBJShTnObZ1gWYhznEPBSpsew3QJWg6QZVp4CiSpMBwRypGoJRmrQAB9HqNSUXslDKPBKlmSglEfSbRm6GCUCUOxUXMeAMHeMpiCgjV+FWt51rQAAJQq7HVFRBsdYbRvGrVdDKFq+0fa7bqsQ6LmOh9SGmrpajmha0CW+klLVFkOq6lAWr668zrMC6xomqaIiiABiWRfv+la1o29Unx2vaXpQN7WShiaRthx67qIB6qBuu68YJ+HIhQZHUfMFUgaMzruoh06hpJ8bJo+hHGY+xblpAHHMZZLb0d2jbac27nzt50WDCe+6IOp56jqg+mkeFv6WcBsCQc5-roCJmG+Z1xnTpF7aMc26tpdxrWq3NpWyasCn1dVuWvaUQXEZt-WAfajmwd6nqpsBXQLYmlAPuaKkJttp2JYEbH7d997Jr0WOPb7eP86z8ClET6lmZD5TgbD8HI4+mrKVjpRVNLhAk4r1PtYzmWDpd7OG9oPOqdVlTnJVmm++lU6y+T4PNFaTQgA" embed=true /%}
+
+```javascript
+import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+const [metadataPda, bump] = findMetadataPda(umi, { mint })
+```
 
 ## Rustでの例
 以下は、Rustで書かれたSolanaプログラムでPDAを導出する例です：

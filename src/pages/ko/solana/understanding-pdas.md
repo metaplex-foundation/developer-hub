@@ -4,7 +4,7 @@ title: Solana 프로그램 파생 주소(PDA) 이해하기
 metaTitle: Solana 프로그램 파생 주소 이해하기 | 가이드
 description: Solana 프로그램 파생 주소(PDA)와 그 사용 사례에 대해 학습합니다.
 created: '04-19-2024'
-updated: '04-19-2025'
+updated: '09-03-2026'
 keywords:
   - Program Derived Addresses
   - PDA
@@ -48,6 +48,18 @@ PDA는 프로그램 ID와 시드 값들의 조합을 사용하여 파생됩니�
 1. **프로그램 ID 선택**: PDA가 파생되는 프로그램의 공개 키입니다.
 2. **시드 선택**: 프로그램 ID와 함께 결합된 값을 기반으로 알고리즘적으로 PDA를 결정론적으로 생성할 하나 이상의 시드 값입니다.
 3. **PDA 계산**: `Pubkey::find_program_address` 함수를 사용하여 PDA를 파생합니다. 이 함수는 파생된 주소가 유효하고 일반적인(비PDA) 주소와 충돌할 수 없음을 보장합니다.
+
+### 직접 해보기: Token Metadata PDA
+
+모든 토큰의 메타데이터 계정은 Token Metadata 프로그램의 PDA이며, 세 개의 시드(문자열 `"metadata"`, 프로그램 ID `metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s`, mint)로부터 파생됩니다. 아래 플로우는 브라우저에서 `find_program_address`를 실행합니다. 세 번째 입력의 mint를 다른 mint로 바꾸면 메타데이터 주소가 갱신됩니다. 이것이 바로 `findMetadataPda(umi, { mint })`가 반환하는 값입니다.
+
+{% video src="https://plgrnd.io/embed?theme=dark&ref=metaplex-docs#flow=N4IgbiBcDMA0IDsD2ATApgZygbVASxShAGMBGEeAFwE8AHNIgYQHkBZVgUQDkAVCkWkgx5KeJAiigAHlAAM8alAC0AJgAssgL7wUAQ0q7JISmimUirNAdoAbUwAIeSANZoE9ywb0H7ABQAiAIIAOgihGGhoKBj2ALz22MEgALZWut66SbD2lC5u9qle+rr2tABOSADmZbrJ9gTZyXgIlAC6oeVVNXXxua7uhenFpRXVtaGhHCgiOQAWaAXNlPYAFJSzeGUojhwAGjz2yOgAlPa6CNsA7vrEs3MLgxlnxMRIAK4tZygoZZgxb7RvGgAHSODYxPAxUy6YiUGzUeyXWb6ewAM2aKE8QwMvj0KzeTWywEWn00p1eyVobxMGGBIE02nwhEgxnIVDoDBZPD2fHggmEonERhkkHkIEUou0IAyRhMZiIj2K9MZIAIREoKn4NHoRG5+34-JEYgkkGkcgUUAAnFodErTcZTOYWYMAI4AIykUgAqmgti6VAAOYgAK1IACU3YEAOrOACaAEVktBqG6AF7Bt0ANl0AbdlAArKQA1JSFgGbAmeroFqObqeQahEahfaRWKJUWbdK7aA5U6QBxfMGAGJR775wJvVEugDK05daFYKhdXFIUlTKd0tEYAYA4mpLhwdzvnAAtS7UHj+SikCDlyss2hs4y1lkBQINgXG4VQNQqNtWzsZVNO9VWZaUn21TkQH8ABJadfAAGUCWMPybE0zUgTNM3-SANClICe0dIh8ykaAAwAaVoNRZjAFAkGSHhGAQRgykCBBqDUL1KFYLj8zKeMACEUAEzNaCkFRyNIL08DUfMoxdZUK1AogUE1dkdRZWD4KQlC+UbQV0JAEUsJw0h80A7sHXlFkVHzfNFPvEg1OfDSQBYdhuF5AR9K-FsoBMi1ICUUhSAsgxZSIlksSeGFXg+ZZ0h+P5VlRJAynuewvWnfxGBJShTnObZ1gWYhznEPBSpsew3QJWg6QZVp4CiSpMBwRypGoJRmrQAB9HqNSUXslDKPBKlmSglEfSbRm6GCUCUOxUXMeAMHeMpiCgjV+FWt51rQAAJQq7HVFRBsdYbRvGrVdDKFq+0fa7bqsQ6LmOh9SGmrpajmha0CW+klLVFkOq6lAWr668zrMC6xomqaIiiABiWRfv+la1o29Unx2vaXpQN7WShiaRthx67qIB6qBuu68YJ+HIhQZHUfMFUgaMzruoh06hpJ8bJo+hHGY+xblpAHHMZZLb0d2jbac27nzt50WDCe+6IOp56jqg+mkeFv6WcBsCQc5-roCJmG+Z1xnTpF7aMc26tpdxrWq3NpWyasCn1dVuWvaUQXEZt-WAfajmwd6nqpsBXQLYmlAPuaKkJttp2JYEbH7d997Jr0WOPb7eP86z8ClET6lmZD5TgbD8HI4+mrKVjpRVNLhAk4r1PtYzmWDpd7OG9oPOqdVlTnJVmm++lU6y+T4PNFaTQgA" embed=true /%}
+
+```javascript
+import { findMetadataPda } from '@metaplex-foundation/mpl-token-metadata'
+
+const [metadataPda, bump] = findMetadataPda(umi, { mint })
+```
 
 ## Rust 예제
 다음은 Rust로 작성된 Solana 프로그램에서 PDA를 파생하는 예제입니다:

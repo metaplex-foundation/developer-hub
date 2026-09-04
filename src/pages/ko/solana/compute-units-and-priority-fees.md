@@ -4,7 +4,7 @@ metaTitle: Compute Units and Priority Fees | Solana Transaction Optimization
 description: Learn how to optimize Solana transactions with compute units and priority fees for better landing rates during network congestion.
 # remember to update dates also in /components/products/guides/index.js
 created: '02-04-2026'
-updated: null
+updated: '09-03-2026'
 ---
 
 Master compute units and priority fees to ensure your transactions land reliably, even during network congestion. {% .lead %}
@@ -82,11 +82,16 @@ Priority Fee = Compute Units × Compute Unit Price (in micro-lamports)
 
 ```
 Compute Units: 200,000
-Price: 1,000 micro-lamports per CU
-Priority Fee: 200,000 × 1,000 = 200,000,000 micro-lamports
-            = 200,000 lamports
-            = 0.0002 SOL
+Price: 10,000 micro-lamports per CU
+Priority Fee: 200,000 × 10,000 = 2,000,000,000 micro-lamports
+            = 2,000 lamports          (1 lamport = 1,000,000 micro-lamports)
+            = 0.000002 SOL
+Total fee:    2,000 + 5,000 (base fee, 1 signature) = 7,000 lamports = 0.000007 SOL
 ```
+
+Try it: change the compute unit limit or the price and the fee updates live.
+
+{% video src="https://plgrnd.io/embed?theme=dark&ref=metaplex-docs#flow=N4IgbiBcDMA0IDsD2ATApgZygbVASxShAGMBGEeAFwE8AHNIgYQHkBZVgUQDkAVCkWkgx5KeJAiigAHlAAM8alAC0AJmiyAvvBQBDSjskhKaKZSIAFAE5jrNAAQAzNGjsBeO8SQBbWgFdjdr4IIhh2AOt2tNbELgAUXnjElkhKADY6PkiWlKH0lnaMAKoAlHYA73aksLI11TUAOgg8SPqpjs5ukdZZItTtLgDUdgBGOhguTnEArHWydumZ2blo+cIA5gh6vpZoxY2NpPMZgtmdVTXyF3YJSSkLJzkAdAUAFjoIay6ULy5chawAIQ4ACU7HgEH4cnZxHZvi5UmgHJRHiANFp8IRICQVPwaPQmGxOLx+IJhKJxIYZJAlNAVPIQIpqaRNNo9AZIKBjKYiIAEwg83khLiCInmeASZjRsAxRAQ5CodAYWL+gJBJKEIjEEg5ICp9MZLJAun0hgQvi8wxWUDpF006JABCIxGguIVBPY3D48FJGop2qpNLpCigAA4DUb2ZyTGYsXyook0LBrolkmljlkoXkCoVUXaHViEDj5filf8gcC1WTNZS5EHIABOMNsk1mi2WKDMi6S6VY4gAFhdxZALHdxK96vJWukylpevbDa0hqb2q50ZAfJuKfu6eW+S32RzUvtmMQzqLipAyrLFZ9k51NYZVpqC-DzfNlsgHZtXaPjoAbAPz2HIlPQEccqz9adAwfGAn1ZY1lyjXkRjGCYOkzdZNkobYEyORYcgPbtEH7M8iEvVUx0rX0p0gWcYGZZ8l1AU03zbSApk7XNjy8OUjFdLFWEKAAZHgAElzEEgBNa8J2rSBrVrXspgY+DgG-PNDTAHi8XPAARESADURJ0jhpPA6joFDWtSHouCIzU49Ui0viQEEgBBVhzGYYEeAAZQAfR4Zg-J85hBNMqi7zY39aOi5S7M4x0pgAt1gPC28qQAdks6D2LiwwVyQuMensSZExCsL7KIHQnMHVydJ0tLZKmaLaxUOk8o5SqsVSQteMHNyPK83yAqC8rGogyAMt7Wi2sbFSupIDLkqxICPXG6i6xa6CVBsxcVKMRCY1hFodDaUq7HKuxYkODCth2YocwAXXgNAUE+LBIFwH8sSkaglFez4-L82UlGY1slGsNYXkoJRuKUHQ0kRMx4AwJBthiGUeNR9G0AACXeFAEUx0GWxWCG8Ch5GjB0SxPlXbjcRpun8YQQnzzhhGESRVFD3U37-retAgYLEmWPJynYdIJRhkR7mUbRywMfzXrscVvGCaJ5XRfByHocZ2m0HprSmcNlm2aIOGZa5iVeePfmAaFvy4Z2DBfFSGHdZhlBNPh2WqdVpWQAZ+WcbNzWg6ll23Y9im9aoE3V2942DcoMPzyT33rZ5wj7cF4XoG1snPaUDOraR-gA-PBBTxASu05lAuwaL2Oqf0FOiCT-XmY19OfbL7mEp+v6HaBjOo-d8XobSKW9xyP2K4VwPO5DtX66xMfMGjyfW4TohHK702e73me0yWefB51Ye878jfXYn4vqsz8uV6XzSF9Do-1598eY8pg-V2qv-NeIBH6c3LhfXOgNga9kLpYbe8Mpb939ovKuxFa4oOAQgGBTc4Ge3-lVZO3dWbh0fkg7O31L4CygY-H+8CeqpjwhgeeL9zyAJYcAmhm974t3wd1XqbciHmz4Qwh4TCs4aEehoIAA" embed=true /%}
 
 ### When to Use Priority Fees
 
