@@ -19,7 +19,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '04-29-2026'
-updated: '05-06-2026'
+updated: '09-08-2026'
 faqs:
   - q: 什么是 Agent 商业？
     a: Agent 商业是自主 AI Agent 的生产性经济活动 — 在链上赚取收入、支付服务费以及与其他 Agent 和人类进行交易。它涵盖 Agent 作为经济参与者的行为方式，而不是 Agent 如何获得资金。
@@ -28,7 +28,7 @@ faqs:
   - q: Metaplex Agent 兼容 EIP-8004 吗？
     a: 是的。Metaplex Agent 注册默认发出 EIP-8004 兼容的元数据。元数据 `type` 字段为 `https://eips.ethereum.org/EIPS/eip-8004#registration-v1`，`services` 数组描述端点和技能，`supportedTrust` 声明信任机制，例如声誉或 TEE 证明。
   - q: Metaplex 支持 x402 支付吗？
-    a: Agent 元数据包含一个一等公民的 `x402Support` 布尔值标志，以便交易对手可以发现 Agent 是否设置为 HTTP 402 稳定币支付。Agent 的 PDA 钱包已经可以接收任何 SPL 代币（USDC、USDT），其执行者可以签署外发支付 — 在其上接入 x402 支付客户端是运行时集成。
+    a: 是的，两端都支持。Agent 元数据包含一个一等公民的 `x402Support` 布尔值标志，以便交易对手可以发现 Agent 是否设置为 HTTP 402 稳定币支付；Agent 的 PDA 钱包持有包括 USDC 在内的任何 SPL 代币，其执行者可以签署外发支付。Metaplex 还运营着 Metaplex x402，这是一个向 Agent 和钱包销售 LLM 推理、图像生成和 Solana RPC 的已上线按请求付费 API。
   - q: Agent 在 Metaplex 上如何相互发现？
     a: 每个已注册的 Agent 都有一个公开的注册 URI，其中包含其 EIP-8004 元数据 — 名称、服务、端点、技能、域、x402 支持标志和信任机制。交易对手 Agent 获取此元数据以发现能力并路由请求。
   - q: Metaplex Agent 今天能赚取收入吗？
@@ -100,17 +100,17 @@ mplx agents register --new \
 
 注册后，任何人都可以从 Agent 的链上 `agentMetadataUri` 解析元数据，并将请求路由到广告的端点。
 
-## x402: 通过标志而非存根的稳定币支付
+## Metaplex 上的 x402 稳定币支付
 
 [x402](https://www.x402.org) 是一种新兴协议，使用 HTTP `402 Payment Required` 使稳定币微支付成为 API 访问的一等公民。客户端请求资源，收到带有支付说明的 `402`，在链上结算，然后使用支付证明重试。
 
-Metaplex 不提供 x402 服务器或客户端 — 那是运行时关注的问题。它提供的是协议从 *Agent* 端需要的所有内容：
+Metaplex 两端都已提供。在 *Agent* 端，一次注册就包含了协议所需的全部内容：
 
 - 元数据中的 **`x402Support: true`**，以便调用者可以发现 x402 能力
 - **持有 USDC/USDT 的 PDA 钱包** — Asset Signer 接受任何 SPL 代币
 - 通过 Core 的 Execute 钩子**可以签署外发支付的执行者**，为 Agent 需要的 API 调用和资源付费
 
-换句话说，链上信任和签名原语已经就位；将它们连接到 x402 服务器框架是集成任务，而不是链上协议设计任务。
+在*服务*端，[Metaplex x402](/agents/x402) 是一个已上线的按请求付费 API，销售 LLM 推理、图像生成和 Solana RPC，其开源客户端位于 [`@metaplex-foundation/x402`](https://github.com/metaplex-foundation/x402)。已注册的 Agent 只需[一次性委托支付权限](/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent)，之后即可从自己的钱包按请求付费，无需再次签名。
 
 ## 通过服务发现实现 Agent 间协调
 
@@ -136,7 +136,7 @@ Agent 间领域（通常在“A2A 协议”这一旗号下讨论）正在收敛�
 
 ## 注意事项
 
-- 此页面描述了 Metaplex 今天提供的构建块。x402 服务器和索引化 Agent 目录的入门流程是单独的运行时关注点，将获得自己的指南
+- 此页面描述的是 Agent 端的构建块。Metaplex 运营的 x402 服务本身见 [Metaplex x402](/agents/x402)；索引化 Agent 目录是单独的运行时关注点，将获得自己的指南
 - EIP-8004 是元数据格式；[Agent 金融](/agents/agent-finance)和 Agent 商业是其上的层。同一注册文档由两者读取
 - `AgentIdentityV2` 上的 `agentToken` 字段通过 [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) 设置一次且永久。向 Agent 代币持有人路由收入是金融关注点；商业流程可以将 SOL 或稳定币直接路由到 Agent 的 PDA
 - 资产所有者可以随时撤销执行者。这是委派自主支付权限时的安全阀
@@ -155,7 +155,7 @@ Agent 商业是自主 AI Agent 的生产性经济活动 — 在链上赚取收�
 是的。默认元数据 `type` 是 `https://eips.ethereum.org/EIPS/eip-8004#registration-v1`。每个 Metaplex Agent 注册都会发出一个具有 `services[]`、`x402Support`、`supportedTrust[]` 和 `registrations[]` 字段的 EIP-8004 兼容文档。任何消费 EIP-8004 元数据的工具都可以消费 Metaplex Agent。
 
 ### Metaplex 支持 x402 支付吗？
-Agent 元数据有一个一等公民的 `x402Support` 布尔值用于能力发现，PDA 钱包已经可以接收任何 SPL 代币（包括 USDC），执行者可以签署外发支付。协议层（x402 服务器框架）是位于这些原语之上的运行时集成。
+是的，两端都支持。Agent 元数据有一个一等公民的 `x402Support` 布尔值用于能力发现，PDA 钱包持有 USDC，执行者可以签署外发支付。Metaplex 还运营着 [Metaplex x402](/agents/x402)，这是一个面向推理、图像生成和 Solana RPC 的已上线按请求付费 API。
 
 ### Agent 在 Metaplex 上如何相互发现？
 每个已注册的 Agent 都有一个包含其 EIP-8004 元数据的公开注册 URI。交易对手 Agent 从链上 `AgentIdentity` 插件解析此 URI 并读取 `services[].endpoint`、`skills`、`domains` 和支持的协议，以决定将请求发送到何处以及如何发送。

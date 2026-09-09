@@ -254,7 +254,7 @@ RPC calls are priced per request at `$0.00001` by default, with higher rates for
 | `getConfirmedBlock` | $0.00005 |
 | `getSignaturesForAddress` | $0.00010 |
 
-## `MetaplexSvmExactScheme` Options
+## `MetaplexSvmExactScheme` Options {% #metaplexsvmexactscheme-options %}
 
 `MetaplexSvmExactScheme` is the payment scheme used for Core asset and agent payments.
 
