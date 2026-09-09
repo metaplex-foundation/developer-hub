@@ -12,7 +12,7 @@ keywords:
   - team token vesting
   - token cliff
   - Solana vesting
-  - on-chain vesting
+  - onchain vesting
 about:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -34,9 +34,9 @@ faqs:
   - q: ClaimScheduleBucketV2와 ClaimSchedule의 차이는 무엇인가요?
     a: ClaimScheduleBucketV2는 한 수신자의 할당과 런타임 상태를 담는 Genesis 아웃플로우 버킷입니다. ClaimSchedule은 그 버킷 안에 저장된 재사용 가능한 클리프와 선형 언록 곡선입니다.
   - q: 베스팅 수신자가 매번 클레임을 제출해야 하나요?
-    a: 아니요. ClaimClaimScheduleV2는 Permissionless이지만, 프로그램은 항상 버킷에 저장된 수신자에게 토큰을 전송합니다. 백엔드 서명자 확장이 구성되어 있으면 그 서명자도 각 클레임을 승인해야 합니다.
+    a: 아니요. claimClaimScheduleV2는 Permissionless이지만, 프로그램은 항상 버킷에 저장된 수신자에게 토큰을 전송합니다. 백엔드 서명자 확장이 구성되어 있으면 그 서명자도 각 클레임을 승인해야 합니다.
   - q: 베스팅이 시작된 뒤 프로젝트가 스케줄을 바꿀 수 있나요?
-    a: 아니요. UpdateClaimScheduleBucketV2는 Finalize 전, 클레임 게이트 또는 스케줄 조건이 충족되기 전, 그리고 클레임이 한 번도 없을 때만 동작합니다. TimeRelative 클레임 게이트, 선형 시작, 또는 클리프도 업데이트를 즉시 비활성화합니다.
+    a: 아니요. updateClaimScheduleBucketV2는 Finalize 전, 클레임 게이트 또는 스케줄 조건이 충족되기 전, 그리고 클레임이 한 번도 없을 때만 동작합니다. TimeRelative 클레임 게이트, 선형 시작, 또는 클리프도 업데이트를 즉시 비활성화합니다.
   - q: 베스팅 버킷이 취소되면 미베스트 토큰은 어떻게 되나요?
     a: 취소는 베스팅을 동결하고 베스트된 양은 수신자를 위해 보존합니다. 버킷에 ReallocateBaseTokensOnCancel 동작이 있으면 누구나 그 동작을 트리거해 미베스트 나머지를 UnlockedBucketV2로 옮길 수 있습니다.
   - q: 하나의 ClaimScheduleBucketV2가 여러 수신자에게 베스트할 수 있나요?

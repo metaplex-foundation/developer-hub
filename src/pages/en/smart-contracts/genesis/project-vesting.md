@@ -1,7 +1,7 @@
 ---
 title: Project Vesting
 metaTitle: Project Token Vesting with ClaimScheduleBucketV2 | Genesis | Metaplex
-description: Create on-chain project token vesting schedules with Genesis ClaimScheduleBucketV2, including cliffs, periodic unlocks, claims, pauses, cancellation, and recipient transfers.
+description: Create onchain project token vesting schedules with Genesis ClaimScheduleBucketV2, including cliffs, periodic unlocks, claims, pauses, cancellation, and recipient transfers.
 created: '08-24-2026'
 updated: '08-24-2026'
 keywords:
@@ -12,7 +12,7 @@ keywords:
   - team token vesting
   - token cliff
   - Solana vesting
-  - on-chain vesting
+  - onchain vesting
 about:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -34,16 +34,16 @@ faqs:
   - q: What is the difference between ClaimScheduleBucketV2 and ClaimSchedule?
     a: ClaimScheduleBucketV2 is a Genesis outflow bucket that holds one recipient's allocation and runtime state. ClaimSchedule is the reusable cliff and linear unlock curve stored inside that bucket.
   - q: Does the vesting recipient have to submit each claim?
-    a: No. ClaimClaimScheduleV2 is permissionless, but the program always transfers tokens to the recipient stored on the bucket. If a backend signer extension is configured, that signer must also authorize each claim.
+    a: No. claimClaimScheduleV2 is permissionless, but the program always transfers tokens to the recipient stored on the bucket. If a backend signer extension is configured, that signer must also authorize each claim.
   - q: Can a project change a vesting schedule after vesting begins?
-    a: No. UpdateClaimScheduleBucketV2 works only before finalization, before the claim gate or either schedule condition is met, and before any claim. A TimeRelative claim gate, linear start, or cliff also disables updates immediately.
+    a: No. updateClaimScheduleBucketV2 works only before finalization, before the claim gate or either schedule condition is met, and before any claim. A TimeRelative claim gate, linear start, or cliff also disables updates immediately.
   - q: What happens to unvested tokens when a vesting bucket is canceled?
     a: Cancellation freezes vesting and preserves any vested amount for the recipient. If the bucket has a ReallocateBaseTokensOnCancel behavior, anyone can trigger that behavior to move the unvested remainder to an UnlockedBucketV2.
   - q: Can one ClaimScheduleBucketV2 vest tokens to multiple recipients?
     a: No. Each bucket has one recipient. Create one ClaimScheduleBucketV2 for each recipient or allocation that needs independent accounting or policy controls.
 ---
 
-[Genesis](/smart-contracts/genesis) project vesting uses a `ClaimScheduleBucketV2` to release one token allocation to one recipient according to an on-chain cliff and periodic linear schedule. {% .lead %}
+[Genesis](/smart-contracts/genesis) project vesting uses a `ClaimScheduleBucketV2` to release one token allocation to one recipient according to an onchain cliff and periodic linear schedule. {% .lead %}
 
 {% callout title="What You'll Build" %}
 This guide creates a one-year project token vesting allocation with a 10% cliff, monthly linear unlocks, and optional authority controls.

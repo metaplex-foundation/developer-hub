@@ -12,7 +12,7 @@ keywords:
   - team token vesting
   - token cliff
   - Solana vesting
-  - on-chain vesting
+  - onchain vesting
 about:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -34,9 +34,9 @@ faqs:
   - q: ClaimScheduleBucketV2 与 ClaimSchedule 有什么区别？
     a: ClaimScheduleBucketV2 是持有一名接收方分配和运行时状态的 Genesis 流出 Bucket。ClaimSchedule 是存储在该 Bucket 内的可复用悬崖与线性解锁曲线。
   - q: 归属接收方必须提交每一次领取吗？
-    a: 不必。ClaimClaimScheduleV2 是 Permissionless 的，但程序始终将代币转到 Bucket 上存储的接收方。若配置了后端签名者扩展，该签名者也必须授权每一次领取。
+    a: 不必。claimClaimScheduleV2 是 Permissionless 的，但程序始终将代币转到 Bucket 上存储的接收方。若配置了后端签名者扩展，该签名者也必须授权每一次领取。
   - q: 归属开始后项目还能更改归属计划吗？
-    a: 不能。UpdateClaimScheduleBucketV2 仅在 Finalize 之前、领取门控或任一计划条件满足之前、以及尚未发生任何领取时有效。TimeRelative 领取门控、线性开始或悬崖也会立即禁用更新。
+    a: 不能。updateClaimScheduleBucketV2 仅在 Finalize 之前、领取门控或任一计划条件满足之前、以及尚未发生任何领取时有效。TimeRelative 领取门控、线性开始或悬崖也会立即禁用更新。
   - q: 归属 Bucket 被取消时，未归属代币会怎样？
     a: 取消会冻结归属，并保留已归属数量给接收方。若 Bucket 有 ReallocateBaseTokensOnCancel 行为，任何人都可以触发该行为，将未归属剩余转到 UnlockedBucketV2。
   - q: 一个 ClaimScheduleBucketV2 可以向多名接收方归属代币吗？

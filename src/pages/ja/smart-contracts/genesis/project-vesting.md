@@ -12,7 +12,7 @@ keywords:
   - team token vesting
   - token cliff
   - Solana vesting
-  - on-chain vesting
+  - onchain vesting
 about:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -34,9 +34,9 @@ faqs:
   - q: ClaimScheduleBucketV2 と ClaimSchedule の違いは何ですか？
     a: ClaimScheduleBucketV2 は 1 人の受取人の割り当てとランタイム状態を保持する Genesis のアウトフローバケットです。ClaimSchedule はそのバケット内に保存される再利用可能なクリフと線形アンロックカーブです。
   - q: ベスティング受取人は毎回クレームを送信する必要がありますか？
-    a: いいえ。ClaimClaimScheduleV2 は Permissionless ですが、プログラムは常にバケットに保存された受取人へトークンを転送します。バックエンド署名者拡張が設定されている場合、その署名者も各クレームを承認する必要があります。
+    a: いいえ。claimClaimScheduleV2 は Permissionless ですが、プログラムは常にバケットに保存された受取人へトークンを転送します。バックエンド署名者拡張が設定されている場合、その署名者も各クレームを承認する必要があります。
   - q: ベスティング開始後にプロジェクトはスケジュールを変更できますか？
-    a: いいえ。UpdateClaimScheduleBucketV2 はファイナライズ前、クレームゲートまたはいずれかのスケジュール条件が満たされる前、かつクレームが 1 回も行われていないときだけ動作します。TimeRelative のクレームゲート、線形開始、またはクリフも更新を直ちに無効にします。
+    a: いいえ。updateClaimScheduleBucketV2 はファイナライズ前、クレームゲートまたはいずれかのスケジュール条件が満たされる前、かつクレームが 1 回も行われていないときだけ動作します。TimeRelative のクレームゲート、線形開始、またはクリフも更新を直ちに無効にします。
   - q: ベスティングバケットがキャンセルされたとき、未ベストトークンはどうなりますか？
     a: キャンセルはベスティングを凍結し、ベスト済み量は受取人のために保持します。バケットに ReallocateBaseTokensOnCancel 動作がある場合、誰でもその動作を起動して未ベスト残りを UnlockedBucketV2 へ移せます。
   - q: 1 つの ClaimScheduleBucketV2 で複数の受取人へベストできますか？
@@ -220,7 +220,7 @@ Genesis に `ClaimScheduleBucketV1` はありません。プロジェクトベ�
 
 | フィールド | 説明 |
 |-------|-------------|
-| `bucket` | 割り当て、残残高、mint、index、手数料データを含む共有バケットヘッダー |
+| `bucket` | 割り当て、残高、mint、index、手数料データを含む共有バケットヘッダー |
 | `recipient` | ベスト済みトークンクレームをすべて受け取るウォレット |
 | `amountClaimed` | 受取人へ転送された累積トークン |
 | `claimSchedule` | クリフと期間ベースの線形ベスティングカーブ |
