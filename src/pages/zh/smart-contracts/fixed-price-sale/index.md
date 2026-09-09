@@ -4,12 +4,6 @@ metaTitle: 概述 | 固定价格销售
 description: 从主版 NFT 销售印刷品
 ---
 
-{% callout type="warning" %}
-
-请注意,该程序已被标记为已弃用,不再由 Metaplex 基金会团队积极维护。不保证新功能、安全修复和向后兼容性。请谨慎使用。
-
-{% /callout %}
-
 # 简介
 
 Metaplex 的固定价格销售程序是一个 Solana 程序,供品牌创建可以分发给大量受众的会员 NFT。这种 NFT 可用于在未来日期控制对某些事物(游戏、活动、发布等)的访问。

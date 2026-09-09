@@ -211,6 +211,18 @@ export const agentMenuCategory = [
       zh: { name: '运行代理', headline: '委托执行以运行自主代理。' },
     },
   },
+  {
+    name: 'Nori',
+    headline: 'Pay-as-you-go LLM, image, and RPC services for agents, metered in SOL.',
+    description: 'Pay-as-you-go LLM, image, and RPC services for agents, metered in SOL.',
+    navigationMenuCatergory: 'Agents',
+    href: '/agents/nori',
+    localizedNavigation: {
+      ja: { name: 'Nori', headline: 'エージェント向けの従量課金制LLM・画像・RPCサービス。SOLで精算します。' },
+      ko: { name: 'Nori', headline: '에이전트를 위한 종량제 LLM·이미지·RPC 서비스. SOL로 정산합니다.' },
+      zh: { name: 'Nori', headline: '面向 Agent 的按量付费 LLM、图像与 RPC 服务，以 SOL 结算。' },
+    },
+  },
 ]
 
 export const nftMenuCategory = [

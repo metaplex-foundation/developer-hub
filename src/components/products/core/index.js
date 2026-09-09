@@ -20,12 +20,12 @@ export const core = {
     create: {
       solana: '0.0015 SOL',
       payer: 'Collector',
-      notes: null,
+      notes: 'Deposited into the Asset account and periodically swept by the Metaplex fee collector. Any lamports above the rent-exempt minimum on a Core Asset account are treated as protocol fees and collected.',
     },
     execute: {
       solana: '0.00004872 SOL',
       payer: 'Owner',
-      notes: null,
+      notes: 'Deposited into the Asset account and periodically swept by the Metaplex fee collector. Any lamports above the rent-exempt minimum on a Core Asset account are treated as protocol fees and collected.',
     },
   },
   sections: [

@@ -20,6 +20,8 @@ Token launch platform fees across the bonding curve lifecycle.
 
 Paid by the minter, which is typically individual collectors minting new drops. Includes all instructions that "create" an NFT including ones that create print editions.
 
+Core protocol fees are deposited into the Asset account itself rather than transferred to a separate fee account. The Metaplex fee collector periodically calls the `collect` instruction, which sweeps every lamport above the Asset account's rent-exempt minimum to the protocol fee recipients. Any SOL sent to a Core Asset address is therefore treated as a protocol fee and collected. Do not store SOL on a Core Asset account; use the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing), a separate address derived from the Asset, as the Asset's wallet.
+
 {% protocol-fees program="core" showTitle=false /%}
 
 {% /totem-accordion %}
@@ -37,6 +39,14 @@ Compressed NFTs with improved features and flexibility.
 Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs).
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-Distro" %}
+
+Paid by the claim transaction payer when a Merkle claim succeeds.
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
 
 {% /totem-accordion %}
 

@@ -64,6 +64,7 @@ mplx <category> <command> [options]
 Categories include:
 - `core`: MPL Core asset management
 - `cm`: Candy Machine operations
+- `distro`: MPL-Distro create, deposit, fetch, and withdraw
 - `toolbox`: Utility commands
 - `config`: Configuration management
 

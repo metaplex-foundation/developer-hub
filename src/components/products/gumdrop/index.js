@@ -10,6 +10,10 @@ export const gumdrop = {
   github: 'https://github.com/metaplex-foundation/gumdrop',
   className: 'accent-green',
   deprecated: true,
+  replacement: {
+    name: 'MPL-Distro',
+    href: '/smart-contracts/mpl-distro',
+  },
   sections: [],
   localizedNavigation: {
     ja: {

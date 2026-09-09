@@ -2,7 +2,7 @@
 title: JavaScript SDK
 metaTitle: JavaScript SDK | Metaplex Core
 description: Metaplex Core JavaScript SDK 완전 레퍼런스. Umi 설정, Asset 생성, 전송, 소각, 업데이트, Collection, 플러그인, 데이터 조회를 다룹니다.
-updated: '01-31-2026'
+updated: '09-03-2026'
 keywords:
   - mpl-core JavaScript
   - Core TypeScript SDK
@@ -58,7 +58,7 @@ Rust SDK 사용([Rust SDK](/ko/smart-contracts/core/sdk/rust) 참조), Token Met
 ## 사전 요구사항
 - **Node.js 18+** 또는 ES 모듈을 지원하는 최신 브라우저
 - RPC와 signer가 구성된 **Umi 프레임워크**
-- 트랜잭션 수수료를 위한 **SOL**(Asset당 약 0.003 SOL)
+- 렌트 및 수수료를 위한 **SOL**(기본 Asset당 약 0.003 SOL. 렌트는 Asset 크기에 따라 다름)
 {% quick-links %}
 {% quick-link title="API 레퍼런스" target="_blank" icon="JavaScript" href="https://mpl-core.typedoc.metaplex.com/" description="SDK의 전체 TypeDoc API 문서." /%}
 {% quick-link title="NPM 패키지" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-core" description="npmjs.com의 패키지 및 버전 기록." /%}
@@ -122,6 +122,9 @@ const umi = createUmi('https://api.devnet.solana.com')
 ### Asset 소각
 `burn()`을 사용하여 Asset을 영구적으로 파괴하고 rent 회수:
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
+{% callout type="warning" title="먼저 Asset Signer 잔액을 인출하세요" %}
+Asset을 소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-signing)가 실패합니다. Asset Signer PDA에 남아 있는 SOL, 토큰, 기타 자산은 묶입니다.
+{% /callout %}
 ### Asset 업데이트
 `update()`를 사용하여 Asset 메타데이터 수정:
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
@@ -267,6 +270,7 @@ console.log('플러그인:', Object.keys(asset))
 - Collection 수준 플러그인은 같은 유형의 Asset 수준 플러그인을 덮어씀
 - 생성 후 즉시 조회하는 Asset에는 `commitment: 'finalized'` 사용
 - 트랜잭션 빌더는 불변 - 각 메서드는 새 빌더 반환
+- `burn()` 전에 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 남은 잔액은 이후 이동할 수 없습니다
 ## 빠른 참조
 ### 최소 의존성
 ```json {% title="package.json" %}

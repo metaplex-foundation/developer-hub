@@ -1,10 +1,12 @@
 ---
 title: Core DAS API拡張機能
-metaTitle: メソッド | Core DAS API拡張機能
+metaTitle: 概要 | Core DAS API拡張機能
 description: MPL Core用のDigital Asset Standard API拡張機能
 ---
 
-一般的なDAS SDKに加えて、[MPL Core](/ja/smart-contracts/core)用の拡張機能が作成されており、MPL Core SDKでさらに使用するための正しいタイプを直接返します。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)のための機能を提供します。
+`@metaplex-foundation/mpl-core-das`パッケージは、[MPL Core](/ja/smart-contracts/core)向けのDAS API拡張機能で、MPL Core SDKで使用するための正しいタイプを返します。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)のための機能を提供します。
+
+インストールとセットアップについては[はじめに](/ja/dev-tools/das-api/getting-started#das-for-mpl-core)を参照してください。
 
 ## 取得
 

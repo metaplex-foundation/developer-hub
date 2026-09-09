@@ -4,10 +4,8 @@ metaTitle: Gumdrop | Developer Hub
 description: Easy token airdrops and print edition airdrops, without requiring high up-front rent costs
 ---
 
-{% callout type="warning" %}
-
-Please note that this program is marked as deprecated and is no longer actively maintained by the Metaplex Foundation team. New features, security fixes and backward compatibility are not guaranteed. Please use with caution.
-
+{% callout type="warning" title="Gumdrop Is Deprecated" %}
+Use [MPL-Distro](/smart-contracts/mpl-distro) for new wallet or legacy NFT token distributions. Start with [Production Delivery](/smart-contracts/mpl-distro/production-delivery) for a claim-based airdrop. Gumdrop remains documented only for existing integrations.
 {% /callout %}
 
 The Gumdrop program enables easy token airdrops and print edition airdrops, without requiring high up-front rent costs.

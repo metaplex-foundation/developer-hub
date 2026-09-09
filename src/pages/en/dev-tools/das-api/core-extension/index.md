@@ -1,10 +1,12 @@
 ---
 title: Core DAS API Extension
-metaTitle: Methods | Core DAS API Extension
+metaTitle: Overview | Core DAS API Extension
 description: Digital Asset Standard API Extension for MPL Core
 ---
 
-In addition to the general DAS SDK an extension for [MPL Core](/smart-contracts/core) has been created that directly returns you the correct types to further use with the MPL Core SDKs. It also automatically derives the plugins in assets inherited from the collection and provides functions for [DAS-to-Core type conversions](/dev-tools/das-api/core-extension/convert-das-asset-to-core).  
+The `@metaplex-foundation/mpl-core-das` package is a DAS API extension for [MPL Core](/smart-contracts/core) that returns the correct types for use with the MPL Core SDKs. It also automatically derives plugins inherited from the collection and provides [DAS-to-Core type conversions](/dev-tools/das-api/core-extension/convert-das-asset-to-core).
+
+See [Getting Started](/dev-tools/das-api/getting-started#das-for-mpl-core) for installation and setup.
 
 ## Fetching
 The Core DAS API Extension supports the following methods:

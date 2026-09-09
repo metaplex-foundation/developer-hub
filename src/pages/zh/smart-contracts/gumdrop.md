@@ -4,10 +4,8 @@ metaTitle: Gumdrop | 开发者中心
 description: 简单的代币空投和印刷版空投,无需高昂的前期租金成本
 ---
 
-{% callout type="warning" %}
-
-请注意,该程序已被标记为已弃用,不再由 Metaplex 基金会团队积极维护。不保证新功能、安全修复和向后兼容性。请谨慎使用。
-
+{% callout type="warning" title="Gumdrop 已弃用" %}
+新的钱包或旧版 NFT 代币分发请使用 [MPL-Distro](/zh/smart-contracts/mpl-distro)。基于领取的空投请从 [生产交付](/zh/smart-contracts/mpl-distro/production-delivery) 开始。Gumdrop 文档仅保留给现有集成。
 {% /callout %}
 
 Gumdrop 程序使简单的代币空投和印刷版空投成为可能,无需高昂的前期租金成本。

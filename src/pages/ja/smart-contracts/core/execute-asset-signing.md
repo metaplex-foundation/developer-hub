@@ -2,7 +2,7 @@
 title: Execute Asset Signing
 metaTitle: ExecuteとAsset Signer | Core
 description: MPL Core AssetsがExecute命令を使用して命令やトランザクションに署名する方法を学びます。
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - asset signer
   - execute instruction
@@ -16,6 +16,13 @@ proficiencyLevel: Advanced
 programmingLanguage:
   - Rust
   - JavaScript
+faqs:
+  - q: Assetをバーンすると、Asset Signer PDAの資金はどうなりますか？
+    a: 取り残されます。executeには有効なCore Assetが必要なため、バーン後もPDAはSOL、トークン、入れ子のAssetを保持できますが、移動するために署名できるものはありません。
+  - q: バーン後に取り残されたAsset Signerの資金を回収できますか？
+    a: いいえ。元のAssetアカウントなしにassetSignerPdaとして署名できる命令はありません。
+  - q: Assetを転送するとAsset Signerウォレットは取り残されますか？
+    a: いいえ。転送はexecuteを呼び出せる所有者を変更するだけです。PDAはAssetアドレスに紐づいたままです。executeを無効にするのは転送ではなくバーンです。
 ---
 MPL Core Execute命令は、MPL Core Assetsに**Asset Signers**の概念を導入します。
 これらの**Asset Signers**は、Asset自体に代わって署名者として機能し、MPL Core Assetsに以下の機能を提供します：
@@ -23,10 +30,18 @@ MPL Core Execute命令は、MPL Core Assetsに**Asset Signers**の概念を導�
 - 他のアカウントの権限になる
 - `assetSignerPda`に割り当てられたトランザクション/命令/CPI署名を必要とする他のアクションと検証を実行する
 MPL Core Assetsは、ブロックチェーンにトランザクション/CPIを署名して送信する機能を持っています。これにより、Core Assetは`assetSigner`という形で独自のウォレットを持つことができます。
+
+{% callout type="warning" title="バーン前にAsset Signerの残高を引き出す" %}
+Core Assetを[バーン](/ja/smart-contracts/core/burn)すると、`execute`命令は失敗します。プログラムはAssetを読み込めなくなるため、`assetSignerPda`として署名できません。そのPDAに残っているSOL、トークン、その他のアセットは回収できないまま取り残されます。
+{% /callout %}
+
 ## Asset Signer PDA
 Assetsは`assetSignerPda`アカウント/アドレスにアクセスできるようになり、MPL Coreプログラムの`execute`命令が、送信された追加の命令を`assetSignerPda`でCPI命令に署名して通過させることができます。
 これにより、`assetSignerPda`アカウントは、現在のアセット所有者に代わってアカウント命令を効果的に所有および実行できます。
 `assetSignerPda`は、Core Assetに接続されたウォレットと考えることができます。
+{% callout type="warning" title="AssetアドレスではなくAsset Signer PDAに資金を送金してください" %}
+`assetSignerPda`はAssetアカウントとは異なるアドレスです。Assetに代わってSOLやトークンを保持できるのは`assetSignerPda`のみです。Assetアカウント自体をウォレットとして使用してはいけません。
+{% /callout %}
 ### findAssetSignerPda()
 ```ts
 const assetId = publickey('11111111111111111111111111111111')
@@ -61,6 +76,17 @@ Freeze Executeプラグインは以下の場合に特に役立ちます：
 - **エスクローレスプロトコル**: プロトコル操作中にexecute機能を一時的にロック
 - **セキュリティ対策**: 複雑な操作を実行できるアセットに追加の保護レイヤーを追加
 Freeze Executeプラグインがアクティブで`frozen: true`に設定されている場合、プラグインが`frozen: false`に更新されるまで、execute命令の使用はブロックされます。
+## Asset Signer残高がある状態でのAssetのバーン
+Core Assetをバーンすると`execute`は永久に無効になるため、`assetSignerPda`に残ったSOL、トークン、入れ子のCore Assetは移動できません。
+
+`execute`命令には、MPL Coreプログラムが所有する有効なCore Assetアカウントが必要です。Assetを[バーン](/ja/smart-contracts/core/burn)すると、そのアカウントは有効なAssetではなくなります。`assetSignerPda`アドレス自体は存在し続け、資金を保持できますが、それを使う命令はもうありません。
+
+バーンする**前に**、`execute`ですべてをPDAから出してください：
+
+1. `findAssetSignerPda`または[`mplx core asset execute info`](/ja/dev-tools/cli/core/execute)でPDAを導出する
+2. PDAが所有するSOL、SPLトークン、Core Assetを転送する
+3. PDAが空であることを確認する
+4. Assetをバーンする
 ## 例
 ### Asset SignerからSOLを転送する
 以下の例では、`assetSignerPda`に送信されたSOLを任意の宛先に転送します。
@@ -206,3 +232,18 @@ const res = await execute(umi, {
 }).sendAndConfirm(umi)
 console.log({ res })
 ```
+## 注意事項
+- 現在のAsset所有者のみが`execute`を呼び出せます（所有者が外側のトランザクションに署名する必要があります）
+- [Freeze Executeプラグイン](/ja/smart-contracts/core/plugins/freeze-execute)は、解除されるまで`execute`をブロックできます
+- AssetのバーンはAsset Signerの資金に対して不可逆です。先にPDAを空にしてください
+- `assetSignerPda`はAssetアドレスから決定論的に導出され、Assetが転送されても変わりません
+- `execute`命令には、命令に渡される`payer`アカウントが支払うプロトコル手数料がかかります。`payer`は通常Asset所有者ですが、`assetSignerPda`自体を指定することもできます。これはSolanaのトランザクション手数料とは別のもので、トランザクション手数料はPDAでは支払えません。現在の金額は[Protocol Fees](/protocol-fees)ページを参照してください。この手数料はAssetアカウントに送金され、後でMetaplexの手数料コレクターによって回収されます。
+- Assetアカウントのレント免除最低額を超えるすべてのラマポートはプロトコル手数料として扱われ、回収されます。SOLやトークンは`assetSignerPda`に保持し、Assetアカウントには絶対に保持しないでください。
+- `assetSignerPda`はシステム所有のアカウントです。Solanaランタイムは、0バイトアカウントのレント免除最低額未満のゼロでない残高を残すトランザクションを拒否するため、送金はアカウントを空にするか、少なくともその最低額を残す必要があります。PDAが`execute`の`payer`でもある場合、同じ命令内でプロトコル手数料もPDAから差し引かれるため、残高の計算にはその手数料も含めてください。最低額は値を固定せず、対象クラスターで`getMinimumBalanceForRentExemption(0)`を照会して取得してください。
+## FAQ
+### Assetをバーンすると、Asset Signer PDAの資金はどうなりますか？
+取り残されます。`execute`には有効なCore Assetが必要なため、バーン後もPDAはSOL、トークン、入れ子のAssetを保持できますが、移動するために署名できるものはありません。
+### バーン後に取り残されたAsset Signerの資金を回収できますか？
+いいえ。元のAssetアカウントなしに`assetSignerPda`として署名できる命令はありません。
+### Assetを転送するとAsset Signerウォレットは取り残されますか？
+いいえ。転送は`execute`を呼び出せる所有者を変更するだけです。PDAはAssetアドレスに紐づいたままです。`execute`を無効にするのは転送ではなくバーンです。

@@ -2,7 +2,7 @@
 title: MPL Core Asset
 metaTitle: What is a Core Asset | Metaplex Core
 description: Learn what a Core Asset is on Solana. Understand the single-account NFT model, account structure, collection membership, and off-chain metadata.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Core Asset
   - NFT account
@@ -292,3 +292,4 @@ The Asset still exists on-chain with its name and URI, but the image and off-cha
 | **Collection** | A Core account that groups related Assets |
 | **Key** | Account discriminator identifying the account type |
 | **seq** | Sequence number used for compression indexing |
+| **Asset Signer PDA** | A separate address derived from an Asset that acts as the Asset's wallet for SOL and tokens |

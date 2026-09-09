@@ -4,10 +4,8 @@ metaTitle: Gumdrop | Developer Hub
 description: 高額な前払いレント費用を必要としない、簡単なトークンエアドロップとプリントエディションエアドロップ
 ---
 
-{% callout type="warning" %}
-
-このプログラムは非推奨としてマークされており、Metaplex Foundationチームによって積極的にメンテナンスされていないことにご注意ください。新機能、セキュリティ修正、および後方互換性は保証されません。注意してご使用ください。
-
+{% callout type="warning" title="Gumdrop は非推奨です" %}
+新しいウォレットまたはレガシー NFT トークン配布には [MPL-Distro](/ja/smart-contracts/mpl-distro) を使ってください。クレームベースのエアドロップは [本番デリバリー](/ja/smart-contracts/mpl-distro/production-delivery) から始めてください。Gumdrop は既存の連携向けにのみ文書化されています。
 {% /callout %}
 
 Gumdropプログラムは、高額な前払いレント費用を必要としない、簡単なトークンエアドロップとプリントエディションエアドロップを可能にします。

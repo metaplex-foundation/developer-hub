@@ -6,6 +6,10 @@ description: 使用 Metaplex CLI 销毁 MPL Core 资产
 
 `mplx core asset burn` 命令允许您永久销毁 MPL Core 资产并回收租金费用。您可以销毁单个资产或使用 JSON 列表文件一次销毁多个资产。
 
+{% callout type="warning" title="销毁前先提取 Asset Signer 余额" %}
+销毁 Core Asset 会使 [`execute`](/zh/smart-contracts/core/execute-asset-signing) 失败。Asset Signer PDA 中剩余的 SOL、代币或其他资产将滞留且无法找回。请先转出 — 可用 [`mplx core asset execute info`](/zh/dev-tools/cli/core/execute) 检查 PDA。
+{% /callout %}
+
 ## 基本用法
 
 ### 销毁单个资产
@@ -77,6 +81,7 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 注意事项
 
 - **警告**：销毁是永久性的，无法撤销
+- 销毁前清空 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 之后 `execute` 会失败，剩余的 SOL、代币或嵌套资产将滞留
 - 您必须是资产的所有者才能销毁它
 - 销毁资产时，大部分租金 SOL 会返还给所有者
 - 少量金额（约 0.00089784 SOL）会保留以防止账户重用

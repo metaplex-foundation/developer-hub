@@ -65,6 +65,7 @@ export const das = {
           title: 'Core Extension SDK',
           links: [
             { title: 'Extension Overview', href: '/dev-tools/das-api/core-extension' },
+            { title: 'Getting Started', href: '/dev-tools/das-api/getting-started#das-for-mpl-core' },
             { title: 'Get Core Asset', href: '/dev-tools/das-api/core-extension/methods/get-asset' },
             { title: 'Get Core Collection', href: '/dev-tools/das-api/core-extension/methods/get-collection' },
             { title: 'Get Core Assets By Authority', href: '/dev-tools/das-api/core-extension/methods/get-assets-by-authority' },

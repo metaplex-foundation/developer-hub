@@ -3,7 +3,7 @@ title: Asset 소각
 metaTitle: Asset 소각 | Metaplex Core
 description: Solana에서 Core NFT Asset을 소각하는 방법을 배웁니다. Metaplex Core SDK를 사용하여 Asset을 영구적으로 파괴하고 렌트를 회수합니다.
 created: '06-15-2024'
-updated: '01-31-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -22,6 +22,7 @@ programmingLanguage:
 howToSteps:
   - npm install @metaplex-foundation/mpl-core로 SDK 설치
   - Asset을 가져와서 소유권 확인
+  - Asset Signer PDA에 SOL, 토큰, 중첩 Asset이 있으면 비우기
   - 소유자로서 burn(umi, { asset }) 호출
   - 렌트가 자동으로 지갑에 반환됨
 howToTools:
@@ -39,6 +40,8 @@ faqs:
     a: 예. Collection의 currentSize가 감소합니다. numMinted 카운터는 변경되지 않습니다.
   - q: 여러 Asset을 한 번에 소각할 수 있나요?
     a: 단일 명령어로는 불가능합니다. 크기 제한 내에서 하나의 트랜잭션에 여러 소각 명령어를 배치할 수 있습니다.
+  - q: 소각하면 Asset Signer PDA의 SOL과 토큰은 어떻게 되나요?
+    a: 소각하면 execute가 비활성화됩니다. 먼저 Asset Signer PDA를 비우지 않으면 해당 잔액은 회수 경로 없이 묶입니다.
 ---
 이 가이드는 Metaplex Core SDK를 사용하여 Solana에서 **Core Asset을 소각**하는 방법을 보여줍니다. Asset을 영구적으로 파괴하고 렌트 보증금의 대부분을 회수합니다. {% .lead %}
 {% callout title="학습 내용" %}
@@ -46,26 +49,35 @@ faqs:
 - Collection 내 Asset의 소각 처리
 - Burn Delegate 권한 이해
 - 소각 후 계정에 무슨 일이 일어나는지 알기
+- 소각 전에 Asset Signer PDA를 비우기
+{% /callout %}
+{% callout type="warning" title="소각 전에 Asset Signer 잔액을 인출하세요" %}
+Core Asset을 소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-signing)가 실패합니다. Asset Signer PDA에 남아 있는 SOL, 토큰, 기타 자산은 회수 경로 없이 묶입니다. 먼저 전송하세요.
 {% /callout %}
 ## 요약
 Core Asset을 소각하여 영구적으로 파괴하고 렌트를 회수합니다. 소유자(또는 Burn Delegate)만 Asset을 소각할 수 있습니다.
 - `burn(umi, { asset })`을 호출하여 Asset 파괴
-- 대부분의 렌트(~0.0028 SOL)가 지불자에게 반환됨
+- 계정의 렌트는 소각 트랜잭션의 지불자에게 반환됨
 - 소액(~0.0009 SOL)이 계정 재사용 방지를 위해 남음
 - 소각은 **영구적이며 되돌릴 수 없음**
+- 먼저 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 소각 후에는 `execute`로 해당 자금을 이동할 수 없습니다
 ## 범위 외
 Token Metadata 소각(mpl-token-metadata 사용), 압축 NFT 소각(Bubblegum 사용), Collection 소각(Collection은 자체 소각 프로세스가 있음).
 ## 빠른 시작
 **바로가기:** [Asset 소각](#code-example) · [Collection 내 소각](#burning-an-asset-that-is-part-of-a-collection)
 1. 설치: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Asset을 가져와서 소유권 확인
-3. 소유자로서 `burn(umi, { asset })` 호출
-4. 렌트가 자동으로 지갑에 반환됨
+3. [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)에 자금이 있으면 `execute`로 전송
+4. 소유자로서 `burn(umi, { asset })` 호출
+5. 렌트가 자동으로 지갑에 반환됨
 ## 전제 조건
 - Asset을 소유한(또는 Burn Delegate인) 서명자로 구성된 **Umi**
 - 소각할 Asset의 **Asset 주소**
 - **Collection 주소** (Asset이 Collection 내에 있는 경우)
-Asset은 `burn` 명령어를 사용하여 소각할 수 있습니다. 이렇게 하면 렌트 면제 수수료가 소유자에게 반환됩니다. 계정이 다시 열리는 것을 방지하기 위해 매우 소액의 SOL(0.00089784)만 계정에 남습니다.
+Asset은 `burn` 명령어를 사용하여 소각할 수 있습니다. 이렇게 하면 Asset 계정의 렌트 예치금이 트랜잭션 지불자에게 반환됩니다. 계정이 다시 열리는 것을 방지하기 위해 1바이트 렌트 면제 최소 금액(0.00089784 SOL)만 계정에 남으며, 그 이상의 lamports도 계정에 그대로 남습니다.
+{% callout type="warning" title="렌트만 환불됩니다" %}
+`burn`은 계정 데이터 크기에 대한 렌트 면제 잔액에서 1바이트 하한을 뺀 금액을 지불자에게 환불합니다. 주소 재오픈 공격을 방지하기 위해 계정은 삭제되지 않고 1바이트 초기화되지 않은 계정으로 크기가 조정됩니다. 아직 회수되지 않은 프로토콜 수수료 등 렌트를 초과하는 lamports는 Metaplex 수수료 수집기가 회수할 때까지 해당 1바이트 초기화되지 않은 계정에 남아 있습니다.
+{% /callout %}
 {% totem %}
 {% totem-accordion title="기술적 명령어 세부사항" %}
 **명령어 계정 목록**
@@ -162,10 +174,12 @@ const collectionId = collectionAddress(asset)
 ```
 ## 참고사항
 - 소각은 **영구적이며 되돌릴 수 없음** - Asset을 복구할 수 없음
-- 렌트는 소유자에게 반환됨 (금액은 자산 크기와 플러그인에 따라 다름)
+- 렌트는 지불자에게 반환됨 (금액은 자산 크기와 플러그인에 따라 다름)
+- 렌트만 환불됨. 렌트 면제 최소 금액을 초과하는 lamports는 소유자에게 반환되지 않음
 - 남은 SOL은 계정 주소의 재사용을 방지함
 - Burn Delegate는 소유자를 대신하여 소각 가능 (Burn Delegate 플러그인을 통해)
 - 동결된 Asset은 소각 전에 해제해야 함
+- 소각 전에 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 이후 `execute`는 실패하고 남은 잔액은 묶입니다
 ## 빠른 참조
 ### 소각 파라미터
 | 파라미터 | 필수 | 설명 |
@@ -185,6 +199,7 @@ const collectionId = collectionAddress(asset)
 |------|--------|
 | 지불자에게 반환 | 기본 + 플러그인 스토리지 렌트 |
 | 계정에 남음 | ~0.0009 SOL |
+| 렌트 초과 lamports | 환불되지 않음 |
 ## FAQ
 ### 계정에 남아있는 ~0.0009 SOL을 회수할 수 있나요?
 아니요. 이 소액은 계정을 "소각됨"으로 표시하고 해당 주소가 새 Asset에 재사용되는 것을 방지하기 위해 의도적으로 남겨집니다.
@@ -196,6 +211,8 @@ const collectionId = collectionAddress(asset)
 예. Asset이 소각되면 Collection의 `currentSize`가 감소합니다. `numMinted` 카운터는 변경되지 않습니다 (지금까지 민팅된 총 수를 추적함).
 ### 여러 Asset을 한 번에 소각할 수 있나요?
 단일 명령어로는 불가능합니다. 하나의 트랜잭션에 여러 소각 명령어를 배치할 수 있습니다 (트랜잭션 크기 제한 내에서).
+### 소각하면 Asset Signer PDA의 SOL과 토큰은 어떻게 되나요?
+소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-signing)가 비활성화됩니다. 먼저 Asset Signer PDA를 비우지 않으면 해당 잔액은 회수 경로 없이 묶입니다.
 ## 용어집
 | 용어 | 정의 |
 |------|------------|
@@ -204,3 +221,4 @@ const collectionId = collectionAddress(asset)
 | **렌트** | Solana에서 계정을 유지하기 위해 예치하는 SOL |
 | **동결** | 소각과 전송이 차단되는 Asset 상태 |
 | **Collection** | Asset이 속할 수 있는 그룹 계정 |
+| **Asset Signer PDA** | execute를 통해 서명하는 Asset에 연결된 지갑. 소각하면 남은 잔액이 묶입니다. |

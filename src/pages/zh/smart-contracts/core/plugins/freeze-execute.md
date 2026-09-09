@@ -2,7 +2,7 @@
 title: Freeze Execute
 metaTitle: Freeze Execute 插件 | Core
 description: 了解 MPL Core Asset Freeze Execute 插件。'Freeze Execute' 插件可以冻结 Execute 生命周期事件，阻止资产执行任意指令。
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - freeze execute
   - block execute
@@ -330,9 +330,10 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - **权限限制**：如果权限已委托给其他人，原所有者在权限撤销之前无法解冻
 - 冻结状态下无法移除插件
 - 冻结状态下无法重新分配权限
-- 此插件与 [Execute 指令](/smart-contracts/core/execute-asset-signing) 系统配合使用
+- 此插件与 [Execute 指令](/zh/smart-contracts/core/execute-asset-signing) 系统配合使用
+- 在[销毁](/zh/smart-contracts/core/burn) Asset **之前**解冻并通过 `execute` 提取。销毁会禁用 `execute`，并使 Asset Signer PDA 中的剩余余额滞留
 ## 使用案例示例：担保 NFT
-Freeze Execute 插件的一个常见用例是创建"担保 NFT"，其中 NFT 代表可通过执行指令提取的基础资产（如 SOL 或代币）的所有权。该插件允许您临时冻结这些执行操作。
+Freeze Execute 插件的一个常见用例是创建"担保 NFT"，其中 NFT 代表可通过执行指令提取的基础资产（如 SOL 或代币）的所有权。该插件允许您临时冻结这些执行操作。销毁 Asset 之前请用 `execute` 提取这些基础资产 — 销毁会禁用 `execute`，并使 Asset Signer PDA 中的剩余余额滞留。
 {% dialect-switcher title="担保 NFT 示例" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
