@@ -4,7 +4,7 @@ metaTitle: Get NFT Editions | DAS API
 description: 마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션을 가져옵니다
 ---
 
-마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션을 반환합니다. 에디션 번호, 주소 및 공급 정보가 포함됩니다. 또한 에디션 주소를 전달하여 해당 마스터 에디션 및 형제 에디션을 검색할 수 있습니다.
+마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션을 반환합니다. 에디션 번호, 주소 및 공급 정보가 포함됩니다.
 
 ## 매개변수
 
@@ -26,9 +26,13 @@ description: 마스터 에디션 NFT 민트의 모든 인쇄 가능한 에디션
   - `edition_number` - 에디션 번호(1, 2, 3 등)
   - `mint_address` - 에디션의 민트 주소
 - `master_edition_address` - 마스터 에디션 계정의 주소
-- `supply` - 현재 발행된 에디션 수
+- `supply` - 이 마스터 에디션에 대해 발행된 에디션의 총 수
 - `max_supply` - 발행할 수 있는 최대 에디션 수(무제한의 경우 null)
+- `total` - 현재 페이지에서 반환된 에디션 수. 전체 발행 수는 `supply`를 사용하세요.
+- 페이지네이션 필드: `cursor`, `page`, `limit`, `before`, `after`
+
+민트에 마스터 에디션 계정이 없으면 RPC가 오류를 반환합니다.
 
 ## Playground
 
-{% apiRenderer method="getNftEditions" noUmi=true /%}
+{% apiRenderer method="getNftEditions" /%}

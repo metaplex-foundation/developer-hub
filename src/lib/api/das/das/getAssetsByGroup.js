@@ -5,7 +5,7 @@ const getAssetsByGroup = {
     {
       name: 'groupKey',
       type: 'string',
-      description: 'Grouping Key',
+      description: 'Grouping Key (e.g. "collection" or "group" for mpl-core groups)',
       placeholder: 'collection',
       required: true,
     },
@@ -83,7 +83,32 @@ const getAssetsByGroup = {
       },
     },
   ],
-  examples: null,
+  examples: [
+    {
+      name: 'Get Assets In Collection',
+      description: 'Get assets in a Token Metadata or Core collection',
+      chain: 'solanaMainnet',
+      body: {
+        params: {
+          groupKey: 'collection',
+          groupValue: '5PA96eCFHJSFPY9SWFeRJUHrpoNF5XZL6RrE1JADXhxf',
+          limit: 10,
+        },
+      },
+    },
+    {
+      name: 'Get mpl-core Group Members',
+      description: 'Get collections, assets, or nested groups in an mpl-core GroupV1',
+      chain: 'solanaMainnet',
+      body: {
+        params: {
+          groupKey: 'group',
+          groupValue: '1CTME6duRH3SaBd5bmSikw1nhxpENe1xS2nHkwUGhgQ',
+          limit: 10,
+        },
+      },
+    },
+  ],
 }
 
 export default getAssetsByGroup

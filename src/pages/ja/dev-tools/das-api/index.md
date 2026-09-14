@@ -11,6 +11,10 @@ Metaplex Digital Asset Standard (DAS) APIは、Solana上のデジタルアセッ
 
 このAPIは、アセットデータを提供するためにRPCが実装する一連のメソッドを定義します。大部分の場合、データはMetaplex Digital Asset RPCインフラストラクチャを使用してインデックス化されます。
 
+## エージェントレジストリフィールド
+
+DASは`MplCoreAsset`行にエージェントメタデータをインデックス化します。レスポンスフィールド`is_agent`、`asset_signer`、`agent_token`は[`getAsset`](/ja/dev-tools/das-api/methods/get-asset)および[`getAssets`](/ja/dev-tools/das-api/methods/get-assets)によって返されます。[`searchAssets`](/ja/dev-tools/das-api/methods/search-assets)にはフィルター`isAgent`、`agentToken`、`assetSigner`が追加されています。使用例については[エージェントデータの読み取り](/ja/agents/read-agent-data#read-agent-data-via-das-api)を参照してください。
+
 ## Core拡張機能
 一般的なDAS SDKに加えて、[MPL Core](/ja/smart-contracts/core)用の拡張機能が作成されており、MPL Core SDKでさらに使用するための正しいタイプを直接返します。また、コレクションから継承されたアセット内のプラグインを自動的に派生し、[DAS-to-Core型変換](/ja/dev-tools/das-api/core-extension/convert-das-asset-to-core)のための機能を提供します。
 

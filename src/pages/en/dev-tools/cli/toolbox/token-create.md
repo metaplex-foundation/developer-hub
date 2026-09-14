@@ -30,6 +30,7 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 - `--description <string>`: Description of the token and its purpose
 - `--image <path>`: Path to the token image file (PNG, JPG, or GIF)
 - `--speed-run`: Enable speed run mode to measure execution time
+- `--mint-keypair <path>`: Path to a keypair JSON file to use as the token mint address (vanity key). See [Grind a vanity public key](/solana/grind-vanity-public-key).
 
 ## Examples
 
@@ -47,6 +48,15 @@ mplx toolbox token create \
   --image ./token-image.png \
   --decimals 2 \
   --mint-amount 1000000
+```
+
+### Create Token with a Vanity Mint Address
+```bash
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-mint.json
 ```
 
 ### Create Token Using Wizard

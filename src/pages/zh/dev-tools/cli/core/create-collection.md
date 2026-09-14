@@ -44,6 +44,9 @@ mplx core collection create --wizard
 - `--plugins`: 使用交互式插件选择
 - `--pluginsFile <path>`: 包含插件数据的 JSON 文件路径
 
+### 虚荣地址
+- `--mint-keypair <path>`: 用于集合地址的密钥对 JSON 文件路径，而不是随机生成。参见[生成虚荣公钥](/zh/solana/grind-vanity-public-key)。
+
 ## 示例
 
 1. 使用交互式向导创建集合：
@@ -59,6 +62,14 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 3. 从文件创建集合：
 ```bash
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
+```
+
+4. 使用虚荣地址创建集合：
+```bash
+mplx core collection create \
+  --name "My Collection" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-collection.json
 ```
 
 ## 输出

@@ -2,7 +2,7 @@
 title: AnchorでMetaplex Coreを使用する
 metaTitle: AnchorでMetaplex Coreを使用する | Metaplex Core
 description: Metaplex CoreをAnchorプログラムに統合します。オンチェーンNFT操作のためのCPI呼び出し、アカウントのデシリアライゼーション、プラグインアクセスを学びます。
-updated: '01-31-2026'
+updated: '07-15-2026'
 keywords:
   - Core Anchor
   - mpl-core CPI
@@ -17,7 +17,11 @@ programmingLanguage:
   - Rust
 faqs:
   - q: anchorフィーチャーフラグは必要ですか？
-    a: はい、Accounts構造体での直接デシリアライゼーションには必要です。なしの場合は、from_bytes()を手動で使用します。
+    a: はい、Accounts構造体での直接デシリアライゼーションには必要です。なしの場合は、from_bytes()を手動で使用します。anchorを有効にする際は常にdefault-features = falseを設定してください。
+  - q: どのAnchorバージョンを使用すべきですか？
+    a: anchor-lang 0.32.xの場合は、default-features = falseとfeatures = ["anchor", "anchor-0-32"]を使用します。anchor-lang 0.31.xの場合は、features = ["anchor"]のみを使用します。
+  - q: どのRustバージョンが必要ですか？
+    a: mpl-coreにはRust 1.89.0以降が必要です。Anchorプロジェクトのrust-toolchain.tomlでバージョンを固定してください。
   - q: プラグインが存在するかどうかを確認するにはどうすればよいですか？
     a: Optionを返すfetch_plugin()を使用します。プラグインが存在しない場合でもエラーをスローしません。
   - q: 外部プラグイン（Oracle、AppData）にアクセスできますか？
@@ -34,7 +38,9 @@ Anchorを使用してCore Assetsと対話する**オンチェーンプログラ�
 {% /callout %}
 ## 概要
 `mpl-core` Rustクレートは、AnchorプログラムからCoreと対話するために必要なすべてを提供します。ネイティブAnchorアカウントのデシリアライゼーションのために`anchor`フィーチャーフラグを有効にします。
-- `features = ["anchor"]`付きで`mpl-core`を追加
+- `default-features = false`と適切なAnchor機能で`mpl-core`を追加
+- `anchor-lang 0.32.x`とともに`features = ["anchor", "anchor-0-32"]`を使用
+- `anchor-lang 0.31.x`とともに`features = ["anchor"]`を使用
 - Accounts構造体でAssets/Collectionsをデシリアライズ
 - `fetch_plugin()`を使用してプラグインデータを読み取り
 - CPIビルダーが命令呼び出しを簡素化
@@ -42,26 +48,45 @@ Anchorを使用してCore Assetsと対話する**オンチェーンプログラ�
 クライアントサイドJavaScript SDK（[JavaScript SDK](/smart-contracts/core/sdk/javascript)を参照）、スタンドアロンRustクライアント（[Rust SDK](/smart-contracts/core/sdk/rust)を参照）、およびクライアントからのCore Assetsの作成。
 ## クイックスタート
 **ジャンプ先:** [インストール](#インストール) · [アカウントのデシリアライゼーション](#アカウントのデシリアライゼーション) · [プラグインアクセス](#プラグインのデシリアライズ) · [CPI例](#cpi命令ビルダー)
-1. Cargo.tomlに`mpl-core = { version = "x.x.x", features = ["anchor"] }`を追加
-2. `Account<'info, BaseAssetV1>`でAssetsをデシリアライズ
-3. `fetch_plugin::<BaseAssetV1, PluginType>()`でプラグインにアクセス
-4. `CreateV2CpiBuilder`、`TransferV1CpiBuilder`などでCPI呼び出し
+1. `default-features = false`とAnchor機能で`mpl-core`をCargo.tomlに追加
+2. `rust-toolchain.toml`でRust `1.89.0`以降を固定
+3. `Account<'info, BaseAssetV1>`でAssetsをデシリアライズ
+4. `fetch_plugin::<BaseAssetV1, PluginType>()`でプラグインにアクセス
+5. `CreateV2CpiBuilder`、`TransferV1CpiBuilder`などでCPI呼び出し
 ## インストール
-AnchorプロジェクトでCoreの使用を開始するには、まず以下を実行してプロジェクトに最新バージョンのクレートを追加していることを確認してください：
-```rust
-cargo add mpl-core
-```
-または、cargo.tomlファイルでバージョンを手動で指定することもできます：
-```rust
-[dependencies]
-mpl-core = "x.x.x"
-```
+Anchorプログラムの`Cargo.toml`に`mpl-core`を追加します。デフォルトの`borsh-v1`機能はAnchor統合と互換性がないため、`anchor`を有効にする際は常にデフォルト機能を無効にしてください。
 ### フィーチャーフラグ
-Coreクレートでは、`cargo.toml`の依存関係エントリを変更することで、mpl-coreクレートのanchorフィーチャーフラグを有効にしてAnchor固有の機能にアクセスできます：
+| 機能 | 説明 |
+|------|------|
+| `anchor` | `anchor-lang 0.31.1`とSolana 2.x型でAnchorアカウントのデシリアライゼーションを有効化 |
+| `anchor-0-32` | `anchor-lang 0.32.x`サポートのオプトイン機能; `anchor`が必要 |
+| `serde` | オフチェーンツール用のオプションserdeサポート |
+#### Anchor 0.32.x（推奨）
+プログラムが`anchor-lang 0.32.x`に依存する場合:
 ```rust
 [dependencies]
-mpl-core = { version = "x.x.x", features = [ "anchor" ] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+#### Anchor 0.31.x（レガシー）
+プログラムが`anchor-lang 0.31.x`に依存する場合:
+```rust
+[dependencies]
+anchor-lang = "0.31.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor"] }
+```
+{% callout title="重要" %}
+- `anchor-0-32`だけでは不十分です — `anchor`と組み合わせて使用する必要があります。
+- `default-features = false`が必要です。設定しないと、デフォルトの`borsh-v1`機能がAnchor統合と競合します。
+- Anchorパスは`Pubkey`、`AccountInfo`および関連するAnchor traitにSolana 2.x型を使用します。
+{% /callout %}
+### Rustツールチェーン
+`mpl-core`には**Rust 1.89.0**以降が必要です。Anchorワークスペースに`rust-toolchain.toml`ファイルを追加してください:
+```toml
+[toolchain]
+channel = "1.89.0"
+```
+`base64ct`などの推移的依存関係により`edition2024`エラーが発生した場合は、Rust 1.89.0以降にアップグレードしてください。
 ### Core Rust SDKモジュール
 Core Rust SDKはいくつかのモジュールで構成されています：
 - `accounts`: プログラムのアカウントを表します
@@ -163,7 +188,10 @@ AssetまたはCollectionアカウントが存在しないか、まだ作成さ�
 ### `InvalidAuthority`
 署名者がこの操作の権限を持っていません。正しい権限が署名していることを確認してください。
 ## 注意事項
-- ネイティブデシリアライゼーションのために常に`features = ["anchor"]`を有効にする
+- Anchor機能を有効にする際は常に`default-features = false`を設定
+- `anchor-lang 0.32.x`とともに`features = ["anchor", "anchor-0-32"]`を使用
+- `anchor-lang 0.31.x`とともに`features = ["anchor"]`を使用
+- `rust-toolchain.toml`でRust `1.89.0`以降を固定
 - 組み込みプラグインには`fetch_plugin()`を、外部には`fetch_external_plugin()`を使用
 - CPIビルダーがアカウント順序の複雑さを抽象化
 - 完全なAPIリファレンスは[docs.rs/mpl-core](https://docs.rs/mpl-core/)を確認
@@ -188,7 +216,11 @@ AssetまたはCollectionアカウントが存在しないか、まだ作成さ�
 | Plugin Registry | `PluginRegistryV1` |
 ## FAQ
 ### anchorフィーチャーフラグは必要ですか？
-はい、Accounts構造体での直接デシリアライゼーションには必要です。なしの場合は、`from_bytes()`を手動で使用します。
+はい、Accounts構造体での直接デシリアライゼーションには必要です。なしの場合は、`from_bytes()`を手動で使用します。`anchor`を有効にする際は常に`default-features = false`を設定してください。
+### どのAnchorバージョンを使用すべきですか？
+`anchor-lang 0.32.x`の場合は、`default-features = false`と`features = ["anchor", "anchor-0-32"]`を使用します。`anchor-lang 0.31.x`の場合は、`features = ["anchor"]`のみを使用します。
+### どのRustバージョンが必要ですか？
+`mpl-core`にはRust **1.89.0**以降が必要です。Anchorプロジェクトの`rust-toolchain.toml`でバージョンを固定してください。
 ### プラグインが存在するかどうかを確認するにはどうすればよいですか？
 `Option`を返す`fetch_plugin()`を使用します。プラグインが存在しない場合でもエラーをスローしません。
 ### 外部プラグイン（Oracle、AppData）にアクセスできますか？
@@ -203,6 +235,7 @@ AssetまたはCollectionアカウントが存在しないか、まだ作成さ�
 | **BaseAssetV1** | デシリアライゼーション用のCore Assetアカウント構造体 |
 | **fetch_plugin()** | アカウントからプラグインデータを読み取る関数 |
 | **anchorフィーチャー** | Anchorネイティブデシリアライゼーションを有効にするCargoフィーチャー |
+| **anchor-0-32フィーチャー** | `anchor-lang 0.32.x`サポートのオプトインCargoフィーチャー |
 ## 関連ページ
 - [Anchorステーキング例](/smart-contracts/core/guides/anchor/anchor-staking-example) - 完全なステーキングプログラム
 - [AnchorでAssetを作成](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - ステップバイステップガイド

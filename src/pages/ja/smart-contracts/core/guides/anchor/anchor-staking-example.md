@@ -60,8 +60,10 @@ _StakeとUnstake関数の両方は、前述のPluginを異なる方法で利用�
 スマートコントラクトを書く前に、スマートコントラクトが動作するために必要なcrateとそれらの関数を見てみましょう！
 この例では、主に[anchor](/ja/smart-contracts/core/using-core-in-anchor)機能を有効にしたmpl_core crateを使用します：
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+レガシーの`anchor-lang 0.31.x`設定とRustツールチェーン要件については、[AnchorでCoreを使用](/ja/smart-contracts/core/using-core-in-anchor)を参照してください。
 そのcrateからの異なる関数は以下の通りです：
 ```rust
 use mpl_core::{

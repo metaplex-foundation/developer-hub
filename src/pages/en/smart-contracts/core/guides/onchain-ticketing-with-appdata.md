@@ -69,8 +69,10 @@ As a stylistic choice, in the account struct of all instructions, we will separa
 ### Dependencies and Imports
 In this example, we primarily use the `mpl_core` crate with the anchor feature enabled:
 ```toml
-mpl-core = { version = "x.x.x", features = ["anchor"] } 
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+See [Using Core in Anchor](/smart-contracts/core/using-core-in-anchor) for feature flag details and Rust toolchain requirements.
 The dependencies used are as follows:
 ```rust
 use anchor_lang::prelude::*;

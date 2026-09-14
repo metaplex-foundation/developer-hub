@@ -212,5 +212,3 @@ await delegateExecutionV1(umi, {
 - 所有者可以通过使用不同的执行者配置文件创建新的委托记录来切换执行者。
 
 有关账户布局、PDA 派生详情和错误代码，请参阅 [Agent Tools](/smart-contracts/mpl-agent/tools) 智能合约参考。
-
-*由 Metaplex 维护 · 2026 年 3 月验证 · [在 GitHub 上查看源码](https://github.com/metaplex-foundation/mpl-agent)*

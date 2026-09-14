@@ -148,8 +148,6 @@ function generateBreadcrumbSchema(pathname, productName, productPath, sectionTit
       items.push({ name: 'Dev Tools', url: `${SITE_URL}/dev-tools` })
     } else if (firstSegment === 'guides') {
       items.push({ name: 'Solana', url: `${SITE_URL}/guides` })
-    } else if (firstSegment === 'legacy-documentation') {
-      items.push({ name: 'Legacy Documentation', url: `${SITE_URL}/legacy-documentation` })
     }
   }
 

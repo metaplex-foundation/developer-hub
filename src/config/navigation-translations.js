@@ -174,6 +174,12 @@ export const NAVIGATION_TRANSLATIONS = {
       ko: '그룹별 에셋 가져오기',
       zh: '按分组获取资产'
     },
+    getGrouping: {
+      en: 'Get Grouping',
+      ja: 'グループ情報の取得',
+      ko: '그룹 정보 가져오기',
+      zh: '获取分组信息'
+    },
     getAssetsByOwner: {
       en: 'Get Assets By Owner',
       ja: '所有者別アセットの取得',

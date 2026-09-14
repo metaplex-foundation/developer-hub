@@ -212,5 +212,3 @@ await delegateExecutionV1(umi, {
 - オーナーは異なるエグゼクティブプロファイルで新しい委任レコードを作成することでエグゼクティブを切り替えられます。
 
 アカウントレイアウト、PDA派生の詳細、エラーコードについては、[Agent Tools](/smart-contracts/mpl-agent/tools)スマートコントラクトリファレンスをご覧ください。
-
-*Metaplexが管理 · 2026年3月検証済み · [GitHubでソースを見る](https://github.com/metaplex-foundation/mpl-agent)*

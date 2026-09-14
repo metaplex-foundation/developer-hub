@@ -19,7 +19,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      legacyDocumentation: 'Legacy Documentation',
       guides: 'Guides'
     },
     ja: {
@@ -40,7 +39,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      legacyDocumentation: 'レガシードキュメント',
       guides: 'ガイド'
     },
     ko: {
@@ -61,7 +59,6 @@ export const getProductTranslation = (productKey, locale = 'en') => {
       shank: 'Shank',
       amman: 'Amman',
       sugar: 'Sugar',
-      legacyDocumentation: '레거시 문서',
       guides: '가이드'
     }
   };

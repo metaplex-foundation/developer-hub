@@ -36,7 +36,8 @@ Setting itself apart from existing Asset programs, like Solana’s Token program
 {% /callout %}
 ## Prerequisite
 - Code Editor of your choice (recommended **Visual Studio Code** with the **Rust Analyzer Plugin**)
-- Anchor **0.30.1** or above.
+- Anchor **0.32.1** or above.
+- Rust **1.89.0** or above (see [Using Core in Anchor](/smart-contracts/core/using-core-in-anchor)).
 ## Initial Setup
 In this guide we’re going to use **Anchor**, leveraging a mono-file approach where all the necessary macros can be found in the `lib.rs` file:
 - `declare_id`: Specifies the program's on-chain address.
@@ -50,14 +51,13 @@ Start by initializing a new project (optional) using `avm` (Anchor Version Manag
 anchor init create-core-asset-example
 ```
 ### Required Crates
-In this guide, we'll use the `mpl_core` crate with the `anchor` feature enabled. To install it, first navigate to the `create-core-asset-example` directory:
+In this guide, we'll use the `mpl_core` crate with the Anchor features enabled. Add the dependency manually in your program's `Cargo.toml`:
+```toml
+[dependencies]
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
-cd create-core-asset-example
-```
-Then run the following command:
-```
-cargo add mpl-core --features anchor
-```
+See [Using Core in Anchor](/smart-contracts/core/using-core-in-anchor) for feature flag details and Rust toolchain requirements.
 ## The program
 ### Imports and Templates
 Here we're going to define all the imports for this particular guide and create the template for the Account struct and instruction in our `lib.rs` file.

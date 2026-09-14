@@ -3,7 +3,7 @@ title: Burning Assets
 metaTitle: Burning Assets | Metaplex Core
 description: Learn how to burn Core NFT Assets on Solana. Permanently destroy Assets and recover rent using the Metaplex Core SDK.
 created: '06-15-2024'
-updated: '01-31-2026'
+updated: '09-03-2026'
 keywords:
   - burn NFT
   - destroy asset
@@ -23,6 +23,7 @@ cli: /dev-tools/cli/core/burn-asset
 howToSteps:
   - Install the SDK with npm install @metaplex-foundation/mpl-core
   - Fetch the Asset to verify ownership
+  - Empty the Asset Signer PDA if it holds SOL, tokens, or nested assets
   - Call burn(umi, { asset }) as the owner
   - Rent is automatically returned to your wallet
 howToTools:
@@ -40,6 +41,8 @@ faqs:
     a: Yes. The Collection's currentSize decrements. The numMinted counter stays unchanged.
   - q: Can I burn multiple Assets at once?
     a: Not in a single instruction. You can batch multiple burn instructions in one transaction up to size limits.
+  - q: What happens to SOL and tokens in the Asset Signer PDA when I burn?
+    a: Burning disables execute. Empty the Asset Signer PDA first or those balances are stranded with no recovery path.
 ---
 This guide shows how to **burn Core Assets** on Solana using the Metaplex Core SDK. Permanently destroy Assets and recover most of the rent deposit. {% .lead %}
 {% callout title="What You'll Learn" %}
@@ -47,26 +50,35 @@ This guide shows how to **burn Core Assets** on Solana using the Metaplex Core S
 - Handle burning for Assets in Collections
 - Understand Burn Delegate permissions
 - Know what happens to the account after burning
+- Empty the Asset Signer PDA before burning
+{% /callout %}
+{% callout type="warning" title="Withdraw Asset Signer balances before burning" %}
+Burning a Core Asset makes [`execute`](/smart-contracts/core/execute-asset-signing) fail. SOL, tokens, or other assets still held by the Asset Signer PDA become stranded with no recovery path. Transfer them out first.
 {% /callout %}
 ## Summary
 Burn a Core Asset to permanently destroy it and recover rent. Only the owner (or Burn Delegate) can burn an Asset.
 - Call `burn(umi, { asset })` to destroy the Asset
-- Most rent (~0.0028 SOL) is returned to the payer
+- The account's rent is returned to the burn transaction's payer
 - A small amount (~0.0009 SOL) remains to prevent account reuse
 - Burning is **permanent and irreversible**
+- Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) first — `execute` cannot move those funds after burn
 ## Out of Scope
 Token Metadata burning (use mpl-token-metadata), compressed NFT burning (use Bubblegum), and Collection burning (Collections have their own burn process).
 ## Quick Start
 **Jump to:** [Burn Asset](#code-example) · [Burn in Collection](#burning-an-asset-that-is-part-of-a-collection)
 1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Fetch the Asset to verify ownership
-3. Call `burn(umi, { asset })` as the owner
-4. Rent is automatically returned to your wallet
+3. If the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) holds funds, transfer them out with `execute`
+4. Call `burn(umi, { asset })` as the owner
+5. Rent is automatically returned to your wallet
 ## Prerequisites
 - **Umi** configured with a signer that owns the Asset (or is its Burn Delegate)
 - **Asset address** of the Asset to burn
 - **Collection address** (if the Asset is in a Collection)
-Assets can be burnt using the `burn` instruction. This will return the rent-exempt fees to the owner. Only a very small amount of SOL (0.00089784) will stay in the account to prevent it from being reopened.
+Assets can be burnt using the `burn` instruction. This refunds the Asset account's rent deposit to the transaction payer. Only the one-byte rent-exempt minimum (0.00089784 SOL) stays in the account to prevent it from being reopened; any lamports above that remain there too.
+{% callout type="warning" title="Only rent is refunded" %}
+`burn` refunds the rent-exempt balance for the account's data size minus the 1-byte floor to the payer. The account is resized to a 1-byte uninitialized account rather than deleted, to prevent address reopen attacks. Any lamports above rent, such as not-yet-collected protocol fees, stay in that 1-byte uninitialized account until swept by the Metaplex fee collector.
+{% /callout %}
 {% totem %}
 {% totem-accordion title="Technical Instruction Details" %}
 **Instruction Accounts List**
@@ -163,10 +175,12 @@ const collectionId = collectionAddress(asset)
 ```
 ## Notes
 - Burning is **permanent and irreversible** - the Asset cannot be recovered
-- Rent is returned to the owner (amount varies based on asset size and plugins)
+- Rent is returned to the payer (amount varies based on asset size and plugins)
+- Only rent is refunded. Any lamports above the rent-exempt minimum are not returned to the owner
 - The remaining SOL prevents the account address from being reused
 - Burn Delegates can burn on behalf of owners (via the Burn Delegate plugin)
 - Frozen Assets must be unfrozen before burning
+- Empty the [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) before burning — `execute` fails afterward and remaining balances are stranded
 ## Quick Reference
 ### Burn Parameters
 | Parameter | Required | Description |
@@ -186,6 +200,7 @@ const collectionId = collectionAddress(asset)
 |------|--------|
 | Returned to payer | Base + plugin storage rent |
 | Remaining in account | ~0.0009 SOL |
+| Lamports above rent | Not refunded|
 ## FAQ
 ### Can I recover the ~0.0009 SOL left in the account?
 No. This small amount is intentionally left to mark the account as "burned" and prevent its address from being reused for a new Asset.
@@ -197,6 +212,8 @@ Yes. Once an owner assigns a Burn Delegate via the plugin, the delegate can burn
 Yes. The Collection's `currentSize` is decremented when an Asset is burned. The `numMinted` counter remains unchanged (it tracks total ever minted).
 ### Can I burn multiple Assets at once?
 Not in a single instruction. You can batch multiple burn instructions in one transaction (up to transaction size limits).
+### What happens to SOL and tokens in the Asset Signer PDA when I burn?
+Burning disables [`execute`](/smart-contracts/core/execute-asset-signing). Empty the Asset Signer PDA first or those balances are stranded with no recovery path.
 ## Glossary
 | Term | Definition |
 |------|------------|
@@ -205,3 +222,4 @@ Not in a single instruction. You can batch multiple burn instructions in one tra
 | **Rent** | SOL deposited to keep an account alive on Solana |
 | **Frozen** | An Asset state where burns and transfers are blocked |
 | **Collection** | A group account that the Asset may belong to |
+| **Asset Signer PDA** | A wallet attached to the Asset that signs via execute. Burning strands any remaining balances. |

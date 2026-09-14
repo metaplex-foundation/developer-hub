@@ -170,7 +170,7 @@ Shank provides five essential derive macros for annotating your Solana program c
 Shank integrates seamlessly with other Metaplex tools:
 
 - **[Kinobi](/dev-tools/umi/kinobi)**: Uses Shank JS library for IDL generation and client creation
-- **[Solita](/legacy-documentation/developer-tools/solita)**: Generates TypeScript SDKs from Shank-extracted IDLs
+- **[Solita](/dev-tools/solita)**: Generates TypeScript SDKs from Shank-extracted IDLs
 
 ## CLI Usage
 

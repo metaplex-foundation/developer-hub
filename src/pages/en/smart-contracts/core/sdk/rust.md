@@ -17,6 +17,7 @@ programmingLanguage:
   - Rust
 ---
 Metaplex provides a Rust library that can be used to interact with the MPL-Core program. The Rust library can be used in rust scripts/builds as well as onchain programs via CPI instructions.
+For Anchor program integration, see [Using Core in Anchor](/smart-contracts/core/using-core-in-anchor) for `anchor`, `anchor-0-32`, and Rust toolchain requirements.
 ## Installation
 The MPL-Core Rust SDK can be used in both scripts/desktop/mobile applications as well as with Solana onchain programs.
 ```rust

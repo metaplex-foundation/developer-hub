@@ -57,5 +57,3 @@ Execution delegates are part of the agent's operational state, not ephemeral app
 - **[Run an Agent](/agents/run-an-agent)** — Set up an executive profile and delegate execution
 - **[Agent Finance](/agents/agent-finance)** — Capitalize the agent through its own onchain token
 - **[Agent Commerce](/agents/agent-commerce)** — Let the agent earn revenue and transact autonomously
-
-*Maintained by [Metaplex](https://github.com/metaplex-foundation) · Last verified March 2026*

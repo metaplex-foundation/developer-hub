@@ -59,6 +59,8 @@ mplx <category> <command> [options]
 
 카테고리에는 다음이 포함됩니다:
 - `core`: MPL Core 자산 관리
+- `cm`: Candy Machine 작업
+- `distro`: MPL-Distro 생성, 입금, 조회, 출금
 - `toolbox`: 유틸리티 명령
 - `config`: 구성 관리
 

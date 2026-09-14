@@ -52,10 +52,6 @@ Collection 账户存储和可访问的数据如下：
 | numMinted | 合集中曾经铸造的 Asset 总数 |
 | currentSize | 当前合集中的 Asset 数量 |
 
-{% callout type="note" %}
-Core Collection 仅对 Core Asset 进行分组。Token Metadata NFT 请使用 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)，压缩 NFT 请使用 [Bubblegum](/smart-contracts/bubblegum)。
-{% /callout %}
-
 ## 管理合集成员资格
 
 Asset 创建后可以使用 `update` 指令将其添加到 Collection、在 Collection 之间移动或从 Collection 中移除。这些操作会更改 Asset 的 [update authority](/smart-contracts/core/update)。添加后设置为 Collection，移除后恢复为钱包地址。
@@ -74,6 +70,7 @@ Asset 创建后可以使用 `update` 指令将其添加到 Collection、在 Coll
 
 ## Notes
 
+- Core Collection 仅对 Core Asset 进行分组。若要在更高层级分类中组织多个合集或独立资产，请参阅 [Core Groups](/zh/smart-contracts/core/groups)。Token Metadata NFT 请使用 [mpl-token-metadata](https://developers.metaplex.com/token-metadata)，压缩 NFT 请使用 [Bubblegum](/zh/smart-contracts/bubblegum)
 - Asset 可以在没有 Collection 的情况下独立存在 — Collection 不是必需的
 - 合集级别的插件会被成员 Asset 继承，除非 Asset 拥有同类型的自有插件进行覆盖
 - `numMinted` 统计合集中曾经创建的所有 Asset 总数，`currentSize` 是实时数量

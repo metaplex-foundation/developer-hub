@@ -4,13 +4,17 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 export const genesis = {
   name: 'Genesis',
   skill: true,
-  headline: 'Token launches via bonding curves.',
+  headline: 'Launch tokens onchain.',
   description:
     'A smart contract for launching tokens on Solana via launch pools and presales.',
   navigationMenuCatergory: 'Smart Contracts',
   path: 'smart-contracts/genesis',
   icon: <SparklesIcon />,
   className: 'accent-pink',
+  protocolFeeTitles: {
+    postBondTrading: 'Bonding Curve CPMM',
+    launchPoolTrading: 'Launch Pool CPMM',
+  },
   protocolFees: {
     bondingCurve: {
       protocolFee: {
@@ -33,11 +37,11 @@ export const genesis = {
       },
       lpFees: {
         label: 'LP fees',
-        solana: '0.17%',
+        solana: '0.21%',
       },
       raydiumFee: {
         label: 'Raydium fee',
-        solana: '0.08%',
+        solana: '0.04%',
       },
     },
     launchPool: {
@@ -63,7 +67,7 @@ export const genesis = {
       },
       protocolFee: {
         label: 'Protocol fee',
-        solana: '0.50%',
+        solana: '0.40%',
       },
       lpFees: {
         label: 'LP fees',
@@ -71,7 +75,7 @@ export const genesis = {
       },
       raydiumFee: {
         label: 'Raydium fee',
-        solana: '0.08%',
+        solana: '0.04%',
       },
     },
   },
@@ -151,6 +155,10 @@ export const genesis = {
             {
               title: 'Launch Pool',
               href: '/smart-contracts/genesis/launch-pool',
+            },
+            {
+              title: 'Project Vesting',
+              href: '/smart-contracts/genesis/project-vesting',
             },
             {
               title: 'Presale',
@@ -257,6 +265,7 @@ export const genesis = {
         'Creator Fees': 'Creator Fees',
         'Bonding Curve': 'Bonding Curve',
         'Launch Pool': 'Launch Pool',
+        'Project Vesting': 'Project Vesting',
         'Presale': 'Presale',
         'Uniform Price Auction': 'Uniform Price Auction',
         'Get Launch': 'Get Launch',
@@ -295,6 +304,7 @@ export const genesis = {
         'Creator Fees': 'クリエイターフィー',
         'Bonding Curve': 'ボンディングカーブ',
         'Launch Pool': 'ローンチプール',
+        'Project Vesting': 'プロジェクトベスティング',
         'Presale': 'プレセール',
         'Uniform Price Auction': 'ユニフォームプライスオークション',
         'Get Launch': 'ローンチ取得',
@@ -333,6 +343,7 @@ export const genesis = {
         'Creator Fees': '크리에이터 수수료',
         'Bonding Curve': '본딩 커브',
         'Launch Pool': '런치 풀',
+        'Project Vesting': '프로젝트 베스팅',
         'Presale': '프리세일',
         'Uniform Price Auction': '균일가 경매',
         'Get Launch': '런치 조회',
@@ -371,6 +382,7 @@ export const genesis = {
         'Creator Fees': '创作者费用',
         'Bonding Curve': '绑定曲线',
         'Launch Pool': '发行池',
+        'Project Vesting': '项目归属',
         'Presale': '预售',
         'Uniform Price Auction': '统一价格拍卖',
         'Get Launch': '获取发行',

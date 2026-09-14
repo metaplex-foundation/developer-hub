@@ -36,7 +36,8 @@ howToTools:
 {% /callout %}
 ## 前提条件
 - 您选择的代码编辑器（推荐使用带有**Rust Analyzer插件**的**Visual Studio Code**）
-- Anchor **0.30.1**或更高版本。
+- Anchor **0.32.1**或更高版本。
+- Rust **1.89.0**或更高版本（参见[在Anchor中使用Core](/zh/smart-contracts/core/using-core-in-anchor)）。
 ## 初始设置
 在本指南中，我们将使用**Anchor**，采用单文件方法，其中所有必要的宏都可以在`lib.rs`文件中找到：
 - `declare_id`：指定程序的链上地址。
@@ -50,14 +51,13 @@ howToTools:
 anchor init create-core-asset-example
 ```
 ### 所需Crate
-在本指南中，我们将使用启用了`anchor`功能的`mpl_core` crate。要安装它，首先导航到`create-core-asset-example`目录：
+在本指南中，我们将使用启用了Anchor功能的`mpl_core` crate。在程序的`Cargo.toml`中手动添加依赖：
+```toml
+[dependencies]
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
-cd create-core-asset-example
-```
-然后运行以下命令：
-```
-cargo add mpl-core --features anchor
-```
+有关功能标志详情和Rust工具链要求，请参阅[在Anchor中使用Core](/zh/smart-contracts/core/using-core-in-anchor)。
 ## 程序
 ### 导入和模板
 这里我们将定义本指南的所有导入，并在`lib.rs`文件中创建Account结构体和指令的模板。

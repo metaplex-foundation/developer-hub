@@ -170,7 +170,7 @@ ShankはSolanaプログラムコードに注釈を付けるための5つの重�
 Shankは他のMetaplexツールとシームレスに統合します：
 
 - **[Kinobi](/ja/dev-tools/umi/kinobi)**: IDL生成とクライアント作成にShank JSライブラリを使用
-- **[Solita](/ja/legacy-documentation/developer-tools/solita)**: Shankで抽出されたIDLからTypeScript SDKを生成
+- **[Solita](/ja/dev-tools/solita)**: Shankで抽出されたIDLからTypeScript SDKを生成
 
 ## CLI使用法
 

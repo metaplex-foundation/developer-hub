@@ -2,7 +2,7 @@
 title: MPL Core Asset
 metaTitle: Core Asset란 | Metaplex Core
 description: Solana에서 Core Asset이 무엇인지 배웁니다. 단일 계정 NFT 모델, 계정 구조, 컬렉션 멤버십, 오프체인 메타데이터를 이해합니다.
-updated: '01-31-2026'
+updated: '09-01-2026'
 keywords:
   - Core Asset
   - NFT account
@@ -292,3 +292,4 @@ Asset은 이름과 URI로 온체인에 계속 존재하지만, 이미지와 오�
 | **Collection** | 관련 Asset을 그룹화하는 Core 계정 |
 | **Key** | 계정 타입을 식별하는 계정 구분자 |
 | **seq** | 압축 인덱싱에 사용되는 시퀀스 번호 |
+| **Asset Signer PDA** | Asset에서 파생된, SOL과 토큰을 위한 Asset의 지갑 역할을 하는 별도의 주소 |

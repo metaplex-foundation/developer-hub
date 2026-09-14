@@ -28,6 +28,10 @@ howToTools:
   - Solana CLI
 ---
 
+{% callout type="warning" title="Use MPL-Distro for New Distributions" %}
+This Gumdrop guide is retained for existing integrations. New wallet and legacy NFT token claims should use [MPL-Distro Production Delivery](/smart-contracts/mpl-distro/production-delivery).
+{% /callout %}
+
 ## Overview
 
 Gumdrop is a Solana program that enables the creation of claimable airdrops. Unlike direct airdrops that send tokens to wallets, Gumdrop creates a claim mechanism where users must actively claim their allocation. This approach has several benefits:
@@ -189,5 +193,5 @@ By following this guide, you can create a secure and efficient token distributio
 ## Need Help?
 
 - Join our [Discord](https://discord.gg/metaplex) for support
-- Check the [Metaplex Gumdrop Docs](/legacy-documentation/gumdrop)
+- Check the [Metaplex Gumdrop Docs](/smart-contracts/gumdrop)
 - Review the [source code](https://github.com/metaplex-foundation/gumdrop)

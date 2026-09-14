@@ -1,9 +1,11 @@
 import { getLocalizedHref } from '@/config/languages'
 import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { agentMenuCategory, anchorTokenMenuCategory, nftMenuCategory, tokenMenuCategory } from '../NavList'
 import { Card, CardContent } from '../ui/card'
 import { products as allProducts, productCategories } from './index'
+import { getStatusLabels } from './statusLabels'
 
 const ProductCard = ({ item, locale }) => {
   const href = getLocalizedHref(item.href || `/${item.path}`, locale)
@@ -30,9 +32,11 @@ const ProductCard = ({ item, locale }) => {
 
 export function ProductCardGrid({ category }) {
   const { locale } = useLocale()
+  const statusLabels = getStatusLabels(locale)
 
   // Get items based on category
   let items = []
+  let deprecatedItems = []
 
   if (category === 'Tokens') {
     items = tokenMenuCategory
@@ -47,6 +51,10 @@ export function ProductCardGrid({ category }) {
     items = allProducts.filter(
       (product) =>
         category === product.navigationMenuCatergory && !product.deprecated
+    )
+    deprecatedItems = allProducts.filter(
+      (product) =>
+        category === product.navigationMenuCatergory && product.deprecated
     )
   }
 
@@ -77,18 +85,38 @@ export function ProductCardGrid({ category }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-stretch">
-      {items.map((item) => {
-        const localizedItem = localizeItem(item)
-        return (
-          <ProductCard
-            key={item.path || item.href}
-            item={localizedItem}
-            locale={locale}
-          />
-        )
-      })}
-    </div>
+    <>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-stretch">
+        {items.map((item) => {
+          const localizedItem = localizeItem(item)
+          return (
+            <ProductCard
+              key={item.path || item.href}
+              item={localizedItem}
+              locale={locale}
+            />
+          )
+        })}
+      </div>
+      {deprecatedItems.length > 0 && (
+        <p className="mt-4 text-xs text-muted-foreground">
+          <span className="font-medium uppercase tracking-wide">
+            {statusLabels.deprecated}:
+          </span>{' '}
+          {deprecatedItems.map((item, index) => (
+            <Fragment key={item.path || item.href}>
+              {index > 0 && ' · '}
+              <Link
+                href={getLocalizedHref(item.href || `/${item.path}`, locale)}
+                className="underline underline-offset-2 hover:text-foreground"
+              >
+                {localizeItem(item).name}
+              </Link>
+            </Fragment>
+          ))}
+        </p>
+      )}
+    </>
   )
 }
 

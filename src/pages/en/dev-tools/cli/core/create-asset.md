@@ -47,6 +47,9 @@ mplx core asset create --wizard
 - `--plugins`: Use interactive plugin selection
 - `--pluginsFile <path>`: Path to a JSON file with plugin data
 
+### Vanity Addresses
+- `--mint-keypair <path>`: Path to a keypair JSON file to use as the asset address instead of generating a random one. See [Grind a vanity public key](/solana/grind-vanity-public-key).
+
 ## Examples
 
 1. Create an asset using the interactive wizard:
@@ -72,6 +75,14 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 5. Create an asset with files and a collection:
 ```bash
 mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
+```
+
+6. Create an asset with a vanity address:
+```bash
+mplx core asset create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-asset.json
 ```
 
 ## JSON Output

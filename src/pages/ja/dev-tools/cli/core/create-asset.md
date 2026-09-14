@@ -45,6 +45,9 @@ mplx core asset create --wizard
 - `--plugins`: インタラクティブなプラグイン選択を使用
 - `--pluginsFile <path>`: プラグインデータを含むJSONファイルへのパス
 
+### バニティアドレス
+- `--mint-keypair <path>`: ランダム生成の代わりにアセットアドレスとして使用するキーペアJSONファイルのパス。[バニティ公開鍵の生成](/ja/solana/grind-vanity-public-key)を参照。
+
 ## 例
 
 1. インタラクティブウィザードを使用してアセットを作成：
@@ -70,6 +73,14 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 5. ファイルとコレクション付きのアセットを作成：
 ```bash
 mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json" --collection "collection_id_here"
+```
+
+6. バニティアドレスでアセットを作成:
+```bash
+mplx core asset create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-asset.json
 ```
 
 ## 出力

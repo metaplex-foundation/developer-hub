@@ -28,8 +28,10 @@ faqs:
     a: 大規模なアカウント作成（Merkleツリー、Candy Machine）とネイティブSOLラッピングは、Solana CPIサイズ制限により失敗します。まず通常のウォレットでこのインフラストラクチャを作成し、その後の操作でアセット署名者ウォレットに切り替えてください。
   - q: PDAが解決するアドレスを確認するにはどうすればよいですか？
     a: "`mplx core asset execute info <assetId>`を実行します。これにより、決定論的なサイナーPDAアドレスとその現在のSOL残高が表示されます。"
+  - q: PDAに資金が残っている状態でAssetをバーンするとどうなりますか？
+    a: Assetをバーンするとexecuteは失敗するため、PDA内のSOL、トークン、入れ子のアセットは取り残されます。先に転送してください。
 created: '03-19-2026'
-updated: '03-19-2026'
+updated: '09-01-2026'
 ---
 
 ## 概要
@@ -53,7 +55,7 @@ mplx config wallets add vault --asset <assetId>
 # 3. PDA情報を確認
 mplx core asset execute info <assetId>
 
-# 4. PDAに資金を送金
+# 4. PDAに資金を送金（ステップ3のSigner PDAアドレスを使用し、アセットアドレスには絶対に送金しないでください）
 mplx toolbox sol transfer 0.1 <signerPdaAddress>
 
 # 5. アセット署名者ウォレットに切り替え
@@ -223,6 +225,10 @@ CLIはエラーを返し、まず所有者ウォレットを追加するよう�
 
 [`mplx core asset execute info <assetId>`](/dev-tools/cli/core/execute)を実行します。これにより、決定論的なサイナーPDAアドレスとその現在のSOL残高が表示されます。
 
+### PDAに資金が残っている状態でAssetをバーンするとどうなりますか？
+
+[`execute`](/ja/smart-contracts/core/execute-asset-signing)はAssetのバーン後に失敗するため、PDA内のSOL、トークン、入れ子のアセットは取り残されます。先に転送してください。
+
 ## 注意事項
 
 - アセット署名者ウォレットには、アセット所有者のウォレットが[ウォレット設定](/dev-tools/cli/config/wallets)に保存されている必要があります — まず所有者ウォレットを追加してください
@@ -230,3 +236,4 @@ CLIはエラーを返し、まず所有者ウォレットを追加するよう�
 - アセット署名者ウォレットから切り替えると、コマンドは通常のキーペア署名に戻ります
 - `-k`フラグはアセット署名者ウォレットを含む、アクティブなウォレットよりも常に優先されます
 - `mplx toolbox raw`によるローインストラクションは、アセット署名者ウォレットがアクティブな場合、他のコマンドと同様に`execute()`でラップされます
+- Assetをバーンすると`execute`は永久に無効になります。先にサイナーPDAを空にしないと、残りのSOL、トークン、入れ子のアセットは取り残されます

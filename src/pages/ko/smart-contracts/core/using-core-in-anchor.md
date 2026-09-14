@@ -2,7 +2,7 @@
 title: Anchor에서 Metaplex Core 사용하기
 metaTitle: Anchor에서 Metaplex Core 사용하기 | Metaplex Core
 description: Metaplex Core를 Anchor 프로그램에 통합합니다. 온체인 NFT 작업을 위한 CPI 호출, 계정 역직렬화 및 플러그인 액세스를 배웁니다.
-updated: '01-31-2026'
+updated: '07-15-2026'
 keywords:
   - Core Anchor
   - mpl-core CPI
@@ -17,7 +17,11 @@ programmingLanguage:
   - Rust
 faqs:
   - q: anchor 기능 플래그가 필요한가요?
-    a: 예, Accounts 구조체에서 직접 역직렬화하려면 필요합니다. 없으면 from_bytes()를 수동으로 사용하세요.
+    a: 예, Accounts 구조체에서 직접 역직렬화하려면 필요합니다. 없으면 from_bytes()를 수동으로 사용하세요. anchor를 활성화할 때는 항상 default-features = false를 설정하세요.
+  - q: 어떤 Anchor 버전을 사용해야 하나요?
+    a: anchor-lang 0.32.x의 경우 default-features = false와 features = ["anchor", "anchor-0-32"]를 사용하세요. anchor-lang 0.31.x의 경우 features = ["anchor"]만 사용하세요.
+  - q: 어떤 Rust 버전이 필요한가요?
+    a: mpl-core는 Rust 1.89.0 이상이 필요합니다. Anchor 프로젝트의 rust-toolchain.toml에 버전을 고정하세요.
   - q: 플러그인이 존재하는지 어떻게 확인하나요?
     a: Option을 반환하는 fetch_plugin()을 사용하세요 - 플러그인이 존재하지 않아도 오류가 발생하지 않습니다.
   - q: 외부 플러그인(Oracle, AppData)에 액세스할 수 있나요?
@@ -34,7 +38,9 @@ Anchor를 사용하여 Core Asset과 상호 작용하는 **온체인 프로그�
 {% /callout %}
 ## 요약
 `mpl-core` Rust 크레이트는 Anchor 프로그램에서 Core와 상호 작용하는 데 필요한 모든 것을 제공합니다. 네이티브 Anchor 계정 역직렬화를 위해 `anchor` 기능 플래그를 활성화하세요.
-- `features = ["anchor"]`와 함께 `mpl-core` 추가
+- `default-features = false`와 적절한 Anchor 기능으로 `mpl-core` 추가
+- `anchor-lang 0.32.x`와 함께 `features = ["anchor", "anchor-0-32"]` 사용
+- `anchor-lang 0.31.x`와 함께 `features = ["anchor"]` 사용
 - Accounts 구조체에서 Asset/Collection 역직렬화
 - 플러그인 데이터를 읽으려면 `fetch_plugin()` 사용
 - CPI 빌더로 명령 호출 단순화
@@ -42,26 +48,45 @@ Anchor를 사용하여 Core Asset과 상호 작용하는 **온체인 프로그�
 클라이언트 측 JavaScript SDK([JavaScript SDK](/smart-contracts/core/sdk/javascript) 참조), 독립 실행형 Rust 클라이언트([Rust SDK](/smart-contracts/core/sdk/rust) 참조), 클라이언트에서 Core Asset 생성.
 ## 빠른 시작
 **바로가기:** [설치](#설치) · [계정 역직렬화](#계정-역직렬화) · [플러그인 액세스](#플러그인-역직렬화) · [CPI 예제](#cpi-명령-빌더)
-1. Cargo.toml에 `mpl-core = { version = "x.x.x", features = ["anchor"] }` 추가
-2. `Account<'info, BaseAssetV1>`로 Asset 역직렬화
-3. `fetch_plugin::<BaseAssetV1, PluginType>()`으로 플러그인 액세스
-4. `CreateV2CpiBuilder`, `TransferV1CpiBuilder` 등으로 CPI 호출
+1. `default-features = false`와 Anchor 기능으로 `mpl-core`를 Cargo.toml에 추가
+2. `rust-toolchain.toml`에 Rust `1.89.0` 이상 고정
+3. `Account<'info, BaseAssetV1>`로 Asset 역직렬화
+4. `fetch_plugin::<BaseAssetV1, PluginType>()`으로 플러그인 액세스
+5. `CreateV2CpiBuilder`, `TransferV1CpiBuilder` 등으로 CPI 호출
 ## 설치
-Anchor 프로젝트에서 Core를 사용하려면 먼저 다음을 실행하여 프로젝트에 최신 버전의 크레이트를 추가했는지 확인하세요:
-```rust
-cargo add mpl-core
-```
-또는 cargo.toml 파일에서 버전을 수동으로 지정할 수 있습니다:
-```rust
-[dependencies]
-mpl-core = "x.x.x"
-```
+Anchor 프로그램의 `Cargo.toml`에 `mpl-core`를 추가합니다. 기본 `borsh-v1` 기능은 Anchor 통합과 호환되지 않으므로 `anchor`를 활성화할 때는 항상 기본 기능을 비활성화해야 합니다.
 ### 기능 플래그
-Core 크레이트를 사용하면 `cargo.toml`의 종속성 항목을 수정하여 mpl-core 크레이트에서 anchor 기능 플래그를 활성화하여 Anchor 전용 기능에 액세스할 수 있습니다:
+| 기능 | 설명 |
+|------|------|
+| `anchor` | `anchor-lang 0.31.1` 및 Solana 2.x 타입으로 Anchor 계정 역직렬화 활성화 |
+| `anchor-0-32` | `anchor-lang 0.32.x` 지원을 위한 선택적 기능; `anchor` 필요 |
+| `serde` | 오프체인 도구를 위한 선택적 serde 지원 |
+#### Anchor 0.32.x (권장)
+프로그램이 `anchor-lang 0.32.x`에 의존하는 경우:
 ```rust
 [dependencies]
-mpl-core = { version = "x.x.x", features = [ "anchor" ] }
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
+#### Anchor 0.31.x (레거시)
+프로그램이 `anchor-lang 0.31.x`에 의존하는 경우:
+```rust
+[dependencies]
+anchor-lang = "0.31.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor"] }
+```
+{% callout title="중요" %}
+- `anchor-0-32`만으로는 충분하지 않습니다 — `anchor`와 함께 사용해야 합니다.
+- `default-features = false`가 필요합니다. 그렇지 않으면 기본 `borsh-v1` 기능이 Anchor 통합과 충돌합니다.
+- Anchor 경로는 `Pubkey`, `AccountInfo` 및 관련 Anchor trait에 Solana 2.x 타입을 사용합니다.
+{% /callout %}
+### Rust 툴체인
+`mpl-core`는 **Rust 1.89.0** 이상이 필요합니다. Anchor 워크스페이스에 `rust-toolchain.toml` 파일을 추가하세요:
+```toml
+[toolchain]
+channel = "1.89.0"
+```
+`base64ct`와 같은 전이 종속성으로 인해 `edition2024` 오류가 발생하면 Rust 1.89.0 이상으로 업그레이드하세요.
 ### Core Rust SDK 모듈
 Core Rust SDK는 여러 모듈로 구성됩니다:
 - `accounts`: 프로그램의 계정을 나타냅니다.
@@ -163,7 +188,10 @@ Asset 또는 Collection 계정이 존재하지 않거나 아직 생성되지 않
 ### `InvalidAuthority`
 서명자에게 이 작업에 대한 권한이 없습니다. 올바른 authority가 서명하고 있는지 확인하세요.
 ## 참고 사항
-- 네이티브 역직렬화를 위해 항상 `features = ["anchor"]` 활성화
+- Anchor 기능을 활성화할 때 항상 `default-features = false` 설정
+- `anchor-lang 0.32.x`와 함께 `features = ["anchor", "anchor-0-32"]` 사용
+- `anchor-lang 0.31.x`와 함께 `features = ["anchor"]` 사용
+- `rust-toolchain.toml`에 Rust `1.89.0` 이상 고정
 - 기본 제공 플러그인에는 `fetch_plugin()`, 외부 플러그인에는 `fetch_external_plugin()` 사용
 - CPI 빌더는 계정 순서 복잡성을 추상화
 - 전체 API 참조는 [docs.rs/mpl-core](https://docs.rs/mpl-core/) 확인
@@ -188,7 +216,11 @@ Asset 또는 Collection 계정이 존재하지 않거나 아직 생성되지 않
 | Plugin Registry | `PluginRegistryV1` |
 ## FAQ
 ### anchor 기능 플래그가 필요한가요?
-예, Accounts 구조체에서 직접 역직렬화하려면 필요합니다. 없으면 `from_bytes()`를 수동으로 사용하세요.
+예, Accounts 구조체에서 직접 역직렬화하려면 필요합니다. 없으면 `from_bytes()`를 수동으로 사용하세요. `anchor`를 활성화할 때는 항상 `default-features = false`를 설정하세요.
+### 어떤 Anchor 버전을 사용해야 하나요?
+`anchor-lang 0.32.x`의 경우 `default-features = false`와 `features = ["anchor", "anchor-0-32"]`를 사용하세요. `anchor-lang 0.31.x`의 경우 `features = ["anchor"]`만 사용하세요.
+### 어떤 Rust 버전이 필요한가요?
+`mpl-core`는 Rust **1.89.0** 이상이 필요합니다. Anchor 프로젝트의 `rust-toolchain.toml`에 버전을 고정하세요.
 ### 플러그인이 존재하는지 어떻게 확인하나요?
 `Option`을 반환하는 `fetch_plugin()`을 사용하세요 - 플러그인이 존재하지 않아도 오류가 발생하지 않습니다.
 ### 외부 플러그인(Oracle, AppData)에 액세스할 수 있나요?
@@ -203,6 +235,7 @@ Asset 또는 Collection 계정이 존재하지 않거나 아직 생성되지 않
 | **BaseAssetV1** | 역직렬화를 위한 Core Asset 계정 구조체 |
 | **fetch_plugin()** | 계정에서 플러그인 데이터를 읽는 함수 |
 | **anchor feature** | Anchor 네이티브 역직렬화를 활성화하는 Cargo 기능 |
+| **anchor-0-32 feature** | `anchor-lang 0.32.x` 지원을 위한 선택적 Cargo 기능 |
 ## 관련 페이지
 - [Anchor 스테이킹 예제](/smart-contracts/core/guides/anchor/anchor-staking-example) - 완전한 스테이킹 프로그램
 - [Anchor로 Asset 생성](/smart-contracts/core/guides/anchor/how-to-create-a-core-nft-asset-with-anchor) - 단계별 가이드

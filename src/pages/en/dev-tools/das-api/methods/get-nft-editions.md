@@ -4,7 +4,7 @@ metaTitle: Get NFT Editions | DAS API
 description: Get all printable editions of a master edition NFT mint
 ---
 
-Returns all printable editions for a master edition NFT mint—including edition numbers, addresses, and supply information. You can also pass an edition address to retrieve the corresponding master edition and its sibling editions.
+Returns all printable editions for a master edition NFT mint, including edition numbers, addresses, and supply information.
 
 ## Parameters
 
@@ -26,9 +26,13 @@ The response includes:
   - `edition_number` - The edition number (1, 2, 3, etc.)
   - `mint_address` - The mint address of the edition
 - `master_edition_address` - Address of the master edition account
-- `supply` - Current number of editions minted
-- `max_supply` - Maximum number of editions that can be minted (null for unlimited)
+- `supply` - Total number of editions minted for this master edition
+- `max_supply` - Maximum number of editions that can be minted (`null` for unlimited)
+- `total` - Number of editions returned in the current page. Use `supply` for the overall minted count.
+- Pagination fields: `cursor`, `page`, `limit`, `before`, `after`
+
+If the mint does not have a master edition account, the RPC returns an error.
 
 ## Playground
 
-{% apiRenderer method="getNftEditions" noUmi=true /%}
+{% apiRenderer method="getNftEditions" /%}

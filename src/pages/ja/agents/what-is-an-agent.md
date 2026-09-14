@@ -49,5 +49,3 @@ Solana上の自律型エージェントは、[Metaplex Agent Registry](/smart-co
 - **[エージェントを実行](/agents/run-an-agent)** — エグゼクティブプロファイルを設定し、実行を委任
 - **[エージェントファイナンス](/agents/agent-finance)** — エージェント独自のオンチェーントークンを通じて資金を調達
 - **[エージェントコマース](/agents/agent-commerce)** — エージェントが収益を得て自律的に取引
-
-*Metaplexが管理 · 2026年3月検証済み*

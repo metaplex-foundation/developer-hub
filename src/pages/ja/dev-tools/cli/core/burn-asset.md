@@ -6,6 +6,10 @@ description: Metaplex CLIを使用してMPL Coreアセットをバーンする
 
 `mplx core asset burn`コマンドを使用すると、MPL Coreアセットを永久に破棄し、レント手数料を回収できます。単一のアセットをバーンすることも、JSONリストファイルを使用して複数のアセットを一度にバーンすることもできます。
 
+{% callout type="warning" title="バーン前にAsset Signerの残高を引き出す" %}
+Core Assetをバーンすると[`execute`](/ja/smart-contracts/core/execute-asset-signing)は失敗します。Asset Signer PDAに残っているSOL、トークン、その他のアセットは回収できないまま取り残されます。先に転送してください — PDAは[`mplx core asset execute info`](/ja/dev-tools/cli/core/execute)で確認できます。
+{% /callout %}
+
 ## 基本的な使い方
 
 ### 単一アセットをバーン
@@ -77,6 +81,7 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 注意事項
 
 - **警告**：バーンは永久的で元に戻すことはできません
+- バーン前に[Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing)を空にする — その後`execute`は失敗し、残りのSOL、トークン、入れ子のアセットは取り残されます
 - アセットをバーンするには、そのアセットの所有者である必要があります
 - アセットをバーンすると、ほとんどのレントSOLが所有者に返金されます
 - アカウントの再利用を防ぐため、少額（約0.00089784 SOL）が残ります

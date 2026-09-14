@@ -7,6 +7,8 @@ tableOfContents: false
 
 返回按所有者地址、铸币地址或两者过滤的代币账户列表。用于查找与钱包关联的所有代币账户或持有特定代币的所有账户。
 
+必须提供 `ownerAddress` 或 `mintAddress` 中的至少一个。
+
 ## 参数
 
 | 名称           | 必需 | 描述                                          |
@@ -18,7 +20,12 @@ tableOfContents: false
 | `limit`        |         | 返回的最大代币账户数量。          |
 | `before`       |         | 返回此游标之前的账户。                  |
 | `after`        |         | 返回此游标之后的账户。                   |
-| `options`      |         | 额外的[显示选项](/zh/dev-tools/das-api/display-options)。              |
+| `options`      |         | 查询显示选项。也可使用 `displayOptions`。 |
+| `options.showZeroBalance` | | 是否在结果中包含零余额账户。 |
+| `options.showFungible` | | API 接受；在此方法上保留供将来使用。 |
+| `options.showCollectionMetadata` | | API 接受；在此方法上保留供将来使用。 |
+| `options.showUnverifiedCollections` | | API 接受；在此方法上保留供将来使用。 |
+| `options.showInscription` | | API 接受；在此方法上保留供将来使用。 |
 
 ## 响应
 
@@ -35,8 +42,11 @@ tableOfContents: false
   - `close_authority` - 关闭权限地址（如果有）
   - `extensions` - 代币扩展数据
 - `errors` - 处理过程中遇到的任何错误数组
-- 分页字段：`cursor`、`page`、`limit`、`before`、`after`、`total`
+- `total` - 当前页返回的代币账户数量
+- 分页字段：`cursor`、`page`、`limit`、`before`、`after`
+
+没有匹配账户的所有者或铸币会返回空的 `token_accounts` 数组，而不是错误。
 
 ## 测试场
 
-{% apiRenderer method="getTokenAccounts" noUmi=true /%}
+{% apiRenderer method="getTokenAccounts" /%}

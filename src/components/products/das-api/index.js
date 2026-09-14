@@ -38,6 +38,7 @@ export const das = {
             { title: 'Get Assets By Authority', href: '/dev-tools/das-api/methods/get-assets-by-authority' },
             { title: 'Get Assets By Creator', href: '/dev-tools/das-api/methods/get-assets-by-creator' },
             { title: 'Get Assets By Group', href: '/dev-tools/das-api/methods/get-assets-by-group' },
+            { title: 'Get Grouping', href: '/dev-tools/das-api/methods/get-grouping' },
             { title: 'Get Assets By Owner', href: '/dev-tools/das-api/methods/get-assets-by-owner' },
             { title: 'Get NFT Editions', href: '/dev-tools/das-api/methods/get-nft-editions' },
             { title: 'Get Token Accounts', href: '/dev-tools/das-api/methods/get-token-accounts' },
@@ -64,6 +65,7 @@ export const das = {
           title: 'Core Extension SDK',
           links: [
             { title: 'Extension Overview', href: '/dev-tools/das-api/core-extension' },
+            { title: 'Getting Started', href: '/dev-tools/das-api/getting-started#das-for-mpl-core' },
             { title: 'Get Core Asset', href: '/dev-tools/das-api/core-extension/methods/get-asset' },
             { title: 'Get Core Collection', href: '/dev-tools/das-api/core-extension/methods/get-collection' },
             { title: 'Get Core Assets By Authority', href: '/dev-tools/das-api/core-extension/methods/get-assets-by-authority' },
@@ -100,6 +102,7 @@ export const das = {
       'Get Assets By Authority': 'links.getAssetsByAuthority',
       'Get Assets By Creator': 'links.getAssetsByCreator',
       'Get Assets By Group': 'links.getAssetsByGroup',
+      'Get Grouping': 'links.getGrouping',
       'Get Assets By Owner': 'links.getAssetsByOwner',
       'Get NFT Editions': 'links.getNftEditions',
       'Get Token Accounts': 'links.getTokenAccounts',

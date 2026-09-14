@@ -10,6 +10,10 @@ export const sugar = {
   github: 'https://github.com/metaplex-foundation/sugar',
   className: 'accent-sky',
   deprecated: true,
+  replacement: {
+    name: 'MPLX CLI',
+    href: '/dev-tools/cli',
+  },
   sections: [
   ],
   localizedNavigation: {

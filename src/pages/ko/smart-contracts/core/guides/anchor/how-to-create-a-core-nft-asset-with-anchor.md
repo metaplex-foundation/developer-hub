@@ -36,7 +36,8 @@ Solana의 Token 프로그램과 같은 기존 Asset 프로그램과 달리 Metap
 {% /callout %}
 ## 전제 조건
 - 선호하는 코드 에디터 (**Rust Analyzer 플러그인**이 포함된 **Visual Studio Code** 권장)
-- Anchor **0.30.1** 이상.
+- Anchor **0.32.1** 이상.
+- Rust **1.89.0** 이상 ([Anchor에서 Core 사용](/ko/smart-contracts/core/using-core-in-anchor) 참조).
 ## 초기 설정
 이 가이드에서는 필요한 모든 매크로를 `lib.rs` 파일에서 찾을 수 있는 모노 파일 접근 방식을 활용하여 **Anchor**를 사용합니다:
 - `declare_id`: 프로그램의 온체인 주소를 지정합니다.
@@ -50,14 +51,13 @@ Solana의 Token 프로그램과 같은 기존 Asset 프로그램과 달리 Metap
 anchor init create-core-asset-example
 ```
 ### 필수 Crate
-이 가이드에서는 `anchor` 기능이 활성화된 `mpl_core` crate를 사용합니다. 설치하려면 먼저 `create-core-asset-example` 디렉토리로 이동하세요:
+이 가이드에서는 Anchor 기능이 활성화된 `mpl_core` crate를 사용합니다. 프로그램의 `Cargo.toml`에 종속성을 수동으로 추가하세요:
+```toml
+[dependencies]
+anchor-lang = "0.32.1"
+mpl-core = { version = "x.x.x", default-features = false, features = ["anchor", "anchor-0-32"] }
 ```
-cd create-core-asset-example
-```
-그런 다음 다음 명령을 실행하세요:
-```
-cargo add mpl-core --features anchor
-```
+기능 플래그 세부 정보 및 Rust 툴체인 요구 사항은 [Anchor에서 Core 사용](/ko/smart-contracts/core/using-core-in-anchor)을 참조하세요.
 ## 프로그램
 ### 임포트와 템플릿
 여기서는 이 가이드에 필요한 모든 임포트를 정의하고 `lib.rs` 파일에 Account 구조체와 명령어의 템플릿을 생성합니다.

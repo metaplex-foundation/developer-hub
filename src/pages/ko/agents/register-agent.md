@@ -206,5 +206,3 @@ await registerIdentityV1(umi, {
 - `agentRegistrationUri`는 영구적으로 호스팅된 JSON(예: Arweave)을 가리켜야 합니다. URI에 접근할 수 없게 되더라도 온체인 신원은 여전히 존재하지만 클라이언트는 에이전트의 메타데이터를 가져올 수 없습니다.
 - `collection` 매개변수는 선택사항이지만 권장됩니다 — 등록 시 컬렉션 수준 권한 검사를 활성화합니다.
 - Transfer, Update, Execute 라이프사이클 훅은 자동으로 첨부됩니다. 이러한 훅을 통해 신원 플러그인이 자산에 대한 작업의 승인 또는 거부에 참여할 수 있습니다.
-
-*Metaplex 관리 · 2026년 3월 검증 완료 · [GitHub에서 소스 보기](https://github.com/metaplex-foundation/mpl-agent)*

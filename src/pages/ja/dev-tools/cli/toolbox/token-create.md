@@ -30,6 +30,7 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 - `--description <string>`: トークンとその目的の説明
 - `--image <path>`: トークン画像ファイルへのパス（PNG、JPG、またはGIF）
 - `--speed-run`: 実行時間を測定するスピードランモードを有効化
+- `--mint-keypair <path>`: トークンミントアドレスとして使用するキーペアJSONファイルのパス（バニティキー）。[バニティ公開鍵の生成](/ja/solana/grind-vanity-public-key)を参照。
 
 ## 例
 
@@ -47,6 +48,15 @@ mplx toolbox token create \
   --image ./token-image.png \
   --decimals 2 \
   --mint-amount 1000000
+```
+
+### バニティミントアドレスでトークンを作成
+```bash
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-mint.json
 ```
 
 ### ウィザードを使用してトークンを作成

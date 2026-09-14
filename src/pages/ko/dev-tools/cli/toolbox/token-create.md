@@ -30,6 +30,7 @@ mplx toolbox token create --name "My Token" --symbol "TOKEN" --mint-amount 10000
 - `--description <string>`: 토큰과 그 목적에 대한 설명
 - `--image <path>`: 토큰 이미지 파일 경로 (PNG, JPG 또는 GIF)
 - `--speed-run`: 실행 시간을 측정하기 위한 스피드런 모드 활성화
+- `--mint-keypair <path>`: 토큰 민트 주소로 사용할 키페어 JSON 파일 경로(바니티 키). [바니티 공개키 생성](/ko/solana/grind-vanity-public-key) 참조.
 
 ## 예시
 
@@ -47,6 +48,15 @@ mplx toolbox token create \
   --image ./token-image.png \
   --decimals 2 \
   --mint-amount 1000000
+```
+
+### 바니티 민트 주소로 토큰 생성
+```bash
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-mint.json
 ```
 
 ### 마법사를 사용하여 토큰 생성

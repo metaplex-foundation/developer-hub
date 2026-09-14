@@ -9,6 +9,22 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/docs',
+        basePath: false,
+        permanent: false,
+      },
+      {
+        source: '/:path((?!docs(?:/|$)|_next/|api/|.*\\..*).*)',
+        destination: '/docs/:path',
+        basePath: false,
+        permanent: false,
+      },
+    ]
+  },
   webpack: (config, { isServer }) => {
     // Tell webpack to NOT parse example files as modules
     // This prevents webpack from trying to resolve their imports
