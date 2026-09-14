@@ -1,6 +1,6 @@
 {
   "comment": "Known-broken in-page anchor links, mostly localized pages that link to English anchors while their headings are translated. CI fails on anything not listed here. Regenerate with: node scripts/audit-heading-anchors.mjs --update-baseline",
-  "total": 453,
+  "total": 452,
   "brokenLinks": {
     "src/pages/en/dev-tools/mobile-sdks/android.md#findAllByMintList": 2,
     "src/pages/en/dev-tools/mobile-sdks/android.md#findAuctionHouseByAddress": 2,
@@ -416,7 +416,6 @@
     "src/pages/zh/smart-contracts/genesis/bonding-curve-swaps.md#slippage-protection": 1,
     "src/pages/zh/smart-contracts/genesis/bonding-curve-swaps.md#umi-and-genesis-plugin-setup": 1,
     "src/pages/zh/smart-contracts/genesis/bonding-curve-swaps.md#wsol-wrapping-note": 1,
-    "src/pages/zh/smart-contracts/genesis/creator-fees.md#agent-发行自动-pda-路由": 1,
     "src/pages/zh/smart-contracts/genesis/creator-fees.md#步骤-1--从-raydium-cpmm-池收集费用": 1,
     "src/pages/zh/smart-contracts/genesis/creator-fees.md#步骤-2--认领费用到创作者钱包": 1,
     "src/pages/zh/smart-contracts/genesis/sdk/javascript.md#gpa-构建器--按发行类型查询": 1,

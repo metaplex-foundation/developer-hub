@@ -36,7 +36,17 @@ const TYPOGRAPHIC = [
 ]
 
 function normalize(value) {
-  let text = value.normalize('NFC').replace(INVISIBLE, '')
+  return value.normalize('NFC').replace(INVISIBLE, '')
+}
+
+/**
+ * Folds typographic punctuation to ASCII. Only used to decide whether a
+ * heading can stay on the legacy path, and to feed it when it can — never on
+ * the Unicode path, where an em dash should disappear the way GitHub-style
+ * anchors expect rather than becoming a hyphen.
+ */
+function foldTypographic(value) {
+  let text = value
   for (const [pattern, replacement] of TYPOGRAPHIC) {
     text = text.replace(pattern, replacement)
   }
@@ -70,7 +80,10 @@ export function slugifyHeading(value) {
   if (!raw.trim()) return ''
   const text = normalize(raw)
   if (!text.trim()) return ''
-  return NON_ASCII.test(text) ? unicodeSlug(text) : slugify(text)
+  const folded = foldTypographic(text)
+  // A heading that is ASCII once curly quotes and dashes are folded keeps the
+  // legacy slug, so long-standing English anchors do not move.
+  return NON_ASCII.test(folded) ? unicodeSlug(text) : slugify(folded)
 }
 
 /**
