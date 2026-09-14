@@ -22,11 +22,11 @@ created: '09-08-2026'
 updated: '09-08-2026'
 ---
 
-Metaplex x402 API 部署在 `https://api.metaplex.com/x402`，提供三项付费服务、两个免费发现端点和四条 Agent 委托路由。本页是端点、定价和客户端导出的参考；构建付费端点所需的支持支付 `fetch` 的方法见[支付模式指南](/agents/x402/payment-modes)。{% .lead %}
+Metaplex x402 API 部署在 `https://api.metaplex.com/x402`，提供三项付费服务、两个免费发现端点和四条 Agent 委托路由。本页是端点、定价和客户端导出的参考；构建付费端点所需的支持支付 `fetch` 的方法见[支付模式指南](/zh/agents/x402/payment-modes)。{% .lead %}
 
 ## 摘要 {% #summary %}
 
-每个付费端点都会对未付费请求返回 HTTP `402`，并附带 `PAYMENT-REQUIRED` 头，精确说明需要支付什么；客户端随后对一笔 USDC 支付签名并重试。发现端点无需支付也无需签名者。
+每个付费端点都会对未付费请求返回 HTTP `402`，并附带 `PAYMENT-REQUIRED` 头，精确说明需要支付什么，客户端随后携带支付证明重试。标准钱包模式，以及 Core 资产或 Agent 直接支付的模式，都会在本地为每笔支付签名；而委托 Agent 则通过一次消息签名完成认证，由服务从 Agent 钱包构建支付。发现端点无需支付也无需签名者。
 
 - **基础 URL** — API 为 `https://api.metaplex.com/x402`，Solana JSON-RPC 为 `https://api.metaplex.com/x402/rpc`
 - **传输格式** — 聊天与图像使用标准 OpenAI 请求/响应体，RPC 使用标准 Solana JSON-RPC
@@ -52,7 +52,7 @@ Metaplex x402 API 部署在 `https://api.metaplex.com/x402`，提供三项付费
 | `GET` | `/x402/pricing` | 免费 | 模型费率、请求最低金额、RPC 方法价格、法律条款 URL |
 | `POST` | `/x402/chat/completions` | 付费 | OpenAI 兼容的聊天补全 |
 | `POST` | `/x402/images/generations` | 付费 | OpenAI 兼容的图像生成 |
-| `POST` | `/x402/rpc` | 付费 | Solana JSON-RPC 与 DAS，仅限 HTTP |
+| `POST` | `/x402/rpc` | 付费 | Solana JSON-RPC 与 [DAS](/zh/solana/rpcs-and-das)，仅限 HTTP |
 | `GET` | `/x402/core-execute-delegate/status` | 免费 | Core 资产的委托状态 |
 | `POST` | `/x402/core-execute-delegate/approve` | 免费 | 批准执行委托 |
 | `POST` | `/x402/core-execute-delegate/revoke` | 免费 | 撤销执行委托 |
@@ -151,7 +151,7 @@ const { image } = await generateImage({
 
 ## Solana RPC 端点 {% #solana-rpc-endpoint %}
 
-`POST /x402/rpc` 接受标准的 Solana JSON-RPC 请求并透传 [DAS](/solana/rpcs-and-das) 方法，每个请求单独定价与支付。
+`POST /x402/rpc` 接受标准的 Solana JSON-RPC 请求并透传 [DAS](/zh/solana/rpcs-and-das) 方法，每个请求单独定价与支付。
 
 ```ts {% title="通过 Solana Kit 使用 Solana RPC" %}
 import { createSolanaRpcFromTransport, type RpcTransport } from '@solana/kit';

@@ -22,11 +22,11 @@ created: '09-08-2026'
 updated: '09-08-2026'
 ---
 
-Metaplex x402 APIは`https://api.metaplex.com/x402`で提供され、3つの有料サービス、2つの無料ディスカバリーエンドポイント、4つのエージェント委任ルートを公開しています。このページはエンドポイント、料金、クライアントエクスポートのリファレンスです。有料エンドポイントに必要な支払い対応`fetch`の構築方法は[支払いモードガイド](/agents/x402/payment-modes)で説明しています。{% .lead %}
+Metaplex x402 APIは`https://api.metaplex.com/x402`で提供され、3つの有料サービス、2つの無料ディスカバリーエンドポイント、4つのエージェント委任ルートを公開しています。このページはエンドポイント、料金、クライアントエクスポートのリファレンスです。有料エンドポイントに必要な支払い対応`fetch`の構築方法は[支払いモードガイド](/ja/agents/x402/payment-modes)で説明しています。{% .lead %}
 
 ## 概要 {% #summary %}
 
-すべての有料エンドポイントは、未払いのリクエストに対してHTTP `402`と、何をいくら支払えばよいかを正確に記述した`PAYMENT-REQUIRED`ヘッダーを返します。クライアントはUSDCの支払いに署名して再試行します。ディスカバリーエンドポイントには支払いも署名者も不要です。
+すべての有料エンドポイントは、未払いのリクエストに対してHTTP `402`と、何をいくら支払えばよいかを正確に記述した`PAYMENT-REQUIRED`ヘッダーを返し、クライアントは支払い証明と共に再試行します。標準ウォレットモードと、Coreアセットまたはエージェントが直接支払うモードでは、支払いごとにローカルで署名します。委任されたエージェントの場合は、メッセージ署名で一度認証を行い、サービスがエージェントのウォレットから支払いを構築します。ディスカバリーエンドポイントには支払いも署名者も不要です。
 
 - **ベースURL** — APIは`https://api.metaplex.com/x402`、Solana JSON-RPCは`https://api.metaplex.com/x402/rpc`
 - **ワイヤーフォーマット** — チャットと画像は正規のOpenAIリクエスト/レスポンスボディ、RPCは標準のSolana JSON-RPC
@@ -52,7 +52,7 @@ Metaplex x402 APIは`https://api.metaplex.com/x402`で提供され、3つの有�
 | `GET` | `/x402/pricing` | 無料 | モデル単価、リクエスト最低額、RPCメソッド別価格、法務URL |
 | `POST` | `/x402/chat/completions` | 有料 | OpenAI互換のチャット補完 |
 | `POST` | `/x402/images/generations` | 有料 | OpenAI互換の画像生成 |
-| `POST` | `/x402/rpc` | 有料 | Solana JSON-RPCとDAS、HTTPのみ |
+| `POST` | `/x402/rpc` | 有料 | Solana JSON-RPCと[DAS](/ja/solana/rpcs-and-das)、HTTPのみ |
 | `GET` | `/x402/core-execute-delegate/status` | 無料 | Coreアセットの委任ステータス |
 | `POST` | `/x402/core-execute-delegate/approve` | 無料 | 実行委任の承認 |
 | `POST` | `/x402/core-execute-delegate/revoke` | 無料 | 実行委任の取り消し |
@@ -151,7 +151,7 @@ const { image } = await generateImage({
 
 ## Solana RPCエンドポイント {% #solana-rpc-endpoint %}
 
-`POST /x402/rpc`は標準のSolana JSON-RPCリクエストを受け付け、[DAS](/solana/rpcs-and-das)メソッドをパススルーし、リクエストごとに個別に課金・決済します。
+`POST /x402/rpc`は標準のSolana JSON-RPCリクエストを受け付け、[DAS](/ja/solana/rpcs-and-das)メソッドをパススルーし、リクエストごとに個別に課金・決済します。
 
 ```ts {% title="Solana KitによるSolana RPC" %}
 import { createSolanaRpcFromTransport, type RpcTransport } from '@solana/kit';

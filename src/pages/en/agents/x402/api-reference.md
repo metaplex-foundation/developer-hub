@@ -26,7 +26,7 @@ The Metaplex x402 API is served at `https://api.metaplex.com/x402` and exposes t
 
 ## Summary
 
-Every paid endpoint answers an unpaid request with HTTP `402` and a `PAYMENT-REQUIRED` header describing exactly what to pay; the client signs a USDC payment and retries. Discovery endpoints need no payment and no signer.
+Every paid endpoint answers an unpaid request with HTTP `402` and a `PAYMENT-REQUIRED` header describing exactly what to pay, and the client retries with a payment proof. Standard-wallet and direct Core asset or agent modes sign each payment locally; a delegated agent instead authenticates once with a message signature and lets the service build payments from the agent's wallet. Discovery endpoints need no payment and no signer.
 
 - **Base URLs** — `https://api.metaplex.com/x402` for the API, `https://api.metaplex.com/x402/rpc` for Solana JSON-RPC
 - **Wire format** — canonical OpenAI request and response bodies for chat and images, standard Solana JSON-RPC for RPC
@@ -52,7 +52,7 @@ Paid endpoints require a payment-aware `fetch`; free endpoints do not.
 | `GET` | `/x402/pricing` | Free | Model rates, request minimums, RPC method prices, legal URLs |
 | `POST` | `/x402/chat/completions` | Paid | OpenAI-compatible chat completions |
 | `POST` | `/x402/images/generations` | Paid | OpenAI-compatible image generation |
-| `POST` | `/x402/rpc` | Paid | Solana JSON-RPC and DAS, HTTP only |
+| `POST` | `/x402/rpc` | Paid | Solana JSON-RPC and [DAS](/solana/rpcs-and-das), HTTP only |
 | `GET` | `/x402/core-execute-delegate/status` | Free | Delegation status for a Core asset |
 | `POST` | `/x402/core-execute-delegate/approve` | Free | Approve execution delegation |
 | `POST` | `/x402/core-execute-delegate/revoke` | Free | Revoke execution delegation |

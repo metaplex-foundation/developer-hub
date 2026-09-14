@@ -102,7 +102,7 @@ After registration, anyone can resolve the agent's metadata from its onchain `ag
 
 ## x402 Stablecoin Payments on Metaplex
 
-[x402](https://www.x402.org) is an emerging protocol that uses HTTP `402 Payment Required` to make stablecoin micropayments a first-class part of API access. A client requests a resource, gets back a `402` with payment instructions, settles onchain, and retries with a payment proof.
+Metaplex operates [Metaplex x402](/agents/x402), a live pay-per-request API that sells LLM inference, image generation, and Solana RPC to agents for USDC. It implements [x402](https://www.x402.org), an emerging protocol that uses HTTP `402 Payment Required` to make stablecoin micropayments a first-class part of API access: a client requests a resource, gets back a `402` with payment instructions, settles onchain, and retries with a payment proof.
 
 Metaplex ships both sides of this. On the *agent* side, a registration carries everything the protocol needs:
 

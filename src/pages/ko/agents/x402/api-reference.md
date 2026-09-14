@@ -22,11 +22,11 @@ created: '09-08-2026'
 updated: '09-08-2026'
 ---
 
-Metaplex x402 API는 `https://api.metaplex.com/x402`에서 제공되며 세 가지 유료 서비스, 두 가지 무료 디스커버리 엔드포인트, 네 개의 에이전트 위임 라우트를 노출합니다. 이 페이지는 엔드포인트, 가격, 클라이언트 익스포트 레퍼런스이며, 유료 엔드포인트에 필요한 결제 지원 `fetch`를 구성하는 방법은 [결제 모드 가이드](/agents/x402/payment-modes)에서 다룹니다. {% .lead %}
+Metaplex x402 API는 `https://api.metaplex.com/x402`에서 제공되며 세 가지 유료 서비스, 두 가지 무료 디스커버리 엔드포인트, 네 개의 에이전트 위임 라우트를 노출합니다. 이 페이지는 엔드포인트, 가격, 클라이언트 익스포트 레퍼런스이며, 유료 엔드포인트에 필요한 결제 지원 `fetch`를 구성하는 방법은 [결제 모드 가이드](/ko/agents/x402/payment-modes)에서 다룹니다. {% .lead %}
 
 ## 요약 {% #summary %}
 
-모든 유료 엔드포인트는 결제되지 않은 요청에 대해 HTTP `402`와 무엇을 얼마나 결제해야 하는지 정확히 기술한 `PAYMENT-REQUIRED` 헤더로 응답하며, 클라이언트는 USDC 결제에 서명해 재시도합니다. 디스커버리 엔드포인트에는 결제도 서명자도 필요 없습니다.
+모든 유료 엔드포인트는 결제되지 않은 요청에 대해 HTTP `402`와 무엇을 얼마나 결제해야 하는지 정확히 기술한 `PAYMENT-REQUIRED` 헤더로 응답하며, 클라이언트는 결제 증명과 함께 재시도합니다. 표준 지갑 모드와 Core 자산 또는 에이전트가 직접 결제하는 모드는 결제마다 로컬에서 서명합니다. 위임된 에이전트는 대신 메시지 서명으로 한 번 인증하고, 서비스가 에이전트 지갑에서 결제를 구성합니다. 디스커버리 엔드포인트에는 결제도 서명자도 필요 없습니다.
 
 - **베이스 URL** — API는 `https://api.metaplex.com/x402`, Solana JSON-RPC는 `https://api.metaplex.com/x402/rpc`
 - **와이어 포맷** — 채팅과 이미지는 표준 OpenAI 요청/응답 바디, RPC는 표준 Solana JSON-RPC
@@ -52,7 +52,7 @@ Metaplex x402 API는 `https://api.metaplex.com/x402`에서 제공되며 세 가�
 | `GET` | `/x402/pricing` | 무료 | 모델 요율, 요청 최소 금액, RPC 메서드별 가격, 법적 고지 URL |
 | `POST` | `/x402/chat/completions` | 유료 | OpenAI 호환 채팅 완성 |
 | `POST` | `/x402/images/generations` | 유료 | OpenAI 호환 이미지 생성 |
-| `POST` | `/x402/rpc` | 유료 | Solana JSON-RPC 및 DAS, HTTP 전용 |
+| `POST` | `/x402/rpc` | 유료 | Solana JSON-RPC 및 [DAS](/ko/solana/rpcs-and-das), HTTP 전용 |
 | `GET` | `/x402/core-execute-delegate/status` | 무료 | Core 에셋의 위임 상태 |
 | `POST` | `/x402/core-execute-delegate/approve` | 무료 | 실행 위임 승인 |
 | `POST` | `/x402/core-execute-delegate/revoke` | 무료 | 실행 위임 취소 |
@@ -151,7 +151,7 @@ const { image } = await generateImage({
 
 ## Solana RPC 엔드포인트 {% #solana-rpc-endpoint %}
 
-`POST /x402/rpc`는 표준 Solana JSON-RPC 요청을 받고 [DAS](/solana/rpcs-and-das) 메서드를 패스스루하며, 각 요청을 개별적으로 과금하고 결제합니다.
+`POST /x402/rpc`는 표준 Solana JSON-RPC 요청을 받고 [DAS](/ko/solana/rpcs-and-das) 메서드를 패스스루하며, 각 요청을 개별적으로 과금하고 결제합니다.
 
 ```ts {% title="Solana Kit을 통한 Solana RPC" %}
 import { createSolanaRpcFromTransport, type RpcTransport } from '@solana/kit';

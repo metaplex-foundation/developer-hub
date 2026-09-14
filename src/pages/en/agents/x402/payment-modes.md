@@ -48,7 +48,7 @@ Metaplex x402 supports three payment modes — a standard Solana wallet, a [Core
 
 ## Summary
 
-Choosing a payment mode means deciding which account's USDC funds a request and how often its owner signs. The client wiring differs only in which payment scheme you register; the request code that follows is identical across all three.
+Choosing a payment mode means deciding which account's USDC funds a request and how often its owner signs. The first two modes differ only in which payment scheme you register; a delegated agent also needs an auth token store and either the client extension or the fetch wrapper. Once `fetchWithPayment` exists, the request code that follows is identical across all three.
 
 - **Standard wallet** — vanilla x402 with `ExactSvmScheme`; the owner signs every payment, and no SOL is required
 - **Core asset or agent (direct)** — `MetaplexSvmExactScheme` with a `coreExecute` target; funds come from the asset's signer PDA and the owner still signs each payment
@@ -244,6 +244,10 @@ Authorization JWTs expire after 24 hours, and the client replaces them automatic
 - Implement the `MetaplexCoreExecuteDelegateAuthTokenStore` interface for any other storage backend
 - Reactive direct-payment fallback is off by default; set `fallback: true` only when the registered payment scheme should handle delegation failures
 - Pass `onEvent` to observe authentication, cache, and fallback behavior
+
+{% callout type="warning" title="Authorization tokens are bearer credentials" %}
+`LocalStorageMetaplexCoreExecuteDelegateAuthTokenStore` keeps the JWT in browser-readable storage, so any XSS on your origin can read it and spend against the delegation until the token expires or the grant is revoked. Prefer `InMemoryMetaplexCoreExecuteDelegateAuthTokenStore` unless the token genuinely has to survive a page reload, keep the agent wallet funded with only what it needs, and call `revokeMetaplexCoreExecuteDelegate` as soon as the delegation is no longer required.
+{% /callout %}
 
 ### Revoke the Delegation
 

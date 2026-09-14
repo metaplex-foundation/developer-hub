@@ -36,14 +36,14 @@ faqs:
     a: 推論の料金は上流プロバイダーのトークン単価に準拠し、1リクエストあたり$0.001の最低額が適用されます。RPC呼び出しは$0.00001からのリクエスト単位課金で、負荷の重いメソッドには高いレートが設定されています。GET /x402/pricingは最新のレートを返し、無料で呼び出せます。
 ---
 
-Metaplex x402は、LLM推論、画像生成、Solana RPCのためのリクエスト課金型HTTP APIです — APIキーもアカウントもサブスクリプションもありません。USDCを保有するSolanaウォレット、[Coreアセット](/smart-contracts/core)、または[登録済みエージェント](/agents/register-agent)を用意すれば、すべてのリクエストがその都度USDCで自動的に支払われます。{% .lead %}
+Metaplex x402は、LLM推論、画像生成、Solana RPCのためのリクエスト課金型HTTP APIです — APIキーもアカウントもサブスクリプションもありません。USDCを保有するSolanaウォレット、[Coreアセット](/ja/smart-contracts/core)、または[登録済みエージェント](/ja/agents/register-agent)を用意すれば、すべてのリクエストがその都度USDCで自動的に支払われます。{% .lead %}
 
 ## 概要 {% #summary %}
 
 Metaplex x402は、HTTPの`402 Payment Required`ステータスを機械が支払い可能なフローに変えます。アプリが通常どおりエンドポイントを呼び出すと、サーバーは支払い要件とともに`402`を返し、クライアントがUSDCの支払いに署名して再試行すると、サーバーがSolana上で決済してレスポンスを返します。このサービスはオンチェーンのMetaplexエージェントである[Mech](#mech-the-agent-that-operates-metaplex-x402)が運用しています。
 
-- **3つのサービス** — OpenAI互換のチャット補完、OpenAI互換の画像生成、そして[DAS](/solana/rpcs-and-das)パススルー対応のSolana JSON-RPC
-- **3つの支払いモード** — 標準ウォレット、Coreアセットまたはエージェントによる直接支払い、そしてリクエストごとの署名なしで支払う[委任エージェント](/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent)
+- **3つのサービス** — OpenAI互換のチャット補完、OpenAI互換の画像生成、そして[DAS](/ja/solana/rpcs-and-das)パススルー対応のSolana JSON-RPC
+- **3つの支払いモード** — 標準ウォレット、Coreアセットまたはエージェントによる直接支払い、そしてリクエストごとの署名なしで支払う[委任エージェント](/ja/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent)
 - **USDC決済** — 支払いはクラシックなSPL Tokenの関連トークンアカウントから行われ、Token-2022の支払いミントはサポートされていません
 - **オープンソースのクライアント** — [`@metaplex-foundation/x402`](https://github.com/metaplex-foundation/x402)はApache-2.0で、12個の実行可能なサンプルが付属します。ホストされたサーバーは公開されていません
 
@@ -63,11 +63,11 @@ Metaplex x402は、単一のベースURL`https://api.metaplex.com/x402`の下で
 | モデル一覧 | `GET /x402/models` | 無料 | 利用可能なモデルID |
 | 料金表 | `GET /x402/pricing` | 無料 | トークン単価、リクエスト最低額、RPCメソッド別価格 |
 
-チャットと画像のエンドポイントは正規のOpenAIワイヤーフォーマットを話すため、OpenAI互換のクライアントであれば`baseURL`を変更して支払い対応の`fetch`を渡すだけで動作します。リクエストとレスポンスの詳細は[APIリファレンス](/agents/x402/api-reference)を参照してください。
+チャットと画像のエンドポイントは正規のOpenAIワイヤーフォーマットを話すため、OpenAI互換のクライアントであれば`baseURL`を変更して支払い対応の`fetch`を渡すだけで動作します。リクエストとレスポンスの詳細は[APIリファレンス](/ja/agents/x402/api-reference)を参照してください。
 
 ## Mech: Metaplex x402を運用するエージェント {% #mech-the-agent-that-operates-metaplex-x402 %}
 
-Mechは、x402サービスを販売するオンチェーンのMetaplexエージェントであり、USDCの支払いはMechのCoreウォレットに決済されます。Mech自身も[Asset Signer PDAウォレット](/smart-contracts/core/execute-asset-signing)を持つ[登録済みエージェント](/agents/what-is-an-agent)です — つまりエージェントがあなたのエージェントにサービスを販売しており、これは[エージェントコマース](/agents/agent-commerce)のモデルがエンドツーエンドで機能している姿です。
+Mechは、x402サービスを販売するオンチェーンのMetaplexエージェントであり、USDCの支払いはMechのCoreウォレットに決済されます。Mech自身も[Asset Signer PDAウォレット](/ja/smart-contracts/core/execute-asset-signing)を持つ[登録済みエージェント](/ja/agents/what-is-an-agent)です — つまりエージェントがあなたのエージェントにサービスを販売しており、これは[エージェントコマース](/ja/agents/agent-commerce)のモデルがエンドツーエンドで機能している姿です。
 
 | 項目 | 値 |
 |------|-----|
@@ -77,7 +77,7 @@ Mechは、x402サービスを販売するオンチェーンのMetaplexエージ�
 
 ## クイックスタート {% #quick-start %}
 
-クライアントをインストールし、支払い対応の`fetch`を使ってOpenAI SDKをMetaplex x402に向けます。この例は標準ウォレットから支払います。3つのモードすべては[支払いモードガイド](/agents/x402/payment-modes)で詳しく説明しています。
+クライアントをインストールし、支払い対応の`fetch`を使ってOpenAI SDKをMetaplex x402に向けます。この例は標準ウォレットから支払います。3つのモードすべては[支払いモードガイド](/ja/agents/x402/payment-modes)で詳しく説明しています。
 
 ```sh {% title="クライアントとピア依存関係のインストール" %}
 pnpm add @metaplex-foundation/x402 \
@@ -130,7 +130,7 @@ Metaplex x402は3つの支払い方法をサポートしており、USDCの出�
 | **Coreアセットまたはエージェント（直接）** | アセットのシグナーPDAのトークンアカウント | 支払いごと | 所有者の監督下でアセットに独自の予算を持たせる場合 |
 | **委任エージェント（即時）** | エージェントのシグナーPDAのトークンアカウント | 委任時に1回のみ | 監督なしで支払う自律エージェント |
 
-委任はいつでも取り消せるオンチェーンの許可です。それぞれのセットアップ、コード、取り消し手順は[支払いモードガイド](/agents/x402/payment-modes)にあります。
+委任はいつでも取り消せるオンチェーンの許可です。それぞれのセットアップ、コード、取り消し手順は[支払いモードガイド](/ja/agents/x402/payment-modes)にあります。
 
 ## Metaplex x402のリクエスト課金の仕組み {% #how-metaplex-x402-prices-requests %}
 
@@ -198,11 +198,11 @@ Metaplex x402のドキュメント全体で使用される用語。
 | **x402** | HTTPの`402 Payment Required`ステータスを利用して、ステーブルコインのマイクロペイメントをAPIのリクエスト/レスポンスサイクルの一部にするオープンプロトコル |
 | **Metaplex x402** | 推論、画像生成、Solana RPCを販売する`https://api.metaplex.com/x402`のMetaplexホスト型x402サービス |
 | **Mech** | Metaplex x402を運用し、USDCの支払いを受け取るオンチェーンのMetaplexエージェント |
-| **Asset Signer PDA** | `["mpl-core-execute", asset]`から派生するMPL Core PDA。Coreアセットのオンチェーンウォレットであり、Coreの[Executeライフサイクルフック](/smart-contracts/core/execute-asset-signing)を通じて制御されます |
+| **Asset Signer PDA** | `["mpl-core-execute", asset]`から派生するMPL Core PDA。Coreアセットのオンチェーンウォレットであり、Coreの[Executeライフサイクルフック](/ja/smart-contracts/core/execute-asset-signing)を通じて制御されます |
 | **支払いモード** | どのアカウントが支払いを負担し、その所有者がどの頻度で署名するか — 標準ウォレット、Coreアセットまたはエージェントの直接支払い、委任エージェント |
 | **実行委任** | リクエストごとの所有者署名なしに、Mechが登録済みエージェントのウォレットから支払いを承認できるようにする、取り消し可能なオンチェーン許可（`ExecutionDelegateRecordV1`） |
 | **ファシリテーター** | リソースを返す前に、送信された支払いを検証してオンチェーンで決済するx402のコンポーネント |
-| **DAS** | [Digital Asset Standard](/solana/rpcs-and-das)の読み取りAPI。x402のRPCエンドポイントからパススルーで利用できます |
+| **DAS** | [Digital Asset Standard](/ja/solana/rpcs-and-das)の読み取りAPI。x402のRPCエンドポイントからパススルーで利用できます |
 
 ---
 

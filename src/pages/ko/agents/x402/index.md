@@ -36,14 +36,14 @@ faqs:
     a: 추론 가격은 업스트림 제공자의 토큰 요율을 따르며 요청당 $0.001의 최소 금액이 적용됩니다. RPC 호출은 요청당 $0.00001부터 과금되며 무거운 메서드에는 더 높은 요율이 적용됩니다. GET /x402/pricing은 최신 요율을 반환하며 무료로 호출할 수 있습니다.
 ---
 
-Metaplex x402는 LLM 추론, 이미지 생성, Solana RPC를 위한 요청당 과금 HTTP API입니다 — API 키도, 계정도, 구독도 없습니다. USDC를 보유한 Solana 지갑, [Core 에셋](/smart-contracts/core) 또는 [등록된 에이전트](/agents/register-agent)만 준비하면 모든 요청이 그때그때 USDC로 자체 결제됩니다. {% .lead %}
+Metaplex x402는 LLM 추론, 이미지 생성, Solana RPC를 위한 요청당 과금 HTTP API입니다 — API 키도, 계정도, 구독도 없습니다. USDC를 보유한 Solana 지갑, [Core 에셋](/ko/smart-contracts/core) 또는 [등록된 에이전트](/ko/agents/register-agent)만 준비하면 모든 요청이 그때그때 USDC로 자체 결제됩니다. {% .lead %}
 
 ## 요약 {% #summary %}
 
 Metaplex x402는 HTTP의 `402 Payment Required` 상태를 기계가 결제 가능한 흐름으로 바꿉니다. 앱이 평소처럼 엔드포인트를 호출하면 서버가 결제 요건과 함께 `402`를 응답하고, 클라이언트가 USDC 결제에 서명해 재시도하면 서버가 Solana에서 정산한 뒤 응답을 반환합니다. 이 서비스는 온체인 Metaplex 에이전트인 [Mech](#mech-the-agent-that-operates-metaplex-x402)가 운영합니다.
 
-- **세 가지 서비스** — OpenAI 호환 채팅 완성, OpenAI 호환 이미지 생성, [DAS](/solana/rpcs-and-das) 패스스루를 지원하는 Solana JSON-RPC
-- **세 가지 결제 모드** — 표준 지갑, Core 에셋 또는 에이전트의 직접 결제, 요청마다 서명하지 않고 결제하는 [위임 에이전트](/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent)
+- **세 가지 서비스** — OpenAI 호환 채팅 완성, OpenAI 호환 이미지 생성, [DAS](/ko/solana/rpcs-and-das) 패스스루를 지원하는 Solana JSON-RPC
+- **세 가지 결제 모드** — 표준 지갑, Core 에셋 또는 에이전트의 직접 결제, 요청마다 서명하지 않고 결제하는 [위임 에이전트](/ko/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent)
 - **USDC 정산** — 결제는 클래식 SPL Token 연관 토큰 계정에서 이루어지며 Token-2022 결제 민트는 지원되지 않습니다
 - **오픈소스 클라이언트** — [`@metaplex-foundation/x402`](https://github.com/metaplex-foundation/x402)는 Apache-2.0이며 실행 가능한 예제 12개가 포함됩니다. 호스팅 서버는 공개되어 있지 않습니다
 
@@ -63,11 +63,11 @@ Metaplex x402는 단일 베이스 URL `https://api.metaplex.com/x402` 아래에�
 | 모델 조회 | `GET /x402/models` | 무료 | 사용 가능한 모델 ID |
 | 가격 조회 | `GET /x402/pricing` | 무료 | 토큰 요율, 요청 최소 금액, RPC 메서드별 가격 |
 
-채팅과 이미지 엔드포인트는 표준 OpenAI 와이어 포맷을 사용하므로, OpenAI 호환 클라이언트라면 `baseURL`을 변경하고 결제 지원 `fetch`를 전달하기만 하면 동작합니다. 요청과 응답의 자세한 내용은 [API 레퍼런스](/agents/x402/api-reference)를 참고하세요.
+채팅과 이미지 엔드포인트는 표준 OpenAI 와이어 포맷을 사용하므로, OpenAI 호환 클라이언트라면 `baseURL`을 변경하고 결제 지원 `fetch`를 전달하기만 하면 동작합니다. 요청과 응답의 자세한 내용은 [API 레퍼런스](/ko/agents/x402/api-reference)를 참고하세요.
 
 ## Mech: Metaplex x402를 운영하는 에이전트 {% #mech-the-agent-that-operates-metaplex-x402 %}
 
-Mech는 x402 서비스를 판매하는 온체인 Metaplex 에이전트이며, USDC 결제는 Mech의 Core 지갑으로 정산됩니다. Mech 자체도 [Asset Signer PDA 지갑](/smart-contracts/core/execute-asset-signing)을 가진 [등록된 에이전트](/agents/what-is-an-agent)입니다 — 에이전트가 여러분의 에이전트에게 서비스를 판매하는 것으로, [에이전트 커머스](/agents/agent-commerce) 모델이 엔드투엔드로 작동하는 모습입니다.
+Mech는 x402 서비스를 판매하는 온체인 Metaplex 에이전트이며, USDC 결제는 Mech의 Core 지갑으로 정산됩니다. Mech 자체도 [Asset Signer PDA 지갑](/ko/smart-contracts/core/execute-asset-signing)을 가진 [등록된 에이전트](/ko/agents/what-is-an-agent)입니다 — 에이전트가 여러분의 에이전트에게 서비스를 판매하는 것으로, [에이전트 커머스](/ko/agents/agent-commerce) 모델이 엔드투엔드로 작동하는 모습입니다.
 
 | 항목 | 값 |
 |------|-----|
@@ -77,7 +77,7 @@ Mech는 x402 서비스를 판매하는 온체인 Metaplex 에이전트이며, US
 
 ## 빠른 시작 {% #quick-start %}
 
-클라이언트를 설치하고 결제 지원 `fetch`로 OpenAI SDK를 Metaplex x402에 연결합니다. 이 예제는 표준 지갑에서 결제하며, 세 가지 모드 전체는 [결제 모드 가이드](/agents/x402/payment-modes)에서 다룹니다.
+클라이언트를 설치하고 결제 지원 `fetch`로 OpenAI SDK를 Metaplex x402에 연결합니다. 이 예제는 표준 지갑에서 결제하며, 세 가지 모드 전체는 [결제 모드 가이드](/ko/agents/x402/payment-modes)에서 다룹니다.
 
 ```sh {% title="클라이언트 및 피어 패키지 설치" %}
 pnpm add @metaplex-foundation/x402 \
@@ -130,7 +130,7 @@ Metaplex x402는 세 가지 결제 방식을 지원하며, USDC의 출처와 소
 | **Core 에셋 또는 에이전트(직접)** | 에셋 서명자 PDA의 토큰 계정 | 결제마다 | 소유자 감독하에 에셋에 자체 예산을 부여하는 경우 |
 | **위임 에이전트(즉시)** | 에이전트 서명자 PDA의 토큰 계정 | 위임 시 한 번만 | 감독 없이 결제하는 자율 에이전트 |
 
-위임은 언제든 취소할 수 있는 온체인 승인입니다. 각 모드의 설정, 코드, 취소 절차는 [결제 모드 가이드](/agents/x402/payment-modes)에 있습니다.
+위임은 언제든 취소할 수 있는 온체인 승인입니다. 각 모드의 설정, 코드, 취소 절차는 [결제 모드 가이드](/ko/agents/x402/payment-modes)에 있습니다.
 
 ## Metaplex x402의 요청 과금 방식 {% #how-metaplex-x402-prices-requests %}
 
@@ -198,11 +198,11 @@ Metaplex x402 문서 전반에서 사용되는 용어.
 | **x402** | HTTP `402 Payment Required` 상태를 사용해 스테이블코인 마이크로페이먼트를 API 요청/응답 주기의 일부로 만드는 개방형 프로토콜 |
 | **Metaplex x402** | 추론, 이미지 생성, Solana RPC를 판매하는 `https://api.metaplex.com/x402`의 Metaplex 호스팅 x402 서비스 |
 | **Mech** | Metaplex x402를 운영하고 USDC 결제를 수령하는 온체인 Metaplex 에이전트 |
-| **Asset Signer PDA** | `["mpl-core-execute", asset]`에서 파생되는 MPL Core PDA. Core 에셋의 온체인 지갑이며 Core의 [Execute 라이프사이클 훅](/smart-contracts/core/execute-asset-signing)을 통해 제어됩니다 |
+| **Asset Signer PDA** | `["mpl-core-execute", asset]`에서 파생되는 MPL Core PDA. Core 에셋의 온체인 지갑이며 Core의 [Execute 라이프사이클 훅](/ko/smart-contracts/core/execute-asset-signing)을 통해 제어됩니다 |
 | **결제 모드** | 어떤 계정이 결제를 부담하고 그 소유자가 얼마나 자주 서명하는지 — 표준 지갑, Core 에셋 또는 에이전트 직접 결제, 위임 에이전트 |
 | **실행 위임** | 요청마다 소유자가 서명하지 않아도 Mech가 등록된 에이전트의 지갑에서 결제를 승인할 수 있게 하는 취소 가능한 온체인 승인(`ExecutionDelegateRecordV1`) |
 | **퍼실리테이터** | 리소스를 반환하기 전에 제출된 결제를 검증하고 온체인에서 정산하는 x402 구성 요소 |
-| **DAS** | [Digital Asset Standard](/solana/rpcs-and-das) 읽기 API. x402 RPC 엔드포인트에서 패스스루로 사용할 수 있습니다 |
+| **DAS** | [Digital Asset Standard](/ko/solana/rpcs-and-das) 읽기 API. x402 RPC 엔드포인트에서 패스스루로 사용할 수 있습니다 |
 
 ---
 

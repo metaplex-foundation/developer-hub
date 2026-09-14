@@ -44,11 +44,11 @@ faqs:
     a: 不可以。支付来源始终是经典 SPL Token 的关联代币账户，目前不支持 Token-2022 支付铸币。
 ---
 
-Metaplex x402 支持三种支付模式 — 标准 Solana 钱包、[Core 资产](/smart-contracts/core)或 [Agent](/agents/what-is-an-agent) 直接支付，以及无需逐次签名即可支付的委托 Agent。每种模式产出的东西都相同：一个支持支付的 `fetch`，交给您已经在用的任意 HTTP 客户端即可。{% .lead %}
+Metaplex x402 支持三种支付模式 — 标准 Solana 钱包、[Core 资产](/zh/smart-contracts/core)或 [Agent](/zh/agents/what-is-an-agent) 直接支付，以及无需逐次签名即可支付的委托 Agent。每种模式产出的东西都相同：一个支持支付的 `fetch`，交给您已经在用的任意 HTTP 客户端即可。{% .lead %}
 
 ## 摘要 {% #summary %}
 
-选择支付模式，就是决定由哪个账户的 USDC 支付请求，以及其所有者签名的频率。客户端接线的差异只在于注册哪个支付方案；之后的请求代码在三种模式下完全一致。
+选择支付模式，就是决定由哪个账户的 USDC 支付请求，以及其所有者签名的频率。前两种模式的差异只在于注册哪个支付方案；委托 Agent 还需要一个认证令牌存储，以及客户端扩展或 fetch 包装器之一。一旦拿到 `fetchWithPayment`，之后的请求代码在三种模式下完全一致。
 
 - **标准钱包** — 使用 `ExactSvmScheme` 的原生 x402；所有者对每次支付签名，且无需 SOL
 - **Core 资产或 Agent（直接）** — 带 `coreExecute` 目标的 `MetaplexSvmExactScheme`；资金来自资产的签名者 PDA，但所有者仍需对每次支付签名
@@ -64,10 +64,10 @@ Metaplex x402 支持三种支付模式 — 标准 Solana 钱包、[Core 资产](
 Metaplex x402 需要一个有资金的 Solana 账户，以及一个能够构建支付交易的签名者。
 
 - Node.js 20.18+ 与 ESM 项目
-- 一个 Solana 签名者 — [Solana Kit](https://github.com/anza-xyz/kit) 密钥对签名者或 [Umi](/dev-tools/umi) 签名者
+- 一个 Solana 签名者 — [Solana Kit](https://github.com/anza-xyz/kit) 密钥对签名者或 [Umi](/zh/dev-tools/umi) 签名者
 - 支付账户的经典 SPL Token 关联代币账户中持有 USDC
 - 对于 Core 资产和 Agent 模式，需要一个由该签名者拥有的 Core 资产，以及其签名者 PDA 中的 SOL
-- 对于委托 Agent 模式，需要一个[已注册的 Agent 身份](/agents/register-agent) — [铸造新 Agent](/agents/mint-agent) 或注册现有的 Core 资产
+- 对于委托 Agent 模式，需要一个[已注册的 Agent 身份](/zh/agents/register-agent) — [铸造新 Agent](/zh/agents/mint-agent) 或注册现有的 Core 资产
 
 {% callout type="warning" title="切勿在浏览器代码中嵌入私钥" %}
 下面的示例从环境变量读取开发用密钥对。在浏览器中请改用钱包适配器签名者 — 发送到客户端的私钥，就等同于已经公开的私钥。
@@ -129,7 +129,7 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 
 ## 使用 Core 资产或 Agent 直接支付 {% #pay-directly-with-a-core-asset-or-agent %}
 
-若希望在所有者仍对每次支付签名的前提下，由 Core 资产自己的钱包出资，请注册带 `coreExecute` 目标的 `MetaplexSvmExactScheme`。每个 Core 资产都自带钱包 — 即其 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) — 因此为该钱包充值可以把支出与主钱包隔离，并且在所有权转移时预算会随资产一同转移。
+若希望在所有者仍对每次支付签名的前提下，由 Core 资产自己的钱包出资，请注册带 `coreExecute` 目标的 `MetaplexSvmExactScheme`。每个 Core 资产都自带钱包 — 即其 [Asset Signer PDA](/zh/smart-contracts/core/execute-asset-signing) — 因此为该钱包充值可以把支出与主钱包隔离，并且在所有权转移时预算会随资产一同转移。
 
 ```ts {% title="Core 资产或 Agent 直接支付" %}
 import { MetaplexSvmExactScheme } from '@metaplex-foundation/x402';
@@ -153,14 +153,14 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 `svmSigner` 是控制该资产的签名者，`svmRpcUrl` 是用于构建支付交易的 Solana RPC 端点，`coreAssetAddress` 是 Core 资产或 Agent 的地址。
 
 {% callout type="note" title="属于合集的资产需要提供合集地址" %}
-当资产属于某个 Core 合集时，请传入 `coreExecute.collection`。完整选项见[方案选项表](/agents/x402/api-reference#metaplexsvmexactscheme-options)。
+当资产属于某个 Core 合集时，请传入 `coreExecute.collection`。完整选项见[方案选项表](/zh/agents/x402/api-reference#metaplexsvmexactscheme-options)。
 {% /callout %}
 
 ## 使用委托 Agent 即时支付 {% #pay-instantly-with-a-delegated-agent %}
 
 将 Agent 一次性委托给 Mech，服务端便可在无需逐次获得所有者签名的情况下，从 Agent 的钱包批准支付。这是适用于自主 Agent 和高频负载的模式。
 
-该 Agent 必须是由批准签名者所拥有的[已注册 Agent 身份](/agents/register-agent)。委托之后，客户端通过 Sign-In-With-X 消息签名进行认证并获得 24 小时有效的 bearer 令牌，服务端则从 Agent 的钱包构建支付。您始终保有控制权：该委托是一项可随时撤销的链上授权。
+该 Agent 必须是由批准签名者所拥有的[已注册 Agent 身份](/zh/agents/register-agent)。委托之后，客户端通过 Sign-In-With-X 消息签名进行认证并获得 24 小时有效的 bearer 令牌，服务端则从 Agent 的钱包构建支付。您始终保有控制权：该委托是一项可随时撤销的链上授权。
 
 ### 一次性批准委托 {% #approve-the-delegation-once %}
 
@@ -244,6 +244,10 @@ const fetchWithPayment = wrapFetchWithMetaplexCoreExecuteDelegate(fetch, {
 - 若使用其他存储后端，请实现 `MetaplexCoreExecuteDelegateAuthTokenStore` 接口
 - 响应式的直接支付回退默认关闭；仅当希望由已注册的支付方案处理委托失败时，才设置 `fallback: true`
 - 传入 `onEvent` 可观察认证、缓存和回退行为
+
+{% callout type="warning" title="授权令牌属于持有者凭证" %}
+`LocalStorageMetaplexCoreExecuteDelegateAuthTokenStore` 会把 JWT 保存在浏览器可读的存储中，因此一旦你的源发生 XSS，攻击者就能读取它，并在令牌过期或委托被撤销之前用该委托进行支付。除非令牌确实需要在页面刷新后继续存在，否则请使用 `InMemoryMetaplexCoreExecuteDelegateAuthTokenStore`，只为 Agent 钱包保留必要的余额，并在不再需要委托时立即调用 `revokeMetaplexCoreExecuteDelegate`。
+{% /callout %}
 
 ### 撤销委托 {% #revoke-the-delegation %}
 

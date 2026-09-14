@@ -44,11 +44,11 @@ faqs:
     a: 아니요. 결제 출처는 항상 클래식 SPL Token 연관 토큰 계정이며 Token-2022 결제 민트는 현재 지원되지 않습니다.
 ---
 
-Metaplex x402는 세 가지 결제 모드 — 표준 Solana 지갑, [Core 에셋](/smart-contracts/core) 또는 [에이전트](/agents/what-is-an-agent)의 직접 결제, 요청마다 서명하지 않고 결제하는 위임 에이전트 — 를 지원합니다. 모든 모드가 만들어내는 결과물은 동일합니다. 이미 사용 중인 HTTP 클라이언트에 그대로 전달할 수 있는 결제 지원 `fetch`입니다. {% .lead %}
+Metaplex x402는 세 가지 결제 모드 — 표준 Solana 지갑, [Core 에셋](/ko/smart-contracts/core) 또는 [에이전트](/ko/agents/what-is-an-agent)의 직접 결제, 요청마다 서명하지 않고 결제하는 위임 에이전트 — 를 지원합니다. 모든 모드가 만들어내는 결과물은 동일합니다. 이미 사용 중인 HTTP 클라이언트에 그대로 전달할 수 있는 결제 지원 `fetch`입니다. {% .lead %}
 
 ## 요약 {% #summary %}
 
-결제 모드를 고른다는 것은 어떤 계정의 USDC로 요청을 결제하고 그 소유자가 얼마나 자주 서명할지를 정하는 일입니다. 클라이언트 연결은 등록하는 결제 스킴만 다를 뿐, 그 이후의 요청 코드는 세 모드 모두 동일합니다.
+결제 모드를 고른다는 것은 어떤 계정의 USDC로 요청을 결제하고 그 소유자가 얼마나 자주 서명할지를 정하는 일입니다. 앞의 두 모드는 등록하는 결제 스킴만 다르지만, 위임된 에이전트는 인증 토큰 저장소와 클라이언트 확장 또는 fetch 래퍼 중 하나가 추가로 필요합니다. `fetchWithPayment`가 준비되고 나면 그 이후의 요청 코드는 세 모드 모두 동일합니다.
 
 - **표준 지갑** — `ExactSvmScheme`를 사용하는 순정 x402. 소유자가 결제마다 서명하며 SOL은 필요하지 않습니다
 - **Core 에셋 또는 에이전트(직접)** — `coreExecute` 타깃을 지정한 `MetaplexSvmExactScheme`. 자금은 에셋의 서명자 PDA에서 나오지만 소유자는 여전히 결제마다 서명합니다
@@ -64,10 +64,10 @@ Metaplex x402는 세 가지 결제 모드 — 표준 Solana 지갑, [Core 에셋
 Metaplex x402에는 자금이 있는 Solana 계정과 결제 트랜잭션을 구성할 수 있는 서명자가 필요합니다.
 
 - Node.js 20.18+ 및 ESM 프로젝트
-- Solana 서명자 — [Solana Kit](https://github.com/anza-xyz/kit) 키페어 서명자 또는 [Umi](/dev-tools/umi) 서명자
+- Solana 서명자 — [Solana Kit](https://github.com/anza-xyz/kit) 키페어 서명자 또는 [Umi](/ko/dev-tools/umi) 서명자
 - 결제 계정의 클래식 SPL Token 연관 토큰 계정에 있는 USDC
 - Core 에셋 및 에이전트 모드의 경우 해당 서명자가 소유한 Core 에셋과 그 서명자 PDA의 SOL
-- 위임 에이전트 모드의 경우 [등록된 에이전트 신원](/agents/register-agent) — [새 에이전트를 민팅](/agents/mint-agent)하거나 기존 Core 에셋을 등록하세요
+- 위임 에이전트 모드의 경우 [등록된 에이전트 신원](/ko/agents/register-agent) — [새 에이전트를 민팅](/ko/agents/mint-agent)하거나 기존 Core 에셋을 등록하세요
 
 {% callout type="warning" title="브라우저 코드에 개인 키를 넣지 마세요" %}
 아래 예제는 개발용 키페어를 환경 변수에서 읽습니다. 브라우저에서는 지갑 어댑터 서명자를 사용하세요 — 클라이언트로 전송된 개인 키는 이미 공개된 개인 키입니다.
@@ -129,7 +129,7 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 
 ## Core 에셋 또는 에이전트로 직접 결제하기 {% #pay-directly-with-a-core-asset-or-agent %}
 
-소유자가 계속 결제마다 서명하면서도 Core 에셋 자신의 지갑에서 자금을 대려면, `coreExecute` 타깃을 지정한 `MetaplexSvmExactScheme`를 등록하세요. 모든 Core 에셋은 내장 지갑인 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)를 가지므로, 그 지갑에 자금을 넣으면 메인 지갑과 지출이 분리되고 소유권이 이전되면 예산도 에셋과 함께 이동합니다.
+소유자가 계속 결제마다 서명하면서도 Core 에셋 자신의 지갑에서 자금을 대려면, `coreExecute` 타깃을 지정한 `MetaplexSvmExactScheme`를 등록하세요. 모든 Core 에셋은 내장 지갑인 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 가지므로, 그 지갑에 자금을 넣으면 메인 지갑과 지출이 분리되고 소유권이 이전되면 예산도 에셋과 함께 이동합니다.
 
 ```ts {% title="Core 에셋 또는 에이전트 직접 결제" %}
 import { MetaplexSvmExactScheme } from '@metaplex-foundation/x402';
@@ -153,14 +153,14 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 `svmSigner`는 에셋을 제어하는 서명자, `svmRpcUrl`은 결제 트랜잭션 구성에 사용하는 Solana RPC 엔드포인트, `coreAssetAddress`는 Core 에셋 또는 에이전트 주소입니다.
 
 {% callout type="note" title="컬렉션에 속한 에셋에는 컬렉션 주소가 필요합니다" %}
-에셋이 Core 컬렉션에 속해 있으면 `coreExecute.collection`을 전달하세요. 모든 옵션은 [스킴 옵션 표](/agents/x402/api-reference#metaplexsvmexactscheme-options)에 있습니다.
+에셋이 Core 컬렉션에 속해 있으면 `coreExecute.collection`을 전달하세요. 모든 옵션은 [스킴 옵션 표](/ko/agents/x402/api-reference#metaplexsvmexactscheme-options)에 있습니다.
 {% /callout %}
 
 ## 위임 에이전트로 즉시 결제하기 {% #pay-instantly-with-a-delegated-agent %}
 
 에이전트를 Mech에 한 번 위임해 두면, 서버가 요청마다 소유자 서명 없이 에이전트의 지갑에서 결제를 승인할 수 있습니다. 자율 에이전트와 고빈도 워크로드에 적합한 모드입니다.
 
-에이전트는 승인하는 서명자가 소유한 [등록된 에이전트 신원](/agents/register-agent)이어야 합니다. 위임 후 클라이언트는 Sign-In-With-X 메시지 서명으로 인증해 24시간 유효한 베어러 토큰을 받고, 서버가 에이전트의 지갑에서 결제를 구성합니다. 이 위임은 언제든 취소할 수 있는 온체인 승인입니다.
+에이전트는 승인하는 서명자가 소유한 [등록된 에이전트 신원](/ko/agents/register-agent)이어야 합니다. 위임 후 클라이언트는 Sign-In-With-X 메시지 서명으로 인증해 24시간 유효한 베어러 토큰을 받고, 서버가 에이전트의 지갑에서 결제를 구성합니다. 이 위임은 언제든 취소할 수 있는 온체인 승인입니다.
 
 ### 위임을 한 번만 승인하기 {% #approve-the-delegation-once %}
 
@@ -244,6 +244,10 @@ const fetchWithPayment = wrapFetchWithMetaplexCoreExecuteDelegate(fetch, {
 - 다른 스토리지 백엔드를 쓰려면 `MetaplexCoreExecuteDelegateAuthTokenStore` 인터페이스를 구현하세요
 - 리액티브 직접 결제 폴백은 기본적으로 비활성화되어 있습니다. 등록된 결제 스킴이 위임 실패를 처리하도록 하려는 경우에만 `fallback: true`를 설정하세요
 - 인증, 캐시, 폴백 동작을 관찰하려면 `onEvent`를 전달하세요
+
+{% callout type="warning" title="인가 토큰은 베어러 자격 증명입니다" %}
+`LocalStorageMetaplexCoreExecuteDelegateAuthTokenStore`는 JWT를 브라우저에서 읽을 수 있는 저장소에 보관하므로, 오리진에 XSS가 발생하면 토큰이 만료되거나 위임이 취소될 때까지 공격자가 이를 읽어 위임으로 결제할 수 있습니다. 토큰이 페이지 새로고침 후에도 유지되어야 하는 경우가 아니라면 `InMemoryMetaplexCoreExecuteDelegateAuthTokenStore`를 사용하고, 에이전트 지갑에는 필요한 만큼만 충전하며, 위임이 더 이상 필요하지 않으면 즉시 `revokeMetaplexCoreExecuteDelegate`를 호출하세요.
+{% /callout %}
 
 ### 위임 취소하기 {% #revoke-the-delegation %}
 

@@ -44,11 +44,11 @@ faqs:
     a: いいえ。支払い元は常にクラシックなSPL Tokenの関連トークンアカウントであり、Token-2022の支払いミントは現在サポートされていません。
 ---
 
-Metaplex x402は3つの支払いモード — 標準Solanaウォレット、[Coreアセット](/smart-contracts/core)または[エージェント](/agents/what-is-an-agent)による直接支払い、リクエストごとの署名なしで支払う委任エージェント — をサポートします。どのモードでも生成されるものは同じで、すでに使っているHTTPクライアントに渡せる支払い対応の`fetch`です。{% .lead %}
+Metaplex x402は3つの支払いモード — 標準Solanaウォレット、[Coreアセット](/ja/smart-contracts/core)または[エージェント](/ja/agents/what-is-an-agent)による直接支払い、リクエストごとの署名なしで支払う委任エージェント — をサポートします。どのモードでも生成されるものは同じで、すでに使っているHTTPクライアントに渡せる支払い対応の`fetch`です。{% .lead %}
 
 ## 概要 {% #summary %}
 
-支払いモードを選ぶということは、どのアカウントのUSDCでリクエストを支払い、その所有者がどの頻度で署名するかを決めることです。クライアントの配線は登録する支払いスキームが違うだけで、その後のリクエストコードは3つのモードすべてで同一です。
+支払いモードを選ぶということは、どのアカウントのUSDCでリクエストを支払い、その所有者がどの頻度で署名するかを決めることです。最初の2つのモードは登録する支払いスキームが違うだけですが、委任されたエージェントではさらに認証トークンストアと、クライアント拡張またはfetchラッパーのいずれかが必要です。`fetchWithPayment`さえ用意できれば、その後のリクエストコードは3つのモードすべてで同一です。
 
 - **標準ウォレット** — `ExactSvmScheme`を使う素のx402。所有者が支払いごとに署名し、SOLは不要です
 - **Coreアセットまたはエージェント（直接）** — `coreExecute`ターゲットを指定した`MetaplexSvmExactScheme`。資金はアセットのシグナーPDAから出ますが、所有者は引き続き支払いごとに署名します
@@ -64,10 +64,10 @@ Metaplex x402は3つの支払いモード — 標準Solanaウォレット、[Cor
 Metaplex x402には、資金を入れたSolanaアカウントと、支払いトランザクションを構築できる署名者が必要です。
 
 - Node.js 20.18+ とESMプロジェクト
-- Solanaの署名者 — [Solana Kit](https://github.com/anza-xyz/kit)のキーペア署名者または[Umi](/dev-tools/umi)の署名者
+- Solanaの署名者 — [Solana Kit](https://github.com/anza-xyz/kit)のキーペア署名者または[Umi](/ja/dev-tools/umi)の署名者
 - 支払い元アカウントのクラシックなSPL Token関連トークンアカウントにあるUSDC
 - Coreアセットおよびエージェントのモードでは、その署名者が所有するCoreアセットと、そのシグナーPDA内のSOL
-- 委任エージェントのモードでは、[登録済みのエージェントアイデンティティ](/agents/register-agent) — [新しいエージェントをミント](/agents/mint-agent)するか、既存のCoreアセットを登録します
+- 委任エージェントのモードでは、[登録済みのエージェントアイデンティティ](/ja/agents/register-agent) — [新しいエージェントをミント](/ja/agents/mint-agent)するか、既存のCoreアセットを登録します
 
 {% callout type="warning" title="ブラウザのコードに秘密鍵を埋め込まないでください" %}
 以下の例は開発用キーペアを環境変数から読み込みます。ブラウザではウォレットアダプターの署名者を使ってください — クライアントに配信された秘密鍵は、公開された秘密鍵と同じです。
@@ -129,7 +129,7 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 
 ## Coreアセットまたはエージェントで直接支払う {% #pay-directly-with-a-core-asset-or-agent %}
 
-所有者が引き続き支払いごとに署名しつつ、Coreアセット自身のウォレットから資金を出すには、`coreExecute`ターゲットを指定した`MetaplexSvmExactScheme`を登録します。すべてのCoreアセットは組み込みのウォレット — [Asset Signer PDA](/smart-contracts/core/execute-asset-signing) — を持っているため、そのウォレットに入金すればメインウォレットと支出を分離でき、所有権が移転すれば予算もアセットとともに移動します。
+所有者が引き続き支払いごとに署名しつつ、Coreアセット自身のウォレットから資金を出すには、`coreExecute`ターゲットを指定した`MetaplexSvmExactScheme`を登録します。すべてのCoreアセットは組み込みのウォレット — [Asset Signer PDA](/ja/smart-contracts/core/execute-asset-signing) — を持っているため、そのウォレットに入金すればメインウォレットと支出を分離でき、所有権が移転すれば予算もアセットとともに移動します。
 
 ```ts {% title="Coreアセットまたはエージェントによる直接支払い" %}
 import { MetaplexSvmExactScheme } from '@metaplex-foundation/x402';
@@ -153,14 +153,14 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, paymentClient);
 `svmSigner`はアセットを管理する署名者、`svmRpcUrl`は支払いトランザクションの構築に使うSolana RPCエンドポイント、`coreAssetAddress`はCoreアセットまたはエージェントのアドレスです。
 
 {% callout type="note" title="コレクションに属するアセットにはコレクションアドレスが必要です" %}
-アセットがCoreコレクションに属している場合は`coreExecute.collection`を渡してください。すべてのオプションは[スキームオプションの表](/agents/x402/api-reference#metaplexsvmexactscheme-options)にあります。
+アセットがCoreコレクションに属している場合は`coreExecute.collection`を渡してください。すべてのオプションは[スキームオプションの表](/ja/agents/x402/api-reference#metaplexsvmexactscheme-options)にあります。
 {% /callout %}
 
 ## 委任エージェントで即時に支払う {% #pay-instantly-with-a-delegated-agent %}
 
 エージェントをMechに1回委任しておけば、サーバーはリクエストごとの所有者署名なしにエージェントのウォレットから支払いを承認できます。自律エージェントや高頻度のワークロードに適したモードです。
 
-エージェントは、承認する署名者が所有する[登録済みのエージェントアイデンティティ](/agents/register-agent)である必要があります。委任後、クライアントはSign-In-With-Xのメッセージ署名で認証して24時間有効なベアラートークンを受け取り、サーバーがエージェントのウォレットから支払いを構築します。この委任はいつでも取り消せるオンチェーンの許可です。
+エージェントは、承認する署名者が所有する[登録済みのエージェントアイデンティティ](/ja/agents/register-agent)である必要があります。委任後、クライアントはSign-In-With-Xのメッセージ署名で認証して24時間有効なベアラートークンを受け取り、サーバーがエージェントのウォレットから支払いを構築します。この委任はいつでも取り消せるオンチェーンの許可です。
 
 ### 委任を1回だけ承認する {% #approve-the-delegation-once %}
 
@@ -244,6 +244,10 @@ const fetchWithPayment = wrapFetchWithMetaplexCoreExecuteDelegate(fetch, {
 - それ以外のストレージバックエンドを使う場合は`MetaplexCoreExecuteDelegateAuthTokenStore`インターフェースを実装します
 - リアクティブな直接支払いフォールバックは既定で無効です。登録済みの支払いスキームに委任失敗を処理させたい場合にのみ`fallback: true`を設定してください
 - 認証、キャッシュ、フォールバックの挙動を観察するには`onEvent`を渡します
+
+{% callout type="warning" title="認可トークンはベアラー資格情報です" %}
+`LocalStorageMetaplexCoreExecuteDelegateAuthTokenStore`はJWTをブラウザから読み取れるストレージに保持するため、オリジンでXSSが発生すると、トークンが失効するか委任が取り消されるまで、攻撃者がそれを読み取って委任を使って支払える状態になります。トークンがページの再読み込みをまたいで残る必要が本当にない限り`InMemoryMetaplexCoreExecuteDelegateAuthTokenStore`を使い、エージェントのウォレットには必要な分だけを入れ、委任が不要になったらすぐに`revokeMetaplexCoreExecuteDelegate`を呼び出してください。
+{% /callout %}
 
 ### 委任を取り消す {% #revoke-the-delegation %}
 
