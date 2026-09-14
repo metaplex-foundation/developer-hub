@@ -1,10 +1,10 @@
-import { slugifyWithCounter } from '@sindresorhus/slugify'
 import { useRouter } from 'next/router'
 
 import { products } from '@/components/products'
 import { useLocale } from '@/contexts/LocaleContext'
 import { getLocalizedSections } from '@/shared/localizedSections'
 import { getLocalizedHref } from '@/config/languages'
+import { slugifyHeadingWithCounter } from '@/shared/slugifyHeading'
 
 export function usePage(pageProps) {
   const { pathname } = useRouter()
@@ -132,7 +132,7 @@ function getActiveSection(pathname, product, pageProps, originalPathname) {
   return activeSection
 }
 
-function parseTableOfContents(nodes, slugify = slugifyWithCounter()) {
+function parseTableOfContents(nodes, slugify = slugifyHeadingWithCounter()) {
   let sections = []
 
   for (let node of nodes) {

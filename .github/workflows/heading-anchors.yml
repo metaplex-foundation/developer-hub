@@ -1,0 +1,32 @@
+name: Heading anchors
+
+# Fails when a heading would render with an empty or duplicate id, or when an
+# in-page link points at a heading that does not exist. Known-broken links are
+# recorded in scripts/heading-anchors-baseline.json; only new breakage fails.
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/**'
+      - 'src/shared/slugifyHeading.js'
+      - 'scripts/audit-heading-anchors.mjs'
+      - 'scripts/heading-anchors-baseline.json'
+  push:
+    branches: [main]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run lint:anchors
