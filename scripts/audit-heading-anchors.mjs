@@ -73,18 +73,27 @@ function walk(dir) {
 function stripNonProse(source) {
   const lines = source.split('\n')
   let inFrontmatter = lines[0]?.trim() === '---'
-  let inFence = false
+
+  let fence = null // { char, length } of the delimiter that opened the block
 
   return lines.map((line, i) => {
     if (inFrontmatter) {
       if (i > 0 && line.trim() === '---') inFrontmatter = false
       return ''
     }
-    if (/^\s*(```|~~~)/.test(line)) {
-      inFence = !inFence
+    const m = /^\s*(`{3,}|~{3,})/.exec(line)
+    if (m) {
+      const char = m[1][0]
+      const length = m[1].length
+      if (!fence) {
+        fence = { char, length }
+        return ''
+      }
+      // A ``` inside a ~~~ block is literal text, not a closing delimiter.
+      if (char === fence.char && length >= fence.length) fence = null
       return ''
     }
-    return inFence ? '' : line
+    return fence ? '' : line
   })
 }
 
@@ -110,18 +119,41 @@ for (const file of walk(PAGES_DIR).sort()) {
   const empty = []
   const duplicates = []
 
+  // Collect first, then assign in the same two passes as `assignHeadingIds`
+  // in src/shared/usePage.js: h2/h3 claim their slug before h1 and h4-h6, so
+  // the audit models exactly what the site renders.
+  const headings = []
   lines.forEach((line, i) => {
     const match = /^(#{1,6})\s+(.*)$/.exec(line)
     if (!match) return
-
     const explicit = /\{%\s*#([^\s%]+)\s*%\}/.exec(match[2])
-    const text = headingText(match[2])
-    const id = explicit ? explicit[1] : slugify(text)
-
-    if (!id) empty.push({ line: i + 1, text })
-    else if (ids.has(id)) duplicates.push({ line: i + 1, id, text })
-    else ids.set(id, i + 1)
+    headings.push({
+      line: i + 1,
+      level: match[1].length,
+      text: headingText(match[2]),
+      explicit: explicit ? explicit[1] : null,
+    })
   })
+
+  const assigned = new Map() // heading -> id
+  for (const h of headings) {
+    if (h.explicit) assigned.set(h, h.explicit)
+  }
+  for (const isTocPass of [true, false]) {
+    for (const h of headings) {
+      if (assigned.has(h)) continue
+      const isToc = h.level === 2 || h.level === 3
+      if (isTocPass !== isToc) continue
+      assigned.set(h, slugify(h.text))
+    }
+  }
+
+  for (const h of headings) {
+    const id = assigned.get(h)
+    if (!id) empty.push({ line: h.line, text: h.text })
+    else if (ids.has(id)) duplicates.push({ line: h.line, id, text: h.text })
+    else ids.set(id, h.line)
+  }
 
   // Authored in-page links. Ignore cross-page links that happen to have a hash.
   const broken = []
@@ -129,7 +161,13 @@ for (const file of walk(PAGES_DIR).sort()) {
   lines.forEach((line, i) => {
     let m
     while ((m = linkRe.exec(line)) !== null) {
-      const anchor = decodeURIComponent(m[1])
+      // A link like `](#rate%off)` is malformed but must not kill the run.
+      let anchor
+      try {
+        anchor = decodeURIComponent(m[1])
+      } catch {
+        anchor = m[1]
+      }
       if (!ids.has(anchor)) broken.push({ line: i + 1, anchor })
     }
   })
@@ -176,11 +214,13 @@ const baseline = loadBaseline()
 // A broken link is "new" when it is absent from the baseline, or occurs more
 // often than the baseline recorded.
 const newBroken = []
+const observed = new Map()
 for (const r of results) {
   for (const b of r.broken) {
     const key = `${r.file}#${b.anchor}`
     const allowed = baseline[key] ?? 0
-    const seen = (newBroken.filter((n) => n.key === key).length ?? 0) + 1
+    const seen = (observed.get(key) ?? 0) + 1
+    observed.set(key, seen)
     if (seen > allowed) newBroken.push({ key, file: r.file, ...b })
   }
 }
