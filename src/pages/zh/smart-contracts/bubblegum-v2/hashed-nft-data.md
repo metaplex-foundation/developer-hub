@@ -270,7 +270,6 @@ impl LeafSchema {
 
 Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.
 
-
 在前面的章节中，我们说过Bubblegum默克尔树中的每个叶节点是通过哈希压缩NFT（cNFT）的数据获得的。但这究竟是如何做到的呢？我们从cNFT的元数据开始。Bubblegum V2的每个cNFT在铸造指令中使用以下元数据结构作为参数，注意Bubblegum v1使用的是MetadataArgs：
 
 ```rust

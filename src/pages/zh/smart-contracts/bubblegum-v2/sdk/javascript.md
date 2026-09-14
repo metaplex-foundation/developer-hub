@@ -466,17 +466,17 @@ await unverifyCreatorV2(umi, {
 
 DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 了解可用方法的完整说明。
 
-### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
+### getAssetWithProof 与继承版税 {% #getassetwithproof-and-inherited-royalties %}
 
 `getAssetWithProof` 将 `getAsset` 和 `getAssetProof` 合并为写入指令所需的参数形态。
 
-| Field | Purpose |
+| 字段 | 用途 |
 |-------|---------|
-| `metadata` | Mirrors DAS main fields (`MetadataArgs`): resolved `sellerFeeBasisPoints` / `creators` when inherited. Use for reading / UI. |
-| `currentMetadata` | Leaf-canonical `MetadataArgsV2Args` for writes (sentinel `65535` when inherited). Included when spreading `...assetWithProof`. |
-| `sellerFeeBasisPointsRaw` / `creatorsRaw` | Optional leaf siblings (`basis_points_raw` / `creators_raw`); omitted when DAS omits them. |
-| `inherited` | Sugar for inherit detection. |
-| `rpcAsset` | Full DAS response. Same main / `_raw` split as above. |
+| `metadata` | 镜像 DAS 主字段（`MetadataArgs`）：继承时为解析后的 `sellerFeeBasisPoints` / `creators`。用于读取与 UI 展示。 |
+| `currentMetadata` | 写入所用的叶子规范 `MetadataArgsV2Args`（继承时为哨兵值 `65535`）。展开 `...assetWithProof` 时包含。 |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | 可选的叶子同级字段（`basis_points_raw` / `creators_raw`）；DAS 未返回时省略。 |
+| `inherited` | 用于继承检测的便捷字段。 |
+| `rpcAsset` | 完整的 DAS 响应。主字段与 `_raw` 的划分同上。 |
 
 `updateMetadataV2` 将其现有叶子参数命名为 `currentMetadata`（IDL）。展开 `...assetWithProof` 即可提供。接受叶子 `metadata` 参数的指令（`setCollectionV2`、`verifyCreatorV2` 等）应使用 `assetWithProof.currentMetadata`。
 

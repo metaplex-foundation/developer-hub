@@ -94,7 +94,6 @@ await unverifyCreatorV2(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Notes
 
 - Only creators already listed in the cNFT's creators array can be verified. Use `updateMetadataV2` to add creators first.

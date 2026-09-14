@@ -466,17 +466,17 @@ await unverifyCreatorV2(umi, {
 
 DAS API 플러그인은 `mplBubblegum()`에 의해 자동으로 등록됩니다. 사용 가능한 메서드의 전체 설명은 [cNFT 가져오기](/ko/smart-contracts/bubblegum-v2/fetch-cnfts)를 참조하세요.
 
-### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
+### getAssetWithProof와 상속 로열티 {% #getassetwithproof-and-inherited-royalties %}
 
 `getAssetWithProof`는 `getAsset`과 `getAssetProof`를 쓰기 명령이 예상하는 파라미터 형태로 결합합니다.
 
-| Field | Purpose |
+| 필드 | 용도 |
 |-------|---------|
-| `metadata` | Mirrors DAS main fields (`MetadataArgs`): resolved `sellerFeeBasisPoints` / `creators` when inherited. Use for reading / UI. |
-| `currentMetadata` | Leaf-canonical `MetadataArgsV2Args` for writes (sentinel `65535` when inherited). Included when spreading `...assetWithProof`. |
-| `sellerFeeBasisPointsRaw` / `creatorsRaw` | Optional leaf siblings (`basis_points_raw` / `creators_raw`); omitted when DAS omits them. |
-| `inherited` | Sugar for inherit detection. |
-| `rpcAsset` | Full DAS response. Same main / `_raw` split as above. |
+| `metadata` | DAS 주요 필드(`MetadataArgs`)를 미러링합니다. 상속 시 확정된 `sellerFeeBasisPoints` / `creators`가 담깁니다. 읽기와 UI 표시에 사용하세요. |
+| `currentMetadata` | 쓰기용 리프 정규 `MetadataArgsV2Args`(상속 시 센티넬 `65535`). `...assetWithProof`를 전개하면 포함됩니다. |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | 선택적 리프 형제 필드(`basis_points_raw` / `creators_raw`). DAS가 반환하지 않으면 생략됩니다. |
+| `inherited` | 상속 감지를 위한 편의 필드입니다. |
+| `rpcAsset` | 전체 DAS 응답. 주요 필드와 `_raw`의 구분은 위와 동일합니다. |
 
 `updateMetadataV2`는 기존 리프 인자 이름을 `currentMetadata`(IDL)로 둡니다. `...assetWithProof` 전개로 공급됩니다. 리프 `metadata` 인자를 받는 명령(`setCollectionV2`, `verifyCreatorV2` 등)에는 `assetWithProof.currentMetadata`를 사용하세요.
 

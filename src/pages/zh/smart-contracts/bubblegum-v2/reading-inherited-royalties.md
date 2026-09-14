@@ -51,6 +51,8 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 
 ## 字段对照表
 
+展示值与叶子值位于不同的 DAS 字段，写入时必须使用叶子值。
+
 | 用例 | 字段 |
 |------|------|
 | 展示费率 / 版税 UI | `royalty.basis_points`、`royalty.percent` |
@@ -59,6 +61,8 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 | 检测继承模式 | `royalty.inherited`（或 `basis_points_raw === 65535`） |
 
 ### 示例 DAS 响应（继承）
+
+继承的资产会在 `basis_points` 返回集合解析后的费率，并在 `basis_points_raw` 返回 `65535` 哨兵值。
 
 ```json
 "royalty": {
@@ -89,6 +93,8 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 
 ## 检测与展示辅助函数
 
+下面三个辅助函数覆盖了继承版税下行为不同的操作：检测继承、还原写入所需的叶子值，以及选择正确的创作者列表。
+
 ```ts
 const INHERIT = 0xffff // 65535
 
@@ -97,10 +103,13 @@ function isInheritedRoyalty(royalty: {
   basis_points_raw?: number | null
   inherited?: boolean | null
 }): boolean {
-  return (
-    royalty.inherited === true ||
-    royalty.basis_points_raw === INHERIT
-  )
+  if (royalty.inherited === true) return true
+  if (royalty.basis_points_raw != null) {
+    return royalty.basis_points_raw === INHERIT
+  }
+  // Older DAS versions return neither field and surface the sentinel
+  // directly in basis_points. Without this, 65535 reads as a 655.35% fee.
+  return royalty.basis_points === INHERIT
 }
 
 function leafBasisPoints(royalty: {
@@ -146,6 +155,8 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 ## 不要这样做
 
+集成时的问题大多源于把叶子值展示给用户，或把展示值哈希进写入。
+
 - **不要**将 `65535` 或 `6.5535%` 作为面向用户的版税费率展示 — 该值位于 `basis_points_raw`。
 - **不要**假设空的 `creators_raw` 表示没有版税收款方；展示用收款方位于 `creators`。
 - 在重新计算叶子哈希或构建 Bubblegum 写入指令时，**不要**使用主字段的 `basis_points` / `creators` — 请使用 `basis_points_raw` 与 `creators_raw`。
@@ -164,6 +175,13 @@ if (isInheritedSfbpRoyalty(royalty)) {
 ## Bubblegum SDK 说明
 
 `getAssetWithProof` 保持**读取兼容**：`metadata` 镜像 DAS 主字段（继承时为解析后的集合费率）。`currentMetadata` 是写入用的叶子规范值。可选同伴字段 `sellerFeeBasisPointsRaw` / `creatorsRaw` 与 `inherited` 镜像 DAS `_raw` / 继承检测。写入时展开 `...assetWithProof`，叶子参数使用 `currentMetadata`，不要传入展示用 `metadata`。详见 [JavaScript SDK](/zh/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)。
+
+## 注意事项
+
+- DAS 的支持程度因提供方而异。升级后的索引器会返回 `basis_points_raw`、`creators_raw` 和 `inherited`；较旧的索引器三者都不返回，而是把 `65535` 哨兵值直接放在 `basis_points` 上。请将这些字段视为可选，并回退到哨兵值判断。
+- 继承是在读取时从 MPL-Core 集合的 Royalties 插件解析出来的。修改集合费率会改变 DAS 为所有继承资产报告的数值，而无需改动任何叶子。
+- 版税*强制执行*与版税*支付*是两回事。哪些程序可以转移由集合的 `ruleSet`（`ProgramAllowList` / `ProgramDenyList`）决定，Bubblegum 不会在转移时托管版税支付。
+- 本页适用于 Bubblegum V2（MPL-Bubblegum）。V1 树没有集合级别的版税继承。
 
 ## 相关内容
 

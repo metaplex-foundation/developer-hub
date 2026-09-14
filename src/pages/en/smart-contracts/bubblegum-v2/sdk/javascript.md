@@ -63,7 +63,6 @@ The **Bubblegum V2 JavaScript SDK** wraps all MPL-Bubblegum V2 program instructi
 - Use `getAssetWithProof` before any write operation (transfer, burn, update, delegate, freeze, verify)
 - Applies to Bubblegum V2 (MPL-Bubblegum 5.x) — not compatible with V1 trees
 
-
 ## Quick Start
 
 **Jump to:** [Setup](#umi-setup) · [Create Tree](#create-a-bubblegum-tree) · [Mint](#mint-a-compressed-nft) · [Transfer](#transfer-a-compressed-nft) · [Burn](#burn-a-compressed-nft) · [Update](#update-a-compressed-nft) · [Delegate](#delegate-a-compressed-nft) · [Collections](#collections) · [Freeze](#freeze-and-thaw) · [Verify Creators](#verify-creators) · [Fetch](#fetching-cnfts) · [Errors](#common-errors) · [Quick Reference](#quick-reference)

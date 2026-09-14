@@ -466,17 +466,17 @@ await unverifyCreatorV2(umi, {
 
 DAS APIプラグインは`mplBubblegum()`によって自動的に登録されます。利用可能なメソッドの詳細については[cNFTのフェッチ](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)を参照してください。
 
-### getAssetWithProof and inherited royalties {% #getassetwithproof-and-inherited-royalties %}
+### getAssetWithProof と継承ロイヤリティ {% #getassetwithproof-and-inherited-royalties %}
 
 `getAssetWithProof` は `getAsset` と `getAssetProof` を書き込み命令が期待するパラメータ形状に結合します。
 
-| Field | Purpose |
+| フィールド | 用途 |
 |-------|---------|
-| `metadata` | Mirrors DAS main fields (`MetadataArgs`): resolved `sellerFeeBasisPoints` / `creators` when inherited. Use for reading / UI. |
-| `currentMetadata` | Leaf-canonical `MetadataArgsV2Args` for writes (sentinel `65535` when inherited). Included when spreading `...assetWithProof`. |
-| `sellerFeeBasisPointsRaw` / `creatorsRaw` | Optional leaf siblings (`basis_points_raw` / `creators_raw`); omitted when DAS omits them. |
-| `inherited` | Sugar for inherit detection. |
-| `rpcAsset` | Full DAS response. Same main / `_raw` split as above. |
+| `metadata` | DASの主フィールド（`MetadataArgs`）をミラーします。継承時は解決済みの`sellerFeeBasisPoints` / `creators`が入ります。読み取りとUI表示に使用します。 |
+| `currentMetadata` | 書き込み用のリーフ正規な`MetadataArgsV2Args`（継承時はセンチネル`65535`）。`...assetWithProof`を展開すると含まれます。 |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | 任意のリーフ兄弟フィールド（`basis_points_raw` / `creators_raw`）。DASが返さない場合は省略されます。 |
+| `inherited` | 継承検出のための糖衣です。 |
+| `rpcAsset` | DASの完全なレスポンス。主フィールドと`_raw`の分かれ方は上記と同じです。 |
 
 `updateMetadataV2` は既存リーフ引数名を `currentMetadata`（IDL）とします。`...assetWithProof` の展開で供給されます。リーフ `metadata` 引数を取る命令（`setCollectionV2`、`verifyCreatorV2` など）では `assetWithProof.currentMetadata` を使ってください。
 

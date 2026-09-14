@@ -270,7 +270,6 @@ impl LeafSchema {
 
 Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.
 
-
 이전 섹션에서 Bubblegum 머클 트리의 각 리프 노드는 압축된 NFT(cNFT)의 데이터를 해싱하여 얻는다고 설명했습니다. 그러나 이것이 정확히 어떻게 수행되는지 알아보겠습니다. cNFT의 메타데이터부터 시작합니다. Bubblegum V2의 각 cNFT는 민팅 명령어에 대한 인수로 다음 메타데이터 구조와 함께 민팅되며, Bubblegum v1은 대신 MetadataArgs를 사용한다는 점에 유의하세요:
 
 ```rust

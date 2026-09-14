@@ -158,7 +158,6 @@ When performing leaf-replacing operations like transfers or burns, you may encou
 
 By applying these techniques, you can overcome transaction size limitations and successfully execute your operations.
 
-
 ## How much does it cost to create a compressed NFT tree? {% #tree-costs %}
 
 Tree costs depend on the configured depth and canopy. Here are some reference costs:

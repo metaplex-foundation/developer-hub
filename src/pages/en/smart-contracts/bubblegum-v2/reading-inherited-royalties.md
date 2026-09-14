@@ -51,6 +51,8 @@ DAS signals this with `royalty.inherited: true` and `royalty.basis_points_raw: 6
 
 ## Field map
 
+Display values and leaf values live on different DAS fields, and writes must use the leaf values.
+
 | Use case | Fields |
 |----------|--------|
 | Display rate / royalty UI | `royalty.basis_points`, `royalty.percent` |
@@ -59,6 +61,8 @@ DAS signals this with `royalty.inherited: true` and `royalty.basis_points_raw: 6
 | Detect inherit mode | `royalty.inherited` (or `basis_points_raw === 65535`) |
 
 ### Example DAS response (inherited)
+
+An inherited asset returns the collection's resolved rate on `basis_points` and the `65535` sentinel on `basis_points_raw`.
 
 ```json
 "royalty": {
@@ -89,6 +93,8 @@ If the collection cannot be resolved, `basis_points` may fall back while `basis_
 
 ## Detection and display helpers
 
+These three helpers cover the operations that differ for inherited royalties: detecting inheritance, recovering the leaf value for writes, and picking the right creator list.
+
 ```ts
 const INHERIT = 0xffff // 65535
 
@@ -97,10 +103,13 @@ function isInheritedRoyalty(royalty: {
   basis_points_raw?: number | null
   inherited?: boolean | null
 }): boolean {
-  return (
-    royalty.inherited === true ||
-    royalty.basis_points_raw === INHERIT
-  )
+  if (royalty.inherited === true) return true
+  if (royalty.basis_points_raw != null) {
+    return royalty.basis_points_raw === INHERIT
+  }
+  // Older DAS versions return neither field and surface the sentinel
+  // directly in basis_points. Without this, 65535 reads as a 655.35% fee.
+  return royalty.basis_points === INHERIT
 }
 
 function leafBasisPoints(royalty: {
@@ -146,6 +155,8 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 ## What not to do
 
+Most integration bugs come from showing a leaf value to users or hashing a display value into a write.
+
 - Do **not** show `65535` or `6.5535%` as the user-facing royalty rate — that value lives on `basis_points_raw`.
 - Do **not** assume empty `creators_raw` means no royalty recipients; display payees are on `creators`.
 - Do **not** use main `basis_points` / `creators` when recomputing leaf hashes or building Bubblegum write instructions — use `basis_points_raw` and `creators_raw`.
@@ -164,6 +175,13 @@ Royalty *enforcement* (who may transfer) is separate: configure the collection R
 ## Bubblegum SDK note
 
 `getAssetWithProof` keeps **reading compatible**: `metadata` mirrors DAS main fields (`basis_points`, `creators`), so `metadata.sellerFeeBasisPoints` is the resolved collection rate when inherited. `currentMetadata` is leaf-canonical for writes (sentinel when inherited). Optional siblings `sellerFeeBasisPointsRaw` / `creatorsRaw` and `inherited` mirror DAS `_raw` / inherit detection. Spread `...assetWithProof` into write instructions — use `currentMetadata` for leaf args, not display `metadata`. See the [JavaScript SDK](/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties).
+
+## Notes
+
+- DAS support varies by provider. Upgraded indexers return `basis_points_raw`, `creators_raw`, and `inherited`; older ones omit all three and surface the `65535` sentinel directly on `basis_points`, so treat those fields as optional and fall back on the sentinel.
+- Inheritance is resolved at read time from the MPL-Core collection's Royalties plugin. Changing the collection's rate changes what DAS reports for every inheriting asset without touching any leaf.
+- Royalty *enforcement* is separate from royalty *payment*. The collection's `ruleSet` (`ProgramAllowList` / `ProgramDenyList`) governs which programs may transfer; Bubblegum does not escrow royalty payments on transfer.
+- Applies to Bubblegum V2 (MPL-Bubblegum). V1 trees have no collection-level royalty inheritance.
 
 ## Related
 

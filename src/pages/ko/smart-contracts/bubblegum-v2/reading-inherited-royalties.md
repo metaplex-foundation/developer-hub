@@ -51,6 +51,8 @@ Bubblegum V2는 리프에 **상속 센티널**(`65535`)로 판매자 수수료�
 
 ## 필드 맵
 
+표시용 값과 리프 값은 서로 다른 DAS 필드에 있으며, 쓰기에는 리프 값을 사용해야 합니다.
+
 | 용도 | 필드 |
 |------|------|
 | 표시 비율 / 로열티 UI | `royalty.basis_points`, `royalty.percent` |
@@ -59,6 +61,8 @@ Bubblegum V2는 리프에 **상속 센티널**(`65535`)로 판매자 수수료�
 | 상속 모드 감지 | `royalty.inherited` (또는 `basis_points_raw === 65535`) |
 
 ### 예시 DAS 응답 (상속)
+
+상속된 자산은 `basis_points`에 컬렉션의 확정 요율을, `basis_points_raw`에 `65535` 센티넬을 반환합니다.
 
 ```json
 "royalty": {
@@ -89,6 +93,8 @@ Bubblegum V2는 리프에 **상속 센티널**(`65535`)로 판매자 수수료�
 
 ## 감지 및 표시 헬퍼
 
+아래 세 헬퍼는 상속 로열티에서 동작이 달라지는 작업, 즉 상속 감지, 쓰기용 리프 값 복원, 올바른 크리에이터 목록 선택을 다룹니다.
+
 ```ts
 const INHERIT = 0xffff // 65535
 
@@ -97,10 +103,13 @@ function isInheritedRoyalty(royalty: {
   basis_points_raw?: number | null
   inherited?: boolean | null
 }): boolean {
-  return (
-    royalty.inherited === true ||
-    royalty.basis_points_raw === INHERIT
-  )
+  if (royalty.inherited === true) return true
+  if (royalty.basis_points_raw != null) {
+    return royalty.basis_points_raw === INHERIT
+  }
+  // Older DAS versions return neither field and surface the sentinel
+  // directly in basis_points. Without this, 65535 reads as a 655.35% fee.
+  return royalty.basis_points === INHERIT
 }
 
 function leafBasisPoints(royalty: {
@@ -146,6 +155,8 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 ## 하지 말아야 할 것
 
+통합 과정의 버그는 대부분 리프 값을 사용자에게 표시하거나, 표시용 값을 쓰기에 해싱하면서 발생합니다.
+
 - `65535` 또는 `6.5535%`를 사용자용 로열티 비율로 **표시하지 마세요** — 그 값은 `basis_points_raw`에 있습니다.
 - 빈 `creators_raw`가 로열티 수취인이 없음을 의미한다고 **가정하지 마세요**; 표시용 수취인은 `creators`에 있습니다.
 - 리프 해시를 다시 계산하거나 Bubblegum 쓰기 명령을 구성할 때 주 필드의 `basis_points` / `creators`를 **사용하지 마세요** — `basis_points_raw`와 `creators_raw`를 사용하세요.
@@ -164,6 +175,13 @@ if (isInheritedSfbpRoyalty(royalty)) {
 ## Bubblegum SDK 참고
 
 `getAssetWithProof`는 **읽기 호환**을 유지합니다: `metadata`는 DAS 주 필드를 미러링합니다(상속 시 해석된 컬렉션 비율). `currentMetadata`는 쓰기용 리프 정규 값입니다. 선택적 형제 필드 `sellerFeeBasisPointsRaw` / `creatorsRaw`와 `inherited`는 DAS `_raw` / 상속 감지를 미러링합니다. 쓰기 시 `...assetWithProof`를 전개하고 리프 인자에는 `currentMetadata`를 사용하세요. 표시용 `metadata`는 전달하지 마세요. [JavaScript SDK](/ko/smart-contracts/bubblegum-v2/sdk/javascript#getassetwithproof-and-inherited-royalties)를 참조하세요.
+
+## 참고사항
+
+- DAS 지원 범위는 제공자마다 다릅니다. 업그레이드된 인덱서는 `basis_points_raw`, `creators_raw`, `inherited`를 반환하지만, 이전 버전은 셋 다 생략하고 `65535` 센티넬을 `basis_points`에 직접 실어 보냅니다. 이 필드들은 선택적인 것으로 취급하고 센티넬로 폴백하세요.
+- 상속은 읽기 시점에 MPL-Core 컬렉션의 Royalties 플러그인에서 확정됩니다. 컬렉션 요율을 바꾸면 리프를 전혀 건드리지 않고도 상속 중인 모든 자산에 대해 DAS가 보고하는 값이 바뀝니다.
+- 로열티 *집행*과 로열티 *지급*은 별개입니다. 어떤 프로그램이 전송할 수 있는지는 컬렉션의 `ruleSet`(`ProgramAllowList` / `ProgramDenyList`)이 결정하며, Bubblegum은 전송 시 로열티 지급을 에스크로하지 않습니다.
+- 이 페이지는 Bubblegum V2(MPL-Bubblegum)에 적용됩니다. V1 트리에는 컬렉션 수준의 로열티 상속이 없습니다.
 
 ## 관련
 

@@ -120,7 +120,6 @@ To switch **from** inherited royalties back to an explicit percentage — for ex
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.

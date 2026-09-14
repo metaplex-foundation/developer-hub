@@ -203,7 +203,6 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Notes
 
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.

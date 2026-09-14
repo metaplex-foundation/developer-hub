@@ -199,7 +199,6 @@ const assetId = leaf.id;
 {% /dialect %}
 {% /dialect-switcher %}
 
-
 ## Notes
 
 - The Bubblegum Tree must be created before minting. See [Creating Trees](/smart-contracts/bubblegum-v2/create-trees).
