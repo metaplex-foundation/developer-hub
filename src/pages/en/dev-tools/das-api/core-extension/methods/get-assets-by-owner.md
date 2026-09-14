@@ -2,6 +2,7 @@
 title: Get Core Assets by Owner
 metaTitle: Get Core Assets by Owner | DAS API Core Extension
 description: Returns the information of all MPL Core asset by Owner
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of all MPL Core assets owned by a given public key including their metadata, owner and parsed Plugin data, plus data inherited from collection.

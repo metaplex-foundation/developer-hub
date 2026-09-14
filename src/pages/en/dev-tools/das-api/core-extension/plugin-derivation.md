@@ -1,7 +1,19 @@
 ---
 title: Plugin Derivation
-metaTitle: DAS API Core Extension - Plugin Derivation
-description: Manually Derive or deactivate automatic derivation
+metaTitle: Plugin Derivation | DAS API Core Extension
+description: Derive MPL Core collection plugins manually, or disable automatic derivation with skipDerivePlugins.
+created: '07-22-2026'
+updated: '07-22-2026'
+keywords:
+  - mpl-core-das plugin derivation
+  - skipDerivePlugins
+  - core collection plugins
+  - derive plugins das
+about:
+  - DAS API
+  - MPL Core
+  - Plugin derivation
+proficiencyLevel: Intermediate
 ---
 
 The Core DAS Extension allows to automatically derive plugins and inherited plugins. If you want to completely deactivate it or derive manually instead the following code snippets might be helpful.

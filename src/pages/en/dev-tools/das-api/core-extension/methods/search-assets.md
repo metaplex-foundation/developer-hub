@@ -12,6 +12,7 @@ about:
   - DAS API
   - MPL Core
   - Agent Registry
+proficiencyLevel: Intermediate
 ---
 
 ## Summary
@@ -32,7 +33,7 @@ In this example two filters are applied:
 
 ### Discover registered agents
 
-`das.searchAssets({ isAgent: true })` finds Core assets with a registered [agent](/agents/) identity and may populate `is_agent`, `agent_token`, and `asset_signer` when indexed.
+`das.searchAssets(umi, { isAgent: true })` finds Core assets with a registered [agent](/agents/) identity and may populate `is_agent`, `agent_token`, and `asset_signer` when indexed.
 
 {% code-tabs-imported from="das-api/core-extension/search-assets-agents" frameworks="umi" /%}
 

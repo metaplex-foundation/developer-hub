@@ -431,7 +431,7 @@
 - [Guides](https://metaplex.com/docs/dev-tools/das-api/guides): Practical guides for common DAS API use cases
 - [Methods](https://metaplex.com/docs/dev-tools/das-api/methods): Callable API Methods for the Metaplex DAS API client.
 - [Paginating DAS API Requests](https://metaplex.com/docs/dev-tools/das-api/guides/pagination): Learn how to paginate DAS API Requests efficiently
-- [Plugin Derivation](https://metaplex.com/docs/dev-tools/das-api/core-extension/plugin-derivation): Manually Derive or deactivate automatic derivation
+- [Plugin Derivation](https://metaplex.com/docs/dev-tools/das-api/core-extension/plugin-derivation): Derive MPL Core collection plugins manually, or disable automatic derivation with skipDerivePlugins.
 - [Search Assets](https://metaplex.com/docs/dev-tools/das-api/methods/search-assets): Return the list of assets given a search criteria
 - [Search Assets by Multiple Criteria](https://metaplex.com/docs/dev-tools/das-api/guides/search-by-criteria): Learn how to combine multiple filters to find specific digital assets
 - [Search Core Assets](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-assets): Search MPL Core assets via DAS, including agent discovery filters.

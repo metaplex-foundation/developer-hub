@@ -2,6 +2,7 @@
 title: Get Core Asset
 metaTitle: Get Asset | DAS API Core Extension
 description: Returns the information of a MPL Core asset
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of a MPL Core assets for example including metadata, owner and parsed Plugin data, plus data inherited from collection.

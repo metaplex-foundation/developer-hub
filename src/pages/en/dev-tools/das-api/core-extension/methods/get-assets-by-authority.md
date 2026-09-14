@@ -2,6 +2,7 @@
 title: Get Core Assets by Authority
 metaTitle: Get Core Assets by Authority | DAS API Core Extension
 description: Returns the information of all MPL Core asset with the given authority
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of all MPL Core assets with the given authority including their metadata, owner and parsed Plugin data, plus data inherited from collection.

@@ -2,6 +2,7 @@
 title: Get Core Assets by Collection
 metaTitle: Get Core Assets by Collection | DAS API Core Extension
 description: Returns the information of all MPL Core asset in a given Collection
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of all MPL Core assets with the given authority including their metadata, owner and parsed Plugin data, plus data inherited from collection.

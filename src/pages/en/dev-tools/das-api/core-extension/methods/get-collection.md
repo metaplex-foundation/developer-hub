@@ -2,6 +2,7 @@
 title: Get Core Collection
 metaTitle: Get Collection | DAS API Core Extension
 description: Returns the information of a MPL Core Collection
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of a MPL Core Collections including their metadata, owner and parsed Plugin data.

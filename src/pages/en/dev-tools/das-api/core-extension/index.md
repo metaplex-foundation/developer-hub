@@ -14,6 +14,7 @@ about:
   - DAS API
   - MPL Core
   - mpl-core-das
+proficiencyLevel: Beginner
 ---
 
 ## Summary
@@ -23,7 +24,11 @@ about:
 - Returns types ready for the MPL Core SDKs
 - Automatically derives collection plugins on assets (optional to skip)
 - Supports [Core Groups](/smart-contracts/core/groups), agent filters, and DAS-to-Core conversions
-- Requires `@metaplex-foundation/digital-asset-standard-api` **≥ 2.1.0**.
+- Requires `@metaplex-foundation/mpl-core-das` **≥ 0.2.0**, `@metaplex-foundation/digital-asset-standard-api` **≥ 2.1.1**, and `@metaplex-foundation/mpl-core` **≥ 1.9.0**
+
+{% callout type="note" title="Group and agent helpers need mpl-core-das 0.2.0" %}
+`getAssetsByGroup`, `getGroup`, `getGrouping`, `searchGroups`, `getGroupsByUpdateAuthority`, `dasAssetToCoreGroup`, and the agent filters (`isAgent`, `agentToken`, `assetSigner`) are added in `0.2.0`. On `0.1.1` only the asset and collection helpers are available.
+{% /callout %}
 
 Install and setup: [Getting Started](/dev-tools/das-api/getting-started#das-for-mpl-core).
 
@@ -67,6 +72,8 @@ Core DAS helpers prefer indexed reads over GPA and may omit some on-chain group 
 
 ## Quick Reference
 
+Every helper is namespaced under `das` and takes the Umi instance as its first argument.
+
 | Helper | Returns | Notes |
 |--------|---------|-------|
 | `das.getAsset` / `getCollection` / `getGroup` | Single Core account | Typed for MPL Core SDKs |
@@ -78,6 +85,8 @@ Core DAS helpers prefer indexed reads over GPA and may omit some on-chain group 
 | `das.dasAssetsToCoreAssets` / `dasAssetToCoreCollection` / `dasAssetToCoreGroup` | Converted Core types | For mixed-standard DAS fetches |
 
 ## Glossary
+
+These terms describe the result shapes and behaviours specific to the Core DAS extension.
 
 | Term | Definition |
 |------|------------|

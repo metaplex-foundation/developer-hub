@@ -13,6 +13,7 @@ about:
   - DAS API
   - MPL Core
   - Core Groups
+proficiencyLevel: Intermediate
 ---
 
 ## Summary

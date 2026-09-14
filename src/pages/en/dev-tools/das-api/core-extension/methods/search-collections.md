@@ -2,6 +2,7 @@
 title: Search Core Collections
 metaTitle: Search Core Collections | DAS API Core Extension
 description: Return the list of MPL Core Collections given a search criteria
+proficiencyLevel: Intermediate
 ---
 
 ## Summary
