@@ -22,7 +22,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 faqs:
   - q: agent_tokenはいつDASレスポンスに含まれますか？
     a: agent_tokenフィールドは、エージェントのAgentIdentityV2 PDAにsetAgentTokenV1でトークンミントが設定されている場合にのみ含まれます。トークンがリンクされていない登録済みエージェントはこのフィールドを省略します。AgentIdentityV1 PDAにはトークンミントがなく、agent_tokenは決して設定されません。searchAssetsリクエストでは同じ値をagentTokenフィルタで指定します。
@@ -118,6 +118,10 @@ PDAを手動で派生せずに、アセットの公開鍵から直接IDを取得
 
 アドレスは決定論的なので、誰でもアセットの公開鍵からアドレスを派生して資金を送信したり残高を確認したりできます。このウォレットに対して署名できるのは、委任された[エグゼクティブ](/agents/run-an-agent)を通じたCoreの[Execute](/smart-contracts/core/execute-asset-signing)命令によるアセット自身のみです。
 
+{% callout type="warning" title="資金はアセットアドレスではなくAsset Signerに送金してください" %}
+Asset Signer PDAとエージェントのCoreアセットは異なる2つのアドレスです。必ずAsset Signer PDAに資金を送金してください。
+{% /callout %}
+
 アカウントレイアウト、PDA派生の詳細、エラーコードについては、[MPL Agent Registry](/smart-contracts/mpl-agent)スマートコントラクトドキュメントをご覧ください。
 
 ## DAS API経由でエージェントデータを読み取る {#read-agent-data-via-das-api}
@@ -209,6 +213,7 @@ DASは取り込み中に2つのオンチェーンソースからエージェン�
 ## 注意事項
 
 - Asset SignerはPDAです — 秘密鍵は存在しません。任意のソースから資金を受け取れますが、発信トランザクションに署名できるのはCoreの[Execute](/smart-contracts/core/execute-asset-signing)命令を通じたアセット自身のみです。
+- Coreアセットアカウント自体はウォレットではありません。
 - `safeFetchAgentIdentityV1`は未登録アセットに対してスローする代わりに`null`を返すため、try/catchなしでの存在チェックに安全です。
 - `findAssetSignerPda`とDASの`asset_signer`は、すべてのネットワークで同じ決定論的なアドレスを返します。
 - `agent_token`は[`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token)で設定すると**永久的**です — クリアや再割り当ての命令はありません。

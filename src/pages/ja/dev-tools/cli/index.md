@@ -59,6 +59,8 @@ mplx <カテゴリ> <コマンド> [オプション]
 
 カテゴリには以下が含まれます：
 - `core`: MPLコアアセット管理
+- `cm`: Candy Machine操作
+- `distro`: MPL-Distro の作成、入金、取得、出金
 - `toolbox`: ユーティリティコマンド
 - `config`: 設定管理
 

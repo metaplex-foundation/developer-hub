@@ -45,6 +45,7 @@ const programs = [
   { name: 'Candy Machine v3', programId: 'CndyV3LdqHUfDLmE5naZjVN8rBZz4tqhdefbAnjHG3JR', github: 'https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-machine-core', docs: '/smart-contracts/candy-machine' },
   { name: 'Candy Guard', programId: 'Guard1JwRhJkVH6XZhzoYxeBVQe872VH6QggF4BWmS9g', github: 'https://github.com/metaplex-foundation/mpl-candy-machine/tree/main/programs/candy-guard', docs: '/smart-contracts/candy-machine/guards' },
   { name: 'Genesis', programId: 'GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B', docs: '/smart-contracts/genesis' },
+  { name: 'MPL-Distro', programId: 'D1STRoZTUiEa6r8TLg2aAbG4nSRT5cDBmgG7jDqCZvU8', github: 'https://github.com/metaplex-foundation/mpl-distro', docs: '/smart-contracts/mpl-distro' },
   { name: 'MPL-Hybrid', programId: 'MPL4o4wMzndgh8T1NVDxELQCj5UQfYTYEkabX3wNKtb', github: 'https://github.com/metaplex-foundation/mpl-hybrid', docs: '/smart-contracts/mpl-hybrid' },
   { name: 'Fusion (Trifle)', programId: 'trifMWutwBxkSuatmpPVnEe7NoE3BJKgjVi8sSyoXWX', github: 'https://github.com/metaplex-foundation/mpl-trifle', docs: '/smart-contracts/fusion' },
   { name: 'Token Auth Rules', programId: 'auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg', github: 'https://github.com/metaplex-foundation/mpl-token-auth-rules', docs: '/smart-contracts/token-auth-rules' },
@@ -52,9 +53,9 @@ const programs = [
   { name: 'Inscriptions', programId: '1NSCRfGeyo7wPUazGbaPBUsTM49e1k2aXewHGARfzSo', github: 'https://github.com/metaplex-foundation/mpl-inscription', docs: '/smart-contracts/inscription' },
   { name: 'MPL System Extras', programId: 'SysExL2WDyJi9aRZrXorrjHJut3JwHQ7R9bTyctbNNG', github: 'https://github.com/metaplex-foundation/mpl-toolbox', docs: '/dev-tools/umi/toolbox' },
   { name: 'MPL Token Extras', programId: 'TokExjvjJmhKaRBShsBAsbSvEWMA1AgUNK7ps4SAc2p', github: 'https://github.com/metaplex-foundation/mpl-toolbox', docs: '/dev-tools/umi/toolbox' },
-  { name: 'Auction House', programId: 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house', docs: '/legacy-documentation/auction-house' },
-  { name: 'Auctioneer', programId: 'neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer', docs: '/legacy-documentation/auction-house/auctioneer' },
-  { name: 'Gumdrop', programId: 'gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a', github: 'https://github.com/metaplex-foundation/gumdrop', docs: '/legacy-documentation/gumdrop' },
+  { name: 'Auction House', programId: 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auction-house', docs: '/smart-contracts/auction-house' },
+  { name: 'Auctioneer', programId: 'neer8g6yJq2mQM6KbnViEDAD4gr3gRZyMMf4F2p3MEh', github: 'https://github.com/metaplex-foundation/metaplex-program-library/tree/master/auctioneer', docs: '/smart-contracts/auction-house/auctioneer' },
+  { name: 'Gumdrop', programId: 'gdrpGjVffourzkdDRrQmySw4aTHr8a3xmQzzxSwFD1a', github: 'https://github.com/metaplex-foundation/gumdrop', docs: '/smart-contracts/gumdrop' },
 ]
 
 const tokensAndNfts = [

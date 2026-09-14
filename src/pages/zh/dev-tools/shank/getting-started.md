@@ -170,7 +170,7 @@ Shank 提供五个用于注解 Solana 程序代码的基本派生宏：
 Shank 与其他 Metaplex 工具无缝集成：
 
 - **[Kinobi](/zh/dev-tools/umi/kinobi)**: 使用 Shank JS 库进行 IDL 生成和客户端创建
-- **[Solita](/zh/legacy-documentation/developer-tools/solita)**: 从 Shank 提取的 IDL 生成 TypeScript SDK
+- **[Solita](/zh/dev-tools/solita)**: 从 Shank 提取的 IDL 生成 TypeScript SDK
 
 ## CLI 使用
 

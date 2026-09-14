@@ -3,8 +3,7 @@ import { useLocale } from '@/contexts/LocaleContext';
 import Link from 'next/link';
 import { nftMenuCategory, tokenMenuCategory } from '../NavList';
 import { products as allProducts } from './index';
-
-
+import { getStatusLabels } from './statusLabels';
 
 export function Grid({
   onClick,
@@ -14,8 +13,13 @@ export function Grid({
   ...props
 }) {
   const { locale } = useLocale()
-  const products = allProducts.filter(
+  const statusLabels = getStatusLabels(locale)
+  const categoryProducts = allProducts.filter(
     (product) => menuItem === product.navigationMenuCatergory
+  )
+  const products = categoryProducts.filter((product) => !product.deprecated)
+  const deprecatedProducts = categoryProducts.filter(
+    (product) => product.deprecated
   )
 
   const tokenMenuItems = tokenMenuCategory.filter(
@@ -50,9 +54,6 @@ export function Grid({
   return (
     <ul className={className} {...props}>
       {products.map((product) => {
-        if (product.deprecated) {
-          return null
-        }
         const localizedProduct = localizeProduct(product)
         return (
           <li key={product.path || product.href}>
@@ -106,6 +107,41 @@ export function Grid({
           </li>
         )
       })}
+      {deprecatedProducts.length > 0 && (
+        <>
+          <li
+            aria-hidden="true"
+            className="col-span-full mt-2 border-t border-slate-200 px-3 pb-1 pt-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:border-slate-700/60 dark:text-slate-500"
+          >
+            {statusLabels.deprecated}
+          </li>
+          {deprecatedProducts.map((product) => {
+            const localizedProduct = localizeProduct(product)
+            return (
+              <li key={product.path || product.href}>
+                <Link
+                  href={getLocalizedHref(product.href || product.path, locale)}
+                  className="block content-start p-3 opacity-70 hover:bg-neutral-800 hover:opacity-100"
+                  onClick={onClick}
+                  {...(product.target && { target: product.target })}
+                >
+                  <div className="flex flex-1 flex-col justify-center text-left">
+                    <div className="text-sm font-medium leading-none text-slate-600 dark:text-slate-300">
+                      {localizedProduct.name}
+                    </div>
+                    <div className="mt-1 text-sm leading-none text-slate-500 dark:text-slate-400">
+                      {product.replacement
+                        ? `→ ${product.replacement.name}`
+                        : localizedProduct.headline ||
+                          localizedProduct.description}
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            )
+          })}
+        </>
+      )}
     </ul>
   )
 }

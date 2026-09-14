@@ -22,7 +22,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 faqs:
   - q: When does agentToken appear in a DAS response?
     a: The agentToken field is present only when the agent's AgentIdentityV2 PDA has a token mint set via setAgentTokenV1. Registered agents without a linked token omit the field. AgentIdentityV1 PDAs do not carry a token mint and never populate agentToken.
@@ -118,6 +118,10 @@ Every Core asset has a built-in wallet called the **Asset Signer** — a PDA der
 
 The address is deterministic, so anyone can derive it from the asset's public key to send funds or check balances. Only the asset itself can sign for this wallet, through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction via a delegated [executive](/agents/run-an-agent).
 
+{% callout type="warning" title="Send funds to the Asset Signer, not the asset address" %}
+The Asset Signer PDA and the agent's Core asset are two different addresses. Make sure to always fund the Asset Signer PDA.
+{% /callout %}
+
 See the [MPL Agent Registry](/smart-contracts/mpl-agent) smart contract docs for account layouts, PDA derivation details, and error codes.
 
 ## Read Agent Data via DAS API
@@ -209,6 +213,7 @@ DAS populates agent fields from two on-chain sources during ingestion. **MPL Cor
 ## Notes
 
 - The Asset Signer is a PDA — no private key exists for it. It can receive funds from any source, but only the asset itself can sign outgoing transactions through Core's [Execute](/smart-contracts/core/execute-asset-signing) instruction.
+- The Core asset account itself is not a wallet.
 - `safeFetchAgentIdentityV1` returns `null` for unregistered assets rather than throwing, making it safe for existence checks without try/catch.
 - `findAssetSignerPda` and DAS `asset_signer` return the same deterministic address on every network.
 - `agent_token` is **permanent** once set via [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) — there is no instruction to clear or reassign it.

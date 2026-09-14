@@ -20,6 +20,8 @@ Metaplex协议目前包含以下费用：
 
 由铸造者支付（通常是铸造新发行品的个人收藏者）。包括所有"创建"NFT的指令，包括创建打印版本的指令。
 
+Core 协议费用直接存入 Asset 账户本身，而不是转入单独的费用账户。Metaplex 费用收集器会定期调用 `collect` 指令，将 Asset 账户中超过免租金最低余额的所有 lamports 清扫至协议费用接收方。因此，任何发送到 Core Asset 地址的 SOL 都会被视为协议费用并被收取。请勿在 Core Asset 账户上存放 SOL；请使用 [Asset Signer PDA](/smart-contracts/core/execute-asset-signing)（从 Asset 派生的独立地址）作为 Asset 的钱包。
+
 {% protocol-fees program="core" showTitle=false /%}
 
 {% /totem-accordion %}
@@ -37,6 +39,14 @@ Metaplex协议目前包含以下费用：
 由铸造者支付（通常是铸造新发行品的个人收藏者）。或者，创作者可以考虑使用Core（下一代NFT）以获得最大的可组合性和更低的铸造成本，或使用Bubblegum（压缩NFT）。
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-Distro" %}
+
+Merkle 领取成功时，由领取交易的支付方支付。
+
+{% protocol-fees program="mpl-distro" showTitle=false /%}
 
 {% /totem-accordion %}
 

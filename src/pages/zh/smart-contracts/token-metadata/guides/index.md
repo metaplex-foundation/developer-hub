@@ -14,6 +14,8 @@ description: Metaplex Token Metadata 产品的操作指南。
 
 {% quick-link title="账户大小缩减" icon="Lightbulb" href="/zh/smart-contracts/token-metadata/guides/account-size-reduction" description="了解更多关于 TM 账户大小缩减的信息" /%}
 
+{% quick-link title="使用 MPL-Distro 创建基于领取的空投" icon="CodeBracketSquare" href="/zh/smart-contracts/mpl-distro/production-delivery" description="持久化 Merkle 证明、运行领取页面或 API，并用 MPL-Distro 回收未领取代币。" /%}
+
 {% quick-link title="代币领取智能合约" icon="CodeBracketSquare" href="/zh/smart-contracts/token-metadata/guides/anchor/token-claimer-smart-contract" description="学习如何在 Solana 上使用 Anchor 创建利用 Merkle 树的代币领取智能合约！" /%}
 
 {% /quick-links %}

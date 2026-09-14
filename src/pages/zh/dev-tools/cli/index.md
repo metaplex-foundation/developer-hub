@@ -64,6 +64,7 @@ mplx <category> <command> [options]
 类别包括:
 - `core`: MPL Core 资产管理
 - `cm`: Candy Machine 操作
+- `distro`: MPL-Distro 创建、存入、获取、提取
 - `toolbox`: 实用程序命令
 - `config`: 配置管理
 

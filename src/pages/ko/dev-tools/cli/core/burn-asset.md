@@ -6,6 +6,10 @@ description: Metaplex CLI를 사용하여 MPL Core 에셋 소각하기
 
 `mplx core asset burn` 명령을 사용하면 MPL Core 에셋을 영구적으로 삭제하고 렌트 비용을 회수할 수 있습니다. 단일 에셋을 소각하거나 JSON 리스트 파일을 사용하여 여러 에셋을 한 번에 소각할 수 있습니다.
 
+{% callout type="warning" title="소각 전에 Asset Signer 잔액을 인출하세요" %}
+Core Asset을 소각하면 [`execute`](/ko/smart-contracts/core/execute-asset-signing)가 실패합니다. Asset Signer PDA에 남아 있는 SOL, 토큰, 기타 자산은 회수 경로 없이 묶입니다. 먼저 전송하세요 — PDA는 [`mplx core asset execute info`](/ko/dev-tools/cli/core/execute)로 확인할 수 있습니다.
+{% /callout %}
+
 ## 기본 사용법
 
 ### 단일 에셋 소각
@@ -77,6 +81,7 @@ mplx core asset burn --list ./assets-to-burn.json
 ## 참고 사항
 
 - **경고**: 소각은 영구적이며 되돌릴 수 없습니다
+- 소각 전에 [Asset Signer PDA](/ko/smart-contracts/core/execute-asset-signing)를 비우세요 — 이후 `execute`는 실패하고 남은 SOL, 토큰, 중첩 자산이 묶입니다
 - 에셋을 소각하려면 해당 에셋의 소유자여야 합니다
 - 에셋을 소각하면 대부분의 렌트 SOL이 소유자에게 반환됩니다
 - 계정 재사용을 방지하기 위해 소액(약 0.00089784 SOL)이 남습니다

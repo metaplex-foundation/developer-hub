@@ -22,7 +22,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '02-25-2026'
-updated: '07-08-2026'
+updated: '09-01-2026'
 faqs:
   - q: agentToken 何时会出现在 DAS 响应中？
     a: 仅当代理的 AgentIdentityV2 PDA 已通过 setAgentTokenV1 设置代币 mint 时，响应中才会包含 agentToken 字段。已注册但未关联代币的代理会省略该字段。AgentIdentityV1 PDA 不携带代币 mint，永远不会填充 agentToken。
@@ -118,6 +118,10 @@ faqs:
 
 地址是确定性的，因此任何人都可以从资产的公钥派生它来发送资金或检查余额。只有资产本身才能通过委托的[执行者](/zh/agents/run-an-agent)经由 Core 的 [Execute](/zh/smart-contracts/core/execute-asset-signing) 指令为此钱包签名。
 
+{% callout type="warning" title="将资金发送到 Asset Signer，而不是资产地址" %}
+Asset Signer PDA 和代理的 Core 资产是两个不同的地址。请务必始终为 Asset Signer PDA 注资。
+{% /callout %}
+
 有关账户布局、PDA 派生详情和错误代码，请参阅 [MPL Agent Registry](/zh/smart-contracts/mpl-agent) 智能合约文档。
 
 ## 通过 DAS API 读取代理数据 {#read-agent-data-via-das-api}
@@ -209,6 +213,7 @@ DAS 在摄取期间从两个链上来源填充代理字段。**MPL Core 资产**
 ## Notes
 
 - Asset Signer 是一个 PDA——不存在私钥。它可以从任何来源接收资金，但只有资产本身才能通过 Core 的 [Execute](/zh/smart-contracts/core/execute-asset-signing) 指令签署发出的交易。
+- Core 资产账户本身不是钱包。
 - `safeFetchAgentIdentityV1` 对未注册资产返回 `null` 而不是抛出异常，使其可以安全地用于无需 try/catch 的存在性检查。
 - `findAssetSignerPda` 与 DAS 的 `asset_signer` 在每个网络上都返回相同的确定性地址。
 - 通过 [`setAgentTokenV1`](/zh/dev-tools/cli/agents/set-agent-token) 设置后，`agent_token` 是**永久性**的——没有指令可以清除或重新分配它。

@@ -2,7 +2,7 @@
 title: Freeze Execute
 metaTitle: Freeze Execute Plugin | Core
 description: Learn about the MPL Core Asset Freeze Execute Plugin. The 'Freeze Execute' plugin can freeze the Execute lifecycle event, preventing the asset from executing arbitrary instructions.
-updated: '01-31-2026'
+updated: '08-28-2026'
 keywords:
   - freeze execute
   - block execute
@@ -331,8 +331,9 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 - The plugin cannot be removed when frozen
 - Authority cannot be reassigned when frozen
 - The plugin works with the [Execute instruction](/smart-contracts/core/execute-asset-signing) system
+- Unfreeze and withdraw via `execute` **before** [burning](/smart-contracts/core/burn) the Asset. Burning disables `execute` and strands remaining balances in the Asset Signer PDA
 ## Example Use Case: Backed NFT
-A common use case for the Freeze Execute Plugin is creating "backed NFTs" where the NFT represents ownership of underlying assets (like SOL or tokens) that can be withdrawn via execute instructions. The plugin allows you to temporarily freeze these execute operations.
+A common use case for the Freeze Execute Plugin is creating "backed NFTs" where the NFT represents ownership of underlying assets (like SOL or tokens) that can be withdrawn via execute instructions. The plugin allows you to temporarily freeze these execute operations. Withdraw those underlying assets with `execute` before burning the Asset — burning disables `execute` and strands remaining balances in the Asset Signer PDA.
 {% dialect-switcher title="Backed NFT Example" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

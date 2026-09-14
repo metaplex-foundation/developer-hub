@@ -25,7 +25,7 @@ about:
 - Supports [Core Groups](/smart-contracts/core/groups), agent filters, and DAS-to-Core conversions
 - Requires `@metaplex-foundation/digital-asset-standard-api` **≥ 2.1.0**.
 
-Install and setup: [Getting Started](/dev-tools/das-api/getting-started).
+Install and setup: [Getting Started](/dev-tools/das-api/getting-started#das-for-mpl-core).
 
 ## Fetching
 
