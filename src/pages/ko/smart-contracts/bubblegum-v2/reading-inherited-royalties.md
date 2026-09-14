@@ -182,6 +182,7 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 상속은 읽기 시점에 MPL-Core 컬렉션의 Royalties 플러그인에서 확정됩니다. 컬렉션 요율을 바꾸면 리프를 전혀 건드리지 않고도 상속 중인 모든 자산에 대해 DAS가 보고하는 값이 바뀝니다.
 - 로열티 *집행*과 로열티 *지급*은 별개입니다. 어떤 프로그램이 전송할 수 있는지는 컬렉션의 `ruleSet`(`ProgramAllowList` / `ProgramDenyList`)이 결정하며, Bubblegum은 전송 시 로열티 지급을 에스크로하지 않습니다.
 - 이 페이지는 Bubblegum V2(MPL-Bubblegum)에 적용됩니다. V1 트리에는 컬렉션 수준의 로열티 상속이 없습니다.
+- 이 페이지의 DAS 필드(`basis_points_raw`, `creators_raw`, `inherited`)에는 `@metaplex-foundation/digital-asset-standard-api` **2.1.0 이상**이 필요합니다. `getAssetWithProof`의 `currentMetadata`는 `@metaplex-foundation/mpl-bubblegum` **5.1.0**에서 사용할 수 있지만, `sellerFeeBasisPointsRaw`, `creatorsRaw`, `inherited` 필드는 아직 게시되지 않았습니다. [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173)에서 추가되며, 그때까지는 `rpcAsset`에서 읽으세요.
 
 ## 자주 묻는 질문
 

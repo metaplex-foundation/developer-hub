@@ -480,7 +480,11 @@ DAS APIプラグインは`mplBubblegum()`によって自動的に登録されま
 
 `updateMetadataV2` は既存リーフ引数名を `currentMetadata`（IDL）とします。`...assetWithProof` の展開で供給されます。リーフ `metadata` 引数を取る命令（`setCollectionV2`、`verifyCreatorV2` など）では `assetWithProof.currentMetadata` を使ってください。
 
-DASを直接読むクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
+DASを直接読み取るクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
+
+{% callout type="note" title="バージョン要件" %}
+`currentMetadata`は`@metaplex-foundation/mpl-bubblegum` **5.1.0**で提供されます。`sellerFeeBasisPointsRaw`、`creatorsRaw`、`inherited`の各フィールドはまだ公開されておらず、[mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173)で追加されます。それまでは同じ値を`rpcAsset.royalty.basis_points_raw`、`rpcAsset.creators_raw`、`rpcAsset.royalty.inherited`から読み取ってください。これらには`@metaplex-foundation/digital-asset-standard-api` **2.1.0以上**が必要です。
+{% /callout %}
 
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 

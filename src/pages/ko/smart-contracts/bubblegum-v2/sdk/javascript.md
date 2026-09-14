@@ -482,6 +482,10 @@ DAS API 플러그인은 `mplBubblegum()`에 의해 자동으로 등록됩니다.
 
 DAS를 직접 읽는 클라이언트는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 따르세요.
 
+{% callout type="note" title="버전 요구사항" %}
+`currentMetadata`는 `@metaplex-foundation/mpl-bubblegum` **5.1.0**에 포함되어 있습니다. `sellerFeeBasisPointsRaw`, `creatorsRaw`, `inherited` 필드는 아직 게시되지 않았으며 [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173)에서 추가됩니다. 그때까지는 같은 값을 `rpcAsset.royalty.basis_points_raw`, `rpcAsset.creators_raw`, `rpcAsset.royalty.inherited`에서 읽으세요. 이들에는 `@metaplex-foundation/digital-asset-standard-api` **2.1.0 이상**이 필요합니다.
+{% /callout %}
+
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
 ### 단일 cNFT 가져오기

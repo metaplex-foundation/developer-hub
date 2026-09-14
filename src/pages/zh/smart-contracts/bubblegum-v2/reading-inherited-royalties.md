@@ -182,6 +182,7 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 继承是在读取时从 MPL-Core 集合的 Royalties 插件解析出来的。修改集合费率会改变 DAS 为所有继承资产报告的数值，而无需改动任何叶子。
 - 版税*强制执行*与版税*支付*是两回事。哪些程序可以转移由集合的 `ruleSet`（`ProgramAllowList` / `ProgramDenyList`）决定，Bubblegum 不会在转移时托管版税支付。
 - 本页适用于 Bubblegum V2（MPL-Bubblegum）。V1 树没有集合级别的版税继承。
+- 本页的 DAS 字段（`basis_points_raw`、`creators_raw`、`inherited`）需要 `@metaplex-foundation/digital-asset-standard-api` **2.1.0 及以上**。`getAssetWithProof` 的 `currentMetadata` 在 `@metaplex-foundation/mpl-bubblegum` **5.1.0** 中已可用，但 `sellerFeeBasisPointsRaw`、`creatorsRaw` 和 `inherited` 这几个同级字段尚未发布，它们将随 [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173) 一起提供。在此之前请从 `rpcAsset` 读取。
 
 ## 常见问题
 

@@ -182,6 +182,7 @@ Royalty *enforcement* (who may transfer) is separate: configure the collection R
 - Inheritance is resolved at read time from the MPL-Core collection's Royalties plugin. Changing the collection's rate changes what DAS reports for every inheriting asset without touching any leaf.
 - Royalty *enforcement* is separate from royalty *payment*. The collection's `ruleSet` (`ProgramAllowList` / `ProgramDenyList`) governs which programs may transfer; Bubblegum does not escrow royalty payments on transfer.
 - Applies to Bubblegum V2 (MPL-Bubblegum). V1 trees have no collection-level royalty inheritance.
+- The DAS fields on this page (`basis_points_raw`, `creators_raw`, `inherited`) need `@metaplex-foundation/digital-asset-standard-api` **≥ 2.1.0**. `getAssetWithProof` exposes `currentMetadata` from `@metaplex-foundation/mpl-bubblegum` **5.1.0**, but its `sellerFeeBasisPointsRaw`, `creatorsRaw`, and `inherited` siblings are not published yet — they arrive with [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173). Read them off `rpcAsset` until that ships.
 
 ## FAQ
 

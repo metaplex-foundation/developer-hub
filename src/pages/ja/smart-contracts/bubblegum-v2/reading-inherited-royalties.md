@@ -182,6 +182,7 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 継承は読み取り時にMPL-CoreコレクションのRoyaltiesプラグインから解決されます。コレクションの料率を変更すると、リーフに一切触れずに、継承しているすべてのアセットについてDASの報告値が変わります。
 - ロイヤリティの*強制*とロイヤリティの*支払い*は別物です。どのプログラムが転送できるかはコレクションの`ruleSet`（`ProgramAllowList` / `ProgramDenyList`）が制御し、Bubblegumは転送時にロイヤリティ支払いをエスクローしません。
 - 本ページはBubblegum V2（MPL-Bubblegum）に適用されます。V1ツリーにはコレクションレベルのロイヤリティ継承はありません。
+- 本ページのDASフィールド（`basis_points_raw`、`creators_raw`、`inherited`）には`@metaplex-foundation/digital-asset-standard-api` **2.1.0以上**が必要です。`getAssetWithProof`の`currentMetadata`は`@metaplex-foundation/mpl-bubblegum` **5.1.0**で利用できますが、`sellerFeeBasisPointsRaw`、`creatorsRaw`、`inherited`の各フィールドはまだ公開されていません。これらは[mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173)で追加されます。それまでは`rpcAsset`から読み取ってください。
 
 ## よくある質問
 

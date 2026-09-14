@@ -480,6 +480,10 @@ The DAS API plugin is automatically registered by `mplBubblegum()`. See [Fetch c
 
 Clients reading DAS directly should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
+{% callout type="note" title="Version requirements" %}
+`currentMetadata` ships in `@metaplex-foundation/mpl-bubblegum` **5.1.0**. The `sellerFeeBasisPointsRaw`, `creatorsRaw`, and `inherited` siblings are not published yet — they arrive with [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173). Until then, read the same values from `rpcAsset.royalty.basis_points_raw`, `rpcAsset.creators_raw`, and `rpcAsset.royalty.inherited`, which need `@metaplex-foundation/digital-asset-standard-api` **≥ 2.1.0**.
+{% /callout %}
+
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
 ### Fetch a Single cNFT

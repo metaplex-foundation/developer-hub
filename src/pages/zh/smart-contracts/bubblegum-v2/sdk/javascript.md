@@ -482,6 +482,10 @@ DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/sma
 
 直接读取 DAS 的客户端应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 
+{% callout type="note" title="版本要求" %}
+`currentMetadata` 已包含在 `@metaplex-foundation/mpl-bubblegum` **5.1.0** 中。`sellerFeeBasisPointsRaw`、`creatorsRaw` 和 `inherited` 这几个同级字段尚未发布，它们将随 [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173) 一起提供。在此之前，请从 `rpcAsset.royalty.basis_points_raw`、`rpcAsset.creators_raw` 和 `rpcAsset.royalty.inherited` 读取相同的值，这些字段需要 `@metaplex-foundation/digital-asset-standard-api` **2.1.0 及以上**。
+{% /callout %}
+
 {% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
 ### 获取单个 cNFT
