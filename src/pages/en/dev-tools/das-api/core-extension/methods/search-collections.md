@@ -7,7 +7,7 @@ proficiencyLevel: Intermediate
 
 ## Summary
 
-`das.searchCollections` returns [MPL Core](/smart-contracts/core) collections that match DAS search filters as `CollectionResult` values.
+`das.searchCollections` returns [MPL Core](/smart-contracts/core) collections that match DAS search filters as [`CollectionResult`](/dev-tools/das-api/core-extension/methods/get-collection) values.
 
 - Filters to `MplCoreCollection` automatically
 - Accepts the same search criteria as Core asset search where applicable
@@ -27,7 +27,7 @@ Additional possible Parameters can be found [below](#parameters).
 
 ## By update authority {% #by-update-authority %}
 
-[`das.getCollectionsByUpdateAuthority`](#by-update-authority) is a convenience wrapper around collection search for a given update authority. It returns [`CollectionResult`](/dev-tools/das-api/core-extension/methods/get-collection) values.
+`das.getCollectionsByUpdateAuthority` is a convenience wrapper around collection search for a given update authority. It returns [`CollectionResult`](/dev-tools/das-api/core-extension/methods/get-collection) values.
 
 {% code-tabs-imported from="das-api/core-extension/get-collections-by-update-authority" frameworks="umi" /%}
 

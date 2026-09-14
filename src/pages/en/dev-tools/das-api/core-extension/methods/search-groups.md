@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## Summary
 
-`das.searchGroups` searches DAS for `MplCoreGroup` interfaces and returns Core-typed groups.
+`das.searchGroups` searches DAS for [`MplCoreGroup`](/smart-contracts/core/groups) interfaces and returns [`GroupResult`](/dev-tools/das-api/core-extension#glossary) values.
 
 - Filters to Core groups only
 - Accepts the same search filters as Core asset search where applicable (for example authority)
@@ -25,6 +25,8 @@ proficiencyLevel: Intermediate
 - For update-authority listing, use [`getGroupsByUpdateAuthority`](#by-update-authority)
 
 ## Code example
+
+`das.searchGroups` takes the Umi instance and a filter object, and returns matching Core-typed groups.
 
 {% code-tabs-imported from="das-api/core-extension/search-groups" frameworks="umi" /%}
 

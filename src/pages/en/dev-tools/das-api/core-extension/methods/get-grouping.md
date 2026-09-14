@@ -25,9 +25,13 @@ proficiencyLevel: Intermediate
 
 ## Code example
 
+`das.getGrouping` takes the Umi instance and a `GroupV1` address, and returns the group name and size without listing members.
+
 {% code-tabs-imported from="das-api/core-extension/get-grouping" frameworks="umi" /%}
 
 ## Parameters
+
+The helper accepts the Umi instance followed by an options object.
 
 | Name         | Required | Description |
 | ------------ | :------: | ----------- |

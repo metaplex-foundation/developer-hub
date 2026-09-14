@@ -27,11 +27,15 @@ proficiencyLevel: Intermediate
 
 ## Code example
 
+`das.getAssetsByGroup` takes the Umi instance and a `GroupV1` address, and returns the group's members as Core-typed results.
+
 Replace `<ENDPOINT>` with your DAS RPC and `<PublicKey>` with the GroupV1 address.
 
 {% code-tabs-imported from="das-api/core-extension/get-assets-by-group" frameworks="umi" /%}
 
 ## Parameters
+
+The helper accepts the Umi instance followed by an options object.
 
 | Name                 | Required | Description |
 | -------------------- | :------: | ----------- |

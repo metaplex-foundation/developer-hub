@@ -17,13 +17,15 @@ proficiencyLevel: Intermediate
 
 ## Summary
 
-`das.getGroup` fetches one [mpl-core GroupV1](/smart-contracts/core/groups) by public key and returns a `GroupResult`.
+`das.getGroup` fetches one [mpl-core GroupV1](/smart-contracts/core/groups) by public key and returns a [`GroupResult`](/dev-tools/das-api/core-extension#glossary).
 
 - Typed for use with MPL Core SDKs
 - Membership vectors may be empty depending on the indexer
 - Prefer [`fetchGroupV1`](/smart-contracts/core/groups) when you need authoritative on-chain `collections` / `groups` / `assets` / `parentGroups`
 
 ## Code example
+
+`das.getGroup` takes the Umi instance and a `GroupV1` address, and returns a single Core-typed group.
 
 {% code-tabs-imported from="das-api/core-extension/get-group" frameworks="umi" /%}
 
