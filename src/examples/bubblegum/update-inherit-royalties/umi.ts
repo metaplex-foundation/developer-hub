@@ -5,12 +5,24 @@ import {
   UpdateArgsArgs,
   mplBubblegum,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { publicKey, some } from '@metaplex-foundation/umi'
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
+import { keypairIdentity, publicKey, some } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
+import { readFileSync } from 'fs'
 // [/IMPORTS]
 
 // [SETUP]
-const umi = createUmi('https://api.devnet.solana.com').use(mplBubblegum())
+// getAssetWithProof calls getAsset and getAssetProof, so this needs a
+// DAS-capable RPC. The public Solana endpoints do not serve DAS methods.
+const umi = createUmi('YOUR_DAS_ENABLED_RPC_URL')
+  .use(mplBubblegum())
+  .use(dasApi())
+
+// The leaf owner or an authorised delegate must sign the update.
+const keypair = umi.eddsa.createKeypairFromSecretKey(
+  new Uint8Array(JSON.parse(readFileSync('./keypair.json', 'utf8')))
+)
+umi.use(keypairIdentity(keypair))
 
 const assetId = publicKey('YOUR_ASSET_ID')
 const collectionPublicKey = publicKey('YOUR_COLLECTION_ADDRESS')

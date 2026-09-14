@@ -183,6 +183,20 @@ Royalty *enforcement* (who may transfer) is separate: configure the collection R
 - Royalty *enforcement* is separate from royalty *payment*. The collection's `ruleSet` (`ProgramAllowList` / `ProgramDenyList`) governs which programs may transfer; Bubblegum does not escrow royalty payments on transfer.
 - Applies to Bubblegum V2 (MPL-Bubblegum). V1 trees have no collection-level royalty inheritance.
 
+## FAQ
+
+### Why does `royalty.basis_points_raw` show 65535?
+
+That is the onchain inherit sentinel used for leaf hashing. `royalty.basis_points` already holds the collection rate for display.
+
+### Why is `creators_raw` empty on an inherited cNFT?
+
+Leaf creators must be empty when SFBP is inherited. Use `creators` for collection royalty payees.
+
+### Do I need to change anything for non-inherited cNFTs?
+
+No. When inheritance is not used, the `_raw` fields and `inherited` are omitted and the main `royalty` and `creators` fields behave as before.
+
 ## Related
 
 - [Fetching Compressed NFTs](/smart-contracts/bubblegum-v2/fetch-cnfts)

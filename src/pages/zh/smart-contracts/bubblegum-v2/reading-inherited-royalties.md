@@ -183,6 +183,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 版税*强制执行*与版税*支付*是两回事。哪些程序可以转移由集合的 `ruleSet`（`ProgramAllowList` / `ProgramDenyList`）决定，Bubblegum 不会在转移时托管版税支付。
 - 本页适用于 Bubblegum V2（MPL-Bubblegum）。V1 树没有集合级别的版税继承。
 
+## 常见问题
+
+### 为什么 `royalty.basis_points_raw` 显示为 65535？
+
+那是链上用于叶子哈希的继承哨兵值。`royalty.basis_points` 已包含用于展示的集合费率。
+
+### 为什么继承版税的 cNFT 上 `creators_raw` 为空？
+
+当 SFBP 被继承时，叶子上的 `creators` 必须为空。请使用 `creators` 获取集合版税收款方。
+
+### 对于非继承版税的 cNFT，我需要改什么吗？
+
+不需要。未使用继承时，`_raw` 字段与 `inherited` 会被省略，主要的 `royalty` 与 `creators` 字段行为与之前相同。
+
 ## 相关内容
 
 - [获取压缩 NFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts)

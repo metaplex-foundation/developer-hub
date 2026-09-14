@@ -183,6 +183,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - ロイヤリティの*強制*とロイヤリティの*支払い*は別物です。どのプログラムが転送できるかはコレクションの`ruleSet`（`ProgramAllowList` / `ProgramDenyList`）が制御し、Bubblegumは転送時にロイヤリティ支払いをエスクローしません。
 - 本ページはBubblegum V2（MPL-Bubblegum）に適用されます。V1ツリーにはコレクションレベルのロイヤリティ継承はありません。
 
+## よくある質問
+
+### `royalty.basis_points_raw`が65535と表示されるのはなぜですか？
+
+リーフハッシュに使われるオンチェーン継承センチネルです。`royalty.basis_points`にはすでに表示用のコレクション料率が入っています。
+
+### 継承されたcNFTで`creators_raw`が空なのはなぜですか？
+
+SFBPが継承される場合、リーフの`creators`は空でなければなりません。コレクションのロイヤリティ受取人には`creators`を使用してください。
+
+### 継承していないcNFTについて変更は必要ですか？
+
+いいえ。継承を使用しない場合、`_raw`フィールドと`inherited`は省略され、主な`royalty`と`creators`フィールドは従来どおり動作します。
+
 ## 関連
 
 - [圧縮NFTの取得](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)

@@ -183,6 +183,20 @@ if (isInheritedSfbpRoyalty(royalty)) {
 - 로열티 *집행*과 로열티 *지급*은 별개입니다. 어떤 프로그램이 전송할 수 있는지는 컬렉션의 `ruleSet`(`ProgramAllowList` / `ProgramDenyList`)이 결정하며, Bubblegum은 전송 시 로열티 지급을 에스크로하지 않습니다.
 - 이 페이지는 Bubblegum V2(MPL-Bubblegum)에 적용됩니다. V1 트리에는 컬렉션 수준의 로열티 상속이 없습니다.
 
+## 자주 묻는 질문
+
+### `royalty.basis_points_raw`가 65535로 표시되는 이유는 무엇인가요?
+
+리프 해싱에 사용되는 온체인 상속 센티널입니다. `royalty.basis_points`에는 이미 표시용 컬렉션 비율이 들어 있습니다.
+
+### 상속된 cNFT에서 `creators_raw`가 비어 있는 이유는 무엇인가요?
+
+SFBP가 상속될 때 리프 `creators`는 비어 있어야 합니다. 컬렉션 로열티 수취인은 `creators`를 사용하세요.
+
+### 상속하지 않는 cNFT에 대해 변경이 필요한가요?
+
+아니요. 상속을 사용하지 않으면 `_raw` 필드와 `inherited`는 생략되며 주요 `royalty` 및 `creators` 필드는 이전과 동일하게 동작합니다.
+
 ## 관련
 
 - [압축 NFT 가져오기](/ko/smart-contracts/bubblegum-v2/fetch-cnfts)

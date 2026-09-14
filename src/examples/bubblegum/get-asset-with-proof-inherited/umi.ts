@@ -1,11 +1,16 @@
 // [IMPORTS]
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api'
 import { getAssetWithProof, mplBubblegum } from '@metaplex-foundation/mpl-bubblegum'
 import { publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
 // [SETUP]
-const umi = createUmi('https://api.devnet.solana.com').use(mplBubblegum())
+// getAssetWithProof calls getAsset and getAssetProof, so this needs a
+// DAS-capable RPC. The public Solana endpoints do not serve DAS methods.
+const umi = createUmi('YOUR_DAS_ENABLED_RPC_URL')
+  .use(mplBubblegum())
+  .use(dasApi())
 
 const assetId = publicKey('YOUR_ASSET_ID')
 // [/SETUP]
