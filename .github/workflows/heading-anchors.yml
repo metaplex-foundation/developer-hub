@@ -1,0 +1,44 @@
+name: Heading anchors
+
+# Fails when a heading would render with an empty or duplicate id, or when an
+# in-page link points at a heading that does not exist. Known-broken links are
+# recorded in scripts/heading-anchors-baseline.json; only new breakage fails.
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/**'
+      - 'src/shared/slugifyHeading.js'
+      - 'src/shared/usePage.js'
+      - 'scripts/audit-heading-anchors.mjs'
+      - 'scripts/heading-anchors-baseline.json'
+      # The audit's own invocation lives here, so changes to either must run it.
+      - 'package.json'
+      - '.github/workflows/heading-anchors.yml'
+  push:
+    branches: [main]
+
+# This job checks out and installs pull-request-controlled code, so it gets no
+# more than read access and never keeps the checkout token on disk.
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      # Actions are pinned to commit SHAs; a tag can be moved, a SHA cannot.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run lint:anchors
