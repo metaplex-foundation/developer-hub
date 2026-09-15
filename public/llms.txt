@@ -396,8 +396,8 @@
 ## DAS API
 
 - [Analyze Collection Statistics](https://metaplex.com/docs/dev-tools/das-api/guides/collection-statistics): Learn how to get insights about collection distribution and ownership using the DAS API
-- [Convert from standard DAS Asset to Core Asset or Collection type](https://metaplex.com/docs/dev-tools/das-api/core-extension/convert-das-asset-to-core): Converts DAS Assets to Core Asset or Collection
-- [Core DAS API Extension](https://metaplex.com/docs/dev-tools/das-api/core-extension): Digital Asset Standard API Extension for MPL Core
+- [Convert from standard DAS Asset to Core Asset, Collection, or Group](https://metaplex.com/docs/dev-tools/das-api/core-extension/convert-das-asset-to-core): Convert DAS API assets to MPL Core Asset, Collection, or Group types.
+- [Core DAS API Extension](https://metaplex.com/docs/dev-tools/das-api/core-extension): Digital Asset Standard API Extension for MPL Core — typed Core assets, collections, groups, and agent discovery.
 - [DAS API](https://metaplex.com/docs/dev-tools/das-api): A DAS API client used to access the Metaplex Digital Asset Standard.
 - [Display Options](https://metaplex.com/docs/dev-tools/das-api/display-options): Learn about the display options available in DAS API methods
 - [Find Compressed NFTs](https://metaplex.com/docs/dev-tools/das-api/guides/find-compressed-nfts): Learn how to discover and work with compressed NFTs using the DAS API
@@ -417,10 +417,13 @@
 - [Get Core Asset](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-asset): Returns the information of a MPL Core asset
 - [Get Core Assets by Authority](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-assets-by-authority): Returns the information of all MPL Core asset with the given authority
 - [Get Core Assets by Collection](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-assets-by-collection): Returns the information of all MPL Core asset in a given Collection
+- [Get Core Assets by Group](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-assets-by-group): List mpl-core GroupV1 members as Core-typed assets, collections, or nested groups.
 - [Get Core Assets by Owner](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-assets-by-owner): Returns the information of all MPL Core asset by Owner
 - [Get Core Collection](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-collection): Returns the information of a MPL Core Collection
+- [Get Core Group](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-group): Fetch a single mpl-core GroupV1 account via DAS as a Core-typed GroupResult.
 - [Get Fungible Assets by Owner](https://metaplex.com/docs/dev-tools/das-api/guides/get-fungible-assets): Learn how to retrieve all fungible tokens owned by a specific wallet
 - [Get Grouping](https://metaplex.com/docs/dev-tools/das-api/methods/get-grouping): Return grouping metadata for a group key/value pair, including the group name and indexed member count.
+- [Get Grouping (Core Extension)](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/get-grouping): Return group name and indexed member count for a collection or mpl-core GroupV1.
 - [Get NFT Editions](https://metaplex.com/docs/dev-tools/das-api/methods/get-nft-editions): Get all printable editions of a master edition NFT mint
 - [Get NFTs by Owner](https://metaplex.com/docs/dev-tools/das-api/guides/get-nfts-by-owner): Learn how to retrieve all non-fungible tokens owned by a specific wallet
 - [Get Token Accounts](https://metaplex.com/docs/dev-tools/das-api/methods/get-token-accounts): Get a list of token accounts by owner or mint
@@ -428,11 +431,12 @@
 - [Guides](https://metaplex.com/docs/dev-tools/das-api/guides): Practical guides for common DAS API use cases
 - [Methods](https://metaplex.com/docs/dev-tools/das-api/methods): Callable API Methods for the Metaplex DAS API client.
 - [Paginating DAS API Requests](https://metaplex.com/docs/dev-tools/das-api/guides/pagination): Learn how to paginate DAS API Requests efficiently
-- [Plugin Derivation](https://metaplex.com/docs/dev-tools/das-api/core-extension/plugin-derivation): Manually Derive or deactivate automatic derivation
+- [Plugin Derivation](https://metaplex.com/docs/dev-tools/das-api/core-extension/plugin-derivation): Derive MPL Core collection plugins manually, or disable automatic derivation with skipDerivePlugins.
 - [Search Assets](https://metaplex.com/docs/dev-tools/das-api/methods/search-assets): Return the list of assets given a search criteria
 - [Search Assets by Multiple Criteria](https://metaplex.com/docs/dev-tools/das-api/guides/search-by-criteria): Learn how to combine multiple filters to find specific digital assets
-- [Search Core Assets](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-assets): Return the list of MPL Core assets given a search criteria
+- [Search Core Assets](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-assets): Search MPL Core assets via DAS, including agent discovery filters.
 - [Search Core Collections](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-collections): Return the list of MPL Core Collections given a search criteria
+- [Search Core Groups](https://metaplex.com/docs/dev-tools/das-api/core-extension/methods/search-groups): Search mpl-core GroupV1 accounts via DAS and return Core-typed GroupResult values.
 
 ## Dev Tools
 
