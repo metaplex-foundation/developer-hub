@@ -48,8 +48,8 @@ const standaloneRedirects = {
   '/ko/smart-contracts/genesis/priced-sale': '/ko/smart-contracts/genesis/presale',
   '/zh/smart-contracts/genesis/priced-sale': '/zh/smart-contracts/genesis/presale',
   // Genesis aggregation/api pages consolidated into integration-apis
-  '/smart-contracts/genesis/aggregation': '/smart-contracts/genesis/integration-apis',
-  '/smart-contracts/genesis/api': '/smart-contracts/genesis/integration-apis',
+  '/smart-contracts/genesis/aggregation': '/api',
+  '/smart-contracts/genesis/api': '/api',
   // Agents: run-agent renamed to read-agent-data
   '/agents/run-agent': '/agents/read-agent-data',
   '/ja/agents/run-agent': '/ja/agents/read-agent-data',
@@ -65,12 +65,12 @@ const standaloneRedirects = {
   '/dev-tools/skill/installation': '/agents/skill/installation',
   '/dev-tools/skill/how-it-works': '/agents/skill/how-it-works',
   '/dev-tools/skill/programs-and-operations': '/agents/skill/programs-and-operations',
-  '/ja/smart-contracts/genesis/aggregation': '/ja/smart-contracts/genesis/integration-apis',
-  '/ja/smart-contracts/genesis/api': '/ja/smart-contracts/genesis/integration-apis',
-  '/ko/smart-contracts/genesis/aggregation': '/ko/smart-contracts/genesis/integration-apis',
-  '/ko/smart-contracts/genesis/api': '/ko/smart-contracts/genesis/integration-apis',
-  '/zh/smart-contracts/genesis/aggregation': '/zh/smart-contracts/genesis/integration-apis',
-  '/zh/smart-contracts/genesis/api': '/zh/smart-contracts/genesis/integration-apis',
+  '/ja/smart-contracts/genesis/aggregation': '/ja/api',
+  '/ja/smart-contracts/genesis/api': '/ja/api',
+  '/ko/smart-contracts/genesis/aggregation': '/ko/api',
+  '/ko/smart-contracts/genesis/api': '/ko/api',
+  '/zh/smart-contracts/genesis/aggregation': '/zh/api',
+  '/zh/smart-contracts/genesis/api': '/zh/api',
 }
 
 // Legacy documentation migration: programs moved under /smart-contracts,
@@ -87,6 +87,32 @@ const legacyDocMigrations = {
   '/developer-tools/rust-bin': '/dev-tools/rust-bin',
   '/developer-tools/shank': '/dev-tools/shank',
   '/mobile-sdks': '/dev-tools/mobile-sdks',
+}
+
+// Genesis Integration APIs REST pages moved to the top-level /api section.
+// The two SDK chain-method pages (fetch-bucket-state, fetch-deposit-state)
+// stayed under Genesis, so only these slugs redirect. Locale-aware.
+const integrationApisMovedSlugs = [
+  'get-launch',
+  'get-launches-by-token',
+  'list-launches',
+  'get-spotlight',
+  'create-launch',
+  'register',
+  'claim-creator-rewards',
+  'verify-twitter',
+]
+
+function integrationApisRedirect(pathname) {
+  const match = pathname.match(
+    /^\/(?:(ja|ko|zh)\/)?smart-contracts\/genesis\/integration-apis(?:\/([^/]+))?$/
+  )
+  if (!match) return null
+  const localePrefix = match[1] ? `/${match[1]}` : ''
+  const slug = match[2]
+  if (!slug) return `${localePrefix}/api`
+  if (integrationApisMovedSlugs.includes(slug)) return `${localePrefix}/api/${slug}`
+  return null
 }
 
 function legacyDocRedirect(pathname) {
@@ -304,6 +330,12 @@ export function middleware(request) {
     return redirectTo(request, legacyDocDestination)
   }
 
+  // Genesis Integration APIs pages moved to /api (locale-aware)
+  const integrationApisDestination = integrationApisRedirect(pathname)
+  if (integrationApisDestination) {
+    return redirectTo(request, integrationApisDestination)
+  }
+
   // Handle legacy redirects FIRST (specific sub-path redirects)
   // This ensures old bookmarked URLs like /bubblegum/getting-started
   // redirect directly to the final destination /smart-contracts/bubblegum/sdk
@@ -376,12 +408,15 @@ export function middleware(request) {
   }
 
   // Rewrite root paths to /en/* for English content
-  // Skip paths that start with /ja, /ko, /zh, /en, /_next, /api, or contain a file extension
+  // Skip paths that start with /ja, /ko, /zh, /en, /_next, or contain a file
+  // extension. /api/og (the OG-image Next API route) must keep its literal
+  // path; every other /api/* path is documentation content under
+  // src/pages/{locale}/api and needs the /en rewrite like any docs page.
   if (!pathname.startsWith('/ja') &&
       !pathname.startsWith('/ko') &&
       !pathname.startsWith('/zh') &&
       !pathname.startsWith('/_next') &&
-      !pathname.startsWith('/api') &&
+      !pathname.startsWith('/api/og') &&
       !pathname.includes('.')) {
     const url = request.nextUrl.clone()
     url.pathname = `/en${pathname === '/' ? '' : pathname}`
