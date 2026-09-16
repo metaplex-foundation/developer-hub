@@ -151,6 +151,7 @@ These lists are in alphabetical order. Choose the provider that best suits your 
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
 - [Chainstack](https://chainstack.com/build-better-with-solana/)
+- [Digital Energy](https://rpc.digital-energy.io)
 - [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
