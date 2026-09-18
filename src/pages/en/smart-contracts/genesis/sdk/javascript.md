@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
 created: '01-15-2025'
-updated: '03-10-2026'
+updated: '09-18-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -11,6 +11,8 @@ keywords:
   - token launch SDK
   - Umi framework
   - Genesis API reference
+  - refundLaunchPoolV2
+  - soft cap
 about:
   - SDK installation
   - API reference
@@ -90,6 +92,7 @@ For complete implementation examples, see [Launch Pool](/smart-contracts/genesis
 | [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Deposit SOL into Launch Pool |
 | [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | Withdraw SOL (during deposit period) |
 | [claimLaunchPoolV2()](#claim-launch-pool-v2) | Claim tokens (after deposit period) |
+| [refundLaunchPoolV2()](#refund-launch-pool-v2) | Refund a deposit (failed threshold or exceeded soft cap) |
 
 ### Presale Operations
 
@@ -143,10 +146,16 @@ await addLaunchPoolBucketV2(umi, {
   depositEndCondition,      // TimeCondition
   claimStartCondition,      // TimeCondition
   claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
+  minimumDepositAmount,     // { amount: bigint } | null
+  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
+  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
   endBehaviors,             // EndBehavior[]
 }).sendAndConfirm(umi);
 ```
+
+{% callout type="warning" %}
+`softCap` is a required argument as of `@metaplex-foundation/genesis` 0.42.0. Unlike the other Launch Pool extensions it has no default in the generated serializer, so pass `softCap: null` explicitly when the launch has no cap. See [Launch Pool Soft Cap](/smart-contracts/genesis/launch-pool#launch-pool-soft-cap) for behaviour.
+{% /callout %}
 
 ### addPresaleBucketV2
 
@@ -223,6 +232,21 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
+### refundLaunchPoolV2
+
+Refunds a Launch Pool deposit after the deposit window closes. The program derives the amount, so there is no amount argument: a missed `minimumQuoteTokenThreshold` refunds the full deposit, and an exceeded `softCap` refunds only the excess while leaving the depositor's token allocation intact.
+
+```typescript
+await refundLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
+}).sendAndConfirm(umi);
+```
+
+Only `payer` must sign, so refunds can be cranked permissionlessly on a depositor's behalf. Calling before the deposit window closes returns `LaunchPoolNotEnded`; calling when the floor was met and the cap was not exceeded returns `LaunchPoolThresholdMet`; calling twice returns `DepositAlreadyRefunded`.
+
 ### claimPresaleV2
 
 ```typescript
@@ -286,7 +310,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis Account
 
-The Genesis Account stores top-level launch state including the [launch type](#launchtype). A backend crank sets the `launchType` field on-chain after creation via the `setLaunchTypeV2` instruction, so the value may initially be `Uninitialized` (0) until the crank processes it.
+The Genesis Account stores top-level launch state including the [launch type](#launch-type). A backend crank sets the `launchType` field on-chain after creation via the `setLaunchTypeV2` instruction, so the value may initially be `Uninitialized` (0) until the crank processes it.
 
 | Function | Returns |
 |----------|---------|
@@ -374,13 +398,34 @@ const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**Bucket state fields:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**Bucket state fields:** `quoteTokenDepositTotal`, `weightedQuoteTokenTotal`, `depositCount`, `claimCount`, `refundCount`, `bucket.baseTokenAllocation`, `extensions`
 
-**Deposit state fields:** `amountQuoteToken`, `claimed`
+**Deposit state fields:** `amountQuoteToken`, `weightedQuoteToken`, `claimed`, `refunded`
 
 ---
 
 ## Types
+
+### LaunchPoolV2Extensions
+
+Optional guards on a Launch Pool bucket, read from `bucket.extensions`. Every field is a Umi `Option`, so use `unwrapOption()` or check `.__option` before reading a value.
+
+```typescript
+{
+  backendSigner: Option<BackendSigner>;
+  depositPenalty: Option<LinearBpsScheduleV2>;
+  withdrawPenalty: Option<LinearBpsScheduleV2>;
+  bonusSchedule: Option<LinearBpsScheduleV2>;
+  depositLimit: Option<DepositLimit>;                             // { limit: bigint }
+  allowlist: Option<Allowlist>;
+  claimSchedule: Option<ClaimSchedule>;
+  minimumDepositAmount: Option<MinimumDepositAmount>;             // { amount: bigint }
+  minimumQuoteTokenThreshold: Option<MinimumQuoteTokenThreshold>; // { amount: bigint } - floor
+  softCap: Option<SoftCap>;                                       // { amount: bigint } - ceiling
+}
+```
+
+Extensions can be added or removed individually with `addLaunchPoolBucketV2Extensions()` and `removeLaunchPoolBucketV2Extensions()`, selecting the field via `LaunchPoolV2ExtensionType`. Both are rejected once the Genesis Account is finalized.
 
 ### LaunchType
 
@@ -461,6 +506,11 @@ Account size: **136 bytes**. PDA seeds: `["genesis_v2", baseMint, genesisIndex]`
 | `already finalized` | Cannot modify after finalization |
 | `deposit period not active` | Outside deposit window |
 | `claim period not active` | Outside claim window |
+| `InvalidSoftCap` (221) | `softCap.amount` is zero — pass `softCap: null` instead of `{ amount: 0n }` |
+| `SoftCapBelowThreshold` (222) | `softCap.amount` is below `minimumQuoteTokenThreshold.amount` |
+| `LaunchPoolNotEnded` | `refundLaunchPoolV2()` called before the deposit window closed |
+| `LaunchPoolThresholdMet` (173) | Refund requested when the floor was met and the soft cap was not exceeded |
+| `DepositAlreadyRefunded` | `refundLaunchPoolV2()` called twice for the same deposit |
 
 ---
 
@@ -476,7 +526,7 @@ Yes. The SDK works in both Node.js and browser environments. For browsers, use a
 `fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
 
 ### How do I retrieve the launch type for a token?
-Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder--query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
+Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder-query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
 
 ### How do I handle transaction errors?
 Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.
