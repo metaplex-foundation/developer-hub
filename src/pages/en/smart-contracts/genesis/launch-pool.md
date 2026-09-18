@@ -603,7 +603,7 @@ if (deposit) {
 - Users must have wSOL (wrapped SOL) to deposit
 - `softCap` is a required argument on `addLaunchPoolBucketV2` in `@metaplex-foundation/genesis` 0.42.0 — pass `softCap: null` when no cap is wanted
 - Launch Pool extensions, including `softCap`, can only be added or removed before `finalizeV2`
-- Soft caps are supported by the Genesis program and JavaScript SDK; the [`mplx` CLI](/dev-tools/cli/genesis/launch-pool) does not expose a soft cap flag yet
+- Soft caps are supported by the Genesis program, the JavaScript SDK, and the [`mplx` CLI](/dev-tools/cli/genesis/launch-pool)
 - An oversubscribed Launch Pool leaves a few quantum units of rounding dust in the bucket, because each depositor's filled portion rounds up
 - `quoteTokenDepositTotal` and `depositCount` are preserved as historical records after refunds; `refundCount` tracks refunds processed
 
