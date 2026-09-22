@@ -3,7 +3,7 @@ title: Genesis - Solana 代币发行智能合约与代币发射台
 metaTitle: Genesis | Solana 代币发射台 | Presale 与公平发射代币发射台平台 | Metaplex
 description: Genesis 是 Solana 代币发射台，支持预售、公平发射和代币生成事件 (TGE)。链上 SPL 代币创建、众筹和代币分发平台。
 created: '01-15-2025'
-updated: '03-04-2026'
+updated: '09-22-2026'
 keywords:
   - token launch
   - token launchpad
@@ -31,7 +31,7 @@ faqs:
   - q: Genesis 支持哪些发行机制？
     a: Genesis 支持三种机制 - Presale（固定价格）、Launch Pool（按比例分配与价格发现）和统一价格拍卖（基于出价的清算价格）。
   - q: 使用 Genesis 需要多少费用？
-    a: Genesis 使用联合曲线费用模型，预毕业交换、毕业后交易和 Launch Pool 操作各有不同的费率。当前费用明细请参阅协议费用部分。
+    a: Genesis 对联合曲线交换和毕业后的 Raydium CPMM 交易收取协议费，创作者提取 Launch Pool 或 Presale 募集的资金时也会收取费用。Launch Pool 和 Presale 的 CPMM 费用还取决于发行是否启用了创作者费。当前费用明细请参阅协议费用部分。
   - q: 发行后可以撤销代币权限吗？
     a: 可以。Genesis 提供了撤销铸造权限和冻结权限的指令，向持有者表明不会再铸造额外的代币。
   - q: Launch Pool 和 Presale 有什么区别？
@@ -117,7 +117,7 @@ Genesis 支持三种可以组合使用的机制：
 
 ## 协议费用
 
-Genesis 使用联合曲线费用模型。费用在预毕业阶段（毕业前）、毕业后交易和 Launch Pool 机制之间有所不同。
+Genesis 的费用取决于发行类型，以及发行是否已毕业到其 Raydium CPMM 池。Launch Pool 和 Presale 的 CPMM 费用还取决于发行是否启用了创作者费。联合曲线 CPMM 池始终收取创作者费。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -146,7 +146,7 @@ Genesis 是 Metaplex 为 Solana 上的代币生成事件 (TGE) 开发的智能�
 Genesis 支持三种机制：**Launch Pool**（按比例分配与价格发现）、**Presale**（固定价格）和**统一价格拍卖**（基于出价的清算价格）。
 
 ### 使用 Genesis 需要多少费用？
-Genesis 使用联合曲线费用模型，预毕业交换、毕业后交易和 Launch Pool 操作各有不同的费率。当前费用明细请参阅[协议费用](#协议费用)。
+Genesis 对联合曲线交换和毕业后的 Raydium CPMM 交易收取协议费，创作者提取 Launch Pool 或 Presale 募集的资金时也会收取费用。Launch Pool 和 Presale 的 CPMM 费用还取决于发行是否启用了创作者费。当前费用明细请参阅[协议费用](#协议费用)。
 
 ### 发行后可以撤销代币权限吗？
 可以。Genesis 提供 `revokeV2` 指令来永久撤销铸造和冻结权限。

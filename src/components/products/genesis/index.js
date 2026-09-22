@@ -13,7 +13,10 @@ export const genesis = {
   className: 'accent-pink',
   protocolFeeTitles: {
     postBondTrading: 'Bonding Curve CPMM',
-    launchPoolTrading: 'Launch Pool CPMM',
+    launchPoolTrading: 'Launch Pool CPMM (Creator Fees Off)',
+    launchPoolTradingCreatorFee: 'Launch Pool CPMM (Creator Fees On)',
+    presaleTrading: 'Presale CPMM (Creator Fees Off)',
+    presaleTradingCreatorFee: 'Presale CPMM (Creator Fees On)',
   },
   protocolFees: {
     bondingCurve: {
@@ -72,6 +75,82 @@ export const genesis = {
       lpFees: {
         label: 'LP fees',
         solana: '0.42%',
+      },
+      raydiumFee: {
+        label: 'Raydium fee',
+        solana: '0.08%',
+      },
+    },
+    launchPoolTradingCreatorFee: {
+      liquidityRequirement: {
+        label: 'Liquidity requirement',
+        solana: '20%',
+        notes: '1 year lock with quarterly unlock',
+      },
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.40%',
+      },
+      creatorRevenue: {
+        label: 'Creator revenue',
+        solana: '0.60%',
+      },
+      lpFees: {
+        label: 'LP fees',
+        solana: '0.21%',
+      },
+      raydiumFee: {
+        label: 'Raydium fee',
+        solana: '0.04%',
+      },
+    },
+    presale: {
+      deposit: {
+        label: 'User deposit fee',
+        solana: '0%',
+      },
+      creatorWithdraw: {
+        label: 'Creator withdraw fee',
+        solana: '5%',
+        notes: 'This fee only applies when creators withdraw liquidity',
+      },
+    },
+    presaleTrading: {
+      liquidityRequirement: {
+        label: 'Liquidity requirement',
+        solana: '20%',
+        notes: '1 year lock with quarterly unlock',
+      },
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.40%',
+      },
+      lpFees: {
+        label: 'LP fees',
+        solana: '0.42%',
+      },
+      raydiumFee: {
+        label: 'Raydium fee',
+        solana: '0.08%',
+      },
+    },
+    presaleTradingCreatorFee: {
+      liquidityRequirement: {
+        label: 'Liquidity requirement',
+        solana: '20%',
+        notes: '1 year lock with quarterly unlock',
+      },
+      protocolFee: {
+        label: 'Protocol fee',
+        solana: '0.40%',
+      },
+      creatorRevenue: {
+        label: 'Creator revenue',
+        solana: '0.60%',
+      },
+      lpFees: {
+        label: 'LP fees',
+        solana: '0.21%',
       },
       raydiumFee: {
         label: 'Raydium fee',
