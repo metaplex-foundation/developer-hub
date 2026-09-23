@@ -3,7 +3,7 @@ title: 圧縮NFTのミント
 metaTitle: 圧縮NFTのミント - Bubblegum V2
 description: Bubblegum V2で圧縮NFTをミントする方法を学びます。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - mint compressed NFT
   - mint cNFT
@@ -28,7 +28,9 @@ faqs:
   - q: 誰でも私のツリーからミントできますか？
     a: ツリーがパブリックに設定されている場合のみです。プライベートツリーでは、ツリー作成者またはツリーデリゲートのみがミントできます。
   - q: ミントに必要なメタデータフィールドは何ですか？
-    a: MetadataArgsV2にはname、uri、sellerFeeBasisPoints、collection（またはnone）、そしてcreatorsの配列が必要です。
+    a: MetadataArgsV2にはname、uri、sellerFeeBasisPoints、collection（またはnone）、creatorsの配列が必要です。
+  - q: cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
+    a: はい。Royaltiesプラグインを持つコレクションにミントする場合、sellerFeeBasisPointsを省略（またはSELLER_FEE_BASIS_POINTS_INHERITセンチネルを渡す）できます。リーフには65535（0xffff）が保存され、DASはroyalty.basis_pointsにコレクション料率を、royalty.basis_points_rawにセンチネルを置きます。
 ---
 
 ## Summary
@@ -39,6 +41,7 @@ faqs:
 - Mint directly into an MPL-Core collection with the BubblegumV2 plugin
 - Retrieve the asset ID and leaf schema from the mint transaction
 - Configure metadata including name, URI, creators, and royalties
+- MPL-CoreコレクションのRoyaltiesプラグインからセラーフィーベーシスポイントを継承する
 
 [前のページ](/ja/smart-contracts/bubblegum-v2/create-trees)では、圧縮NFTをミントするためにBubblegumツリーが必要であることを確認し、その作成方法を見ました。今度は、与えられたBubblegumツリーから圧縮NFTをミントする方法を見てみましょう。 {% .lead %}
 
@@ -146,6 +149,32 @@ await createCollection(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
+## コレクションからロイヤリティを継承する
+
+MPL-Coreコレクションにミントする場合、コレクションのロイヤリティ率をすべてのcNFTにコピーする代わりに、リーフに**センチネル**のセラーフィーベーシスポイント値（`65535`、`SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff` としてエクスポート）を保存できます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置き（`royalty.inherited: true`）、オンチェーンのリーフはハッシュ化のためにセンチネルを保持します。
+
+DASレスポンスを**読む**クライアント（ウォレット、マーケットプレイス、インデクサー、アプリ）は[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
+
+{% callout type="warning" title="マーケットプレイス / インデクサー互換性" %}
+マーケットプレイスの DAS プロバイダーが継承 SFBP 解決をサポートするまで、`creators: []` と `basis_points: 65535` を見てロイヤリティ支払いをスキップする可能性があります。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)の警告を参照してください。より強い保証のため、コレクション Royalties プラグインの許可/拒否リストを使い、ロイヤリティ準拠の会場経由で販売してください。
+{% /callout %}
+
+JavaScript SDKの `mintV2` ヘルパーは、`coreCollection` が指定され `metadata.sellerFeeBasisPoints` が省略された場合、この動作をデフォルトとします。
+
+**要件:**
+
+- MPL-Coreコレクションには `BubblegumV2` と `Royalties` の両方のプラグインが必要です。
+- 継承されたセラーフィーを使用する場合、`metadata.creators` は**空の配列**である必要があります。クリエイター分配はリーフレベルのクリエイターではなく、コレクションのRoyaltiesプラグインから取得されます。
+- 継承されたセラーフィーはコレクション内のcNFTでのみ有効です。コレクションなしのミントでは `0` から `10000` の明示的な値を使用する必要があります。
+
+{% code-tabs-imported from="bubblegum/mint-inherit-royalties" frameworks="umi" /%}
+
+単一のミントでコレクションのデフォルトを上書きするために、明示的な `sellerFeeBasisPoints` を渡すこともできます。
+
+{% callout type="note" title="コレクションの削除" %}
+継承されたセラーフィーを持つcNFTは、セラーフィーが明示的な値に更新されるまでコレクションから削除できません。[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections#inherited-royalties)および[圧縮NFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)を参照してください。
+{% /callout %}
+
 ### ミントトランザクションからアセットIDとリーフスキーマを取得する {% #get-leaf-schema-from-mint-transaction %}
 
 `parseLeafFromMintV2Transaction`ヘルパーを使用して、`mintV2`トランザクションからリーフを取得し、アセットIDを特定できます。この関数はトランザクションを解析するため、`parseLeafFromMintV2Transaction`を呼び出す前にトランザクションが完了していることを確認してください。
@@ -178,6 +207,7 @@ const assetId = leaf.id;
 
 - The Bubblegum Tree must be created before minting. See [Creating Trees](/ja/smart-contracts/bubblegum-v2/create-trees).
 - For collection mints, the MPL-Core collection must have the `BubblegumV2` plugin enabled.
+- コレクションからロイヤリティを継承するには、コレクションに `Royalties` プラグインも必要で、リーフの `creators` 配列は空である必要があります。
 - The collection authority must sign the transaction when minting to a collection, regardless of whether the tree is public or private.
 - Use `parseLeafFromMintV2Transaction` only after the transaction is **finalized**, not just confirmed.
 
@@ -197,7 +227,11 @@ MPL-Coreコレクションアドレスに設定された`coreCollection`パラ�
 
 ### ミントに必要なメタデータフィールドは何ですか？
 
-`MetadataArgsV2`には、name、uri、sellerFeeBasisPoints、collection（またはnone）、およびcreatorsの配列が必要です。
+`MetadataArgsV2` 構造体には以下が必要です：`name`（文字列）、`uri`（JSONメタデータを指す文字列）、`sellerFeeBasisPoints`（0-10000、またはコレクションにミントしてRoyaltiesプラグインから継承する場合は省略）、`collection`（公開鍵またはnone）、`creators`（クリエイターオブジェクトの配列。ロイヤリティを継承する場合は空である必要があります）。
+
+### cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？
+
+はい。`coreCollection` でミントする場合、`metadata.sellerFeeBasisPoints` を省略し、`metadata.creators` を空にしてください。SDKはリーフに `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）を保存します。コレクションには `Royalties` プラグインが必要です。[コレクションからロイヤリティを継承する](#inheriting-royalties-from-the-collection)を参照してください。
 
 ## Glossary
 
@@ -205,6 +239,7 @@ MPL-Coreコレクションアドレスに設定された`coreCollection`パラ�
 |------|------------|
 | **mintV2** | The Bubblegum V2 instruction for minting compressed NFTs, replacing the V1 mint instructions |
 | **MetadataArgsV2** | The metadata structure passed to mintV2, containing name, URI, royalties, collection, and creators |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` (`0xffff`) stored on-chain to indicate royalties are inherited from the MPL-Core collection |
 | **Collection Authority** | The signer authorized to manage the MPL-Core collection — required when minting to a collection |
 | **BubblegumV2 Plugin** | An MPL-Core collection plugin that enables Bubblegum V2 features (freeze, soulbound, royalties) |
 | **Asset ID** | A PDA derived from the merkle tree address and leaf index, uniquely identifying a compressed NFT |
