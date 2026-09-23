@@ -31,7 +31,7 @@ faqs:
   - q: What launch mechanisms does Genesis support?
     a: Genesis supports three mechanisms - Presale (fixed price), Launch Pool (proportional distribution with price discovery), and Uniform Price Auction (bid-based with clearing price).
   - q: How much does it cost to use Genesis?
-    a: Genesis charges a protocol fee on bonding curve swaps and on Raydium CPMM trading after graduation, plus a fee when the creator withdraws launch pool or presale proceeds. Launch pool and presale CPMM fees also depend on whether the launch enables creator fees. See the Protocol Fees section for the current breakdown.
+    a: Genesis charges a protocol fee on bonding curve swaps and on Raydium CPMM trading after graduation, plus a fee when the creator withdraws launch pool or presale proceeds. Launch pool and presale CPMM fees also depend on whether the launch enables creator rewards. See the Protocol Fees section for the current breakdown.
   - q: Can I revoke token authorities after launch?
     a: Yes. Genesis provides instructions to revoke mint and freeze authorities, signaling to holders that no additional tokens can be minted.
   - q: What's the difference between Launch Pool and Presale?
@@ -117,7 +117,7 @@ Every bucket has time windows that control when actions are allowed:
 
 ## Protocol Fees
 
-Genesis fees depend on the launch type and on whether the launch has graduated to its Raydium CPMM pool. Launch pool and presale CPMM fees also depend on whether the launch enables creator fees. Bonding curve CPMM pools always charge creator fees.
+Genesis fees depend on the launch type and on whether the launch has graduated to its Raydium CPMM pool. Launch pool and presale CPMM fees also depend on whether the launch enables creator rewards. Bonding curve CPMM pools always include creator rewards.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -146,7 +146,7 @@ Genesis is a Metaplex smart contract for Token Generation Events (TGE) on Solana
 Genesis supports three mechanisms: **Launch Pool** (proportional distribution with price discovery), **Presale** (fixed price), and **Uniform Price Auction** (bid-based with clearing price).
 
 ### How much does it cost to use Genesis?
-Genesis charges a protocol fee on bonding curve swaps and on Raydium CPMM trading after graduation, plus a fee when the creator withdraws launch pool or presale proceeds. Launch pool and presale CPMM fees also depend on whether the launch enables creator fees. See [Protocol Fees](#protocol-fees) for the current breakdown.
+Genesis charges a protocol fee on bonding curve swaps and on Raydium CPMM trading after graduation, plus a fee when the creator withdraws launch pool or presale proceeds. Launch pool and presale CPMM fees also depend on whether the launch enables creator rewards. See [Protocol Fees](#protocol-fees) for the current breakdown.
 
 ### Can I revoke token authorities after launch?
 Yes. Genesis provides the `revokeV2` instruction to permanently revoke mint and/or freeze authority.

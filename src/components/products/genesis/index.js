@@ -13,10 +13,10 @@ export const genesis = {
   className: 'accent-pink',
   protocolFeeTitles: {
     postBondTrading: 'Bonding Curve CPMM',
-    launchPoolTrading: 'Launch Pool CPMM (Creator Fees Off)',
-    launchPoolTradingCreatorFee: 'Launch Pool CPMM (Creator Fees On)',
-    presaleTrading: 'Presale CPMM (Creator Fees Off)',
-    presaleTradingCreatorFee: 'Presale CPMM (Creator Fees On)',
+    launchPoolTrading: 'Launch Pool CPMM (Creator Rewards Off)',
+    launchPoolTradingCreatorFee: 'Launch Pool CPMM (Creator Rewards On)',
+    presaleTrading: 'Presale CPMM (Creator Rewards Off)',
+    presaleTradingCreatorFee: 'Presale CPMM (Creator Rewards On)',
   },
   protocolFees: {
     bondingCurve: {
