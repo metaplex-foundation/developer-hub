@@ -17,12 +17,6 @@ programmingLanguage:
 created: '01-16-2024'
 updated: '09-21-2026'
 ---
-Managing and sending transactions is an important part of any Solana client. To help manage them, Umi provides a bunch of components:
-
-- A [TransactionFactoryInterface](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionFactoryInterface.html) that can be used to create and (de)serialize transactions.
-- A [TransactionBuilder](https://umi.typedoc.metaplex.com/classes/umi.TransactionBuilder.html) that makes it easy to build transactions.
-- A [RpcInterface](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) that can be used to send, confirm and fetch transactions. You can [read more about the RPC interface here](rpc).
-
 ## Summary
 
 Umi creates, signs, sends, and confirms Solana transactions through transaction factories, immutable transaction builders, and its RPC interface.
@@ -31,6 +25,12 @@ Umi creates, signs, sends, and confirms Solana transactions through transaction 
 - Use `setTransactionConfig()` instead of Compute Budget instructions with V1.
 - Umi 1.6.0 still defaults to V0 unless configured otherwise.
 - Keep transactions that require Address Lookup Tables on V0.
+
+Managing and sending transactions is an important part of any Solana client. To help manage them, Umi provides a bunch of components:
+
+- A [TransactionFactoryInterface](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionFactoryInterface.html) that can be used to create and (de)serialize transactions.
+- A [TransactionBuilder](https://umi.typedoc.metaplex.com/classes/umi.TransactionBuilder.html) that makes it easy to build transactions.
+- A [RpcInterface](https://umi.typedoc.metaplex.com/interfaces/umi.RpcInterface.html) that can be used to send, confirm and fetch transactions. You can [read more about the RPC interface here](rpc).
 
 ## Transactions and Instructions
 
@@ -249,7 +249,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com', {
 ```
 
 {% callout type="warning" %}
-V1 transactions reject Compute Budget instructions and Address Lookup Tables. See [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) for conversion steps and compatibility requirements.
+Umi transaction builders reject Compute Budget instructions when building V1 transactions; use `setTransactionConfig()` instead. Low-level `umi.transactions.create()` does not apply this builder check, but the Solana runtime ignores Compute Budget instructions for V1 configuration. Address Lookup Tables are not supported by V1. See [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) for conversion steps and compatibility requirements.
 {% /callout %}
 
 ## Using address lookup tables

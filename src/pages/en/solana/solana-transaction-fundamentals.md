@@ -188,16 +188,25 @@ const result = await myBuilder.sendAndConfirm(umi, {
 Solana supports three transaction formats:
 
 ### Legacy Transactions
+
+Legacy transactions use Solana's original transaction format without Address Lookup Tables.
+
 - Original format
 - Limited to 35 accounts
 - Simpler structure
 
 ### V0 Transactions
+
+V0 transactions add Address Lookup Table support for transactions that need more accounts.
+
 - Support **Address Lookup Tables** (ALTs)
 - Can reference up to 256 accounts
 - Required for complex DeFi operations
 
 ### V1 Transactions
+
+V1 transactions increase the transaction size limit and store compute configuration in the message.
+
 - Support transactions up to 4,096 bytes
 - Store compute budget configuration in the transaction message
 - Do not support Address Lookup Tables

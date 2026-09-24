@@ -17,6 +17,15 @@ created: '01-16-2024'
 updated: '09-21-2026'
 ---
 
+## Summary
+
+The Umi Web3.js adapters convert common Solana types between Umi and `@solana/web3.js`.
+
+- Install or import helpers from `@metaplex-foundation/umi-web3js-adapters`.
+- Convert public keys, keypairs, instructions, transactions, and messages.
+- Use Umi 1.6.0 and `@solana/web3.js` 1.99.0 or later for V1 transactions.
+- Keep native Web3.js transaction creation on V0 because Web3.js 1.x cannot create V1 transactions by itself.
+
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc.
 
 When creating `Umi`, we wanted to move away from the class-based types defined in `@solana/web3.js`. This unfortunately means that, although having the same or similar import names, not all types from `@solana/web3.js` are compatible with the ones provided by `Umi` and vice versa.
@@ -229,10 +238,6 @@ The Solana runtime supports three transaction formats:
 
 Umi 1.6.0 and `umi-web3js-adapters` support legacy, V0, and V1 transactions. V1 requires `@solana/web3.js` 1.99.0 or later.
 
-{% callout type="note" %}
-Web3.js 1.x can deserialize V1 transactions but cannot create or serialize them on its own. Umi provides the V1 serializer used by the adapters, which is why the native Web3.js creation examples below still use V0.
-{% /callout %}
-
 ### Umi
 ```ts
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -392,3 +397,11 @@ const Web3JsMessage = new TransactionMessage({...createMessageParams}).compileTo
 // Convert it using the UmiWeb3jsAdapters Package
 const umiMessage = fromWeb3JMessage(Web3JsMessage);
 ```
+
+## Notes
+
+Web3.js 1.x has limited support for V1 transactions.
+
+- Web3.js 1.x can deserialize V1 transactions but cannot create or serialize them on its own.
+- Umi provides the V1 serializer used by the adapters.
+- The native Web3.js transaction creation examples remain on V0.

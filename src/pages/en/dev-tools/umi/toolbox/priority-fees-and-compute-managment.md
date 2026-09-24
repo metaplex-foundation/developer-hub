@@ -18,16 +18,16 @@ created: '09-04-2024'
 updated: '09-21-2026'
 ---
 
-Umi V1 transactions store compute limits and the total priority fee in the transaction message, while V0 transactions use Compute Budget program instructions.
-
 ## Summary
 
 Use `setTransactionConfig()` to configure compute units and priority fees on V1 transactions.
 
 - V1 uses `computeUnitLimit` and a total `priorityFee`.
-- V1 rejects Compute Budget program instructions.
+- Umi V1 transaction builders reject Compute Budget program instructions.
 - V0 uses `setComputeUnitLimit` and `setComputeUnitPrice`.
 - Priority fee estimates expressed in micro-lamports per compute unit must be converted to total lamports for V1.
+
+Umi V1 transactions store compute limits and the total priority fee in the transaction message, while V0 transactions use Compute Budget program instructions.
 
 ## Configure V1 Compute Units and Priority Fees
 

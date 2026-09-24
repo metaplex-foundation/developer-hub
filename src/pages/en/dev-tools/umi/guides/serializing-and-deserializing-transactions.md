@@ -122,7 +122,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 {% /totem %}
 
 {% callout type="note" %}
-The examples use V1 transactions and require Umi 1.6.0 or later. When a wallet signs the deserialized transaction, that wallet must also support transaction version `1`.
+The examples use V1 transactions and require Umi 1.6.0 or later and `@solana/web3.js` 1.99.0 or later. When a wallet signs the deserialized transaction, that wallet must also support transaction version `1`.
 {% /callout %}
 
 ## Serialization
