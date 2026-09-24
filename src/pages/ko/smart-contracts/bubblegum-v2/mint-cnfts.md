@@ -145,7 +145,7 @@ await createCollection(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 컬렉션에서 로열티 상속
+## 컬렉션에서 로열티 상속 {% #inheriting-royalties-from-the-collection %}
 
 MPL-Core 컬렉션에 민팅할 때 컬렉션의 로열티 비율을 모든 cNFT에 복사하는 대신 리프에 **센티널** seller fee basis points 값(`65535`, `SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff`로 내보냄)을 저장할 수 있습니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 두며(`royalty.inherited: true`), 온체인 리프는 해싱을 위해 센티널을 유지합니다.
 
