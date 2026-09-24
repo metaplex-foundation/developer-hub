@@ -3,7 +3,7 @@ title: 圧縮NFTの更新
 metaTitle: 圧縮NFTの更新 - Bubblegum V2
 description: Bubblegum V2で圧縮NFTを更新する方法を学びます。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - update compressed NFT
   - update cNFT
@@ -24,6 +24,8 @@ faqs:
     a: UpdateArgsArgsで定義された名前、URI、セラーフィーベーシスポイント、その他のメタデータフィールドを更新できます。変更したいフィールドにはsome('newValue')を使用します。
   - q: 更新時にコレクションを渡す必要がありますか？
     a: はい、cNFTがコレクションに属している場合。コレクションの公開鍵とともにcoreCollectionパラメータを渡します。コレクション権限がトランザクションに署名する必要があります。
+  - q: コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
+    a: updateMetadataV2 に ...assetWithProof を展開してください（currentMetadata はリーフ正規で、継承時は 65535）。表示用の解決料率は metadata 側です。metadata を currentMetadata として渡さないでください。
 ---
 
 ## Summary
@@ -34,6 +36,7 @@ faqs:
 - コレクション権限はコレクションに属するcNFTを更新する
 - ツリー権限はコレクションに属さないcNFTを更新する
 - 変更はマークルツリーに反映され、DAS APIプロバイダーによってインデックス化されます
+- `updateMetadataV2` に `...assetWithProof` を展開し、`getAssetWithProof.currentMetadata`（リーフ正規）を使う
 
 **updateMetadataV2**命令は、圧縮NFTのメタデータを変更するために使用できます。マークルルートは、データの伝播されたハッシュを反映するように更新され、[Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)に準拠するRPCプロバイダーは、cNFTのインデックスを更新します。
 
@@ -90,7 +93,6 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.metadata,
   updateArgs,
   // オプションパラメータ。権限が現在のumiアイデンティティと
   // 異なる署名者型の場合、ここでその署名者を割り当てます。
@@ -100,6 +102,20 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+{% callout type="note" title="書き込み命令用のリーフメタデータ" %}
+`getAssetWithProof` は `metadata`（DAS 表示 / 解決料率）と `currentMetadata`（リーフ正規の `MetadataArgsV2Args`、継承時は `65535`）の両方を返します。書き込みでは `...assetWithProof` を展開し、表示用 `metadata` を `currentMetadata` として渡さないでください。UI には `metadata` / `rpcAsset`、継承検出には `inherited` を使います。
+
+アセット読み取り時のDASレスポンスフィールドについては、[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
+{% /callout %}
+
+## 継承されたロイヤリティ {% #inherited-royalties %}
+
+`updateArgs.sellerFeeBasisPoints` を `some(SELLER_FEE_BASIS_POINTS_INHERIT)` に設定することで、cNFTを継承ロイヤリティ**へ**切り替えられます。コレクションには `Royalties` プラグインが必要で、更新後のメタデータの `creators` 配列は空である必要があります。
+
+継承ロイヤリティ**から**明示的なパーセンテージに戻すには — 例えば[cNFTをコレクションから削除する](/ja/smart-contracts/bubblegum-v2/collections#inherited-royalties)前に — 希望するベーシスポイントを渡します：
+
+{% code-tabs-imported from="bubblegum/update-inherit-royalties" frameworks="umi" /%}
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -107,8 +123,27 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - 更新権限は、cNFTがコレクションに属しているかどうかによって異なります。コレクションcNFTはコレクション権限を使用し、スタンドアロンcNFTはツリー権限を使用します。
-- 更新を適用する前にプログラムが現在のリーフを検証できるよう、`getAssetWithProof`からの`currentMetadata`を渡す必要があります。
+- `updateMetadataV2` に `...assetWithProof` を展開し、リーフ正規の `currentMetadata` で検証できるようにしてください。
 - 更新したいフィールドには`some()`を使用し、変更しないフィールドは省略します。
+- 継承されたセラーフィーには、リーフレベルの空の`creators`配列と`Royalties`プラグインを持つコレクションが必要です。
+
+## FAQ
+
+### 圧縮NFTのメタデータを更新できるのは誰ですか？
+
+cNFTがコレクションに属している場合、更新できるのはコレクション権限のみです。コレクションに属していない場合、ツリー権限（ツリー作成者またはデリゲート）が更新できます。
+
+### cNFTで更新できるフィールドは何ですか？
+
+`UpdateArgsArgs`で定義された名前、URI、セラーフィーベーシスポイント、その他のメタデータフィールドを更新できます。変更したいフィールドには`some('newValue')`を使用します。
+
+### 更新時にコレクションを渡す必要がありますか？
+
+はい、cNFTがコレクションに属している場合。コレクションの公開鍵とともに`coreCollection`パラメータを渡します。コレクション権限がトランザクションに署名する必要があります。
+
+### コレクションからロイヤリティを継承しているcNFTを更新するにはどうすればよいですか？
+
+`updateMetadataV2` に `...assetWithProof` を展開すると、継承時は `currentMetadata` にオンチェーンセンチネルが入ります。継承ロイヤリティに切り替えるには `updateArgs.sellerFeeBasisPoints` に `some(SELLER_FEE_BASIS_POINTS_INHERIT)` を、離れるには明示的な数値を使います。
 
 ## Glossary
 
@@ -118,4 +153,5 @@ await updateMetadataV2(umi, {
 | **コレクション権限** | MPL-Coreコレクションの更新権限。そのコレクション内のcNFTを更新する権限がある |
 | **ツリー権限** | コレクションに属さないcNFTを更新する権限を持つツリー作成者またはデリゲート |
 | **UpdateArgsArgs** | どのメタデータフィールドをOptionラッパーを使用して更新するかを定義するTypeScript型 |
-| **currentMetadata** | getAssetWithProofで取得したcNFTの既存メタデータ。検証に必要 |
+| **currentMetadata** | 既存リーフメタデータに対する `updateMetadataV2` のIDL引数；`...assetWithProof` 展開時に `getAssetWithProof.currentMetadata` が供給される |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | MPL-Coreコレクションからロイヤリティが継承されることを示すセンチネル値 `65535` |
