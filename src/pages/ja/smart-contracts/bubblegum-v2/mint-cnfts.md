@@ -149,7 +149,7 @@ await createCollection(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## コレクションからロイヤリティを継承する
+## コレクションからロイヤリティを継承する {% #inheriting-royalties-from-the-collection %}
 
 MPL-Coreコレクションにミントする場合、コレクションのロイヤリティ率をすべてのcNFTにコピーする代わりに、リーフに**センチネル**のセラーフィーベーシスポイント値（`65535`、`SELLER_FEE_BASIS_POINTS_INHERIT` / `0xffff` としてエクスポート）を保存できます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置き（`royalty.inherited: true`）、オンチェーンのリーフはハッシュ化のためにセンチネルを保持します。
 
