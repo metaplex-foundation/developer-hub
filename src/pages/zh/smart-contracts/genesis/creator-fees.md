@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - 调用 createAndRegisterLaunch 时在启动对象中设置 creatorFeeWallet
   - 启动后使用 fetchBondingCurveBucketV2 监控桶账户中的 creatorFeeAccrued
@@ -120,7 +120,7 @@ faqs:
 
 您需要 Genesis SDK、已配置的 Umi 实例和已充值的 Solana 钱包。
 
-- 已安装 `@metaplex-foundation/genesis` SDK
+- 已安装 `@metaplex-foundation/genesis` SDK 0.43.0 或更高版本（更早的版本缺少 `collectRaydiumCpmmFeesWithCreatorFeeV2` 所需的 `creatorFeeShare` 账户）
 - 配置了密钥对身份的 Umi 实例——详见[通过 Metaplex API 发行联合曲线](/smart-contracts/genesis/bonding-curve-launch#umi-setup)
 - 用于支付交易费用的已充值 Solana 钱包
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## 注意事项
 
-以下注意事项涵盖费用时机、推荐的 API 认领路径、无需许可的链上认领、两步毕业后流程以及首次购买费用豁免。
+以下注意事项涵盖费用时机、推荐的 API 认领路径、无需许可的链上认领、两步毕业后流程、必需的 `creatorFeeShare` 账户以及首次购买费用豁免。
 
 - 创作者费在每次兑换时累积到 bucket（`creatorFeeAccrued`），不会立即转账——需通过 API/SDK 或链上指令显式认领；`creatorFeeClaimed` 追踪迄今累积认领的总额
 - `claimCreatorRewards`（API/SDK）将钱包有资格获得的所有联合曲线和 Raydium bucket 聚合到一次调用中；当没有可认领内容时，返回 HTTP `400` 和 `"No rewards available to claim"`，而不是空的交易数组
 - 链上认领指令（`claimBondingCurveCreatorFeeV2`、`collectRaydiumCpmmFeesWithCreatorFeeV2`、`claimRaydiumCreatorFeeV2`）均无需许可：任何钱包都可以触发，但 SOL 始终流向配置的创作者费钱包，而非调用方
 - 毕业后费用需要按顺序两个步骤：`collectRaydiumCpmmFeesWithCreatorFeeV2`（从 Raydium 池收集 → Genesis bucket），然后 `claimRaydiumCreatorFeeV2`（bucket → 创作者钱包）；两者可合并到单个交易中，API 路径也会替您封装这两步
+- `collectRaydiumCpmmFeesWithCreatorFeeV2` 需要 `creatorFeeShare` 账户（Genesis Raydium 签名者与池 AMM 配置对应的 Raydium `CreatorFeeShare` PDA），但该账户无需在链上存在；请传入与 `ammConfig` 来自同一次 `deriveRaydiumPDAsV2` 调用的 `pdas.creatorFeeShare`——不匹配的账户会以 `InvalidRaydiumCreatorFeeShare`（错误 260）失败，0.43.0 之前的 SDK 版本会以 `NotEnoughAccountKeys` 失败
 - `creatorFeeAccrued` 和 `creatorFeeClaimed` 同时存在于 `BondingCurveBucketV2`（活跃曲线）和 `RaydiumCpmmBucketV2`（毕业后）上；分别使用 `fetchBondingCurveBucketV2` 和 `fetchRaydiumCpmmBucketV2`
 - `creatorFeeWallet` 未设置时默认为发行钱包；曲线创建后无法更改
 - 首次购买机制仅对指定的初始购买豁免所有费用（协议费和创作者费）；之后所有兑换正常收取创作者费

@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - createAndRegisterLaunch の呼び出し時にローンチオブジェクトで creatorFeeWallet を設定します
   - ローンチ後、fetchBondingCurveBucketV2 を使用してバケットアカウントの creatorFeeAccrued を監視します
@@ -120,7 +120,7 @@ faqs:
 
 Genesis SDK、設定済みのUmiインスタンス、および入金済みのSolanaウォレットが必要です。
 
-- `@metaplex-foundation/genesis` SDKインストール済み
+- `@metaplex-foundation/genesis` SDK 0.43.0以降をインストール済み（それ以前のバージョンには、`collectRaydiumCpmmFeesWithCreatorFeeV2` に必要な `creatorFeeShare` アカウントが含まれません）
 - キーペアIDで設定されたUmiインスタンス — [Metaplex APIを通じたボンディングカーブのローンチ](/smart-contracts/genesis/bonding-curve-launch#umi-setup)を参照
 - トランザクション手数料のための入金済みSolanaウォレット
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## Notes
 
-以下の注意事項は、手数料のタイミング、推奨されるAPI請求パス、パーミッションレスなオンチェーン請求、2ステップのグラデュエーション後フロー、およびファーストバイの手数料免除について説明します。
+以下の注意事項は、手数料のタイミング、推奨されるAPI請求パス、パーミッションレスなオンチェーン請求、2ステップのグラデュエーション後フロー、必須の `creatorFeeShare` アカウント、およびファーストバイの手数料免除について説明します。
 
 - クリエイター手数料は各スワップでバケット（`creatorFeeAccrued`）に蓄積されますが、すぐには転送されません — API/SDKまたはオンチェーンインストラクションで明示的に請求する必要があります。`creatorFeeClaimed` は累計の請求済み合計を追跡します
 - `claimCreatorRewards`（API/SDK）は、ウォレットの対象となるすべてのボンディングカーブとRaydiumバケットを1回の呼び出しに集約します。請求するものがない場合、空のトランザクション配列ではなくHTTP `400` と `"No rewards available to claim"` を返します
 - オンチェーン請求インストラクション（`claimBondingCurveCreatorFeeV2`、`collectRaydiumCpmmFeesWithCreatorFeeV2`、`claimRaydiumCreatorFeeV2`）はパーミッションレスです。どのウォレットでもトリガーできますが、SOLは常に設定されたクリエイター手数料ウォレットに送られ、呼び出し元には送られません
 - グラデュエーション後の手数料には順序通り2つのステップが必要です：`collectRaydiumCpmmFeesWithCreatorFeeV2`（Raydiumプール → Genesisバケットへの収集）、次に `claimRaydiumCreatorFeeV2`（バケット → クリエイターウォレット）。両方を1つのトランザクションにまとめることができ、APIパスは両方をまとめて処理します
+- `collectRaydiumCpmmFeesWithCreatorFeeV2` には `creatorFeeShare` アカウント（Genesis Raydium署名者とプールのAMMコンフィグに対応するRaydiumの `CreatorFeeShare` PDA）が必要ですが、このアカウントがオンチェーンに存在している必要はありません。`ammConfig` を取得したのと同じ `deriveRaydiumPDAsV2` 呼び出しの `pdas.creatorFeeShare` を渡してください — 一致しないアカウントは `InvalidRaydiumCreatorFeeShare`（エラー260）で失敗し、0.43.0より前のSDKバージョンは `NotEnoughAccountKeys` で失敗します
 - `creatorFeeAccrued` と `creatorFeeClaimed` は `BondingCurveBucketV2`（アクティブカーブ）と `RaydiumCpmmBucketV2`（グラデュエーション後）の両方に存在します。それぞれ `fetchBondingCurveBucketV2` と `fetchRaydiumCpmmBucketV2` を使用します
 - `creatorFeeWallet` は設定されていない場合デフォルトでローンチウォレットになります。カーブ作成後は変更できません
 - ファーストバイの仕組みは、指定された初回購入のみすべての手数料（プロトコルとクリエイター）を免除します。その後のすべてのスワップは通常のクリエイター手数料を支払います
