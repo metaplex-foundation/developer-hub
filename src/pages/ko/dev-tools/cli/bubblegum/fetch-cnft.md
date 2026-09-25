@@ -134,4 +134,4 @@ Creators (leaf / raw):
 - 표준 Solana RPC 엔드포인트는 "Asset not found or RPC does not support DAS API"로 실패합니다
 - 머클 증명은 전송, 소각, 업데이트 작업에 필수적입니다
 - `--json` 플래그는 스크립팅을 위한 기계 판독 가능한 JSON을 출력합니다
-- 상속 로열티에서 `Royalty` / `Creators (display)`는 컬렉션에서 해석된 값입니다. `Inherited`와 `Creators (leaf / raw)`는 진단용이며 DAS가 `_raw` / `inherited`를 제공할 때만 표시됩니다. 해당 필드가 없으면 센티널을 만들지 마세요. [상속 로열티 읽기](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
+- 상속 로열티에서 `Royalty` / `Creators (display)`는 컬렉션에서 해석된 값입니다. `Inherited`와 `Creators (leaf / raw)`는 진단용이며 DAS가 `_raw` / `inherited`를 제공할 때만 표시됩니다. 해당 필드가 없으면 센티널을 만들지 마세요. 구버전 DAS는 `_raw` / `inherited`를 생략하고 `royalty.basis_points: 65535`를 반환할 수 있습니다. 이는 리프 상속 센티널이며 컬렉션에서 해석된 비율이 아닙니다. [상속 로열티 읽기](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

@@ -54,7 +54,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--symbol <value>` | On-chain symbol |
 | `--royalties <value>` | Explicit leaf royalty % (0–100, decimals allowed e.g. `7.5`). Opts out of collection inherit |
 | `--inherit-royalties` | Store inherit sentinel `65535` and empty leaf creators. Requires `--collection` with a Royalties plugin. Default when the collection has Royalties and you omit `--royalties`, `--creator`, and JSON `seller_fee_basis_points` |
-| `--creator <address>:<share>` | Leaf payout split (repeatable; shares must sum to 100). Default: payer @ 100%. Opts out of inherit even if `--royalties` is omitted. Incompatible with `--inherit-royalties` |
+| `--creator <address>:<share>` | Leaf payout split (repeatable; shares must sum to 100). For explicit-leaf mints, the default is payer @ 100%. Opts out of inherit even if `--royalties` is omitted. Incompatible with `--inherit-royalties` |
 | `--collection <value>` | Core collection address (must have BubblegumV2). [Metaplex Core collections](/smart-contracts/core/collections) |
 | `--owner <value>` | Leaf owner public key (defaults to payer) |
 
@@ -201,7 +201,7 @@ mplx bg collection create \
 | Explicit leaf rate | `--royalties <0-100>` (decimals ok). Opts out of inherit |
 | Explicit splits | `--creator <ADDR>:<share>` (repeatable; shares sum to 100). Opts out of inherit even without `--royalties` (leaf rate is then `0%`) |
 
-`--inherit-royalties` requires `--collection` with a Royalties plugin and cannot be combined with `--royalties` or `--creator`. A plain `mplx core collection create` is not enough — the collection needs `BubblegumV2` (and Royalties, to inherit).
+`--inherit-royalties` requires `--collection` with a Royalties plugin and cannot be combined with `--royalties`, `--creator`, or JSON `seller_fee_basis_points`. A plain `mplx core collection create` is not enough — the collection needs `BubblegumV2` (and Royalties, to inherit).
 
 ## Notes
 

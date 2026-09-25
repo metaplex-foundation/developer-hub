@@ -134,4 +134,4 @@ When using `--download`, two files are created:
 - Standard Solana RPC endpoints will fail with "Asset not found or RPC does not support DAS API"
 - The merkle proof is essential for transfer, burn, and update operations
 - The `--json` flag outputs machine-readable JSON for scripting
-- For inherited royalties, `Royalty` / `Creators (display)` show the collection-resolved values. `Inherited` and `Creators (leaf / raw)` are diagnostic and appear only when DAS exposes `_raw` / `inherited`. Do not invent a sentinel if those fields are missing. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
+- For inherited royalties, `Royalty` / `Creators (display)` show the collection-resolved values. `Inherited` and `Creators (leaf / raw)` are diagnostic and appear only when DAS exposes `_raw` / `inherited`. Do not invent a sentinel if those fields are missing. Older DAS may omit `_raw` / `inherited` and return `royalty.basis_points: 65535` — that is the leaf inherit sentinel, not the collection-resolved rate. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

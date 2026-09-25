@@ -134,4 +134,4 @@ Creators (leaf / raw):
 - 標準のSolana RPCエンドポイントは「Asset not found or RPC does not support DAS API」で失敗します
 - マークルプルーフは転送、バーン、更新操作に不可欠です
 - `--json`フラグはスクリプト用の機械可読JSONを出力します
-- 継承ロイヤリティでは `Royalty` / `Creators (display)` がコレクション解決値です。`Inherited` と `Creators (leaf / raw)` は診断用で、DAS が `_raw` / `inherited` を返す場合のみ表示されます。これらのフィールドが無いときにセンチネルを捏造しないでください。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
+- 継承ロイヤリティでは `Royalty` / `Creators (display)` がコレクション解決値です。`Inherited` と `Creators (leaf / raw)` は診断用で、DAS が `_raw` / `inherited` を返す場合のみ表示されます。これらのフィールドが無いときにセンチネルを捏造しないでください。古い DAS は `_raw` / `inherited` を省略し `royalty.basis_points: 65535` を返すことがあります。これはリーフの継承センチネルであり、コレクション解決後の料率ではありません。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

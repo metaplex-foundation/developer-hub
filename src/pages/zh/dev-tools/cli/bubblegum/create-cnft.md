@@ -54,7 +54,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--symbol <value>` | 链上符号 |
 | `--royalties <value>` | 显式叶子版税 %（0–100，允许小数，例如 `7.5`）。退出集合继承 |
 | `--inherit-royalties` | 存储继承哨兵 `65535` 和空叶子创作者。需要带 Royalties 插件的 `--collection`。当集合有 Royalties 且省略 `--royalties`、`--creator` 和 JSON `seller_fee_basis_points` 时为默认 |
-| `--creator <address>:<share>` | 叶子分成（可重复；份额合计须为 100）。默认：付款者 100%。即使省略 `--royalties` 也会退出继承。不能与 `--inherit-royalties` 同时使用 |
+| `--creator <address>:<share>` | 叶子分成（可重复；份额合计须为 100）。显式叶子铸造时默认是付款者 100%。即使省略 `--royalties` 也会退出继承。不能与 `--inherit-royalties` 同时使用 |
 | `--collection <value>` | Core 集合地址（必须有 BubblegumV2）。[Metaplex Core 集合](/smart-contracts/core/collections) |
 | `--owner <value>` | 叶子所有者公钥（默认为付款者） |
 
@@ -199,7 +199,7 @@ mplx bg collection create \
 | 显式叶子费率 | `--royalties <0-100>`（允许小数）。退出继承 |
 | 显式分成 | `--creator <ADDR>:<share>`（可重复；合计 100）。即使没有 `--royalties` 也会退出继承（叶子费率则为 `0%`） |
 
-`--inherit-royalties` 需要带 Royalties 插件的 `--collection`，且不能与 `--royalties` 或 `--creator` 同时使用。仅用 `mplx core collection create` 不够——集合需要 `BubblegumV2`（若要继承还需要 Royalties）。
+`--inherit-royalties` 需要带 Royalties 插件的 `--collection`，且不能与 `--royalties`、`--creator` 或 JSON `seller_fee_basis_points` 同时使用。仅用 `mplx core collection create` 不够——集合需要 `BubblegumV2`（若要继承还需要 Royalties）。
 
 ## 注意事项
 

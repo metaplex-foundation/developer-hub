@@ -54,7 +54,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--symbol <value>` | オンチェーンシンボル |
 | `--royalties <value>` | 明示的なリーフロイヤリティ%（0–100、小数可 例: `7.5`）。コレクション継承をオプトアウト |
 | `--inherit-royalties` | 継承センチネル `65535` と空のリーフクリエイターを保存。Royaltiesプラグイン付きの `--collection` が必要。コレクションにRoyaltiesがあり `--royalties`、`--creator`、JSON の `seller_fee_basis_points` を省略した場合のデフォルト |
-| `--creator <address>:<share>` | リーフの分配（繰り返し可。シェア合計は100）。デフォルトは支払者 100%。`--royalties` がなくても継承をオプトアウト。`--inherit-royalties` とは併用不可 |
+| `--creator <address>:<share>` | リーフの分配（繰り返し可。シェア合計は100）。明示的リーフミントではデフォルトは支払者 100%。`--royalties` がなくても継承をオプトアウト。`--inherit-royalties` とは併用不可 |
 | `--collection <value>` | Coreコレクションアドレス（BubblegumV2必須）。[Metaplex Coreコレクション](/smart-contracts/core/collections) |
 | `--owner <value>` | リーフオーナーの公開鍵（デフォルトは支払者） |
 
@@ -199,7 +199,7 @@ mplx bg collection create \
 | 明示的なリーフ料率 | `--royalties <0-100>`（小数可）。継承をオプトアウト |
 | 明示的な分配 | `--creator <ADDR>:<share>`（繰り返し可。合計100）。`--royalties` がなくても継承をオプトアウト（リーフ料率は `0%`） |
 
-`--inherit-royalties` には Royalties プラグイン付きの `--collection` が必要で、`--royalties` や `--creator` と併用できません。`mplx core collection create` だけでは不十分です。コレクションには `BubblegumV2`（継承する場合は Royalties）が必要です。
+`--inherit-royalties` には Royalties プラグイン付きの `--collection` が必要で、`--royalties`、`--creator`、JSON の `seller_fee_basis_points` と併用できません。`mplx core collection create` だけでは不十分です。コレクションには `BubblegumV2`（継承する場合は Royalties）が必要です。
 
 ## 注意事項
 

@@ -134,4 +134,4 @@ Creators (leaf / raw):
 - 标准 Solana RPC 端点会显示 "Asset not found or RPC does not support DAS API" 错误
 - 默克尔证明对于转移、销毁和更新操作至关重要
 - `--json` 标志输出机器可读的 JSON，用于脚本编写
-- 继承版税时，`Royalty` / `Creators (display)` 显示集合解析后的值。`Inherited` 和 `Creators (leaf / raw)` 为诊断信息，仅在 DAS 提供 `_raw` / `inherited` 时出现。这些字段缺失时不要编造哨兵。参见[读取继承版税](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
+- 继承版税时，`Royalty` / `Creators (display)` 显示集合解析后的值。`Inherited` 和 `Creators (leaf / raw)` 为诊断信息，仅在 DAS 提供 `_raw` / `inherited` 时出现。这些字段缺失时不要编造哨兵。旧版 DAS 可能省略 `_raw` / `inherited` 并返回 `royalty.basis_points: 65535`——那是叶子继承哨兵，不是集合解析后的费率。参见[读取继承版税](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

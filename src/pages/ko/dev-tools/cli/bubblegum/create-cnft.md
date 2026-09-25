@@ -54,7 +54,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--symbol <value>` | 온체인 심볼 |
 | `--royalties <value>` | 명시적 리프 로열티 %(0–100, 소수 가능 예: `7.5`). 컬렉션 상속을 옵트아웃 |
 | `--inherit-royalties` | 상속 센티널 `65535`와 빈 리프 크리에이터를 저장. Royalties 플러그인이 있는 `--collection` 필요. 컬렉션에 Royalties가 있고 `--royalties`, `--creator`, JSON `seller_fee_basis_points`를 생략하면 기본값 |
-| `--creator <address>:<share>` | 리프 분배(반복 가능, 합계 100). 기본값: 지불자 100%. `--royalties`가 없어도 상속을 옵트아웃. `--inherit-royalties`와 함께 사용 불가 |
+| `--creator <address>:<share>` | 리프 분배(반복 가능, 합계 100). 명시적 리프 민트에서 기본값은 지불자 100%. `--royalties`가 없어도 상속을 옵트아웃. `--inherit-royalties`와 함께 사용 불가 |
 | `--collection <value>` | Core 컬렉션 주소(BubblegumV2 필수). [Metaplex Core 컬렉션](/smart-contracts/core/collections) |
 | `--owner <value>` | 리프 소유자 공개 키 (기본값은 지불자) |
 
@@ -199,7 +199,7 @@ mplx bg collection create \
 | 명시적 리프 비율 | `--royalties <0-100>` (소수 가능). 상속 옵트아웃 |
 | 명시적 분배 | `--creator <ADDR>:<share>` (반복 가능, 합계 100). `--royalties`가 없어도 상속 옵트아웃 (리프 비율은 `0%`) |
 
-`--inherit-royalties`는 Royalties 플러그인이 있는 `--collection`이 필요하며 `--royalties` 또는 `--creator`와 함께 사용할 수 없습니다. `mplx core collection create`만으로는 부족합니다. 컬렉션에 `BubblegumV2`(상속하려면 Royalties)가 있어야 합니다.
+`--inherit-royalties`는 Royalties 플러그인이 있는 `--collection`이 필요하며 `--royalties`, `--creator`, JSON `seller_fee_basis_points`와 함께 사용할 수 없습니다. `mplx core collection create`만으로는 부족합니다. 컬렉션에 `BubblegumV2`(상속하려면 Royalties)가 있어야 합니다.
 
 ## 참고 사항
 
