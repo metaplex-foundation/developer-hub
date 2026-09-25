@@ -52,8 +52,10 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--animation <value>` | 动画/视频文件路径 |
 | `--project-url <value>` | 外部项目 URL |
 | `--symbol <value>` | 链上符号 |
-| `--royalties <value>` | 版税百分比（0-100） |
-| `--collection <value>` | 集合铸造地址（[Metaplex Core 集合](/smart-contracts/core/collections)） |
+| `--royalties <value>` | 显式叶子版税 %（0–100，允许小数，例如 `7.5`）。退出集合继承 |
+| `--inherit-royalties` | 存储继承哨兵 `65535` 和空叶子创作者。需要带 Royalties 插件的 `--collection`。当集合有 Royalties 且省略 `--royalties`、`--creator` 和 JSON `seller_fee_basis_points` 时为默认 |
+| `--creator <address>:<share>` | 叶子分成（可重复；份额合计须为 100）。默认：付款者 100%。即使省略 `--royalties` 也会退出继承。不能与 `--inherit-royalties` 同时使用 |
+| `--collection <value>` | Core 集合地址（必须有 BubblegumV2）。[Metaplex Core 集合](/smart-contracts/core/collections) |
 | `--owner <value>` | 叶子所有者公钥（默认为付款者） |
 
 ## 全局标志
@@ -102,13 +104,35 @@ mplx bg nft create my-tree \
   --royalties 5
 ```
 
-1. 在集合中创建：
+1. 在集合中创建（集合有 Royalties 插件时自动继承）：
 
 ```bash
 mplx bg nft create my-tree \
   --name "Collection Item #1" \
   --image ./nft.png \
   --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+1. 强制从集合 Royalties 插件继承：
+
+```bash
+mplx bg nft create my-tree \
+  --name "Inherited cNFT" \
+  --uri "https://arweave.net/xxx" \
+  --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+  --inherit-royalties
+```
+
+1. 显式叶子版税与创作者分成（退出继承）：
+
+```bash
+mplx bg nft create my-tree \
+  --name "Split cNFT" \
+  --uri "https://arweave.net/xxx" \
+  --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+  --royalties 7.5 \
+  --creator Addr111111111111111111111111111111111111111:60 \
+  --creator Addr222222222222222222222222222222222222222:40
 ```
 
 ## 输出
@@ -124,6 +148,7 @@ Compressed NFT Created!
 Tree: my-tree
 Owner: YourWalletAddressHere
 Asset ID: CNFTAssetIdHere
+Royalties: inherited (leaf sentinel 65535)
 
 Signature: 5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Explorer: https://solscan.io/tx/5xxx...
@@ -154,6 +179,28 @@ Explorer: https://solscan.io/tx/5xxx...
 
 `image` 字段将自动填充上传的图片 URI。
 
+如果设置了 `seller_fee_basis_points`，CLI 会将其视为显式叶子费率，**不会**从集合继承。
+
+## 继承版税
+
+铸造到带有 [Royalties 插件](/smart-contracts/core/plugins/royalties) 的 Core 集合时，CLI 可以存储继承哨兵（`65535`）和空叶子创作者，而不是把集合费率复制到每个 cNFT。DAS 会解析集合费率用于展示。参见[读取继承版税](/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
+
+```bash
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
+```
+
+| 意图 | 标志 |
+|--------|--------|
+| 自动继承 | `--collection <COL>`，并省略 `--royalties`、`--creator` 和 JSON `seller_fee_basis_points` |
+| 强制继承 | `--collection <COL> --inherit-royalties` |
+| 显式叶子费率 | `--royalties <0-100>`（允许小数）。退出继承 |
+| 显式分成 | `--creator <ADDR>:<share>`（可重复；合计 100）。即使没有 `--royalties` 也会退出继承（叶子费率则为 `0%`） |
+
+`--inherit-royalties` 需要带 Royalties 插件的 `--collection`，且不能与 `--royalties` 或 `--creator` 同时使用。仅用 `mplx core collection create` 不够——集合需要 `BubblegumV2`（若要继承还需要 Royalties）。
+
 ## 注意事项
 
 - 树参数可以是已保存的树名称或公钥地址
@@ -162,3 +209,4 @@ Explorer: https://solscan.io/tx/5xxx...
 - RPC 必须支持 DAS API
 - **仅限 Bubblegum V2** - 这些命令适用于 Bubblegum V2 树，并使用 [Metaplex Core 集合](/smart-contracts/core/collections)（不是 Token Metadata 集合）
 - 属性格式：`"trait:value,trait:value"` - 冒号分隔 trait 和 value，逗号分隔对
+- 所选集合有 Royalties 插件时，向导会提供继承与显式版税两种选择

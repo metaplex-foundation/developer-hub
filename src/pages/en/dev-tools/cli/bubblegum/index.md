@@ -26,8 +26,11 @@ Bubblegum V2 uses [Metaplex Core collections](/smart-contracts/core/collections)
 ```bash
 mplx bg collection create \
   --name "My Compressed Collection" \
-  --uri "https://example.com/collection.json"
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
+
+`--royalties` adds a Core Royalties plugin so later `mplx bg nft create --collection` mints can [inherit collection royalties](/dev-tools/cli/bubblegum/create-cnft#inherited-royalties) (leaf sentinel `65535`) instead of copying the rate onto every cNFT.
 
 You can also use a vanity collection address with `--mint-keypair`:
 
@@ -83,16 +86,19 @@ mplx config rpcs add <name> <url>
 mplx bg tree create --wizard
 ```
 
-1. Create a collection (optional but recommended):
+1. Create a Bubblegum-ready collection (optional but recommended). Pass `--royalties` so mints can inherit:
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
 
-1. Mint compressed NFTs:
+1. Mint compressed NFTs. Omit `--royalties` / `--creator` (and JSON `seller_fee_basis_points`) to auto-inherit:
 
 ```bash
-mplx bg nft create my-tree --wizard
+mplx bg nft create my-tree --name "cNFT #1" --uri "https://example.com/1.json" --collection <COL>
 ```
 
 ## Authority Model

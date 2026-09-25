@@ -109,10 +109,14 @@ Merkle Proof:
 
 Royalty:
   Basis Points: 500 (5%)
+  Inherited: Yes (leaf sentinel 65535)
   Primary Sale: No
 
-Creators:
-  CreatorAddress1 (100%) ✓
+Creators (display):
+  CollectionCreatorAddress (100%) ✓
+
+Creators (leaf / raw):
+  (empty — typical when SFBP is inherited)
 
 --------------------------------
 ```
@@ -130,3 +134,4 @@ Creators:
 - 標準のSolana RPCエンドポイントは「Asset not found or RPC does not support DAS API」で失敗します
 - マークルプルーフは転送、バーン、更新操作に不可欠です
 - `--json`フラグはスクリプト用の機械可読JSONを出力します
+- 継承ロイヤリティでは `Royalty` / `Creators (display)` がコレクション解決値です。`Inherited` と `Creators (leaf / raw)` は診断用で、DAS が `_raw` / `inherited` を返す場合のみ表示されます。これらのフィールドが無いときにセンチネルを捏造しないでください。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
