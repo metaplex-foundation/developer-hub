@@ -181,7 +181,7 @@ The `image` field will be automatically populated with the uploaded image URI.
 
 If `seller_fee_basis_points` is set, the CLI treats it as an explicit leaf rate and **does not inherit** from the collection.
 
-## Inherited royalties
+## Inherited royalties {% #inherited-royalties %}
 
 When minting into a Core collection that has a [Royalties plugin](/smart-contracts/core/plugins/royalties), the CLI can store the inherit sentinel (`65535`) and empty leaf creators instead of copying the collection rate onto every cNFT. DAS then resolves the collection rate for display. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 

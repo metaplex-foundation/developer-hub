@@ -181,7 +181,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 `seller_fee_basis_points`가 있으면 CLI는 이를 명시적 리프 비율로 취급하며 컬렉션에서 **상속하지 않습니다**.
 
-## 상속 로열티
+## 상속 로열티 {% #inherited-royalties %}
 
 [Royalties 플러그인](/smart-contracts/core/plugins/royalties)이 있는 Core 컬렉션에 민팅할 때 CLI는 컬렉션 비율을 각 cNFT에 복사하는 대신 상속 센티널(`65535`)과 빈 리프 크리에이터를 저장할 수 있습니다. DAS는 표시용으로 컬렉션 비율을 해석합니다. [상속 로열티 읽기](/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하세요.
 

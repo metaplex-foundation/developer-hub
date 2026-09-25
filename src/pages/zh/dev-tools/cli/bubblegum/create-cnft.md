@@ -181,7 +181,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 如果设置了 `seller_fee_basis_points`，CLI 会将其视为显式叶子费率，**不会**从集合继承。
 
-## 继承版税
+## 继承版税 {% #inherited-royalties %}
 
 铸造到带有 [Royalties 插件](/smart-contracts/core/plugins/royalties) 的 Core 集合时，CLI 可以存储继承哨兵（`65535`）和空叶子创作者，而不是把集合费率复制到每个 cNFT。DAS 会解析集合费率用于展示。参见[读取继承版税](/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
 

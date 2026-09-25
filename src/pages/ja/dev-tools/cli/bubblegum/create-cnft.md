@@ -181,7 +181,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 `seller_fee_basis_points` が設定されている場合、CLIは明示的なリーフ料率として扱い、コレクションからは**継承しません**。
 
-## 継承ロイヤリティ
+## 継承ロイヤリティ {% #inherited-royalties %}
 
 [Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)を持つ Core コレクションへミントする場合、CLIはコレクション料率を各cNFTにコピーする代わりに、継承センチネル（`65535`）と空のリーフクリエイターを保存できます。DASは表示用にコレクション料率を解決します。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
 
