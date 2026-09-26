@@ -19,7 +19,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '04-29-2026'
-updated: '05-06-2026'
+updated: '09-08-2026'
 faqs:
   - q: What is agent commerce?
     a: Agent commerce is the productive economic activity of autonomous AI agents — earning revenue, paying for services, and transacting with other agents and humans onchain. It covers how agents act as economic participants, not how they are funded.
@@ -28,7 +28,7 @@ faqs:
   - q: Are Metaplex agents EIP-8004 compatible?
     a: Yes. Metaplex agent registrations emit EIP-8004-compliant metadata by default. The metadata `type` field is `https://eips.ethereum.org/EIPS/eip-8004#registration-v1`, the `services` array describes endpoints and skills, and `supportedTrust` declares trust mechanisms such as reputation or TEE attestation.
   - q: Does Metaplex support x402 payments?
-    a: Agent metadata includes a first-class `x402Support` boolean flag so counterparties can discover whether an agent is set up for HTTP 402 stablecoin payments. The agent's PDA wallet can already receive any SPL token (USDC, USDT) and its executive can sign outbound payments — wiring an x402 payment client on top is a runtime integration.
+    a: Yes, on both sides. Agent metadata includes a first-class `x402Support` boolean flag so counterparties can discover whether an agent is set up for HTTP 402 stablecoin payments, the agent's PDA wallet holds any SPL token including USDC, and its executive signs outbound payments. Metaplex also operates Metaplex x402, a live pay-per-request API selling LLM inference, image generation, and Solana RPC to agents and wallets.
   - q: How do agents discover each other on Metaplex?
     a: Each registered agent has a public registration URI containing its EIP-8004 metadata — name, services, endpoints, skills, domains, x402 support flag, and trust mechanisms. Counterparty agents fetch this metadata to discover capabilities and route requests.
   - q: Can a Metaplex agent earn revenue today?
@@ -100,17 +100,17 @@ mplx agents register --new \
 
 After registration, anyone can resolve the agent's metadata from its onchain `agentMetadataUri` and route requests to the advertised endpoint.
 
-## x402: Stablecoin Payments by Flag, Not Stub
+## x402 Stablecoin Payments on Metaplex
 
-[x402](https://www.x402.org) is an emerging protocol that uses HTTP `402 Payment Required` to make stablecoin micropayments a first-class part of API access. A client requests a resource, gets back a `402` with payment instructions, settles onchain, and retries with a payment proof.
+Metaplex operates [Metaplex x402](/agents/x402), a live pay-per-request API that sells LLM inference, image generation, and Solana RPC to agents for USDC. It implements [x402](https://www.x402.org), an emerging protocol that uses HTTP `402 Payment Required` to make stablecoin micropayments a first-class part of API access: a client requests a resource, gets back a `402` with payment instructions, settles onchain, and retries with a payment proof.
 
-Metaplex doesn't ship an x402 server or client — that's a runtime concern. What it ships is everything the protocol needs from the *agent* side:
+Metaplex ships both sides of this. On the *agent* side, a registration carries everything the protocol needs:
 
 - **`x402Support: true`** in the metadata so callers can discover x402 capability
 - **A PDA wallet that holds USDC/USDT** — the Asset Signer accepts any SPL token
 - **An executive that can sign outbound payments** through Core's Execute hook, paying for the API calls and resources the agent needs
 
-In other words, the onchain trust and signing primitives are in place; wiring them to an x402 server framework is an integration task, not an onchain protocol design task.
+On the *service* side, [Metaplex x402](/agents/x402) is a live pay-per-request API selling LLM inference, image generation, and Solana RPC, with an open-source client at [`@metaplex-foundation/x402`](https://github.com/metaplex-foundation/x402). A registered agent can [delegate payment authority](/agents/x402/payment-modes#pay-instantly-with-a-delegated-agent) to it once and then pay per request from its own wallet with no further signatures.
 
 ## Agent-to-Agent Coordination via Services Discovery
 
@@ -136,7 +136,7 @@ Every step uses primitives the Metaplex stack already provides. There's no off-c
 
 ## Notes
 
-- This page describes the building blocks Metaplex ships today. Onboarding flows for x402 servers and an indexed agent directory are separate runtime concerns and will get their own guides
+- This page describes the agent-side building blocks. [Metaplex x402](/agents/x402) documents the Metaplex-operated x402 service itself; an indexed agent directory is a separate runtime concern and will get its own guide
 - EIP-8004 is the metadata format; [agent finance](/agents/agent-finance) and agent commerce are the layers above it. The same registration document is read by both
 - The `agentToken` field on `AgentIdentityV2` is set once via [`setAgentTokenV1`](/dev-tools/cli/agents/set-agent-token) and is permanent. Revenue routing to the agent's token holders is a finance concern; commerce flows can route SOL or stablecoins to the agent's PDA directly
 - An asset owner can revoke the executive at any time. This is the safety valve when delegating autonomous payment authority
@@ -155,7 +155,7 @@ Agent commerce is the productive economic activity of autonomous AI agents — e
 Yes. The default metadata `type` is `https://eips.ethereum.org/EIPS/eip-8004#registration-v1`. Every Metaplex agent registration emits an EIP-8004-compliant document with `services[]`, `x402Support`, `supportedTrust[]`, and `registrations[]` fields. Anything that consumes EIP-8004 metadata can consume a Metaplex agent.
 
 ### Does Metaplex support x402 payments?
-Agent metadata has a first-class `x402Support` boolean for capability discovery, the PDA wallet can already receive any SPL token (including USDC), and the executive can sign outbound payments. The protocol layer (an x402 server framework) is a runtime integration that sits on top of these primitives.
+Yes, on both sides. Agent metadata has a first-class `x402Support` boolean for capability discovery, the PDA wallet holds USDC, and the executive signs outbound payments. Metaplex also operates [Metaplex x402](/agents/x402), a live pay-per-request API for inference, image generation, and Solana RPC that agents can pay from their own wallets.
 
 ### How do agents discover each other on Metaplex?
 Every registered agent has a public registration URI containing its EIP-8004 metadata. Counterparty agents resolve this URI from the onchain `AgentIdentity` plugin and read `services[].endpoint`, `skills`, `domains`, and supported protocols to decide where and how to send a request.

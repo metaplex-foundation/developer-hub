@@ -71,23 +71,19 @@ export const agents = {
           ],
         },
         {
-          title: 'Nori',
+          title: 'x402',
           links: [
             {
-              title: 'Nori Overview',
-              href: '/agents/nori',
+              title: 'x402 Overview',
+              href: '/agents/x402',
             },
             {
-              title: 'Delegate to Nori',
-              href: '/agents/nori/delegate-to-nori',
+              title: 'Payment Modes',
+              href: '/agents/x402/payment-modes',
             },
             {
-              title: 'Pricing and Billing',
-              href: '/agents/nori/pricing-and-billing',
-            },
-            {
-              title: 'Example Agents',
-              href: '/agents/nori/example-agents',
+              title: 'API Reference',
+              href: '/agents/x402/api-reference',
             },
           ],
         },
@@ -112,10 +108,10 @@ export const agents = {
         ko: '시작하기',
         zh: '快速入门',
       },
-      'Nori': {
-        ja: 'Nori',
-        ko: 'Nori',
-        zh: 'Nori',
+      'x402': {
+        ja: 'x402',
+        ko: 'x402',
+        zh: 'x402',
       },
     },
     linkKeys: {
@@ -169,25 +165,20 @@ export const agents = {
         ko: '에이전트 실행',
         zh: '运行 Agent',
       },
-      'Nori Overview': {
-        ja: 'Nori 概要',
-        ko: 'Nori 개요',
-        zh: 'Nori 概述',
+      'x402 Overview': {
+        ja: 'x402 概要',
+        ko: 'x402 개요',
+        zh: 'x402 概述',
       },
-      'Delegate to Nori': {
-        ja: 'Nori への委任',
-        ko: 'Nori에 위임하기',
-        zh: '委托给 Nori',
+      'Payment Modes': {
+        ja: '支払いモード',
+        ko: '결제 모드',
+        zh: '支付模式',
       },
-      'Pricing and Billing': {
-        ja: '料金と請求',
-        ko: '가격 및 청구',
-        zh: '定价与计费',
-      },
-      'Example Agents': {
-        ja: 'エージェントの例',
-        ko: '에이전트 예시',
-        zh: 'Agent 示例',
+      'API Reference': {
+        ja: 'APIリファレンス',
+        ko: 'API 레퍼런스',
+        zh: 'API 参考',
       },
     },
   }),
