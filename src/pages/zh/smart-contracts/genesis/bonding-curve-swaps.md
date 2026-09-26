@@ -72,7 +72,7 @@ faqs:
 
 ## 快速开始
 
-**跳转至：** [安装](#installation) · [配置](#umi-and-genesis-plugin-setup) · [获取曲线](#fetching-a-bonding-curve-bucketv2) · [生命周期辅助函数](#bonding-curve-lifecycle-helpers) · [报价](#getting-a-swap-quote) · [滑点](#slippage-protection) · [执行兑换](#constructing-swap-transactions) · [创作者费](/smart-contracts/genesis/creator-fees) · [错误处理](#error-handling) · [API 参考](#api-reference)
+**跳转至：** [安装](#installation) · [配置](#umi-and-genesis-plugin-setup) · [获取曲线](#fetching-a-bonding-curve-bucket-v2) · [生命周期辅助函数](#bonding-curve-lifecycle-helpers) · [报价](#getting-a-swap-quote) · [滑点](#slippage-protection) · [执行兑换](#constructing-swap-transactions) · [创作者费](/smart-contracts/genesis/creator-fees) · [错误处理](#error-handling) · [API 参考](#api-reference)
 
 1. 安装依赖包并使用 `genesis()` 插件配置 Umi 实例
 2. 推导 `BondingCurveBucketV2Pda` 并获取账户
@@ -124,7 +124,7 @@ const keypair = umi.eddsa.createKeypairFromSecretKey(Uint8Array.from(keypairFile
 umi.use(keypairIdentity(keypair));
 ```
 
-## 获取 Bonding Curve BucketV2
+## 获取 Bonding Curve BucketV2 {% #fetching-a-bonding-curve-bucket-v2 %}
 
 根据已掌握的信息，可选用三种发现策略。
 
@@ -275,7 +275,7 @@ const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1% slippage
 
 {% code-tabs-imported from="genesis/swap_sell" frameworks="umi,cli" defaultFramework="umi" /%}
 
-### wSOL 包装说明
+### wSOL 包装说明 {% #w-sol-wrapping-note %}
 
 {% callout type="warning" title="需手动处理 wSOL" %}
 `swapBondingCurveV2` 使用包装 SOL（wSOL）作为报价代币，**不会**自动包装或解包原生 SOL。
@@ -426,7 +426,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 
 ### 调用 swapBondingCurveV2 之前需要先包装 SOL 吗？
 
-是的。联合曲线使用 wSOL 作为报价代币，`swapBondingCurveV2` 不会自动包装或解包原生 SOL。详见 [wSOL 包装说明](#wsol-wrapping-note)。
+是的。联合曲线使用 wSOL 作为报价代币，`swapBondingCurveV2` 不会自动包装或解包原生 SOL。详见 [wSOL 包装说明](#w-sol-wrapping-note)。
 
 ### getSwapResult 返回什么，它如何处理手续费？
 

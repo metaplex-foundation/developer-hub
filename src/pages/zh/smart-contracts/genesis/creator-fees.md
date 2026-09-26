@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 毕业后——收割 LP 费用 | Genesis 账户、Raydium 池 PDA、Raydium bucket PDA | LP 费用从 Raydium 池移至 Genesis bucket |
 | `claimRaydiumCreatorFeeV2` | 毕业后——认领 bucket 余额 | Genesis 账户、Raydium bucket PDA、base/quote mint、创作者费钱包 | Bucket 余额转移到创作者钱包 |
 
-**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#处理无奖励情况) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#步骤-1--从-raydium-cpmm-池收集费用) · [毕业后认领](#步骤-2--认领费用到创作者钱包)
+**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#处理无奖励情况) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#step-1-collect-fees-from-the-raydium-cpmm-pool) · [毕业后认领](#step-2-claim-fees-to-the-creator-wallet)
 
 1. 调用 `createAndRegisterLaunch` 时在 `launch` 对象中设置 `creatorFeeWallet`
 2. 发行后读取 `bucket.creatorFeeAccrued` 监控累积费用
@@ -283,7 +283,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 `raydiumBucket.creatorFeeAccrued` 仅反映已从 Raydium 池收集到 bucket 中的费用。Raydium 池本身可能持有额外的未收集 LP 费用——在读取最终可认领余额之前，运行 `collectRaydiumCpmmFeesWithCreatorFeeV2` 将其移至 bucket。
 {% /callout %}
 
-### 步骤 1 — 从 Raydium CPMM 池收集费用
+### 步骤 1 — 从 Raydium CPMM 池收集费用 {% #step-1-collect-fees-from-the-raydium-cpmm-pool %}
 
 `collectRaydiumCpmmFeesWithCreatorFeeV2` 从 Raydium CPMM 池收集累积的 LP 交易费用，将其记入 `RaydiumCpmmBucketV2` bucket 签名者的代币账户，并更新 `creatorFeeAccrued`。必须在认领之前运行此步骤——在从 Raydium 收集费用之前，没有可认领的内容。
 
@@ -331,7 +331,7 @@ console.log('Raydium LP fees collected into Genesis bucket');
 `collectRaydiumCpmmFeesWithCreatorFeeV2` 是无需许可的——任何钱包都可以调用。收集的费用流入 Genesis bucket 签名者的代币账户，并在下次 bucket 获取时反映在 `creatorFeeAccrued` 中。
 {% /callout %}
 
-### 步骤 2 — 认领费用到创作者钱包
+### 步骤 2 — 认领费用到创作者钱包 {% #step-2-claim-fees-to-the-creator-wallet %}
 
 `claimRaydiumCreatorFeeV2` 将 `RaydiumCpmmBucketV2` bucket 中累积的余额转移到配置的创作者费钱包。在收集后运行，或在 bucket 持有来自先前收集的未认领余额时随时运行。
 

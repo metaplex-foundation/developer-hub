@@ -49,7 +49,7 @@ Core는 Token Metadata의 다중 계정 모델을 단일 계정 설계로 대체
 ## 범위 외
 pNFT 관련 기능과 대체 가능 토큰 처리 (SPL Token 사용).
 ## 빠른 시작
-**바로가기:** [비용 비교](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [라이프사이클 이벤트](#lifecycle-events-and-plugins)
+**바로가기:** [비용 비교](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [라이프사이클 이벤트](#lifecycle-events-and-plugins)
 새로 시작하는 경우 Core를 사용하세요. 마이그레이션하는 경우 주요 멘탈 시프트는:
 1. 세 개가 아닌 하나의 계정
 2. 위임자가 아닌 플러그인

@@ -49,7 +49,7 @@ faqs:
 ## 不在范围内
 Token Metadata 版税（不同的系统）、版税收取/分配（由市场处理）以及版税的法律强制执行。
 ## 快速开始
-**跳转到：** [添加到 Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [添加到 Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [更新](#updating-the-royalties-plugin-on-an-asset)
+**跳转到：** [添加到 Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [添加到 Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rule-sets) · [更新](#updating-the-royalties-plugin-on-an-asset)
 1. 从 `@metaplex-foundation/mpl-core` 导入 `addPlugin`
 2. 使用 `type: 'Royalties'`、`basisPoints`、`creators` 和 `ruleSet` 调用
 3. 市场读取 Plugin 并在销售时强制执行版税

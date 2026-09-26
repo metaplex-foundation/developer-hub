@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | グラデュエーション後 — LP手数料のハーベスト | Genesisアカウント、RaydiumプールPDA、RaydiumバケットPDA | LP手数料がRaydiumプールからGenesisバケットに移動 |
 | `claimRaydiumCreatorFeeV2` | グラデュエーション後 — バケット残高の請求 | Genesisアカウント、RaydiumバケットPDA、ベース/クォートミント、クリエイター手数料ウォレット | バケット残高がクリエイターウォレットに転送 |
 
-**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#エージェントローンチ自動pdaルーティング) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [API経由で請求](#metaplex-api経由で請求推奨) · [報酬なしのケース](#報酬なしのケースの処理) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#ステップ1--raydium-cpmmプールからの手数料収集) · [グラデュエーション後の請求](#ステップ2--クリエイターウォレットへの手数料請求)
+**ジャンプ:** [ローンチ時の設定](#ローンチ時のクリエイター手数料の設定) · [ウォレットへのリダイレクト](#クリエイター手数料を特定のウォレットにリダイレクトする) · [エージェントPDA](#agent-launches-automatic-pda-routing) · [ファーストバイとの組み合わせ](#クリエイター手数料とファーストバイの組み合わせ) · [蓄積確認（カーブ）](#蓄積したクリエイター手数料の確認) · [API経由で請求](#metaplex-api経由で請求推奨) · [報酬なしのケース](#報酬なしのケースの処理) · [カーブ中の請求](#アクティブなカーブ中のクリエイター手数料の請求) · [Raydium手数料の確認](#蓄積したraydiumクリエイター手数料の確認) · [Raydiumからの収集](#step-1-collect-fees-from-the-raydium-cpmm-pool) · [グラデュエーション後の請求](#step-2-claim-fees-to-the-creator-wallet)
 
 1. `createAndRegisterLaunch` を呼び出すときに `launch` オブジェクトに `creatorFeeWallet` を設定する
 2. ローンチ後、`bucket.creatorFeeAccrued` を監視して蓄積手数料を追跡する
@@ -153,7 +153,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 クリエイター手数料ウォレットはカーブ作成時に設定され、カーブがライブになった後は変更できません。
 {% /callout %}
 
-### エージェントローンチ — 自動PDAルーティング
+### エージェントローンチ — 自動PDAルーティング {% #agent-launches-automatic-pda-routing %}
 
 Metaplexエージェントのためにローンチする場合、クリエイター手数料は `creatorFeeWallet` を手動設定せずにエージェントのPDAに自動的にルーティングされます。Coreエグゼキュートラッピングと `setToken` 関連付けを含む完全なエージェントローンチフローについては、[エージェントトークンの作成](/agents/create-agent-token)を参照してください。
 
@@ -283,7 +283,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 `raydiumBucket.creatorFeeAccrued` はRaydiumプールからバケットに既に収集された手数料のみを反映します。Raydiumプール自体に未収集のLP手数料がある場合があります — 最終的な請求可能残高を読み取る前に `collectRaydiumCpmmFeesWithCreatorFeeV2` を実行してバケットに移動してください。
 {% /callout %}
 
-### ステップ1 — Raydium CPMMプールからの手数料収集
+### ステップ1 — Raydium CPMMプールからの手数料収集 {% #step-1-collect-fees-from-the-raydium-cpmm-pool %}
 
 `collectRaydiumCpmmFeesWithCreatorFeeV2` はRaydium CPMMプールから蓄積されたLP取引手数料を収集し、`RaydiumCpmmBucketV2` バケット署名者のトークンアカウントにクレジットし、`creatorFeeAccrued` を更新します。請求前にこのステップを実行する必要があります — Raydiumから手数料が収集されるまで、請求するものはありません。
 
@@ -331,7 +331,7 @@ console.log('Raydium LP fees collected into Genesis bucket');
 `collectRaydiumCpmmFeesWithCreatorFeeV2` はパーミッションレスです — どのウォレットでも呼び出せます。収集された手数料はGenesisバケット署名者のトークンアカウントに流れ、次回のバケットフェッチで `creatorFeeAccrued` に反映されます。
 {% /callout %}
 
-### ステップ2 — クリエイターウォレットへの手数料請求
+### ステップ2 — クリエイターウォレットへの手数料請求 {% #step-2-claim-fees-to-the-creator-wallet %}
 
 `claimRaydiumCreatorFeeV2` は `RaydiumCpmmBucketV2` バケットに蓄積された残高を設定されたクリエイター手数料ウォレットに転送します。収集後に実行するか、前回の収集からバケットに未請求残高がある場合はいつでも実行します。
 

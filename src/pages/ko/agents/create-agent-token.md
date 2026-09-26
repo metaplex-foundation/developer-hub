@@ -82,7 +82,7 @@ faqs:
 - Solana RPC 엔드포인트(mainnet-beta 또는 devnet)
 - [Irys](https://irys.xyz)에 미리 업로드된 토큰 이미지 — `image` 필드는 Irys 게이트웨이 URL이어야 함
 
-## 설치 {#installation}
+## 설치 {% #installation %}
 
 ```bash {% title="Terminal" %}
 npm install @metaplex-foundation/genesis \
@@ -90,7 +90,7 @@ npm install @metaplex-foundation/genesis \
   @metaplex-foundation/umi-bundle-defaults
 ```
 
-## Umi 설정 {#umi-setup}
+## Umi 설정 {% #umi-setup %}
 
 Genesis 함수를 호출하기 전에 키페어 ID로 Umi 인스턴스를 구성하세요.
 
@@ -109,7 +109,7 @@ umi.use(keypairIdentity(keypair));
 Genesis API 함수는 명령어를 직접 제출하는 대신 HTTP를 통해 호스팅된 Metaplex API와 통신합니다. Umi 인스턴스는 서명자 ID와 트랜잭션 전송 기능에만 사용되며 `genesis()` 플러그인은 필요하지 않습니다.
 {% /callout %}
 
-## 에이전트 토큰 발행 {#launching-an-agent-token}
+## 에이전트 토큰 발행 {% #launching-an-agent-token %}
 
 `createAndRegisterLaunch`에 에이전트의 [Core](/core) asset 주소를 지정한 `agent` 필드를 전달하세요. SDK가 자동으로 다음을 수행합니다.
 
@@ -147,7 +147,7 @@ console.log('확인 링크:', result.launch.link);
 
 본딩 커브 가격 책정, 수수료, 졸업 방식에 대한 자세한 설명은 [본딩 커브 — 동작 이론](/smart-contracts/genesis/bonding-curve)을 참조하세요.
 
-## 첫 번째 구매 {#first-buy}
+## 첫 번째 구매 {% #first-buy %}
 
 첫 번째 구매는 지정된 SOL 금액으로 에이전트 PDA를 위해 커브의 초기 스왑을 예약하며, 모든 수수료가 면제됩니다.
 
@@ -174,7 +174,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 
 첫 번째 구매는 launch 트랜잭션 흐름의 일부로 실행됩니다. 트랜잭션이 확인되면 커브에는 이미 초기 구매가 적용되어 있습니다. `firstBuyAmount`를 생략하거나 `0`으로 설정하면 첫 번째 구매가 적용되지 않으며 어떤 지갑이든 첫 번째 스왑을 할 수 있습니다.
 
-## 토큰 메타데이터 {#token-metadata}
+## 토큰 메타데이터 {% #token-metadata %}
 
 모든 발행에는 다음 필드를 포함한 `token` 객체가 필요합니다.
 
@@ -201,7 +201,7 @@ token: {
 
 `image` 필드는 Irys 게이트웨이 URL을 가리켜야 합니다. 먼저 [Irys](https://irys.xyz)에 이미지를 업로드하고 반환된 `https://gateway.irys.xyz/<id>` URL을 사용하세요. 다른 호스트는 API 유효성 검사에서 실패합니다.
 
-## Devnet 테스트 {#devnet-testing}
+## Devnet 테스트 {% #devnet-testing %}
 
 `network: 'solana-devnet'`을 전달하고 Umi 인스턴스를 devnet RPC 엔드포인트로 연결하면 launch를 devnet 인프라를 통해 라우팅할 수 있습니다.
 
@@ -226,7 +226,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 });
 ```
 
-## 오류 처리 {#error-handling}
+## 오류 처리 {% #error-handling %}
 
 SDK는 다양한 장애 유형에 대한 타입별 오류를 제공합니다.
 

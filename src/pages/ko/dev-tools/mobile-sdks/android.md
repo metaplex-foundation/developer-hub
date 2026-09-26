@@ -25,7 +25,7 @@ Android 및 kotlin을 지원하는 다른 플랫폼에서 모두 작동합니다
 ## 시작하기
 
 ### 설치
-#### 요구 사항 {#requirements}
+#### 요구 사항 {% #requirements %}
 
 - Android 21+
 
@@ -173,16 +173,16 @@ Metaplex Auction House 프로토콜을 사용하면 누구나 분산된 판매 �
 
 경매 모듈은 `Metaplex.auctions`를 통해 액세스할 수 있으며 다음 메서드를 제공합니다. 현재는 읽기 메서드만 지원합니다. Auction House 생성 및 입찰 및 목록 생성 및 상호 작용 기능은 향후 지원될 예정입니다.
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#find-auction-house-by-creator-and-mint)
 - 곧 더 많이!
 
 모든 메서드는 애플리케이션에서 더 많은 유연성과 호환성을 제공하기 위해 구성 가능한 [일시 중단 함수](https://kotlinlang.org/docs/composing-suspending-functions.html)로 제공됩니다.
 
 **참고:** Auctions API에서 제공하는 이러한 일시 중단 함수는 라이브러리의 아키텍처 변경 사항입니다. 이전에는 비동기 콜백 메서드만 제공했습니다. 모든 사람이 새로운 일시 중단 함수로 마이그레이션할 것을 강력히 권장하지만 사용 가능한 메서드의 비동기 콜백 구현도 제공했습니다. 이러한 메서드는 임시로 제공되며 향후 더 이상 사용되지 않을 수 있습니다:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address, callback)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#find-auction-house-by-creator-and-mint)
 
 ### findAuctionHouseByAddress
 

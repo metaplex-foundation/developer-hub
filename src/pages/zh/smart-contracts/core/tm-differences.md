@@ -49,7 +49,7 @@ Core 用单账户设计取代了 Token Metadata 的多账户模型。一切都�
 ## 范围外
 pNFT 特定功能和同质化代币处理（使用 SPL Token）。
 ## 快速开始
-**跳转至：** [成本比较](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [生命周期事件](#lifecycle-events-and-plugins)
+**跳转至：** [成本比较](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [生命周期事件](#lifecycle-events-and-plugins)
 如果您是新手，请使用 Core。如果正在迁移，主要的心智转变是：
 1. 一个账户，而不是三个
 2. 插件，而不是委托

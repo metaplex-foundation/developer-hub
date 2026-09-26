@@ -49,7 +49,7 @@ CoreはToken Metadataのマルチアカウントモデルをシングルアカ�
 ## 範囲外
 pNFT固有の機能と代替可能トークンの処理（SPL Tokenを使用）。
 ## クイックスタート
-**ジャンプ先：** [コスト比較](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [ライフサイクルイベント](#lifecycle-events-and-plugins)
+**ジャンプ先：** [コスト比較](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [ライフサイクルイベント](#lifecycle-events-and-plugins)
 新しく始める場合はCoreを使用してください。移行する場合、主要なメンタルシフトは：
 1. 3つではなく1つのアカウント
 2. デリゲートではなくプラグイン

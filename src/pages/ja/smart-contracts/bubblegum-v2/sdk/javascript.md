@@ -67,7 +67,7 @@ faqs:
 
 ## クイックスタート
 
-**ジャンプ先：** [セットアップ](#umi-setup) · [ツリー作成](#create-a-bubblegum-tree) · [ミント](#mint-a-compressed-nft) · [転送](#transfer-a-compressed-nft) · [バーン](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委任](#delegate-a-compressed-nft) · [コレクション](#collections) · [フリーズ](#freeze-and-thaw) · [クリエイター検証](#verify-creators) · [フェッチ](#fetching-cnfts) · [エラー](#common-errors) · [クイックリファレンス](#quick-reference)
+**ジャンプ先：** [セットアップ](#umi-setup) · [ツリー作成](#create-a-bubblegum-tree) · [ミント](#mint-a-compressed-nft) · [転送](#transfer-a-compressed-nft) · [バーン](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委任](#delegate-a-compressed-nft) · [コレクション](#collections) · [フリーズ](#freeze-and-thaw) · [クリエイター検証](#verify-creators) · [フェッチ](#fetching-c-nfts) · [エラー](#common-errors) · [クイックリファレンス](#quick-reference)
 
 1. 依存関係のインストール：`npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-defaults`
 2. `.use(mplBubblegum())`を使用してUmiインスタンスを作成する
@@ -462,7 +462,7 @@ await unverifyCreatorV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## cNFTのフェッチ
+## cNFTのフェッチ {% #fetching-c-nfts %}
 
 DAS APIプラグインは`mplBubblegum()`によって自動的に登録されます。利用可能なメソッドの詳細については[cNFTのフェッチ](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)を参照してください。
 

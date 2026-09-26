@@ -67,7 +67,7 @@ faqs:
 
 ## 快速入门
 
-**跳转至：** [设置](#umi-setup) · [创建树](#create-a-bubblegum-tree) · [铸造](#mint-a-compressed-nft) · [转移](#transfer-a-compressed-nft) · [销毁](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委托](#delegate-a-compressed-nft) · [集合](#collections) · [冻结](#freeze-and-thaw) · [验证创建者](#verify-creators) · [获取](#fetching-cnfts) · [错误](#common-errors) · [快速参考](#quick-reference)
+**跳转至：** [设置](#umi-setup) · [创建树](#create-a-bubblegum-tree) · [铸造](#mint-a-compressed-nft) · [转移](#transfer-a-compressed-nft) · [销毁](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委托](#delegate-a-compressed-nft) · [集合](#collections) · [冻结](#freeze-and-thaw) · [验证创建者](#verify-creators) · [获取](#fetching-c-nfts) · [错误](#common-errors) · [快速参考](#quick-reference)
 
 1. 安装依赖：`npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-defaults`
 2. 使用 `.use(mplBubblegum())` 创建 Umi 实例
@@ -462,7 +462,7 @@ await unverifyCreatorV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 获取 cNFT
+## 获取 cNFT {% #fetching-c-nfts %}
 
 DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 了解可用方法的完整说明。
 

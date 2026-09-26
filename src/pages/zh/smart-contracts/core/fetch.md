@@ -55,7 +55,7 @@ faqs:
 ## 超出范围
 Token Metadata 获取（使用 mpl-token-metadata）、压缩 NFT 获取（使用 Bubblegum DAS 扩展）和链下元数据获取（直接获取 URI）。
 ## 快速开始
-**跳转至：** [单个 Asset](#fetch-a-single-asset-or-collection) · [按所有者](#fetch-assets-by-owner) · [按集合](#fetch-assets-by-collection) · [DAS API](#das---digital-asset-standard-api)
+**跳转至：** [单个 Asset](#fetch-a-single-asset-or-collection) · [按所有者](#fetch-assets-by-owner) · [按集合](#fetch-assets-by-collection) · [DAS API](#das-digital-asset-standard-api)
 1. 安装：`npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. 使用您的 RPC 端点配置 Umi
 3. 使用 Asset 地址调用 `fetchAsset(umi, publicKey)`
@@ -285,7 +285,7 @@ pub async fn fetch_assets_by_update_authority() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## DAS - 数字资产标准 API
+## DAS - 数字资产标准 API {% #das-digital-asset-standard-api %}
 如果您使用启用了 DAS 的 RPC，您将能够利用索引 Asset 进行快速获取和数据检索。
 DAS 将索引从元数据、链下元数据、集合数据、插件（包括 Attributes）等所有内容。要了解更多关于 Metaplex DAS API 的信息，您可以[访问Metaplex DAS API页面](/dev-tools/das-api)。除了通用的 DAS SDK，还创建了一个[针对 MPL Core 的扩展](/dev-tools/das-api/core-extension)，它直接返回正确的类型，以便进一步与 MPL Core SDK 一起使用。它还自动派生从集合继承的资产中的插件，并提供 DAS 到 Core 类型转换的函数。
 以下是使用 DAS 获取 MPL Core Asset 返回数据的示例。

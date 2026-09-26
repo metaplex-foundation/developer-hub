@@ -21,7 +21,7 @@ NFT JSON 데이터와 이미지는 역사적으로 Arweave나 IPFS와 같은 탈
 두 가지 다른 종류의 Inscription이 있습니다:
 
 1. **[NFT 민트에 첨부된](#inscriptions-attached-to-nft-mints)** Inscription - NFT 데이터가 오프체인 저장소 대신 또는 추가로 체인에 작성됩니다
-2. **[저장소 제공자로서의](#inscriptions-as-storage-provider)** Inscription - 임의의 데이터를 체인에 작성합니다
+2. **[저장소 제공자로서의](#inscriptions-as-a-storage-provider)** Inscription - 임의의 데이터를 체인에 작성합니다
 
 ### NFT 민트에 첨부된 Inscription {% #inscriptions-attached-to-nft-mints %}
 
@@ -206,7 +206,7 @@ pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
 {% /dialect-switcher %}
 
-### 저장소 제공자로서의 Inscription
+### 저장소 제공자로서의 Inscription {% #inscriptions-as-a-storage-provider %}
 
 NFT 민트와의 사용 외에도 Inscription은 최대 10MB의 임의 데이터를 온체인에 저장하는 데도 사용할 수 있습니다. 무제한 수의 [연관된 Inscription](#associated-inscription-accounts)을 생성할 수 있습니다.
 

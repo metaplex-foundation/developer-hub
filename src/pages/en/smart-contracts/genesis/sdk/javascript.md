@@ -286,7 +286,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis Account
 
-The Genesis Account stores top-level launch state including the [launch type](#launchtype). A backend crank sets the `launchType` field on-chain after creation via the `setLaunchTypeV2` instruction, so the value may initially be `Uninitialized` (0) until the crank processes it.
+The Genesis Account stores top-level launch state including the [launch type](#launch-type). A backend crank sets the `launchType` field on-chain after creation via the `setLaunchTypeV2` instruction, so the value may initially be `Uninitialized` (0) until the crank processes it.
 
 | Function | Returns |
 |----------|---------|
@@ -476,7 +476,7 @@ Yes. The SDK works in both Node.js and browser environments. For browsers, use a
 `fetch` throws an error if the account doesn't exist. `safeFetch` returns `null` instead, useful for checking if an account exists.
 
 ### How do I retrieve the launch type for a token?
-Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder--query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
+Fetch the `GenesisAccountV2` account using `fetchGenesisAccountV2FromSeeds()` with the token's mint address. The `launchType` field returns `0` (Uninitialized) or `3` (LaunchPoolV1). To query all launches of a given type, use the [GPA builder](#gpa-builder-query-by-launch-type). Alternatively, the [Integration APIs](/smart-contracts/genesis/integration-apis) return the launch type as a string in REST responses.
 
 ### How do I handle transaction errors?
 Wrap `sendAndConfirm` calls in try/catch blocks. Check error messages for specific failure reasons.

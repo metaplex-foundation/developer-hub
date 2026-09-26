@@ -14,7 +14,7 @@ The authority is the wallet which controls the usage of an account, and in this 
 
 The authority can also be transferred to another wallet after the creation of the Auction House, which transfers control of the Auction House. This action should be performed carefully.
 
-Authority wallet also plays another important role of guarding which assets could be listed and sold on the marketplace. We'll talk more about this functionality of the authority when we discuss [`requireSignOff`](#requiresignoff)
+Authority wallet also plays another important role of guarding which assets could be listed and sold on the marketplace. We'll talk more about this functionality of the authority when we discuss [`requireSignOff`](#require-sign-off)
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}

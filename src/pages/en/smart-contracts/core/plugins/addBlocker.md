@@ -44,7 +44,7 @@ The **AddBlocker** plugin is an Authority Managed plugin that prevents adding ne
 ## Out of Scope
 Blocking owner-managed plugins (always allowed), removing existing plugins, and blocking updates to existing plugins.
 ## Quick Start
-**Jump to:** [Add to Asset](#adding-the-addblocker-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-addblocker-plugin-to-a-collection-code-example)
+**Jump to:** [Add to Asset](#adding-the-add-blocker-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-add-blocker-plugin-to-a-collection-code-example)
 1. Add all authority-managed plugins you'll need
 2. Add AddBlocker plugin as update authority
 3. No new authority-managed plugins can be added

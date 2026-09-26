@@ -72,7 +72,7 @@ Bonding curve swaps use the Genesis SDK to interact with the `BondingCurveBucket
 
 ## Quick Start
 
-**Jump to:** [Installation](#installation) · [Setup](#umi-and-genesis-plugin-setup) · [Fetch Curve](#fetching-a-bonding-curve-bucketv2) · [Lifecycle Helpers](#bonding-curve-lifecycle-helpers) · [Quote](#getting-a-swap-quote) · [Slippage](#slippage-protection) · [Execute Swap](#constructing-swap-transactions) · [Creator Fees](/smart-contracts/genesis/creator-fees) · [Errors](#error-handling) · [API Reference](#api-reference)
+**Jump to:** [Installation](#installation) · [Setup](#umi-and-genesis-plugin-setup) · [Fetch Curve](#fetching-a-bonding-curve-bucket-v2) · [Lifecycle Helpers](#bonding-curve-lifecycle-helpers) · [Quote](#getting-a-swap-quote) · [Slippage](#slippage-protection) · [Execute Swap](#constructing-swap-transactions) · [Creator Fees](/smart-contracts/genesis/creator-fees) · [Errors](#error-handling) · [API Reference](#api-reference)
 
 1. Install the packages and configure a Umi instance with the `genesis()` plugin
 2. Derive `BondingCurveBucketV2Pda` and fetch the account
@@ -424,7 +424,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 `isSwappable` returns `true` only when the curve is actively accepting public trades. `isSoldOut` returns `true` the moment `baseTokenBalance` reaches zero, ending trading and triggering graduation. A curve can be sold out but not yet graduated.
 
 ### Do I need to wrap SOL before calling swapBondingCurveV2?
-Yes. The bonding curve uses wSOL as its quote token and `swapBondingCurveV2` does not wrap or unwrap native SOL automatically. See [wSOL Wrapping Note](#wsol-wrapping-note).
+Yes. The bonding curve uses wSOL as its quote token and `swapBondingCurveV2` does not wrap or unwrap native SOL automatically. See [wSOL Wrapping Note](#w-sol-wrapping-note).
 
 ### What does getSwapResult return and how does it handle fees?
 `getSwapResult` returns `{ amountIn, fee, creatorFee, amountOut }`. For buys, fees are deducted from SOL input before the AMM formula runs. For sells, fees are deducted from the SOL output after the AMM runs. Pass `true` as the fourth argument to simulate the first-buy fee waiver (all fees zeroed).
