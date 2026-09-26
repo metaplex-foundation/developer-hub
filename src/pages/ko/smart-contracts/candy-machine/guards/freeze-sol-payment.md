@@ -4,7 +4,7 @@ metaTitle: Freeze Sol Payment Guard | Candy Machine
 description: 'SOL로 가격을 설정하고 동결 기간을 적용합니다.'
 ---
 
-## 개요
+## 개요 {% #overview %}
 
 **Freeze Sol Payment** 가드는 지불자에게 SOL 금액을 청구하여 동결된 NFT를 민팅할 수 있게 합니다. 동결된 NFT는 해동될 때까지 전송하거나 마켓플레이스에 등록할 수 없습니다.
 
@@ -75,7 +75,7 @@ _When all NFTs have been thawed._
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
-## 가드 설정
+## 가드 설정 {% #guard-settings %}
 
 Freeze Sol Payment 가드는 다음 설정을 포함합니다:
 
@@ -117,7 +117,7 @@ config.json 파일의 guard 섹션에 다음 객체를 추가하세요:
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 민트 설정
+## 민트 설정 {% #mint-settings %}
 
 Freeze Sol Payment 가드는 다음 민트 설정을 포함합니다:
 
@@ -154,7 +154,7 @@ _가드가 할당되면 sugar를 사용하여 민팅할 수 없으므로 특정 
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 라우트 명령어
+## 라우트 명령어 {% #route-instruction %}
 
 Freeze Sol Payment 라우트 명령어는 다음 기능을 지원합니다.
 
@@ -168,7 +168,7 @@ Freeze Sol Payment 라우트 명령어는 다음 기능을 지원합니다.
 - [NFT 동결 중지](#stop-freezing-nfts)
 - [Freeze Escrow와 가드 그룹](#freeze-escrows-and-guard-groups)
 
-### Freeze Escrow 초기화
+### Freeze Escrow 초기화 {% #initialize-the-freeze-escrow %}
 
 _경로: `initialize`_
 
@@ -377,7 +377,7 @@ sugar freeze initialize
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 동결된 NFT 해동
+### 동결된 NFT 해동 {% #thaw-a-frozen-nft %}
 
 _경로: `thaw`_
 
@@ -540,7 +540,7 @@ OPTIONS:
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 자금 잠금 해제
+### 자금 잠금 해제 {% #unlock-funds %}
 
 _경로: `unlockFunds`_
 
@@ -684,7 +684,7 @@ sugar freeze unlock-funds
 {% /dialect %}
 {% /dialect-switcher %}
 
-## NFT 동결 중지
+## NFT 동결 중지 {% #stop-freezing-nfts %}
 
 Freeze Sol Payment 가드 내에서 NFT 동결을 중지할 수 있습니다. 즉, 새로 민팅된 NFT는 더 이상 동결되지 않지만 **기존 동결된 NFT는 동결된 상태로 유지됩니다**.
 
@@ -701,7 +701,7 @@ Freeze Sol Payment 가드 내에서 NFT 동결을 중지할 수 있습니다. �
 - Candy Guard 계정이 삭제됨 → ❄️ **해동 불가**.
 - Freeze Sol Payment 가드가 설정에서 제거됨 → ❄️ **해동 불가**.
 
-## Freeze Escrow와 가드 그룹
+## Freeze Escrow와 가드 그룹 {% #freeze-escrows-and-guard-groups %}
 
 다양한 [가드 그룹](/ko/smart-contracts/candy-machine/guard-groups) 내에서 여러 Freeze Sol Payment 가드를 사용할 때 Freeze Sol Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
 

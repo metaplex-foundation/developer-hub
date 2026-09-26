@@ -66,7 +66,7 @@ Oracle Account를 업데이트하고 변경할 수 있는 기능은 강력하고
 | Can Approve | ❌  |
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
-## 온체인 Oracle 계정 구조
+## 온체인 Oracle 계정 구조 {% #on-chain-oracle-account-structure %}
 Oracle Account는 다음과 같은 온체인 계정 구조를 가져야 합니다.
 {% dialect-switcher title="Oracle Account의 온체인 계정 구조체" %}
 {% dialect title="Anchor" id="rust-anchor" %}
@@ -235,7 +235,7 @@ pub enum ExtraAccount {
 }
 ```
 ## Oracle Plugin 생성 및 추가
-### Oracle Plugin으로 Asset 생성
+### Oracle Plugin으로 Asset 생성 {% #creating-an-asset-with-the-oracle-plugin %}
 {% dialect-switcher title="Oracle Plugin이 있는 MPL Core Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -406,7 +406,7 @@ pub enum ExtraAccount {
 ```
 {% /dialect %}
 {% /dialect-switcher %} -->
-### Asset에 Oracle Plugin 추가
+### Asset에 Oracle Plugin 추가 {% #adding-an-oracle-plugin-to-an-asset %}
 {% dialect-switcher title="Collection에 Oracle Plugin 추가" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
@@ -627,7 +627,7 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Metaplex에서 배포한 기본 Oracle
+## Metaplex에서 배포한 기본 Oracle {% #default-oracles-deployed-by-metaplex %}
 [Soulbound NFT](/ko/smart-contracts/core/guides/create-soulbound-nft-asset)와 같은 드문 경우에 항상 Lifecycle 이벤트를 거부하거나 승인하는 Oracle이 유용할 수 있습니다. 이를 위해 다음 Oracle이 배포되었으며 누구나 사용할 수 있습니다:
 - **Transfer Oracle**: 항상 전송을 거부합니다. `AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 - **Update Oracle**: 항상 업데이트를 거부합니다. `6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`

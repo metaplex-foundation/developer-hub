@@ -318,7 +318,7 @@ _一旦分配了守卫，您就无法使用 sugar 进行铸造——因此没有
 
 Allow List route 指令支持以下功能。
 
-### 验证 Merkle 证明
+### 验证 Merkle 证明 {% #validate-a-merkle-proof %}
 
 _路径：`proof`_
 

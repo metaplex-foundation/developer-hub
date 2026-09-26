@@ -54,7 +54,7 @@ faqs:
 2. **1件のエージェント、インデックス済みフィールド** — Coreアセットアドレスを指定して`getAsset`を呼び出す（下記のDASセクション）
 3. **エージェントの検出** — `isAgent: true`を指定して`searchAssets`を呼び出す、または`agentToken` / `assetSigner`でフィルタ
 
-## 登録を確認 {#check-registration}
+## 登録を確認 {% #check-registration %}
 
 安全取得メソッドはIDが存在しない場合にスローする代わりに`null`を返すため、アセットが登録されているかどうかのチェックに便利です：
 
@@ -72,7 +72,7 @@ PDAを手動で派生せずに、アセットの公開鍵から直接IDを取得
 
 {% code-tabs-imported from="agents/read_agent_verify_plugin" frameworks="umi" defaultFramework="umi" /%}
 
-## 登録ドキュメントの読み取り {#read-the-registration-document}
+## 登録ドキュメントの読み取り {% #read-the-registration-document %}
 
 `AgentIdentity`プラグインの`uri`は、エージェントの完全なプロファイル（名前、説明、サービスエンドポイントなど）を含むオフチェーンJSONドキュメントを指します。他のURIと同様に取得します：
 
@@ -110,7 +110,7 @@ PDAを手動で派生せずに、アセットの公開鍵から直接IDを取得
 
 フィールドの完全なリファレンスについては、[エージェントを登録](/agents/register-agent#agent-registration-document)をご覧ください。
 
-## エージェントのウォレットを取得 {#fetch-the-agents-wallet}
+## エージェントのウォレットを取得 {% #fetch-the-agents-wallet %}
 
 すべてのCoreアセットには**Asset Signer**と呼ばれる内蔵ウォレットがあります。アセットの公開鍵から派生したPDAです。秘密鍵は存在しないため、盗まれることはありません。ウォレットはSOL、トークン、その他のアセットを保持できます。`findAssetSignerPda`でアドレスを派生します：
 
@@ -124,7 +124,7 @@ Asset Signer PDAとエージェントのCoreアセットは異なる2つのア�
 
 アカウントレイアウト、PDA派生の詳細、エラーコードについては、[MPL Agent Registry](/smart-contracts/mpl-agent)スマートコントラクトドキュメントをご覧ください。
 
-## DAS API経由でエージェントデータを読み取る {#read-agent-data-via-das-api}
+## DAS API経由でエージェントデータを読み取る {% #read-agent-data-via-das-api %}
 
 [DAS API](/dev-tools/das-api)はMPL Coreアセット上のエージェントフィールド（登録状態、ウォレットPDA、正規トークンミント）をインデックス化するため、Coreアカウントを自分で解析せずに読み取れます。
 

@@ -175,7 +175,7 @@ address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 }
 ```
 
-## 程序
+## 程序 {% #the-program %}
 
 ### 导入和模板
 
@@ -345,7 +345,7 @@ pub fn create_token(
 1. `create_metadata_accounts_v3`（第14-40行）- 创建并初始化包含名称、符号和URI的元数据账户
 2. `mint_to`（第43-54行）- 将指定数量的代币铸造到付款方的代币账户
 
-## 测试客户端
+## 测试客户端 {% #the-client %}
 
 在测试之前，先构建程序：
 
@@ -485,7 +485,7 @@ Token created and minted successfully!
 
 将此JSON文件托管在永久存储解决方案上，如Arweave或IPFS。
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 ### `no function or associated item named 'create_type' found`
 

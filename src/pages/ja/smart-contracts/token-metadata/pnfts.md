@@ -192,7 +192,7 @@ pNFTの場合、以下の操作がサポートされています：
 {% edge from="ruleset-revision" to="ruleset-revision-1" dashed=true arrow="none" animated=true toPosition="left" /%}
 {% /diagram %}
 
-## 使用例：ロイヤルティの強制
+## 使用例：ロイヤルティの強制 {% #use-case-royalty-enforcement %}
 
 pNFTについてより理解できたところで、pNFTで解決できる具体的な使用例を見てみましょう：ロイヤルティの強制。
 

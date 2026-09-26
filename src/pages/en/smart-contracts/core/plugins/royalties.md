@@ -49,7 +49,7 @@ The **Royalties Plugin** is an authority-managed plugin that enforces royalties 
 ## Out of Scope
 Token Metadata royalties (different system), royalty collection/distribution (handled by marketplaces), and legal enforcement of royalties.
 ## Quick Start
-**Jump to:** [Add to Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [Update](#updating-the-royalties-plugin-on-an-asset)
+**Jump to:** [Add to Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rule-sets) · [Update](#updating-the-royalties-plugin-on-an-asset)
 1. Import `addPlugin` from `@metaplex-foundation/mpl-core`
 2. Call with `type: 'Royalties'`, `basisPoints`, `creators`, and `ruleSet`
 3. Marketplaces read the plugin and enforce the royalty on sales

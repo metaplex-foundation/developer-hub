@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 졸업 후 — LP 수수료 수확 | Genesis 계정, Raydium 풀 PDA, Raydium 버킷 PDA | LP 수수료가 Raydium 풀에서 Genesis 버킷으로 이동 |
 | `claimRaydiumCreatorFeeV2` | 졸업 후 — 버킷 잔액 청구 | Genesis 계정, Raydium 버킷 PDA, 베이스/쿼트 민트, 창작자 수수료 지갑 | 버킷 잔액이 창작자 지갑으로 전송 |
 
-**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#에이전트-런칭--자동-pda-라우팅) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#보상-없음-사례-처리) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#단계-1--raydium-cpmm-풀에서-수수료-수집) · [졸업 후 청구](#단계-2--창작자-지갑으로-수수료-청구)
+**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#agent-launches-automatic-pda-routing) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#보상-없음-사례-처리) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#step-1-collect-fees-from-the-raydium-cpmm-pool) · [졸업 후 청구](#step-2-claim-fees-to-the-creator-wallet)
 
 1. `createAndRegisterLaunch`를 호출할 때 `launch` 객체에서 `creatorFeeWallet`을 설정합니다
 2. 런칭 후 `bucket.creatorFeeAccrued`를 읽어 누적된 수수료를 모니터링합니다
@@ -153,7 +153,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 창작자 수수료 지갑은 커브 생성 시 설정되며 커브가 라이브된 후에는 변경할 수 없습니다.
 {% /callout %}
 
-### 에이전트 런칭 — 자동 PDA 라우팅
+### 에이전트 런칭 — 자동 PDA 라우팅 {% #agent-launches-automatic-pda-routing %}
 
 Metaplex 에이전트를 대신하여 런칭할 때, `creatorFeeWallet`을 수동으로 설정하지 않아도 창작자 수수료가 에이전트의 PDA로 자동 라우팅됩니다. Core execute 래핑 및 `setToken` 연결을 포함한 전체 에이전트 런칭 흐름은 [에이전트 토큰 생성](/agents/create-agent-token)을 참조하세요.
 
@@ -283,7 +283,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 `raydiumBucket.creatorFeeAccrued`는 Raydium 풀에서 버킷으로 이미 수집된 수수료만 반영합니다. Raydium 풀 자체에 수집되지 않은 LP 수수료가 있을 수 있습니다 — 최종 청구 가능 잔액을 읽기 전에 `collectRaydiumCpmmFeesWithCreatorFeeV2`를 실행하여 버킷으로 이동하세요.
 {% /callout %}
 
-### 단계 1 — Raydium CPMM 풀에서 수수료 수집
+### 단계 1 — Raydium CPMM 풀에서 수수료 수집 {% #step-1-collect-fees-from-the-raydium-cpmm-pool %}
 
 `collectRaydiumCpmmFeesWithCreatorFeeV2`는 Raydium CPMM 풀에서 누적된 LP 거래 수수료를 수집하여 `RaydiumCpmmBucketV2` 버킷 서명자의 토큰 계정에 크레딧하고 `creatorFeeAccrued`를 업데이트합니다. 청구 전에 이 단계를 실행해야 합니다 — Raydium에서 수수료가 수집될 때까지 청구할 것이 없습니다.
 
@@ -331,7 +331,7 @@ console.log('Raydium LP fees collected into Genesis bucket');
 `collectRaydiumCpmmFeesWithCreatorFeeV2`는 권한 없이 호출 가능합니다 — 어떤 지갑도 호출할 수 있습니다. 수집된 수수료는 Genesis 버킷 서명자의 토큰 계정으로 흘러가며, 다음 버킷 조회 시 `creatorFeeAccrued`에 반영됩니다.
 {% /callout %}
 
-### 단계 2 — 창작자 지갑으로 수수료 청구
+### 단계 2 — 창작자 지갑으로 수수료 청구 {% #step-2-claim-fees-to-the-creator-wallet %}
 
 `claimRaydiumCreatorFeeV2`는 `RaydiumCpmmBucketV2` 버킷에 누적된 잔액을 구성된 창작자 수수료 지갑으로 전송합니다. 수집 후에 실행하거나, 이전 수집에서 버킷에 미청구 잔액이 있는 경우 언제든지 실행합니다.
 

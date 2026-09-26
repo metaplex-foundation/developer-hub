@@ -175,7 +175,7 @@ address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 }
 ```
 
-## 프로그램
+## 프로그램 {% #the-program %}
 
 ### Import와 템플릿
 
@@ -345,7 +345,7 @@ pub fn create_token(
 1. `create_metadata_accounts_v3` (14-40행) - 이름, 심볼, URI로 메타데이터 계정을 생성하고 초기화합니다
 2. `mint_to` (43-54행) - 지정된 수량을 지불자의 토큰 계정에 발행합니다
 
-## 테스트 클라이언트
+## 테스트 클라이언트 {% #the-client %}
 
 테스트 전에 프로그램을 빌드합니다:
 
@@ -485,7 +485,7 @@ Token created and minted successfully!
 
 이 JSON 파일을 Arweave 또는 IPFS와 같은 영구 스토리지 솔루션에 호스팅하세요.
 
-## 일반적인 오류
+## 일반적인 오류 {% #common-errors %}
 
 ### `no function or associated item named 'create_type' found`
 

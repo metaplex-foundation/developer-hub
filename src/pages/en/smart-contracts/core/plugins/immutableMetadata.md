@@ -44,7 +44,7 @@ The **ImmutableMetadata** plugin is an Authority Managed plugin that prevents an
 ## Out of Scope
 Making other plugin data immutable (use authority `None` on those plugins), selective field immutability, and temporary locks.
 ## Quick Start
-**Jump to:** [Add to Asset](#adding-the-immutablemetadata-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-immutablemetadata-plugin-to-a-collection-code-example)
+**Jump to:** [Add to Asset](#adding-the-immutable-metadata-plugin-to-an-asset-code-example) · [Add to Collection](#adding-the-immutable-metadata-plugin-to-a-collection-code-example)
 1. Ensure metadata (name, URI) is finalized
 2. Add ImmutableMetadata plugin as update authority
 3. Metadata is now permanently locked

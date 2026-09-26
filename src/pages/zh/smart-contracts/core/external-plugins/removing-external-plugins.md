@@ -44,7 +44,7 @@ faqs:
 1. 确定要移除的插件类型和基础地址
 2. 使用插件键调用 `removePlugin()`
 3. 插件立即移除，租金回收
-## 从 Asset 移除
+## 从 Asset 移除 {% #remove-from-asset %}
 {% dialect-switcher title="从 Asset 移除外部插件" %}
 {% dialect title="JavaScript" id="js" %}
 要从 Asset 移除外部插件适配器，您需要使用 `removePlugin()` 函数。
@@ -96,7 +96,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 ```
 {% /dialect  %}
 {% /dialect-switcher %}
-## 从 Collection 移除
+## 从 Collection 移除 {% #remove-from-collection %}
 {% dialect-switcher title="从 Collection 移除外部插件" %}
 {% dialect title="JavaScript" id="js" %}
 要从 Collection 移除外部插件适配器，您需要使用 `removeCollectionPlugin()` 函数。

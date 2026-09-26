@@ -207,4 +207,4 @@ SDriveはGenesysGo Shadow Drive上に構築されたストレージアプリで�
 
 `guards`設定では、Candy Machineで有効にするガードを指定できます。
 
-Candy Machineは、ミントへのアクセス制御を提供する多数のガードをサポートしています。[ガード](#/candy-machine/guards)は「デフォルト」[ガードグループ](#/candy-machine/guard-groups)に設定するか、複数のガードグループに表示させることができます。
+Candy Machineは、ミントへのアクセス制御を提供する多数のガードをサポートしています。[ガード](/ja/smart-contracts/candy-machine/guards)は「デフォルト」[ガードグループ](/ja/smart-contracts/candy-machine/guard-groups)に設定するか、複数のガードグループに表示させることができます。

@@ -14,7 +14,7 @@ description: Auction House設定について詳しく説明します。
 
 権限は、Auction Houseの作成後に別のウォレットに転送することもでき、Auction Houseの制御が転送されます。このアクションは慎重に実行する必要があります。
 
-権限ウォレットは、マーケットプレイスでリストできるアセットと入札できるビッドを保護するという別の重要な役割も果たします。[`requireSignOff`](#requiresignoff)について説明するときに、権限のこの機能についてさらに詳しく説明します。
+権限ウォレットは、マーケットプレイスでリストできるアセットと入札できるビッドを保護するという別の重要な役割も果たします。[`requireSignOff`](#require-sign-off)について説明するときに、権限のこの機能についてさらに詳しく説明します。
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
@@ -104,7 +104,7 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## サインオフを要求
+## サインオフを要求 {% #require-sign-off %}
 
 この設定により、マーケットプレイスはアセットリストと販売をゲートできます。権限セクションで説明したように、Auction House権限はアセットのゲートに役割を果たします。この検閲または集中制御は、`requireSignOff = true`の場合にのみ発生します。
 

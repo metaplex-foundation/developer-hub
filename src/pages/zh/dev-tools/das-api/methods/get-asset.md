@@ -16,7 +16,7 @@ tableOfContents: false
 | `id`            |    ✅    | 资产的 ID。                       |
 | `options`       |          | 显示选项对象。详见[显示选项](/zh/dev-tools/das-api/display-options)。 |
 
-## 代理字段（`MplCoreAsset`） {#agent-fields-mplcoreasset}
+## 代理字段（`MplCoreAsset`） {% #agent-fields-mplcoreasset %}
 
 `MplCoreAsset` 响应可能包含从[代理注册表](/zh/smart-contracts/mpl-agent)索引的代理专用字段。非 Core 接口会省略这些字段。集合和分组可能包含 `is_agent: false`，但只有单个 Core 资产可以是代理。
 

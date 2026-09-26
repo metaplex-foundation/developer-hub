@@ -93,10 +93,10 @@ Asset은 `burn` 명령어를 사용하여 소각할 수 있습니다. 이렇게 
 온체인 명령어의 전체 세부사항은 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123)에서 확인할 수 있습니다.
 {% /totem-accordion %}
 {% /totem %}
-## 코드 예제
+## 코드 예제 {% #code-example %}
 SDK를 사용하여 Core asset을 소각하는 방법입니다. 이 스니펫은 당신이 자산의 소유자라고 가정합니다.
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
-## Collection에 속한 Asset 소각
+## Collection에 속한 Asset 소각 {% #burning-an-asset-that-is-part-of-a-collection %}
 컬렉션의 일부인 Core asset을 소각하기 위한 SDK 사용 방법입니다. 이 스니펫은 당신이 자산의 소유자라고 가정합니다.
 {% dialect-switcher title="Collection에 속한 Asset 소각" %}
 {% dialect title="JavaScript" id="js" %}

@@ -75,7 +75,7 @@ faqs:
 | 参数    | 值 |
 | ------ | ----- |
 | frozen | bool  |
-## 创建带有Permanent Transfer Plugin的MPL Core Asset
+## 创建带有Permanent Transfer Plugin的MPL Core Asset {% #creating-a-mpl-core-asset-with-a-permanent-transfer-plugin %}
 {% dialect-switcher title="创建带有Permanent Transfer Plugin的MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

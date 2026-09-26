@@ -128,7 +128,7 @@ const signer = useUmiStore.getState().signer
 umi.use(signerIdentity(signer))
 ```
 
-## 辅助函数
+## 辅助函数 {% #helpers %}
 
 位于 `/lib/umi` 文件夹中，有一些预制的辅助函数可以使您的开发更轻松。
 

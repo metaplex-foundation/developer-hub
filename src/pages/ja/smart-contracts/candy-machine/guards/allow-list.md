@@ -318,7 +318,7 @@ _ガードが割り当てられるとすぐに、sugarを使用してミント�
 
 Allow Listルート命令は以下の機能をサポートします。
 
-### Merkle Proofの検証
+### Merkle Proofの検証 {% #validate-a-merkle-proof %}
 
 _パス: `proof`_
 

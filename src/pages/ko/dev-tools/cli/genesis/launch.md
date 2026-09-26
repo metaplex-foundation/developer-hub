@@ -63,8 +63,17 @@ Genesis API를 사용하여 단일 명령어로 토큰 출시를 생성하고 �
 
 두 가지 출시 유형을 사용할 수 있습니다:
 
-- **`launchpool`** (기본값): 48시간 입금 기간, 비례적 토큰 배분, 구성 가능한 할당. `--tokenAllocation`, `--depositStartTime`, `--raiseGoal`, `--raydiumLiquidityBps`, `--fundsRecipient`가 필요합니다.
 - **`bonding-curve`**: 즉시 bonding curve (상수 곱 AMM). 거래가 즉시 시작되며 입금 기간이 없습니다. 모든 토큰이 판매되면 자동으로 Raydium CPMM 풀로 졸업합니다. `--name`, `--symbol`, `--image`만 필요합니다.
+- **`launchpool`** (기본값): 48시간 입금 기간, 비례적 토큰 배분, 구성 가능한 할당. `--tokenAllocation`, `--depositStartTime`, `--raiseGoal`, `--raydiumLiquidityBps`, `--fundsRecipient`가 필요합니다.
+
+### Bonding Curve 예제 {% #bonding-curve-example %}
+
+```bash {% title="Bonding Curve 출시 생성" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" \
+  --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
 
 ### Launchpool 예제
 
@@ -196,7 +205,7 @@ mplx genesis launch create --launchType bonding-curve \
 
 첫 구매 금액은 SOL 단위입니다 (예: `0.1` = 0.1 SOL). 첫 구매에는 프로토콜 수수료나 크리에이터 수수료가 부과되지 않습니다.
 
-## Agent 출시
+## Agent 출시 {% #agent-launches %}
 
 `--agentAsset`를 전달하여 토큰 출시를 등록된 [agent](/ko/agents/mint-agent)에 연결합니다. launchpool과 bonding curve 출시 유형 모두에서 사용할 수 있습니다.
 
@@ -365,7 +374,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 계정이 이미 등록되어 있는 경우, 명령어는 이를 알리고 기존 출시 세부 정보를 표시합니다.
 
-## 잠금 할당
+## 잠금 할당 {% #locked-allocations %}
 
 잠금 할당을 사용하면 베스팅 스케줄로 토큰 공급량의 일부를 예약할 수 있습니다. `--lockedAllocations`를 통해 JSON 배열 파일로 제공합니다.
 
@@ -402,7 +411,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `TWO_WEEKS`, `MONTH`, `QUARTER`, `YEAR`
 
-## 일반적인 오류
+## 일반적인 오류 {% #common-errors %}
 
 | 오류 | 원인 | 해결 방법 |
 |------|------|-----------|
