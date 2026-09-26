@@ -152,7 +152,7 @@ API の完全なコントラクトは OpenAPI 3.1 ドキュメントとして公
 ## Notes
 
 - API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
-- すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。
+- すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。ボンディングカーブのローンチには終了時刻がないため、`endTime` は `null` になります。
 - デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
 - `POST` エンドポイントについては、`/launches/create` と `/launches/register` の両方をラップする [SDK API クライアント](/ja/smart-contracts/genesis/sdk/api-client)の使用を推奨します。
 
@@ -167,12 +167,12 @@ interface Launch {
   genesisAddress: string;
   spotlight: boolean;
   startTime: string;
-  endTime: string;
+  endTime: string | null;
   status: 'upcoming' | 'live' | 'graduated' | 'ended';
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'launchpool' | 'presale';
+  type: 'launchpool' | 'presale' | 'bondingCurve' | 'auction' | 'custom';
 }
 
 interface BaseToken {
@@ -209,7 +209,7 @@ pub struct Launch {
     pub genesis_address: String,
     pub spotlight: bool,
     pub start_time: String,
-    pub end_time: String,
+    pub end_time: Option<String>,
     pub status: String,
     pub hero_url: Option<String>,
     pub graduated_at: Option<String>,

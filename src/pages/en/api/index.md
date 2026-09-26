@@ -152,7 +152,7 @@ Import the spec into Postman, Swagger UI, code generators, or agent frameworks t
 ## Notes
 
 - The API is rate limited. If you receive a `429` response, reduce your request frequency.
-- All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings.
+- All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings. `endTime` is `null` for bonding curve launches, which have no end time.
 - The default network is `solana-mainnet`. Devnet data is available via `?network=solana-devnet`.
 - For `POST` endpoints, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) is recommended as it wraps both `/launches/create` and `/launches/register`.
 
@@ -167,12 +167,12 @@ interface Launch {
   genesisAddress: string;
   spotlight: boolean;
   startTime: string;
-  endTime: string;
+  endTime: string | null;
   status: 'upcoming' | 'live' | 'graduated' | 'ended';
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'launchpool' | 'presale';
+  type: 'launchpool' | 'presale' | 'bondingCurve' | 'auction' | 'custom';
 }
 
 interface BaseToken {
@@ -209,7 +209,7 @@ pub struct Launch {
     pub genesis_address: String,
     pub spotlight: bool,
     pub start_time: String,
-    pub end_time: String,
+    pub end_time: Option<String>,
     pub status: String,
     pub hero_url: Option<String>,
     pub graduated_at: Option<String>,

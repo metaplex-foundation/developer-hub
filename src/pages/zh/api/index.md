@@ -152,7 +152,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 ## Notes
 
 - API 有速率限制。如果收到 `429` 响应，请降低请求频率。
-- 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。
+- 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。联合曲线发行没有结束时间，因此其 `endTime` 为 `null`。
 - 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
 - 对于 `POST` 端点，建议使用 [SDK API 客户端](/zh/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
 
@@ -167,12 +167,12 @@ interface Launch {
   genesisAddress: string;
   spotlight: boolean;
   startTime: string;
-  endTime: string;
+  endTime: string | null;
   status: 'upcoming' | 'live' | 'graduated' | 'ended';
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'launchpool' | 'presale';
+  type: 'launchpool' | 'presale' | 'bondingCurve' | 'auction' | 'custom';
 }
 
 interface BaseToken {
@@ -209,7 +209,7 @@ pub struct Launch {
     pub genesis_address: String,
     pub spotlight: bool,
     pub start_time: String,
-    pub end_time: String,
+    pub end_time: Option<String>,
     pub status: String,
     pub hero_url: Option<String>,
     pub graduated_at: Option<String>,

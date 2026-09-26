@@ -152,7 +152,7 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 ## Notes
 
 - API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
-- 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다.
+- 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다. 본딩 커브 런칭은 종료 시간이 없으므로 `endTime`이 `null`입니다.
 - 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
 - `POST` 엔드포인트의 경우 [SDK API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
 
@@ -167,12 +167,12 @@ interface Launch {
   genesisAddress: string;
   spotlight: boolean;
   startTime: string;
-  endTime: string;
+  endTime: string | null;
   status: 'upcoming' | 'live' | 'graduated' | 'ended';
   heroUrl: string | null;
   graduatedAt: string | null;
   lastActivityAt: string;
-  type: 'launchpool' | 'presale';
+  type: 'launchpool' | 'presale' | 'bondingCurve' | 'auction' | 'custom';
 }
 
 interface BaseToken {
@@ -209,7 +209,7 @@ pub struct Launch {
     pub genesis_address: String,
     pub spotlight: bool,
     pub start_time: String,
-    pub end_time: String,
+    pub end_time: Option<String>,
     pub status: String,
     pub hero_url: Option<String>,
     pub graduated_at: Option<String>,
