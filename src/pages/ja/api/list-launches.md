@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - 結果はページネーションされません。エンドポイントは一致するすべてのローンチを単一のレスポンスで返します。
 - `status` フィルタは `upcoming`、`live`、`graduated` を受け付けます。省略するとすべてのステータスを返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`bondingCurveV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
 

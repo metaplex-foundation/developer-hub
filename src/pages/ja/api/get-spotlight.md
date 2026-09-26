@@ -167,4 +167,4 @@ for entry in &response.data {
 
 - スポットライトステータスはプラットフォームによって管理され、API 経由で設定することはできません。
 - このエンドポイントは `spotlight=true` をクエリパラメータとして使用する同じ `/launches` ルートを使用します — 別のエンドポイントではありません。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`bondingCurveV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

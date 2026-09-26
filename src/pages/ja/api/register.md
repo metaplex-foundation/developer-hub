@@ -4,7 +4,7 @@ metaTitle: Metaplex API - ローンチ登録 | REST API | Metaplex
 description: オンチェーントランザクションの確認後に Genesis ローンチを登録します。オンチェーン状態を検証し、ローンチリスティングを作成します。
 method: POST
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '09-26-2026'
 keywords:
   - Genesis API
   - register launch
@@ -38,8 +38,11 @@ POST /v1/launches/register
 | `genesisAccount` | `string` | はい | Genesis アカウントの公開鍵（ローンチ作成レスポンスから取得） |
 | `network` | `string` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'` |
 | `launch` | `object` | はい | ローンチ作成で使用したものと同じローンチ設定 |
+| `twitterVerificationToken` | `string` | いいえ | [Twitter 認証](/ja/api/verify-twitter)で取得したトークン。指定した場合、トークンのユーザー名が `launch.externalLinks.twitter` と一致すると、ローンチの Twitter リンクが認証済みとしてマークされます。 |
+| `creatorWallet` | `string` | いいえ | Genesis アカウントの権限者と異なる場合の作成者ウォレット公開鍵 |
+| `agent` | `object` | いいえ | ローンチ対象の[エージェント](/ja/agents)の `{ mint }`。[ローンチ作成](/ja/api/create-launch#agent-launches)に送信した `agent.mint` と一致する必要があります |
 
-`launch` オブジェクトは、API がオンチェーン状態と期待される設定の一致を検証できるように、ローンチ作成エンドポイントに送信したものと一致する必要があります。トップレベルの `network` フィールドは検証対象の Solana クラスターを指定します。`launch` 内の `network` もこれと一致させてください。
+`launch` オブジェクトは、API がオンチェーン状態と期待される設定の一致を検証できるように、ローンチ作成エンドポイントに送信したものと一致する必要があります。同じ[ローンチタイプ](/ja/api/create-launch#launch-types)、[アロケーションルール](/ja/api/create-launch#allocation-types)、[既存トークン](/ja/api/create-launch#existing-tokens)のルールが適用され、アカウントで有効になっていない機能に対する `403` レスポンスも含まれます。トップレベルの `network` フィールドは検証対象の Solana クラスターを指定します。`launch` 内の `network` もこれと一致させてください。
 
 ## リクエスト例
 

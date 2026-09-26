@@ -159,4 +159,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - 查找 Genesis 公钥需要索引或 `getProgramAccounts`。如果您只有代币铸造地址，请改用[按代币获取发行](/zh/api/get-launches-by-token)端点。
 - 如果 Genesis 地址未找到或没有有效发行，返回 `404`。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`、`bondingCurveV2`）。`type` 字段表示底层发行机制（`launchpool`、`presale` 或 `bondingCurve`）。

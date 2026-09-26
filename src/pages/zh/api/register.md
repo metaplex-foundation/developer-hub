@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 注册发行 | REST API | Metaplex
 description: 在链上交易确认后注册 Genesis 发行。验证链上状态并创建发行列表。
 method: POST
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '09-26-2026'
 keywords:
   - Genesis API
   - register launch
@@ -38,8 +38,11 @@ POST /v1/launches/register
 | `genesisAccount` | `string` | 是 | Genesis 账户公钥（来自创建发行响应） |
 | `network` | `string` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'` |
 | `launch` | `object` | 是 | 与创建发行中使用的相同发行配置 |
+| `twitterVerificationToken` | `string` | 否 | 来自 [Twitter 验证](/zh/api/verify-twitter)的令牌。提供后，如果令牌的用户名与 `launch.externalLinks.twitter` 一致，发行的 Twitter 链接会被标记为已验证。 |
+| `creatorWallet` | `string` | 否 | 当创建者钱包与 Genesis 账户权限者不同时，传入创建者钱包公钥 |
+| `agent` | `object` | 否 | 该发行所属[智能体](/zh/agents)的 `{ mint }`。必须与发送到[创建发行](/zh/api/create-launch#agent-launches)的 `agent.mint` 一致 |
 
-`launch` 对象必须与发送到创建发行端点的内容一致，以便 API 能够验证链上状态与预期配置匹配。顶级 `network` 字段决定要验证的 Solana 集群；`launch` 中的 `network` 应与之一致。
+`launch` 对象必须与发送到创建发行端点的内容一致，以便 API 能够验证链上状态与预期配置匹配。相同的[发行类型](/zh/api/create-launch#launch-types)、[分配规则](/zh/api/create-launch#allocation-types)和[已有代币](/zh/api/create-launch#existing-tokens)规则同样适用，包括针对账户未启用功能的 `403` 响应。顶级 `network` 字段决定要验证的 Solana 集群；`launch` 中的 `network` 应与之一致。
 
 ## 请求示例
 

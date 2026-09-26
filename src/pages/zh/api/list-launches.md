@@ -169,5 +169,5 @@ println!("{} launches", response.data.len());
 
 - 结果不分页。端点在单个响应中返回所有匹配的发行。
 - `status` 过滤器接受 `upcoming`、`live` 或 `graduated`。省略则返回所有状态。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`、`bondingCurveV2`）。`type` 字段表示底层发行机制（`launchpool`、`presale` 或 `bondingCurve`）。
 

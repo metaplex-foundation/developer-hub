@@ -263,8 +263,8 @@ serde = { version = "1", features = ["derive"] }
 | **Genesis Address** | 특정 런칭 캠페인을 고유하게 식별하는 PDA (Program Derived Address) |
 | **Base Token** | 민트 주소로 식별되는 런칭 대상 토큰 |
 | **Launch Page** | 사용자가 런칭에 참여할 수 있는 URL |
-| **Mechanic** | 런칭에 사용되는 할당 메커니즘 (예: `launchpoolV2`, `presaleV2`, `auction`) |
-| **Launch Type** | 런칭의 기본 메커니즘: `launchpool` 또는 `presale` |
+| **Mechanic** | 런칭에 사용되는 할당 메커니즘 (예: `launchpoolV2`, `presaleV2`, `bondingCurveV2`) |
+| **Launch Type** | 런칭의 기본 메커니즘: `launchpool`, `presale` 또는 `bondingCurve` |
 | **Spotlight** | 플랫폼에서 큐레이팅한 주요 런칭을 나타내는 플래그 |
 | **Status** | 런칭의 현재 상태: `upcoming`, `live`, `graduated`, `ended` |
 | **Socials** | 토큰과 관련된 소셜 미디어 링크 (X/Twitter, Telegram, Discord) |

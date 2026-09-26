@@ -159,4 +159,4 @@ println!("{}", response.data.base_token.name); // "My Token"
 
 - Genesis 公開鍵の取得にはインデックス化または `getProgramAccounts` が必要です。トークンミントのみお持ちの場合は、[トークンによるローンチ取得](/ja/api/get-launches-by-token)エンドポイントを使用してください。
 - Genesis アドレスが見つからない場合や有効なローンチがない場合は `404` を返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`bondingCurveV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

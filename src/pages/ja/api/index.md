@@ -263,8 +263,8 @@ serde = { version = "1", features = ["derive"] }
 | **Genesis Address** | 特定のローンチキャンペーンを一意に識別する PDA（Program Derived Address） |
 | **Base Token** | ミントアドレスで識別される、ローンチされるトークン |
 | **Launch Page** | ユーザーがローンチに参加できる URL |
-| **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`auction`） |
-| **Launch Type** | ローンチの基盤メカニズム：`launchpool` または `presale` |
+| **Mechanic** | ローンチに使用される割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`bondingCurveV2`） |
+| **Launch Type** | ローンチの基盤メカニズム：`launchpool`、`presale`、または `bondingCurve` |
 | **Spotlight** | プラットフォームが厳選した注目ローンチを示すフラグ |
 | **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
 | **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |

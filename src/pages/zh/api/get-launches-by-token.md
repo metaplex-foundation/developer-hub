@@ -162,4 +162,4 @@ println!("{} launches found", response.data.launches.len());
 
 - 一个代币可以使用不同的 `genesisIndex` 值拥有多个发行。响应返回所有关联的发行活动。
 - 如果代币铸造地址未找到，返回 `404`。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`、`bondingCurveV2`）。`type` 字段表示底层发行机制（`launchpool`、`presale` 或 `bondingCurve`）。

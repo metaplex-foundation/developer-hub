@@ -263,8 +263,8 @@ serde = { version = "1", features = ["derive"] }
 | **Genesis Address** | 唯一标识特定发行活动的 PDA（Program Derived Address） |
 | **Base Token** | 通过铸造地址标识的待发行代币 |
 | **Launch Page** | 用户可以参与发行的 URL |
-| **Mechanic** | 发行使用的分配机制（例如 `launchpoolV2`、`presaleV2`、`auction`） |
-| **Launch Type** | 发行的底层机制：`launchpool` 或 `presale` |
+| **Mechanic** | 发行使用的分配机制（例如 `launchpoolV2`、`presaleV2`、`bondingCurveV2`） |
+| **Launch Type** | 发行的底层机制：`launchpool`、`presale` 或 `bondingCurve` |
 | **Spotlight** | 平台策划的精选发行标志 |
 | **Status** | 发行的当前状态：`upcoming`、`live`、`graduated` 或 `ended` |
 | **Socials** | 与代币关联的社交媒体链接（X/Twitter、Telegram、Discord） |

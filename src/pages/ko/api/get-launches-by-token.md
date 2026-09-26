@@ -162,4 +162,4 @@ println!("{} launches found", response.data.launches.len());
 
 - 하나의 토큰은 다른 `genesisIndex` 값을 사용하여 여러 런치를 가질 수 있습니다. 응답은 관련된 모든 런치 캠페인을 반환합니다.
 - 토큰 민트 주소를 찾을 수 없는 경우 `404`를 반환합니다.
-- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool` 또는 `presale`)을 나타냅니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`, `bondingCurveV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool`, `presale` 또는 `bondingCurve`)을 나타냅니다.

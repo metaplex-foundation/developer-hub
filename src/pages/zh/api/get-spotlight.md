@@ -167,4 +167,4 @@ for entry in &response.data {
 
 - 聚焦状态由平台管理，不能通过 API 设置。
 - 此端点使用 `spotlight=true` 作为查询参数的相同 `/launches` 路由 — 它不是一个单独的端点。
-- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`）。`type` 字段表示底层发行机制（`launchpool` 或 `presale`）。
+- `mechanic` 字段表示分配机制（例如 `launchpoolV2`、`presaleV2`、`bondingCurveV2`）。`type` 字段表示底层发行机制（`launchpool`、`presale` 或 `bondingCurve`）。

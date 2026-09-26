@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Register Launch | REST API | Metaplex
 description: Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 method: POST
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '09-26-2026'
 keywords:
   - Genesis API
   - register launch
@@ -39,8 +39,10 @@ POST /v1/launches/register
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'` |
 | `launch` | `object` | Yes | The same launch configuration used in Create Launch |
 | `twitterVerificationToken` | `string` | No | Token from [Verify Twitter](/api/verify-twitter). When supplied, the launch's Twitter link is marked verified if the token's username matches `launch.externalLinks.twitter`. |
+| `creatorWallet` | `string` | No | Creator's wallet public key, when it differs from the genesis account's authority |
+| `agent` | `object` | No | `{ mint }` of the [agent](/agents/) the launch was created for. Must match the `agent.mint` sent to [Create Launch](/api/create-launch#agent-launches) |
 
-The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
+The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The same [launch types](/api/create-launch#launch-types), [allocation rules](/api/create-launch#allocation-types), and [existing-token](/api/create-launch#existing-tokens) rules apply, including the `403` responses for features that are not enabled for your account. The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
 
 ## Example Request
 

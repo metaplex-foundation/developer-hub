@@ -162,4 +162,4 @@ println!("{} launches found", response.data.launches.len());
 
 - 1つのトークンは異なる `genesisIndex` 値を使用して複数のローンチを持つことができます。レスポンスは関連するすべてのローンチキャンペーンを返します。
 - トークンミントアドレスが見つからない場合は `404` を返します。
-- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。
+- `mechanic` フィールドは割り当てメカニズム（例：`launchpoolV2`、`presaleV2`、`bondingCurveV2`）を示します。`type` フィールドはローンチの基盤メカニズム（`launchpool`、`presale`）を示します。

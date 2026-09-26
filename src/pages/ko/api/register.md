@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 런칭 등록 | REST API | Metaplex
 description: 온체인 트랜잭션이 확인된 후 Genesis 런칭을 등록합니다. 온체인 상태를 검증하고 런칭 목록을 생성합니다.
 method: POST
 created: '01-15-2025'
-updated: '02-19-2026'
+updated: '09-26-2026'
 keywords:
   - Genesis API
   - register launch
@@ -38,8 +38,11 @@ POST /v1/launches/register
 | `genesisAccount` | `string` | 예 | Genesis 계정 공개 키 (런칭 생성 응답에서 제공) |
 | `network` | `string` | 아니오 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'` |
 | `launch` | `object` | 예 | 런칭 생성에서 사용한 것과 동일한 런칭 구성 |
+| `twitterVerificationToken` | `string` | 아니오 | [Twitter 인증](/ko/api/verify-twitter)에서 받은 토큰. 제공하면 토큰의 사용자 이름이 `launch.externalLinks.twitter`와 일치할 때 런칭의 Twitter 링크가 인증됨으로 표시됩니다. |
+| `creatorWallet` | `string` | 아니오 | Genesis 계정 권한자와 다른 경우의 생성자 지갑 공개 키 |
+| `agent` | `object` | 아니오 | 런칭 대상 [에이전트](/ko/agents)의 `{ mint }`. [런칭 생성](/ko/api/create-launch#agent-launches)에 보낸 `agent.mint`와 일치해야 함 |
 
-`launch` 객체는 런칭 생성 엔드포인트로 전송한 것과 일치해야 API가 온체인 상태가 예상된 구성과 일치하는지 확인할 수 있습니다. 최상위 `network` 필드는 검증할 Solana 클러스터를 결정하며, `launch` 내의 `network`도 이와 일치해야 합니다.
+`launch` 객체는 런칭 생성 엔드포인트로 전송한 것과 일치해야 API가 온체인 상태가 예상된 구성과 일치하는지 확인할 수 있습니다. 동일한 [런칭 유형](/ko/api/create-launch#launch-types), [할당 규칙](/ko/api/create-launch#allocation-types), [기존 토큰](/ko/api/create-launch#existing-tokens) 규칙이 적용되며, 계정에서 활성화되지 않은 기능에 대한 `403` 응답도 포함됩니다. 최상위 `network` 필드는 검증할 Solana 클러스터를 결정하며, `launch` 내의 `network`도 이와 일치해야 합니다.
 
 ## 요청 예시
 

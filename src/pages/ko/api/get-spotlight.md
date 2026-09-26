@@ -167,4 +167,4 @@ for entry in &response.data {
 
 - 스포트라이트 상태는 플랫폼에서 관리되며 API를 통해 설정할 수 없습니다.
 - 이 엔드포인트는 `spotlight=true`를 쿼리 파라미터로 사용하는 동일한 `/launches` 라우트를 사용합니다 — 별도의 엔드포인트가 아닙니다.
-- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool` 또는 `presale`)을 나타냅니다.
+- `mechanic` 필드는 할당 메커니즘(예: `launchpoolV2`, `presaleV2`, `bondingCurveV2`)을 나타냅니다. `type` 필드는 기본 런치 메커니즘(`launchpool`, `presale` 또는 `bondingCurve`)을 나타냅니다.
