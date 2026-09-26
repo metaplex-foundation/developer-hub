@@ -282,6 +282,12 @@ export const NAVIGATION_TRANSLATIONS = {
       ko: 'Core 컬렉션 가져오기',
       zh: '获取Core合集'
     },
+    getCoreGroup: {
+      en: 'Get Core Group',
+      ja: 'Coreグループの取得',
+      ko: 'Core 그룹 가져오기',
+      zh: '获取Core分组'
+    },
     getCoreAssetsByAuthority: {
       en: 'Get Core Assets By Authority',
       ja: '権限別Coreアセットの取得',
@@ -300,6 +306,12 @@ export const NAVIGATION_TRANSLATIONS = {
       ko: '소유자별 Core 에셋 가져오기',
       zh: '按所有者获取Core资产'
     },
+    getCoreAssetsByGroup: {
+      en: 'Get Core Assets By Group',
+      ja: 'グループ別Coreアセットの取得',
+      ko: '그룹별 Core 에셋 가져오기',
+      zh: '按分组获取Core资产'
+    },
     searchCoreAssets: {
       en: 'Search Core Assets',
       ja: 'Coreアセットの検索',
@@ -311,6 +323,12 @@ export const NAVIGATION_TRANSLATIONS = {
       ja: 'Coreコレクションの検索',
       ko: 'Core 컬렉션 검색',
       zh: '搜索Core合集'
+    },
+    searchCoreGroups: {
+      en: 'Search Core Groups',
+      ja: 'Coreグループの検索',
+      ko: 'Core 그룹 검색',
+      zh: '搜索Core分组'
     },
     pluginDerivation: {
       en: 'Plugin Derivation',

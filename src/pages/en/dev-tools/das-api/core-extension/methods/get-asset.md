@@ -2,6 +2,7 @@
 title: Get Core Asset
 metaTitle: Get Asset | DAS API Core Extension
 description: Returns the information of a MPL Core asset
+proficiencyLevel: Intermediate
 ---
 
 Returns the information of a MPL Core assets for example including metadata, owner and parsed Plugin data, plus data inherited from collection.
@@ -10,18 +11,7 @@ Returns the information of a MPL Core assets for example including metadata, own
 
 Replace the `<ENDPOINT>` with your personal RPC and the `<PublicKey>` value with the public key of the NFT you want to fetch.
 
-```js
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
-import { das }  from '@metaplex-foundation/mpl-core-das';
-import { publicKey } from '@metaplex-foundation/umi';
-
-const umi = createUmi('<ENDPOINT>').use(dasApi());
-const assetId = publicKey('<PublicKey>');
-
-const asset = await das.getAsset(umi, assetId);
-console.log(asset);
-```
+{% code-tabs-imported from="das-api/core-extension/get-asset" frameworks="umi" /%}
 
 ## Example Response
 
