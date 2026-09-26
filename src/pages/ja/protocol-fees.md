@@ -10,7 +10,7 @@ Metaplexプロトコルには現在、以下の手数料が含まれています
 
 {% totem-accordion title="Genesis" %}
 
-ボンディングカーブのライフサイクル全体にわたるトークンローンチプラットフォーム手数料。
+ボンディングカーブ、Launch Pool、Presale の各ローンチと、グラデュエーション後の Raydium CPMMプールでの取引にかかる手数料。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 

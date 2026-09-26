@@ -10,7 +10,7 @@ Metaplex协议目前包含以下费用：
 
 {% totem-accordion title="Genesis" %}
 
-联合曲线生命周期全程的代币发行平台费用。
+联合曲线、Launch Pool 和 Presale 发行的费用，包括毕业后在 Raydium CPMM 池中的交易费用。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 

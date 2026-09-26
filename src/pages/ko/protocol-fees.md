@@ -10,7 +10,7 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 {% totem-accordion title="Genesis" %}
 
-본딩 커브 라이프사이클 전반에 걸친 토큰 런치 플랫폼 수수료.
+본딩 커브, Launch Pool, Presale 런치와 졸업 후 Raydium CPMM 풀 거래에 적용되는 수수료.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 

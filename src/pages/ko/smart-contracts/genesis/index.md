@@ -3,7 +3,7 @@ title: Genesis - 솔라나 토큰 런치패드 & 출시 플랫폼
 metaTitle: Genesis | 솔라나 토큰 런치패드 | Presale & 공정한 출시 토큰 런치패드 플랫폼 | Metaplex
 description: Genesis는 프리세일, 공정한 출시 및 토큰 생성 이벤트(TGE)를 위한 솔라나 토큰 런치패드입니다. 온체인 SPL 토큰 생성, 크라우드세일, 토큰 배포 플랫폼.
 created: '01-15-2025'
-updated: '03-04-2026'
+updated: '09-22-2026'
 keywords:
   - token launch
   - token launchpad
@@ -31,7 +31,7 @@ faqs:
   - q: Genesis는 어떤 출시 메커니즘을 지원하나요?
     a: Genesis는 세 가지 메커니즘을 지원합니다 - Presale(고정 가격), Launch Pool(가격 발견을 통한 비례 배분), Uniform Price Auction(클리어링 가격을 사용한 입찰 기반).
   - q: Genesis를 사용하는 데 비용이 얼마나 드나요?
-    a: Genesis는 본딩 커브 수수료 모델을 사용하며, 프리본드 스왑, 포스트본드 거래, Launch Pool 운영에 대해 각각 다른 수수료율이 적용됩니다. 현재 내역은 프로토콜 수수료 섹션을 참조하세요.
+    a: Genesis는 본딩 커브 스왑과 졸업 후 Raydium CPMM 거래에 프로토콜 수수료를 부과하며, 창작자가 Launch Pool 또는 Presale의 모금된 자금을 인출할 때도 수수료를 부과합니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 현재 내역은 프로토콜 수수료 섹션을 참조하세요.
   - q: 출시 후 토큰 권한을 취소할 수 있나요?
     a: 네. Genesis는 민트 및 동결 권한을 취소하는 명령어를 제공하여, 추가 토큰을 발행할 수 없음을 보유자에게 알릴 수 있습니다.
   - q: Launch Pool과 Presale의 차이점은 무엇인가요?
@@ -117,7 +117,7 @@ Genesis는 조합할 수 있는 세 가지 메커니즘을 지원합니다:
 
 ## 프로토콜 수수료
 
-Genesis는 본딩 커브 수수료 모델을 사용합니다. 수수료는 프리본드 단계(졸업 전), 포스트본드 거래, Launch Pool 메커니즘에 따라 다릅니다.
+Genesis 수수료는 런칭 타입과 런칭이 Raydium CPMM 풀로 졸업했는지 여부에 따라 달라집니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 본딩 커브 CPMM 풀에는 항상 창작자 보상이 포함됩니다.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -146,7 +146,7 @@ Genesis는 솔라나에서 토큰 생성 이벤트(TGE)를 위한 Metaplex 스�
 Genesis는 세 가지 메커니즘을 지원합니다: **Launch Pool**(가격 발견을 통한 비례 배분), **Presale**(고정 가격), **Uniform Price Auction**(클리어링 가격을 사용한 입찰 기반).
 
 ### Genesis를 사용하는 데 비용이 얼마나 드나요?
-Genesis는 본딩 커브 수수료 모델을 사용하며, 프리본드 스왑, 포스트본드 거래, Launch Pool 운영에 대해 각각 다른 수수료율이 적용됩니다. 현재 내역은 [프로토콜 수수료](#프로토콜-수수료)를 참조하세요.
+Genesis는 본딩 커브 스왑과 졸업 후 Raydium CPMM 거래에 프로토콜 수수료를 부과하며, 창작자가 Launch Pool 또는 Presale의 모금된 자금을 인출할 때도 수수료를 부과합니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 현재 내역은 [프로토콜 수수료](#프로토콜-수수료)를 참조하세요.
 
 ### 출시 후 토큰 권한을 취소할 수 있나요?
 네. Genesis는 권한을 영구적으로 취소하기 위한 `revokeV2` 명령어를 제공합니다.
