@@ -1,5 +1,5 @@
 import React from 'react'
-import slugifyLib from '@sindresorhus/slugify'
+import { slugifyHeading } from '@/shared/slugifyHeading'
 
 function getTextFromChildren(children) {
   if (typeof children === 'string') {
@@ -17,8 +17,9 @@ function getTextFromChildren(children) {
 export function Heading({ level, id, children }) {
   const Tag = `h${level}`
 
-  // Generate ID from text content if not provided, using same slugify as TOC
-  const headingId = id || slugifyLib(getTextFromChildren(children))
+  // Generate ID from text content if not provided, using same slugifier as the
+  // TOC and the client-side anchors so all three agree on every locale.
+  const headingId = id || slugifyHeading(getTextFromChildren(children))
 
   return <Tag id={headingId}>{children}</Tag>
 }

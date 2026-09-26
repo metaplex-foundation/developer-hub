@@ -12,7 +12,9 @@
     "build-examples": "node scripts/build-examples.js",
     "generate-llms": "node scripts/generate-llms-txt.mjs",
     "lint:md": "markdownlint-cli2 \"src/pages/**/*.md\"",
-    "lint:md:fix": "markdownlint-cli2 --fix \"src/pages/**/*.md\""
+    "lint:md:fix": "markdownlint-cli2 --fix \"src/pages/**/*.md\"",
+    "lint:anchors": "node scripts/audit-heading-anchors.mjs",
+    "lint:anchors:update": "node scripts/audit-heading-anchors.mjs --update-baseline"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
