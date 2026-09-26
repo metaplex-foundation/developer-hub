@@ -192,7 +192,7 @@ pNFT의 경우, 다음 작업들이 지원됩니다:
 {% edge from="ruleset-revision" to="ruleset-revision-1" dashed=true arrow="none" animated=true toPosition="left" /%}
 {% /diagram %}
 
-## 사용 사례: 로열티 시행
+## 사용 사례: 로열티 시행 {% #use-case-royalty-enforcement %}
 
 이제 pNFT를 조금 더 잘 이해했으니, pNFT로 해결할 수 있는 구체적인 사용 사례를 살펴보겠습니다: 로열티 시행.
 

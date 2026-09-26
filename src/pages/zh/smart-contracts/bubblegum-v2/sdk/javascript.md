@@ -85,7 +85,7 @@ npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-d
 {% quick-link title="npm 包" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="npmjs.com 上带版本历史的包。" /%}
 {% /quick-links %}
 
-## Umi 设置
+## Umi 设置 {% #umi-setup %}
 
 `mplBubblegum` 插件将所有 Bubblegum V2 指令和 DAS API 插件注册到您的 Umi 实例中。
 
@@ -127,7 +127,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 {% /totem-accordion %}
 {% /totem %}
 
-## 创建 Bubblegum 树
+## 创建 Bubblegum 树 {% #create-a-bubblegum-tree %}
 
 `createTree` 在链上分配一个新的[默克尔树](/zh/smart-contracts/bubblegum-v2/concurrent-merkle-trees)并将其注册为 Bubblegum V2 树。树的参数是永久性的 — 创建前请仔细选择。
 
@@ -152,7 +152,7 @@ console.log('Tree address:', merkleTree.publicKey)
 `public: false` 表示只有树创建者（或已批准的树委托人）才能从树中铸造。设置 `public: true` 允许任何人铸造。请参阅[创建树](/zh/smart-contracts/bubblegum-v2/create-trees)了解树大小成本估算。
 {% /callout %}
 
-## 铸造压缩 NFT
+## 铸造压缩 NFT {% #mint-a-compressed-nft %}
 
 ### 不带集合铸造
 
@@ -230,7 +230,7 @@ console.log('Asset ID:', leaf.id)
 console.log('Leaf index:', leaf.nonce)
 ```
 
-## 转移压缩 NFT
+## 转移压缩 NFT {% #transfer-a-compressed-nft %}
 
 `transferV2` 将 cNFT 的所有权转移到新钱包。`getAssetWithProof` 从 [DAS API](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 获取所有必需的证明参数。
 
@@ -247,7 +247,7 @@ await transferV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 销毁压缩 NFT
+## 销毁压缩 NFT {% #burn-a-compressed-nft %}
 
 `burnV2` 永久销毁 cNFT 并从树中移除其叶子。
 
@@ -262,7 +262,7 @@ await burnV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 更新压缩 NFT
+## 更新压缩 NFT {% #update-a-compressed-nft %}
 
 `updateMetadataV2` 修改 cNFT 的元数据。更新权限取决于 cNFT 是否属于集合 — 请参阅[更新 cNFT](/zh/smart-contracts/bubblegum-v2/update-cnfts) 了解权限规则。
 
@@ -292,7 +292,7 @@ await updateMetadataV2(umi, {
 
 `getAssetWithProof.metadata` 镜像 DAS 主字段（继承时为解析值）。`currentMetadata` 是写入用的叶子规范 `MetadataArgsV2Args`。可选同伴字段 `sellerFeeBasisPointsRaw` / `creatorsRaw` 与 `inherited` 镜像 DAS `_raw`。写入时展开 `...assetWithProof`，不要把展示用 `metadata` 当作叶子参数传入。
 
-## 委托压缩 NFT
+## 委托压缩 NFT {% #delegate-a-compressed-nft %}
 
 [叶子委托人](/zh/smart-contracts/bubblegum-v2/delegate-cnfts)可以代表所有者转移、销毁和冻结 cNFT。委托人在任何转移后重置为新所有者。
 
@@ -329,7 +329,7 @@ await delegate(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 集合
+## 集合 {% #collections %}
 
 `setCollectionV2` 设置、更改或移除 cNFT 上的 MPL-Core 集合。详情请参阅[管理集合](/zh/smart-contracts/bubblegum-v2/collections)。
 
@@ -369,7 +369,7 @@ await setCollectionV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 冻结与解冻
+## 冻结与解冻 {% #freeze-and-thaw %}
 
 有两种冻结机制可用。请参阅[冻结 cNFT](/zh/smart-contracts/bubblegum-v2/freeze-cnfts) 了解资产级别与集合级别冻结的完整说明。
 
@@ -424,7 +424,7 @@ await setNonTransferableV2(umi, {
 `setNonTransferableV2` 是不可逆的。调用此函数后，cNFT 无法再次变为可转移状态。
 {% /callout %}
 
-## 验证创建者
+## 验证创建者 {% #verify-creators %}
 
 `verifyCreatorV2` 在创建者条目上设置 `verified` 标志。被验证的创建者必须签署交易。详情请参阅[验证创建者](/zh/smart-contracts/bubblegum-v2/verify-creators)。
 
@@ -561,7 +561,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 // send later: await umi.rpc.sendTransaction(tx)
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 ### `Transaction too large`
 默克尔证明超过了 1232 字节的交易限制。在 `getAssetWithProof` 中使用 `{ truncateCanopy: true }`，或实现带有地址查找表的版本化交易。
@@ -590,7 +590,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 - 此 SDK 针对 Bubblegum V2（`LeafSchemaV2`）。与 Bubblegum V1 树或解压缩工作流不兼容。
 - 与 cNFT 一起使用的集合必须启用 `BubblegumV2` 插件。没有此插件的标准 MPL-Core 集合无法使用。
 
-## 快速参考
+## 快速参考 {% #quick-reference %}
 
 ### Bubblegum V2 函数
 

@@ -75,7 +75,7 @@ faqs:
 | 인수    | 값 |
 | ------ | ----- |
 | frozen | bool  |
-## Permanent Freeze plugin이 있는 Asset 생성
+## Permanent Freeze plugin이 있는 Asset 생성 {% #creating-an-asset-with-a-permanent-freeze-plugin %}
 다음 예제는 Permanent Freeze plugin이 있는 Asset을 생성하는 방법을 보여줍니다.
 {% dialect-switcher title="Permanent Freeze plugin이 있는 Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,7 +139,7 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Asset의 Permanent Freeze Delegate plugin 업데이트
+## Asset의 Permanent Freeze Delegate plugin 업데이트 {% #updating-the-permanent-freeze-delegate-plugin-on-an-asset %}
 다음 예제는 Asset의 Permanent Freeze Delegate plugin을 업데이트하는 방법을 보여줍니다. `frozen` 인수를 `true` 또는 `false`로 설정하여 동결 또는 해제합니다. 서명 지갑이 plugin authority임을 전제로 합니다.
 {% dialect-switcher title="Asset의 Permanent Freeze Delegate plugin 업데이트" %}
 {% dialect title="JavaScript" id="js" %}
@@ -155,7 +155,7 @@ const updateAssetResponse = await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Permanent Freeze plugin이 있는 Collection 생성
+## Permanent Freeze plugin이 있는 Collection 생성 {% #creating-a-collection-with-a-permanent-freeze-plugin %}
 다음 예제는 Permanent Freeze plugin이 있는 Collection을 생성하는 방법을 보여줍니다.
 {% dialect-switcher title="Permanent Freeze plugin이 있는 Collection 생성" %}
 {% dialect title="JavaScript" id="js" %}

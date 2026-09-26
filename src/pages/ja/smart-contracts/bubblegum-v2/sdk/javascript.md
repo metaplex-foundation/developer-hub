@@ -85,7 +85,7 @@ npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-d
 {% quick-link title="npmパッケージ" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="バージョン履歴付きのnpmjs.comのパッケージ。" /%}
 {% /quick-links %}
 
-## Umiのセットアップ
+## Umiのセットアップ {% #umi-setup %}
 
 `mplBubblegum`プラグインは、すべてのBubblegum V2命令とDAS APIプラグインをUmiインスタンスに登録します。
 
@@ -127,7 +127,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 {% /totem-accordion %}
 {% /totem %}
 
-## Bubblegumツリーの作成
+## Bubblegumツリーの作成 {% #create-a-bubblegum-tree %}
 
 `createTree`は新しい[マークルツリー](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)をオンチェーンに割り当て、Bubblegum V2ツリーとして登録します。ツリーのパラメーターは永続的なので、作成前に慎重に選択してください。
 
@@ -152,7 +152,7 @@ console.log('Tree address:', merkleTree.publicKey)
 `public: false`はツリークリエイター（または承認されたツリーデリゲート）のみがツリーからミントできることを意味します。誰でもミントできるようにするには`public: true`を設定してください。ツリーサイズのコスト見積もりについては[ツリーの作成](/ja/smart-contracts/bubblegum-v2/create-trees)を参照してください。
 {% /callout %}
 
-## 圧縮NFTのミント
+## 圧縮NFTのミント {% #mint-a-compressed-nft %}
 
 ### コレクションなしでミント
 
@@ -230,7 +230,7 @@ console.log('Asset ID:', leaf.id)
 console.log('Leaf index:', leaf.nonce)
 ```
 
-## 圧縮NFTの転送
+## 圧縮NFTの転送 {% #transfer-a-compressed-nft %}
 
 `transferV2`はcNFTの所有権を新しいウォレットに移動します。`getAssetWithProof`は[DAS API](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)から必要なすべてのプルーフパラメーターを取得します。
 
@@ -247,7 +247,7 @@ await transferV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 圧縮NFTのバーン
+## 圧縮NFTのバーン {% #burn-a-compressed-nft %}
 
 `burnV2`はcNFTを永久に破壊し、ツリーからリーフを削除します。
 
@@ -262,7 +262,7 @@ await burnV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 圧縮NFTの更新
+## 圧縮NFTの更新 {% #update-a-compressed-nft %}
 
 `updateMetadataV2`はcNFTのメタデータを変更します。更新権限はcNFTがコレクションに属しているかどうかによって異なります。権限のルールについては[cNFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts)を参照してください。
 
@@ -292,7 +292,7 @@ await updateMetadataV2(umi, {
 
 `getAssetWithProof.metadata` は DAS の主フィールドを反映します（継承時は解決済み）。`currentMetadata` は書き込み用のリーフ正規 `MetadataArgsV2Args` です。任意の兄弟フィールド `sellerFeeBasisPointsRaw` / `creatorsRaw` と `inherited` は DAS の `_raw` をミラーします。書き込みでは `...assetWithProof` を展開し、表示用 `metadata` をリーフ引数に渡さないでください。
 
-## 圧縮NFTの委任
+## 圧縮NFTの委任 {% #delegate-a-compressed-nft %}
 
 [リーフデリゲート](/ja/smart-contracts/bubblegum-v2/delegate-cnfts)は、オーナーに代わってcNFTを転送、バーン、フリーズできます。デリゲートは転送後に新しいオーナーにリセットされます。
 
@@ -329,7 +329,7 @@ await delegate(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## コレクション
+## コレクション {% #collections %}
 
 `setCollectionV2`はcNFTのMPL-Coreコレクションを設定、変更、または削除します。詳細については[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections)を参照してください。
 
@@ -369,7 +369,7 @@ await setCollectionV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## フリーズと解除
+## フリーズと解除 {% #freeze-and-thaw %}
 
 2つのフリーズメカニズムが利用可能です。アセットレベルとコレクションレベルのフリーズの詳細については[cNFTのフリーズ](/ja/smart-contracts/bubblegum-v2/freeze-cnfts)を参照してください。
 
@@ -424,7 +424,7 @@ await setNonTransferableV2(umi, {
 `setNonTransferableV2`は不可逆です。この呼び出し後、cNFTを再び転送可能にすることはできません。
 {% /callout %}
 
-## クリエイターの検証
+## クリエイターの検証 {% #verify-creators %}
 
 `verifyCreatorV2`はクリエイターエントリに`verified`フラグを設定します。検証されるクリエイターはトランザクションに署名する必要があります。詳細については[クリエイターの検証](/ja/smart-contracts/bubblegum-v2/verify-creators)を参照してください。
 
@@ -561,7 +561,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 // send later: await umi.rpc.sendTransaction(tx)
 ```
 
-## 一般的なエラー
+## 一般的なエラー {% #common-errors %}
 
 ### `Transaction too large`
 マークルプルーフが1232バイトのトランザクション制限を超えています。`getAssetWithProof`で`{ truncateCanopy: true }`を使用するか、アドレスルックアップテーブル付きのバージョン管理されたトランザクションを実装してください。
@@ -590,7 +590,7 @@ RPCプロバイダーがMetaplex DAS APIをサポートしていない可能性�
 - このSDKはBubblegum V2（`LeafSchemaV2`）を対象としています。Bubblegum V1ツリーや解凍ワークフローとは互換性がありません。
 - cNFTで使用されるコレクションには`BubblegumV2`プラグインが有効になっている必要があります。このプラグインのない標準的なMPL-Coreコレクションは使用できません。
 
-## クイックリファレンス
+## クイックリファレンス {% #quick-reference %}
 
 ### Bubblegum V2 関数
 

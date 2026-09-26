@@ -46,7 +46,7 @@ faqs:
 2. 在创建时添加插件或通过 `addPlugin()` 添加
 3. 配置生命周期检查（Oracle）或数据权限（AppData）
 ## Asset
-### 创建带外部插件的 Core Asset
+### 创建带外部插件的 Core Asset {% #creating-a-core-asset-with-an-external-plugin %}
 {% dialect-switcher title="创建带外部插件的 Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -123,7 +123,7 @@ pub async fn create_asset_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### 向 Core Asset 添加外部插件
+### 向 Core Asset 添加外部插件 {% #adding-a-external-plugin-to-a-core-asset %}
 {% dialect-switcher title="添加带有指定权限的插件" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
@@ -195,7 +195,7 @@ addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Collection
-### 创建带外部插件的 Core Collection
+### 创建带外部插件的 Core Collection {% #creating-a-core-collection-with-an-external-plugin %}
 {% dialect-switcher title="向 Core Collection 添加外部插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

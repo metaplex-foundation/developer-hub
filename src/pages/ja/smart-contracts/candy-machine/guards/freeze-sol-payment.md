@@ -4,7 +4,7 @@ metaTitle: Freeze Sol Payment Guard | Candy Machine
 description: 'フリーズ期間付きでSOLでミント価格を設定します。'
 ---
 
-## 概要
+## 概要 {% #overview %}
 
 **Freeze Sol Payment**ガードは、支払者にSOLの金額を請求することで、フリーズされたNFTのミントを許可します。フリーズされたNFTは、解凍されるまで転送したり、マーケットプレイスに出品したりすることはできません。
 
@@ -75,7 +75,7 @@ _When all NFTs have been thawed._
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
-## ガード設定
+## ガード設定 {% #guard-settings %}
 
 Freeze Sol Paymentガードには以下の設定が含まれます：
 
@@ -117,7 +117,7 @@ config.jsonファイルのガードセクションに以下のオブジェクト
 {% /dialect %}
 {% /dialect-switcher %}
 
-## ミント設定
+## ミント設定 {% #mint-settings %}
 
 Freeze Sol Paymentガードには以下のミント設定が含まれます：
 
@@ -154,7 +154,7 @@ _ガードが割り当てられるとすぐに、sugarを使用してミント�
 {% /dialect %}
 {% /dialect-switcher %}
 
-## ルート命令
+## ルート命令 {% #route-instruction %}
 
 Freeze Sol Paymentルート命令は以下の機能をサポートします。
 
@@ -168,7 +168,7 @@ Freeze Sol Paymentルート命令は以下の機能をサポートします。
 - [NFTのフリーズを停止](#stop-freezing-nfts)
 - [Freeze EscrowsとGuard Groups](#freeze-escrows-and-guard-groups)
 
-### Freeze Escrowの初期化
+### Freeze Escrowの初期化 {% #initialize-the-freeze-escrow %}
 
 _パス: `initialize`_
 
@@ -377,7 +377,7 @@ sugar freeze initialize
 {% /dialect %}
 {% /dialect-switcher %}
 
-### フリーズされたNFTを解凍
+### フリーズされたNFTを解凍 {% #thaw-a-frozen-nft %}
 
 _パス: `thaw`_
 
@@ -540,7 +540,7 @@ OPTIONS:
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 資金のロック解除
+### 資金のロック解除 {% #unlock-funds %}
 
 _パス: `unlockFunds`_
 
@@ -684,7 +684,7 @@ sugar freeze unlock-funds
 {% /dialect %}
 {% /dialect-switcher %}
 
-## NFTのフリーズを停止
+## NFTのフリーズを停止 {% #stop-freezing-nfts %}
 
 Freeze Sol Paymentガード内でのNFTのフリーズを停止することが可能です。つまり、新しくミントされたNFTはもはやフリーズされませんが、**既存のフリーズされたNFTはフリーズされたまま**です。
 
@@ -701,7 +701,7 @@ Freeze Sol Paymentガード内でのNFTのフリーズを停止することが�
 - Candy Guardアカウントが削除された → ❄️ **解凍不可**。
 - Freeze Sol Paymentガードが設定から削除された → ❄️ **解凍不可**。
 
-## Freeze EscrowsとGuard Groups
+## Freeze EscrowsとGuard Groups {% #freeze-escrows-and-guard-groups %}
 
 様々な[Guard Groups](/ja/smart-contracts/candy-machine/guard-groups)内で複数のFreeze Sol Paymentガードを使用する場合、Freeze Sol PaymentガードとFreeze Escrowアカウント間の関係を理解することが重要です。
 

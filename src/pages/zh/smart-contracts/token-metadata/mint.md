@@ -169,7 +169,7 @@ umi.use(irysUploader())
 我们正在设置 `master_edition`，因为铸造 `NonFungible` 需要它；如果 `token` 账户不存在并且将初始化一个，则需要 `token_owner`。
 {% /callout %}
 
-## 创建辅助函数
+## 创建辅助函数 {% #create-helpers %}
 
 由于创建数字资产是 Token Metadata 的重要组成部分，我们的 SDK 提供了辅助方法来使该过程更容易。也就是说，这些辅助方法以不同的方式组合 **Create V1** 和 **Mint V1** 指令，具体取决于我们想要创建的代币标准。
 

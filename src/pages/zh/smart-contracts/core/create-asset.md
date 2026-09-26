@@ -69,7 +69,7 @@ Token Metadata NFT（使用 mpl-token-metadata）、压缩 NFT（使用 Bubblegu
 ## 创建流程
 1. **上传链下数据。** 存储包含名称、描述、图像 URL 和属性的 JSON 文件。文件必须通过公共 **URI** 可访问。
 2. **创建链上 Asset 账户。** 使用元数据 URI 调用 `create` 指令来铸造 Asset。
-## 上传链下数据
+## 上传链下数据 {% #uploading-off-chain-data %}
 使用任何存储服务（Arweave、IPFS、AWS）上传您的元数据 JSON。Umi 为常见服务提供上传器插件。有关所有可用元数据字段，请参阅 [JSON Schema](/smart-contracts/core/json-schema)。
 ```ts {% title="upload-metadata.ts" %}
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -88,7 +88,7 @@ const uri = await umi.uploader.uploadJson({
 })
 ```
 获得 **URI** 后，您可以创建 Asset。
-## 创建 Asset
+## 创建 Asset {% #create-an-asset %}
 使用 `create` 指令铸造新的 Core Asset。
 {% totem %}
 {% totem-accordion title="技术指令详情" %}
@@ -111,11 +111,11 @@ const uri = await umi.uploader.uploadJson({
 {% /totem-accordion %}
 {% /totem %}
 {% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
-## 将 Asset 创建到 Collection 中
+## 将 Asset 创建到 Collection 中 {% #create-an-asset-into-a-collection %}
 要将 Asset 作为 Collection 的一部分创建，请传递 `collection` 参数。Collection 必须已经存在。
 {% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
 有关创建 Collection，请参阅 [Collection](/zh/smart-contracts/core/collections)。
-## 使用插件创建 Asset
+## 使用插件创建 Asset {% #create-an-asset-with-plugins %}
 通过在 `plugins` 数组中传递来在创建时添加插件。此示例添加 Royalties 插件：
 {% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
 ### 常用插件

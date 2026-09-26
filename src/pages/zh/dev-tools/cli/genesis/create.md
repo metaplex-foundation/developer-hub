@@ -52,13 +52,13 @@ Bucket 配置、存款/领取流程、代币元数据托管、流动性池设置
 
 *由 Metaplex Foundation 维护 · 最近验证于 2026 年 2 月 · 需要 Metaplex CLI (mplx)*
 
-## 基本用法
+## 基本用法 {% #basic-usage %}
 
 ```bash {% title="Create a Genesis account" %}
 mplx genesis create --name "My Token" --symbol "MTK" --totalSupply 1000000000000000 --decimals 9
 ```
 
-## 选项
+## 选项 {% #options %}
 
 | 标志 | 简写 | 描述 | 必需 |
 |------|-------|-------------|----------|
@@ -72,7 +72,7 @@ mplx genesis create --name "My Token" --symbol "MTK" --totalSupply 1000000000000
 | `--baseMint <string>` | | 基础代币 mint 地址（当 `fundingMode` 为 `transfer` 时必需） | 条件性 |
 | `--genesisIndex <integer>` | | 同一 mint 上多次发行的 Genesis 索引（默认：0） | 否 |
 
-## 示例
+## 示例 {% #examples %}
 
 1. 创建一个 9 位小数、总供应量 100 万的代币：
 ```bash {% title="Basic creation" %}
@@ -103,7 +103,7 @@ mplx genesis create \
   --baseMint <EXISTING_MINT_ADDRESS>
 ```
 
-## 输出
+## 输出 {% #output %}
 
 ```text {% title="Expected output" %}
 --------------------------------
@@ -115,7 +115,7 @@ mplx genesis create \
 
 保存 `Genesis Account` 地址——您将在后续每个命令中使用它。
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |-------|-------|-----|
@@ -131,7 +131,7 @@ mplx genesis create \
 - 使用 `--fundingMode transfer` 时，还必须提供 `--baseMint` 及现有的代币 mint 地址
 - 如果需要为同一代币 mint 创建多次 Genesis 发行，请使用 `--genesisIndex`
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **mplx genesis create 做什么？**
 它在 Solana 上创建一个新的 Genesis Account PDA 和代币 mint。这是任何 Genesis 代币发行的第一步——所有后续命令都会引用此步骤中的 Genesis 地址。

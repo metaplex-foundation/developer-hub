@@ -64,7 +64,7 @@ Token Metadata 获取（使用 mpl-token-metadata）、压缩 NFT 获取（使�
 - 配置了 RPC 连接的 **Umi**
 - 要获取的 **Asset/Collection 地址**（公钥）
 - **启用 DAS 的 RPC** 用于索引查询（可选但推荐）
-## 获取单个 Asset 或 Collection
+## 获取单个 Asset 或 Collection {% #fetch-a-single-asset-or-collection %}
 要获取单个 Asset，可以使用以下函数：
 {% code-tabs-imported from="core/fetch-asset" frameworks="umi" /%}
 {% seperator h="6" /%}
@@ -96,7 +96,7 @@ pub async fn fetch_asset() {
 {% /dialect-switcher %}
 ## 获取多个 Asset
 可以使用 `getProgramAccounts`（GPA）调用获取多个 Asset，这在 RPC 方面可能相当昂贵和缓慢，或者使用 `Digital Asset Standard` API，它更快但需要[特定的 RPC 提供商](/solana/rpcs-and-das)。
-### 按所有者获取 Asset
+### 按所有者获取 Asset {% #fetch-assets-by-owner %}
 {% dialect-switcher title="按所有者获取 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -158,7 +158,7 @@ pub async fn fetch_assets_by_owner() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### 按集合获取 Asset
+### 按集合获取 Asset {% #fetch-assets-by-collection %}
 {% dialect-switcher title="按集合获取 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
