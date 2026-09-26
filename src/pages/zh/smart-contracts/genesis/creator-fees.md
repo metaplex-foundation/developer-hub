@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 毕业后——收割 LP 费用 | Genesis 账户、Raydium 池 PDA、Raydium bucket PDA | LP 费用从 Raydium 池移至 Genesis bucket |
 | `claimRaydiumCreatorFeeV2` | 毕业后——认领 bucket 余额 | Genesis 账户、Raydium bucket PDA、base/quote mint、创作者费钱包 | Bucket 余额转移到创作者钱包 |
 
-**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#处理无奖励情况) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#步骤-1--从-raydium-cpmm-池收集费用) · [毕业后认领](#步骤-2--认领费用到创作者钱包)
+**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#handling-the-no-rewards-case) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#步骤-1--从-raydium-cpmm-池收集费用) · [毕业后认领](#步骤-2--认领费用到创作者钱包)
 
 1. 调用 `createAndRegisterLaunch` 时在 `launch` 对象中设置 `creatorFeeWallet`
 2. 发行后读取 `bucket.creatorFeeAccrued` 监控累积费用
@@ -209,9 +209,9 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。 |
 | `payer` | `PublicKey \| string` | 否 | 承担返回交易的费用和租金的钱包。默认为 `wallet`。当创作者费钱包不持有 SOL 时使用——例如 agent PDA 或冷钱包。 |
 
-SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)。
+SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/zh/api/claim-creator-rewards)。
 
-### 处理无奖励情况
+### 处理无奖励情况 {% #handling-the-no-rewards-case %}
 
 当钱包没有可认领内容时，端点返回 HTTP `400` 和 `{ "error": { "message": "No rewards available to claim" } }`——它**不会**返回带有空 `transactions` 数组的成功响应。SDK 将其呈现为 `GenesisApiError`，因此调用方必须捕获错误并基于 `err.message`（或 `err.statusCode === 400`）进行分支，而非让错误向上传播。
 
@@ -461,7 +461,7 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### 没有可认领的奖励时会发生什么？
 
-`claimCreatorRewards` 端点返回 HTTP `400` 和 `{"error":{"message":"No rewards available to claim"}}`。SDK 将其呈现为 `GenesisApiError`。将其视为非异常结果——检查 `err.message`（或 `err.statusCode === 400`）并进行分支处理，而非让错误向上传播。请参阅[处理无奖励情况](#处理无奖励情况)。
+`claimCreatorRewards` 端点返回 HTTP `400` 和 `{"error":{"message":"No rewards available to claim"}}`。SDK 将其呈现为 `GenesisApiError`。将其视为非异常结果——检查 `err.message`（或 `err.statusCode === 400`）并进行分支处理，而非让错误向上传播。请参阅[处理无奖励情况](#handling-the-no-rewards-case)。
 
 ### 可选的 `payer` 字段有什么用？
 

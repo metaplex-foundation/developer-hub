@@ -89,7 +89,7 @@ Genesis 支持三种可以组合使用的机制：
 | **Launch Pool** (`launchpool`) | 通过存款窗口实现按比例分配与价格发现 | 公平发射、社区代币、众筹 |
 | **Presale** (`presale`) | 以预定价格进行的固定价格代币销售 | 代币销售、已知估值 |
 
-发行类型在创建后由后端 crank 记录到 [Genesis Account](#genesis-account) 的链上数据中。交易者和聚合器可以通过 [JavaScript SDK](/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）或 [Integration APIs](/smart-contracts/genesis/integration-apis)（REST 响应中的 `type` 字段）以编程方式查询类型。
+发行类型在创建后由后端 crank 记录到 [Genesis Account](#genesis-account) 的链上数据中。交易者和聚合器可以通过 [JavaScript SDK](/zh/smart-contracts/genesis/sdk/javascript#genesis-account)（`fetchGenesisAccountV2`）或 [Metaplex API](/zh/api)（REST 响应中的 `type` 字段）以编程方式查询类型。
 
 ### Genesis Account
 
