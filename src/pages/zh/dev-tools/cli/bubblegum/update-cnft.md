@@ -125,3 +125,4 @@ Updating compressed NFT... ✓
 - `--uri` 标志与 `--image`、`--description` 和 `--editor` 互斥
 - `--editor` 标志与所有其他更新标志互斥
 - 编辑器使用 `$EDITOR` 环境变量，或默认使用 nano/notepad
+- 对以继承版税铸造的 cNFT，更新会从 SDK `currentMetadata` 或 DAS `royalty.basis_points_raw` / `creators_raw` 重建叶子规范元数据（`65535` + 空创作者）。不要把展示用的版税 % 写入叶子，否则哈希会失败。参见[读取继承版税](/smart-contracts/bubblegum-v2/reading-inherited-royalties)
