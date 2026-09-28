@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - createAndRegisterLaunch 호출 시 런치 객체에 creatorFeeWallet을 설정합니다
   - 런치 후 fetchBondingCurveBucketV2를 사용하여 버킷 계정의 creatorFeeAccrued를 모니터링합니다
@@ -120,7 +120,7 @@ faqs:
 
 Genesis SDK, 구성된 Umi 인스턴스 및 충전된 Solana 지갑이 필요합니다.
 
-- `@metaplex-foundation/genesis` SDK 설치
+- `@metaplex-foundation/genesis` SDK 0.43.0 이상 설치 (이전 버전에는 `collectRaydiumCpmmFeesWithCreatorFeeV2`에 필요한 `creatorFeeShare` 계정이 포함되지 않습니다)
 - 키페어 ID로 구성된 Umi 인스턴스 — [Metaplex API를 통한 본딩 커브 런칭](/smart-contracts/genesis/bonding-curve-launch#umi-setup)을 참조하세요
 - 트랜잭션 수수료를 위한 충전된 Solana 지갑
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## 참고 사항
 
-다음 주의사항은 수수료 타이밍, 권장 API 청구 경로, 권한 없는 온체인 청구, 2단계 졸업 후 흐름 및 첫 번째 구매 수수료 면제에 대해 설명합니다.
+다음 주의사항은 수수료 타이밍, 권장 API 청구 경로, 권한 없는 온체인 청구, 2단계 졸업 후 흐름, 필수 `creatorFeeShare` 계정 및 첫 번째 구매 수수료 면제에 대해 설명합니다.
 
 - 창작자 수수료는 각 스왑에서 버킷(`creatorFeeAccrued`)에 누적되며 즉시 전송되지 않습니다 — API/SDK 또는 온체인 명령어로 명시적으로 청구해야 합니다; `creatorFeeClaimed`는 현재까지 청구된 누적 합계를 추적합니다
 - `claimCreatorRewards`(API/SDK)는 지갑이 자격이 있는 모든 본딩 커브와 Raydium 버킷을 한 번의 호출에 집계합니다; 청구할 것이 없으면 빈 트랜잭션 배열이 아니라 HTTP `400`과 `"No rewards available to claim"`을 반환합니다
 - 온체인 청구 명령어(`claimBondingCurveCreatorFeeV2`, `collectRaydiumCpmmFeesWithCreatorFeeV2`, `claimRaydiumCreatorFeeV2`)는 권한 없이 호출 가능합니다: 어떤 지갑도 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송됩니다
 - 졸업 후 수수료는 순서대로 두 단계가 필요합니다: `collectRaydiumCpmmFeesWithCreatorFeeV2`(Raydium 풀 → Genesis 버킷으로 수집), 그 다음 `claimRaydiumCreatorFeeV2`(버킷 → 창작자 지갑); 두 단계를 단일 트랜잭션으로 결합할 수 있고, API 경로는 두 단계를 래핑합니다
+- `collectRaydiumCpmmFeesWithCreatorFeeV2`에는 `creatorFeeShare` 계정(Genesis Raydium 서명자와 풀의 AMM 구성에 대한 Raydium의 `CreatorFeeShare` PDA)이 필요하지만, 이 계정이 온체인에 존재할 필요는 없습니다; `ammConfig`를 제공하는 것과 동일한 `deriveRaydiumPDAsV2` 호출의 `pdas.creatorFeeShare`를 전달하세요 — 일치하지 않는 계정은 `InvalidRaydiumCreatorFeeShare`(오류 260)로 실패하고, 0.43.0 이전 SDK 버전은 `NotEnoughAccountKeys`로 실패합니다
 - `creatorFeeAccrued`와 `creatorFeeClaimed`는 `BondingCurveBucketV2`(활성 커브)와 `RaydiumCpmmBucketV2`(졸업 후) 모두에 존재합니다; 각각 `fetchBondingCurveBucketV2`와 `fetchRaydiumCpmmBucketV2`를 사용하세요
 - `creatorFeeWallet`은 설정하지 않으면 런칭 지갑으로 기본 설정됩니다; 커브가 생성된 후에는 변경할 수 없습니다
 - 첫 번째 구매 메커니즘은 지정된 초기 구매에 대해서만 모든 수수료(프로토콜 및 창작자)를 면제합니다; 이후 모든 스왑은 일반 창작자 수수료를 납부합니다

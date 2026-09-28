@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - Set creatorFeeWallet in the launch object when calling createAndRegisterLaunch
   - After launch, monitor creatorFeeAccrued in the bucket account using fetchBondingCurveBucketV2
@@ -120,7 +120,7 @@ This table summarizes when to call each fee instruction, the accounts it require
 
 You must have the Genesis SDK, a configured Umi instance, and a funded Solana wallet.
 
-- `@metaplex-foundation/genesis` SDK installed
+- `@metaplex-foundation/genesis` SDK 0.43.0 or later installed (earlier versions omit the `creatorFeeShare` account that `collectRaydiumCpmmFeesWithCreatorFeeV2` requires)
 - A Umi instance configured with your keypair identity — see [Launching a Bonding Curve via the Metaplex API](/smart-contracts/genesis/bonding-curve-launch#umi-setup)
 - A funded Solana wallet for transaction fees
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## Notes
 
-These caveats cover fee timing, the recommended API claim path, permissionless on-chain claiming, the two-step post-graduation flow, and first-buy fee waivers.
+These caveats cover fee timing, the recommended API claim path, permissionless on-chain claiming, the two-step post-graduation flow, the required `creatorFeeShare` account, and first-buy fee waivers.
 
 - Creator fees accrue in the bucket (`creatorFeeAccrued`) on each swap, not transferred immediately — explicitly claim them via the API/SDK or the on-chain instructions; `creatorFeeClaimed` tracks the cumulative total claimed to date
 - `claimCreatorRewards` (API/SDK) aggregates every eligible bonding-curve and Raydium bucket for a wallet into a single call; when there is nothing to claim it returns HTTP `400` with `"No rewards available to claim"` rather than an empty transactions array
 - The on-chain claim instructions (`claimBondingCurveCreatorFeeV2`, `collectRaydiumCpmmFeesWithCreatorFeeV2`, `claimRaydiumCreatorFeeV2`) are permissionless: any wallet can trigger them, but the SOL always goes to the configured creator fee wallet, not the caller
 - Post-graduation fees require two steps in order: `collectRaydiumCpmmFeesWithCreatorFeeV2` (harvest from Raydium pool → Genesis bucket), then `claimRaydiumCreatorFeeV2` (bucket → creator wallet); both can be combined in a single transaction, and the API path wraps both for you
+- `collectRaydiumCpmmFeesWithCreatorFeeV2` requires a `creatorFeeShare` account (Raydium's `CreatorFeeShare` PDA for the Genesis Raydium signer and the pool's AMM config), which does not need to exist on-chain; pass `pdas.creatorFeeShare` from the same `deriveRaydiumPDAsV2` call that supplies `ammConfig` — a mismatched account fails with `InvalidRaydiumCreatorFeeShare` (error 260), and SDK versions before 0.43.0 fail with `NotEnoughAccountKeys`
 - `creatorFeeAccrued` and `creatorFeeClaimed` exist on both `BondingCurveBucketV2` (active curve) and `RaydiumCpmmBucketV2` (post-graduation); use `fetchBondingCurveBucketV2` and `fetchRaydiumCpmmBucketV2` respectively
 - `creatorFeeWallet` defaults to the launching wallet if not set; it cannot be changed after the curve is created
 - The first buy mechanism waives all fees (protocol and creator) for the designated initial purchase only; all subsequent swaps pay the normal creator fee
