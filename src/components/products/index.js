@@ -20,6 +20,7 @@ import { gumdrop } from './gumdrop';
 import { hydra } from './hydra';
 import { inscription } from './inscription';
 import { mobileSdks } from './mobileSdks';
+import { mpl3643 } from './mpl-3643';
 import { mplAgent } from './mpl-agent';
 import { mplDistro } from './mpl-distro';
 import { mplHybrid } from './mpl-hybrid';
@@ -53,6 +54,7 @@ export const products = [
   tokenMetadata,
   core,
   mplAgent,
+  mpl3643,
   bubblegumv2,
   coreCandyMachine,
   candyMachine,

@@ -42,6 +42,14 @@ Coreのプロトコル手数料は、別の手数料アカウントに送金さ�
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-3643" %}
+
+発行、ライフサイクルイベント、ホルダーアクティベーション時に発行者が支払う定額手数料。
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="MPL-Distro" %}
 
 Merkle クレームが成功したとき、クレームトランザクションの支払者が支払います。

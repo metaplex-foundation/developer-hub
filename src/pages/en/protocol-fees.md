@@ -42,6 +42,14 @@ Paid by the minter, which is typically individual collectors minting new drops. 
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-3643" %}
+
+Flat fees paid by the issuer at issuance, lifecycle events, and holder activation.
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="MPL-Distro" %}
 
 Paid by the claim transaction payer when a Merkle claim succeeds.
