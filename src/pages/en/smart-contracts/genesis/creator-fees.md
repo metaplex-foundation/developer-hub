@@ -209,7 +209,7 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | No | `'solana-mainnet'` (default) or `'solana-devnet'`. |
 | `payer` | `PublicKey \| string` | No | Wallet that covers fees and rent on the returned transactions. Defaults to `wallet`. Use this when the creator fee wallet does not hold SOL — for example, an agent PDA or a cold wallet. |
 
-The SDK returns deserialized Umi `Transaction`s plus the blockhash they were built against. Always confirm each transaction against the returned blockhash — do not substitute a freshly-fetched one, or confirmation will race. See the full HTTP schema at [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards).
+The SDK returns deserialized Umi `Transaction`s plus the blockhash they were built against. Always confirm each transaction against the returned blockhash — do not substitute a freshly-fetched one, or confirmation will race. See the full HTTP schema at [Claim Creator Rewards (API)](/api/claim-creator-rewards).
 
 ### Handling the No-Rewards Case
 
