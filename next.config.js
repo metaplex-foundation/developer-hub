@@ -18,13 +18,6 @@ const nextConfig = {
         permanent: false,
       },
       {
-        // MPL-3643 docs exist in English only; send localized nav links to
-        // the English pages instead of a 404. Remove when translations land.
-        source: '/:locale(ja|ko|zh)/smart-contracts/mpl-3643/:path*',
-        destination: '/smart-contracts/mpl-3643/:path*',
-        permanent: false,
-      },
-      {
         source: '/:path((?!docs(?:/|$)|_next/|api/|.*\\..*).*)',
         destination: '/docs/:path',
         basePath: false,
