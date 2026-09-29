@@ -203,7 +203,7 @@ function generateLlmsTxt(categories) {
     '- Candy Machine is a minting tool, not an asset standard. It creates either Core Assets or Token Metadata NFTs.',
     '- "Metaplex NFT" typically refers to Token Metadata NFTs (legacy). New projects should use "Core Assets".',
     '- **MPL-3643** is a compliance standard for **permissioned** tokens (securities, RWAs). **Genesis** is for **permissionless** token launches. They are not alternatives to each other.',
-    '- An MPL-3643 token is a **Token-2022** mint, not an SPL Token mint and not a new token program. Compliance is a layer above the token.',
+    '- An MPL-3643 token is a **Token-2022** mint, not a legacy SPL Token mint and not a new token program. Compliance is a layer above the token.',
     '- MPL-3643 enforces eligibility at **freeze and thaw** time, not inside every transfer. Per-transfer enforcement is opt-in via a Token-2022 transfer hook.',
     '- MPL-3643 is **live on mainnet in early access** and has not been audited. Request alpha access at https://form.typeform.com/to/AgllGJaz.',
     '',
