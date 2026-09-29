@@ -19,6 +19,7 @@ const products = [
   { name: 'Umi', level: 2 },
   { name: 'Amman', level: 2 },
   { name: 'Shank', level: 2 },
+  { name: 'MPL-3643', level: 1 },
   { name: 'Genesis', level: 1 },
   { name: 'Core', level: 1 },
   { name: 'Fusion', level: 1 },
