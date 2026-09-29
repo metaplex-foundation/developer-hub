@@ -3,7 +3,7 @@ title: 哈希NFT数据
 metaTitle: 哈希NFT数据 - Bubblegum V2
 description: 了解更多关于Bubblegum上NFT数据如何被哈希的信息。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - hashed NFT data
   - merkle leaf
@@ -270,7 +270,6 @@ impl LeafSchema {
 
 Bubblegum operations that involve changing a leaf (`transfer`, `delegate`, `burn`, etc.) will send a "before" and "after" hashed leaf node to `spl-account-compression` or `mpl-account-compression` depending on the leaf schema version to validate the Merkle tree change.
 
-
 在前面的章节中，我们说过Bubblegum默克尔树中的每个叶节点是通过哈希压缩NFT（cNFT）的数据获得的。但这究竟是如何做到的呢？我们从cNFT的元数据开始。Bubblegum V2的每个cNFT在铸造指令中使用以下元数据结构作为参数，注意Bubblegum v1使用的是MetadataArgs：
 
 ```rust
@@ -281,7 +280,8 @@ pub struct MetadataArgsV2 {
     pub symbol: String,
     /// 指向代表资产的JSON的URI
     pub uri: String,
-    /// 二级销售中给予创作者的版税基点（0-10000）
+    /// 二级销售中给予创作者的版税基点（0-10000），
+    /// 或 u16::MAX（65535）以从 MPL-Core 集合的 Royalties 插件继承。
     pub seller_fee_basis_points: u16,
     /// 不可变，一旦翻转，此元数据的所有销售都被视为二级销售
     pub primary_sale_happened: bool,
@@ -295,6 +295,8 @@ pub struct MetadataArgsV2 {
     pub collection: Option<Pubkey>,
 }
 ```
+
+当 `seller_fee_basis_points` 为 `65535`（`0xffff`，`SELLER_FEE_BASIS_POINTS_INHERIT`）时，叶子上存储的是哨兵值而非字面版税百分比。数据哈希根据该哨兵值计算，而非根据集合的已解析 basis points。DAS 将集合费率放在 `royalty.basis_points` 上，将叶子哨兵放在 `royalty.basis_points_raw` 上。JavaScript SDK 的 `getAssetWithProof` 辅助函数将解析后的费率放在 `metadata.sellerFeeBasisPoints` 上，并将叶子哨兵放在 `currentMetadata.sellerFeeBasisPoints`（以及可选 sibling `sellerFeeBasisPointsRaw`，`inherited: true`）上。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)和[从集合继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
 
 cNFT的元数据被多次哈希，如图表所示并在下面描述：
 
@@ -523,6 +525,7 @@ impl LeafSchema {
 | Term | Definition |
 |------|------------|
 | **MetadataArgsV2** | The Rust struct containing cNFT metadata (name, symbol, URI, royalties, creators, collection) |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | 从 MPL-Core 集合继承版税时存储在 `seller_fee_basis_points` 中的哨兵值 `65535` |
 | **Data Hash** | keccak-256 hash of the metadata combined with seller_fee_basis_points |
 | **Creator Hash** | keccak-256 hash of the creator array (address, verified flag, share for each creator) |
 | **Collection Hash** | keccak-256 hash of the collection public key (new in V2) |

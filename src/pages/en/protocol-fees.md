@@ -10,7 +10,7 @@ The Metaplex Protocol currently includes the following fees:
 
 {% totem-accordion title="Genesis" %}
 
-Token launch platform fees across the bonding curve lifecycle.
+Fees for bonding curve, launch pool, and presale launches, including trading in the Raydium CPMM pool after graduation.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 

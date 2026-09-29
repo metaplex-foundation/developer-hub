@@ -1,8 +1,10 @@
 import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
+
+import { useLocale } from '@/contexts/LocaleContext'
 
 const docSearchConfig = {
   appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
@@ -25,6 +27,14 @@ function SearchIcon(props) {
 export function Search({iconOnly}) {
   let [isOpen, setIsOpen] = useState(false)
   let [modifierKey, setModifierKey] = useState()
+  const { locale } = useLocale()
+
+  // The index holds every locale; each record's `lang` matches its page's locale.
+  // Filter on `lang`, not `language` — only `lang` is a facet in the index.
+  const searchParameters = useMemo(
+    () => ({ facetFilters: [`lang:${locale}`] }),
+    [locale]
+  )
 
   const onOpen = useCallback(() => {
     setIsOpen(true)
@@ -65,6 +75,7 @@ export function Search({iconOnly}) {
         createPortal(
           <DocSearchModal
             {...docSearchConfig}
+            searchParameters={searchParameters}
             initialScrollY={window.scrollY}
             onClose={onClose}
             hitComponent={Hit}

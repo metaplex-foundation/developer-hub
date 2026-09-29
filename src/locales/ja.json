@@ -59,6 +59,7 @@
   },
   "header": {
     "mpl": "MPL",
+    "api": "API",
     "devTools": "開発ツール",
     "guides": "ガイド",
     "home": "ホーム",

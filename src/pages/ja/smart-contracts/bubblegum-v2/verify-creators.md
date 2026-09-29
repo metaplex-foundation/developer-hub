@@ -62,16 +62,7 @@ import {
 } from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-const collectionOption = unwrapOption(assetWithProof.metadata.collection);
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: collectionOption
-    ? collectionOption.key
-    : none(),
-  creators: assetWithProof.metadata.creators,
-};
+const metadata = assetWithProof.currentMetadata;
 await verifyCreatorV2(umi, {
   ...assetWithProof,
   metadata,
@@ -103,15 +94,7 @@ import {
 } from '@metaplex-foundation/umi';
 
 const assetWithProof = await getAssetWithProof(umi, assetId, {truncateCanopy: true});
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)
-    ? unwrapOption(assetWithProof.metadata.collection)!.key
-    : none(),
-  creators: assetWithProof.metadata.creators,
-};
+const metadata = assetWithProof.currentMetadata;
 await unverifyCreatorV2(umi, {
   ...assetWithProof,
   metadata,

@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - 调用 createAndRegisterLaunch 时在启动对象中设置 creatorFeeWallet
   - 启动后使用 fetchBondingCurveBucketV2 监控桶账户中的 creatorFeeAccrued
@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 毕业后——收割 LP 费用 | Genesis 账户、Raydium 池 PDA、Raydium bucket PDA | LP 费用从 Raydium 池移至 Genesis bucket |
 | `claimRaydiumCreatorFeeV2` | 毕业后——认领 bucket 余额 | Genesis 账户、Raydium bucket PDA、base/quote mint、创作者费钱包 | Bucket 余额转移到创作者钱包 |
 
-**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#处理无奖励情况) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#步骤-1--从-raydium-cpmm-池收集费用) · [毕业后认领](#步骤-2--认领费用到创作者钱包)
+**跳转至：** [发行时配置](#发行时配置创作者费) · [重定向到钱包](#将创作者费重定向到特定钱包) · [Agent PDA](#agent-发行自动-pda-路由) · [与首次购买组合](#将创作者费与首次购买组合) · [检查累积费用（曲线）](#检查累积的创作者费) · [通过 API 认领](#通过-metaplex-api-认领推荐) · [无奖励情况](#handling-the-no-rewards-case) · [活跃曲线期间认领](#在活跃曲线期间认领创作者费) · [检查 Raydium 费用](#检查累积的-raydium-创作者费) · [从 Raydium 收集](#步骤-1--从-raydium-cpmm-池收集费用) · [毕业后认领](#步骤-2--认领费用到创作者钱包)
 
 1. 调用 `createAndRegisterLaunch` 时在 `launch` 对象中设置 `creatorFeeWallet`
 2. 发行后读取 `bucket.creatorFeeAccrued` 监控累积费用
@@ -120,7 +120,7 @@ faqs:
 
 您需要 Genesis SDK、已配置的 Umi 实例和已充值的 Solana 钱包。
 
-- 已安装 `@metaplex-foundation/genesis` SDK
+- 已安装 `@metaplex-foundation/genesis` SDK 0.43.0 或更高版本（更早的版本缺少 `collectRaydiumCpmmFeesWithCreatorFeeV2` 所需的 `creatorFeeShare` 账户）
 - 配置了密钥对身份的 Umi 实例——详见[通过 Metaplex API 发行联合曲线](/smart-contracts/genesis/bonding-curve-launch#umi-setup)
 - 用于支付交易费用的已充值 Solana 钱包
 
@@ -209,9 +209,9 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。 |
 | `payer` | `PublicKey \| string` | 否 | 承担返回交易的费用和租金的钱包。默认为 `wallet`。当创作者费钱包不持有 SOL 时使用——例如 agent PDA 或冷钱包。 |
 
-SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)。
+SDK 返回反序列化的 Umi `Transaction` 以及构建它们时使用的区块哈希。始终使用返回的区块哈希确认每个交易——不要用新获取的区块哈希替换它，否则会出现确认竞争。完整的 HTTP schema 请参阅 [Claim Creator Rewards (API)](/zh/api/claim-creator-rewards)。
 
-### 处理无奖励情况
+### 处理无奖励情况 {% #handling-the-no-rewards-case %}
 
 当钱包没有可认领内容时，端点返回 HTTP `400` 和 `{ "error": { "message": "No rewards available to claim" } }`——它**不会**返回带有空 `transactions` 数组的成功响应。SDK 将其呈现为 `GenesisApiError`，因此调用方必须捕获错误并基于 `err.message`（或 `err.statusCode === 400`）进行分支，而非让错误向上传播。
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## 注意事项
 
-以下注意事项涵盖费用时机、推荐的 API 认领路径、无需许可的链上认领、两步毕业后流程以及首次购买费用豁免。
+以下注意事项涵盖费用时机、推荐的 API 认领路径、无需许可的链上认领、两步毕业后流程、必需的 `creatorFeeShare` 账户以及首次购买费用豁免。
 
 - 创作者费在每次兑换时累积到 bucket（`creatorFeeAccrued`），不会立即转账——需通过 API/SDK 或链上指令显式认领；`creatorFeeClaimed` 追踪迄今累积认领的总额
 - `claimCreatorRewards`（API/SDK）将钱包有资格获得的所有联合曲线和 Raydium bucket 聚合到一次调用中；当没有可认领内容时，返回 HTTP `400` 和 `"No rewards available to claim"`，而不是空的交易数组
 - 链上认领指令（`claimBondingCurveCreatorFeeV2`、`collectRaydiumCpmmFeesWithCreatorFeeV2`、`claimRaydiumCreatorFeeV2`）均无需许可：任何钱包都可以触发，但 SOL 始终流向配置的创作者费钱包，而非调用方
 - 毕业后费用需要按顺序两个步骤：`collectRaydiumCpmmFeesWithCreatorFeeV2`（从 Raydium 池收集 → Genesis bucket），然后 `claimRaydiumCreatorFeeV2`（bucket → 创作者钱包）；两者可合并到单个交易中，API 路径也会替您封装这两步
+- `collectRaydiumCpmmFeesWithCreatorFeeV2` 需要 `creatorFeeShare` 账户（Genesis Raydium 签名者与池 AMM 配置对应的 Raydium `CreatorFeeShare` PDA），但该账户无需在链上存在；请传入与 `ammConfig` 来自同一次 `deriveRaydiumPDAsV2` 调用的 `pdas.creatorFeeShare`——不匹配的账户会以 `InvalidRaydiumCreatorFeeShare`（错误 260）失败，0.43.0 之前的 SDK 版本会以 `NotEnoughAccountKeys` 失败
 - `creatorFeeAccrued` 和 `creatorFeeClaimed` 同时存在于 `BondingCurveBucketV2`（活跃曲线）和 `RaydiumCpmmBucketV2`（毕业后）上；分别使用 `fetchBondingCurveBucketV2` 和 `fetchRaydiumCpmmBucketV2`
 - `creatorFeeWallet` 未设置时默认为发行钱包；曲线创建后无法更改
 - 首次购买机制仅对指定的初始购买豁免所有费用（协议费和创作者费）；之后所有兑换正常收取创作者费
@@ -461,7 +464,7 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### 没有可认领的奖励时会发生什么？
 
-`claimCreatorRewards` 端点返回 HTTP `400` 和 `{"error":{"message":"No rewards available to claim"}}`。SDK 将其呈现为 `GenesisApiError`。将其视为非异常结果——检查 `err.message`（或 `err.statusCode === 400`）并进行分支处理，而非让错误向上传播。请参阅[处理无奖励情况](#处理无奖励情况)。
+`claimCreatorRewards` 端点返回 HTTP `400` 和 `{"error":{"message":"No rewards available to claim"}}`。SDK 将其呈现为 `GenesisApiError`。将其视为非异常结果——检查 `err.message`（或 `err.statusCode === 400`）并进行分支处理，而非让错误向上传播。请参阅[处理无奖励情况](#handling-the-no-rewards-case)。
 
 ### 可选的 `payer` 字段有什么用？
 
