@@ -34,7 +34,7 @@ programmingLanguage:
   - Bash
 proficiencyLevel: Intermediate
 created: '04-09-2026'
-updated: '04-24-2026'
+updated: '09-25-2026'
 howToSteps:
   - createAndRegisterLaunch 호출 시 런치 객체에 creatorFeeWallet을 설정합니다
   - 런치 후 fetchBondingCurveBucketV2를 사용하여 버킷 계정의 creatorFeeAccrued를 모니터링합니다
@@ -108,7 +108,7 @@ faqs:
 | `collectRaydiumCpmmFeesWithCreatorFeeV2` | 졸업 후 — LP 수수료 수확 | Genesis 계정, Raydium 풀 PDA, Raydium 버킷 PDA | LP 수수료가 Raydium 풀에서 Genesis 버킷으로 이동 |
 | `claimRaydiumCreatorFeeV2` | 졸업 후 — 버킷 잔액 청구 | Genesis 계정, Raydium 버킷 PDA, 베이스/쿼트 민트, 창작자 수수료 지갑 | 버킷 잔액이 창작자 지갑으로 전송 |
 
-**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#agent-launches-automatic-pda-routing) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#보상-없음-사례-처리) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#step-1-collect-fees-from-the-raydium-cpmm-pool) · [졸업 후 청구](#step-2-claim-fees-to-the-creator-wallet)
+**바로 가기:** [런칭 시 구성](#런칭-시-창작자-수수료-구성) · [지갑으로 지정](#특정-지갑으로-창작자-수수료-지정) · [에이전트 PDA](#agent-launches-automatic-pda-routing) · [첫 번째 구매와 결합](#창작자-수수료와-첫-번째-구매-결합) · [누적 확인(커브)](#누적-창작자-수수료-확인) · [API로 청구](#metaplex-api로-청구-권장) · [보상 없음 처리](#handling-the-no-rewards-case) · [커브 중 청구](#활성-커브-중-창작자-수수료-청구) · [Raydium 수수료 확인](#누적-raydium-창작자-수수료-확인) · [Raydium에서 수집](#step-1-collect-fees-from-the-raydium-cpmm-pool) · [졸업 후 청구](#step-2-claim-fees-to-the-creator-wallet)
 
 1. `createAndRegisterLaunch`를 호출할 때 `launch` 객체에서 `creatorFeeWallet`을 설정합니다
 2. 런칭 후 `bucket.creatorFeeAccrued`를 읽어 누적된 수수료를 모니터링합니다
@@ -120,7 +120,7 @@ faqs:
 
 Genesis SDK, 구성된 Umi 인스턴스 및 충전된 Solana 지갑이 필요합니다.
 
-- `@metaplex-foundation/genesis` SDK 설치
+- `@metaplex-foundation/genesis` SDK 0.43.0 이상 설치 (이전 버전에는 `collectRaydiumCpmmFeesWithCreatorFeeV2`에 필요한 `creatorFeeShare` 계정이 포함되지 않습니다)
 - 키페어 ID로 구성된 Umi 인스턴스 — [Metaplex API를 통한 본딩 커브 런칭](/smart-contracts/genesis/bonding-curve-launch#umi-setup)을 참조하세요
 - 트랜잭션 수수료를 위한 충전된 Solana 지갑
 
@@ -209,9 +209,9 @@ console.log('Creator fee wallet:', creatorFeeWallet?.toString() ?? 'none configu
 | `network` | `SvmNetwork` | 아니요 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'`. |
 | `payer` | `PublicKey \| string` | 아니요 | 반환된 트랜잭션의 수수료와 임대료를 부담하는 지갑. 기본값은 `wallet`. 창작자 수수료 지갑이 SOL을 보유하고 있지 않을 때 사용 — 예: 에이전트 PDA 또는 콜드 지갑. |
 
-SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 것으로 대체하지 마세요. 그렇지 않으면 확인이 경합합니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/smart-contracts/genesis/integration-apis/claim-creator-rewards)를 참조하세요.
+SDK는 역직렬화된 Umi `Transaction`과 트랜잭션이 작성된 블록해시를 반환합니다. 항상 반환된 블록해시에 대해 각 트랜잭션을 확인하세요 — 새로 가져온 블록해시로 대체하지 마세요 — 트랜잭션 확인 과정에서 경쟁 상태(race condition)가 발생할 수 있습니다. 전체 HTTP 스키마는 [Claim Creator Rewards (API)](/ko/api/claim-creator-rewards)를 참조하세요.
 
-### 보상 없음 사례 처리
+### 보상 없음 사례 처리 {% #handling-the-no-rewards-case %}
 
 지갑에 청구할 것이 없을 때 엔드포인트는 HTTP `400`과 `{ "error": { "message": "No rewards available to claim" } }`를 반환합니다 — 빈 `transactions` 배열로 성공 응답을 반환하지 **않습니다**. SDK는 이를 `GenesisApiError`로 표면화하므로 호출자는 오류를 잡고 `err.message`(또는 `err.statusCode === 400`)로 분기해야 합니다. 오류를 그대로 전파시키지 마세요.
 
@@ -322,6 +322,7 @@ await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
   baseVault: pdas.baseVault,
   quoteVault: pdas.quoteVault,
   raydiumProgram: pdas.raydiumProgram,
+  creatorFeeShare: pdas.creatorFeeShare,
 }).sendAndConfirm(umi);
 
 console.log('Raydium LP fees collected into Genesis bucket');
@@ -417,6 +418,7 @@ await transactionBuilder()
     baseVault: pdas.baseVault,
     quoteVault: pdas.quoteVault,
     raydiumProgram: pdas.raydiumProgram,
+    creatorFeeShare: pdas.creatorFeeShare,
   }))
   .add(claimRaydiumCreatorFeeV2(umi, {
     genesisAccount,
@@ -432,12 +434,13 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ## 참고 사항
 
-다음 주의사항은 수수료 타이밍, 권장 API 청구 경로, 권한 없는 온체인 청구, 2단계 졸업 후 흐름 및 첫 번째 구매 수수료 면제에 대해 설명합니다.
+다음 주의사항은 수수료 타이밍, 권장 API 청구 경로, 권한 없는 온체인 청구, 2단계 졸업 후 흐름, 필수 `creatorFeeShare` 계정 및 첫 번째 구매 수수료 면제에 대해 설명합니다.
 
 - 창작자 수수료는 각 스왑에서 버킷(`creatorFeeAccrued`)에 누적되며 즉시 전송되지 않습니다 — API/SDK 또는 온체인 명령어로 명시적으로 청구해야 합니다; `creatorFeeClaimed`는 현재까지 청구된 누적 합계를 추적합니다
 - `claimCreatorRewards`(API/SDK)는 지갑이 자격이 있는 모든 본딩 커브와 Raydium 버킷을 한 번의 호출에 집계합니다; 청구할 것이 없으면 빈 트랜잭션 배열이 아니라 HTTP `400`과 `"No rewards available to claim"`을 반환합니다
 - 온체인 청구 명령어(`claimBondingCurveCreatorFeeV2`, `collectRaydiumCpmmFeesWithCreatorFeeV2`, `claimRaydiumCreatorFeeV2`)는 권한 없이 호출 가능합니다: 어떤 지갑도 트리거할 수 있지만 SOL은 항상 구성된 창작자 수수료 지갑으로 전송됩니다
 - 졸업 후 수수료는 순서대로 두 단계가 필요합니다: `collectRaydiumCpmmFeesWithCreatorFeeV2`(Raydium 풀 → Genesis 버킷으로 수집), 그 다음 `claimRaydiumCreatorFeeV2`(버킷 → 창작자 지갑); 두 단계를 단일 트랜잭션으로 결합할 수 있고, API 경로는 두 단계를 래핑합니다
+- `collectRaydiumCpmmFeesWithCreatorFeeV2`에는 `creatorFeeShare` 계정(Genesis Raydium 서명자와 풀의 AMM 구성에 대한 Raydium의 `CreatorFeeShare` PDA)이 필요하지만, 이 계정이 온체인에 존재할 필요는 없습니다; `ammConfig`를 제공하는 것과 동일한 `deriveRaydiumPDAsV2` 호출의 `pdas.creatorFeeShare`를 전달하세요 — 일치하지 않는 계정은 `InvalidRaydiumCreatorFeeShare`(오류 260)로 실패하고, 0.43.0 이전 SDK 버전은 `NotEnoughAccountKeys`로 실패합니다
 - `creatorFeeAccrued`와 `creatorFeeClaimed`는 `BondingCurveBucketV2`(활성 커브)와 `RaydiumCpmmBucketV2`(졸업 후) 모두에 존재합니다; 각각 `fetchBondingCurveBucketV2`와 `fetchRaydiumCpmmBucketV2`를 사용하세요
 - `creatorFeeWallet`은 설정하지 않으면 런칭 지갑으로 기본 설정됩니다; 커브가 생성된 후에는 변경할 수 없습니다
 - 첫 번째 구매 메커니즘은 지정된 초기 구매에 대해서만 모든 수수료(프로토콜 및 창작자)를 면제합니다; 이후 모든 스왑은 일반 창작자 수수료를 납부합니다
@@ -461,7 +464,7 @@ console.log('Raydium creator fees collected and claimed to:', creatorFeeWallet.t
 
 ### 청구할 보상이 없는 경우 어떻게 되나요?
 
-`claimCreatorRewards` 엔드포인트는 HTTP `400`과 `{"error":{"message":"No rewards available to claim"}}`를 반환합니다. SDK는 이를 `GenesisApiError`로 표면화합니다. 이를 예외적인 결과가 아니라 — `err.message`(또는 `err.statusCode === 400`)를 확인하고 오류를 전파시키지 말고 분기하세요. [보상 없음 사례 처리](#보상-없음-사례-처리)를 참조하세요.
+`claimCreatorRewards` 엔드포인트는 HTTP `400`과 `{"error":{"message":"No rewards available to claim"}}`를 반환합니다. SDK는 이를 `GenesisApiError`로 표면화합니다. 이를 예외적인 결과가 아니라 — `err.message`(또는 `err.statusCode === 400`)를 확인하고 오류를 전파시키지 말고 분기하세요. [보상 없음 사례 처리](#handling-the-no-rewards-case)를 참조하세요.
 
 ### 선택적인 `payer` 필드는 무엇을 위한 것인가요?
 

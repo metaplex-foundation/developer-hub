@@ -257,7 +257,7 @@ Finalize 후, Bucket 시간 조건에 따라 출시가 활성화됩니다. 현�
 | **Genesis Account** | 출시를 조정하고 토큰을 보관하는 PDA |
 | **Inflow Bucket** | 사용자로부터 예치금을 수집하는 Bucket |
 | **Outflow Bucket** | 종료 동작을 통해 자금을 받는 Bucket |
-| **런칭 타입** | 런칭의 기본 메커니즘: `launchpool` 또는 `presale`. 생성 후 백엔드 크랭크에 의해 온체인으로 소급 설정. [SDK](/ko/smart-contracts/genesis/sdk/javascript#genesis-account) 또는 [REST API](/ko/smart-contracts/genesis/integration-apis)로 조회 가능 |
+| **런칭 타입** | 런칭의 기본 메커니즘: `launchpool` 또는 `presale`. 생성 후 백엔드 크랭크에 의해 온체인으로 소급 설정. [SDK](/ko/smart-contracts/genesis/sdk/javascript#genesis-account) 또는 [REST API](/ko/api)로 조회 가능 |
 | **Finalize** | 구성을 잠그고 출시를 활성화 |
 | **Time Condition** | Bucket 단계를 제어하는 Unix 타임스탬프 |
 | **End Behavior** | 예치 기간 종료 시 자동화된 동작 |
