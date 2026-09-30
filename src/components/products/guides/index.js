@@ -39,7 +39,7 @@ export const guides = {
               title: 'Solana Transaction Fundamentals',
               href: '/solana/solana-transaction-fundamentals',
               created: '02-04-2026',
-              updated: null,
+              updated: '09-21-2026',
             },
             {
               title: 'Solana Programs',

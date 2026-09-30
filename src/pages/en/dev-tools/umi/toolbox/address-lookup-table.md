@@ -6,6 +6,10 @@ description: How to use Address Lookup Tables with Umi.
 
 The SPL Address Lookup Table program can be used to reduce the size of transactions by creating custom lookup tables — a.k.a **LUTs** or **ALTs** — before using them in transactions. This program allows you to create and extend LUTs. You can learn more about this program in [Solana's official documentation](https://docs.solana.com/developing/lookup-tables).
 
+{% callout type="warning" %}
+Address Lookup Tables are only supported by V0 transactions. A transaction builder that uses `setAddressLookupTables()` must use `useV0()`, even when Umi is configured to use V1 by default.
+{% /callout %}
+
 ## Create empty LUTs
 
 This instruction allows you to create an empty Address Lookup Table (LUT) account.
@@ -75,8 +79,11 @@ for (const createLutBuilder of createLutBuilders) {
   await createLutBuilder.sendAndConfirm(umi)
 }
 
-// 3. Use the LUTs in the base transaction builder.
-await baseBuilder.setAddressLookupTables(lutAccounts).sendAndConfirm(umi)
+// 3. Use the LUTs in a V0 transaction.
+await baseBuilder
+  .useV0()
+  .setAddressLookupTables(lutAccounts)
+  .sendAndConfirm(umi)
 ```
 
 ## Freeze a LUT

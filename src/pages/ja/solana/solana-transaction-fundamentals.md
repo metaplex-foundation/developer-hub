@@ -1,30 +1,30 @@
 ---
-title: Solana Transaction Fundamentals
-metaTitle: Solana Transaction Fundamentals | How Transactions Work
-description: Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
+title: Solanaトランザクションの基礎
+metaTitle: Solanaトランザクションの基礎 | トランザクションの仕組み
+description: 構造、署名、送信、確認を含むSolanaトランザクションの仕組みを学びます。信頼性の高いアプリケーションを構築するために欠かせない知識です。
 # remember to update dates also in /components/products/guides/index.js
 created: '02-04-2026'
-updated: null
+updated: '09-21-2026'
 ---
 
-A comprehensive guide to understanding how Solana transactions work from structure to confirmation. {% .lead %}
+構造から確認まで、Solanaトランザクションの仕組みを包括的に解説します。 {% .lead %}
 
-## What You'll Learn
+## このガイドで学ぶこと
 
-- The anatomy of a Solana transaction
-- How to sign and send transactions
-- Transaction confirmation and finality
-- Versioned transactions vs legacy
-- Common transaction errors and their meanings
+- Solanaトランザクションの構造
+- トランザクションに署名して送信する方法
+- トランザクションの確認とファイナリティ
+- バージョン付きトランザクションとlegacyトランザクションの違い
+- 一般的なトランザクションエラーとその意味
 
-## Prerequisites
+## 前提条件
 
-- [Solana CLI installed](/solana/solana-cli-essentials)
-- [Understanding Solana accounts](/solana/understanding-solana-accounts)
+- [Solana CLIのインストール](/solana/solana-cli-essentials)
+- [Solanaアカウントの理解](/solana/understanding-solana-accounts)
 
-## Transaction Anatomy
+## トランザクションの構造
 
-A Solana transaction consists of several components:
+Solanaトランザクションは複数のコンポーネントで構成されます。
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -49,22 +49,22 @@ A Solana transaction consists of several components:
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Key Components
+### 主要コンポーネント
 
-| Component | Description |
+| コンポーネント | 説明 |
 |-----------|-------------|
-| **Signatures** | Ed25519 signatures from required signers |
-| **Recent Blockhash** | A recent block hash (valid for ~60-90 seconds) |
-| **Instructions** | The operations to perform |
-| **Account Keys** | All accounts involved in the transaction |
+| **Signatures** | 必要な署名者によるEd25519署名 |
+| **Recent Blockhash** | 最近のブロックハッシュ（約60〜90秒間有効） |
+| **Instructions** | 実行する処理 |
+| **Account Keys** | トランザクションに関与するすべてのアカウント |
 
-## Instructions
+## 命令
 
-Instructions are the actual operations in a transaction. Each instruction specifies:
+命令はトランザクション内で実際に実行される処理です。各命令は次の項目を指定します。
 
-- **Program ID** - Which program to execute
-- **Accounts** - Which accounts the program needs
-- **Data** - Serialized arguments for the program
+- **Program ID** - 実行するプログラム
+- **Accounts** - プログラムが必要とするアカウント
+- **Data** - プログラムに渡すシリアライズ済み引数
 
 ```
 Instruction:
@@ -75,9 +75,9 @@ Instruction:
   └── data: [encoded transfer amount]
 ```
 
-### Multiple Instructions
+### 複数の命令
 
-Transactions can contain multiple instructions that execute atomically:
+トランザクションには、アトミックに実行される複数の命令を含めることができます。
 
 ```javascript
 import { transactionBuilder } from '@metaplex-foundation/umi'
@@ -91,14 +91,14 @@ const builder = transactionBuilder()
 await builder.sendAndConfirm(umi)
 ```
 
-This atomicity is powerful. If any instruction fails, the entire transaction is reverted.
+このアトミック性により、いずれかの命令が失敗するとトランザクション全体がロールバックされます。
 
 ## Recent Blockhash
 
-Every transaction requires a **recent blockhash** that:
-- Proves the transaction was created recently
-- Prevents replay attacks
-- Expires after ~60-90 seconds (~150 slots)
+すべてのトランザクションには、次の役割を持つ**recent blockhash**が必要です。
+- トランザクションが最近作成されたことを証明する
+- リプレイ攻撃を防ぐ
+- 約60〜90秒後（約150スロット後）に期限切れになる
 
 ```javascript
 // UMI handles blockhash automatically when sending transactions.
@@ -106,13 +106,13 @@ Every transaction requires a **recent blockhash** that:
 const { blockhash, lastValidBlockHeight } = await umi.rpc.getLatestBlockhash()
 ```
 
-{% callout title="Blockhash Expiration" type="warning" %}
-If your transaction isn't confirmed before the blockhash expires, it will be dropped. For long-running operations, fetch a fresh blockhash before sending.
+{% callout title="ブロックハッシュの期限切れ" type="warning" %}
+ブロックハッシュの期限が切れる前にトランザクションが確認されなければ、そのトランザクションは破棄されます。時間のかかる処理では、送信前に新しいブロックハッシュを取得してください。
 {% /callout %}
 
-## Signing Transactions
+## トランザクションへの署名
 
-Transactions must be signed by all accounts marked as `isSigner`:
+トランザクションには、`isSigner`と指定されたすべてのアカウントによる署名が必要です。
 
 ```javascript
 // UMI signs automatically with the identity signer when sending.
@@ -130,9 +130,9 @@ const encoded = base64.deserialize(serialized)[0]
 // ... send encoded string to another party for additional signing ...
 ```
 
-## Sending Transactions
+## トランザクションの送信
 
-### Basic Send
+### 基本的な送信
 
 ```javascript
 // Send and wait for confirmation (recommended)
@@ -142,7 +142,7 @@ const result = await myBuilder.sendAndConfirm(umi)
 const signature = await myBuilder.send(umi)
 ```
 
-### Send with Options
+### オプションを指定した送信
 
 ```javascript
 const result = await myBuilder.sendAndConfirm(umi, {
@@ -151,17 +151,17 @@ const result = await myBuilder.sendAndConfirm(umi, {
 })
 ```
 
-## Transaction Confirmation
+## トランザクションの確認
 
-Solana has multiple **commitment levels** indicating transaction finality:
+Solanaには、トランザクションのファイナリティを示す複数の**commitment level**があります。
 
-| Commitment | Description | Use Case |
+| Commitment | 説明 | ユースケース |
 |------------|-------------|----------|
-| `processed` | Transaction received by leader | Real-time updates |
-| `confirmed` | Voted on by supermajority | Most applications |
-| `finalized` | 31+ blocks deep, irreversible | Financial operations |
+| `processed` | リーダーがトランザクションを受信済み | リアルタイム更新 |
+| `confirmed` | スーパーマジョリティによる投票済み | ほとんどのアプリケーション |
+| `finalized` | 31ブロック以上経過し、不可逆 | 金融処理 |
 
-### Checking Confirmation
+### 確認状況を調べる
 
 ```javascript
 // sendAndConfirm waits for confirmation automatically.
@@ -169,7 +169,7 @@ Solana has multiple **commitment levels** indicating transaction finality:
 const result = await umi.rpc.getSignatureStatuses([signature])
 ```
 
-### Commitment in Practice
+### 実際のCommitment指定
 
 ```javascript
 // For most operations, 'confirmed' is the right default
@@ -183,24 +183,38 @@ const result = await myBuilder.sendAndConfirm(umi, {
 })
 ```
 
-## Versioned Transactions
+## バージョン付きトランザクション
 
-Solana currently supports two transaction formats:
+Solanaは3つのトランザクション形式をサポートしています。
 
-### Legacy Transactions
-- Original format
-- Limited to 35 accounts
-- Simpler structure
+### Legacyトランザクション
 
-### Versioned Transactions (v0)
-- Support **Address Lookup Tables** (ALTs)
-- Can reference up to 256 accounts
-- Required for complex DeFi operations
+Legacyトランザクションは、Address Lookup Tablesを使用しないSolanaの元来のトランザクション形式です。
+
+- 元来の形式
+- 最大35アカウント
+- より単純な構造
+
+### V0トランザクション
+
+V0トランザクションは、より多くのアカウントを必要とするトランザクション向けにAddress Lookup Tableをサポートします。
+
+- **Address Lookup Tables**（ALT）をサポート
+- 最大256アカウントを参照可能
+- 複雑なDeFi処理で必要
+
+### V1トランザクション
+
+V1トランザクションではトランザクションのサイズ上限が増え、コンピュート設定がメッセージ内に格納されます。
+
+- 最大4,096バイトのトランザクションをサポート
+- コンピュートバジェット設定をトランザクションメッセージ内に格納
+- Address Lookup Tablesはサポートしない
 
 ```javascript
-// UMI uses V0 transactions by default
+// Umi uses V0 transactions by default. Opt in to V1 explicitly.
 const result = await myBuilder
-  .useV0()  // Explicit, but this is already the default
+  .useV1()
   .sendAndConfirm(umi)
 
 // To use legacy transactions instead
@@ -217,40 +231,44 @@ const [lutBuilder, lut] = createLut(umi, {
 })
 await lutBuilder.sendAndConfirm(umi)
 
-// Use the lookup table in your transaction
-await myBuilder.setAddressLookupTables([lut]).sendAndConfirm(umi)
+// Address Lookup Tables require V0.
+await myBuilder
+  .useV0()
+  .setAddressLookupTables([lut])
+  .sendAndConfirm(umi)
 ```
 
-{% callout title="When to Use Versioned Transactions" %}
-Use versioned transactions when:
-- Your transaction involves many accounts (>35)
-- You're interacting with DeFi protocols that require ALTs
-- You want to reduce transaction size
+{% callout title="トランザクションバージョンの選び方" %}
+- ウォレットがトランザクションバージョン`1`をサポートし、トランザクションが1,232バイトを超える場合はV1を使用します。
+- トランザクションにAddress Lookup Tableが必要な場合はV0を使用します。
+- 互換性のために元来の形式が必要な場合にのみlegacyトランザクションを使用します。
 
-For simple operations (transfers, basic mints), legacy transactions work fine.
+後方互換性のため、UmiのデフォルトはV0です。アプリケーション全体のデフォルトを変更する前に、[V0からV1トランザクションへの移行](/dev-tools/umi/guides/migrate-to-transaction-v1)を参照してください。
 {% /callout %}
 
-## Transaction Size Limits
+## トランザクションのサイズ制限
 
-Solana transactions have strict size limits:
+Solanaトランザクションには厳格なサイズ制限があります。
 
-| Limit | Value |
+| 制限 | 値 |
 |-------|-------|
-| Maximum transaction size | 1232 bytes |
-| Maximum accounts | 35 (legacy) / 256 (versioned with ALTs) |
-| Maximum instructions | Limited by size |
+| LegacyおよびV0トランザクションのサイズ | 1,232バイト |
+| V1トランザクションのサイズ | 4,096バイト |
+| Address Lookup Tables | V0のみ |
+| 命令の最大数 | サイズによる制限 |
 
-### Dealing with Size Limits
+### サイズ制限への対処
 
-If your transaction is too large:
+トランザクションが大きすぎる場合は、次の方法で対処します。
 
-1. **Use Address Lookup Tables** - Compress account references
-2. **Split into multiple transactions** - Execute sequentially
-3. **Optimize instruction data** - Minimize serialized data
+1. **V1を使用する** - Address Lookup Tableが不要な場合、サイズ上限を4,096バイトに増やす
+2. **V0でAddress Lookup Tablesを使用する** - アカウント参照を圧縮する
+3. **複数のトランザクションに分割する** - 順番に実行する
+4. **命令データを最適化する** - シリアライズされるデータを最小化する
 
-## Simulation
+## シミュレーション
 
-Before sending, simulate transactions to catch errors:
+送信前にトランザクションをシミュレーションしてエラーを検出します。
 
 ```javascript
 // Build the transaction without sending
@@ -265,27 +283,27 @@ const simulation = await umi.rpc.simulateTransaction(tx, {
 console.log('Simulation result:', simulation)
 ```
 
-Simulation helps you:
-- Catch errors before paying fees
-- Estimate compute units
-- Debug program logic
+シミュレーションには次の利点があります。
+- 料金を支払う前にエラーを検出できる
+- コンピュートユニットを見積もれる
+- プログラムロジックをデバッグできる
 
-## Common Transaction Errors
+## 一般的なトランザクションエラー
 
 ### "Blockhash not found"
 
-**Cause**: The blockhash expired before confirmation.
+**原因**：確認前にブロックハッシュの期限が切れています。
 
-**Solutions**:
-1. Retry with a fresh blockhash (UMI fetches a new blockhash automatically on each send)
-2. Use `'finalized'` commitment for blockhash when network is congested
-3. Implement retry logic in your application
+**解決方法**：
+1. 新しいブロックハッシュで再試行します（UMIは送信のたびに新しいブロックハッシュを自動取得します）
+2. ネットワーク混雑時には、ブロックハッシュに`'finalized'` commitmentを使用します
+3. アプリケーションに再試行ロジックを実装します
 
 ### "Insufficient funds"
 
-**Cause**: Account doesn't have enough SOL for transaction fees + rent.
+**原因**：アカウントにトランザクション料金とrentを支払うための十分なSOLがありません。
 
-**Solution**: Ensure the fee payer has sufficient balance:
+**解決方法**：fee payerに十分な残高があることを確認します。
 ```bash
 solana balance
 solana airdrop 1  # On devnet
@@ -293,23 +311,23 @@ solana airdrop 1  # On devnet
 
 ### "Transaction simulation failed"
 
-**Cause**: Program logic error.
+**原因**：プログラムロジックのエラーです。
 
-**Solution**: Check simulation logs on an explorer (see [Using Solana Explorers](/solana/using-solana-explorers)), or simulate the transaction before sending to inspect the error output.
+**解決方法**：[Solana Explorerの使用](/solana/using-solana-explorers)を参照してExplorerでシミュレーションログを確認するか、送信前にトランザクションをシミュレーションしてエラー出力を調べます。
 
 ### "Account not found"
 
-**Cause**: An account in the transaction doesn't exist.
+**原因**：トランザクション内のアカウントが存在しません。
 
-**Solution**: Create the account first or check addresses.
+**解決方法**：先にアカウントを作成するか、アドレスを確認します。
 
 ### "Invalid account owner"
 
-**Cause**: Account is owned by a different program than expected.
+**原因**：アカウントが想定とは異なるプログラムによって所有されています。
 
-**Solution**: Verify account ownership matches the program you're calling.
+**解決方法**：アカウントの所有者が呼び出し先のプログラムと一致することを確認します。
 
-## Practical Example: Complete Flow
+## 実践例：完全なフロー
 
 ```javascript
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
@@ -337,26 +355,26 @@ console.log('Transaction confirmed:', signature)
 console.log(`Explorer: https://explorer.solana.com/tx/${signature}?cluster=devnet`)
 ```
 
-## Next Steps
+## 次のステップ
 
-- [Compute units and priority fees](/solana/compute-units-and-priority-fees) - Optimize transaction landing
-- [Working with devnet and testnet](/solana/working-with-devnet-and-testnet) - Test your transactions
-- [Diagnose transaction errors](/solana/general/how-to-diagnose-solana-transaction-errors) - Debug failed transactions
+- [コンピュートユニットと優先料金](/solana/compute-units-and-priority-fees) - トランザクション実行を最適化する
+- [devnetとtestnetの使用](/solana/working-with-devnet-and-testnet) - トランザクションをテストする
+- [トランザクションエラーの診断](/solana/general/how-to-diagnose-solana-transaction-errors) - 失敗したトランザクションをデバッグする
 
 ## FAQ
 
-### How long do I have to confirm a transaction?
+### トランザクションを確認できる時間はどのくらいですか？
 
-A transaction's blockhash is valid for approximately 60-90 seconds (~150 slots). After that, the transaction will be dropped if not confirmed.
+トランザクションのブロックハッシュは約60〜90秒間（約150スロット）有効です。その時間を過ぎても確認されなかったトランザクションは破棄されます。
 
-### Can I cancel a transaction?
+### トランザクションをキャンセルできますか？
 
-No, once submitted, you cannot cancel a transaction. However, if it hasn't been confirmed, you can submit a new transaction with the same nonce (using durable nonces) to effectively "replace" it.
+いいえ。一度送信したトランザクションはキャンセルできません。ただし、まだ確認されていない場合は、durable nonceを使用して同じnonceの新しいトランザクションを送信し、実質的に「置き換える」ことができます。
 
-### What's the difference between "processed" and "confirmed"?
+### "processed"と"confirmed"の違いは何ですか？
 
-"Processed" means a validator received it. "Confirmed" means a supermajority (66%+) of validators voted on the block containing it. Always use "confirmed" or "finalized" for important operations.
+"Processed"は、バリデーターがトランザクションを受信したことを意味します。"Confirmed"は、トランザクションを含むブロックに対してスーパーマジョリティ（66%以上）のバリデーターが投票したことを意味します。重要な処理には必ず"confirmed"または"finalized"を使用してください。
 
-### Why did my transaction fail after simulation succeeded?
+### シミュレーションが成功した後にトランザクションが失敗したのはなぜですか？
 
-State can change between simulation and execution. Another transaction may have modified the accounts. This is common in competitive scenarios like NFT mints.
+シミュレーションと実行の間に状態が変化することがあります。別のトランザクションがアカウントを変更した可能性があります。これはNFTのミントなど、競合が発生する状況でよく起こります。
