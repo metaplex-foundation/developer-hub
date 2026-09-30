@@ -337,7 +337,7 @@ const NavList = () => {
           'NFTs': '/nfts',
           'Smart Contracts': '/smart-contracts',
           'Dev Tools': '/dev-tools',
-          'Solana': '/guides',
+          'Solana': '/solana',
         }
 
         const path = categoryPaths[item]
