@@ -318,7 +318,7 @@ tokens_i = (weighted_i / weightedQuoteTokenTotal) * baseTokenAllocation
 
 {% /totem %}
 
-`filled` rounds **up** so that the sum of all filled portions is always at least the soft cap. This keeps the bucket solvent against the capped graduation transfer regardless of whether refunds or graduation are cranked first; the rounding leaves at most a few quantum units of dust in the bucket.
+`filled` rounds **up** so that the sum of all filled portions is always at least the soft cap. This keeps the bucket solvent against the capped graduation transfer regardless of whether refunds or graduation are cranked first; each depositor's rounding adds less than one quantum unit, so the dust left in the bucket is at most `depositCount - 1` quantum units in total.
 
 Token allocation is unaffected by the cap. Refunding excess does not remove a depositor's weighted contribution, so everyone still receives tokens proportional to their **full** deposit.
 
@@ -544,6 +544,8 @@ Extensions are optional guards configured on the Launch Pool bucket. All are set
 
 ### Common Errors
 
+The errors below cover invalid soft cap configurations and the Launch Pool states in which `refundLaunchPoolV2` rejects a refund request.
+
 | Error | Code | Cause |
 |-------|------|-------|
 | `InvalidSoftCap` | 221 | `softCap.amount` is zero — omit the extension instead of setting it to `0` |
@@ -604,7 +606,7 @@ if (deposit) {
 - `softCap` is a required argument on `addLaunchPoolBucketV2` in `@metaplex-foundation/genesis` 0.42.0 — pass `softCap: null` when no cap is wanted
 - Launch Pool extensions, including `softCap`, can only be added or removed before `finalizeV2`
 - Soft caps are supported by the Genesis program and JavaScript SDK; the [`mplx` CLI](/dev-tools/cli/genesis/launch-pool) does not expose a soft cap flag yet
-- An oversubscribed Launch Pool leaves a few quantum units of rounding dust in the bucket, because each depositor's filled portion rounds up
+- An oversubscribed Launch Pool leaves rounding dust of at most `depositCount - 1` quantum units in the bucket, because each depositor's filled portion rounds up
 - `quoteTokenDepositTotal` and `depositCount` are preserved as historical records after refunds; `refundCount` tracks refunds processed
 
 ## FAQ
