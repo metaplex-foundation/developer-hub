@@ -42,6 +42,14 @@ Core 프로토콜 수수료는 별도의 수수료 계정으로 이체되는 것
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-3643" %}
+
+발행, 라이프사이클 이벤트 및 홀더 활성화 시 발행자가 지불하는 고정 수수료입니다.
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="MPL-Distro" %}
 
 Merkle 클레임이 성공할 때 클레임 트랜잭션 지불자가 냅니다.

@@ -2,11 +2,42 @@
 title: Optimal transaction landing using Compute Units (CU) and priority fees
 metaTitle: Umi - Optimal transaction landing using Compute Units (CU) and priority fees
 description: Learn how to optimize your Solana transactions by calculating and setting appropriate Compute Units (CU) and priority fees.
+keywords:
+  - Umi transaction v1
+  - compute units
+  - priority fees
+  - transaction optimization
+about:
+  - Umi
+  - Solana Transaction V1
+  - Priority Fees
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
 created: '12-02-2024'
-updated: '12-02-2024'
+updated: '09-21-2026'
 ---
 
-When sending transactions on Solana, optimizing two key parameters can significantly improve your transaction's success rate and cost-effectiveness:
+## Summary
+
+Umi V1 transactions use simulation to estimate compute consumption and store the compute limit and total priority fee in `TransactionV1Config`.
+
+- Simulate with a 1,400,000 compute unit limit.
+- Add a safety margin to the consumed units.
+- Estimate the market price in micro-lamports per compute unit.
+- Convert the estimate to a total lamport fee before calling `setTransactionConfig()`.
+
+When sending transactions on Solana, optimizing two key parameters can significantly improve your transaction's success rate and cost-effectiveness.
+
+## Quick Start
+
+Estimate the V1 compute limit and total priority fee before sending the transaction.
+
+1. [Estimate the priority fee](#priority-fees) from recent fees paid for the transaction's writable accounts.
+2. [Simulate the transaction](#compute-unit-limit) with the maximum V1 compute limit.
+3. [Apply the estimated values](#implementation-guide) with `setTransactionConfig()`.
+4. [Run the complete SOL transfer example](#full-example-for-sol-transfer).
 
 ## Priority Fees
 
@@ -160,16 +191,20 @@ export const getRequiredCU = async (
     return DEFAULT_COMPUTE_UNITS;
   }
 
-  // Add safety buffer to estimated compute units
-  return Math.ceil(unitsConsumed * BUFFER_FACTOR); // Step 3: use the buffer
+  // Add a safety buffer without exceeding the V1 maximum.
+  const bufferedUnits = Math.ceil(unitsConsumed * BUFFER_FACTOR);
+  if (bufferedUnits > 1_400_000) {
+    throw new Error(
+      `Transaction requires ${bufferedUnits} compute units after buffering, so it cannot fit within the V1 maximum of 1,400,000. Split it into multiple transactions.`
+    );
+  }
+  return bufferedUnits; // Step 3: use the buffer
 };
 
 
-  const withCU = baseTransaction.prepend(
-    setComputeUnitPrice(umi, { microLamports: priorityFee })
-  ).prepend(
-    setComputeUnitLimit(umi, { units: 1400000 })
-  );
+  const withCU = baseTransaction
+    .useV1()
+    .setTransactionConfig({ computeUnitLimit: 1_400_000 });
 
   // Step 8: Calculate optimal compute unit limit
   console.log("Estimating required compute units...");
@@ -186,6 +221,7 @@ Following the code above and introducing some boilerplate to create the Umi inst
 ```js
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
+  lamports,
   sol,
   publicKey,
   Transaction,
@@ -196,8 +232,6 @@ import {
 } from "@metaplex-foundation/umi";
 import {
   transferSol,
-  setComputeUnitLimit,
-  setComputeUnitPrice,
   mplToolbox,
 } from "@metaplex-foundation/mpl-toolbox";
 import { base58, base64 } from "@metaplex-foundation/umi/serializers";
@@ -301,8 +335,14 @@ export const getRequiredCU = async (
     return DEFAULT_COMPUTE_UNITS;
   }
 
-  // Add safety buffer to estimated compute units
-  return Math.ceil(unitsConsumed * BUFFER_FACTOR);
+  // Add a safety buffer without exceeding the V1 maximum.
+  const bufferedUnits = Math.ceil(unitsConsumed * BUFFER_FACTOR);
+  if (bufferedUnits > 1_400_000) {
+    throw new Error(
+      `Transaction requires ${bufferedUnits} compute units after buffering, so it cannot fit within the V1 maximum of 1,400,000. Split it into multiple transactions.`
+    );
+  }
+  return bufferedUnits;
 };
 
 /**
@@ -339,23 +379,25 @@ const example = async () => {
   const priorityFee = await getPriorityFee(umi, baseTransaction);
   
   // Step 7: Create intermediate transaction for compute unit estimation
-  const withCU = baseTransaction.prepend(
-    setComputeUnitPrice(umi, { microLamports: priorityFee })
-  ).prepend(
-    setComputeUnitLimit(umi, { units: 1400000 })
-  );
+  const withCU = baseTransaction
+    .useV1()
+    .setTransactionConfig({ computeUnitLimit: 1_400_000 });
 
   // Step 8: Calculate optimal compute unit limit
   console.log("Estimating required compute units...");
   const requiredUnits = await getRequiredCU(umi, withCU.build(umi));
   
   // Step 9: Build the final optimized transaction
-  const finalTransaction = baseTransaction.prepend(
-    setComputeUnitPrice(umi, { microLamports: priorityFee })
-  ).prepend(
-    setComputeUnitLimit(umi, { units: requiredUnits })
+  const totalPriorityFeeLamports = Math.ceil(
+    (priorityFee * requiredUnits) / 1_000_000
   );
-  console.log(`Transaction optimized with Priority Fee: ${priorityFee} microLamports and ${requiredUnits} compute units`);
+  const finalTransaction = baseTransaction
+    .useV1()
+    .setTransactionConfig({
+      computeUnitLimit: requiredUnits,
+      priorityFee: lamports(totalPriorityFeeLamports),
+    });
+  console.log(`Transaction optimized with a total priority fee of ${totalPriorityFeeLamports} lamports and ${requiredUnits} compute units`);
 
   // Step 10: Send and confirm the transaction
   console.log("Sending optimized transaction...");
@@ -369,3 +411,10 @@ example().catch(console.error);
 ```
 {% /totem-accordion  %}
 {% /totem %}
+
+## Notes
+
+- This guide targets Umi 1.6.0 or later and V1 transactions.
+- `TransactionV1Config.priorityFee` is a total lamport amount, while `getRecentPrioritizationFees` returns a price in micro-lamports per compute unit.
+- V1 transactions do not support Address Lookup Tables or Compute Budget instructions.
+- See [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) when converting an existing V0 transaction builder.

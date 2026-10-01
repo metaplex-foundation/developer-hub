@@ -52,8 +52,10 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--animation <value>` | アニメーション/動画ファイルへのパス |
 | `--project-url <value>` | 外部プロジェクトURL |
 | `--symbol <value>` | オンチェーンシンボル |
-| `--royalties <value>` | ロイヤリティパーセンテージ（0-100） |
-| `--collection <value>` | コレクションミントアドレス（[Metaplex Coreコレクション](/smart-contracts/core/collections)） |
+| `--royalties <value>` | 明示的なリーフロイヤリティ%（0–100、小数可 例: `7.5`）。コレクション継承をオプトアウト |
+| `--inherit-royalties` | 継承センチネル `65535` と空のリーフクリエイターを保存。Royaltiesプラグイン付きの `--collection` が必要。コレクションにRoyaltiesがあり `--royalties`、`--creator`、JSON の `seller_fee_basis_points` を省略した場合のデフォルト |
+| `--creator <address>:<share>` | リーフの分配（繰り返し可。シェア合計は100）。明示的リーフミントではデフォルトは支払者 100%。`--royalties` がなくても継承をオプトアウト。`--inherit-royalties` とは併用不可 |
+| `--collection <value>` | Coreコレクションアドレス（BubblegumV2必須）。[Metaplex Coreコレクション](/smart-contracts/core/collections) |
 | `--owner <value>` | リーフオーナーの公開鍵（デフォルトは支払者） |
 
 ## グローバルフラグ
@@ -102,13 +104,35 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
      --royalties 5
    ```
 
-1. コレクションに作成：
+1. コレクションに作成（Royaltiesプラグインがある場合は自動継承）：
 
    ```bash
    mplx bg nft create my-tree \
      --name "Collection Item #1" \
      --image ./nft.png \
      --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
+
+1. コレクションのRoyaltiesプラグインから継承を強制：
+
+   ```bash
+   mplx bg nft create my-tree \
+     --name "Inherited cNFT" \
+     --uri "https://arweave.net/xxx" \
+     --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+     --inherit-royalties
+   ```
+
+1. 明示的なリーフロイヤリティとクリエイター分配（継承をオプトアウト）：
+
+   ```bash
+   mplx bg nft create my-tree \
+     --name "Split cNFT" \
+     --uri "https://arweave.net/xxx" \
+     --collection 7kPqYxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
+     --royalties 7.5 \
+     --creator Addr111111111111111111111111111111111111111:60 \
+     --creator Addr222222222222222222222222222222222222222:40
    ```
 
 ## 出力
@@ -124,6 +148,7 @@ Compressed NFT Created!
 Tree: my-tree
 Owner: YourWalletAddressHere
 Asset ID: CNFTAssetIdHere
+Royalties: inherited (leaf sentinel 65535)
 
 Signature: 5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Explorer: https://solscan.io/tx/5xxx...
@@ -154,6 +179,28 @@ Explorer: https://solscan.io/tx/5xxx...
 
 `image`フィールドはアップロードされた画像URIで自動的に入力されます。
 
+`seller_fee_basis_points` が設定されている場合、CLIは明示的なリーフ料率として扱い、コレクションからは**継承しません**。
+
+## 継承ロイヤリティ {% #inherited-royalties %}
+
+[Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)を持つ Core コレクションへミントする場合、CLIはコレクション料率を各cNFTにコピーする代わりに、継承センチネル（`65535`）と空のリーフクリエイターを保存できます。DASは表示用にコレクション料率を解決します。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
+
+```bash
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
+```
+
+| 意図 | フラグ |
+|--------|--------|
+| 自動継承 | `--collection <COL>` かつ `--royalties`、`--creator`、JSON の `seller_fee_basis_points` を省略 |
+| 継承を強制 | `--collection <COL> --inherit-royalties` |
+| 明示的なリーフ料率 | `--royalties <0-100>`（小数可）。継承をオプトアウト |
+| 明示的な分配 | `--creator <ADDR>:<share>`（繰り返し可。合計100）。`--royalties` がなくても継承をオプトアウト（リーフ料率は `0%`） |
+
+`--inherit-royalties` には Royalties プラグイン付きの `--collection` が必要で、`--royalties`、`--creator`、JSON の `seller_fee_basis_points` と併用できません。`mplx core collection create` だけでは不十分です。コレクションには `BubblegumV2`（継承する場合は Royalties）が必要です。
+
 ## 注意事項
 
 - ツリー引数は保存されたツリー名または公開鍵アドレスのいずれかを使用できます
@@ -162,3 +209,4 @@ Explorer: https://solscan.io/tx/5xxx...
 - RPCはDAS APIをサポートしている必要があります
 - **Bubblegum V2のみ** - これらのコマンドはBubblegum V2ツリーで動作し、[Metaplex Coreコレクション](/smart-contracts/core/collections)を使用します（Token Metadataコレクションではありません）
 - 属性形式：`"trait:value,trait:value"` - コロンでtraitとvalueを区切り、カンマでペアを区切ります
+- 選択したコレクションにRoyaltiesプラグインがある場合、ウィザードは継承と明示的ロイヤリティを選択できます
