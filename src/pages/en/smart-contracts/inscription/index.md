@@ -21,7 +21,7 @@ NFT JSON data and Images have historically been stored on decentralized storage 
 There are two different kinds of Inscriptions:
 
 1. Inscriptions **[attached to NFT Mints](#inscriptions-attached-to-nft-mints)** - NFT data is written to the chain instead or in addition to off chain storage
-2. Inscriptions as **[storage providers](#inscriptions-as-storage-provider)** - Write arbitrary data to the chain
+2. Inscriptions as **[storage providers](#inscriptions-as-a-storage-provider)** - Write arbitrary data to the chain
 
 ### Inscriptions attached to NFT Mints
 

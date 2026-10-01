@@ -63,8 +63,17 @@ faqs:
 
 有两种可用的发行类型：
 
-- **`launchpool`**（默认）：48 小时存款窗口，按比例分配代币，可配置分配方案。需要 `--tokenAllocation`、`--depositStartTime`、`--raiseGoal`、`--raydiumLiquidityBps` 和 `--fundsRecipient`。
 - **`bonding-curve`**：即时 bonding curve（恒定乘积 AMM）。交易立即开始——无存款窗口。当所有代币售出时自动迁移到 Raydium CPMM。仅需 `--name`、`--symbol` 和 `--image`。
+- **`launchpool`**（默认）：48 小时存款窗口，按比例分配代币，可配置分配方案。需要 `--tokenAllocation`、`--depositStartTime`、`--raiseGoal`、`--raydiumLiquidityBps` 和 `--fundsRecipient`。
+
+### Bonding Curve 示例 {% #bonding-curve-example %}
+
+```bash {% title="创建 bonding curve 发行" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" \
+  --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
 
 ### Launchpool 示例
 
@@ -196,7 +205,7 @@ mplx genesis launch create --launchType bonding-curve \
 
 首次购买金额以 SOL 为单位（例如 `0.1` = 0.1 SOL）。首次购买不收取协议费或创建者费用。
 
-## Agent 发行
+## Agent 发行 {% #agent-launches %}
 
 通过传入 `--agentAsset` 将代币发行链接到已注册的 [agent](/zh/agents/mint-agent)。这适用于 launchpool 和 bonding curve 两种发行类型。
 
@@ -365,7 +374,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 如果账户已经注册过，命令会报告此情况并显示现有的发行详情。
 
-## 锁定分配
+## 锁定分配 {% #locked-allocations %}
 
 锁定分配允许你保留一部分代币供应量并设置归属计划。通过 `--lockedAllocations` 提供一个 JSON 数组文件。
 
@@ -402,7 +411,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 `SECOND`、`MINUTE`、`HOUR`、`DAY`、`WEEK`、`TWO_WEEKS`、`MONTH`、`QUARTER`、`YEAR`
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |------|------|----------|
@@ -414,7 +423,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 | raydiumLiquidityBps out of range | 值超出 2000–10000 范围 | 使用 2000（20%）到 10000（100%）之间的值 |
 | Launch config missing required fields | register 的配置不完整 | 确保你的发行配置 JSON 包含 `token`、`launch` 和有效的 `launchType` |
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **`genesis launch create` 与手动流程有什么区别？**
 `genesis launch create` 命令是一个一体化流程，它调用 Genesis API 构建交易、签名并发送，然后在 Metaplex 平台上注册发行——全部在一条命令中完成。手动流程需要分别执行 `create`、`bucket add-launch-pool`、`finalize` 和 register 步骤。

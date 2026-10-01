@@ -62,7 +62,7 @@ Launch Pool 配置、Presale 配置、存款/提取流程、前端集成、代�
 
 *由 Metaplex Foundation 维护 · 最近验证于 2026 年 2 月 · 需要 Metaplex CLI (mplx)*
 
-## 添加 Unlocked Bucket
+## 添加 Unlocked Bucket {% #add-unlocked-bucket %}
 
 `mplx genesis bucket add-unlocked` 命令添加一个 unlocked bucket。Unlocked bucket 允许指定的接收者领取代币或通过 end behavior 转发的 SOL。
 
@@ -98,7 +98,7 @@ mplx genesis finalize <GENESIS_ADDRESS>
 
 无需额外标志。此操作不可逆——在运行此命令之前请仔细检查所有 bucket 配置。
 
-## 查询
+## 查询 {% #fetch %}
 
 `mplx genesis fetch` 命令获取 Genesis 账户详情，包括 bucket 数量、总供应量、finalize 状态以及基础/报价 mint。
 
@@ -108,7 +108,7 @@ mplx genesis fetch <GENESIS_ADDRESS>
 
 无需额外标志。
 
-## 查询 Bucket
+## 查询 Bucket {% #fetch-bucket %}
 
 `mplx genesis bucket fetch` 命令获取特定 bucket 的详情。
 
@@ -140,7 +140,7 @@ mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 0 --type presale
 mplx genesis bucket fetch <GENESIS_ADDRESS> --bucketIndex 1 --type unlocked
 ```
 
-## 领取 Unlocked
+## 领取 Unlocked {% #claim-unlocked %}
 
 `mplx genesis claim-unlocked` 命令从 unlocked bucket 领取代币或 SOL。通常由团队/国库钱包使用，领取通过 end behavior 转发的报价代币。
 
@@ -155,7 +155,7 @@ mplx genesis claim-unlocked <GENESIS_ADDRESS> --bucketIndex 1
 | `--bucketIndex <integer>` | `-b` | Unlocked bucket 的索引（默认：0） | 否 |
 | `--recipient <string>` | | 领取代币的接收地址（默认：签名者） | 否 |
 
-## 撤销
+## 撤销 {% #revoke %}
 
 `mplx genesis revoke` 命令撤销代币的 mint 和/或 freeze 权限。至少需要指定一个标志。
 
@@ -187,7 +187,7 @@ mplx genesis revoke <GENESIS_ADDRESS> --revokeMint --revokeFreeze
 - 撤销 mint 权限确保不能再铸造新代币
 - 这些操作不可逆
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |-------|-------|-----|
@@ -199,7 +199,7 @@ mplx genesis revoke <GENESIS_ADDRESS> --revokeMint --revokeFreeze
 | Claim period not active | 在 `claimStart` 之前从 unlocked bucket 领取 | 等待领取开始时间戳之后 |
 | Invalid bucket type | 在 `bucket fetch` 中使用了错误的 `--type` 标志 | 使用 `launch-pool`、`presale` 或 `unlocked` |
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **finalize 做什么？**
 Finalize 永久锁定 Genesis 配置。Finalize 后，不能再添加 bucket，发行变为活跃状态。一旦配置的存款窗口开启，即可开始存入。

@@ -40,7 +40,7 @@ howToTools:
 
 **跳转至：** [快速参考](#quick-reference) · [用法](#usage) · [输出](#output) · [注意事项](#notes)
 
-## 快速参考
+## 快速参考 {% #quick-reference %}
 
 | 项目 | 值 |
 |------|-------|
@@ -48,13 +48,13 @@ howToTools:
 | **必填参数** | `ASSET_ADDRESS` — 要查询的 MPL Core 资产 |
 | **可选标志** | `--json` — 机器可读输出 |
 
-## 用法
+## 用法 {% #usage %}
 
 ```bash {% title="Fetch agent identity" %}
 mplx agents fetch <AGENT_ASSET>
 ```
 
-## 输出
+## 输出 {% #output %}
 
 ```text {% title="Expected output (registered agent)" %}
 {
@@ -74,7 +74,7 @@ mplx agents fetch <AGENT_ASSET>
 No agent identity found for this asset. The asset may not be registered.
 ```
 
-## 注意事项
+## 注意事项 {% #notes %}
 
 - `wallet` 字段是 Asset Signer PDA——Agent 的内置钱包，用于签署交易和持有资金
 - `registrationUri` 指向注册时上传的 JSON 文档，包含 Agent 的名称、描述、服务和信任模型

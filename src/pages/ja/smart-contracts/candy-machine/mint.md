@@ -177,7 +177,7 @@ APIリファレンス: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/f
 {% /dialect %}
 {% /dialect-switcher %}
 
-## ガード付きミント
+## ガード付きミント {% #minting-with-guards %}
 
 多数のガードを使用するキャンディマシンからミントする際、追加のガード固有の情報を提供する必要がある場合があります。
 

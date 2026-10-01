@@ -26,7 +26,7 @@ This project is in active development. **All** interfaces are _very likely_ to c
 ## Getting started
 
 ### Installation
-#### Requirements {#requirements}
+#### Requirements {% #requirements %}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
 - Swift 5.3+

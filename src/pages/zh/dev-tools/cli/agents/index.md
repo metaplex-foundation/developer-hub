@@ -48,7 +48,7 @@ Agent 身份管理的完整 CLI 参考：
 
 **跳转至：** [前置条件](#prerequisites) · [通用流程](#general-flow) · [命令参考](#command-reference) · [常见错误](#common-errors) · [FAQ](#faq) · [术语表](#glossary)
 
-## 前置条件
+## 前置条件 {% #prerequisites %}
 
 - 已安装 Metaplex CLI 并配置到 `PATH`
 - Solana 密钥对文件（如 `~/.config/solana/id.json`）
@@ -61,7 +61,7 @@ Agent 身份管理的完整 CLI 参考：
 mplx agents --help
 ```
 
-## 通用流程
+## 通用流程 {% #general-flow %}
 
 ### 注册 Agent 身份
 
@@ -109,7 +109,7 @@ mplx agents executive revoke <AGENT_ASSET>
 
 详见 [执行委托](/dev-tools/cli/agents/executive)。
 
-## 命令参考
+## 命令参考 {% #command-reference %}
 
 | 命令 | 描述 |
 |---------|-------------|
@@ -128,7 +128,7 @@ mplx agents executive revoke <AGENT_ASSET>
 - 运行 `mplx agents <command> --help` 查看任意命令的完整标志文档
 - 请参阅 [Agent Kit 文档](/agents) 了解概念、架构和 SDK 指南
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|-----|
@@ -155,7 +155,7 @@ mplx agents executive revoke <AGENT_ASSET>
 **API 注册路径和直接 IX 注册路径有什么区别？**
 API 路径（默认）通过单次 API 调用完成资产创建和身份注册，无需 Irys 上传。直接 IX 路径（`--use-ix`）直接发送 `registerIdentityV1` 指令，适用于现有资产、自定义文档工作流或交互式向导。
 
-## 术语表
+## 术语表 {% #glossary %}
 
 | 术语 | 定义 |
 |------|------------|

@@ -49,7 +49,7 @@ Genesis 代币发行的完整 CLI 参考：
 
 *由 Metaplex Foundation 维护 · 最近验证于 2026 年 2 月 · 需要 Metaplex CLI (mplx)*
 
-## 前置条件
+## 前置条件 {% #prerequisites %}
 
 - 已安装 Metaplex CLI 并添加到 `PATH`
 - Solana 密钥对文件（例如 `~/.config/solana/id.json`）
@@ -62,7 +62,7 @@ Genesis 代币发行的完整 CLI 参考：
 mplx genesis --help
 ```
 
-## 一般流程
+## 一般流程 {% #general-flow %}
 
 使用 Genesis CLI 发行代币有两种方式：
 
@@ -107,7 +107,7 @@ mplx genesis launch create --launchType bonding-curve \
 
 您可以随时使用 `genesis fetch` 和 `genesis bucket fetch` 检查发行状态。
 
-## 命令参考
+## 命令参考 {% #command-reference %}
 
 | 命令 | 描述 |
 |---------|-------------|
@@ -139,7 +139,7 @@ mplx genesis launch create --launchType bonding-curve \
 - 运行 `mplx genesis <command> --help` 查看任何命令的完整标志文档
 - 请参阅 [Genesis 文档](/zh/smart-contracts/genesis) 了解概念、生命周期详情和 SDK 指南
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |-------|-------|-----|
@@ -151,7 +151,7 @@ mplx genesis launch create --launchType bonding-curve \
 | Insufficient funds | 钱包中没有足够的 SOL 或报价代币 | 为钱包充值，如需要请使用 `mplx toolbox sol wrap` 包装 SOL |
 | No wrapped SOL | 存入未包装的 SOL | 请先包装 SOL：`mplx toolbox sol wrap <amount>` |
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **什么是 mplx genesis 命令？**
 `mplx genesis` 命令组允许您从终端运行完整的 Genesis 代币发行——创建账户、配置 bucket、存入、领取和撤销权限。
@@ -171,7 +171,7 @@ Genesis 有三种 bucket 类型：**Launch Pool**（基于存款的按比例分�
 **同一类型可以有多个 bucket 吗？**
 可以。使用 `--bucketIndex` 标志为同一类型的每个 bucket 指定不同的索引。
 
-## 术语表
+## 术语表 {% #glossary %}
 
 | 术语 | 定义 |
 |------|------------|

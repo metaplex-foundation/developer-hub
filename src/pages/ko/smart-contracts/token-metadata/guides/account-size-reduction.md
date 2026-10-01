@@ -49,7 +49,7 @@ TM 계정에서 데이터를 역직렬화하는 Rust SDK를 기반으로 하고 
 | Master Edition v2 | 282          | 20               |
 | Edition           | 241          | 42               |
 
-### 어떤 SDK 버전이 영향을 받습니까?
+### 어떤 SDK 버전이 영향을 받습니까? {% #which-sdk-versions-are-affected %}
 
 * **Javascript**: JS SDK(@metaplex-foundation/js 및 Umi 기반 SDK 모두)는 영향을 받지 않습니다
 * **Rust**: Rust SDK는 v2.0.0부터 시작하여 1년 이상 전에 호환되었습니다 (2023년 8월부터 사용 가능)

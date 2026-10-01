@@ -34,7 +34,7 @@ updated: '03-12-2026'
 ## 快速开始
 
 1. [前提条件](#前提条件) — 获取 MPL Core 资产并安装 SDK
-2. [注册代理](#注册代理-1) — 调用 `registerIdentityV1` 绑定身份
+2. [注册代理](#register-an-agent) — 调用 `registerIdentityV1` 绑定身份
 3. [代理注册文档](#代理注册文档) — 创建链下元数据 JSON
 4. [验证注册](#验证注册) — 确认身份已附加
 5. [完整示例](#完整示例) — 端到端代码示例
@@ -50,7 +50,7 @@ updated: '03-12-2026'
 
 注册前需要一个 MPL Core 资产。如果还没有，请参阅[创建 NFT](/nfts/create-nft)。有关身份程序本身的更多信息，请参阅 [MPL Agent Registry](/smart-contracts/mpl-agent) 文档。
 
-## 注册代理
+## 注册代理 {% #register-an-agent %}
 
 注册会从资产的公钥派生创建 PDA，并附加带有 Transfer、Update 和 Execute 生命周期钩子的 `AgentIdentity` 插件。PDA 使代理可被发现——任何人都可以从资产地址派生它并检查是否存在已注册的身份。
 

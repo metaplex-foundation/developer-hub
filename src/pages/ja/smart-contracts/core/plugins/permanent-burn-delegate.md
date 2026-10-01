@@ -76,7 +76,7 @@ faqs:
 - **Collection**：collection authorityを使用してCollection内の任意のAssetのburnを許可します。一度に全てをburnするわけではありません。
 ## 引数
 Permanent Burn Pluginには渡す引数はありません。
-## Permanent Burn Pluginを持つAssetの作成
+## Permanent Burn Pluginを持つAssetの作成 {% #creating-an-asset-with-a-permanent-burn-plugin %}
 {% dialect-switcher title="Permanent Freeze pluginを持つAssetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

@@ -54,7 +54,7 @@ faqs:
 2. **单个代理，已索引字段** — 使用 Core 资产地址调用 `getAsset`（见下方 DAS 章节）
 3. **发现代理** — 使用 `isAgent: true` 调用 `searchAssets`，或按 `agentToken` / `assetSigner` 过滤
 
-## 检查注册 {#check-registration}
+## 检查注册 {% #check-registration %}
 
 安全获取方法在身份不存在时返回 `null` 而不是抛出异常，这对于检查资产是否已注册很有用：
 
@@ -72,7 +72,7 @@ faqs:
 
 {% code-tabs-imported from="agents/read_agent_verify_plugin" frameworks="umi" defaultFramework="umi" /%}
 
-## 读取注册文档 {#read-the-registration-document}
+## 读取注册文档 {% #read-the-registration-document %}
 
 `AgentIdentity` 插件上的 `uri` 指向一个包含代理完整配置文件（名称、描述、服务端点等）的链下 JSON 文档。像其他 URI 一样获取它：
 
@@ -110,7 +110,7 @@ faqs:
 
 完整字段参考请参阅[注册代理](/zh/agents/register-agent#agent-registration-document)。
 
-## 获取代理钱包 {#fetch-the-agents-wallet}
+## 获取代理钱包 {% #fetch-the-agents-wallet %}
 
 每个 Core 资产都有一个称为 **Asset Signer** 的内置钱包——从资产公钥派生的 PDA。不存在私钥，因此无法被盗。钱包可以持有 SOL、代币或任何其他资产。使用 `findAssetSignerPda` 派生地址：
 
@@ -124,7 +124,7 @@ Asset Signer PDA 和代理的 Core 资产是两个不同的地址。请务必始
 
 有关账户布局、PDA 派生详情和错误代码，请参阅 [MPL Agent Registry](/zh/smart-contracts/mpl-agent) 智能合约文档。
 
-## 通过 DAS API 读取代理数据 {#read-agent-data-via-das-api}
+## 通过 DAS API 读取代理数据 {% #read-agent-data-via-das-api %}
 
 [DAS API](/zh/dev-tools/das-api) 在 MPL Core 资产上索引代理字段——注册状态、钱包 PDA 和规范代币 mint——因此您无需自行解析 Core 账户即可读取这些字段。
 

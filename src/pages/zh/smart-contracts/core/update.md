@@ -86,10 +86,10 @@ Core Asset 的更新权限或代理有能力更改 Asset 的某些数据。
 有关链上指令的完整详细信息，可以在此处查看。[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/clients/rust/src/generated/instructions/update_v1.rs#L126)
 {% /totem-accordion %}
 {% /totem %}
-## 更新 Core Asset
+## 更新 Core Asset {% #updating-a-core-asset %}
 以下是如何使用我们的 SDK 更新 MPL Core Asset。
 {% code-tabs-imported from="core/update-asset" frameworks="umi" /%}
-## 更改 Core Asset 的 Collection
+## 更改 Core Asset 的 Collection {% #change-the-collection-of-a-core-asset %}
 以下是如何使用我们的 SDK 更改 Core Asset 的集合。
 {% dialect-switcher title="更改 Core Asset 的集合" %}
 {% dialect title="JavaScript" id="js" %}
@@ -120,7 +120,7 @@ const updateTx = await update(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 使 Core Asset 数据不可变
+## 使 Core Asset 数据不可变 {% #making-a-core-asset-data-immutable %}
 以下是如何使用我们的 SDK 使 Core Asset 完全不可变。请注意，[不可变性指南](/smart-contracts/core/guides/immutability)中描述了不同级别的不可变性。
 {% callout type="warning" title="重要" %}
 这是一个破坏性操作，将移除更新资产的能力。

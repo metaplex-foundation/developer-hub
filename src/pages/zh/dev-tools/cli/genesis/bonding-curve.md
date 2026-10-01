@@ -61,7 +61,7 @@ faqs:
 
 **跳转至：** [创建联合曲线](#create-a-bonding-curve) · [兑换（买卖）](#swap-buy-and-sell) · [检查曲线状态](#checking-curve-status) · [查看联合曲线 Bucket](#inspect-bonding-curve-bucket) · [完整生命周期示例](#full-lifecycle-example) · [常见错误](#common-errors) · [FAQ](#faq)
 
-## 创建联合曲线
+## 创建联合曲线 {% #create-a-bonding-curve %}
 
 联合曲线发行通过 [Genesis API](/dev-tools/cli/genesis/launch#bonding-curve) 创建。只需 `--name`、`--symbol` 和 `--image`：
 
@@ -98,7 +98,7 @@ mplx genesis launch create --launchType bonding-curve \
 联合曲线只能通过 Genesis API 创建。不存在手动 `bucket add-bonding-curve` 命令。
 {% /callout %}
 
-## 兑换（买卖）
+## 兑换（买卖） {% #swap-buy-and-sell %}
 
 `mplx genesis swap` 命令在联合曲线上买入或卖出代币。
 
@@ -144,7 +144,7 @@ mplx genesis swap <GENESIS_ACCOUNT> --buyAmount 50000000 --slippage 100
 --------------------------------
 ```
 
-## 检查曲线状态
+## 检查曲线状态 {% #checking-curve-status %}
 
 `--info` 标志显示当前曲线状态而不执行兑换：
 
@@ -169,7 +169,7 @@ mplx genesis swap <GENESIS_ACCOUNT> --info --sellAmount 1000000000
 - 曲线当前是否可兑换
 - 含手续费和最低输出的价格报价（提供数量时显示）
 
-## 查看联合曲线 Bucket
+## 查看联合曲线 Bucket {% #inspect-bonding-curve-bucket %}
 
 带 `--type bonding-curve` 的 [`genesis bucket fetch`](/dev-tools/cli/genesis/manage#fetch-bucket) 命令可获取完整的 bucket 配置：
 
@@ -183,7 +183,7 @@ mplx genesis bucket fetch <GENESIS_ACCOUNT> --type bonding-curve
 mplx genesis bucket fetch <GENESIS_ACCOUNT>
 ```
 
-## 完整生命周期示例
+## 完整生命周期示例 {% #full-lifecycle-example %}
 
 ```bash {% title="Complete bonding curve lifecycle" %}
 # 1. 创建联合曲线发行
@@ -209,7 +209,7 @@ mplx genesis swap <GENESIS_ACCOUNT> --sellAmount 500000000000
 mplx genesis bucket fetch <GENESIS_ACCOUNT> --type bonding-curve
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|-----|

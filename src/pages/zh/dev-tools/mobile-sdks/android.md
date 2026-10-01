@@ -25,7 +25,7 @@ Metaplex Android SDK 是一个允许您执行以下操作的库:
 ## 入门
 
 ### 安装
-#### 要求 {#requirements}
+#### 要求 {% #requirements %}
 
 - Android 21+
 
@@ -173,16 +173,16 @@ Metaplex 拍卖行协议允许任何人实施去中心化的销售合约并接�
 
 拍卖模块可以通过 `Metaplex.auctions` 访问并提供以下方法。目前我们只支持读取方法。未来将支持拍卖行创建以及与出价和列表交互和创建的能力。
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#find-auction-house-by-creator-and-mint)
 - 更多即将推出!
 
 所有方法都作为可组合的[挂起函数](https://kotlinlang.org/docs/composing-suspending-functions.html)提供,以在您的应用程序中提供更多的灵活性和兼容性。
 
 **注意:** 拍卖 API 提供的这些挂起函数是库的架构更改。我们以前只提供异步回调方法。我们强烈建议每个人都迁移到新的挂起函数,但我们也提供了可用方法的异步回调实现。请注意,这些方法作为临时方案提供,将来可能会被弃用:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address, callback)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#find-auction-house-by-creator-and-mint)
 
 ### findAuctionHouseByAddress
 

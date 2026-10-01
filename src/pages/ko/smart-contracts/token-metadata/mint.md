@@ -169,7 +169,7 @@ Rust에서 `mint` 계정을 설정할 때, 계정이 서명자인지 여부를 �
 `NonFungible`을 민팅하는 데 필요하므로 `master_edition`을 설정하고 있습니다; `token` 계정이 존재하지 않고 하나가 초기화될 경우 `token_owner`가 필요합니다.
 {% /callout %}
 
-## 생성 헬퍼
+## 생성 헬퍼 {% #create-helpers %}
 
 디지털 자산 생성이 Token Metadata의 중요한 부분이므로, 우리의 SDK는 프로세스를 더 쉽게 만들기 위한 헬퍼 메서드를 제공합니다. 즉, 이러한 헬퍼 메서드는 생성하려는 토큰 표준에 따라 **Create V1**과 **Mint V1** 명령어를 다양한 방식으로 결합합니다.
 

@@ -51,7 +51,7 @@ Agent 代币是永久关联到已注册 [Agent 身份](/agents) 的 [Genesis](/s
 
 **跳转至：** [一步完成：创建带 Agent 的发行](#one-step-launch-with-agent) · [两步完成：手动关联](#two-step-manual-linking) · [常见错误](#common-errors) · [FAQ](#faq)
 
-## 一步完成：创建带 Agent 的发行
+## 一步完成：创建带 Agent 的发行 {% #one-step-launch-with-agent %}
 
 创建 Agent 代币最简单的方式是在创建发行时传入 `--agentAsset`。这将从 Agent 的 [Asset Signer PDA](/dev-tools/cli/config/asset-signer-wallets) 自动推导创作者费钱包，并可选择在同一交易中关联代币。
 
@@ -86,11 +86,11 @@ mplx genesis launch create \
 
 详见 [Launch (API) — Agent 发行](/dev-tools/cli/genesis/launch#agent-launches)。
 
-## 两步完成：手动关联
+## 两步完成：手动关联 {% #two-step-manual-linking %}
 
 如果在创建代币发行时未使用 `--agentSetToken`，可以之后通过 `agents set-agent-token` 关联。这需要 [asset-signer 钱包模式](/dev-tools/cli/config/asset-signer-wallets)。
 
-### 第一步：配置 Asset-Signer 钱包
+### 第一步：配置 Asset-Signer 钱包 {% #step-1-configure-asset-signer-wallet %}
 
 ```bash {% title="Set up asset-signer wallet" %}
 mplx config wallets add --name my-agent --agent <AGENT_ASSET>
@@ -137,7 +137,7 @@ mplx genesis launch create --launchType bonding-curve \
 mplx agents fetch <AGENT_ASSET>
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|-----|

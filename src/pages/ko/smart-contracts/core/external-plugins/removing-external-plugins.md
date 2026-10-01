@@ -44,7 +44,7 @@ Asset에는 `removePlugin()`을, Collection에는 `removeCollectionPlugin()`을 
 1. 제거할 플러그인 유형과 기본 주소 확인
 2. 플러그인 키로 `removePlugin()` 호출
 3. 플러그인이 즉시 제거되고 렌트 회수
-## Asset에서 제거
+## Asset에서 제거 {% #remove-from-asset %}
 {% dialect-switcher title="Asset에서 외부 플러그인 제거" %}
 {% dialect title="JavaScript" id="js" %}
 Asset에서 외부 플러그인 어댑터를 제거하려면 `removePlugin()` 함수를 사용해야 합니다.
@@ -96,7 +96,7 @@ pub async fn remove_external_plugin_adapter_from_asset() {
 ```
 {% /dialect  %}
 {% /dialect-switcher %}
-## Collection에서 제거
+## Collection에서 제거 {% #remove-from-collection %}
 {% dialect-switcher title="Collection에서 외부 플러그인 제거" %}
 {% dialect title="JavaScript" id="js" %}
 Collection에서 외부 플러그인 어댑터를 제거하려면 `removeCollectionPlugin()` 함수를 사용해야 합니다.

@@ -49,7 +49,7 @@ Rust SDKに基づいており、TMアカウントからデータを逆シリア�
 | Master Edition v2 | 282            | 20                   |
 | Edition           | 241            | 42                   |
 
-### どのSDKバージョンが影響を受けますか？
+### どのSDKバージョンが影響を受けますか？ {% #which-sdk-versions-are-affected %}
 
 * **Javascript**: JS SDK（@metaplex-foundation/jsとUmiベースのSDKの両方）は影響を受けません
 * **Rust**: Rust SDKは1年以上前からv2.0.0以降で互換性があります（2023年8月から利用可能）

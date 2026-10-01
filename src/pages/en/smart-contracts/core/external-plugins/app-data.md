@@ -45,7 +45,7 @@ The **AppData** plugin stores arbitrary data on Assets with controlled write acc
 ## Out of Scope
 Oracle validation (see [Oracle Plugin](/smart-contracts/core/external-plugins/oracle)), on-chain attributes (see [Attributes Plugin](/smart-contracts/core/plugins/attribute)), and off-chain metadata storage.
 ## Quick Start
-**Jump to:** [Add to Asset](#adding-the-appdata-plugin-to-an-asset) · [Write Data](#writing-data-to-the-appdata-plugin) · [Read Data](#reading-data-from-the-appdata-plugin)
+**Jump to:** [Add to Asset](#adding-the-app-data-plugin-to-an-asset) · [Write Data](#writing-data-to-the-app-data-plugin) · [Read Data](#reading-data-from-the-app-data-plugin)
 1. Add AppData plugin with a Data Authority address
 2. Choose schema: JSON, MsgPack, or Binary
 3. Write data using `writeData()` (must sign as Data Authority)

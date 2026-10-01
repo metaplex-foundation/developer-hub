@@ -76,7 +76,7 @@ faqs:
 - **Collection**：允许使用collection authority burn Collection中的任何Asset。不会一次性burn所有Asset。
 ## 参数
 Permanent Burn Plugin没有需要传入的参数。
-## 创建带有Permanent Burn Plugin的Asset
+## 创建带有Permanent Burn Plugin的Asset {% #creating-an-asset-with-a-permanent-burn-plugin %}
 {% dialect-switcher title="创建带有Permanent Freeze plugin的Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

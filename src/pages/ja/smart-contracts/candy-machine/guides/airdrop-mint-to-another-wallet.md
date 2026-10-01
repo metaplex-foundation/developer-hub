@@ -34,7 +34,7 @@ description: Candy Machineから別のウォレットアドレスにNFTをミン
 1. [Sugar CLI](#using-sugar-cli)を使用したミント。コーディング不要！
 2. [Javascript](#using-typescript-and-metaplex-foundation-mpl-candy-machine)を使用したミント
 
-## Sugar CLIの使用
+## Sugar CLIの使用 {% #using-sugar-cli %}
 
 Sugar CLIは、他のウォレットにNFTをミントするための2つの主要なコマンドを提供します：
 1. `sugar mint`：*1つ*の特定のウォレットにミント
@@ -77,7 +77,7 @@ sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-m
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
 
-## Typescriptと`@metaplex-foundation/mpl-candy-machine`の使用
+## Typescriptと`@metaplex-foundation/mpl-candy-machine`の使用 {% #using-typescript-and-metaplex-foundation-mpl-candy-machine %}
 
 このセクションでは、Javascriptでのミント関数のコードスニペットを示します。両方の例には、Candy Machineが作成され、その後特定のウォレットに単一のNFTがミントされる完全なコードスニペットも含まれています。完全なエアドロップスクリプトを実装するには、ミント関数の周りにループとエラー処理を実装する必要があります。
 

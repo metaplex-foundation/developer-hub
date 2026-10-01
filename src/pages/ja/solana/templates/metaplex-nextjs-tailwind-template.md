@@ -128,7 +128,7 @@ const signer = useUmiStore.getState().signer
 umi.use(signerIdentity(signer))
 ```
 
-## ヘルパー
+## ヘルパー {% #helpers %}
 
 `/lib/umi`フォルダに、開発を簡単にするために使用できるいくつかの事前に作成されたヘルパーがあります。
 

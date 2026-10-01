@@ -176,7 +176,7 @@ API 참조: [mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/mi
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 가드와 함께 민팅
+## 가드와 함께 민팅 {% #minting-with-guards %}
 
 많은 가드를 사용하는 Candy Machine에서 민팅할 때 추가적인 가드별 정보를 제공해야 할 수 있습니다.
 

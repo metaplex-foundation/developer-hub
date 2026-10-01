@@ -93,10 +93,10 @@ Assetは`burn`命令を使用してバーンできます。これにより、Ass
 オンチェーン命令の完全な詳細は[Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123)で確認できます。
 {% /totem-accordion %}
 {% /totem %}
-## コード例
+## コード例 {% #code-example %}
 SDKを使用してCore assetをバーンする方法を示します。このスニペットはあなたがアセットの所有者であることを前提としています。
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
-## Collectionに属するAssetのバーン
+## Collectionに属するAssetのバーン {% #burning-an-asset-that-is-part-of-a-collection %}
 コレクションの一部であるCore assetをバーンするためのSDKの使用方法を示します。このスニペットはあなたがアセットの所有者であることを前提としています。
 {% dialect-switcher title="Collectionに属するAssetのバーン" %}
 {% dialect title="JavaScript" id="js" %}
