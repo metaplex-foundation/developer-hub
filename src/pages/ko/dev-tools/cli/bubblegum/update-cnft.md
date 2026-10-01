@@ -125,3 +125,4 @@ Updating compressed NFT... ✓
 - `--uri` 플래그는 `--image`, `--description`, `--editor`와 배타적입니다
 - `--editor` 플래그는 다른 모든 업데이트 플래그와 배타적입니다
 - 편집기는 `$EDITOR` 환경 변수를 사용하거나 기본적으로 nano/notepad를 사용합니다
+- 상속 로열티로 민팅된 cNFT를 업데이트할 때 CLI는 SDK `currentMetadata` 또는 DAS `royalty.basis_points_raw` / `creators_raw`에서 리프 정규 메타데이터(`65535` + 빈 크리에이터)를 다시 만듭니다. 표시용 로열티 %를 리프에 쓰지 마세요. 해시가 깨집니다. [상속 로열티 읽기](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

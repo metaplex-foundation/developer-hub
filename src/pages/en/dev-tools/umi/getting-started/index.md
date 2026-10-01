@@ -8,11 +8,11 @@ description: A Javascript Framework for Solana.
 
 To use Umi you need to install Umi and all the external plugins you'll want to use. Alternatively, if you don't need a specific plugin, you can install the default bundle that includes a set of plugins that's suitable for most use cases.
 
-**Note**: since the default bundle relies on web3.js for some of the interfaces you'll need to install that package as well.
+**Note**: Since the default bundle relies on Web3.js for some interfaces, you need to install that package as well. Umi 1.6.0 requires `@solana/web3.js` 1.99.0 or later for V1 transaction support.
 
 ### Required Packages
 
-{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js@1"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js"] type="npm" /%}
 
 To install them, use the following commands:
 
@@ -25,7 +25,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```
-npm i @solana/web3.js@1
+npm i @solana/web3.js@^1.99.0
 ```
 
 ### For library authors

@@ -42,6 +42,14 @@ Core 协议费用直接存入 Asset 账户本身，而不是转入单独的费�
 
 {% /totem-accordion %}
 
+{% totem-accordion title="MPL-3643" %}
+
+由发行方在发行、生命周期事件和持有人激活时支付的固定费用。
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="MPL-Distro" %}
 
 Merkle 领取成功时，由领取交易的支付方支付。
