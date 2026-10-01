@@ -1,5 +1,0 @@
-{
-  "comment": "Known-broken in-page anchor links, mostly localized pages that link to English anchors while their headings are translated. CI fails on anything not listed here. Regenerate with: node scripts/audit-heading-anchors.mjs --update-baseline",
-  "total": 0,
-  "brokenLinks": {}
-}
