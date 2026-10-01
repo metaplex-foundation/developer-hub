@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK - Bubblegum V2 - Metaplex
 description: Metaplex Bubblegum V2 JavaScript SDK 完整参考文档，涵盖 Umi 设置、创建树、铸造、转移、销毁、更新、委托、冻结以及获取压缩 NFT。
 created: '01-15-2025'
-updated: '02-25-2026'
+updated: '06-19-2026'
 keywords:
   - mpl-bubblegum JavaScript
   - Bubblegum V2 TypeScript SDK
@@ -39,7 +39,7 @@ faqs:
   - q: 我可以将此 SDK 用于 Bubblegum V1 树吗？
     a: 不可以。此 SDK 针对 Bubblegum V2，使用 LeafSchemaV2。V1 树请使用旧版 Bubblegum SDK。
   - q: getAssetWithProof 是什么，为什么需要它？
-    a: getAssetWithProof 是一个辅助函数，可以从 DAS API 一次调用中获取叶子变更指令所需的所有参数（证明、根、叶子索引、随机数、元数据）。几乎所有写入指令都需要它。
+    a: getAssetWithProof 是一个辅助函数，可以从 DAS API 一次调用中获取叶子变更指令所需的所有参数。继承时 metadata 为展示用解析费率，currentMetadata 为叶子规范值（65535），可选 sellerFeeBasisPointsRaw / inherited 镜像 DAS。写入时展开 ...assetWithProof 以使用 currentMetadata。
 ---
 
 **Bubblegum V2 JavaScript SDK**（`@metaplex-foundation/mpl-bubblegum`）是在 Solana 上创建和管理[压缩 NFT](/zh/smart-contracts/bubblegum-v2) 的推荐 TypeScript/JavaScript 库。基于 [Umi 框架](/zh/dev-tools/umi)构建，它为所有 Bubblegum V2 操作提供类型安全的函数，并自动包含 [DAS API](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 插件。 {% .lead %}
@@ -197,6 +197,14 @@ await mintV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+### 从集合继承版税
+
+当设置了 `coreCollection` 时，如果省略 `metadata.sellerFeeBasisPoints`，SDK 的 `mintV2` 辅助函数默认使用继承版税。叶子上存储 `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）。集合必须具有 `Royalties` 插件，且 `metadata.creators` 必须为空。
+
+{% code-tabs-imported from="bubblegum/mint-inherit-royalties" frameworks="umi" /%}
+
+有关集合设置和约束，请参阅[铸造压缩 NFT — 继承版税](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)。
+
 ### 铸造后获取资产 ID
 
 铸造确认后，使用 `parseLeafFromMintV2Transaction` 获取叶子模式（包括资产 ID）。
@@ -273,15 +281,16 @@ const updateArgs: UpdateArgsArgs = {
   uri: some('https://example.com/updated.json'),
 }
 
+// Spread includes currentMetadata (leaf-canonical).
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.metadata,
   updateArgs,
-  // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
+
+`getAssetWithProof.metadata` 镜像 DAS 主字段（继承时为解析值）。`currentMetadata` 是写入用的叶子规范 `MetadataArgsV2Args`。可选同伴字段 `sellerFeeBasisPointsRaw` / `creatorsRaw` 与 `inherited` 镜像 DAS `_raw`。写入时展开 `...assetWithProof`，不要把展示用 `metadata` 当作叶子参数传入。
 
 ## 委托压缩 NFT
 
@@ -330,21 +339,14 @@ await delegate(umi, {
 import {
   getAssetWithProof,
   setCollectionV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, publicKey } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  ...assetWithProof.metadata,
-  collection: collection?.key ?? null,
-}
 
 await setCollectionV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   newCollectionAuthority: newCollectionUpdateAuthority,
   newCoreCollection: publicKey('NewCollectionAddressHere'),
 }).sendAndConfirm(umi)
@@ -357,12 +359,13 @@ import { getAssetWithProof, setCollectionV2 } from '@metaplex-foundation/mpl-bub
 import { unwrapOption } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
+const collection = unwrapOption(assetWithProof.currentMetadata.collection)
 
 await setCollectionV2(umi, {
   ...assetWithProof,
+  metadata: assetWithProof.currentMetadata,
   authority: collectionAuthoritySigner,
-  coreCollection: collection!.key,
+  coreCollection: collection!,
 }).sendAndConfirm(umi)
 ```
 
@@ -431,24 +434,13 @@ await setNonTransferableV2(umi, {
 import {
   getAssetWithProof,
   verifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collectionOption = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: collectionOption ? collectionOption.key : none(),
-  creators: assetWithProof.metadata.creators,
-}
 
 await verifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity, // the creator being verified must sign
 }).sendAndConfirm(umi)
 ```
@@ -459,23 +451,13 @@ await verifyCreatorV2(umi, {
 import {
   getAssetWithProof,
   unverifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
 
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)?.key ?? none(),
-  creators: assetWithProof.metadata.creators,
-}
-
 await unverifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity,
 }).sendAndConfirm(umi)
 ```
@@ -483,6 +465,28 @@ await unverifyCreatorV2(umi, {
 ## 获取 cNFT
 
 DAS API 插件由 `mplBubblegum()` 自动注册。请参阅[获取 cNFT](/zh/smart-contracts/bubblegum-v2/fetch-cnfts) 了解可用方法的完整说明。
+
+### getAssetWithProof 与继承版税 {% #getassetwithproof-and-inherited-royalties %}
+
+`getAssetWithProof` 将 `getAsset` 和 `getAssetProof` 合并为写入指令所需的参数形态。
+
+| 字段 | 用途 |
+|-------|---------|
+| `metadata` | 镜像 DAS 主字段（`MetadataArgs`）：继承时为解析后的 `sellerFeeBasisPoints` / `creators`。用于读取与 UI 展示。 |
+| `currentMetadata` | 写入所用的叶子规范 `MetadataArgsV2Args`（继承时为哨兵值 `65535`）。展开 `...assetWithProof` 时包含。 |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | 可选的叶子同级字段（`basis_points_raw` / `creators_raw`）；DAS 未返回时省略。 |
+| `inherited` | 用于继承检测的便捷字段。 |
+| `rpcAsset` | 完整的 DAS 响应。主字段与 `_raw` 的划分同上。 |
+
+`updateMetadataV2` 将其现有叶子参数命名为 `currentMetadata`（IDL）。展开 `...assetWithProof` 即可提供。接受叶子 `metadata` 参数的指令（`setCollectionV2`、`verifyCreatorV2` 等）应使用 `assetWithProof.currentMetadata`。
+
+直接读取 DAS 的客户端应遵循[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
+
+{% callout type="note" title="版本要求" %}
+`currentMetadata` 已包含在 `@metaplex-foundation/mpl-bubblegum` **5.1.0** 中。`sellerFeeBasisPointsRaw`、`creatorsRaw` 和 `inherited` 这几个同级字段尚未发布，它们将随 [mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173) 一起提供。在此之前，请从 `rpcAsset.royalty.basis_points_raw`、`rpcAsset.creators_raw` 和 `rpcAsset.royalty.inherited` 读取相同的值，这些字段需要 `@metaplex-foundation/digital-asset-standard-api` **2.1.0 及以上**。
+{% /callout %}
+
+{% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
 ### 获取单个 cNFT
 
@@ -606,7 +610,8 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 | `setNonTransferableV2` | 使 cNFT 永久灵魂绑定（不可逆） |
 | `verifyCreatorV2` | 在创建者条目上设置 verified 标志 |
 | `unverifyCreatorV2` | 从创建者条目中移除 verified 标志 |
-| `getAssetWithProof` | 获取写入指令所需的所有证明参数 |
+| `getAssetWithProof` | 获取证明参数；展示用 `metadata`，写入用 `currentMetadata`；可选 `_raw` 同伴字段 + `inherited` |
+| `SELLER_FEE_BASIS_POINTS_INHERIT` | 从 MPL-Core 集合继承版税的哨兵常量（`65535`） |
 | `findLeafAssetIdPda` | 从树地址和叶子索引推导 cNFT 资产 ID |
 | `parseLeafFromMintV2Transaction` | 从铸造交易中提取叶子模式（包括资产 ID） |
 
