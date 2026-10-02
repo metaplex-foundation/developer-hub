@@ -3,7 +3,7 @@ title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegumに関するよくある質問。
 created: '01-15-2025'
-updated: '06-19-2026'
+updated: '10-01-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -159,6 +159,10 @@ cNFTの最大数は `2^maxDepth` です。深度14のツリーは16,384個、深
 ## cNFTはMPL-Coreコレクションからロイヤリティを継承できますか？ {% #inherited-royalties %}
 
 はい。`Royalties` プラグインを持つMPL-Coreコレクションにミントする場合、`metadata.sellerFeeBasisPoints` を省略（または `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535` を渡す）できます。リーフにはそのセンチネルがオンチェーンに保存されます。DASは表示用に `royalty.basis_points` / `creators` にコレクションから解決された料率を置き、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます（`royalty.inherited: true`）。
+
+{% callout type="warning" title="継承ロイヤリティ未対応のDASプロバイダー" %}
+まだ継承ロイヤリティに対応していないDASプロバイダーは、`royalty.basis_points` にリーフセンチネル（`65535`）を返し、`creators` は空になります。そのため、ウォレットやマーケットプレイスではクリエイターなしの **655.35%のロイヤリティ**（約650%）が表示されます。オンチェーンのアセットは正しいです。[継承ロイヤリティ未対応のDASプロバイダーからのレスポンス](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)を参照してください。
+{% /callout %}
 
 **要件:**
 

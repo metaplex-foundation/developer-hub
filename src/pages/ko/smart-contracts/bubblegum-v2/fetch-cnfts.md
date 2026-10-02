@@ -3,7 +3,7 @@ title: 압축된 NFT 가져오기
 metaTitle: 압축된 NFT 가져오기 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 가져오는 방법을 알아보세요.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '10-01-2026'
 keywords:
   - fetch compressed NFT
   - read cNFT
@@ -208,7 +208,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/ko/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
-- 컬렉션에서 판매자 수수료를 상속하는 Bubblegum V2 cNFT의 경우, DAS는 `royalty.basis_points` / `creators`에 컬렉션 비율을, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하세요.
+- 컬렉션에서 판매자 수수료를 상속하는 Bubblegum V2 cNFT의 경우, DAS는 `royalty.basis_points` / `creators`에 컬렉션 비율을, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다. 아직 상속 로열티를 지원하지 않는 DAS 제공자는 대신 `royalty.basis_points: 65535`(655.35% 로열티)와 빈 `creators`를 반환합니다. [상속 로열티를 지원하지 않는 DAS 제공자의 응답](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)을 참조하세요.
 
 ## FAQ
 

@@ -3,7 +3,7 @@ title: 圧縮NFTの取得
 metaTitle: 圧縮NFTの取得 - Bubblegum V2
 description: Bubblegumで圧縮NFTを取得する方法を学びます。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '10-01-2026'
 keywords:
   - fetch compressed NFT
   - read cNFT
@@ -78,7 +78,7 @@ umi.use(dasApi());
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
-- コレクションから販売者手数料を継承するBubblegum V2 cNFTでは、DASは `royalty.basis_points` / `creators` にコレクション料率を、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)を参照してください。
+- コレクションから販売者手数料を継承するBubblegum V2 cNFTでは、DASは `royalty.basis_points` / `creators` にコレクション料率を、`royalty.basis_points_raw` / `creators_raw` にリーフセンチネルを置きます。まだ継承ロイヤリティに対応していないDASプロバイダーは、代わりに `royalty.basis_points: 65535`（655.35%のロイヤリティ）を返し、`creators` は空になります。[継承ロイヤリティ未対応のDASプロバイダーからのレスポンス](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)を参照してください。
 
 ## FAQ
 
