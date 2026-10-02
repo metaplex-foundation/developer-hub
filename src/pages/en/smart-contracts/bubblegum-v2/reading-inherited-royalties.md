@@ -3,7 +3,7 @@ title: Reading Inherited Royalties
 metaTitle: Reading Inherited Royalties - Bubblegum V2 - Metaplex
 description: How wallets, marketplaces, indexers, and other clients should read DAS getAsset responses for Bubblegum V2 cNFTs that inherit seller fees from an MPL-Core collection.
 created: '07-16-2026'
-updated: '08-06-2026'
+updated: '10-01-2026'
 keywords:
   - inherited royalties
   - seller fee basis points
@@ -26,6 +26,8 @@ faqs:
     a: That is the on-chain inherit sentinel used for leaf hashing. royalty.basis_points already holds the collection rate for display.
   - q: Why is creators_raw empty on an inherited cNFT?
     a: Leaf creators must be empty when SFBP is inherited. Use creators for collection royalty payees.
+  - q: Why does a wallet or marketplace show a 655.35% royalty on my cNFT?
+    a: The app's DAS provider does not support inherited royalties yet. It returns the leaf inherit sentinel 65535 on royalty.basis_points (655.35%) with empty creators instead of the collection rate. The onchain royalty is not wrong; the app needs an upgraded DAS provider or must read the collection Royalties plugin.
   - q: Do I need to change anything for non-inherited cNFTs?
     a: No. When inheritance is not used, the _raw fields and inherited are omitted and the main royalty and creators fields behave as before.
 ---
@@ -37,6 +39,7 @@ Bubblegum V2 can store seller fees as an **inherit sentinel** (`65535`) on the l
 - Use **main fields** (`royalty.basis_points`, `creators`) for royalty UI and payout display
 - Use **`_raw` fields** (`royalty.basis_points_raw`, `creators_raw`) for proofs, hashing, and write instructions
 - Non-inherited assets are unchanged — `_raw` / `inherited` are omitted
+- DAS providers without inherited royalty support return the raw sentinel instead, which apps display as a **655.35%** royalty with no creators
 
 This page is for **any client that reads** `getAsset` / DAS responses — wallets, marketplaces, indexers, analytics, and apps. For minting and updating inherited cNFTs, see [Minting](/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection) and [Updating](/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties).
 
@@ -90,6 +93,41 @@ An inherited asset returns the collection's resolved rate on `basis_points` and 
 - `creators` are collection Royalties plugin payees; `creators_raw: []` is the leaf creators array for hashing.
 
 If the collection cannot be resolved, `basis_points` may fall back while `basis_points_raw` remains `65535`.
+
+## Responses from DAS providers without inherited royalty support {% #unsupported-das %}
+
+A DAS provider that does not support inherited royalties yet returns the leaf data unchanged, so an inherited cNFT shows a **655.35% royalty** (often rounded to "650%" or "655%" in UIs) with **no creators**. The onchain asset is correct — only the indexer's response is missing the collection resolution.
+
+The same inherited asset from the example above looks like this on an unsupported provider:
+
+```json
+"royalty": {
+  "royalty_model": "creators",
+  "target": null,
+  "percent": 6.5535,
+  "basis_points": 65535,
+  "primary_sale_happened": false,
+  "locked": false
+},
+"creators": []
+```
+
+| Field | Supported DAS | Unsupported DAS | What users see on unsupported DAS |
+|-------|---------------|-----------------|-----------------------------------|
+| `royalty.basis_points` | `750` (collection rate) | `65535` (leaf sentinel) | 655.35% royalty |
+| `royalty.percent` | `0.075` | `6.5535` | 655.35% royalty |
+| `creators` | Collection Royalties plugin payees | `[]` | No royalty recipients |
+| `royalty.basis_points_raw` / `creators_raw` / `royalty.inherited` | Present | Omitted | — |
+
+{% callout type="warning" title="655.35% is the inherit sentinel, not a real royalty" %}
+If a wallet, marketplace, or explorer shows a royalty of roughly 650% on a Bubblegum V2 cNFT, its DAS provider does not support inherited royalties yet. Nothing is wrong with the asset or the collection. The value is `65535` basis points, the `SELLER_FEE_BASIS_POINTS_INHERIT` sentinel, read as if it were a rate.
+{% /callout %}
+
+Clients can handle unsupported providers in three ways:
+
+- Treat `royalty.basis_points === 65535` without `basis_points_raw` as inherited — the `isInheritedRoyalty` helper below does this.
+- Read the effective rate and payees from the MPL-Core collection's [Royalties plugin](/smart-contracts/core/plugins/royalties) instead of DAS. The collection address is in the asset's `grouping` with `group_key: "collection"`.
+- Switch to a DAS provider that supports inherited royalties. See [RPCs and DAS](/solana/rpcs-and-das).
 
 ## Detection and display helpers
 
@@ -157,12 +195,12 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 Most integration bugs come from showing a leaf value to users or hashing a display value into a write.
 
-- Do **not** show `65535` or `6.5535%` as the user-facing royalty rate — that value lives on `basis_points_raw`.
+- Do **not** show `65535` basis points (655.35%) as the user-facing royalty rate — on supported DAS that value lives on `basis_points_raw`, and on [unsupported DAS](#unsupported-das) it means the rate must be resolved from the collection.
 - Do **not** assume empty `creators_raw` means no royalty recipients; display payees are on `creators`.
 - Do **not** use main `basis_points` / `creators` when recomputing leaf hashes or building Bubblegum write instructions — use `basis_points_raw` and `creators_raw`.
 
-{% callout type="warning" title="Outdated DAS / marketplaces" %}
-Inherited royalties require a DAS indexer that resolves collection rates onto the main fields. On an **outdated** DAS endpoint, `getAsset` still returns the leaf as-is: `royalty.basis_points` ≈ `65535`, `creators: []`, and no `basis_points_raw` / `inherited` / `creators_raw`.
+{% callout type="warning" title="Royalty payouts on marketplaces with unsupported DAS" %}
+Inherited royalties require a DAS indexer that resolves collection rates onto the main fields. On an [unsupported DAS provider](#unsupported-das), `getAsset` returns the leaf as-is: `royalty.basis_points: 65535` (655.35%), `creators: []`, and no `basis_points_raw` / `inherited` / `creators_raw`.
 
 Marketplaces that only read those DAS asset fields for payouts may treat the asset as having **no royalty recipients** (or an invalid rate) and **pay creators nothing**. Prefer marketplaces that:
 
@@ -193,6 +231,10 @@ That is the onchain inherit sentinel used for leaf hashing. `royalty.basis_point
 ### Why is `creators_raw` empty on an inherited cNFT?
 
 Leaf creators must be empty when SFBP is inherited. Use `creators` for collection royalty payees.
+
+### Why does a wallet or marketplace show a 655.35% royalty on my cNFT?
+
+The app's DAS provider does not support inherited royalties yet. It returns the leaf inherit sentinel `65535` on `royalty.basis_points` (655.35%) with empty `creators` instead of the collection rate. The onchain royalty is not wrong; the app needs an upgraded DAS provider or must read the collection Royalties plugin. See [Responses from DAS providers without inherited royalty support](#unsupported-das).
 
 ### Do I need to change anything for non-inherited cNFTs?
 

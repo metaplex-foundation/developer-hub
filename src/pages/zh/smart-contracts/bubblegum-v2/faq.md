@@ -3,7 +3,7 @@ title: 常见问题
 metaTitle: 常见问题 - Bubblegum V2
 description: 关于Bubblegum的常见问题。
 created: '01-15-2025'
-updated: '06-19-2026'
+updated: '10-01-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -165,6 +165,10 @@ cNFT 的最大数量是 `2^maxDepth`。深度 14 的树可容纳 16,384 个，�
 ## cNFT 可以从 MPL-Core 集合继承版税吗？ {% #inherited-royalties %}
 
 可以。铸造到具有 `Royalties` 插件的 MPL-Core 集合时，可以省略 `metadata.sellerFeeBasisPoints`（或传入 `SELLER_FEE_BASIS_POINTS_INHERIT`、`65535`）。叶子上链存储该哨兵值。DAS 将集合解析后的费率放在 `royalty.basis_points` / `creators` 上供展示，并将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上（同时 `royalty.inherited: true`）。
+
+{% callout type="warning" title="不支持继承版税的 DAS 提供方" %}
+尚不支持继承版税的 DAS 提供方会在 `royalty.basis_points` 上返回叶子哨兵值（`65535`），且 `creators` 为空，因此钱包和市场会显示 **655.35% 的版税**（约 650%）且没有 creators。链上资产是正确的。请参阅[不支持继承版税的 DAS 提供方的响应](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)。
+{% /callout %}
 
 **要求:**
 
