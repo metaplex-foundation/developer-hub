@@ -147,7 +147,7 @@ export function MobileNavigation({ page }) {
           </Link>
 
           <Link
-            href={getLocalizedHref('/guides', locale)}
+            href={getLocalizedHref('/solana', locale)}
             className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <BookOpenIcon height={20} /> {t('solana', 'Solana')}
