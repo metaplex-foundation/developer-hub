@@ -10,7 +10,7 @@ Metaplex协议目前包含以下费用：
 
 {% totem-accordion title="Genesis" %}
 
-联合曲线生命周期全程的代币发行平台费用。
+联合曲线、Launch Pool 和 Presale 发行的费用，包括毕业后在 Raydium CPMM 池中的交易费用。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -39,6 +39,14 @@ Core 协议费用直接存入 Asset 账户本身，而不是转入单独的费�
 由铸造者支付（通常是铸造新发行品的个人收藏者）。或者，创作者可以考虑使用Core（下一代NFT）以获得最大的可组合性和更低的铸造成本，或使用Bubblegum（压缩NFT）。
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-3643" %}
+
+由发行方在发行、生命周期事件和持有人激活时支付的固定费用。
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
 
 {% /totem-accordion %}
 

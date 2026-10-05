@@ -177,6 +177,7 @@ async function main() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
@@ -436,4 +437,4 @@ main().catch(console.error);
 - [Genesis Overview](/smart-contracts/genesis) - Learn more about the Solana token launchpad
 - [Launch Pool](/smart-contracts/genesis/launch-pool) - Detailed fair launch documentation
 - [Presale](/smart-contracts/genesis/presale) - Run a token presale at a fixed price
-- [Integration APIs](/smart-contracts/genesis/integration-apis) - Query launch and token sale data via API
+- [Metaplex API](/api) - Query launch and token sale data via API

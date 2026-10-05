@@ -10,7 +10,7 @@ Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
 
 {% totem-accordion title="Genesis" %}
 
-본딩 커브 라이프사이클 전반에 걸친 토큰 런치 플랫폼 수수료.
+본딩 커브, Launch Pool, Presale 런치와 졸업 후 Raydium CPMM 풀 거래에 적용되는 수수료.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -39,6 +39,14 @@ Core 프로토콜 수수료는 별도의 수수료 계정으로 이체되는 것
 민터가 지불합니다 (일반적으로 새로운 드롭을 민팅하는 개별 컬렉터). 또는 크리에이터는 최대 구성 가능성과 낮은 민팅 비용을 위해 Core(차세대 NFT) 또는 Bubblegum(압축 NFT) 사용을 고려할 수 있습니다.
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-3643" %}
+
+발행, 라이프사이클 이벤트 및 홀더 활성화 시 발행자가 지불하는 고정 수수료입니다.
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
 
 {% /totem-accordion %}
 

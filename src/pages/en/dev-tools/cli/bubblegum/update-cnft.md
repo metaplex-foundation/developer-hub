@@ -123,3 +123,4 @@ To update a compressed NFT, you must be either:
 - The `--uri` flag is mutually exclusive with `--image`, `--description`, and `--editor`
 - The `--editor` flag is mutually exclusive with all other update flags
 - Editor uses `$EDITOR` environment variable, or defaults to nano/notepad
+- For cNFTs minted with inherited royalties, update rebuilds leaf-canonical metadata (`65535` + empty creators) from SDK `currentMetadata` or DAS `royalty.basis_points_raw` / `creators_raw`. Do not write the display royalty % into the leaf — that breaks the hash. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

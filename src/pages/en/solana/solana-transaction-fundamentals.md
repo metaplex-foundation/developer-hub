@@ -4,7 +4,7 @@ metaTitle: Solana Transaction Fundamentals | How Transactions Work
 description: Learn how Solana transactions work, including structure, signing, sending, and confirmation. Essential knowledge for building reliable applications.
 # remember to update dates also in /components/products/guides/index.js
 created: '02-04-2026'
-updated: null
+updated: '09-21-2026'
 ---
 
 A comprehensive guide to understanding how Solana transactions work from structure to confirmation. {% .lead %}
@@ -185,22 +185,36 @@ const result = await myBuilder.sendAndConfirm(umi, {
 
 ## Versioned Transactions
 
-Solana currently supports two transaction formats:
+Solana supports three transaction formats:
 
 ### Legacy Transactions
+
+Legacy transactions use Solana's original transaction format without Address Lookup Tables.
+
 - Original format
 - Limited to 35 accounts
 - Simpler structure
 
-### Versioned Transactions (v0)
+### V0 Transactions
+
+V0 transactions add Address Lookup Table support for transactions that need more accounts.
+
 - Support **Address Lookup Tables** (ALTs)
 - Can reference up to 256 accounts
 - Required for complex DeFi operations
 
+### V1 Transactions
+
+V1 transactions increase the transaction size limit and store compute configuration in the message.
+
+- Support transactions up to 4,096 bytes
+- Store compute budget configuration in the transaction message
+- Do not support Address Lookup Tables
+
 ```javascript
-// UMI uses V0 transactions by default
+// Umi uses V0 transactions by default. Opt in to V1 explicitly.
 const result = await myBuilder
-  .useV0()  // Explicit, but this is already the default
+  .useV1()
   .sendAndConfirm(umi)
 
 // To use legacy transactions instead
@@ -217,17 +231,19 @@ const [lutBuilder, lut] = createLut(umi, {
 })
 await lutBuilder.sendAndConfirm(umi)
 
-// Use the lookup table in your transaction
-await myBuilder.setAddressLookupTables([lut]).sendAndConfirm(umi)
+// Address Lookup Tables require V0.
+await myBuilder
+  .useV0()
+  .setAddressLookupTables([lut])
+  .sendAndConfirm(umi)
 ```
 
-{% callout title="When to Use Versioned Transactions" %}
-Use versioned transactions when:
-- Your transaction involves many accounts (>35)
-- You're interacting with DeFi protocols that require ALTs
-- You want to reduce transaction size
+{% callout title="Choosing a Transaction Version" %}
+- Use V1 for transactions larger than 1,232 bytes when the wallet supports transaction version `1`.
+- Use V0 when the transaction requires an Address Lookup Table.
+- Use legacy transactions only when compatibility requires the original format.
 
-For simple operations (transfers, basic mints), legacy transactions work fine.
+Umi defaults to V0 for backward compatibility. See [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) before changing the application-wide default.
 {% /callout %}
 
 ## Transaction Size Limits
@@ -236,17 +252,19 @@ Solana transactions have strict size limits:
 
 | Limit | Value |
 |-------|-------|
-| Maximum transaction size | 1232 bytes |
-| Maximum accounts | 35 (legacy) / 256 (versioned with ALTs) |
+| Legacy and V0 transaction size | 1,232 bytes |
+| V1 transaction size | 4,096 bytes |
+| Address Lookup Tables | V0 only |
 | Maximum instructions | Limited by size |
 
 ### Dealing with Size Limits
 
 If your transaction is too large:
 
-1. **Use Address Lookup Tables** - Compress account references
-2. **Split into multiple transactions** - Execute sequentially
-3. **Optimize instruction data** - Minimize serialized data
+1. **Use V1** - Increase the size limit to 4,096 bytes when no Address Lookup Table is required
+2. **Use Address Lookup Tables with V0** - Compress account references
+3. **Split into multiple transactions** - Execute sequentially
+4. **Optimize instruction data** - Minimize serialized data
 
 ## Simulation
 

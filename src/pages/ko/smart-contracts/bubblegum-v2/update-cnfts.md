@@ -3,7 +3,7 @@ title: 압축된 NFT 업데이트
 metaTitle: 압축된 NFT 업데이트 - Bubblegum V2
 description: Bubblegum에서 압축된 NFT를 업데이트하는 방법을 알아보세요.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - update compressed NFT
   - update cNFT
@@ -24,6 +24,8 @@ faqs:
     a: UpdateArgsArgs에 정의된 이름, URI, 판매자 수수료 기준 포인트 및 기타 메타데이터 필드를 업데이트할 수 있습니다. 변경하려는 필드에는 some('newValue')을 사용하세요.
   - q: 업데이트 시 컬렉션을 전달해야 하나요?
     a: 예, cNFT가 컬렉션에 속한 경우. 컬렉션의 공개 키와 함께 coreCollection 매개변수를 전달하세요. 컬렉션 권한이 트랜잭션에 서명해야 합니다.
+  - q: 컬렉션에서 로열티를 상속하는 cNFT를 업데이트하려면 어떻게 해야 하나요?
+    a: updateMetadataV2에 ...assetWithProof를 전개하세요(currentMetadata는 리프 정규이며 상속 시 65535). 표시용 해석 비율은 metadata에 있습니다. metadata를 currentMetadata로 전달하지 마세요.
 ---
 
 ## Summary
@@ -34,6 +36,7 @@ faqs:
 - Collection authority updates cNFTs that belong to a collection
 - Tree authority updates cNFTs that do not belong to a collection
 - Changes are reflected in the merkle tree and indexed by DAS API providers
+- `updateMetadataV2`에 `...assetWithProof`를 전개해 `getAssetWithProof.currentMetadata`(리프 정규)를 사용
 
 **updateMetadataV2** 명령어는 압축된 NFT의 메타데이터를 수정하는 데 사용할 수 있습니다. 머클 루트가 업데이트되어 데이터의 전파된 해시를 반영하고, [Metaplex DAS API](https://github.com/metaplex-foundation/digital-asset-standard-api)를 준수하는 RPC 제공업체는 cNFT의 인덱스를 업데이트합니다.
 
@@ -90,7 +93,6 @@ const updateArgs: UpdateArgsArgs = {
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner,
-  currentMetadata: assetWithProof.metadata,
   updateArgs,
   // 선택적 매개변수. 권한이 현재 umi 신원과 다른 서명자 타입인 경우
   // 여기에 해당 서명자를 할당합니다.
@@ -100,6 +102,20 @@ await updateMetadataV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+{% callout type="note" title="쓰기 명령용 리프 메타데이터" %}
+`getAssetWithProof`는 `metadata`(DAS 표시 / 해석 비율)와 `currentMetadata`(리프 정규 `MetadataArgsV2Args`, 상속 시 `65535`)를 모두 반환합니다. 쓰기 시 `...assetWithProof`를 전개하고 표시용 `metadata`를 `currentMetadata`로 전달하지 마세요. UI에는 `metadata` / `rpcAsset`, 상속 감지에는 `inherited`를 사용하세요.
+
+자산을 읽을 때 DAS 응답 필드 안내는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하세요.
+{% /callout %}
+
+## 상속된 로열티 {% #inherited-royalties %}
+
+`updateArgs.sellerFeeBasisPoints`를 `some(SELLER_FEE_BASIS_POINTS_INHERIT)`로 설정하면 cNFT를 상속 로열티**로** 전환할 수 있습니다. 컬렉션에는 `Royalties` 플러그인이 있어야 하며 업데이트된 메타데이터의 `creators` 배열은 비어 있어야 합니다.
+
+상속 로열티**에서** 명시적인 비율로 되돌리려면 — 예를 들어 [cNFT를 컬렉션에서 제거하기](/ko/smart-contracts/bubblegum-v2/collections#inherited-royalties) 전에 — 원하는 basis points를 전달하세요:
+
+{% code-tabs-imported from="bubblegum/update-inherit-royalties" frameworks="umi" /%}
+
 {% /totem %}
 {% /dialect %}
 {% /dialect-switcher %}
@@ -107,12 +123,27 @@ await updateMetadataV2(umi, {
 ## Notes
 
 - The update authority depends on whether the cNFT belongs to a collection. Collection cNFTs use the collection authority; standalone cNFTs use the tree authority.
-- You must pass `currentMetadata` from `getAssetWithProof` so the program can verify the current leaf before applying updates.
+- `updateMetadataV2`에 `...assetWithProof`를 전개해 리프 정규 `currentMetadata`로 검증할 수 있게 하세요.
 - Use `some()` for fields you want to update and omit fields you want to keep unchanged.
+- Inherited seller fees require an empty leaf-level `creators` array and a collection with the `Royalties` plugin.
 
 ## FAQ
 
-#
+### 압축된 NFT의 메타데이터를 업데이트할 수 있는 사람은 누구인가요?
+
+cNFT가 컬렉션에 속한 경우 컬렉션 권한만 업데이트할 수 있습니다. 컬렉션에 속하지 않은 경우 트리 권한(트리 생성자 또는 위임자)이 업데이트할 수 있습니다.
+
+### cNFT에서 업데이트할 수 있는 필드는 무엇인가요?
+
+`UpdateArgsArgs`에 정의된 이름, URI, seller fee basis points 및 기타 메타데이터 필드를 업데이트할 수 있습니다. 변경하려는 필드에는 `some('newValue')`를 사용하세요.
+
+### 업데이트 시 컬렉션을 전달해야 하나요?
+
+예, cNFT가 컬렉션에 속한 경우. 컬렉션의 공개 키와 함께 `coreCollection` 매개변수를 전달하세요. 컬렉션 권한이 트랜잭션에 서명해야 합니다.
+
+### 컬렉션에서 로열티를 상속하는 cNFT를 업데이트하려면 어떻게 해야 하나요?
+
+`updateMetadataV2`에 `...assetWithProof`를 전개하면 상속 시 `currentMetadata`에 온체인 센티널이 들어갑니다. 상속 로열티로 전환하려면 `updateArgs.sellerFeeBasisPoints`에 `some(SELLER_FEE_BASIS_POINTS_INHERIT)`를, 벗어나려면 명시적인 숫자를 사용하세요.
 
 ## Glossary
 
@@ -122,4 +153,5 @@ await updateMetadataV2(umi, {
 | **Collection Authority** | The update authority of the MPL-Core collection, authorized to update cNFTs in that collection |
 | **Tree Authority** | The tree creator or delegate, authorized to update cNFTs that do not belong to a collection |
 | **UpdateArgsArgs** | The TypeScript type defining which metadata fields to update, using Option wrappers |
-| **currentMetadata** | The existing metadata of the cNFT, fetched via getAssetWithProof and required for verification |
+| **currentMetadata** | 기존 리프 메타데이터에 대한 `updateMetadataV2`의 IDL 인자; `...assetWithProof` 전개 시 `getAssetWithProof.currentMetadata`가 제공됨 |
+| **SELLER_FEE_BASIS_POINTS_INHERIT** | Sentinel value `65535` indicating royalties are inherited from the MPL-Core collection |

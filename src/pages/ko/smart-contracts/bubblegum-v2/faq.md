@@ -3,7 +3,7 @@ title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegum에 대한 자주 묻는 질문.
 created: '2025-01-15'
-updated: '2026-02-24'
+updated: '06-19-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -35,6 +35,8 @@ faqs:
     a: 압축 해제는 Bubblegum V1 자산에서만 사용할 수 있습니다. V2는 압축 해제를 지원하지 않습니다.
   - q: 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요?
     a: 최대값은 2^maxDepth입니다. 깊이 30의 트리는 10억 개 이상의 cNFT를 보유할 수 있지만, 트리가 클수록 렌트 비용이 더 많이 듭니다.
+  - q: cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요?
+    a: 예. Royalties 플러그인이 있는 컬렉션에 민팅할 때 sellerFeeBasisPoints를 생략하세요. 리프에는 상속 센티널(65535)이 저장되고 DAS는 royalty.basis_points에 컬렉션 비율을, royalty.basis_points_raw에 센티널을 둡니다. 쓰기 시 getAssetWithProof를 전개해 currentMetadata(리프 정규)를 사용하세요.
 ---
 
 ## Summary
@@ -45,6 +47,7 @@ faqs:
 - `truncateCanopy` 또는 주소 조회 테이블로 "트랜잭션이 너무 큽니다" 오류 해결하기
 - 트리를 생성하기 전에 트리 비용과 용량 이해하기
 - Bubblegum V2는 V1 트리 또는 압축 해제와 하위 호환되지 않음
+- cNFT는 MPL-Core 컬렉션의 Royalties 플러그인에서 seller fee basis points를 상속할 수 있음
 
 ## Bubblegum V2란 무엇인가요?
 
@@ -148,3 +151,33 @@ await transferV2(umi, {
    다른 접근 방식은 [버전화된 트랜잭션과 주소 조회 테이블](/ko/dev-tools/umi/toolbox/address-lookup-table)을 구현하는 것입니다. 이 방법은 트랜잭션 크기를 더 효과적으로 관리하는 데 도움이 될 수 있습니다.
 
 이러한 기술을 적용하면 트랜잭션 크기 제한을 극복하고 작업을 성공적으로 실행할 수 있습니다.
+
+## 하나의 트리에 cNFT를 몇 개나 저장할 수 있나요? {% #tree-capacity %}
+
+cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊이 20은 약 100만 개, 깊이 24는 약 1,600만 개, 깊이 30은 10억 개 이상의 cNFT를 보유할 수 있습니다. 모든 옵션은 [트리 용량 표](/ko/smart-contracts/bubblegum-v2/create-trees)를 참조하세요.
+
+## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
+
+예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다(`royalty.inherited: true`).
+
+**요구 사항:**
+
+- 컬렉션에 `BubblegumV2`와 `Royalties` 플러그인이 모두 있어야 합니다.
+- 상속 seller fee를 사용할 때 `metadata.creators`는 빈 배열이어야 합니다.
+
+**`getAssetWithProof` 사용:**
+
+- **`metadata`** — DAS 주/표시 필드를 미러링(상속 시 `sellerFeeBasisPoints`는 컬렉션에서 해석된 비율).
+- **`currentMetadata`** — 쓰기용 리프 정규 `MetadataArgsV2Args`(상속 시 센티널).
+- **`sellerFeeBasisPointsRaw` / `creatorsRaw`** — 선택적 리프 형제; 상속 / DAS가 `_raw`를 줄 때만.
+- **`inherited`** — 상속 감지 슈거.
+- **`rpcAsset`** — 전체 DAS 응답(표시는 `royalty.basis_points` / `creators`).
+
+`updateMetadataV2`에서는 `...assetWithProof`를 전개해 `currentMetadata`를 사용하세요. 리프 `metadata` 인자를 받는 명령에는 `assetWithProof.currentMetadata`를 전달하세요.
+
+**컬렉션 관리:**
+
+- 상속된 seller fee를 사용하는 cNFT는 명시적인 `sellerFeeBasisPoints`로 업데이트할 때까지 컬렉션에서 **제거할 수 없습니다**.
+- 대상에 `Royalties` 플러그인이 있으면 다른 컬렉션으로 이동할 수 있습니다.
+
+DAS를 읽는 클라이언트는 [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하고, 전체 예제는 [민팅 — 로열티 상속](/ko/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection), [cNFT 업데이트](/ko/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties), [컬렉션 관리](/ko/smart-contracts/bubblegum-v2/collections#inherited-royalties)를 참조하세요.

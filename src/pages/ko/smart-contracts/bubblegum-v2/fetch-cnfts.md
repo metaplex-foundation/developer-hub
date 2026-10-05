@@ -208,6 +208,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/ko/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
+- 컬렉션에서 판매자 수수료를 상속하는 Bubblegum V2 cNFT의 경우, DAS는 `royalty.basis_points` / `creators`에 컬렉션 비율을, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다. [상속 로열티 읽기](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties)를 참조하세요.
 
 ## FAQ
 

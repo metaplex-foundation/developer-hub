@@ -322,7 +322,7 @@ if (account2.data.launchType === LaunchType.LaunchPoolV1) {
 
 **Genesis 账户字段：** `authority`、`baseMint`、`quoteMint`、`totalSupplyBaseToken`、`totalAllocatedSupplyBaseToken`、`totalProceedsQuoteToken`、`fundingMode`、`launchType`、`bucketCount`、`finalized`
 
-### GPA 构建器 — 按发行类型查询
+### GPA 构建器 — 按发行类型查询 {% #gpa-builder-query-by-launch-type %}
 
 使用 `getGenesisAccountV2GpaBuilder()` 查询按链上字段过滤的所有 Genesis 账户。这使用 Solana 的字节级过滤器 `getProgramAccounts` RPC 方法进行高效查找。
 
@@ -389,7 +389,7 @@ enum LaunchType {
 }
 ```
 
-[Integration APIs](/zh/smart-contracts/genesis/integration-apis) 以字符串形式返回（`'launchpool'`），而链上 SDK 使用上述数字枚举。
+[Metaplex API](/zh/api) 以字符串形式返回（`'launchpool'`），而链上 SDK 使用上述数字枚举。
 
 ### GenesisAccountV2
 
@@ -472,7 +472,7 @@ Umi 是 Metaplex 的 Solana JavaScript 框架。它提供了统一的接口来�
 `fetch` 在账户不存在时会抛出错误。`safeFetch` 则返回 `null`，适用于检查账户是否存在。
 
 ### 如何获取代币的发行类型？
-使用代币的铸币地址通过 `fetchGenesisAccountV2FromSeeds()` 获取 `GenesisAccountV2` 账户。`launchType` 字段返回 `0`（未初始化）或 `3`（LaunchPoolV1）。要查询特定类型的所有发行，请使用 [GPA 构建器](#gpa-构建器--按发行类型查询)。或者，[Integration APIs](/zh/smart-contracts/genesis/integration-apis) 在 REST 响应中以字符串形式返回发行类型。
+使用代币的铸币地址通过 `fetchGenesisAccountV2FromSeeds()` 获取 `GenesisAccountV2` 账户。`launchType` 字段返回 `0`（未初始化）或 `3`（LaunchPoolV1）。要查询特定类型的所有发行，请使用 [GPA 构建器](#gpa-builder-query-by-launch-type)。或者，[Metaplex API](/zh/api) 在 REST 响应中以字符串形式返回发行类型。
 
 ### 如何处理交易错误？
 将 `sendAndConfirm` 调用包装在 try/catch 块中。检查错误消息以了解具体的失败原因。

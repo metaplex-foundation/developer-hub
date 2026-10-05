@@ -59,6 +59,7 @@
   },
   "header": {
     "mpl": "MPL",
+    "api": "API",
     "devTools": "Dev Tools",
     "guides": "Guides",
     "tokens": "Tokens",

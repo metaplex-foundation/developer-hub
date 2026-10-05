@@ -10,7 +10,7 @@ Metaplexプロトコルには現在、以下の手数料が含まれています
 
 {% totem-accordion title="Genesis" %}
 
-ボンディングカーブのライフサイクル全体にわたるトークンローンチプラットフォーム手数料。
+ボンディングカーブ、Launch Pool、Presale の各ローンチと、グラデュエーション後の Raydium CPMMプールでの取引にかかる手数料。
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -39,6 +39,14 @@ Coreのプロトコル手数料は、別の手数料アカウントに送金さ�
 ミンターが支払います（通常は新しいドロップをミントする個々のコレクターです）。または、クリエイターは最大限の構成可能性と低いミントコストを求めてCore（次世代NFT）、またはBubblegum（圧縮NFT）の使用を検討できます。
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-3643" %}
+
+発行、ライフサイクルイベント、ホルダーアクティベーション時に発行者が支払う定額手数料。
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
 
 {% /totem-accordion %}
 
