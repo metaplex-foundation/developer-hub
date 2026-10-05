@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
 created: '01-15-2025'
-updated: '03-10-2026'
+updated: '09-18-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -11,6 +11,8 @@ keywords:
   - token launch SDK
   - Umi framework
   - Genesis API reference
+  - refundLaunchPoolV2
+  - soft cap
 about:
   - SDK installation
   - API reference
@@ -90,6 +92,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 | [depositLaunchPoolV2()](#deposit-launch-pool-v2) | 向 Launch Pool 存入 SOL |
 | [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | 提取 SOL（存款期间） |
 | [claimLaunchPoolV2()](#claim-launch-pool-v2) | 领取代币（存款期结束后） |
+| [refundLaunchPoolV2()](#refund-launch-pool-v2) | 退还存款（未达门槛或超过软顶） |
 
 ### Presale 操作
 
@@ -143,10 +146,16 @@ await addLaunchPoolBucketV2(umi, {
   depositEndCondition,      // TimeCondition
   claimStartCondition,      // TimeCondition
   claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
+  minimumDepositAmount,     // { amount: bigint } | null
+  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
+  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
   endBehaviors,             // EndBehavior[]
 }).sendAndConfirm(umi);
 ```
+
+{% callout type="warning" %}
+自 `@metaplex-foundation/genesis` 0.42.0 起，`softCap` 为必填参数。与其他 Launch Pool 扩展不同，它在生成的序列化器中没有默认值，因此当发行没有上限时，请显式传入 `softCap: null`。行为说明请参阅 [Launch Pool 软顶](/zh/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)。
+{% /callout %}
 
 ### addPresaleBucketV2
 
@@ -223,6 +232,21 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
+### refundLaunchPoolV2
+
+在存款窗口关闭后退还 Launch Pool 存款。退款金额由程序计算，因此没有金额参数：未达到 `minimumQuoteTokenThreshold` 时退还全部存款，超过 `softCap` 时仅退还超出部分，并保留存款人的代币分配不变。
+
+```typescript
+await refundLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
+}).sendAndConfirm(umi);
+```
+
+只有 `payer` 需要签名，因此任何人都可以代表存款人无需许可地触发退款。在存款窗口关闭前调用会返回 `LaunchPoolNotEnded`；在门槛已达到且未超过上限时调用会返回 `LaunchPoolThresholdMet`；重复调用会返回 `DepositAlreadyRefunded`。
+
 ### claimPresaleV2
 
 ```typescript
@@ -282,7 +306,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis 账户
 
-Genesis 账户存储包括[发行类型](#launchtype)在内的顶层发行状态。后端 crank 在创建后通过 `setLaunchTypeV2` 指令在链上设置 `launchType` 字段，因此在 crank 处理之前，该值可能为 `Uninitialized`（0）。
+Genesis 账户存储包括[发行类型](#launch-type)在内的顶层发行状态。后端 crank 在创建后通过 `setLaunchTypeV2` 指令在链上设置 `launchType` 字段，因此在 crank 处理之前，该值可能为 `Uninitialized`（0）。
 
 | 函数 | 返回值 |
 |----------|---------|
@@ -370,13 +394,34 @@ const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**Bucket 状态字段：** `quoteTokenDepositTotal`、`depositCount`、`claimCount`、`bucket.baseTokenAllocation`
+**Bucket 状态字段：** `quoteTokenDepositTotal`、`weightedQuoteTokenTotal`、`depositCount`、`claimCount`、`refundCount`、`bucket.baseTokenAllocation`、`extensions`
 
-**存款状态字段：** `amountQuoteToken`、`claimed`
+**存款状态字段：** `amountQuoteToken`、`weightedQuoteToken`、`claimed`、`refunded`
 
 ---
 
 ## 类型
+
+### LaunchPoolV2Extensions
+
+Launch Pool bucket 上的可选保护机制，从 `bucket.extensions` 读取。每个字段都是 Umi `Option`，因此读取值之前请使用 `unwrapOption()` 或检查 `.__option`。
+
+```typescript
+{
+  backendSigner: Option<BackendSigner>;
+  depositPenalty: Option<LinearBpsScheduleV2>;
+  withdrawPenalty: Option<LinearBpsScheduleV2>;
+  bonusSchedule: Option<LinearBpsScheduleV2>;
+  depositLimit: Option<DepositLimit>;                             // { limit: bigint }
+  allowlist: Option<Allowlist>;
+  claimSchedule: Option<ClaimSchedule>;
+  minimumDepositAmount: Option<MinimumDepositAmount>;             // { amount: bigint }
+  minimumQuoteTokenThreshold: Option<MinimumQuoteTokenThreshold>; // { amount: bigint } - floor
+  softCap: Option<SoftCap>;                                       // { amount: bigint } - ceiling
+}
+```
+
+可以使用 `addLaunchPoolBucketV2Extensions()` 和 `removeLaunchPoolBucketV2Extensions()` 单独添加或移除扩展，并通过 `LaunchPoolV2ExtensionType` 选择字段。Genesis 账户最终化之后，这两个操作都会被拒绝。
 
 ### LaunchType
 
@@ -457,6 +502,11 @@ Genesis 发行的顶层链上账户。每个代币铸币地址、每个发行索
 | `already finalized` | 最终化后无法修改 |
 | `deposit period not active` | 不在存款窗口内 |
 | `claim period not active` | 不在领取窗口内 |
+| `InvalidSoftCap` (221) | `softCap.amount` 为零 — 请传入 `softCap: null` 而不是 `{ amount: 0n }` |
+| `SoftCapBelowThreshold` (222) | `softCap.amount` 低于 `minimumQuoteTokenThreshold.amount` |
+| `LaunchPoolNotEnded` | 在存款窗口关闭前调用了 `refundLaunchPoolV2()` |
+| `LaunchPoolThresholdMet` (173) | 在门槛已达到且未超过软顶时请求了退款 |
+| `DepositAlreadyRefunded` | 对同一笔存款调用了两次 `refundLaunchPoolV2()` |
 
 ---
 
