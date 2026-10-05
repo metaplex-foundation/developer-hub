@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
 description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '09-18-2026'
 keywords:
   - launch pool
   - token distribution
@@ -17,10 +17,15 @@ keywords:
   - token sale alternative
   - SPL token launch
   - on-chain token launch
+  - soft cap
+  - oversubscription
+  - pro-rata refund
+  - minimum quote token threshold
 about:
   - Launch pools
   - Price discovery
   - Token distribution
+  - Soft caps
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
@@ -45,6 +50,14 @@ faqs:
     a: 入金期間が終了し、請求ウィンドウが開いた後（claimStartCondition で定義）に請求できます。End Behavior を処理するために、先に triggerBehaviorsV2 を実行する必要があります。
   - q: Launch Pool と Presale の違いは何ですか？
     a: Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、上限に達するまで先着順で割り当てられます。
+  - q: Launch Pool のソフトキャップとは何ですか？
+    a: ソフトキャップは、Launch Pool が保持する Quote Token の上限であり、softCap 拡張で設定します。上限を超える入金も受け付けられ、ローンチは成功し、超過分は入金ウィンドウ終了後に比例配分で返金されます。
+  - q: ソフトキャップと最小 Quote Token しきい値の違いは何ですか？
+    a: ソフトキャップは調達額の上限であり、ローンチを失敗させることはありません。最小 Quote Token しきい値（minimumQuoteTokenThreshold）は下限で、総入金額がこれを下回るとローンチは失敗し、すべての入金者が全額返金を受けられます。これらは別々の拡張であり、併用できます。
+  - q: Launch Pool が申込超過（オーバーサブスクライブ）になると、入金者の受け取るトークンは減りますか？
+    a: いいえ。Base Token の割り当て全体は、引き続きすべての入金に比例して配布されます。申込超過の場合はトークン割り当てを減らす代わりに超過分の Quote Token が返金されるため、実効価格は softCap / baseTokenAllocation で上限が決まります。
+  - q: ソフトキャップは Raydium グラデュエーションの開始価格に影響しますか？
+    a: はい。Launch Pool が申込超過の場合、グラデュエーションの開始価格は生の入金総額ではなく上限適用後の調達額から算出されるため、SendQuoteTokenPercentage によって実際に転送される額と一致します。
 ---
 
 **Launch Pool** は Solana 上でのフェアトークンローンチのための自然な価格発見メカニズムを提供します。ユーザーはウィンドウ期間中に SOL を入金し、総入金額に対するシェアに比例して SPL トークンを受け取ります。スナイピングなし、フロントランニングなし、全員にとって公平な配布です。 {% .lead %}
@@ -64,11 +77,12 @@ Launch Pool は、定義されたウィンドウ期間中に入金を受け付�
 - ユーザーは入金ウィンドウ期間中に SOL を入金します（{% fee product="genesis" config="launchPool" fee="deposit" /%} の手数料が適用）
 - 入金期間中は引き出しが可能です（{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料）
 - トークン配布は入金シェアに比例します
+- 任意の[ソフトキャップ](#launch-pool-soft-cap)により、ローンチが保持する額に上限を設け、超過分を比例配分で返金できます
 - End Behavior が集められた SOL をトレジャリー bucket にルーティングします
 
-## 対象外
-
-固定価格販売（[Presale](/smart-contracts/genesis/presale) を参照）、入札ベースのオークション（[Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を参照）、流動性プール作成（Raydium/Orca を使用）。
+{% callout type="note" %}
+Launch Pool は入金に基づいて価格を発見します。事前に設定された固定価格には [Presale](/smart-contracts/genesis/presale) を、入札ベースのクリアリングには [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を使用してください。流動性プールの作成は、Launch Pool bucket 自体ではなく Raydium グラデュエーション bucket が担当します。
+{% /callout %}
 
 ## クイックスタート
 
@@ -223,11 +237,130 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 **例：** 1,000,000 トークンが割り当てられ、総入金額が 100 SOL の場合 = 1トークンあたり 0.0001 SOL
 
+価格発見はデフォルトでは上限がなく、申込が増えるほど暗黙の価格は上昇します。[ソフトキャップ](#launch-pool-soft-cap)を設定すると、その上限を設けられます。
+
 ### ライフサイクル
 
 1. **入金期間** - ユーザーは定義されたウィンドウ期間中に SOL を入金します
 2. **`triggerBehaviorsV2`** - End Behavior が実行されます（例：集められた SOL を別の bucket に送信）
 3. **請求期間** - ユーザーは入金の重みに比例してトークンを請求します
+4. **返金期間**（条件付き） - [ソフトキャップ](#launch-pool-soft-cap)を超過した場合、または[最小 Quote Token しきい値](#soft-cap-and-minimum-quote-token-threshold-together)に届かなかった場合、入金者は `refundLaunchPoolV2` を呼び出します
+
+## Launch Pool のソフトキャップ {% #launch-pool-soft-cap %}
+
+**ソフトキャップ**は、Launch Pool が保持する Quote Token の上限であり、`addLaunchPoolBucketV2` の `softCap` 拡張で設定します。上限を超える入金も入金ウィンドウ期間中は受け付けられ、ローンチは成功し、超過分の Quote Token はウィンドウ終了後に比例配分で返金されます。
+
+ソフトキャップがない場合、価格発見には上限がありません。すべての入金が保持され、申込が増えるほどトークンの暗黙の価格が上昇します。ソフトキャップはローンチの最大調達額を固定するため、入金がどれだけ上限を超えても、実効価格は `softCap / baseTokenAllocation` になります。
+
+| プロパティ | ソフトキャップ設定時の動作 |
+|----------|------------------------------------------|
+| 上限を超える入金 | 入金ウィンドウ期間中は受け付けられ、上限で入金が拒否されることはありません |
+| ローンチの結果 | 成功します。ソフトキャップは上限であり、失敗条件ではありません |
+| Base Token の配布 | `baseTokenAllocation` 全体がすべての入金に比例して配布されます |
+| 超過分の Quote Token | 入金ウィンドウ終了後、`refundLaunchPoolV2` により比例配分で返金されます |
+| End Behavior から見える調達額 | ソフトキャップに制限されるため、`SendQuoteTokenPercentage` が転送するのは最大でも `softCap` です |
+| Raydium グラデュエーションの開始価格 | 生の入金総額ではなく、上限適用後の調達額から算出されます |
+
+{% callout type="note" %}
+ソフトキャップは調達額の上限であり、下限ではありません。下限は別の拡張である `minimumQuoteTokenThreshold` です。詳しくは[ソフトキャップと最小 Quote Token しきい値の併用](#soft-cap-and-minimum-quote-token-threshold-together)を参照してください。
+{% /callout %}
+
+### Launch Pool Bucket にソフトキャップを設定する {% #configuring-a-soft-cap-on-a-launch-pool-bucket %}
+
+bucket を追加する際に、`addLaunchPoolBucketV2` に `softCap` の値を渡します。金額は Quote Token の最小単位（wSOL の場合は lamports）で指定します。
+
+{% totem %}
+
+```typescript {% title="100 SOL のソフトキャップを持つ Launch Pool bucket を追加する" %}
+import { sol } from '@metaplex-foundation/umi';
+
+await addLaunchPoolBucketV2(umi, {
+  genesisAccount,
+  baseMint: baseMint.publicKey,
+  baseTokenAllocation: TOTAL_SUPPLY,
+  // ...time conditions and end behaviors...
+
+  // Floor: the launch fails below this and everyone can take a full refund.
+  minimumQuoteTokenThreshold: { amount: sol(10).basisPoints },
+
+  // Ceiling: the launch keeps at most this much; the rest is refunded pro-rata.
+  softCap: { amount: sol(100).basisPoints },
+}).sendAndConfirm(umi);
+```
+
+{% /totem %}
+
+{% callout type="warning" %}
+`softCap` は `@metaplex-foundation/genesis` 0.42.0 の `addLaunchPoolBucketV2` における**必須**引数です。他の Launch Pool 拡張とは異なりデフォルト値がないため、上限を設けない場合は明示的に `softCap: null` を渡してください。
+{% /callout %}
+
+ソフトキャップは、拡張を設定する際と `finalizeV2` の際に検証されます：
+
+| ルール | 違反時のエラー |
+|------|-------------------|
+| `softCap.amount` は 0 より大きい必要があります | `InvalidSoftCap` (221) |
+| `softCap.amount` は `minimumQuoteTokenThreshold.amount` 以上である必要があります | `SoftCapBelowThreshold` (222) |
+| 拡張の追加・削除は `finalizeV2` の前にのみ可能です | アカウントはファイナライズ済みとして拒否されます |
+
+既存の bucket に対しても、`LaunchPoolV2ExtensionType` の `SoftCap` メンバーを使って `addLaunchPoolBucketV2Extensions` と `removeLaunchPoolBucketV2Extensions` でソフトキャップを設定または解除できます。ただし、Genesis Account がファイナライズされる前に限ります。
+
+### 申込超過と比例配分返金の計算 {% #oversubscription-and-pro-rata-refund-math %}
+
+`quoteTokenDepositTotal` が `softCap.amount` を厳密に上回る場合、Launch Pool は**申込超過（オーバーサブスクライブ）**の状態です。このとき各入金は、上限にカウントされる*充当分（filled）*と、返金対象の*超過分（excess）*に分割されます：
+
+{% totem %}
+
+```text {% title="申込超過の Launch Pool における入金者ごとの分割" %}
+filled_i = ceil(deposit_i * softCap / totalDeposits)
+excess_i = deposit_i - filled_i
+tokens_i = (weighted_i / weightedQuoteTokenTotal) * baseTokenAllocation
+```
+
+{% /totem %}
+
+`filled` は**切り上げ**で計算されるため、すべての充当分の合計は常にソフトキャップ以上になります。これにより、返金とグラデュエーションのどちらを先に実行しても、上限適用後のグラデュエーション転送に対して bucket の残高が不足することはありません。各入金者の端数の切り上げは 1 最小単位未満であるため、bucket に残る端数（ダスト）は合計で最大 `depositCount - 1` 最小単位です。
+
+トークン割り当ては上限の影響を受けません。超過分を返金しても入金者の重み付き貢献分は削除されないため、全員が**入金全額**に比例してトークンを受け取ります。
+
+**具体例** — 1,000,000 トークンが割り当てられ、ソフトキャップが 100 SOL、入金額が 150 SOL の場合：
+
+| 入金者 | 入金額 | 充当分（保持） | 返金額 | 受け取るトークン |
+|-----------|-----------|---------------|----------|-----------------|
+| Alice | 50 SOL | 約 33.33 SOL | 約 16.67 SOL | 333,333（1/3） |
+| Bob | 100 SOL | 約 66.67 SOL | 約 33.33 SOL | 666,667（2/3） |
+| **合計** | **150 SOL** | **100 SOL** | **50 SOL** | **1,000,000** |
+
+実効価格は 1トークンあたり 0.0001 SOL（100 SOL / 1,000,000）であり、上限なしの入金総額から導かれる 1トークンあたり 0.00015 SOL ではありません。オンチェーンの値は `filled` を切り上げた lamports 単位で計算されるため、実際の数値は上記の丸めた SOL 額と数 lamports 異なります。
+
+### refundLaunchPoolV2 で超過入金を返金する {% #refunding-excess-deposits-with-refund-launch-pool-v2 %}
+
+`refundLaunchPoolV2` は、申込超過の入金ウィンドウ終了後に、入金者の超過分の Quote Token を返金します。金額の引数はなく、プログラムが入金額、ソフトキャップ、bucket の入金総額から返金額を計算します。
+
+{% code-tabs-imported from="genesis/refund_launch_pool_v2" frameworks="umi" filename="refundLaunchPool" /%}
+
+返金パスの主な特性：
+
+- **クランクは誰でも実行できます。** 署名が必要なのは `payer` のみです。入金者も署名した場合、入金者の空の Base Token アカウントがクローズされます。
+- 返金には**手数料もペナルティも適用されません**。入金・引き出しのペナルティスケジュールは返金に影響しません。
+- **請求の順序は問いません。** 超過分の返金は `claimLaunchPoolV2` の前でも後でも可能で、どちらの順序でも同じ最終状態になります。
+- **1 つの入金につき返金は 1 回です。** 2 回目の呼び出しは `DepositAlreadyRefunded` を返します。
+- **返金は入金ウィンドウの終了後に限られます。** それより前に呼び出すと `LaunchPoolNotEnded` を返します。
+- **返金には、下限未達または上限超過が必要です。** どちらにも該当しない場合、呼び出しは `LaunchPoolThresholdMet` を返します。
+
+### ソフトキャップと最小 Quote Token しきい値の併用 {% #soft-cap-and-minimum-quote-token-threshold-together %}
+
+`softCap` と `minimumQuoteTokenThreshold` は、Launch Pool を反対方向から制限する独立した拡張であり、`refundLaunchPoolV2` は両方に対応します。下限に達しなかった場合はそちらが優先され、返金は全額返金になります。
+
+| 構成 | 入金が下限未満 | 入金が下限と上限の間 | 入金が上限超過 |
+|---------------|--------------------------|--------------------------------|------------------------|
+| いずれも未設定 | ローンチ成功、返金なし | ローンチ成功、返金なし | ローンチ成功、返金なし |
+| 下限のみ | ローンチ失敗、全額返金 | ローンチ成功、返金なし | ローンチ成功、返金なし |
+| 上限のみ | ローンチ成功、返金なし | ローンチ成功、返金なし | ローンチ成功、超過分を比例配分で返金 |
+| 下限と上限 | ローンチ失敗、全額返金 | ローンチ成功、返金なし | ローンチ成功、超過分を比例配分で返金 |
+
+{% callout type="note" %}
+全額返金は入金者の重み付き貢献分を bucket から削除するため、請求の後に行うことはできません。下限未達の場合は請求自体が不可能です。超過分の返金は重み付き貢献分をそのまま残すため、比例配分の請求計算式は正しいままです。
+{% /callout %}
 
 ## 手数料
 
@@ -304,6 +437,10 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 {% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
 トークン割り当て：`userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
+
+### 入金の返金
+
+返金が可能なのは 2 つの場合です。ローンチが `minimumQuoteTokenThreshold` に届かなかった場合（全額返金）、または `softCap` を超過した場合（超過分のみ返金）です。どちらも同じインストラクションを使用します。詳しくは [refundLaunchPoolV2 で超過入金を返金する](#refunding-excess-deposits-with-refund-launch-pool-v2)を参照してください。
 
 ## 管理者操作
 
@@ -388,6 +525,36 @@ endBehaviors: [
 
 {% /totem %}
 
+### Launch Pool 拡張
+
+拡張は、Launch Pool bucket に設定する任意のガードです。すべて `addLaunchPoolBucketV2` で設定するか、`finalizeV2` の前に `addLaunchPoolBucketV2Extensions` と `removeLaunchPoolBucketV2Extensions` で個別に追加・削除できます。
+
+| 拡張 | 型 | 目的 |
+|-----------|------|---------|
+| `softCap` | `{ amount: bigint }` | 保持する Quote Token の上限。超過分は比例配分で返金 |
+| `minimumQuoteTokenThreshold` | `{ amount: bigint }` | これを下回るとローンチが失敗し、全額返金が可能になる下限 |
+| `minimumDepositAmount` | `{ amount: bigint }` | 1 回の入金あたりの最小 Quote Token 量 |
+| `depositLimit` | `{ limit: bigint }` | アカウントあたりの最大 Quote Token 量 |
+| `allowlist` | `Allowlist` | 入金を許可リストのウォレットに限定 |
+| `claimSchedule` | `ClaimSchedule` | 請求した Base Token を時間をかけてベスティング |
+| `bonusSchedule` | `LinearBpsScheduleV2` | 時間に応じた入金ボーナス |
+| `depositPenalty` | `LinearBpsScheduleV2` | 時間に応じた入金ペナルティ |
+| `withdrawPenalty` | `LinearBpsScheduleV2` | 時間に応じた引き出しペナルティ |
+| `backendSigner` | `BackendSigner` | ユーザー操作にバックエンドの共同署名を要求 |
+
+### よくあるエラー {% #common-errors %}
+
+以下のエラーは、無効なソフトキャップ設定と、`refundLaunchPoolV2` が返金リクエストを拒否する Launch Pool の状態を示します。
+
+| エラー | コード | 原因 |
+|-------|------|-------|
+| `InvalidSoftCap` | 221 | `softCap.amount` が 0 です。`0` に設定せず、拡張自体を省略してください |
+| `SoftCapBelowThreshold` | 222 | `softCap.amount` が `minimumQuoteTokenThreshold.amount` を下回っています |
+| `LaunchPoolNotEnded` | — | 入金ウィンドウが閉じる前に `refundLaunchPoolV2` が呼び出されました |
+| `LaunchPoolThresholdMet` | 173 | 下限に達し、上限も超過していない状態で返金がリクエストされました |
+| `DepositAlreadyRefunded` | — | 同じ入金に対して `refundLaunchPoolV2` が 2 回呼び出されました |
+| `DepositAlreadyClaimed` | — | 入金者がすでにトークンを請求した後に全額返金がリクエストされました |
+
 ### 状態の取得
 
 **Bucket の状態：**
@@ -402,6 +569,10 @@ console.log('Total deposits:', bucket.quoteTokenDepositTotal);
 console.log('Deposit count:', bucket.depositCount);
 console.log('Claim count:', bucket.claimCount);
 console.log('Token allocation:', bucket.bucket.baseTokenAllocation);
+
+// Soft cap state (Option<SoftCap>)
+console.log('Soft cap:', bucket.extensions.softCap);
+console.log('Floor:', bucket.extensions.minimumQuoteTokenThreshold);
 ```
 
 {% /totem %}
@@ -419,6 +590,7 @@ const maybeDeposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // ret
 if (deposit) {
   console.log('Amount deposited:', deposit.amountQuoteToken);
   console.log('Claimed:', deposit.claimed);
+  console.log('Refunded:', deposit.refunded);
 }
 ```
 
@@ -431,6 +603,11 @@ if (deposit) {
 - ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
 - End Behavior を処理するには、入金終了後に `triggerBehaviorsV2` を実行する必要があります
 - ユーザーは入金するために wSOL（ラップされた SOL）を保持している必要があります
+- `softCap` は `@metaplex-foundation/genesis` 0.42.0 の `addLaunchPoolBucketV2` における必須引数です。上限が不要な場合は `softCap: null` を渡してください
+- `softCap` を含む Launch Pool 拡張は、`finalizeV2` の前にのみ追加・削除できます
+- ソフトキャップは Genesis プログラムと JavaScript SDK でサポートされています。[`mplx` CLI](/dev-tools/cli/genesis/launch-pool) にはまだソフトキャップのフラグがありません
+- 申込超過の Launch Pool では、各入金者の充当分が切り上げられるため、bucket に最大 `depositCount - 1` 最小単位の端数（ダスト）が残ります
+- `quoteTokenDepositTotal` と `depositCount` は返金後も履歴として保持され、処理済みの返金数は `refundCount` で追跡されます
 
 ## FAQ
 
@@ -449,6 +626,18 @@ if (deposit) {
 ### Launch Pool と Presale の違いは何ですか？
 Launch Pool は入金に基づいて自然に価格を発見し、比例配分で配布します。Presale は事前に固定価格が設定され、先着順で上限まで割り当てられます。
 
+### Launch Pool のソフトキャップとは何ですか？
+ソフトキャップは、Launch Pool が保持する Quote Token の上限であり、`softCap` 拡張で設定します。上限を超える入金も受け付けられ、ローンチは成功し、超過分は入金ウィンドウ終了後に比例配分で返金されます。
+
+### ソフトキャップと最小 Quote Token しきい値の違いは何ですか？
+ソフトキャップは調達額の上限であり、ローンチを失敗させることはありません。`minimumQuoteTokenThreshold` は下限で、総入金額がこれを下回るとローンチは失敗し、すべての入金者が全額返金を受けられます。これらは別々の拡張であり、併用できます。
+
+### Launch Pool が申込超過（オーバーサブスクライブ）になると、入金者の受け取るトークンは減りますか？
+いいえ。Base Token の割り当て全体は、引き続きすべての入金に比例して配布されます。申込超過の場合はトークン割り当てを減らす代わりに超過分の Quote Token が返金されるため、実効価格は `softCap / baseTokenAllocation` で上限が決まります。
+
+### ソフトキャップは Raydium グラデュエーションの開始価格に影響しますか？
+はい。Launch Pool が申込超過の場合、グラデュエーションの開始価格は生の入金総額ではなく上限適用後の調達額から算出されるため、`SendQuoteTokenPercentage` によって実際に転送される額と一致します。
+
 ## 用語集
 
 | 用語 | 定義 |
@@ -461,6 +650,11 @@ Launch Pool は入金に基づいて自然に価格を発見し、比例配分�
 | **比例配分** | 総入金額に対するユーザーのシェアに基づくトークン割り当て |
 | **Quote Token** | ユーザーが入金するトークン（通常は wSOL） |
 | **Base Token** | 配布されるトークン |
+| **ソフトキャップ** | Launch Pool が保持する Quote Token の上限。超過分は比例配分で返金される |
+| **最小 Quote Token しきい値** | これを下回ると Launch Pool が失敗し、全額返金が可能になる下限 |
+| **申込超過（オーバーサブスクリプション）** | 総入金額が設定されたソフトキャップを超えている状態 |
+| **充当分（Filled Portion）** | 入金のうちソフトキャップにカウントされ、ローンチが保持する部分 |
+| **超過分の返金（Excess Refund）** | 入金のうちソフトキャップを超える部分の返却。トークン割り当ては維持される |
 
 ## 次のステップ
 
