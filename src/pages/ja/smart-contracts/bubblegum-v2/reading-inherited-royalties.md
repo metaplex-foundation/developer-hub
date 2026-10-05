@@ -3,7 +3,7 @@ title: 継承ロイヤリティの読み取り
 metaTitle: 継承ロイヤリティの読み取り - Bubblegum V2 - Metaplex
 description: ウォレット、マーケットプレイス、インデクサー、その他のクライアントが、MPL-Coreコレクションから販売者手数料を継承するBubblegum V2 cNFTのDAS getAssetレスポンスをどのように読むべきかを説明します。
 created: '07-16-2026'
-updated: '08-06-2026'
+updated: '10-01-2026'
 keywords:
   - inherited royalties
   - seller fee basis points
@@ -26,6 +26,8 @@ faqs:
     a: リーフハッシュに使われるオンチェーン継承センチネルです。royalty.basis_pointsにはすでに表示用のコレクション料率が入っています。
   - q: 継承されたcNFTでcreators_rawが空なのはなぜですか？
     a: SFBPが継承される場合、リーフのcreatorsは空でなければなりません。コレクションのロイヤリティ受取人にはcreatorsを使用してください。
+  - q: ウォレットやマーケットプレイスで私のcNFTのロイヤリティが655.35%と表示されるのはなぜですか？
+    a: そのアプリのDASプロバイダーがまだ継承ロイヤリティに対応していないためです。コレクション料率の代わりに、リーフの継承センチネル65535をroyalty.basis_points（655.35%）に返し、creatorsは空になります。オンチェーンのロイヤリティは誤っていません。アプリはアップグレード済みのDASプロバイダーを使うか、コレクションのRoyaltiesプラグインを読み取る必要があります。
   - q: 継承していないcNFTについて変更は必要ですか？
     a: いいえ。継承を使用しない場合、_rawフィールドとinheritedは省略され、主なroyaltyとcreatorsフィールドは従来どおり動作します。
 ---
@@ -37,6 +39,7 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
 - **主フィールド**（`royalty.basis_points`、`creators`）はロイヤリティUIと支払い表示に使用
 - **`_raw` フィールド**（`royalty.basis_points_raw`、`creators_raw`）は証明、ハッシュ、書き込み命令に使用
 - 非継承アセットは変更なし — `_raw` / `inherited` は省略されます
+- 継承ロイヤリティ未対応のDASプロバイダーは代わりに生のセンチネルを返し、アプリではクリエイターなしの**655.35%**のロイヤリティとして表示されます
 
 このページは、`getAsset` / DASレスポンスを**読む**すべてのクライアント（ウォレット、マーケットプレイス、インデクサー、分析、アプリ）向けです。継承ロイヤリティのcNFTのミントと更新については、[ミント](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)および[更新](/ja/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)を参照してください。
 
@@ -90,6 +93,41 @@ Bubblegum V2は、リーフ上に販売者手数料を**継承センチネル**�
 - `creators` はコレクション Royalties プラグインの受取人、`creators_raw: []` はハッシュ用のリーフ creators 配列です。
 
 コレクションを解決できない場合、`basis_points` はフォールバックすることがあり、`basis_points_raw` は `65535` のままです。
+
+## 継承ロイヤリティ未対応のDASプロバイダーからのレスポンス {% #unsupported-das %}
+
+まだ継承ロイヤリティに対応していないDASプロバイダーはリーフデータをそのまま返すため、継承されたcNFTは**クリエイターなし**で**655.35%のロイヤリティ**（UIではしばしば「650%」や「655%」に丸められます）と表示されます。オンチェーンのアセットは正しく、インデクサーのレスポンスにコレクションの解決が欠けているだけです。
+
+上の例と同じ継承アセットは、未対応のプロバイダーでは次のようになります。
+
+```json
+"royalty": {
+  "royalty_model": "creators",
+  "target": null,
+  "percent": 6.5535,
+  "basis_points": 65535,
+  "primary_sale_happened": false,
+  "locked": false
+},
+"creators": []
+```
+
+| フィールド | 対応済みDAS | 未対応DAS | 未対応DASでユーザーに見えるもの |
+|-------|---------------|-----------------|-----------------------------------|
+| `royalty.basis_points` | `750`（コレクション料率） | `65535`（リーフセンチネル） | 655.35%のロイヤリティ |
+| `royalty.percent` | `0.075` | `6.5535` | 655.35%のロイヤリティ |
+| `creators` | コレクション Royalties プラグインの受取人 | `[]` | ロイヤリティ受取人なし |
+| `royalty.basis_points_raw` / `creators_raw` / `royalty.inherited` | あり | 省略 | — |
+
+{% callout type="warning" title="655.35%は継承センチネルであり、実際のロイヤリティではありません" %}
+ウォレット、マーケットプレイス、エクスプローラーがBubblegum V2 cNFTのロイヤリティを約650%と表示する場合、そのDASプロバイダーはまだ継承ロイヤリティに対応していません。アセットにもコレクションにも問題はありません。この値は`SELLER_FEE_BASIS_POINTS_INHERIT`センチネルである`65535`ベーシスポイントが、料率として読まれているものです。
+{% /callout %}
+
+クライアントは未対応のプロバイダーに次の3つの方法で対処できます。
+
+- `basis_points_raw`なしの`royalty.basis_points === 65535`を継承として扱う — 下の`isInheritedRoyalty`ヘルパーがこれを行います。
+- 実効料率と受取人を、DASではなくMPL-Coreコレクションの[Royaltiesプラグイン](/ja/smart-contracts/core/plugins/royalties)から読み取る。コレクションアドレスはアセットの`grouping`内の`group_key: "collection"`にあります。
+- 継承ロイヤリティに対応したDASプロバイダーに切り替える。[RPCとDAS](/ja/solana/rpcs-and-das)を参照してください。
 
 ## 検出と表示ヘルパー
 
@@ -157,12 +195,12 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 統合時の不具合の多くは、リーフの値をユーザーに表示してしまうか、表示用の値を書き込みでハッシュしてしまうことが原因です。
 
-- `65535` や `6.5535%` をユーザー向けロイヤリティ料率として**表示しないでください** — その値は `basis_points_raw` にあります。
+- `65535` ベーシスポイント（655.35%）をユーザー向けロイヤリティ料率として**表示しないでください** — 対応済みDASではその値は `basis_points_raw` にあり、[未対応DAS](#unsupported-das)ではコレクションから料率を解決する必要があることを意味します。
 - 空の `creators_raw` がロイヤリティ受取人がいないことを意味すると**仮定しないでください**；表示用の受取人は `creators` にあります。
 - リーフハッシュの再計算や Bubblegum 書き込み命令の構築時に、主フィールドの `basis_points` / `creators` を**使わないでください** — `basis_points_raw` と `creators_raw` を使ってください。
 
-{% callout type="warning" title="古い DAS / マーケットプレイス" %}
-継承ロイヤリティには、コレクション料率を主フィールドに解決する DAS インデクサーが必要です。**古い** DAS エンドポイントでは、`getAsset` はリーフをそのまま返します：`royalty.basis_points` ≈ `65535`、`creators: []`、および `basis_points_raw` / `inherited` / `creators_raw` なし。
+{% callout type="warning" title="未対応DASを使うマーケットプレイスでのロイヤリティ支払い" %}
+継承ロイヤリティには、コレクション料率を主フィールドに解決する DAS インデクサーが必要です。[未対応の DAS プロバイダー](#unsupported-das)では、`getAsset` はリーフをそのまま返します：`royalty.basis_points: 65535`（655.35%）、`creators: []`、および `basis_points_raw` / `inherited` / `creators_raw` なし。
 
 これらの DAS アセットフィールドだけを支払い分割に使うマーケットプレイスは、アセットを**ロイヤリティ受取人なし**（または無効な料率）とみなし、**クリエイターに何も支払わない**可能性があります。次のいずれかを優先してください：
 
@@ -193,6 +231,10 @@ if (isInheritedSfbpRoyalty(royalty)) {
 ### 継承されたcNFTで`creators_raw`が空なのはなぜですか？
 
 SFBPが継承される場合、リーフの`creators`は空でなければなりません。コレクションのロイヤリティ受取人には`creators`を使用してください。
+
+### ウォレットやマーケットプレイスで私のcNFTのロイヤリティが655.35%と表示されるのはなぜですか？
+
+そのアプリのDASプロバイダーがまだ継承ロイヤリティに対応していないためです。コレクション料率の代わりに、リーフの継承センチネル`65535`を`royalty.basis_points`（655.35%）に返し、`creators`は空になります。オンチェーンのロイヤリティは誤っていません。アプリはアップグレード済みのDASプロバイダーを使うか、コレクションのRoyaltiesプラグインを読み取る必要があります。[継承ロイヤリティ未対応のDASプロバイダーからのレスポンス](#unsupported-das)を参照してください。
 
 ### 継承していないcNFTについて変更は必要ですか？
 
