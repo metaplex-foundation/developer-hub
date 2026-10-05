@@ -69,7 +69,7 @@ Token Metadata NFT (mpl-token-metadata 사용), 압축 NFT (Bubblegum 사용), �
 ## 생성 프로세스
 1. **오프체인 데이터 업로드.** 이름, 설명, 이미지 URL, 속성이 포함된 JSON 파일을 저장합니다. 파일은 공개 **URI**를 통해 접근 가능해야 합니다.
 2. **온체인 Asset 계정 생성.** 메타데이터 URI로 `create` 명령어를 호출하여 Asset을 민팅합니다.
-## 오프체인 데이터 업로드
+## 오프체인 데이터 업로드 {% #uploading-off-chain-data %}
 메타데이터 JSON을 업로드하려면 모든 스토리지 서비스 (Arweave, IPFS, AWS)를 사용하세요. Umi는 일반적인 서비스용 업로더 플러그인을 제공합니다. 사용 가능한 모든 메타데이터 필드는 [JSON Schema](/smart-contracts/core/json-schema)를 참조하세요.
 ```ts {% title="upload-metadata.ts" %}
 import { irysUploader } from '@metaplex-foundation/umi-uploader-irys'
@@ -88,7 +88,7 @@ const uri = await umi.uploader.uploadJson({
 })
 ```
 **URI**를 얻었으면 Asset을 생성할 수 있습니다.
-## Asset 생성
+## Asset 생성 {% #create-an-asset %}
 `create` 명령어를 사용하여 새 Core Asset을 민팅합니다.
 {% totem %}
 {% totem-accordion title="기술적 명령어 세부사항" %}
@@ -111,11 +111,11 @@ const uri = await umi.uploader.uploadJson({
 {% /totem-accordion %}
 {% /totem %}
 {% code-tabs-imported from="core/create-asset" frameworks="umi" /%}
-## Collection에 Asset 생성
+## Collection에 Asset 생성 {% #create-an-asset-into-a-collection %}
 Collection의 일부로 Asset을 생성하려면 `collection` 파라미터를 전달합니다. Collection이 이미 존재해야 합니다.
 {% code-tabs-imported from="core/create-asset-in-collection" frameworks="umi" /%}
 Collection 생성에 대해서는 [Collection](/ko/smart-contracts/core/collections)을 참조하세요.
-## 플러그인과 함께 Asset 생성
+## 플러그인과 함께 Asset 생성 {% #create-an-asset-with-plugins %}
 `plugins` 배열에 전달하여 생성 시 플러그인을 추가합니다. 이 예제에서는 Royalties 플러그인을 추가합니다:
 {% code-tabs-imported from="core/create-asset-with-plugins" frameworks="umi" /%}
 ### 일반적인 플러그인

@@ -75,7 +75,7 @@ faqs:
 | 引数    | 値 |
 | ------ | ----- |
 | frozen | bool  |
-## Permanent Freeze pluginを持つAssetの作成
+## Permanent Freeze pluginを持つAssetの作成 {% #creating-an-asset-with-a-permanent-freeze-plugin %}
 以下の例は、Permanent Freeze pluginを持つAssetを作成する方法を示しています。
 {% dialect-switcher title="Permanent Freeze pluginを持つAssetの作成" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,7 +139,7 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## AssetのPermanent Freeze Delegate pluginの更新
+## AssetのPermanent Freeze Delegate pluginの更新 {% #updating-the-permanent-freeze-delegate-plugin-on-an-asset %}
 以下の例は、AssetのPermanent Freeze Delegate pluginを更新する方法を示しています。`frozen`引数を`true`または`false`に設定してフリーズまたは解凍します。署名ウォレットがplugin authorityであることを前提としています。
 {% dialect-switcher title="AssetのPermanent Freeze Delegate pluginの更新" %}
 {% dialect title="JavaScript" id="js" %}
@@ -155,7 +155,7 @@ const updateAssetResponse = await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Permanent Freeze pluginを持つCollectionの作成
+## Permanent Freeze pluginを持つCollectionの作成 {% #creating-a-collection-with-a-permanent-freeze-plugin %}
 以下の例は、Permanent Freeze pluginを持つCollectionを作成する方法を示しています。
 {% dialect-switcher title="Permanent Freeze pluginを持つCollectionの作成" %}
 {% dialect title="JavaScript" id="js" %}

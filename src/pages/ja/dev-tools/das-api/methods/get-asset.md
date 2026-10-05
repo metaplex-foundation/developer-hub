@@ -16,7 +16,7 @@ MPL-Coreコレクションから販売者手数料を継承するBubblegum V2 cN
 | `id`            |    ✅    | アセットのID。                       |
 | `options`       |          | 表示オプションオブジェクト。詳細は[表示オプション](/ja/dev-tools/das-api/display-options)を参照してください。 |
 
-## エージェントフィールド（`MplCoreAsset`） {#agent-fields-mplcoreasset}
+## エージェントフィールド（`MplCoreAsset`） {% #agent-fields-mplcoreasset %}
 
 `MplCoreAsset`レスポンスには、[エージェントレジストリ](/ja/smart-contracts/mpl-agent)からインデックス化されたエージェント固有のフィールドが含まれる場合があります。これらのフィールドはCore以外のインターフェースでは省略されます。コレクションやグループには`is_agent: false`が含まれる場合がありますが、個々のCoreアセットのみがエージェントになれます。
 

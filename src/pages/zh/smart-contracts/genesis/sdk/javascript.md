@@ -282,7 +282,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis 账户
 
-Genesis 账户存储包括[发行类型](#launchtype)在内的顶层发行状态。后端 crank 在创建后通过 `setLaunchTypeV2` 指令在链上设置 `launchType` 字段，因此在 crank 处理之前，该值可能为 `Uninitialized`（0）。
+Genesis 账户存储包括[发行类型](#launch-type)在内的顶层发行状态。后端 crank 在创建后通过 `setLaunchTypeV2` 指令在链上设置 `launchType` 字段，因此在 crank 处理之前，该值可能为 `Uninitialized`（0）。
 
 | 函数 | 返回值 |
 |----------|---------|

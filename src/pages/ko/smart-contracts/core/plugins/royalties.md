@@ -49,7 +49,7 @@ faqs:
 ## 범위 외
 Token Metadata 로열티(다른 시스템), 로열티 수집/분배(마켓플레이스에서 처리), 로열티의 법적 강제.
 ## 빠른 시작
-**바로가기:** [Asset에 추가](#asset에-royalties-plugin-추가-코드-예제) · [Collection에 추가](#collection에-royalties-plugin-추가-코드-예제) · [RuleSet](#ruleset) · [업데이트](#asset의-royalties-plugin-업데이트)
+**바로가기:** [Asset에 추가](#asset에-royalties-plugin-추가-코드-예제) · [Collection에 추가](#collection에-royalties-plugin-추가-코드-예제) · [RuleSet](#rule-sets) · [업데이트](#asset의-royalties-plugin-업데이트)
 1. `@metaplex-foundation/mpl-core`에서 `addPlugin` 가져오기
 2. `type: 'Royalties'`, `basisPoints`, `creators`, `ruleSet`으로 호출
 3. 마켓플레이스가 Plugin을 읽고 판매 시 로열티 강제
@@ -104,7 +104,7 @@ let creators = vec![
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## RuleSet
+## RuleSet {% #rule-sets %}
 RuleSet은 로열티가 적용된 Asset을 어떤 프로그램이 전송할 수 있는지 제어합니다. 규정을 준수하는 마켓플레이스로 전송을 제한하여 로열티를 강제하는 데 사용합니다.
 ### None (제한 없음)
 모든 프로그램이 Asset을 전송할 수 있습니다. 로열티는 권고 사항으로만 적용됩니다.

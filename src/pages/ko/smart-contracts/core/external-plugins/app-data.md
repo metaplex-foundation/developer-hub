@@ -45,7 +45,7 @@ faqs:
 ## 범위 외
 Oracle 검증([Oracle 플러그인](/smart-contracts/core/external-plugins/oracle) 참조), 온체인 속성([Attributes 플러그인](/smart-contracts/core/plugins/attribute) 참조), 오프체인 메타데이터 저장.
 ## 빠른 시작
-**바로 가기:** [Asset에 추가](#adding-the-appdata-plugin-to-an-asset) · [데이터 쓰기](#writing-data-to-the-appdata-plugin) · [데이터 읽기](#reading-data-from-the-appdata-plugin)
+**바로 가기:** [Asset에 추가](#adding-the-app-data-plugin-to-an-asset) · [데이터 쓰기](#writing-data-to-the-app-data-plugin) · [데이터 읽기](#reading-data-from-the-app-data-plugin)
 1. Data Authority 주소와 함께 AppData 플러그인 추가
 2. 스키마 선택: JSON, MsgPack 또는 Binary
 3. `writeData()`를 사용하여 데이터 쓰기 (Data Authority로 서명 필요)
@@ -107,7 +107,7 @@ let schema = ExternalPluginAdapterSchema::Json
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Asset에 AppData 플러그인 추가
+## Asset에 AppData 플러그인 추가 {% #adding-the-app-data-plugin-to-an-asset %}
 {% dialect-switcher title="MPL Core Asset에 Attribute 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -179,7 +179,7 @@ pub async fn add_app_data_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## AppData 플러그인에 데이터 쓰기
+## AppData 플러그인에 데이터 쓰기 {% #writing-data-to-the-app-data-plugin %}
 dataAuthority 주소만 `AppData` 플러그인에 데이터를 쓸 수 있습니다.
 `AppData` 플러그인에 데이터를 쓰려면 다음 인수를 받는 `writeData()` 헬퍼를 사용합니다.
 | 인수      | 값                                        |
@@ -295,7 +295,7 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## AppData 플러그인에서 데이터 읽기
+## AppData 플러그인에서 데이터 읽기 {% #reading-data-from-the-app-data-plugin %}
 데이터는 온체인 프로그램과 계정 데이터를 가져오는 외부 소스 모두에서 읽을 수 있습니다.
 ### 원시 데이터 가져오기
 `AppData` 플러그인에 저장된 데이터를 역직렬화하는 첫 번째 단계는 원시 데이터를 가져오고 직렬화 전에 데이터가 저장된 형식을 나타내는 스키마 필드를 확인하는 것입니다.

@@ -282,7 +282,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis 계정
 
-Genesis 계정은 [런칭 타입](#launchtype)을 포함한 최상위 런칭 상태를 저장합니다. 백엔드 크랭크가 `setLaunchTypeV2` 인스트럭션을 통해 생성 후 온체인에서 `launchType` 필드를 설정하므로, 크랭크가 처리할 때까지 값이 `Uninitialized`(0)일 수 있습니다.
+Genesis 계정은 [런칭 타입](#launch-type)을 포함한 최상위 런칭 상태를 저장합니다. 백엔드 크랭크가 `setLaunchTypeV2` 인스트럭션을 통해 생성 후 온체인에서 `launchType` 필드를 설정하므로, 크랭크가 처리할 때까지 값이 `Uninitialized`(0)일 수 있습니다.
 
 | 함수 | 반환값 |
 |----------|---------|

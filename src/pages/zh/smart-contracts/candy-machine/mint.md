@@ -177,7 +177,7 @@ API 参考：[mintV2](https://mpl-candy-machine.typedoc.metaplex.com/functions/m
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 使用守卫铸造
+## 使用守卫铸造 {% #minting-with-guards %}
 
 当从使用多个守卫的 Candy Machine 铸造时，您可能需要提供额外的守卫特定信息。
 

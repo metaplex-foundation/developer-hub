@@ -174,14 +174,14 @@ _ガードが割り当てられるとすぐに sugar を使用してミントす
 {% /dialect %}
 {% /dialect-switcher %}
 
-## ルート命令
+## ルート命令 {% #route-instruction %}
 
 Freeze Sol Payment ルート命令は以下の機能をサポートしています。
 
 - [概要](#概要)
 - [ガード設定](#ガード設定)
 - [ミント設定](#ミント設定)
-- [ルート命令](#ルート命令)
+- [ルート命令](#route-instruction)
   - [Freeze Escrow の初期化](#freeze-escrow-の初期化)
   - [凍結された Asset の解凍](#凍結された-asset-の解凍)
   - [資金のロック解除](#資金のロック解除)

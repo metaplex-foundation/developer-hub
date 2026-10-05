@@ -25,7 +25,7 @@ updated: '03-10-2026'
 
 **Freeze Token Payment** 가드는 지불자에게 지정된 금액의 SPL 토큰을 청구하고 민팅된 Core Asset을 구성 가능한 기간 동안 동결하여, Asset이 해제될 때까지 전송을 방지합니다. {% .lead %}
 
-## 개요
+## 개요 {% #overview %}
 
 **Freeze Token Payment** 가드는 지불자에게 특정 민트 계정의 토큰을 특정 금액만큼 청구하여 동결된 Asset의 민팅을 허용합니다. 동결된 Asset은 해제될 때까지 전송되거나 마켓플레이스에 상장될 수 없습니다.
 
@@ -96,7 +96,7 @@ _When all Assets have been thawed._
 {% node #treasury label="Treasury" theme="slate" parent="freezeEscrow-pda2" y="70" x="40" /%}
 
 {% /diagram %}
-## 가드 설정
+## 가드 설정 {% #guard-settings %}
 
 Freeze Token Payment 가드에는 다음 설정이 포함됩니다:
 
@@ -132,7 +132,7 @@ create(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 민팅 설정
+## 민팅 설정 {% #mint-settings %}
 
 Freeze Token Payment 가드에는 다음 민팅 설정이 포함됩니다:
 
@@ -177,7 +177,7 @@ Freeze Token Payment route instruction은 다음 기능들을 지원합니다.
 - [Asset 동결 중단](#stop-freezing-assets)
 - [Freeze Escrow와 가드 그룹](#freeze-escrows-and-guard-groups)
 
-### Freeze Escrow 초기화
+### Freeze Escrow 초기화 {% #initialize-the-freeze-escrow %}
 
 _Path: `initialize`_
 
@@ -349,7 +349,7 @@ route(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 동결된 Asset 해제
+### 동결된 Asset 해제 {% #thaw-a-frozen-asset %}
 
 _Path: `thaw`_
 
@@ -452,7 +452,7 @@ route(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 
-### 자금 잠금 해제
+### 자금 잠금 해제 {% #unlock-funds %}
 
 _Path: `unlockFunds`_
 
@@ -574,7 +574,7 @@ API References: [route](https://mpl-core-candy-machine.typedoc.metaplex.com/func
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Asset 동결 중단
+## Asset 동결 중단 {% #stop-freezing-assets %}
 
 Freeze Token Payment 가드 내에서 Asset의 동결을 중단하는 것이 가능합니다. 즉, 새로 민팅된 Asset은 더 이상 동결되지 않지만 **기존 동결된 Asset은 동결 상태를 유지합니다**.
 
@@ -591,7 +591,7 @@ Freeze Token Payment 가드 내에서 Asset의 동결을 중단하는 것이 가
 - Candy Guard 계정이 삭제됨 → ❄️ **해제 불가**.
 - Freeze Token Payment 가드가 설정에서 제거됨 → ❄️ **해제 불가**.
 
-## Freeze Escrow와 가드 그룹
+## Freeze Escrow와 가드 그룹 {% #freeze-escrows-and-guard-groups %}
 
 다양한 [가드 그룹](/ko/smart-contracts/core-candy-machine/guard-groups) 내에서 여러 Freeze Token Payment 가드를 사용할 때는 Freeze Token Payment 가드와 Freeze Escrow 계정 간의 관계를 이해하는 것이 중요합니다.
 

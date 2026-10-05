@@ -93,10 +93,10 @@ Token Metadata 销毁（使用 mpl-token-metadata）、压缩 NFT 销毁（使�
 链上指令的完整详细信息可在 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L123) 上查看。
 {% /totem-accordion %}
 {% /totem %}
-## 代码示例
+## 代码示例 {% #code-example %}
 以下是如何使用我们的 SDK 销毁 Core asset。该代码片段假设您是资产的所有者。
 {% code-tabs-imported from="core/burn-asset" frameworks="umi" /%}
-## 销毁属于 Collection 的 Asset
+## 销毁属于 Collection 的 Asset {% #burning-an-asset-that-is-part-of-a-collection %}
 以下是如何使用我们的 SDK 销毁属于 collection 的 Core asset。该代码片段假设您是资产的所有者。
 {% dialect-switcher title="销毁属于 Collection 的 Asset" %}
 {% dialect title="JavaScript" id="js" %}

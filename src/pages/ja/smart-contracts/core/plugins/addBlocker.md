@@ -44,7 +44,7 @@ faqs:
 ## 対象外
 オーナー管理プラグインのブロック（常に許可）、既存のプラグインの削除、既存のプラグインへの更新のブロック。
 ## クイックスタート
-**ジャンプ先:** [Assetに追加](#assetへのaddblockerプラグインの追加コード例) · [Collectionに追加](#collectionへのaddblockerプラグインの追加コード例)
+**ジャンプ先:** [Assetに追加](#adding-the-add-blocker-plugin-to-an-asset-code-example) · [Collectionに追加](#collectionへのaddblockerプラグインの追加コード例)
 1. 必要なすべてのauthority管理プラグインを追加
 2. update authorityとしてAddBlockerプラグインを追加
 3. 新しいauthority管理プラグインは追加できなくなる
@@ -70,7 +70,7 @@ faqs:
 | MPL Core Collection | ✅  |
 ## 引数
 `AddBlocker`プラグインには引数は必要ありません。
-## Assetへのaddplockerプラグインの追加コード例
+## Assetへのaddplockerプラグインの追加コード例 {% #adding-the-add-blocker-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="MPL Core AssetへのaddBlockerプラグインの追加" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

@@ -59,7 +59,7 @@ Launch Pool bucket、unlocked bucket、end behavior、Genesis 账户创建、fin
 
 *由 Metaplex Foundation 维护 · 最近验证于 2026 年 2 月 · 需要 Metaplex CLI (mplx)*
 
-## 添加 Presale Bucket
+## 添加 Presale Bucket {% #add-presale-bucket %}
 
 `mplx genesis bucket add-presale` 命令向 Genesis 账户添加一个 Presale bucket。
 
@@ -97,7 +97,7 @@ price per token = quoteCap / allocation
 
 **示例**：100 SOL 报价上限（`100000000000` lamports）/ 1,000,000 代币（`1000000000000000` 基本单位）= 每个代币 0.0001 SOL
 
-## 存入
+## 存入 {% #deposit %}
 
 `mplx genesis presale deposit` 命令在存款窗口期间将报价代币存入 Presale bucket。
 
@@ -120,7 +120,7 @@ mplx toolbox sol wrap 10
 mplx genesis presale deposit <GENESIS_ADDRESS> --amount 10000000000 --bucketIndex 0
 ```
 
-## 领取
+## 领取 {% #claim %}
 
 `mplx genesis presale claim` 命令在领取期开始后从 Presale bucket 领取基础代币。
 
@@ -152,7 +152,7 @@ mplx genesis presale claim <GENESIS_ADDRESS> --bucketIndex 0
 mplx genesis presale claim <GENESIS_ADDRESS> --bucketIndex 0 --recipient <WALLET_ADDRESS>
 ```
 
-## 完整生命周期示例
+## 完整生命周期示例 {% #full-lifecycle-example %}
 
 ```bash {% title="Complete presale lifecycle" %}
 # 1. Create the token
@@ -201,7 +201,7 @@ mplx genesis presale deposit $GENESIS --amount 1000000000 --bucketIndex 0
 mplx genesis presale claim $GENESIS --bucketIndex 0
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |-------|-------|-----|
@@ -213,7 +213,7 @@ mplx genesis presale claim $GENESIS --bucketIndex 0
 | Exceeds deposit limit | 用户总存款超过 `depositLimit` | 减少存款金额——您已达到每用户上限 |
 | Nothing to claim | 用户在此 Presale bucket 中没有存款 | 验证正确的 `--bucketIndex` 并确认您在窗口期间进行了存款 |
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **Presale 价格如何确定？**
 价格计算方式为 `quoteCap / allocation`。例如，100 SOL 报价上限和 1,000,000 代币分配 = 每个代币 0.0001 SOL。

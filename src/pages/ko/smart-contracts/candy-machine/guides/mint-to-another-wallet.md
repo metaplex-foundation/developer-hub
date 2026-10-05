@@ -31,7 +31,7 @@ description: Candy Machine에서 다른 지갑 주소로 NFT를 민팅하는 방
 1. [sugar CLI](#using-sugar-cli)를 사용한 민팅
 2. [Javascript](#using-typescript-and-mpl-candy-machine)를 사용한 민팅
 
-## Sugar CLI 사용
+## Sugar CLI 사용 {% #using-sugar-cli %}
 Sugar CLI는 다른 지갑으로 NFT를 민팅하기 위한 두 가지 주요 명령을 제공합니다:
 1. `sugar mint` - *하나*의 특정 지갑으로 민팅
 2. `sugar airdrop` - *여러* 지갑으로 민팅
@@ -69,7 +69,7 @@ sugar mint --receiver Tes1zkZkXhgTaMFqVgbgvMsVkRJpq4Y6g54SbDBeKVV -n 3 --candy-m
 sugar airdrop --candy-machine 11111111111111111111111111111111
 ```
 
-## Typescript와 `mpl-candy-machine` 사용
+## Typescript와 `mpl-candy-machine` 사용 {% #using-typescript-and-mpl-candy-machine %}
 
 이 섹션에서는 Javascript에서 민트 함수에 대한 코드 스니펫을 보여줍니다. 두 예제 모두 candy machine이 생성되고 이후 단일 NFT가 민팅되는 전체 코드 스니펫을 포함합니다. 완전한 에어드롭 스크립트를 구현하려면 민트 함수 주위에 루프와 오류 처리를 구현해야 합니다.
 

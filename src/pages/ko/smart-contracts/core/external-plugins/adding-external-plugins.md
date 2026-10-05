@@ -46,7 +46,7 @@ faqs:
 2. 생성 시 또는 `addPlugin()`을 통해 플러그인 추가
 3. 라이프사이클 검사(Oracle) 또는 Data Authority(AppData) 구성
 ## Assets
-### 외부 플러그인과 함께 Core Asset 생성
+### 외부 플러그인과 함께 Core Asset 생성 {% #creating-a-core-asset-with-an-external-plugin %}
 {% dialect-switcher title="외부 플러그인과 함께 Core Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -123,7 +123,7 @@ pub async fn create_asset_with_oracle_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-### Core Asset에 외부 플러그인 추가
+### Core Asset에 외부 플러그인 추가 {% #adding-a-external-plugin-to-a-core-asset %}
 {% dialect-switcher title="지정된 권한으로 플러그인 추가" %}
 {% dialect title="Rust" id="rust" %}
 ```rust
@@ -195,7 +195,7 @@ addPlugin(umi, {
 {% /dialect %}
 {% /dialect-switcher %}
 ## Collections
-### 외부 플러그인과 함께 Core Collection 생성
+### 외부 플러그인과 함께 Core Collection 생성 {% #creating-a-core-collection-with-an-external-plugin %}
 {% dialect-switcher title="Core Collection에 외부 플러그인 추가" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

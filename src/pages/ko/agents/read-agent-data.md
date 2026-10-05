@@ -54,7 +54,7 @@ faqs:
 2. **단일 에이전트, 인덱싱된 필드** — Core 자산 주소로 `getAsset` 호출(아래 DAS 섹션)
 3. **에이전트 검색** — `isAgent: true`로 `searchAssets` 호출 또는 `agentToken` / `assetSigner`로 필터링
 
-## 등록 확인 {#check-registration}
+## 등록 확인 {% #check-registration %}
 
 안전 가져오기 메서드는 신원이 존재하지 않을 때 throw 대신 `null`을 반환하여 자산이 등록되었는지 확인하는 데 유용합니다:
 
@@ -72,7 +72,7 @@ PDA를 수동으로 파생하지 않고 자산의 공개 키에서 직접 신원
 
 {% code-tabs-imported from="agents/read_agent_verify_plugin" frameworks="umi" defaultFramework="umi" /%}
 
-## 등록 문서 읽기 {#read-the-registration-document}
+## 등록 문서 읽기 {% #read-the-registration-document %}
 
 `AgentIdentity` 플러그인의 `uri`는 에이전트의 전체 프로필(이름, 설명, 서비스 엔드포인트 등)을 포함하는 오프체인 JSON 문서를 가리킵니다. 다른 URI처럼 가져옵니다:
 
@@ -110,7 +110,7 @@ PDA를 수동으로 파생하지 않고 자산의 공개 키에서 직접 신원
 
 전체 필드 레퍼런스는 [에이전트 등록](/agents/register-agent#agent-registration-document)을 참조하세요.
 
-## 에이전트 지갑 가져오기 {#fetch-the-agents-wallet}
+## 에이전트 지갑 가져오기 {% #fetch-the-agents-wallet %}
 
 모든 Core 자산에는 **Asset Signer**라는 내장 지갑이 있습니다 — 자산의 공개 키에서 파생된 PDA입니다. 개인 키가 존재하지 않으므로 도난될 수 없습니다. 지갑은 SOL, 토큰 또는 기타 자산을 보유할 수 있습니다. `findAssetSignerPda`로 주소를 파생합니다:
 
@@ -124,7 +124,7 @@ Asset Signer PDA와 에이전트의 Core 자산은 서로 다른 두 주소입�
 
 계정 레이아웃, PDA 파생 세부사항 및 오류 코드에 대해서는 [MPL Agent Registry](/smart-contracts/mpl-agent) 스마트 컨트랙트 문서를 참조하세요.
 
-## DAS API를 통해 에이전트 데이터 읽기 {#read-agent-data-via-das-api}
+## DAS API를 통해 에이전트 데이터 읽기 {% #read-agent-data-via-das-api %}
 
 [DAS API](/dev-tools/das-api)는 MPL Core 자산의 에이전트 필드(등록 상태, 지갑 PDA, 정식 토큰 민트)를 인덱싱하므로 Core 계정을 직접 파싱하지 않고 읽을 수 있습니다.
 

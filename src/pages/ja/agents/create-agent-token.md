@@ -82,7 +82,7 @@ faqs:
 - SolanaのRPCエンドポイント（mainnet-betaまたはdevnet）
 - [Irys](https://irys.xyz)にアップロード済みのトークン画像 — `image`フィールドはIrysゲートウェイURLである必要がある
 
-## インストール {#installation}
+## インストール {% #installation %}
 
 ```bash {% title="Terminal" %}
 npm install @metaplex-foundation/genesis \
@@ -90,7 +90,7 @@ npm install @metaplex-foundation/genesis \
   @metaplex-foundation/umi-bundle-defaults
 ```
 
-## Umiセットアップ {#umi-setup}
+## Umiセットアップ {% #umi-setup %}
 
 Genesis関数を呼び出す前に、キーペアIDでUmiインスタンスを設定してください。
 
@@ -109,7 +109,7 @@ umi.use(keypairIdentity(keypair));
 Genesis API関数は、インストラクションを直接送信するのではなく、HTTPを経由してホスト型のMetaplex APIと通信します。Umiインスタンスは署名者IDとトランザクション送信機能のためだけに使用され、`genesis()`プラグインは必要ありません。
 {% /callout %}
 
-## エージェントトークンの発行 {#launching-an-agent-token}
+## エージェントトークンの発行 {% #launching-an-agent-token %}
 
 `createAndRegisterLaunch`にエージェントの[Core](/core) assetアドレスを指定した`agent`フィールドを渡します。SDKは自動的に以下を行います。
 
@@ -147,7 +147,7 @@ console.log('確認先:', result.launch.link);
 
 ボンディングカーブの価格設定、手数料、グラデュエーションの仕組みについては、[ボンディングカーブ — 動作理論](/smart-contracts/genesis/bonding-curve)を参照してください。
 
-## 初回購入 {#first-buy}
+## 初回購入 {% #first-buy %}
 
 初回購入は、指定したSOL額でエージェントPDAのためにカーブの最初のスワップを予約し、すべての手数料が免除されます。
 
@@ -174,7 +174,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 
 初回購入はlaunchトランザクションフローの一部として実行されます。トランザクションが確認された時点で、カーブにはすでに初回購入が適用されています。`firstBuyAmount`が省略または`0`の場合、初回購入は適用されず、任意のウォレットが最初のスワップを行うことができます。
 
-## トークンメタデータ {#token-metadata}
+## トークンメタデータ {% #token-metadata %}
 
 すべての発行には以下のフィールドを含む`token`オブジェクトが必要です。
 
@@ -201,7 +201,7 @@ token: {
 
 `image`フィールドはIrysゲートウェイURLを指定する必要があります。先に[Irys](https://irys.xyz)に画像をアップロードし、返された`https://gateway.irys.xyz/<id>` URLを使用してください。その他のホストはAPIバリデーションで失敗します。
 
-## Devnetテスト {#devnet-testing}
+## Devnetテスト {% #devnet-testing %}
 
 `network: 'solana-devnet'`を渡し、UmiインスタンスをdevnetのRPCエンドポイントに向けることで、launchをdevnetインフラを通じてルーティングできます。
 
@@ -226,7 +226,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 });
 ```
 
-## エラー処理 {#error-handling}
+## エラー処理 {% #error-handling %}
 
 SDKは異なる障害モードに対して型付きエラーを提供します。
 

@@ -286,7 +286,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesisアカウント
 
-Genesisアカウントは[ローンチタイプ](#launchtype)を含むトップレベルのローンチ状態を保存します。バックエンドクランクが`setLaunchTypeV2`インストラクションを介して作成後にオンチェーンで`launchType`フィールドを設定するため、クランクが処理するまで値は`Uninitialized`（0）のままの場合があります。
+Genesisアカウントは[ローンチタイプ](#launch-type)を含むトップレベルのローンチ状態を保存します。バックエンドクランクが`setLaunchTypeV2`インストラクションを介して作成後にオンチェーンで`launchType`フィールドを設定するため、クランクが処理するまで値は`Uninitialized`（0）のままの場合があります。
 
 | 関数 | 戻り値 |
 |----------|---------|

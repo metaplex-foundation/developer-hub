@@ -45,7 +45,7 @@ faqs:
 ## 超出范围
 Oracle 验证（参见 [Oracle 插件](/smart-contracts/core/external-plugins/oracle)）、链上属性（参见 [Attributes 插件](/smart-contracts/core/plugins/attribute)）和链下元数据存储。
 ## 快速开始
-**跳转至：** [添加到 Asset](#adding-the-appdata-plugin-to-an-asset) · [写入数据](#writing-data-to-the-appdata-plugin) · [读取数据](#reading-data-from-the-appdata-plugin)
+**跳转至：** [添加到 Asset](#adding-the-app-data-plugin-to-an-asset) · [写入数据](#writing-data-to-the-app-data-plugin) · [读取数据](#reading-data-from-the-app-data-plugin)
 1. 添加带有数据权限地址的 AppData 插件
 2. 选择模式：JSON、MsgPack 或 Binary
 3. 使用 `writeData()` 写入数据（必须以数据权限签名）
@@ -107,7 +107,7 @@ let schema = ExternalPluginAdapterSchema::Json
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 向 Asset 添加 AppData 插件
+## 向 Asset 添加 AppData 插件 {% #adding-the-app-data-plugin-to-an-asset %}
 {% dialect-switcher title="向 MPL Core Asset 添加 Attribute 插件" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -179,7 +179,7 @@ pub async fn add_app_data_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 向 AppData 插件写入数据
+## 向 AppData 插件写入数据 {% #writing-data-to-the-app-data-plugin %}
 只有 dataAuthority 地址可以向 `AppData` 插件写入数据。
 要向 `AppData` 插件写入数据，我们将使用 `writeData()` 辅助函数，它接受以下参数。
 | 参数      | 值                                        |
@@ -295,7 +295,7 @@ let write_to_app_data_plugin_ix = WriteExternalPluginAdapterDataV1CpiBuilder::ne
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 从 AppData 插件读取数据
+## 从 AppData 插件读取数据 {% #reading-data-from-the-app-data-plugin %}
 数据可以从链上程序和提取账户数据的外部来源读取。
 ### 获取原始数据
 反序列化存储在 `AppData` 插件中的数据的第一步是获取原始数据并检查 schema 字段，该字段指示数据在序列化之前的存储格式。

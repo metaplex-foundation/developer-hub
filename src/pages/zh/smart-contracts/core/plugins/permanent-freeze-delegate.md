@@ -75,7 +75,7 @@ faqs:
 | 参数    | 值 |
 | ------ | ----- |
 | frozen | bool  |
-## 创建带有Permanent Freeze plugin的Asset
+## 创建带有Permanent Freeze plugin的Asset {% #creating-an-asset-with-a-permanent-freeze-plugin %}
 以下示例展示如何创建带有Permanent Freeze plugin的Asset。
 {% dialect-switcher title="创建带有Permanent Freeze plugin的Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -139,7 +139,7 @@ pub async fn create_asset_with_permanent_freeze_delegate_plugin() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 更新Asset上的Permanent Freeze Delegate plugin
+## 更新Asset上的Permanent Freeze Delegate plugin {% #updating-the-permanent-freeze-delegate-plugin-on-an-asset %}
 以下示例展示如何更新Asset上的Permanent Freeze Delegate plugin。将`frozen`参数设置为`true`或`false`以冻结或解冻。假设签名钱包是plugin authority。
 {% dialect-switcher title="更新Asset上的Permanent Freeze Delegate plugin" %}
 {% dialect title="JavaScript" id="js" %}
@@ -155,7 +155,7 @@ const updateAssetResponse = await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 创建带有Permanent Freeze plugin的Collection
+## 创建带有Permanent Freeze plugin的Collection {% #creating-a-collection-with-a-permanent-freeze-plugin %}
 以下示例展示如何创建带有Permanent Freeze plugin的Collection。
 {% dialect-switcher title="创建带有Permanent Freeze plugin的Collection" %}
 {% dialect title="JavaScript" id="js" %}

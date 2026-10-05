@@ -49,12 +49,12 @@ Core 用单账户设计取代了 Token Metadata 的多账户模型。一切都�
 ## 范围外
 pNFT 特定功能和同质化代币处理（使用 SPL Token）。
 ## 快速开始
-**跳转至：** [成本比较](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [生命周期事件](#lifecycle-events-and-plugins)
+**跳转至：** [成本比较](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [生命周期事件](#lifecycle-events-and-plugins)
 如果您是新手，请使用 Core。如果正在迁移，主要的心智转变是：
 1. 一个账户，而不是三个
 2. 插件，而不是委托
 3. 收藏级操作是原生的
-## 区别概述
+## 区别概述 {% #difference-overview %}
 - **前所未有的成本效率**: Metaplex Core 提供与可用替代方案相比最低的铸造成本。例如，使用 Token Metadata 需要 0.022 SOL 的 NFT 可以用 Core 以约 0.003 SOL 铸造。
 - **改进的开发者体验**: 虽然大多数数字资产继承了维护整个同质化代币程序所需的数据，但 Core 针对 NFT 进行了优化，允许所有关键数据存储在单个 Solana 账户中。这极大地降低了开发者的复杂性，同时也有助于提高 Solana 整体的网络性能。
 - **增强的收藏管理**: 通过对收藏的一等支持，开发者和创作者可以轻松管理收藏级配置，如版税和插件，这些可以为单个 NFT 唯一覆盖。这可以在单个交易中完成，降低收藏管理成本和 Solana 交易费用。
@@ -85,7 +85,7 @@ Core Collection 包含多项新功能。Collection 现在是自己的账户类�
 TM 无法实现的收藏功能示例是收藏级版税——更改版税或创作者时不再需要更新每个资产，而是在收藏中定义。这可以通过向您的收藏添加 [Royalties Plugin](/zh/smart-contracts/core/plugins/royalties) 来完成。一些资产需要不同的版税设置？只需将相同的插件添加到资产中，收藏级版税插件就会被覆盖。
 收藏级别的冻结也是可能的。
 有关处理收藏（如创建或更新）的更多信息，请参阅 [Managing Collections](/zh/smart-contracts/core/collections) 页面。
-### 生命周期事件和插件
+### 生命周期事件和插件 {% #lifecycle-events-and-plugins %}
 在 Asset 的生命周期中，可以触发多个事件：
 - 创建
 - 转移

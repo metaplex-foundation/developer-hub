@@ -82,7 +82,7 @@ faqs:
 - Solana RPC 端点（mainnet-beta 或 devnet）
 - 已上传至 [Irys](https://irys.xyz) 的代币图片 — `image` 字段必须为 Irys 网关 URL
 
-## 安装 {#installation}
+## 安装 {% #installation %}
 
 ```bash {% title="Terminal" %}
 npm install @metaplex-foundation/genesis \
@@ -90,7 +90,7 @@ npm install @metaplex-foundation/genesis \
   @metaplex-foundation/umi-bundle-defaults
 ```
 
-## Umi 配置 {#umi-setup}
+## Umi 配置 {% #umi-setup %}
 
 在调用任何 Genesis 函数之前，使用密钥对身份配置 Umi 实例。
 
@@ -109,7 +109,7 @@ umi.use(keypairIdentity(keypair));
 Genesis API 函数通过 HTTP 与托管的 Metaplex API 通信，而非直接提交指令。Umi 实例仅用于签名者身份和交易发送能力——不需要 `genesis()` 插件。
 {% /callout %}
 
-## 发行代理代币 {#launching-an-agent-token}
+## 发行代理代币 {% #launching-an-agent-token %}
 
 将包含代理 [Core](/core) asset 地址的 `agent` 字段传入 `createAndRegisterLaunch`。SDK 会自动：
 
@@ -147,7 +147,7 @@ console.log('查看链接：', result.launch.link);
 
 有关本金曲线定价、费用和毕业机制的完整说明，请参阅[本金曲线 — 运作原理](/smart-contracts/genesis/bonding-curve)。
 
-## 首次购买 {#first-buy}
+## 首次购买 {% #first-buy %}
 
 首次购买以指定 SOL 金额为代理 PDA 预留曲线上的初始兑换名额，且免收所有费用。
 
@@ -174,7 +174,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 
 首次购买作为发行交易流程的一部分执行——交易确认后，曲线上已应用初始购买。省略 `firstBuyAmount` 或设为 `0` 时，不执行首次购买，任何钱包均可进行第一次兑换。
 
-## 代币元数据 {#token-metadata}
+## 代币元数据 {% #token-metadata %}
 
 每次发行都需要包含以下字段的 `token` 对象。
 
@@ -201,7 +201,7 @@ token: {
 
 `image` 字段必须指向 Irys 网关 URL。请先将图片上传至 [Irys](https://irys.xyz)，然后使用返回的 `https://gateway.irys.xyz/<id>` URL。其他托管服务将无法通过 API 验证。
 
-## Devnet 测试 {#devnet-testing}
+## Devnet 测试 {% #devnet-testing %}
 
 传入 `network: 'solana-devnet'` 并将 Umi 实例指向 devnet RPC 端点，即可将发行请求路由至 devnet 基础设施。
 
@@ -226,7 +226,7 @@ const result = await createAndRegisterLaunch(umi, {}, {
 });
 ```
 
-## 错误处理 {#error-handling}
+## 错误处理 {% #error-handling %}
 
 SDK 为不同故障模式提供了类型化错误。
 

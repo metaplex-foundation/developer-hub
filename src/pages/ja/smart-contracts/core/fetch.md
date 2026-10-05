@@ -55,7 +55,7 @@ SDKヘルパー関数またはDAS APIを使用してCore AssetとCollectionを�
 ## スコープ外
 Token Metadataの取得（mpl-token-metadataを使用）、圧縮NFTの取得（Bubblegum DAS拡張を使用）、オフチェーンメタデータの取得（URIを直接フェッチ）。
 ## クイックスタート
-**ジャンプ先:** [単一Asset](#単一のassetまたはcollectionの取得) · [所有者別](#所有者別assetの取得) · [Collection別](#collection別assetの取得) · [DAS API](#das---digital-asset-standard-api)
+**ジャンプ先:** [単一Asset](#単一のassetまたはcollectionの取得) · [所有者別](#所有者別assetの取得) · [Collection別](#collection別assetの取得) · [DAS API](#das-digital-asset-standard-api)
 1. インストール: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. RPCエンドポイントでUmiを設定
 3. Assetアドレスで`fetchAsset(umi, publicKey)`を呼び出す

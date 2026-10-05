@@ -26,7 +26,7 @@ iOSおよびSwiftをサポートする他のAppleプラットフォームで動�
 ## はじめに
 
 ### インストール
-#### 要件 {#requirements}
+#### 要件 {% #requirements %}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
 - Swift 5.3+

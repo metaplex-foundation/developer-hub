@@ -60,11 +60,11 @@ faqs:
 
 ## 快速开始
 
-1. [获取 Nori 的 Agent 卡片](#步骤-1--发现-nori-的执行者地址)并读取 `serviceExecutiveAddress`
-2. [构建委托交易](#步骤-2--构建并提交委托交易)，以您的执行者密钥对作为权限、Nori 作为费用支付方，然后将其提交到 `POST /v1/delegate/submit`
+1. [获取 Nori 的 Agent 卡片](#step-1-discover-noris-executive-address)并读取 `serviceExecutiveAddress`
+2. [构建委托交易](#step-2-build-and-submit-the-delegation-transaction)，以您的执行者密钥对作为权限、Nori 作为费用支付方，然后将其提交到 `POST /v1/delegate/submit`
 3. [为您 Agent 的 PDA 钱包充值](#为-agent-pda-钱包充值)一定的 SOL 工作余额
-4. 通过 `/auth/challenge` + `/auth/handshake` [铸造 Bearer 令牌](#步骤-3--使用-bearer-令牌进行认证)
-5. 携带 `Authorization: Bearer <token>` [发起付费调用](#步骤-4--发起付费调用)
+4. 通过 `/auth/challenge` + `/auth/handshake` [铸造 Bearer 令牌](#step-3-authenticate-with-a-bearer-token)
+5. 携带 `Authorization: Bearer <token>` [发起付费调用](#step-4-make-a-paid-call)
 
 ## 前提条件
 
@@ -75,7 +75,7 @@ faqs:
 - 已安装 `@metaplex-foundation/mpl-agent-registry` 和 `@metaplex-foundation/umi`
 - 委托本身不需要 SOL，也不需要 RPC 端点 — 两者都由 Nori 提供
 
-## 步骤 1 — 发现 Nori 的执行者地址
+## 步骤 1 — 发现 Nori 的执行者地址 {% #step-1-discover-noris-executive-address %}
 
 Nori 的 Agent 卡片公布了您要委托的地址。获取 `/.well-known/agent-card.json` 并读取两个字段：
 
@@ -97,7 +97,7 @@ const noriServiceAsset = card.serviceAssetAddress; // charges are paid here
 Agent 卡片决定了你将计费权限委托给哪个执行者配置文件。只从由你自己管理配置的 `NORI_URL` 获取 Agent 卡片，并在签署委托前通过带外方式核验 `serviceExecutiveAddress`（例如与 Nori 公开的 Agent 注册信息进行比对）。
 {% /callout %}
 
-## 步骤 2 — 构建并提交委托交易
+## 步骤 2 — 构建并提交委托交易 {% #step-2-build-and-submit-the-delegation-transaction %}
 
 委托交易恰好包含一条 `delegateExecutionV1` 指令：您的执行者密钥对作为权限签名，Nori 的执行者配置文件是委托方，Nori 的密钥对是费用支付方。您离线构建并签名它（Nori 免费的 `GET /v1/solana/blockhash` 端点提供 blockhash），然后将部分签名的交易 POST 到 `POST /v1/delegate/submit`。Nori 验证它，作为费用支付方共同签署，并提交它。
 
@@ -153,7 +153,7 @@ console.log(result);
 
 如果您基于 Metaplex Agent 模板构建 Agent，整个步骤已打包为 `delegate-to-nori` 工具 — 一次调用即可，无需手动构建交易。
 
-## 步骤 3 — 使用 Bearer 令牌进行认证
+## 步骤 3 — 使用 Bearer 令牌进行认证 {% #step-3-authenticate-with-a-bearer-token %}
 
 当付费调用携带通过 Sign-In-With-Solana 风格握手铸造的 Bearer 令牌时，它们会被路由到 delegate-pay 轨道。该令牌证明您控制着在 Agent 资产上注册为委托方的执行者密钥对；令牌有效期为 15 分钟，过期后请重新执行握手。
 
@@ -187,7 +187,7 @@ const { token } = await fetch(`${NORI_URL}/auth/handshake`, {
 }).then((r) => r.json());
 ```
 
-## 步骤 4 — 发起付费调用
+## 步骤 4 — 发起付费调用 {% #step-4-make-a-paid-call %}
 
 附上 Bearer 令牌后，Nori 会先运行上游调用，再通过一笔 Execute 交易向您 Agent 的 PDA 扣费 — 响应在单次往返中返回，没有 402 质询。同一个请求头适用于所有 `/v1/*` 端点和 `/a2a`。
 
@@ -215,7 +215,7 @@ const completion = await fetch(`${NORI_URL}/v1/chat/completions`, {
 
 撤销执行委托是终止开关，并以硬停止的方式生效。当资产所有者撤销 Nori 执行者配置文件对应的 `ExecutionDelegateRecordV1` 时，下一次扣费尝试会在链上失败，Nori 会作废其为您的资产缓存的委托状态，delegate-pay 轨道随即停止 — 此后您的调用会收到 x402 支付质询，而不是被自动扣费。由于委托状态缓存为 5 分钟，撤销后立即发起的调用可能仍会尝试（并失败）一次委托扣费；撤销后没有任何扣费能够落地，因为链会拒绝它。
 
-撤销不会注销您的 Agent，也不会触及其 PDA 余额 — 它只是移除 Nori 对其扣费的权限。您可以稍后通过重复[步骤 2](#步骤-2--构建并提交委托交易)重新委托。
+撤销不会注销您的 Agent，也不会触及其 PDA 余额 — 它只是移除 Nori 对其扣费的权限。您可以稍后通过重复[步骤 2](#step-2-build-and-submit-the-delegation-transaction)重新委托。
 
 ## 常见错误
 

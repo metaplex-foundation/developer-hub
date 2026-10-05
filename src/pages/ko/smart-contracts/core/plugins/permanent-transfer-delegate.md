@@ -75,7 +75,7 @@ faqs:
 | 인수    | 값 |
 | ------ | ----- |
 | frozen | bool  |
-## Permanent Transfer Plugin이 있는 MPL Core Asset 생성
+## Permanent Transfer Plugin이 있는 MPL Core Asset 생성 {% #creating-a-mpl-core-asset-with-a-permanent-transfer-plugin %}
 {% dialect-switcher title="Permanent Transfer Plugin이 있는 MPL Core Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

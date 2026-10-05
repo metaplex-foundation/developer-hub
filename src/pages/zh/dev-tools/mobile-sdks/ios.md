@@ -26,7 +26,7 @@ description: Metaplex iOS SDK
 ## 入门
 
 ### 安装
-#### 要求 {#requirements}
+#### 要求 {% #requirements %}
 
 - iOS 11.0+ / macOS 10.13+ / tvOS 11.0+ / watchOS 3.0+
 - Swift 5.3+

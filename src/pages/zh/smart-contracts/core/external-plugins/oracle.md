@@ -66,7 +66,7 @@ Oracle Plugin 存储与 4 个生命周期事件（`create`、`transfer`、`burn`
 | Can Approve | ❌  |
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
-## 链上 Oracle 账户结构
+## 链上 Oracle 账户结构 {% #on-chain-oracle-account-structure %}
 Oracle Account 应具有以下链上账户结构。
 {% dialect-switcher title="Oracle Account 的链上账户结构" %}
 {% dialect title="Anchor" id="rust-anchor" %}
@@ -235,7 +235,7 @@ pub enum ExtraAccount {
 }
 ```
 ## 创建和添加 Oracle Plugin
-### 使用 Oracle Plugin 创建 Asset
+### 使用 Oracle Plugin 创建 Asset {% #creating-an-asset-with-the-oracle-plugin %}
 {% dialect-switcher title="使用 Oracle Plugin 创建 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -406,7 +406,7 @@ pub enum ExtraAccount {
 ```
 {% /dialect %}
 {% /dialect-switcher %} -->
-### 将 Oracle Plugin 添加到 Asset
+### 将 Oracle Plugin 添加到 Asset {% #adding-an-oracle-plugin-to-an-asset %}
 {% dialect-switcher title="将 Oracle Plugin 添加到 Collection" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
@@ -627,7 +627,7 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Metaplex 部署的默认 Oracle
+## Metaplex 部署的默认 Oracle {% #default-oracles-deployed-by-metaplex %}
 在某些罕见情况下，如 [灵魂绑定 NFT](/zh/smart-contracts/core/guides/create-soulbound-nft-asset)，可能需要始终拒绝或批准生命周期事件的 Oracle。为此，以下 Oracle 已部署，任何人都可以使用：
 - **Transfer Oracle**：始终拒绝转账。`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 - **Update Oracle**：始终拒绝更新。`6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`

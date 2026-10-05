@@ -92,7 +92,7 @@ faqs:
 - Solana RPC 端点（mainnet-beta 或 devnet）
 - 预先上传到 [Irys](https://irys.xyz) 的图片——代币元数据 `image` 字段必须是 Irys 网关 URL
 
-## 安装
+## 安装 {% #installation %}
 
 安装三个必需的依赖包。
 
@@ -102,7 +102,7 @@ npm install @metaplex-foundation/genesis \
   @metaplex-foundation/umi-bundle-defaults
 ```
 
-## Umi 配置
+## Umi 配置 {% #umi-setup %}
 
 调用任何 Genesis API 函数前，使用密钥对身份配置 Umi 实例。
 
@@ -121,7 +121,7 @@ umi.use(keypairIdentity(keypair));
 Genesis API 函数不需要 `genesis()` 插件——它们通过 HTTP 与托管的 Metaplex API 通信，而非直接提交指令。Umi 实例仅用于其签名者身份和交易发送能力。
 {% /callout %}
 
-## 发行联合曲线（一键流程）
+## 发行联合曲线（一键流程） {% #launching-a-bonding-curve-one-liner-flow %}
 
 `createAndRegisterLaunch` 是最简单的路径——在单次等待调用中创建发行、签名发送所有交易并在 metaplex.com 上注册代币。
 
@@ -141,7 +141,7 @@ launch: {
 
 完整配置选项、如何检查累积余额以及认领指令（`claimBondingCurveCreatorFeeV2` / `claimRaydiumCreatorFeeV2`），请参阅[创作者费](/smart-contracts/genesis/creator-fees)。
 
-## 首次购买
+## 首次购买 {% #first-buy %}
 
 首次购买为发行钱包保留曲线上的初始兑换，指定 SOL 金额，所有手续费豁免。
 
@@ -162,7 +162,7 @@ launch: {
 },
 ```
 
-## 手动签名流程
+## 手动签名流程 {% #manual-signing-flow %}
 
 当需要控制交易签名和提交方式时，分别使用 `createLaunch` 和 `registerLaunch`——例如使用 Jito bundles、优先费或自定义重试逻辑时。
 
@@ -217,7 +217,7 @@ console.log('Launch live at:', registered.launch.link);
 仅在创建交易链上确认后调用 `registerLaunch`。API 在注册前验证 genesis 账户存在——过早调用将返回 API 错误。
 {% /callout %}
 
-## 代币元数据
+## 代币元数据 {% #token-metadata %}
 
 每次发行都需要包含以下字段的 `token` 对象。
 
@@ -243,13 +243,13 @@ token: {
 },
 ```
 
-## Devnet 测试
+## Devnet 测试 {% #devnet-testing %}
 
 传入 `network: 'solana-devnet'` 并将 Umi 实例指向 devnet RPC 端点，将发行路由通过 devnet 基础设施。使用 CLI 时，网络由配置的 RPC 端点决定。
 
 {% code-tabs-imported from="genesis/api_bonding_curve_devnet" frameworks="umi,cli" defaultFramework="umi" /%}
 
-## 高级
+## 高级 {% #advanced %}
 
 ### 自定义 API 基础 URL
 
@@ -303,7 +303,7 @@ const result = await createAndRegisterLaunch(
 );
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 类型检查 | 原因 | 解决方法 |
 |-------|-----------|-------|-----|
@@ -350,7 +350,7 @@ try {
 - 首次购买在发行创建时配置，曲线上线后无法添加；`firstBuyAmount: 0` 或省略该字段将完全禁用它
 - 创作者费累积在 bucket 中，而非按次转账；通过无需许可的 `claimBondingCurveCreatorFeeV2`（联合曲线）和 `claimRaydiumCreatorFeeV2`（毕业后 Raydium）指令认领
 
-## API 参考
+## API 参考 {% #api-reference %}
 
 ### `createAndRegisterLaunch(umi, config, input, options?)`
 
