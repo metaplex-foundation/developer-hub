@@ -406,8 +406,9 @@
 - [Getting Started](https://metaplex.com/docs/dev-tools/umi/getting-started): A Javascript Framework for Solana.
 - [Interface implementations](https://metaplex.com/docs/dev-tools/umi/implementations): Overview over Public Interface Implementations
 - [Metaplex Umi Plugins](https://metaplex.com/docs/dev-tools/umi/metaplex-umi-plugins): An overview of Metaplex built Umi Plugins.
+- [Migrating from V0 to V1 Transactions](https://metaplex.com/docs/dev-tools/umi/guides/migrate-to-transaction-v1): Migrate Umi transaction builders and direct transaction creation from Solana V0 transactions to V1 transactions, including compute budgets, priority fees, and wallet compatibility.
 - [Optimal transaction landing using Compute Units (CU) and priority fees](https://metaplex.com/docs/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees): Learn how to optimize your Solana transactions by calculating and setting appropriate Compute Units (CU) and priority fees.
-- [Priority Fees and Compute Management](https://metaplex.com/docs/dev-tools/umi/toolbox/priority-fees-and-compute-managment): How to use Priority Fees and the Compute Budget Program with Umi.
+- [Priority Fees and Compute Management](https://metaplex.com/docs/dev-tools/umi/toolbox/priority-fees-and-compute-managment): Configure compute unit limits and priority fees for Umi V1 and V0 transactions.
 - [Public keys and Signers](https://metaplex.com/docs/dev-tools/umi/public-keys-and-signers): Public keys and signers in Metaplex Umi
 - [Registering Programs](https://metaplex.com/docs/dev-tools/umi/programs): Registering Programs to Metaplex Umi
 - [Sending Http requests](https://metaplex.com/docs/dev-tools/umi/http-requests): Sending Http requests using Metaplex Umi
