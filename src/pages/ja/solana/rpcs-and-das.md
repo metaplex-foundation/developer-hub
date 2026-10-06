@@ -154,4 +154,5 @@ RPCとDASは互いを補完します。標準RPCがオンチェーンデータ�
 - [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
+- [Supanode](https://supanode.xyz/services/solana)
 - [Syndica](https://syndica.io/)
