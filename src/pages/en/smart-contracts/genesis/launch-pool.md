@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
 description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - launch pool
   - token distribution
@@ -172,6 +172,7 @@ async function setupLaunchPool() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
@@ -548,7 +549,7 @@ The errors below cover invalid soft cap configurations and the Launch Pool state
 
 | Error | Code | Cause |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount` is zero — omit the extension instead of setting it to `0` |
+| `InvalidSoftCap` | 221 | `softCap.amount` is zero — pass `softCap: null` instead of `{ amount: 0n }` |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount` is below `minimumQuoteTokenThreshold.amount` |
 | `LaunchPoolNotEnded` | — | `refundLaunchPoolV2` called before the deposit window closed |
 | `LaunchPoolThresholdMet` | 173 | Refund requested when the floor was met and the cap was not exceeded |
