@@ -49,7 +49,7 @@ faqs:
 ## 不在范围内
 Token Metadata 版税（不同的系统）、版税收取/分配（由市场处理）以及版税的法律强制执行。
 ## 快速开始
-**跳转到：** [添加到 Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [添加到 Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rulesets) · [更新](#updating-the-royalties-plugin-on-an-asset)
+**跳转到：** [添加到 Asset](#adding-the-royalties-plugin-to-an-asset-code-example) · [添加到 Collection](#adding-the-royalties-plugin-to-a-collection-code-example) · [RuleSets](#rule-sets) · [更新](#updating-the-royalties-plugin-on-an-asset)
 1. 从 `@metaplex-foundation/mpl-core` 导入 `addPlugin`
 2. 使用 `type: 'Royalties'`、`basisPoints`、`creators` 和 `ruleSet` 调用
 3. 市场读取 Plugin 并在销售时强制执行版税
@@ -174,7 +174,7 @@ let rule_set = RuleSet::ProgramDenyList(vec![
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 将 Royalties Plugin 添加到 Asset（代码示例）
+## 将 Royalties Plugin 添加到 Asset（代码示例） {% #adding-the-royalties-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="将 Royalties Plugin 添加到 Asset" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts {% title="add-royalties-to-asset.ts" %}
@@ -236,7 +236,7 @@ pub async fn add_royalties_to_asset() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 将 Royalties Plugin 添加到 Collection（代码示例）
+## 将 Royalties Plugin 添加到 Collection（代码示例） {% #adding-the-royalties-plugin-to-a-collection-code-example %}
 Collection 级别的版税适用于 Collection 中的所有 Assets，除非在 Asset 级别被覆盖。
 {% dialect-switcher title="将 Royalties Plugin 添加到 Collection" %}
 {% dialect title="JavaScript" id="js" %}
@@ -300,7 +300,7 @@ pub async fn add_royalties_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 更新 Asset 上的 Royalties Plugin
+## 更新 Asset 上的 Royalties Plugin {% #updating-the-royalties-plugin-on-an-asset %}
 修改现有 Asset 上的版税百分比、创作者或规则集。
 {% dialect-switcher title="更新 Asset 上的 Royalties Plugin" %}
 {% dialect title="JavaScript" id="js" %}

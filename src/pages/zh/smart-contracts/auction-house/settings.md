@@ -14,7 +14,7 @@ description: 详细解释拍卖行设置。
 
 权限也可以在创建拍卖行后转移到另一个钱包,从而转移拍卖行的控制权。应谨慎执行此操作。
 
-权限钱包还扮演着保护哪些资产可以在市场上列出和出售的重要角色。当我们讨论 [`requireSignOff`](#requiresignoff) 时,我们将更多地讨论权限的这一功能
+权限钱包还扮演着保护哪些资产可以在市场上列出和出售的重要角色。当我们讨论 [`requireSignOff`](#require-sign-off) 时,我们将更多地讨论权限的这一功能
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}
@@ -104,7 +104,7 @@ const auctionHouseSettings = {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 需要签署
+## 需要签署 {% #require-sign-off %}
 此设置允许市场控制资产列表和销售。如权限部分所述,拍卖行权限在资产控制中发挥作用。只有在 `requireSignOff = true` 时,才能进行这种审查或集中控制。
 
 当发生这种情况时,市场上的每笔交易: 列表、出价和销售执行都需要由拍卖行权限签名。完全去中心化的市场可以选择将 `requireSignOff` 设置保持为 `false` 以避免该市场上操作的审查或集中控制。

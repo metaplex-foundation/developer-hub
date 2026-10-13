@@ -50,7 +50,7 @@ faqs:
 
 **跳转至：** [注册执行者配置文件](#register-executive-profile) · [委托执行](#delegate-execution) · [撤销委托](#revoke-delegation) · [常见错误](#common-errors) · [FAQ](#faq)
 
-## 注册执行者配置文件
+## 注册执行者配置文件 {% #register-executive-profile %}
 
 `agents executive register` 命令为当前钱包创建一次性链上执行者配置文件 PDA。在任何 Agent 被[委托](/dev-tools/cli/agents/executive#delegate-execution)给此钱包之前，必须先有此配置文件。
 
@@ -71,7 +71,7 @@ mplx agents executive register
 --------------------------------
 ```
 
-## 委托执行
+## 委托执行 {% #delegate-execution %}
 
 `agents executive delegate` 命令将已注册 Agent 关联到执行者配置文件，允许执行者代表 Agent 签署交易。只有资产所有者才能委托执行。
 
@@ -100,7 +100,7 @@ mplx agents executive delegate <AGENT_ASSET> --executive <EXECUTIVE_WALLET>
 --------------------------------
 ```
 
-## 撤销委托
+## 撤销委托 {% #revoke-delegation %}
 
 `agents executive revoke` 命令移除执行委托，关闭委托记录并退还租金。资产所有者或执行者授权方均可撤销。
 
@@ -130,7 +130,7 @@ mplx agents executive revoke <AGENT_ASSET>
 --------------------------------
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|-----|

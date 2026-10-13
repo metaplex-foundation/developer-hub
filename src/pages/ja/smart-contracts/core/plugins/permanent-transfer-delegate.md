@@ -75,7 +75,7 @@ faqs:
 | 引数    | 値 |
 | ------ | ----- |
 | frozen | bool  |
-## Permanent Transfer Pluginを持つMPL Core Assetの作成
+## Permanent Transfer Pluginを持つMPL Core Assetの作成 {% #creating-a-mpl-core-asset-with-a-permanent-transfer-plugin %}
 {% dialect-switcher title="Permanent Transfer Pluginを持つMPL Core Assetの作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

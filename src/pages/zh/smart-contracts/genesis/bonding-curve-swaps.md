@@ -72,7 +72,7 @@ faqs:
 
 ## 快速开始
 
-**跳转至：** [安装](#installation) · [配置](#umi-and-genesis-plugin-setup) · [获取曲线](#fetching-a-bonding-curve-bucketv2) · [生命周期辅助函数](#bonding-curve-lifecycle-helpers) · [报价](#getting-a-swap-quote) · [滑点](#slippage-protection) · [执行兑换](#constructing-swap-transactions) · [创作者费](/smart-contracts/genesis/creator-fees) · [错误处理](#error-handling) · [API 参考](#api-reference)
+**跳转至：** [安装](#installation) · [配置](#umi-and-genesis-plugin-setup) · [获取曲线](#fetching-a-bonding-curve-bucket-v2) · [生命周期辅助函数](#bonding-curve-lifecycle-helpers) · [报价](#getting-a-swap-quote) · [滑点](#slippage-protection) · [执行兑换](#constructing-swap-transactions) · [创作者费](/smart-contracts/genesis/creator-fees) · [错误处理](#error-handling) · [API 参考](#api-reference)
 
 1. 安装依赖包并使用 `genesis()` 插件配置 Umi 实例
 2. 推导 `BondingCurveBucketV2Pda` 并获取账户
@@ -97,7 +97,7 @@ faqs:
 | `@metaplex-foundation/umi-bundle-defaults` | 1.x |
 | Node.js | 18+ |
 
-## 安装
+## 安装 {% #installation %}
 
 ```bash {% title="Terminal" %}
 npm install @metaplex-foundation/genesis \
@@ -105,7 +105,7 @@ npm install @metaplex-foundation/genesis \
   @metaplex-foundation/umi-bundle-defaults
 ```
 
-## Umi 和 Genesis 插件配置
+## Umi 和 Genesis 插件配置 {% #umi-and-genesis-plugin-setup %}
 
 在调用任何 SDK 函数前，先配置 Umi 实例并注册 `genesis()` 插件。
 
@@ -124,7 +124,7 @@ const keypair = umi.eddsa.createKeypairFromSecretKey(Uint8Array.from(keypairFile
 umi.use(keypairIdentity(keypair));
 ```
 
-## 获取 Bonding Curve BucketV2
+## 获取 Bonding Curve BucketV2 {% #fetching-a-bonding-curve-bucket-v2 %}
 
 根据已掌握的信息，可选用三种发现策略。
 
@@ -177,7 +177,7 @@ const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 `virtualSol` 和 `virtualTokens` 仅存在于定价数学中——它们从未作为真实资产存入链上。请参阅[运作原理](/smart-contracts/genesis/bonding-curve-theory#why-bonding-curves-require-virtual-reserves)了解虚拟储备如何塑造恒积曲线。
 {% /callout %}
 
-## 联合曲线生命周期辅助函数
+## 联合曲线生命周期辅助函数 {% #bonding-curve-lifecycle-helpers %}
 
 五个辅助函数可在无需额外 RPC 调用的情况下检查曲线状态（`isGraduated` 除外）。
 
@@ -205,7 +205,7 @@ const graduated = await isGraduated(umi, bucket); // async RPC call
 | `getFillPercentage(bucket)` | 否 | `number` | 已售出分配量的 0–100 百分比 |
 | `isGraduated(umi, bucket)` | 是 | `boolean` | Raydium CPMM 池链上存在时为 `true` |
 
-## 获取兑换报价
+## 获取兑换报价 {% #getting-a-swap-quote %}
 
 `getSwapResult(bucket, amountIn, swapDirection, isFirstBuy?)` 无需发送任何交易即可计算兑换的精确含手续费金额。
 
@@ -246,7 +246,7 @@ const lamportsPerToken = getCurrentPriceQuotePerBase(bucket); // bigint
 const { baseReserves, quoteReserves } = getCurrentPriceComponents(bucket);
 ```
 
-## 滑点保护
+## 滑点保护 {% #slippage-protection %}
 
 `applySlippage(expectedAmountOut, slippageBps)` 将预期输出减去滑点容忍度。将结果作为 `minAmountOutScaled` 传给兑换指令——若实际输出低于此值，链上程序将拒绝交易。
 
@@ -263,7 +263,7 @@ const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1% slippage
 
 常用值：稳定行情下 50 bps（0.5%），波动性发行时 200 bps（2%）。
 
-## 构建兑换交易
+## 构建兑换交易 {% #constructing-swap-transactions %}
 
 `swapBondingCurveV2(umi, accounts)` 构建兑换指令。调用方负责在交易前后处理包装 SOL（wSOL）。
 
@@ -275,7 +275,7 @@ const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1% slippage
 
 {% code-tabs-imported from="genesis/swap_sell" frameworks="umi,cli" defaultFramework="umi" /%}
 
-### wSOL 包装说明
+### wSOL 包装说明 {% #w-sol-wrapping-note %}
 
 {% callout type="warning" title="需手动处理 wSOL" %}
 `swapBondingCurveV2` 使用包装 SOL（wSOL）作为报价代币，**不会**自动包装或解包原生 SOL。
@@ -325,7 +325,7 @@ await unwrapBuilder.sendAndConfirm(umi);
 
 完整认领流程——包括如何检查累积余额以及处理毕业后 Raydium LP 费用——请参阅[创作者费](/smart-contracts/genesis/creator-fees)。
 
-## 错误处理
+## 错误处理 {% #error-handling %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|------------|
@@ -371,7 +371,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 - 事件解码和生命周期索引，请参阅[索引与事件](/smart-contracts/genesis/bonding-curve-indexing)
 - 所有手续费金额以 lamports 计（SOL 侧）；当前费率请参阅[协议费用](/protocol-fees)
 
-## API 参考
+## API 参考 {% #api-reference %}
 
 ### 报价和价格函数
 
@@ -426,7 +426,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 
 ### 调用 swapBondingCurveV2 之前需要先包装 SOL 吗？
 
-是的。联合曲线使用 wSOL 作为报价代币，`swapBondingCurveV2` 不会自动包装或解包原生 SOL。详见 [wSOL 包装说明](#wsol-wrapping-note)。
+是的。联合曲线使用 wSOL 作为报价代币，`swapBondingCurveV2` 不会自动包装或解包原生 SOL。详见 [wSOL 包装说明](#w-sol-wrapping-note)。
 
 ### getSwapResult 返回什么，它如何处理手续费？
 

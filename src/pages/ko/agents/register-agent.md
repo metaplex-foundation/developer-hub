@@ -34,7 +34,7 @@ MPL Core 자산에 신원 기록을 바인딩하여 Metaplex 014 에이전트 �
 ## 빠른 시작
 
 1. [사전 요구사항](#사전-요구사항) — MPL Core 자산 획득 및 SDK 설치
-2. [에이전트 등록](#에이전트-등록-1) — `registerIdentityV1` 호출하여 신원 바인딩
+2. [에이전트 등록](#register-an-agent) — `registerIdentityV1` 호출하여 신원 바인딩
 3. [에이전트 등록 문서](#에이전트-등록-문서) — 오프체인 메타데이터 JSON 생성
 4. [등록 확인](#등록-확인) — 신원이 첨부되었는지 확인
 5. [전체 예제](#전체-예제) — 엔드투엔드 코드 샘플
@@ -50,7 +50,7 @@ MPL Core 자산에 신원 기록을 바인딩하여 Metaplex 014 에이전트 �
 
 등록 전에 MPL Core 자산이 필요합니다. 아직 없다면 [NFT 만들기](/nfts/create-nft)를 참조하세요. 신원 프로그램 자체에 대한 자세한 내용은 [MPL Agent Registry](/smart-contracts/mpl-agent) 문서를 참조하세요.
 
-## 에이전트 등록
+## 에이전트 등록 {% #register-an-agent %}
 
 등록은 자산의 공개 키에서 파생된 PDA를 생성하고 Transfer, Update, Execute 라이프사이클 훅이 있는 `AgentIdentity` 플러그인을 첨부합니다. PDA를 통해 에이전트를 검색할 수 있습니다 — 누구나 자산 주소에서 PDA를 파생하여 등록된 신원이 있는지 확인할 수 있습니다.
 

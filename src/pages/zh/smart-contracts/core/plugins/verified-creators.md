@@ -83,7 +83,7 @@ faqs:
 | address | publicKey |
 | message | string    |
 Asset 从 Collection 继承创作者数组。
-## 将 Verified Creators 插件添加到 Asset 的代码示例
+## 将 Verified Creators 插件添加到 Asset 的代码示例 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="将 Verified Creators 插件添加到 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 此代码片段假设 umi identity 是 asset 的 update authority。
@@ -105,7 +105,7 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 将不同的创作者添加到 Asset 的代码示例
+## 将不同的创作者添加到 Asset 的代码示例 {% #adding-a-different-creator-to-an-asset-code-example %}
 {% dialect-switcher title="将不同的创作者添加到 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 此代码片段假设 umi identity 是 asset 的 update authority，用于添加未验证的创作者。
@@ -159,7 +159,7 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 从 Asset 移除创作者的代码示例
+## 从 Asset 移除创作者的代码示例 {% #removing-a-creator-from-an-asset-code-example %}
 {% dialect-switcher title="从 MPL Core Asset 移除创作者" %}
 {% dialect title="JavaScript" id="js" %}
 只有 update authority 可以移除创作者。要移除创作者，必须是 `verified:false` 或者是 update authority 本身。因此，更新将分两步完成。如果您能够同时使用 update authority 和创作者进行签名，这可以在一个交易中组合两个指令完成。

@@ -16,7 +16,7 @@ MPL-Core 컬렉션에서 판매자 수수료를 상속하는 Bubblegum V2 cNFT�
 | `id`            |    ✅    | 자산의 ID입니다.                       |
 | `options`       |          | 표시 옵션 객체입니다. 자세한 내용은 [표시 옵션](/ko/dev-tools/das-api/display-options)을 참조하세요. |
 
-## 에이전트 필드 (`MplCoreAsset`) {#agent-fields-mplcoreasset}
+## 에이전트 필드 (`MplCoreAsset`) {% #agent-fields-mplcoreasset %}
 
 `MplCoreAsset` 응답에는 [에이전트 레지스트리](/ko/smart-contracts/mpl-agent)에서 인덱싱된 에이전트 관련 필드가 포함될 수 있습니다. Core가 아닌 인터페이스에서는 이러한 필드가 생략됩니다. 컬렉션 및 그룹에는 `is_agent: false`가 포함될 수 있지만, 개별 Core 자산만 에이전트가 될 수 있습니다.
 

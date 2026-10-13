@@ -65,7 +65,7 @@ The **Bubblegum V2 JavaScript SDK** wraps all MPL-Bubblegum V2 program instructi
 
 ## Quick Start
 
-**Jump to:** [Setup](#umi-setup) · [Create Tree](#create-a-bubblegum-tree) · [Mint](#mint-a-compressed-nft) · [Transfer](#transfer-a-compressed-nft) · [Burn](#burn-a-compressed-nft) · [Update](#update-a-compressed-nft) · [Delegate](#delegate-a-compressed-nft) · [Collections](#collections) · [Freeze](#freeze-and-thaw) · [Verify Creators](#verify-creators) · [Fetch](#fetching-cnfts) · [Errors](#common-errors) · [Quick Reference](#quick-reference)
+**Jump to:** [Setup](#umi-setup) · [Create Tree](#create-a-bubblegum-tree) · [Mint](#mint-a-compressed-nft) · [Transfer](#transfer-a-compressed-nft) · [Burn](#burn-a-compressed-nft) · [Update](#update-a-compressed-nft) · [Delegate](#delegate-a-compressed-nft) · [Collections](#collections) · [Freeze](#freeze-and-thaw) · [Verify Creators](#verify-creators) · [Fetch](#fetching-c-nfts) · [Errors](#common-errors) · [Quick Reference](#quick-reference)
 
 1. Install dependencies: `npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-defaults`
 2. Create a Umi instance with `.use(mplBubblegum())`

@@ -55,7 +55,7 @@ SDK 헬퍼 함수 또는 DAS API를 사용하여 Core Asset과 Collection을 가
 ## 범위 외
 Token Metadata 가져오기(mpl-token-metadata 사용), 압축 NFT 가져오기(Bubblegum DAS 확장 사용), 오프체인 메타데이터 가져오기(URI 직접 페치).
 ## 빠른 시작
-**바로가기:** [단일 Asset](#단일-asset-또는-collection-가져오기) · [소유자별](#소유자별-asset-가져오기) · [Collection별](#collection별-asset-가져오기) · [DAS API](#das---digital-asset-standard-api)
+**바로가기:** [단일 Asset](#단일-asset-또는-collection-가져오기) · [소유자별](#소유자별-asset-가져오기) · [Collection별](#collection별-asset-가져오기) · [DAS API](#das-digital-asset-standard-api)
 1. 설치: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. RPC 엔드포인트로 Umi 설정
 3. Asset 주소로 `fetchAsset(umi, publicKey)` 호출

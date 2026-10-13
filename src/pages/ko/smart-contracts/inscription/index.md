@@ -21,9 +21,9 @@ NFT JSON 데이터와 이미지는 역사적으로 Arweave나 IPFS와 같은 탈
 두 가지 다른 종류의 Inscription이 있습니다:
 
 1. **[NFT 민트에 첨부된](#inscriptions-attached-to-nft-mints)** Inscription - NFT 데이터가 오프체인 저장소 대신 또는 추가로 체인에 작성됩니다
-2. **[저장소 제공자로서의](#inscriptions-as-storage-provider)** Inscription - 임의의 데이터를 체인에 작성합니다
+2. **[저장소 제공자로서의](#inscriptions-as-a-storage-provider)** Inscription - 임의의 데이터를 체인에 작성합니다
 
-### NFT 민트에 첨부된 Inscription
+### NFT 민트에 첨부된 Inscription {% #inscriptions-attached-to-nft-mints %}
 
 Inscription은 메타데이터 JSON과 미디어가 저장되는 Arweave와 같은 오프체인 저장소에 추가로 사용하거나, [Inscription Gateway](#inscription-gateway)를 사용하여 해당 오프체인 저장소를 완전히 대체할 수 있습니다.
 
@@ -206,7 +206,7 @@ pnpm cli inscribe -r <RPC_ENDPOINT> -k <KEYPAIR_FILE> -m <NFT_ADDRESS>
 
 {% /dialect-switcher %}
 
-### 저장소 제공자로서의 Inscription
+### 저장소 제공자로서의 Inscription {% #inscriptions-as-a-storage-provider %}
 
 NFT 민트와의 사용 외에도 Inscription은 최대 10MB의 임의 데이터를 온체인에 저장하는 데도 사용할 수 있습니다. 무제한 수의 [연관된 Inscription](#associated-inscription-accounts)을 생성할 수 있습니다.
 
@@ -328,7 +328,7 @@ await builder.sendAndConfirm(umi, { confirm: { commitment: 'finalized' } })
 {% /dialect %}
 {% /dialect-switcher %}
 
-## 연관된 Inscription 계정
+## 연관된 Inscription 계정 {% #associated-inscription-accounts %}
 
 [Metaplex JSON 표준](/ko/smart-contracts/token-metadata/token-standard)은 JSON 스키마의 files 속성을 통해 토큰에 연관된 파일을 연결하는 옵션을 포함합니다. Inscription 프로그램은 PDA의 힘을 사용하여 추가 데이터를 연관시키는 새로운 방법을 도입합니다! PDA는 Inscription과 **연관 태그**에서 파생되어, 비싼 JSON 역직렬화 및 파싱을 요구하지 않고 추가 새겨진 데이터를 프로그래밍 방식으로 파생할 수 있는 방법을 제공합니다.
 

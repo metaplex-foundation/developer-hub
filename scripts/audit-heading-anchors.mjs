@@ -7,16 +7,12 @@
  * exist. CJK headings used to produce empty ids silently, which broke the TOC
  * and every jump link on 91% of localized pages without failing any build.
  *
- * Empty and duplicate ids always fail. Broken in-page links are compared
- * against a checked-in baseline so the known backlog of localized pages that
- * still link to English anchors does not block CI, while any newly introduced
- * broken link does.
+ * Zero tolerance: empty ids, duplicate ids and broken in-page links all fail,
+ * and there is no allowlist.
  *
  * Usage:
- *   node scripts/audit-heading-anchors.mjs                   # audit, exit 1 on new failures
- *   node scripts/audit-heading-anchors.mjs --json            # machine-readable report
- *   node scripts/audit-heading-anchors.mjs --all             # ignore the baseline
- *   node scripts/audit-heading-anchors.mjs --update-baseline # re-record the backlog
+ *   node scripts/audit-heading-anchors.mjs         # audit, exit 1 on any failure
+ *   node scripts/audit-heading-anchors.mjs --json  # machine-readable report
  */
 
 import fs from 'node:fs'
@@ -29,31 +25,6 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const PAGES_DIR = path.join(ROOT, 'src', 'pages')
 
 const asJson = process.argv.includes('--json')
-const ignoreBaseline = process.argv.includes('--all')
-const updateBaseline = process.argv.includes('--update-baseline')
-
-const BASELINE_PATH = path.join(ROOT, 'scripts', 'heading-anchors-baseline.json')
-
-/** Broken links are keyed by file and anchor, counted to catch duplicates. */
-function tally(files) {
-  const counts = {}
-  for (const f of files) {
-    for (const b of f.broken) {
-      const key = `${f.file}#${b.anchor}`
-      counts[key] = (counts[key] ?? 0) + 1
-    }
-  }
-  return counts
-}
-
-function loadBaseline() {
-  if (ignoreBaseline || !fs.existsSync(BASELINE_PATH)) return {}
-  try {
-    return JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8')).brokenLinks ?? {}
-  } catch {
-    return {}
-  }
-}
 
 function walk(dir) {
   const out = []
@@ -186,72 +157,24 @@ const totals = results.reduce(
   { empty: 0, duplicates: 0, broken: 0 }
 )
 
-const current = tally(results)
-
-if (updateBaseline) {
-  const sorted = Object.fromEntries(Object.entries(current).sort(([a], [b]) => (a < b ? -1 : 1)))
-  fs.writeFileSync(
-    BASELINE_PATH,
-    JSON.stringify(
-      {
-        comment:
-          'Known-broken in-page anchor links, mostly localized pages that link to English ' +
-          'anchors while their headings are translated. CI fails on anything not listed here. ' +
-          'Regenerate with: node scripts/audit-heading-anchors.mjs --update-baseline',
-        total: Object.values(sorted).reduce((a, b) => a + b, 0),
-        brokenLinks: sorted,
-      },
-      null,
-      2
-    ) + '\n'
-  )
-  console.log(`Baseline written: ${Object.keys(sorted).length} entries.`)
-  process.exit(0)
-}
-
-const baseline = loadBaseline()
-
-// A broken link is "new" when it is absent from the baseline, or occurs more
-// often than the baseline recorded.
-const newBroken = []
-const observed = new Map()
-for (const r of results) {
-  for (const b of r.broken) {
-    const key = `${r.file}#${b.anchor}`
-    const allowed = baseline[key] ?? 0
-    const seen = (observed.get(key) ?? 0) + 1
-    observed.set(key, seen)
-    if (seen > allowed) newBroken.push({ key, file: r.file, ...b })
-  }
-}
-
 if (asJson) {
-  console.log(JSON.stringify({ totals, newBroken, files: results }, null, 2))
+  console.log(JSON.stringify({ totals, files: results }, null, 2))
 } else {
   for (const r of results) {
     const lines = []
     for (const e of r.empty) lines.push(`  :${e.line} empty id for heading "${e.text}"`)
     for (const d of r.duplicates) lines.push(`  :${d.line} duplicate id "${d.id}" ("${d.text}")`)
-    for (const b of r.broken) {
-      const isNew = newBroken.some((n) => n.file === r.file && n.anchor === b.anchor)
-      if (isNew || ignoreBaseline) {
-        lines.push(`  :${b.line} link to #${b.anchor} matches no heading${isNew ? ' (NEW)' : ''}`)
-      }
-    }
+    for (const b of r.broken) lines.push(`  :${b.line} link to #${b.anchor} matches no heading`)
     if (lines.length) console.log(`\n${r.file}\n${lines.join('\n')}`)
   }
   console.log(
     `\n${totals.empty} empty id(s), ${totals.duplicates} duplicate id(s), ` +
-      `${totals.broken} broken in-page link(s) ` +
-      `(${newBroken.length} new, ${totals.broken - newBroken.length} in baseline).`
+      `${totals.broken} broken in-page link(s).`
   )
 }
 
-const failed = totals.empty + totals.duplicates + newBroken.length
+const failed = totals.empty + totals.duplicates + totals.broken
 if (failed > 0 && !asJson) {
-  console.error(
-    '\nFAIL: fix the problems above, or run --update-baseline if a broken link is ' +
-      'intentionally deferred.'
-  )
+  console.error('\nFAIL: fix the problems above.')
 }
 process.exit(failed > 0 ? 1 : 0)
