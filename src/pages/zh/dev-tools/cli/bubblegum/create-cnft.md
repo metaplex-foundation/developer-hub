@@ -23,8 +23,12 @@ mplx bg nft create my-tree --wizard
 ### 基于文件创建
 
 ```bash
-mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
+mplx bg nft create my-tree --image ./nft.png --offchain ./metadata.json
 ```
+
+{% callout type="note" %}
+在早期的 CLI 版本中，此命令通过 `--json <path>` 指定元数据文件。现在 `--json` 与其他所有 `mplx` 命令一样是输出标志，元数据文件通过 `--offchain` 传入。向 `--json` 传入路径会返回一个提示使用 `--offchain` 的错误。
+{% /callout %}
 
 ### 基于 URI 创建
 
@@ -45,7 +49,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--wizard` | 使用交互式向导 |
 | `--name <value>` | NFT 名称 |
 | `--uri <value>` | 现有元数据 URI |
-| `--json <value>` | JSON 元数据文件路径（需要 `--image`） |
+| `--offchain <value>` | JSON 元数据文件路径（需要 `--image`） |
 | `--image <value>` | 图片文件路径 |
 | `--description <value>` | NFT 描述 |
 | `--attributes <value>` | "trait:value,trait:value" 格式的属性 |
@@ -90,7 +94,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 1. 使用本地文件创建：
 
 ```bash
-mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
+mplx bg nft create my-tree --image ./artwork.png --offchain ./metadata.json
 ```
 
 1. 使用元数据标志创建：
@@ -157,7 +161,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 ## 元数据 JSON 格式
 
-使用 `--json` 时，您的元数据文件应遵循以下结构：
+使用 `--offchain` 时，您的元数据文件应遵循以下结构：
 
 ```json
 {
