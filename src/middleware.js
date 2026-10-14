@@ -378,7 +378,7 @@ export function middleware(request) {
   // Redirect /guides/* to /solana/* (path rename)
   if (pathname === '/guides' || pathname.startsWith('/guides/')) {
     const newPath = pathname.replace('/guides', '/solana')
-    return NextResponse.redirect(new URL(newPath, request.url), 308)
+    return redirectTo(request, newPath)
   }
 
   // Handle Japanese, Korean, and Chinese path migration redirects
@@ -402,7 +402,7 @@ export function middleware(request) {
       // Redirect /lang/guides/* to /lang/solana/* (path rename)
       if (pathname === `/${lang}/guides` || pathname.startsWith(`/${lang}/guides/`)) {
         const newPath = pathname.replace(`/${lang}/guides`, `/${lang}/solana`)
-        return NextResponse.redirect(new URL(newPath, request.url), 308)
+        return redirectTo(request, newPath)
       }
     }
   }
