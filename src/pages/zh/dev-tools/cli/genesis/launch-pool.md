@@ -58,7 +58,7 @@ Presale bucket、unlocked bucket、Genesis 账户创建、finalize、前端集�
 
 **跳转至：** [添加 Bucket](#add-launch-pool-bucket) · [存入](#deposit) · [提取](#withdraw) · [转换](#transition) · [领取](#claim) · [完整生命周期](#full-lifecycle-example) · [常见错误](#common-errors) · [常见问题](#faq)
 
-## 添加 Launch Pool Bucket
+## 添加 Launch Pool Bucket {% #add-launch-pool-bucket %}
 
 `mplx genesis bucket add-launch-pool` 命令向 Genesis 账户添加一个 Launch Pool bucket。
 
@@ -148,7 +148,7 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
   --claimSchedule '{"startTime":1704153601,"endTime":1735689600,"period":86400,"cliffTime":1704240000,"cliffAmountBps":1000}'
 ```
 
-## 存入
+## 存入 {% #deposit %}
 
 `mplx genesis deposit` 命令在存款窗口期间将报价代币存入 Launch Pool bucket。如果使用 SOL 作为报价代币，请先包装。
 
@@ -171,7 +171,7 @@ mplx toolbox sol wrap 10
 mplx genesis deposit <GENESIS_ADDRESS> --amount 10000000000 --bucketIndex 0
 ```
 
-## 提取
+## 提取 {% #withdraw %}
 
 `mplx genesis withdraw` 命令从 Launch Pool bucket 提取报价代币。仅在存款期间可用。
 
@@ -186,7 +186,7 @@ mplx genesis withdraw <GENESIS_ADDRESS> --amount 5000000000 --bucketIndex 0
 | `--amount <string>` | `-a` | 要提取的报价代币金额（基本单位） | 是 |
 | `--bucketIndex <integer>` | `-b` | Launch Pool bucket 的索引（默认：0） | 否 |
 
-## 转换
+## 转换 {% #transition %}
 
 `mplx genesis transition` 命令在存款期结束后执行 end behavior，将收集的报价代币转移到目标 bucket。
 
@@ -205,7 +205,7 @@ mplx genesis transition <GENESIS_ADDRESS> --bucketIndex 0
 - 必须在存款期结束后调用
 - 仅在 bucket 配置了 end behavior 时才需要
 
-## 领取
+## 领取 {% #claim %}
 
 `mplx genesis claim` 命令从 Launch Pool bucket 领取基础代币。用户按其存款比例获得代币。
 
@@ -232,7 +232,7 @@ mplx genesis claim <GENESIS_ADDRESS> --bucketIndex 0
 mplx genesis claim <GENESIS_ADDRESS> --bucketIndex 0 --recipient <WALLET_ADDRESS>
 ```
 
-## 完整生命周期示例
+## 完整生命周期示例 {% #full-lifecycle-example %}
 
 ```bash {% title="Complete launch pool lifecycle" %}
 # 1. Create the Genesis account
@@ -283,7 +283,7 @@ mplx genesis claim $GENESIS --bucketIndex 0
 mplx genesis revoke $GENESIS --revokeMint
 ```
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 修复方法 |
 |-------|-------|-----|
@@ -296,7 +296,7 @@ mplx genesis revoke $GENESIS --revokeMint
 | End behavior not configured | 在未配置 end behavior 的 bucket 上运行 `transition` | Transition 仅在配置了 `--endBehavior` 的 bucket 上需要 |
 | Deposit period not ended | 在存款关闭前运行 `transition` | 等待 `depositEnd` 时间戳之后 |
 
-## 常见问题
+## 常见问题 {% #faq %}
 
 **Launch Pool 中的代币如何分发？**
 代币按比例分发。如果您存入了池中总报价代币的 10%，您将获得该 bucket 基础代币分配的 10%。

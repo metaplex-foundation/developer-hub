@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import slugify from '@sindresorhus/slugify'
+import { slugifyHeading } from '@/shared/slugifyHeading'
 
 // Link icon (lucide "link") rendered as a static SVG string so it can be
 // injected into headings created by Markdoc's serialized render tree.
@@ -96,7 +96,7 @@ export function HeadingAnchors() {
 
       // Ensure the heading has a stable id to link to.
       if (!heading.id) {
-        const base = slugify(heading.textContent || '') || 'section'
+        const base = slugifyHeading(heading.textContent || '') || 'section'
         let candidate = base
         let counter = 1
         while (usedIds.has(candidate)) {

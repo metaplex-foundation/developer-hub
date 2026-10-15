@@ -2,7 +2,30 @@
 title: Sending transactions
 metaTitle: Sending transactions | Umi
 description: Sending transactions using Metaplex Umi and Transaction Builders
+keywords:
+  - Umi transactions
+  - Solana transaction v1
+  - transaction builder
+  - sendAndConfirm
+about:
+  - Umi
+  - Solana Transactions
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '01-16-2024'
+updated: '09-21-2026'
 ---
+## Summary
+
+Umi creates, signs, sends, and confirms Solana transactions through transaction factories, immutable transaction builders, and its RPC interface.
+
+- Use `useV1()` to select V1 on a transaction builder.
+- Use `setTransactionConfig()` instead of Compute Budget instructions with V1.
+- Umi 1.6.0 still defaults to V0 unless configured otherwise.
+- Keep transactions that require Address Lookup Tables on V0.
+
 Managing and sending transactions is an important part of any Solana client. To help manage them, Umi provides a bunch of components:
 
 - A [TransactionFactoryInterface](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionFactoryInterface.html) that can be used to create and (de)serialize transactions.
@@ -17,18 +40,25 @@ Umi defines its own set of interfaces for transactions, instructions and all oth
 - [TransactionMessage](https://umi.typedoc.metaplex.com/interfaces/umi.TransactionMessage.html): A transaction message is composed of all required public keys, one or many compiled instructions using indexes instead of public keys, a recent blockhash and other attributes such as its version. A transaction message can have one of the following versions:
   - Version: "legacy": The first Solana iteration of the transaction message.
   - Version: 0: The first transaction message version that introduces transaction versioning. It also introduces address lookup tables.
+  - Version: 1: A transaction format with a 4,096-byte limit and compute configuration stored in the message. It does not support Address Lookup Tables.
 - [Instruction](https://umi.typedoc.metaplex.com/types/umi.Instruction.html): An instruction is composed of a program id, a list of [AccountMeta](https://umi.typedoc.metaplex.com/types/umi.AccountMeta.html) and some serialized data. Each account `AccountMeta` is composed of a public key, a boolean indicating whether it will be signing the transaction and another boolean indicating whether it's writable or not.
 
-To create a new transaction, you may use the `create` method of the `TransactionFactoryInterface`. For instance, here's how you'd create a version `0` transaction with a single instruction:
+To create a new transaction, you may use the `create` method of the `TransactionFactoryInterface`. The following example creates a version `1` transaction with a single instruction:
 
-```ts
+```ts {% title="Create a V1 transaction" %}
 const transaction = umi.transactions.create({
-  version: 0,
+  version: 1,
   blockhash: (await umi.rpc.getLatestBlockhash()).blockhash,
   instructions: [myInstruction],
   payer: umi.payer.publicKey,
+  transactionConfig: {
+    computeUnitLimit: 200_000,
+    loadedAccountsDataSizeLimit: 64 * 1024 * 1024,
+  },
 })
 ```
+
+The low-level `create()` method does not apply transaction builder defaults, so V1 callers must provide nonzero compute and loaded-account data limits.
 
 The transaction factory interface can also be used to serialize and deserialize transactions and their messages.
 
@@ -89,7 +119,9 @@ And there's much more you can do with transaction builders. Feel free to [read t
 // Setters.
 builder = builder.setVersion(myTransactionVersion) // Sets the transaction version.
 builder = builder.useLegacyVersion() // Sets the transaction version to "legacy".
-builder = builder.useV0() // Sets the transaction version to 0 (default).
+builder = builder.useV0() // Sets the transaction version to 0.
+builder = builder.useV1() // Sets the transaction version to 1.
+builder = builder.setTransactionConfig(myV1Config) // Sets compute limits and fees for version 1.
 builder = builder.empty() // Removes all instructions from the builder but keeps the configurations.
 builder = builder.setItems(myWrappedInstructions) // Overwrite the wrapped instructions with the given ones.
 builder = builder.setAddressLookupTables(myLuts) // Set the address lookup tables, only for version 0 transactions.
@@ -190,9 +222,39 @@ Or use `sendAndConfirm()` to wait for the transaction finalization for you. To d
 const confirmResult = await builder.sendAndConfirm(umi, {confirm: {commitment: 'finalized'}})
 ```
 
+## Using V1 Transactions
+
+V1 transaction builders use `useV1()` and store compute configuration in the transaction message.
+
+```ts {% title="Send a V1 transaction" %}
+import { lamports, transactionBuilder } from '@metaplex-foundation/umi'
+import { transferSol } from '@metaplex-foundation/mpl-toolbox'
+
+await transactionBuilder()
+  .add(transferSol(umi, transferArgs))
+  .useV1()
+  .setTransactionConfig({
+    computeUnitLimit: 600_000,
+    priorityFee: lamports(600),
+  })
+  .sendAndConfirm(umi)
+```
+
+Umi defaults to V0 for backward compatibility. Set V1 as the application default when all supported wallets can sign it:
+
+```ts {% title="Configure V1 as the default" %}
+const umi = createUmi('https://api.mainnet-beta.solana.com', {
+  defaultTransactionVersion: 1,
+})
+```
+
+{% callout type="warning" %}
+Umi transaction builders reject Compute Budget instructions when building V1 transactions; use `setTransactionConfig()` instead. Low-level `umi.transactions.create()` does not apply this builder check, but the Solana runtime ignores Compute Budget instructions for V1 configuration. Address Lookup Tables are not supported by V1. See [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) for conversion steps and compatibility requirements.
+{% /callout %}
+
 ## Using address lookup tables
 
-Starting from version 0 transactions, you may use address lookup tables to reduce the size of transactions.
+Address Lookup Tables reduce the account-key footprint of V0 transactions but are not supported by V1.
 
 ```ts
 const myLut: AddressLookupTableInput = {
@@ -271,3 +333,10 @@ This will return an instance of [`TransactionWithMeta`](https://umi.typedoc.meta
 const transaction = await umi.rpc.getTransaction(signature)
 const logs: string[] = transaction.meta.logs
 ```
+
+## Notes
+
+- Umi 1.6.0 or later is required for V1 transactions.
+- Umi's Web3.js-based packages require `@solana/web3.js` 1.99.0 or later for V1.
+- Connected wallets must support transaction version `1`; Umi does not perform this compatibility check.
+- Transactions that require Address Lookup Tables must remain on V0.

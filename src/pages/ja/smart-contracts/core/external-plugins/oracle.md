@@ -66,7 +66,7 @@ Oracle AccountからOracle Pluginに以下のバリデーション結果を返�
 | Can Approve | ❌  |
 | Can Reject  | ✅  |
 | Can Pass    | ❌  |
-## オンチェーンOracle Accountの構造
+## オンチェーンOracle Accountの構造 {% #on-chain-oracle-account-structure %}
 Oracle Accountは以下のオンチェーンアカウント構造を持つ必要があります。
 {% dialect-switcher title="Oracle Accountのオンチェーンアカウント構造" %}
 {% dialect title="Anchor" id="rust-anchor" %}
@@ -235,7 +235,7 @@ pub enum ExtraAccount {
 }
 ```
 ## Oracle Pluginの作成と追加
-### Oracle PluginでAssetを作成
+### Oracle PluginでAssetを作成 {% #creating-an-asset-with-the-oracle-plugin %}
 {% dialect-switcher title="Oracle PluginでMPL Core Assetを作成" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts
@@ -406,7 +406,7 @@ pub enum ExtraAccount {
 ```
 {% /dialect %}
 {% /dialect-switcher %} -->
-### AssetにOracle Pluginを追加
+### AssetにOracle Pluginを追加 {% #adding-an-oracle-plugin-to-an-asset %}
 {% dialect-switcher title="CollectionにOracle Pluginを追加" %}
 {% dialect title="Javascript" id="js" %}
 ```ts
@@ -627,7 +627,7 @@ pub async fn add_oracle_plugin_to_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## MetaplexがデプロイしたデフォルトのOracle
+## MetaplexがデプロイしたデフォルトのOracle {% #default-oracles-deployed-by-metaplex %}
 [Soulbound NFT](/ja/smart-contracts/core/guides/create-soulbound-nft-asset)のようなまれなケースでは、常にライフサイクルイベントを拒否または承認するOracleがあると便利な場合があります。そのために、以下のOracleがデプロイされており、誰でも使用できます：
 - **Transfer Oracle**: 常に転送を拒否します。`AwPRxL5f6GDVajyE1bBcfSWdQT58nWMoS36A1uFtpCZY`
 - **Update Oracle**: 常に更新を拒否します。`6cKyMV4toCVCEtvh6Sh5RQ1fevynvBDByaQP4ufz1Zj6`

@@ -275,7 +275,7 @@ const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1%スリッ�
 
 {% code-tabs-imported from="genesis/swap_sell" frameworks="umi,cli" defaultFramework="umi" /%}
 
-### wSOLラッピングに関する注意
+### wSOLラッピングに関する注意 {% #w-sol-wrapping-note %}
 
 {% callout type="warning" title="wSOLの手動処理が必要" %}
 `swapBondingCurveV2` はクォートトークンとしてラップドSOL（wSOL）を使用し、ネイティブSOLを自動的にラップ・アンラップ**しません**。
@@ -426,7 +426,7 @@ async function executeBuy(bucket, amountIn: bigint, slippageBps: number) {
 
 ### swapBondingCurveV2を呼び出す前にSOLをラップする必要がありますか？
 
-はい。ボンディングカーブはクォートトークンとしてwSOLを使用し、`swapBondingCurveV2` はネイティブSOLを自動的にラップ・アンラップしません。[wSOLラッピングに関する注意](#wsol-ラッピングに関する注意)を参照してください。
+はい。ボンディングカーブはクォートトークンとしてwSOLを使用し、`swapBondingCurveV2` はネイティブSOLを自動的にラップ・アンラップしません。[wSOLラッピングに関する注意](#w-sol-wrapping-note)を参照してください。
 
 ### getSwapResultは何を返し、手数料はどのように処理されますか？
 

@@ -21,11 +21,16 @@ Bubblegumは、従来のNFTよりもはるかに低コストでNFTを作成で�
 - 操作に必要なプルーフサイズ
 
 ### コレクション
-Bubblegum V2は[Metaplex Coreコレクション](/smart-contracts/core/collections)を使用します（Token Metadataコレクションではありません）。まずCoreコレクションを作成してください：
+Bubblegum V2は[Metaplex Coreコレクション](/smart-contracts/core/collections)を使用します。Bubblegum V2プラグイン付きのCoreコレクションを作成します：
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
+
+`--royalties` は Core Royalties プラグインを追加し、後続の `mplx bg nft create --collection` が[コレクションロイヤリティを継承](/dev-tools/cli/bubblegum/create-cnft#inherited-royalties)できるようにします（リーフセンチネル `65535`）。
 
 ### RPC要件
 
@@ -68,16 +73,19 @@ mplx bg <resource> <command> [options]
    mplx bg tree create --wizard
    ```
 
-1. コレクションを作成（オプションですが推奨）：
+1. Bubblegum対応コレクションを作成（オプションですが推奨）。継承するには `--royalties` を付けます：
 
    ```bash
-   mplx core collection create --wizard
+   mplx bg collection create \
+     --name "My Compressed Collection" \
+     --uri "https://example.com/collection.json" \
+     --royalties 5
    ```
 
-1. 圧縮NFTをミント：
+1. 圧縮NFTをミント。自動継承するには `--royalties` / `--creator`（および JSON の `seller_fee_basis_points`）を省略します：
 
    ```bash
-   mplx bg nft create my-tree --wizard
+   mplx bg nft create my-tree --name "cNFT #1" --uri "https://example.com/1.json" --collection <COL>
    ```
 
 ## 権限モデル

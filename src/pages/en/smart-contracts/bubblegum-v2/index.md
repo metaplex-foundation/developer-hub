@@ -3,7 +3,7 @@ title: Overview
 metaTitle: Bubblegum V2 - Compressed NFTs on Solana - Metaplex
 description: Provides a high-level overview of Bubblegum V2 and compressed NFTs (cNFTs) on Solana. Learn about merkle trees, the DAS API, and new features like freeze, soulbound, and MPL-Core collections.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '06-19-2026'
 keywords:
   - compressed NFT
   - cNFT
@@ -84,6 +84,7 @@ Bubblegum V2 builds on the foundation of the original Bubblegum program while in
 - **Freeze and Thaw Functionality**: Two types of freeze/thaw are available: 1) cNFT owners can delegate freeze authority to a leaf delegate for asset-level control, providing flexibility for various use cases such as preventing transfers during specific events or implementing vesting mechanics.  2) If the `PermanentFreezeDelegate` plugin is enabled on collection creation, project creators can freeze and thaw cNFTs via the permanent freeze delegate for collection-wide control
 - **MPL-Core Collections Integration**: Bubblegum V2 NFTs can now be added to MPL-Core collections instead of being limited to token metadata collections, allowing for greater flexibility and integration with the broader Metaplex ecosystem.
 - **Royalty Enforcement**: Since Bubblegum V2 is using [MPL-Core](/smart-contracts/core) Collections, it is possible to enforce royalties on cNFTs e.g. using a `ProgramDenyList`.
+- **Inherited Royalties**: cNFTs minted into MPL-Core collections can store a sentinel seller fee basis points value (`65535`) on the leaf and inherit the collection's Royalties plugin configuration instead of duplicating basis points on every mint.
 - **Soulbound NFTs**: cNFTs can now be made soulbound (non-transferrable), permanently binding them to their owner's wallet. This is perfect for credentials, proof of attendance, identity verification, and more. It requires the `PermanentFreezeDelegate` plugin to be enabled when creating the collection.
 - **Allow Permanent Transfer**: The permanent transfer delegate can now transfer the cNFT to a new owner without interaction of the leaf owner if the `PermanentTransferDelegate` plugin is enabled on the collection.
 - **Burning by Authority**: If the Collection has the `PermanentBurnDelegate` plugin enabled, the delegate could burn the NFT without the leaf owner's signature.

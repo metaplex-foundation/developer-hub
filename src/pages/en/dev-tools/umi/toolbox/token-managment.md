@@ -4,7 +4,7 @@ metaTitle: Token Management | Toolbox
 description: How to manage Token with Umi.
 ---
 
-The following instructions are part of the Token Programm the Associated Token Program and MPL Token Extras Program. The Token Program and Associated Token programs are essential for managing tokens on Solana since they enable you to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, and more. You can learn more about these programs in [Solana's official documentation](https://spl.solana.com/token).
+The following instructions are part of the Token Program, the Associated Token Program and MPL Token Extras Program. The Token Program and Associated Token programs are essential for managing tokens on Solana since they enable you to create Mint accounts, Token accounts, Associated Token PDAs, mint tokens, transfer tokens, delegate tokens, and more. You can learn more about these programs in [Solana's official documentation](https://spl.solana.com/token).
 
 ## Create a Mint
 

@@ -21,11 +21,16 @@ Bubblegum 是 Metaplex 的压缩 NFT（cNFT）程序，允许您以传统 NFT �
 - 操作所需的证明大小
 
 ### 集合
-Bubblegum V2 使用 [Metaplex Core 集合](/smart-contracts/core/collections)（不是 Token Metadata 集合）。首先创建一个 Core 集合：
+Bubblegum V2 使用 [Metaplex Core 集合](/smart-contracts/core/collections)。创建带 Bubblegum V2 插件的 Core 集合：
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
+
+`--royalties` 会添加 Core Royalties 插件，以便后续 `mplx bg nft create --collection` 可以[继承集合版税](/dev-tools/cli/bubblegum/create-cnft#inherited-royalties)（叶子哨兵 `65535`）。
 
 ### RPC 要求
 
@@ -68,16 +73,19 @@ mplx config rpcs add <name> <url>
 mplx bg tree create --wizard
 ```
 
-1. 创建集合（可选但推荐）：
+1. 创建 Bubblegum 可用集合（可选但推荐）。传入 `--royalties` 以便铸造时继承：
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
 
-1. 铸造压缩 NFT：
+1. 铸造压缩 NFT。省略 `--royalties` / `--creator`（以及 JSON `seller_fee_basis_points`）即可自动继承：
 
 ```bash
-mplx bg nft create my-tree --wizard
+mplx bg nft create my-tree --name "cNFT #1" --uri "https://example.com/1.json" --collection <COL>
 ```
 
 ## 权限模型

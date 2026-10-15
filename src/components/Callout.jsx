@@ -13,7 +13,7 @@ const styles = {
     container: 'border-l-2 border-amber-400 bg-amber-50/50 dark:bg-amber-950/20',
     icon: 'text-amber-500 dark:text-amber-400',
     title: 'text-amber-900 dark:text-amber-400',
-    body: 'text-amber-800 prose-a:text-amber-900 prose-code:text-amber-900 dark:text-amber-200 dark:prose-a:text-amber-400 dark:prose-code:text-amber-200',
+    body: 'text-amber-800 prose-a:text-amber-900 prose-a:underline prose-a:!decoration-current prose-a:underline-offset-2 prose-code:text-amber-900 dark:text-amber-200 dark:prose-a:text-amber-400 dark:prose-code:text-amber-200',
   },
 }
 

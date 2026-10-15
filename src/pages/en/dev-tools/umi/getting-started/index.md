@@ -8,11 +8,11 @@ description: A Javascript Framework for Solana.
 
 To use Umi you need to install Umi and all the external plugins you'll want to use. Alternatively, if you don't need a specific plugin, you can install the default bundle that includes a set of plugins that's suitable for most use cases.
 
-**Note**: since the default bundle relies on web3.js for some of the interfaces you'll need to install that package as well.
+**Note**: Since the default bundle relies on Web3.js for some interfaces, you need to install that package as well. Umi 1.6.0 requires `@solana/web3.js` 1.99.0 or later for V1 transaction support.
 
 ### Required Packages
 
-{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js@1"] type="npm" /%}
+{% packagesUsed packages=["umi", "umiDefaults", "@solana/web3.js"] type="npm" /%}
 
 To install them, use the following commands:
 
@@ -25,7 +25,7 @@ npm i @metaplex-foundation/umi-bundle-defaults
 ```
 
 ```
-npm i @solana/web3.js@1
+npm i @solana/web3.js@^1.99.0
 ```
 
 ### For library authors
@@ -83,7 +83,7 @@ In this section, we'll cover the essential steps to get started with Umi:
 
 Solana has different clusters (e.g., Mainnet-beta, Devnet, Testnet, ...) that serve various purposes, each with dedicated API nodes to handle RPC requests.
 
-Connecting Umi to a cluster of choice is is as simple as creating an umi instance since the RPC endpoint is passed as the first argument.
+Connecting Umi to a cluster of choice is as simple as creating an umi instance since the RPC endpoint is passed as the first argument.
 
 **Note**: If you're connecting to **Mainnet**, it's recommended to use a dedicated RPC endpoint from a Solana RPC provider instead of the public endpoint (`https://api.mainnet-beta.solana.com`) due to its limitations.
 

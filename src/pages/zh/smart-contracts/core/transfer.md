@@ -83,9 +83,9 @@ Core Asset 的所有者可以通过使用 `transfer` 指令到 MPL Core 程序�
 链上指令的完整详细信息可在 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139) 上查看。
 {% /totem-accordion %}
 {% /totem %}
-## 转移 Core Asset
+## 转移 Core Asset {% #transferring-a-core-asset %}
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
-## 转移 Collection 中的 Core Asset
+## 转移 Collection 中的 Core Asset {% #transferring-a-core-asset-in-a-collection %}
 如果您要转移具有收藏的 Asset，需要传递收藏地址。
 [如何判断 Asset 是否在 Collection 中？]()
 {% dialect-switcher title="转移属于 Collection 的 Asset" %}
@@ -136,7 +136,7 @@ pub async fn transfer_asset_in_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## 如果我是 Asset 的 Transfer Delegate？
+## 如果我是 Asset 的 Transfer Delegate？ {% #what-if-i-am-the-transfer-delegate-of-an-asset %}
 如果您通过 [Transfer Delegate](/zh/smart-contracts/core/plugins/transfer-delegate) 插件成为 Asset 的 Transfer Delegate，您可以像 Asset 所有者一样调用 `transferV1` 函数。
 ## 常见错误
 ### `Authority mismatch`

@@ -45,7 +45,7 @@ There exist another type of Account, called **Program Derived Account**, whose a
 
 Since the address is always derived from the public key of the Program, no other Program can algorithmically derive the same address. On top of that, additional **Seeds** can be provided to the algorithm to add more context to the address.
 
-This has a variety of use cases such as enabling programs to sign [Cross-Program Invocations](#cross-program-invokations) or enabling the creation of accounts within an address that can be derived deterministically.
+This has a variety of use cases such as enabling programs to sign [Cross-Program Invocations](#cross-program-invocations-cpi) or enabling the creation of accounts within an address that can be derived deterministically.
 
 Note that, by design, Program Derived Addresses will never conflict with cryptographically generated public keys. All cryptographic public keys are part of what we call an [Elliptic-curve](https://en.wikipedia.org/wiki/Elliptic-curve_cryptography). If, when generating a PDA, the algorithm generated a key that falls on that curve, a **Bump** is added to the address and is incremented by one until the generated address no longer falls on the curve.
 

@@ -175,7 +175,7 @@ address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 }
 ```
 
-## プログラム
+## プログラム {% #the-program %}
 
 ### インポートとテンプレート
 
@@ -345,7 +345,7 @@ pub fn create_token(
 1. `create_metadata_accounts_v3`（14〜40行目）- 名前、シンボル、URIを持つメタデータアカウントを作成・初期化
 2. `mint_to`（43〜54行目）- 指定された量を支払者のトークンアカウントにミント
 
-## テストクライアント
+## テストクライアント {% #the-client %}
 
 テストの前に、プログラムをビルドします：
 
@@ -485,7 +485,7 @@ Token created and minted successfully!
 
 このJSONファイルをArweaveやIPFSなどの永続ストレージソリューションにホストしてください。
 
-## よくあるエラー
+## よくあるエラー {% #common-errors %}
 
 ### `no function or associated item named 'create_type' found`
 

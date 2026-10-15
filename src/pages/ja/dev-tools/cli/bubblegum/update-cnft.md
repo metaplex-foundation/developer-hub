@@ -125,3 +125,4 @@ Updating compressed NFT... ✓
 - `--uri`フラグは`--image`、`--description`、`--editor`と排他的です
 - `--editor`フラグは他のすべての更新フラグと排他的です
 - エディタは`$EDITOR`環境変数を使用するか、デフォルトでnano/notepadを使用します
+- 継承ロイヤリティでミントされたcNFTの更新では、SDK の `currentMetadata` または DAS の `royalty.basis_points_raw` / `creators_raw` からリーフ正規メタデータ（`65535` + 空のクリエイター）を再構築します。表示用のロイヤリティ%をリーフに書き込まないでください。ハッシュが壊れます。[継承ロイヤリティの読み取り](/smart-contracts/bubblegum-v2/reading-inherited-royalties)

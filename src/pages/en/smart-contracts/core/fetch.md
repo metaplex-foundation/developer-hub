@@ -56,7 +56,7 @@ Fetch Core Assets and Collections using SDK helper functions or the DAS API. Cho
 ## Out of Scope
 Token Metadata fetching (use mpl-token-metadata), compressed NFT fetching (use Bubblegum DAS extensions), and off-chain metadata fetching (fetch the URI directly).
 ## Quick Start
-**Jump to:** [Single Asset](#fetch-a-single-asset-or-collection) · [By Owner](#fetch-assets-by-owner) · [By Collection](#fetch-assets-by-collection) · [DAS API](#das---digital-asset-standard-api)
+**Jump to:** [Single Asset](#fetch-a-single-asset-or-collection) · [By Owner](#fetch-assets-by-owner) · [By Collection](#fetch-assets-by-collection) · [DAS API](#das-digital-asset-standard-api)
 1. Install: `npm install @metaplex-foundation/mpl-core @metaplex-foundation/umi`
 2. Configure Umi with your RPC endpoint
 3. Call `fetchAsset(umi, publicKey)` with the Asset address

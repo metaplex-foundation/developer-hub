@@ -83,7 +83,7 @@ faqs:
 | address | publicKey |
 | message | string    |
 Asset은 Collection에서 Creators 배열을 상속받습니다.
-## Asset에 Verified Creators Plugin 추가 코드 예제
+## Asset에 Verified Creators Plugin 추가 코드 예제 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="MPL Core Asset에 Verified Creators Plugin 추가" %}
 {% dialect title="JavaScript" id="js" %}
 이 코드는 umi identity가 asset의 update authority라고 가정합니다.
@@ -105,7 +105,7 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Asset에 다른 창작자 추가 코드 예제
+## Asset에 다른 창작자 추가 코드 예제 {% #adding-a-different-creator-to-an-asset-code-example %}
 {% dialect-switcher title="MPL Core Asset에 다른 Creator 추가" %}
 {% dialect title="JavaScript" id="js" %}
 이 코드는 umi identity가 asset의 update authority이며 미검증 Creator를 추가한다고 가정합니다.
@@ -159,7 +159,7 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Asset에서 창작자 제거 코드 예제
+## Asset에서 창작자 제거 코드 예제 {% #removing-a-creator-from-an-asset-code-example %}
 {% dialect-switcher title="MPL Core Asset에서 Creator 제거" %}
 {% dialect title="JavaScript" id="js" %}
 update authority만 창작자를 제거할 수 있습니다. 창작자를 제거하려면 `verified:false`이거나 update authority 자신이어야 합니다. 따라서 업데이트는 두 단계로 수행됩니다. update authority와 창작자로 동시에 서명할 수 있다면 두 인스트럭션을 결합하여 하나의 트랜잭션으로 처리할 수 있습니다.

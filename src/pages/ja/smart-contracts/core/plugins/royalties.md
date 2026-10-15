@@ -49,7 +49,7 @@ faqs:
 ## 範囲外
 Token Metadataロイヤリティ（異なるシステム）、ロイヤリティの収集/分配（マーケットプレイスが処理）、およびロイヤリティの法的強制。
 ## クイックスタート
-**ジャンプ先:** [Assetに追加](#assetへのroyalties-pluginの追加コード例) · [Collectionに追加](#collectionへのroyalties-pluginの追加コード例) · [RuleSets](#rulesets) · [更新](#assetのroyalties-pluginの更新)
+**ジャンプ先:** [Assetに追加](#assetへのroyalties-pluginの追加コード例) · [Collectionに追加](#collectionへのroyalties-pluginの追加コード例) · [RuleSets](#rule-sets) · [更新](#assetのroyalties-pluginの更新)
 1. `@metaplex-foundation/mpl-core`から`addPlugin`をインポート
 2. `type: 'Royalties'`、`basisPoints`、`creators`、`ruleSet`を指定して呼び出し
 3. マーケットプレイスがPluginを読み取り、販売時にロイヤリティを強制

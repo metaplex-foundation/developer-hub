@@ -63,8 +63,17 @@ Genesis API を使用してトークンローンチを単一コマンドで作�
 
 2 つのローンチタイプが利用可能です：
 
-- **`launchpool`**（デフォルト）: 48 時間の入金ウィンドウ、比例的なトークン配布、設定可能な割り当て。`--tokenAllocation`、`--depositStartTime`、`--raiseGoal`、`--raydiumLiquidityBps`、`--fundsRecipient` が必要です。
 - **`bonding-curve`**: 即時 bonding curve（constant product AMM）。取引は即座に開始 — 入金ウィンドウなし。すべてのトークンが売却されると Raydium CPMM に自動卒業します。`--name`、`--symbol`、`--image` のみ必要です。
+- **`launchpool`**（デフォルト）: 48 時間の入金ウィンドウ、比例的なトークン配布、設定可能な割り当て。`--tokenAllocation`、`--depositStartTime`、`--raiseGoal`、`--raydiumLiquidityBps`、`--fundsRecipient` が必要です。
+
+### Bonding Curve の例 {% #bonding-curve-example %}
+
+```bash {% title="bonding curve ローンチの作成" %}
+mplx genesis launch create --launchType bonding-curve \
+  --name "My Token" \
+  --symbol "MTK" \
+  --image "https://gateway.irys.xyz/abc123"
+```
 
 ### Launchpool の例
 
@@ -196,7 +205,7 @@ mplx genesis launch create --launchType bonding-curve \
 
 初回購入金額は SOL 単位です（例: `0.1` = 0.1 SOL）。初回購入にはプロトコルフィーもクリエイターフィーも課されません。
 
-## Agent ローンチ
+## Agent ローンチ {% #agent-launches %}
 
 `--agentAsset` を渡すことで、トークンローンチを登録済みの [agent](/ja/agents/mint-agent) にリンクします。launchpool と bonding curve の両方のローンチタイプで動作します。
 
@@ -365,7 +374,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 アカウントが既に登録されている場合、コマンドはその旨を報告し、既存のローンチ詳細を表示します。
 
-## ロック付き割り当て
+## ロック付き割り当て {% #locked-allocations %}
 
 ロック付き割り当てにより、ベスティングスケジュール付きでトークン供給量の一部を予約できます。`--lockedAllocations` で JSON 配列ファイルとして指定します。
 
@@ -402,7 +411,7 @@ mplx genesis launch register <GENESIS_ACCOUNT> \
 
 `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `TWO_WEEKS`, `MONTH`, `QUARTER`, `YEAR`
 
-## 一般的なエラー
+## 一般的なエラー {% #common-errors %}
 
 | エラー | 原因 | 対処法 |
 |-------|------|--------|

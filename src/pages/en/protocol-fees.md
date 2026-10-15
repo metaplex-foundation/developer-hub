@@ -10,7 +10,7 @@ The Metaplex Protocol currently includes the following fees:
 
 {% totem-accordion title="Genesis" %}
 
-Token launch platform fees across the bonding curve lifecycle.
+Fees for bonding curve, launch pool, and presale launches, including trading in the Raydium CPMM pool after graduation.
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
@@ -39,6 +39,14 @@ Compressed NFTs with improved features and flexibility.
 Paid by the minter, which is typically individual collectors minting new drops. Alternatively creators may consider using Core (next gen NFTs) for maximum composability and lower mint costs, or Bubblegum (compressed NFTs).
 
 {% protocol-fees program="token-metadata" showTitle=false /%}
+
+{% /totem-accordion %}
+
+{% totem-accordion title="MPL-3643" %}
+
+Flat fees paid by the issuer at issuance, lifecycle events, and holder activation.
+
+{% protocol-fees program="mpl-3643" showTitle=false /%}
 
 {% /totem-accordion %}
 

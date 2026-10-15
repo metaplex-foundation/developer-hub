@@ -9,6 +9,7 @@ import { getLocalizedHref } from '@/config/languages'
 import { useLocale, useTranslations } from '@/contexts/LocaleContext'
 import {
   BookOpenIcon,
+  CodeBracketIcon,
   ComputerDesktopIcon,
   CpuChipIcon,
   DocumentTextIcon,
@@ -107,6 +108,12 @@ export function MobileNavigation({ page }) {
             className="mt-12 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
           >
             <HomeIcon height={20} /> {t('home', 'Home')}
+          </Link>
+          <Link
+            href={getLocalizedHref('/api', locale)}
+            className="mt-4 flex items-center gap-2 text-foreground transition-colors hover:text-primary"
+          >
+            <CodeBracketIcon height={20} /> {t('api', 'API')}
           </Link>
           <Link
             href={getLocalizedHref('/tokens', locale)}

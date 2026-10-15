@@ -64,6 +64,10 @@ await addLaunchPoolBucketV2(umi, {
   // Optional: Minimum deposit
   minimumDepositAmount: null, // or { amount: sol(0.1).basisPoints }
 
+  // Required since @metaplex-foundation/genesis 0.42.0: pass null for no soft cap,
+  // or { amount: sol(100).basisPoints } to cap the quote tokens kept
+  softCap: null,
+
   // Where collected SOL goes after transition
   endBehaviors: [
     {

@@ -7,4 +7,10 @@ mplx core asset create --wizard
 mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 
 # Create with files (image + metadata)
-mplx core asset create --files --image "./my-nft.png" --json "./metadata.json"
+mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
+
+# Create with a vanity asset address
+mplx core asset create \
+  --name "My NFT" \
+  --uri "https://example.com/metadata.json" \
+  --mint-keypair ./vanity-asset.json

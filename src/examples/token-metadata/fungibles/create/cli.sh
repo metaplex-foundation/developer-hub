@@ -18,6 +18,13 @@ mplx toolbox token create \
   --decimals 9 \
   --mint-amount 1000000000000000
 
+# Create with a vanity mint address
+mplx toolbox token create \
+  --name "Cool Token" \
+  --symbol "COOL" \
+  --mint-amount 1000000 \
+  --mint-keypair ./vanity-mint.json
+
 # Note: mint-amount is in smallest units
 # With --decimals 9, to mint 1,000,000 tokens: --mint-amount 1000000000000000
 # With --decimals 0 (default), to mint 1,000,000 tokens: --mint-amount 1000000

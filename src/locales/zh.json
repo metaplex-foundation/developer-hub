@@ -60,6 +60,7 @@
   },
   "header": {
     "mpl": "MPL",
+    "api": "API",
     "devTools": "开发工具",
     "guides": "指南",
     "aura": "Aura",

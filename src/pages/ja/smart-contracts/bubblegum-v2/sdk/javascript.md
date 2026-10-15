@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK - Bubblegum V2 - Metaplex
 description: Metaplex Bubblegum V2 JavaScript SDKの完全なリファレンス。Umiのセットアップ、ツリーの作成、ミント、転送、バーン、更新、委任、フリーズ、圧縮NFTのフェッチを網羅。
 created: '01-15-2025'
-updated: '02-25-2026'
+updated: '06-19-2026'
 keywords:
   - mpl-bubblegum JavaScript
   - Bubblegum V2 TypeScript SDK
@@ -39,7 +39,7 @@ faqs:
   - q: このSDKをBubblegum V1ツリーで使用できますか？
     a: いいえ。このSDKはBubblegum V2を対象としておりLeafSchemaV2を使用します。V1ツリーにはレガシーBubblegum SDKを使用してください。
   - q: getAssetWithProofとは何で、なぜ必要なのですか？
-    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーター（プルーフ、ルート、リーフインデックス、ノンス、メタデータ）を1回の呼び出しで取得するヘルパーです。ほぼすべての書き込み命令にこれが必要です。
+    a: getAssetWithProofは、DAS APIからリーフ変更命令に必要なすべてのパラメーターを1回の呼び出しで取得するヘルパーです。継承時は metadata が表示用解決料率、currentMetadata がリーフ正規（65535）、任意の sellerFeeBasisPointsRaw / inherited が DAS をミラーします。書き込みでは ...assetWithProof を展開して currentMetadata を使います。
 ---
 
 **Bubblegum V2 JavaScript SDK**（`@metaplex-foundation/mpl-bubblegum`）は、Solanaで[圧縮NFT](/ja/smart-contracts/bubblegum-v2)を作成・管理するための推奨TypeScript/JavaScriptライブラリです。[Umiフレームワーク](/ja/dev-tools/umi)をベースに構築されており、すべてのBubblegum V2操作に対してタイプセーフな関数を提供し、[DAS API](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)プラグインが自動的に含まれています。 {% .lead %}
@@ -67,7 +67,7 @@ faqs:
 
 ## クイックスタート
 
-**ジャンプ先：** [セットアップ](#umi-setup) · [ツリー作成](#create-a-bubblegum-tree) · [ミント](#mint-a-compressed-nft) · [転送](#transfer-a-compressed-nft) · [バーン](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委任](#delegate-a-compressed-nft) · [コレクション](#collections) · [フリーズ](#freeze-and-thaw) · [クリエイター検証](#verify-creators) · [フェッチ](#fetching-cnfts) · [エラー](#common-errors) · [クイックリファレンス](#quick-reference)
+**ジャンプ先：** [セットアップ](#umi-setup) · [ツリー作成](#create-a-bubblegum-tree) · [ミント](#mint-a-compressed-nft) · [転送](#transfer-a-compressed-nft) · [バーン](#burn-a-compressed-nft) · [更新](#update-a-compressed-nft) · [委任](#delegate-a-compressed-nft) · [コレクション](#collections) · [フリーズ](#freeze-and-thaw) · [クリエイター検証](#verify-creators) · [フェッチ](#fetching-c-nfts) · [エラー](#common-errors) · [クイックリファレンス](#quick-reference)
 
 1. 依存関係のインストール：`npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-defaults`
 2. `.use(mplBubblegum())`を使用してUmiインスタンスを作成する
@@ -85,7 +85,7 @@ npm install @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi-bundle-d
 {% quick-link title="npmパッケージ" target="_blank" icon="JavaScript" href="https://www.npmjs.com/package/@metaplex-foundation/mpl-bubblegum" description="バージョン履歴付きのnpmjs.comのパッケージ。" /%}
 {% /quick-links %}
 
-## Umiのセットアップ
+## Umiのセットアップ {% #umi-setup %}
 
 `mplBubblegum`プラグインは、すべてのBubblegum V2命令とDAS APIプラグインをUmiインスタンスに登録します。
 
@@ -127,7 +127,7 @@ const umi = createUmi('https://api.devnet.solana.com')
 {% /totem-accordion %}
 {% /totem %}
 
-## Bubblegumツリーの作成
+## Bubblegumツリーの作成 {% #create-a-bubblegum-tree %}
 
 `createTree`は新しい[マークルツリー](/ja/smart-contracts/bubblegum-v2/concurrent-merkle-trees)をオンチェーンに割り当て、Bubblegum V2ツリーとして登録します。ツリーのパラメーターは永続的なので、作成前に慎重に選択してください。
 
@@ -152,7 +152,7 @@ console.log('Tree address:', merkleTree.publicKey)
 `public: false`はツリークリエイター（または承認されたツリーデリゲート）のみがツリーからミントできることを意味します。誰でもミントできるようにするには`public: true`を設定してください。ツリーサイズのコスト見積もりについては[ツリーの作成](/ja/smart-contracts/bubblegum-v2/create-trees)を参照してください。
 {% /callout %}
 
-## 圧縮NFTのミント
+## 圧縮NFTのミント {% #mint-a-compressed-nft %}
 
 ### コレクションなしでミント
 
@@ -197,6 +197,14 @@ await mintV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
+### コレクションからロイヤリティを継承する
+
+`coreCollection` が設定されている場合、SDKの `mintV2` ヘルパーは `metadata.sellerFeeBasisPoints` が省略されていれば継承ロイヤリティをデフォルトとします。リーフには `SELLER_FEE_BASIS_POINTS_INHERIT`（`65535`）が保存されます。コレクションには `Royalties` プラグインが必要で、`metadata.creators` は空である必要があります。
+
+{% code-tabs-imported from="bubblegum/mint-inherit-royalties" frameworks="umi" /%}
+
+[圧縮NFTのミント — ロイヤリティの継承](/ja/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)でコレクション設定と制約を参照してください。
+
 ### ミント後のアセットIDの取得
 
 ミントが確認された後、`parseLeafFromMintV2Transaction`を使用してリーフスキーマ（アセットIDを含む）を取得します。
@@ -222,7 +230,7 @@ console.log('Asset ID:', leaf.id)
 console.log('Leaf index:', leaf.nonce)
 ```
 
-## 圧縮NFTの転送
+## 圧縮NFTの転送 {% #transfer-a-compressed-nft %}
 
 `transferV2`はcNFTの所有権を新しいウォレットに移動します。`getAssetWithProof`は[DAS API](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)から必要なすべてのプルーフパラメーターを取得します。
 
@@ -239,7 +247,7 @@ await transferV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 圧縮NFTのバーン
+## 圧縮NFTのバーン {% #burn-a-compressed-nft %}
 
 `burnV2`はcNFTを永久に破壊し、ツリーからリーフを削除します。
 
@@ -254,7 +262,7 @@ await burnV2(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## 圧縮NFTの更新
+## 圧縮NFTの更新 {% #update-a-compressed-nft %}
 
 `updateMetadataV2`はcNFTのメタデータを変更します。更新権限はcNFTがコレクションに属しているかどうかによって異なります。権限のルールについては[cNFTの更新](/ja/smart-contracts/bubblegum-v2/update-cnfts)を参照してください。
 
@@ -273,17 +281,18 @@ const updateArgs: UpdateArgsArgs = {
   uri: some('https://example.com/updated.json'),
 }
 
+// Spread includes currentMetadata (leaf-canonical).
 await updateMetadataV2(umi, {
   ...assetWithProof,
   leafOwner: assetWithProof.leafOwner,
-  currentMetadata: assetWithProof.metadata,
   updateArgs,
-  // If cNFT belongs to a collection, pass the collection address:
   coreCollection: publicKey('YourCollectionAddressHere'),
 }).sendAndConfirm(umi)
 ```
 
-## 圧縮NFTの委任
+`getAssetWithProof.metadata` は DAS の主フィールドを反映します（継承時は解決済み）。`currentMetadata` は書き込み用のリーフ正規 `MetadataArgsV2Args` です。任意の兄弟フィールド `sellerFeeBasisPointsRaw` / `creatorsRaw` と `inherited` は DAS の `_raw` をミラーします。書き込みでは `...assetWithProof` を展開し、表示用 `metadata` をリーフ引数に渡さないでください。
+
+## 圧縮NFTの委任 {% #delegate-a-compressed-nft %}
 
 [リーフデリゲート](/ja/smart-contracts/bubblegum-v2/delegate-cnfts)は、オーナーに代わってcNFTを転送、バーン、フリーズできます。デリゲートは転送後に新しいオーナーにリセットされます。
 
@@ -320,7 +329,7 @@ await delegate(umi, {
 }).sendAndConfirm(umi)
 ```
 
-## コレクション
+## コレクション {% #collections %}
 
 `setCollectionV2`はcNFTのMPL-Coreコレクションを設定、変更、または削除します。詳細については[コレクションの管理](/ja/smart-contracts/bubblegum-v2/collections)を参照してください。
 
@@ -330,21 +339,14 @@ await delegate(umi, {
 import {
   getAssetWithProof,
   setCollectionV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, publicKey } from '@metaplex-foundation/umi'
+import { publicKey } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  ...assetWithProof.metadata,
-  collection: collection?.key ?? null,
-}
 
 await setCollectionV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   newCollectionAuthority: newCollectionUpdateAuthority,
   newCoreCollection: publicKey('NewCollectionAddressHere'),
 }).sendAndConfirm(umi)
@@ -357,16 +359,17 @@ import { getAssetWithProof, setCollectionV2 } from '@metaplex-foundation/mpl-bub
 import { unwrapOption } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collection = unwrapOption(assetWithProof.metadata.collection)
+const collection = unwrapOption(assetWithProof.currentMetadata.collection)
 
 await setCollectionV2(umi, {
   ...assetWithProof,
+  metadata: assetWithProof.currentMetadata,
   authority: collectionAuthoritySigner,
-  coreCollection: collection!.key,
+  coreCollection: collection!,
 }).sendAndConfirm(umi)
 ```
 
-## フリーズと解除
+## フリーズと解除 {% #freeze-and-thaw %}
 
 2つのフリーズメカニズムが利用可能です。アセットレベルとコレクションレベルのフリーズの詳細については[cNFTのフリーズ](/ja/smart-contracts/bubblegum-v2/freeze-cnfts)を参照してください。
 
@@ -421,7 +424,7 @@ await setNonTransferableV2(umi, {
 `setNonTransferableV2`は不可逆です。この呼び出し後、cNFTを再び転送可能にすることはできません。
 {% /callout %}
 
-## クリエイターの検証
+## クリエイターの検証 {% #verify-creators %}
 
 `verifyCreatorV2`はクリエイターエントリに`verified`フラグを設定します。検証されるクリエイターはトランザクションに署名する必要があります。詳細については[クリエイターの検証](/ja/smart-contracts/bubblegum-v2/verify-creators)を参照してください。
 
@@ -431,24 +434,13 @@ await setNonTransferableV2(umi, {
 import {
   getAssetWithProof,
   verifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
-const collectionOption = unwrapOption(assetWithProof.metadata.collection)
-
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: collectionOption ? collectionOption.key : none(),
-  creators: assetWithProof.metadata.creators,
-}
 
 await verifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity, // the creator being verified must sign
 }).sendAndConfirm(umi)
 ```
@@ -459,30 +451,42 @@ await verifyCreatorV2(umi, {
 import {
   getAssetWithProof,
   unverifyCreatorV2,
-  MetadataArgsV2Args,
 } from '@metaplex-foundation/mpl-bubblegum'
-import { unwrapOption, none } from '@metaplex-foundation/umi'
 
 const assetWithProof = await getAssetWithProof(umi, assetId, { truncateCanopy: true })
 
-const metadata: MetadataArgsV2Args = {
-  name: assetWithProof.metadata.name,
-  uri: assetWithProof.metadata.uri,
-  sellerFeeBasisPoints: assetWithProof.metadata.sellerFeeBasisPoints,
-  collection: unwrapOption(assetWithProof.metadata.collection)?.key ?? none(),
-  creators: assetWithProof.metadata.creators,
-}
-
 await unverifyCreatorV2(umi, {
   ...assetWithProof,
-  metadata,
+  metadata: assetWithProof.currentMetadata,
   creator: umi.identity,
 }).sendAndConfirm(umi)
 ```
 
-## cNFTのフェッチ
+## cNFTのフェッチ {% #fetching-c-nfts %}
 
 DAS APIプラグインは`mplBubblegum()`によって自動的に登録されます。利用可能なメソッドの詳細については[cNFTのフェッチ](/ja/smart-contracts/bubblegum-v2/fetch-cnfts)を参照してください。
+
+### getAssetWithProof と継承ロイヤリティ {% #getassetwithproof-and-inherited-royalties %}
+
+`getAssetWithProof` は `getAsset` と `getAssetProof` を書き込み命令が期待するパラメータ形状に結合します。
+
+| フィールド | 用途 |
+|-------|---------|
+| `metadata` | DASの主フィールド（`MetadataArgs`）をミラーします。継承時は解決済みの`sellerFeeBasisPoints` / `creators`が入ります。読み取りとUI表示に使用します。 |
+| `currentMetadata` | 書き込み用のリーフ正規な`MetadataArgsV2Args`（継承時はセンチネル`65535`）。`...assetWithProof`を展開すると含まれます。 |
+| `sellerFeeBasisPointsRaw` / `creatorsRaw` | 任意のリーフ兄弟フィールド（`basis_points_raw` / `creators_raw`）。DASが返さない場合は省略されます。 |
+| `inherited` | 継承検出のための糖衣です。 |
+| `rpcAsset` | DASの完全なレスポンス。主フィールドと`_raw`の分かれ方は上記と同じです。 |
+
+`updateMetadataV2` は既存リーフ引数名を `currentMetadata`（IDL）とします。`...assetWithProof` の展開で供給されます。リーフ `metadata` 引数を取る命令（`setCollectionV2`、`verifyCreatorV2` など）では `assetWithProof.currentMetadata` を使ってください。
+
+DASを直接読み取るクライアントは[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
+
+{% callout type="note" title="バージョン要件" %}
+`currentMetadata`は`@metaplex-foundation/mpl-bubblegum` **5.1.0**で提供されます。`sellerFeeBasisPointsRaw`、`creatorsRaw`、`inherited`の各フィールドはまだ公開されておらず、[mpl-bubblegum#173](https://github.com/metaplex-foundation/mpl-bubblegum/pull/173)で追加されます。それまでは同じ値を`rpcAsset.royalty.basis_points_raw`、`rpcAsset.creators_raw`、`rpcAsset.royalty.inherited`から読み取ってください。これらには`@metaplex-foundation/digital-asset-standard-api` **2.1.0以上**が必要です。
+{% /callout %}
+
+{% code-tabs-imported from="bubblegum/get-asset-with-proof-inherited" frameworks="umi" /%}
 
 ### 単一cNFTのフェッチ
 
@@ -557,7 +561,7 @@ const tx = await mintV2(umi, { ... }).buildAndSign(umi)
 // send later: await umi.rpc.sendTransaction(tx)
 ```
 
-## 一般的なエラー
+## 一般的なエラー {% #common-errors %}
 
 ### `Transaction too large`
 マークルプルーフが1232バイトのトランザクション制限を超えています。`getAssetWithProof`で`{ truncateCanopy: true }`を使用するか、アドレスルックアップテーブル付きのバージョン管理されたトランザクションを実装してください。
@@ -586,7 +590,7 @@ RPCプロバイダーがMetaplex DAS APIをサポートしていない可能性�
 - このSDKはBubblegum V2（`LeafSchemaV2`）を対象としています。Bubblegum V1ツリーや解凍ワークフローとは互換性がありません。
 - cNFTで使用されるコレクションには`BubblegumV2`プラグインが有効になっている必要があります。このプラグインのない標準的なMPL-Coreコレクションは使用できません。
 
-## クイックリファレンス
+## クイックリファレンス {% #quick-reference %}
 
 ### Bubblegum V2 関数
 
@@ -606,7 +610,8 @@ RPCプロバイダーがMetaplex DAS APIをサポートしていない可能性�
 | `setNonTransferableV2` | cNFTを永続的にソウルバウンドにする（不可逆） |
 | `verifyCreatorV2` | クリエイターエントリにverifiedフラグを設定する |
 | `unverifyCreatorV2` | クリエイターエントリからverifiedフラグを削除する |
-| `getAssetWithProof` | 書き込み命令に必要なすべてのプルーフパラメーターをフェッチする |
+| `getAssetWithProof` | プルーフパラメーターを取得；表示は `metadata`、書き込みは `currentMetadata`；任意の `_raw` 兄弟 + `inherited` |
+| `SELLER_FEE_BASIS_POINTS_INHERIT` | MPL-Coreコレクションから継承されたロイヤリティのセンチネル定数（`65535`） |
 | `findLeafAssetIdPda` | ツリーアドレスとリーフインデックスからcNFTアセットIDを導出する |
 | `parseLeafFromMintV2Transaction` | ミントトランザクションからリーフスキーマ（アセットIDを含む）を抽出する |
 

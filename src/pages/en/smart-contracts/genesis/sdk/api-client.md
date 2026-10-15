@@ -54,9 +54,9 @@ umi.use(keypairIdentity(myKeypair));
 
 | Function | Purpose |
 |----------|---------|
-| [`createAndRegisterLaunch`](#easy-mode-createandregisterlaunch) | One-call token launch — create, sign, send, and register |
-| [`createLaunch`](#full-control-createlaunch--registerlaunch) | Build unsigned launch transactions for custom signing flows |
-| [`registerLaunch`](#full-control-createlaunch--registerlaunch) | Register a launch after its create transactions confirm on-chain |
+| [`createAndRegisterLaunch`](#easy-mode-create-and-register-launch) | One-call token launch — create, sign, send, and register |
+| [`createLaunch`](#full-control-create-launch-register-launch) | Build unsigned launch transactions for custom signing flows |
+| [`registerLaunch`](#full-control-create-launch-register-launch) | Register a launch after its create transactions confirm on-chain |
 | [`claimCreatorRewards`](#claim-creator-rewards) | Claim accrued creator rewards across every bucket for a wallet |
 
 ## Three Integration Modes

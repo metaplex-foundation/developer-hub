@@ -1,13 +1,17 @@
-import { slugifyWithCounter } from '@sindresorhus/slugify'
 import { useRouter } from 'next/router'
 
 import { products } from '@/components/products'
 import { useLocale } from '@/contexts/LocaleContext'
 import { getLocalizedSections } from '@/shared/localizedSections'
 import { getLocalizedHref } from '@/config/languages'
+import { slugifyHeadingWithCounter } from '@/shared/slugifyHeading'
 
 export function usePage(pageProps) {
   const { pathname } = useRouter()
+
+  const headingsWithIds = pageProps.markdoc?.content
+    ? assignHeadingIds(pageProps.markdoc.content)
+    : null
   const { locale, t } = useLocale()
   
   // Remove locale prefix for product matching (for /ja/core -> core, /en/core -> core)
@@ -43,8 +47,10 @@ export function usePage(pageProps) {
     product,
     activeSection,
     isIndexPage: product?.path ? normalizedPathname === `/${product.path}` : normalizedPathname === '/',
-    tableOfContents: pageProps.markdoc?.frontmatter.tableOfContents != false && pageProps.markdoc?.content
-      ? parseTableOfContents(pageProps.markdoc.content)
+    tableOfContents: headingsWithIds
+      ? pageProps.markdoc?.frontmatter.tableOfContents != false
+        ? parseTableOfContents(headingsWithIds)
+        : []
       : [],
     // Enhanced JSON-LD schema fields
     keywords: pageProps.markdoc?.frontmatter.keywords ?? null,
@@ -132,15 +138,52 @@ function getActiveSection(pathname, product, pageProps, originalPathname) {
   return activeSection
 }
 
-function parseTableOfContents(nodes, slugify = slugifyWithCounter()) {
+const HEADING_NAMES = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+const TOC_HEADING_NAMES = new Set(['h2', 'h3'])
+
+/**
+ * Assigns a counted id to every heading in the tree, not just the h2/h3 pairs
+ * that reach the table of contents.
+ *
+ * `Heading` falls back to a stateless slug when no id is supplied, so any
+ * heading this does not reach can collide with an identical one on the same
+ * page — repeated `#### Arguments` sections being the common case. Run this for
+ * every page, including those with `tableOfContents: false`.
+ */
+export function assignHeadingIds(nodes) {
+  const headings = []
+  ;(function collect(list) {
+    for (let node of list) {
+      if (HEADING_NAMES.has(node.name)) headings.push(node)
+      collect(node.children ?? [])
+    }
+  })(nodes)
+
+  const slugify = slugifyHeadingWithCounter()
+
+  // Two passes, so the h2/h3 headings that reach the table of contents claim
+  // their slug first and keep the exact ids they had before h4-h6 were counted.
+  // The second pass shares the counter, so a repeated `#### Notes` dedupes
+  // against the `## Notes` it would otherwise collide with.
+  for (const pass of [TOC_HEADING_NAMES, HEADING_NAMES]) {
+    for (const node of headings) {
+      if (node.attributes.id != null) continue
+      if (!pass.has(node.name)) continue
+      const title = getNodeText(node)
+      if (title) node.attributes.id = slugify(title)
+    }
+  }
+
+  return nodes
+}
+
+function parseTableOfContents(nodes) {
   let sections = []
 
   for (let node of nodes) {
     if (node.name === 'h2' || node.name === 'h3') {
       let title = getNodeText(node)
       if (title) {
-        let id = node.attributes.id ?? slugify(title)
-        node.attributes.id = id
         if (node.name === 'h3') {
           if (!sections[sections.length - 1]) {
             throw new Error(
@@ -157,7 +200,7 @@ function parseTableOfContents(nodes, slugify = slugifyWithCounter()) {
       }
     }
 
-    sections.push(...parseTableOfContents(node.children ?? [], slugify))
+    sections.push(...parseTableOfContents(node.children ?? []))
   }
 
   return sections

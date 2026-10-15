@@ -3,7 +3,7 @@ title: Serializing, Deserializing, and sending Transactions
 metaTitle: Umi - Serializing, Deserializing, and sending Transactions
 description: Learn how to Serialize and Deserialize Transactions to move them across different environments while using the Metaplex Umi client.
 created: '08-15-2024'
-updated: '08-15-2024'
+updated: '09-21-2026'
 ---
 
 **In this guide we're going to talk about:**
@@ -121,13 +121,17 @@ const umi = createUmi('https://api.devnet.solana.com')
 
 {% /totem %}
 
+{% callout type="note" %}
+The examples use V1 transactions and require Umi 1.6.0 or later and `@solana/web3.js` 1.99.0 or later. When a wallet signs the deserialized transaction, that wallet must also support transaction version `1`.
+{% /callout %}
+
 ## Serialization
 
 Serialization of a transaction is the process of converting the transaction object into a series of bytes or string that saves the state of the transaction in an easily transmittable form. This allows it to be passed through the likes of a http request.  
 
 Within the serialization example we're going to:  
 - Use the `NoopSigner` to add the `Payer` as `Signer` in the instruction
-- Create a Versioned Transaction and sign it with the `collectionAuthority` and the `Asset`
+- Create a V1 transaction and sign it with the `collectionAuthority` and the `Asset`
 - Serialize it so all the details are preserved and can be accurately reconstructed by the frontend
 - And send it as a String, instead of a u8, so it can be passed through a request
 
@@ -191,7 +195,7 @@ const createAssetTx = await create(umi, {
   name: 'My NFT',
   uri: 'https://example.com/my-nft.json',
 })
-  .useV0()
+  .useV1()
   .setBlockhash(await umi.rpc.getLatestBlockhash())
   .buildAndSign(umi);
 
@@ -283,7 +287,7 @@ const frontEndSigner = generateSigner(umi);
     name: 'My NFT',
     uri: 'https://example.com/my-nft.json',
   })
-    .useV0()
+    .useV1()
     .setBlockhash(await umi.rpc.getLatestBlockhash())
     .buildAndSign(umi);
 

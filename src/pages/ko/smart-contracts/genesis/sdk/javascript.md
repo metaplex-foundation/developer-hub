@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
 created: '01-15-2025'
-updated: '03-10-2026'
+updated: '09-18-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -11,6 +11,8 @@ keywords:
   - token launch SDK
   - Umi framework
   - Genesis API reference
+  - refundLaunchPoolV2
+  - soft cap
 about:
   - SDK installation
   - API reference
@@ -90,6 +92,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 | [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch Pool에 SOL 예치 |
 | [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOL 출금 (예치 기간 중) |
 | [claimLaunchPoolV2()](#claim-launch-pool-v2) | 토큰 청구 (예치 기간 후) |
+| [refundLaunchPoolV2()](#refund-launch-pool-v2) | 예치금 환불 (최소 임계값 미달 또는 소프트 캡 초과) |
 
 ### Presale 운영
 
@@ -143,10 +146,16 @@ await addLaunchPoolBucketV2(umi, {
   depositEndCondition,      // TimeCondition
   claimStartCondition,      // TimeCondition
   claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
+  minimumDepositAmount,     // { amount: bigint } | null
+  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
+  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
   endBehaviors,             // EndBehavior[]
 }).sendAndConfirm(umi);
 ```
+
+{% callout type="warning" %}
+`softCap`은 `@metaplex-foundation/genesis` 0.42.0부터 필수 인수입니다. 다른 Launch Pool 확장과 달리 생성된 시리얼라이저에 기본값이 없으므로, 런칭에 상한이 없을 때는 `softCap: null`을 명시적으로 전달하세요. 동작 방식은 [Launch Pool 소프트 캡](/ko/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)을 참조하세요.
+{% /callout %}
 
 ### addPresaleBucketV2
 
@@ -223,6 +232,21 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
+### refundLaunchPoolV2
+
+예치 기간이 종료된 후 Launch Pool 예치금을 환불합니다. 프로그램이 금액을 계산하므로 amount 인수는 없습니다. `minimumQuoteTokenThreshold`에 미달하면 예치금 전액이 환불되고, `softCap`을 초과하면 초과분만 환불되며 예치자의 토큰 할당량은 그대로 유지됩니다.
+
+```typescript
+await refundLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
+}).sendAndConfirm(umi);
+```
+
+`payer`만 서명하면 되므로 예치자를 대신해 누구나 환불을 크랭크할 수 있습니다. 예치 기간이 끝나기 전에 호출하면 `LaunchPoolNotEnded`, 최소 임계값을 충족하고 소프트 캡을 초과하지 않았을 때 호출하면 `LaunchPoolThresholdMet`, 같은 예치금에 대해 두 번 호출하면 `DepositAlreadyRefunded`가 반환됩니다.
+
 ### claimPresaleV2
 
 ```typescript
@@ -282,7 +306,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesis 계정
 
-Genesis 계정은 [런칭 타입](#launchtype)을 포함한 최상위 런칭 상태를 저장합니다. 백엔드 크랭크가 `setLaunchTypeV2` 인스트럭션을 통해 생성 후 온체인에서 `launchType` 필드를 설정하므로, 크랭크가 처리할 때까지 값이 `Uninitialized`(0)일 수 있습니다.
+Genesis 계정은 [런칭 타입](#launch-type)을 포함한 최상위 런칭 상태를 저장합니다. 백엔드 크랭크가 `setLaunchTypeV2` 인스트럭션을 통해 생성 후 온체인에서 `launchType` 필드를 설정하므로, 크랭크가 처리할 때까지 값이 `Uninitialized`(0)일 수 있습니다.
 
 | 함수 | 반환값 |
 |----------|---------|
@@ -322,7 +346,7 @@ if (account2.data.launchType === LaunchType.LaunchPoolV1) {
 
 **Genesis 계정 필드:** `authority`, `baseMint`, `quoteMint`, `totalSupplyBaseToken`, `totalAllocatedSupplyBaseToken`, `totalProceedsQuoteToken`, `fundingMode`, `launchType`, `bucketCount`, `finalized`
 
-### GPA 빌더 — 런칭 타입으로 조회
+### GPA 빌더 — 런칭 타입으로 조회 {% #gpa-builder-query-by-launch-type %}
 
 `getGenesisAccountV2GpaBuilder()`를 사용하여 온체인 필드로 필터링된 모든 Genesis 계정을 조회합니다. Solana의 바이트 수준 필터를 사용한 `getProgramAccounts` RPC 메서드로 효율적인 검색을 수행합니다.
 
@@ -370,13 +394,34 @@ const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // 찾지 못하면 null
 ```
 
-**버킷 상태 필드:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**버킷 상태 필드:** `quoteTokenDepositTotal`, `weightedQuoteTokenTotal`, `depositCount`, `claimCount`, `refundCount`, `bucket.baseTokenAllocation`, `extensions`
 
-**예치 상태 필드:** `amountQuoteToken`, `claimed`
+**예치 상태 필드:** `amountQuoteToken`, `weightedQuoteToken`, `claimed`, `refunded`
 
 ---
 
 ## 타입
+
+### LaunchPoolV2Extensions
+
+Launch Pool 버킷의 선택적 가드이며 `bucket.extensions`에서 읽습니다. 모든 필드는 Umi `Option`이므로 값을 읽기 전에 `unwrapOption()`을 사용하거나 `.__option`을 확인하세요.
+
+```typescript
+{
+  backendSigner: Option<BackendSigner>;
+  depositPenalty: Option<LinearBpsScheduleV2>;
+  withdrawPenalty: Option<LinearBpsScheduleV2>;
+  bonusSchedule: Option<LinearBpsScheduleV2>;
+  depositLimit: Option<DepositLimit>;                             // { limit: bigint }
+  allowlist: Option<Allowlist>;
+  claimSchedule: Option<ClaimSchedule>;
+  minimumDepositAmount: Option<MinimumDepositAmount>;             // { amount: bigint }
+  minimumQuoteTokenThreshold: Option<MinimumQuoteTokenThreshold>; // { amount: bigint } - floor
+  softCap: Option<SoftCap>;                                       // { amount: bigint } - ceiling
+}
+```
+
+확장은 `addLaunchPoolBucketV2Extensions()`와 `removeLaunchPoolBucketV2Extensions()`로 개별적으로 추가하거나 제거할 수 있으며, `LaunchPoolV2ExtensionType`으로 필드를 선택합니다. 두 명령어 모두 Genesis 계정이 최종화된 후에는 거부됩니다.
 
 ### LaunchType
 
@@ -389,7 +434,7 @@ enum LaunchType {
 }
 ```
 
-[Integration APIs](/ko/smart-contracts/genesis/integration-apis)에서는 문자열(`'launchpool'`)로 반환되지만, 온체인 SDK에서는 위의 숫자 열거형을 사용합니다.
+[Metaplex API](/ko/api)에서는 문자열(`'launchpool'`)로 반환되지만, 온체인 SDK에서는 위의 숫자 열거형을 사용합니다.
 
 ### GenesisAccountV2
 
@@ -457,6 +502,11 @@ Genesis 런칭의 최상위 온체인 계정입니다. 토큰 민트당, 런칭 
 | `already finalized` | 확정 후 수정 불가 |
 | `deposit period not active` | 예치 기간 외 |
 | `claim period not active` | 청구 기간 외 |
+| `InvalidSoftCap` (221) | `softCap.amount`가 0입니다 — `{ amount: 0n }` 대신 `softCap: null`을 전달하세요 |
+| `SoftCapBelowThreshold` (222) | `softCap.amount`가 `minimumQuoteTokenThreshold.amount`보다 작습니다 |
+| `LaunchPoolNotEnded` | 예치 기간이 끝나기 전에 `refundLaunchPoolV2()`를 호출했습니다 |
+| `LaunchPoolThresholdMet` (173) | 최소 임계값을 충족하고 소프트 캡을 초과하지 않았는데 환불을 요청했습니다 |
+| `DepositAlreadyRefunded` | 같은 예치금에 대해 `refundLaunchPoolV2()`를 두 번 호출했습니다 |
 
 ---
 
@@ -472,7 +522,7 @@ Umi는 Solana를 위한 Metaplex의 JavaScript 프레임워크입니다. 트랜�
 `fetch`는 계정이 존재하지 않으면 오류를 던집니다. `safeFetch`는 대신 `null`을 반환하며, 계정 존재 여부를 확인하는 데 유용합니다.
 
 ### 토큰의 런칭 타입을 어떻게 조회하나요?
-토큰의 민트 주소를 사용하여 `fetchGenesisAccountV2FromSeeds()`로 `GenesisAccountV2` 계정을 조회합니다. `launchType` 필드는 `0`(미초기화) 또는 `3`(LaunchPoolV1)을 반환합니다. 특정 타입의 모든 런칭을 조회하려면 [GPA 빌더](#gpa-빌더--런칭-타입으로-조회)를 사용하세요. 또는 [Integration APIs](/ko/smart-contracts/genesis/integration-apis)가 REST 응답에서 문자열로 런칭 타입을 반환합니다.
+토큰의 민트 주소를 사용하여 `fetchGenesisAccountV2FromSeeds()`로 `GenesisAccountV2` 계정을 조회합니다. `launchType` 필드는 `0`(미초기화) 또는 `3`(LaunchPoolV1)을 반환합니다. 특정 타입의 모든 런칭을 조회하려면 [GPA 빌더](#gpa-builder-query-by-launch-type)를 사용하세요. 또는 [Metaplex API](/ko/api)가 REST 응답에서 문자열로 런칭 타입을 반환합니다.
 
 ### 트랜잭션 오류를 어떻게 처리하나요?
 `sendAndConfirm` 호출을 try/catch 블록으로 감싸세요. 구체적인 실패 원인은 오류 메시지를 확인하세요.

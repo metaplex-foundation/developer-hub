@@ -10,9 +10,15 @@ export function MarkdocLink({ href, children, ...props }) {
     )
   }
 
-  // External links open in new tab
+  // External links open in a new tab; mailto: and other schemes do not
+  const isExternal = /^https?:\/\//i.test(href ?? '')
+
   return (
-    <a href={href} {...props}>
+    <a
+      href={href}
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      {...props}
+    >
       {children}
     </a>
   )

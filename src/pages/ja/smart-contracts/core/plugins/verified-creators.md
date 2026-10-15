@@ -83,7 +83,7 @@ faqs:
 | address | publicKey |
 | message | string    |
 AssetはCollectionからCreators配列を継承します。
-## Assetへのautograph Plugin追加のコード例
+## Assetへのautograph Plugin追加のコード例 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 このスニペットは、umiのidentityがassetのupdate authorityであることを前提としています。
@@ -105,7 +105,7 @@ await addPlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Assetに別のCreatorを追加するコード例
+## Assetに別のCreatorを追加するコード例 {% #adding-a-different-creator-to-an-asset-code-example %}
 {% dialect-switcher title="Adding a different Creator to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 このスニペットは、umiのidentityがassetのupdate authorityであり、未検証のCreatorを追加することを前提としています。
@@ -159,7 +159,7 @@ await updatePlugin(umi, {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## AssetからCreatorを削除するコード例
+## AssetからCreatorを削除するコード例 {% #removing-a-creator-from-an-asset-code-example %}
 {% dialect-switcher title="Removing a Creator from an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
 update authorityのみがクリエイターを削除できます。クリエイターを削除するには、`verified:false`であるか、update authority自身である必要があります。そのため、更新は2つのステップで行われます。update authorityとクリエイターの両方で同時に署名できる場合、両方のインストラクションを組み合わせて1つのトランザクションで実行できます。

@@ -2,7 +2,29 @@
 title: '@solana/web3.js Differences and Adapters'
 metaTitle: 'Umi - @solana/web3.js Differences and Adapters'
 description: 'Difference and Adapters to make Metaplex Umi work with Solana web3js.'
+keywords:
+  - Umi web3.js adapters
+  - Solana transaction v1
+  - web3.js conversion
+about:
+  - Umi
+  - web3.js
+proficiencyLevel: Intermediate
+programmingLanguage:
+  - JavaScript
+  - TypeScript
+created: '01-16-2024'
+updated: '09-21-2026'
 ---
+
+## Summary
+
+The Umi Web3.js adapters convert common Solana types between Umi and `@solana/web3.js`.
+
+- Install or import helpers from `@metaplex-foundation/umi-web3js-adapters`.
+- Convert public keys, keypairs, instructions, transactions, and messages.
+- Use Umi 1.6.0 and `@solana/web3.js` 1.99.0 or later for V1 transactions.
+- Keep native Web3.js transaction creation on V0 because Web3.js 1.x cannot create V1 transactions by itself.
 
 The `@solana/web3.js` library is currently widely used in the Solana ecosystem and defines its own types for `Publickeys`, `Transactions`, `Instructions`, etc.
 
@@ -207,13 +229,14 @@ const umiInstruction = fromWeb3JsInstruction(web3jsInstruction);
 
 ## Transactions
 
-The Solana runtime supports two transaction versions:
-- Legacy Transaction: Older transaction format with no additional benefit
-- 0 / Versioned Transaction: Added support for Address Lookup Tables
+The Solana runtime supports three transaction formats:
+- Legacy transaction: The original transaction format
+- V0 transaction: Adds support for Address Lookup Tables
+- V1 transaction: Raises the transaction size limit to 4,096 bytes and stores compute configuration in the message
 
-**Note**: if you're not familiar with the concept of Versioned Transactions, read more about it [in the Solana Versioned Transactions docs](https://solana.com/en/docs/advanced/versions)
+**Note**: If you're not familiar with versioned transactions, read [Migrating from V0 to V1 Transactions](/dev-tools/umi/guides/migrate-to-transaction-v1).
 
-For `umi` and `umi-web3js-adapters` we added support for both transaction types!
+Umi 1.6.0 and `umi-web3js-adapters` support legacy, V0, and V1 transactions. V1 requires `@solana/web3.js` 1.99.0 or later.
 
 ### Umi
 ```ts
@@ -225,8 +248,8 @@ const umi = createUmi('https://api.devnet.solana.com').use(mplCore())
 // Create a new Umi Legacy Transaction
 const umiTransaction = transferSol(umi, {...TransferParams}).useLegacyVersion();
 
-// Create a new Umi Versioned Transaction
-const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().build(umi)
+// Create a new Umi V1 transaction
+const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV1().build(umi)
 ```
 
 ### Web3Js
@@ -268,10 +291,10 @@ const umiTransaction = transferSol(umi, {...TransferParams}).useLegacyVersion();
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsTransaction = toWeb3JsTransaction(umiTransaction);
 
-/// Versioned Transactions ///
+/// V1 transactions ///
 
-// Create a new Versioned Transaction
-const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV0().build(umi)
+// Create a new V1 transaction
+const umiVersionedTransaction = transferSol(umi, {...TransferParams}).useV1().build(umi)
 
 // Convert it using the UmiWeb3jsAdapters Package
 const web3jsVersionedTransaction = toWeb3JsTransaction(umiVersionedTransaction);
@@ -315,10 +338,14 @@ const blockhash = await umi.rpc.getLatestBlockhash()
 const instructions = transfer(umi, {...TransferParams}).getInstructions()
 
 const umiVersionedTransaction = umi.transactions.create({
-  version: 0,
+  version: 1,
   payer: frontEndSigner.publicKey,
   instructions,
   blockhash: blockhash.blockhash,
+  transactionConfig: {
+    computeUnitLimit: 200_000,
+    loadedAccountsDataSizeLimit: 64 * 1024 * 1024,
+  },
 });
 
 const umiMessage = umiVersionedTransaction.message
@@ -370,3 +397,11 @@ const Web3JsMessage = new TransactionMessage({...createMessageParams}).compileTo
 // Convert it using the UmiWeb3jsAdapters Package
 const umiMessage = fromWeb3JMessage(Web3JsMessage);
 ```
+
+## Notes
+
+Web3.js 1.x has limited support for V1 transactions.
+
+- Web3.js 1.x can deserialize V1 transactions but cannot create or serialize them on its own.
+- Umi provides the V1 serializer used by the adapters.
+- The native Web3.js transaction creation examples remain on V0.

@@ -106,8 +106,10 @@ function filePathToUrlPath(filePath) {
  */
 function categorizePages(pages) {
   const categories = {
+    'Metaplex API (REST)': [],
     'Genesis (Token Launch)': [],
     'MPL-Distro (Token Distribution)': [],
+    'MPL-3643 (Compliance Standard)': [],
     'Core (NFT Standard)': [],
     'Candy Machine': [],
     'Core Candy Machine': [],
@@ -123,10 +125,14 @@ function categorizePages(pages) {
   for (const page of pages) {
     const urlPath = page.urlPath
 
-    if (urlPath.startsWith('/smart-contracts/genesis')) {
+    if (urlPath === '/api' || urlPath.startsWith('/api/')) {
+      categories['Metaplex API (REST)'].push(page)
+    } else if (urlPath.startsWith('/smart-contracts/genesis')) {
       categories['Genesis (Token Launch)'].push(page)
     } else if (urlPath.startsWith('/smart-contracts/mpl-distro')) {
       categories['MPL-Distro (Token Distribution)'].push(page)
+    } else if (urlPath.startsWith('/smart-contracts/mpl-3643')) {
+      categories['MPL-3643 (Compliance Standard)'].push(page)
     } else if (urlPath.startsWith('/smart-contracts/core/') || urlPath === '/smart-contracts/core') {
       if (!urlPath.includes('candy-machine')) {
         categories['Core (NFT Standard)'].push(page)
@@ -179,6 +185,11 @@ function generateLlmsTxt(categories) {
     '- **Bubblegum**: A compression system for creating large-scale NFT collections at reduced cost using Merkle trees.',
     '- **Genesis**: A token launch platform for launching tokens on Solana via launch pools, presales, and uniform price auctions.',
     '- **MPL-Distro**: A standalone program for distributing an existing SPL token mint to wallet addresses or legacy NFT mints through Merkle claims.',
+    '- **MPL-3643**: A suite of onchain programs that enables the issuance, management, and transfer of permissioned tokens on Solana, built on Token-2022, Token ACL (sRFC 37), and the Solana Attestation Service. The ERC-3643 equivalent for Solana.',
+    '- **Identity Registry**: The MPL-3643 program holding wallet-keyed Claim records attached by trusted attestors.',
+    '- **Compliance Module**: The MPL-3643 program enforcing offering rules — holder caps, jurisdictions, lockups, volume limits — as boundary or per-transfer modules.',
+    '- **Gate Program**: The MPL-3643 program implementing the sRFC 37 gate interface, deciding every permissionless thaw and freeze.',
+    '- **Token ACL (sRFC 37)**: The existing Solana program that holds a mint freeze authority and consults a gate program before freezing or thawing.',
     '- **UMI**: A Solana framework for building JavaScript clients, used by all Metaplex SDKs.',
     '- **DAS API**: Digital Asset Standard API for querying indexed NFT data from RPC providers.',
     '',
@@ -191,6 +202,10 @@ function generateLlmsTxt(categories) {
     '- Bubblegum creates compressed NFTs that are fully compatible with Core plugins.',
     '- Candy Machine is a minting tool, not an asset standard. It creates either Core Assets or Token Metadata NFTs.',
     '- "Metaplex NFT" typically refers to Token Metadata NFTs (legacy). New projects should use "Core Assets".',
+    '- **MPL-3643** is a compliance standard for **permissioned** tokens (securities, RWAs). **Genesis** is for **permissionless** token launches. They are not alternatives to each other.',
+    '- An MPL-3643 token is a **Token-2022** mint, not a legacy SPL Token mint and not a new token program. Compliance is a layer above the token.',
+    '- MPL-3643 enforces eligibility at **freeze and thaw** time, not inside every transfer. Per-transfer enforcement is opt-in via a Token-2022 transfer hook.',
+    '- MPL-3643 is **live on mainnet in early access** and has not been audited. Request alpha access at https://form.typeform.com/to/AgllGJaz.',
     '',
     '## Protocols Overview',
     '',
@@ -198,6 +213,7 @@ function generateLlmsTxt(categories) {
     '|----------|---------|--------|',
     '| **Genesis** | Token launch platform (launch pools, presales, auctions) | Active, recommended |',
     '| **MPL-Distro** | Merkle claims and airdrops for existing SPL tokens | Active |',
+    '| **MPL-3643** | Permissioned token standard for RWAs | Live on mainnet, early access |',
     '| **Core** | Digital asset standard (NFTs, gaming assets, memberships) | Active, recommended |',
     '| **Core Candy Machine** | Minting Core Assets with guards and rules | Active, recommended |',
     '| **Candy Machine** | Minting Token Metadata NFTs | Deprecated — use Core Candy Machine |',
@@ -211,6 +227,8 @@ function generateLlmsTxt(categories) {
     '- **New to Metaplex?** Start here: https://metaplex.com/docs/',
     '- **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis',
     '- **Distributing an existing token allocation?** Use MPL-Distro: https://metaplex.com/docs/smart-contracts/mpl-distro',
+    '- **Tokenizing a security or RWA?** See MPL-3643: https://metaplex.com/docs/smart-contracts/mpl-3643',
+    '- **Calling the public REST API?** Reference: https://metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)',
     '- **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core',
     '- **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine',
     '- **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi',
@@ -223,6 +241,7 @@ function generateLlmsTxt(categories) {
     '- **Token Metadata** is maintained for backward compatibility but considered legacy.',
     '- **Candy Machine v3** (for Token Metadata) is deprecated; **Core Candy Machine** is recommended for new launches.',
     '- **Sugar**, **Hydra**, **Fusion**, and **Token Auth Rules** are deprecated and no longer actively maintained.',
+    '- **MPL-3643** is live on mainnet in early access and has not been audited; alpha partners receive direct onboarding support.',
     '- Documentation reflects current best practices as of 2026.',
     '',
     '---',

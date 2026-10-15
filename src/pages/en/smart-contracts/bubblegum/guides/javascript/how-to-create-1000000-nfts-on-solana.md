@@ -92,7 +92,7 @@ createCnft()
 
 ## Setting up Umi
 
-This example is going to run through setting up Umi with a `generatedSigner()`. If you wish to try this example with React you'll need to setup Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the the wallet setup this guide will use fileStorage keys and wallet adapter.
+This example sets up Umi with `generateSigner(umi)`. If you wish to try this example with React, you'll need to set up Umi via the `React - Umi w/ Wallet Adapter` guide. Apart from the wallet setup, this guide will use fileStorage keys and a wallet adapter.
 
 ### Generating a New Wallet
 
@@ -315,7 +315,7 @@ const nftMetadataUri = await umi.uploader.uploadJson(nftMetadata)
 
 ### Mint cNFT to the Merkle Tree
 
-Minting a cNFT to a tree does not cost any additional account/storage costs on the Solana blockchain as the tree has already been created with enough room for all our cNFT data to be stored (1,000,000 cNFTs in fact). The only additional cost here is just the basic Solana transaction fee making cNFTs incredible efficient to mint in mass.b
+Minting a cNFT to a tree does not cost any additional account/storage costs on the Solana blockchain as the tree has already been created with enough room for all our cNFT data to be stored (1,000,000 cNFTs in fact). The only additional cost here is just the basic Solana transaction fee making cNFTs incredibly efficient to mint en masse.
 
 ```ts
 //
