@@ -212,15 +212,15 @@ export const agentMenuCategory = [
     },
   },
   {
-    name: 'Nori',
-    headline: 'Pay-as-you-go LLM, image, and RPC services for agents, metered in SOL.',
-    description: 'Pay-as-you-go LLM, image, and RPC services for agents, metered in SOL.',
+    name: 'x402',
+    headline: 'Pay-per-request LLM, image, and Solana RPC services, settled in USDC.',
+    description: 'Pay-per-request LLM, image, and Solana RPC services, settled in USDC.',
     navigationMenuCatergory: 'Agents',
-    href: '/agents/nori',
+    href: '/agents/x402',
     localizedNavigation: {
-      ja: { name: 'Nori', headline: 'エージェント向けの従量課金制LLM・画像・RPCサービス。SOLで精算します。' },
-      ko: { name: 'Nori', headline: '에이전트를 위한 종량제 LLM·이미지·RPC 서비스. SOL로 정산합니다.' },
-      zh: { name: 'Nori', headline: '面向 Agent 的按量付费 LLM、图像与 RPC 服务，以 SOL 结算。' },
+      ja: { name: 'x402', headline: 'リクエストごとに課金されるLLM・画像・Solana RPCサービス。USDCで精算します。' },
+      ko: { name: 'x402', headline: '요청당 과금되는 LLM·이미지·Solana RPC 서비스. USDC로 정산합니다.' },
+      zh: { name: 'x402', headline: '按请求付费的 LLM、图像与 Solana RPC 服务，以 USDC 结算。' },
     },
   },
 ]
