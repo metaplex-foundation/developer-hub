@@ -2,6 +2,7 @@
 title: Solanaでトークンをローンチする
 metaTitle: Solanaトークンローンチパッド | トークンセール＆フェアローンチ | Metaplex
 description: Genesisを使ってSolana上でSPLトークンをローンチ。フェアローンチ、Presale、クラウドセール、トークン生成イベント（TGE）に対応したトークンローンチパッドです。オンチェーントークン配布のためのTypeScriptステップバイステップガイド。
+cli: /dev-tools/cli/genesis/launch
 ---
 
 [Genesis](/ja/smart-contracts/genesis) を使用して Solana 上で SPL トークンをローンチします。Genesis はオンチェーンのトークンローンチパッドおよびフェアローンチプラットフォームです。トークンセール、クラウドセールなど、Genesis Launch Pools がオンチェーンで透明にトークン配布を行います。ユーザーは設定した期間中に SOL を預け入れ、総預入額に対するシェアに比例してトークンを受け取ります。 {% .lead %}

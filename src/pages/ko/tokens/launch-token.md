@@ -2,6 +2,7 @@
 title: Solana에서 토큰 런칭하기
 metaTitle: 솔라나 토큰 런치패드 | 토큰 세일 & 공정한 출시 토큰 런치패드 | Metaplex
 description: Genesis로 솔라나에서 SPL 토큰을 출시하세요 — 공정한 출시, 프리세일, 크라우드세일, 토큰 생성 이벤트(TGE)를 위한 토큰 런치패드. 온체인 토큰 배포를 위한 단계별 TypeScript 가이드.
+cli: /dev-tools/cli/genesis/launch
 ---
 
 [Genesis](/ko/smart-contracts/genesis)를 사용하여 솔라나에서 SPL 토큰을 출시하세요 — 온체인 토큰 런치패드이자 공정한 출시 플랫폼입니다. 토큰 세일, 크라우드세일을 실행하려는 경우, Genesis Launch Pool은 온체인에서 투명하게 토큰 배포를 처리합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
