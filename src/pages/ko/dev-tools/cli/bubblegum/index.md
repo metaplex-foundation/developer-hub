@@ -21,11 +21,16 @@ Bubblegum은 기존 NFT보다 훨씬 저렴한 비용으로 NFT를 생성할 수
 - 작업에 필요한 증명 크기
 
 ### 컬렉션
-Bubblegum V2는 [Metaplex Core 컬렉션](/smart-contracts/core/collections)을 사용합니다 (Token Metadata 컬렉션이 아님). 먼저 Core 컬렉션을 생성하세요:
+Bubblegum V2는 [Metaplex Core 컬렉션](/smart-contracts/core/collections)을 사용합니다. Bubblegum V2 플러그인이 있는 Core 컬렉션을 만듭니다:
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
+
+`--royalties`는 Core Royalties 플러그인을 추가하여 이후 `mplx bg nft create --collection`이 [컬렉션 로열티를 상속](/dev-tools/cli/bubblegum/create-cnft#inherited-royalties)할 수 있게 합니다(리프 센티널 `65535`).
 
 ### RPC 요구 사항
 
@@ -68,16 +73,19 @@ mplx config rpcs add <name> <url>
 mplx bg tree create --wizard
 ```
 
-1. 컬렉션 생성 (선택 사항이지만 권장):
+1. Bubblegum용 컬렉션 생성 (선택 사항이지만 권장). 상속하려면 `--royalties`를 넣습니다:
 
 ```bash
-mplx core collection create --wizard
+mplx bg collection create \
+  --name "My Compressed Collection" \
+  --uri "https://example.com/collection.json" \
+  --royalties 5
 ```
 
-1. 압축 NFT 민트:
+1. 압축 NFT 민트. 자동 상속하려면 `--royalties` / `--creator`(및 JSON `seller_fee_basis_points`)를 생략합니다:
 
 ```bash
-mplx bg nft create my-tree --wizard
+mplx bg nft create my-tree --name "cNFT #1" --uri "https://example.com/1.json" --collection <COL>
 ```
 
 ## 권한 모델

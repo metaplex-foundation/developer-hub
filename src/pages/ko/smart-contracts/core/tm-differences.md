@@ -49,12 +49,12 @@ Core는 Token Metadata의 다중 계정 모델을 단일 계정 설계로 대체
 ## 범위 외
 pNFT 관련 기능과 대체 가능 토큰 처리 (SPL Token 사용).
 ## 빠른 시작
-**바로가기:** [비용 비교](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [라이프사이클 이벤트](#lifecycle-events-and-plugins)
+**바로가기:** [비용 비교](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [라이프사이클 이벤트](#lifecycle-events-and-plugins)
 새로 시작하는 경우 Core를 사용하세요. 마이그레이션하는 경우 주요 멘탈 시프트는:
 1. 세 개가 아닌 하나의 계정
 2. 위임자가 아닌 플러그인
 3. 컬렉션 수준 작업이 네이티브
-## 차이점 개요
+## 차이점 개요 {% #difference-overview %}
 - **전례 없는 비용 효율성**: Metaplex Core는 사용 가능한 대안 중 가장 낮은 민팅 비용을 제공합니다. 예를 들어, Token Metadata로 0.022 SOL이 드는 NFT를 Core로 약 0.003 SOL에 민팅할 수 있습니다.
 - **개선된 개발자 경험**: 대부분의 디지털 자산은 전체 대체 가능 토큰 프로그램을 유지하는 데 필요한 데이터를 상속받지만, Core는 NFT에 최적화되어 모든 주요 데이터를 단일 Solana 계정에 저장할 수 있습니다. 이로 인해 개발자의 복잡성이 크게 줄어들고, Solana 전체의 네트워크 성능 향상에도 기여합니다.
 - **강화된 컬렉션 관리**: 컬렉션에 대한 퍼스트 클래스 지원으로 개발자와 크리에이터는 로열티와 플러그인과 같은 컬렉션 수준 구성을 쉽게 관리할 수 있으며, 개별 NFT에 대해 고유하게 재정의할 수 있습니다. 이는 단일 트랜잭션으로 수행할 수 있어 컬렉션 관리 비용과 Solana 트랜잭션 수수료를 줄입니다.
@@ -85,7 +85,7 @@ Core에서 Collection은 추가 기능을 허용하는 **퍼스트 클래스 자
 TM에서는 불가능했던 컬렉션 기능의 예로 컬렉션 수준 로열티가 있습니다. 로열티나 크리에이터를 변경할 때 각 자산을 업데이트할 필요가 없고 컬렉션에서 정의하면 됩니다. 이는 Collection에 [Royalties Plugin](/ko/smart-contracts/core/plugins/royalties)을 추가하여 수행할 수 있습니다. 일부 자산에 다른 로열티 설정이 필요하면? 동일한 플러그인을 자산에 추가하면 컬렉션 수준 로열티 플러그인이 재정의됩니다.
 컬렉션 수준에서 동결도 가능합니다.
 컬렉션 생성이나 업데이트와 같은 처리에 대한 자세한 정보는 [Managing Collections](/ko/smart-contracts/core/collections) 페이지에서 확인할 수 있습니다.
-### 라이프사이클 이벤트와 플러그인
+### 라이프사이클 이벤트와 플러그인 {% #lifecycle-events-and-plugins %}
 Asset의 라이프사이클 동안 여러 이벤트가 트리거될 수 있습니다:
 - 생성
 - 전송

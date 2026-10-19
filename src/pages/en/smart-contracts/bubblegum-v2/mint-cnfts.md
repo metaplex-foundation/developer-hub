@@ -3,7 +3,7 @@ title: Minting Compressed NFTs
 metaTitle: Minting Compressed NFTs - Bubblegum V2 - Metaplex
 description: Learn how to mint compressed NFTs on Bubblegum V2. Covers minting with and without collections, MPL-Core collection setup, and retrieving the asset ID from mint transactions.
 created: '01-15-2025'
-updated: '06-19-2026'
+updated: '10-01-2026'
 keywords:
   - mint compressed NFT
   - mint cNFT
@@ -152,7 +152,7 @@ When minting to an MPL-Core collection, you can store a **sentinel** seller fee 
 Clients that **read** DAS responses (wallets, marketplaces, indexers, and apps) should follow [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
 
 {% callout type="warning" title="Marketplace / indexer compatibility" %}
-Until a marketplace's DAS provider supports inherited SFBP resolution, it may see `creators: []` and `basis_points: 65535` and skip royalty payouts. See the warning on [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties). For stronger guarantees, use collection Royalties plugin allow/deny lists so sales go through royalty-compliant venues.
+Until a wallet's or marketplace's DAS provider supports inherited SFBP resolution, it sees `creators: []` and `basis_points: 65535`. Apps then display a **655.35% royalty** (roughly 650%) with no creators and may skip royalty payouts. The onchain asset is correct. See [Responses from DAS providers without inherited royalty support](/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das). For stronger guarantees, use collection Royalties plugin allow/deny lists so sales go through royalty-compliant venues.
 {% /callout %}
 
 The JavaScript SDK's `mintV2` helper defaults to this behavior when `coreCollection` is provided and `metadata.sellerFeeBasisPoints` is omitted.

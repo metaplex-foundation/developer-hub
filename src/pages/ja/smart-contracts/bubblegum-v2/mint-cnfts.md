@@ -3,7 +3,7 @@ title: 圧縮NFTのミント
 metaTitle: 圧縮NFTのミント - Bubblegum V2
 description: Bubblegum V2で圧縮NFTをミントする方法を学びます。
 created: '01-15-2025'
-updated: '06-19-2026'
+updated: '10-01-2026'
 keywords:
   - mint compressed NFT
   - mint cNFT
@@ -156,7 +156,7 @@ MPL-Coreコレクションにミントする場合、コレクションのロイ
 DASレスポンスを**読む**クライアント（ウォレット、マーケットプレイス、インデクサー、アプリ）は[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)に従ってください。
 
 {% callout type="warning" title="マーケットプレイス / インデクサー互換性" %}
-マーケットプレイスの DAS プロバイダーが継承 SFBP 解決をサポートするまで、`creators: []` と `basis_points: 65535` を見てロイヤリティ支払いをスキップする可能性があります。[継承ロイヤリティの読み取り](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties)の警告を参照してください。より強い保証のため、コレクション Royalties プラグインの許可/拒否リストを使い、ロイヤリティ準拠の会場経由で販売してください。
+ウォレットやマーケットプレイスの DAS プロバイダーが継承 SFBP 解決をサポートするまで、`creators: []` と `basis_points: 65535` が返されます。その場合、アプリはクリエイターなしの **655.35%のロイヤリティ**（約650%）を表示し、ロイヤリティ支払いをスキップする可能性があります。オンチェーンのアセットは正しいです。[継承ロイヤリティ未対応のDASプロバイダーからのレスポンス](/ja/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)を参照してください。より強い保証のため、コレクション Royalties プラグインの許可/拒否リストを使い、ロイヤリティ準拠の会場経由で販売してください。
 {% /callout %}
 
 JavaScript SDKの `mintV2` ヘルパーは、`coreCollection` が指定され `metadata.sellerFeeBasisPoints` が省略された場合、この動作をデフォルトとします。

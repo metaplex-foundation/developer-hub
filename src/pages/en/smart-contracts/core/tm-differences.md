@@ -49,7 +49,7 @@ Core replaces Token Metadata's multi-account model with a single-account design.
 ## Out of Scope
 pNFT-specific features and fungible token handling (use SPL Token).
 ## Quick Start
-**Jump to:** [Cost Comparison](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze--lock) · [Lifecycle Events](#lifecycle-events-and-plugins)
+**Jump to:** [Cost Comparison](#difference-overview) · [Collections](#collections) · [Freeze/Lock](#freeze-lock) · [Lifecycle Events](#lifecycle-events-and-plugins)
 If you're starting fresh, use Core. If migrating, the key mental shifts are:
 1. One account, not three
 2. Plugins, not delegates

@@ -14,7 +14,7 @@ description: Auction House 설정을 매우 자세하게 설명합니다.
 
 권한은 Auction House를 만든 후 다른 지갑으로 전송할 수도 있으며, 이는 Auction House의 제어권을 이전합니다. 이 작업은 신중하게 수행해야 합니다.
 
-권한 지갑은 또한 마켓플레이스에 목록에 올리고 판매할 수 있는 자산을 보호하는 중요한 역할을 합니다. [`requireSignOff`](#requiresignoff)를 논의할 때 권한의 이 기능에 대해 자세히 이야기할 것입니다
+권한 지갑은 또한 마켓플레이스에 목록에 올리고 판매할 수 있는 자산을 보호하는 중요한 역할을 합니다. [`requireSignOff`](#require-sign-off)를 논의할 때 권한의 이 기능에 대해 자세히 이야기할 것입니다
 
 {% dialect-switcher title="JS SDK" %}
 {% dialect title="JavaScript" id="js" %}

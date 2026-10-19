@@ -318,7 +318,7 @@ _가드가 할당되는 즉시 sugar를 사용하여 민팅할 수 없습니다 
 
 Allow List route 명령어는 다음 기능을 지원합니다.
 
-### Merkle Proof 검증
+### Merkle Proof 검증 {% #validate-a-merkle-proof %}
 
 _Path: `proof`_
 

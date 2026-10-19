@@ -83,9 +83,9 @@ Core Asset의 소유자는 MPL Core 프로그램에 `transfer` 명령어를 사�
 온체인 명령어의 전체 세부사항은 [Github](https://github.com/metaplex-foundation/mpl-core/blob/5a45f7b891f2ca58ad1fc18e0ebdd0556ad59a4b/programs/mpl-core/src/instruction.rs#L139)에서 확인할 수 있습니다.
 {% /totem-accordion %}
 {% /totem %}
-## Core Asset 전송
+## Core Asset 전송 {% #transferring-a-core-asset %}
 {% code-tabs-imported from="core/transfer-asset" frameworks="umi" /%}
-## Collection 내 Core Asset 전송
+## Collection 내 Core Asset 전송 {% #transferring-a-core-asset-in-a-collection %}
 컬렉션이 있는 Asset을 전송하는 경우 컬렉션 주소를 전달해야 합니다.
 [Asset이 Collection에 있는지 확인하는 방법]()
 {% dialect-switcher title="Collection의 일부인 Asset 전송" %}
@@ -136,7 +136,7 @@ pub async fn transfer_asset_in_collection() {
 ```
 {% /dialect %}
 {% /dialect-switcher %}
-## Asset의 Transfer Delegate인 경우는?
+## Asset의 Transfer Delegate인 경우는? {% #what-if-i-am-the-transfer-delegate-of-an-asset %}
 [Transfer Delegate](/ko/smart-contracts/core/plugins/transfer-delegate) 플러그인을 통해 Asset의 Transfer Delegate인 경우, Asset의 소유자인 것처럼 `transferV1` 함수를 호출할 수 있습니다.
 ## 일반적인 오류
 ### `Authority mismatch`

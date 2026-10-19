@@ -76,7 +76,7 @@ faqs:
 - **Collection**: collection authority를 사용하여 Collection 내의 모든 Asset burn을 허용합니다. 한 번에 모두 burn하지 않습니다.
 ## 인수
 Permanent Burn Plugin에는 전달할 인수가 없습니다.
-## Permanent Burn Plugin이 있는 Asset 생성
+## Permanent Burn Plugin이 있는 Asset 생성 {% #creating-an-asset-with-a-permanent-burn-plugin %}
 {% dialect-switcher title="Permanent Freeze plugin이 있는 Asset 생성" %}
 {% dialect title="JavaScript" id="js" %}
 ```ts

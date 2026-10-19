@@ -25,7 +25,7 @@ Androidおよびkotlinをサポートする他のプラットフォームで動�
 ## はじめに
 
 ### インストール
-#### 要件 {#requirements}
+#### 要件 {% #requirements %}
 
 - Android 21+
 
@@ -173,16 +173,16 @@ Metaplex Auction Houseプロトコルにより、誰でも分散型販売契約�
 
 オークションモジュールは`Metaplex.auctions`を介してアクセスでき、以下のメソッドを提供します。現在、読み取りメソッドのみをサポートしています。Auction Houseの作成、およびビッドとリスティングの対話と作成は、将来サポートされる予定です。
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#find-auction-house-by-creator-and-mint)
 - さらに近日公開予定！
 
 すべてのメソッドは、アプリケーションでより柔軟性と互換性を提供するために、構成可能な[サスペンド関数](https://kotlinlang.org/docs/composing-suspending-functions.html)として提供されます。
 
 **注意：** Auctions APIが提供するこれらのサスペンド関数は、ライブラリのアーキテクチャの変更です。以前は非同期コールバックメソッドのみを提供していました。すべてのユーザーが新しいサスペンド関数に移行することを強くお勧めしますが、利用可能なメソッドの非同期コールバック実装も提供しています。これらのメソッドは暫定的に提供されており、将来的に非推奨になる可能性があることに注意してください：
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address, callback)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#find-auction-house-by-creator-and-mint)
 
 ### findAuctionHouseByAddress
 

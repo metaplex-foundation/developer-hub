@@ -3,7 +3,7 @@ title: 获取压缩NFT
 metaTitle: 获取压缩NFT - Bubblegum V2
 description: 了解如何在Bubblegum上获取压缩NFT。
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '10-01-2026'
 keywords:
   - fetch compressed NFT
   - read cNFT
@@ -208,7 +208,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - 并非所有RPC提供商都支持DAS API。请查看[RPC提供商](/zh/rpc-providers)页面获取兼容选项。
 - 安装`mplBubblegum`时会自动包含DAS API插件，无需单独安装。
 - 通过`getAssetProof`获取的证明在树被修改后可能会过期。在执行写入操作前始终获取最新证明。
-- 对于从集合继承卖家费用的 Bubblegum V2 cNFT，DAS 将集合费率放在 `royalty.basis_points` / `creators` 上，将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上。请参阅[读取继承版税](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties)。
+- 对于从集合继承卖家费用的 Bubblegum V2 cNFT，DAS 将集合费率放在 `royalty.basis_points` / `creators` 上，将叶子哨兵放在 `royalty.basis_points_raw` / `creators_raw` 上。尚不支持继承版税的 DAS 提供方则会返回 `royalty.basis_points: 65535`（655.35% 的版税），且 `creators` 为空。请参阅[不支持继承版税的 DAS 提供方的响应](/zh/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)。
 
 ## Glossary
 

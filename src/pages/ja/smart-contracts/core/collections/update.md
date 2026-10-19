@@ -43,14 +43,14 @@ Core Collectionの作成後の更新には2つの命令があります。
 - どちらも`updateAuthority`の署名が必要です
 - コレクションレベルのプラグインへの変更はそれを継承するメンバーAssetに伝播します
 
-**ジャンプ：** [メタデータの更新](#collectionメタデータの更新) · [プラグインの更新](#collectionプラグインの更新) · [エラー対処](#よくあるエラー)
+**ジャンプ：** [メタデータの更新](#updating-collection-metadata) · [プラグインの更新](#updating-a-collection-plugin) · [エラー対処](#よくあるエラー)
 
 ## 前提条件
 
 - CollectionのupdateAuthorityをsignerとして設定した**Umi** — この値を取得するには[Collectionの取得](/smart-contracts/core/collections/fetch)を参照
 - 更新したいcollectionのアドレス
 
-## Collectionメタデータ更新
+## Collectionメタデータ更新 {% #updating-collection-metadata %}
 
 `updateCollection`は既存Collectionの`name`および/または`uri`を変更します。変更したいフィールドのみ渡してください。
 
@@ -107,7 +107,7 @@ pub async fn update_collection() {
 {% /dialect %}
 {% /dialect-switcher %}
 
-## Collectionプラグイン更新
+## Collectionプラグイン更新 {% #updating-a-collection-plugin %}
 
 `updateCollectionPlugin`はCollectionにすでに付与されているプラグインの設定を変更します。以下の例では[Royaltiesプラグイン](/smart-contracts/core/plugins/royalties)のBasis pointsとクリエイター配分を更新しています。
 

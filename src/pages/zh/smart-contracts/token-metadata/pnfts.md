@@ -193,7 +193,7 @@ pNFTs 在大多数操作中需要附加账户，包括 `tokenRecord`、`authoriz
 {% edge from="ruleset-revision" to="ruleset-revision-1" dashed=true arrow="none" animated=true toPosition="left" /%}
 {% /diagram %}
 
-## 用例：版税强制执行
+## 用例：版税强制执行 {% #use-case-royalty-enforcement %}
 
 现在我们对 pNFTs 有了更好的理解，让我们看一个可以用 PNFTs 解决的具体用例：版税强制执行。
 

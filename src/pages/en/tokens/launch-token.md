@@ -177,6 +177,7 @@ async function main() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',

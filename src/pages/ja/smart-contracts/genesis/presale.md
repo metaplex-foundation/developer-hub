@@ -269,7 +269,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Presale から SOL を受�
 
 {% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
 
-## ユーザー操作
+## ユーザー操作 {% #user-operations %}
 
 ### SOL のラップ
 

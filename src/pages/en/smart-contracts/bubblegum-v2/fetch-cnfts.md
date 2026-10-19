@@ -3,7 +3,7 @@ title: Fetching Compressed NFTs
 metaTitle: Fetching Compressed NFTs - Bubblegum V2 - Metaplex
 description: Learn how to fetch compressed NFTs using the Metaplex DAS API. Covers getAsset, getAssetProof, getAssetsByOwner, and getAssetsByGroup methods.
 created: '01-15-2025'
-updated: '02-24-2026'
+updated: '10-01-2026'
 keywords:
   - fetch compressed NFT
   - read cNFT
@@ -208,7 +208,7 @@ const rpcAssetList = await umi.rpc.getAssetsByGroup({
 - Not all RPC providers support the DAS API. Check the [RPC Providers](/rpc-providers) page for compatible options.
 - The DAS API plugin is automatically included when you install `mplBubblegum` — no separate installation needed.
 - Proofs fetched via `getAssetProof` may become stale if the tree is modified. Always fetch fresh proofs before performing write operations.
-- For Bubblegum V2 cNFTs that inherit seller fees from a collection, DAS puts the collection rate on `royalty.basis_points` / `creators` and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw`. See [Reading Inherited Royalties](/smart-contracts/bubblegum-v2/reading-inherited-royalties).
+- For Bubblegum V2 cNFTs that inherit seller fees from a collection, DAS puts the collection rate on `royalty.basis_points` / `creators` and the leaf sentinel on `royalty.basis_points_raw` / `creators_raw`. DAS providers that do not support inherited royalties yet return `royalty.basis_points: 65535` (a 655.35% royalty) with empty `creators` instead. See [Responses from DAS providers without inherited royalty support](/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das).
 
 ## FAQ
 

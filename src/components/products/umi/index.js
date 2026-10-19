@@ -98,6 +98,12 @@ export const umi = {
           title: 'Guides',
           links: [
             {
+              title: 'Migrating from V0 to V1 Transactions',
+              href: '/dev-tools/umi/guides/migrate-to-transaction-v1',
+              created: '2026-09-21',
+              updated: null, // null means it's never been updated
+            },
+            {
               title: 'Optimal transaction landing',
               href: '/dev-tools/umi/guides/optimal-transactions-with-compute-units-and-priority-fees',
               created: '2024-12-01',
@@ -151,6 +157,7 @@ export const umi = {
         'Priority Fees and Compute Managment': 'Priority Fees and Compute Managment',
         'Address Lookup Table': 'Address Lookup Table',
         'Transaction Memo': 'Transaction Memo',
+        'Migrating from V0 to V1 Transactions': 'Migrating from V0 to V1 Transactions',
         'Optimal transaction landing': 'Optimal transaction landing',
         'Serializing and Deserializing Transactions': 'Serializing and Deserializing Transactions',
         'RPC': 'RPC',

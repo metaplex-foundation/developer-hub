@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDKのAPIリファレンス。Solana上でのトークンローンチに必要な関数シグネチャ、パラメータ、型の解説。
 created: '01-15-2025'
-updated: '03-10-2026'
+updated: '09-18-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -11,6 +11,8 @@ keywords:
   - token launch SDK
   - Umi framework
   - Genesis API reference
+  - refundLaunchPoolV2
+  - soft cap
 about:
   - SDK installation
   - API reference
@@ -90,6 +92,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 | [depositLaunchPoolV2()](#deposit-launch-pool-v2) | Launch PoolにSOLを入金 |
 | [withdrawLaunchPoolV2()](#withdraw-launch-pool-v2) | SOLの出金（入金期間中） |
 | [claimLaunchPoolV2()](#claim-launch-pool-v2) | トークンの請求（入金期間終了後） |
+| [refundLaunchPoolV2()](#refund-launch-pool-v2) | 入金の返金（しきい値未達またはソフトキャップ超過時） |
 
 ### Presale操作
 
@@ -143,10 +146,16 @@ await addLaunchPoolBucketV2(umi, {
   depositEndCondition,      // TimeCondition
   claimStartCondition,      // TimeCondition
   claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
+  minimumDepositAmount,     // { amount: bigint } | null
+  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
+  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
   endBehaviors,             // EndBehavior[]
 }).sendAndConfirm(umi);
 ```
+
+{% callout type="warning" %}
+`softCap` は `@metaplex-foundation/genesis` 0.42.0 以降、必須引数です。他の Launch Pool 拡張とは異なり、生成されたシリアライザにデフォルト値がないため、ローンチに上限を設けない場合は明示的に `softCap: null` を渡してください。動作については [Launch Pool のソフトキャップ](/ja/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)を参照してください。
+{% /callout %}
 
 ### addPresaleBucketV2
 
@@ -223,6 +232,21 @@ await claimLaunchPoolV2(umi, {
 }).sendAndConfirm(umi);
 ```
 
+### refundLaunchPoolV2
+
+入金ウィンドウが閉じた後に Launch Pool の入金を返金します。金額はプログラムが導出するため、金額の引数はありません。`minimumQuoteTokenThreshold` に届かなかった場合は入金全額が返金され、`softCap` を超過した場合は入金者のトークン割り当てを維持したまま超過分のみが返金されます。
+
+```typescript
+await refundLaunchPoolV2(umi, {
+  genesisAccount,     // PublicKey
+  bucket,             // PublicKey
+  baseMint,           // PublicKey
+  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
+}).sendAndConfirm(umi);
+```
+
+署名が必要なのは `payer` のみのため、入金者に代わって誰でも返金をクランクできます。入金ウィンドウが閉じる前に呼び出すと `LaunchPoolNotEnded`、下限に達し上限も超過していない状態で呼び出すと `LaunchPoolThresholdMet`、2 回呼び出すと `DepositAlreadyRefunded` を返します。
+
 ### claimPresaleV2
 
 ```typescript
@@ -286,7 +310,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, { bucket: bucketPda, recipi
 
 ### Genesisアカウント
 
-Genesisアカウントは[ローンチタイプ](#launchtype)を含むトップレベルのローンチ状態を保存します。バックエンドクランクが`setLaunchTypeV2`インストラクションを介して作成後にオンチェーンで`launchType`フィールドを設定するため、クランクが処理するまで値は`Uninitialized`（0）のままの場合があります。
+Genesisアカウントは[ローンチタイプ](#launch-type)を含むトップレベルのローンチ状態を保存します。バックエンドクランクが`setLaunchTypeV2`インストラクションを介して作成後にオンチェーンで`launchType`フィールドを設定するため、クランクが処理するまで値は`Uninitialized`（0）のままの場合があります。
 
 | 関数 | 戻り値 |
 |----------|---------|
@@ -374,13 +398,34 @@ const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
 const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
 ```
 
-**バケットの状態フィールド:** `quoteTokenDepositTotal`, `depositCount`, `claimCount`, `bucket.baseTokenAllocation`
+**バケットの状態フィールド:** `quoteTokenDepositTotal`, `weightedQuoteTokenTotal`, `depositCount`, `claimCount`, `refundCount`, `bucket.baseTokenAllocation`, `extensions`
 
-**入金の状態フィールド:** `amountQuoteToken`, `claimed`
+**入金の状態フィールド:** `amountQuoteToken`, `weightedQuoteToken`, `claimed`, `refunded`
 
 ---
 
 ## 型
+
+### LaunchPoolV2Extensions
+
+Launch Pool bucket の任意のガードで、`bucket.extensions` から読み取ります。すべてのフィールドは Umi の `Option` であるため、値を読み取る前に `unwrapOption()` を使用するか `.__option` を確認してください。
+
+```typescript
+{
+  backendSigner: Option<BackendSigner>;
+  depositPenalty: Option<LinearBpsScheduleV2>;
+  withdrawPenalty: Option<LinearBpsScheduleV2>;
+  bonusSchedule: Option<LinearBpsScheduleV2>;
+  depositLimit: Option<DepositLimit>;                             // { limit: bigint }
+  allowlist: Option<Allowlist>;
+  claimSchedule: Option<ClaimSchedule>;
+  minimumDepositAmount: Option<MinimumDepositAmount>;             // { amount: bigint }
+  minimumQuoteTokenThreshold: Option<MinimumQuoteTokenThreshold>; // { amount: bigint } - floor
+  softCap: Option<SoftCap>;                                       // { amount: bigint } - ceiling
+}
+```
+
+拡張は `addLaunchPoolBucketV2Extensions()` と `removeLaunchPoolBucketV2Extensions()` で個別に追加・削除でき、`LaunchPoolV2ExtensionType` でフィールドを選択します。どちらも Genesis Account がファイナライズされた後は拒否されます。
 
 ### LaunchType
 
@@ -461,6 +506,11 @@ Genesisローンチのトップレベルオンチェーンアカウントです�
 | `already finalized` | ファイナライズ後は変更不可 |
 | `deposit period not active` | 入金期間外 |
 | `claim period not active` | 請求期間外 |
+| `InvalidSoftCap` (221) | `softCap.amount` が 0 です。`{ amount: 0n }` ではなく `softCap: null` を渡してください |
+| `SoftCapBelowThreshold` (222) | `softCap.amount` が `minimumQuoteTokenThreshold.amount` を下回っています |
+| `LaunchPoolNotEnded` | 入金ウィンドウが閉じる前に `refundLaunchPoolV2()` が呼び出されました |
+| `LaunchPoolThresholdMet` (173) | 下限に達し、ソフトキャップも超過していない状態で返金がリクエストされました |
+| `DepositAlreadyRefunded` | 同じ入金に対して `refundLaunchPoolV2()` が 2 回呼び出されました |
 
 ---
 

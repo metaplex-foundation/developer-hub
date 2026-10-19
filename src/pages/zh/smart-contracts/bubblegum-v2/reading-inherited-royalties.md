@@ -3,7 +3,7 @@ title: 读取继承版税
 metaTitle: 读取继承版税 - Bubblegum V2 - Metaplex
 description: 钱包、市场、索引器及其他客户端应如何读取 DAS getAsset 响应，以处理从 MPL-Core 集合继承卖家费用的 Bubblegum V2 cNFT。
 created: '07-16-2026'
-updated: '08-06-2026'
+updated: '10-01-2026'
 keywords:
   - inherited royalties
   - seller fee basis points
@@ -26,6 +26,8 @@ faqs:
     a: 那是链上用于叶子哈希的继承哨兵值。royalty.basis_points 已包含用于展示的集合费率。
   - q: 为什么继承版税的 cNFT 上 creators_raw 为空？
     a: 当 SFBP 被继承时，叶子上的 creators 必须为空。请使用 creators 获取集合版税收款方。
+  - q: 为什么钱包或市场在我的 cNFT 上显示 655.35% 的版税？
+    a: 该应用的 DAS 提供方尚不支持继承版税。它会在 royalty.basis_points 上返回叶子继承哨兵值 65535（655.35%），且 creators 为空，而不是集合费率。链上版税并没有错；该应用需要升级 DAS 提供方，或直接读取集合的 Royalties 插件。
   - q: 对于非继承版税的 cNFT，我需要改什么吗？
     a: 不需要。未使用继承时，_raw 字段与 inherited 会被省略，主要的 royalty 与 creators 字段行为与之前相同。
 ---
@@ -37,6 +39,7 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 - 使用**主字段**（`royalty.basis_points`、`creators`）进行版税 UI 与分账展示
 - 使用 **`_raw` 字段**（`royalty.basis_points_raw`、`creators_raw`）进行证明、哈希和写入指令
 - 非继承资产保持不变 — `_raw` / `inherited` 会被省略
+- 不支持继承版税的 DAS 提供方会直接返回原始哨兵值，应用会将其显示为 **655.35%** 的版税且没有 creators
 
 本页面向任何**读取** `getAsset` / DAS 响应的客户端 — 钱包、市场、索引器、分析工具与应用。关于铸造与更新继承版税的 cNFT，请参阅[铸造](/zh/smart-contracts/bubblegum-v2/mint-cnfts#inheriting-royalties-from-the-collection)与[更新](/zh/smart-contracts/bubblegum-v2/update-cnfts#inherited-royalties)。
 
@@ -90,6 +93,41 @@ Bubblegum V2 可以在叶子上以**继承哨兵**（`65535`）存储卖家费�
 - `creators` 是集合 Royalties 插件中的收款方；`creators_raw: []` 是用于哈希的叶子 creators 数组。
 
 如果无法解析集合，`basis_points` 可能回退，而 `basis_points_raw` 仍为 `65535`。
+
+## 不支持继承版税的 DAS 提供方的响应 {% #unsupported-das %}
+
+尚不支持继承版税的 DAS 提供方会原样返回叶子数据，因此继承版税的 cNFT 会显示 **655.35% 的版税**（UI 中常四舍五入为 "650%" 或 "655%"），且**没有 creators**。链上资产是正确的 — 只是索引器的响应缺少集合解析。
+
+上面示例中的同一个继承资产，在不支持的提供方上看起来是这样的：
+
+```json
+"royalty": {
+  "royalty_model": "creators",
+  "target": null,
+  "percent": 6.5535,
+  "basis_points": 65535,
+  "primary_sale_happened": false,
+  "locked": false
+},
+"creators": []
+```
+
+| 字段 | 支持的 DAS | 不支持的 DAS | 用户在不支持的 DAS 上看到的内容 |
+|------|------------|--------------|--------------------------------|
+| `royalty.basis_points` | `750`（集合费率） | `65535`（叶子哨兵） | 655.35% 版税 |
+| `royalty.percent` | `0.075` | `6.5535` | 655.35% 版税 |
+| `creators` | 集合 Royalties 插件收款方 | `[]` | 没有版税收款方 |
+| `royalty.basis_points_raw` / `creators_raw` / `royalty.inherited` | 存在 | 省略 | — |
+
+{% callout type="warning" title="655.35% 是继承哨兵值，不是真实版税" %}
+如果钱包、市场或浏览器在 Bubblegum V2 cNFT 上显示约 650% 的版税，说明其 DAS 提供方尚不支持继承版税。资产和集合都没有问题。该值是 `65535` 基点，即 `SELLER_FEE_BASIS_POINTS_INHERIT` 哨兵值，被当作费率读取了。
+{% /callout %}
+
+客户端可以通过三种方式处理不支持的提供方：
+
+- 将没有 `basis_points_raw` 且 `royalty.basis_points === 65535` 的情况视为继承 — 下方的 `isInheritedRoyalty` 辅助函数就是这样做的。
+- 从 MPL-Core 集合的 [Royalties 插件](/zh/smart-contracts/core/plugins/royalties)而非 DAS 读取有效费率与收款方。集合地址位于资产的 `grouping` 中 `group_key: "collection"` 的条目。
+- 切换到支持继承版税的 DAS 提供方。请参阅 [RPC 与 DAS](/zh/solana/rpcs-and-das)。
 
 ## 检测与展示辅助函数
 
@@ -157,12 +195,12 @@ if (isInheritedSfbpRoyalty(royalty)) {
 
 集成时的问题大多源于把叶子值展示给用户，或把展示值哈希进写入。
 
-- **不要**将 `65535` 或 `6.5535%` 作为面向用户的版税费率展示 — 该值位于 `basis_points_raw`。
+- **不要**将 `65535` 基点（655.35%）作为面向用户的版税费率展示 — 在支持的 DAS 上该值位于 `basis_points_raw`，而在[不支持的 DAS](#unsupported-das) 上它意味着必须从集合解析费率。
 - **不要**假设空的 `creators_raw` 表示没有版税收款方；展示用收款方位于 `creators`。
 - 在重新计算叶子哈希或构建 Bubblegum 写入指令时，**不要**使用主字段的 `basis_points` / `creators` — 请使用 `basis_points_raw` 与 `creators_raw`。
 
-{% callout type="warning" title="过时的 DAS / 市场" %}
-继承版税需要能将集合费率解析到主字段的 DAS 索引器。在**过时**的 DAS 端点上，`getAsset` 仍会原样返回叶子：`royalty.basis_points` ≈ `65535`、`creators: []`，且没有 `basis_points_raw` / `inherited` / `creators_raw`。
+{% callout type="warning" title="使用不支持的 DAS 的市场上的版税支付" %}
+继承版税需要能将集合费率解析到主字段的 DAS 索引器。在[不支持的 DAS 提供方](#unsupported-das)上，`getAsset` 会原样返回叶子：`royalty.basis_points: 65535`（655.35%）、`creators: []`，且没有 `basis_points_raw` / `inherited` / `creators_raw`。
 
 仅依赖这些 DAS 资产字段做分成的市场可能会把资产视为**没有版税收款方**（或费率无效），从而**不向创作者支付任何费用**。请优先选择：
 
@@ -193,6 +231,10 @@ if (isInheritedSfbpRoyalty(royalty)) {
 ### 为什么继承版税的 cNFT 上 `creators_raw` 为空？
 
 当 SFBP 被继承时，叶子上的 `creators` 必须为空。请使用 `creators` 获取集合版税收款方。
+
+### 为什么钱包或市场在我的 cNFT 上显示 655.35% 的版税？
+
+该应用的 DAS 提供方尚不支持继承版税。它会在 `royalty.basis_points` 上返回叶子继承哨兵值 `65535`（655.35%），且 `creators` 为空，而不是集合费率。链上版税并没有错；该应用需要升级 DAS 提供方，或直接读取集合的 Royalties 插件。请参阅[不支持继承版税的 DAS 提供方的响应](#unsupported-das)。
 
 ### 对于非继承版税的 cNFT，我需要改什么吗？
 

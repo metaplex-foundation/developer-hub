@@ -8,11 +8,15 @@ keywords:
   - token distribution
   - proportional distribution
   - mplx genesis deposit
+  - mplx genesis refund
+  - soft cap
+  - oversubscription
 about:
   - launch pool bucket
   - proportional token distribution
   - deposit and claim lifecycle
   - end behaviors
+  - soft caps
 proficiencyLevel: Intermediate
 programmingLanguage:
   - Bash
@@ -22,6 +26,7 @@ howToSteps:
   - Wrap SOL and deposit quote tokens during the deposit window
   - Transition collected funds to destination buckets after deposits close (if end behaviors are set)
   - Claim base tokens proportional to your deposit after the claim period opens
+  - Refund excess deposits with the refund command if the pool exceeded its soft cap
 howToTools:
   - Metaplex CLI (mplx)
   - Solana CLI
@@ -34,6 +39,12 @@ faqs:
     a: End behaviors forward collected quote tokens from a launch pool to destination buckets (usually unlocked buckets) after the deposit period ends. Use the transition command to execute them.
   - q: What is a claim schedule?
     a: A claim schedule adds vesting to token claims — tokens are released gradually over time instead of all at once, with optional cliff periods.
+  - q: What does the softCap flag do?
+    a: The softCap flag caps the quote tokens a launch pool keeps. Deposits above the cap are still accepted and the launch still succeeds, but the excess is refunded pro-rata with the refund command. Token allocation is unaffected.
+  - q: What is the difference between softCap and minimumQuoteTokenThreshold?
+    a: softCap is a ceiling and never causes a launch to fail. minimumQuoteTokenThreshold is a floor — if deposits fall below it the launch fails and depositors can take a full refund. They can be used together, and softCap must be greater than or equal to minimumQuoteTokenThreshold.
+  - q: When can the refund command be used?
+    a: Only after the deposit window closes, and only when the launch missed its minimum quote token threshold or exceeded its soft cap. In any other case the command reports that the pool is not refundable.
 ---
 
 {% callout title="What You'll Do" %}
@@ -48,15 +59,15 @@ Run the full launch pool lifecycle from the CLI:
 A launch pool collects deposits during a window and distributes tokens proportionally. This page covers the full launch pool lifecycle — from creating the bucket to claiming tokens.
 
 - **Distribution**: Proportional — your share of deposits determines your share of tokens
-- **Commands**: `bucket add-launch-pool`, `deposit`, `withdraw`, `transition`, `claim`
-- **Optional features**: End behaviors, deposit/withdraw penalties, bonus schedules, claim vesting, allowlists
+- **Commands**: `bucket add-launch-pool`, `deposit`, `withdraw`, `transition`, `claim`, `refund`
+- **Optional features**: Soft cap, minimum threshold, end behaviors, deposit/withdraw penalties, bonus schedules, claim vesting, allowlists
 - **Quote token**: Wrapped SOL by default — wrap SOL before depositing
 
-## Out of Scope
+{% callout type="note" %}
+This page covers launch pool buckets only. Presale and unlocked buckets, Genesis account creation and finalization are covered on their own CLI pages.
+{% /callout %}
 
-Presale buckets, unlocked buckets, Genesis account creation, finalization, frontend integration, token economics modeling.
-
-**Jump to:** [Add Bucket](#add-launch-pool-bucket) · [Deposit](#deposit) · [Withdraw](#withdraw) · [Transition](#transition) · [Claim](#claim) · [Full Lifecycle](#full-lifecycle-example) · [Common Errors](#common-errors) · [FAQ](#faq)
+**Jump to:** [Add Bucket](#add-launch-pool-bucket) · [Soft Cap](#soft-cap-and-minimum-threshold) · [Deposit](#deposit) · [Withdraw](#withdraw) · [Transition](#transition) · [Claim](#claim) · [Refund](#refund) · [Full Lifecycle](#full-lifecycle-example) · [Common Errors](#common-errors) · [FAQ](#faq)
 
 ## Add Launch Pool Bucket
 
@@ -84,7 +95,8 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
 | `--endBehavior <string>` | | Format: `<destinationBucketAddress>:<percentageBps>` where `10000` = 100%. Can be specified multiple times | No |
 | `--minimumDeposit <string>` | | Minimum deposit per transaction in base units | No |
 | `--depositLimit <string>` | | Maximum deposit per user in base units | No |
-| `--minimumQuoteTokenThreshold <string>` | | Minimum total quote tokens required for the bucket to succeed | No |
+| `--minimumQuoteTokenThreshold <string>` | | Floor: minimum total quote tokens required for the bucket to succeed | No |
+| `--softCap <string>` | | Ceiling: maximum total quote tokens the bucket keeps. Deposits above this are refunded pro-rata | No |
 | `--depositPenalty <json>` | | Penalty schedule JSON | No |
 | `--withdrawPenalty <json>` | | Withdraw penalty schedule JSON (same format as depositPenalty) | No |
 | `--bonusSchedule <json>` | | Bonus schedule JSON | No |
@@ -147,6 +159,35 @@ mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
   --claimEnd 1735689600 \
   --claimSchedule '{"startTime":1704153601,"endTime":1735689600,"period":86400,"cliffTime":1704240000,"cliffAmountBps":1000}'
 ```
+
+4. With a floor and a ceiling:
+```bash {% title="With minimum threshold and soft cap" %}
+mplx genesis bucket add-launch-pool <GENESIS_ADDRESS> \
+  --allocation 500000000000000 \
+  --depositStart 1704067200 \
+  --depositEnd 1704153600 \
+  --claimStart 1704153601 \
+  --claimEnd 1735689600 \
+  --minimumQuoteTokenThreshold 10000000000 \
+  --softCap 100000000000
+```
+
+## Soft Cap and Minimum Threshold
+
+The `--softCap` flag caps the quote tokens a launch pool keeps, and `--minimumQuoteTokenThreshold` sets the minimum it must raise to succeed. Both are optional, both are denominated in quote token quantum units (lamports for wrapped SOL), and they can be used together.
+
+| Flag | Role | Effect when breached |
+|------|------|----------------------|
+| `--minimumQuoteTokenThreshold` | Floor | Launch fails; every depositor can take a full refund |
+| `--softCap` | Ceiling | Launch still succeeds; the excess above the cap is refunded pro-rata |
+
+A soft cap does not reject deposits at the cap. Deposits continue to be accepted for the whole window, the full base token allocation is still distributed proportionally, and only the excess quote tokens are returned. The effective price is therefore capped at `softCap / allocation` no matter how far deposits overshoot.
+
+{% callout type="note" %}
+`--softCap` must be greater than zero and greater than or equal to `--minimumQuoteTokenThreshold`. The CLI checks both before sending the transaction, so a misconfiguration fails immediately rather than returning `InvalidSoftCap` or `SoftCapBelowThreshold` from the program.
+{% /callout %}
+
+For the underlying protocol behaviour, including the pro-rata refund math and how a soft cap affects Raydium graduation pricing, see [Launch Pool Soft Cap](/smart-contracts/genesis/launch-pool#launch-pool-soft-cap).
 
 ## Deposit
 
@@ -232,6 +273,36 @@ mplx genesis claim <GENESIS_ADDRESS> --bucketIndex 0
 mplx genesis claim <GENESIS_ADDRESS> --bucketIndex 0 --recipient <WALLET_ADDRESS>
 ```
 
+## Refund
+
+The `mplx genesis refund` command returns quote tokens to a depositor after the deposit window closes. It takes no amount flag — the program derives the refundable amount.
+
+```bash {% title="Refund a launch pool deposit" %}
+mplx genesis refund <GENESIS_ADDRESS> --bucketIndex 0
+```
+
+Refunds are only available in two cases, and the command reports which one applied:
+
+| Case | Refund | Effect on tokens |
+|------|--------|------------------|
+| Launch missed `--minimumQuoteTokenThreshold` | Full deposit | No tokens were claimable |
+| Launch exceeded `--softCap` | Excess above the cap only | Token allocation unaffected |
+
+### Options
+
+| Flag | Short | Description | Required |
+|------|-------|-------------|----------|
+| `--bucketIndex <integer>` | `-b` | Index of the launch pool bucket (default: 0) | No |
+| `--recipient <string>` | | Depositor being refunded (default: signer) | No |
+
+### Notes
+
+- Only the payer must sign, so a refund can be cranked on another wallet's behalf with `--recipient`.
+- No fee or penalty is applied to a refund.
+- An excess refund can be run before or after `mplx genesis claim` — the order does not matter.
+- Each deposit can only be refunded once.
+- If the pool met its floor and stayed under its cap, the command reports that the pool is not refundable rather than sending a transaction.
+
 ## Full Lifecycle Example
 
 ```bash {% title="Complete launch pool lifecycle" %}
@@ -295,6 +366,11 @@ mplx genesis revoke $GENESIS --revokeMint
 | Exceeds deposit limit | User's total deposits exceed `depositLimit` | Reduce the deposit amount — you've hit the per-user cap |
 | End behavior not configured | Running `transition` on a bucket without end behaviors | Transition is only needed for buckets with `--endBehavior` |
 | Deposit period not ended | Running `transition` before deposits close | Wait until after `depositEnd` timestamp |
+| `"softCap" must be greater than zero` | Passed `--softCap 0` | Omit the flag entirely to leave the launch uncapped |
+| `"softCap" must be greater than or equal to "minimumQuoteTokenThreshold"` | Ceiling set below the floor | Raise `--softCap` or lower `--minimumQuoteTokenThreshold` |
+| Launch pool is not refundable | Running `refund` on a pool that met its floor and stayed under its cap | Refunds only apply to a failed threshold or an exceeded soft cap |
+| Deposit already refunded | Running `refund` twice for the same depositor | Each deposit can only be refunded once |
+| No deposit found | Running `refund` or `claim` for a wallet that never deposited | Check the address passed to `--recipient` |
 
 ## FAQ
 
@@ -311,7 +387,16 @@ End behaviors forward collected quote tokens from a launch pool to destination b
 A claim schedule adds vesting to token claims. Instead of receiving all tokens at once, they are released gradually based on the configured `period`, `cliffTime`, and `cliffAmountBps`.
 
 **What happens if minimumQuoteTokenThreshold is not met?**
-If the total deposits don't reach the threshold, the bucket does not succeed and depositors can reclaim their funds.
+If the total deposits don't reach the threshold, the bucket does not succeed and depositors reclaim their full deposit with `mplx genesis refund`.
+
+**What does the softCap flag do?**
+`--softCap` caps the quote tokens a launch pool keeps. Deposits above the cap are still accepted and the launch still succeeds, but the excess is refunded pro-rata with `mplx genesis refund`. Token allocation is unaffected.
+
+**What is the difference between softCap and minimumQuoteTokenThreshold?**
+`--softCap` is a ceiling and never causes a launch to fail. `--minimumQuoteTokenThreshold` is a floor — if deposits fall below it the launch fails and depositors can take a full refund. They can be used together, and `--softCap` must be greater than or equal to `--minimumQuoteTokenThreshold`.
+
+**When can the refund command be used?**
+Only after the deposit window closes, and only when the launch missed its minimum quote token threshold or exceeded its soft cap. In any other case the command reports that the pool is not refundable.
 
 **Can I split end behaviors across multiple destinations?**
 Yes. Specify `--endBehavior` multiple times with different destination addresses and percentages (in basis points, totaling 10000).
@@ -328,4 +413,8 @@ Yes. Specify `--endBehavior` multiple times with different destination addresses
 | **Withdraw Penalty** | Fee applied to withdrawals during the deposit period |
 | **Bonus Schedule** | Extra token allocation for early or specific-timing deposits |
 | **Allowlist** | Merkle-tree-based access control limiting who can deposit |
+| **Soft Cap** | Ceiling on the quote tokens a launch pool keeps; the excess is refunded pro-rata |
+| **Minimum Quote Token Threshold** | Floor below which a launch pool fails and full refunds open |
+| **Oversubscription** | State where total deposits exceed the configured soft cap |
+| **Refund** | Return of a deposit, in full when the floor was missed or excess-only when the cap was exceeded |
 | **Basis Points (bps)** | 1/100th of a percent — 10000 bps = 100%, 100 bps = 1% |

@@ -3,7 +3,7 @@ title: FAQ
 metaTitle: FAQ - Bubblegum V2
 description: Bubblegum에 대한 자주 묻는 질문.
 created: '2025-01-15'
-updated: '06-19-2026'
+updated: '10-01-2026'
 keywords:
   - Bubblegum FAQ
   - compressed NFT questions
@@ -159,6 +159,10 @@ cNFT의 최대 수는 `2^maxDepth`입니다. 깊이 14 트리는 16,384개, 깊�
 ## cNFT가 MPL-Core 컬렉션에서 로열티를 상속할 수 있나요? {% #inherited-royalties %}
 
 예. `Royalties` 플러그인이 있는 MPL-Core 컬렉션에 민팅할 때 `metadata.sellerFeeBasisPoints`를 생략하거나 `SELLER_FEE_BASIS_POINTS_INHERIT`(`65535`)를 전달할 수 있습니다. 리프에는 해당 센티널이 온체인에 저장됩니다. DAS는 표시용으로 `royalty.basis_points` / `creators`에 컬렉션에서 해석된 비율을 두고, `royalty.basis_points_raw` / `creators_raw`에 리프 센티널을 둡니다(`royalty.inherited: true`).
+
+{% callout type="warning" title="상속 로열티를 지원하지 않는 DAS 제공자" %}
+아직 상속 로열티를 지원하지 않는 DAS 제공자는 `royalty.basis_points`에 리프 센티널(`65535`)을, `creators`는 빈 배열로 반환하므로 지갑과 마켓플레이스는 크리에이터 없는 **655.35% 로열티**(약 650%)를 표시합니다. 온체인 자산은 올바릅니다. [상속 로열티를 지원하지 않는 DAS 제공자의 응답](/ko/smart-contracts/bubblegum-v2/reading-inherited-royalties#unsupported-das)을 참조하세요.
+{% /callout %}
 
 **요구 사항:**
 

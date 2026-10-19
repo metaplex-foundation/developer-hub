@@ -49,7 +49,7 @@ faqs:
 
 **跳转至：** [基本用法](#basic-usage) · [选项](#options) · [注册工作流](#registration-workflows) · [示例](#examples) · [输出](#output) · [常见错误](#common-errors) · [FAQ](#faq)
 
-## 基本用法
+## 基本用法 {% #basic-usage %}
 
 默认 API 模式仅需最少的必填标志即可注册 Agent：
 
@@ -60,7 +60,7 @@ mplx agents register \
   --image "./avatar.png"
 ```
 
-## 选项
+## 选项 {% #options %}
 
 | 标志 | 简写 | 描述 | 是否必填 | 默认值 |
 |------|-------|-------------|----------|---------|
@@ -82,7 +82,7 @@ mplx agents register \
 `--wizard`、`--from-file` 和 `--name` 互斥——只能使用其中一个来指定注册文档来源。
 {% /callout %}
 
-## 注册工作流
+## 注册工作流 {% #registration-workflows %}
 
 ### API 模式（默认）
 
@@ -123,7 +123,7 @@ mplx agents register <AGENT_ASSET> --use-ix \
 mplx agents register --new --wizard
 ```
 
-## 示例
+## 示例 {% #examples %}
 
 注册时配置服务端点：
 
@@ -154,7 +154,7 @@ mplx agents register \
   --save-document "./my-agent-doc.json"
 ```
 
-## 输出
+## 输出 {% #output %}
 
 ```text {% title="Expected output" %}
 --------------------------------
@@ -166,7 +166,7 @@ mplx agents register \
 
 保存 `Asset` 地址——后续在 `agents fetch`、`agents set-agent-token` 和 `agents executive delegate` 中会用到。
 
-## 常见错误
+## 常见错误 {% #common-errors %}
 
 | 错误 | 原因 | 解决方法 |
 |-------|-------|-----|

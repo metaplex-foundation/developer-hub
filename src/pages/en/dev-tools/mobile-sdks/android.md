@@ -25,7 +25,7 @@ This project is in development. **All** interfaces are _very likely_ to change v
 ## Getting started
 
 ### Installation
-#### Requirements {#requirements}
+#### Requirements {% #requirements %}
 
 - Android 21+
 
@@ -173,16 +173,16 @@ The Metaplex Auction House protocol allows anyone to implement a decentralized s
 
 The Auctions module can be accessed via `Metaplex.auctions` and provide the following methods. Currently we only support read methods. Auction House creation, and the ability to interact with and create bids and listings will be supported in the future.
 
-- [`findAuctionHouseByAddress(address)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint)`](#find-auction-house-by-creator-and-mint)
 - more coming soon!
 
 All methods are provided as composable [suspending functions](https://kotlinlang.org/docs/composing-suspending-functions.html) to provide more flexibility and compatibility in your application.
 
 **Note:** These suspend functions provided by the Auctions API are an architectural change for the library. We have previously only provided async-callback methods. We highly recommend that everyone migrate to the new suspending functions, however we have also provided async-callback implementations of the available methods. Note that these methods are provided as a interim and may be deprecated in the future:
 
-- [`findAuctionHouseByAddress(address, callback)`](#findAuctionHouseByAddress)
-- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#findAllByMintList)
+- [`findAuctionHouseByAddress(address, callback)`](#find-auction-house-by-address)
+- [`findAuctionHouseByCreatorAndMint(creator, treasuryMint, callback)`](#find-auction-house-by-creator-and-mint)
 
 ### findAuctionHouseByAddress
 
