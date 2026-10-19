@@ -10,10 +10,13 @@ keywords:
   - createLaunch
   - registerLaunch
   - createAndRegisterLaunch
+  - claimCreatorRewards
+  - creator rewards
 about:
   - SDK API client
   - Token launch creation
   - Launch registration
+  - Creator rewards claiming
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
@@ -47,11 +50,20 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 umi.use(keypairIdentity(myKeypair));
 ```
 
+## 함수 개요 {% #function-overview %}
+
+| 함수 | 목적 |
+|----------|---------|
+| [`createAndRegisterLaunch`](#easy-mode-create-and-register-launch) | 한 번의 호출로 토큰 런치 — 생성, 서명, 전송, 등록 |
+| [`createLaunch`](#full-control-create-launch-register-launch) | 맞춤 서명 흐름을 위한 서명되지 않은 런치 트랜잭션 생성 |
+| [`registerLaunch`](#full-control-create-launch-register-launch) | 생성 트랜잭션이 온체인에서 확인된 후 런치 등록 |
+| [`claimCreatorRewards`](#claim-creator-rewards) | 지갑의 모든 버킷에서 누적된 창작자 보상 청구 |
+
 ## 세 가지 통합 모드
 
 SDK는 완전 자동부터 완전 수동까지, 런칭 생성을 위한 세 가지 모드를 제공합니다.
 
-### 간편 모드 — `createAndRegisterLaunch`
+### 간편 모드 — `createAndRegisterLaunch` {% #easy-mode-create-and-register-launch %}
 
 가장 간단한 방식입니다. 하나의 함수 호출로 온체인 계정 생성, Umi를 통한 트랜잭션 서명 및 전송, 런칭 등록까지 모든 것을 처리합니다.
 
@@ -77,7 +89,7 @@ SDK는 완전 자동부터 완전 수동까지, 런칭 생성을 위한 세 가�
 
 `txSender` 콜백은 미서명 트랜잭션 배열을 받아 서명 배열을 반환해야 합니다. SDK는 콜백이 완료된 후 등록을 처리합니다.
 
-### 완전 제어 — `createLaunch` + `registerLaunch`
+### 완전 제어 — `createLaunch` + `registerLaunch` {% #full-control-create-launch-register-launch %}
 
 트랜잭션 라이프사이클을 완전히 제어할 수 있습니다. `createLaunch`를 호출하여 미서명 트랜잭션을 받고, 서명과 전송을 직접 처리한 다음, `registerLaunch`를 호출합니다.
 
@@ -108,6 +120,35 @@ SDK는 완전 자동부터 완전 수동까지, 런칭 생성을 위한 세 가�
 
 ---
 
+## 창작자 보상 청구 {% #claim-creator-rewards %}
+
+`claimCreatorRewards`는 `POST /v1/creator-rewards/claim`을 호출하고, 청구 가능한 모든 본딩 커브 및 Raydium 버킷에 대한 Base64 인코딩된 청구 트랜잭션을 Umi `Transaction`으로 역직렬화하여 반환합니다. 각 트랜잭션에 Umi identity로 서명하고 전송하세요. 창작자 수수료 구성, 누적 확인, 버킷별 하위 수준 명령을 포함한 전체 청구 흐름은 [Genesis 본딩 커브의 창작자 수수료](/ko/smart-contracts/genesis/creator-fees)를 참조하세요.
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
+
+### ClaimCreatorRewardsInput
+
+| 필드 | 타입 | 필수 | 설명 |
+|-------|------|----------|-------------|
+| `wallet` | `PublicKey \| string` | 예 | 청구 대상 창작자 수수료 지갑. |
+| `network` | `SvmNetwork` | 아니요 | `'solana-mainnet'`(기본값) 또는 `'solana-devnet'`. API 기본 URL(`https://api.metaplex.com`)과 일치해야 합니다 |
+| `payer` | `PublicKey \| string` | 아니요 | 반환된 트랜잭션의 수수료와 렌트를 부담하는 지갑. 기본값은 `wallet`. 창작자 수수료 지갑에 SOL이 없는 경우(예: 에이전트 PDA)에 사용하세요. payer는 반환된 트랜잭션에 서명해야 하며, 청구된 SOL은 계속 창작자 수수료 지갑이 받습니다. |
+
+### ClaimCreatorRewardsResponse
+
+| 필드 | 타입 | 설명 |
+|-------|------|-------------|
+| `transactions` | `Transaction[]` | 역직렬화된 Umi 트랜잭션, 청구하는 버킷당 하나. payer identity로 각각 서명하고 전송하세요. |
+| `blockhash` | `BlockhashWithExpiryBlockHeight` | 트랜잭션이 빌드된 블록해시. 확인에는 이것을 사용하세요. 새로 가져온 블록해시로 대체하지 마세요. |
+
+{% callout type="warning" title="보상 없음은 빈 배열이 아니라 타입이 지정된 오류입니다" %}
+지갑에 청구할 것이 없으면 API는 HTTP `400`과 `{"error":{"message":"No rewards available to claim"}}`을 반환하고 SDK는 `GenesisApiError`를 던집니다. 호출자는 오류를 잡아 `err.message`(또는 `err.statusCode === 400`)로 분기해야 하며, `result.transactions.length === 0`에 의존할 수 없습니다. [보상 없음 사례 처리](/ko/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)를 참조하세요.
+{% /callout %}
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" filename="errorHandling" /%}
+
+---
+
 ## 구성
 
 ### CreateLaunchInput
@@ -117,7 +158,7 @@ SDK는 완전 자동부터 완전 수동까지, 런칭 생성을 위한 세 가�
 | `wallet` | `PublicKey \| string` | 예 | 생성자의 지갑 (트랜잭션 서명) |
 | `token` | `TokenMetadata` | 예 | 토큰 메타데이터 |
 | `network` | `SvmNetwork` | 아니오 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'` |
-| `quoteMint` | `QuoteMintInput` | 아니오 | `'SOL'` (기본값), `'USDC'`, 또는 민트 주소 직접 입력 |
+| `quoteMint` | `QuoteMintInput` | 아니요 | `'SOL'`(기본값) 또는 `'USDC'` |
 | `launchType` | `CreateLaunchType` | 예 | `'launchpool'` — 기본 런칭 메커니즘 |
 | `launch` | `LaunchpoolLaunchInput` | 예 | 런칭 구성 |
 
@@ -208,7 +249,7 @@ API가 비성공 응답을 반환할 때 발생합니다.
 import { isGenesisApiError } from '@metaplex-foundation/genesis';
 
 try {
-  await createLaunch(umi, input);
+  await createLaunch(umi, {}, input);
 } catch (err) {
   if (isGenesisApiError(err)) {
     console.error('API error:', err.statusCode, err.responseBody);
@@ -293,7 +334,7 @@ import {
   signAndSendLaunchTransactions,
 } from '@metaplex-foundation/genesis';
 
-const createResult = await createLaunch(umi, input);
+const createResult = await createLaunch(umi, {}, input);
 const signatures = await signAndSendLaunchTransactions(umi, createResult, {
   commitment: 'confirmed',
 });

@@ -260,6 +260,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+기본 버킷에 구성된 종료 동작을 처리하여, 수집된 자금을 `endBehaviors`에 정의된 대상 버킷으로 이동합니다.
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -271,6 +273,8 @@ await triggerBehaviorsV2(umi, {
 ```
 
 ### revokeV2
+
+베이스 토큰의 민트 및/또는 프리즈 권한을 영구적으로 취소합니다.
 
 ```typescript
 await revokeV2(umi, {

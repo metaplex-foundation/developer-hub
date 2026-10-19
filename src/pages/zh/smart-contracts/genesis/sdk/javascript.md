@@ -260,6 +260,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+处理主存储桶上配置的结束行为，将收集的资金转移到 `endBehaviors` 中定义的目标存储桶。
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -271,6 +273,8 @@ await triggerBehaviorsV2(umi, {
 ```
 
 ### revokeV2
+
+永久撤销基础代币的铸币和/或冻结权限。
 
 ```typescript
 await revokeV2(umi, {

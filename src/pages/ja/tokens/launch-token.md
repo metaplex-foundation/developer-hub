@@ -1,38 +1,38 @@
 ---
 title: Solanaでトークンをローンチする
-metaTitle: Solanaトークンローンチパッド | トークンセール＆フェアローンチ | Metaplex
-description: Genesisを使ってSolana上でSPLトークンをローンチ。フェアローンチ、Presale、クラウドセール、トークン生成イベント（TGE）に対応したトークンローンチパッドです。オンチェーントークン配布のためのTypeScriptステップバイステップガイド。
+metaTitle: Solanaでトークンをローンチする — Genesis フェアローンチガイド | Metaplex
+description: Genesis Launch Pool を使って Solana 上で SPL トークンをローンチする TypeScript ステップバイステップガイド。透明な価格発見を伴う、公平なオンチェーントークン配布。
 cli: /dev-tools/cli/genesis/launch
 ---
 
-[Genesis](/ja/smart-contracts/genesis) を使用して Solana 上で SPL トークンをローンチします。Genesis はオンチェーンのトークンローンチパッドおよびフェアローンチプラットフォームです。トークンセール、クラウドセールなど、Genesis Launch Pools がオンチェーンで透明にトークン配布を行います。ユーザーは設定した期間中に SOL を預け入れ、総預入額に対するシェアに比例してトークンを受け取ります。 {% .lead %}
+[Genesis](/ja/smart-contracts/genesis) Launch Pool を使用して Solana 上で SPL トークンをローンチします。このガイドでは、ユーザーが一定期間中に SOL を預け入れ、総預入額に対するシェアに比例してトークンを受け取るフェアローンチを、すべてオンチェーンで透明に行う手順を説明します。 {% .lead %}
 
 {% callout type="note" title="ノーコードオプション" %}
-コードを書きたくない場合は、[Metaplex トークンローンチパッド](https://www.metaplex.com)を使えばコーディング不要でトークンをローンチできます。このガイドは、Genesis SDK を使って独自のトークンローンチ体験を構築したり、独自のウェブサイトでトークンセールを開催したい開発者向けです。
+コードを書きたくない場合は、[Metaplex トークンローンチパッド](https://www.metaplex.com)を使えば、コーディング不要でトークンをローンチできます。このガイドは、独自のトークンローンチ体験を構築したい開発者、または Genesis SDK を使って自社ウェブサイトでトークンセールを開催したい開発者向けです。
 {% /callout %}
 
-{% callout type="note" title="その他のローンチ方法" %}
-このガイドでは**Launch Pool**方式を説明していますが、Genesisは固定価格でトークンを販売する**[プレセール](/ja/smart-contracts/genesis/presale)**ローンチもサポートしています。[Genesis概要](/ja/smart-contracts/genesis)で各方式を比較し、プロジェクトに最適な方法を選択してください。
+{% callout type="note" title="その他のローンチ方式" %}
+このガイドでは **Launch Pool** 方式のフェアローンチを説明しますが、Genesis は固定価格でトークンを販売する **[プレセール](/ja/smart-contracts/genesis/presale)** もサポートしています。[Genesis 概要](/ja/smart-contracts/genesis)で各方式を比較し、プロジェクトに最適な方法を選択してください。
 {% /callout %}
 
 ## 概要
 
-Genesis は Solana トークンローンチパッドであり、公正なオンチェーントークンローンチメカニズムを提供します。集中型のトークンセールプラットフォームとは異なり、Launch Pool では市場がトークン配布を決定します。すべての参加者が預入額に比例してトークンを受け取り、公平で透明なトークン生成イベント（TGE）を実現します。SPL トークンの作成、資金調達、配布はすべてオンチェーンで行われ、仲介者は不要です。
+Genesis は、公平なオンチェーンのトークンローンチ機構を提供する Solana のトークンローンチパッドです。固定価格でトークンを販売する中央集権型のトークンセールプラットフォームとは異なり、Launch Pool では市場がトークン配布を決定します。すべての参加者は預入額に比例してトークンを受け取るため、公平で透明なトークン生成イベント（TGE）が保証されます。SPL トークンの作成、資金調達、配布はすべて仲介者なしでオンチェーンで行われます。
 
-Launch Pool トークンローンチには3つのフェーズがあります：
+Launch Pool によるトークンローンチには3つのフェーズがあります：
 
-1. **セットアップ**（1回実行） - トークンを作成し、ローンチを設定して有効化
-2. **預入期間**（ユーザーが参加） - 設定した期間中にユーザーがSOLを預け入れ
-3. **ローンチ後**（あなた＋ユーザー） - 状態機械をクランクし、ユーザーがトークンを請求、権限を取り消し
+1. **セットアップ**（1回だけ実行）- トークンの作成、ローンチの設定、アクティベート
+2. **入金期間**（ユーザーが操作）- 設定した期間中にユーザーが SOL を預け入れる
+3. **ローンチ後**（あなたとユーザー）- ステートマシンを進行（crank）し、ユーザーがトークンを請求し、あなたが権限を取り消す
 
-このガイドでは、異なるステージで実行する**4つの別々のスクリプト**の作成方法を説明します：
+このガイドでは、段階ごとに実行する**4つの独立したスクリプト**を作成します：
 
 | スクリプト | 実行タイミング | 目的 |
 |--------|-------------|---------|
-| `launch.ts` | 1回、開始時 | トークンを作成しローンチを有効化 |
-| `crank.ts` | 預入終了後 | エンド動作をトリガーしてSOLをアンロックバケットに移動 |
-| `claim.ts` | クランク後 | ユーザーがトークンを請求するために実行 |
-| `revoke.ts` | ローンチ完了時 | ミント/フリーズ権限を永久に削除 |
+| `launch.ts` | 開始時に1回 | トークンを作成し、ローンチをアクティベートします |
+| `crank.ts` | 入金終了後 | 条件とビヘイビアをトリガーして、SOL をアンロック済みバケットに移動します |
+| `claim.ts` | crank 後 | ユーザーがトークンを請求するために実行します |
+| `revoke.ts` | ローンチ完了時 | ミント/フリーズ権限を永久に削除します |
 
 ## 前提条件
 
@@ -47,13 +47,13 @@ npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foun
 
 ## 完全なローンチスクリプト
 
-以下は完全な実行可能スクリプトです。各セクションには説明のコメントが付いています。このスクリプトを**1回**実行してローンチをセットアップします。
+以下は、完全で実行可能なスクリプトです。各セクションには動作を説明するコメントが付いています。このスクリプトは、ローンチのセットアップのために**1回だけ**実行します。
 
 {% callout type="warning" title="キーペアが必要です" %}
-トランザクションに署名するには、マシン上にSolanaキーペアファイルが必要です。これは通常、`~/.config/solana/id.json`にあるSolana CLIウォレットです。スクリプト内の`walletFile`パスをキーペアファイルを指すように更新してください。このウォレットにトランザクション手数料用のSOLがあることを確認してください。
+トランザクションに署名するには、マシン上に Solana キーペアファイルが必要です。通常は `~/.config/solana/id.json` にある Solana CLI ウォレットです。スクリプト内の `walletFile` パスをキーペアファイルのパスに更新してください。このウォレットにトランザクション手数料用の SOL があることを確認してください。
 {% /callout %}
 
-`launch.ts`というファイルを作成します：
+`launch.ts` というファイルを作成します：
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -72,35 +72,35 @@ import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation
 
 async function main() {
   // ============================================
-  // セットアップ: 接続とウォレットを設定
+  // SETUP: Configure your connection and wallet
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // マシン上のファイルからウォレットキーペアを読み込み
-  // これは通常、~/.config/solana/id.jsonにあるSolana CLIウォレットです
-  // または、アクセス可能な任意のキーペアファイルを使用
-  const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
+  // Load your wallet keypair from a file on your machine
+  // This is typically your Solana CLI wallet at ~/.config/solana/id.json
+  // Or use any keypair file you have access to
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
   const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
   // ============================================
-  // 設定: これらの値をカスタマイズ
+  // CONFIGURATION: Customize these values
   // ============================================
 
-  // トークンの詳細
+  // Token details
   const TOKEN_NAME = 'My Token';
   const TOKEN_SYMBOL = 'MTK';
-  const TOKEN_URI = 'https://example.com/metadata.json'; // メタデータJSON URL
-  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1兆トークン（必要に応じて調整）
+  const TOKEN_URI = 'https://example.com/metadata.json'; // Your metadata JSON URL
+  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1 trillion tokens (adjust as needed)
 
-  // タイミング（現在からの秒数）
-  const DEPOSIT_DURATION = 24 * 60 * 60; // 24時間
-  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7日
+  // Timing (in seconds from now)
+  const DEPOSIT_DURATION = 24 * 60 * 60; // 24 hours
+  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7 days
 
-  // タイムスタンプを計算
+  // Calculate timestamps
   const now = BigInt(Math.floor(Date.now() / 1000));
   const depositStart = now;
   const depositEnd = now + BigInt(DEPOSIT_DURATION);
@@ -108,9 +108,9 @@ async function main() {
   const claimEnd = claimStart + BigInt(CLAIM_DURATION);
 
   // ============================================
-  // ステップ1: トークンを作成
+  // STEP 1: Create your token
   // ============================================
-  console.log('ステップ1: トークンを作成中...');
+  console.log('Step 1: Creating token...');
 
   const baseMint = generateSigner(umi);
 
@@ -128,15 +128,15 @@ async function main() {
     symbol: TOKEN_SYMBOL,
   }).sendAndConfirm(umi);
 
-  console.log('✓ トークン作成完了！');
-  console.log('  トークンミント:', baseMint.publicKey);
-  console.log('  Genesisアカウント:', genesisAccount);
+  console.log('✓ Token created!');
+  console.log('  Token mint:', baseMint.publicKey);
+  console.log('  Genesis account:', genesisAccount);
 
   // ============================================
-  // ステップ2: Launch Poolバケットを追加
-  // ここにユーザーがSOLを預け入れます
+  // STEP 2: Add Launch Pool bucket
+  // This is where users will deposit SOL
   // ============================================
-  console.log('\nステップ2: Launch Poolバケットを追加中...');
+  console.log('\nStep 2: Adding Launch Pool bucket...');
 
   const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, {
     genesisAccount,
@@ -177,25 +177,26 @@ async function main() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
         padding: Array(4).fill(0),
         destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000, // 収集したSOLの100%がアンロックバケットへ
+        percentageBps: 10000, // 100% of collected SOL goes to unlocked bucket
         processed: false,
       },
     ],
   }).sendAndConfirm(umi);
 
-  console.log('✓ Launch Poolバケット追加完了！');
-  console.log('  バケットアドレス:', launchPoolBucket);
+  console.log('✓ Launch Pool bucket added!');
+  console.log('  Bucket address:', launchPoolBucket);
 
   // ============================================
-  // ステップ3: アンロックバケットを追加
-  // ここに収集したSOLがチームに送られます
+  // STEP 3: Add Unlocked bucket
+  // This receives the collected SOL for your team
   // ============================================
-  console.log('\nステップ3: アンロックバケットを追加中...');
+  console.log('\nStep 3: Adding Unlocked bucket...');
 
   await addUnlockedBucketV2(umi, {
     genesisAccount,
@@ -217,65 +218,65 @@ async function main() {
     backendSigner: null,
   }).sendAndConfirm(umi);
 
-  console.log('✓ アンロックバケット追加完了！');
-  console.log('  バケットアドレス:', unlockedBucket);
+  console.log('✓ Unlocked bucket added!');
+  console.log('  Bucket address:', unlockedBucket);
 
   // ============================================
-  // ステップ4: ファイナライズ - ローンチを有効化
-  // この後は変更できません
+  // STEP 4: Finalize - activates the launch
+  // After this, no more changes can be made
   // ============================================
-  console.log('\nステップ4: ファイナライズ中...');
+  console.log('\nStep 4: Finalizing...');
 
   await finalizeV2(umi, {
     baseMint: baseMint.publicKey,
     genesisAccount,
   }).sendAndConfirm(umi);
 
-  console.log('✓ ローンチが有効になりました！');
+  console.log('✓ Launch is now ACTIVE!');
 
   // ============================================
-  // サマリー: これらのアドレスを保存！
+  // SUMMARY: Save these addresses!
   // ============================================
   console.log('\n========================================');
-  console.log('ローンチ完了 - これらのアドレスを保存：');
+  console.log('LAUNCH COMPLETE - SAVE THESE ADDRESSES:');
   console.log('========================================');
-  console.log('トークンミント:', baseMint.publicKey);
-  console.log('Genesisアカウント:', genesisAccount);
-  console.log('Launch Poolバケット:', launchPoolBucket);
-  console.log('アンロックバケット:', unlockedBucket);
+  console.log('Token mint:', baseMint.publicKey);
+  console.log('Genesis account:', genesisAccount);
+  console.log('Launch Pool bucket:', launchPoolBucket);
+  console.log('Unlocked bucket:', unlockedBucket);
   console.log('');
-  console.log('タイミング:');
-  console.log('預入開始:', new Date(Number(depositStart) * 1000).toISOString());
-  console.log('預入終了:', new Date(Number(depositEnd) * 1000).toISOString());
-  console.log('請求開始:', new Date(Number(claimStart) * 1000).toISOString());
-  console.log('請求終了:', new Date(Number(claimEnd) * 1000).toISOString());
+  console.log('TIMING:');
+  console.log('Deposits open:', new Date(Number(depositStart) * 1000).toISOString());
+  console.log('Deposits close:', new Date(Number(depositEnd) * 1000).toISOString());
+  console.log('Claims open:', new Date(Number(claimStart) * 1000).toISOString());
+  console.log('Claims close:', new Date(Number(claimEnd) * 1000).toISOString());
 }
 
 main().catch(console.error);
 ```
 
-スクリプトを実行：
+スクリプトを実行します：
 
 ```bash
 npx ts-node launch.ts
 ```
 
-**表示されたアドレスを保存してください！** 次のステップで必要になります。
+**出力されたアドレスを保存してください！** 次のステップで必要になります。
 
 ## 次に何が起こるか
 
-ローンチスクリプトを実行すると、ローンチがライブになります。各フェーズで何が起こるかを説明します：
+ローンチスクリプトを実行すると、ローンチが開始されます。各フェーズで起こることは次のとおりです：
 
-### 預入期間中
+### 入金期間中
 
-ユーザーはフロントエンドまたはSDKを直接使用してSOLを預け入れます。各預入：
-- 2%の手数料が適用されます
-- 預入PDAで追跡されます
-- 一部または全額を引き出し可能（2%の手数料あり）
+ユーザーはフロントエンドまたは SDK を直接使って SOL を預け入れます。各入金には次の特徴があります：
+- 手数料が適用されます
+- 入金 PDA で追跡されます
+- 一部または全額を引き出すことができます（手数料あり）
 
-### 預入終了後
+### 入金終了後
 
-預入期間が終了したら、`triggerBehaviorsV2`を実行してバケットに設定されたエンド動作（この場合、収集したSOLをアンロックバケットに移動）を処理します。`crank.ts`というファイルを作成します：
+入金期間が終了したら、`triggerBehaviorsV2` を実行して、バケットに設定された終了時のビヘイビア（この場合は集まった SOL をアンロック済みバケットへ移動）を実行します。`crank.ts` というファイルを作成します：
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -293,13 +294,13 @@ async function main() {
     .use(mplToolbox())
     .use(genesis());
 
-  // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
-  const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
+  // Load your wallet keypair (same wallet used for launch)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
   const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // ローンチスクリプトで表示されたアドレスを入力
+  // Fill in the addresses printed by your launch script
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
@@ -310,7 +311,7 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('状態をクランク中...');
+  console.log('Cranking state...');
 
   await triggerBehaviorsV2(umi, {
     genesisAccount,
@@ -323,13 +324,13 @@ async function main() {
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ クランク完了！SOLがアンロックバケットに移動しました。');
+  console.log('✓ Crank complete! SOL moved to unlocked bucket.');
 }
 
 main().catch(console.error);
 ```
 
-預入期間終了後に実行：
+入金期間の終了後に実行します：
 
 ```bash
 npx ts-node crank.ts
@@ -337,13 +338,13 @@ npx ts-node crank.ts
 
 ### ユーザーがトークンを請求
 
-クランク後、ユーザーはトークンを請求できます。各ユーザーは総預入額に対する自分のシェアに比例してトークンを受け取ります：
+crank の後、ユーザーはトークンを請求できます。各ユーザーは、総預入額に対するシェアに比例してトークンを受け取ります：
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ```
 
-ユーザーはフロントエンドまたはこのスクリプトを使用して請求できます（`claim.ts`を作成）：
+ユーザーはフロントエンド経由、またはこのスクリプト（`claim.ts` を作成）で請求できます：
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -358,18 +359,18 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // ユーザーのウォレットキーペアを読み込み（SOLを預け入れた人）
-  const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
+  // Load the user's wallet keypair (whoever deposited SOL)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
   const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // ローンチからのアドレスを入力
+  // Fill in the addresses from the launch
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
 
-  console.log('トークンを請求中...');
+  console.log('Claiming tokens...');
 
   await claimLaunchPoolV2(umi, {
     genesisAccount,
@@ -378,7 +379,7 @@ async function main() {
     recipient: umi.identity.publicKey,
   }).sendAndConfirm(umi);
 
-  console.log('✓ トークン請求完了！');
+  console.log('✓ Tokens claimed!');
 }
 
 main().catch(console.error);
@@ -386,13 +387,13 @@ main().catch(console.error);
 
 ### 最終化: 権限を取り消し
 
-ローンチが完了したら、ミントとフリーズの権限を取り消します。これにより、追加のトークンを発行できないことをホルダーに示します。
+ローンチが完了したら、ミント権限とフリーズ権限を取り消します。これにより、追加のトークンが発行されることはないとホルダーに示せます。
 
 {% callout type="warning" %}
-**これは元に戻せません。** 一度取り消すと、追加のトークンを発行したりアカウントをフリーズしたりすることはできません。ローンチが完了したことが確実な場合のみ実行してください。
+**この操作は元に戻せません。** 一度取り消すと、追加のトークンのミントやアカウントのフリーズは二度とできません。ローンチが完了したと確信できる場合にのみ実行してください。
 {% /callout %}
 
-`revoke.ts`を作成：
+`revoke.ts` を作成します：
 
 ```typescript
 import { readFileSync } from 'fs';
@@ -408,17 +409,17 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // ウォレットキーペアを読み込み（ローンチで使用したのと同じウォレット）
-  const walletFile = '/path/to/your/keypair.json'; // <-- このパスを更新
+  // Load your wallet keypair (same wallet used for launch)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
   const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // ローンチからのアドレスを入力
+  // Fill in these addresses from the launch
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('ミントとフリーズ権限を取り消し中...');
+  console.log('Revoking mint and freeze authorities...');
   await revokeV2(umi, {
     genesisAccount,
     baseMint,
@@ -428,7 +429,7 @@ async function main() {
     padding: Array(5).fill(0),
   }).sendAndConfirm(umi);
 
-  console.log('\n✓ ローンチ完了！トークンは完全に分散化されました。');
+  console.log('\n✓ Launch complete! Token is fully decentralized.');
 }
 
 main().catch(console.error);
@@ -439,4 +440,4 @@ main().catch(console.error);
 - [Genesis 概要](/ja/smart-contracts/genesis) - Solana トークンローンチパッドについて詳しく学ぶ
 - [Launch Pool](/ja/smart-contracts/genesis/launch-pool) - フェアローンチの詳細ドキュメント
 - [プレセール](/ja/smart-contracts/genesis/presale) - 固定価格でのトークンプレセールを実行
-- [Metaplex API](/ja/api) - API でトークンセールデータをクエリ
+- [Metaplex API](/ja/api) - API でローンチおよびトークンセールのデータを照会
