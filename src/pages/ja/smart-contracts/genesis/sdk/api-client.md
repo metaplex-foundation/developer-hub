@@ -3,7 +3,7 @@ title: API クライアント
 metaTitle: API クライアント | Genesis SDK | Metaplex
 description: Genesis API クライアントを使用して、Solana 上でトークンローンチの作成と登録を行います。シンプルからフルコントロールまで3つの統合モードを提供します。
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
@@ -148,30 +148,40 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `raiseGoal` | `number` | 最低調達目標（整数単位、例：250 SOL）。最低 250 SOL または 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | Raydium LP に使用する調達資金の割合（ベーシスポイント、2000〜10000） |
 | `fundsRecipient` | `PublicKey \| string` | ロック解除された調達資金の受取先 |
+| `softCap` | `number?` | 調達するクォートトークンの任意の上限（整数単位）。これを超える入金は按分で返金されます。0 より大きい必要があります。上限なしの場合は省略 |
 
-### LockedAllocation（Streamflow ロックアップ）
+### ClaimScheduleAllocation（ベスティングロック）
 
-オプションのロック付きトークンスケジュールは `launch.lockedAllocations` で追加できます：
+`ClaimScheduleAllocation` は、トークン供給量の一部に対する Genesis ネイティブのベスティングロックを定義し、`launch.claimScheduleAllocations` で渡します。各アロケーションはオンチェーンの `ClaimScheduleBucketV2` になります。トークンはオプションのクリフを持つ線形カーブに沿って累積され、SDK は以下の人間が読みやすいスケジュールをオンチェーンの秒数とベーシスポイントの値に変換します。
 
-| フィールド | 型 | 説明 |
-|-------|------|-------------|
-| `name` | `string` | ストリーム名、最大64文字（例："Team"、"Advisors"） |
-| `recipient` | `PublicKey \| string` | ロックアップの受取先ウォレット |
-| `tokenAmount` | `number` | ロックスケジュールの総トークン数 |
-| `vestingStartTime` | `Date \| string` | ロック解除スケジュールの開始時刻 |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 全ロックアップ期間 |
-| `unlockSchedule` | `TimeUnit` | トークンがリリースされる頻度 |
-| `cliff` | `object?` | オプションのクリフ（`duration` と `unlockAmount` を含む） |
+| フィールド | 型 | 必須 | 説明 |
+|-------|------|----------|-------------|
+| `name` | `string` | はい | ロック名、最大64文字（例："Team"、"Advisors"） |
+| `recipient` | `PublicKey \| string` | はい | ベスティング済みトークンを請求できるウォレット |
+| `tokenAmount` | `number` | はい | ベスティングスケジュールの総トークン数 |
+| `vestingStartTime` | `Date \| string` | はい | 線形ベスティングカーブの累積開始時刻 |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | はい | 線形ベスティング期間の長さ |
+| `unlockSchedule` | `TimeUnit` | はい | トークンがアンロックされる頻度 |
+| `cliff` | `{ duration, unlockAmount? }` | いいえ | オプションのクリフ。`duration` は `vestingStartTime` からの期間、`unlockAmount` はトークン数、または比例配分を表す `'linear'`（デフォルト） |
+| `cancelable` | `boolean` | いいえ | ローンチ作成者がロックをキャンセルできます。デフォルトは `false` |
+| `cancelableByRecipient` | `boolean` | いいえ | 受取人がロックをキャンセルできます。デフォルトは `false` |
+| `transferable` | `boolean` | いいえ | ローンチ作成者がロックを移転できます。デフォルトは `false` |
+| `transferableByRecipient` | `boolean` | いいえ | 受取人がロックを移転できます。デフォルトは `false` |
+| `pausable` | `boolean` | いいえ | Genesis の権限者がベスティングを一時停止・再開できます。デフォルトは `false` |
 
-{% callout type="warning" %}
-`vestingStartTime` は**入金期間終了後**（つまり `depositStartTime` + 48時間以降）でなければなりません。入金ウィンドウが閉じる前に開始するロックスケジュールは API によって拒否されます。
+{% callout type="note" %}
+ローンチプールでは、`vestingStartTime` がそれより前でトークンがすでに累積していても、ローンチがグラデュエートするまでベスティング済みトークンを**請求**できません。解決後のクリフ分は 0 より大きくなければなりません。
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations は非推奨です" %}
+`launch.lockedAllocations`（旧 Streamflow ロックアップ）は非推奨です。SDK は引き続きこれを受け付け、各エントリをクレームスケジュールにマッピングするため、既存の連携はそのままコンパイルできます。新規の連携では `claimScheduleAllocations` を使用してください。移行時には、`cancelableBySender` を `cancelable` に、`transferableBySender` を `transferable` に名前変更してください。
 {% /callout %}
 
 **TimeUnit の値:** `'SECOND'`、`'MINUTE'`、`'HOUR'`、`'DAY'`、`'WEEK'`、`'TWO_WEEKS'`、`'MONTH'`、`'QUARTER'`、`'YEAR'`
 
-**ロック付きアロケーションの例：**
+**ベスティングロックの例：**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 

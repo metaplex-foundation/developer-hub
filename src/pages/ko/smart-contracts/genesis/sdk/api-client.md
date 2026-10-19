@@ -3,7 +3,7 @@ title: API 클라이언트
 metaTitle: API 클라이언트 | Genesis SDK | Metaplex
 description: Genesis API 클라이언트를 사용하여 Solana에서 토큰 런칭을 생성하고 등록하세요. 간단한 방식부터 완전한 제어까지 세 가지 통합 모드를 제공합니다.
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
@@ -148,30 +148,40 @@ SDK는 완전 자동부터 완전 수동까지, 런칭 생성을 위한 세 가�
 | `raiseGoal` | `number` | 최소 모금 목표 견적 토큰, 정수 단위 (예: 250 SOL). 최소 250 SOL 또는 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | Raydium LP에 사용할 모금 자금 비율, 베이시스 포인트 (2000–10000) |
 | `fundsRecipient` | `PublicKey \| string` | 잠금 해제된 모금 자금을 수령하는 지갑 |
+| `softCap` | `number?` | 모금할 견적 토큰의 선택적 상한, 정수 단위. 이를 초과하는 예치금은 비례하여 환불됩니다. 0보다 커야 하며, 상한이 없으면 생략 |
 
-### LockedAllocation (Streamflow 잠금)
+### ClaimScheduleAllocation (베스팅 잠금)
 
-`launch.lockedAllocations`를 통해 선택적으로 잠금 토큰 일정을 추가할 수 있습니다:
+`ClaimScheduleAllocation`은 토큰 공급량 일부에 대한 Genesis 네이티브 베스팅 잠금을 정의하며 `launch.claimScheduleAllocations`로 전달합니다. 각 할당은 온체인 `ClaimScheduleBucketV2`가 됩니다. 토큰은 선택적 클리프가 있는 선형 곡선을 따라 누적되며, SDK는 아래의 사람이 읽기 쉬운 일정을 온체인 초 단위 및 베이시스 포인트 값으로 변환합니다.
 
-| 필드 | 타입 | 설명 |
-|------|------|------|
-| `name` | `string` | 스트림 이름, 최대 64자 (예: "Team", "Advisors") |
-| `recipient` | `PublicKey \| string` | 잠금 수령 지갑 |
-| `tokenAmount` | `number` | 잠금 일정의 총 토큰 수량 |
-| `vestingStartTime` | `Date \| string` | 잠금 해제 일정 시작 시점 |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 전체 잠금 기간 |
-| `unlockSchedule` | `TimeUnit` | 토큰이 해제되는 빈도 |
-| `cliff` | `object?` | `duration`과 `unlockAmount`가 포함된 선택적 클리프 |
+| 필드 | 타입 | 필수 | 설명 |
+|-------|------|----------|-------------|
+| `name` | `string` | 예 | 잠금 이름, 최대 64자 (예: "Team", "Advisors") |
+| `recipient` | `PublicKey \| string` | 예 | 베스팅된 토큰을 청구할 수 있는 지갑 |
+| `tokenAmount` | `number` | 예 | 베스팅 일정의 총 토큰 수량 |
+| `vestingStartTime` | `Date \| string` | 예 | 선형 베스팅 곡선이 누적되기 시작하는 시점 |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 예 | 선형 베스팅 기간의 길이 |
+| `unlockSchedule` | `TimeUnit` | 예 | 토큰이 잠금 해제되는 빈도 |
+| `cliff` | `{ duration, unlockAmount? }` | 아니요 | 선택적 클리프. `duration`은 `vestingStartTime`부터 측정하며, `unlockAmount`는 토큰 수량 또는 비례 몫을 뜻하는 `'linear'`(기본값) |
+| `cancelable` | `boolean` | 아니요 | 런치 생성자가 잠금을 취소할 수 있습니다. 기본값 `false` |
+| `cancelableByRecipient` | `boolean` | 아니요 | 수령인이 잠금을 취소할 수 있습니다. 기본값 `false` |
+| `transferable` | `boolean` | 아니요 | 런치 생성자가 잠금을 이전할 수 있습니다. 기본값 `false` |
+| `transferableByRecipient` | `boolean` | 아니요 | 수령인이 잠금을 이전할 수 있습니다. 기본값 `false` |
+| `pausable` | `boolean` | 아니요 | Genesis 권한자가 베스팅을 일시 중지하고 재개할 수 있습니다. 기본값 `false` |
 
-{% callout type="warning" %}
-`vestingStartTime`은 **예치 기간이 종료된 후** (즉, `depositStartTime` + 48시간 이후)여야 합니다. API는 예치 기간이 종료되기 전에 시작하는 잠금 일정을 거부합니다.
+{% callout type="note" %}
+런치 풀에서는 `vestingStartTime`이 더 이른 시점이고 토큰이 이미 누적되었더라도, 런치가 졸업(graduate)하기 전까지는 베스팅된 토큰을 **청구**할 수 없습니다. 확정된 클리프 몫은 0보다 커야 합니다.
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations는 더 이상 사용되지 않습니다" %}
+`launch.lockedAllocations`(이전 Streamflow 잠금)는 더 이상 사용되지 않습니다(deprecated). SDK는 여전히 이를 허용하고 각 항목을 클레임 스케줄에 매핑하므로 기존 통합은 계속 컴파일됩니다. 새 통합에는 `claimScheduleAllocations`를 사용하세요. 마이그레이션할 때 `cancelableBySender`는 `cancelable`로, `transferableBySender`는 `transferable`로 이름을 바꾸세요.
 {% /callout %}
 
 **TimeUnit 값:** `'SECOND'`, `'MINUTE'`, `'HOUR'`, `'DAY'`, `'WEEK'`, `'TWO_WEEKS'`, `'MONTH'`, `'QUARTER'`, `'YEAR'`
 
-**잠금 할당이 포함된 예시:**
+**베스팅 잠금 예시:**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 

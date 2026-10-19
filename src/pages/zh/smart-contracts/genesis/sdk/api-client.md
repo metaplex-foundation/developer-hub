@@ -3,7 +3,7 @@ title: API 客户端
 metaTitle: API 客户端 | Genesis SDK | Metaplex
 description: 使用 Genesis API 客户端在 Solana 上创建和注册代币发行。提供从简单到完全控制的三种集成模式。
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
@@ -148,30 +148,40 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `raiseGoal` | `number` | 最低募集报价代币数量，以整数单位表示（例如 250 SOL）。最低 250 SOL 或 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | 用于 Raydium LP 的募集资金百分比，以基点表示（2000–10000） |
 | `fundsRecipient` | `PublicKey \| string` | 接收解锁部分募集资金的地址 |
+| `softCap` | `number?` | 募集报价代币的可选上限，以整数单位表示。超出上限的存款将按比例退还。必须大于 0；省略则表示无上限 |
 
-### LockedAllocation（Streamflow 锁仓）
+### ClaimScheduleAllocation（归属锁仓）
 
-可通过 `launch.lockedAllocations` 添加可选的锁仓代币计划：
+`ClaimScheduleAllocation` 为部分代币供应量定义 Genesis 原生的归属（vesting）锁仓，通过 `launch.claimScheduleAllocations` 传入。每个分配都会成为链上的 `ClaimScheduleBucketV2`：代币沿带有可选悬崖期的线性曲线累积，SDK 会将下面易读的计划转换为链上的秒数和基点值。
 
-| 字段 | 类型 | 描述 |
-|-------|------|-------------|
-| `name` | `string` | 流名称，最多 64 个字符（例如 "Team"、"Advisors"） |
-| `recipient` | `PublicKey \| string` | 锁仓接收方钱包 |
-| `tokenAmount` | `number` | 锁仓计划中的代币总量 |
-| `vestingStartTime` | `Date \| string` | 解锁计划开始时间 |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 完整锁仓周期 |
-| `unlockSchedule` | `TimeUnit` | 代币释放频率 |
-| `cliff` | `object?` | 可选悬崖期，包含 `duration` 和 `unlockAmount` |
+| 字段 | 类型 | 必填 | 描述 |
+|-------|------|----------|-------------|
+| `name` | `string` | 是 | 锁仓名称，最多 64 个字符（例如 "Team"、"Advisors"） |
+| `recipient` | `PublicKey \| string` | 是 | 可领取已归属代币的钱包 |
+| `tokenAmount` | `number` | 是 | 归属计划中的代币总量 |
+| `vestingStartTime` | `Date \| string` | 是 | 线性归属曲线开始累积的时间 |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 是 | 线性归属周期的长度 |
+| `unlockSchedule` | `TimeUnit` | 是 | 代币解锁的频率 |
+| `cliff` | `{ duration, unlockAmount? }` | 否 | 可选悬崖期。`duration` 从 `vestingStartTime` 起算；`unlockAmount` 为代币数量，或表示按比例份额的 `'linear'`（默认值） |
+| `cancelable` | `boolean` | 否 | 发行创建者可以取消该锁仓。默认 `false` |
+| `cancelableByRecipient` | `boolean` | 否 | 接收方可以取消该锁仓。默认 `false` |
+| `transferable` | `boolean` | 否 | 发行创建者可以转让该锁仓。默认 `false` |
+| `transferableByRecipient` | `boolean` | 否 | 接收方可以转让该锁仓。默认 `false` |
+| `pausable` | `boolean` | 否 | Genesis 权限方可以暂停和恢复归属。默认 `false` |
 
-{% callout type="warning" %}
-`vestingStartTime` 必须在**存款期结束之后**（即 `depositStartTime` + 48 小时之后）。API 将拒绝在存款窗口关闭之前开始的锁仓计划。
+{% callout type="note" %}
+对于 Launch Pool，即使 `vestingStartTime` 更早且代币已经累积，在发行完成毕业（graduate）之前也无法**领取**已归属的代币。解析后的悬崖期份额必须大于零。
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations 已弃用" %}
+`launch.lockedAllocations`（原 Streamflow 锁仓）已弃用。SDK 仍然接受它，并将每个条目映射为领取计划（claim schedule），因此现有集成仍可正常编译。新的集成应使用 `claimScheduleAllocations`。迁移时，请将 `cancelableBySender` 重命名为 `cancelable`，将 `transferableBySender` 重命名为 `transferable`。
 {% /callout %}
 
 **TimeUnit 值：** `'SECOND'`、`'MINUTE'`、`'HOUR'`、`'DAY'`、`'WEEK'`、`'TWO_WEEKS'`、`'MONTH'`、`'QUARTER'`、`'YEAR'`
 
-**带锁仓分配的示例：**
+**归属锁仓示例：**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 

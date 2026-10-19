@@ -396,6 +396,7 @@ import {
   genesis,
   revokeV2,
 } from '@metaplex-foundation/genesis';
+import { SPL_TOKEN_PROGRAM_ID } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
@@ -416,8 +417,10 @@ async function main() {
   await revokeV2(umi, {
     genesisAccount,
     baseMint,
+    baseTokenProgram: SPL_TOKEN_PROGRAM_ID,
     revokeMintAuthority: true,
     revokeFreezeAuthority: true,
+    padding: Array(5).fill(0),
   }).sendAndConfirm(umi);
 
   console.log('\n✓ 출시 완료! 토큰이 완전히 탈중앙화되었습니다.');

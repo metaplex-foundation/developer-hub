@@ -400,6 +400,7 @@ import {
   genesis,
   revokeV2,
 } from '@metaplex-foundation/genesis';
+import { SPL_TOKEN_PROGRAM_ID } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
@@ -420,8 +421,10 @@ async function main() {
   await revokeV2(umi, {
     genesisAccount,
     baseMint,
+    baseTokenProgram: SPL_TOKEN_PROGRAM_ID,
     revokeMintAuthority: true,
     revokeFreezeAuthority: true,
+    padding: Array(5).fill(0),
   }).sendAndConfirm(umi);
 
   console.log('\n✓ ローンチ完了！トークンは完全に分散化されました。');
