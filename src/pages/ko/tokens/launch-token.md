@@ -1,41 +1,42 @@
 ---
-title: Solana에서 토큰 런칭하기
-metaTitle: 솔라나 토큰 런치패드 | 토큰 세일 & 공정한 출시 토큰 런치패드 | Metaplex
-description: Genesis로 솔라나에서 SPL 토큰을 출시하세요 — 공정한 출시, 프리세일, 크라우드세일, 토큰 생성 이벤트(TGE)를 위한 토큰 런치패드. 온체인 토큰 배포를 위한 단계별 TypeScript 가이드.
+title: Solana에서 토큰 런치하기
+metaTitle: Solana에서 토큰 런치하기 — Genesis 공정 런치 가이드 | Metaplex
+description: Genesis Launch Pool을 사용해 Solana에서 SPL 토큰을 런치하는 TypeScript 단계별 가이드. 투명한 가격 발견을 통한 공정한 온체인 토큰 배포.
+cli: /dev-tools/cli/genesis/launch
 ---
 
-[Genesis](/ko/smart-contracts/genesis)를 사용하여 솔라나에서 SPL 토큰을 출시하세요 — 온체인 토큰 런치패드이자 공정한 출시 플랫폼입니다. 토큰 세일, 크라우드세일을 실행하려는 경우, Genesis Launch Pool은 온체인에서 투명하게 토큰 배포를 처리합니다. 사용자는 설정한 기간 동안 SOL을 예치하고, 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다. {% .lead %}
+[Genesis](/ko/smart-contracts/genesis) Launch Pool을 사용해 Solana에서 SPL 토큰을 런치합니다. 이 가이드에서는 사용자가 일정 기간 동안 SOL을 예치하고 총 예치금에서 차지하는 비율에 비례해 토큰을 받는 공정 런치를 처음부터 끝까지 안내합니다. 모든 과정은 온체인에서 투명하게 처리됩니다. {% .lead %}
 
 {% callout type="note" title="노코드 옵션" %}
-코드를 작성하고 싶지 않으신가요? [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하여 코딩 없이 토큰을 출시하세요. 이 가이드는 Genesis SDK를 사용하여 자체 토큰 출시 경험을 구축하거나 자체 웹사이트에서 토큰 세일을 호스팅하려는 개발자를 위한 것입니다.
+코드를 작성하고 싶지 않으신가요? [Metaplex 토큰 런치패드](https://www.metaplex.com)를 사용하면 코딩 없이 토큰을 런치할 수 있습니다. 이 가이드는 자체 토큰 런치 경험을 구축하거나 Genesis SDK로 자신의 웹사이트에서 토큰 세일을 진행하려는 개발자를 위한 것입니다.
 {% /callout %}
 
-{% callout type="note" title="다른 출시 방법" %}
-이 가이드는 **Launch Pool** 방식을 다루지만, Genesis는 고정 가격으로 토큰을 판매하는 **[프리세일](/ko/smart-contracts/genesis/presale)** 출시도 지원합니다. [Genesis 개요](/ko/smart-contracts/genesis)에서 각 방식을 비교하고 프로젝트에 가장 적합한 방법을 선택하세요.
+{% callout type="note" title="다른 런치 방식" %}
+이 가이드는 **Launch Pool** 공정 런치 방식을 다루지만, Genesis는 고정 가격으로 토큰을 판매하는 **[프리세일](/ko/smart-contracts/genesis/presale)** 토큰 세일도 지원합니다. [Genesis 개요](/ko/smart-contracts/genesis)에서 방식을 비교하고 프로젝트에 가장 적합한 방법을 선택하세요.
 {% /callout %}
 
 ## 개요
 
-Genesis는 공정한 온체인 토큰 출시 메커니즘을 제공하는 솔라나 토큰 런치패드입니다. 고정 가격으로 토큰을 판매하는 기존 중앙화된 토큰 세일 플랫폼과 달리, Launch Pool은 시장이 토큰 배분을 결정합니다 — 모든 참가자가 예치금에 비례하여 토큰을 받아 공정하고 투명한 토큰 생성 이벤트(TGE)를 보장합니다. 모든 SPL 토큰 생성, 자금 조달, 배포가 중개자 없이 온체인에서 이루어집니다.
+Genesis는 공정한 온체인 토큰 런치 메커니즘을 제공하는 Solana 토큰 런치패드입니다. 고정 가격으로 토큰을 판매하는 중앙화된 토큰 세일 플랫폼과 달리, Launch Pool은 시장이 토큰 배포를 결정합니다. 모든 참여자가 예치금에 비례해 토큰을 받으므로 공정하고 투명한 토큰 생성 이벤트(TGE)가 보장됩니다. SPL 토큰 생성, 자금 모금, 배포는 모두 중개자 없이 온체인에서 이루어집니다.
 
-Launch Pool 토큰 출시에는 세 가지 단계가 있습니다:
+Launch Pool 토큰 런치는 세 단계로 이루어집니다:
 
-1. **설정** (한 번 실행) - 토큰을 생성하고, 출시를 구성하고, 활성화합니다
-2. **예치 기간** (사용자 참여) - 설정한 기간 동안 사용자가 SOL을 예치합니다
-3. **출시 후** (당신 + 사용자) - 상태 머신 크랭크 실행, 사용자가 토큰을 청구하고, 권한을 철회합니다
+1. **설정** (한 번만 실행) - 토큰 생성, 런치 구성, 활성화
+2. **예치 기간** (사용자 참여) - 설정한 기간 동안 사용자가 SOL을 예치
+3. **런치 이후** (사용자와 함께) - 상태 머신 진행(crank), 사용자의 토큰 청구, 권한 취소
 
-이 가이드에서는 서로 다른 단계에서 실행할 **4개의 별도 스크립트**를 만드는 방법을 안내합니다:
+이 가이드에서는 단계별로 실행할 **네 개의 별도 스크립트**를 작성합니다:
 
 | 스크립트 | 실행 시점 | 목적 |
 |--------|-------------|---------|
-| `launch.ts` | 한 번, 시작 시 | 토큰을 생성하고 출시를 활성화 |
-| `crank.ts` | 예치 종료 후 | 종료 동작을 트리거하여 SOL을 잠금 해제 버킷으로 이동 |
-| `claim.ts` | 크랭크 후 | 사용자가 토큰을 청구하기 위해 실행 |
-| `revoke.ts` | 출시 완료 시 | 민트/동결 권한을 영구적으로 제거 |
+| `launch.ts` | 시작 시 한 번 | 토큰을 생성하고 런치를 활성화합니다 |
+| `crank.ts` | 예치 종료 후 | 조건과 동작을 트리거하여 SOL을 잠금 해제 버킷으로 이동합니다 |
+| `claim.ts` | crank 이후 | 사용자가 토큰을 청구하기 위해 실행합니다 |
+| `revoke.ts` | 런치 완료 시 | 민트/프리즈 권한을 영구적으로 제거합니다 |
 
 ## 사전 요구 사항
 
-새 프로젝트를 만들고 종속성을 설치합니다:
+새 프로젝트를 만들고 의존성을 설치합니다:
 
 ```bash
 mkdir my-token-launch
@@ -44,17 +45,18 @@ npm init -y
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
-## 전체 출시 스크립트
+## 전체 런치 스크립트
 
-아래는 완전하고 실행 가능한 스크립트입니다. 각 섹션에는 설명하는 주석이 있습니다. 이 스크립트를 **한 번** 실행하여 출시를 설정합니다.
+아래는 바로 실행할 수 있는 전체 스크립트입니다. 각 섹션에는 동작을 설명하는 주석이 달려 있습니다. 이 스크립트는 런치를 설정하기 위해 **한 번만** 실행합니다.
 
 {% callout type="warning" title="키페어 필요" %}
-트랜잭션에 서명하려면 머신에 Solana 키페어 파일이 필요합니다. 이것은 일반적으로 `~/.config/solana/id.json`에 있는 Solana CLI 지갑입니다. 스크립트의 `walletFile` 경로를 키페어 파일을 가리키도록 업데이트하세요. 이 지갑에 트랜잭션 수수료를 위한 SOL이 있는지 확인하세요.
+트랜잭션에 서명하려면 컴퓨터에 Solana 키페어 파일이 필요합니다. 일반적으로 `~/.config/solana/id.json`에 있는 Solana CLI 지갑입니다. 스크립트의 `walletFile` 경로를 키페어 파일 경로로 수정하세요. 이 지갑에 트랜잭션 수수료를 낼 SOL이 있는지 확인하세요.
 {% /callout %}
 
 `launch.ts`라는 파일을 만듭니다:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -70,35 +72,35 @@ import { generateSigner, publicKey, keypairIdentity } from '@metaplex-foundation
 
 async function main() {
   // ============================================
-  // 설정: 연결 및 지갑 구성
+  // SETUP: Configure your connection and wallet
   // ============================================
 
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // 머신의 파일에서 지갑 키페어 로드
-  // 이것은 일반적으로 ~/.config/solana/id.json에 있는 Solana CLI 지갑입니다
-  // 또는 액세스할 수 있는 모든 키페어 파일 사용
-  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  // Load your wallet keypair from a file on your machine
+  // This is typically your Solana CLI wallet at ~/.config/solana/id.json
+  // Or use any keypair file you have access to
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
   // ============================================
-  // 구성: 이 값들을 커스터마이즈
+  // CONFIGURATION: Customize these values
   // ============================================
 
-  // 토큰 세부 정보
+  // Token details
   const TOKEN_NAME = 'My Token';
   const TOKEN_SYMBOL = 'MTK';
-  const TOKEN_URI = 'https://example.com/metadata.json'; // 메타데이터 JSON URL
-  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1조 토큰 (필요에 따라 조정)
+  const TOKEN_URI = 'https://example.com/metadata.json'; // Your metadata JSON URL
+  const TOTAL_SUPPLY = 1_000_000_000_000n; // 1 trillion tokens (adjust as needed)
 
-  // 타이밍 (현재부터 초 단위)
-  const DEPOSIT_DURATION = 24 * 60 * 60; // 24시간
-  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7일
+  // Timing (in seconds from now)
+  const DEPOSIT_DURATION = 24 * 60 * 60; // 24 hours
+  const CLAIM_DURATION = 7 * 24 * 60 * 60; // 7 days
 
-  // 타임스탬프 계산
+  // Calculate timestamps
   const now = BigInt(Math.floor(Date.now() / 1000));
   const depositStart = now;
   const depositEnd = now + BigInt(DEPOSIT_DURATION);
@@ -106,9 +108,9 @@ async function main() {
   const claimEnd = claimStart + BigInt(CLAIM_DURATION);
 
   // ============================================
-  // 1단계: 토큰 생성
+  // STEP 1: Create your token
   // ============================================
-  console.log('1단계: 토큰 생성 중...');
+  console.log('Step 1: Creating token...');
 
   const baseMint = generateSigner(umi);
 
@@ -126,15 +128,15 @@ async function main() {
     symbol: TOKEN_SYMBOL,
   }).sendAndConfirm(umi);
 
-  console.log('✓ 토큰 생성 완료!');
-  console.log('  토큰 민트:', baseMint.publicKey);
-  console.log('  Genesis 계정:', genesisAccount);
+  console.log('✓ Token created!');
+  console.log('  Token mint:', baseMint.publicKey);
+  console.log('  Genesis account:', genesisAccount);
 
   // ============================================
-  // 2단계: Launch Pool 버킷 추가
-  // 사용자가 SOL을 예치하는 곳
+  // STEP 2: Add Launch Pool bucket
+  // This is where users will deposit SOL
   // ============================================
-  console.log('\n2단계: Launch Pool 버킷 추가 중...');
+  console.log('\nStep 2: Adding Launch Pool bucket...');
 
   const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, {
     genesisAccount,
@@ -175,25 +177,26 @@ async function main() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
         padding: Array(4).fill(0),
         destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000, // 수집된 SOL의 100%가 잠금 해제 버킷으로
+        percentageBps: 10000, // 100% of collected SOL goes to unlocked bucket
         processed: false,
       },
     ],
   }).sendAndConfirm(umi);
 
-  console.log('✓ Launch Pool 버킷 추가 완료!');
-  console.log('  버킷 주소:', launchPoolBucket);
+  console.log('✓ Launch Pool bucket added!');
+  console.log('  Bucket address:', launchPoolBucket);
 
   // ============================================
-  // 3단계: 잠금 해제 버킷 추가
-  // 수집된 SOL이 팀에게 전송되는 곳
+  // STEP 3: Add Unlocked bucket
+  // This receives the collected SOL for your team
   // ============================================
-  console.log('\n3단계: 잠금 해제 버킷 추가 중...');
+  console.log('\nStep 3: Adding Unlocked bucket...');
 
   await addUnlockedBucketV2(umi, {
     genesisAccount,
@@ -215,44 +218,44 @@ async function main() {
     backendSigner: null,
   }).sendAndConfirm(umi);
 
-  console.log('✓ 잠금 해제 버킷 추가 완료!');
-  console.log('  버킷 주소:', unlockedBucket);
+  console.log('✓ Unlocked bucket added!');
+  console.log('  Bucket address:', unlockedBucket);
 
   // ============================================
-  // 4단계: 마무리 - 출시 활성화
-  // 이후에는 더 이상 변경할 수 없음
+  // STEP 4: Finalize - activates the launch
+  // After this, no more changes can be made
   // ============================================
-  console.log('\n4단계: 마무리 중...');
+  console.log('\nStep 4: Finalizing...');
 
   await finalizeV2(umi, {
     baseMint: baseMint.publicKey,
     genesisAccount,
   }).sendAndConfirm(umi);
 
-  console.log('✓ 출시가 활성화되었습니다!');
+  console.log('✓ Launch is now ACTIVE!');
 
   // ============================================
-  // 요약: 이 주소들을 저장하세요!
+  // SUMMARY: Save these addresses!
   // ============================================
   console.log('\n========================================');
-  console.log('출시 완료 - 이 주소들을 저장하세요:');
+  console.log('LAUNCH COMPLETE - SAVE THESE ADDRESSES:');
   console.log('========================================');
-  console.log('토큰 민트:', baseMint.publicKey);
-  console.log('Genesis 계정:', genesisAccount);
-  console.log('Launch Pool 버킷:', launchPoolBucket);
-  console.log('잠금 해제 버킷:', unlockedBucket);
+  console.log('Token mint:', baseMint.publicKey);
+  console.log('Genesis account:', genesisAccount);
+  console.log('Launch Pool bucket:', launchPoolBucket);
+  console.log('Unlocked bucket:', unlockedBucket);
   console.log('');
-  console.log('타이밍:');
-  console.log('예치 시작:', new Date(Number(depositStart) * 1000).toISOString());
-  console.log('예치 종료:', new Date(Number(depositEnd) * 1000).toISOString());
-  console.log('청구 시작:', new Date(Number(claimStart) * 1000).toISOString());
-  console.log('청구 종료:', new Date(Number(claimEnd) * 1000).toISOString());
+  console.log('TIMING:');
+  console.log('Deposits open:', new Date(Number(depositStart) * 1000).toISOString());
+  console.log('Deposits close:', new Date(Number(depositEnd) * 1000).toISOString());
+  console.log('Claims open:', new Date(Number(claimStart) * 1000).toISOString());
+  console.log('Claims close:', new Date(Number(claimEnd) * 1000).toISOString());
 }
 
 main().catch(console.error);
 ```
 
-스크립트 실행:
+스크립트를 실행합니다:
 
 ```bash
 npx ts-node launch.ts
@@ -262,20 +265,21 @@ npx ts-node launch.ts
 
 ## 다음에 일어나는 일
 
-출시 스크립트를 실행하면 출시가 라이브됩니다. 각 단계에서 일어나는 일은 다음과 같습니다:
+런치 스크립트를 실행하면 런치가 시작됩니다. 각 단계에서 일어나는 일은 다음과 같습니다:
 
-### 예치 기간 동안
+### 예치 기간 중
 
-사용자는 프론트엔드 또는 SDK를 직접 사용하여 SOL을 예치합니다. 각 예치:
-- 2% 수수료가 적용됩니다
+사용자는 프런트엔드 또는 SDK를 직접 사용해 SOL을 예치합니다. 각 예치는 다음과 같습니다:
+- 수수료가 적용됩니다
 - 예치 PDA에서 추적됩니다
-- 부분적으로 또는 전체적으로 출금 가능 (2% 수수료 포함)
+- 일부 또는 전체를 인출할 수 있습니다(수수료 있음)
 
 ### 예치 종료 후
 
-예치 기간이 끝나면 `triggerBehaviorsV2`를 실행하여 버킷에 설정된 종료 동작(이 경우 수집된 SOL을 잠금 해제 버킷으로 이동)을 처리합니다. `crank.ts`라는 파일을 만듭니다:
+예치 기간이 끝나면 `triggerBehaviorsV2`를 실행해 버킷에 구성된 종료 동작(이 경우 모인 SOL을 잠금 해제 버킷으로 이동)을 실행합니다. `crank.ts`라는 파일을 만듭니다:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -290,13 +294,13 @@ async function main() {
     .use(mplToolbox())
     .use(genesis());
 
-  // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
-  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  // Load your wallet keypair (same wallet used for launch)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // 출시 스크립트에서 출력된 주소를 입력
+  // Fill in the addresses printed by your launch script
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
@@ -307,7 +311,7 @@ async function main() {
     mint: WRAPPED_SOL_MINT,
   });
 
-  console.log('상태 크랭킹 중...');
+  console.log('Cranking state...');
 
   await triggerBehaviorsV2(umi, {
     genesisAccount,
@@ -320,29 +324,30 @@ async function main() {
     ])
     .sendAndConfirm(umi);
 
-  console.log('✓ 크랭크 완료! SOL이 잠금 해제 버킷으로 이동했습니다.');
+  console.log('✓ Crank complete! SOL moved to unlocked bucket.');
 }
 
 main().catch(console.error);
 ```
 
-예치 기간 종료 후 실행:
+예치 기간이 끝난 후 실행합니다:
 
 ```bash
 npx ts-node crank.ts
 ```
 
-### 사용자가 토큰 청구
+### 사용자 토큰 청구
 
-크랭크 후 사용자는 토큰을 청구할 수 있습니다. 각 사용자는 총 예치금에서 자신의 지분 비율에 따라 토큰을 받습니다:
+crank 이후 사용자는 토큰을 청구할 수 있습니다. 각 사용자는 총 예치금에서 차지하는 비율에 비례해 토큰을 받습니다:
 
 ```
 userTokens = (userDeposit / totalDeposits) * totalTokenSupply
 ```
 
-사용자는 프론트엔드 또는 이 스크립트를 사용하여 청구할 수 있습니다 (`claim.ts` 생성):
+사용자는 프런트엔드를 통해 또는 이 스크립트(`claim.ts` 생성)로 청구할 수 있습니다:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
@@ -354,18 +359,18 @@ async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // 사용자의 지갑 키페어 로드 (SOL을 예치한 사람)
-  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  // Load the user's wallet keypair (whoever deposited SOL)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // 출시에서 가져온 주소 입력
+  // Fill in the addresses from the launch
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
   const launchPoolBucket = publicKey('YOUR_LAUNCH_POOL_BUCKET');
 
-  console.log('토큰 청구 중...');
+  console.log('Claiming tokens...');
 
   await claimLaunchPoolV2(umi, {
     genesisAccount,
@@ -374,53 +379,57 @@ async function main() {
     recipient: umi.identity.publicKey,
   }).sendAndConfirm(umi);
 
-  console.log('✓ 토큰 청구 완료!');
+  console.log('✓ Tokens claimed!');
 }
 
 main().catch(console.error);
 ```
 
-### 마무리: 권한 철회
+### 마무리: 권한 취소
 
-출시가 완료되면 민트 및 동결 권한을 철회합니다. 이는 보유자에게 추가 토큰을 발행할 수 없음을 알립니다.
+런치가 완료되면 민트 및 프리즈 권한을 취소합니다. 이는 추가 토큰이 발행되지 않는다는 신호를 홀더에게 줍니다.
 
 {% callout type="warning" %}
-**이것은 되돌릴 수 없습니다.** 한 번 철회하면 추가 토큰을 발행하거나 계정을 동결할 수 없습니다. 출시가 완료되었다고 확신할 때만 이 작업을 수행하세요.
+**이 작업은 되돌릴 수 없습니다.** 한 번 취소하면 추가 토큰을 발행하거나 계정을 동결할 수 없습니다. 런치가 완료되었다고 확신할 때만 실행하세요.
 {% /callout %}
 
-`revoke.ts` 생성:
+`revoke.ts`를 만듭니다:
 
 ```typescript
+import { readFileSync } from 'fs';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   genesis,
   revokeV2,
 } from '@metaplex-foundation/genesis';
+import { SPL_TOKEN_PROGRAM_ID } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey, keypairIdentity } from '@metaplex-foundation/umi';
 
 async function main() {
   const umi = createUmi('https://api.devnet.solana.com')
     .use(genesis());
 
-  // 지갑 키페어 로드 (출시에 사용한 것과 동일한 지갑)
-  const walletFile = '/path/to/your/keypair.json'; // <-- 이 경로 업데이트
-  const secretKey = JSON.parse(require('fs').readFileSync(walletFile, 'utf-8'));
+  // Load your wallet keypair (same wallet used for launch)
+  const walletFile = '/path/to/your/keypair.json'; // <-- UPDATE THIS PATH
+  const secretKey = JSON.parse(readFileSync(walletFile, 'utf-8'));
   const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secretKey));
   umi.use(keypairIdentity(keypair));
 
-  // 출시에서 가져온 주소 입력
+  // Fill in these addresses from the launch
   const genesisAccount = publicKey('YOUR_GENESIS_ACCOUNT');
   const baseMint = publicKey('YOUR_TOKEN_MINT');
 
-  console.log('민트 및 동결 권한 철회 중...');
+  console.log('Revoking mint and freeze authorities...');
   await revokeV2(umi, {
     genesisAccount,
     baseMint,
+    baseTokenProgram: SPL_TOKEN_PROGRAM_ID,
     revokeMintAuthority: true,
     revokeFreezeAuthority: true,
+    padding: Array(5).fill(0),
   }).sendAndConfirm(umi);
 
-  console.log('\n✓ 출시 완료! 토큰이 완전히 탈중앙화되었습니다.');
+  console.log('\n✓ Launch complete! Token is fully decentralized.');
 }
 
 main().catch(console.error);
@@ -428,7 +437,7 @@ main().catch(console.error);
 
 ## 다음 단계
 
-- [Genesis 개요](/ko/smart-contracts/genesis) - 솔라나 토큰 런치패드에 대해 더 알아보기
-- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 상세한 공정한 출시 문서
-- [프리세일](/ko/smart-contracts/genesis/presale) - 고정 가격으로 토큰 프리세일 실행
-- [Metaplex API](/ko/api) - API를 통해 출시 및 토큰 세일 데이터 쿼리
+- [Genesis 개요](/ko/smart-contracts/genesis) - Solana 토큰 런치패드에 대해 자세히 알아보기
+- [Launch Pool](/ko/smart-contracts/genesis/launch-pool) - 공정 런치 상세 문서
+- [프리세일](/ko/smart-contracts/genesis/presale) - 고정 가격으로 토큰 프리세일 진행
+- [Metaplex API](/ko/api) - API로 런치 및 토큰 세일 데이터 조회

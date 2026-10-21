@@ -23,7 +23,7 @@ const input: CreateLaunchInput = {
     name: 'My Token',
     symbol: 'MTK',
     image: 'https://gateway.irys.xyz/...',
-    description: 'A project token with locked allocations.',
+    description: 'A project token with vesting locks.',
     externalLinks: {
       website: 'https://example.com',
       twitter: '@mytoken',
@@ -38,7 +38,7 @@ const input: CreateLaunchInput = {
       raydiumLiquidityBps: 5000,
       fundsRecipient: 'FundsRecipientWallet...',
     },
-    lockedAllocations: [
+    claimScheduleAllocations: [
       {
         name: 'Team',
         recipient: 'TeamWallet...',
@@ -50,6 +50,8 @@ const input: CreateLaunchInput = {
           duration: { value: 3, unit: 'MONTH' },
           unlockAmount: 10_000_000,
         },
+        cancelable: false,
+        pausable: false,
       },
     ],
   },
