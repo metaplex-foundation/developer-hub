@@ -14,6 +14,14 @@ export const hydra = {
   github: 'https://github.com/metaplex-foundation/mpl-hydra',
   className: 'accent-amber',
   deprecated: true,
+  protocolFees: {
+    inflow: {
+      label: 'distribute (new inflows)',
+      solana: '0.5%',
+      notes:
+        'Taken from each new SOL or token inflow before it is shared among members. Applies to the existing balance when a token mint is added to a fanout.',
+    },
+  },
   sections: [
     {
       ...documentationSection('smart-contracts/hydra'),

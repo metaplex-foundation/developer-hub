@@ -58,6 +58,14 @@ Merkle 클레임이 성공할 때 클레임 트랜잭션 지불자가 냅니다.
 
 {% /totem-accordion %}
 
+{% totem-accordion title="Hydra" %}
+
+팬아웃 지갑으로 들어오는 모든 신규 유입액에서 일정 비율이 차감되고, 나머지가 멤버들에게 분배됩니다. 수수료는 Metaplex 수수료 권한자가 프로토콜 트레저리로 회수할 때까지 팬아웃의 보유 계정에 남아 있습니다.
+
+{% protocol-fees program="hydra" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1 (레거시)" %}
 
 오리지널 압축 NFT 프로그램.
