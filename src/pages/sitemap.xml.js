@@ -14,7 +14,10 @@ export async function getServerSideProps({ res }) {
 
   const json = JSON.parse(fs.readFileSync(directoryPath, 'utf8'))
 
-  const staticRoutes = json.dataRoutes.map((route) => {
+  // Component test pages and the 404 page are not real docs, so keep them out
+  const isIndexable = (page) => !/\/test-[^/]+$/.test(page) && !/\/404$/.test(page)
+
+  const staticRoutes = json.dataRoutes.filter((route) => isIndexable(route.page)).map((route) => {
     let url = route.page
     // Strip /en prefix from English routes since they redirect to root paths
     if (url === '/en' || url.startsWith('/en/')) {
