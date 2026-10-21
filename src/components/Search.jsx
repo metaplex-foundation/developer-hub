@@ -56,6 +56,7 @@ export function Search({iconOnly}) {
     <>
       <button
         type="button"
+        aria-label="Search docs"
         className={`flex ${iconOnly ? "": "p-2 max-w-4xl w-full justify-start items-center "}`}
         onClick={onOpen}
       >
