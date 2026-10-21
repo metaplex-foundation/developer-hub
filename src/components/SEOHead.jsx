@@ -568,6 +568,7 @@ export function SEOHead({
 }) {
   const router = useRouter()
   const { pathname } = router
+  const isTestPage = /\/test-[^/]+$/.test(pathname)
 
   // Use metaTitle if provided, otherwise use title
   const finalMetaTitle = metaTitle || title
@@ -633,6 +634,7 @@ export function SEOHead({
       {/* Primary Meta Tags */}
       <title>{finalMetaTitle}</title>
       {description && <meta name="description" content={description} />}
+      {isTestPage && <meta name="robots" content="noindex" />}
 
       {/* Canonical URL - points to current language version */}
       <link rel="canonical" href={canonicalUrl} />
