@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 런칭 생성 | REST API | Metaplex
 description: 새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. 서명 및 전송 준비가 된 미서명 트랜잭션을 반환합니다.
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-21-2026'
 keywords:
   - Genesis API
   - create launch
@@ -74,7 +74,7 @@ POST /v1/launches/create
 
 | `type` | 설명 |
 |--------|------|
-| `launchpool` | 비례 배분 풀. 할당: `launchpoolV2`와 임의 개수의 `unlockedV2` 및 `claimScheduleV2` |
+| `launchpool` | 비례 배분 풀. 할당(순서대로): `launchpoolV2`, `unlockedV2`, 이후 임의 개수의 `claimScheduleV2` |
 | `presale` | 고정가 사전 판매. 할당(순서대로): `presaleV2`, `unlockedV2`, 이후 임의 개수의 `claimScheduleV2` |
 | `bondingCurve` | 본딩 커브 런칭. 할당: `bondingCurveV2`. 공급량 1,000,000,000, 소수점 6자리, SOL 견적으로 고정 |
 
