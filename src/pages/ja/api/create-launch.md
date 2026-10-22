@@ -4,7 +4,7 @@ metaTitle: Metaplex API - ローンチ作成 | REST API | Metaplex
 description: 新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。署名・送信可能な未署名トランザクションを返します。
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-21-2026'
 keywords:
   - Genesis API
   - create launch
@@ -74,7 +74,7 @@ POST /v1/launches/create
 
 | `type` | 説明 |
 |--------|-------------|
-| `launchpool` | 比例配分プール。アロケーション：`launchpoolV2` と、任意の数の `unlockedV2` および `claimScheduleV2` |
+| `launchpool` | 比例配分プール。アロケーション（順序どおり）：`launchpoolV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2` |
 | `presale` | 固定価格プレセール。アロケーション（順序どおり）：`presaleV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2` |
 | `bondingCurve` | ボンディングカーブによるローンチ。アロケーション：`bondingCurveV2`。供給量 1,000,000,000、デシマル6、SOL クォートに固定されます |
 
