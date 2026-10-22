@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-21-2026'
 keywords:
   - Genesis API
   - create launch
@@ -28,6 +28,26 @@ Most integrators should use [`createAndRegisterLaunch`](/smart-contracts/genesis
 {% callout type="note" %}
 We recommend using the Create API to build launches programmatically, as [metaplex.com](https://www.metaplex.com) does not yet support the full feature set of the Genesis program. Mainnet launches created through the API will appear on metaplex.com once [registered](/api/register).
 {% /callout %}
+
+## Summary
+
+`POST /v1/launches/create` builds the unsigned transactions for a new Genesis token launch, which the creator signs and sends before calling [Register Launch](/api/register).
+
+- Supports the `launchpool`, `presale`, and `bondingCurve` launch types
+- A `launchpool` or `presale` takes its allocations in a fixed order: the sale, the `Unlocked Tokens` allocation, then at most 8 unlock schedules
+- A `launchpool` or `presale` that ends below its minimum raise returns its tokens to the `Unlocked Tokens` allocation's recipient
+- Most integrators call [`createAndRegisterLaunch`](/smart-contracts/genesis/sdk/api-client) from the SDK instead of this endpoint
+
+## Quick Reference
+
+| Item | Value |
+|------|-------|
+| **Method** | `POST` |
+| **Path** | `/v1/launches/create` |
+| **Launch types** | `launchpool`, `presale`, `bondingCurve` |
+| **Response** | Unsigned base64 transactions, `mintAddress`, `genesisAccount` |
+| **Next step** | [Register Launch](/api/register) |
+| **Contract** | [OpenAPI spec](https://api.metaplex.com/v1/openapi.yaml) |
 
 ## Endpoint
 
@@ -74,11 +94,36 @@ For a new token, the allocation supplies must add up to exactly `supply`. A new 
 
 | `type` | Description |
 |--------|-------------|
-| `launchpool` | Proportional distribution pool. Allocations: a `launchpoolV2`, plus any `unlockedV2` and `claimScheduleV2` allocations |
+| `launchpool` | Proportional distribution pool. Allocations, in order: a `launchpoolV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
 | `presale` | Fixed-price presale. Allocations, in order: a `presaleV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
 | `bondingCurve` | Bonding curve launch. Allocations: a `bondingCurveV2`. Fixed at 1,000,000,000 supply, 6 decimals, and a SOL quote |
 
 The schema also defines `auction` and `custom`. `auction` is a placeholder that is not implemented yet, and `custom` is rejected by the public API with `400`.
+
+### Launch Pool and Presale Allocation Order
+
+A `launchpool` or `presale` lists its allocations in this order, and any other order returns `400`:
+
+| Position | Allocation `type` | Rules |
+|----------|-------------------|-------|
+| 1 | `launchpoolV2` or `presaleV2` | The sale. `supply` is at least 1, and `minimumQuoteTokenThreshold` is required |
+| 2 | `unlockedV2` | The `Unlocked Tokens` allocation, claimed by `unlockedV2.recipient`. `name` must be `Unlocked Tokens`, the default when omitted, and `supply` may be 0 |
+| 3 and later | `claimScheduleV2` | Unlock schedules, at most 8 |
+
+The `Unlocked Tokens` allocation is required even when no supply remains for it, because a sale that fails returns its tokens there (see [Sales That End Below Their Minimum](#sales-that-end-below-their-minimum)). A second `unlockedV2` allocation returns `400`.
+
+{% callout type="note" title="At most 8 unlock schedules" %}
+When a sale fails, one transaction marks every unlock schedule failed, so a `launchpool` or `presale` takes at most 8 `claimScheduleV2` allocations. A launch with 9 returns `400` at `allocations` with: `A sale with a graduation minimum can fail at most 8 unlock schedules and other unlocked allocations with tokens, and this launch has 9. Remove some of them.`
+{% /callout %}
+
+### Sales That End Below Their Minimum
+
+A `launchpool` or `presale` that ends below its `minimumQuoteTokenThreshold` fails, and its tokens return to the `Unlocked Tokens` allocation:
+
+- Depositors claim refunds of their deposits.
+- No Raydium pool is created, and no unlock schedule releases tokens.
+- The sale's tokens, the tokens reserved for the Raydium pool, and the tokens of every unlock schedule move to the `Unlocked Tokens` allocation.
+- Metaplex claims the `Unlocked Tokens` allocation to its `recipient` when the sale ends.
 
 ### Allocation Types
 
@@ -185,6 +230,7 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
 | Code | Description |
 |------|-------------|
 | `400` | Invalid input or validation failure |
+| `403` | A feature that is not enabled for your account: custom supply, existing tokens, or CLMM |
 | `500` | Internal server error |
 
 ## Recommended: Use the SDK
@@ -194,3 +240,9 @@ Instead of calling this endpoint directly, use [`createAndRegisterLaunch`](/smar
 {% code-tabs-imported from="genesis/api_easy_mode" frameworks="umi" filename="createAndRegisterLaunch" /%}
 
 See [API Client](/smart-contracts/genesis/sdk/api-client) for the full SDK documentation including all three integration modes.
+
+## Notes
+
+- The [OpenAPI spec](https://api.metaplex.com/v1/openapi.yaml) is the machine-readable contract for this endpoint.
+- Use `@metaplex-foundation/genesis` 0.41.1 or later. Earlier versions send allocation names that return `400`. Through 0.43.5, a `launchpool` payload built with unlock schedules, or with no supply left for `Unlocked Tokens`, also returns `400`.
+- Launches created before October 22, 2026 keep the earlier failure behavior: the tokens of their Raydium pool and unlock schedules are not returned to `Unlocked Tokens`.
