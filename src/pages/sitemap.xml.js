@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { SUPPORTED_LANGUAGES } from '@/config/languages'
 
 // Turns out Vercel builds the site into a different directory and file structure than running `next build` locally
 // So we need to read the routes-manifest.json file from a different location than the .next directory that is locally
@@ -15,6 +16,9 @@ export async function getServerSideProps({ res }) {
   const json = JSON.parse(fs.readFileSync(directoryPath, 'utf8'))
 
   const staticRoutes = json.dataRoutes
+    .filter(({ page }) =>
+      SUPPORTED_LANGUAGES.some((lang) => page === `/${lang}` || page.startsWith(`/${lang}/`))
+    )
     .map((route) => {
       let url = route.page
       // Strip /en prefix from English routes since they redirect to root paths
@@ -23,7 +27,6 @@ export async function getServerSideProps({ res }) {
       }
       return url
     })
-    .filter((url) => !['/404', '/500', '/_error', '/sitemap.xml'].includes(url))
 
   // Generate the sitemap XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
