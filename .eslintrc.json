@@ -1,6 +1,13 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='NextResponse'][callee.property.name='redirect'] > NewExpression[callee.name='URL']",
+        "message": "new URL(path, request.url) drops the /docs basePath. Use redirectTo(request, path) instead."
+      }
+    ]
   }
 }
