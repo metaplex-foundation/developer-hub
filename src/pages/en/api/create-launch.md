@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-27-2026'
 keywords:
   - Genesis API
   - create launch
@@ -94,6 +94,67 @@ Raydium liquidity is configured as a fund flow on the sale allocation, not as it
 
 {% callout type="warning" title="Streamflow allocations are retired" %}
 The earlier `lockedV2` (Streamflow) allocation type is no longer accepted. Use `claimScheduleV2` for locked and vesting allocations.
+{% /callout %}
+
+### Claim Schedule Start and Cliff Conditions
+
+In a `claimScheduleV2` allocation, `startCondition` sets when vesting starts and `cliff.condition` sets when an enabled cliff unlocks. Each takes a `TimeAbsolute` condition for a fixed date or a `TimeRelativeToUnknownAddress` condition for a time after the launch's graduation. Graduation is the moment the launch's Raydium bucket records its `Graduate` time. For a CPMM launch, it is when the pool is created. For a CLMM launch, it is when the last of its positions opens.
+
+A `TimeAbsolute` condition names a fixed date:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | `string` | Yes | `'TimeAbsolute'` |
+| `timestamp` | `string` | Yes | ISO 8601 date-time in UTC ending in `Z`, such as `'2027-01-01T00:00:00Z'`. An offset such as `+00:00` is rejected with `400` |
+
+A `TimeRelativeToUnknownAddress` condition names the instant `timeOffset` seconds after graduation:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `type` | `string` | Yes | `'TimeRelativeToUnknownAddress'` |
+| `timeOffset` | `number` | Yes | Whole seconds after graduation, `0` or more |
+| `bucketType` | `string` | No | `'raydiumV2'`, the default and only accepted value. It refers to the launch's Raydium bucket, for a CPMM pool or a CLMM position |
+| `bucketIndex` | `number` | No | `0`, the default and only accepted value |
+| `bucketTime` | `string` | No | `'Graduate'`, the default and only accepted value |
+
+A `TimeRelativeToUnknownAddress` condition moves with the actual graduation time. A `TimeAbsolute` condition keeps its date.
+
+When `cliff.enabled` is `true`, `cliff.condition` must use the same `type` as `startCondition`. A `TimeRelativeToUnknownAddress` cliff must also use the same `timeOffset`. Any other pair returns `400`, with the message `Cliff must use the same start as the schedule` in `details`.
+
+Set `timeOffset` to the number of seconds from graduation to the moment the cliff share unlocks and linear vesting begins. For a schedule with a cliff, that number includes the cliff period. `durationSeconds`, the length of the linear vesting, counts from that moment.
+
+The allocation below waits 30 days after graduation and then has a 90-day cliff, so both conditions use a `timeOffset` of 10,368,000 seconds (120 days). When those 120 days have passed, 10% of its tokens unlock, and the remaining 90% vests in 365 daily steps. Its `claimStartCondition` sends only `type`, because claims always open at graduation:
+
+```json
+{
+  "type": "claimScheduleV2",
+  "name": "Team",
+  "supply": 100000000,
+  "claimScheduleV2": {
+    "recipient": "RecipientWalletPublicKey...",
+    "claimStartCondition": { "type": "TimeRelativeToUnknownAddress" },
+    "startCondition": {
+      "type": "TimeRelativeToUnknownAddress",
+      "timeOffset": 10368000
+    },
+    "durationSeconds": 31536000,
+    "periodSeconds": 86400,
+    "cliff": {
+      "enabled": true,
+      "condition": {
+        "type": "TimeRelativeToUnknownAddress",
+        "timeOffset": 10368000
+      },
+      "amountBps": 1000
+    }
+  }
+}
+```
+
+On chain, a `TimeRelativeToUnknownAddress` condition becomes a `TimeRelative` condition on the launch's Raydium bucket. The program counts it as met only when [`triggerConditionsV2`](/smart-contracts/genesis/project-vesting#claim-gate-and-vesting-curve) runs at or after graduation plus `timeOffset`. Until then, the program treats the allocation as unvested. The metaplex.com claim transaction adds `triggerConditionsV2` when an allocation needs it. A client that builds its own claim must run `triggerConditionsV2` first, in the same transaction or an earlier one. Pass the launch's Raydium bucket to it as a writable remaining account. Anyone can run the instruction. A `TimeAbsolute` condition needs no trigger.
+
+{% callout type="warning" title="Cancel only after graduation" %}
+A cancelable `claimScheduleV2` allocation with a `TimeRelativeToUnknownAddress` start can be canceled at any time. Its unvested tokens can be [reallocated](/smart-contracts/genesis/project-vesting#reallocating-unvested-tokens-after-cancellation) only after its start has been triggered. Until then, the reallocation fails with `ClaimScheduleConditionNotTriggered`. If the allocation is canceled before graduation and the sale then fails, its start can never be triggered, so its tokens stay locked permanently. To avoid this, cancel such an allocation only after graduation. The metaplex.com app keeps **Cancel lock** disabled for it until then.
 {% /callout %}
 
 ### Existing Tokens
