@@ -2,7 +2,7 @@
 title: AppData 플러그인
 metaTitle: AppData 플러그인 | Metaplex Core
 description: AppData 플러그인으로 Core NFT에 임의의 데이터를 저장합니다. 서드파티 앱, 게임 상태 또는 커스텀 메타데이터를 위한 안전하고 분리된 저장소를 생성합니다.
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - AppData plugin
   - NFT data storage
@@ -416,6 +416,8 @@ Data Authority만 데이터를 쓸 수 있습니다. 올바른 키페어로 서�
 데이터가 계정 크기 제한을 초과합니다. 데이터를 압축하거나 여러 플러그인에 분할하는 것을 고려하세요.
 ### `Invalid schema`
 데이터가 선언된 스키마와 일치하지 않습니다. JSON이 유효하거나 MsgPack이 올바르게 인코딩되었는지 확인하세요.
+### LinkedAppData를 통해 쓸 때 `InvalidCollection`
+Asset이 `LinkedAppData` 플러그인을 가진 Collection의 멤버가 아닙니다. Collection의 `LinkedAppData`를 통한 쓰기는 update authority가 해당 Collection인 Asset(`UpdateAuthority::Collection`)에 대해서만 성공합니다. Asset을 Collection에 추가하거나, Asset 자체의 `AppData` 플러그인을 사용하세요.
 ## 참고 사항
 - Data Authority는 플러그인 권한과 별개입니다
 - DAS 인덱싱을 위해 JSON 또는 MsgPack 선택
@@ -451,7 +453,7 @@ LinkedAppData는 Collection에 추가되며 Data Authority가 각 Asset에 AppDa
 |------|------|
 | **AppData** | Asset에 임의의 데이터를 저장하기 위한 외부 플러그인 |
 | **Data Authority** | 독점적인 쓰기 권한을 가진 주소 |
-| **LinkedAppData** | 모든 Asset에 쓸 수 있는 Collection 수준 변형 |
+| **LinkedAppData** | Collection 내 모든 Asset에 쓸 수 있는 Collection 수준 변형 |
 | **Schema** | 데이터 형식: JSON, MsgPack 또는 Binary |
 | **writeData()** | AppData 플러그인에 데이터를 쓰는 함수 |
 ## 관련 페이지
