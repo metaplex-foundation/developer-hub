@@ -2,7 +2,7 @@
 title: Verified Creator Plugin
 metaTitle: Verified Creator Plugin | Metaplex Core
 description: Core NFT Asset과 Collection에 검증된 창작자 서명을 추가합니다. 로열티 분배에 영향을 주지 않으면서 창작자임을 증명할 수 있습니다.
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - verified creator
   - creator signature
@@ -25,6 +25,8 @@ faqs:
     a: 검증된 창작자를 제거하려면 먼저 스스로 검증을 취소해야 합니다. 이는 검증된 창작자의 무단 제거를 방지합니다.
   - q: Asset이 자동으로 Collection의 verified creators를 상속받나요?
     a: 네. Asset은 Collection에서 creators 배열을 상속받습니다. 개별 Asset도 다른 창작자가 포함된 자체 Verified Creators 플러그인을 가질 수 있습니다.
+  - q: Collection에서 Asset을 생성할 때 Collection의 verified creators가 서명해야 하나요?
+    a: 아니요. Verified Creators 플러그인이 있는 Collection에서 Asset을 생성할 때 Collection의 창작자 서명은 필요하지 않으며, 해당 Asset에 플러그인을 추가하거나 업데이트할 때도 마찬가지입니다. 검사되는 것은 Verified Creators 플러그인 자체에 대한 변경뿐입니다. Core v0.15.3(2026년 10월) 이전 프로그램 버전에서는 이 경우 잘못 MissingSigner로 실패했습니다.
   - q: 공동 창작자 표시에 이것을 사용할 수 있나요?
     a: 네. 이것은 일반적인 사용 사례입니다 - 여러 창작자가 Asset 또는 Collection 제작에 참여했음을 모두 검증할 수 있습니다.
 ---
@@ -83,6 +85,12 @@ faqs:
 | address | publicKey |
 | message | string    |
 Asset은 Collection에서 Creators 배열을 상속받습니다.
+
+Collection에서 Asset을 생성할 때 Collection의 검증된 창작자가 서명할 필요는 없습니다. Collection 내 Asset에 플러그인을 추가하거나 업데이트할 때도 마찬가지입니다. Collection의 Verified Creators 플러그인은 Collection 자체의 창작자 목록에 대한 변경만 검증합니다. Asset에 자체 Verified Creators 플러그인이 있다면, 해당 플러그인에 대한 변경은 여전히 Asset의 창작자를 기준으로 검증됩니다.
+
+{% callout type="note" title="Core v0.15.3에서 수정됨" %}
+Core 프로그램 v0.15.3(2026년 10월 mainnet-beta 및 devnet에 배포) 이전에는 Verified Creators 플러그인이 있는 Collection에서 Asset을 생성하면, Collection의 검증된 창작자가 트랜잭션에 서명하지 않는 한 `MissingSigner`로 실패했습니다. 이로 인해 예를 들어 Master Edition Collection에 Edition을 프린트할 수 없었습니다. [mpl-core#302](https://github.com/metaplex-foundation/mpl-core/pull/302)를 참고하세요.
+{% /callout %}
 ## Asset에 Verified Creators Plugin 추가 코드 예제 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="MPL Core Asset에 Verified Creators Plugin 추가" %}
 {% dialect title="JavaScript" id="js" %}
@@ -238,11 +246,14 @@ update authority만 플러그인을 추가하거나 새 창작자를 추가할 �
 창작자가 이미 스스로 검증했습니다. 추가 작업이 필요 없습니다.
 ### `Cannot remove verified creator`
 검증된 창작자는 update authority가 제거하기 전에 스스로 검증을 취소해야 합니다.
+### Collection에서 Asset 생성 시 `MissingSigner`
+v0.15.3 이전 Core 프로그램은 Collection에서 Asset을 생성할 때 Collection의 검증된 창작자 서명을 요구했습니다. 현재 mainnet-beta 및 devnet 배포에서는 더 이상 그렇지 않습니다. 로컬 밸리데이터나 커스텀 클러스터에서 여전히 이 오류가 발생한다면, 해당 환경의 Core 프로그램을 v0.15.3 이상으로 업데이트하세요.
 ## 참고 사항
 - Verified Creators는 로열티 분배에 사용되지 않습니다 (Royalties 플러그인 사용)
 - 창작자는 스스로 검증해야 합니다—update authority가 대신 검증할 수 없습니다
 - 창작자는 제거되기 전에 검증을 취소해야 합니다
 - Asset은 Collection에서 creators 배열을 상속받습니다
+- Collection에서 Asset을 생성하거나 해당 Asset에 플러그인을 추가/업데이트할 때 Collection의 검증된 창작자 서명은 필요하지 않습니다 (Core v0.15.3 이상)
 ## 빠른 참조
 ### 검증 워크플로우
 | 단계 | 작업 | 수행자 |
@@ -268,6 +279,8 @@ Token Metadata에서 creator 배열은 로열티 분배에 사용되었습니다
 검증된 창작자를 제거하려면 먼저 스스로 검증을 취소해야 합니다. 이는 검증된 창작자의 무단 제거를 방지합니다.
 ### Asset이 자동으로 Collection의 verified creators를 상속받나요?
 네. Asset은 Collection에서 creators 배열을 상속받습니다. 개별 Asset도 다른 창작자가 포함된 자체 Verified Creators 플러그인을 가질 수 있습니다.
+### Collection에서 Asset을 생성할 때 Collection의 verified creators가 서명해야 하나요?
+아니요. Verified Creators 플러그인이 있는 Collection에서 Asset을 생성할 때 Collection의 창작자 서명은 필요하지 않으며, 해당 Asset에 플러그인을 추가하거나 업데이트할 때도 마찬가지입니다. 검사되는 것은 Verified Creators 플러그인 자체에 대한 변경뿐입니다. Core v0.15.3(2026년 10월) 이전 프로그램 버전에서는 이 경우 잘못 `MissingSigner`로 실패했습니다.
 ### 공동 창작자 표시에 이것을 사용할 수 있나요?
 네. 이것은 일반적인 사용 사례입니다—여러 창작자(디자이너, 개발자, 아티스트)가 Asset 또는 Collection 제작에 참여했음을 모두 검증할 수 있습니다.
 ## 용어집
