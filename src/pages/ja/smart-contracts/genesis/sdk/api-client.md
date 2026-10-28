@@ -3,17 +3,20 @@ title: API クライアント
 metaTitle: API クライアント | Genesis SDK | Metaplex
 description: Genesis API クライアントを使用して、Solana 上でトークンローンチの作成と登録を行います。シンプルからフルコントロールまで3つの統合モードを提供します。
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
   - createLaunch
   - registerLaunch
   - createAndRegisterLaunch
+  - claimCreatorRewards
+  - creator rewards
 about:
   - SDK API client
   - Token launch creation
   - Launch registration
+  - Creator rewards claiming
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
@@ -47,11 +50,20 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 umi.use(keypairIdentity(myKeypair));
 ```
 
+## 関数の概要 {% #function-overview %}
+
+| 関数 | 目的 |
+|----------|---------|
+| [`createAndRegisterLaunch`](#easy-mode-create-and-register-launch) | 1回の呼び出しでトークンをローンチ — 作成、署名、送信、登録 |
+| [`createLaunch`](#full-control-create-launch-register-launch) | カスタム署名フロー向けに未署名のローンチトランザクションを構築 |
+| [`registerLaunch`](#full-control-create-launch-register-launch) | 作成トランザクションがオンチェーンで確認された後にローンチを登録 |
+| [`claimCreatorRewards`](#claim-creator-rewards) | ウォレットのすべてのバケットで発生したクリエイター報酬を請求 |
+
 ## 3つの統合モード
 
 SDK はローンチ作成のために、完全自動から完全手動まで3つのモードを提供します。
 
-### イージーモード — `createAndRegisterLaunch`
+### イージーモード — `createAndRegisterLaunch` {% #easy-mode-create-and-register-launch %}
 
 最もシンプルなアプローチです。1回の関数呼び出しですべてを処理します：オンチェーンアカウントの作成、Umi を介したトランザクションの署名と送信、そしてローンチの登録を行います。
 
@@ -77,7 +89,7 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 
 `txSender` コールバックは未署名トランザクションの配列を受け取り、署名の配列を返す必要があります。コールバック完了後、SDK が登録処理を行います。
 
-### フルコントロール — `createLaunch` + `registerLaunch`
+### フルコントロール — `createLaunch` + `registerLaunch` {% #full-control-create-launch-register-launch %}
 
 トランザクションライフサイクルを完全に制御するモードです。`createLaunch` を呼び出して未署名トランザクションを取得し、署名と送信を自分で行った後、`registerLaunch` を呼び出します。
 
@@ -108,6 +120,35 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 
 ---
 
+## クリエイター報酬の請求 {% #claim-creator-rewards %}
+
+`claimCreatorRewards` は `POST /v1/creator-rewards/claim` を呼び出し、請求可能なすべてのボンディングカーブおよび Raydium バケット向けの Base64 エンコード済み請求トランザクションを、Umi の `Transaction` にデシリアライズして返します。各トランザクションに Umi の identity で署名して送信してください。クリエイター手数料の設定、蓄積の確認、バケットごとの低レベル命令を含む請求フロー全体については、[Genesis ボンディングカーブのクリエイター手数料](/ja/smart-contracts/genesis/creator-fees)を参照してください。
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
+
+### ClaimCreatorRewardsInput
+
+| フィールド | 型 | 必須 | 説明 |
+|-------|------|----------|-------------|
+| `wallet` | `PublicKey \| string` | はい | 請求対象のクリエイター手数料ウォレット。 |
+| `network` | `SvmNetwork` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'`。API のベース URL（`https://api.metaplex.com`）と一致している必要があります |
+| `payer` | `PublicKey \| string` | いいえ | 返されるトランザクションの手数料とレントを負担するウォレット。デフォルトは `wallet`。クリエイター手数料ウォレットが SOL を保有していない場合（例：エージェント PDA）に使用します。payer は返されたトランザクションに署名する必要があり、請求された SOL は引き続きクリエイター手数料ウォレットが受け取ります。 |
+
+### ClaimCreatorRewardsResponse
+
+| フィールド | 型 | 説明 |
+|-------|------|-------------|
+| `transactions` | `Transaction[]` | デシリアライズ済みの Umi トランザクション。請求するバケットごとに1つ。payer の identity で各トランザクションに署名して送信してください。 |
+| `blockhash` | `BlockhashWithExpiryBlockHeight` | トランザクションの構築に使用されたブロックハッシュ。確認にはこれを使用してください。新たに取得したブロックハッシュで代用しないでください。 |
+
+{% callout type="warning" title="報酬なしは空配列ではなく型付きエラーです" %}
+ウォレットに請求できるものがない場合、API は HTTP `400` と `{"error":{"message":"No rewards available to claim"}}` を返し、SDK は `GenesisApiError` をスローします。呼び出し側はエラーをキャッチし、`err.message`（または `err.statusCode === 400`）で分岐する必要があります。`result.transactions.length === 0` には依存できません。[報酬なしのケースの処理](/ja/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)を参照してください。
+{% /callout %}
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" filename="errorHandling" /%}
+
+---
+
 ## 設定
 
 ### CreateLaunchInput
@@ -117,7 +158,7 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `wallet` | `PublicKey \| string` | はい | 作成者のウォレット（トランザクションに署名） |
 | `token` | `TokenMetadata` | はい | トークンメタデータ |
 | `network` | `SvmNetwork` | いいえ | `'solana-mainnet'`（デフォルト）または `'solana-devnet'` |
-| `quoteMint` | `QuoteMintInput` | いいえ | `'SOL'`（デフォルト）、`'USDC'`、または生のミントアドレス |
+| `quoteMint` | `QuoteMintInput` | いいえ | `'SOL'`（デフォルト）または `'USDC'` |
 | `launchType` | `CreateLaunchType` | はい | `'launchpool'` — 基盤ローンチメカニズム |
 | `launch` | `LaunchpoolLaunchInput` | はい | ローンチ設定 |
 
@@ -148,30 +189,40 @@ SDK はローンチ作成のために、完全自動から完全手動まで3つ
 | `raiseGoal` | `number` | 最低調達目標（整数単位、例：250 SOL）。最低 250 SOL または 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | Raydium LP に使用する調達資金の割合（ベーシスポイント、2000〜10000） |
 | `fundsRecipient` | `PublicKey \| string` | ロック解除された調達資金の受取先 |
+| `softCap` | `number?` | 調達するクォートトークンの任意の上限（整数単位）。これを超える入金は按分で返金されます。0 より大きい必要があります。上限なしの場合は省略 |
 
-### LockedAllocation（Streamflow ロックアップ）
+### ClaimScheduleAllocation（ベスティングロック）
 
-オプションのロック付きトークンスケジュールは `launch.lockedAllocations` で追加できます：
+`ClaimScheduleAllocation` は、トークン供給量の一部に対する Genesis ネイティブのベスティングロックを定義し、`launch.claimScheduleAllocations` で渡します。各アロケーションはオンチェーンの `ClaimScheduleBucketV2` になります。トークンはオプションのクリフを持つ線形カーブに沿って累積され、SDK は以下の人間が読みやすいスケジュールをオンチェーンの秒数とベーシスポイントの値に変換します。
 
-| フィールド | 型 | 説明 |
-|-------|------|-------------|
-| `name` | `string` | ストリーム名、最大64文字（例："Team"、"Advisors"） |
-| `recipient` | `PublicKey \| string` | ロックアップの受取先ウォレット |
-| `tokenAmount` | `number` | ロックスケジュールの総トークン数 |
-| `vestingStartTime` | `Date \| string` | ロック解除スケジュールの開始時刻 |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 全ロックアップ期間 |
-| `unlockSchedule` | `TimeUnit` | トークンがリリースされる頻度 |
-| `cliff` | `object?` | オプションのクリフ（`duration` と `unlockAmount` を含む） |
+| フィールド | 型 | 必須 | 説明 |
+|-------|------|----------|-------------|
+| `name` | `string` | はい | ロック名、最大64文字（例："Team"、"Advisors"） |
+| `recipient` | `PublicKey \| string` | はい | ベスティング済みトークンを請求できるウォレット |
+| `tokenAmount` | `number` | はい | ベスティングスケジュールの総トークン数 |
+| `vestingStartTime` | `Date \| string` | はい | 線形ベスティングカーブの累積開始時刻 |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | はい | 線形ベスティング期間の長さ |
+| `unlockSchedule` | `TimeUnit` | はい | トークンがアンロックされる頻度 |
+| `cliff` | `{ duration, unlockAmount? }` | いいえ | オプションのクリフ。`duration` は `vestingStartTime` からの期間、`unlockAmount` はトークン数、または比例配分を表す `'linear'`（デフォルト） |
+| `cancelable` | `boolean` | いいえ | ローンチ作成者がロックをキャンセルできます。デフォルトは `false` |
+| `cancelableByRecipient` | `boolean` | いいえ | 受取人がロックをキャンセルできます。デフォルトは `false` |
+| `transferable` | `boolean` | いいえ | ローンチ作成者がロックを移転できます。デフォルトは `false` |
+| `transferableByRecipient` | `boolean` | いいえ | 受取人がロックを移転できます。デフォルトは `false` |
+| `pausable` | `boolean` | いいえ | Genesis の権限者がベスティングを一時停止・再開できます。デフォルトは `false` |
 
-{% callout type="warning" %}
-`vestingStartTime` は**入金期間終了後**（つまり `depositStartTime` + 48時間以降）でなければなりません。入金ウィンドウが閉じる前に開始するロックスケジュールは API によって拒否されます。
+{% callout type="note" %}
+ローンチプールでは、`vestingStartTime` がそれより前でトークンがすでに累積していても、ローンチがグラデュエートするまでベスティング済みトークンを**請求**できません。解決後のクリフ分は 0 より大きくなければなりません。
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations は非推奨です" %}
+`launch.lockedAllocations`（旧 Streamflow ロックアップ）は非推奨です。SDK は引き続きこれを受け付け、各エントリをクレームスケジュールにマッピングするため、既存の連携はそのままコンパイルできます。新規の連携では `claimScheduleAllocations` を使用してください。移行時には、`cancelableBySender` を `cancelable` に、`transferableBySender` を `transferable` に名前変更してください。
 {% /callout %}
 
 **TimeUnit の値:** `'SECOND'`、`'MINUTE'`、`'HOUR'`、`'DAY'`、`'WEEK'`、`'TWO_WEEKS'`、`'MONTH'`、`'QUARTER'`、`'YEAR'`
 
-**ロック付きアロケーションの例：**
+**ベスティングロックの例：**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 
@@ -198,7 +249,7 @@ API が成功以外のレスポンスを返した場合にスローされます�
 import { isGenesisApiError } from '@metaplex-foundation/genesis';
 
 try {
-  await createLaunch(umi, input);
+  await createLaunch(umi, {}, input);
 } catch (err) {
   if (isGenesisApiError(err)) {
     console.error('API error:', err.statusCode, err.responseBody);
@@ -283,7 +334,7 @@ import {
   signAndSendLaunchTransactions,
 } from '@metaplex-foundation/genesis';
 
-const createResult = await createLaunch(umi, input);
+const createResult = await createLaunch(umi, {}, input);
 const signatures = await signAndSendLaunchTransactions(umi, createResult, {
   commitment: 'confirmed',
 });

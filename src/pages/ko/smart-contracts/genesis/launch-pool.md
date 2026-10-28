@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
 description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - launch pool
   - token distribution
@@ -172,6 +172,7 @@ async function setupLaunchPool() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
@@ -548,7 +549,7 @@ endBehaviors: [
 
 | 오류 | 코드 | 원인 |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount`가 0입니다 — `0`으로 설정하지 말고 확장을 생략하세요 |
+| `InvalidSoftCap` | 221 | `softCap.amount`가 0입니다 — `{ amount: 0n }` 대신 `softCap: null`을 전달하세요 |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount`가 `minimumQuoteTokenThreshold.amount`보다 작습니다 |
 | `LaunchPoolNotEnded` | — | 예치 기간이 닫히기 전에 `refundLaunchPoolV2`를 호출했습니다 |
 | `LaunchPoolThresholdMet` | 173 | 하한을 충족했고 상한을 초과하지 않았는데 환불을 요청했습니다 |

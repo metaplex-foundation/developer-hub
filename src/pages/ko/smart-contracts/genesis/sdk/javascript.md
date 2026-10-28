@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -260,6 +260,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+기본 버킷에 구성된 종료 동작을 처리하여, 수집된 자금을 `endBehaviors`에 정의된 대상 버킷으로 이동합니다.
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -272,12 +274,16 @@ await triggerBehaviorsV2(umi, {
 
 ### revokeV2
 
+베이스 토큰의 민트 및/또는 프리즈 권한을 영구적으로 취소합니다.
+
 ```typescript
 await revokeV2(umi, {
   genesisAccount,           // PublicKey
   baseMint,                 // PublicKey
+  baseTokenProgram,         // PublicKey - required, e.g. SPL_TOKEN_PROGRAM_ID from mpl-toolbox
   revokeMintAuthority,      // boolean
   revokeFreezeAuthority,    // boolean
+  padding: Array(5).fill(0), // required, no default
 }).sendAndConfirm(umi);
 ```
 

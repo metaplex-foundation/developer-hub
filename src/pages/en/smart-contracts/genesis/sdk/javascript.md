@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -280,8 +280,10 @@ Permanently revokes mint and/or freeze authority for the base token.
 await revokeV2(umi, {
   genesisAccount,           // PublicKey
   baseMint,                 // PublicKey
+  baseTokenProgram,         // PublicKey - required, e.g. SPL_TOKEN_PROGRAM_ID from mpl-toolbox
   revokeMintAuthority,      // boolean
   revokeFreezeAuthority,    // boolean
+  padding: Array(5).fill(0), // required, no default
 }).sendAndConfirm(umi);
 ```
 
