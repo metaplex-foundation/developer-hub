@@ -155,3 +155,7 @@ RPCとDASは互いを補完します。標準RPCがオンチェーンデータ�
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)
+
+### セルフホスト型RPCプロキシ
+
+- [eRPC](https://github.com/erpc/erpc) - 上記の複数のプロバイダー間でリトライとフェイルオーバーを行うオープンソースのプロキシ
