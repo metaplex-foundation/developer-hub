@@ -2,7 +2,7 @@
 title: Verified Creator Plugin
 metaTitle: Verified Creator Plugin | Metaplex Core
 description: Add verified creator signatures to Core NFT Assets and Collections. Prove creatorship without affecting royalty distribution.
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - verified creator
   - creator signature
@@ -25,6 +25,8 @@ faqs:
     a: To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
   - q: Do Assets automatically get the Collection's verified creators?
     a: Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
+  - q: Do the Collection's verified creators need to sign when I create an Asset in the Collection?
+    a: No. Creating an Asset in a Collection that has the Verified Creators plugin does not require any of the Collection's creators to sign, and neither does adding or updating plugins on that Asset. Only changes to a Verified Creators plugin itself are checked. Program versions before Core v0.15.3 (October 2026) wrongly failed with MissingSigner in this case.
   - q: Can I use this for co-creator attribution?
     a: Yes. This is a common use case - multiple creators can all verify their involvement in creating an Asset or Collection.
 ---
@@ -83,6 +85,12 @@ The `verifiedCreator` Plugin requires the following arguments in a `VerifiedCrea
 | address | publicKey |
 | message | string    |
 Assets inherit the Creators array from the Collection.
+
+The Collection's verified creators do not need to sign when an Asset is created in that Collection. The same applies when a plugin is added to or updated on an Asset in the Collection. The Collection's Verified Creators plugin only validates changes to the Collection's own creators list. If the Asset has its own Verified Creators plugin, changes to that plugin are still validated against the Asset's creators.
+
+{% callout type="note" title="Fixed in Core v0.15.3" %}
+Before Core program v0.15.3 (deployed to mainnet-beta and devnet in October 2026), creating an Asset in a Collection with the Verified Creators plugin failed with `MissingSigner` unless the transaction was signed by the Collection's verified creators. This blocked, for example, printing Editions into a Master Edition Collection. See [mpl-core#302](https://github.com/metaplex-foundation/mpl-core/pull/302).
+{% /callout %}
 ## Adding the autograph Plugin to an Asset code example
 {% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -238,11 +246,14 @@ Only the update authority can add the plugin or add new creators. Only the creat
 The creator has already verified themselves. No action needed.
 ### `Cannot remove verified creator`
 A verified creator must unverify themselves before the update authority can remove them.
+### `MissingSigner` when creating an Asset in a Collection
+Core program versions before v0.15.3 required the Collection's verified creators to sign when an Asset was created in the Collection. Current mainnet-beta and devnet deployments no longer do this. If you still see this error on a local validator or a custom cluster, update the Core program there to v0.15.3 or later.
 ## Notes
 - Verified Creators are NOT used for royalty distribution (use Royalties plugin)
 - Creators must verify themselves—update authority cannot verify on their behalf
 - A creator must unverify before they can be removed
 - Assets inherit the creators array from their Collection
+- Creating an Asset in a Collection, or adding/updating plugins on that Asset, does not require the Collection's verified creators to sign (Core v0.15.3 and later)
 ## Quick Reference
 ### Verification Workflow
 | Step | Action | Who |
@@ -268,6 +279,8 @@ No. Each creator must verify themselves by signing the transaction. This ensures
 To remove a verified creator, they must first unverify themselves. This prevents unauthorized removal of verified creators.
 ### Do Assets automatically get the Collection's verified creators?
 Yes. Assets inherit the creators array from their Collection. Individual Assets can also have their own Verified Creators plugin with different creators.
+### Do the Collection's verified creators need to sign when I create an Asset in the Collection?
+No. Creating an Asset in a Collection that has the Verified Creators plugin does not require any of the Collection's creators to sign, and neither does adding or updating plugins on that Asset. Only changes to a Verified Creators plugin itself are checked. Program versions before Core v0.15.3 (October 2026) wrongly failed with `MissingSigner` in this case.
 ### Can I use this for co-creator attribution?
 Yes. This is a common use case—multiple creators (designer, developer, artist) can all verify their involvement in creating an Asset or Collection.
 ## Glossary

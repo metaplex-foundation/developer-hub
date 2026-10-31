@@ -2,7 +2,7 @@
 title: Verified Creator Plugin
 metaTitle: Verified Creator Plugin | Metaplex Core
 description: Core NFT AssetやCollectionに検証済みクリエイター署名を追加します。ロイヤリティ配分に影響を与えずにクリエイターであることを証明できます。
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - verified creator
   - creator signature
@@ -25,6 +25,8 @@ faqs:
     a: 検証済みクリエイターを削除するには、まず自分自身の検証を解除する必要があります。これにより、検証済みクリエイターの不正な削除を防止します。
   - q: AssetはCollectionの検証済みクリエイターを自動的に取得しますか？
     a: はい。AssetはCollectionからcreators配列を継承します。個別のAssetは異なるクリエイターを持つ独自のVerified Creators Pluginを持つこともできます。
+  - q: Collection内でAssetを作成するとき、Collectionの検証済みクリエイターの署名は必要ですか？
+    a: いいえ。Verified Creators Pluginを持つCollection内でAssetを作成する場合、Collectionのクリエイターの署名は不要です。そのAssetへのPluginの追加や更新も同様です。チェックされるのはVerified Creators Plugin自体への変更のみです。Core v0.15.3（2026年10月）より前のプログラムバージョンでは、このケースで誤ってMissingSignerで失敗していました。
   - q: 共同クリエイターの帰属表示に使用できますか？
     a: はい。これは一般的なユースケースです。複数のクリエイターが全員、AssetやCollectionの作成への関与を検証できます。
 ---
@@ -83,6 +85,12 @@ faqs:
 | address | publicKey |
 | message | string    |
 AssetはCollectionからCreators配列を継承します。
+
+CollectionでAssetを作成するとき、Collectionの検証済みクリエイターが署名する必要はありません。Collection内のAssetにPluginを追加・更新する場合も同様です。CollectionのVerified Creators Pluginが検証するのは、Collection自身のクリエイターリストへの変更だけです。Assetが独自のVerified Creators Pluginを持つ場合、そのPluginへの変更は引き続きAssetのクリエイターに対して検証されます。
+
+{% callout type="note" title="Core v0.15.3で修正" %}
+Coreプログラムv0.15.3（2026年10月にmainnet-betaとdevnetにデプロイ）より前は、Verified Creators Pluginを持つCollection内でAssetを作成すると、Collectionの検証済みクリエイターがトランザクションに署名しない限り`MissingSigner`で失敗していました。これにより、例えばMaster Edition CollectionへのEditionのプリントができませんでした。[mpl-core#302](https://github.com/metaplex-foundation/mpl-core/pull/302)を参照してください。
+{% /callout %}
 ## Assetへのautograph Plugin追加のコード例 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="Adding a verified Creators Plugin to an MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -238,11 +246,14 @@ update authorityのみがPluginを追加したり、新しいクリエイター�
 クリエイターは既に自分自身を検証しています。アクションは不要です。
 ### `Cannot remove verified creator`
 検証済みクリエイターは、update authorityが削除する前に自分自身の検証を解除する必要があります。
+### Collection内でAssetを作成するときの`MissingSigner`
+v0.15.3より前のCoreプログラムでは、Collection内でAssetを作成するときにCollectionの検証済みクリエイターの署名が必要でした。現在のmainnet-betaとdevnetのデプロイではこの制限はありません。ローカルバリデーターやカスタムクラスターでまだこのエラーが出る場合は、そこのCoreプログラムをv0.15.3以降に更新してください。
 ## 注意事項
 - Verified Creatorsはロイヤリティ配分には使用されません（Royalties Pluginを使用）
 - クリエイターは自分自身を検証する必要があります。update authorityは代わりに検証できません
 - クリエイターは削除される前に検証を解除する必要があります
 - AssetはCollectionからcreators配列を継承します
+- Collection内でのAsset作成、およびそのAssetへのPluginの追加・更新には、Collectionの検証済みクリエイターの署名は不要です（Core v0.15.3以降）
 ## クイックリファレンス
 ### 検証ワークフロー
 | ステップ | アクション | 実行者 |
@@ -268,6 +279,8 @@ Token Metadataでは、creator配列はロイヤリティ配分に使用され�
 検証済みクリエイターを削除するには、まず自分自身の検証を解除する必要があります。これにより、検証済みクリエイターの不正な削除を防止します。
 ### AssetはCollectionの検証済みクリエイターを自動的に取得しますか？
 はい。AssetはCollectionからcreators配列を継承します。個別のAssetは異なるクリエイターを持つ独自のVerified Creators Pluginを持つこともできます。
+### Collection内でAssetを作成するとき、Collectionの検証済みクリエイターの署名は必要ですか？
+いいえ。Verified Creators Pluginを持つCollection内でAssetを作成する場合、Collectionのクリエイターの署名は不要です。そのAssetへのPluginの追加や更新も同様です。チェックされるのはVerified Creators Plugin自体への変更のみです。Core v0.15.3（2026年10月）より前のプログラムバージョンでは、このケースで誤って`MissingSigner`で失敗していました。
 ### 共同クリエイターの帰属表示に使用できますか？
 はい。これは一般的なユースケースです。複数のクリエイター（デザイナー、開発者、アーティスト）が全員、AssetやCollectionの作成への関与を検証できます。
 ## 用語集
