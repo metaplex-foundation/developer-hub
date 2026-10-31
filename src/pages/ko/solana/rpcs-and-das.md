@@ -154,4 +154,5 @@ These lists are in alphabetical order. Choose the provider that best suits your 
 - [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
+- [Supanode](https://supanode.xyz/services/solana)
 - [Syndica](https://syndica.io/)
