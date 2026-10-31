@@ -2,7 +2,7 @@
 title: AppDataプラグイン
 metaTitle: AppDataプラグイン | Metaplex Core
 description: AppDataプラグインでCore NFTに任意のデータを保存します。サードパーティアプリ、ゲーム状態、またはカスタムメタデータ用の安全でパーティション化されたストレージを作成します。
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - AppData plugin
   - NFT data storage
@@ -416,6 +416,8 @@ Data Authorityのみがデータを書き込めます。正しいキーペアで
 データがアカウントサイズの制限を超えています。データを圧縮するか、複数のプラグインに分割することを検討してください。
 ### `Invalid schema`
 データが宣言されたスキーマと一致しません。JSONが有効であるか、MsgPackが正しくエンコードされていることを確認してください。
+### LinkedAppData経由で書き込むときの`InvalidCollection`
+Assetが`LinkedAppData`プラグインを持つCollectionのメンバーではありません。Collectionの`LinkedAppData`経由の書き込みは、update authorityがそのCollectionであるAsset（`UpdateAuthority::Collection`）に対してのみ成功します。AssetをCollectionに追加するか、Asset自体の`AppData`プラグインを使用してください。
 ## 注意事項
 - Data Authorityはプラグインauthorityとは別
 - DASインデックスにはJSONまたはMsgPackを選択
@@ -451,7 +453,7 @@ LinkedAppDataはCollectionに追加され、各Assetに個別にAppDataを追加
 |------|------------|
 | **AppData** | Assetsに任意のデータを保存するための外部プラグイン |
 | **Data Authority** | 排他的な書き込み権限を持つアドレス |
-| **LinkedAppData** | 任意のAssetへの書き込み用のコレクションレベルバリアント |
+| **LinkedAppData** | Collection内の任意のAssetへの書き込み用のコレクションレベルバリアント |
 | **Schema** | データ形式：JSON、MsgPack、またはBinary |
 | **writeData()** | AppDataプラグインにデータを書き込む関数 |
 ## 関連ページ
