@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 런칭 생성 | REST API | Metaplex
 description: 새로운 Genesis 토큰 런칭을 위한 온체인 트랜잭션을 빌드합니다. 서명 및 전송 준비가 된 미서명 트랜잭션을 반환합니다.
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -75,7 +75,7 @@ POST /v1/launches/create
 | `type` | 설명 |
 |--------|------|
 | `launchpool` | 비례 배분 풀. 할당(순서대로): `launchpoolV2`, `unlockedV2`, 이후 임의 개수의 `claimScheduleV2` |
-| `presale` | 고정가 사전 판매. 할당(순서대로): `presaleV2`, `unlockedV2`, 이후 임의 개수의 `claimScheduleV2` |
+| `presale` | 고정가 사전 판매. 할당(순서대로): `presaleV2`, `unlockedV2`, 이후 임의 개수의 `claimScheduleV2`. 판매되지 않은 토큰과 졸업 시 Raydium 풀이 사용하지 않은 토큰은 `unlockedV2` 할당으로 이월되어 함께 청구됩니다 |
 | `bondingCurve` | 본딩 커브 런칭. 할당: `bondingCurveV2`. 공급량 1,000,000,000, 소수점 6자리, SOL 견적으로 고정 |
 
 스키마에는 `auction`과 `custom`도 정의되어 있습니다. `auction`은 아직 구현되지 않은 자리 표시자이며, `custom`은 공개 API에서 `400`으로 거부됩니다.
@@ -91,6 +91,8 @@ POST /v1/launches/create
 - **`claimScheduleV2`** — 베스팅 일정에 따라 수령인에게 해제되는 토큰 (클리프 선택 사항)
 
 Raydium 유동성은 별도의 할당이 아니라 판매 할당의 펀드 플로우로 구성됩니다. `RaydiumLP` 플로우는 Raydium CPMM 풀을, `RaydiumClmmLP` 플로우는 Raydium CLMM(집중 유동성) 포지션을 생성합니다. CLMM 런칭은 계정에서 활성화되어 있지 않으면 `403`을 반환합니다.
+
+사전 판매의 `fundFlows`는 정확히 두 개입니다. 수익금을 위한 `UnlockedFunds` 플로우와 `RaydiumLP` 또는 `RaydiumClmmLP` 플로우입니다. 판매되지 않은 토큰과 풀의 졸업 잔여분은 자동으로 런칭의 `unlockedV2` 할당으로 이월됩니다. 세 번째 `BaseTokenRollover` 플로우나 Raydium 플로우에 중첩된 `fundFlows` 배열은 더 이상 허용되지 않으며 `400`을 반환합니다.
 
 {% callout type="warning" title="Streamflow 할당은 폐지되었습니다" %}
 이전의 `lockedV2`(Streamflow) 할당 유형은 더 이상 허용되지 않습니다. 잠금 및 베스팅 할당에는 `claimScheduleV2`를 사용하세요.

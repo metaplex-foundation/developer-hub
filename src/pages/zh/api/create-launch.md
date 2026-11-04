@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 创建发行 | REST API | Metaplex
 description: 为新的 Genesis 代币发行构建链上交易。返回可供签名和发送的未签名交易。
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -75,7 +75,7 @@ POST /v1/launches/create
 | `type` | 描述 |
 |--------|-------------|
 | `launchpool` | 按比例分配池。分配（按顺序）：`launchpoolV2`、`unlockedV2`，然后是任意数量的 `claimScheduleV2` |
-| `presale` | 固定价格预售。分配（按顺序）：`presaleV2`、`unlockedV2`，然后是任意数量的 `claimScheduleV2` |
+| `presale` | 固定价格预售。分配（按顺序）：`presaleV2`、`unlockedV2`，然后是任意数量的 `claimScheduleV2`。未售出的代币以及毕业时 Raydium 池未使用的代币会转入 `unlockedV2` 分配，并随之一起领取 |
 | `bondingCurve` | 联合曲线发行。分配：一个 `bondingCurveV2`。固定为 1,000,000,000 供应量、6 位精度和 SOL 报价 |
 
 Schema 还定义了 `auction` 和 `custom`。`auction` 是尚未实现的占位类型，`custom` 会被公共 API 以 `400` 拒绝。
@@ -91,6 +91,8 @@ Schema 还定义了 `auction` 和 `custom`。`auction` 是尚未实现的占位�
 - **`claimScheduleV2`** — 按归属计划释放给接收方的代币，可选悬崖期
 
 Raydium 流动性作为销售分配上的资金流配置，而不是单独的分配：`RaydiumLP` 资金流创建 Raydium CPMM 池，`RaydiumClmmLP` 资金流创建 Raydium CLMM（集中流动性）头寸。除非你的账户已启用，CLMM 发行会返回 `403`。
+
+预售的 `fundFlows` 恰好有两个：用于募集资金的 `UnlockedFunds` 资金流，以及 `RaydiumLP` 或 `RaydiumClmmLP` 资金流。未售出的代币和池在毕业时的剩余代币会自动转入该发行的 `unlockedV2` 分配。第三个 `BaseTokenRollover` 资金流，或嵌套在 Raydium 资金流上的 `fundFlows` 数组，不再被接受并返回 `400`。
 
 {% callout type="warning" title="Streamflow 分配已停用" %}
 之前的 `lockedV2`（Streamflow）分配类型已不再被接受。锁仓和归属分配请使用 `claimScheduleV2`。

@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -75,7 +75,7 @@ For a new token, the allocation supplies must add up to exactly `supply`. A new 
 | `type` | Description |
 |--------|-------------|
 | `launchpool` | Proportional distribution pool. Allocations, in order: a `launchpoolV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
-| `presale` | Fixed-price presale. Allocations, in order: a `presaleV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
+| `presale` | Fixed-price presale. Allocations, in order: a `presaleV2`, an `unlockedV2`, then any `claimScheduleV2` allocations. Tokens the sale does not sell, and the tokens its Raydium pool leaves unused at graduation, roll into the `unlockedV2` allocation and are claimed with it |
 | `bondingCurve` | Bonding curve launch. Allocations: a `bondingCurveV2`. Fixed at 1,000,000,000 supply, 6 decimals, and a SOL quote |
 
 The schema also defines `auction` and `custom`. `auction` is a placeholder that is not implemented yet, and `custom` is rejected by the public API with `400`.
@@ -91,6 +91,8 @@ Each allocation in the `allocations` array has a `type` field, a `name`, a `supp
 - **`claimScheduleV2`** — Tokens released to a recipient on a vesting schedule, with an optional cliff
 
 Raydium liquidity is configured as a fund flow on the sale allocation, not as its own allocation: a `RaydiumLP` flow creates a Raydium CPMM pool, and a `RaydiumClmmLP` flow creates a Raydium CLMM (concentrated liquidity) position. CLMM launches return `403` unless they are enabled for your account.
+
+A presale's `fundFlows` are exactly two: an `UnlockedFunds` flow for the proceeds, then the `RaydiumLP` or `RaydiumClmmLP` flow. The sale's unsold tokens and the pool's graduation leftover roll into the launch's `unlockedV2` allocation on their own. A third `BaseTokenRollover` flow, or a `fundFlows` array nested on the Raydium flow, is no longer accepted and returns `400`.
 
 {% callout type="warning" title="Streamflow allocations are retired" %}
 The earlier `lockedV2` (Streamflow) allocation type is no longer accepted. Use `claimScheduleV2` for locked and vesting allocations.

@@ -4,7 +4,7 @@ metaTitle: Metaplex API - ローンチ作成 | REST API | Metaplex
 description: 新しい Genesis トークンローンチのためのオンチェーントランザクションを構築します。署名・送信可能な未署名トランザクションを返します。
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-04-2026'
 keywords:
   - Genesis API
   - create launch
@@ -75,7 +75,7 @@ POST /v1/launches/create
 | `type` | 説明 |
 |--------|-------------|
 | `launchpool` | 比例配分プール。アロケーション（順序どおり）：`launchpoolV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2` |
-| `presale` | 固定価格プレセール。アロケーション（順序どおり）：`presaleV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2` |
+| `presale` | 固定価格プレセール。アロケーション（順序どおり）：`presaleV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2`。売れ残ったトークンと、卒業時に Raydium プールで使われなかったトークンは `unlockedV2` アロケーションに繰り入れられ、まとめて請求されます |
 | `bondingCurve` | ボンディングカーブによるローンチ。アロケーション：`bondingCurveV2`。供給量 1,000,000,000、デシマル6、SOL クォートに固定されます |
 
 スキーマには `auction` と `custom` も定義されています。`auction` は未実装のプレースホルダーで、`custom` はパブリック API で `400` として拒否されます。
@@ -91,6 +91,8 @@ POST /v1/launches/create
 - **`claimScheduleV2`** — ベスティングスケジュールに従って受取先にリリースされるトークン（クリフは任意）
 
 Raydium の流動性は独立したアロケーションではなく、販売アロケーションのファンドフローとして設定します。`RaydiumLP` フローは Raydium CPMM プールを作成し、`RaydiumClmmLP` フローは Raydium CLMM（集中流動性）ポジションを作成します。CLMM ローンチは、アカウントで有効になっていない限り `403` を返します。
+
+プレセールの `fundFlows` はちょうど 2 つです。売上金のための `UnlockedFunds` フローと、`RaydiumLP` または `RaydiumClmmLP` フローです。売れ残ったトークンとプールの卒業時の残りは、自動的にローンチの `unlockedV2` アロケーションに繰り入れられます。3 つ目の `BaseTokenRollover` フローや、Raydium フローにネストした `fundFlows` 配列は受け付けられなくなり、`400` を返します。
 
 {% callout type="warning" title="Streamflow アロケーションは廃止されました" %}
 以前の `lockedV2`（Streamflow）アロケーションタイプは受け付けられなくなりました。ロックおよびベスティングのアロケーションには `claimScheduleV2` を使用してください。
