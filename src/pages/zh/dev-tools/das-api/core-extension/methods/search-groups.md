@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 概述
 
-`das.searchGroups` 在 DAS 中搜索 [`MplCoreGroup`](/zh/smart-contracts/core/groups) 接口，并返回 [`GroupResult`](/zh/dev-tools/das-api/core-extension) 值。
+`das.searchGroups` 在 DAS 中搜索 [`MplCoreGroup`](/zh/smart-contracts/core/groups) 接口，并返回 [`GroupResult`](/zh/smart-contracts/core/groups#groupv1-账户) 值。
 
 - 仅筛选 Core 分组
 - 在适用时接受与 Core 资产搜索相同的搜索过滤器（例如 authority）

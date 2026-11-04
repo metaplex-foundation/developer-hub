@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 요약
 
-`das.searchGroups`는 DAS에서 [`MplCoreGroup`](/ko/smart-contracts/core/groups) 인터페이스를 검색하고 [`GroupResult`](/ko/dev-tools/das-api/core-extension) 값을 반환합니다.
+`das.searchGroups`는 DAS에서 [`MplCoreGroup`](/ko/smart-contracts/core/groups) 인터페이스를 검색하고 [`GroupResult`](/ko/smart-contracts/core/groups#groupv1-계정) 값을 반환합니다.
 
 - Core 그룹만 필터링합니다
 - 해당되는 경우 Core 자산 검색과 동일한 검색 필터(예: authority)를 허용합니다

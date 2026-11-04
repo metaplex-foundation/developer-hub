@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 概要
 
-`das.getGroup` は公開鍵を指定して1つの [mpl-core GroupV1](/ja/smart-contracts/core/groups) を取得し、[`GroupResult`](/ja/dev-tools/das-api/core-extension) を返します。
+`das.getGroup` は公開鍵を指定して1つの [mpl-core GroupV1](/ja/smart-contracts/core/groups) を取得し、[`GroupResult`](/ja/smart-contracts/core/groups#groupv1-アカウント) を返します。
 
 - MPL Core SDKで使用できるように型付けされています
 - メンバーシップのベクトルは、インデクサーによっては空になる場合があります

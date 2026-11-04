@@ -51,4 +51,4 @@ proficiencyLevel: Intermediate
 ## 注意事項
 
 - これはGroupV1メンバーシップ用のCoreヘルパーです。基本のDAS経由のToken Metadata / コレクションのグルーピングについては、`groupKey: "collection"` を指定した [`getAssetsByGroup`](/ja/dev-tools/das-api/methods/get-assets-by-group) を参照してください。
-- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0 と、Coreグループをインデックスする RPC が必要です。
+- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0 と、CoreグループをインデックスするRPCが必要です。

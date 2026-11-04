@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 概要
 
-`das.getGrouping` は、すべてのメンバーを一覧表示せずに、グループのキーと値のペアに対するサマリーメタデータを返します。
+`das.getGrouping` は、すべてのメンバーを一覧表示せずに、グループのキーと値のペアに対する概要メタデータを返します。
 
 - `group_key`、`group_name`、`group_size` を返します
 - コレクションには `groupKey: "collection"` を、[GroupV1](/ja/smart-contracts/core/groups) には `groupKey: "group"` を使用します

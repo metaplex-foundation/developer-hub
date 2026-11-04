@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 概述
 
-`das.getGroup` 按公钥获取一个 [mpl-core GroupV1](/zh/smart-contracts/core/groups)，并返回 [`GroupResult`](/zh/dev-tools/das-api/core-extension)。
+`das.getGroup` 按公钥获取一个 [mpl-core GroupV1](/zh/smart-contracts/core/groups)，并返回 [`GroupResult`](/zh/smart-contracts/core/groups#groupv1-账户)。
 
 - 已针对 MPL Core SDK 进行类型化
 - 成员向量可能因索引器而为空

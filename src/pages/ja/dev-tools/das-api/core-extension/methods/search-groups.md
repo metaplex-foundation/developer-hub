@@ -17,12 +17,12 @@ proficiencyLevel: Intermediate
 
 ## 概要
 
-`das.searchGroups` はDASで [`MplCoreGroup`](/ja/smart-contracts/core/groups) インターフェースを検索し、[`GroupResult`](/ja/dev-tools/das-api/core-extension) 値を返します。
+`das.searchGroups` はDASで [`MplCoreGroup`](/ja/smart-contracts/core/groups) インターフェースを検索し、[`GroupResult`](/ja/smart-contracts/core/groups#groupv1-アカウント) 値を返します。
 
 - Coreグループのみにフィルタリングします
 - 該当する場合、Coreアセット検索と同じ検索フィルター（例えばauthority）を受け付けます
 - アドレスで単一のグループを取得する場合は、[`getGroup`](/ja/dev-tools/das-api/core-extension/methods/get-group) を優先してください
-- 更新権限別に一覧表示するには、[`getGroupsByUpdateAuthority`](#by-update-authority) を使用します
+- update authority別に一覧表示するには、[`getGroupsByUpdateAuthority`](#by-update-authority) を使用します
 
 ## コード例
 
@@ -30,9 +30,9 @@ proficiencyLevel: Intermediate
 
 {% code-tabs-imported from="das-api/core-extension/search-groups" frameworks="umi" /%}
 
-## 更新権限別 {% #by-update-authority %}
+## update authority別 {% #by-update-authority %}
 
-`das.getGroupsByUpdateAuthority` は、指定した更新権限のCoreグループを一覧表示し、`GroupResult` 値を返します。[`getAssetsByGroup`](/ja/dev-tools/das-api/core-extension/methods/get-assets-by-group) と組み合わせると、各グループのメンバーを一覧表示できます。
+`das.getGroupsByUpdateAuthority` は、指定したupdate authorityのCoreグループを一覧表示し、`GroupResult` 値を返します。[`getAssetsByGroup`](/ja/dev-tools/das-api/core-extension/methods/get-assets-by-group) と組み合わせると、各グループのメンバーを一覧表示できます。
 
 {% code-tabs-imported from="das-api/core-extension/get-groups-by-update-authority" frameworks="umi" /%}
 

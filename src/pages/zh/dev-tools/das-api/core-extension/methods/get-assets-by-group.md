@@ -29,7 +29,7 @@ proficiencyLevel: Intermediate
 
 `das.getAssetsByGroup` 接收 Umi 实例和 `GroupV1` 地址，并以 Core 类型的结果返回分组成员。
 
-将 `<ENDPOINT>` 替换为你的 DAS RPC，将 `<PublicKey>` 替换为 GroupV1 地址。
+将 `<ENDPOINT>` 替换为您的 DAS RPC，将 `<PublicKey>` 替换为 GroupV1 地址。
 
 {% code-tabs-imported from="das-api/core-extension/get-assets-by-group" frameworks="umi" /%}
 
