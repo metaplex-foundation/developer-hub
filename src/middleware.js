@@ -37,10 +37,11 @@ const standaloneRedirects = {
   '/zh/contact': '/zh',
   '/zh/developer-tools': '/zh/dev-tools',
   '/zh/programs-and-tools': '/zh/smart-contracts',
+  '/zh/storage-providers': '/zh/smart-contracts/core-candy-machine/preparing-assets',
   // Locale-only page that never had an English version
-  '/ja/solana/create-a-solana-token': '/ja/solana/javascript/how-to-create-a-solana-token',
-  '/ko/solana/create-a-solana-token': '/ko/solana/javascript/how-to-create-a-solana-token',
-  '/zh/solana/create-a-solana-token': '/zh/solana/javascript/how-to-create-a-solana-token',
+  '/ja/solana/create-a-solana-token': '/ja/tokens/create-a-token',
+  '/ko/solana/create-a-solana-token': '/ko/tokens/create-a-token',
+  '/zh/solana/create-a-solana-token': '/zh/tokens/create-a-token',
   // Legacy pages moved under /solana
   '/rpc-providers': '/solana/rpcs-and-das',
   '/understanding-programs': '/solana/understanding-programs',
