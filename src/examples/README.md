@@ -153,5 +153,5 @@ In any markdown file (EN/JA/KO), import the example using the self-closing tag s
 
 ## Testing
 
-See the test page for live examples:
-`/test-code-tabs`
+See the Creating Assets guide for live examples:
+`/smart-contracts/core/create-asset`

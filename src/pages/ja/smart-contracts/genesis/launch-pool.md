@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
 description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - launch pool
   - token distribution
@@ -172,6 +172,7 @@ async function setupLaunchPool() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
@@ -548,7 +549,7 @@ endBehaviors: [
 
 | エラー | コード | 原因 |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount` が 0 です。`0` に設定せず、拡張自体を省略してください |
+| `InvalidSoftCap` | 221 | `softCap.amount` が 0 です。`{ amount: 0n }` ではなく `softCap: null` を渡してください |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount` が `minimumQuoteTokenThreshold.amount` を下回っています |
 | `LaunchPoolNotEnded` | — | 入金ウィンドウが閉じる前に `refundLaunchPoolV2` が呼び出されました |
 | `LaunchPoolThresholdMet` | 173 | 下限に達し、上限も超過していない状態で返金がリクエストされました |

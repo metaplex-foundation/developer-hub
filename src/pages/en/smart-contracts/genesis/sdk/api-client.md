@@ -3,7 +3,7 @@ title: API Client
 metaTitle: API Client | Genesis SDK | Metaplex
 description: Use the Genesis API client to create and register token launches on Solana. Three integration modes from simple to full control.
 created: '02-19-2026'
-updated: '04-23-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
@@ -189,30 +189,40 @@ When the wallet has nothing to claim, the API returns HTTP `400` with `{"error":
 | `raiseGoal` | `number` | Minimum quote tokens to raise, in whole units (e.g. 250 SOL). Minimum 250 SOL or 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | % of raised funds for Raydium LP, in basis points (2000–10000) |
 | `fundsRecipient` | `PublicKey \| string` | Receives the unlocked portion of raised funds |
+| `softCap` | `number?` | Optional ceiling on quote tokens raised, in whole units. Deposits above it are refunded pro-rata. Must be greater than 0; omit for no cap |
 
-### LockedAllocation (Streamflow Lockup)
+### ClaimScheduleAllocation (Vesting Lock)
 
-Optional locked token schedules can be added via `launch.lockedAllocations`:
+`ClaimScheduleAllocation` defines a Genesis-native vesting lock for part of the token supply, passed in `launch.claimScheduleAllocations`. Each allocation becomes an onchain `ClaimScheduleBucketV2`: tokens accrue on a linear curve with an optional cliff, and the SDK converts the human-readable schedule below into the onchain seconds and basis-point values.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | `string` | Stream name, max 64 characters (e.g. "Team", "Advisors") |
-| `recipient` | `PublicKey \| string` | Lockup recipient wallet |
-| `tokenAmount` | `number` | Total tokens in the locked schedule |
-| `vestingStartTime` | `Date \| string` | When the unlock schedule begins |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | Full lockup period |
-| `unlockSchedule` | `TimeUnit` | How frequently tokens are released |
-| `cliff` | `object?` | Optional cliff with `duration` and `unlockAmount` |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | `string` | Yes | Lock name, max 64 characters (e.g. "Team", "Advisors") |
+| `recipient` | `PublicKey \| string` | Yes | Wallet that can claim the vested tokens |
+| `tokenAmount` | `number` | Yes | Total tokens in the vesting schedule |
+| `vestingStartTime` | `Date \| string` | Yes | When the linear vesting curve begins accruing |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | Yes | Length of the linear vesting period |
+| `unlockSchedule` | `TimeUnit` | Yes | How frequently tokens unlock |
+| `cliff` | `{ duration, unlockAmount? }` | No | Optional cliff. `duration` is measured from `vestingStartTime`; `unlockAmount` is a token amount, or `'linear'` (the default) for the proportional share |
+| `cancelable` | `boolean` | No | Launch creator can cancel the lock. Default `false` |
+| `cancelableByRecipient` | `boolean` | No | Recipient can cancel the lock. Default `false` |
+| `transferable` | `boolean` | No | Launch creator can transfer the lock. Default `false` |
+| `transferableByRecipient` | `boolean` | No | Recipient can transfer the lock. Default `false` |
+| `pausable` | `boolean` | No | Genesis authority can pause and resume vesting. Default `false` |
 
-{% callout type="warning" %}
-The `vestingStartTime` must be **after the deposit period ends** (i.e., after `depositStartTime` + 48 hours). The API will reject locked schedules that start before the deposit window closes.
+{% callout type="note" %}
+For a launch pool, vested tokens cannot be **claimed** until the launch graduates, even when `vestingStartTime` is earlier and tokens have already accrued. The resolved cliff share must be greater than zero.
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations is deprecated" %}
+`launch.lockedAllocations` (the former Streamflow lockup) is deprecated. The SDK still accepts it and maps each entry onto a claim schedule, so existing integrations keep compiling. New integrations should use `claimScheduleAllocations`. When migrating, rename `cancelableBySender` to `cancelable` and `transferableBySender` to `transferable`.
 {% /callout %}
 
 **TimeUnit values:** `'SECOND'`, `'MINUTE'`, `'HOUR'`, `'DAY'`, `'WEEK'`, `'TWO_WEEKS'`, `'MONTH'`, `'QUARTER'`, `'YEAR'`
 
-**Example with locked allocations:**
+**Example with vesting locks:**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 

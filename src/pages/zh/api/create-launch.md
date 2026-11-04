@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 创建发行 | REST API | Metaplex
 description: 为新的 Genesis 代币发行构建链上交易。返回可供签名和发送的未签名交易。
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-21-2026'
 keywords:
   - Genesis API
   - create launch
@@ -74,7 +74,7 @@ POST /v1/launches/create
 
 | `type` | 描述 |
 |--------|-------------|
-| `launchpool` | 按比例分配池。分配：一个 `launchpoolV2`，以及任意数量的 `unlockedV2` 和 `claimScheduleV2` |
+| `launchpool` | 按比例分配池。分配（按顺序）：`launchpoolV2`、`unlockedV2`，然后是任意数量的 `claimScheduleV2` |
 | `presale` | 固定价格预售。分配（按顺序）：`presaleV2`、`unlockedV2`，然后是任意数量的 `claimScheduleV2` |
 | `bondingCurve` | 联合曲线发行。分配：一个 `bondingCurveV2`。固定为 1,000,000,000 供应量、6 位精度和 SOL 报价 |
 

@@ -2,6 +2,7 @@
 title: 본딩 커브 스왑 통합
 metaTitle: Genesis 본딩 커브 스왑 통합 | Metaplex
 description: Genesis SDK를 사용하여 본딩 커브 상태 읽기, 스왑 견적 계산, 매수 및 매도 트랜잭션 실행, 슬리피지 처리, 창작자 수수료 청구하는 방법을 설명합니다.
+updated: '10-12-2026'
 keywords:
   - bonding curve
   - swap

@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -260,6 +260,8 @@ await claimPresaleV2(umi, {
 
 ### triggerBehaviorsV2
 
+处理主存储桶上配置的结束行为，将收集的资金转移到 `endBehaviors` 中定义的目标存储桶。
+
 ```typescript
 await triggerBehaviorsV2(umi, {
   genesisAccount,     // PublicKey
@@ -272,12 +274,16 @@ await triggerBehaviorsV2(umi, {
 
 ### revokeV2
 
+永久撤销基础代币的铸币和/或冻结权限。
+
 ```typescript
 await revokeV2(umi, {
   genesisAccount,           // PublicKey
   baseMint,                 // PublicKey
+  baseTokenProgram,         // PublicKey - required, e.g. SPL_TOKEN_PROGRAM_ID from mpl-toolbox
   revokeMintAuthority,      // boolean
   revokeFreezeAuthority,    // boolean
+  padding: Array(5).fill(0), // required, no default
 }).sendAndConfirm(umi);
 ```
 
