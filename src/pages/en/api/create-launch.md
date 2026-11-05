@@ -92,7 +92,7 @@ Each allocation in the `allocations` array has a `type` field, a `name`, a `supp
 
 Raydium liquidity is configured as a fund flow on the sale allocation, not as its own allocation: a `RaydiumLP` flow creates a Raydium CPMM pool, and a `RaydiumClmmLP` flow creates a Raydium CLMM (concentrated liquidity) position. CLMM launches return `403` unless they are enabled for your account.
 
-A presale's `fundFlows` are exactly two: an `UnlockedFunds` flow for the proceeds, then the `RaydiumLP` or `RaydiumClmmLP` flow. The sale's unsold tokens and the pool's graduation leftover roll into the launch's `unlockedV2` allocation on their own. A third `BaseTokenRollover` flow, or a `fundFlows` array nested on the Raydium flow, is no longer accepted and returns `400`.
+A presale's `fundFlows` are exactly two: an `UnlockedFunds` flow for the proceeds, then the `RaydiumLP` or `RaydiumClmmLP` flow.
 
 {% callout type="warning" title="Streamflow allocations are retired" %}
 The earlier `lockedV2` (Streamflow) allocation type is no longer accepted. Use `claimScheduleV2` for locked and vesting allocations.

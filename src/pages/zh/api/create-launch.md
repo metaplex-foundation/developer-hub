@@ -92,7 +92,7 @@ Schema 还定义了 `auction` 和 `custom`。`auction` 是尚未实现的占位�
 
 Raydium 流动性作为销售分配上的资金流配置，而不是单独的分配：`RaydiumLP` 资金流创建 Raydium CPMM 池，`RaydiumClmmLP` 资金流创建 Raydium CLMM（集中流动性）头寸。除非你的账户已启用，CLMM 发行会返回 `403`。
 
-预售的 `fundFlows` 恰好有两个：用于募集资金的 `UnlockedFunds` 资金流，以及 `RaydiumLP` 或 `RaydiumClmmLP` 资金流。未售出的代币和池在毕业时的剩余代币会自动转入该发行的 `unlockedV2` 分配。第三个 `BaseTokenRollover` 资金流，或嵌套在 Raydium 资金流上的 `fundFlows` 数组，不再被接受并返回 `400`。
+预售的 `fundFlows` 恰好有两个：用于募集资金的 `UnlockedFunds` 资金流，以及 `RaydiumLP` 或 `RaydiumClmmLP` 资金流。
 
 {% callout type="warning" title="Streamflow 分配已停用" %}
 之前的 `lockedV2`（Streamflow）分配类型已不再被接受。锁仓和归属分配请使用 `claimScheduleV2`。
