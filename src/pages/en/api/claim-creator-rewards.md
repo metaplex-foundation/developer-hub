@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Claim Creator Rewards | REST API | Metaplex
 description: Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | Yes | Base58-encoded public key of the creator fee wallet to claim for. This is the wallet set as `creatorFeeWallet` on the bucket — or the launching wallet if no override was configured. |
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'`. Must match the base URL's cluster. |
 | `payer` | `string` | No | Base58-encoded public key that covers transaction fees and any rent on the returned transactions. Defaults to `wallet` when omitted. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes Umi 1.6 or `@solana/web3.js` 1.99 or later, and `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
 
 ### When to set `payer`
 

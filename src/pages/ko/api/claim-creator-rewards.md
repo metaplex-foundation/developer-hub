@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 창작자 보상 청구 | REST API | Metaplex
 description: 단일 API 호출로 지갑의 모든 Genesis 본딩 커브 및 Raydium 버킷에서 누적된 창작자 보상을 청구합니다. 서명할 준비가 된 Solana 트랜잭션을 반환합니다.
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | 예 | 청구할 창작자 수수료 지갑의 base58 인코딩된 공개 키. 이는 버킷에서 `creatorFeeWallet`로 설정된 지갑 — 또는 오버라이드가 구성되지 않은 경우 런칭 지갑입니다. |
 | `network` | `string` | 아니요 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'`. 베이스 URL의 클러스터와 일치해야 합니다. |
 | `payer` | `string` | 아니요 | 반환된 트랜잭션의 트랜잭션 수수료와 임대료를 부담하는 base58 인코딩된 공개 키. 생략 시 기본값은 `wallet`입니다. |
+| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. 읽으려면 Umi 1.6 또는 `@solana/web3.js` 1.99 이상이 필요하며, `@solana/web3.js` 1.x로는 서명할 수 없습니다. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
 
 ### `payer`를 설정하는 시기
 

@@ -4,7 +4,7 @@ metaTitle: Metaplex API - エージェントのミント | REST API | Metaplex
 description: エージェントの Core アセットをミントし、オンチェーンアイデンティティを登録する部分署名済みトランザクションを構築します。
 method: POST
 created: '08-01-2026'
-updated: '08-01-2026'
+updated: '11-05-2026'
 keywords:
   - Agent API
   - mint agent
@@ -56,6 +56,7 @@ POST /agents/mint
 | `agentMetadata` | `object` | はい | EIP-8004 エージェント登録 JSON（name、description、image、services、registrations、active、…）。 |
 | `collectionAddress` | `string` | いいえ | エージェントをミントする Core コレクション。 |
 | `a2aCard` | `object` | いいえ | 事前に構築した A2A AgentCard。省略した場合は `agentMetadata` から合成されます。 |
+| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。読み取りにはUmi 1.6または`@solana/web3.js` 1.99以降が必要で、`@solana/web3.js` 1.xでは署名できません。`solana-mainnet`と`solana-devnet`で利用できます。 |
 
 ## リクエスト例
 

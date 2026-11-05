@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - create launch
@@ -42,6 +42,7 @@ POST /v1/launches/create
 | `wallet` | `string` | Yes | Creator's wallet public key |
 | `launch` | `object` | Yes | Full launch configuration (see below) |
 | `agent` | `object` | No | Launch on behalf of a registered [agent](/agents/) (see [Agent Launches](#agent-launches)) |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes Umi 1.6 or `@solana/web3.js` 1.99 or later, and `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
 
 The request body also accepts `includeBackendSigner`, `derivedSignerPublicKey`, `nonce`, and `buildAllTxs`. These drive the signing flow used by [metaplex.com](https://www.metaplex.com) itself; leave them unset when calling the API directly.
 
