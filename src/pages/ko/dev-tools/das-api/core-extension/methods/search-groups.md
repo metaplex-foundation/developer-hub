@@ -3,7 +3,7 @@ title: Core 그룹 검색
 metaTitle: Core 그룹 검색 | DAS API Core 확장
 description: DAS를 통해 mpl-core GroupV1 계정을 검색하고 Core 타입의 GroupResult 값을 반환합니다.
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das searchGroups
   - mpl-core-das searchGroups
@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 요약
 
-`das.searchGroups`는 DAS에서 [`MplCoreGroup`](/ko/smart-contracts/core/groups) 인터페이스를 검색하고 [`GroupResult`](/ko/smart-contracts/core/groups#groupv1-계정) 값을 반환합니다.
+`das.searchGroups`는 DAS에서 [`MplCoreGroup`](/ko/smart-contracts/core/groups) 인터페이스를 검색하고 `GroupResult` 값을 반환합니다.
 
 - Core 그룹만 필터링합니다
 - 해당되는 경우 Core 자산 검색과 동일한 검색 필터(예: authority)를 허용합니다
@@ -38,5 +38,5 @@ proficiencyLevel: Intermediate
 
 ## 참고 사항
 
-- `MplCoreGroup` 인덱싱을 지원하는 DAS 클라이언트 ≥ 2.1.0이 필요합니다.
+- `MplCoreGroup` 인덱싱을 지원하는 DAS 클라이언트 ≥ 2.1.1이 필요합니다.
 - 결과의 멤버십 벡터는 비어 있을 수 있습니다. 전체 온체인 멤버십은 [`fetchGroupV1`](/ko/smart-contracts/core/groups)을 사용하세요.

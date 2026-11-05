@@ -3,7 +3,7 @@ title: 按分组获取Core资产
 metaTitle: 按分组获取Core资产 | DAS API Core 扩展
 description: 以 Core 类型的资产、合集或嵌套分组列出 mpl-core GroupV1 的成员。
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getAssetsByGroup core
   - mpl-core-das getAssetsByGroup
@@ -51,4 +51,4 @@ proficiencyLevel: Intermediate
 ## 注意事项
 
 - 这是用于 GroupV1 成员关系的 Core 辅助函数。要通过基础 DAS 进行 Token Metadata / 合集分组，请参阅使用 `groupKey: "collection"` 的 [`getAssetsByGroup`](/zh/dev-tools/das-api/methods/get-assets-by-group)。
-- 需要 `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0 以及可索引 Core 分组的 RPC。
+- 需要 `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.1 以及可索引 Core 分组的 RPC。

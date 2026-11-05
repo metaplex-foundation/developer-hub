@@ -3,7 +3,7 @@ title: 搜索Core分组
 metaTitle: 搜索Core分组 | DAS API Core 扩展
 description: 通过 DAS 搜索 mpl-core GroupV1 账户，并返回 Core 类型的 GroupResult 值。
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das searchGroups
   - mpl-core-das searchGroups
@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 概述
 
-`das.searchGroups` 在 DAS 中搜索 [`MplCoreGroup`](/zh/smart-contracts/core/groups) 接口，并返回 [`GroupResult`](/zh/smart-contracts/core/groups#groupv1-账户) 值。
+`das.searchGroups` 在 DAS 中搜索 [`MplCoreGroup`](/zh/smart-contracts/core/groups) 接口，并返回 `GroupResult` 值。
 
 - 仅筛选 Core 分组
 - 在适用时接受与 Core 资产搜索相同的搜索过滤器（例如 authority）
@@ -38,5 +38,5 @@ proficiencyLevel: Intermediate
 
 ## 注意事项
 
-- 需要支持 `MplCoreGroup` 索引的 DAS 客户端 ≥ 2.1.0。
+- 需要支持 `MplCoreGroup` 索引的 DAS 客户端 ≥ 2.1.1。
 - 结果中的成员向量可能为空。要获取完整的链上成员关系，请使用 [`fetchGroupV1`](/zh/smart-contracts/core/groups)。

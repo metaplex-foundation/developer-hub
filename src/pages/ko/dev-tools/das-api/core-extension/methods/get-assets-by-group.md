@@ -3,7 +3,7 @@ title: 그룹별 Core 자산 가져오기
 metaTitle: 그룹별 Core 자산 가져오기 | DAS API Core 확장
 description: mpl-core GroupV1의 멤버를 Core 타입의 자산, 컬렉션 또는 중첩 그룹으로 나열합니다.
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getAssetsByGroup core
   - mpl-core-das getAssetsByGroup
@@ -51,4 +51,4 @@ proficiencyLevel: Intermediate
 ## 참고 사항
 
 - 이것은 GroupV1 멤버십용 Core 헬퍼입니다. 기본 DAS를 통한 Token Metadata / 컬렉션 그룹화는 `groupKey: "collection"`을 사용하는 [`getAssetsByGroup`](/ko/dev-tools/das-api/methods/get-assets-by-group)을 참고하세요.
-- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0과 Core 그룹을 인덱싱하는 RPC가 필요합니다.
+- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.1과 Core 그룹을 인덱싱하는 RPC가 필요합니다.

@@ -17,7 +17,7 @@ proficiencyLevel: Intermediate
 
 ## 요약
 
-`das.getGroup`은 공개 키로 [mpl-core GroupV1](/ko/smart-contracts/core/groups) 하나를 가져와 [`GroupResult`](/ko/smart-contracts/core/groups#groupv1-계정)를 반환합니다.
+`das.getGroup`은 공개 키로 [mpl-core GroupV1](/ko/smart-contracts/core/groups) 하나를 가져와 `GroupResult`를 반환합니다.
 
 - MPL Core SDK와 함께 사용하도록 타입이 지정되어 있습니다
 - 멤버십 벡터는 인덱서에 따라 비어 있을 수 있습니다

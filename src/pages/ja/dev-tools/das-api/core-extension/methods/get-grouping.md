@@ -3,7 +3,7 @@ title: グループ情報の取得（Core 拡張機能）
 metaTitle: グループ情報の取得 | DAS API Core 拡張機能
 description: コレクションまたはmpl-core GroupV1のグループ名とインデックス済みメンバー数を返します。
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getGrouping core extension
   - mpl-core-das getGrouping
@@ -21,7 +21,7 @@ proficiencyLevel: Intermediate
 
 - `group_key`、`group_name`、`group_size` を返します
 - コレクションには `groupKey: "collection"` を、[GroupV1](/ja/smart-contracts/core/groups) には `groupKey: "group"` を使用します
-- メンバーを一覧表示するには、[`getAssetsByGroup`](/ja/dev-tools/das-api/core-extension/methods/get-assets-by-group)（Core）または[基本のDASメソッド](/ja/dev-tools/das-api/methods/get-grouping)を使用します
+- メンバーを一覧表示するには、[`getAssetsByGroup`](/ja/dev-tools/das-api/core-extension/methods/get-assets-by-group)（Core）または[基本のDASメソッド](/ja/dev-tools/das-api/methods/get-assets-by-group)を使用します
 
 ## コード例
 
@@ -41,4 +41,4 @@ proficiencyLevel: Intermediate
 ## 注意事項
 
 - `group_size` はインデクサーが記録した値を反映しており、オンチェーンの現在のベクトル長と一致するとは限りません。
-- DASクライアント ≥ 2.1.0 と、`getGrouping` をサポートするRPCが必要です。
+- DASクライアント ≥ 2.1.1 と、`getGrouping` をサポートするRPCが必要です。

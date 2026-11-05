@@ -3,7 +3,7 @@ title: グループ別Coreアセットの取得
 metaTitle: グループ別Coreアセットの取得 | DAS API Core 拡張機能
 description: mpl-core GroupV1のメンバーを、Core型のアセット、コレクション、またはネストされたグループとして一覧表示します。
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getAssetsByGroup core
   - mpl-core-das getAssetsByGroup
@@ -51,4 +51,4 @@ proficiencyLevel: Intermediate
 ## 注意事項
 
 - これはGroupV1メンバーシップ用のCoreヘルパーです。基本のDAS経由のToken Metadata / コレクションのグルーピングについては、`groupKey: "collection"` を指定した [`getAssetsByGroup`](/ja/dev-tools/das-api/methods/get-assets-by-group) を参照してください。
-- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0 と、CoreグループをインデックスするRPCが必要です。
+- `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.1 と、CoreグループをインデックスするRPCが必要です。
