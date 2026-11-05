@@ -92,8 +92,6 @@ POST /v1/launches/create
 
 Raydium の流動性は独立したアロケーションではなく、販売アロケーションのファンドフローとして設定します。`RaydiumLP` フローは Raydium CPMM プールを作成し、`RaydiumClmmLP` フローは Raydium CLMM（集中流動性）ポジションを作成します。CLMM ローンチは、アカウントで有効になっていない限り `403` を返します。
 
-プレセールの `fundFlows` はちょうど 2 つです。売上金のための `UnlockedFunds` フローと、`RaydiumLP` または `RaydiumClmmLP` フローです。
-
 {% callout type="warning" title="Streamflow アロケーションは廃止されました" %}
 以前の `lockedV2`（Streamflow）アロケーションタイプは受け付けられなくなりました。ロックおよびベスティングのアロケーションには `claimScheduleV2` を使用してください。
 {% /callout %}

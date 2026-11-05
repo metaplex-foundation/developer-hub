@@ -92,8 +92,6 @@ POST /v1/launches/create
 
 Raydium 유동성은 별도의 할당이 아니라 판매 할당의 펀드 플로우로 구성됩니다. `RaydiumLP` 플로우는 Raydium CPMM 풀을, `RaydiumClmmLP` 플로우는 Raydium CLMM(집중 유동성) 포지션을 생성합니다. CLMM 런칭은 계정에서 활성화되어 있지 않으면 `403`을 반환합니다.
 
-사전 판매의 `fundFlows`는 정확히 두 개입니다. 수익금을 위한 `UnlockedFunds` 플로우와 `RaydiumLP` 또는 `RaydiumClmmLP` 플로우입니다.
-
 {% callout type="warning" title="Streamflow 할당은 폐지되었습니다" %}
 이전의 `lockedV2`(Streamflow) 할당 유형은 더 이상 허용되지 않습니다. 잠금 및 베스팅 할당에는 `claimScheduleV2`를 사용하세요.
 {% /callout %}
