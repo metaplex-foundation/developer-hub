@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 创建发行 | REST API | Metaplex
 description: 为新的 Genesis 代币发行构建链上交易。返回可供签名和发送的未签名交易。
 method: POST
 created: '02-19-2026'
-updated: '10-21-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - create launch
@@ -42,6 +42,7 @@ POST /v1/launches/create
 | `wallet` | `string` | 是 | 创建者钱包公钥 |
 | `launch` | `object` | 是 | 完整发行配置（见下文） |
 | `agent` | `object` | 否 | 代表已注册的[智能体](/zh/agents)发行（见[智能体发行](#agent-launches)） |
+| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。读取 V1 交易需要 Umi 1.6 或 `@solana/web3.js` 1.99 及以上版本，`@solana/web3.js` 1.x 无法对其签名。适用于 `solana-mainnet` 和 `solana-devnet`。 |
 
 请求体还接受 `includeBackendSigner`、`derivedSignerPublicKey`、`nonce` 和 `buildAllTxs`。这些字段用于 [metaplex.com](https://www.metaplex.com) 自身的签名流程；直接调用 API 时请勿设置。
 

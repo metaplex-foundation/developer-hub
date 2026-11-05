@@ -4,7 +4,7 @@ metaTitle: Metaplex API - エージェントウォレットからの出金 | RES
 description: エージェントのウォレットからオーナーに SOL を引き出すトランザクションを構築します。オーナー限定。
 method: POST
 created: '08-01-2026'
-updated: '08-01-2026'
+updated: '11-05-2026'
 keywords:
   - Agent API
   - withdraw
@@ -55,6 +55,7 @@ POST /agents/{address}/withdraw
 | `sender` | `string` | はい | エージェントオーナーのウォレット（base58）。SOL を受け取り、トランザクションに署名します。 |
 | `amount` | `number` | はい | SOL 単位の金額。正の値である必要があります。 |
 | `network` | `string` | いいえ | `solana-mainnet`（デフォルト）または `solana-devnet`。 |
+| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。読み取りにはUmi 1.6または`@solana/web3.js` 1.99以降が必要で、`@solana/web3.js` 1.xでは署名できません。`solana-mainnet`と`solana-devnet`で利用できます。 |
 
 ## リクエスト例
 

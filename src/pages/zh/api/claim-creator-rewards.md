@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 认领创作者奖励 | REST API | Metaplex
 description: 通过单次 API 调用，跨钱包的所有 Genesis 联合曲线和 Raydium bucket 认领累积的创作者奖励。返回准备好签名的 Solana 交易。
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | 是 | 要认领的创作者费钱包的 base58 编码公钥。这是在 bucket 上设置为 `creatorFeeWallet` 的钱包——若未配置覆盖，则为发行钱包。 |
 | `network` | `string` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。必须与基础 URL 的集群匹配。 |
 | `payer` | `string` | 否 | 承担返回交易的交易费和租金的 base58 编码公钥。省略时默认为 `wallet`。 |
+| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。读取 V1 交易需要 Umi 1.6 或 `@solana/web3.js` 1.99 及以上版本，`@solana/web3.js` 1.x 无法对其签名。适用于 `solana-mainnet` 和 `solana-devnet`。 |
 
 ### 何时设置 `payer`
 
