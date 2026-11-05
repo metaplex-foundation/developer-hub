@@ -3,7 +3,7 @@ title: Get Grouping (Core Extension)
 metaTitle: Get Grouping | DAS API Core Extension
 description: Return group name and indexed member count for a collection or mpl-core GroupV1.
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getGrouping core extension
   - mpl-core-das getGrouping
@@ -21,7 +21,7 @@ proficiencyLevel: Intermediate
 
 - Returns `group_key`, `group_name`, and `group_size`
 - Use `groupKey: "collection"` for collections or `groupKey: "group"` for [GroupV1](/smart-contracts/core/groups)
-- To list members, use [`getAssetsByGroup`](/dev-tools/das-api/core-extension/methods/get-assets-by-group) (Core) or the [base DAS method](/dev-tools/das-api/methods/get-grouping)
+- To list members, use [`getAssetsByGroup`](/dev-tools/das-api/core-extension/methods/get-assets-by-group) (Core) or the [base DAS method](/dev-tools/das-api/methods/get-assets-by-group)
 
 ## Code example
 
@@ -41,4 +41,4 @@ The helper accepts the Umi instance followed by an options object.
 ## Notes
 
 - `group_size` reflects what the indexer has recorded, not necessarily live on-chain vector lengths.
-- Requires DAS client ≥ 2.1.0 and RPC support for `getGrouping`.
+- Requires DAS client ≥ 2.1.1 and RPC support for `getGrouping`.
