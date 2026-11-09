@@ -3,17 +3,20 @@ title: API 客户端
 metaTitle: API 客户端 | Genesis SDK | Metaplex
 description: 使用 Genesis API 客户端在 Solana 上创建和注册代币发行。提供从简单到完全控制的三种集成模式。
 created: '02-19-2026'
-updated: '03-04-2026'
+updated: '10-12-2026'
 keywords:
   - Genesis API client
   - token launch SDK
   - createLaunch
   - registerLaunch
   - createAndRegisterLaunch
+  - claimCreatorRewards
+  - creator rewards
 about:
   - SDK API client
   - Token launch creation
   - Launch registration
+  - Creator rewards claiming
 proficiencyLevel: Intermediate
 programmingLanguage:
   - JavaScript
@@ -47,11 +50,20 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 umi.use(keypairIdentity(myKeypair));
 ```
 
+## 函数概览 {% #function-overview %}
+
+| 函数 | 用途 |
+|----------|---------|
+| [`createAndRegisterLaunch`](#easy-mode-create-and-register-launch) | 一次调用完成代币发行——创建、签名、发送并注册 |
+| [`createLaunch`](#full-control-create-launch-register-launch) | 为自定义签名流程构建未签名的发行交易 |
+| [`registerLaunch`](#full-control-create-launch-register-launch) | 在创建交易于链上确认后注册发行 |
+| [`claimCreatorRewards`](#claim-creator-rewards) | 为某个钱包认领所有存储桶中累积的创作者奖励 |
+
 ## 三种集成模式
 
 SDK 提供三种创建发行的模式，从全自动到完全手动。
 
-### 简易模式 — `createAndRegisterLaunch`
+### 简易模式 — `createAndRegisterLaunch` {% #easy-mode-create-and-register-launch %}
 
 最简单的方式。一次函数调用即可处理所有事项：创建链上账户、通过 Umi 签名并发送交易，以及注册发行。
 
@@ -77,7 +89,7 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 
 `txSender` 回调接收未签名交易数组，必须返回签名数组。回调完成后 SDK 会处理注册。
 
-### 完全控制 — `createLaunch` + `registerLaunch`
+### 完全控制 — `createLaunch` + `registerLaunch` {% #full-control-create-launch-register-launch %}
 
 完全控制交易生命周期。调用 `createLaunch` 获取未签名交易，自行处理签名和发送，然后调用 `registerLaunch`。
 
@@ -108,6 +120,35 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 
 ---
 
+## 认领创作者奖励 {% #claim-creator-rewards %}
+
+`claimCreatorRewards` 调用 `POST /v1/creator-rewards/claim`，并返回每个符合条件的联合曲线和 Raydium 存储桶的 base64 编码认领交易，这些交易已反序列化为 Umi `Transaction`。请使用 Umi identity 对每个交易签名并发送。有关完整的认领流程——包括创作者费配置、累积检查以及更底层的逐桶指令——请参阅 [Genesis 联合曲线上的创作者费](/zh/smart-contracts/genesis/creator-fees)。
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards" frameworks="umi" filename="claimCreatorRewards" /%}
+
+### ClaimCreatorRewardsInput
+
+| 字段 | 类型 | 必填 | 描述 |
+|-------|------|----------|-------------|
+| `wallet` | `PublicKey \| string` | 是 | 要认领的创作者费钱包。 |
+| `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。必须与 API 基础 URL 一致——`https://api.metaplex.com` |
+| `payer` | `PublicKey \| string` | 否 | 支付返回交易的费用和租金的钱包。默认为 `wallet`。当创作者费钱包没有 SOL 时使用（例如 agent PDA）。payer 必须对返回的交易签名；认领到的 SOL 仍由创作者费钱包接收。 |
+
+### ClaimCreatorRewardsResponse
+
+| 字段 | 类型 | 描述 |
+|-------|------|-------------|
+| `transactions` | `Transaction[]` | 已反序列化的 Umi 交易，每个被认领的存储桶一个。请使用 payer identity 对每个交易签名并发送。 |
+| `blockhash` | `BlockhashWithExpiryBlockHeight` | 构建交易时使用的区块哈希。请用它来确认交易——不要替换为新获取的区块哈希。 |
+
+{% callout type="warning" title="无奖励是类型化错误，而不是空数组" %}
+当钱包没有可认领的内容时，API 返回 HTTP `400` 和 `{"error":{"message":"No rewards available to claim"}}`，SDK 会抛出 `GenesisApiError`。调用方必须捕获该错误并根据 `err.message`（或 `err.statusCode === 400`）进行分支——不能依赖 `result.transactions.length === 0`。请参阅[处理无奖励情况](/zh/smart-contracts/genesis/creator-fees#handling-the-no-rewards-case)。
+{% /callout %}
+
+{% code-tabs-imported from="genesis/api_claim_creator_rewards_errors" frameworks="umi" filename="errorHandling" /%}
+
+---
+
 ## 配置
 
 ### CreateLaunchInput
@@ -117,7 +158,7 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `wallet` | `PublicKey \| string` | 是 | 创建者钱包（签署交易） |
 | `token` | `TokenMetadata` | 是 | 代币元数据 |
 | `network` | `SvmNetwork` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'` |
-| `quoteMint` | `QuoteMintInput` | 否 | `'SOL'`（默认）、`'USDC'` 或原始铸造地址 |
+| `quoteMint` | `QuoteMintInput` | 否 | `'SOL'`（默认）或 `'USDC'` |
 | `launchType` | `CreateLaunchType` | 是 | `'launchpool'` — 底层发行机制 |
 | `launch` | `LaunchpoolLaunchInput` | 是 | 发行配置 |
 
@@ -148,30 +189,40 @@ SDK 提供三种创建发行的模式，从全自动到完全手动。
 | `raiseGoal` | `number` | 最低募集报价代币数量，以整数单位表示（例如 250 SOL）。最低 250 SOL 或 5,000 USDC |
 | `raydiumLiquidityBps` | `number` | 用于 Raydium LP 的募集资金百分比，以基点表示（2000–10000） |
 | `fundsRecipient` | `PublicKey \| string` | 接收解锁部分募集资金的地址 |
+| `softCap` | `number?` | 募集报价代币的可选上限，以整数单位表示。超出上限的存款将按比例退还。必须大于 0；省略则表示无上限 |
 
-### LockedAllocation（Streamflow 锁仓）
+### ClaimScheduleAllocation（归属锁仓）
 
-可通过 `launch.lockedAllocations` 添加可选的锁仓代币计划：
+`ClaimScheduleAllocation` 为部分代币供应量定义 Genesis 原生的归属（vesting）锁仓，通过 `launch.claimScheduleAllocations` 传入。每个分配都会成为链上的 `ClaimScheduleBucketV2`：代币沿带有可选悬崖期的线性曲线累积，SDK 会将下面易读的计划转换为链上的秒数和基点值。
 
-| 字段 | 类型 | 描述 |
-|-------|------|-------------|
-| `name` | `string` | 流名称，最多 64 个字符（例如 "Team"、"Advisors"） |
-| `recipient` | `PublicKey \| string` | 锁仓接收方钱包 |
-| `tokenAmount` | `number` | 锁仓计划中的代币总量 |
-| `vestingStartTime` | `Date \| string` | 解锁计划开始时间 |
-| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 完整锁仓周期 |
-| `unlockSchedule` | `TimeUnit` | 代币释放频率 |
-| `cliff` | `object?` | 可选悬崖期，包含 `duration` 和 `unlockAmount` |
+| 字段 | 类型 | 必填 | 描述 |
+|-------|------|----------|-------------|
+| `name` | `string` | 是 | 锁仓名称，最多 64 个字符（例如 "Team"、"Advisors"） |
+| `recipient` | `PublicKey \| string` | 是 | 可领取已归属代币的钱包 |
+| `tokenAmount` | `number` | 是 | 归属计划中的代币总量 |
+| `vestingStartTime` | `Date \| string` | 是 | 线性归属曲线开始累积的时间 |
+| `vestingDuration` | `{ value: number, unit: TimeUnit }` | 是 | 线性归属周期的长度 |
+| `unlockSchedule` | `TimeUnit` | 是 | 代币解锁的频率 |
+| `cliff` | `{ duration, unlockAmount? }` | 否 | 可选悬崖期。`duration` 从 `vestingStartTime` 起算；`unlockAmount` 为代币数量，或表示按比例份额的 `'linear'`（默认值） |
+| `cancelable` | `boolean` | 否 | 发行创建者可以取消该锁仓。默认 `false` |
+| `cancelableByRecipient` | `boolean` | 否 | 接收方可以取消该锁仓。默认 `false` |
+| `transferable` | `boolean` | 否 | 发行创建者可以转让该锁仓。默认 `false` |
+| `transferableByRecipient` | `boolean` | 否 | 接收方可以转让该锁仓。默认 `false` |
+| `pausable` | `boolean` | 否 | Genesis 权限方可以暂停和恢复归属。默认 `false` |
 
-{% callout type="warning" %}
-`vestingStartTime` 必须在**存款期结束之后**（即 `depositStartTime` + 48 小时之后）。API 将拒绝在存款窗口关闭之前开始的锁仓计划。
+{% callout type="note" %}
+对于 Launch Pool，即使 `vestingStartTime` 更早且代币已经累积，在发行完成毕业（graduate）之前也无法**领取**已归属的代币。解析后的悬崖期份额必须大于零。
+{% /callout %}
+
+{% callout type="warning" title="lockedAllocations 已弃用" %}
+`launch.lockedAllocations`（原 Streamflow 锁仓）已弃用。SDK 仍然接受它，并将每个条目映射为领取计划（claim schedule），因此现有集成仍可正常编译。新的集成应使用 `claimScheduleAllocations`。迁移时，请将 `cancelableBySender` 重命名为 `cancelable`，将 `transferableBySender` 重命名为 `transferable`。
 {% /callout %}
 
 **TimeUnit 值：** `'SECOND'`、`'MINUTE'`、`'HOUR'`、`'DAY'`、`'WEEK'`、`'TWO_WEEKS'`、`'MONTH'`、`'QUARTER'`、`'YEAR'`
 
-**带锁仓分配的示例：**
+**归属锁仓示例：**
 
-{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="lockedAllocations" /%}
+{% code-tabs-imported from="genesis/api_locked_allocations" frameworks="umi" filename="claimScheduleAllocations" /%}
 
 ### SignAndSendOptions
 
@@ -198,7 +249,7 @@ SDK 提供三种错误类型及对应的类型守卫函数。
 import { isGenesisApiError } from '@metaplex-foundation/genesis';
 
 try {
-  await createLaunch(umi, input);
+  await createLaunch(umi, {}, input);
 } catch (err) {
   if (isGenesisApiError(err)) {
     console.error('API error:', err.statusCode, err.responseBody);
@@ -283,7 +334,7 @@ import {
   signAndSendLaunchTransactions,
 } from '@metaplex-foundation/genesis';
 
-const createResult = await createLaunch(umi, input);
+const createResult = await createLaunch(umi, {}, input);
 const signatures = await signAndSendLaunchTransactions(umi, createResult, {
   commitment: 'confirmed',
 });

@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 公平发射与 Solana 代币分发 | Metaplex
 description: Solana 上的公平发射代币分发。用户存入 SOL 并按比例获得 SPL 代币——链上众筹替代方案，具有有机价格发现机制。
 created: '01-15-2025'
-updated: '09-18-2026'
+updated: '10-12-2026'
 keywords:
   - launch pool
   - token distribution
@@ -172,6 +172,7 @@ async function setupLaunchPool() {
       triggeredTimestamp: null,
     },
     minimumDepositAmount: null,
+    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
     endBehaviors: [
       {
         __kind: 'SendQuoteTokenPercentage',
@@ -548,7 +549,7 @@ endBehaviors: [
 
 | 错误 | 代码 | 原因 |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount` 为零——请省略该扩展，而不是将其设置为 `0` |
+| `InvalidSoftCap` | 221 | `softCap.amount` 为零——请传入 `softCap: null`，而不是 `{ amount: 0n }` |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount` 低于 `minimumQuoteTokenThreshold.amount` |
 | `LaunchPoolNotEnded` | — | 在存款窗口关闭前调用了 `refundLaunchPoolV2` |
 | `LaunchPoolThresholdMet` | 173 | 在下限已达到且未超过上限时请求了退款 |

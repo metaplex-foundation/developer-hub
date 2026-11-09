@@ -41,7 +41,7 @@
     "html-to-image": "^1.11.11",
     "lightense-images": "^1.0.17",
     "lucide-react": "^0.563.0",
-    "next": "15.5.15",
+    "next": "15.5.28",
     "next-intl": "^4.9.1",
     "postcss-focus-visible": "^6.0.4",
     "postcss-import": "^14.1.0",
@@ -59,7 +59,7 @@
     "markdownlint-cli2": "^0.20.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
-    "sharp": "^0.32.6"
+    "sharp": "^0.35.5"
   },
   "packageManager": "pnpm@9.1.4+sha512.9df9cf27c91715646c7d675d1c9c8e41f6fce88246f1318c1aa6a1ed1aeb3c4f032fcdf4ba63cc69c4fe6d634279176b5358727d8f2cc1e65b65f43ce2f8bfb0"
 }

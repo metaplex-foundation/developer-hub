@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '09-26-2026'
+updated: '10-21-2026'
 keywords:
   - Genesis API
   - create launch
@@ -74,7 +74,7 @@ For a new token, the allocation supplies must add up to exactly `supply`. A new 
 
 | `type` | Description |
 |--------|-------------|
-| `launchpool` | Proportional distribution pool. Allocations: a `launchpoolV2`, plus any `unlockedV2` and `claimScheduleV2` allocations |
+| `launchpool` | Proportional distribution pool. Allocations, in order: a `launchpoolV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
 | `presale` | Fixed-price presale. Allocations, in order: a `presaleV2`, an `unlockedV2`, then any `claimScheduleV2` allocations |
 | `bondingCurve` | Bonding curve launch. Allocations: a `bondingCurveV2`. Fixed at 1,000,000,000 supply, 6 decimals, and a SOL quote |
 

@@ -57,7 +57,7 @@ If you need to register an agent, start with the registration guide before conti
 
 {% quick-links %}
 
-{% quick-link title="Register an Agent" icon="InboxArrowDown" href="/docs/agents/register-agent" description="If you need to register an agent, create the onchain identity and get the Core asset address required by this launch flow." /%}
+{% quick-link title="Register an Agent" icon="InboxArrowDown" href="/agents/register-agent" description="If you need to register an agent, create the onchain identity and get the Core asset address required by this launch flow." /%}
 
 {% quick-link title="Set Agent Token" icon="CommandLine" href="#set-agent-token" description="If the agent token has not been set yet, use setAgentTokenV1 to link an existing Genesis token." /%}
 

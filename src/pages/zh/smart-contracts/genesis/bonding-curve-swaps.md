@@ -2,7 +2,7 @@
 title: 联合曲线兑换集成
 metaTitle: Genesis 联合曲线兑换集成 | Metaplex
 description: 如何使用 Genesis SDK 读取联合曲线状态、获取兑换报价、执行买入和卖出交易、处理滑点以及认领创作者费。
-updated: '04-09-2026'
+updated: '10-12-2026'
 keywords:
   - bonding curve
   - swap

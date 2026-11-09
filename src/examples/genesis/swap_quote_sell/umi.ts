@@ -4,6 +4,7 @@ import {
   findBondingCurveBucketV2Pda,
   fetchBondingCurveBucketV2,
   getSwapResult,
+  SwapDirection,
 } from '@metaplex-foundation/genesis';
 import { publicKey } from '@metaplex-foundation/umi';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
@@ -20,7 +21,7 @@ const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 // [MAIN]
 const TOKENS_IN = 500_000_000_000n; // 500 tokens (9 decimals)
 
-const sellQuote = getSwapResult(bucket, TOKENS_IN, 'sell');
+const sellQuote = getSwapResult(bucket, TOKENS_IN, SwapDirection.Sell);
 
 console.log('Tokens input: ', sellQuote.amountIn.toString());
 console.log('Total fee:    ', sellQuote.fee.toString(), 'lamports');

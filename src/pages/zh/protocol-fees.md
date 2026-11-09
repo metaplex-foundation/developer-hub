@@ -58,6 +58,14 @@ Merkle 领取成功时，由领取交易的支付方支付。
 
 {% /totem-accordion %}
 
+{% totem-accordion title="Hydra" %}
+
+从扇出钱包的每笔新流入中扣除一定比例，剩余部分再在成员之间分配。该手续费保留在扇出的持有账户中，直到 Metaplex 手续费权限方将其收取至协议金库。
+
+{% protocol-fees program="hydra" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1（旧版）" %}
 
 原始压缩NFT程序。

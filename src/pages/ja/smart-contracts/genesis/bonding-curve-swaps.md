@@ -2,7 +2,7 @@
 title: ボンディングカーブ スワップ統合
 metaTitle: Genesis ボンディングカーブ スワップ統合 | Metaplex
 description: Genesis SDKを使用して、ボンディングカーブの状態の読み取り、スワップ見積もりの取得、売買トランザクションの実行、スリッページの処理、クリエイター手数料の請求を行う方法。
-updated: '04-09-2026'
+updated: '10-12-2026'
 keywords:
   - bonding curve
   - swap

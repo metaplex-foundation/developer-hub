@@ -2,7 +2,7 @@
 title: Bonding Curve Swap Integration
 metaTitle: Genesis Bonding Curve Swap Integration | Metaplex
 description: How to read bonding curve state, get swap quotes, execute buy and sell transactions, handle slippage, and claim creator fees using the Genesis SDK.
-updated: '04-09-2026'
+updated: '10-12-2026'
 keywords:
   - bonding curve
   - swap

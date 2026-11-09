@@ -7,8 +7,8 @@ import {
   applySlippage,
   swapBondingCurveV2,
   isSwappable,
+  SwapDirection,
 } from '@metaplex-foundation/genesis';
-import { findAssociatedTokenPda } from '@metaplex-foundation/mpl-toolbox';
 import { publicKey } from '@metaplex-foundation/umi';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 // [/IMPORTS]
@@ -28,23 +28,19 @@ const bucket = await fetchBondingCurveBucketV2(umi, bucketPda);
 if (!isSwappable(bucket)) throw new Error('Curve is not currently accepting swaps');
 
 const SOL_IN = 1_000_000_000n; // 1 SOL in lamports
-const quote = getSwapResult(bucket, SOL_IN, 'buy');
-const minAmountOut = applySlippage(quote.amountOut, 100); // 1% slippage
-
-const [userBaseTokenAccount] = findAssociatedTokenPda(umi, { mint: baseMint, owner: umi.identity.publicKey });
-const [userQuoteTokenAccount] = findAssociatedTokenPda(umi, { mint: quoteMint, owner: umi.identity.publicKey });
+const quote = getSwapResult(bucket, SOL_IN, SwapDirection.Buy);
+const minAmountOutScaled = applySlippage(quote.amountOut, 100); // 1% slippage
 
 // NOTE: Fund the wSOL ATA before this call — see the wSOL Wrapping Note on this page.
+// The user's base and wSOL token accounts default to the payer's ATAs.
 const result = await swapBondingCurveV2(umi, {
   genesisAccount,
-  bucketPda,
+  bucket: bucketPda,
   baseMint,
   quoteMint,
-  userBaseTokenAccount,
-  userQuoteTokenAccount,
-  amountIn: quote.amountIn,
-  minAmountOut,
-  direction: 'buy',
+  amount: quote.amountIn,
+  minAmountOutScaled,
+  swapDirection: SwapDirection.Buy,
 }).sendAndConfirm(umi);
 
 console.log('Buy confirmed:', result.signature);

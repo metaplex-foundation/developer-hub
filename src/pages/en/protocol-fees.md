@@ -58,6 +58,14 @@ Paid by the claim transaction payer when a Merkle claim succeeds.
 
 {% /totem-accordion %}
 
+{% totem-accordion title="Hydra" %}
+
+A percentage of every new inflow to a fanout wallet, deducted before the remainder is split among members. The fee stays in the fanout's holding account until the Metaplex fee authority collects it to the protocol treasury.
+
+{% protocol-fees program="hydra" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1 (Legacy)" %}
 
 The original compressed NFT program.

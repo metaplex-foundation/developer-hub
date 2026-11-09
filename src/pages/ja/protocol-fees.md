@@ -58,6 +58,14 @@ Merkle クレームが成功したとき、クレームトランザクション�
 
 {% /totem-accordion %}
 
+{% totem-accordion title="Hydra" %}
+
+ファンアウトウォレットへの新しい流入額ごとに一定割合が差し引かれ、残りがメンバー間で分配されます。手数料はMetaplexの手数料オーソリティがプロトコルトレジャリーに回収するまで、ファンアウトの保有アカウントに保管されます。
+
+{% protocol-fees program="hydra" showTitle=false /%}
+
+{% /totem-accordion %}
+
 {% totem-accordion title="Bubblegum v1（レガシー）" %}
 
 オリジナルの圧縮NFTプログラム。
