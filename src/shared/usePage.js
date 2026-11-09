@@ -40,7 +40,12 @@ export function usePage(pageProps) {
     metaTitle: localizedMetaTitle,
     description: pageProps.markdoc?.frontmatter.description,
     created: pageProps.markdoc?.frontmatter.created ?? null,
-    updated: pageProps.markdoc?.frontmatter.updated ?? null,
+    // `lastModified` is injected at build from frontmatter `updated` or the
+    // last git commit (scripts/generate-last-modified.mjs).
+    updated:
+      pageProps.markdoc?.frontmatter.lastModified ??
+      pageProps.markdoc?.frontmatter.updated ??
+      null,
     pathname: normalizedPathname,
     originalPathname: pathname,
     locale,

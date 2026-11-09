@@ -39,3 +39,6 @@ yarn-error.log*
 # Auto-generated
 public/llms.txt
 
+
+# generated at build (scripts/generate-last-modified.mjs)
+/src/generated/

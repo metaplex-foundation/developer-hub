@@ -149,11 +149,16 @@ export function Layout({ children, page }) {
                         <p className="text-sm text-slate-500 dark:text-slate-400">
                           Last updated{' '}
                           {(() => {
-                            // Parse MM-DD-YYYY or YYYY-MM-DD format
+                            // Parse MM-DD-YYYY or YYYY-MM-DD as a local date:
+                            // new Date('YYYY-MM-DD') is UTC midnight, which
+                            // shows the previous day west of UTC.
                             const dateStr = page.updated
                             let date
                             if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
                               const [month, day, year] = dateStr.split('-')
+                              date = new Date(year, month - 1, day)
+                            } else if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                              const [year, month, day] = dateStr.split('-')
                               date = new Date(year, month - 1, day)
                             } else {
                               date = new Date(dateStr)

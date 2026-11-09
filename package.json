@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "node scripts/generate-llms-txt.mjs && next build",
+    "dev": "node scripts/generate-last-modified.mjs && next dev",
+    "build": "node scripts/generate-llms-txt.mjs && node scripts/generate-last-modified.mjs && next build",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "node generate-sitemap.mjs",
