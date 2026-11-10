@@ -108,9 +108,9 @@ export function Navigation({ product, navigation, className, hideProductHeader =
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
           <li key={`${product.name}-${section.title}`}>
-            <h2 className="font-display font-medium text-foreground">
+            <p className="font-display font-medium text-foreground">
               {section.title}
-            </h2>
+            </p>
             <ul
               role="list"
               className="mt-2 space-y-2 border-l border-sidebar-border lg:mt-4 lg:space-y-4"
