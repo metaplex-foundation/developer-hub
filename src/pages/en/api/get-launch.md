@@ -75,6 +75,7 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
       "mechanic": "launchpoolV2",
       "genesisAddress": "7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaSfG6EQN",
       "spotlight": false,
+      "verified": false,
       "startTime": "2026-01-15T14:00:00.000Z",
       "endTime": "2026-01-15T18:00:00.000Z",
       "status": "graduated",
@@ -94,7 +95,8 @@ curl https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPaS
     "socials": {
       "x": "https://x.com/mytoken",
       "telegram": "https://t.me/mytoken",
-      "discord": "https://discord.gg/mytoken"
+      "discord": "https://discord.gg/mytoken",
+      "twitterVerified": true
     }
   }
 }
