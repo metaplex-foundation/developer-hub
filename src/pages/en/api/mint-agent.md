@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Mint Agent | REST API | Metaplex
 description: Build a partially signed transaction that mints an agent Core asset and registers its on-chain identity.
 method: POST
 created: '08-01-2026'
-updated: '08-01-2026'
+updated: '11-05-2026'
 keywords:
   - Agent API
   - mint agent
@@ -56,6 +56,7 @@ POST /agents/mint
 | `agentMetadata` | `object` | Yes | EIP-8004 agent registration JSON (name, description, image, services, registrations, active, …). |
 | `collectionAddress` | `string` | No | Core collection to mint the agent into. |
 | `a2aCard` | `object` | No | Pre-built A2A AgentCard. When omitted, one is synthesized from `agentMetadata`. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes Umi 1.6 or `@solana/web3.js` 1.99 or later, and `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
 
 ## Example Request
 
