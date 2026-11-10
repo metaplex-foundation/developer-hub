@@ -68,6 +68,8 @@ Metaplex Core（"Core"）是 Solana 上的**下一代 NFT 标准**。它采用**
 ## 介绍
 Metaplex Core 是 Solana 上新项目推荐的 NFT 标准。与 Token Metadata 和其他标准相比，Core 提供：
 ### 成本效率
+
+铸造成本截至2026年9月29日。当前的Core协议费用请参阅[协议费用](/protocol-fees)。
 | 标准 | 铸造成本 | 计算单元 |
 |----------|-----------|---------------|
 | **Metaplex Core** | ~0.003 SOL | ~17,000 CU |

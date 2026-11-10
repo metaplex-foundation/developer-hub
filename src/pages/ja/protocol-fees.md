@@ -2,9 +2,10 @@
 title: プロトコル手数料
 metaTitle: プロトコル手数料 | Developer Hub
 description: Metaplexプロダクトのオンチェーン手数料の詳細。
+updated: '09-29-2026'
 ---
 
-Metaplexプロトコルには現在、以下の手数料が含まれています：
+Metaplexプロトコルには現在、以下の手数料が含まれています： 2026年9月29日時点の手数料です。
 
 {% totem %}
 

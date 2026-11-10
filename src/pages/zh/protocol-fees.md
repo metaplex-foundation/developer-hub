@@ -2,9 +2,10 @@
 title: 协议费用
 metaTitle: 协议费用 | Developer Hub
 description: Metaplex产品链上费用详情。
+updated: '09-29-2026'
 ---
 
-Metaplex协议目前包含以下费用：
+Metaplex协议目前包含以下费用： 费用截至2026年9月29日。
 
 {% totem %}
 
