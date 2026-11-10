@@ -3,7 +3,7 @@ title: Get Core Assets by Group
 metaTitle: Get Core Assets by Group | DAS API Core Extension
 description: List mpl-core GroupV1 members as Core-typed assets, collections, or nested groups.
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das getAssetsByGroup core
   - mpl-core-das getAssetsByGroup
@@ -51,4 +51,4 @@ The helper accepts the Umi instance followed by an options object.
 ## Notes
 
 - This is the Core helper for GroupV1 membership. For Token Metadata / collection grouping via base DAS, see [`getAssetsByGroup`](/dev-tools/das-api/methods/get-assets-by-group) with `groupKey: "collection"`.
-- Requires `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.0 and an RPC that indexes Core groups.
+- Requires `@metaplex-foundation/digital-asset-standard-api` ≥ 2.1.1 and an RPC that indexes Core groups.

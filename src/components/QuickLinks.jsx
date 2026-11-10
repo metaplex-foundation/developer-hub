@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Icon } from '@/components/icons'
+import { useInPageHref } from '@/shared/useInPageHref'
 
 export function QuickLinks({ children }) {
   return (
@@ -11,6 +12,8 @@ export function QuickLinks({ children }) {
 }
 
 export function QuickLink({ title, description, href, target, icon }) {
+  const inPageHref = useInPageHref()
+
   return (
     <div className="group relative border border-border bg-card transition-colors duration-200 hover:border-foreground">
       <div className="relative overflow-hidden p-6">
@@ -19,7 +22,7 @@ export function QuickLink({ title, description, href, target, icon }) {
           className="h-8 w-8 transition-colors duration-200 group-hover:text-primary"
         />
         <h2 className="mt-4 font-display text-base text-card-foreground">
-          <Link href={href} target={target}>
+          <Link href={inPageHref(href)} target={target}>
             <span className="absolute -inset-px" />
             {title}
           </Link>

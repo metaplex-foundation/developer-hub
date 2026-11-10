@@ -3,7 +3,7 @@ title: Search Core Groups
 metaTitle: Search Core Groups | DAS API Core Extension
 description: Search mpl-core GroupV1 accounts via DAS and return Core-typed GroupResult values.
 created: '07-22-2026'
-updated: '07-22-2026'
+updated: '11-04-2026'
 keywords:
   - das searchGroups
   - mpl-core-das searchGroups
@@ -38,5 +38,5 @@ proficiencyLevel: Intermediate
 
 ## Notes
 
-- Requires DAS client ≥ 2.1.0 with `MplCoreGroup` indexing.
+- Requires DAS client ≥ 2.1.1 with `MplCoreGroup` indexing.
 - Membership vectors on results may be empty — use [`fetchGroupV1`](/smart-contracts/core/groups) for full on-chain membership.
