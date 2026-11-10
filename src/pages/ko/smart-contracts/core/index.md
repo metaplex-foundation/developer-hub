@@ -68,6 +68,8 @@ Metaplex Core("Core")는 Solana의 **차세대 NFT 표준**입니다. **단일 �
 ## 소개
 Metaplex Core는 Solana에서 새 프로젝트에 권장되는 NFT 표준입니다. Token Metadata 및 기타 표준과 비교하여 Core는 다음을 제공합니다:
 ### 비용 효율성
+
+민팅 비용은 2026년 9월 29일 기준입니다. 현재 Core 프로토콜 수수료는 [프로토콜 수수료](/protocol-fees)를 참고하세요.
 | 표준 | 민팅 비용 | 컴퓨팅 유닛 |
 |----------|-----------|---------------|
 | **Metaplex Core** | ~0.003 SOL | ~17,000 CU |

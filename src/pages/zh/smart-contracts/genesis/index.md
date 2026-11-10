@@ -121,6 +121,8 @@ Genesis 的费用取决于发行类型，以及发行是否已毕业到其 Raydi
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
+费用截至2026年9月29日。这些数字与[协议费用](/protocol-fees)页面使用同一数据源。
+
 ## 程序信息
 
 | 网络 | Program ID |

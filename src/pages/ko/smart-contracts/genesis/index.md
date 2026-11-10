@@ -121,6 +121,8 @@ Genesis 수수료는 런칭 타입과 런칭이 Raydium CPMM 풀로 졸업했는
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
+수수료는 2026년 9월 29일 기준입니다. 이 수치는 [프로토콜 수수료](/protocol-fees) 페이지와 동일한 소스에서 가져옵니다.
+
 ## 프로그램 정보
 
 | 네트워크 | Program ID |
