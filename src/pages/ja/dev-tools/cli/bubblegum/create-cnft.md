@@ -23,8 +23,12 @@ mplx bg nft create my-tree --wizard
 ### ファイルベースの作成
 
 ```bash
-mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
+mplx bg nft create my-tree --image ./nft.png --offchain ./metadata.json
 ```
+
+{% callout type="note" %}
+以前のCLIバージョンでは、このコマンドの`--json <path>`でメタデータファイルを指定していました。`--json`は他の`mplx`コマンドと同様に出力用フラグになり、メタデータファイルは`--offchain`で指定します。`--json`にパスを渡すと、`--offchain`を案内するエラーになります。
+{% /callout %}
 
 ### URIベースの作成
 
@@ -45,7 +49,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--wizard` | インタラクティブウィザードを使用 |
 | `--name <value>` | NFT名 |
 | `--uri <value>` | 既存のメタデータURI |
-| `--json <value>` | JSONメタデータファイルへのパス（`--image`が必要） |
+| `--offchain <value>` | JSONメタデータファイルへのパス（`--image`が必要） |
 | `--image <value>` | 画像ファイルへのパス |
 | `--description <value>` | NFTの説明 |
 | `--attributes <value>` | "trait:value,trait:value"形式の属性 |
@@ -90,7 +94,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 1. ローカルファイルで作成：
 
    ```bash
-   mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
+   mplx bg nft create my-tree --image ./artwork.png --offchain ./metadata.json
    ```
 
 1. メタデータフラグで作成：
@@ -157,7 +161,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 ## メタデータJSON形式
 
-`--json`を使用する場合、メタデータファイルは以下の構造に従う必要があります：
+`--offchain`を使用する場合、メタデータファイルは以下の構造に従う必要があります：
 
 ```json
 {

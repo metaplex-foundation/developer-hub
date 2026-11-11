@@ -23,8 +23,12 @@ mplx bg nft create my-tree --wizard
 ### 파일 기반 생성
 
 ```bash
-mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
+mplx bg nft create my-tree --image ./nft.png --offchain ./metadata.json
 ```
+
+{% callout type="note" %}
+이전 CLI 버전에서는 이 명령에서 `--json <path>`로 메타데이터 파일을 지정했습니다. 이제 `--json`은 다른 모든 `mplx` 명령과 마찬가지로 출력 플래그이며, 메타데이터 파일은 `--offchain`으로 전달합니다. `--json`에 경로를 전달하면 `--offchain`을 안내하는 오류가 발생합니다.
+{% /callout %}
 
 ### URI 기반 생성
 
@@ -45,7 +49,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--wizard` | 대화형 마법사 사용 |
 | `--name <value>` | NFT 이름 |
 | `--uri <value>` | 기존 메타데이터 URI |
-| `--json <value>` | JSON 메타데이터 파일 경로 (`--image` 필요) |
+| `--offchain <value>` | JSON 메타데이터 파일 경로 (`--image` 필요) |
 | `--image <value>` | 이미지 파일 경로 |
 | `--description <value>` | NFT 설명 |
 | `--attributes <value>` | "trait:value,trait:value" 형식의 속성 |
@@ -90,7 +94,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 1. 로컬 파일로 생성:
 
 ```bash
-mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
+mplx bg nft create my-tree --image ./artwork.png --offchain ./metadata.json
 ```
 
 1. 메타데이터 플래그로 생성:
@@ -157,7 +161,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 ## 메타데이터 JSON 형식
 
-`--json`을 사용할 때 메타데이터 파일은 다음 구조를 따라야 합니다:
+`--offchain`을 사용할 때 메타데이터 파일은 다음 구조를 따라야 합니다:
 
 ```json
 {

@@ -23,8 +23,12 @@ mplx bg nft create my-tree --wizard
 ### File-Based Creation
 
 ```bash
-mplx bg nft create my-tree --image ./nft.png --json ./metadata.json
+mplx bg nft create my-tree --image ./nft.png --offchain ./metadata.json
 ```
+
+{% callout type="note" %}
+In earlier CLI versions, `--json <path>` supplied the metadata file on this command. `--json` is now the output flag, as on every other `mplx` command, and the metadata file is passed with `--offchain`. Passing a path to `--json` fails with an error that points to `--offchain`.
+{% /callout %}
 
 ### URI-Based Creation
 
@@ -45,7 +49,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://example.com/metadata.j
 | `--wizard` | Use interactive wizard |
 | `--name <value>` | NFT name |
 | `--uri <value>` | Existing metadata URI |
-| `--json <value>` | Path to JSON metadata file (requires `--image`) |
+| `--offchain <value>` | Path to JSON metadata file (requires `--image`) |
 | `--image <value>` | Path to image file |
 | `--description <value>` | NFT description |
 | `--attributes <value>` | Attributes in "trait:value,trait:value" format |
@@ -90,7 +94,7 @@ mplx bg nft create my-tree --name "My NFT" --uri "https://arweave.net/xxx"
 1. Create with local files:
 
 ```bash
-mplx bg nft create my-tree --image ./artwork.png --json ./metadata.json
+mplx bg nft create my-tree --image ./artwork.png --offchain ./metadata.json
 ```
 
 1. Create with metadata flags:
@@ -157,7 +161,7 @@ Explorer: https://solscan.io/tx/5xxx...
 
 ## Metadata JSON Format
 
-When using `--json`, your metadata file should follow this structure:
+When using `--offchain`, your metadata file should follow this structure:
 
 ```json
 {
