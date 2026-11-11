@@ -2,7 +2,7 @@
 title: Verified Creator 插件
 metaTitle: Verified Creator 插件 | Metaplex Core
 description: 为 Core NFT Asset 和 Collection 添加已验证创作者签名。证明创作者身份而不影响版税分配。
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - verified creator
   - creator signature
@@ -25,6 +25,8 @@ faqs:
     a: 要移除已验证的创作者，他们必须先取消验证自己。这可以防止未经授权移除已验证的创作者。
   - q: Asset 会自动获得 Collection 的已验证创作者吗？
     a: 是的。Asset 会从其 Collection 继承创作者数组。单个 Asset 也可以拥有自己的 Verified Creators 插件，包含不同的创作者。
+  - q: 在 Collection 中创建 Asset 时，Collection 的已验证创作者需要签名吗？
+    a: 不需要。在带有 Verified Creators 插件的 Collection 中创建 Asset 不需要 Collection 的任何创作者签名，为该 Asset 添加或更新插件也不需要。只有对 Verified Creators 插件本身的更改才会被检查。Core v0.15.3（2026 年 10 月）之前的程序版本在这种情况下会错误地以 MissingSigner 失败。
   - q: 我可以用这个来标注联合创作者吗？
     a: 可以。这是一个常见用例——多个创作者都可以验证他们参与创建 Asset 或 Collection。
 ---
@@ -83,6 +85,12 @@ faqs:
 | address | publicKey |
 | message | string    |
 Asset 从 Collection 继承创作者数组。
+
+在 Collection 中创建 Asset 时，Collection 的已验证创作者无需签名。为 Collection 中的 Asset 添加或更新插件时也是如此。Collection 的 Verified Creators 插件只验证对 Collection 自身创作者列表的更改。如果 Asset 拥有自己的 Verified Creators 插件，对该插件的更改仍会根据 Asset 的创作者进行验证。
+
+{% callout type="note" title="已在 Core v0.15.3 中修复" %}
+在 Core 程序 v0.15.3（2026 年 10 月部署到 mainnet-beta 和 devnet）之前，在带有 Verified Creators 插件的 Collection 中创建 Asset 时，除非交易由 Collection 的已验证创作者签名，否则会以 `MissingSigner` 失败。例如，这会导致无法将 Edition 打印到 Master Edition Collection 中。参见 [mpl-core#302](https://github.com/metaplex-foundation/mpl-core/pull/302)。
+{% /callout %}
 ## 将 Verified Creators 插件添加到 Asset 的代码示例 {% #adding-the-autograph-plugin-to-an-asset-code-example %}
 {% dialect-switcher title="将 Verified Creators 插件添加到 MPL Core Asset" %}
 {% dialect title="JavaScript" id="js" %}
@@ -238,11 +246,14 @@ await addCollectionPlugin(umi, {
 该创作者已经验证过自己。无需任何操作。
 ### `Cannot remove verified creator`
 已验证的创作者必须先取消验证自己，然后 update authority 才能移除他们。
+### 在 Collection 中创建 Asset 时出现 `MissingSigner`
+v0.15.3 之前的 Core 程序在 Collection 中创建 Asset 时要求 Collection 的已验证创作者签名。当前 mainnet-beta 和 devnet 上的部署已不再如此。如果您在本地验证器或自定义集群上仍遇到此错误，请将该环境中的 Core 程序更新到 v0.15.3 或更高版本。
 ## 注意事项
 - Verified Creators 不用于版税分配（请使用 Royalties 插件）
 - 创作者必须自己验证——update authority 无法代替他们验证
 - 创作者必须先取消验证才能被移除
 - Asset 从其 Collection 继承创作者数组
+- 在 Collection 中创建 Asset，或为该 Asset 添加/更新插件时，不需要 Collection 的已验证创作者签名（Core v0.15.3 及更高版本）
 ## 快速参考
 ### 验证工作流程
 | 步骤 | 操作 | 执行者 |
@@ -268,6 +279,8 @@ await addCollectionPlugin(umi, {
 要移除已验证的创作者，他们必须先取消验证自己。这可以防止未经授权移除已验证的创作者。
 ### Asset 会自动获得 Collection 的已验证创作者吗？
 是的。Asset 从其 Collection 继承创作者数组。单个 Asset 也可以拥有自己的 Verified Creators 插件，包含不同的创作者。
+### 在 Collection 中创建 Asset 时，Collection 的已验证创作者需要签名吗？
+不需要。在带有 Verified Creators 插件的 Collection 中创建 Asset 不需要 Collection 的任何创作者签名，为该 Asset 添加或更新插件也不需要。只有对 Verified Creators 插件本身的更改才会被检查。Core v0.15.3（2026 年 10 月）之前的程序版本在这种情况下会错误地以 `MissingSigner` 失败。
 ### 我可以用这个来标注联合创作者吗？
 可以。这是一个常见用例——多个创作者（设计师、开发者、艺术家）都可以验证他们参与创建 Asset 或 Collection。
 ## 术语表
