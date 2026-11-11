@@ -22,6 +22,8 @@ mplx core asset create --name "My NFT" --uri "https://example.com/metadata.json"
 mplx core asset create --files --image "./my-nft.png" --offchain "./metadata.json"
 ```
 
+メタデータファイルのひな形が必要な場合は、`mplx core asset template [output]`を実行すると`asset/`フォルダ内に`metadata.json`が生成されます。それを`--offchain`に渡してください。
+
 ### 3. インタラクティブウィザード
 ファイルのアップロードとメタデータの作成を含む全プロセスをガイドするインタラクティブウィザードを使用してアセットを作成します。
 

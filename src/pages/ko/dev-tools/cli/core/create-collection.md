@@ -22,6 +22,8 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
+시작용 메타데이터 파일이 필요하다면 `mplx core collection template [output]`을 실행하여 `collection/` 폴더 안에 `metadata.json`을 생성한 뒤 `--offchain`에 전달하세요.
+
 ### 3. 대화형 마법사
 파일 업로드 및 메타데이터 생성을 포함한 전체 프로세스를 안내하는 대화형 마법사를 사용하여 컬렉션을 생성합니다.
 
