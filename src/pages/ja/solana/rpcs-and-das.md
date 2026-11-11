@@ -151,6 +151,7 @@ RPCとDASは互いを補完します。標準RPCがオンチェーンデータ�
 - [Ankr](https://www.ankr.com/protocol/public/solana/)
 - [Blockdaemon](https://blockdaemon.com/marketplace/solana/)
 - [Chainstack](https://chainstack.com/build-better-with-solana/)
+- [Digital Energy](https://rpc.digital-energy.io)
 - [Figment](https://figment.io/)
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
