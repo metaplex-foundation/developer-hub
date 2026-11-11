@@ -2,7 +2,7 @@
 title: AppData 插件
 metaTitle: AppData 插件 | Metaplex Core
 description: 使用 AppData 插件在 Core NFT 上存储任意数据。为第三方应用、游戏状态或自定义元数据创建安全的分区存储。
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - AppData plugin
   - NFT data storage
@@ -416,6 +416,8 @@ println!("{:?}", my_data);
 数据超出账户大小限制。考虑压缩或将数据拆分到多个插件中。
 ### `Invalid schema`
 数据与声明的 schema 不匹配。确保 JSON 有效或 MsgPack 正确编码。
+### 通过 LinkedAppData 写入时出现 `InvalidCollection`
+该 Asset 不是持有 `LinkedAppData` 插件的 Collection 的成员。通过 Collection 的 `LinkedAppData` 写入，仅对 update authority 为该 Collection 的 Asset（`UpdateAuthority::Collection`）有效。请将 Asset 添加到该 Collection，或在 Asset 本身上使用 `AppData` 插件。
 ## 注意事项
 - 数据权限与插件权限是分开的
 - 选择 JSON 或 MsgPack 以进行 DAS 索引
@@ -451,7 +453,7 @@ LinkedAppData 添加到 Collection 上，允许数据权限写入该 Collection 
 |------|------|
 | **AppData** | 用于在 Asset 上存储任意数据的外部插件 |
 | **Data Authority** | 具有独占写入权限的地址 |
-| **LinkedAppData** | 用于写入任何 Asset 的 Collection 级变体 |
+| **LinkedAppData** | 用于写入 Collection 中任何 Asset 的 Collection 级变体 |
 | **Schema** | 数据格式：JSON、MsgPack 或 Binary |
 | **writeData()** | 向 AppData 插件写入数据的函数 |
 ## 相关页面

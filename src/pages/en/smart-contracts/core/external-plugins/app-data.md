@@ -2,7 +2,7 @@
 title: AppData Plugin
 metaTitle: AppData Plugin | Metaplex Core
 description: Store arbitrary data on Core NFTs with the AppData plugin. Create secure, partitioned storage for third-party apps, game state, or custom metadata.
-updated: '01-31-2026'
+updated: '10-28-2026'
 keywords:
   - AppData plugin
   - NFT data storage
@@ -418,6 +418,8 @@ Only the Data Authority can write data. Verify you're signing with the correct k
 The data exceeds account size limits. Consider compressing or splitting data across multiple plugins.
 ### `Invalid schema`
 The data doesn't match the declared schema. Ensure JSON is valid or MsgPack is properly encoded.
+### `InvalidCollection` when writing through LinkedAppData
+The Asset is not a member of the Collection that holds the `LinkedAppData` plugin. Writes through a Collection's `LinkedAppData` only succeed for Assets whose update authority is that Collection (`UpdateAuthority::Collection`). Add the Asset to the Collection, or use an `AppData` plugin on the Asset itself.
 ## Notes
 - Data Authority is separate from plugin authority
 - Choose JSON or MsgPack for DAS indexing
@@ -453,7 +455,7 @@ LinkedAppData is added to a Collection and allows the Data Authority to write to
 |------|------------|
 | **AppData** | External plugin for storing arbitrary data on Assets |
 | **Data Authority** | Address with exclusive write permission |
-| **LinkedAppData** | Collection-level variant for writing to any Asset |
+| **LinkedAppData** | Collection-level variant for writing to any Asset in the Collection |
 | **Schema** | Data format: JSON, MsgPack, or Binary |
 | **writeData()** | Function to write data to AppData plugin |
 ## Related Pages
