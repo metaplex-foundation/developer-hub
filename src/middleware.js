@@ -1,4 +1,10 @@
 import { NextResponse } from 'next/server';
+import routes from '@/generated/routes.json'
+import { resolveDeadUrl } from '@/redirects/dead-urls'
+
+// Every public docs path (built by scripts/generate-route-manifest.mjs).
+const routeSet = new Set(routes)
+const isRoute = (pathname) => routeSet.has(pathname)
 
 // Smart contracts path migration redirects
 // Redirect old paths to new /smart-contracts/ structure
@@ -324,34 +330,41 @@ const redirectRules = {
 function redirectTo(request, path, status = 308) {
   const url = request.nextUrl.clone()
   url.pathname = path
-  return NextResponse.redirect(url, status)
+  // NextURL re-applies the request's trailing slash; drop it so the target
+  // loads without a second redirect.
+  const target = new URL(url.toString())
+  if (path !== '/' && target.pathname.endsWith('/')) {
+    target.pathname = target.pathname.slice(0, -1)
+  }
+  return NextResponse.redirect(target, status)
 }
 
-export function middleware(request) {
-  const { pathname } = request.nextUrl
-
+/**
+ * The site's path-migration rules. Returns the new path for an old one, or
+ * null. Pure, so resolveDeadUrl() can chain it with the dead-URL tables.
+ */
+function matchLegacyRedirect(pathname) {
   // Redirect /en/* paths to root /* for backwards compatibility
   // This ensures users visiting /en/core are redirected to /core
   if (pathname === '/en' || pathname.startsWith('/en/')) {
-    const newPath = pathname === '/en' ? '/' : pathname.slice('/en'.length)
-    return redirectTo(request, newPath)
+    return pathname === '/en' ? '/' : pathname.slice('/en'.length)
   }
 
   // Handle standalone page redirects first
   if (standaloneRedirects[pathname]) {
-    return redirectTo(request, standaloneRedirects[pathname])
+    return standaloneRedirects[pathname]
   }
 
   // Handle legacy-documentation migration redirects (locale-aware)
   const legacyDocDestination = legacyDocRedirect(pathname)
   if (legacyDocDestination) {
-    return redirectTo(request, legacyDocDestination)
+    return legacyDocDestination
   }
 
   // Genesis Integration APIs pages moved to /api (locale-aware)
   const integrationApisDestination = integrationApisRedirect(pathname)
   if (integrationApisDestination) {
-    return redirectTo(request, integrationApisDestination)
+    return integrationApisDestination
   }
 
   // Handle legacy redirects FIRST (specific sub-path redirects)
@@ -361,13 +374,13 @@ export function middleware(request) {
     if (pathname.startsWith(rootPath)) {
       if (typeof rule === 'string') {
         // Direct redirect
-        return redirectTo(request, rule)
+        return rule
       } else if (typeof rule === 'object') {
         // Nested redirects
         const subPath = pathname.slice(rootPath.length) || '/'
         const destination = rule[subPath]
         if (destination) {
-          return redirectTo(request, destination)
+          return destination
         }
       }
     }
@@ -379,7 +392,7 @@ export function middleware(request) {
   for (const product of smartContractRedirects) {
     if (pathname === `/${product}` || pathname.startsWith(`/${product}/`)) {
       const newPath = pathname.replace(`/${product}`, `/smart-contracts/${product}`)
-      return redirectTo(request, newPath)
+      return newPath
     }
   }
 
@@ -389,14 +402,14 @@ export function middleware(request) {
   for (const product of devToolsRedirects) {
     if (pathname === `/${product}` || pathname.startsWith(`/${product}/`)) {
       const newPath = pathname.replace(`/${product}`, `/dev-tools/${product}`)
-      return redirectTo(request, newPath)
+      return newPath
     }
   }
 
   // Redirect /guides/* to /solana/* (path rename)
   if (pathname === '/guides' || pathname.startsWith('/guides/')) {
     const newPath = pathname.replace('/guides', '/solana')
-    return redirectTo(request, newPath)
+    return newPath
   }
 
   // Handle Japanese, Korean, and Chinese path migration redirects
@@ -407,22 +420,61 @@ export function middleware(request) {
       for (const product of smartContractRedirects) {
         if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/smart-contracts/${product}`)
-          return redirectTo(request, newPath)
+          return newPath
         }
       }
       // Dev tools redirects for localized paths
       for (const product of devToolsRedirects) {
         if (pathname === `/${lang}/${product}` || pathname.startsWith(`/${lang}/${product}/`)) {
           const newPath = pathname.replace(`/${lang}/${product}`, `/${lang}/dev-tools/${product}`)
-          return redirectTo(request, newPath)
+          return newPath
         }
       }
       // Redirect /lang/guides/* to /lang/solana/* (path rename)
       if (pathname === `/${lang}/guides` || pathname.startsWith(`/${lang}/guides/`)) {
         const newPath = pathname.replace(`/${lang}/guides`, `/${lang}/solana`)
-        return redirectTo(request, newPath)
+        return newPath
       }
     }
+  }
+
+  return null
+}
+
+/**
+ * Where a redirect should land. A destination that is not a page is passed
+ * through resolveDeadUrl(), so old rules that point at a since-renamed page
+ * still land on a real one in a single hop.
+ */
+function finalDestination(pathname) {
+  if (isRoute(pathname)) return pathname
+  return resolveDeadUrl(pathname, { isRoute, followRule: matchLegacyRedirect }) || pathname
+}
+
+export function middleware(request) {
+  const { pathname } = request.nextUrl
+
+  // /api/og is a Next API route (the OG image), not a docs page.
+  const isNextInternal = pathname.startsWith('/_next') || pathname.startsWith('/api/og')
+  // A file such as an image or `llms.txt` is never a dead docs URL. A `.md`
+  // suffix or a version number (`/changelog/v1.3`) is.
+  const isAssetFile = /\.(?!md$)[a-z][a-z0-9]*$/i.test(pathname) && !/https?:/.test(pathname)
+
+  if (!isNextInternal && !isAssetFile && !isRoute(pathname)) {
+    // Not a page: an old, renamed or malformed URL. Send it to the best
+    // matching page, or let it fall through to the 404 page.
+    const destination = resolveDeadUrl(pathname, {
+      isRoute,
+      followRule: matchLegacyRedirect,
+    })
+    if (destination) return redirectTo(request, destination)
+  }
+
+  // A few real files are still redirected on purpose (e.g. locale-only
+  // leftovers), so the migration rules also apply to pages.
+  const legacyDestination = matchLegacyRedirect(pathname)
+  if (legacyDestination) {
+    return redirectTo(request, finalDestination(legacyDestination))
   }
 
   // Rewrite root paths to /en/* for English content
@@ -450,5 +502,11 @@ export const config = {
     '/',
     // Match all paths except static files, _next, and api
     '/((?!_next/static|_next/image|favicon.ico|.*\\..*).*)',
+    // Dead URLs that contain a dot: a `.md` suffix, a Markdown link pasted
+    // into the path (`/bubblegumhttps:/www.npmjs.com/...`).
+    '/(.*\\.md)',
+    '/(.*https?:.*)',
+    // Version numbers in old paths: `/token-metadata/v1.0.0/nft-standard`.
+    '/(.*\\.\\d.*)',
   ],
 }
