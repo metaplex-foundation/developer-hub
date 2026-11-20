@@ -34,7 +34,7 @@ Most integrators should use [`claimCreatorRewards`](/smart-contracts/genesis/sdk
 
 `POST /v1/creator-rewards/claim` returns the Solana transactions needed to claim a wallet's accrued creator rewards across every bonding-curve and Raydium CPMM bucket in a single call.
 
-- **Aggregation** — one request claims across all eligible buckets; one transaction is returned per bucket
+- **Aggregation** — one request claims across all eligible buckets; the API packs the claims into as few transactions as fit
 - **Signing** — response is base64-encoded Solana transactions the wallet (or optional `payer`) must sign and submit
 - **Errors** — HTTP `400` `"No rewards available to claim"` when nothing has accrued; callers must branch on the error, not an empty array
 - **SDK wrapper** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) handles deserialization, typed errors, and Umi signing
@@ -87,7 +87,7 @@ Set `payer` to a different wallet when the creator fee wallet does not hold SOL 
 | `data.blockhash.lastValidBlockHeight` | `number` | Slot height after which the blockhash expires. |
 
 {% callout type="note" %}
-The API returns one transaction per bucket being claimed — often two (bonding-curve plus Raydium). Submit them sequentially; their order is not significant.
+The API packs the claims into as few transactions as fit, so one request can return one transaction or several, and `transactionVersion: 1` can fit more claims in each. Submit them sequentially; their order is not significant.
 {% /callout %}
 
 ## Error Response

@@ -34,7 +34,7 @@ programmingLanguage:
 
 `POST /v1/creator-rewards/claim` は、1回の呼び出しでウォレットのすべてのボンディングカーブとRaydium CPMMバケットから蓄積したクリエイター報酬を請求するために必要なSolanaトランザクションを返します。
 
-- **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。バケットごとに1つのトランザクションが返されます
+- **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。請求はできるだけ少ないトランザクションにまとめられます
 - **署名** — レスポンスはウォレット（または任意の `payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションです
 - **エラー** — 蓄積がない場合はHTTP `400` `"No rewards available to claim"` を返します。呼び出し元は空の配列ではなくエラーで分岐する必要があります
 - **SDK ラッパー** — [`claimCreatorRewards`](/ja/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) はデシリアライズ、型付きエラー、Umi 署名を処理します
@@ -87,7 +87,7 @@ POST /v1/creator-rewards/claim
 | `data.blockhash.lastValidBlockHeight` | `number` | ブロックハッシュが期限切れになる以降のスロット高さ。 |
 
 {% callout type="note" %}
-APIは請求されるバケットごとに1つのトランザクションを返します — 多くの場合2つ（ボンディングカーブとRaydium）。順次送信してください。順序は重要ではありません。
+APIは請求をできるだけ少ないトランザクションにまとめるため、1回のリクエストで返るトランザクションは1つの場合も複数の場合もあります。`transactionVersion: 1` では1つのトランザクションにより多くの請求が収まります。順次送信してください。順序は重要ではありません。
 {% /callout %}
 
 ## エラーレスポンス

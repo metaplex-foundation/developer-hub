@@ -34,7 +34,7 @@ programmingLanguage:
 
 `POST /v1/creator-rewards/claim` 通过一次调用返回认领钱包在所有联合曲线和 Raydium CPMM bucket 上累积的创作者奖励所需的 Solana 交易。
 
-- **聚合** — 一次请求即可跨所有符合条件的 bucket 认领；每个 bucket 返回一个交易
+- **聚合** — 一次请求即可跨所有符合条件的 bucket 认领；认领会被打包进尽可能少的交易
 - **签名** — 响应是钱包（或可选的 `payer`）必须签名并提交的 base64 编码的 Solana 交易
 - **错误** — 当没有累积时返回 HTTP `400` `"No rewards available to claim"`；调用方必须基于错误分支，而不是空数组
 - **SDK 包装器** — [`claimCreatorRewards`](/zh/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) 处理反序列化、类型化错误和 Umi 签名
@@ -87,7 +87,7 @@ POST /v1/creator-rewards/claim
 | `data.blockhash.lastValidBlockHeight` | `number` | 区块哈希过期后的槽高度。 |
 
 {% callout type="note" %}
-API 为每个被认领的 bucket 返回一个交易——通常是两个（联合曲线加 Raydium）。请按顺序提交；它们的顺序并不重要。
+API 会把认领打包进尽可能少的交易，因此一次请求可能返回一个或多个交易；使用 `transactionVersion: 1` 时，每个交易可容纳更多认领。请按顺序提交；它们的顺序并不重要。
 {% /callout %}
 
 ## 错误响应
