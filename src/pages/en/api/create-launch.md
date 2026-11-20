@@ -42,7 +42,7 @@ POST /v1/launches/create
 | `wallet` | `string` | Yes | Creator's wallet public key |
 | `launch` | `object` | Yes | Full launch configuration (see below) |
 | `agent` | `object` | No | Launch on behalf of a registered [agent](/agents/) (see [Agent Launches](#agent-launches)) |
-| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes `@solana/web3.js` 1.99 or a later 1.x release, or Umi 1.6 with that release as its `@solana/web3.js` peer. `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Umi 1.6 or later can read and sign V1 transactions. `@solana/web3.js` 1.99 and later 1.x releases can read one but cannot sign it, and earlier releases cannot read it. Check that the signing wallet supports V1 before asking for it. Available on `solana-mainnet` and `solana-devnet`. |
 
 The request body also accepts `includeBackendSigner`, `derivedSignerPublicKey`, `nonce`, and `buildAllTxs`. These drive the signing flow used by [metaplex.com](https://www.metaplex.com) itself; leave them unset when calling the API directly.
 

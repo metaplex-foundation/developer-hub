@@ -42,7 +42,7 @@ POST /v1/launches/create
 | `wallet` | `string` | 예 | 생성자의 지갑 공개 키 |
 | `launch` | `object` | 예 | 전체 런칭 구성 (아래 참조) |
 | `agent` | `object` | 아니오 | 등록된 [에이전트](/ko/agents)를 대신하여 런칭 ([에이전트 런칭](#agent-launches) 참조) |
-| `transactionVersion` | `number` | 아니오 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. 읽으려면 `@solana/web3.js` 1.99 이상의 1.x 릴리스, 또는 해당 릴리스를 `@solana/web3.js` 피어로 사용하는 Umi 1.6이 필요합니다. `@solana/web3.js` 1.x로는 서명할 수 없습니다. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
+| `transactionVersion` | `number` | 아니오 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. Umi 1.6 이상은 V1 트랜잭션을 읽고 서명할 수 있습니다. `@solana/web3.js` 1.99 이상의 1.x 릴리스는 읽을 수는 있지만 서명할 수 없으며, 그 이전 릴리스는 읽을 수도 없습니다. V1을 요청하기 전에 서명할 지갑이 V1을 지원하는지 확인하세요. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
 
 요청 본문은 `includeBackendSigner`, `derivedSignerPublicKey`, `nonce`, `buildAllTxs`도 허용합니다. 이 필드들은 [metaplex.com](https://www.metaplex.com) 자체의 서명 흐름에서 사용되므로, API를 직접 호출할 때는 설정하지 마세요.
 

@@ -55,7 +55,7 @@ POST /agents/{address}/withdraw
 | `sender` | `string` | Yes | The agent owner's wallet (base58). Receives the SOL and signs the transaction. |
 | `amount` | `number` | Yes | Amount in SOL. Must be positive. |
 | `network` | `string` | No | `solana-mainnet` (default) or `solana-devnet`. |
-| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes `@solana/web3.js` 1.99 or a later 1.x release, or Umi 1.6 with that release as its `@solana/web3.js` peer. `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Umi 1.6 or later can read and sign V1 transactions. `@solana/web3.js` 1.99 and later 1.x releases can read one but cannot sign it, and earlier releases cannot read it. Check that the signing wallet supports V1 before asking for it. Available on `solana-mainnet` and `solana-devnet`. |
 
 ## Example Request
 

@@ -56,7 +56,7 @@ POST /agents/{address}/fund
 | `amount` | `number` | 是 | 以 SOL 为单位的金额。必须为正数。 |
 | `memo` | `string` | 是 | 记录在链上的备注，1–256 个字符。 |
 | `network` | `string` | 否 | `solana-mainnet`（默认）或 `solana-devnet`。 |
-| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。读取 V1 交易需要 `@solana/web3.js` 1.99 或更高的 1.x 版本，或以该版本作为 `@solana/web3.js` 对等依赖的 Umi 1.6。`@solana/web3.js` 1.x 无法对其签名。适用于 `solana-mainnet` 和 `solana-devnet`。 |
+| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。Umi 1.6 及以上版本可以读取并签名 V1 交易。`@solana/web3.js` 1.99 及以上的 1.x 版本可以读取但无法签名，更早的版本无法读取。请求 V1 之前，请确认签名钱包支持 V1。适用于 `solana-mainnet` 和 `solana-devnet`。 |
 
 ## 请求示例
 

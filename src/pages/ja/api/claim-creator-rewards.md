@@ -56,7 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | はい | 請求するクリエイター手数料ウォレットのbase58エンコードされた公開鍵。これはバケットで`creatorFeeWallet`として設定されたウォレット — オーバーライドが設定されていない場合はローンチウォレットです。 |
 | `network` | `string` | いいえ | `'solana-mainnet'`（デフォルト）または`'solana-devnet'`。ベースURLのクラスタと一致する必要があります。 |
 | `payer` | `string` | いいえ | 返されたトランザクションのトランザクション手数料とレントを負担するbase58エンコードされた公開鍵。省略時はデフォルトで`wallet`になります。 |
-| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。読み取りには`@solana/web3.js` 1.99以降の1.xリリース、またはそのリリースを`@solana/web3.js`のピアとするUmi 1.6が必要です。`@solana/web3.js` 1.xでは署名できません。`solana-mainnet`と`solana-devnet`で利用できます。 |
+| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。Umi 1.6以降はV1トランザクションの読み取りと署名ができます。`@solana/web3.js` 1.99以降の1.xリリースは読み取りはできますが署名はできず、それより前のリリースは読み取りもできません。V1を指定する前に、署名するウォレットがV1に対応しているか確認してください。`solana-mainnet`と`solana-devnet`で利用できます。 |
 
 ### `payer`を設定するタイミング
 
