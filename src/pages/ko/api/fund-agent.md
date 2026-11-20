@@ -56,7 +56,7 @@ POST /agents/{address}/fund
 | `amount` | `number` | 예 | SOL 단위 금액. 양수여야 합니다. |
 | `memo` | `string` | 예 | 온체인에 기록되는 메모, 1–256자. |
 | `network` | `string` | 아니요 | `solana-mainnet`(기본값) 또는 `solana-devnet` |
-| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. Umi 1.6 이상은 V1 트랜잭션을 읽고 서명할 수 있습니다. `@solana/web3.js` 1.99 이상의 1.x 릴리스는 읽을 수는 있지만 서명할 수 없으며, 그 이전 릴리스는 읽을 수도 없습니다. V1을 요청하기 전에 서명할 지갑이 V1을 지원하는지 확인하세요. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
+| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. Umi 1.6 이상은 V1 트랜잭션을 읽고 서명할 수 있으며, `@solana/web3.js` 1.99 이상의 1.x 릴리스가 필요합니다. 이 `@solana/web3.js` 릴리스는 단독으로도 읽을 수는 있지만 서명할 수 없으며, 그 이전 릴리스는 읽을 수도 없습니다. V1을 요청하기 전에 서명할 지갑이 V1을 지원하는지 확인하세요. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
 
 ## 요청 예시
 
