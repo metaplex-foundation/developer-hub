@@ -55,7 +55,7 @@ POST /agents/{address}/withdraw
 | `sender` | `string` | 예 | 에이전트 소유자의 지갑 (base58). SOL을 수령하고 트랜잭션에 서명합니다. |
 | `amount` | `number` | 예 | SOL 단위 금액. 양수여야 합니다. |
 | `network` | `string` | 아니요 | `solana-mainnet`(기본값) 또는 `solana-devnet` |
-| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. 읽으려면 Umi 1.6 또는 `@solana/web3.js` 1.99 이상이 필요하며, `@solana/web3.js` 1.x로는 서명할 수 없습니다. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
+| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. 읽으려면 `@solana/web3.js` 1.99 이상의 1.x 릴리스, 또는 해당 릴리스를 `@solana/web3.js` 피어로 사용하는 Umi 1.6이 필요합니다. `@solana/web3.js` 1.x로는 서명할 수 없습니다. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
 
 ## 요청 예시
 

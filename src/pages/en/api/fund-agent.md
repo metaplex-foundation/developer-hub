@@ -56,7 +56,7 @@ POST /agents/{address}/fund
 | `amount` | `number` | Yes | Amount in SOL. Must be positive. |
 | `memo` | `string` | Yes | Memo recorded on-chain, 1–256 characters. |
 | `network` | `string` | No | `solana-mainnet` (default) or `solana-devnet`. |
-| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes Umi 1.6 or `@solana/web3.js` 1.99 or later, and `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Reading one takes `@solana/web3.js` 1.99 or a later 1.x release, or Umi 1.6 with that release as its `@solana/web3.js` peer. `@solana/web3.js` 1.x cannot sign one. Available on `solana-mainnet` and `solana-devnet`. |
 
 ## Example Request
 

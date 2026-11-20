@@ -56,7 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | 是 | 要认领的创作者费钱包的 base58 编码公钥。这是在 bucket 上设置为 `creatorFeeWallet` 的钱包——若未配置覆盖，则为发行钱包。 |
 | `network` | `string` | 否 | `'solana-mainnet'`（默认）或 `'solana-devnet'`。必须与基础 URL 的集群匹配。 |
 | `payer` | `string` | 否 | 承担返回交易的交易费和租金的 base58 编码公钥。省略时默认为 `wallet`。 |
-| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。读取 V1 交易需要 Umi 1.6 或 `@solana/web3.js` 1.99 及以上版本，`@solana/web3.js` 1.x 无法对其签名。适用于 `solana-mainnet` 和 `solana-devnet`。 |
+| `transactionVersion` | `number` | 否 | `0`（默认）构建版本 0 交易。`1` 构建 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)，最多可容纳 4,096 字节，且不能使用地址查找表，因此请求返回的交易数量可能更少。读取 V1 交易需要 `@solana/web3.js` 1.99 或更高的 1.x 版本，或以该版本作为 `@solana/web3.js` 对等依赖的 Umi 1.6。`@solana/web3.js` 1.x 无法对其签名。适用于 `solana-mainnet` 和 `solana-devnet`。 |
 
 ### 何时设置 `payer`
 
