@@ -2,9 +2,10 @@
 title: Protocol Fees
 metaTitle: Protocol Fees | Developer Hub
 description: Details of the onchain fees for Metaplex's products.
+updated: '09-29-2026'
 ---
 
-The Metaplex Protocol currently includes the following fees:
+The Metaplex Protocol currently includes the following fees. Fees as of September 29, 2026.
 
 {% totem %}
 

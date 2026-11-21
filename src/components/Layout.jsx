@@ -75,7 +75,8 @@ export function Layout({ children, page }) {
       <HeadingAnchors />
 
       {isHomePage && (
-        <>
+        <main>
+          <h1 className="sr-only">Metaplex Developer Docs</h1>
           {productCategories.map((category, index) => (
             <div key={category} className={clsx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", index === 0 ? "pt-12 pb-12" : "py-12")}>
               <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
@@ -85,11 +86,11 @@ export function Layout({ children, page }) {
               <ProductCardGrid category={category} />
             </div>
           ))}
-        </>
+        </main>
       )}
 
       {isCategoryIndexPage && (
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-12">
           {page.title && (
             <h2 className="mb-2 text-2xl font-bold text-foreground">{page.title}</h2>
           )}
@@ -97,7 +98,7 @@ export function Layout({ children, page }) {
             <p className="mb-8 text-sm text-muted-foreground">{page.description}</p>
           )}
           <Prose className="break-words">{children}</Prose>
-        </div>
+        </main>
       )}
 
       {!isHomePage && !isCategoryIndexPage && (
@@ -122,7 +123,7 @@ export function Layout({ children, page }) {
           )}
 
           {/* Content. */}
-          <div
+          <main
             className={clsx(
               'min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-3xl xl:max-w-4xl mx-auto',
               hasNavigation ? 'lg:pl-8 lg:pr-0 xl:px-16' : 'lg:pl-0 lg:pr-16'
@@ -149,11 +150,16 @@ export function Layout({ children, page }) {
                         <p className="text-sm text-slate-500 dark:text-slate-400">
                           Last updated{' '}
                           {(() => {
-                            // Parse MM-DD-YYYY or YYYY-MM-DD format
+                            // Parse MM-DD-YYYY or YYYY-MM-DD as a local date:
+                            // new Date('YYYY-MM-DD') is UTC midnight, which
+                            // shows the previous day west of UTC.
                             const dateStr = page.updated
                             let date
                             if (/^\d{2}-\d{2}-\d{4}$/.test(dateStr)) {
                               const [month, day, year] = dateStr.split('-')
+                              date = new Date(year, month - 1, day)
+                            } else if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+                              const [year, month, day] = dateStr.split('-')
                               date = new Date(year, month - 1, day)
                             } else {
                               date = new Date(dateStr)
@@ -213,7 +219,7 @@ export function Layout({ children, page }) {
               )}
             </dl>
             )}
-          </div>
+          </main>
 
           {/* Table of contents. */}
           {page.tableOfContents.length > 0 && !page.product.isFallbackProduct && (

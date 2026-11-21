@@ -1,6 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 
+// Written at build by scripts/generate-last-modified.mjs: route -> YYYY-MM-DD.
+import lastModified from '@/generated/last-modified.json'
+
 // Turns out Vercel builds the site into a different directory and file structure than running `next build` locally
 // So we need to read the routes-manifest.json file from a different location than the .next directory that is locally
 // built. The /sitemap.xml route will not work on local development, but it will work on Vercel deployment.
@@ -21,18 +24,22 @@ export async function getServerSideProps({ res }) {
       if (url === '/en' || url.startsWith('/en/')) {
         url = url === '/en' ? '/' : url.slice('/en'.length)
       }
-      return url
+      return { url, lastmod: lastModified[route.page] }
     })
-    .filter((url) => !['/404', '/500', '/_error', '/sitemap.xml'].includes(url))
+    .filter(
+      ({ url }) => !['/404', '/500', '/_error', '/sitemap.xml'].includes(url)
+    )
 
   // Generate the sitemap XML
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
           ${staticRoutes
-            .map((route) => {
+            .map(({ url, lastmod }) => {
               return `
                 <url>
-                  <loc>${`https://www.metaplex.com/docs`}${route}</loc>
+                  <loc>${`https://www.metaplex.com/docs`}${url}</loc>${
+                    lastmod ? `\n                  <lastmod>${lastmod}</lastmod>` : ''
+                  }
                 </url>
               `
             })

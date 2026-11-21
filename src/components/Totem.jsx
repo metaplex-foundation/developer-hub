@@ -22,7 +22,10 @@ export function TotemAccordion({ children, title, defaultOpen = false }) {
               )}
             />
           </Disclosure.Button>
-          <Disclosure.Panel>{children}</Disclosure.Panel>
+          {/* static keeps the panel in the server HTML so crawlers without JS can read it */}
+          <Disclosure.Panel static className={open ? undefined : 'hidden'}>
+            {children}
+          </Disclosure.Panel>
         </div>
       )}
     </Disclosure>

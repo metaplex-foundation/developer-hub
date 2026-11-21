@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const SITE_URL = 'https://metaplex.com/docs'
+const SITE_URL = 'https://www.metaplex.com/docs'
 const PAGES_DIR = path.join(__dirname, '..', 'src', 'pages', 'en')
 const OUTPUT_FILE = path.join(__dirname, '..', 'public', 'llms.txt')
 
@@ -224,16 +224,16 @@ function generateLlmsTxt(categories) {
     '',
     '## Recommended Entry Points',
     '',
-    '- **New to Metaplex?** Start here: https://metaplex.com/docs/',
-    '- **Launching a token?** Use Genesis: https://metaplex.com/docs/smart-contracts/genesis',
-    '- **Distributing an existing token allocation?** Use MPL-Distro: https://metaplex.com/docs/smart-contracts/mpl-distro',
-    '- **Tokenizing a security or RWA?** See MPL-3643: https://metaplex.com/docs/smart-contracts/mpl-3643',
-    '- **Calling the public REST API?** Reference: https://metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)',
-    '- **Creating NFTs/Assets?** Use Core: https://metaplex.com/docs/smart-contracts/core',
-    '- **Launching an NFT collection?** Use Core Candy Machine: https://metaplex.com/docs/smart-contracts/core-candy-machine',
-    '- **Need JavaScript SDK?** Start with UMI: https://metaplex.com/docs/dev-tools/umi',
-    '- **Querying NFT data?** Use DAS API: https://metaplex.com/docs/dev-tools/das-api',
-    '- **Working with legacy NFTs?** See Token Metadata: https://metaplex.com/docs/smart-contracts/token-metadata',
+    '- **New to Metaplex?** Start here: https://www.metaplex.com/docs/',
+    '- **Launching a token?** Use Genesis: https://www.metaplex.com/docs/smart-contracts/genesis',
+    '- **Distributing an existing token allocation?** Use MPL-Distro: https://www.metaplex.com/docs/smart-contracts/mpl-distro',
+    '- **Tokenizing a security or RWA?** See MPL-3643: https://www.metaplex.com/docs/smart-contracts/mpl-3643',
+    '- **Calling the public REST API?** Reference: https://www.metaplex.com/docs/api — machine-readable OpenAPI spec: https://api.metaplex.com/v1/openapi.json (also /v1/openapi.yaml; RFC 9727 catalog at https://api.metaplex.com/.well-known/api-catalog)',
+    '- **Creating NFTs/Assets?** Use Core: https://www.metaplex.com/docs/smart-contracts/core',
+    '- **Launching an NFT collection?** Use Core Candy Machine: https://www.metaplex.com/docs/smart-contracts/core-candy-machine',
+    '- **Need JavaScript SDK?** Start with UMI: https://www.metaplex.com/docs/dev-tools/umi',
+    '- **Querying NFT data?** Use DAS API: https://www.metaplex.com/docs/dev-tools/das-api',
+    '- **Working with legacy NFTs?** See Token Metadata: https://www.metaplex.com/docs/smart-contracts/token-metadata',
     '',
     '## Documentation Status',
     '',
