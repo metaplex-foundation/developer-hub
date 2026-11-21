@@ -75,7 +75,7 @@ POST /v1/launches/create
 | `type` | 説明 |
 |--------|-------------|
 | `launchpool` | 比例配分プール。アロケーション（順序どおり）：`launchpoolV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2` |
-| `presale` | 固定価格プレセール。アロケーション（順序どおり）：`presaleV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2`。売れ残ったトークンと、卒業時に Raydium プールで使われなかったトークンは `unlockedV2` アロケーションに繰り入れられ、まとめて請求されます |
+| `presale` | 固定価格プレセール。アロケーション（順序どおり）：`presaleV2`、`unlockedV2`、その後に任意の数の `claimScheduleV2`。未販売のトークンと、卒業時に Raydium プールで使われなかったトークンは `unlockedV2` アロケーションに繰り入れられ、そのアロケーションと一緒に請求されます |
 | `bondingCurve` | ボンディングカーブによるローンチ。アロケーション：`bondingCurveV2`。供給量 1,000,000,000、デシマル6、SOL クォートに固定されます |
 
 スキーマには `auction` と `custom` も定義されています。`auction` は未実装のプレースホルダーで、`custom` はパブリック API で `400` として拒否されます。
