@@ -47,7 +47,7 @@ This overview covers:
 {% /callout %}
 ## Summary
 **Metaplex Core** is a Solana NFT standard that replaces Token Metadata for most new projects. It offers the lowest minting costs, enforced royalties, and a plugin architecture for custom functionality.
-- Single-account design: ~0.003 SOL per mint (vs 0.022 SOL for Token Metadata)
+- Single-account design: ~0.003 SOL per mint (vs 0.022 SOL for Token Metadata), as of September 29, 2026
 - Enforced royalties by default with allowlist/denylist controls
 - Plugin system for staking, attributes, delegates, and custom behaviors
 - Collection-level operations: freeze, update royalties, or modify all assets at once
@@ -68,6 +68,8 @@ This overview does not cover: fungible tokens (use SPL Token), Token Metadata mi
 ## Introduction
 Metaplex Core is the recommended NFT standard for new projects on Solana. Compared to Token Metadata and other standards, Core provides:
 ### Cost Efficiency
+
+Mint costs as of September 29, 2026. See [Protocol Fees](/protocol-fees) for the current Core protocol fee.
 | Standard | Mint Cost | Compute Units |
 |----------|-----------|---------------|
 | **Metaplex Core** | ~0.003 SOL | ~17,000 CU |

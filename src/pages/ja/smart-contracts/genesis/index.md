@@ -113,6 +113,8 @@ Genesis の手数料は、ローンチタイプと、ローンチが Raydium CPM
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
+2026年9月29日時点の手数料です。これらの数値は[プロトコル手数料](/protocol-fees)ページと同じソースから取得しています。
+
 ## プログラム情報
 
 | ネットワーク | プログラム ID |

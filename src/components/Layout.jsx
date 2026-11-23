@@ -77,6 +77,7 @@ export function Layout({ children, page }) {
       {isHomePage && (
         <main>
           <h1 className="sr-only">Metaplex Developer Docs</h1>
+          <nav aria-label="Documentation products">
           {productCategories.map((category, index) => (
             <div key={category} className={clsx("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", index === 0 ? "pt-12 pb-12" : "py-12")}>
               <h2 className="mb-2 text-2xl font-bold text-foreground">{getCategoryName(category)}</h2>
@@ -86,6 +87,7 @@ export function Layout({ children, page }) {
               <ProductCardGrid category={category} />
             </div>
           ))}
+          </nav>
         </main>
       )}
 

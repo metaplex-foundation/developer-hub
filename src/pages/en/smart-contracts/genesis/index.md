@@ -121,6 +121,8 @@ Genesis fees depend on the launch type and on whether the launch has graduated t
 
 {% protocol-fees program="genesis" showTitle=false /%}
 
+Fees as of September 29, 2026. These figures come from the same source as the [Protocol Fees](/protocol-fees) page.
+
 ## Program Information
 
 | Network | Program ID |

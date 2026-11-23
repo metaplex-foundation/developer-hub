@@ -2,9 +2,10 @@
 title: 프로토콜 수수료
 metaTitle: 프로토콜 수수료 | Developer Hub
 description: Metaplex 제품의 온체인 수수료 세부 정보.
+updated: '09-29-2026'
 ---
 
-Metaplex 프로토콜은 현재 다음 수수료를 포함합니다:
+Metaplex 프로토콜은 현재 다음 수수료를 포함합니다: 수수료는 2026년 9월 29일 기준입니다.
 
 {% totem %}
 
