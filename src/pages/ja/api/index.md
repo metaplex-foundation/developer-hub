@@ -166,6 +166,7 @@ interface Launch {
   mechanic: string;
   genesisAddress: string;
   spotlight: boolean;
+  verified: boolean;
   startTime: string;
   endTime: string | null;
   status: 'upcoming' | 'live' | 'graduated' | 'ended';
@@ -187,6 +188,7 @@ interface Socials {
   x?: string;
   telegram?: string;
   discord?: string;
+  twitterVerified?: boolean;
 }
 
 interface ErrorResponse {
@@ -208,6 +210,7 @@ pub struct Launch {
     pub mechanic: String,
     pub genesis_address: String,
     pub spotlight: bool,
+    pub verified: bool,
     pub start_time: String,
     pub end_time: Option<String>,
     pub status: String,
@@ -233,6 +236,8 @@ pub struct Socials {
     pub x: Option<String>,
     pub telegram: Option<String>,
     pub discord: Option<String>,
+    #[serde(rename = "twitterVerified")]
+    pub twitter_verified: Option<bool>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
