@@ -275,6 +275,10 @@ export const genesis = {
               title: 'End Behaviors',
               href: '/smart-contracts/genesis/end-behaviors',
             },
+            {
+              title: 'Unlocked Buckets',
+              href: '/smart-contracts/genesis/unlocked-bucket',
+            },
           ],
         },
         {
@@ -350,6 +354,7 @@ export const genesis = {
         'Conditions and Triggers': 'Conditions and Triggers',
         'End Behaviors': 'End Behaviors',
         'Raydium CPMM Graduation': 'Raydium CPMM Graduation',
+        'Unlocked Buckets': 'Unlocked Buckets',
       },
     },
     ja: {
@@ -388,6 +393,7 @@ export const genesis = {
         'Conditions and Triggers': '条件とトリガー',
         'End Behaviors': '終了動作',
         'Raydium CPMM Graduation': 'Raydium CPMMへの卒業',
+        'Unlocked Buckets': 'Unlocked Bucket',
       },
     },
     ko: {
@@ -426,6 +432,7 @@ export const genesis = {
         'Conditions and Triggers': '조건과 트리거',
         'End Behaviors': '종료 동작',
         'Raydium CPMM Graduation': 'Raydium CPMM 졸업',
+        'Unlocked Buckets': 'Unlocked Bucket',
       },
     },
     zh: {
@@ -464,6 +471,7 @@ export const genesis = {
         'Conditions and Triggers': '条件与触发器',
         'End Behaviors': '结束行为',
         'Raydium CPMM Graduation': 'Raydium CPMM 毕业',
+        'Unlocked Buckets': 'Unlocked Bucket',
       },
     },
   },
