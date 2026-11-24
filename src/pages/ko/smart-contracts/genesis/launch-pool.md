@@ -89,134 +89,9 @@ Launch Pool은 예치금으로부터 가격을 발견합니다. 미리 정해진
 {% totem %}
 {% totem-accordion title="전체 설정 스크립트 보기" %}
 
-Launch Pool을 예치 및 청구 기간과 함께 설정하는 방법을 보여줍니다. 사용자용 앱을 구축하려면 [사용자 작업](#사용자-작업)을 참조하세요.
+이 스크립트는 토큰을 생성하고, 예치 및 청구 기간이 있는 Launch Pool bucket과 모금된 SOL을 받는 Unlocked bucket을 추가한 뒤 런칭을 최종화합니다. 이 스크립트는 devnet에서 실행되었습니다. 사용자용 앱을 구축하려면 [사용자 작업](#사용자-작업)을 참조하세요.
 
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-  addLaunchPoolBucketV2,
-  findLaunchPoolBucketV2Pda,
-  addUnlockedBucketV2,
-  findUnlockedBucketV2Pda,
-  finalizeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey } from '@metaplex-foundation/umi';
-
-async function setupLaunchPool() {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
-    .use(mplToolbox())
-    .use(genesis());
-
-  // umi.use(keypairIdentity(yourKeypair));
-
-  const baseMint = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
-
-  // 1. Initialize
-  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-    baseMint: baseMint.publicKey,
-    genesisIndex: 0,
-  });
-
-  await initializeV2(umi, {
-    baseMint,
-    fundingMode: 0,
-    totalSupplyBaseToken: TOTAL_SUPPLY,
-    name: 'My Token',
-    symbol: 'MTK',
-    uri: 'https://example.com/metadata.json',
-  }).sendAndConfirm(umi);
-
-  // 2. Define timing
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const depositStart = now + 60n;
-  const depositEnd = now + 86400n; // 24 hours
-  const claimStart = depositEnd + 1n;
-  const claimEnd = claimStart + 604800n; // 1 week
-
-  // 3. Derive bucket PDAs
-  const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-  // 4. Add Launch Pool bucket
-  await addLaunchPoolBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: TOTAL_SUPPLY,
-    depositStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositStart,
-      triggeredTimestamp: null,
-    },
-    depositEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositEnd,
-      triggeredTimestamp: null,
-    },
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-    minimumDepositAmount: null,
-    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
-    endBehaviors: [
-      {
-        __kind: 'SendQuoteTokenPercentage',
-        padding: Array(4).fill(0),
-        destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000, // 100%
-        processed: false,
-      },
-    ],
-  }).sendAndConfirm(umi);
-
-  // 5. Add Unlocked bucket (receives SOL after transition)
-  await addUnlockedBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: 0n,
-    recipient: umi.identity.publicKey,
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-  }).sendAndConfirm(umi);
-
-  // 6. Finalize
-  await finalizeV2(umi, {
-    baseMint: baseMint.publicKey,
-    genesisAccount,
-  }).sendAndConfirm(umi);
-
-  console.log('Launch Pool active!');
-  console.log('Token:', baseMint.publicKey);
-  console.log('Genesis:', genesisAccount);
-}
-
-setupLaunchPool().catch(console.error);
-```
+{% code-tabs-imported from="genesis/launch_token_launch" frameworks="umi" filename="launch" /%}
 
 {% /totem-accordion %}
 {% /totem %}
@@ -249,7 +124,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 ## Launch Pool 소프트 캡 {% #launch-pool-soft-cap %}
 
-**소프트 캡**은 Launch Pool이 보유하는 quote 토큰의 상한이며, `addLaunchPoolBucketV2`의 `softCap` 확장으로 설정합니다. 상한을 초과하는 예치금도 예치 기간 동안 계속 받아들여지고 런칭은 성공하며, 초과분 quote 토큰은 예치 기간이 끝나면 비례적으로 환불됩니다.
+**소프트 캡**은 Launch Pool이 보유하는 quote 토큰의 상한이며, `addLaunchPoolBucketV2Extensions`를 통해 `SoftCap` 확장으로 설정합니다. 상한을 초과하는 예치금도 예치 기간 동안 계속 받아들여지고 런칭은 성공하며, 초과분 quote 토큰은 예치 기간이 끝나면 비례적으로 환불됩니다.
 
 소프트 캡이 없으면 가격 발견에 상한이 없습니다. 모든 예치금이 보유되고 청약이 늘어날수록 암묵적 토큰 가격이 상승합니다. 소프트 캡은 런칭이 모금하는 최대 금액을 고정하므로, 예치금이 얼마나 초과하든 실효 가격은 `softCap / baseTokenAllocation`입니다.
 
@@ -268,31 +143,16 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 ### Launch Pool Bucket에 소프트 캡 설정하기 {% #configuring-a-soft-cap-on-a-launch-pool-bucket %}
 
-bucket을 추가할 때 `addLaunchPoolBucketV2`에 `softCap` 값을 전달합니다. 금액은 quote 토큰의 최소 단위(wSOL의 경우 lamports)로 표시합니다.
+`addLaunchPoolBucketV2Base`로 bucket을 생성한 후 `finalizeV2` 전에 `addLaunchPoolBucketV2Extensions`로 `SoftCap` 확장을 추가합니다. 금액은 quote 토큰의 최소 단위(wSOL의 경우 lamports)로 표시합니다.
 
 {% totem %}
 
-```typescript {% title="Add a Launch Pool bucket with a 100 SOL soft cap" %}
-import { sol } from '@metaplex-foundation/umi';
-
-await addLaunchPoolBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: TOTAL_SUPPLY,
-  // ...time conditions and end behaviors...
-
-  // Floor: the launch fails below this and everyone can take a full refund.
-  minimumQuoteTokenThreshold: { amount: sol(10).basisPoints },
-
-  // Ceiling: the launch keeps at most this much; the rest is refunded pro-rata.
-  softCap: { amount: sol(100).basisPoints },
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_launch_pool_soft_cap_v2" frameworks="umi" filename="addSoftCap" /%}
 
 {% /totem %}
 
 {% callout type="warning" %}
-`softCap`은 `@metaplex-foundation/genesis` 0.42.0의 `addLaunchPoolBucketV2`에서 **필수** 인수입니다. 다른 Launch Pool 확장과 달리 기본값이 없으므로, 상한을 원하지 않을 때는 `softCap: null`을 명시적으로 전달하세요.
+결합형 `addLaunchPoolBucketV2` 명령어로 Launch Pool을 구성하지 마세요. 옵션을 포함하면 약 1,566바이트로 직렬화되어 Solana의 1,232바이트 트랜잭션 한도를 초과하므로, 전송 시 `base64 encoded data too large` 오류로 실패합니다. `addLaunchPoolBucketV2Base`를 사용한 다음 `addLaunchPoolBucketV2Extensions`와 `setLaunchPoolBucketV2Behaviors`를 사용하세요. 소프트 캡이 없는 런칭은 `SoftCap` 확장을 생략하면 됩니다.
 {% /callout %}
 
 소프트 캡은 확장을 설정할 때와 `finalizeV2` 시점에 다시 검증됩니다:
@@ -528,7 +388,7 @@ endBehaviors: [
 
 ### Launch Pool 확장 {% #launch-pool-extensions %}
 
-확장은 Launch Pool bucket에 구성하는 선택적 가드입니다. 모두 `addLaunchPoolBucketV2`로 설정하거나, `finalizeV2` 전에 `addLaunchPoolBucketV2Extensions` 및 `removeLaunchPoolBucketV2Extensions`로 개별적으로 추가하고 제거할 수 있습니다.
+확장은 Launch Pool bucket에 구성하는 선택적 가드입니다. `addLaunchPoolBucketV2Base` 이후 `finalizeV2` 전에 `addLaunchPoolBucketV2Extensions` 및 `removeLaunchPoolBucketV2Extensions`로 추가하고 제거합니다. `extensions`의 각 항목은 `{ __kind: 'SoftCap', softCap: { amount } }`와 같은 태그된 객체입니다.
 
 | 확장 | 타입 | 목적 |
 |-----------|------|---------|
@@ -549,7 +409,7 @@ endBehaviors: [
 
 | 오류 | 코드 | 원인 |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount`가 0입니다 — `{ amount: 0n }` 대신 `softCap: null`을 전달하세요 |
+| `InvalidSoftCap` | 221 | 금액이 0인 `SoftCap` 확장입니다. 상한을 두지 않으려면 확장을 생략하세요 |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount`가 `minimumQuoteTokenThreshold.amount`보다 작습니다 |
 | `LaunchPoolNotEnded` | — | 예치 기간이 닫히기 전에 `refundLaunchPoolV2`를 호출했습니다 |
 | `LaunchPoolThresholdMet` | 173 | 하한을 충족했고 상한을 초과하지 않았는데 환불을 요청했습니다 |
@@ -604,9 +464,9 @@ if (deposit) {
 - 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다
 - End behavior를 처리하려면 예치 종료 후 `triggerBehaviorsV2`가 실행되어야 합니다
 - 사용자는 예치하려면 wSOL (래핑된 SOL)이 있어야 합니다
-- `softCap`은 `@metaplex-foundation/genesis` 0.42.0의 `addLaunchPoolBucketV2`에서 필수 인수입니다 — 상한을 원하지 않으면 `softCap: null`을 전달하세요
+- Launch Pool bucket은 `addLaunchPoolBucketV2Base`로 생성하고, `SoftCap` 같은 가드는 `addLaunchPoolBucketV2Extensions`로 추가하세요. 결합형 `addLaunchPoolBucketV2` 명령어는 Solana의 트랜잭션 크기 한도를 초과합니다
 - `softCap`을 포함한 Launch Pool 확장은 `finalizeV2` 전에만 추가하거나 제거할 수 있습니다
-- 소프트 캡은 Genesis 프로그램과 JavaScript SDK에서 지원됩니다. [`mplx` CLI](/ko/dev-tools/cli/genesis/launch-pool)는 아직 소프트 캡 플래그를 제공하지 않습니다
+- 소프트 캡은 Genesis 프로그램, JavaScript SDK, [`mplx` CLI](/ko/dev-tools/cli/genesis/launch-pool)에서 지원됩니다
 - 초과 청약된 Launch Pool은 각 예치자의 충당 부분이 올림되기 때문에 bucket에 최대 `depositCount - 1` 최소 단위의 반올림 먼지가 남습니다
 - `quoteTokenDepositTotal`과 `depositCount`는 환불 후에도 이력 기록으로 보존되며, `refundCount`는 처리된 환불 수를 추적합니다
 

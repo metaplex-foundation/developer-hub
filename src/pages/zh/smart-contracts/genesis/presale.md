@@ -97,134 +97,9 @@ tokens = deposit / price
 {% totem %}
 {% totem-accordion title="查看完整设置脚本" %}
 
-这展示了如何设置带有开始和结束日期的Presale。您还可以添加最小存款金额、最大存款金额或后端签名者。要构建面向用户的应用，请参见[用户操作](#用户操作)。
+此脚本设置一个带有开始和结束日期的Presale，并已在 devnet 上运行。最小和最大存款金额、冷却期、白名单或后端签名者可在 `finalizeV2` 之前通过 `addPresaleBucketV2Extensions` 添加。要构建面向用户的应用，请参见[用户操作](#用户操作)。
 
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-  addPresaleBucketV2,
-  findPresaleBucketV2Pda,
-  addUnlockedBucketV2,
-  findUnlockedBucketV2Pda,
-  finalizeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey, sol } from '@metaplex-foundation/umi';
-
-async function setupPresale() {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
-    .use(mplToolbox())
-    .use(genesis());
-
-  // umi.use(keypairIdentity(yourKeypair));
-
-  const baseMint = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100万代币（9位小数）
-
-  // 1. 初始化
-  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-    baseMint: baseMint.publicKey,
-    genesisIndex: 0,
-  });
-
-  await initializeV2(umi, {
-    baseMint,
-    fundingMode: 0,
-    totalSupplyBaseToken: TOTAL_SUPPLY,
-    name: 'My Token',
-    symbol: 'MTK',
-    uri: 'https://example.com/metadata.json',
-  }).sendAndConfirm(umi);
-
-  // 2. 定义时间
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const depositStart = now + 60n;
-  const depositEnd = now + 86400n;
-  const claimStart = depositEnd + 1n;
-  const claimEnd = claimStart + 604800n;
-
-  // 3. 推导Bucket PDA
-  const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-  // 4. 添加Presale Bucket
-  await addPresaleBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: TOTAL_SUPPLY,
-    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL上限
-    depositStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositStart,
-      triggeredTimestamp: null,
-    },
-    depositEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositEnd,
-      triggeredTimestamp: null,
-    },
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-    minimumDepositAmount: null,
-    endBehaviors: [
-      {
-        __kind: 'SendQuoteTokenPercentage',
-        padding: Array(4).fill(0),
-        destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000,
-        processed: false,
-      },
-    ],
-  }).sendAndConfirm(umi);
-
-  // 5. 添加Unlocked Bucket（triggerBehaviorsV2 执行后接收SOL）
-  await addUnlockedBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: 0n,
-    recipient: umi.identity.publicKey,
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-  }).sendAndConfirm(umi);
-
-  // 6. Finalize
-  await finalizeV2(umi, {
-    baseMint: baseMint.publicKey,
-    genesisAccount,
-  }).sendAndConfirm(umi);
-
-  console.log('Presale active!');
-  console.log('Token:', baseMint.publicKey);
-  console.log('Genesis:', genesisAccount);
-}
-
-setupPresale().catch(console.error);
-```
+{% code-tabs-imported from="genesis/presale_quick_start" frameworks="umi" filename="setupPresale" /%}
 
 {% /totem-accordion %}
 {% /totem %}
@@ -309,7 +184,7 @@ Unlocked Bucket在 `triggerBehaviorsV2` 执行后从Presale接收SOL。
 
 ### 配置选项
 
-这些选项在创建Presale Bucket时设置：
+这些选项是Presale扩展，在 `addPresaleBucketV2Base` 之后、`finalizeV2` 之前通过 `addPresaleBucketV2Extensions` 添加。每个条目都是一个带标签的对象，例如 `{ __kind: 'MinimumDepositAmount', minimumDepositAmount: { amount } }`：
 
 | 选项 | 描述 | 示例 |
 |--------|-------------|---------|

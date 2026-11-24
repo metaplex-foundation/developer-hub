@@ -97,134 +97,9 @@ tokens = deposit / price
 {% totem %}
 {% totem-accordion title="전체 설정 스크립트 보기" %}
 
-이것은 시작 및 종료 날짜가 있는 Presale 설정 방법을 보여줍니다. 최소 예치 금액, 최대 예치 금액 또는 백엔드 서명자를 추가할 수도 있습니다. 사용자 대상 앱을 빌드하려면 [사용자 작업](#사용자-작업)을 참조하세요.
+이 스크립트는 시작 및 종료 날짜가 있는 Presale을 설정하며 devnet에서 실행되었습니다. 최소 및 최대 예치 금액, 쿨다운, 허용 목록 또는 백엔드 서명자는 `finalizeV2` 전에 `addPresaleBucketV2Extensions`로 추가합니다. 사용자 대상 앱을 빌드하려면 [사용자 작업](#사용자-작업)을 참조하세요.
 
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-  addPresaleBucketV2,
-  findPresaleBucketV2Pda,
-  addUnlockedBucketV2,
-  findUnlockedBucketV2Pda,
-  finalizeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey, sol } from '@metaplex-foundation/umi';
-
-async function setupPresale() {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
-    .use(mplToolbox())
-    .use(genesis());
-
-  // umi.use(keypairIdentity(yourKeypair));
-
-  const baseMint = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 100만 토큰 (소수점 9자리)
-
-  // 1. 초기화
-  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-    baseMint: baseMint.publicKey,
-    genesisIndex: 0,
-  });
-
-  await initializeV2(umi, {
-    baseMint,
-    fundingMode: 0,
-    totalSupplyBaseToken: TOTAL_SUPPLY,
-    name: 'My Token',
-    symbol: 'MTK',
-    uri: 'https://example.com/metadata.json',
-  }).sendAndConfirm(umi);
-
-  // 2. 타이밍 정의
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const depositStart = now + 60n;
-  const depositEnd = now + 86400n;
-  const claimStart = depositEnd + 1n;
-  const claimEnd = claimStart + 604800n;
-
-  // 3. Bucket PDA 도출
-  const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-  // 4. Presale Bucket 추가
-  await addPresaleBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: TOTAL_SUPPLY,
-    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL 상한
-    depositStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositStart,
-      triggeredTimestamp: null,
-    },
-    depositEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositEnd,
-      triggeredTimestamp: null,
-    },
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-    minimumDepositAmount: null,
-    endBehaviors: [
-      {
-        __kind: 'SendQuoteTokenPercentage',
-        padding: Array(4).fill(0),
-        destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000,
-        processed: false,
-      },
-    ],
-  }).sendAndConfirm(umi);
-
-  // 5. Unlocked Bucket 추가 (triggerBehaviorsV2 실행 후 SOL 수령)
-  await addUnlockedBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: 0n,
-    recipient: umi.identity.publicKey,
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-  }).sendAndConfirm(umi);
-
-  // 6. Finalize
-  await finalizeV2(umi, {
-    baseMint: baseMint.publicKey,
-    genesisAccount,
-  }).sendAndConfirm(umi);
-
-  console.log('Presale active!');
-  console.log('Token:', baseMint.publicKey);
-  console.log('Genesis:', genesisAccount);
-}
-
-setupPresale().catch(console.error);
-```
+{% code-tabs-imported from="genesis/presale_quick_start" frameworks="umi" filename="setupPresale" /%}
 
 {% /totem-accordion %}
 {% /totem %}
@@ -309,7 +184,7 @@ Unlocked Bucket은 `triggerBehaviorsV2` 실행 후 Presale에서 SOL을 받습�
 
 ### 설정 옵션
 
-이 옵션들은 Presale Bucket 생성 시 설정됩니다:
+이 옵션들은 Presale 확장으로, `addPresaleBucketV2Base` 이후 `finalizeV2` 전에 `addPresaleBucketV2Extensions`로 추가합니다. 각 항목은 `{ __kind: 'MinimumDepositAmount', minimumDepositAmount: { amount } }`와 같은 태그된 객체입니다:
 
 | 옵션 | 설명 | 예시 |
 |--------|-------------|---------|
