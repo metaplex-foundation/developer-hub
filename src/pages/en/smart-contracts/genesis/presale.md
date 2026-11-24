@@ -98,134 +98,9 @@ For example, if you allocate 1,000,000 tokens with a 100 SOL cap:
 {% totem %}
 {% totem-accordion title="View complete setup Script" %}
 
-This shows how to setup a Presale with Start and End Dates. You can also add a minimum deposit amount and a maximum deposit amount or a backend signer. To build the user-facing app, see [User Operations](#user-operations).
+This script sets up a Presale with start and end dates and was run on devnet. Minimum and maximum deposit amounts, cooldowns, an allowlist, or a backend signer are added with `addPresaleBucketV2Extensions` before `finalizeV2`. To build the user-facing app, see [User Operations](#user-operations).
 
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-  addPresaleBucketV2,
-  findPresaleBucketV2Pda,
-  addUnlockedBucketV2,
-  findUnlockedBucketV2Pda,
-  finalizeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey, sol } from '@metaplex-foundation/umi';
-
-async function setupPresale() {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
-    .use(mplToolbox())
-    .use(genesis());
-
-  // umi.use(keypairIdentity(yourKeypair));
-
-  const baseMint = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
-
-  // 1. Initialize
-  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-    baseMint: baseMint.publicKey,
-    genesisIndex: 0,
-  });
-
-  await initializeV2(umi, {
-    baseMint,
-    fundingMode: 0,
-    totalSupplyBaseToken: TOTAL_SUPPLY,
-    name: 'My Token',
-    symbol: 'MTK',
-    uri: 'https://example.com/metadata.json',
-  }).sendAndConfirm(umi);
-
-  // 2. Define timing
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const depositStart = now + 60n;
-  const depositEnd = now + 86400n;
-  const claimStart = depositEnd + 1n;
-  const claimEnd = claimStart + 604800n;
-
-  // 3. Derive bucket PDAs
-  const [presaleBucket] = findPresaleBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-  // 4. Add Presale bucket
-  await addPresaleBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: TOTAL_SUPPLY,
-    allocationQuoteTokenCap: sol(100).basisPoints, // 100 SOL cap
-    depositStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositStart,
-      triggeredTimestamp: null,
-    },
-    depositEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositEnd,
-      triggeredTimestamp: null,
-    },
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-    minimumDepositAmount: null,
-    endBehaviors: [
-      {
-        __kind: 'SendQuoteTokenPercentage',
-        padding: Array(4).fill(0),
-        destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000,
-        processed: false,
-      },
-    ],
-  }).sendAndConfirm(umi);
-
-  // 5. Add Unlocked bucket (receives SOL after transition)
-  await addUnlockedBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: 0n,
-    recipient: umi.identity.publicKey,
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-  }).sendAndConfirm(umi);
-
-  // 6. Finalize
-  await finalizeV2(umi, {
-    baseMint: baseMint.publicKey,
-    genesisAccount,
-  }).sendAndConfirm(umi);
-
-  console.log('Presale active!');
-  console.log('Token:', baseMint.publicKey);
-  console.log('Genesis:', genesisAccount);
-}
-
-setupPresale().catch(console.error);
-```
+{% code-tabs-imported from="genesis/presale_quick_start" frameworks="umi" filename="setupPresale" /%}
 
 {% /totem-accordion %}
 {% /totem %}
@@ -310,7 +185,7 @@ After the deposit period ends, run `triggerBehaviorsV2` to process the end behav
 
 ### Configuration Options
 
-These options are set when creating the Presale bucket:
+These options are Presale extensions, added with `addPresaleBucketV2Extensions` after `addPresaleBucketV2Base` and before `finalizeV2`. Each entry is a tagged object such as `{ __kind: 'MinimumDepositAmount', minimumDepositAmount: { amount } }`:
 
 | Option | Description | Example |
 |--------|-------------|---------|

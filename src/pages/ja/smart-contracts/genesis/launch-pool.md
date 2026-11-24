@@ -81,7 +81,7 @@ Launch Pool は、定義されたウィンドウ期間中に入金を受け付�
 - End Behavior が集められた SOL をトレジャリー bucket にルーティングします
 
 {% callout type="note" %}
-Launch Pool は入金に基づいて価格を発見します。事前に設定された固定価格には [Presale](/smart-contracts/genesis/presale) を、入札ベースのクリアリングには [Uniform Price Auction](/smart-contracts/genesis/uniform-price-auction) を使用してください。流動性プールの作成は、Launch Pool bucket 自体ではなく Raydium グラデュエーション bucket が担当します。
+Launch Pool は入金に基づいて価格を発見します。事前に設定された固定価格には [Presale](/ja/smart-contracts/genesis/presale) を、入札ベースのクリアリングには [Uniform Price Auction](/ja/smart-contracts/genesis/uniform-price-auction) を使用してください。流動性プールの作成は、Launch Pool bucket 自体ではなく Raydium グラデュエーション bucket が担当します。
 {% /callout %}
 
 ## クイックスタート
@@ -89,134 +89,9 @@ Launch Pool は入金に基づいて価格を発見します。事前に設定�
 {% totem %}
 {% totem-accordion title="完全なセットアップスクリプトを表示" %}
 
-これは入金ウィンドウと請求ウィンドウを持つ Launch Pool のセットアップ方法を示しています。ユーザー向けアプリの構築については、[ユーザー操作](#ユーザー操作)を参照してください。
+このスクリプトは、トークンを作成し、入金ウィンドウと請求ウィンドウを持つ Launch Pool bucket と調達した SOL 用の Unlocked bucket を追加して、ローンチをファイナライズします。devnet で実行済みです。ユーザー向けアプリの構築については、[ユーザー操作](#ユーザー操作)を参照してください。
 
-```typescript
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { mplToolbox } from '@metaplex-foundation/mpl-toolbox';
-import {
-  genesis,
-  initializeV2,
-  findGenesisAccountV2Pda,
-  addLaunchPoolBucketV2,
-  findLaunchPoolBucketV2Pda,
-  addUnlockedBucketV2,
-  findUnlockedBucketV2Pda,
-  finalizeV2,
-} from '@metaplex-foundation/genesis';
-import { generateSigner, publicKey } from '@metaplex-foundation/umi';
-
-async function setupLaunchPool() {
-  const umi = createUmi('https://api.mainnet-beta.solana.com')
-    .use(mplToolbox())
-    .use(genesis());
-
-  // umi.use(keypairIdentity(yourKeypair));
-
-  const baseMint = generateSigner(umi);
-  const TOTAL_SUPPLY = 1_000_000_000_000_000n; // 1 million tokens (9 decimals)
-
-  // 1. Initialize
-  const [genesisAccount] = findGenesisAccountV2Pda(umi, {
-    baseMint: baseMint.publicKey,
-    genesisIndex: 0,
-  });
-
-  await initializeV2(umi, {
-    baseMint,
-    fundingMode: 0,
-    totalSupplyBaseToken: TOTAL_SUPPLY,
-    name: 'My Token',
-    symbol: 'MTK',
-    uri: 'https://example.com/metadata.json',
-  }).sendAndConfirm(umi);
-
-  // 2. Define timing
-  const now = BigInt(Math.floor(Date.now() / 1000));
-  const depositStart = now + 60n;
-  const depositEnd = now + 86400n; // 24 hours
-  const claimStart = depositEnd + 1n;
-  const claimEnd = claimStart + 604800n; // 1 week
-
-  // 3. Derive bucket PDAs
-  const [launchPoolBucket] = findLaunchPoolBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-  const [unlockedBucket] = findUnlockedBucketV2Pda(umi, { genesisAccount, bucketIndex: 0 });
-
-  // 4. Add Launch Pool bucket
-  await addLaunchPoolBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: TOTAL_SUPPLY,
-    depositStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositStart,
-      triggeredTimestamp: null,
-    },
-    depositEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: depositEnd,
-      triggeredTimestamp: null,
-    },
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-    minimumDepositAmount: null,
-    softCap: null, // required since genesis 0.42.0; pass null for no soft cap
-    endBehaviors: [
-      {
-        __kind: 'SendQuoteTokenPercentage',
-        padding: Array(4).fill(0),
-        destinationBucket: publicKey(unlockedBucket),
-        percentageBps: 10000, // 100%
-        processed: false,
-      },
-    ],
-  }).sendAndConfirm(umi);
-
-  // 5. Add Unlocked bucket (receives SOL after transition)
-  await addUnlockedBucketV2(umi, {
-    genesisAccount,
-    baseMint: baseMint.publicKey,
-    baseTokenAllocation: 0n,
-    recipient: umi.identity.publicKey,
-    claimStartCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimStart,
-      triggeredTimestamp: null,
-    },
-    claimEndCondition: {
-      __kind: 'TimeAbsolute',
-      padding: Array(47).fill(0),
-      time: claimEnd,
-      triggeredTimestamp: null,
-    },
-  }).sendAndConfirm(umi);
-
-  // 6. Finalize
-  await finalizeV2(umi, {
-    baseMint: baseMint.publicKey,
-    genesisAccount,
-  }).sendAndConfirm(umi);
-
-  console.log('Launch Pool active!');
-  console.log('Token:', baseMint.publicKey);
-  console.log('Genesis:', genesisAccount);
-}
-
-setupLaunchPool().catch(console.error);
-```
+{% code-tabs-imported from="genesis/launch_token_launch" frameworks="umi" filename="launch" /%}
 
 {% /totem-accordion %}
 {% /totem %}
@@ -249,7 +124,7 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 ## Launch Pool のソフトキャップ {% #launch-pool-soft-cap %}
 
-**ソフトキャップ**は、Launch Pool が保持する Quote Token の上限であり、`addLaunchPoolBucketV2` の `softCap` 拡張で設定します。上限を超える入金も入金ウィンドウ期間中は受け付けられ、ローンチは成功し、超過分の Quote Token はウィンドウ終了後に比例配分で返金されます。
+**ソフトキャップ**は、Launch Pool が保持する Quote Token の上限であり、`addLaunchPoolBucketV2Extensions` を通じて `SoftCap` 拡張で設定します。上限を超える入金も入金ウィンドウ期間中は受け付けられ、ローンチは成功し、超過分の Quote Token はウィンドウ終了後に比例配分で返金されます。
 
 ソフトキャップがない場合、価格発見には上限がありません。すべての入金が保持され、申込が増えるほどトークンの暗黙の価格が上昇します。ソフトキャップはローンチの最大調達額を固定するため、入金がどれだけ上限を超えても、実効価格は `softCap / baseTokenAllocation` になります。
 
@@ -268,31 +143,16 @@ userTokens = (userDeposit / totalDeposits) * tokenAllocation
 
 ### Launch Pool Bucket にソフトキャップを設定する {% #configuring-a-soft-cap-on-a-launch-pool-bucket %}
 
-bucket を追加する際に、`addLaunchPoolBucketV2` に `softCap` の値を渡します。金額は Quote Token の最小単位（wSOL の場合は lamports）で指定します。
+`addLaunchPoolBucketV2Base` で bucket を作成した後、`finalizeV2` の前に、`addLaunchPoolBucketV2Extensions` で `SoftCap` 拡張を追加します。金額は Quote Token の最小単位（wSOL の場合は lamports）で指定します。
 
 {% totem %}
 
-```typescript {% title="100 SOL のソフトキャップを持つ Launch Pool bucket を追加する" %}
-import { sol } from '@metaplex-foundation/umi';
-
-await addLaunchPoolBucketV2(umi, {
-  genesisAccount,
-  baseMint: baseMint.publicKey,
-  baseTokenAllocation: TOTAL_SUPPLY,
-  // ...time conditions and end behaviors...
-
-  // Floor: the launch fails below this and everyone can take a full refund.
-  minimumQuoteTokenThreshold: { amount: sol(10).basisPoints },
-
-  // Ceiling: the launch keeps at most this much; the rest is refunded pro-rata.
-  softCap: { amount: sol(100).basisPoints },
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_launch_pool_soft_cap_v2" frameworks="umi" filename="addSoftCap" /%}
 
 {% /totem %}
 
 {% callout type="warning" %}
-`softCap` は `@metaplex-foundation/genesis` 0.42.0 の `addLaunchPoolBucketV2` における**必須**引数です。他の Launch Pool 拡張とは異なりデフォルト値がないため、上限を設けない場合は明示的に `softCap: null` を渡してください。
+Launch Pool の設定に、統合版の `addLaunchPoolBucketV2` インストラクションを使用しないでください。オプションを含めるとシリアライズ後のサイズが約 1,566 バイトとなり、Solana のトランザクション上限である 1,232 バイトを超えるため、送信すると `base64 encoded data too large` で失敗します。`addLaunchPoolBucketV2Base` を使用し、その後に `addLaunchPoolBucketV2Extensions` と `setLaunchPoolBucketV2Behaviors` を使用してください。ソフトキャップのないローンチでは、`SoftCap` 拡張を省略するだけです。
 {% /callout %}
 
 ソフトキャップは、拡張を設定する際と `finalizeV2` の際に検証されます：
@@ -528,7 +388,7 @@ endBehaviors: [
 
 ### Launch Pool 拡張
 
-拡張は、Launch Pool bucket に設定する任意のガードです。すべて `addLaunchPoolBucketV2` で設定するか、`finalizeV2` の前に `addLaunchPoolBucketV2Extensions` と `removeLaunchPoolBucketV2Extensions` で個別に追加・削除できます。
+拡張は、Launch Pool bucket に設定する任意のガードです。`addLaunchPoolBucketV2Base` の後、`finalizeV2` の前に、`addLaunchPoolBucketV2Extensions` と `removeLaunchPoolBucketV2Extensions` で追加・削除します。`extensions` の各エントリは、`{ __kind: 'SoftCap', softCap: { amount } }` のようなタグ付きオブジェクトです。
 
 | 拡張 | 型 | 目的 |
 |-----------|------|---------|
@@ -549,7 +409,7 @@ endBehaviors: [
 
 | エラー | コード | 原因 |
 |-------|------|-------|
-| `InvalidSoftCap` | 221 | `softCap.amount` が 0 です。`{ amount: 0n }` ではなく `softCap: null` を渡してください |
+| `InvalidSoftCap` | 221 | 金額が 0 の `SoftCap` 拡張です。上限を設けない場合は拡張を省略してください |
 | `SoftCapBelowThreshold` | 222 | `softCap.amount` が `minimumQuoteTokenThreshold.amount` を下回っています |
 | `LaunchPoolNotEnded` | — | 入金ウィンドウが閉じる前に `refundLaunchPoolV2` が呼び出されました |
 | `LaunchPoolThresholdMet` | 173 | 下限に達し、上限も超過していない状態で返金がリクエストされました |
@@ -604,9 +464,9 @@ if (deposit) {
 - ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
 - End Behavior を処理するには、入金終了後に `triggerBehaviorsV2` を実行する必要があります
 - ユーザーは入金するために wSOL（ラップされた SOL）を保持している必要があります
-- `softCap` は `@metaplex-foundation/genesis` 0.42.0 の `addLaunchPoolBucketV2` における必須引数です。上限が不要な場合は `softCap: null` を渡してください
+- Launch Pool bucket は `addLaunchPoolBucketV2Base` で作成し、`SoftCap` などのガードは `addLaunchPoolBucketV2Extensions` で追加します。統合版の `addLaunchPoolBucketV2` インストラクションは Solana のトランザクションサイズ上限を超えます
 - `softCap` を含む Launch Pool 拡張は、`finalizeV2` の前にのみ追加・削除できます
-- ソフトキャップは Genesis プログラムと JavaScript SDK でサポートされています。[`mplx` CLI](/dev-tools/cli/genesis/launch-pool) にはまだソフトキャップのフラグがありません
+- ソフトキャップは Genesis プログラム、JavaScript SDK、[`mplx` CLI](/ja/dev-tools/cli/genesis/launch-pool) でサポートされています
 - 申込超過の Launch Pool では、各入金者の充当分が切り上げられるため、bucket に最大 `depositCount - 1` 最小単位の端数（ダスト）が残ります
 - `quoteTokenDepositTotal` と `depositCount` は返金後も履歴として保持され、処理済みの返金数は `refundCount` で追跡されます
 
