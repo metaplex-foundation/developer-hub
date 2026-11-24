@@ -254,6 +254,15 @@ export const genesis = {
           ],
         },
         {
+          title: 'Launch Mechanics',
+          links: [
+            {
+              title: 'Conditions and Triggers',
+              href: '/smart-contracts/genesis/conditions',
+            },
+          ],
+        },
+        {
           title: 'Integration APIs',
           links: [
             {
@@ -299,6 +308,7 @@ export const genesis = {
         'Launch Types': 'Launch Types',
         'Integrations': 'Integrations',
         'CLI': 'CLI',
+        'Launch Mechanics': 'Launch Mechanics',
       },
       links: {
         'Overview': 'Overview',
@@ -322,6 +332,7 @@ export const genesis = {
         'Fetch Deposit State': 'Fetch Deposit State',
         'Locked LP Tokens': 'Locked LP Tokens',
         'Genesis CLI Commands': 'Genesis CLI Commands',
+        'Conditions and Triggers': 'Conditions and Triggers',
       },
     },
     ja: {
@@ -333,6 +344,7 @@ export const genesis = {
         'Launch Types': 'ローンチタイプ',
         'Integrations': 'インテグレーション',
         'CLI': 'CLI',
+        'Launch Mechanics': 'ローンチの仕組み',
       },
       links: {
         'Overview': '概要',
@@ -356,6 +368,7 @@ export const genesis = {
         'Fetch Deposit State': 'デポジット状態の取得',
         'Locked LP Tokens': 'ロックされたLPトークン',
         'Genesis CLI Commands': 'Genesis CLIコマンド',
+        'Conditions and Triggers': '条件とトリガー',
       },
     },
     ko: {
@@ -367,6 +380,7 @@ export const genesis = {
         'Launch Types': '런치 유형',
         'Integrations': '통합',
         'CLI': 'CLI',
+        'Launch Mechanics': '런치 메커니즘',
       },
       links: {
         'Overview': '개요',
@@ -390,6 +404,7 @@ export const genesis = {
         'Fetch Deposit State': '예치 상태 조회',
         'Locked LP Tokens': '잠긴 LP 토큰',
         'Genesis CLI Commands': 'Genesis CLI 명령어',
+        'Conditions and Triggers': '조건과 트리거',
       },
     },
     zh: {
@@ -401,6 +416,7 @@ export const genesis = {
         'Launch Types': '发行类型',
         'Integrations': '集成',
         'CLI': 'CLI',
+        'Launch Mechanics': '发行机制',
       },
       links: {
         'Overview': '概述',
@@ -424,6 +440,7 @@ export const genesis = {
         'Fetch Deposit State': '获取存款状态',
         'Locked LP Tokens': '锁定的LP代币',
         'Genesis CLI Commands': 'Genesis CLI命令',
+        'Conditions and Triggers': '条件与触发器',
       },
     },
   },

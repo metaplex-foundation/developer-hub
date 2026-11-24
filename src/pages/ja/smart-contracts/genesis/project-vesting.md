@@ -88,7 +88,7 @@ Genesis に `ClaimScheduleBucketV1` はありません。プロジェクトベ�
 
 他の配布バケットをすべて追加してから、[Genesis セットアップ](/ja/smart-contracts/genesis/getting-started) の通り `finalizeV2` を呼び出します。ファイナライズは不可逆です。
 
-### ベスト済みプロジェクトトークンのクレーム
+### ベスト済みプロジェクトトークンのクレーム {% #claim-vested-project-tokens %}
 
 `claimClaimScheduleV2` は、現在ベスト済みで未クレームのトークンすべてをバケットに保存された受取人へ転送します。
 

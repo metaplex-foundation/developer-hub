@@ -115,7 +115,7 @@ Genesis는 조합할 수 있는 세 가지 메커니즘을 지원합니다:
 - **예치 기간** - 사용자가 SOL을 예치할 수 있는 시기
 - **청구 기간** - 사용자가 토큰을 청구할 수 있는 시기
 
-## 프로토콜 수수료
+## 프로토콜 수수료 {% #protocol-fees %}
 
 Genesis 수수료는 런칭 타입과 런칭이 Raydium CPMM 풀로 졸업했는지 여부에 따라 달라집니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 본딩 커브 CPMM 풀에는 항상 창작자 보상이 포함됩니다.
 
@@ -148,7 +148,7 @@ Genesis는 솔라나에서 토큰 생성 이벤트(TGE)를 위한 Metaplex 스�
 Genesis는 세 가지 메커니즘을 지원합니다: **Launch Pool**(가격 발견을 통한 비례 배분), **Presale**(고정 가격), **Uniform Price Auction**(클리어링 가격을 사용한 입찰 기반).
 
 ### Genesis를 사용하는 데 비용이 얼마나 드나요?
-Genesis는 본딩 커브 스왑과 졸업 후 Raydium CPMM 거래에 프로토콜 수수료를 부과하며, 창작자가 Launch Pool 또는 Presale의 모금된 자금을 인출할 때도 수수료를 부과합니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 현재 내역은 [프로토콜 수수료](#프로토콜-수수료)를 참조하세요.
+Genesis는 본딩 커브 스왑과 졸업 후 Raydium CPMM 거래에 프로토콜 수수료를 부과하며, 창작자가 Launch Pool 또는 Presale의 모금된 자금을 인출할 때도 수수료를 부과합니다. Launch Pool과 Presale의 CPMM 수수료는 런칭에서 창작자 보상을 활성화했는지 여부에 따라서도 달라집니다. 현재 내역은 [프로토콜 수수료](#protocol-fees)를 참조하세요.
 
 ### 출시 후 토큰 권한을 취소할 수 있나요?
 네. Genesis는 권한을 영구적으로 취소하기 위한 `revokeV2` 명령어를 제공합니다.
