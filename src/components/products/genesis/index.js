@@ -238,6 +238,17 @@ export const genesis = {
             {
               title: 'Launch Pool',
               href: '/smart-contracts/genesis/launch-pool',
+              collapsible: true,
+              children: [
+                {
+                  title: 'Overview',
+                  href: '/smart-contracts/genesis/launch-pool',
+                },
+                {
+                  title: 'Raydium CPMM Graduation',
+                  href: '/smart-contracts/genesis/raydium-cpmm-graduation',
+                },
+              ],
             },
             {
               title: 'Project Vesting',
@@ -338,6 +349,7 @@ export const genesis = {
         'Genesis CLI Commands': 'Genesis CLI Commands',
         'Conditions and Triggers': 'Conditions and Triggers',
         'End Behaviors': 'End Behaviors',
+        'Raydium CPMM Graduation': 'Raydium CPMM Graduation',
       },
     },
     ja: {
@@ -375,6 +387,7 @@ export const genesis = {
         'Genesis CLI Commands': 'Genesis CLIコマンド',
         'Conditions and Triggers': '条件とトリガー',
         'End Behaviors': '終了動作',
+        'Raydium CPMM Graduation': 'Raydium CPMMへの卒業',
       },
     },
     ko: {
@@ -412,6 +425,7 @@ export const genesis = {
         'Genesis CLI Commands': 'Genesis CLI 명령어',
         'Conditions and Triggers': '조건과 트리거',
         'End Behaviors': '종료 동작',
+        'Raydium CPMM Graduation': 'Raydium CPMM 졸업',
       },
     },
     zh: {
@@ -449,6 +463,7 @@ export const genesis = {
         'Genesis CLI Commands': 'Genesis CLI命令',
         'Conditions and Triggers': '条件与触发器',
         'End Behaviors': '结束行为',
+        'Raydium CPMM Graduation': 'Raydium CPMM 毕业',
       },
     },
   },
