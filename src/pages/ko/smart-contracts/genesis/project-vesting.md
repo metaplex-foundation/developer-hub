@@ -88,7 +88,7 @@ Genesis에는 `ClaimScheduleBucketV1`이 없습니다. 프로젝트 베스팅에
 
 다른 배포 버킷을 모두 추가한 뒤 [Genesis 설정](/ko/smart-contracts/genesis/getting-started)대로 `finalizeV2`를 호출하세요. Finalize는 되돌릴 수 없습니다.
 
-### 베스트된 프로젝트 토큰 클레임
+### 베스트된 프로젝트 토큰 클레임 {% #claim-vested-project-tokens %}
 
 `claimClaimScheduleV2`는 현재 베스트되어 아직 클레임되지 않은 모든 토큰을 버킷에 저장된 수신자에게 전송합니다.
 

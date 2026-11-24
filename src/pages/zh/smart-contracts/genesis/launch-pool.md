@@ -417,13 +417,13 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 
 {% code-tabs-imported from="genesis/wrap_sol" frameworks="umi" filename="wrapSol" /%}
 
-### 存款
+### 存款 {% #depositing %}
 
 {% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 同一用户的多次存款会累积到一个存款账户中。
 
-### 提款
+### 提款 {% #withdrawing %}
 
 用户可以在存款期间提款。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用。
 
@@ -431,7 +431,7 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 
 如果用户提取全部余额，存款 PDA 将被关闭。
 
-### 领取代币
+### 领取代币 {% #claiming-tokens %}
 
 在存款期结束且领取开放后：
 

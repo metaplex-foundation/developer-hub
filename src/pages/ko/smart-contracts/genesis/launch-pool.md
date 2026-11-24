@@ -417,13 +417,13 @@ Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받�
 
 {% code-tabs-imported from="genesis/wrap_sol" frameworks="umi" filename="wrapSol" /%}
 
-### 예치
+### 예치 {% #depositing %}
 
 {% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 같은 사용자의 여러 예치금은 단일 예치 계정에 누적됩니다.
 
-### 출금
+### 출금 {% #withdrawing %}
 
 사용자는 예치 기간 동안 출금할 수 있습니다. {% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료가 적용됩니다.
 
@@ -431,7 +431,7 @@ Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받�
 
 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다.
 
-### 토큰 청구
+### 토큰 청구 {% #claiming-tokens %}
 
 예치 기간이 종료되고 청구가 열린 후:
 

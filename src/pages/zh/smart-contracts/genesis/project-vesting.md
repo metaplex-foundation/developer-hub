@@ -88,7 +88,7 @@ Genesis 没有 `ClaimScheduleBucketV1`。项目归属请使用 `V2` 账户和指
 
 添加所有其他分发 Bucket，然后按 [Genesis 设置](/zh/smart-contracts/genesis/getting-started) 调用 `finalizeV2`。Finalize 不可逆。
 
-### 领取已归属的项目代币
+### 领取已归属的项目代币 {% #claim-vested-project-tokens %}
 
 `claimClaimScheduleV2` 将当前已归属且尚未领取的全部代币转到 Bucket 存储的接收方。
 

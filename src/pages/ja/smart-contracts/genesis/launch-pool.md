@@ -417,13 +417,13 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 
 {% code-tabs-imported from="genesis/wrap_sol" frameworks="umi" filename="wrapSol" /%}
 
-### 入金
+### 入金 {% #depositing %}
 
 {% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 同じユーザーからの複数の入金は、単一の入金アカウントに蓄積されます。
 
-### 引き出し
+### 引き出し {% #withdrawing %}
 
 ユーザーは入金期間中に引き出すことができます。{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料が適用されます。
 
@@ -431,7 +431,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 
 ユーザーが残高全額を引き出すと、入金 PDA はクローズされます。
 
-### トークンの請求
+### トークンの請求 {% #claiming-tokens %}
 
 入金期間が終了し、請求が開始された後：
 
@@ -439,7 +439,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 
 トークン割り当て：`userTokens = (userDeposit / totalDeposits) * bucketTokenAllocation`
 
-### 入金の返金
+### 入金の返金 {% #refunding-a-deposit %}
 
 返金が可能なのは 2 つの場合です。ローンチが `minimumQuoteTokenThreshold` に届かなかった場合（全額返金）、または `softCap` を超過した場合（超過分のみ返金）です。どちらも同じインストラクションを使用します。詳しくは [refundLaunchPoolV2 で超過入金を返金する](#refunding-excess-deposits-with-refund-launch-pool-v2)を参照してください。
 
@@ -526,7 +526,7 @@ endBehaviors: [
 
 {% /totem %}
 
-### Launch Pool 拡張
+### Launch Pool 拡張 {% #launch-pool-extensions %}
 
 拡張は、Launch Pool bucket に設定する任意のガードです。すべて `addLaunchPoolBucketV2` で設定するか、`finalizeV2` の前に `addLaunchPoolBucketV2Extensions` と `removeLaunchPoolBucketV2Extensions` で個別に追加・削除できます。
 
