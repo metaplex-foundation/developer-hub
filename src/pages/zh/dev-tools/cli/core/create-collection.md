@@ -22,6 +22,8 @@ mplx core collection create --name "My Collection" --uri "https://example.com/me
 mplx core collection create --files --image "./my-collection.png" --offchain "./metadata.json"
 ```
 
+需要一个初始元数据文件？运行 `mplx core collection template [output]` 会在 `collection/` 文件夹中生成 `metadata.json`，然后将其传给 `--offchain`。
+
 ### 3. 交互式向导
 使用交互式向导创建集合，它会引导您完成整个过程，包括文件上传和元数据创建。
 
