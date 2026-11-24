@@ -260,6 +260,10 @@ export const genesis = {
               title: 'Conditions and Triggers',
               href: '/smart-contracts/genesis/conditions',
             },
+            {
+              title: 'End Behaviors',
+              href: '/smart-contracts/genesis/end-behaviors',
+            },
           ],
         },
         {
@@ -333,6 +337,7 @@ export const genesis = {
         'Locked LP Tokens': 'Locked LP Tokens',
         'Genesis CLI Commands': 'Genesis CLI Commands',
         'Conditions and Triggers': 'Conditions and Triggers',
+        'End Behaviors': 'End Behaviors',
       },
     },
     ja: {
@@ -369,6 +374,7 @@ export const genesis = {
         'Locked LP Tokens': 'ロックされたLPトークン',
         'Genesis CLI Commands': 'Genesis CLIコマンド',
         'Conditions and Triggers': '条件とトリガー',
+        'End Behaviors': '終了動作',
       },
     },
     ko: {
@@ -405,6 +411,7 @@ export const genesis = {
         'Locked LP Tokens': '잠긴 LP 토큰',
         'Genesis CLI Commands': 'Genesis CLI 명령어',
         'Conditions and Triggers': '조건과 트리거',
+        'End Behaviors': '종료 동작',
       },
     },
     zh: {
@@ -441,6 +448,7 @@ export const genesis = {
         'Locked LP Tokens': '锁定的LP代币',
         'Genesis CLI Commands': 'Genesis CLI命令',
         'Conditions and Triggers': '条件与触发器',
+        'End Behaviors': '结束行为',
       },
     },
   },
