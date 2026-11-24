@@ -1,6 +1,8 @@
 // [IMPORTS]
 import {
   addUnlockedBucketV2,
+  createNeverCondition,
+  createTimeAbsoluteCondition,
   genesis,
 } from '@metaplex-foundation/genesis'
 import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
@@ -15,7 +17,7 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 // umi.use(keypairIdentity(yourKeypair));
 
-// Assumes genesisAccount, baseMint, claimStart, and claimEnd from previous steps.
+// Assumes genesisAccount, baseMint, and claimStart from previous steps.
 // [/SETUP]
 
 // [MAIN]
@@ -24,18 +26,10 @@ await addUnlockedBucketV2(umi, {
   baseMint: baseMint.publicKey,
   baseTokenAllocation: 0n,
   recipient: umi.identity.publicKey,
-  claimStartCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimStart,
-    triggeredTimestamp: null,
-  },
-  claimEndCondition: {
-    __kind: 'TimeAbsolute',
-    padding: Array(47).fill(0),
-    time: claimEnd,
-    triggeredTimestamp: null,
-  },
+  claimStartCondition: createTimeAbsoluteCondition(claimStart),
+  // An Unlocked bucket that receives tokens from end behaviors (here the
+  // raised SOL) should never close, so late credits stay claimable.
+  claimEndCondition: createNeverCondition(),
   backendSigner: null,
 }).sendAndConfirm(umi)
 // [/MAIN]

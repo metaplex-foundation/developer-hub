@@ -14,7 +14,9 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
 // [SETUP]
-const umi = createUmi('https://api.mainnet-beta.solana.com')
+// 'confirmed' makes each transaction's simulation see the previous one;
+// the RPC default, 'finalized', lags behind and can reject back-to-back steps.
+const umi = createUmi('https://api.mainnet-beta.solana.com', { commitment: 'confirmed' })
   .use(mplToolbox())
   .use(genesis())
 
