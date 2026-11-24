@@ -3,12 +3,15 @@ import {
   cancelClaimScheduleBucketV2,
   genesis,
 } from '@metaplex-foundation/genesis'
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
 import { keypairIdentity, publicKey } from '@metaplex-foundation/umi'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 // [/IMPORTS]
 
 // [SETUP]
-const umi = createUmi('https://api.mainnet-beta.solana.com').use(genesis())
+const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
+  .use(genesis())
 
 // umi.use(keypairIdentity(yourKeypair))
 

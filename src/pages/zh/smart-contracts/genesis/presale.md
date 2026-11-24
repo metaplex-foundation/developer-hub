@@ -267,7 +267,7 @@ Unlocked Bucket在 `triggerBehaviorsV2` 执行后从Presale接收SOL。
 
 所有Bucket配置完成后，Finalize以激活预售。这是不可逆的。
 
-{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
+{% code-tabs-imported from="genesis/finalize_presale_v2" frameworks="umi" filename="finalize" /%}
 
 ## 用户操作
 

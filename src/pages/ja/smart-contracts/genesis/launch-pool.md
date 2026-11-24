@@ -411,7 +411,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 
 ## ユーザー操作
 
-### SOL のラッピング
+### SOL のラッピング {% #wrapping-sol %}
 
 ユーザーは入金前に SOL を wSOL にラップする必要があります。
 

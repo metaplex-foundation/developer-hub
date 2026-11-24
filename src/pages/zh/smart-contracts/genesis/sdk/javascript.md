@@ -55,7 +55,7 @@ Genesis JavaScript SDK 将每一条 Genesis 程序指令都封装为 Umi 构建�
 - 指令构建器涵盖 bucket 设置、存款与领取、Raydium CPMM 毕业、LP 代币与池费用、Unlocked bucket 以及领取计划（claim schedule）
 - `triggerConditionsV2` 和 `triggerBehaviorsV2` 是无需许可的 crank，分别用于解析条件和执行结束行为
 - 下文给出了条件（`TimeAbsolute`、`TimeRelative`、`Triggered`、`TriggeredWithExpiry`、`Never`、`Always`）和结束行为（六种类型）的确切对象结构
-- 已针对 `@metaplex-foundation/genesis` 0.44.0 和 Genesis 程序 `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` 验证
+- 已针对 `@metaplex-foundation/genesis` 0.44.0 和 Genesis 程序 `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` 验证；所有示例均已在 devnet 上运行
 
 **跳转至：** [指令](#instructions-reference) · [Raydium CPMM](#raydium-cpmm-graduation-signatures) · [条件与行为](#condition-and-behavior-signatures) · [TimeCondition](#time-condition) · [EndBehavior](#end-behavior) · [错误](#common-errors)
 
@@ -73,25 +73,31 @@ Genesis SDK 通过 npm 与 Umi 及 Metaplex toolbox 包一起安装。
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox \
-  @metaplex-foundation/mpl-token-metadata
+  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
 ## 设置 {% #setup %}
 
-SDK 通过 `.use(genesis())` 注册为 Umi 插件。
+SDK 通过 `.use(genesis())` 注册为 Umi 插件，并需同时使用 `.use(mplToolbox())`，后者会注册 SPL Token 和 Associated Token 程序，Genesis 指令借助它们解析代币账户。
 
 ```typescript {% title="setup.ts" %}
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { genesis } from '@metaplex-foundation/genesis';
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
+import { genesis } from '@metaplex-foundation/genesis'
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
+import { keypairIdentity } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 
 const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
   .use(genesis())
-  .use(mplTokenMetadata());
+
+umi.use(keypairIdentity(yourKeypair))
 ```
 
-完整的实现示例请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。
+{% callout type="warning" %}
+如果没有 `mplToolbox()`，派生代币账户的指令会在发送前失败，并报错 `ProgramNotRecognizedError: The provided program name [splAssociatedToken] is not recognized`。
+{% /callout %}
+
+本页示例使用主网 RPC。在 devnet 上，请使用 `https://api.devnet.solana.com`，并向 `deriveRaydiumPDAsV2` 传入 `{ env: 'devnet' }`，否则它会派生主网的 Raydium 账户。所有示例均已在 devnet 上运行。完整的实现指南请参阅 [Launch Pool](/zh/smart-contracts/genesis/launch-pool) 或 [Presale](/zh/smart-contracts/genesis/presale)。
 
 ---
 
@@ -110,8 +116,8 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 | 函数 | 描述 | 签名者 |
 |----------|-------------|---------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 添加按比例分配的 bucket | Authority |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | 添加固定价格销售 bucket | Authority |
+| [addLaunchPoolBucketV2Base()](#add-launch-pool-bucket-v2) | 添加按比例分配的 bucket（随后添加扩展和行为） | Authority |
+| [addPresaleBucketV2Base()](#add-presale-bucket-v2) | 添加固定价格销售 bucket（随后添加扩展和行为） | Authority |
 | [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 添加资金库/接收者 bucket | Authority |
 | [addRaydiumCpmmBucketV2()](#add-raydium-cpmm-bucket-v2) | 添加 Raydium CPMM 毕业 bucket | Authority |
 | [addClaimScheduleBucketV2()](#add-claim-schedule-bucket-v2) | 添加带领取计划的归属 bucket | Authority |
@@ -178,107 +184,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 ## 函数签名 {% #function-signatures %}
 
-每个签名列出了通常需要传入的参数。未列出的账户（例如代币账户、代币程序和 bucket 签名者 PDA）由 SDK 自动派生。
+下面每条指令都附有完整示例，并对其参数加了注释。未列出的账户（例如代币账户、代币程序和 bucket 签名者 PDA）由 SDK 自动派生。所有示例均已针对 devnet 上的 Genesis 程序运行。
 
 ### initializeV2
 
-```typescript
-await initializeV2(umi, {
-  baseMint,           // Signer - new token keypair
-  quoteMint,          // PublicKey - deposit token (wSOL)
-  fundingMode,        // number - use 0
-  totalSupplyBaseToken, // bigint - supply with decimals
-  name,               // string - token name
-  symbol,             // string - token symbol
-  uri,                // string - metadata URI
-}).sendAndConfirm(umi);
-```
+`initializeV2` 创建 Genesis Account，并将代币的全部供应量铸造到其中。
+
+{% code-tabs-imported from="genesis/initialize_v2" frameworks="umi" filename="initializeV2" /%}
 
 ### finalizeV2
 
-```typescript
-await finalizeV2(umi, {
-  baseMint,           // PublicKey
-  genesisAccount,     // PublicKey
-}).sendAndConfirm(umi);
-```
+`finalizeV2` 锁定发行配置并将其激活。它需要将发行的每个 bucket 作为只读剩余账户传入，且数量必须等于 Genesis 账户的 `bucketCount`。
+
+{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalizeV2" /%}
+
+不传入 bucket 账户就调用会失败并返回 `MissingFinalizeBucketAccounts`。当各 bucket 的分配量之和不等于总供应量时，最终确定也会失败并返回 `TotalSupplyNotFullyAllocated`。
 
 ### addLaunchPoolBucketV2
 
-```typescript
-await addLaunchPoolBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint - tokens for this bucket
-  depositStartCondition,    // TimeCondition
-  depositEndCondition,      // TimeCondition
-  claimStartCondition,      // TimeCondition
-  claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // { amount: bigint } | null
-  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
-  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
-  endBehaviors,             // EndBehavior[]
-}).sendAndConfirm(umi);
-```
+Launch Pool bucket 通过 `addLaunchPoolBucketV2Base` 创建，可选的限制条件通过 `addLaunchPoolBucketV2Extensions` 添加，结束行为通过 `setLaunchPoolBucketV2Behaviors` 设置。
+
+{% code-tabs-imported from="genesis/add_launch_pool_bucket_v2" frameworks="umi" filename="addLaunchPoolBucket" /%}
 
 {% callout type="warning" %}
-自 `@metaplex-foundation/genesis` 0.42.0 起，`softCap` 为必填参数。与其他 Launch Pool 扩展不同，它在生成的序列化器中没有默认值，因此当发行没有上限时，请显式传入 `softCap: null`。行为说明请参阅 [Launch Pool 软顶](/zh/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)。
+请勿使用合并的 `addLaunchPoolBucketV2` 指令。带上其选项和一个结束行为后，它序列化后约为 1,566 字节，超过 Solana 1,232 字节的交易上限，因此发送时会失败并报错 `base64 encoded data too large`。
 {% /callout %}
+
+`addLaunchPoolBucketV2Extensions` 接受的扩展有 `MinimumDepositAmount`、`MinimumQuoteTokenThreshold`、`SoftCap`、`DepositLimit`、`Allowlist`、`ClaimSchedule`、`BackendSigner`、`DepositPenalty`、`WithdrawPenalty` 和 `BonusSchedule`。软顶必须大于零（`InvalidSoftCap`），且不得低于最低门槛（`SoftCapBelowThreshold`）。行为说明请参阅 [Launch Pool 软顶](/zh/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)。
 
 ### addPresaleBucketV2
 
-```typescript
-await addPresaleBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint
-  allocationQuoteTokenCap,  // bigint - SOL cap (sets price)
-  depositStartCondition,    // TimeCondition
-  depositEndCondition,      // TimeCondition
-  claimStartCondition,      // TimeCondition
-  claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
-  depositLimit,             // bigint | null - max per user
-  endBehaviors,             // EndBehavior[]
-}).sendAndConfirm(umi);
-```
+Presale bucket 通过 `addPresaleBucketV2Base` 创建，它设置分配量、决定价格的报价代币上限以及时间安排。结束行为通过 `setPresaleBucketV2Behaviors` 设置。
+
+{% code-tabs-imported from="genesis/add_presale_bucket_v2" frameworks="umi" filename="addPresaleBucket" /%}
+
+使用真实账户时，合并的 `addPresaleBucketV2` 指令会略微超出交易大小上限。存款限额、冷却期、白名单和最低募资额通过 `addPresaleBucketV2Extensions` 添加。
 
 ### addUnlockedBucketV2
 
 Unlocked bucket 为单个接收者（例如团队资金库）持有代币。它从自身的分配以及 rollover 或重新分配行为中接收基础代币，并从 `SendQuoteTokenPercentage` 行为中接收报价代币。
 
-```typescript
-await addUnlockedBucketV2(umi, {
-  genesisAccount,       // PublicKey
-  baseMint,             // PublicKey
-  baseTokenAllocation,  // bigint - optional, usually 0n
-  recipient,            // PublicKey - who receives claimed tokens
-  claimStartCondition,  // TimeCondition
-  claimEndCondition,    // TimeCondition
-  backendSigner,        // { signer: PublicKey } | null - optional co-signer for claims
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
 ### addRaydiumCpmmBucketV2
 
 Raydium CPMM bucket 预留基础代币，并通过结束行为接收销售收益，然后在毕业时创建 Raydium CP-Swap 池。LP 锁定的工作原理请参阅 [锁定 LP 代币](/zh/smart-contracts/genesis/locked-lp-tokens)。
 
-```typescript
-await addRaydiumCpmmBucketV2(umi, {
-  genesisAccount,        // PublicKey
-  baseMint,              // PublicKey
-  baseTokenAllocation,   // bigint - base tokens reserved for the pool
-  startCondition,        // TimeCondition - earliest time graduation can run
-  lpLockSchedule,        // ClaimSchedule | null - LP vesting; null = Genesis authority claims all LP
-  lpClaimAuthority,      // PublicKey | null - null = Genesis authority
-  burnLp,                // boolean - true burns all LP at graduation
-  creatorFee,            // { wallet: PublicKey } | null - share of Raydium creator fees
-  postponableStart,      // PostponableStart | null - allow postponeStartRaydiumCpmmBucketV2
-  backendSigner,         // { signer: PublicKey } | null - co-signer for graduation and LP actions
-  deferPoolCreationCost, // boolean - false: payer pre-funds pool creation now
-  endBehaviors,          // EndBehavior[] - BaseTokenRollover / ReallocateBaseTokensOnFailure
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_raydium_cpmm_bucket_v2" frameworks="umi" filename="addRaydiumCpmmBucket" /%}
 
 bucket 的 `graduateCondition` 不是参数。程序会将其创建为 `Triggered` 条件，并在 `graduateToRaydiumCpmmV2` 内部触发它，从而使 `BucketTimes.Graduate` 可以作为其他 bucket 的 `TimeRelative` 参照。
 
@@ -286,131 +238,67 @@ bucket 的 `graduateCondition` 不是参数。程序会将其创建为 `Triggere
 Raydium CPMM bucket 必须恰好是一个 `SendQuoteTokenPercentage` 行为和恰好一个 `SendStartPrice` 行为的目标，且两者来自同一个销售 bucket。否则 `finalizeV2` 会拒绝该发行（`MissingRaydiumGraduationSource`、`DuplicateRaydiumGraduationSource`、`RaydiumGraduationSourceMismatch`）。`burnLp: true` 不能与 `lpLockSchedule` 同时使用（`BurnLpConflictsWithLpLockSchedule`）。
 {% /callout %}
 
-`PostponableStart` 的结构为 `{ maxPostpones: number, timesPostponed: 0, padding: Array(3).fill(0), delayBudgetSeconds: number }`。请预先使用 `findRaydiumCpmmBucketV2Pda` 派生 bucket 的 PDA，这样销售 bucket 就能在该 bucket 创建之前在其 `endBehaviors` 中指向它。
+`postponableStart` 的结构为 `{ maxPostpones: number, timesPostponed: 0, padding: Array(2).fill(0), delayBudgetSeconds: number }`，并要求开始条件为 `TimeAbsolute`，或锚定到销售的 `DepositEnd` 或 `SwapEnd` 的 `TimeRelative`。请预先使用 `findRaydiumCpmmBucketV2Pda` 派生 bucket 的 PDA，这样销售 bucket 就能在该 bucket 创建之前在其结束行为中指向它。
 
 ### addClaimScheduleBucketV2
 
 领取计划 bucket 随时间向单个接收者归属基础代币。归属计算和运行时控制请参阅 [项目归属](/zh/smart-contracts/genesis/project-vesting)。
 
-```typescript
-await addClaimScheduleBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint
-  recipient,                // PublicKey - defaults to the authority
-  claimStartCondition,      // TimeCondition - claim gate
-  claimSchedule,            // ClaimSchedule - start, duration, period, cliff
-  pausable,                 // boolean - optional, default false
-  cancelable,               // boolean - optional, default false
-  cancelableByRecipient,    // boolean - optional, default false
-  transferable,             // boolean - optional, default false
-  transferableByRecipient,  // boolean - optional, default false
-  backendSigner,            // { signer: PublicKey } | null
-  endBehaviors,             // EndBehavior[] - at most one ReallocateBaseTokensOnCancel
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_claim_schedule_bucket_v2" frameworks="umi" filename="addClaimScheduleBucket" /%}
 
-`ClaimSchedule` 的结构为 `{ startCondition, duration, period, cliffCondition, cliffAmountBps, reserved: Array(126).fill(0) }`。对于绝对时间，可使用 `createClaimSchedule({ startTime, endTime, cliffTime, cliffAmountBps, period })` 构建；如需将归属锚定到毕业时间，可使用 `createTimeRelativeCondition` 构造开始条件和 cliff 条件。
+`ClaimSchedule` 的结构为 `{ startCondition, duration, period, cliffCondition, cliffAmountBps, reserved: Array(126).fill(0) }`。对于绝对时间，可使用 `createClaimSchedule({ startTime, endTime, cliffTime, cliffAmountBps, period })` 构建；如需将归属锚定到毕业时间，可使用 `createTimeRelativeCondition` 构造开始条件和 cliff 条件。cliff 与线性计划相互独立：使用 `Never` cliff 并设置 `cliffAmountBps: 0` 即可实现纯线性归属。
 
 ### depositLaunchPoolV2
 
-```typescript
-await depositLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`depositLaunchPoolV2` 在存款窗口期间将 wrapped SOL 存入 Launch Pool。请先包装 SOL，方法见 [包装 SOL](/zh/smart-contracts/genesis/launch-pool#wrapping-sol)。
+
+{% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 ### depositPresaleV2
 
-```typescript
-await depositPresaleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`depositPresaleV2` 在存款窗口期间将 wrapped SOL 存入 Presale。
+
+{% code-tabs-imported from="genesis/deposit_presale_v2" frameworks="umi" filename="depositPresale" /%}
 
 ### withdrawLaunchPoolV2
 
-```typescript
-await withdrawLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`withdrawLaunchPoolV2` 在存款窗口开放期间提取部分 Launch Pool 存款。
+
+{% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
 ### claimLaunchPoolV2
 
-```typescript
-await claimLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey
-}).sendAndConfirm(umi);
-```
+`claimLaunchPoolV2` 在领取窗口开放后，将存款人在 Launch Pool 分配中的份额发送给存款人。
+
+{% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
 ### refundLaunchPoolV2
 
-在存款窗口关闭后退还 Launch Pool 存款。退款金额由程序计算，因此没有金额参数：未达到 `minimumQuoteTokenThreshold` 时退还全部存款，超过 `softCap` 时仅退还超出部分，并保留存款人的代币分配不变。
+`refundLaunchPoolV2` 在存款窗口关闭后退还 Launch Pool 存款。退款金额由程序计算：未达到 `minimumQuoteTokenThreshold` 时退还全部存款，超过 `softCap` 时仅退还超出部分，并保留存款人的代币分配不变。
 
-```typescript
-await refundLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/refund_launch_pool_v2" frameworks="umi" filename="refundLaunchPool" /%}
 
 只有 `payer` 需要签名，因此任何人都可以代表存款人无需许可地触发退款。在存款窗口关闭前调用会返回 `LaunchPoolNotEnded`；在门槛已达到且未超过上限时调用会返回 `LaunchPoolThresholdMet`；重复调用会返回 `DepositAlreadyRefunded`。
 
 ### claimPresaleV2
 
-```typescript
-await claimPresaleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey
-}).sendAndConfirm(umi);
-```
+`claimPresaleV2` 在领取窗口开放后，将 Presale 存款人的代币发送给存款人。
+
+{% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 
 ### claimUnlockedV2
 
 `claimUnlockedV2` 将 Unlocked bucket 当前的全部基础代币余额和报价代币余额发送给 bucket 上存储的接收者，报价代币一侧会扣除协议领取费。
 
-```typescript
-await claimUnlockedV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - UnlockedBucketV2
-  baseMint,           // PublicKey
-  recipient,          // PublicKey - must match the bucket's recipient
-  backendSigner,      // Signer - only if the bucket has a backend signer
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_unlocked_v2" frameworks="umi" filename="claimUnlocked" /%}
 
-领取可以重复进行：在之前的领取之后，后续的 rollover 或重新分配行为可能会再计入更多基础代币。没有剩余可领取余额时返回 `UnlockedBucketAlreadyClaimed`，接收者与 bucket 上存储的不一致时返回 `RecipientMismatch`。
+领取可以重复进行：在之前的领取之后，后续的 rollover 或重新分配行为可能会再计入更多基础代币。没有剩余可领取余额时返回 `UnlockedBucketAlreadyClaimed`，接收者与 bucket 上存储的不一致时返回 `RecipientMismatch`。当 bucket 设有后端签名者时，请将其作为 `backendSigner` 传入。
 
 ### claimClaimScheduleV2
 
 `claimClaimScheduleV2` 将当前所有已归属但尚未领取的代币转给 bucket 上存储的接收者。
 
-```typescript
-await claimClaimScheduleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - ClaimScheduleBucketV2
-  baseMint,           // PublicKey
-  recipient,          // PublicKey - must match the bucket's recipient
-  backendSigner,      // Signer - only if the bucket has a backend signer
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_claim_schedule_v2" frameworks="umi" filename="claimClaimSchedule" /%}
 
 如果领取门控、线性开始或 cliff 是 `TimeRelative` 条件，请先对领取计划 bucket 调用 [triggerConditionsV2](#trigger-conditions-v2)。没有任何已归属代币时领取会返回 `NothingToClaim`。
 
@@ -418,56 +306,31 @@ await claimClaimScheduleV2(umi, {
 
 领取计划运行时控制用于在最终化之后暂停、取消归属 bucket 或更改其接收地址，每项控制只有在创建时设置了对应的策略标志后才可用。
 
-```typescript
-// Pause or resume vesting (requires pausable: true). Signer: Genesis authority.
-await setClaimSchedulePausedStateV2(umi, {
-  genesisAccount, bucket, signer: authority,
-  paused: true, padding: Array(6).fill(0),
-}).sendAndConfirm(umi);
+`setClaimSchedulePausedStateV2` 暂停或恢复归属，要求 `pausable: true`。由 Genesis authority 签名。
 
-// Stop vesting permanently (requires cancelable or cancelableByRecipient).
-await cancelClaimScheduleBucketV2(umi, {
-  genesisAccount, bucket, signer, // authority or recipient
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
+{% code-tabs-imported from="genesis/pause_claim_schedule_bucket_v2" frameworks="umi" filename="setClaimSchedulePausedState" /%}
 
-// Change the recipient (requires transferable or transferableByRecipient).
-await transferRecipientClaimScheduleBucketV2(umi, {
-  genesisAccount, bucket, signer, // authority or recipient
-  newRecipient,                   // PublicKey
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
-```
+`transferRecipientClaimScheduleBucketV2` 更改接收者，要求 `transferable`（authority）或 `transferableByRecipient`（接收者）。
+
+{% code-tabs-imported from="genesis/transfer_claim_schedule_recipient_v2" frameworks="umi" filename="transferRecipientClaimScheduleBucket" /%}
+
+`cancelClaimScheduleBucketV2` 永久停止归属，要求 `cancelable`（authority）或 `cancelableByRecipient`（接收者）。
+
+{% code-tabs-imported from="genesis/cancel_claim_schedule_bucket_v2" frameworks="umi" filename="cancelClaimScheduleBucket" /%}
 
 策略未启用时返回 `ClaimSchedulePolicyDisabled`，签名者不在策略允许范围内时返回 `ClaimScheduleUnauthorized`。取消之后，通过 `triggerBehaviorsV2` 执行的 `ReallocateBaseTokensOnCancel` 行为会转移剩余的未归属部分。
 
 ### revokeV2
 
-永久撤销基础代币的铸币和/或冻结权限。
+`revokeV2` 永久撤销基础代币的铸币权限、冻结权限或两者。
 
-```typescript
-await revokeV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenProgram,         // PublicKey - required, e.g. SPL_TOKEN_PROGRAM_ID from mpl-toolbox
-  revokeMintAuthority,      // boolean
-  revokeFreezeAuthority,    // boolean
-  padding: Array(5).fill(0), // required, no default
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/revoke_v2" frameworks="umi" filename="revoke" /%}
 
 ### setBucketBackendSignerV2
 
 `setBucketBackendSignerV2` 在任何支持后端签名者扩展的 V2 bucket 上设置、轮换或清除该扩展。当后端密钥丢失时，这是恢复手段，否则所有受该密钥控制的操作（包括用户领取）都将一直被阻塞。
 
-```typescript
-await setBucketBackendSignerV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - any V2 bucket with a backend signer slot
-  authority,          // Signer - Genesis authority (defaults to identity)
-  backendSigner,      // PublicKey - new co-signer; the default (all-zero) key clears it
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/set_bucket_backend_signer_v2" frameworks="umi" filename="setBucketBackendSigner" /%}
 
 轮换或清除现有的后端签名者在 `finalizeV2` 之前或之后都可以进行。为从未设置过后端签名者的 bucket 添加后端签名者，只能在最终化之前进行。后端签名者可以是 Genesis authority 选择的任意密钥。
 
@@ -481,48 +344,20 @@ Raydium CPMM 毕业指令从 Raydium CPMM bucket 创建 Raydium CP-Swap 池，�
 
 `deriveRaydiumPDAsV2` 返回某个 Raydium CPMM bucket 对应的 Raydium 池账户。池状态是由 Genesis 派生的 PDA，因此在毕业之前任何人都无法创建该池。
 
-```typescript
-const raydium = deriveRaydiumPDAsV2(umi, baseMint, raydiumBucket, {
-  quoteMint,   // PublicKey - optional, defaults to wSOL
-  env,         // 'mainnet' | 'devnet' - optional, defaults to 'mainnet'
-  creatorFee,  // boolean - optional, true selects the creator-fee AMM config
-  ammConfig,   // PublicKey - optional override
-});
-// raydium.poolState, ammConfig, poolAuthority, lpMint, baseVault, quoteVault,
-// createPoolFee, observationState, raydiumProgram, raydiumSigner, permission,
-// creatorFeeShare, token0Mint, token1Mint, isProjectMintToken0
-```
+| 选项 | 类型 | 默认值 | 含义 |
+|--------|------|---------|---------|
+| `quoteMint` | `PublicKey` | wSOL | 报价代币铸币 |
+| `env` | `'mainnet' \| 'devnet'` | `'mainnet'` | 选择 Raydium CP-Swap 程序、AMM 配置和池费用接收方 |
+| `creatorFee` | `boolean` | `false` | 选择创作者费 AMM 配置。当 bucket 带有 `creatorFee` 扩展时必须设置 |
+| `ammConfig` | `PublicKey` | — | 显式覆盖 AMM 配置 |
 
-当 bucket 带有 `creatorFee` 扩展时，请传入 `creatorFee: true`。使用创作者费 AMM 配置但没有该扩展，或有该扩展但没有使用创作者费 AMM 配置，都会导致毕业失败并返回 `InvalidCreatorFeeConfig`。
+结果包含 `poolState`、`ammConfig`、`poolAuthority`、`lpMint`、`baseVault`、`quoteVault`、`createPoolFee`、`observationState`、`raydiumProgram`、`raydiumSigner`、`permission`、`creatorFeeShare`、`token0Mint`、`token1Mint` 和 `isProjectMintToken0`。使用创作者费 AMM 配置但没有该扩展，或有该扩展但没有使用创作者费 AMM 配置，都会导致毕业失败并返回 `InvalidCreatorFeeConfig`。
 
 ### graduateToRaydiumCpmmV2
 
 `graduateToRaydiumCpmmV2` 创建 Raydium 池，按销售的起始价格存入 bucket 的报价代币和相应数量的基础代币，并触发 bucket 的 `graduateCondition`。
 
-```typescript
-await transactionBuilder()
-  .add(setComputeUnitLimit(umi, { units: 400_000 }))
-  .add(
-    graduateToRaydiumCpmmV2(umi, {
-      genesisAccount,     // PublicKey
-      bucket,             // PublicKey - RaydiumCpmmBucketV2
-      baseMint,           // PublicKey
-      quoteMint,          // PublicKey - optional, defaults to wSOL
-      poolState: raydium.poolState,
-      ammConfig: raydium.ammConfig,
-      poolAuthority: raydium.poolAuthority,
-      lpMint: raydium.lpMint,
-      baseVault: raydium.baseVault,
-      quoteVault: raydium.quoteVault,
-      createPoolFee: raydium.createPoolFee,
-      observationState: raydium.observationState,
-      permission: raydium.permission,
-      raydiumProgram: raydium.raydiumProgram,
-      backendSigner,      // Signer - only if the bucket has a backend signer
-    })
-  )
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/graduate_to_raydium_cpmm_v2" frameworks="umi" filename="graduateToRaydiumCpmm" /%}
 
 毕业无需许可：只需手续费支付者签名，如果 bucket 带有后端签名者扩展，则还需该后端签名者签名。该指令按顺序检查以下三项：
 
@@ -532,7 +367,7 @@ await transactionBuilder()
 | 提供资金的销售未失败（未收到 `TransmitFailure`） | `BucketLaunchFailed` |
 | bucket 的 `startCondition` 已满足 | `GraduationNotStarted` |
 
-毕业之前，请先对销售 bucket 运行 `triggerBehaviorsV2`，使 Raydium bucket 收到其报价代币和起始价格。如果 `startCondition` 是 `TimeRelative` 条件，请先对 Raydium bucket 运行 `triggerConditionsV2`，并将销售 bucket 作为剩余账户传入。
+毕业之前，请先对销售 bucket 运行 `triggerBehaviorsV2`，使 Raydium bucket 收到其报价代币和起始价格；否则毕业会失败并返回 `InvalidAmount`。如果 `startCondition` 是 `TimeRelative` 条件，请先对 Raydium bucket 运行 `triggerConditionsV2`，并将销售 bucket 作为剩余账户传入。
 
 {% callout type="warning" %}
 毕业不会开放其他 bucket 的领取。所有以 `BucketTimes.Graduate` 为参照的 `TimeRelative` 条件（无论属于 Launch Pool、Unlocked 还是领取计划 bucket）都会保持未触发状态，直到有人对该 bucket 调用 [triggerConditionsV2](#trigger-conditions-v2) 并将 Raydium bucket 作为可写剩余账户传入。
@@ -542,36 +377,15 @@ await transactionBuilder()
 
 `postponeStartRaydiumCpmmBucketV2` 将毕业开始时间推迟，且仅适用于创建时带有 `postponableStart` 扩展的 bucket。
 
-```typescript
-await postponeStartRaydiumCpmmBucketV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - RaydiumCpmmBucketV2
-  authority,          // Signer - Genesis authority (defaults to identity)
-  sourceBucket,       // PublicKey - sale bucket; required when startCondition is TimeRelative
-  newStartValue,      // bigint - new unix time (TimeAbsolute) or new offset in seconds (TimeRelative)
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/postpone_start_raydium_cpmm_bucket_v2" frameworks="umi" filename="postponeStartRaydiumCpmmBucket" /%}
 
-延期受 `maxPostpones` 和 `delayBudgetSeconds` 限制，必须在预定毕业时间之前至少 30 分钟进行，且必须将开始时间至少推后 24 小时。违反这些限制会返回 `PostponeLimitReached`、`PostponeNotLater`、`PostponeExceedsMaxDelay`、`PostponeTooLate`、`PostponeTooSoon` 或 `BucketNotPostponable`。
+对于 `TimeAbsolute` 开始条件，`newStartValue` 是新的 Unix 时间；对于 `TimeRelative` 开始条件，它是相对于销售结束的新偏移秒数，此时还需要将销售 bucket 作为 `sourceBucket` 传入。延期受 `maxPostpones` 和 `delayBudgetSeconds` 限制，必须在预定毕业时间之前至少 30 分钟进行，且必须将开始时间至少推后 24 小时。违反这些限制会返回 `PostponeLimitReached`、`PostponeNotLater`、`PostponeExceedsMaxDelay`、`PostponeTooLate`、`PostponeTooSoon` 或 `BucketNotPostponable`。
 
 ### claimRaydiumCpmmLpTokensV2
 
 `claimRaydiumCpmmLpTokensV2` 将已解锁的 LP 代币从 bucket 签名者转入目标代币账户，数量上限为 `lpLockSchedule` 已归属的数量。
 
-```typescript
-await claimRaydiumCpmmLpTokensV2(umi, {
-  genesisAccount,            // PublicKey
-  bucket,                    // PublicKey - RaydiumCpmmBucketV2
-  baseMint,                  // PublicKey
-  lpMint: raydium.lpMint,    // PublicKey
-  recipient,                 // PublicKey - owner of the destination account
-  destinationLpTokenAccount, // PublicKey - recipient's LP ATA, created if missing
-  lpClaimAuthority,          // Signer - lpClaimAuthority, or the Genesis authority if unset
-  backendSigner,             // Signer - only if the bucket has a backend signer
-  amount,                    // bigint - LP tokens to claim
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_raydium_cpmm_lp_tokens_v2" frameworks="umi" filename="claimRaydiumCpmmLpTokens" /%}
 
 在毕业之前领取会返回 `NoLpTokensToClaim`，签名者错误会返回 `InvalidLpClaimAuthority`，在尚无已解锁 LP 代币时领取会返回 `InsufficientUnlockedAmount`。超过已解锁余额的 `amount` 不会被拒绝，而是被截断为该余额。如果 `lpLockSchedule` 使用了 `TimeRelative` 条件，领取前需要先对 Raydium bucket 调用 [triggerConditionsV2](#trigger-conditions-v2)。
 
@@ -579,73 +393,31 @@ await claimRaydiumCpmmLpTokensV2(umi, {
 
 `burnRaydiumCpmmLpTokensV2` 销毁 bucket 签名者持有的未领取 LP 代币，从而永久锁定该部分池流动性。
 
-```typescript
-await burnRaydiumCpmmLpTokensV2(umi, {
-  genesisAccount,          // PublicKey
-  bucket,                  // PublicKey - RaydiumCpmmBucketV2
-  baseMint,                // PublicKey
-  lpMint: raydium.lpMint,  // PublicKey
-  lpClaimAuthority,        // Signer
-  backendSigner,           // Signer - only if the bucket has a backend signer
-  amount,                  // bigint - capped to the unclaimed, unburned balance
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/burn_raydium_cpmm_lp_tokens_v2" frameworks="umi" filename="burnRaydiumCpmmLpTokens" /%}
 
-销毁会忽略 `lpLockSchedule`，因为它只会放弃价值。如果希望在毕业时销毁全部 LP 代币，请在创建 bucket 时设置 `burnLp: true`。
+销毁会忽略 `lpLockSchedule`，因为它只会放弃价值。bucket 会分别记录 `lpTokenBalance`（毕业时收到的数量）、`lpTokensClaimed` 和 `lpTokensBurned`。如果希望在毕业时销毁全部 LP 代币，请在创建 bucket 时设置 `burnLp: true`。
 
 ### collectRaydiumCpmmFeesV2
 
-`collectRaydiumCpmmFeesV2` 收取池中累积的 Raydium 创作者费，并将报价代币一侧发送到 Genesis 费用钱包，适用于创建时没有 `creatorFee` 扩展的池。
+`collectRaydiumCpmmFeesV2` 收取池中累积的 Raydium 创作者费，并将报价代币一侧发送到 Genesis 二级费用钱包，适用于创建时没有 `creatorFee` 扩展的池。
 
-```typescript
-await collectRaydiumCpmmFeesV2(umi, {
-  baseMint,                                  // PublicKey
-  quoteMint,                                 // PublicKey - optional, defaults to wSOL
-  poolState: raydium.poolState,
-  ammConfig: raydium.ammConfig,
-  poolAuthority: raydium.poolAuthority,
-  baseVault: raydium.baseVault,
-  quoteVault: raydium.quoteVault,
-  raydiumProgram: raydium.raydiumProgram,
-  creatorFeeShare: raydium.creatorFeeShare,
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/collect_raydium_cpmm_fees_v2" frameworks="umi" filename="collectRaydiumCpmmFees" /%}
 
-没有累积费用时，该指令会成功返回但不进行转账。使用创作者费 AMM 配置的池会返回 `InvalidRaydiumAmmConfig`；这类池请使用 `collectRaydiumCpmmFeesWithCreatorFeeV2`。
+没有累积费用时，该指令会成功执行但不进行转账。使用创作者费 AMM 配置的池会返回 `InvalidRaydiumAmmConfig`；这类池请使用 `collectRaydiumCpmmFeesWithCreatorFeeV2`。
 
 ### collectRaydiumCpmmFeesWithCreatorFeeV2
 
-`collectRaydiumCpmmFeesWithCreatorFeeV2` 从其 bucket 带有 `creatorFee` 扩展的池中收取创作者费，在 bucket 上累计发行创建者的份额，并将剩余部分发送到 Genesis 费用钱包。
+`collectRaydiumCpmmFeesWithCreatorFeeV2` 从其 bucket 带有 `creatorFee` 扩展的池中收取创作者费，在 bucket 上累计发行创建者的份额，并将剩余部分发送到 Genesis 二级费用钱包。示例随后通过 `claimRaydiumCreatorFeeV2` 向创建者支付费用。
 
-```typescript
-await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
-  baseMint,                                  // PublicKey
-  genesisAccount,                            // PublicKey
-  raydiumCpmmBucket,                         // PublicKey - bucket with creatorFee extension
-  poolState: raydium.poolState,
-  ammConfig: raydium.ammConfig,              // creator-fee AMM config
-  poolAuthority: raydium.poolAuthority,
-  baseVault: raydium.baseVault,
-  quoteVault: raydium.quoteVault,
-  raydiumProgram: raydium.raydiumProgram,
-  creatorFeeShare: raydium.creatorFeeShare,
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/collect_raydium_cpmm_fees_with_creator_fee_v2" frameworks="umi" filename="collectRaydiumCpmmFeesWithCreatorFee" /%}
 
 ### claimRaydiumCreatorFeeV2
 
 `claimRaydiumCreatorFeeV2` 将 Raydium bucket 中已累计但未领取的创作者费支付到其 `creatorFee` 扩展中存储的钱包。端到端流程请参阅 [创作者费](/zh/smart-contracts/genesis/creator-fees)。
 
-```typescript
-await claimRaydiumCreatorFeeV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - RaydiumCpmmBucketV2
-  baseMint,           // PublicKey
-  creatorFeeWallet,   // PublicKey - must match the creatorFee extension wallet
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_raydium_creator_fee_v2" frameworks="umi" filename="claimRaydiumCreatorFee" /%}
 
-当报价代币铸币为 wSOL 时，费用会被解包并以原生 SOL 支付。钱包与扩展中存储的不一致时返回 `InvalidCreatorFeeWallet`。
+当报价代币铸币为 wSOL 时，费用会被解包并以原生 SOL 支付。没有未领取的费用时，该指令会成功执行但不进行转账；钱包与扩展中存储的不一致时返回 `InvalidCreatorFeeWallet`。
 
 ---
 
@@ -657,18 +429,7 @@ await claimRaydiumCreatorFeeV2(umi, {
 
 `triggerConditionsV2` 解析单个目标 bucket 上的所有条件，包括扩展中的条件，例如 `claimSchedule` 的开始和 cliff，或 Raydium 的 `lpLockSchedule`。该指令无需许可，只需手续费支付者签名。
 
-```typescript
-await triggerConditionsV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - the bucket whose conditions to resolve
-  baseMint,           // PublicKey
-})
-  .addRemainingAccounts([
-    // Every bucket the target's TimeRelative conditions reference, writable
-    { pubkey: raydiumBucket, isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/trigger_conditions_after_graduation_v2" frameworks="umi" filename="triggerConditions" /%}
 
 | 属性 | 值 |
 |----------|-------|
@@ -676,7 +437,7 @@ await triggerConditionsV2(umi, {
 | 目标 | 每条指令一个 bucket |
 | 剩余账户 | 所有被引用的 bucket，**可写**，顺序不限 |
 | 自引用 | 无需再次传入目标 bucket 即可解析 |
-| 重复运行 | 安全；已触发的条件会被跳过 |
+| 重复运行 | 安全；已触发的条件会被跳过，没有到期条件的调用会成功执行且不做任何更改 |
 
 该指令首先解析每个剩余账户 bucket 上的 `TimeAbsolute` 条件，然后解析目标 bucket 上参照对象在剩余账户之中且时间已到的每个 `TimeRelative` 条件。记录的 `triggeredTimestamp` 是参照时间加上偏移量，而不是 crank 实际运行的时间。
 
@@ -688,21 +449,9 @@ await triggerConditionsV2(umi, {
 
 `triggerBehaviorsV2` 执行单个源 bucket（`primaryBucket`）上所有尚未处理的结束行为，并将每个行为标记为已处理，使其无法重复执行。该指令无需许可，只需手续费支付者签名。
 
-```typescript
-await triggerBehaviorsV2(umi, {
-  genesisAccount,     // PublicKey
-  primaryBucket,      // PublicKey - source bucket
-  baseMint,           // PublicKey
-})
-  .addRemainingAccounts([
-    // One (destination bucket, destination quote token account) pair per destination
-    { pubkey: destinationBucket, isSigner: false, isWritable: true },
-    { pubkey: destinationQuoteTokenAccount, isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/trigger_launch_pool_graduation_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
-目标报价代币账户是目标 bucket 的报价代币铸币 ATA。对于 Raydium CPMM 目标，该账户由 `findRaydiumBucketSignerPda(umi, { bucket })` 得到的 bucket 签名者 PDA 持有，而不是由 bucket 本身持有。剩余账户数量为奇数时返回 `InvalidRemainingAccountsLength`。
+剩余账户为每个目标对应一对 `(destination bucket, destination quote token account)`，且均为可写。目标报价代币账户是目标 bucket 的报价代币铸币 ATA；对于 Raydium CPMM 目标，该账户由 `findRaydiumBucketSignerPda(umi, { bucket })` 得到的 bucket 签名者 PDA 持有，而不是由 bucket 本身持有。剩余账户数量为奇数时返回 `InvalidRemainingAccountsLength`。
 
 | 源 bucket | 就绪条件 | 过早调用时的错误 |
 |---------------|------------|--------------------|
@@ -715,15 +464,7 @@ await triggerBehaviorsV2(umi, {
 
 `set*BucketV2Behaviors` 指令会替换现有 bucket 上的整个 `endBehaviors` 列表。它们需要 Genesis authority 签名，在 `finalizeV2` 之后调用会失败并返回 `GenesisAccountFinalized`。
 
-```typescript
-await setLaunchPoolBucketV2Behaviors(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  authority,          // Signer - Genesis authority (defaults to identity)
-  padding: Array(3).fill(0), // required, no default
-  endBehaviors,       // EndBehavior[] - replaces the existing list
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/set_launch_pool_bucket_v2_behaviors" frameworks="umi" filename="setLaunchPoolBucketBehaviors" /%}
 
 | 函数 | Bucket 类型 | 允许的行为 |
 |----------|-------------|-------------------|
@@ -781,61 +522,15 @@ Genesis 账户存储包括[发行类型](#launch-type)在内的顶层发行状�
 | safeFetchGenesisAccountV2FromSeeds() | 同上，不存在时返回 `null` |
 | fetchAllGenesisAccountV2() | 批量获取多个 Genesis 账户 |
 
-```typescript
-import {
-  fetchGenesisAccountV2,
-  fetchGenesisAccountV2FromSeeds,
-  findGenesisAccountV2Pda,
-  LaunchType,
-} from '@metaplex-foundation/genesis';
-
-// Fetch by PDA address
-const [genesisAccountPda] = findGenesisAccountV2Pda(umi, {
-  baseMint: mintAddress,
-  genesisIndex: 0,
-});
-const account = await fetchGenesisAccountV2(umi, genesisAccountPda);
-console.log(account.data.launchType); // 0 = Uninitialized, 3 = LaunchPoolV1
-
-// Or fetch directly from seeds
-const account2 = await fetchGenesisAccountV2FromSeeds(umi, {
-  baseMint: mintAddress,
-  genesisIndex: 0,
-});
-
-// Check launch type
-if (account2.data.launchType === LaunchType.LaunchPoolV1) {
-  console.log('This is a launch pool');
-}
-```
+{% code-tabs-imported from="genesis/fetch_genesis_account_v2" frameworks="umi" filename="fetchGenesisAccount" /%}
 
 **Genesis 账户字段：** `authority`、`baseMint`、`quoteMint`、`totalSupplyBaseToken`、`totalAllocatedSupplyBaseToken`、`totalProceedsQuoteToken`、`fundingMode`、`launchType`、`bucketCount`、`finalized`
 
 ### GPA 构建器 — 按发行类型查询 {% #gpa-builder-query-by-launch-type %}
 
-使用 `getGenesisAccountV2GpaBuilder()` 查询按链上字段过滤的所有 Genesis 账户。它使用 Solana 的 `getProgramAccounts` RPC 方法配合字节级过滤器，实现高效查找。
+使用 `getGenesisAccountV2GpaBuilder()` 查询按链上字段过滤的所有 Genesis 账户。它使用 Solana 的 `getProgramAccounts` RPC 方法配合字节级过滤器，因此 RPC 端点必须允许对 Genesis 程序调用 `getProgramAccounts`。
 
-```typescript
-import {
-  getGenesisAccountV2GpaBuilder,
-  LaunchType,
-} from '@metaplex-foundation/genesis';
-
-// Get all launch pool launches
-const launchpools = await getGenesisAccountV2GpaBuilder(umi)
-  .whereField('launchType', LaunchType.LaunchPoolV1)
-  .getDeserialized();
-
-// Filter by multiple fields
-const finalizedLaunchpools = await getGenesisAccountV2GpaBuilder(umi)
-  .whereField('launchType', LaunchType.LaunchPoolV1)
-  .whereField('finalized', true)
-  .getDeserialized();
-
-for (const account of launchpools) {
-  console.log(account.publicKey, account.data.baseMint, account.data.launchType);
-}
-```
+{% code-tabs-imported from="genesis/query_genesis_accounts_by_launch_type" frameworks="umi" filename="queryByLaunchType" /%}
 
 {% callout type="note" %}
 `launchType` 在发行创建后由后端 crank 追溯设置。最近创建的发行可能会显示 `LaunchType.Uninitialized`（0），直到 crank 处理完毕。
@@ -857,12 +552,7 @@ for (const account of launchpools) {
 | fetchPresaleDepositV2() | 存款状态（不存在时抛出错误） |
 | safeFetchPresaleDepositV2() | 存款状态或 `null` |
 
-```typescript
-const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
-const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
-const raydiumBucket = await fetchRaydiumCpmmBucketV2(umi, raydiumBucketPda);
-console.log(raydiumBucket.graduateCondition.triggeredTimestamp); // Some(t) once graduated
-```
+{% code-tabs-imported from="genesis/fetch_launch_pool_bucket_and_deposit_v2" frameworks="umi" filename="fetchLaunchPoolState" /%}
 
 **Bucket 状态字段：** `quoteTokenDepositTotal`、`weightedQuoteTokenTotal`、`depositCount`、`claimCount`、`refundCount`、`bucket.baseTokenAllocation`、`extensions`
 
@@ -1070,9 +760,13 @@ Genesis 程序错误会以名称（及数字代码）的形式出现在交易日
 | `insufficient funds` | SOL 不足以支付费用 |
 | `already initialized` | Genesis Account 已存在 |
 | `GenesisAccountFinalized` (43) | 在 `finalizeV2()` 之后修改 bucket、扩展或行为 |
+| `MissingFinalizeBucketAccounts` (183) | 调用 `finalizeV2()` 时未将每个 bucket 作为只读剩余账户传入 |
+| `TotalSupplyNotFullyAllocated` (187) | 调用 `finalizeV2()` 时各 bucket 的分配量之和不等于总供应量 |
+| `base64 encoded data too large` | 交易超过 1,232 字节，例如合并的 `addLaunchPoolBucketV2`。请使用 `Base` 指令加扩展和行为 |
+| `ProgramNotRecognizedError` (`splAssociatedToken`) | 设置 Umi 时未使用 `.use(mplToolbox())` |
 | `deposit period not active` | 不在存款窗口内 |
 | `ClaimNotStarted` (22) | 领取开始条件未满足，或 `TimeRelative` 领取开始条件尚未触发 |
-| `InvalidSoftCap` (221) | `softCap.amount` 为零 — 请传入 `softCap: null` 而不是 `{ amount: 0n }` |
+| `InvalidSoftCap` (221) | `SoftCap` 扩展的金额为零。无上限时请省略该扩展 |
 | `SoftCapBelowThreshold` (222) | `softCap.amount` 低于 `minimumQuoteTokenThreshold.amount` |
 | `LaunchPoolNotEnded` (25) | 在存款窗口关闭前调用了 `refundLaunchPoolV2()` 或 `triggerBehaviorsV2()` |
 | `LaunchPoolThresholdMet` (173) | 在门槛已达到且未超过软顶时请求了退款 |
@@ -1125,6 +819,8 @@ Genesis 程序错误会以名称（及数字代码）的形式出现在交易日
 - `TimeRelative` 条件只能通过 `triggerConditionsV2` 解析。毕业会触发 Raydium bucket 自身的 `graduateCondition`，但不会影响其他引用它的 bucket 上的条件。
 - `triggerConditionsV2`、`triggerBehaviorsV2` 和 `graduateToRaydiumCpmmV2` 只执行 `assert_signer(payer)`，因此项目后端、keeper 机器人或任何用户钱包都可以推进发行生命周期。当 Raydium bucket 带有后端签名者扩展时，毕业还需要该后端签名者签名。
 - 结束行为、条件和扩展在 `finalizeV2` 后即固定，但有两个例外：`postponeStartRaydiumCpmmBucketV2` 可以推迟以 `postponableStart` 创建的 bucket 的毕业开始时间，`setBucketBackendSignerV2` 可以轮换或清除现有的后端签名者。
+- 使用 `add*BucketV2Base` 指令配置 Launch Pool 和 Presale bucket，然后再调用 `add*BucketV2Extensions` 和 `set*BucketV2Behaviors`。合并的 `addLaunchPoolBucketV2` 和 `addPresaleBucketV2` 指令超过 Solana 1,232 字节的交易上限。
+- 本页所有示例均已针对 devnet 上的 Genesis 程序运行，并缩短了时间窗口、按比例缩小了金额。在 devnet 上，请向 `deriveRaydiumPDAsV2` 传入 `{ env: 'devnet' }`。
 - SDK 中包含 Raydium CLMM 毕业（`addRaydiumClmmBucketV2`、`graduateToRaydiumClmmV2`），但本页未作说明。
 - 已针对 `@metaplex-foundation/genesis` 0.44.0 和已部署的 Genesis 程序版本 `genesis v0.41.0`（commit `86eb6121`）验证。已部署的程序不支持 Token-2022 基础代币铸币。来源：[metaplex-foundation/genesis](https://github.com/metaplex-foundation/genesis)。由 Metaplex Foundation 维护；最后验证于 2026-11-24。
 

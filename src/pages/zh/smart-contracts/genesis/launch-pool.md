@@ -411,7 +411,7 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 
 ## 用户操作
 
-### 包装 SOL
+### 包装 SOL {% #wrapping-sol %}
 
 用户必须在存款前将 SOL 包装为 wSOL。
 

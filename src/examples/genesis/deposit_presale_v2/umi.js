@@ -33,7 +33,7 @@ const [depositPda] = findPresaleDepositV2Pda(umi, {
   bucket: presaleBucket,
   recipient: umi.identity.publicKey,
 })
-const deposit = await fetchPresaleDepositV2(umi, depositPda)
+const deposit = await fetchPresaleDepositV2(umi, depositPda, { commitment: 'confirmed' })
 // [/MAIN]
 
 // [OUTPUT]

@@ -55,7 +55,7 @@ Genesis JavaScript SDK는 모든 Genesis 프로그램 명령어를 Umi 빌더로
 - 명령어 빌더는 버킷 설정, 예치 및 청구, Raydium CPMM 졸업, LP 토큰 및 풀 수수료, Unlocked 버킷, 청구 스케줄을 다룹니다
 - `triggerConditionsV2`와 `triggerBehaviorsV2`는 조건을 해결하고 종료 동작을 실행하는 무허가(permissionless) 크랭크입니다
 - 조건(`TimeAbsolute`, `TimeRelative`, `Triggered`, `TriggeredWithExpiry`, `Never`, `Always`)과 종료 동작(6가지 타입)의 정확한 객체 형태를 아래에서 설명합니다
-- `@metaplex-foundation/genesis` 0.44.0 및 Genesis 프로그램 `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` 기준으로 검증되었습니다
+- `@metaplex-foundation/genesis` 0.44.0 및 Genesis 프로그램 `GNS1S5J5AspKXgpjz6SvKL66kPaKWAhaGRhCqPRxii2B` 기준으로 검증되었으며, 모든 예제는 데브넷에서 실행되었습니다
 
 **바로 가기:** [명령어](#instructions-reference) · [Raydium CPMM](#raydium-cpmm-graduation-signatures) · [조건 및 동작](#condition-and-behavior-signatures) · [TimeCondition](#time-condition) · [EndBehavior](#end-behavior) · [오류](#common-errors)
 
@@ -73,25 +73,31 @@ Genesis SDK는 Umi 및 Metaplex toolbox 패키지와 함께 npm에서 설치합�
 
 ```bash
 npm install @metaplex-foundation/genesis @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox \
-  @metaplex-foundation/mpl-token-metadata
+  @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/mpl-toolbox
 ```
 
 ## 설정 {% #setup %}
 
-SDK는 `.use(genesis())`로 Umi 플러그인으로 등록됩니다.
+SDK는 `.use(genesis())`로 Umi 플러그인으로 등록되며, `.use(mplToolbox())`도 함께 등록합니다. `mplToolbox()`는 Genesis 명령어가 토큰 계정을 해석하는 데 사용하는 SPL Token 및 Associated Token 프로그램을 등록합니다.
 
 ```typescript {% title="setup.ts" %}
-import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
-import { genesis } from '@metaplex-foundation/genesis';
-import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
+import { genesis } from '@metaplex-foundation/genesis'
+import { mplToolbox } from '@metaplex-foundation/mpl-toolbox'
+import { keypairIdentity } from '@metaplex-foundation/umi'
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 
 const umi = createUmi('https://api.mainnet-beta.solana.com')
+  .use(mplToolbox())
   .use(genesis())
-  .use(mplTokenMetadata());
+
+umi.use(keypairIdentity(yourKeypair))
 ```
 
-전체 구현 예제는 [Launch Pool](/ko/smart-contracts/genesis/launch-pool) 또는 [Presale](/ko/smart-contracts/genesis/presale)을 참조하세요.
+{% callout type="warning" %}
+`mplToolbox()`가 없으면 토큰 계정을 도출하는 명령어가 전송 전에 `ProgramNotRecognizedError: The provided program name [splAssociatedToken] is not recognized` 오류로 실패합니다.
+{% /callout %}
+
+이 페이지의 예제는 메인넷 RPC를 사용합니다. 데브넷에서는 `https://api.devnet.solana.com`을 사용하고, `deriveRaydiumPDAsV2`에 `{ env: 'devnet' }`을 전달하세요. 전달하지 않으면 메인넷 Raydium 계정이 도출됩니다. 모든 예제는 데브넷에서 실행되었습니다. 전체 구현 가이드는 [Launch Pool](/ko/smart-contracts/genesis/launch-pool) 또는 [Presale](/ko/smart-contracts/genesis/presale)을 참조하세요.
 
 ---
 
@@ -110,8 +116,8 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 | 함수 | 설명 | 서명자 |
 |----------|-------------|---------|
-| [addLaunchPoolBucketV2()](#add-launch-pool-bucket-v2) | 비례 배분 버킷 추가 | 권한자 |
-| [addPresaleBucketV2()](#add-presale-bucket-v2) | 고정가 판매 버킷 추가 | 권한자 |
+| [addLaunchPoolBucketV2Base()](#add-launch-pool-bucket-v2) | 비례 배분 버킷 추가 (이후 확장 및 동작 설정) | 권한자 |
+| [addPresaleBucketV2Base()](#add-presale-bucket-v2) | 고정가 판매 버킷 추가 (이후 확장 및 동작 설정) | 권한자 |
 | [addUnlockedBucketV2()](#add-unlocked-bucket-v2) | 트레저리/수신자 버킷 추가 | 권한자 |
 | [addRaydiumCpmmBucketV2()](#add-raydium-cpmm-bucket-v2) | Raydium CPMM 졸업 버킷 추가 | 권한자 |
 | [addClaimScheduleBucketV2()](#add-claim-schedule-bucket-v2) | 청구 스케줄이 있는 베스팅 버킷 추가 | 권한자 |
@@ -178,107 +184,53 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 ## 함수 시그니처 {% #function-signatures %}
 
-각 시그니처는 일반적으로 전달하는 인수를 나열합니다. 토큰 계정, 토큰 프로그램, 버킷 서명자 PDA 등 표시되지 않은 계정은 SDK가 도출합니다.
+아래의 각 명령어에는 인수에 주석이 달린 완전한 예제가 있습니다. 토큰 계정, 토큰 프로그램, 버킷 서명자 PDA 등 표시되지 않은 계정은 SDK가 도출합니다. 모든 예제는 데브넷의 Genesis 프로그램에서 실행되었습니다.
 
 ### initializeV2
 
-```typescript
-await initializeV2(umi, {
-  baseMint,           // Signer - new token keypair
-  quoteMint,          // PublicKey - deposit token (wSOL)
-  fundingMode,        // number - use 0
-  totalSupplyBaseToken, // bigint - supply with decimals
-  name,               // string - token name
-  symbol,             // string - token symbol
-  uri,                // string - metadata URI
-}).sendAndConfirm(umi);
-```
+`initializeV2`는 Genesis 계정을 생성하고 토큰의 총 공급량을 해당 계정에 발행합니다.
+
+{% code-tabs-imported from="genesis/initialize_v2" frameworks="umi" filename="initializeV2" /%}
 
 ### finalizeV2
 
-```typescript
-await finalizeV2(umi, {
-  baseMint,           // PublicKey
-  genesisAccount,     // PublicKey
-}).sendAndConfirm(umi);
-```
+`finalizeV2`는 런칭 설정을 잠그고 런칭을 활성화합니다. 런칭의 모든 버킷을 읽기 전용 remaining account로 전달해야 하며, 그 개수는 Genesis 계정의 `bucketCount`와 같아야 합니다.
+
+{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalizeV2" /%}
+
+버킷 계정 없이 호출하면 `MissingFinalizeBucketAccounts`로 실패합니다. 버킷 할당량의 합계가 총 공급량과 일치하지 않으면 최종화가 `TotalSupplyNotFullyAllocated`로도 실패합니다.
 
 ### addLaunchPoolBucketV2
 
-```typescript
-await addLaunchPoolBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint - tokens for this bucket
-  depositStartCondition,    // TimeCondition
-  depositEndCondition,      // TimeCondition
-  claimStartCondition,      // TimeCondition
-  claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // { amount: bigint } | null
-  minimumQuoteTokenThreshold, // { amount: bigint } | null - floor, launch fails below it
-  softCap,                  // { amount: bigint } | null - REQUIRED, ceiling on quote kept
-  endBehaviors,             // EndBehavior[]
-}).sendAndConfirm(umi);
-```
+Launch Pool 버킷은 `addLaunchPoolBucketV2Base`로 생성하고, 선택적 가드는 `addLaunchPoolBucketV2Extensions`로 추가하며, 종료 동작은 `setLaunchPoolBucketV2Behaviors`로 설정합니다.
+
+{% code-tabs-imported from="genesis/add_launch_pool_bucket_v2" frameworks="umi" filename="addLaunchPoolBucket" /%}
 
 {% callout type="warning" %}
-`softCap`은 `@metaplex-foundation/genesis` 0.42.0부터 필수 인수입니다. 다른 Launch Pool 확장과 달리 생성된 시리얼라이저에 기본값이 없으므로, 런칭에 상한이 없을 때는 `softCap: null`을 명시적으로 전달하세요. 동작 방식은 [Launch Pool 소프트 캡](/ko/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)을 참조하세요.
+결합된 `addLaunchPoolBucketV2` 명령어는 사용하지 마세요. 옵션과 종료 동작 하나를 포함하면 약 1,566바이트로 직렬화되어 Solana의 1,232바이트 트랜잭션 한도를 초과하므로, 전송 시 `base64 encoded data too large`로 실패합니다.
 {% /callout %}
+
+`addLaunchPoolBucketV2Extensions`가 허용하는 확장은 `MinimumDepositAmount`, `MinimumQuoteTokenThreshold`, `SoftCap`, `DepositLimit`, `Allowlist`, `ClaimSchedule`, `BackendSigner`, `DepositPenalty`, `WithdrawPenalty`, `BonusSchedule`입니다. 소프트 캡은 0보다 커야 하며(`InvalidSoftCap`), 최소 임계값 이상이어야 합니다(`SoftCapBelowThreshold`). 동작 방식은 [Launch Pool 소프트 캡](/ko/smart-contracts/genesis/launch-pool#launch-pool-soft-cap)을 참조하세요.
 
 ### addPresaleBucketV2
 
-```typescript
-await addPresaleBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint
-  allocationQuoteTokenCap,  // bigint - SOL cap (sets price)
-  depositStartCondition,    // TimeCondition
-  depositEndCondition,      // TimeCondition
-  claimStartCondition,      // TimeCondition
-  claimEndCondition,        // TimeCondition
-  minimumDepositAmount,     // bigint | null
-  depositLimit,             // bigint | null - max per user
-  endBehaviors,             // EndBehavior[]
-}).sendAndConfirm(umi);
-```
+Presale 버킷은 `addPresaleBucketV2Base`로 생성하며, 이 명령어는 할당량, 가격을 결정하는 쿼트 토큰 상한, 타이밍을 설정합니다. 종료 동작은 `setPresaleBucketV2Behaviors`로 설정합니다.
+
+{% code-tabs-imported from="genesis/add_presale_bucket_v2" frameworks="umi" filename="addPresaleBucket" /%}
+
+결합된 `addPresaleBucketV2` 명령어는 실제 계정을 사용하면 트랜잭션 크기 한도를 약간 초과합니다. 예치 한도, 쿨다운, 허용 목록, 최소 모금액은 `addPresaleBucketV2Extensions`로 추가합니다.
 
 ### addUnlockedBucketV2
 
 Unlocked 버킷은 팀 트레저리처럼 단일 수신자를 위한 토큰을 보관합니다. 자체 할당량과 롤오버 또는 재할당 동작으로부터 베이스 토큰을 받고, `SendQuoteTokenPercentage` 동작으로부터 쿼트 토큰을 받습니다.
 
-```typescript
-await addUnlockedBucketV2(umi, {
-  genesisAccount,       // PublicKey
-  baseMint,             // PublicKey
-  baseTokenAllocation,  // bigint - optional, usually 0n
-  recipient,            // PublicKey - who receives claimed tokens
-  claimStartCondition,  // TimeCondition
-  claimEndCondition,    // TimeCondition
-  backendSigner,        // { signer: PublicKey } | null - optional co-signer for claims
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_unlocked_bucket_v2" frameworks="umi" filename="addUnlockedBucket" /%}
 
 ### addRaydiumCpmmBucketV2
 
 Raydium CPMM 버킷은 베이스 토큰을 예약하고 종료 동작을 통해 판매 수익을 받은 뒤, 졸업 시 Raydium CP-Swap 풀을 생성합니다. LP 잠금 방식은 [Locked LP Tokens](/ko/smart-contracts/genesis/locked-lp-tokens)를 참조하세요.
 
-```typescript
-await addRaydiumCpmmBucketV2(umi, {
-  genesisAccount,        // PublicKey
-  baseMint,              // PublicKey
-  baseTokenAllocation,   // bigint - base tokens reserved for the pool
-  startCondition,        // TimeCondition - earliest time graduation can run
-  lpLockSchedule,        // ClaimSchedule | null - LP vesting; null = Genesis authority claims all LP
-  lpClaimAuthority,      // PublicKey | null - null = Genesis authority
-  burnLp,                // boolean - true burns all LP at graduation
-  creatorFee,            // { wallet: PublicKey } | null - share of Raydium creator fees
-  postponableStart,      // PostponableStart | null - allow postponeStartRaydiumCpmmBucketV2
-  backendSigner,         // { signer: PublicKey } | null - co-signer for graduation and LP actions
-  deferPoolCreationCost, // boolean - false: payer pre-funds pool creation now
-  endBehaviors,          // EndBehavior[] - BaseTokenRollover / ReallocateBaseTokensOnFailure
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_raydium_cpmm_bucket_v2" frameworks="umi" filename="addRaydiumCpmmBucket" /%}
 
 버킷의 `graduateCondition`은 인수가 아닙니다. 프로그램이 이를 `Triggered` 조건으로 생성하고 `graduateToRaydiumCpmmV2` 내부에서 발동시키며, 이로써 다른 버킷이 `BucketTimes.Graduate`를 `TimeRelative` 기준으로 사용할 수 있게 됩니다.
 
@@ -286,131 +238,67 @@ await addRaydiumCpmmBucketV2(umi, {
 Raydium CPMM 버킷은 정확히 하나의 `SendQuoteTokenPercentage` 동작과 정확히 하나의 `SendStartPrice` 동작의 대상이어야 하며, 두 동작은 같은 판매 버킷에서 와야 합니다. 그렇지 않으면 `finalizeV2`가 런칭을 거부합니다(`MissingRaydiumGraduationSource`, `DuplicateRaydiumGraduationSource`, `RaydiumGraduationSourceMismatch`). `burnLp: true`는 `lpLockSchedule`과 함께 사용할 수 없습니다(`BurnLpConflictsWithLpLockSchedule`).
 {% /callout %}
 
-`PostponableStart`의 형태는 `{ maxPostpones: number, timesPostponed: 0, padding: Array(3).fill(0), delayBudgetSeconds: number }`입니다. 판매 버킷이 버킷 생성 전에 `endBehaviors`에서 이를 대상으로 지정할 수 있도록, `findRaydiumCpmmBucketV2Pda`로 버킷의 PDA를 미리 도출하세요.
+`postponableStart`의 형태는 `{ maxPostpones: number, timesPostponed: 0, padding: Array(2).fill(0), delayBudgetSeconds: number }`이며, `TimeAbsolute` 시작 또는 판매의 `DepositEnd`나 `SwapEnd`에 고정된 `TimeRelative` 시작이 필요합니다. 판매 버킷이 버킷 생성 전에 종료 동작에서 이를 대상으로 지정할 수 있도록, `findRaydiumCpmmBucketV2Pda`로 버킷의 PDA를 미리 도출하세요.
 
 ### addClaimScheduleBucketV2
 
 청구 스케줄 버킷은 시간에 걸쳐 베이스 토큰을 한 명의 수신자에게 베스팅합니다. 베스팅 계산 방식과 런타임 제어는 [Project Vesting](/ko/smart-contracts/genesis/project-vesting)을 참조하세요.
 
-```typescript
-await addClaimScheduleBucketV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenAllocation,      // bigint
-  recipient,                // PublicKey - defaults to the authority
-  claimStartCondition,      // TimeCondition - claim gate
-  claimSchedule,            // ClaimSchedule - start, duration, period, cliff
-  pausable,                 // boolean - optional, default false
-  cancelable,               // boolean - optional, default false
-  cancelableByRecipient,    // boolean - optional, default false
-  transferable,             // boolean - optional, default false
-  transferableByRecipient,  // boolean - optional, default false
-  backendSigner,            // { signer: PublicKey } | null
-  endBehaviors,             // EndBehavior[] - at most one ReallocateBaseTokensOnCancel
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/add_claim_schedule_bucket_v2" frameworks="umi" filename="addClaimScheduleBucket" /%}
 
-`ClaimSchedule`의 형태는 `{ startCondition, duration, period, cliffCondition, cliffAmountBps, reserved: Array(126).fill(0) }`입니다. 절대 시간을 사용할 때는 `createClaimSchedule({ startTime, endTime, cliffTime, cliffAmountBps, period })`로 생성하고, 베스팅을 졸업 시점에 고정하려면 `createTimeRelativeCondition`으로 만든 시작 및 클리프 조건으로 직접 구성하세요.
+`ClaimSchedule`의 형태는 `{ startCondition, duration, period, cliffCondition, cliffAmountBps, reserved: Array(126).fill(0) }`입니다. 절대 시간을 사용할 때는 `createClaimSchedule({ startTime, endTime, cliffTime, cliffAmountBps, period })`로 생성하고, 베스팅을 졸업 시점에 고정하려면 `createTimeRelativeCondition`으로 만든 시작 및 클리프 조건으로 직접 구성하세요. 클리프와 선형 스케줄은 서로 독립적입니다. `cliffAmountBps: 0`인 `Never` 클리프를 사용하면 선형 베스팅만 적용됩니다.
 
 ### depositLaunchPoolV2
 
-```typescript
-await depositLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`depositLaunchPoolV2`는 예치 기간 동안 래핑된 SOL을 Launch Pool에 예치합니다. 먼저 [SOL 래핑](/ko/smart-contracts/genesis/launch-pool#wrapping-sol)에 나온 대로 SOL을 래핑하세요.
+
+{% code-tabs-imported from="genesis/deposit_launch_pool_v2" frameworks="umi" filename="depositLaunchPool" /%}
 
 ### depositPresaleV2
 
-```typescript
-await depositPresaleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`depositPresaleV2`는 예치 기간 동안 래핑된 SOL을 Presale에 예치합니다.
+
+{% code-tabs-imported from="genesis/deposit_presale_v2" frameworks="umi" filename="depositPresale" /%}
 
 ### withdrawLaunchPoolV2
 
-```typescript
-await withdrawLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  amountQuoteToken,   // bigint - lamports
-}).sendAndConfirm(umi);
-```
+`withdrawLaunchPoolV2`는 예치 기간이 열려 있는 동안 Launch Pool 예치금의 일부를 출금합니다.
+
+{% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
 ### claimLaunchPoolV2
 
-```typescript
-await claimLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey
-}).sendAndConfirm(umi);
-```
+`claimLaunchPoolV2`는 청구 기간이 열리면 예치자가 받을 Launch Pool 할당량 몫을 전송합니다.
+
+{% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
 ### refundLaunchPoolV2
 
-예치 기간이 종료된 후 Launch Pool 예치금을 환불합니다. 프로그램이 금액을 계산하므로 amount 인수는 없습니다. `minimumQuoteTokenThreshold`에 미달하면 예치금 전액이 환불되고, `softCap`을 초과하면 초과분만 환불되며 예치자의 토큰 할당량은 그대로 유지됩니다.
+`refundLaunchPoolV2`는 예치 기간이 종료된 후 Launch Pool 예치금을 환불합니다. 프로그램이 금액을 계산합니다. `minimumQuoteTokenThreshold`에 미달하면 예치금 전액이 환불되고, `softCap`을 초과하면 초과분만 환불되며 예치자의 토큰 할당량은 그대로 유지됩니다.
 
-```typescript
-await refundLaunchPoolV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey | Signer - depositor; base token account closed if they sign
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/refund_launch_pool_v2" frameworks="umi" filename="refundLaunchPool" /%}
 
 `payer`만 서명하면 되므로 예치자를 대신해 누구나 환불을 크랭크할 수 있습니다. 예치 기간이 끝나기 전에 호출하면 `LaunchPoolNotEnded`, 최소 임계값을 충족하고 소프트 캡을 초과하지 않았을 때 호출하면 `LaunchPoolThresholdMet`, 두 번 호출하면 `DepositAlreadyRefunded`가 반환됩니다.
 
 ### claimPresaleV2
 
-```typescript
-await claimPresaleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  baseMint,           // PublicKey
-  recipient,          // PublicKey
-}).sendAndConfirm(umi);
-```
+`claimPresaleV2`는 청구 기간이 열리면 Presale 예치자의 토큰을 전송합니다.
+
+{% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 
 ### claimUnlockedV2
 
 `claimUnlockedV2`는 Unlocked 버킷의 현재 베이스 토큰 잔액 전체와 쿼트 토큰 잔액을 버킷에 저장된 수신자에게 전송합니다. 쿼트 측에서는 프로토콜 청구 수수료가 차감됩니다.
 
-```typescript
-await claimUnlockedV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - UnlockedBucketV2
-  baseMint,           // PublicKey
-  recipient,          // PublicKey - must match the bucket's recipient
-  backendSigner,      // Signer - only if the bucket has a backend signer
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_unlocked_v2" frameworks="umi" filename="claimUnlocked" /%}
 
-청구는 반복할 수 있습니다. 이전 청구 이후에도 롤오버 또는 재할당 동작이 베이스 토큰을 추가로 적립할 수 있기 때문입니다. 남은 잔액이 없을 때 청구하면 `UnlockedBucketAlreadyClaimed`가, 수신자가 버킷의 수신자와 다르면 `RecipientMismatch`가 반환됩니다.
+청구는 반복할 수 있습니다. 이전 청구 이후에도 롤오버 또는 재할당 동작이 베이스 토큰을 추가로 적립할 수 있기 때문입니다. 남은 잔액이 없을 때 청구하면 `UnlockedBucketAlreadyClaimed`가, 수신자가 버킷의 수신자와 다르면 `RecipientMismatch`가 반환됩니다. 버킷에 백엔드 서명자가 있으면 이를 `backendSigner`로 전달하세요.
 
 ### claimClaimScheduleV2
 
 `claimClaimScheduleV2`는 현재 베스팅되었지만 아직 청구되지 않은 모든 토큰을 버킷에 저장된 수신자에게 전송합니다.
 
-```typescript
-await claimClaimScheduleV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - ClaimScheduleBucketV2
-  baseMint,           // PublicKey
-  recipient,          // PublicKey - must match the bucket's recipient
-  backendSigner,      // Signer - only if the bucket has a backend signer
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_claim_schedule_v2" frameworks="umi" filename="claimClaimSchedule" /%}
 
 청구 게이트, 선형 베스팅 시작, 또는 클리프가 `TimeRelative`이면 먼저 청구 스케줄 버킷에 대해 [triggerConditionsV2](#trigger-conditions-v2)를 호출하세요. 베스팅된 토큰이 없을 때 청구하면 `NothingToClaim`이 반환됩니다.
 
@@ -418,56 +306,31 @@ await claimClaimScheduleV2(umi, {
 
 청구 스케줄 런타임 제어는 최종화 후 베스팅 버킷을 일시 중지, 취소하거나 수신자를 변경하며, 각 제어는 생성 시 해당 정책 플래그가 설정된 경우에만 작동합니다.
 
-```typescript
-// Pause or resume vesting (requires pausable: true). Signer: Genesis authority.
-await setClaimSchedulePausedStateV2(umi, {
-  genesisAccount, bucket, signer: authority,
-  paused: true, padding: Array(6).fill(0),
-}).sendAndConfirm(umi);
+`setClaimSchedulePausedStateV2`는 베스팅을 일시 중지하거나 재개하며, `pausable: true`가 필요합니다. Genesis 권한자가 서명합니다.
 
-// Stop vesting permanently (requires cancelable or cancelableByRecipient).
-await cancelClaimScheduleBucketV2(umi, {
-  genesisAccount, bucket, signer, // authority or recipient
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
+{% code-tabs-imported from="genesis/pause_claim_schedule_bucket_v2" frameworks="umi" filename="setClaimSchedulePausedState" /%}
 
-// Change the recipient (requires transferable or transferableByRecipient).
-await transferRecipientClaimScheduleBucketV2(umi, {
-  genesisAccount, bucket, signer, // authority or recipient
-  newRecipient,                   // PublicKey
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
-```
+`transferRecipientClaimScheduleBucketV2`는 수신자를 변경하며, `transferable`(권한자) 또는 `transferableByRecipient`(수신자)가 필요합니다.
+
+{% code-tabs-imported from="genesis/transfer_claim_schedule_recipient_v2" frameworks="umi" filename="transferRecipientClaimScheduleBucket" /%}
+
+`cancelClaimScheduleBucketV2`는 베스팅을 영구적으로 중단하며, `cancelable`(권한자) 또는 `cancelableByRecipient`(수신자)가 필요합니다.
+
+{% code-tabs-imported from="genesis/cancel_claim_schedule_bucket_v2" frameworks="umi" filename="cancelClaimScheduleBucket" /%}
 
 정책이 비활성화되어 있으면 `ClaimSchedulePolicyDisabled`가, 정책이 허용하지 않는 서명자이면 `ClaimScheduleUnauthorized`가 반환됩니다. 취소 후에는 `triggerBehaviorsV2`로 실행되는 `ReallocateBaseTokensOnCancel` 동작이 베스팅되지 않은 잔여분을 이동합니다.
 
 ### revokeV2
 
-베이스 토큰의 민트 및/또는 동결 권한을 영구적으로 폐기합니다.
+`revokeV2`는 베이스 토큰의 민트 권한, 동결 권한, 또는 둘 다를 영구적으로 폐기합니다.
 
-```typescript
-await revokeV2(umi, {
-  genesisAccount,           // PublicKey
-  baseMint,                 // PublicKey
-  baseTokenProgram,         // PublicKey - required, e.g. SPL_TOKEN_PROGRAM_ID from mpl-toolbox
-  revokeMintAuthority,      // boolean
-  revokeFreezeAuthority,    // boolean
-  padding: Array(5).fill(0), // required, no default
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/revoke_v2" frameworks="umi" filename="revoke" /%}
 
 ### setBucketBackendSignerV2
 
 `setBucketBackendSignerV2`는 백엔드 서명자를 지원하는 모든 V2 버킷에서 백엔드 서명자 확장을 설정, 교체 또는 해제합니다. 백엔드 키를 분실하면 사용자 청구를 포함해 해당 키가 필요한 모든 작업이 계속 차단되므로, 이 명령어가 복구 경로가 됩니다.
 
-```typescript
-await setBucketBackendSignerV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - any V2 bucket with a backend signer slot
-  authority,          // Signer - Genesis authority (defaults to identity)
-  backendSigner,      // PublicKey - new co-signer; the default (all-zero) key clears it
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/set_bucket_backend_signer_v2" frameworks="umi" filename="setBucketBackendSigner" /%}
 
 기존 백엔드 서명자의 교체 또는 해제는 `finalizeV2` 전후 모두 가능합니다. 백엔드 서명자가 없던 버킷에 새로 추가하는 것은 최종화 전에만 허용됩니다. 백엔드 서명자는 Genesis 권한자가 선택한 어떤 키든 될 수 있습니다.
 
@@ -481,48 +344,20 @@ Raydium CPMM 졸업 명령어는 Raydium CPMM 버킷으로부터 Raydium CP-Swap
 
 `deriveRaydiumPDAsV2`는 Raydium CPMM 버킷에 대한 Raydium 풀 계정들을 반환합니다. 풀 상태는 Genesis가 도출한 PDA이므로 졸업 전에는 누구도 풀을 생성할 수 없습니다.
 
-```typescript
-const raydium = deriveRaydiumPDAsV2(umi, baseMint, raydiumBucket, {
-  quoteMint,   // PublicKey - optional, defaults to wSOL
-  env,         // 'mainnet' | 'devnet' - optional, defaults to 'mainnet'
-  creatorFee,  // boolean - optional, true selects the creator-fee AMM config
-  ammConfig,   // PublicKey - optional override
-});
-// raydium.poolState, ammConfig, poolAuthority, lpMint, baseVault, quoteVault,
-// createPoolFee, observationState, raydiumProgram, raydiumSigner, permission,
-// creatorFeeShare, token0Mint, token1Mint, isProjectMintToken0
-```
+| 옵션 | 타입 | 기본값 | 의미 |
+|--------|------|---------|---------|
+| `quoteMint` | `PublicKey` | wSOL | 쿼트 토큰 민트 |
+| `env` | `'mainnet' \| 'devnet'` | `'mainnet'` | Raydium CP-Swap 프로그램, AMM 설정, 풀 수수료 수신자를 선택 |
+| `creatorFee` | `boolean` | `false` | 창작자 수수료 AMM 설정을 선택. 버킷에 `creatorFee` 확장이 있으면 필수 |
+| `ammConfig` | `PublicKey` | — | 명시적인 AMM 설정 재정의 |
 
-버킷에 `creatorFee` 확장이 있으면 `creatorFee: true`를 전달하세요. 확장 없이 창작자 수수료 AMM 설정을 사용하거나, 창작자 수수료 AMM 설정 없이 확장을 사용하면 졸업이 `InvalidCreatorFeeConfig`로 실패합니다.
+결과에는 `poolState`, `ammConfig`, `poolAuthority`, `lpMint`, `baseVault`, `quoteVault`, `createPoolFee`, `observationState`, `raydiumProgram`, `raydiumSigner`, `permission`, `creatorFeeShare`, `token0Mint`, `token1Mint`, `isProjectMintToken0`이 포함됩니다. 확장 없이 창작자 수수료 AMM 설정을 사용하거나, 창작자 수수료 AMM 설정 없이 확장을 사용하면 졸업이 `InvalidCreatorFeeConfig`로 실패합니다.
 
 ### graduateToRaydiumCpmmV2
 
 `graduateToRaydiumCpmmV2`는 Raydium 풀을 생성하고, 버킷의 쿼트 토큰과 이에 대응하는 베이스 토큰을 판매 시작 가격으로 예치한 뒤, 버킷의 `graduateCondition`을 발동시킵니다.
 
-```typescript
-await transactionBuilder()
-  .add(setComputeUnitLimit(umi, { units: 400_000 }))
-  .add(
-    graduateToRaydiumCpmmV2(umi, {
-      genesisAccount,     // PublicKey
-      bucket,             // PublicKey - RaydiumCpmmBucketV2
-      baseMint,           // PublicKey
-      quoteMint,          // PublicKey - optional, defaults to wSOL
-      poolState: raydium.poolState,
-      ammConfig: raydium.ammConfig,
-      poolAuthority: raydium.poolAuthority,
-      lpMint: raydium.lpMint,
-      baseVault: raydium.baseVault,
-      quoteVault: raydium.quoteVault,
-      createPoolFee: raydium.createPoolFee,
-      observationState: raydium.observationState,
-      permission: raydium.permission,
-      raydiumProgram: raydium.raydiumProgram,
-      backendSigner,      // Signer - only if the bucket has a backend signer
-    })
-  )
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/graduate_to_raydium_cpmm_v2" frameworks="umi" filename="graduateToRaydiumCpmm" /%}
 
 졸업은 무허가(permissionless)입니다. 수수료 지불자만 서명하면 되며, 버킷에 백엔드 서명자 확장이 있는 경우 백엔드 서명자도 서명합니다. 이 명령어는 다음 세 가지를 순서대로 확인합니다.
 
@@ -532,7 +367,7 @@ await transactionBuilder()
 | 자금을 공급하는 판매가 실패하지 않았음 (`TransmitFailure`를 받지 않음) | `BucketLaunchFailed` |
 | 버킷의 `startCondition`이 충족됨 | `GraduationNotStarted` |
 
-졸업 전에 판매 버킷에 대해 `triggerBehaviorsV2`를 실행하여 Raydium 버킷이 쿼트 토큰과 시작 가격을 받도록 하세요. `startCondition`이 `TimeRelative`이면, 먼저 판매 버킷을 remaining account로 지정하여 Raydium 버킷에 대해 `triggerConditionsV2`를 실행하세요.
+졸업 전에 판매 버킷에 대해 `triggerBehaviorsV2`를 실행하여 Raydium 버킷이 쿼트 토큰과 시작 가격을 받도록 하세요. 이것들이 없으면 졸업이 `InvalidAmount`로 실패합니다. `startCondition`이 `TimeRelative`이면, 먼저 판매 버킷을 remaining account로 지정하여 Raydium 버킷에 대해 `triggerConditionsV2`를 실행하세요.
 
 {% callout type="warning" %}
 졸업은 다른 버킷의 청구를 열어주지 않습니다. `BucketTimes.Graduate`에 대해 `TimeRelative`인 Launch Pool, Unlocked, 청구 스케줄 조건은 누군가 Raydium 버킷을 쓰기 가능한 remaining account로 지정하여 해당 버킷에 [triggerConditionsV2](#trigger-conditions-v2)를 호출할 때까지 트리거되지 않은 상태로 남습니다.
@@ -542,36 +377,15 @@ await transactionBuilder()
 
 `postponeStartRaydiumCpmmBucketV2`는 졸업 시작 시점을 뒤로 이동하며, `postponableStart` 확장으로 생성된 버킷에서만 작동합니다.
 
-```typescript
-await postponeStartRaydiumCpmmBucketV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - RaydiumCpmmBucketV2
-  authority,          // Signer - Genesis authority (defaults to identity)
-  sourceBucket,       // PublicKey - sale bucket; required when startCondition is TimeRelative
-  newStartValue,      // bigint - new unix time (TimeAbsolute) or new offset in seconds (TimeRelative)
-  padding: Array(7).fill(0),
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/postpone_start_raydium_cpmm_bucket_v2" frameworks="umi" filename="postponeStartRaydiumCpmmBucket" /%}
 
-연기는 `maxPostpones`와 `delayBudgetSeconds`로 제한되며, 예정된 졸업 시점보다 최소 30분 전에 이루어져야 하고, 시작 시점을 최소 24시간 이후로 이동해야 합니다. 위반 시 `PostponeLimitReached`, `PostponeNotLater`, `PostponeExceedsMaxDelay`, `PostponeTooLate`, `PostponeTooSoon`, 또는 `BucketNotPostponable`이 반환됩니다.
+`newStartValue`는 `TimeAbsolute` 시작의 경우 새 Unix 시간이고, `TimeRelative` 시작의 경우 판매 종료 후의 새 오프셋(초)이며, 후자는 판매 버킷을 `sourceBucket`으로 전달해야 합니다. 연기는 `maxPostpones`와 `delayBudgetSeconds`로 제한되며, 예정된 졸업 시점보다 최소 30분 전에 이루어져야 하고, 시작 시점을 최소 24시간 이후로 이동해야 합니다. 위반 시 `PostponeLimitReached`, `PostponeNotLater`, `PostponeExceedsMaxDelay`, `PostponeTooLate`, `PostponeTooSoon`, 또는 `BucketNotPostponable`이 반환됩니다.
 
 ### claimRaydiumCpmmLpTokensV2
 
 `claimRaydiumCpmmLpTokensV2`는 `lpLockSchedule`에 따라 베스팅된 양까지, 잠금 해제된 LP 토큰을 버킷 서명자로부터 대상 토큰 계정으로 전송합니다.
 
-```typescript
-await claimRaydiumCpmmLpTokensV2(umi, {
-  genesisAccount,            // PublicKey
-  bucket,                    // PublicKey - RaydiumCpmmBucketV2
-  baseMint,                  // PublicKey
-  lpMint: raydium.lpMint,    // PublicKey
-  recipient,                 // PublicKey - owner of the destination account
-  destinationLpTokenAccount, // PublicKey - recipient's LP ATA, created if missing
-  lpClaimAuthority,          // Signer - lpClaimAuthority, or the Genesis authority if unset
-  backendSigner,             // Signer - only if the bucket has a backend signer
-  amount,                    // bigint - LP tokens to claim
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_raydium_cpmm_lp_tokens_v2" frameworks="umi" filename="claimRaydiumCpmmLpTokens" /%}
 
 졸업 전에 청구하면 `NoLpTokensToClaim`, 잘못된 서명자이면 `InvalidLpClaimAuthority`, 아직 언락된 LP 토큰이 없는 상태에서 청구하면 `InsufficientUnlockedAmount`가 반환됩니다. 언락된 잔액을 초과하는 `amount`는 거부되지 않고 해당 잔액으로 제한됩니다. `TimeRelative` 조건이 있는 `lpLockSchedule`은 청구 전에 Raydium 버킷에 대해 [triggerConditionsV2](#trigger-conditions-v2)를 호출해야 합니다.
 
@@ -579,73 +393,31 @@ await claimRaydiumCpmmLpTokensV2(umi, {
 
 `burnRaydiumCpmmLpTokensV2`는 버킷 서명자가 보유한 청구되지 않은 LP 토큰을 소각하여, 해당 비율의 풀 유동성을 영구적으로 잠급니다.
 
-```typescript
-await burnRaydiumCpmmLpTokensV2(umi, {
-  genesisAccount,          // PublicKey
-  bucket,                  // PublicKey - RaydiumCpmmBucketV2
-  baseMint,                // PublicKey
-  lpMint: raydium.lpMint,  // PublicKey
-  lpClaimAuthority,        // Signer
-  backendSigner,           // Signer - only if the bucket has a backend signer
-  amount,                  // bigint - capped to the unclaimed, unburned balance
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/burn_raydium_cpmm_lp_tokens_v2" frameworks="umi" filename="burnRaydiumCpmmLpTokens" /%}
 
-소각은 가치를 포기하는 것일 뿐이므로 `lpLockSchedule`을 무시합니다. 졸업 시점에 모든 LP 토큰을 소각하려면 대신 `burnLp: true`로 버킷을 생성하세요.
+소각은 가치를 포기하는 것일 뿐이므로 `lpLockSchedule`을 무시합니다. 버킷은 `lpTokenBalance`(졸업 시 수령), `lpTokensClaimed`, `lpTokensBurned`를 각각 따로 추적합니다. 졸업 시점에 모든 LP 토큰을 소각하려면 대신 `burnLp: true`로 버킷을 생성하세요.
 
 ### collectRaydiumCpmmFeesV2
 
-`collectRaydiumCpmmFeesV2`는 `creatorFee` 확장 없이 생성된 풀에서 누적된 Raydium 창작자 수수료를 수집하여, 쿼트 측을 Genesis 수수료 지갑으로 보냅니다.
+`collectRaydiumCpmmFeesV2`는 `creatorFee` 확장 없이 생성된 풀에서 누적된 Raydium 창작자 수수료를 수집하여, 쿼트 측을 Genesis 2차 수수료 지갑으로 보냅니다.
 
-```typescript
-await collectRaydiumCpmmFeesV2(umi, {
-  baseMint,                                  // PublicKey
-  quoteMint,                                 // PublicKey - optional, defaults to wSOL
-  poolState: raydium.poolState,
-  ammConfig: raydium.ammConfig,
-  poolAuthority: raydium.poolAuthority,
-  baseVault: raydium.baseVault,
-  quoteVault: raydium.quoteVault,
-  raydiumProgram: raydium.raydiumProgram,
-  creatorFeeShare: raydium.creatorFeeShare,
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/collect_raydium_cpmm_fees_v2" frameworks="umi" filename="collectRaydiumCpmmFees" /%}
 
-누적된 수수료가 없으면 전송 없이 성공적으로 반환됩니다. 창작자 수수료 AMM 설정을 사용하는 풀은 `InvalidRaydiumAmmConfig`를 반환하므로, 해당 풀에는 `collectRaydiumCpmmFeesWithCreatorFeeV2`를 사용하세요.
+누적된 수수료가 없으면 이 명령어는 전송 없이 성공합니다. 창작자 수수료 AMM 설정을 사용하는 풀은 `InvalidRaydiumAmmConfig`를 반환하므로, 해당 풀에는 `collectRaydiumCpmmFeesWithCreatorFeeV2`를 사용하세요.
 
 ### collectRaydiumCpmmFeesWithCreatorFeeV2
 
-`collectRaydiumCpmmFeesWithCreatorFeeV2`는 버킷에 `creatorFee` 확장이 있는 풀에서 창작자 수수료를 수집하고, 런칭 창작자의 몫을 버킷에 적립한 뒤, 나머지를 Genesis 수수료 지갑으로 보냅니다.
+`collectRaydiumCpmmFeesWithCreatorFeeV2`는 버킷에 `creatorFee` 확장이 있는 풀에서 창작자 수수료를 수집하고, 런칭 창작자의 몫을 버킷에 적립한 뒤, 나머지를 Genesis 2차 수수료 지갑으로 보냅니다. 예제는 이어서 `claimRaydiumCreatorFeeV2`로 창작자에게 지급합니다.
 
-```typescript
-await collectRaydiumCpmmFeesWithCreatorFeeV2(umi, {
-  baseMint,                                  // PublicKey
-  genesisAccount,                            // PublicKey
-  raydiumCpmmBucket,                         // PublicKey - bucket with creatorFee extension
-  poolState: raydium.poolState,
-  ammConfig: raydium.ammConfig,              // creator-fee AMM config
-  poolAuthority: raydium.poolAuthority,
-  baseVault: raydium.baseVault,
-  quoteVault: raydium.quoteVault,
-  raydiumProgram: raydium.raydiumProgram,
-  creatorFeeShare: raydium.creatorFeeShare,
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/collect_raydium_cpmm_fees_with_creator_fee_v2" frameworks="umi" filename="collectRaydiumCpmmFeesWithCreatorFee" /%}
 
 ### claimRaydiumCreatorFeeV2
 
 `claimRaydiumCreatorFeeV2`는 Raydium 버킷에 적립되어 아직 청구되지 않은 창작자 수수료를 `creatorFee` 확장에 저장된 지갑으로 지급합니다. 전체 흐름은 [Creator Fees](/ko/smart-contracts/genesis/creator-fees)를 참조하세요.
 
-```typescript
-await claimRaydiumCreatorFeeV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - RaydiumCpmmBucketV2
-  baseMint,           // PublicKey
-  creatorFeeWallet,   // PublicKey - must match the creatorFee extension wallet
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/claim_raydium_creator_fee_v2" frameworks="umi" filename="claimRaydiumCreatorFee" /%}
 
-쿼트 민트가 wSOL이면 수수료는 언랩되어 네이티브 SOL로 지급됩니다. 확장의 지갑과 다른 지갑을 지정하면 `InvalidCreatorFeeWallet`이 반환됩니다.
+쿼트 민트가 wSOL이면 수수료는 언랩되어 네이티브 SOL로 지급됩니다. 청구되지 않은 수수료가 없으면 이 명령어는 전송 없이 성공하며, 확장의 지갑과 다른 지갑을 지정하면 `InvalidCreatorFeeWallet`이 반환됩니다.
 
 ---
 
@@ -657,18 +429,7 @@ await claimRaydiumCreatorFeeV2(umi, {
 
 `triggerConditionsV2`는 대상 버킷 하나의 모든 조건을 해결하며, 여기에는 `claimSchedule`의 시작 및 클리프나 Raydium `lpLockSchedule` 같은 확장 조건도 포함됩니다. 무허가(permissionless) 명령어이며 수수료 지불자의 서명만 필요합니다.
 
-```typescript
-await triggerConditionsV2(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey - the bucket whose conditions to resolve
-  baseMint,           // PublicKey
-})
-  .addRemainingAccounts([
-    // Every bucket the target's TimeRelative conditions reference, writable
-    { pubkey: raydiumBucket, isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/trigger_conditions_after_graduation_v2" frameworks="umi" filename="triggerConditions" /%}
 
 | 속성 | 값 |
 |----------|-------|
@@ -676,7 +437,7 @@ await triggerConditionsV2(umi, {
 | 대상 | 명령어당 버킷 하나 |
 | Remaining accounts | 참조되는 모든 버킷, **쓰기 가능**, 순서 무관 |
 | 자기 참조 | 대상 버킷을 다시 전달하지 않아도 해결됨 |
-| 재실행 | 안전함. 이미 트리거된 조건은 건너뜀 |
+| 재실행 | 안전함. 이미 트리거된 조건은 건너뛰며, 처리할 조건이 없는 호출도 변경 없이 성공함 |
 
 이 명령어는 먼저 각 remaining account 버킷의 `TimeAbsolute` 조건을 해결한 다음, 대상 버킷에서 참조 버킷이 그중에 포함되어 있고 시간이 경과한 각 `TimeRelative` 조건을 해결합니다. 기록되는 `triggeredTimestamp`는 크랭크가 실행된 시간이 아니라 기준 시간에 오프셋을 더한 값입니다.
 
@@ -688,21 +449,9 @@ await triggerConditionsV2(umi, {
 
 `triggerBehaviorsV2`는 소스 버킷 하나(`primaryBucket`)에서 아직 처리되지 않은 모든 종료 동작을 실행하고, 각 동작을 처리됨으로 표시하여 두 번 실행되지 않도록 합니다. 무허가(permissionless) 명령어이며 수수료 지불자의 서명만 필요합니다.
 
-```typescript
-await triggerBehaviorsV2(umi, {
-  genesisAccount,     // PublicKey
-  primaryBucket,      // PublicKey - source bucket
-  baseMint,           // PublicKey
-})
-  .addRemainingAccounts([
-    // One (destination bucket, destination quote token account) pair per destination
-    { pubkey: destinationBucket, isSigner: false, isWritable: true },
-    { pubkey: destinationQuoteTokenAccount, isSigner: false, isWritable: true },
-  ])
-  .sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/trigger_launch_pool_graduation_v2" frameworks="umi" filename="triggerBehaviors" /%}
 
-대상 쿼트 토큰 계정은 대상 버킷의 쿼트 민트 ATA입니다. 대상이 Raydium CPMM이면 이 계정은 버킷 자체가 아니라 `findRaydiumBucketSignerPda(umi, { bucket })`로 얻는 버킷 서명자 PDA가 소유합니다. remaining accounts의 개수가 홀수이면 `InvalidRemainingAccountsLength`가 반환됩니다.
+Remaining accounts는 대상마다 하나의 `(destination bucket, destination quote token account)` 쌍이며, 모두 쓰기 가능해야 합니다. 대상 쿼트 토큰 계정은 대상 버킷의 쿼트 민트 ATA입니다. 대상이 Raydium CPMM이면 이 계정은 버킷 자체가 아니라 `findRaydiumBucketSignerPda(umi, { bucket })`로 얻는 버킷 서명자 PDA가 소유합니다. remaining accounts의 개수가 홀수이면 `InvalidRemainingAccountsLength`가 반환됩니다.
 
 | 소스 버킷 | 실행 가능 시점 | 너무 이르면 발생하는 오류 |
 |---------------|------------|--------------------|
@@ -715,15 +464,7 @@ await triggerBehaviorsV2(umi, {
 
 `set*BucketV2Behaviors` 명령어는 기존 버킷의 `endBehaviors` 목록 전체를 교체합니다. Genesis 권한자가 필요하며, `finalizeV2` 이후에는 `GenesisAccountFinalized`로 실패합니다.
 
-```typescript
-await setLaunchPoolBucketV2Behaviors(umi, {
-  genesisAccount,     // PublicKey
-  bucket,             // PublicKey
-  authority,          // Signer - Genesis authority (defaults to identity)
-  padding: Array(3).fill(0), // required, no default
-  endBehaviors,       // EndBehavior[] - replaces the existing list
-}).sendAndConfirm(umi);
-```
+{% code-tabs-imported from="genesis/set_launch_pool_bucket_v2_behaviors" frameworks="umi" filename="setLaunchPoolBucketBehaviors" /%}
 
 | 함수 | 버킷 타입 | 허용되는 동작 |
 |----------|-------------|-------------------|
@@ -781,61 +522,15 @@ Genesis 계정은 [런칭 타입](#launch-type)을 포함한 최상위 런칭 �
 | safeFetchGenesisAccountV2FromSeeds() | 위와 동일, 없으면 `null` 반환 |
 | fetchAllGenesisAccountV2() | 여러 Genesis 계정 일괄 조회 |
 
-```typescript
-import {
-  fetchGenesisAccountV2,
-  fetchGenesisAccountV2FromSeeds,
-  findGenesisAccountV2Pda,
-  LaunchType,
-} from '@metaplex-foundation/genesis';
-
-// Fetch by PDA address
-const [genesisAccountPda] = findGenesisAccountV2Pda(umi, {
-  baseMint: mintAddress,
-  genesisIndex: 0,
-});
-const account = await fetchGenesisAccountV2(umi, genesisAccountPda);
-console.log(account.data.launchType); // 0 = Uninitialized, 3 = LaunchPoolV1
-
-// Or fetch directly from seeds
-const account2 = await fetchGenesisAccountV2FromSeeds(umi, {
-  baseMint: mintAddress,
-  genesisIndex: 0,
-});
-
-// Check launch type
-if (account2.data.launchType === LaunchType.LaunchPoolV1) {
-  console.log('This is a launch pool');
-}
-```
+{% code-tabs-imported from="genesis/fetch_genesis_account_v2" frameworks="umi" filename="fetchGenesisAccount" /%}
 
 **Genesis 계정 필드:** `authority`, `baseMint`, `quoteMint`, `totalSupplyBaseToken`, `totalAllocatedSupplyBaseToken`, `totalProceedsQuoteToken`, `fundingMode`, `launchType`, `bucketCount`, `finalized`
 
 ### GPA 빌더 — 런칭 타입으로 조회 {% #gpa-builder-query-by-launch-type %}
 
-`getGenesisAccountV2GpaBuilder()`를 사용하여 온체인 필드로 필터링된 모든 Genesis 계정을 조회합니다. Solana의 `getProgramAccounts` RPC 메서드와 바이트 수준 필터를 사용하여 효율적으로 검색합니다.
+`getGenesisAccountV2GpaBuilder()`를 사용하여 온체인 필드로 필터링된 모든 Genesis 계정을 조회합니다. Solana의 `getProgramAccounts` RPC 메서드와 바이트 수준 필터를 사용하므로, RPC 엔드포인트가 Genesis 프로그램에 대해 `getProgramAccounts`를 허용해야 합니다.
 
-```typescript
-import {
-  getGenesisAccountV2GpaBuilder,
-  LaunchType,
-} from '@metaplex-foundation/genesis';
-
-// Get all launch pool launches
-const launchpools = await getGenesisAccountV2GpaBuilder(umi)
-  .whereField('launchType', LaunchType.LaunchPoolV1)
-  .getDeserialized();
-
-// Filter by multiple fields
-const finalizedLaunchpools = await getGenesisAccountV2GpaBuilder(umi)
-  .whereField('launchType', LaunchType.LaunchPoolV1)
-  .whereField('finalized', true)
-  .getDeserialized();
-
-for (const account of launchpools) {
-  console.log(account.publicKey, account.data.baseMint, account.data.launchType);
-}
-```
+{% code-tabs-imported from="genesis/query_genesis_accounts_by_launch_type" frameworks="umi" filename="queryByLaunchType" /%}
 
 {% callout type="note" %}
 `launchType`은 런칭 생성 후 백엔드 크랭크에 의해 소급적으로 설정됩니다. 최근 생성된 런칭은 크랭크가 처리할 때까지 `LaunchType.Uninitialized`(0)을 표시할 수 있습니다.
@@ -857,12 +552,7 @@ for (const account of launchpools) {
 | fetchPresaleDepositV2() | 예치 상태 (없으면 오류 발생) |
 | safeFetchPresaleDepositV2() | 예치 상태 또는 `null` |
 
-```typescript
-const bucket = await fetchLaunchPoolBucketV2(umi, bucketPda);
-const deposit = await safeFetchLaunchPoolDepositV2(umi, depositPda); // null if not found
-const raydiumBucket = await fetchRaydiumCpmmBucketV2(umi, raydiumBucketPda);
-console.log(raydiumBucket.graduateCondition.triggeredTimestamp); // Some(t) once graduated
-```
+{% code-tabs-imported from="genesis/fetch_launch_pool_bucket_and_deposit_v2" frameworks="umi" filename="fetchLaunchPoolState" /%}
 
 **버킷 상태 필드:** `quoteTokenDepositTotal`, `weightedQuoteTokenTotal`, `depositCount`, `claimCount`, `refundCount`, `bucket.baseTokenAllocation`, `extensions`
 
@@ -1070,9 +760,13 @@ Genesis 프로그램 오류는 트랜잭션 로그와 SDK가 던지는 `ProgramE
 | `insufficient funds` | 수수료를 위한 SOL 부족 |
 | `already initialized` | Genesis 계정이 이미 존재 |
 | `GenesisAccountFinalized` (43) | `finalizeV2()` 이후 버킷, 확장, 또는 동작을 변경함 |
+| `MissingFinalizeBucketAccounts` (183) | 모든 버킷을 읽기 전용 remaining account로 전달하지 않고 `finalizeV2()`를 전송함 |
+| `TotalSupplyNotFullyAllocated` (187) | `finalizeV2()` 시점에 버킷 할당량의 합계가 총 공급량과 일치하지 않음 |
+| `base64 encoded data too large` | 트랜잭션이 1,232바이트를 초과함(예: 결합된 `addLaunchPoolBucketV2`). `Base` 명령어와 확장 및 동작 명령어를 사용하세요 |
+| `ProgramNotRecognizedError` (`splAssociatedToken`) | `.use(mplToolbox())` 없이 Umi를 설정함 |
 | `deposit period not active` | 예치 기간 외 |
 | `ClaimNotStarted` (22) | 청구 시작 조건이 충족되지 않았거나, `TimeRelative` 청구 시작이 아직 트리거되지 않음 |
-| `InvalidSoftCap` (221) | `softCap.amount`가 0입니다 — `{ amount: 0n }` 대신 `softCap: null`을 전달하세요 |
+| `InvalidSoftCap` (221) | 금액이 0인 `SoftCap` 확장. 상한이 없으려면 확장을 생략하세요 |
 | `SoftCapBelowThreshold` (222) | `softCap.amount`가 `minimumQuoteTokenThreshold.amount`보다 작습니다 |
 | `LaunchPoolNotEnded` (25) | 예치 기간이 끝나기 전에 `refundLaunchPoolV2()` 또는 `triggerBehaviorsV2()`를 호출함 |
 | `LaunchPoolThresholdMet` (173) | 최소 임계값을 충족하고 소프트 캡을 초과하지 않았는데 환불을 요청함 |
@@ -1125,6 +819,8 @@ Genesis 프로그램 오류는 트랜잭션 로그와 SDK가 던지는 `ProgramE
 - `TimeRelative` 조건은 `triggerConditionsV2`를 통해서만 해결됩니다. 졸업은 Raydium 버킷 자신의 `graduateCondition`을 발동시키지만, 이를 참조하는 다른 버킷의 조건은 건드리지 않습니다.
 - `triggerConditionsV2`, `triggerBehaviorsV2`, `graduateToRaydiumCpmmV2`는 `assert_signer(payer)`만 확인하므로, 프로젝트 백엔드, 키퍼 봇, 또는 어떤 사용자 지갑이든 런칭 라이프사이클을 실행할 수 있습니다. Raydium 버킷에 백엔드 서명자 확장이 있으면 졸업에는 백엔드 서명자도 추가로 필요합니다.
 - 종료 동작, 조건, 확장은 `finalizeV2`로 고정되며, 두 가지 예외가 있습니다. `postponeStartRaydiumCpmmBucketV2`는 `postponableStart`로 생성된 버킷의 졸업 시작 시점을 이동하고, `setBucketBackendSignerV2`는 기존 백엔드 서명자를 교체하거나 해제합니다.
+- Launch Pool 및 Presale 버킷은 `add*BucketV2Base` 명령어로 구성한 다음 `add*BucketV2Extensions`와 `set*BucketV2Behaviors`를 사용하세요. 결합된 `addLaunchPoolBucketV2` 및 `addPresaleBucketV2` 명령어는 Solana의 1,232바이트 트랜잭션 한도를 초과합니다.
+- 이 페이지의 모든 예제는 타이밍 기간을 단축하고 금액을 줄여 데브넷의 Genesis 프로그램에서 실행되었습니다. 데브넷에서는 `deriveRaydiumPDAsV2`에 `{ env: 'devnet' }`을 전달하세요.
 - Raydium CLMM 졸업(`addRaydiumClmmBucketV2`, `graduateToRaydiumClmmV2`)은 SDK에 존재하지만 이 페이지에서는 다루지 않습니다.
 - `@metaplex-foundation/genesis` 0.44.0 및 배포된 Genesis 프로그램 릴리스 `genesis v0.41.0`(커밋 `86eb6121`) 기준으로 검증되었습니다. 배포된 프로그램은 Token-2022 베이스 민트를 지원하지 않습니다. 소스: [metaplex-foundation/genesis](https://github.com/metaplex-foundation/genesis). Metaplex Foundation이 관리하며, 마지막 검증일은 2026-11-24입니다.
 

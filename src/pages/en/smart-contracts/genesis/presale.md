@@ -268,7 +268,7 @@ The Unlocked bucket receives SOL from the Presale after end behaviors are trigge
 
 Once all buckets are configured, finalize to activate the presale. This is irreversible.
 
-{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
+{% code-tabs-imported from="genesis/finalize_presale_v2" frameworks="umi" filename="finalize" /%}
 
 ## User Operations
 
