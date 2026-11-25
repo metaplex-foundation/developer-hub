@@ -15,14 +15,19 @@ const umi = createUmi('https://api.mainnet-beta.solana.com')
 
 // umi.use(keypairIdentity(yourKeypair));
 
-// Assumes genesisAccount and baseMint from the Initialize step.
+// Assumes genesisAccount, baseMint, and the launchPoolBucket and unlockedBucket from previous steps.
 // [/SETUP]
 
 // [MAIN]
+// finalizeV2 needs every bucket of the launch as a read-only remaining account.
+const buckets = [launchPoolBucket, unlockedBucket]
+
 await finalizeV2(umi, {
   baseMint: baseMint.publicKey,
   genesisAccount,
-}).sendAndConfirm(umi)
+})
+  .addRemainingAccounts(buckets.map((pubkey) => ({ pubkey, isSigner: false, isWritable: false })))
+  .sendAndConfirm(umi)
 // [/MAIN]
 
 // [OUTPUT]

@@ -267,7 +267,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Presale から SOL を受�
 
 すべての bucket が設定されたら、ファイナライズして Presale を有効化します。この操作は元に戻せません。
 
-{% code-tabs-imported from="genesis/finalize_v2" frameworks="umi" filename="finalize" /%}
+{% code-tabs-imported from="genesis/finalize_presale_v2" frameworks="umi" filename="finalize" /%}
 
 ## ユーザー操作 {% #user-operations %}
 

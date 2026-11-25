@@ -411,7 +411,7 @@ Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받�
 
 ## 사용자 작업
 
-### SOL 래핑
+### SOL 래핑 {% #wrapping-sol %}
 
 사용자는 예치하기 전에 SOL을 wSOL로 래핑해야 합니다.
 

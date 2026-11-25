@@ -33,7 +33,7 @@ const [depositPda] = findLaunchPoolDepositV2Pda(umi, {
   bucket: launchPoolBucket,
   recipient: umi.identity.publicKey,
 })
-const deposit = await fetchLaunchPoolDepositV2(umi, depositPda)
+const deposit = await fetchLaunchPoolDepositV2(umi, depositPda, { commitment: 'confirmed' })
 // [/MAIN]
 
 // [OUTPUT]
