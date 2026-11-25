@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 ### 빌드되는 트랜잭션의 버전 {% #transaction-version-of-built-transactions %}
 
-트랜잭션 빌드 엔드포인트는 요청 본문에서 `transactionVersion: 1`을 설정하지 않는 한 버전 0 트랜잭션을 반환합니다. `1`을 설정하면 대신 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 반환합니다. 이 필드는 선택 사항이며 기본값은 `0`입니다. 이 필드를 받는 엔드포인트는 [`/launches/create`](/ko/api/create-launch), [`/creator-rewards/claim`](/ko/api/claim-creator-rewards), [`/agents/mint`](/ko/api/mint-agent), [`/agents/{address}/fund`](/ko/api/fund-agent), [`/agents/{address}/withdraw`](/ko/api/withdraw-agent) 다섯 개입니다.
+트랜잭션 빌드 엔드포인트는 요청 본문에서 `transactionVersion: 1`을 설정하지 않는 한 버전 0 트랜잭션을 반환합니다. `1`을 설정하면 대신 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 반환합니다. `/launches/create`에서는 [Create Launch](/ko/api/create-launch)가 API를 직접 호출할 때 권장하는 대로 `derivedSignerPublicKey`를 설정하지 않은 경우에 이 동작이 적용됩니다. 이 필드는 선택 사항이며 기본값은 `0`입니다. 이 필드를 받는 엔드포인트는 [`/launches/create`](/ko/api/create-launch), [`/creator-rewards/claim`](/ko/api/claim-creator-rewards), [`/agents/mint`](/ko/api/mint-agent), [`/agents/{address}/fund`](/ko/api/fund-agent), [`/agents/{address}/withdraw`](/ko/api/withdraw-agent) 다섯 개입니다.
 
 | 값 | 반환되는 트랜잭션 |
 | --- | --- |

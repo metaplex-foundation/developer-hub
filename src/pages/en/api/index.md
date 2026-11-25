@@ -102,7 +102,7 @@ For minting agents with a guided walkthrough, see [Mint an Agent](/agents/mint-a
 
 ### Transaction Version of Built Transactions
 
-The transaction-building endpoints return version 0 transactions unless the request body sets `transactionVersion: 1`, which returns [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) instead. The field is optional, defaults to `0`, and is accepted by five endpoints: [`/launches/create`](/api/create-launch), [`/creator-rewards/claim`](/api/claim-creator-rewards), [`/agents/mint`](/api/mint-agent), [`/agents/{address}/fund`](/api/fund-agent), and [`/agents/{address}/withdraw`](/api/withdraw-agent).
+The transaction-building endpoints return version 0 transactions unless the request body sets `transactionVersion: 1`, which returns [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) instead. On `/launches/create`, this holds when `derivedSignerPublicKey` is left unset, as [Create Launch](/api/create-launch) recommends for direct API callers. The field is optional, defaults to `0`, and is accepted by five endpoints: [`/launches/create`](/api/create-launch), [`/creator-rewards/claim`](/api/claim-creator-rewards), [`/agents/mint`](/api/mint-agent), [`/agents/{address}/fund`](/api/fund-agent), and [`/agents/{address}/withdraw`](/api/withdraw-agent).
 
 | Value | Transactions returned |
 | --- | --- |

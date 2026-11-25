@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 ### 构建交易的版本 {% #transaction-version-of-built-transactions %}
 
-除非请求体设置了 `transactionVersion: 1`，交易构建端点都返回版本 0 交易；设置为 `1` 时改为返回 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)。该字段可选，默认值为 `0`，以下五个端点接受该字段：[`/launches/create`](/zh/api/create-launch)、[`/creator-rewards/claim`](/zh/api/claim-creator-rewards)、[`/agents/mint`](/zh/api/mint-agent)、[`/agents/{address}/fund`](/zh/api/fund-agent) 和 [`/agents/{address}/withdraw`](/zh/api/withdraw-agent)。
+除非请求体设置了 `transactionVersion: 1`，交易构建端点都返回版本 0 交易；设置为 `1` 时改为返回 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)。对于 `/launches/create`，仅当未设置 `derivedSignerPublicKey` 时才如此，这也是 [Create Launch](/zh/api/create-launch) 对直接调用 API 的推荐做法。该字段可选，默认值为 `0`，以下五个端点接受该字段：[`/launches/create`](/zh/api/create-launch)、[`/creator-rewards/claim`](/zh/api/claim-creator-rewards)、[`/agents/mint`](/zh/api/mint-agent)、[`/agents/{address}/fund`](/zh/api/fund-agent) 和 [`/agents/{address}/withdraw`](/zh/api/withdraw-agent)。
 
 | 值 | 返回的交易 |
 | --- | --- |

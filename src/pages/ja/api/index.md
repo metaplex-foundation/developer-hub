@@ -102,7 +102,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 ### 構築されるトランザクションのバージョン {% #transaction-version-of-built-transactions %}
 
-トランザクション構築エンドポイントは、リクエストボディで `transactionVersion: 1` を指定しない限りバージョン0のトランザクションを返します。`1` を指定すると、代わりに[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を返します。このフィールドは省略可能で、デフォルトは `0` です。対応するエンドポイントは [`/launches/create`](/ja/api/create-launch)、[`/creator-rewards/claim`](/ja/api/claim-creator-rewards)、[`/agents/mint`](/ja/api/mint-agent)、[`/agents/{address}/fund`](/ja/api/fund-agent)、[`/agents/{address}/withdraw`](/ja/api/withdraw-agent) の5つです。
+トランザクション構築エンドポイントは、リクエストボディで `transactionVersion: 1` を指定しない限りバージョン0のトランザクションを返します。`1` を指定すると、代わりに[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を返します。`/launches/create` では、[Create Launch](/ja/api/create-launch) が API を直接呼び出す場合に推奨しているとおり `derivedSignerPublicKey` を未設定にしたときに、この動作になります。このフィールドは省略可能で、デフォルトは `0` です。対応するエンドポイントは [`/launches/create`](/ja/api/create-launch)、[`/creator-rewards/claim`](/ja/api/claim-creator-rewards)、[`/agents/mint`](/ja/api/mint-agent)、[`/agents/{address}/fund`](/ja/api/fund-agent)、[`/agents/{address}/withdraw`](/ja/api/withdraw-agent) の5つです。
 
 | 値 | 返されるトランザクション |
 | --- | --- |
