@@ -3,7 +3,7 @@ title: Metaplex API
 metaTitle: Metaplex API - パブリック REST API リファレンス | Metaplex
 description: api.metaplex.com のMetaplexパブリック REST API — Genesis ローンチデータ、ローンチ作成、エージェントレジストリ、エージェントウォレットトランザクション。認証不要です。
 created: '01-15-2025'
-updated: '08-01-2026'
+updated: '11-25-2026'
 keywords:
   - Metaplex API
   - Genesis API
@@ -100,6 +100,19 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 トランザクションを構築する `POST` エンドポイントは、ユーザーの鍵を保持することも、トランザクションを送信することもありません。各エンドポイントは、base64 でシリアライズされた1つ以上のトランザクションと、その構築に使用されたブロックハッシュを返します。アプリケーション側でデシリアライズし、ユーザーのウォレットで署名し、ネットワークに送信してください。
 
+### 構築されるトランザクションのバージョン {% #transaction-version-of-built-transactions %}
+
+トランザクション構築エンドポイントは、リクエストボディで `transactionVersion: 1` を指定しない限りバージョン0のトランザクションを返します。`1` を指定すると、代わりに[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を返します。このフィールドは省略可能で、デフォルトは `0` です。対応するエンドポイントは [`/launches/create`](/ja/api/create-launch)、[`/creator-rewards/claim`](/ja/api/claim-creator-rewards)、[`/agents/mint`](/ja/api/mint-agent)、[`/agents/{address}/fund`](/ja/api/fund-agent)、[`/agents/{address}/withdraw`](/ja/api/withdraw-agent) の5つです。
+
+| 値 | 返されるトランザクション |
+| --- | --- |
+| `0`（デフォルト） | バージョン0のトランザクション。Address Lookup Tablesを使用できます |
+| `1` | Solana V1トランザクション。最大4,096バイトで、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります |
+
+{% callout type="warning" title="V1を指定する前にクライアントを確認する" %}
+結果をデシリアライズして署名するコードがV1に対応している場合にのみ、`transactionVersion: 1` を指定してください。[Umi](/ja/dev-tools/umi) 1.6以降はV1トランザクションの読み取りと署名ができ、`@solana/web3.js` 1.99以降の1.xリリースが必要です。これらの`@solana/web3.js`リリースは単体でもV1トランザクションを読み取れますが署名はできず、それより前のリリースは読み取りもできません。署名するウォレットもV1に対応している必要があります。V1は `solana-mainnet` と `solana-devnet` で利用でき、それ以外の `network` で指定すると `400` が返されます。
+{% /callout %}
+
 ## エラーコード
 
 | コード | 説明 |
@@ -154,6 +167,7 @@ API の完全なコントラクトは OpenAPI 3.1 ドキュメントとして公
 - API にはレート制限があります。`429` レスポンスを受け取った場合は、リクエスト頻度を下げてください。
 - すべての日付フィールド（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）は ISO 8601 文字列として返されます。ボンディングカーブのローンチには終了時刻がないため、`endTime` は `null` になります。
 - デフォルトのネットワークは `solana-mainnet` です。デブネットのデータは `?network=solana-devnet` で利用可能です。
+- トランザクション構築エンドポイントはデフォルトでバージョン0のトランザクションを返します。`transactionVersion: 1` は、クライアントとウォレットがSolana V1トランザクションの読み取りと署名に対応している場合にのみ指定してください（[構築されるトランザクションのバージョン](#transaction-version-of-built-transactions)を参照）。
 - `POST` エンドポイントについては、`/launches/create` と `/launches/register` の両方をラップする [SDK API クライアント](/ja/smart-contracts/genesis/sdk/api-client)の使用を推奨します。
 
 ## 共有型 {% #shared-types %}
@@ -274,4 +288,5 @@ serde = { version = "1", features = ["derive"] }
 | **Status** | ローンチの現在の状態：`upcoming`、`live`、`graduated`、`ended` |
 | **Socials** | トークンに関連するソーシャルメディアリンク（X/Twitter、Telegram、Discord） |
 | **LaunchData** | `launch`、`baseToken`、`website`、`socials` を含むレスポンスラッパー |
+| **Solana V1 Transaction** | SIMD-0385 で定義されたトランザクション形式。最大4,096バイトで、Address Lookup Tablesは使用できません。リクエストで `transactionVersion: 1` を指定すると返されます |
 | **TokenData** | トークンクエリ用のレスポンスラッパー。`launches` 配列と `baseToken`、`website`、`socials` を含む |

@@ -3,7 +3,7 @@ title: Metaplex API
 metaTitle: Metaplex API - 공개 REST API 레퍼런스 | Metaplex
 description: api.metaplex.com의 Metaplex 공개 REST API — Genesis 런칭 데이터, 런칭 생성, 에이전트 레지스트리, 에이전트 지갑 트랜잭션을 제공합니다. 인증이 필요 없습니다.
 created: '01-15-2025'
-updated: '08-01-2026'
+updated: '11-25-2026'
 keywords:
   - Metaplex API
   - Genesis API
@@ -100,6 +100,19 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 트랜잭션을 빌드하는 `POST` 엔드포인트는 사용자 키를 보관하지 않으며 트랜잭션을 제출하지도 않습니다. 각 엔드포인트는 base64로 직렬화된 하나 이상의 트랜잭션과 빌드에 사용된 블록해시를 반환합니다. 애플리케이션이 이를 역직렬화하고, 사용자의 지갑으로 서명한 후 네트워크에 제출합니다.
 
+### 빌드되는 트랜잭션의 버전 {% #transaction-version-of-built-transactions %}
+
+트랜잭션 빌드 엔드포인트는 요청 본문에서 `transactionVersion: 1`을 설정하지 않는 한 버전 0 트랜잭션을 반환합니다. `1`을 설정하면 대신 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 반환합니다. 이 필드는 선택 사항이며 기본값은 `0`입니다. 이 필드를 받는 엔드포인트는 [`/launches/create`](/ko/api/create-launch), [`/creator-rewards/claim`](/ko/api/claim-creator-rewards), [`/agents/mint`](/ko/api/mint-agent), [`/agents/{address}/fund`](/ko/api/fund-agent), [`/agents/{address}/withdraw`](/ko/api/withdraw-agent) 다섯 개입니다.
+
+| 값 | 반환되는 트랜잭션 |
+| --- | --- |
+| `0`(기본값) | 버전 0 트랜잭션. Address Lookup Tables를 사용할 수 있습니다 |
+| `1` | Solana V1 트랜잭션. 최대 4,096바이트이며 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다 |
+
+{% callout type="warning" title="V1을 요청하기 전에 클라이언트 확인" %}
+결과를 역직렬화하고 서명하는 코드가 V1을 지원할 때만 `transactionVersion: 1`을 요청하세요. [Umi](/ko/dev-tools/umi) 1.6 이상은 V1 트랜잭션을 읽고 서명할 수 있으며, `@solana/web3.js` 1.99 이상의 1.x 릴리스가 필요합니다. 이 `@solana/web3.js` 릴리스는 단독으로도 V1 트랜잭션을 읽을 수는 있지만 서명할 수 없으며, 그 이전 릴리스는 읽을 수도 없습니다. 서명할 지갑도 V1을 지원해야 합니다. V1은 `solana-mainnet`과 `solana-devnet`에서 사용할 수 있으며, 다른 `network`에서 요청하면 `400`이 반환됩니다.
+{% /callout %}
+
 ## 오류 코드
 
 | 코드 | 설명 |
@@ -154,6 +167,7 @@ API의 발전 과정을 반영하여 두 가지 엔벨로프 규약이 사용됩
 - API에는 속도 제한이 있습니다. `429` 응답을 받으면 요청 빈도를 줄이세요.
 - 모든 날짜 필드(`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`)는 ISO 8601 문자열로 반환됩니다. 본딩 커브 런칭은 종료 시간이 없으므로 `endTime`이 `null`입니다.
 - 기본 네트워크는 `solana-mainnet`입니다. 데브넷 데이터는 `?network=solana-devnet`으로 이용 가능합니다.
+- 트랜잭션 빌드 엔드포인트는 기본적으로 버전 0 트랜잭션을 반환합니다. `transactionVersion: 1`은 클라이언트와 지갑이 Solana V1 트랜잭션을 읽고 서명할 수 있을 때만 설정하세요([빌드되는 트랜잭션의 버전](#transaction-version-of-built-transactions) 참고).
 - `POST` 엔드포인트의 경우 [SDK API 클라이언트](/ko/smart-contracts/genesis/sdk/api-client)를 사용하는 것이 권장됩니다. `/launches/create`와 `/launches/register`를 래핑합니다.
 
 ## 공유 타입 {% #shared-types %}
@@ -274,4 +288,5 @@ serde = { version = "1", features = ["derive"] }
 | **Status** | 런칭의 현재 상태: `upcoming`, `live`, `graduated`, `ended` |
 | **Socials** | 토큰과 관련된 소셜 미디어 링크 (X/Twitter, Telegram, Discord) |
 | **LaunchData** | `launch`, `baseToken`, `website`, `socials`를 포함하는 응답 래퍼 |
+| **Solana V1 Transaction** | SIMD-0385에서 정의한 트랜잭션 형식. 최대 4,096바이트이며 Address Lookup Tables를 사용할 수 없습니다. 요청에서 `transactionVersion: 1`을 설정하면 반환됩니다 |
 | **TokenData** | 토큰 쿼리용 응답 래퍼. `launches` 배열과 `baseToken`, `website`, `socials` 포함 |

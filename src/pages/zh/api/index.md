@@ -3,7 +3,7 @@ title: Metaplex API
 metaTitle: Metaplex API - 公开 REST API 参考 | Metaplex
 description: api.metaplex.com 上的 Metaplex 公开 REST API — Genesis 发行数据、发行创建、Agent 注册表以及 Agent 钱包交易。无需认证。
 created: '01-15-2025'
-updated: '08-01-2026'
+updated: '11-25-2026'
 keywords:
   - Metaplex API
   - Genesis API
@@ -100,6 +100,19 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 
 构建交易的 `POST` 端点绝不持有用户密钥，也绝不提交交易。每个端点返回一个或多个 base64 序列化的交易以及构建时所依据的区块哈希；您的应用程序对其进行反序列化，由用户的钱包签名，然后提交到网络。
 
+### 构建交易的版本 {% #transaction-version-of-built-transactions %}
+
+除非请求体设置了 `transactionVersion: 1`，交易构建端点都返回版本 0 交易；设置为 `1` 时改为返回 [Solana V1 交易](/zh/dev-tools/umi/guides/migrate-to-transaction-v1)。该字段可选，默认值为 `0`，以下五个端点接受该字段：[`/launches/create`](/zh/api/create-launch)、[`/creator-rewards/claim`](/zh/api/claim-creator-rewards)、[`/agents/mint`](/zh/api/mint-agent)、[`/agents/{address}/fund`](/zh/api/fund-agent) 和 [`/agents/{address}/withdraw`](/zh/api/withdraw-agent)。
+
+| 值 | 返回的交易 |
+| --- | --- |
+| `0`（默认） | 版本 0 交易，可以使用地址查找表 |
+| `1` | Solana V1 交易：最多 4,096 字节，不能使用地址查找表，因此请求返回的交易数量可能更少 |
+
+{% callout type="warning" title="请求 V1 之前请先检查客户端" %}
+仅当反序列化并签名结果的代码支持 V1 时，才请求 `transactionVersion: 1`。[Umi](/zh/dev-tools/umi) 1.6 及以上版本可以读取并签名 V1 交易，并需要 `@solana/web3.js` 1.99 及以上的 1.x 版本。这些 `@solana/web3.js` 版本单独使用时可以读取 V1 交易但无法签名，更早的版本无法读取。签名钱包也必须支持 V1。V1 适用于 `solana-mainnet` 和 `solana-devnet`；在其他 `network` 上请求会返回 `400`。
+{% /callout %}
+
 ## 错误码
 
 | 状态码 | 描述 |
@@ -154,6 +167,7 @@ curl "https://api.metaplex.com/v1/launches/7nE9GvcwsqzYcPUYfm5gxzCKfmPqi68FM7gPa
 - API 有速率限制。如果收到 `429` 响应，请降低请求频率。
 - 所有日期字段（`startTime`、`endTime`、`graduatedAt`、`lastActivityAt`）以 ISO 8601 字符串返回。联合曲线发行没有结束时间，因此其 `endTime` 为 `null`。
 - 默认网络为 `solana-mainnet`。可通过 `?network=solana-devnet` 获取开发网数据。
+- 交易构建端点默认返回版本 0 交易。仅当您的客户端和钱包能够读取并签名 Solana V1 交易时，才设置 `transactionVersion: 1`（参见[构建交易的版本](#transaction-version-of-built-transactions)）。
 - 对于 `POST` 端点，建议使用 [SDK API 客户端](/zh/smart-contracts/genesis/sdk/api-client)，它封装了 `/launches/create` 和 `/launches/register`。
 
 ## 共享类型 {% #shared-types %}
@@ -274,4 +288,5 @@ serde = { version = "1", features = ["derive"] }
 | **Status** | 发行的当前状态：`upcoming`、`live`、`graduated` 或 `ended` |
 | **Socials** | 与代币关联的社交媒体链接（X/Twitter、Telegram、Discord） |
 | **LaunchData** | 包含 `launch`、`baseToken`、`website` 和 `socials` 的响应包装器 |
+| **Solana V1 Transaction** | SIMD-0385 定义的交易格式，最多 4,096 字节，不能使用地址查找表；请求设置 `transactionVersion: 1` 时返回 |
 | **TokenData** | 代币查询的响应包装器，包含 `launches` 数组以及 `baseToken`、`website` 和 `socials` |
