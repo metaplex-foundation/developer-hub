@@ -42,3 +42,10 @@ public/llms.txt
 
 # generated at build (scripts/generate-last-modified.mjs)
 /src/generated/
+
+# generated at build (scripts/generate-markdown-pages.mjs, scripts/generate-llms-txt.mjs)
+/public/**/*.md
+/public/.markdown-pages.json
+/public/**/llms.txt
+/public/**/llms-full.txt
+/public/llms-full.txt

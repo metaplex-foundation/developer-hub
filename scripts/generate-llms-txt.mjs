@@ -1,169 +1,114 @@
 #!/usr/bin/env node
 
 /**
- * Generate llms.txt file for LLM discoverability
+ * Generate llms.txt files for LLM and agent discoverability.
  *
- * This script generates a plain text file (similar to robots.txt) that helps
- * LLMs understand and prioritize site content. It parses markdown files and
- * organizes them by product/category.
+ * Outputs (all under public/, served at https://www.metaplex.com/docs/...):
+ *   - llms.txt                      Index of every page, linking to its Markdown copy
+ *   - llms-full.txt                 Every page's Markdown in one file
+ *   - <product>/llms.txt            Index for one product (e.g. smart-contracts/core/llms.txt)
+ *   - <product>/llms-full.txt       Every page of one product in one file
+ *
+ * Page links point at the per-page Markdown files written by
+ * scripts/generate-markdown-pages.mjs (for example .../core/create-asset.md).
  *
  * Usage:
  *   node scripts/generate-llms-txt.mjs
- *
- * Output:
- *   public/llms.txt
  */
 
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const SITE_URL = 'https://www.metaplex.com/docs'
-const PAGES_DIR = path.join(__dirname, '..', 'src', 'pages', 'en')
-const OUTPUT_FILE = path.join(__dirname, '..', 'public', 'llms.txt')
+import {
+  SITE_URL,
+  PUBLIC_DIR,
+  collectPages,
+  isDeprecated,
+  pageToMarkdown,
+} from './lib/markdown-export.mjs'
 
 /**
- * Parse frontmatter from markdown content
+ * Categories in output order. `prefix` (plus any `alsoPrefixes`) decides
+ * membership, first match wins. `prefix` is also where the category's own
+ * llms.txt is written, unless `noProductFile` is set.
  */
-function parseFrontmatter(content) {
-  // Handle both Unix (\n) and Windows (\r\n) line endings
-  const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
-  if (!frontmatterMatch) {
-    return {}
-  }
+const CATEGORIES = [
+  { name: 'Metaplex API (REST)', prefix: '/api' },
+  { name: 'Agents', prefix: '/agents' },
+  { name: 'Genesis (Token Launch)', prefix: '/smart-contracts/genesis' },
+  { name: 'MPL-Distro (Token Distribution)', prefix: '/smart-contracts/mpl-distro' },
+  { name: 'MPL-3643 (Compliance Standard)', prefix: '/smart-contracts/mpl-3643' },
+  { name: 'Core Candy Machine', prefix: '/smart-contracts/core-candy-machine' },
+  { name: 'Core (NFT Standard)', prefix: '/smart-contracts/core' },
+  { name: 'Candy Machine', prefix: '/smart-contracts/candy-machine' },
+  { name: 'Bubblegum (Compressed NFTs)', prefix: '/smart-contracts/bubblegum-v2', alsoPrefixes: ['/smart-contracts/bubblegum'] },
+  { name: 'Token Metadata', prefix: '/smart-contracts/token-metadata' },
+  { name: 'UMI (Framework)', prefix: '/dev-tools/umi' },
+  { name: 'DAS API', prefix: '/dev-tools/das-api' },
+  { name: 'Tokens', prefix: '/tokens' },
+  { name: 'NFTs', prefix: '/nfts' },
+  { name: 'Solana Guides', prefix: '/solana' },
+  { name: 'Dev Tools', prefix: '/dev-tools', noProductFile: true },
+  { name: 'Other', prefix: null },
+]
 
-  const frontmatterStr = frontmatterMatch[1]
-  const frontmatter = {}
-
-  // Split by either line ending type
-  for (const line of frontmatterStr.split(/\r?\n/)) {
-    const colonIndex = line.indexOf(':')
-    if (colonIndex > 0) {
-      const key = line.slice(0, colonIndex).trim()
-      // Also trim any trailing \r that might remain
-      let value = line.slice(colonIndex + 1).trim().replace(/\r$/, '')
-      // Remove surrounding quotes if present
-      if ((value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1)
-      }
-      frontmatter[key] = value
-    }
-  }
-
-  return frontmatter
+function matchesPrefix(urlPath, prefix) {
+  // '/smart-contracts/core' must not swallow '/smart-contracts/core-candy-machine'
+  return urlPath === prefix || urlPath.startsWith(`${prefix}/`)
 }
 
-/**
- * Get all markdown files recursively
- */
-function getMarkdownFiles(dir) {
-  const files = []
-
-  if (!fs.existsSync(dir)) {
-    return files
-  }
-
-  const entries = fs.readdirSync(dir, { withFileTypes: true })
-
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name)
-
-    if (entry.isDirectory()) {
-      files.push(...getMarkdownFiles(fullPath))
-    } else if (entry.name.endsWith('.md')) {
-      files.push(fullPath)
-    }
-  }
-
-  return files
-}
-
-/**
- * Convert file path to URL path
- */
-function filePathToUrlPath(filePath) {
-  let urlPath = path.relative(PAGES_DIR, filePath)
-    .replace(/\\/g, '/')
-    .replace(/\.md$/, '')
-
-  // Handle index files
-  if (urlPath.endsWith('/index')) {
-    urlPath = urlPath.slice(0, -6)
-  }
-  if (urlPath === 'index') {
-    urlPath = ''
-  }
-
-  return '/' + urlPath
-}
-
-/**
- * Categorize pages by their path structure
- */
 function categorizePages(pages) {
-  const categories = {
-    'Metaplex API (REST)': [],
-    'Genesis (Token Launch)': [],
-    'MPL-Distro (Token Distribution)': [],
-    'MPL-3643 (Compliance Standard)': [],
-    'Core (NFT Standard)': [],
-    'Candy Machine': [],
-    'Core Candy Machine': [],
-    'Bubblegum (Compressed NFTs)': [],
-    'Token Metadata': [],
-    'UMI (Framework)': [],
-    'DAS API': [],
-    'Guides': [],
-    'Dev Tools': [],
-    'Other': [],
-  }
-
+  const categories = CATEGORIES.map((c) => ({ ...c, pages: [] }))
   for (const page of pages) {
-    const urlPath = page.urlPath
-
-    if (urlPath === '/api' || urlPath.startsWith('/api/')) {
-      categories['Metaplex API (REST)'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/genesis')) {
-      categories['Genesis (Token Launch)'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/mpl-distro')) {
-      categories['MPL-Distro (Token Distribution)'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/mpl-3643')) {
-      categories['MPL-3643 (Compliance Standard)'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/core/') || urlPath === '/smart-contracts/core') {
-      if (!urlPath.includes('candy-machine')) {
-        categories['Core (NFT Standard)'].push(page)
-      }
-    } else if (urlPath.startsWith('/smart-contracts/core-candy-machine')) {
-      categories['Core Candy Machine'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/candy-machine')) {
-      categories['Candy Machine'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/bubblegum')) {
-      categories['Bubblegum (Compressed NFTs)'].push(page)
-    } else if (urlPath.startsWith('/smart-contracts/token-metadata')) {
-      categories['Token Metadata'].push(page)
-    } else if (urlPath.startsWith('/dev-tools/umi')) {
-      categories['UMI (Framework)'].push(page)
-    } else if (urlPath.startsWith('/dev-tools/das-api')) {
-      categories['DAS API'].push(page)
-    } else if (urlPath.startsWith('/guides')) {
-      categories['Guides'].push(page)
-    } else if (urlPath.startsWith('/dev-tools')) {
-      categories['Dev Tools'].push(page)
-    } else if (urlPath !== '' && urlPath !== '/') {
-      categories['Other'].push(page)
-    }
+    if (page.urlPath === '/' || page.urlPath === '') continue
+    const category =
+      categories.find((c) => c.prefix &&
+        [c.prefix, ...(c.alsoPrefixes || [])].some((p) => matchesPrefix(page.urlPath, p))) ||
+      categories.find((c) => c.prefix === null)
+    category.pages.push(page)
   }
-
+  for (const category of categories) {
+    // Product overview first, then alphabetical.
+    category.pages.sort((a, b) => {
+      const aIsIndex = a.urlPath === category.prefix
+      const bIsIndex = b.urlPath === category.prefix
+      if (aIsIndex !== bIsIndex) return aIsIndex ? -1 : 1
+      return a.title.localeCompare(b.title)
+    })
+  }
   return categories
 }
 
+function pageLine(page) {
+  const description = page.description ? `: ${page.description}` : ''
+  return `- [${page.title}](${SITE_URL}${page.markdownPath})${description}`
+}
+
+function productFilePath(category) {
+  return `${category.prefix}/llms.txt`
+}
+
 /**
- * Generate llms.txt content
+ * Instructions for agents, at the top of llms.txt.
  */
+function agentInstructions(categories) {
+  const products = categories.filter((c) => c.prefix && !c.noProductFile && c.pages.length)
+  return [
+    '## Instructions for AI Agents',
+    '',
+    '- Every page below links to its Markdown version. Fetch the `.md` URL, not the HTML page. Any docs page URL also returns Markdown when requested with the header `Accept: text/markdown`, or when `.md` is appended to it.',
+    `- For a whole product in one request, use its \`llms-full.txt\` (for example ${SITE_URL}/smart-contracts/core/llms-full.txt). The entire site is at ${SITE_URL}/llms-full.txt.`,
+    `- If you are a coding agent, install the Metaplex Skill: \`npx skills add metaplex-foundation/skill\`. It covers program choice, SDK setup and CLI commands. See ${SITE_URL}/agents/skill.md.`,
+    '- Use **Core** for new NFTs and digital assets, **Genesis** for new token launches, and **Umi** with the Metaplex JS SDKs. Treat Token Metadata and Candy Machine v3 as legacy unless the user is already on them.',
+    '- Prefer the code examples on these pages over writing calls from memory. Package names and function signatures change between SDK versions.',
+    '- For the REST API, read the OpenAPI spec at https://api.metaplex.com/v1/openapi.json instead of inferring request shapes.',
+    '',
+    '### Per-product indexes',
+    '',
+    ...products.map((c) => `- [${c.name}](${SITE_URL}${productFilePath(c)}): ${c.pages.length} pages · full text at ${SITE_URL}${c.prefix}/llms-full.txt`),
+    '',
+  ]
+}
+
 function generateLlmsTxt(categories) {
   const lines = [
     '# Metaplex Developer Hub',
@@ -247,35 +192,18 @@ function generateLlmsTxt(categories) {
     '---',
     '',
   ]
+  // Insert agent instructions right after the summary line.
+  const summaryEnd = lines.indexOf('---')
+  lines.splice(summaryEnd, 0, ...agentInstructions(categories))
 
-  // Add each category
-  for (const [category, pages] of Object.entries(categories)) {
-    if (pages.length === 0) continue
-
-    lines.push(`## ${category}`)
-    lines.push('')
-
-    // Sort pages: index pages first, then alphabetically
-    const sortedPages = pages.sort((a, b) => {
-      const aIsIndex = a.urlPath.endsWith(a.urlPath.split('/').slice(-2, -1)[0]) || a.title === 'Overview'
-      const bIsIndex = b.urlPath.endsWith(b.urlPath.split('/').slice(-2, -1)[0]) || b.title === 'Overview'
-
-      if (aIsIndex && !bIsIndex) return -1
-      if (!aIsIndex && bIsIndex) return 1
-      return a.title.localeCompare(b.title)
-    })
-
-    for (const page of sortedPages) {
-      const description = page.description ? `: ${page.description}` : ''
-      lines.push(`- [${page.title}](${SITE_URL}${page.urlPath})${description}`)
-    }
-
+  for (const category of categories) {
+    if (category.pages.length === 0) continue
+    lines.push(`## ${category.name}`, '')
+    for (const page of category.pages) lines.push(pageLine(page))
     lines.push('')
   }
 
-  // Add footer
-  lines.push('## Additional Resources')
-  lines.push('')
+  lines.push('## Additional Resources', '')
   lines.push(`- [GitHub](https://github.com/metaplex-foundation): Source code and examples`)
   lines.push(`- [Discord](https://discord.gg/metaplex): Community support`)
   lines.push(`- [Twitter](https://twitter.com/metaplex): Updates and announcements`)
@@ -284,78 +212,59 @@ function generateLlmsTxt(categories) {
   return lines.join('\n')
 }
 
-/**
- * Main function
- */
+function generateProductLlmsTxt(category) {
+  const overview = category.pages.find((p) => p.urlPath === category.prefix)
+  const lines = [`# Metaplex ${category.name}`, '']
+  if (overview?.description) lines.push(`> ${overview.description}`, '')
+  lines.push(
+    `Part of the Metaplex Developer Hub. Site-wide index: ${SITE_URL}/llms.txt`,
+    `Every page of this product in one file: ${SITE_URL}${category.prefix}/llms-full.txt`,
+    '',
+    '## Pages',
+    '',
+    ...category.pages.map(pageLine),
+    '',
+  )
+  return lines.join('\n')
+}
+
+function generateFullText(title, pages) {
+  const parts = [`# ${title}`, '', `Generated from ${SITE_URL}. Index: ${SITE_URL}/llms.txt`, '']
+  for (const page of pages) {
+    parts.push('---', '', pageToMarkdown(page).trim(), '')
+  }
+  return parts.join('\n')
+}
+
+function write(relPath, content) {
+  const out = path.join(PUBLIC_DIR, relPath)
+  fs.mkdirSync(path.dirname(out), { recursive: true })
+  fs.writeFileSync(out, content, 'utf-8')
+  return out
+}
+
 function main() {
   console.log('Generating llms.txt...')
 
-  // Get all markdown files
-  const markdownFiles = getMarkdownFiles(PAGES_DIR)
-  console.log(`Found ${markdownFiles.length} markdown files`)
-
-  // Parse each file
-  const pages = []
-
-  for (const filePath of markdownFiles) {
-    try {
-      const content = fs.readFileSync(filePath, 'utf-8')
-      const frontmatter = parseFrontmatter(content)
-
-      // Skip pages without titles or with empty titles
-      if (!frontmatter.title && !frontmatter.metaTitle) {
-        continue
-      }
-
-      const title = frontmatter.title || frontmatter.metaTitle.split('|')[0].trim()
-
-      // Skip deprecated program and tool docs for cleaner output
-      // (formerly under /legacy-documentation)
-      const deprecatedPaths = [
-        '/smart-contracts/auction-house',
-        '/smart-contracts/fixed-price-sale',
-        '/smart-contracts/gumdrop',
-        '/smart-contracts/token-entangler',
-        '/dev-tools/solita',
-        '/dev-tools/beet',
-        '/dev-tools/cusper',
-        '/dev-tools/rust-bin',
-        '/dev-tools/mobile-sdks',
-      ]
-      const urlPath = filePathToUrlPath(filePath)
-      if (deprecatedPaths.some((p) => urlPath === p || urlPath.startsWith(`${p}/`))) {
-        continue
-      }
-
-      pages.push({
-        filePath,
-        urlPath,
-        title,
-        description: frontmatter.description || '',
-      })
-    } catch (error) {
-      console.warn(`Warning: Could not parse ${filePath}: ${error.message}`)
-    }
-  }
-
+  const pages = collectPages().filter((p) => !isDeprecated(p.urlPath))
   console.log(`Processed ${pages.length} pages with valid titles`)
 
-  // Categorize pages
   const categories = categorizePages(pages)
 
-  // Generate content
-  const content = generateLlmsTxt(categories)
+  write('llms.txt', generateLlmsTxt(categories))
+  const ordered = categories.flatMap((c) => c.pages)
+  write('llms-full.txt', generateFullText('Metaplex Developer Hub — full documentation', ordered))
 
-  // Write output file
-  fs.writeFileSync(OUTPUT_FILE, content, 'utf-8')
-  console.log(`Generated ${OUTPUT_FILE}`)
+  for (const category of categories) {
+    if (!category.prefix || category.noProductFile || category.pages.length === 0) continue
+    write(productFilePath(category).slice(1), generateProductLlmsTxt(category))
+    write(`${category.prefix.slice(1)}/llms-full.txt`,
+      generateFullText(`Metaplex ${category.name} — full documentation`, category.pages))
+  }
 
-  // Print summary
   console.log('\nSummary:')
-  for (const [category, categoryPages] of Object.entries(categories)) {
-    if (categoryPages.length > 0) {
-      console.log(`  ${category}: ${categoryPages.length} pages`)
-    }
+  for (const category of categories) {
+    if (category.pages.length > 0) console.log(`  ${category.name}: ${category.pages.length} pages`)
   }
 }
 
