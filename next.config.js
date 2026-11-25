@@ -8,6 +8,14 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md'],
   experimental: {
     scrollRestoration: true,
+    // Compile in a separate worker that exits before page data collection.
+    // Next.js turns this off by default when a custom `webpack` config is present,
+    // which kept ~4 GB of compiler memory alive while the page workers started.
+    webpackBuildWorker: true,
+    // Each static-generation worker grows to ~1.5 GB over the ~2,300 pages.
+    // Two workers keep the build's peak memory ~0.7 GB lower than the default
+    // (CPU count - 1) at the same build time (DEV-276).
+    cpus: 2,
   },
   async redirects() {
     return [
