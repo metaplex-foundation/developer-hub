@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Fund Agent Wallet | REST API | Metaplex
 description: Build a SOL transfer transaction that funds a registered agent's wallet, with an on-chain memo.
 method: POST
 created: '08-01-2026'
-updated: '08-01-2026'
+updated: '11-05-2026'
 keywords:
   - Agent API
   - fund agent
@@ -56,6 +56,7 @@ POST /agents/{address}/fund
 | `amount` | `number` | Yes | Amount in SOL. Must be positive. |
 | `memo` | `string` | Yes | Memo recorded on-chain, 1–256 characters. |
 | `network` | `string` | No | `solana-mainnet` (default) or `solana-devnet`. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Umi 1.6 or later can read and sign V1 transactions, and needs `@solana/web3.js` 1.99 or a later 1.x release. Those `@solana/web3.js` releases can read one on their own but cannot sign it; earlier releases cannot read it. Check that the signing wallet supports V1 before asking for it. Available on `solana-mainnet` and `solana-devnet`. |
 
 ## Example Request
 

@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Claim Creator Rewards | REST API | Metaplex
 description: Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -34,7 +34,7 @@ Most integrators should use [`claimCreatorRewards`](/smart-contracts/genesis/sdk
 
 `POST /v1/creator-rewards/claim` returns the Solana transactions needed to claim a wallet's accrued creator rewards across every bonding-curve and Raydium CPMM bucket in a single call.
 
-- **Aggregation** — one request claims across all eligible buckets; one transaction is returned per bucket
+- **Aggregation** — one request claims across all eligible buckets; the API packs the claims into as few transactions as fit
 - **Signing** — response is base64-encoded Solana transactions the wallet (or optional `payer`) must sign and submit
 - **Errors** — HTTP `400` `"No rewards available to claim"` when nothing has accrued; callers must branch on the error, not an empty array
 - **SDK wrapper** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) handles deserialization, typed errors, and Umi signing
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | Yes | Base58-encoded public key of the creator fee wallet to claim for. This is the wallet set as `creatorFeeWallet` on the bucket — or the launching wallet if no override was configured. |
 | `network` | `string` | No | `'solana-mainnet'` (default) or `'solana-devnet'`. Must match the base URL's cluster. |
 | `payer` | `string` | No | Base58-encoded public key that covers transaction fees and any rent on the returned transactions. Defaults to `wallet` when omitted. |
+| `transactionVersion` | `number` | No | `0` (default) builds version 0 transactions. `1` builds [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1), which hold up to 4,096 bytes and cannot use Address Lookup Tables, so a request can come back as fewer transactions. Umi 1.6 or later can read and sign V1 transactions, and needs `@solana/web3.js` 1.99 or a later 1.x release. Those `@solana/web3.js` releases can read one on their own but cannot sign it; earlier releases cannot read it. Check that the signing wallet supports V1 before asking for it. Available on `solana-mainnet` and `solana-devnet`. |
 
 ### When to set `payer`
 
@@ -86,7 +87,7 @@ Set `payer` to a different wallet when the creator fee wallet does not hold SOL 
 | `data.blockhash.lastValidBlockHeight` | `number` | Slot height after which the blockhash expires. |
 
 {% callout type="note" %}
-The API returns one transaction per bucket being claimed — often two (bonding-curve plus Raydium). Submit them sequentially; their order is not significant.
+The API packs the claims into as few transactions as fit, so one request can return one transaction or several, and `transactionVersion: 1` can fit more claims in each. Submit them sequentially; their order is not significant.
 {% /callout %}
 
 ## Error Response

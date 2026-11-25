@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 창작자 보상 청구 | REST API | Metaplex
 description: 단일 API 호출로 지갑의 모든 Genesis 본딩 커브 및 Raydium 버킷에서 누적된 창작자 보상을 청구합니다. 서명할 준비가 된 Solana 트랜잭션을 반환합니다.
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -34,7 +34,7 @@ programmingLanguage:
 
 `POST /v1/creator-rewards/claim`은 한 번의 호출로 지갑의 모든 본딩 커브 및 Raydium CPMM 버킷에서 누적된 창작자 보상을 청구하는 데 필요한 Solana 트랜잭션을 반환합니다.
 
-- **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 버킷당 하나의 트랜잭션이 반환됩니다
+- **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 청구는 가능한 한 적은 트랜잭션으로 묶입니다
 - **서명** — 응답은 지갑(또는 선택적 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션입니다
 - **오류** — 누적된 것이 없으면 HTTP `400` `"No rewards available to claim"`를 반환합니다; 호출자는 빈 배열이 아니라 오류로 분기해야 합니다
 - **SDK 래퍼** — [`claimCreatorRewards`](/ko/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)는 역직렬화, 타입화된 오류, Umi 서명을 처리합니다
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | 예 | 청구할 창작자 수수료 지갑의 base58 인코딩된 공개 키. 이는 버킷에서 `creatorFeeWallet`로 설정된 지갑 — 또는 오버라이드가 구성되지 않은 경우 런칭 지갑입니다. |
 | `network` | `string` | 아니요 | `'solana-mainnet'` (기본값) 또는 `'solana-devnet'`. 베이스 URL의 클러스터와 일치해야 합니다. |
 | `payer` | `string` | 아니요 | 반환된 트랜잭션의 트랜잭션 수수료와 임대료를 부담하는 base58 인코딩된 공개 키. 생략 시 기본값은 `wallet`입니다. |
+| `transactionVersion` | `number` | 아니요 | `0`(기본값)은 버전 0 트랜잭션을 빌드합니다. `1`은 [Solana V1 트랜잭션](/ko/dev-tools/umi/guides/migrate-to-transaction-v1)을 빌드합니다. V1은 최대 4,096바이트를 담을 수 있고 Address Lookup Tables를 사용할 수 없으므로, 요청이 더 적은 수의 트랜잭션을 반환할 수 있습니다. Umi 1.6 이상은 V1 트랜잭션을 읽고 서명할 수 있으며, `@solana/web3.js` 1.99 이상의 1.x 릴리스가 필요합니다. 이 `@solana/web3.js` 릴리스는 단독으로도 읽을 수는 있지만 서명할 수 없으며, 그 이전 릴리스는 읽을 수도 없습니다. V1을 요청하기 전에 서명할 지갑이 V1을 지원하는지 확인하세요. `solana-mainnet`과 `solana-devnet`에서 사용할 수 있습니다. |
 
 ### `payer`를 설정하는 시기
 
@@ -86,7 +87,7 @@ POST /v1/creator-rewards/claim
 | `data.blockhash.lastValidBlockHeight` | `number` | 블록해시가 만료되는 슬롯 높이. |
 
 {% callout type="note" %}
-API는 청구되는 버킷마다 하나의 트랜잭션을 반환합니다 — 보통 두 개(본딩 커브와 Raydium). 순차적으로 제출하세요; 순서는 중요하지 않습니다.
+API는 청구를 가능한 한 적은 트랜잭션으로 묶으므로, 한 번의 요청이 트랜잭션 하나 또는 여러 개를 반환할 수 있으며, `transactionVersion: 1`에서는 트랜잭션 하나에 더 많은 청구가 들어갑니다. 순차적으로 제출하세요; 순서는 중요하지 않습니다.
 {% /callout %}
 
 ## 오류 응답

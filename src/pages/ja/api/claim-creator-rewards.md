@@ -4,7 +4,7 @@ metaTitle: Metaplex API - クリエイター報酬の請求 | REST API | Metaple
 description: 1回のAPI呼び出しでウォレットのすべてのGenesisボンディングカーブとRaydiumバケットからクリエイター報酬を請求します。署名準備済みのSolanaトランザクションを返します。
 method: POST
 created: '04-23-2026'
-updated: '04-23-2026'
+updated: '11-05-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -34,7 +34,7 @@ programmingLanguage:
 
 `POST /v1/creator-rewards/claim` は、1回の呼び出しでウォレットのすべてのボンディングカーブとRaydium CPMMバケットから蓄積したクリエイター報酬を請求するために必要なSolanaトランザクションを返します。
 
-- **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。バケットごとに1つのトランザクションが返されます
+- **集約** — 1回のリクエストで対象となるすべてのバケットを請求します。請求はできるだけ少ないトランザクションにまとめられます
 - **署名** — レスポンスはウォレット（または任意の `payer`）が署名して送信する必要があるbase64エンコードされたSolanaトランザクションです
 - **エラー** — 蓄積がない場合はHTTP `400` `"No rewards available to claim"` を返します。呼び出し元は空の配列ではなくエラーで分岐する必要があります
 - **SDK ラッパー** — [`claimCreatorRewards`](/ja/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) はデシリアライズ、型付きエラー、Umi 署名を処理します
@@ -56,6 +56,7 @@ POST /v1/creator-rewards/claim
 | `wallet` | `string` | はい | 請求するクリエイター手数料ウォレットのbase58エンコードされた公開鍵。これはバケットで`creatorFeeWallet`として設定されたウォレット — オーバーライドが設定されていない場合はローンチウォレットです。 |
 | `network` | `string` | いいえ | `'solana-mainnet'`（デフォルト）または`'solana-devnet'`。ベースURLのクラスタと一致する必要があります。 |
 | `payer` | `string` | いいえ | 返されたトランザクションのトランザクション手数料とレントを負担するbase58エンコードされた公開鍵。省略時はデフォルトで`wallet`になります。 |
+| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。Umi 1.6以降はV1トランザクションの読み取りと署名ができ、`@solana/web3.js` 1.99以降の1.xリリースが必要です。これらの`@solana/web3.js`リリースは単体でも読み取りはできますが署名はできず、それより前のリリースは読み取りもできません。V1を指定する前に、署名するウォレットがV1に対応しているか確認してください。`solana-mainnet`と`solana-devnet`で利用できます。 |
 
 ### `payer`を設定するタイミング
 
@@ -86,7 +87,7 @@ POST /v1/creator-rewards/claim
 | `data.blockhash.lastValidBlockHeight` | `number` | ブロックハッシュが期限切れになる以降のスロット高さ。 |
 
 {% callout type="note" %}
-APIは請求されるバケットごとに1つのトランザクションを返します — 多くの場合2つ（ボンディングカーブとRaydium）。順次送信してください。順序は重要ではありません。
+APIは請求をできるだけ少ないトランザクションにまとめるため、1回のリクエストで返るトランザクションは1つの場合も複数の場合もあります。`transactionVersion: 1` では1つのトランザクションにより多くの請求が収まります。順次送信してください。順序は重要ではありません。
 {% /callout %}
 
 ## エラーレスポンス

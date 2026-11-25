@@ -4,7 +4,7 @@ metaTitle: Metaplex API - エージェントウォレットへの資金供給 | 
 description: 登録済みエージェントのウォレットに資金を供給する、オンチェーンメモ付きの SOL 送金トランザクションを構築します。
 method: POST
 created: '08-01-2026'
-updated: '08-01-2026'
+updated: '11-05-2026'
 keywords:
   - Agent API
   - fund agent
@@ -56,6 +56,7 @@ POST /agents/{address}/fund
 | `amount` | `number` | はい | SOL 単位の金額。正の値である必要があります。 |
 | `memo` | `string` | はい | オンチェーンに記録されるメモ（1〜256文字）。 |
 | `network` | `string` | いいえ | `solana-mainnet`（デフォルト）または `solana-devnet`。 |
+| `transactionVersion` | `number` | いいえ | `0`（デフォルト）はバージョン0のトランザクションを構築します。`1` は[Solana V1トランザクション](/ja/dev-tools/umi/guides/migrate-to-transaction-v1)を構築します。V1は最大4,096バイトを格納でき、Address Lookup Tablesは使用できないため、リクエストが返すトランザクション数が少なくなる場合があります。Umi 1.6以降はV1トランザクションの読み取りと署名ができ、`@solana/web3.js` 1.99以降の1.xリリースが必要です。これらの`@solana/web3.js`リリースは単体でも読み取りはできますが署名はできず、それより前のリリースは読み取りもできません。V1を指定する前に、署名するウォレットがV1に対応しているか確認してください。`solana-mainnet`と`solana-devnet`で利用できます。 |
 
 ## リクエスト例
 
