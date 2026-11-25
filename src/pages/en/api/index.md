@@ -3,7 +3,7 @@ title: Metaplex API
 metaTitle: Metaplex API - Public REST API Reference | Metaplex
 description: The Metaplex public REST API at api.metaplex.com — Genesis launch data, launch creation, the agent registry, and agent wallet transactions. No authentication required.
 created: '01-15-2025'
-updated: '08-01-2026'
+updated: '11-25-2026'
 keywords:
   - Metaplex API
   - Genesis API
@@ -100,6 +100,19 @@ For minting agents with a guided walkthrough, see [Mint an Agent](/agents/mint-a
 
 `POST` endpoints that build transactions never hold user keys and never submit transactions. Each returns one or more base64-serialized transactions plus the blockhash they were built against; your application deserializes them, has the user's wallet sign, and submits to the network.
 
+### Transaction Version of Built Transactions
+
+The transaction-building endpoints return version 0 transactions unless the request body sets `transactionVersion: 1`, which returns [Solana V1 transactions](/dev-tools/umi/guides/migrate-to-transaction-v1) instead. On `/launches/create`, this holds when `derivedSignerPublicKey` is left unset, as [Create Launch](/api/create-launch) recommends for direct API callers. The field is optional, defaults to `0`, and is accepted by five endpoints: [`/launches/create`](/api/create-launch), [`/creator-rewards/claim`](/api/claim-creator-rewards), [`/agents/mint`](/api/mint-agent), [`/agents/{address}/fund`](/api/fund-agent), and [`/agents/{address}/withdraw`](/api/withdraw-agent).
+
+| Value | Transactions returned |
+| --- | --- |
+| `0` (default) | Version 0 transactions, which can use Address Lookup Tables |
+| `1` | Solana V1 transactions: up to 4,096 bytes, no Address Lookup Tables, so a request can come back as fewer transactions |
+
+{% callout type="warning" title="Check the client before requesting V1" %}
+Request `transactionVersion: 1` only when the code that deserializes and signs the result supports V1. [Umi](/dev-tools/umi) 1.6 or later can read and sign V1 transactions, and needs `@solana/web3.js` 1.99 or a later 1.x release. Those `@solana/web3.js` releases can read a V1 transaction on their own but cannot sign it; earlier releases cannot read it. The signing wallet must support V1 as well. V1 is available on `solana-mainnet` and `solana-devnet`; requesting it for any other `network` returns `400`.
+{% /callout %}
+
 ## Error Codes
 
 | Code | Description |
@@ -154,6 +167,7 @@ Import the spec into Postman, Swagger UI, code generators, or agent frameworks t
 - The API is rate limited. If you receive a `429` response, reduce your request frequency.
 - All date fields (`startTime`, `endTime`, `graduatedAt`, `lastActivityAt`) are returned as ISO 8601 strings. `endTime` is `null` for bonding curve launches, which have no end time.
 - The default network is `solana-mainnet`. Devnet data is available via `?network=solana-devnet`.
+- Transaction-building endpoints return version 0 transactions by default. Set `transactionVersion: 1` only if your client and wallet can read and sign Solana V1 transactions (see [Transaction Version of Built Transactions](#transaction-version-of-built-transactions)).
 - For `POST` endpoints, the [SDK API Client](/smart-contracts/genesis/sdk/api-client) is recommended as it wraps both `/launches/create` and `/launches/register`.
 
 ## Shared Types
@@ -274,4 +288,5 @@ serde = { version = "1", features = ["derive"] }
 | **Status** | The current state of a launch: `upcoming`, `live`, `graduated`, or `ended` |
 | **Socials** | Social media links (X/Twitter, Telegram, Discord) associated with a token |
 | **LaunchData** | The response wrapper containing `launch`, `baseToken`, `website`, and `socials` |
+| **Solana V1 Transaction** | The transaction format from SIMD-0385, up to 4,096 bytes and without Address Lookup Tables; returned when a request sets `transactionVersion: 1` |
 | **TokenData** | The response wrapper for token queries, containing a `launches` array plus `baseToken`, `website`, and `socials` |
