@@ -9,6 +9,20 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  async headers() {
+    // Markdown copies of pages for AI agents (scripts/generate-markdown-pages.mjs)
+    // and the llms.txt family (scripts/generate-llms-txt.mjs).
+    return [
+      {
+        source: '/:path*.md',
+        headers: [{ key: 'Content-Type', value: 'text/markdown; charset=utf-8' }],
+      },
+      {
+        source: '/:path*/llms-full.txt',
+        headers: [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }],
+      },
+    ]
+  },
   async redirects() {
     return [
       {

@@ -327,6 +327,24 @@ function redirectTo(request, path, status = 308) {
   return NextResponse.redirect(url, status)
 }
 
+/**
+ * True when the client prefers Markdown over HTML, e.g. an AI agent sending
+ * `Accept: text/markdown`. Browsers send text/html first and never match.
+ */
+function wantsMarkdown(request) {
+  const accept = request.headers.get('accept') || ''
+  if (!/text\/(markdown|x-markdown)/i.test(accept)) return false
+  const types = accept.split(',').map((part) => {
+    const [type, ...params] = part.trim().toLowerCase().split(';')
+    const q = params.map((p) => p.trim()).find((p) => p.startsWith('q='))
+    return { type: type.trim(), q: q ? parseFloat(q.slice(2)) : 1 }
+  })
+  const best = (pred) => Math.max(0, ...types.filter(pred).map((t) => t.q))
+  const md = best((t) => t.type === 'text/markdown' || t.type === 'text/x-markdown')
+  const html = best((t) => t.type === 'text/html')
+  return md > 0 && md >= html
+}
+
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
@@ -423,6 +441,21 @@ export function middleware(request) {
         return redirectTo(request, newPath)
       }
     }
+  }
+
+  // Agents that ask for Markdown get the page's generated .md copy
+  // (public/<path>.md, written by scripts/generate-markdown-pages.mjs).
+  // English only; the .md files are not generated for /ja, /ko, /zh.
+  if (wantsMarkdown(request) &&
+      !/^\/(ja|ko|zh)(\/|$)/.test(pathname) &&
+      !pathname.startsWith('/_next') &&
+      !pathname.startsWith('/api/og') &&
+      !pathname.includes('.')) {
+    const url = request.nextUrl.clone()
+    url.pathname = pathname === '/' ? '/index.md' : `${pathname.replace(/\/$/, '')}.md`
+    const response = NextResponse.rewrite(url)
+    response.headers.set('Vary', 'Accept')
+    return response
   }
 
   // Rewrite root paths to /en/* for English content
