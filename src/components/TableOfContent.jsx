@@ -2,6 +2,8 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
+import { useInPageHref } from '@/shared/useInPageHref'
+
 function useTableOfContents(tableOfContents) {
   let [currentSection, setCurrentSection] = useState(tableOfContents[0]?.id)
 
@@ -48,6 +50,7 @@ function useTableOfContents(tableOfContents) {
 
 export function TableOfContent({ tableOfContents }) {
   let currentSection = useTableOfContents(tableOfContents)
+  const inPageHref = useInPageHref()
 
   function isActive(section) {
     if (section.id === currentSection) {
@@ -74,7 +77,7 @@ export function TableOfContent({ tableOfContents }) {
               <li key={section.id} className="relative">
                 <h3>
                   <Link
-                    href={`#${section.id}`}
+                    href={inPageHref(`#${section.id}`)}
                     className={clsx(
                       'block w-full py-0.5 pl-3.5 before:pointer-events-none before:absolute before:-left-[2px] before:top-1/2 before:h-4 before:w-[3px] before:-translate-y-1/2',
                       isActive(section)
