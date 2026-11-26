@@ -19,7 +19,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - TypeScript
 created: '09-08-2026'
-updated: '09-08-2026'
+updated: '11-26-2026'
 ---
 
 The Metaplex x402 API is served at `https://api.metaplex.com/x402` and exposes three paid services, two free discovery endpoints, and four agent delegation routes. This page is the endpoint, pricing, and client-export reference; the [payment modes guide](/agents/x402/payment-modes) covers how to build the payment-aware `fetch` that paid endpoints require. {% .lead %}
@@ -32,6 +32,7 @@ Every paid endpoint answers an unpaid request with HTTP `402` and a `PAYMENT-REQ
 - **Wire format** — canonical OpenAI request and response bodies for chat and images, standard Solana JSON-RPC for RPC
 - **Settlement** — USDC on Solana mainnet, x402 protocol version 2, `exact` scheme
 - **Client version** — `@metaplex-foundation/x402` `0.1.0`, Node.js 20.18+, ESM only
+- **Rate limits** — the inference endpoints return `429` with a `Retry-After` header when the upstream gateway is rate limited
 
 ## Base URLs and Constants
 
@@ -209,6 +210,22 @@ An unpaid request to a paid endpoint returns HTTP `402` with a base64 `PAYMENT-R
 The `402` challenge for an inference request carries a `quoteId` and a populated `usage` object, so the amount reflects the tokens the request actually consumed rather than an estimate. Response headers `PAYMENT-REQUIRED` and `PAYMENT-RESPONSE` are both CORS-exposed.
 {% /callout %}
 
+## Errors and Rate Limits
+
+The paid endpoints answer with `402` when payment is required, `429` when the inference endpoints are rate limited upstream, and `5xx` for server failures.
+
+| Status | Endpoints | Meaning | What to do |
+|--------|-----------|---------|------------|
+| `402` | All paid endpoints | Payment required. The `PAYMENT-REQUIRED` header describes what to pay | Pay and retry. `@metaplex-foundation/x402` clients do this automatically |
+| `429` | `/x402/chat/completions`, `/x402/images/generations` | The upstream AI gateway is rate limiting inference. Body: `{ "error": { "message": "Inference is rate limited, retry later" } }` | Wait the number of seconds in the `Retry-After` header, then send the unpaid request again |
+| `5xx` | All endpoints | Server or upstream failure | Retry with backoff |
+
+The `429` can only come from the first, unpaid request: inference runs while the quote is priced, and the paid retry reuses the stored quote. No payment has been made when a `429` is returned. `Retry-After` is the gateway's own value, or `60` when the gateway sends none, and it is CORS-exposed, so browser clients can read it. The `/x402/rpc` endpoint does not return this `429`.
+
+{% callout type="note" title="Retry the unpaid request, not the payment" %}
+The payment-aware `fetch` only acts on `402`, so a `429` passes straight through to your code. The OpenAI SDK used in the examples above retries `429` responses and honours `Retry-After` on its own (twice by default, set by `maxRetries`). With a plain `fetch`, read `Retry-After`, wait, and call the endpoint again.
+{% /callout %}
+
 ## Chat Completion Pricing
 
 Chat models are priced per million tokens with separate input, cached-input, and output rates, subject to a `$0.001` per-request minimum. The rates below were read from `GET /x402/pricing` on 2026-09-08.
@@ -312,6 +329,7 @@ The runnable examples in the [x402 repository](https://github.com/metaplex-found
 | JS client | `@metaplex-foundation/x402` (`0.1.0`) |
 | Runtime | Node.js 20.18+, ESM |
 | Protocol | x402 version 2, `exact` scheme |
+| Rate-limited inference | `429` + `Retry-After` (seconds, default `60`) |
 | Network | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Solana mainnet) |
 | Payment mint | `EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v` (USDC) |
 | Operating agent | `MECHjj31U1hBapoVeJtZo5U5WGRd2293JEwRErvPTuF` |
