@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '11-05-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis API
   - create launch
@@ -92,6 +92,19 @@ Each allocation in the `allocations` array has a `type` field, a `name`, a `supp
 - **`claimScheduleV2`** — Tokens released to a recipient on a vesting schedule, with an optional cliff
 
 Raydium liquidity is configured as a fund flow on the sale allocation, not as its own allocation: a `RaydiumLP` flow creates a Raydium CPMM pool, and a `RaydiumClmmLP` flow creates a Raydium CLMM (concentrated liquidity) position. CLMM launches return `403` unless they are enabled for your account.
+
+### Creator Rewards on Launch Pool and Presale
+
+Creator rewards on the Raydium CPMM pool that a launch pool or presale graduates to are off by default. A `RaydiumLP` fund flow with no `creatorFee`, or with `creatorFee: { enabled: false }`, creates a standard CPMM pool with no creator share of the LP fees. Setting `creatorFee: { enabled: true, wallet }` returns `403` unless creator rewards are enabled for your account:
+
+```json
+{
+  "success": false,
+  "error": "Creator rewards on launch pool and presale graduation pools are not enabled for this account. Set creatorFee to { enabled: false }."
+}
+```
+
+Bonding curve launches are not affected: their `creatorFee` setting works as described in [Creator Fees](/smart-contracts/genesis/creator-fees).
 
 {% callout type="warning" title="Streamflow allocations are retired" %}
 The earlier `lockedV2` (Streamflow) allocation type is no longer accepted. Use `claimScheduleV2` for locked and vesting allocations.
@@ -186,6 +199,7 @@ curl -X POST https://api.metaplex.com/v1/launches/create \
 | Code | Description |
 |------|-------------|
 | `400` | Invalid input or validation failure |
+| `403` | The launch uses a feature that is not enabled for your account: an existing token, a custom supply, a Raydium CLMM pool, or creator rewards on a launch pool or presale |
 | `500` | Internal server error |
 
 ## Recommended: Use the SDK

@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Claim Creator Rewards | REST API | Metaplex
 description: Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
 method: POST
 created: '04-23-2026'
-updated: '11-05-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -115,6 +115,7 @@ The endpoint returns HTTP `400` with the message `No rewards available to claim`
 - The returned transactions use the blockhash in `data.blockhash`. If confirmation takes longer than ~60–90 seconds, the blockhash will expire and the call must be repeated to get a fresh set of transactions.
 - Creator rewards accrue on every swap (bonding curve) and from LP trading activity (Raydium CPMM) — this endpoint aggregates both. For the underlying accrual mechanics and per-bucket fetch helpers, see [Creator Fees on the Genesis Bonding Curve](/smart-contracts/genesis/creator-fees).
 - The creator fee wallet is set at bucket creation via `creatorFeeWallet` and cannot be changed after a curve goes live.
+- Launch pool and presale launches have creator rewards off by default, so their Raydium CPMM pools accrue no creator rewards unless the launch was created with `creatorFee` enabled. See [Creator Rewards on Launch Pool and Presale](/api/create-launch#creator-rewards-on-launch-pool-and-presale).
 
 ## Recommended: Use the SDK
 
