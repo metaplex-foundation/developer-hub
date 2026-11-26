@@ -117,7 +117,7 @@ Genesis API 函数通过 HTTP 与托管的 Metaplex API 通信，而非直接提
 - 将发行交易包装在 Core execute 指令中，以便代理在链上执行
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,
@@ -243,7 +243,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createAndRegisterLaunch(umi, {}, input);

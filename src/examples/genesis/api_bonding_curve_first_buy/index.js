@@ -8,11 +8,11 @@
  */
 
 const umiSections = {
-  "imports": "import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { keypairIdentity } from '@metaplex-foundation/umi';",
+  "imports": "import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { keypairIdentity } from '@metaplex-foundation/umi';",
   "setup": "const umi = createUmi('https://api.mainnet-beta.solana.com');\nconst keypair = umi.eddsa.createKeypairFromSecretKey(mySecretKeyBytes);\numi.use(keypairIdentity(keypair));",
   "main": "const result = await createAndRegisterLaunch(umi, {}, {\n  wallet: umi.identity.publicKey,\n  launchType: 'bondingCurve',\n  token: {\n    name: 'My Token',\n    symbol: 'MTK',\n    image: 'https://gateway.irys.xyz/your-image-id',\n  },\n  launch: {\n    firstBuyAmount: 0.1, // 0.1 SOL, fee-free initial purchase\n  },\n});",
   "output": "",
-  "full": "// [IMPORTS]\nimport { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { keypairIdentity } from '@metaplex-foundation/umi';\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com');\nconst keypair = umi.eddsa.createKeypairFromSecretKey(mySecretKeyBytes);\numi.use(keypairIdentity(keypair));\n// [/SETUP]\n\n// [MAIN]\nconst result = await createAndRegisterLaunch(umi, {}, {\n  wallet: umi.identity.publicKey,\n  launchType: 'bondingCurve',\n  token: {\n    name: 'My Token',\n    symbol: 'MTK',\n    image: 'https://gateway.irys.xyz/your-image-id',\n  },\n  launch: {\n    firstBuyAmount: 0.1, // 0.1 SOL, fee-free initial purchase\n  },\n});\n// [/MAIN]\n\n// [OUTPUT]\n// [/OUTPUT]\n"
+  "full": "// [IMPORTS]\nimport { createAndRegisterLaunch } from '@metaplex-foundation/genesis';\nimport { createUmi } from '@metaplex-foundation/umi-bundle-defaults';\nimport { keypairIdentity } from '@metaplex-foundation/umi';\n// [/IMPORTS]\n\n// [SETUP]\nconst umi = createUmi('https://api.mainnet-beta.solana.com');\nconst keypair = umi.eddsa.createKeypairFromSecretKey(mySecretKeyBytes);\numi.use(keypairIdentity(keypair));\n// [/SETUP]\n\n// [MAIN]\nconst result = await createAndRegisterLaunch(umi, {}, {\n  wallet: umi.identity.publicKey,\n  launchType: 'bondingCurve',\n  token: {\n    name: 'My Token',\n    symbol: 'MTK',\n    image: 'https://gateway.irys.xyz/your-image-id',\n  },\n  launch: {\n    firstBuyAmount: 0.1, // 0.1 SOL, fee-free initial purchase\n  },\n});\n// [/MAIN]\n\n// [OUTPUT]\n// [/OUTPUT]\n"
 }
 
 const cliSections = {

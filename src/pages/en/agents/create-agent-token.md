@@ -217,7 +217,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createAndRegisterLaunch(umi, {}, input);

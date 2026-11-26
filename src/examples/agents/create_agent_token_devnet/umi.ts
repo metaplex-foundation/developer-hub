@@ -1,5 +1,5 @@
 // [IMPORTS]
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { keypairIdentity } from '@metaplex-foundation/umi';
 // [/IMPORTS]

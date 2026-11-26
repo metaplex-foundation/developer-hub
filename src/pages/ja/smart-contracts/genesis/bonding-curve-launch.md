@@ -171,7 +171,7 @@ import {
   createLaunch,
   registerLaunch,
   signAndSendLaunchTransactions,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 // ステップ1：APIを呼び出して未署名トランザクションを取得する。
 const createResult = await createLaunch(umi, {}, {
@@ -322,7 +322,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createLaunch(umi, {}, input);

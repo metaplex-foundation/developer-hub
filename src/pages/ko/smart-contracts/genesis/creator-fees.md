@@ -133,7 +133,7 @@ Genesis SDK, 구성된 Umi 인스턴스 및 충전된 Solana 지갑이 필요합
 `creatorFeeWallet`을 설정하여 누적된 수수료를 런칭 지갑 이외의 지갑 주소로 지정합니다.
 
 ```typescript {% title="launch-with-creator-fee.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,

@@ -117,7 +117,7 @@ Genesis API関数は、インストラクションを直接送信するのでは
 - エージェントがオンチェーンで実行できるようにlaunchトランザクションをCore executeインストラクションでラップする
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,
@@ -243,7 +243,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createAndRegisterLaunch(umi, {}, input);

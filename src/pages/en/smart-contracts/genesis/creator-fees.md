@@ -133,7 +133,7 @@ Creator fees are configured in the `launch` object passed to `createAndRegisterL
 Set `creatorFeeWallet` to direct accrued fees to any wallet address other than the launching wallet.
 
 ```typescript {% title="launch-with-creator-fee.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,
