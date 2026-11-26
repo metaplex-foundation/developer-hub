@@ -275,6 +275,7 @@ Payment construction failures almost always trace back to funding, network misma
 | Signature rejected for a Core asset | The asset is not controlled by the signer you passed | Pass the signer that owns the Core asset |
 | Delegated payments fall back or fail | The asset is not a registered agent identity, or delegation was never approved | Confirm `fetchMetaplexCoreExecuteDelegateStatus()` returns `isDelegated: true` |
 | Authentication loops or double-pays | The reactive extension and proactive wrapper are composed together | Use one integration style, never both |
+| `429` on the first chat or image request | The upstream AI gateway is rate limiting inference; no payment was made | Wait the `Retry-After` seconds and send the request again. See [Errors and Rate Limits](/agents/x402/api-reference#errors-and-rate-limits) |
 
 ## Tested Configuration
 
