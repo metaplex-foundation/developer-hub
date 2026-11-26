@@ -51,7 +51,7 @@ export const guides = {
               title: 'Understanding PDAs',
               href: '/solana/understanding-pdas',
               created: '2021-10-01',
-              updated: null,
+              updated: '10-12-2026',
             },
             {
               title: 'Validators and Staking',
@@ -81,7 +81,7 @@ export const guides = {
               title: 'Compute Units and Priority Fees',
               href: '/solana/compute-units-and-priority-fees',
               created: '02-04-2026',
-              updated: null,
+              updated: '10-12-2026',
             },
           ],
         },

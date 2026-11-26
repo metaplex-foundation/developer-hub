@@ -27,6 +27,7 @@ import { MarkdocProductCardGrid } from '@/components/products/ProductCardGrid'
 import { CodeTabs, CodeTab } from '@/components/code/CodeTabs'
 import { CodeTabsImported } from '@/components/code/CodeTabsImported'
 import { BubblegumCalculator } from '@/components/BubblegumCalculator'
+import { PlgrndFlow } from '@/components/PlgrndFlow'
 
 const tags = {
   callout: {
@@ -262,6 +263,13 @@ const tags = {
   'official-links': {
     render: OfficialLinks,
     selfClosing: true,
+  },
+  'plgrnd-flow': {
+    render: PlgrndFlow,
+    selfClosing: true,
+    attributes: {
+      flow: { type: String, required: true },
+    },
   },
 }
 
