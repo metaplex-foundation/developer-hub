@@ -105,7 +105,7 @@ For minting agents with a guided walkthrough, see [Mint an Agent](/agents/mint-a
 | Code | Description |
 | --- | --- |
 | `400` | Bad request - invalid parameters |
-| `403` | Not authorized for the operation (e.g. withdrawing from an agent you don't own) |
+| `403` | Not authorized for the operation (e.g. withdrawing from an agent you don't own, or creating a launch with a feature that is not enabled for your account, such as creator rewards on a launch pool or presale) |
 | `404` | Launch, token, or agent not found |
 | `429` | Rate limit exceeded |
 | `500` | Internal server error |

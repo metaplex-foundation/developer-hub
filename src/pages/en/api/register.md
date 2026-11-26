@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Register Launch | REST API | Metaplex
 description: Register a Genesis launch after on-chain transactions are confirmed. Validates the on-chain state and creates the launch listing.
 method: POST
 created: '01-15-2025'
-updated: '09-26-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis API
   - register launch
@@ -42,7 +42,7 @@ POST /v1/launches/register
 | `creatorWallet` | `string` | No | Creator's wallet public key, when it differs from the genesis account's authority |
 | `agent` | `object` | No | `{ mint }` of the [agent](/agents/) the launch was created for. Must match the `agent.mint` sent to [Create Launch](/api/create-launch#agent-launches) |
 
-The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The same [launch types](/api/create-launch#launch-types), [allocation rules](/api/create-launch#allocation-types), and [existing-token](/api/create-launch#existing-tokens) rules apply, including the `403` responses for features that are not enabled for your account. The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
+The `launch` object must match what was sent to the Create Launch endpoint so the API can verify the on-chain state matches the expected configuration. The same [launch types](/api/create-launch#launch-types), [allocation rules](/api/create-launch#allocation-types), and [existing-token](/api/create-launch#existing-tokens) rules apply, including the `403` responses for features that are not enabled for your account (an existing token, a custom supply, a Raydium CLMM pool, or [creator rewards on a launch pool or presale](/api/create-launch#creator-rewards-on-launch-pool-and-presale)). The top-level `network` field determines which Solana cluster to verify against; the `network` inside `launch` should match.
 
 ## Example Request
 
@@ -117,6 +117,7 @@ Mainnet launches will appear on [metaplex.com](https://www.metaplex.com) after r
 | Code | Description |
 |------|-------------|
 | `400` | Invalid input, on-chain state mismatch, or genesis account not found |
+| `403` | The launch uses a feature that is not enabled for your account (see [Create Launch](/api/create-launch#creator-rewards-on-launch-pool-and-presale)) |
 | `500` | Internal server error |
 
 ## Validation
