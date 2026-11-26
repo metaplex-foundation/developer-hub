@@ -171,7 +171,7 @@ import {
   createLaunch,
   registerLaunch,
   signAndSendLaunchTransactions,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 // 1단계: API를 호출하여 서명되지 않은 트랜잭션을 가져옵니다.
 const createResult = await createLaunch(umi, {}, {
@@ -322,7 +322,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createLaunch(umi, {}, input);

@@ -133,7 +133,7 @@ Genesis SDK、設定済みのUmiインスタンス、および入金済みのSol
 `creatorFeeWallet` を設定して、蓄積された手数料をローンチウォレット以外の任意のウォレットアドレスに向けます。
 
 ```typescript {% title="launch-with-creator-fee.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,

@@ -133,7 +133,7 @@ faqs:
 将 `creatorFeeWallet` 设置为任意钱包地址，将累积费用引导到发行钱包以外的地址。
 
 ```typescript {% title="launch-with-creator-fee.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,

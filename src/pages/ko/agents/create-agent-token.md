@@ -117,7 +117,7 @@ Genesis API 함수는 명령어를 직접 제출하는 대신 HTTP를 통해 호
 - 에이전트가 온체인에서 실행할 수 있도록 launch 트랜잭션을 Core execute 명령어로 래핑
 
 ```typescript {% title="agent-launch.ts" showLineNumbers=true %}
-import { createAndRegisterLaunch } from '@metaplex-foundation/genesis/api';
+import { createAndRegisterLaunch } from '@metaplex-foundation/genesis';
 
 const result = await createAndRegisterLaunch(umi, {}, {
   wallet: umi.identity.publicKey,
@@ -243,7 +243,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createAndRegisterLaunch(umi, {}, input);

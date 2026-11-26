@@ -171,7 +171,7 @@ import {
   createLaunch,
   registerLaunch,
   signAndSendLaunchTransactions,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 // Step 1: Call the API to get unsigned transactions.
 const createResult = await createLaunch(umi, {}, {
@@ -322,7 +322,7 @@ import {
   isGenesisApiError,
   isGenesisApiNetworkError,
   isGenesisValidationError,
-} from '@metaplex-foundation/genesis/api';
+} from '@metaplex-foundation/genesis';
 
 try {
   const result = await createLaunch(umi, {}, input);
