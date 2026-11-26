@@ -155,3 +155,7 @@ These lists are in alphabetical order. Choose the provider that best suits your 
 - [GetBlock](https://getblock.io/)
 - [NOWNodes](https://nownodes.io/)
 - [Syndica](https://syndica.io/)
+
+### Self-Hosted RPC Proxies
+
+- [eRPC](https://github.com/erpc/erpc) - open-source proxy that retries and fails over across several of the providers above
