@@ -3,7 +3,7 @@ title: Presale
 metaTitle: Genesis Presale | 솔라나 고정가 토큰 판매 | Metaplex
 description: 솔라나에서 토큰 프리세일을 실행하세요. 사용자가 SOL을 예치하고 미리 정해진 비율로 SPL 토큰을 받는 고정가 토큰 판매. Genesis 런치패드를 통한 온체인 토큰 오퍼링.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '11-26-2026'
 keywords:
   - presale
   - token presale
@@ -286,6 +286,10 @@ Unlocked Bucket은 `triggerBehaviorsV2` 실행 후 Presale에서 SOL을 받습�
 ### 토큰 청구
 
 예치 기간 종료 후 청구가 시작되면:
+
+{% callout type="note" %}
+청구는 항상 예치 기간이 끝날 때까지 기다립니다. `depositEndCondition`이 충족되기 전에 보낸 청구는 청구 시작 조건이 이미 충족되었더라도 `PresaleBucketNotEnded`를 반환합니다. 따라서 청구 시작은 예치 종료 시점 또는 그 이후로 설정하세요.
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 

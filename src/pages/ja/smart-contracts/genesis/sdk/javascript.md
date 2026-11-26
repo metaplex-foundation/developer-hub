@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDKのAPIリファレンス。Solana上でのトークンローンチに必要な関数シグネチャ、パラメータ、型の解説。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -212,6 +212,8 @@ await depositPresaleV2(umi, {
 
 ### withdrawLaunchPoolV2
 
+入金ウィンドウが開いている間、Launch Pool の入金の一部を引き出します。すでにトークンを請求した入金は引き出せなくなります（`WithdrawAfterClaim`）。
+
 ```typescript
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,     // PublicKey
@@ -222,6 +224,8 @@ await withdrawLaunchPoolV2(umi, {
 ```
 
 ### claimLaunchPoolV2
+
+請求ウィンドウが開くと、入金者の Launch Pool 割り当て分を送信します。請求は入金ウィンドウが閉じるまでも待機します。`depositEndCondition` が満たされるまでは、請求開始条件がすでに満たされていても `LaunchPoolNotEnded` を返します。
 
 ```typescript
 await claimLaunchPoolV2(umi, {
@@ -248,6 +252,8 @@ await refundLaunchPoolV2(umi, {
 署名が必要なのは `payer` のみのため、入金者に代わって誰でも返金をクランクできます。入金ウィンドウが閉じる前に呼び出すと `LaunchPoolNotEnded`、下限に達し上限も超過していない状態で呼び出すと `LaunchPoolThresholdMet`、2 回呼び出すと `DepositAlreadyRefunded` を返します。
 
 ### claimPresaleV2
+
+請求ウィンドウが開くと、Presale の入金者にトークンを送信します。請求は入金ウィンドウが閉じるまでも待機します。`depositEndCondition` が満たされるまでは、請求開始条件がすでに満たされていても `PresaleBucketNotEnded` を返します。
 
 ```typescript
 await claimPresaleV2(umi, {
@@ -510,9 +516,17 @@ Genesisローンチのトップレベルオンチェーンアカウントです�
 | `claim period not active` | 請求期間外 |
 | `InvalidSoftCap` (221) | `softCap.amount` が 0 です。`{ amount: 0n }` ではなく `softCap: null` を渡してください |
 | `SoftCapBelowThreshold` (222) | `softCap.amount` が `minimumQuoteTokenThreshold.amount` を下回っています |
-| `LaunchPoolNotEnded` | 入金ウィンドウが閉じる前に `refundLaunchPoolV2()` が呼び出されました |
+| `LaunchPoolNotEnded` (25) | 入金ウィンドウが閉じる前に `claimLaunchPoolV2()` または `refundLaunchPoolV2()` が呼び出されました |
+| `PresaleBucketNotEnded` (67) | Presale の入金ウィンドウが閉じる前に `claimPresaleV2()` または `triggerBehaviorsV2()` が呼び出されました |
+| `WithdrawAfterClaim` (268) | すでにトークンを請求した入金に対して `withdrawLaunchPoolV2()` が呼び出されました |
 | `LaunchPoolThresholdMet` (173) | 下限に達し、ソフトキャップも超過していない状態で返金がリクエストされました |
 | `DepositAlreadyRefunded` | 同じ入金に対して `refundLaunchPoolV2()` が 2 回呼び出されました |
+| `InvalidBehaviorDestination` (269) | `finalizeV2()` の時点で、ビヘイビアの `destinationBucket` が、それを受け取れるこの genesis のバケットではありません（クォートトークン：Unlocked または Raydium、開始価格：Raydium） |
+| `MissingRaydiumGraduationSource` (270) | `finalizeV2()` の時点で、Raydium バケットが `SendQuoteTokenPercentage` と `SendStartPrice` のちょうど 1 つずつの対象になっていません |
+| `DuplicateRaydiumGraduationSource` (271) | `finalizeV2()` の時点で、Raydium バケットが複数の `SendQuoteTokenPercentage` または `SendStartPrice` ビヘイビアの対象になっています |
+| `RaydiumGraduationSourceMismatch` (272) | `finalizeV2()` の時点で、Raydium バケットのクォートトークンと開始価格が異なるソースバケットから来ています |
+| `StartPriceAlreadySet` (273) | `SendStartPrice` がすでに送信先の価格を書き込んでいます |
+| `TransmitFailureSourceMismatch` (274) | Raydium バケットを対象とする `TransmitFailure` が、その Raydium バケットのグラデュエーションソース以外のバケットから来ています |
 
 ---
 

@@ -3,7 +3,7 @@ title: Presale
 metaTitle: Genesis Presale | Solanaでの固定価格トークンセール | Metaplex
 description: Solanaでトークンプレセールを実施。ユーザーがSOLを預け入れ、事前に設定されたレートでトークンを受け取る固定価格SPLトークンセールです。Genesisローンチパッドによるオンチェーントークンオファリング。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '11-26-2026'
 keywords:
   - presale
   - token presale
@@ -286,6 +286,10 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Presale から SOL を受�
 ### トークンの請求
 
 入金期間が終了し、請求が開始された後：
+
+{% callout type="note" %}
+請求は常に入金ウィンドウが閉じるまで待機します。`depositEndCondition` が満たされる前に送信された請求は、請求開始条件がすでに満たされていても `PresaleBucketNotEnded` を返します。そのため、請求開始は入金終了と同時かそれ以降に設定してください。
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 

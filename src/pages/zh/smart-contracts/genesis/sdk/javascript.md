@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK 的 API 参考。Solana 上代币发行的函数签名、参数和类型。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -212,6 +212,8 @@ await depositPresaleV2(umi, {
 
 ### withdrawLaunchPoolV2
 
+在存款窗口开放期间提取 Launch Pool 存款的一部分。已经领取过代币的存款不能再提款（`WithdrawAfterClaim`）。
+
 ```typescript
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,     // PublicKey
@@ -222,6 +224,8 @@ await withdrawLaunchPoolV2(umi, {
 ```
 
 ### claimLaunchPoolV2
+
+领取窗口开放后，发送存款人在 Launch Pool 分配中的份额。领取还要等存款窗口关闭：在 `depositEndCondition` 满足之前，即使领取开始条件已经满足，领取也会返回 `LaunchPoolNotEnded`。
 
 ```typescript
 await claimLaunchPoolV2(umi, {
@@ -248,6 +252,8 @@ await refundLaunchPoolV2(umi, {
 只有 `payer` 需要签名，因此任何人都可以代表存款人无需许可地触发退款。在存款窗口关闭前调用会返回 `LaunchPoolNotEnded`；在门槛已达到且未超过上限时调用会返回 `LaunchPoolThresholdMet`；重复调用会返回 `DepositAlreadyRefunded`。
 
 ### claimPresaleV2
+
+领取窗口开放后，向 Presale 存款人发送代币。领取还要等存款窗口关闭：在 `depositEndCondition` 满足之前，即使领取开始条件已经满足，领取也会返回 `PresaleBucketNotEnded`。
 
 ```typescript
 await claimPresaleV2(umi, {
@@ -510,9 +516,17 @@ Genesis 发行的顶层链上账户。每个代币铸币地址、每个发行索
 | `claim period not active` | 不在领取窗口内 |
 | `InvalidSoftCap` (221) | `softCap.amount` 为零 — 请传入 `softCap: null` 而不是 `{ amount: 0n }` |
 | `SoftCapBelowThreshold` (222) | `softCap.amount` 低于 `minimumQuoteTokenThreshold.amount` |
-| `LaunchPoolNotEnded` | 在存款窗口关闭前调用了 `refundLaunchPoolV2()` |
+| `LaunchPoolNotEnded` (25) | 在存款窗口关闭前调用了 `claimLaunchPoolV2()` 或 `refundLaunchPoolV2()` |
+| `PresaleBucketNotEnded` (67) | 在 Presale 存款窗口关闭前调用了 `claimPresaleV2()` 或 `triggerBehaviorsV2()` |
+| `WithdrawAfterClaim` (268) | 对已经领取过代币的存款调用了 `withdrawLaunchPoolV2()` |
 | `LaunchPoolThresholdMet` (173) | 在门槛已达到且未超过软顶时请求了退款 |
 | `DepositAlreadyRefunded` | 对同一笔存款调用了两次 `refundLaunchPoolV2()` |
+| `InvalidBehaviorDestination` (269) | 在 `finalizeV2()` 时，某个行为的 `destinationBucket` 不是本 genesis 中可以接收它的桶（报价代币：Unlocked 或 Raydium；起始价格：Raydium） |
+| `MissingRaydiumGraduationSource` (270) | 在 `finalizeV2()` 时，某个 Raydium 桶没有恰好被一个 `SendQuoteTokenPercentage` 和一个 `SendStartPrice` 指向 |
+| `DuplicateRaydiumGraduationSource` (271) | 在 `finalizeV2()` 时，某个 Raydium 桶被多个 `SendQuoteTokenPercentage` 或 `SendStartPrice` 行为指向 |
+| `RaydiumGraduationSourceMismatch` (272) | 在 `finalizeV2()` 时，某个 Raydium 桶的报价代币和起始价格来自不同的源桶 |
+| `StartPriceAlreadySet` (273) | `SendStartPrice` 已经写入了目标桶的价格 |
+| `TransmitFailureSourceMismatch` (274) | 指向 Raydium 桶的 `TransmitFailure` 来自该 Raydium 桶毕业来源以外的桶 |
 
 ---
 
