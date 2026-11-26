@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
 description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - launch pool
   - token distribution
@@ -43,7 +43,7 @@ faqs:
   - q: Launch Pool でトークン価格はどのように決まりますか？
     a: 価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
   - q: ユーザーは入金を引き出せますか？
-    a: はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
+    a: はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。すでにトークンを請求した入金は、引き出すことができなくなります。
   - q: 複数回入金するとどうなりますか？
     a: 同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。
   - q: ユーザーはいつトークンを請求できますか？
@@ -425,7 +425,7 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 
 ### 引き出し
 
-ユーザーは入金期間中に引き出すことができます。{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料が適用されます。
+ユーザーは入金期間中に引き出すことができます。{% fee product="genesis" config="launchPool" fee="withdraw" /%} の手数料が適用されます。すでにトークンを請求した入金は、引き出すことができなくなります（`WithdrawAfterClaim`）。
 
 {% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
@@ -434,6 +434,10 @@ Unlocked bucket は `triggerBehaviorsV2` 実行後に Launch Pool から SOL を
 ### トークンの請求
 
 入金期間が終了し、請求が開始された後：
+
+{% callout type="note" %}
+請求は常に入金ウィンドウが閉じるまで待機します。`depositEndCondition` が満たされる前に送信された請求は、請求開始条件がすでに満たされていても `LaunchPoolNotEnded` を返します。そのため、請求開始は入金終了と同時かそれ以降に設定してください。
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
@@ -555,6 +559,7 @@ endBehaviors: [
 | `LaunchPoolThresholdMet` | 173 | 下限に達し、上限も超過していない状態で返金がリクエストされました |
 | `DepositAlreadyRefunded` | — | 同じ入金に対して `refundLaunchPoolV2` が 2 回呼び出されました |
 | `DepositAlreadyClaimed` | — | 入金者がすでにトークンを請求した後に全額返金がリクエストされました |
+| `WithdrawAfterClaim` | 268 | すでにトークンを請求した入金に対して `withdrawLaunchPoolV2` が呼び出されました |
 
 ### 状態の取得
 
@@ -616,7 +621,7 @@ if (deposit) {
 価格は総入金額に基づいて自然に発見されます。最終価格は、入金された SOL の総額を割り当てられたトークン数で割った値になります。入金が多いほど、トークンあたりの暗黙の価格が高くなります。
 
 ### ユーザーは入金を引き出せますか？
-はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。
+はい、入金期間中に引き出すことができます。システムの悪用を防ぐため、{% fee product="genesis" config="launchPool" fee="withdraw" /%} の引き出し手数料が適用されます。すでにトークンを請求した入金は、引き出すことができなくなります（`WithdrawAfterClaim`）。
 
 ### 複数回入金するとどうなりますか？
 同じウォレットからの複数の入金は、単一の入金アカウントに蓄積されます。あなたの合計シェアは、合算された入金額に基づきます。

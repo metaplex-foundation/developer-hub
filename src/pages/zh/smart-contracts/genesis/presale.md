@@ -3,7 +3,7 @@ title: Presale
 metaTitle: Genesis Presale | 固定价格代币销售 Solana | Metaplex
 description: 在 Solana 上进行代币预售。固定价格 SPL 代币销售，用户存入 SOL 并以预定汇率获得代币。使用 Genesis 发射台进行链上代币发售。
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '11-26-2026'
 keywords:
   - presale
   - token presale
@@ -286,6 +286,10 @@ Unlocked Bucket在 `triggerBehaviorsV2` 执行后从Presale接收SOL。
 ### 领取代币
 
 存款期结束并开始领取后：
+
+{% callout type="note" %}
+领取始终要等存款窗口关闭。在 `depositEndCondition` 满足之前发送的领取会返回 `PresaleBucketNotEnded`，即使领取开始条件已经满足。因此请将领取开始时间设置为存款结束时或之后。
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 

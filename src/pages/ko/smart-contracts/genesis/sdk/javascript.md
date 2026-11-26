@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: Genesis JavaScript SDK의 API 레퍼런스. Solana에서 토큰 런칭을 위한 함수 시그니처, 매개변수 및 타입.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -212,6 +212,8 @@ await depositPresaleV2(umi, {
 
 ### withdrawLaunchPoolV2
 
+예치 기간이 열려 있는 동안 Launch Pool 예치금의 일부를 출금합니다. 이미 토큰을 청구한 예치금은 더 이상 출금할 수 없습니다(`WithdrawAfterClaim`).
+
 ```typescript
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,     // PublicKey
@@ -222,6 +224,8 @@ await withdrawLaunchPoolV2(umi, {
 ```
 
 ### claimLaunchPoolV2
+
+청구 기간이 열리면 예치자의 Launch Pool 할당분을 보냅니다. 청구는 예치 기간이 끝날 때까지도 기다립니다. `depositEndCondition`이 충족되기 전에는 청구 시작 조건이 이미 충족되었더라도 `LaunchPoolNotEnded`를 반환합니다.
 
 ```typescript
 await claimLaunchPoolV2(umi, {
@@ -248,6 +252,8 @@ await refundLaunchPoolV2(umi, {
 `payer`만 서명하면 되므로 예치자를 대신해 누구나 환불을 크랭크할 수 있습니다. 예치 기간이 끝나기 전에 호출하면 `LaunchPoolNotEnded`, 최소 임계값을 충족하고 소프트 캡을 초과하지 않았을 때 호출하면 `LaunchPoolThresholdMet`, 같은 예치금에 대해 두 번 호출하면 `DepositAlreadyRefunded`가 반환됩니다.
 
 ### claimPresaleV2
+
+청구 기간이 열리면 Presale 예치자에게 토큰을 보냅니다. 청구는 예치 기간이 끝날 때까지도 기다립니다. `depositEndCondition`이 충족되기 전에는 청구 시작 조건이 이미 충족되었더라도 `PresaleBucketNotEnded`를 반환합니다.
 
 ```typescript
 await claimPresaleV2(umi, {
@@ -510,9 +516,17 @@ Genesis 런칭의 최상위 온체인 계정입니다. 토큰 민트당, 런칭 
 | `claim period not active` | 청구 기간 외 |
 | `InvalidSoftCap` (221) | `softCap.amount`가 0입니다 — `{ amount: 0n }` 대신 `softCap: null`을 전달하세요 |
 | `SoftCapBelowThreshold` (222) | `softCap.amount`가 `minimumQuoteTokenThreshold.amount`보다 작습니다 |
-| `LaunchPoolNotEnded` | 예치 기간이 끝나기 전에 `refundLaunchPoolV2()`를 호출했습니다 |
+| `LaunchPoolNotEnded` (25) | 예치 기간이 끝나기 전에 `claimLaunchPoolV2()` 또는 `refundLaunchPoolV2()`를 호출했습니다 |
+| `PresaleBucketNotEnded` (67) | Presale 예치 기간이 끝나기 전에 `claimPresaleV2()` 또는 `triggerBehaviorsV2()`를 호출했습니다 |
+| `WithdrawAfterClaim` (268) | 이미 토큰을 청구한 예치금에 대해 `withdrawLaunchPoolV2()`를 호출했습니다 |
 | `LaunchPoolThresholdMet` (173) | 최소 임계값을 충족하고 소프트 캡을 초과하지 않았는데 환불을 요청했습니다 |
 | `DepositAlreadyRefunded` | 같은 예치금에 대해 `refundLaunchPoolV2()`를 두 번 호출했습니다 |
+| `InvalidBehaviorDestination` (269) | `finalizeV2()` 시점에 비헤이비어의 `destinationBucket`이 이를 받을 수 있는 이 genesis의 버킷이 아닙니다(쿼트 토큰: Unlocked 또는 Raydium, 시작 가격: Raydium) |
+| `MissingRaydiumGraduationSource` (270) | `finalizeV2()` 시점에 Raydium 버킷이 정확히 하나의 `SendQuoteTokenPercentage`와 하나의 `SendStartPrice`의 대상이 아닙니다 |
+| `DuplicateRaydiumGraduationSource` (271) | `finalizeV2()` 시점에 Raydium 버킷이 둘 이상의 `SendQuoteTokenPercentage` 또는 `SendStartPrice` 비헤이비어의 대상입니다 |
+| `RaydiumGraduationSourceMismatch` (272) | `finalizeV2()` 시점에 Raydium 버킷의 쿼트 토큰과 시작 가격이 서로 다른 소스 버킷에서 옵니다 |
+| `StartPriceAlreadySet` (273) | `SendStartPrice`가 이미 대상 버킷의 가격을 기록했습니다 |
+| `TransmitFailureSourceMismatch` (274) | Raydium 버킷을 대상으로 하는 `TransmitFailure`가 해당 Raydium 버킷의 졸업 소스가 아닌 버킷에서 옵니다 |
 
 ---
 

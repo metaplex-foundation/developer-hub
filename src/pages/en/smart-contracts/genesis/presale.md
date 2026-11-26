@@ -3,7 +3,7 @@ title: Presale
 metaTitle: Genesis Presale | Fixed-Price Token Sale on Solana | Metaplex
 description: Run a fixed-price token presale on Solana. SPL token sale where users deposit SOL and receive tokens at a predetermined rate. On-chain token sale with the Genesis token launchpad.
 created: '01-15-2025'
-updated: '01-31-2026'
+updated: '11-26-2026'
 keywords:
   - presale
   - token presale
@@ -287,6 +287,10 @@ Multiple deposits from the same user accumulate into a single deposit account.
 ### Claiming Tokens
 
 After the deposit period ends and claims open:
+
+{% callout type="note" %}
+Claims always wait for the deposit window to close. A claim sent before `depositEndCondition` is met returns `PresaleBucketNotEnded`, even if the claim start condition is already met, so set the claim start at or after the deposit end.
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_presale_v2" frameworks="umi" filename="claimPresale" /%}
 

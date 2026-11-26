@@ -3,7 +3,7 @@ title: JavaScript SDK
 metaTitle: JavaScript SDK | Genesis | Metaplex
 description: API reference for the Genesis JavaScript SDK. Function signatures, parameters, and types for token launches on Solana.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - Genesis SDK
   - JavaScript SDK
@@ -212,6 +212,8 @@ await depositPresaleV2(umi, {
 
 ### withdrawLaunchPoolV2
 
+Withdraws part of a Launch Pool deposit while the deposit window is open. A deposit that has already claimed tokens can no longer be withdrawn (`WithdrawAfterClaim`).
+
 ```typescript
 await withdrawLaunchPoolV2(umi, {
   genesisAccount,     // PublicKey
@@ -222,6 +224,8 @@ await withdrawLaunchPoolV2(umi, {
 ```
 
 ### claimLaunchPoolV2
+
+Sends a depositor's share of the Launch Pool allocation once the claim window opens. Claims also wait for the deposit window to close: until `depositEndCondition` is met, a claim returns `LaunchPoolNotEnded` even when the claim start condition is already met.
 
 ```typescript
 await claimLaunchPoolV2(umi, {
@@ -248,6 +252,8 @@ await refundLaunchPoolV2(umi, {
 Only `payer` must sign, so refunds can be cranked permissionlessly on a depositor's behalf. Calling before the deposit window closes returns `LaunchPoolNotEnded`; calling when the floor was met and the cap was not exceeded returns `LaunchPoolThresholdMet`; calling twice returns `DepositAlreadyRefunded`.
 
 ### claimPresaleV2
+
+Sends a Presale depositor's tokens once the claim window opens. Claims also wait for the deposit window to close: until `depositEndCondition` is met, a claim returns `PresaleBucketNotEnded` even when the claim start condition is already met.
 
 ```typescript
 await claimPresaleV2(umi, {
@@ -510,9 +516,17 @@ Account size: **136 bytes**. PDA seeds: `["genesis_v2", baseMint, genesisIndex]`
 | `claim period not active` | Outside claim window |
 | `InvalidSoftCap` (221) | `softCap.amount` is zero — pass `softCap: null` instead of `{ amount: 0n }` |
 | `SoftCapBelowThreshold` (222) | `softCap.amount` is below `minimumQuoteTokenThreshold.amount` |
-| `LaunchPoolNotEnded` | `refundLaunchPoolV2()` called before the deposit window closed |
+| `LaunchPoolNotEnded` (25) | `claimLaunchPoolV2()` or `refundLaunchPoolV2()` called before the deposit window closed |
+| `PresaleBucketNotEnded` (67) | `claimPresaleV2()` or `triggerBehaviorsV2()` called before the Presale deposit window closed |
+| `WithdrawAfterClaim` (268) | `withdrawLaunchPoolV2()` on a deposit that has already claimed tokens |
 | `LaunchPoolThresholdMet` (173) | Refund requested when the floor was met and the soft cap was not exceeded |
 | `DepositAlreadyRefunded` | `refundLaunchPoolV2()` called twice for the same deposit |
+| `InvalidBehaviorDestination` (269) | At `finalizeV2()`, a behavior's `destinationBucket` is not a bucket of this genesis that can receive it (quote tokens: Unlocked or Raydium; start price: Raydium) |
+| `MissingRaydiumGraduationSource` (270) | At `finalizeV2()`, a Raydium bucket is not targeted by exactly one `SendQuoteTokenPercentage` and one `SendStartPrice` |
+| `DuplicateRaydiumGraduationSource` (271) | At `finalizeV2()`, a Raydium bucket is targeted by more than one `SendQuoteTokenPercentage` or `SendStartPrice` behavior |
+| `RaydiumGraduationSourceMismatch` (272) | At `finalizeV2()`, a Raydium bucket's quote tokens and start price come from different source buckets |
+| `StartPriceAlreadySet` (273) | `SendStartPrice` already wrote the destination's price |
+| `TransmitFailureSourceMismatch` (274) | A `TransmitFailure` targeting a Raydium bucket comes from a bucket other than that Raydium bucket's graduation source |
 
 ---
 

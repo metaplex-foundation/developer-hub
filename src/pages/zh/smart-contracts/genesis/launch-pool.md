@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 公平发射与 Solana 代币分发 | Metaplex
 description: Solana 上的公平发射代币分发。用户存入 SOL 并按比例获得 SPL 代币——链上众筹替代方案，具有有机价格发现机制。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - launch pool
   - token distribution
@@ -43,7 +43,7 @@ faqs:
   - q: Launch Pool 中的代币价格是如何确定的？
     a: 价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
   - q: 用户可以提取他们的存款吗？
-    a: 可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
+    a: 可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。已经领取过代币的存款不能再提款。
   - q: 如果我多次存款会怎样？
     a: 同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。
   - q: 用户何时可以领取他们的代币？
@@ -425,7 +425,7 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 
 ### 提款
 
-用户可以在存款期间提款。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用。
+用户可以在存款期间提款。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 费用。已经领取过代币的存款不能再提款（`WithdrawAfterClaim`）。
 
 {% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
@@ -434,6 +434,10 @@ Unlocked bucket 在 `triggerBehaviorsV2` 执行后接收来自 Launch Pool 的 S
 ### 领取代币
 
 在存款期结束且领取开放后：
+
+{% callout type="note" %}
+领取始终要等存款窗口关闭。在 `depositEndCondition` 满足之前发送的领取会返回 `LaunchPoolNotEnded`，即使领取开始条件已经满足。因此请将领取开始时间设置为存款结束时或之后。
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
@@ -555,6 +559,7 @@ endBehaviors: [
 | `LaunchPoolThresholdMet` | 173 | 在下限已达到且未超过上限时请求了退款 |
 | `DepositAlreadyRefunded` | — | 对同一笔存款调用了两次 `refundLaunchPoolV2` |
 | `DepositAlreadyClaimed` | — | 存款人已领取代币后请求了全额退款 |
+| `WithdrawAfterClaim` | 268 | 对已经领取过代币的存款调用了 `withdrawLaunchPoolV2` |
 
 ### 获取状态
 
@@ -616,7 +621,7 @@ if (deposit) {
 价格是根据总存款有机发现的。最终价格等于存入的总 SOL 除以分配的代币数量。存款越多意味着每个代币的隐含价格越高。
 
 ### 用户可以提取他们的存款吗？
-可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。
+可以，用户可以在存款期间提取。需要支付 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 的提款费用，以防止系统被利用。已经领取过代币的存款不能再提款（`WithdrawAfterClaim`）。
 
 ### 如果我多次存款会怎样？
 同一钱包的多次存款会累积到一个存款账户中。您的总份额基于您的累计存款。

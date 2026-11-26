@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
 description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - launch pool
   - token distribution
@@ -43,7 +43,7 @@ faqs:
   - q: Launch Pool에서 토큰 가격은 어떻게 결정되나요?
     a: 가격은 총 예치금을 기반으로 유기적으로 발견됩니다. 최종 가격은 총 예치된 SOL을 할당된 토큰으로 나눈 값입니다. 예치금이 많을수록 토큰당 암묵적 가격이 높아집니다.
   - q: 사용자가 예치금을 출금할 수 있나요?
-    a: 네, 사용자는 예치 기간 동안 출금할 수 있습니다. 시스템 악용을 방지하기 위해 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 출금 수수료가 적용됩니다.
+    a: 네, 사용자는 예치 기간 동안 출금할 수 있습니다. 시스템 악용을 방지하기 위해 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 출금 수수료가 적용됩니다. 이미 토큰을 청구한 예치금은 더 이상 출금할 수 없습니다.
   - q: 여러 번 예치하면 어떻게 되나요?
     a: 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.
   - q: 사용자는 언제 토큰을 청구할 수 있나요?
@@ -425,7 +425,7 @@ Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받�
 
 ### 출금
 
-사용자는 예치 기간 동안 출금할 수 있습니다. {% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료가 적용됩니다.
+사용자는 예치 기간 동안 출금할 수 있습니다. {% fee product="genesis" config="launchPool" fee="withdraw" /%} 수수료가 적용됩니다. 이미 토큰을 청구한 예치금은 더 이상 출금할 수 없습니다(`WithdrawAfterClaim`).
 
 {% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
@@ -434,6 +434,10 @@ Unlocked bucket은 `triggerBehaviorsV2` 실행 후 Launch Pool에서 SOL을 받�
 ### 토큰 청구
 
 예치 기간이 종료되고 청구가 열린 후:
+
+{% callout type="note" %}
+청구는 항상 예치 기간이 끝날 때까지 기다립니다. `depositEndCondition`이 충족되기 전에 보낸 청구는 청구 시작 조건이 이미 충족되었더라도 `LaunchPoolNotEnded`를 반환합니다. 따라서 청구 시작은 예치 종료 시점 또는 그 이후로 설정하세요.
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
@@ -555,6 +559,7 @@ endBehaviors: [
 | `LaunchPoolThresholdMet` | 173 | 하한을 충족했고 상한을 초과하지 않았는데 환불을 요청했습니다 |
 | `DepositAlreadyRefunded` | — | 같은 예치금에 대해 `refundLaunchPoolV2`를 두 번 호출했습니다 |
 | `DepositAlreadyClaimed` | — | 예치자가 이미 토큰을 청구한 후 전액 환불을 요청했습니다 |
+| `WithdrawAfterClaim` | 268 | 이미 토큰을 청구한 예치금에 대해 `withdrawLaunchPoolV2`를 호출했습니다 |
 
 ### 상태 조회
 
@@ -616,7 +621,7 @@ if (deposit) {
 가격은 총 예치금을 기반으로 유기적으로 발견됩니다. 최종 가격은 총 예치된 SOL을 할당된 토큰으로 나눈 값입니다. 예치금이 많을수록 토큰당 암묵적 가격이 높아집니다.
 
 ### 사용자가 예치금을 출금할 수 있나요?
-네, 사용자는 예치 기간 동안 출금할 수 있습니다. 시스템 악용을 방지하기 위해 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 출금 수수료가 적용됩니다.
+네, 사용자는 예치 기간 동안 출금할 수 있습니다. 시스템 악용을 방지하기 위해 {% fee product="genesis" config="launchPool" fee="withdraw" /%} 출금 수수료가 적용됩니다. 이미 토큰을 청구한 예치금은 더 이상 출금할 수 없습니다(`WithdrawAfterClaim`).
 
 ### 여러 번 예치하면 어떻게 되나요?
 같은 지갑에서의 여러 예치금은 단일 예치 계정에 누적됩니다. 총 지분은 합산된 예치금을 기준으로 합니다.

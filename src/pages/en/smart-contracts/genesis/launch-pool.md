@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
 description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-26-2026'
 keywords:
   - launch pool
   - token distribution
@@ -43,7 +43,7 @@ faqs:
   - q: How is the token price determined in a Launch Pool?
     a: The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
   - q: Can users withdraw their deposits?
-    a: Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system.
+    a: Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system. A deposit that has already claimed tokens can no longer be withdrawn.
   - q: What happens if I deposit multiple times?
     a: Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
   - q: When can users claim their tokens?
@@ -425,7 +425,7 @@ Multiple deposits from the same user accumulate into a single deposit account.
 
 ### Withdrawing
 
-Users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} fee applies.
+Users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} fee applies. A deposit that has already claimed tokens can no longer be withdrawn (`WithdrawAfterClaim`).
 
 {% code-tabs-imported from="genesis/withdraw_launch_pool_v2" frameworks="umi" filename="withdrawLaunchPool" /%}
 
@@ -434,6 +434,10 @@ If a user withdraws their entire balance, the deposit PDA is closed.
 ### Claiming Tokens
 
 After the deposit period ends and claims open:
+
+{% callout type="note" %}
+Claims always wait for the deposit window to close. A claim sent before `depositEndCondition` is met returns `LaunchPoolNotEnded`, even if the claim start condition is already met, so set the claim start at or after the deposit end.
+{% /callout %}
 
 {% code-tabs-imported from="genesis/claim_launch_pool_v2" frameworks="umi" filename="claimLaunchPool" /%}
 
@@ -555,6 +559,7 @@ The errors below cover invalid soft cap configurations and the Launch Pool state
 | `LaunchPoolThresholdMet` | 173 | Refund requested when the floor was met and the cap was not exceeded |
 | `DepositAlreadyRefunded` | — | `refundLaunchPoolV2` called twice for the same deposit |
 | `DepositAlreadyClaimed` | — | Full refund requested after the depositor already claimed tokens |
+| `WithdrawAfterClaim` | 268 | `withdrawLaunchPoolV2` on a deposit that has already claimed tokens |
 
 ### Fetching State
 
@@ -616,7 +621,7 @@ if (deposit) {
 The price is discovered organically based on total deposits. Final price equals total SOL deposited divided by tokens allocated. More deposits means higher implied price per token.
 
 ### Can users withdraw their deposits?
-Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system.
+Yes, users can withdraw during the deposit period. A {% fee product="genesis" config="launchPool" fee="withdraw" /%} withdrawal fee applies to discourage gaming the system. A deposit that has already claimed tokens can no longer be withdrawn (`WithdrawAfterClaim`).
 
 ### What happens if I deposit multiple times?
 Multiple deposits from the same wallet accumulate into a single deposit account. Your total share is based on your combined deposits.
