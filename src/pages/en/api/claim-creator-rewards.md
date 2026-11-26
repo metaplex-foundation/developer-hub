@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Claim Creator Rewards | REST API | Metaplex
 description: Claim accrued creator rewards for a wallet across all Genesis bonding-curve and Raydium buckets in a single API call. Returns ready-to-sign Solana transactions.
 method: POST
 created: '04-23-2026'
-updated: '11-05-2026'
+updated: '11-25-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -34,7 +34,7 @@ Most integrators should use [`claimCreatorRewards`](/smart-contracts/genesis/sdk
 
 `POST /v1/creator-rewards/claim` returns the Solana transactions needed to claim a wallet's accrued creator rewards across every bonding-curve and Raydium CPMM bucket in a single call.
 
-- **Aggregation** — one request claims across all eligible buckets; the API packs the claims into as few transactions as fit
+- **Aggregation** — one request claims across all eligible buckets; several claims can share one transaction
 - **Signing** — response is base64-encoded Solana transactions the wallet (or optional `payer`) must sign and submit
 - **Errors** — HTTP `400` `"No rewards available to claim"` when nothing has accrued; callers must branch on the error, not an empty array
 - **SDK wrapper** — [`claimCreatorRewards`](/smart-contracts/genesis/sdk/api-client#claim-creator-rewards) handles deserialization, typed errors, and Umi signing
@@ -87,7 +87,7 @@ Set `payer` to a different wallet when the creator fee wallet does not hold SOL 
 | `data.blockhash.lastValidBlockHeight` | `number` | Slot height after which the blockhash expires. |
 
 {% callout type="note" %}
-The API packs the claims into as few transactions as fit, so one request can return one transaction or several, and `transactionVersion: 1` can fit more claims in each. Submit them sequentially; their order is not significant.
+Several claims can share one transaction, so one request can return one transaction or several, and `transactionVersion: 1` can fit more claims in each. Submit them sequentially; their order is not significant.
 {% /callout %}
 
 ## Error Response

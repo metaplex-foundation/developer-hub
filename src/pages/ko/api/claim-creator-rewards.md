@@ -4,7 +4,7 @@ metaTitle: Metaplex API - 창작자 보상 청구 | REST API | Metaplex
 description: 단일 API 호출로 지갑의 모든 Genesis 본딩 커브 및 Raydium 버킷에서 누적된 창작자 보상을 청구합니다. 서명할 준비가 된 Solana 트랜잭션을 반환합니다.
 method: POST
 created: '04-23-2026'
-updated: '11-05-2026'
+updated: '11-25-2026'
 keywords:
   - Genesis API
   - claim creator rewards
@@ -34,7 +34,7 @@ programmingLanguage:
 
 `POST /v1/creator-rewards/claim`은 한 번의 호출로 지갑의 모든 본딩 커브 및 Raydium CPMM 버킷에서 누적된 창작자 보상을 청구하는 데 필요한 Solana 트랜잭션을 반환합니다.
 
-- **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 청구는 가능한 한 적은 트랜잭션으로 묶입니다
+- **집계** — 한 번의 요청으로 모든 자격 있는 버킷을 청구합니다; 여러 청구가 하나의 트랜잭션에 묶일 수 있습니다
 - **서명** — 응답은 지갑(또는 선택적 `payer`)이 서명하고 제출해야 하는 base64 인코딩된 Solana 트랜잭션입니다
 - **오류** — 누적된 것이 없으면 HTTP `400` `"No rewards available to claim"`를 반환합니다; 호출자는 빈 배열이 아니라 오류로 분기해야 합니다
 - **SDK 래퍼** — [`claimCreatorRewards`](/ko/smart-contracts/genesis/sdk/api-client#claim-creator-rewards)는 역직렬화, 타입화된 오류, Umi 서명을 처리합니다
@@ -87,7 +87,7 @@ POST /v1/creator-rewards/claim
 | `data.blockhash.lastValidBlockHeight` | `number` | 블록해시가 만료되는 슬롯 높이. |
 
 {% callout type="note" %}
-API는 청구를 가능한 한 적은 트랜잭션으로 묶으므로, 한 번의 요청이 트랜잭션 하나 또는 여러 개를 반환할 수 있으며, `transactionVersion: 1`에서는 트랜잭션 하나에 더 많은 청구가 들어갑니다. 순차적으로 제출하세요; 순서는 중요하지 않습니다.
+여러 청구가 하나의 트랜잭션에 묶일 수 있으므로, 한 번의 요청이 트랜잭션 하나 또는 여러 개를 반환할 수 있으며, `transactionVersion: 1`에서는 트랜잭션 하나에 더 많은 청구가 들어갈 수 있습니다. 순차적으로 제출하세요; 순서는 중요하지 않습니다.
 {% /callout %}
 
 ## 오류 응답
