@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 公平发射与 Solana 代币分发 | Metaplex
 description: Solana 上的公平发射代币分发。用户存入 SOL 并按比例获得 SPL 代币——链上众筹替代方案，具有有机价格发现机制。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-27-2026'
 keywords:
   - launch pool
   - token distribution
@@ -603,6 +603,7 @@ if (deposit) {
 - 同一用户的多次存款会累积在一个存款账户中
 - 如果用户提取全部余额，存款 PDA 将被关闭
 - 存款结束后必须执行 `triggerBehaviorsV2` 以处理结束行为
+- 领取开始等待 Raydium 毕业的 Unlocked bucket 在 Launch Pool 失败时永远不会开放，因此请添加指向该 bucket 的 `TransmitFailure` [结束行为](/zh/smart-contracts/genesis/end-behaviors#failure-handling-with-transmit-failure)。这样销售失败时会[立即开放领取](/zh/smart-contracts/genesis/unlocked-bucket#claiming-after-a-failed-sale)，领取结束条件仍然适用。当两个销售向同一个 Unlocked bucket 输送资金时，任何一个失败都会开放该 bucket，因此只应从该 bucket 所等待毕业的那个销售上挂载该行为
 - 用户必须拥有 wSOL（包装的 SOL）才能存款
 - 在 `@metaplex-foundation/genesis` 0.42.0 中，`softCap` 是 `addLaunchPoolBucketV2` 的必填参数——不需要上限时请传入 `softCap: null`
 - 包括 `softCap` 在内的 Launch Pool 扩展只能在 `finalizeV2` 之前添加或移除
