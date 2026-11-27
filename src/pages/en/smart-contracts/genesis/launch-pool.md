@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Fair Launch & Token Distribution on Solana | Metaplex
 description: Fair launch token distribution on Solana. Users deposit SOL and receive SPL tokens proportionally — an on-chain crowdsale with organic price discovery on the Genesis token launchpad.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-27-2026'
 keywords:
   - launch pool
   - token distribution
@@ -603,6 +603,7 @@ if (deposit) {
 - Multiple deposits from the same user accumulate in one deposit account
 - If a user withdraws their entire balance, the deposit PDA closes
 - `triggerBehaviorsV2` must be executed after deposits close for end behaviors to process
+- An Unlocked bucket whose claim waits for Raydium graduation never opens if the Launch Pool fails, so add a `TransmitFailure` [end behavior](/smart-contracts/genesis/end-behaviors#failure-handling-with-transmit-failure) pointing at it. A failed sale then [opens the claim immediately](/smart-contracts/genesis/unlocked-bucket#claiming-after-a-failed-sale), and the claim end condition still applies. When two sales feed one Unlocked bucket, either one failing opens it, so attach the behavior only from the sale whose graduation the bucket waits for
 - Users must have wSOL (wrapped SOL) to deposit
 - `softCap` is a required argument on `addLaunchPoolBucketV2` in `@metaplex-foundation/genesis` 0.42.0 — pass `softCap: null` when no cap is wanted
 - Launch Pool extensions, including `softCap`, can only be added or removed before `finalizeV2`
