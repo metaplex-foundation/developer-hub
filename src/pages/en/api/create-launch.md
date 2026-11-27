@@ -4,7 +4,7 @@ metaTitle: Metaplex API - Create Launch | REST API | Metaplex
 description: Build on-chain transactions for a new Genesis token launch. Returns unsigned transactions ready for signing and sending.
 method: POST
 created: '02-19-2026'
-updated: '11-05-2026'
+updated: '11-27-2026'
 keywords:
   - Genesis API
   - create launch
@@ -92,6 +92,17 @@ Each allocation in the `allocations` array has a `type` field, a `name`, a `supp
 - **`claimScheduleV2`** — Tokens released to a recipient on a vesting schedule, with an optional cliff
 
 Raydium liquidity is configured as a fund flow on the sale allocation, not as its own allocation: a `RaydiumLP` flow creates a Raydium CPMM pool, and a `RaydiumClmmLP` flow creates a Raydium CLMM (concentrated liquidity) position. CLMM launches return `403` unless they are enabled for your account.
+
+### Bonding Curve LP Burn
+
+A `bondingCurve` launch burns its Raydium LP tokens at graduation by default. The `RaydiumLP` fund flow on the `bondingCurveV2` allocation takes an optional `burnLp` boolean:
+
+| `burnLp` | Behaviour at graduation |
+|----------|-------------------------|
+| `true` (default) | The full LP token amount is burned, so the liquidity can never be withdrawn |
+| `false` | The LP tokens are locked permanently. The flow's `lpLockSchedule` never opens |
+
+Burning the LP does not affect creator fees. The flow's `creatorFee` is paid from Raydium's pool-creator fee, not from the LP tokens. `burnLp` applies only to bonding curve launches. `launchpool` and `presale` `RaydiumLP` flows do not accept it and drop the field.
 
 {% callout type="warning" title="Streamflow allocations are retired" %}
 The earlier `lockedV2` (Streamflow) allocation type is no longer accepted. Use `claimScheduleV2` for locked and vesting allocations.
