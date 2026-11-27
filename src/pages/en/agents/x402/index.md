@@ -18,7 +18,7 @@ about:
   - Metaplex
 proficiencyLevel: Beginner
 created: '09-08-2026'
-updated: '09-08-2026'
+updated: '11-27-2026'
 faqs:
   - q: What is Metaplex x402?
     a: Metaplex x402 is a pay-per-request HTTP API selling LLM inference, image generation, and Solana RPC access. There are no API keys, accounts, or subscriptions — each request settles in USDC on Solana using the x402 protocol, which turns the HTTP 402 Payment Required status into a machine-payable flow.
@@ -158,7 +158,7 @@ Rates published in documentation are a snapshot. `GET /x402/pricing` on the live
 |------|-------|
 | API base URL | `https://api.metaplex.com/x402` |
 | RPC URL | `https://api.metaplex.com/x402/rpc` |
-| JS client | `@metaplex-foundation/x402` (`0.1.0`) |
+| JS client | `@metaplex-foundation/x402` (`0.1.2`) |
 | Runtime | Node.js 20.18+, ESM |
 | Settlement asset | USDC (classic SPL Token) |
 | Operating agent | `MECHjj31U1hBapoVeJtZo5U5WGRd2293JEwRErvPTuF` |
@@ -206,4 +206,4 @@ Terms used across the Metaplex x402 documentation.
 
 ---
 
-Maintained by Metaplex Foundation. Last verified: 2026-09-08. Client version: `@metaplex-foundation/x402` `0.1.0`. [View source on GitHub](https://github.com/metaplex-foundation/x402).
+Maintained by Metaplex Foundation. Last verified: 2026-11-27. Client version: `@metaplex-foundation/x402` `0.1.2`. [View source on GitHub](https://github.com/metaplex-foundation/x402).

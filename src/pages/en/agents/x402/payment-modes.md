@@ -18,7 +18,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - TypeScript
 created: '09-08-2026'
-updated: '09-08-2026'
+updated: '11-27-2026'
 howToTools:
   - "@metaplex-foundation/x402"
   - Node.js 20.18+
@@ -280,7 +280,7 @@ Payment construction failures almost always trace back to funding, network misma
 
 | Package | Version |
 |---------|---------|
-| `@metaplex-foundation/x402` | `0.1.0` |
+| `@metaplex-foundation/x402` | `0.1.2` |
 | Node.js | 20.18+ (ESM) |
 | Payment mint | USDC (classic SPL Token) |
 
@@ -326,4 +326,4 @@ No. The payment source is always a classic SPL Token associated token account, a
 
 ---
 
-Maintained by Metaplex Foundation. Last verified: 2026-09-08. Client version: `@metaplex-foundation/x402` `0.1.0`. [View source on GitHub](https://github.com/metaplex-foundation/x402).
+Maintained by Metaplex Foundation. Last verified: 2026-11-27. Client version: `@metaplex-foundation/x402` `0.1.2`. [View source on GitHub](https://github.com/metaplex-foundation/x402).

@@ -19,7 +19,7 @@ proficiencyLevel: Intermediate
 programmingLanguage:
   - TypeScript
 created: '09-08-2026'
-updated: '09-08-2026'
+updated: '11-27-2026'
 ---
 
 The Metaplex x402 API is served at `https://api.metaplex.com/x402` and exposes three paid services, two free discovery endpoints, and four agent delegation routes. This page is the endpoint, pricing, and client-export reference; the [payment modes guide](/agents/x402/payment-modes) covers how to build the payment-aware `fetch` that paid endpoints require. {% .lead %}
@@ -31,7 +31,7 @@ Every paid endpoint answers an unpaid request with HTTP `402` and a `PAYMENT-REQ
 - **Base URLs** — `https://api.metaplex.com/x402` for the API, `https://api.metaplex.com/x402/rpc` for Solana JSON-RPC
 - **Wire format** — canonical OpenAI request and response bodies for chat and images, standard Solana JSON-RPC for RPC
 - **Settlement** — USDC on Solana mainnet, x402 protocol version 2, `exact` scheme
-- **Client version** — `@metaplex-foundation/x402` `0.1.0`, Node.js 20.18+, ESM only
+- **Client version** — `@metaplex-foundation/x402` `0.1.2`, Node.js 20.18+, ESM only
 
 ## Base URLs and Constants
 
@@ -309,7 +309,7 @@ The runnable examples in the [x402 repository](https://github.com/metaplex-found
 |------|-------|
 | API base URL | `https://api.metaplex.com/x402` |
 | RPC URL | `https://api.metaplex.com/x402/rpc` |
-| JS client | `@metaplex-foundation/x402` (`0.1.0`) |
+| JS client | `@metaplex-foundation/x402` (`0.1.2`) |
 | Runtime | Node.js 20.18+, ESM |
 | Protocol | x402 version 2, `exact` scheme |
 | Network | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Solana mainnet) |
@@ -319,4 +319,4 @@ The runnable examples in the [x402 repository](https://github.com/metaplex-found
 
 ---
 
-Maintained by Metaplex Foundation. Last verified: 2026-09-08. Client version: `@metaplex-foundation/x402` `0.1.0`. [View source on GitHub](https://github.com/metaplex-foundation/x402).
+Maintained by Metaplex Foundation. Last verified: 2026-11-27. Client version: `@metaplex-foundation/x402` `0.1.2`. [View source on GitHub](https://github.com/metaplex-foundation/x402).
