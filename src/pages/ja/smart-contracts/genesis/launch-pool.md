@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | Solanaでのフェアローンチとトークン配布 | Metaplex
 description: Solanaでのフェアローンチによるトークン配布。ユーザーがSOLを預け入れ、比例配分でSPLトークンを受け取ります。自然な価格発見を実現するオンチェーンクラウドセールです。
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-27-2026'
 keywords:
   - launch pool
   - token distribution
@@ -603,6 +603,7 @@ if (deposit) {
 - 同じユーザーからの複数の入金は1つの入金アカウントに蓄積されます
 - ユーザーが残高全額を引き出すと、入金 PDA はクローズされます
 - End Behavior を処理するには、入金終了後に `triggerBehaviorsV2` を実行する必要があります
+- 請求開始がRaydiumグラデュエーションを待つUnlockedバケットは、Launch Poolが失敗すると開放されないため、そのバケットを宛先とする `TransmitFailure` の[終了動作](/ja/smart-contracts/genesis/end-behaviors#failure-handling-with-transmit-failure)を追加してください。販売が失敗すると[すぐに請求が開始](/ja/smart-contracts/genesis/unlocked-bucket#claiming-after-a-failed-sale)され、請求終了条件は引き続き適用されます。2つの販売が1つのUnlockedバケットに資金を送る場合、どちらが失敗してもバケットは開放されるため、バケットが待機しているグラデュエーションの販売からのみ設定してください
 - ユーザーは入金するために wSOL（ラップされた SOL）を保持している必要があります
 - `softCap` は `@metaplex-foundation/genesis` 0.42.0 の `addLaunchPoolBucketV2` における必須引数です。上限が不要な場合は `softCap: null` を渡してください
 - `softCap` を含む Launch Pool 拡張は、`finalizeV2` の前にのみ追加・削除できます

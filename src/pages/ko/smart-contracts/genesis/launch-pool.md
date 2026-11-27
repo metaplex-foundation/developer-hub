@@ -3,7 +3,7 @@ title: Launch Pool
 metaTitle: Genesis Launch Pool | 솔라나 공정한 출시 & 토큰 배포 | Metaplex
 description: 솔라나에서의 공정한 토큰 출시 배포. 사용자가 SOL을 예치하고 SPL 토큰을 비례적으로 받습니다 — 기존 중앙화 토큰 판매의 온체인 크라우드세일 대안으로 유기적인 가격 발견을 제공합니다.
 created: '01-15-2025'
-updated: '10-12-2026'
+updated: '11-27-2026'
 keywords:
   - launch pool
   - token distribution
@@ -603,6 +603,7 @@ if (deposit) {
 - 같은 사용자의 여러 예치금은 하나의 예치 계정에 누적됩니다
 - 사용자가 전체 잔액을 출금하면 예치 PDA가 닫힙니다
 - End behavior를 처리하려면 예치 종료 후 `triggerBehaviorsV2`가 실행되어야 합니다
+- 청구 시작이 Raydium 졸업을 기다리는 Unlocked 버킷은 Launch Pool이 실패하면 열리지 않으므로, 해당 버킷을 대상으로 하는 `TransmitFailure` [종료 동작](/ko/smart-contracts/genesis/end-behaviors#failure-handling-with-transmit-failure)을 추가하세요. 그러면 판매가 실패했을 때 [즉시 청구가 열리며](/ko/smart-contracts/genesis/unlocked-bucket#claiming-after-a-failed-sale), 청구 종료 조건은 그대로 적용됩니다. 두 판매가 하나의 Unlocked 버킷에 자금을 보내는 경우 어느 쪽이 실패해도 버킷이 열리므로, 버킷이 기다리는 졸업과 연결된 판매에만 이 동작을 연결하세요
 - 사용자는 예치하려면 wSOL (래핑된 SOL)이 있어야 합니다
 - `softCap`은 `@metaplex-foundation/genesis` 0.42.0의 `addLaunchPoolBucketV2`에서 필수 인수입니다 — 상한을 원하지 않으면 `softCap: null`을 전달하세요
 - `softCap`을 포함한 Launch Pool 확장은 `finalizeV2` 전에만 추가하거나 제거할 수 있습니다
