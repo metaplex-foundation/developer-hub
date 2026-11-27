@@ -3,7 +3,7 @@ title: 프로젝트 베스팅
 metaTitle: ClaimScheduleBucketV2로 프로젝트 토큰 베스팅 | Genesis | Metaplex
 description: Genesis ClaimScheduleBucketV2로 온체인 프로젝트 토큰 베스팅 스케줄을 만듭니다. 클리프, 주기적 언록, 클레임, 일시정지, 취소, 수신자 이전을 포함합니다.
 created: '08-24-2026'
-updated: '08-24-2026'
+updated: '11-27-2026'
 keywords:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -246,7 +246,8 @@ Genesis에는 `ClaimScheduleBucketV1`이 없습니다. 프로젝트 베스팅에
 | `ClaimScheduleUpdateForbidden` | 클레임 게이트 또는 스케줄이 시작됨, 토큰이 클레임됨, 또는 관련 조건이 `TimeRelative` | 발화 전에 절대 시각 필드를 구성하세요. 상대 스케줄은 업데이트할 수 없습니다 |
 | `ClaimScheduleUnauthorized` | 서명자가 해당 제어를 쓸 수 없음 | 켜진 정책이 요구하는 Genesis 권한자 또는 수신자를 사용하세요 |
 | `ClaimSchedulePolicyDisabled` | 요청한 일시정지, 취소, 또는 이전 정책이 꺼짐 | 버킷 생성 시 정책을 켜세요 |
-| `InvalidBackendSigner` | 구성된 백엔드 서명자가 클레임을 승인하지 않음 | 구성된 백엔드 서명자를 포함하세요 |
+| `MissingBackendSigner` | 백엔드 서명자가 구성되어 있지만 클레임에 `backendSigner` 계정이 누락됨 | 구성된 백엔드 서명자를 `backendSigner`로 전달하세요 |
+| `InvalidBackendSigner` | `backendSigner` 계정이 버킷에 저장된 키와 일치하지 않음 | 구성된 백엔드 서명자를 `backendSigner`로 전달하세요 |
 | `ClaimScheduleConditionNotTriggered` | 취소 재할당이 미해결 상대 조건에 의존 | 먼저 상대 스케줄 조건을 트리거하세요 |
 
 ## 빠른 참조

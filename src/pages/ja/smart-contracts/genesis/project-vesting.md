@@ -3,7 +3,7 @@ title: プロジェクトベスティング
 metaTitle: ClaimScheduleBucketV2 によるプロジェクトトークンベスティング | Genesis | Metaplex
 description: Genesis ClaimScheduleBucketV2 でオンチェーンのプロジェクトトークンベスティングスケジュールを作成します。クリフ、定期アンロック、クレーム、一時停止、キャンセル、受取人変更を含みます。
 created: '08-24-2026'
-updated: '08-24-2026'
+updated: '11-27-2026'
 keywords:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -246,7 +246,8 @@ Genesis に `ClaimScheduleBucketV1` はありません。プロジェクトベ�
 | `ClaimScheduleUpdateForbidden` | クレームゲートまたはスケジュールが始まっている、トークンがクレーム済み、または関連条件が `TimeRelative` | 発火前に絶対時刻フィールドを設定する。相対スケジュールは更新できない |
 | `ClaimScheduleUnauthorized` | 署名者がその制御を使えない | 有効ポリシーが要求する Genesis 権限者または受取人を使う |
 | `ClaimSchedulePolicyDisabled` | 要求された一時停止、キャンセル、または移転ポリシーがオフ | バケット作成時にポリシーを有効にする |
-| `InvalidBackendSigner` | 設定されたバックエンド署名者がクレームを承認しなかった | 設定されたバックエンド署名者を含める |
+| `MissingBackendSigner` | バックエンド署名者が設定されているが、クレームに `backendSigner` アカウントが含まれていない | 設定されたバックエンド署名者を `backendSigner` として渡す |
+| `InvalidBackendSigner` | `backendSigner` アカウントがバケットに保存されたキーと一致しない | 設定されたバックエンド署名者を `backendSigner` として渡す |
 | `ClaimScheduleConditionNotTriggered` | キャンセル再割り当てが未解決の相対条件に依存する | 先に相対スケジュール条件をトリガーする |
 
 ## クイックリファレンス

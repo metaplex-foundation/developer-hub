@@ -3,7 +3,7 @@ title: 项目归属
 metaTitle: 使用 ClaimScheduleBucketV2 进行项目代币归属 | Genesis | Metaplex
 description: 使用 Genesis ClaimScheduleBucketV2 创建链上项目代币归属计划，包括悬崖、周期性解锁、领取、暂停、取消和接收方转移。
 created: '08-24-2026'
-updated: '08-24-2026'
+updated: '11-27-2026'
 keywords:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -246,7 +246,8 @@ Bucket 记录 `pausedAt` 和 `totalSecondsPaused`。在暂停期间取消会将�
 | `ClaimScheduleUpdateForbidden` | 领取门控或计划已开始、代币已被领取，或相关条件为 `TimeRelative` | 在触发前配置绝对时间字段；相对计划无法更新 |
 | `ClaimScheduleUnauthorized` | 签名者不允许使用该控制 | 使用已启用策略所要求的 Genesis 权限方或接收方 |
 | `ClaimSchedulePolicyDisabled` | 请求的暂停、取消或转移策略已关闭 | 创建 Bucket 时启用该策略 |
-| `InvalidBackendSigner` | 配置的后端签名者未授权领取 | 包含配置的后端签名者 |
+| `MissingBackendSigner` | 已配置后端签名者，但领取指令缺少 `backendSigner` 账户 | 将配置的后端签名者作为 `backendSigner` 传入 |
+| `InvalidBackendSigner` | `backendSigner` 账户与存储桶中保存的密钥不匹配 | 将配置的后端签名者作为 `backendSigner` 传入 |
 | `ClaimScheduleConditionNotTriggered` | 取消再分配依赖于未解析的相对条件 | 先触发相对计划条件 |
 
 ## 快速参考

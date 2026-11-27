@@ -3,7 +3,7 @@ title: Project Vesting
 metaTitle: Project Token Vesting with ClaimScheduleBucketV2 | Genesis | Metaplex
 description: Create onchain project token vesting schedules with Genesis ClaimScheduleBucketV2, including cliffs, periodic unlocks, claims, pauses, cancellation, and recipient transfers.
 created: '08-24-2026'
-updated: '08-24-2026'
+updated: '11-27-2026'
 keywords:
   - Genesis project vesting
   - ClaimScheduleBucketV2
@@ -246,7 +246,8 @@ Claim schedule errors identify invalid schedule configuration, unauthorized cont
 | `ClaimScheduleUpdateForbidden` | The claim gate or schedule has begun, tokens were claimed, or a relevant condition is `TimeRelative` | Configure absolute-time fields before they trigger; relative schedules cannot be updated |
 | `ClaimScheduleUnauthorized` | The signer is not allowed to use the control | Use the Genesis authority or recipient required by the enabled policy |
 | `ClaimSchedulePolicyDisabled` | The requested pause, cancel, or transfer policy is off | Enable the policy when creating the bucket |
-| `InvalidBackendSigner` | A configured backend signer did not authorize the claim | Include the configured backend signer |
+| `MissingBackendSigner` | A backend signer is configured but the claim omitted the `backendSigner` account | Pass the configured backend signer as `backendSigner` |
+| `InvalidBackendSigner` | The `backendSigner` account does not match the key stored on the bucket | Pass the configured backend signer as `backendSigner` |
 | `ClaimScheduleConditionNotTriggered` | Cancellation reallocation depends on unresolved relative conditions | Trigger the relative schedule conditions first |
 
 ## Quick Reference
