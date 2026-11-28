@@ -245,6 +245,10 @@ export const genesis = {
                   href: '/smart-contracts/genesis/launch-pool',
                 },
                 {
+                  title: 'Lifecycle with the SDK',
+                  href: '/smart-contracts/genesis/launch-pool-lifecycle',
+                },
+                {
                   title: 'Raydium CPMM Graduation',
                   href: '/smart-contracts/genesis/raydium-cpmm-graduation',
                 },
@@ -355,6 +359,7 @@ export const genesis = {
         'End Behaviors': 'End Behaviors',
         'Raydium CPMM Graduation': 'Raydium CPMM Graduation',
         'Unlocked Buckets': 'Unlocked Buckets',
+        'Lifecycle with the SDK': 'Lifecycle with the SDK',
       },
     },
     ja: {
@@ -394,6 +399,7 @@ export const genesis = {
         'End Behaviors': '終了動作',
         'Raydium CPMM Graduation': 'Raydium CPMMへの卒業',
         'Unlocked Buckets': 'Unlocked Bucket',
+        'Lifecycle with the SDK': 'SDKによるライフサイクル',
       },
     },
     ko: {
@@ -433,6 +439,7 @@ export const genesis = {
         'End Behaviors': '종료 동작',
         'Raydium CPMM Graduation': 'Raydium CPMM 졸업',
         'Unlocked Buckets': 'Unlocked Bucket',
+        'Lifecycle with the SDK': 'SDK 라이프사이클',
       },
     },
     zh: {
@@ -472,6 +479,7 @@ export const genesis = {
         'End Behaviors': '结束行为',
         'Raydium CPMM Graduation': 'Raydium CPMM 毕业',
         'Unlocked Buckets': 'Unlocked Bucket',
+        'Lifecycle with the SDK': '使用 SDK 的生命周期',
       },
     },
   },
