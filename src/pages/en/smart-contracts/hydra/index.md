@@ -321,6 +321,16 @@ let distributeToMember1 = await fanoutSdk.distributeWalletMemberInstructions(
 
 ```
 
+## Protocol Fee on Hydra Inflows
+
+Hydra takes a protocol fee of {% fee product="hydra" config="inflow" fee="solana" /%} from every new inflow to a fanout before the rest is split among members. Member payouts are calculated from the inflow after the fee, so the shares you set in `initializeFanout` divide the net amount.
+
+- **When the fee is taken:** each time a distribution counts new funds in the holding account (SOL or an SPL mint added to the fanout). The fee is rounded down to the smallest unit, so very small inflows can carry no fee.
+- **Where the fee goes:** it stays in the fanout's holding account and is tracked in the `accruedFees` field of the `Fanout` account (SOL) or `FanoutMint` account (SPL tokens). It is not paid out to members.
+- **Who collects it:** only the Metaplex protocol fee authority can sweep accrued fees to the protocol treasury, with the `collectFees` (SOL) and `collectMintFees` (SPL) instructions. Fanout authorities and members do not need to call them.
+
+See [Protocol Fees](/protocol-fees) for every Metaplex program's fees.
+
 ## Additional Capabilities
 
 ### Signing Metadata as Creator
